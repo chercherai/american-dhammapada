@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swallow Mud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a cold spruce night, dark theme; thin wisps of steam rise from the foot of the page, curl, and thin out to nothing; datelined sections. */
+  --ground: #101418;
+  --ground-2: #1a2026;
+  --paper: #e6e2d8;
+  --paper-dim: #9da2a2;
+  --butternut: #c8995c;
+  --steam: #d3dbde;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #26231d 0%, var(--ground) 58%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,226,216,.2); }
+.series a:hover { color: var(--butternut); }
+a:focus-visible { outline: 2px solid var(--butternut); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--butternut); text-wrap: balance; text-shadow: 0 0 28px rgba(200,153,92,.2); }
+.epigraph { border-left: 1px solid rgba(200,153,92,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--butternut); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--butternut); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(26,32,38,.78); border: 1px solid rgba(230,226,216,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--steam); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .45; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,226,216,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--butternut); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--butternut); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--butternut); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--butternut); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--butternut); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--butternut); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(26,32,38,.78); border-left: 2px solid var(--butternut); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 5.2 &middot; Mah&#257; Kassapa&rsquo;s Pupil</span></nav>
+<header>
+  <h1>Swallow Mud</h1>
+  <div class="epigraph">Better a house, though a hut it be,<br>A man is master at home;<br>A pair of goats and a patched-up roof<br>Are better far than begging.<br>&mdash; H&aacute;vam&aacute;l 36</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I had it told,</span> on the Shin Pond road.</p>
+
+<section>
+  <h2>I. The Water</h2>
+  <p class="dateline">Shin Pond road, above Patten &middot; October 2016</p>
+  <p>Wendell Kasper had piped steam in the Millinocket mill for thirty-one years, and when the mill shut he drove north past Patten and up a logging spur off the Shin Pond road and built a cabin at the end of it, and he had lived there alone since. He was seventy-one. He ate once a day, at noon. He slept on a bed of spruce poles under two wool blankets. He hauled his water from the brook in two pails because the brook was there, and he had patched his roof so many times, with tarpaper and cedar bark and the flattened lids of coffee cans, that the kindred said it was the swallows holding it up. Every May the barn swallows came back and plastered their mud cups under the eave over his door, and nobody was allowed to knock them down.</p>
+  <p>Behind the cabin, in a ring of white birches, stood the hof: a lean-to of rough hemlock boards, a flat stone in front of it, a plank table. On the old feast days eight or nine people drove in from Patten and Sherman and Island Falls, and now and then somebody from Bangor, to make blót there. They poured mead into a maple bowl and lifted it to the gods and shook it with a sprig of fir over the stone and over one another. Then they sat at the plank table and passed the horn. Kasper was their gothi because he had been reading the old poems longer than any of them. He had found the Eddas in the Millinocket library in 1986 and read them on his breaks in the boiler house, and he still had the library's copy, which he said he had paid for twice over in fines. He did not preach. When the young ones asked him what the gods wanted, he said they wanted the wood split.</p>
+  <p>That fall two young men were living with him.</p>
+  <p>Toby Michaud was twenty-four and from East Millinocket, where his father had worked in the mill until it closed in 2014 and then had not worked anywhere until he died. Toby came up the spur in his mother&rsquo;s Buick in June to ask whether the old man needed help, and stayed. He was a big, quiet boy who did a thing and then did the next thing. He was up before Kasper every morning to set out the enamel basin of hot water and the razor on a folded towel. He split wood, carried water, shoveled the ashes out, and banked the stove at night.</p>
+  <p>Brody Leeman was from Bangor and twenty-seven. He had found Kasper on the internet, in a picture somebody posted from Midsummer of the old man in front of the hof with his beard down his chest and the horn raised, and he wrote to Toby asking if the gothi took students. He came in August with a phone and a pack and a bag of runes he had bought online, and he could talk about the gods for an hour without stopping. He was good company at the table. When there was wood to be split he was usually somewhere else.</p>
+  <p>He had a way of getting to Kasper first. Toby would set out the basin and go back out to the woodpile, and Brody would come in from the outhouse and say, <em>Water&rsquo;s on, Wendell. Go ahead and wash.</em> Toby would carry six pails up from the brook to fill the reservoir on the cookstove, and at noon Brody would say, <em>Reservoir&rsquo;s full.</em> At the full-moon sumbel, when the horn went around and each one stood to boast of a thing done, Brody boasted the cord of rock maple stacked against the north wall. Toby, who had stacked it, drank when the horn came to him and said nothing.</p>
+  <p>Kasper bathed on Saturday nights in a galvanized tub in the back room. It took the canner and both kettles and a five-gallon milk can heated all afternoon on the cookstove to fill it halfway. On a Saturday in October, Toby had had enough.</p>
+  <p>He did not say so to anyone. After the noon meal, while Brody slept on the bunk with his phone face down on his chest, Toby heated the water the way he always did. Then he carried the milk can and the canner out to the woodshed and set them by the chopping block under a horse blanket to keep hot, and on the cookstove he left one small saucepan with an inch of water in the bottom, steaming. Then he took the rifle and went up the spur after a deer he had seen.</p>
+  <p>Brody woke at four and saw the steam. He went to Kasper, who was darning a mitten by the window, and said, <em>Bath&rsquo;s in, Wendell. Go on and get in while it&rsquo;s hot,</em> and walked him to the back room himself.</p>
+  <p>The tub was dry.</p>
+  <p><em>Where&rsquo;s the water, son?</em></p>
+  <p>Brody went back to the stove and put the dipper in the saucepan and struck bottom. <em>Will you look at that,</em> he said. <em>He set a pot of nothing on the stove and took off. Who knows where. I saw the steam and figured.</em> He said some other things about Toby. Then he grabbed both pails off their nails and banged out the door and down the path toward the brook, as if it were the old man who had done something to him.</p>
+  <p>Toby came back at dusk without a deer. He went to the shed and carried in the milk can and the canner and filled the tub, and Kasper sat in it with his knees up and thought for a long time.</p>
+  <p>When Brody came up the path in the dark with his pails half spilled, the old man was dressed and sitting by the lamp.</p>
+  <p><em>Sit down,</em> Kasper said. Brody sat. <em>One of us doesn&rsquo;t say he&rsquo;s done a thing unless he&rsquo;s done it. You came and told me the water was in. Then when there wasn&rsquo;t any, you went off mad to the brook. That&rsquo;s no way to be.</em></p>
+  <p>That was all. He went back to the mitten.</p>
+  <p>Brody lay awake on the bunk most of the night. A few gallons of water. He had carried plenty of water. The old man had made him out a liar in front of Toby over a few gallons of water.</p>
+  <p>In the morning, when Kasper went out to the truck to go down to Patten for his mail and his Sunday rounds, Brody said his back was bad and he would stay. So Kasper took Toby.</p>
+</section>
+
+<section>
+  <h2>II. The Stew</h2>
+  <p class="dateline">Stacyville &middot; the end of October</p>
+  <p>Karen Ouellette kept forty Romney ewes on a hill farm in Stacyville and wove. She was not one of the kindred. She went to Mass in Patten when she went. But she had known Kasper since her husband ran the paper machines and Kasper kept their steam up, and since her husband died she had fed the old man his one meal every Sunday at her kitchen table, as other people in those towns did on other days. He went around to them the way the mail went around: Karen on Sundays, the Hersey family in Sherman on Wednesdays, the diner in Patten when somebody there had a birthday.</p>
+  <p>Two weeks before, at the Winter Nights blót, Karen had come up the spur with a cloak she had woven him on the big loom in her parlor, a heavy grey twill as long as a bedspread, with a fringe. Kasper put it on and thanked her and wore it home. The next morning he folded it over the back of Toby&rsquo;s chair. <em>I&rsquo;ve got a coat,</em> he said. Toby gathered butternut hulls along Fish Stream and boiled the cloak in the canner until it came out the brown of strong tea, and cut it with Kasper&rsquo;s tin snips, which was the only shears on the place, into a long coat and a short cape. Brody had watched him do it.</p>
+  <p>That Sunday, while Kasper and Toby were at the Herseys&rsquo; helping put in a stovepipe, Brody drove his Subaru down to Stacyville. Karen came out wiping her hands.</p>
+  <p><em>Where&rsquo;s Wendell?</em></p>
+  <p><em>He&rsquo;s poorly,</em> Brody said. <em>Took a chill. He&rsquo;s staying in bed.</em></p>
+  <p><em>Well, for heaven&rsquo;s sake. What does he want?</em></p>
+  <p>Brody said Wendell had said that if she was making anything, a chicken stew would go down good, and maybe some of her biscuits, and maybe if there was any of that apple pie. He said it as if he were reading it off a list the old man had written. Karen went in and made the stew from scratch with one of her own hens and put it in a quart jar wrapped in a dish towel, and a dozen biscuits in a bread bag, and half a pie on a paper plate, and sent her love.</p>
+  <p>Brody ate it at the turnout by the Fish Stream bridge with the engine running for the heat. He ate the biscuits and the stew and the pie with his fingers, and threw the jar in the brush.</p>
+  <p>The next Sunday Kasper came into Karen&rsquo;s kitchen and stamped the snow off and sat down.</p>
+  <p><em>Look at you,</em> she said. <em>Your boy said you were flat on your back. I sent up stew. I guess it did you good.</em></p>
+  <p>Kasper said nothing. He ate what she put in front of him and thanked her for it and drove home.</p>
+  <p>That evening he said to Brody, <em>I hear you went to Karen&rsquo;s last Sunday and told her I was sick.</em> He waited, and Brody did not answer. <em>That&rsquo;s not a thing we do. You don&rsquo;t eat food you got by letting on it was for somebody else.</em></p>
+  <p>Brody went out to the outhouse and sat in it in the cold for an hour.</p>
+  <p>A few gallons of water. A jar of stew. He went over it and over it. Called a liar over the water, and now a thief over a jar of stew, a fistful of food the woman would have given him anyway if he had asked her. And the cloak. A cloak she wove for the gothi, and the old man handed it to Toby like it was a dish towel, and Toby had gone and made himself a coat of it, and walked around in it now. It was plain how things stood. He said it to himself in the dark until he believed it. The old man had treated him like dirt from the start. Well, he knew what to do about that.</p>
+</section>
+
+<section>
+  <h2>III. The Maul</h2>
+  <p class="dateline">The first snow &middot; November</p>
+  <p>On the Saturday after the first snow, Kasper drove down to Patten for his mail and the kerosene, and Toby went with him, and Brody stayed.</p>
+  <p>He started with the horns. There were two drinking horns on pegs by the door. Kasper had made the long one himself in 1991 from a steer horn he got off a farm in Littleton, boiled and scraped and polished with ashes until you could see a candle through it, and every blót the kindred had made in twenty-five years had been drunk out of it. Brody took them down and broke them across the edge of the cookstove. He took the maple bowl from the hof, and when it would not break he split it with the axe. He swept the shelves with the axe handle, and down came the jars, sixty or seventy quarts of beans and venison and fiddleheads and blueberries, which was the old man&rsquo;s winter, and the lamp chimneys and the enamel basin and the mugs. Then he poured the kerosene from the lamp can over the bunk and the books and the tarpaper and lit it, and went out back and lit the hof.</p>
+  <p>When he had watched it for a while he went and got the eight-pound maul from the chopping block. Whatever would not burn he went after. He beat in the side of the galvanized tub. He swung at the cookstove until a leg went and the firebox cracked across. He broke the flat stone in front of the hof into three pieces. Last of all he reached up and knocked the swallows&rsquo; nests off the eave with the maul handle, though they had been empty since August, and the dry mud came down in the snow in little grey cups and broke.</p>
+  <p>Then he got in the Subaru and drove away down the Shin Pond road.</p>
+  <p>Kasper and Toby saw the smoke from the bridge. By the time they came up the spur there was nothing to do. The cabin was a black square in the snow with the stovepipe standing up out of it, and the hof was a few charred posts in the ring of birches. Toby ran about with a pail. Kasper stood in the dooryard in his old coat and looked at it.</p>
+  <p>Then he went and knelt in the wet ash by the door and picked up a curved piece of the long horn about the size of his hand. He turned it over and put it in his coat pocket, and got up, and told Toby to stop.</p>
+  <p>Karen took them in. Kasper slept that winter in her back bedroom off the kitchen, under a quilt, and said it was too soft, and Toby slept on the parlor couch beside the loom.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The towns talked about it all winter. At the Patten diner and the post office and the transfer station they said a fella from Bangor had burned out old Kasper up the Shin Pond road over a couple of words, if you could believe that. Burned the house, burned that Viking shed of his, broke the stove with a maul. Over being told something. People who had never had any use for the kindred said it, and people who thought the old man was a crank said it, and they shook their heads.</p>
+  <p>In January Brody Leeman drove a borrowed pickup out onto Pushaw Lake at two in the morning, where people had been fishing through the ice all week, and found the place where it was thin. The warden service brought the truck up with a winch in the spring. In Patten the kindred heard about it a week after. Dale Hersey, who drove a log truck and did not say much, was in Karen&rsquo;s kitchen when the call came, and he said the lines from the old seeress&rsquo;s poem about the shore of the dead:</p>
+  <div class="verse">
+    <p>I saw there wading through rivers wild<br>Treacherous men and murderers too,<br>And workers of ill with the wives of men;<br>There Nithhogg sucked the blood of the slain,<br>And the wolf tore men; would you know yet more?</p>
+    <p>&mdash; V&ouml;lusp&aacute; 39</p>
+  </div>
+  <p>Kasper was at the table with his coffee. He did not say anything. He took the piece of horn out of his pocket and set it on the oilcloth and looked at it.</p>
+</section>
+
+<section>
+  <h2>IV. The High Seat</h2>
+  <p class="dateline">A Grange hall in Dover-Foxcroft &middot; February 2017</p>
+  <p>In February the kindreds from around the state met for two days in a rented Grange hall in Dover-Foxcroft, and on the Saturday night Ronda Theriault sat the high seat.</p>
+  <p>She was forty-six and a hospice aide for the county. Most weeks of the year she drove a Honda with a hundred and ninety thousand miles on it from one farmhouse to another, turning people in their beds and washing them and sitting with them, and twice a year she did this. They had built her a platform at the end of the hall out of folding tables with a kitchen chair on top, and hung blankets around it, and she sat up there in a dark blue cloak with a veil of black net over her face and a staff across her knees. Down on the floor eighty people sat in the dark on metal chairs. A man with a frame drum walked them, in their minds, down the trunk of the great tree, down through the roots and the cold and the mist to the gate of the hall of the dead, and four women sang the old calling song, and when they stopped singing the seeress was somewhere else, and anybody who had a question could come up the aisle and ask it.</p>
+  <p>Dale Hersey had not meant to ask anything. He had driven down Route 11 in the dark because his wife wanted to come. But the line kept moving, and he found he was in it.</p>
+  <p>Ronda had known Wendell Kasper since she was fifteen and shelving books on Saturdays at the Millinocket library, when a pipefitter with a beard came in and asked if they had anything on the old Norse gods. She had brought him the Eddas from the back. He had kept them, and twenty years later he had taught her to read the runes at his plank table. That was the only reason Dale could think of afterward for what she said. He came up to the edge of the platform in the dark, and before he could open his mouth the voice came out from under the black net. It was lower and older than Ronda&rsquo;s.</p>
+  <p><em>How is it with my son Wendell?</em></p>
+  <p>Dale stood there a minute. <em>He&rsquo;s all right,</em> he said. <em>He&rsquo;s at Karen Ouellette&rsquo;s. He&rsquo;s fine. Only one of the boys he took in, the Bangor one, burned him out in November over being spoken to. Burned the house and the hof both. Then he went through the ice on Pushaw in January.</em></p>
+  <p>Nobody in the hall made a sound. The drummer had laid his hand flat on the drum.</p>
+  <p><em>That isn&rsquo;t the first time,</em> the voice said. <em>That one never could stand a word said to him. It isn&rsquo;t the first house he pulled down, either.</em></p>
+  <p>Dale said he did not understand.</p>
+  <p><em>I see a barn,</em> said the seeress. <em>I see a swallow building under the eave of it. I see rain.</em></p>
+  <p>She told it slowly, as if it were going by her a little at a time and she was telling what she saw. A swallow had built her house under the eave of a barn, a cup of mud carried up a mouthful at a time from the edge of the stream and lined with feathers. In a cold rain a raccoon came along the beam, wet to the skin and shivering. The swallow looked out of her house at him.</p>
+  <p><em>Raccoon,</em> she said, <em>you have a face like a man&rsquo;s, and hands like a man&rsquo;s. Why don&rsquo;t you have a house?</em></p>
+  <p><em>I have the hands,</em> the raccoon said. <em>I haven&rsquo;t got the sense. The best thing a man has, I haven&rsquo;t got.</em></p>
+  <p>And because the raccoon had stolen eggs from that barn, and lied to the dog about it, and let the cat take the blame, the swallow said to him the thing that was true. <em>Then it&rsquo;s no wonder. You&rsquo;re light-minded and you&rsquo;re false to your friends, and nothing you promise holds. A house wouldn&rsquo;t do you any good. If you want to be out of the wind, go make one with all your strength, and change your ways.</em></p>
+  <p>The raccoon thought, <em>She calls me light-minded. She calls me false. I&rsquo;ll show her a thing or two about houses.</em> He reached up with his clever hands and tore the mud cup off the beam and threw the pieces down in the rain. The swallow was out of it before it fell. She flew off over the field.</p>
+  <p>The veil turned toward Dale.</p>
+  <p><em>That raccoon was the Bangor boy,</em> said the voice. <em>The swallow was the one we&rsquo;re speaking of. Would you know yet more?</em></p>
+  <p>Dale said no.</p>
+  <p><em>He would be better off alone,</em> said the seeress, <em>than with one like that. If he can&rsquo;t find a better man than himself to walk with, or one as good, let him walk by himself and be glad of it.</em> And then she said the old lines that the High One gave to the wandering singer, the way a person says something they have known so long it comes out by itself:</p>
+  <div class="verse">
+    <p>I rede thee, Loddfafnir! and hear thou my rede,&mdash;<br>Profit thou hast if thou hearest,<br>Great thy gain if thou learnest:<br>A good man find to hold in friendship,<br>And give heed to his healing charms.</p>
+    <p>I rede thee, Loddfafnir! and hear thou my rede,&mdash;<br>Profit thou hast if thou hearest,<br>Great thy gain if thou learnest:<br>Exchange of words with a witless ape<br>Thou must not ever make.</p>
+    <p>&mdash; H&aacute;vam&aacute;l 120, 122</p>
+  </div>
+  <p>Then the singers began again, and Dale went back down the aisle and sat in his metal chair beside his wife, and somebody else went up.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>They drove home on Route 11 a little after midnight. North of Sherman the sky cleared, and at the long rise where you can see the mountain, Dale pulled the truck onto the shoulder and shut the engine off.</p>
+  <p>Katahdin was white under the moon. His wife asked if he was all right. He said he was. He was fifty-eight years old and had carried a grudge against his own brother since their father&rsquo;s funeral, eleven years, over a remark at the graveside about a chainsaw, and he had been feeding it every day the way you feed a stove. Sitting there he could not find it. He looked for it the way you pat your pockets for your keys. It was not anywhere. There was the mountain and the cold ticking of the engine and his wife&rsquo;s breath on the window, and in his chest, where the thing had been, a feeling like a room after a stove has been taken out of it, a lot of space and a little cold.</p>
+  <p>He never told anyone about it but her. In March he drove to Medway and knocked on his brother&rsquo;s door.</p>
+</section>
+
+<section>
+  <h2>V. Mud</h2>
+  <p class="dateline">Shin Pond road &middot; May 2017</p>
+  <p>The kindred came up the spur on three Saturdays in April when the frost went out and helped raise a new cabin on the old sills. It was smaller than the first one, twelve by sixteen, of spruce logs Toby had cut and peeled over the winter at a woodlot in Stacyville, with a shed roof of second-hand steel that a man in Island Falls took off his barn. Karen gave him a cookstove from her cellar. Somebody from Bangor sent a box of quart jars in the mail with no note.</p>
+  <p>The flat stone in front of the hof was in three pieces, and Kasper set them back in the ground as close together as they would go and left the cracks between them. He did not rebuild the hof that year. He said the birches would do.</p>
+  <p>Toby stayed. He wore the butternut coat every day until it was too warm, and then he hung it on a nail by the door. Kasper did not take anyone else in. A young couple from Portland wrote that spring asking whether the gothi took students, and he had Toby write back that he was too old and they should go see Ronda Theriault in Dover-Foxcroft.</p>
+  <p>On the second Sunday in May, after the noon meal, the old man was sitting on the chopping block in the sun with the piece of horn in his hand when the swallows came back. There were four of them, and they went around and around the cabin in the wind, low, over the place where the old eave had been, and then over the new one. Toby came out of the woods with a pail in each hand and stopped beside him to watch.</p>
+  <p>The new eave was a raw spruce board, still white, still bleeding a little pitch. One swallow went down to the edge of the brook and came back, and hung there against the board with her wings going, and pressed a pellet of wet mud onto it, and went for another.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If a traveller does not meet with one who is his better, or his equal, let him firmly keep to his solitary journey; there is no companionship with a fool.<cite>Dhammapada 61, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Mah&#257; Kassapa, the Buddha&rsquo;s great ascetic disciple, lives at the Pipphali Cave near R&#257;jagaha with two young attendants. One does the work; the other takes the credit, telling the elder his bath is ready when the faithful pupil has left only a little water steaming in a pot. Rebuked, the false pupil goes to the elder&rsquo;s lay supporter, says the elder is sick, and eats the food he is given. Rebuked again, and jealous of the fine robes the elder has passed on to the other pupil, he smashes the monastery&rsquo;s vessels, burns the elder&rsquo;s leaf hut, beats what will not burn with a hammer, and runs. He dies and goes to hell. When a monk from R&#257;jagaha brings the news to the Buddha, the Buddha tells the birth story of a monkey who, scolded by a hornbill for having hands like a man and no house, tore the bird&rsquo;s nest to pieces, and speaks the verse. The visiting monk enters the stream. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-02.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mahakasyapa">Mah&#257; Kassapa</a>.</p>
+    <h3>The North Woods, 2016</h3>
+    <p>The paper mills built the towns below Katahdin. Great Northern Paper&rsquo;s mills at Millinocket and East Millinocket went through bankruptcy and changes of ownership after 2003; the Millinocket mill shut in 2008 and the last mill in the region, at East Millinocket, closed in 2014, ending several hundred jobs. <a href="https://en.wikipedia.org/wiki/Millinocket,_Maine">Millinocket</a> has lost nearly half its 1970 population. On August 24, 2016, President Obama proclaimed the <a href="https://en.wikipedia.org/wiki/Katahdin_Woods_and_Waters_National_Monument">Katahdin Woods and Waters National Monument</a> on 87,563 acres east of Baxter State Park, donated by the family foundation of a Burt&rsquo;s Bees co-founder. Many local people and the governor bitterly opposed it, and others hoped it would bring visitors back. Its north entrance lies up Route 159, the Shin Pond road, out of Patten.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Heathenry_(new_religious_movement)">Heathenry</a>, the modern revival of pre-Christian Germanic and Norse religion, has been practiced in the United States since the 1960s, mostly in small local groups called kindreds. Its central rites are the bl&oacute;t, an offering of mead to the gods sprinkled over the people, and the sumbel, rounds of toasts and boasts over the drinking horn, where words spoken are held to be binding. Its scriptures are the poems of the <a href="https://en.wikipedia.org/wiki/Poetic_Edda">Poetic Edda</a>, above all the <a href="https://en.wikipedia.org/wiki/H%C3%A1vam%C3%A1l">H&aacute;vam&aacute;l</a>, the the &ldquo;Sayings of the High One,&rdquo;ldquo;Words of the High One,the &ldquo;Sayings of the High One,&rdquo;rdquo; Odin&rsquo;s counsel on hospitality, friendship and good sense. Some groups have also revived oracular sei&eth;r, drawn from the seeress in the <a href="https://en.wikipedia.org/wiki/Saga_of_Erik_the_Red">Saga of Erik the Red</a>: the seer sits on a high seat while songs and drumming carry the gathering in trance down the world tree toward Hel, and then answers the questions people bring.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Mah&#257; Kassapa&rsquo;s pupil from the Dhammapada commentary (verse 61). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-02.htm">The original</a>. Scripture from the Poetic Edda, translated by Henry Adams Bellows (1923). Written by Claude Opus 5.5.
+  <div class="pager"><a href="pond-lilies.html">&larr; Pond Lilies</a><a href="index.html">All stories</a><a href="five-places.html">Five Places &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, wisps = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(w, anywhere) {
+    w.x0 = Math.random() * W;
+    w.y = anywhere ? H * (0.45 + Math.random() * 0.6) : H + 30;
+    w.vy = 0.18 + Math.random() * 0.22;
+    w.r = 14 + Math.random() * 22;
+    w.ph = Math.random() * 6.28;
+    w.amp = 10 + Math.random() * 26;
+    w.a = 0.035 + Math.random() * 0.035;
+    return w;
+  }
+  function make() {
+    var n = Math.round(Math.max(10, Math.min(26, W / 55)));
+    wisps = [];
+    for (var i = 0; i < n; i++) wisps.push(spawn({}, true));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < wisps.length; i++) {
+      var w = wisps[i];
+      if (!reduce) { w.y -= w.vy; w.ph += 0.006; w.r += 0.025; if (w.y < H * 0.35) spawn(w, false); }
+      var rise = (H - w.y) / (H * 0.65);
+      var fade = Math.max(0, Math.min(1, (1 - rise) * 1.6)) * Math.min(1, (H + 30 - w.y) / 80);
+      var x = w.x0 + Math.sin(w.ph + w.y * 0.012) * w.amp;
+      var a = w.a * fade;
+      if (a < 0.003) continue;
+      var g = ctx.createRadialGradient(x, w.y, 0, x, w.y, w.r * 2.2);
+      g.addColorStop(0, 'rgba(211,219,222,' + a + ')');
+      g.addColorStop(0.5, 'rgba(211,219,222,' + (a * 0.45) + ')');
+      g.addColorStop(1, 'rgba(211,219,222,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, w.y, w.r * 2.2, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

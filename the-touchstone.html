@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Touchstone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a black touchstone at night, dark theme; now and then a short bright streak of gold is drawn across the stone near the margins, holds, and is wiped slowly away; datelined sections. */
+  --ground: #121214;
+  --bg-image: radial-gradient(ellipse at 50% 30%, #1d1d21 0%, #121214 65%) fixed;
+  --paper: #e7e2d7;
+  --paper-dim: #a39d91;
+  --accent: #d4ab55;
+  --glow: #ecc66c;
+  --panel: rgba(28,28,32,.78);
+  --rule: rgba(231,226,215,.1);
+  --accent-line: rgba(212,171,85,.4);
+  --title-shadow: 0 0 28px rgba(212,171,85,.22);
+  --body-weight: 300;
+  color-scheme: dark;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg-image), var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: var(--title-shadow); }
+.epigraph { border-left: 1px solid var(--accent-line); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 17.7 &middot; Atula</span></nav>
+<header>
+  <h1>The Touchstone</h1>
+  <div class="epigraph">But wisdom is justified by all her children.<br>&mdash; Luke 7:35 (Peshitta, tr. Murdock)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Hākadhā samiʿtu,</span> at the counter of the Royal Star Market on Dequindre.</p>
+
+<section>
+  <h2>I. The Monk</h2>
+  <p class="dateline">Sterling Heights, Michigan · the Ninevite fast, January 2023</p>
+  <p>Fadi Atallah sold Jeeps at a dealership on Van Dyke in Warren, and on Sunday nights, and sometimes on Wednesdays, he went live on his phone and talked about God.</p>
+  <p>He called it Faith with Fadi. He had started it during the lockdown in 2020, when the churches were closed and he was living in his parents' basement with nothing to do, and for two years forty people watched it, most of them aunts. He talked about the saints. He talked about the martyrs of the Nineveh plain, and about his grandmother, who had left Telkaif in 1977 with her gold sewn into the hem of her dress, and about the Detroit Lions, whom he considered a test of faith. He was thirty-one, handsome in a heavy-eyebrowed way, and he had the dealership voice, warm and fast, the voice that tells you there is never going to be a better time than now.</p>
+  <p>That January his cousin's wedding put him on the map. Somebody's video of Fadi leading the line dance at a banquet hall on Van Dyke, a hundred and forty people holding pinkies, went around the internet and came back again, and when it came back it had brought him nine thousand followers. Most of them were Chaldean, from Sterling Heights and El Cajon and Sydney and Toronto and Amman. Some were just people who liked the dance. On the first night of the Ninevite fast, when he went live at nine o'clock from the parking lot of the church on Seventeen Mile, there were five hundred and twelve people watching, and he felt their attention on him like the heat off a grill.</p>
+  <p><em>Habibis,</em> he told them, <em>it's the Ba'utha. Three days, no food till noon, no meat, no dairy, no nothing. Jonah went to Nineveh and told them to repent, and they repented, the king, the cows, everybody. Our people kept this fast for fifteen hundred years. So for three days I'm going to bring you the real thing. No Fadi. Real teachers. Tonight we start at the top.</em></p>
+  <p>At the top, that week, was a monk.</p>
+  <p>Everybody in Sterling Heights knew he was in town. He was old, and he had come from Alqosh in the north of Iraq to see a doctor at Beaumont about his heart, and he was staying with a nephew on Metro Parkway, and in the evenings the nephew brought him to the parish hall and sat him in a folding chair near the coffee urn, and people lined up to kiss his hand. He was a monk of Our Lady of the Seeds, the monastery on the plain below the old monastery of Rabban Hormizd, which had been carved into the cliff above Alqosh thirteen hundred years ago. People said he had lived in one of the caves in the cliff for nineteen years, alone, coming down once a week for bread. People said he had been in the cave the whole time ISIS was in the plain below, and that the black flags had come up the road as far as the village of Batnaya and stopped, and that nobody ever knew why. People said a lot of things.</p>
+  <p>Fadi kissed his hand. He held the phone up so the five hundred could see him, a small man in a black habit with a white beard cut square, a face like a walnut, his eyes very bright.</p>
+  <p><em>Rabban,</em> said Fadi. <em>We're live. There are five hundred people watching from all over the world. They want to hear from you. What would you tell them? What's the one thing?</em></p>
+  <p>The monk looked at the phone. Then he looked at Fadi, kindly, the way you look at a nephew. Then he folded his hands in his lap and looked at nothing in particular, somewhere around the coffee urn, and said nothing.</p>
+  <p>Fadi waited. He asked again, in Sureth this time, and then in Arabic. The monk smiled a little. In the corner of the screen the comments went up. <em>Is he ok. Is the sound off. Lol. Bro he's sleeping. God bless him. Ask him about the caves. Boring. Is this a prank.</em> The count went down to four hundred and ninety, and then four-sixty. The nephew leaned over and said, quietly, in Fadi's ear, that his uncle didn't talk much. That he hadn't really talked, the nephew said, since about 1990.</p>
+  <p>Six minutes. Fadi counted them afterward on the video. Six minutes of a man in a folding chair saying nothing at all, while the parish hall clinked and murmured around him and the urn ticked.</p>
+  <p><em>Okay,</em> said Fadi finally, turning the phone around to his own face, and he smiled the dealership smile, and he ended the live. Out in the parking lot, with the snow coming down in the sodium lights, he sat in his Grand Cherokee with the engine running and felt his face burn. He had driven twenty minutes and brought five hundred people for that. The man had nothing for them. Nothing.</p>
+</section>
+
+<section>
+  <h2>II. The Doctor</h2>
+  <p class="dateline">The parish hall · the second night</p>
+  <p>On the second night he went to Father Raad.</p>
+  <p>Everybody also knew Father Raad. He had a doctorate from the Pontifical Oriental Institute in Rome and had written a book, in English, with footnotes, about the Christology of the Church of the East. On the Tuesday of the Ba'utha he was giving a lecture in the parish hall for the young adults, and the folding chairs were set out in rows, and Fadi sat in the front with his phone on a little tripod on his knee. Five hundred and forty people were watching when Father Raad began.</p>
+  <p><em>Fadi wants the one thing,</em> said Father Raad, smiling, when he saw the phone. <em>So I'll give you the one thing. But to understand the one thing you must understand three words.</em></p>
+  <p>The three words were in Syriac. One was <em>kyana</em>, which meant nature, and one was <em>parsopa</em>, which meant something like person, and the third was <em>qnoma</em>, which Father Raad said could not really be translated at all, though he would spend some time explaining why. He explained how the Church of the East had said for fifteen centuries that in Christ there were two natures and two <em>qnome</em> in one <em>parsopa</em>, and how the Greeks and the Latins had said two natures in one hypostasis, and how everybody had called everybody else a heretic over it for most of that time, and how in 1994 the Pope and the Patriarch of the Assyrian Church of the East had signed a common declaration saying, more or less, that they had all meant the same thing all along. He drew diagrams on a whiteboard on wheels. He quoted Babai the Great. He quoted Nestorius, and then explained carefully that he was not a Nestorian, and that nobody in the room was a Nestorian, and that Nestorius had arguably not been a Nestorian either.</p>
+  <p>It went on for an hour and fifty minutes. It was, Fadi understood dimly somewhere in the second hour, very beautiful, like watching a man build a cathedral out of toothpicks. He did not understand one word in ten. The count went down to three hundred, then a hundred and fifty, then sixty. The comments said <em>???</em> and <em>my brain</em> and <em>Abouna I love you but</em> and <em>what is a qnoma</em> and <em>did he say heretic</em>. Somebody in Toronto asked Fadi to ask Father Raad what time it was in Rome. At the end Father Raad capped his marker and asked if there were any questions, and nobody in the hall had any, and Fadi ended the live with thirty-one people watching, all of them, he suspected, aunts.</p>
+  <p>He drove home on Mound Road angry. That one had too much for them. What use was a man like that, to a car salesman in Warren, to a girl in El Cajon, to anybody with a mortgage? He might as well have done the whole thing in Syriac.</p>
+</section>
+
+<section>
+  <h2>III. The Young Father</h2>
+  <p class="dateline">The church on Seventeen Mile · Wednesday</p>
+  <p>On the third day, after the liturgy that ends the fast, Fadi caught Father Danny in the sacristy taking off his vestments.</p>
+  <p>Father Danny was twenty-nine and had been born at Providence Hospital in Southfield and had played point guard at De La Salle. He was the one the kids liked. He said Mass fast and his homilies were short and he was, everyone agreed, the future. Fadi told him about the monk and about Father Raad. Father Danny laughed and said Rabban was a saint and Father Raad was a genius, and Fadi said that was very nice, but he had five hundred people, and they had come for something, and they had gotten a man who wouldn't talk and a man who wouldn't stop.</p>
+  <p><em>Okay,</em> said Father Danny. <em>Put it on.</em></p>
+  <p>Fadi went live. Four hundred and eighty people were watching. Father Danny pulled his alb off over his head and folded it over his arm and looked straight into the phone.</p>
+  <p><em>Here's the whole thing. God loves you. Jonah didn't want to go to Nineveh because he knew God would forgive them, and God forgave them. So fast when it's time to fast. Forgive somebody this week, somebody specific. Call your mom. That's it. That's the Ba'utha. God bless.</em></p>
+  <p>It took forty seconds. Then he went to hang up the alb. Fadi stood in the sacristy holding the phone. The comments said <em>amen</em> and <em>love you Abouna</em> and <em>that's it?</em> and <em>my mom says hi</em> and <em>too short</em> and <em>fortune cookie</em> and <em>I drove here for this</em>, which was a lie, because the person who wrote it was in Sydney. Fadi ended the live. He found that he was angry at Father Danny too, which surprised him. A fortune cookie. Forty seconds. As if five hundred people could be handled like a customer who wanted to know the price and nothing else.</p>
+  <p>He sat in the Grand Cherokee in the church lot. It was dark already, at six o'clock, and the snow had stopped and frozen. The fast was over. He had not eaten since the night before. He was furious with all of them, the one who said nothing and the one who said everything and the one who said a little, and he did not know where to go, and so he went where he always went when he did not know where to go, which was to his aunt's store.</p>
+</section>
+
+<section>
+  <h2>IV. The Store</h2>
+  <p class="dateline">Royal Star Market, Dequindre Road, Warren</p>
+  <p>Suhaila Kassab was not really his aunt. She was his mother's first cousin, which in Sterling Heights is the same thing. She ran the Royal Star Market on Dequindre, the road that divides Macomb County from Oakland, a party store with a lottery machine and a beer cave and a deli counter and a wall of hot sauces she said were the best selection north of Eight Mile. She had run it alone since her husband Wadie died in April of 2020, in the first wave, in the ICU at Beaumont, while she stood in the parking lot with her phone and the nurse held the other phone to his ear. She was fifty-six. She opened the store at seven in the morning and closed it at midnight, and in between she knew everyone who came through the door, and their mothers, and what they owed her, and she told them.</p>
+  <p>There was still a plexiglass shield on the counter from the pandemic, taped at the corners, with a slot at the bottom for money. Suhaila had never taken it down. She said it kept the flu off her and the lottery players' breath, and anyway Wadie had put it up.</p>
+  <p>Fadi came in stamping snow. She looked at him over the plexiglass.</p>
+  <p><em>You didn't eat.</em></p>
+  <p><em>The fast's over.</em></p>
+  <p><em>I know the fast is over. I didn't ask if the fast was over.</em> She went to the deli and came back with a pita rolled around chicken shawarma and a can of Faygo and put them through the gap at the side of the shield, and he ate standing up at the counter while she sold three scratch-offs and a pack of Newports to a man in a Carhartt jacket and asked him about his daughter's knee.</p>
+  <p>Then Fadi told her. He told her the whole thing, the five hundred, the monk, the doctor, the young father. He told her about the comments. He took out his phone, without really thinking about it, and propped it against the hot sauce display and went live, because he wanted the five hundred to hear somebody agree with him, and Suhaila would agree with him. She agreed with everybody about how bad everybody else was. Four hundred and ninety-six people were watching.</p>
+  <p><em>So,</em> he said. <em>Three days. One says nothing. One says everything. One says forty seconds and goes to hang up his clothes. I'm angry at all three of them. Tell me I'm wrong.</em></p>
+  <p>Suhaila looked at him through the plexiglass for a while. Then she looked at the phone against the hot sauce. Then she took her own phone out of her apron pocket, which had a cracked screen and a picture of the Virgin of the Seeds on the case, and scrolled, and held it up against the shield so that he could read it.</p>
+  <p>It was her store, on Google. Royal Star Market. 3.9 stars, 212 reviews.</p>
+  <p><em>Read,</em> she said.</p>
+  <p>He read. One star: <em>The lady never smiles. Never says hello.</em> One star: <em>Owner talks too much, I just want my lottery.</em> One star: <em>Fine I guess.</em> Five stars: <em>Best store in Warren, she asked about my mom.</em> One star: <em>She asked about my mom???</em> Two stars: <em>Too many hot sauces.</em> Five stars: <em>The hot sauces.</em></p>
+  <p><em>Now,</em> said Suhaila. She typed with her thumb and held it up again. It was the Grand Canyon. Four point seven. She scrolled down to the one stars and read one aloud herself, through the plexiglass. <em>It's a hole. Very big hole. Nothing to do.</em> She typed again. Lake Michigan. One star. <em>Too cold, can't see the other side.</em> She typed again. It was the cathedral in Southfield, Mother of God, Our Lady of the Chaldeans. One star. <em>Mass too long.</em> One star, right under it. <em>Mass too short, priest in a hurry.</em> One star. <em>Nobody talked to me.</em></p>
+  <p><em>The Grand Canyon,</em> she said. <em>God made it with his hands for a million years. Somebody gives it one star. And this one,</em> she said, putting her finger on the cathedral, <em>is my church, and I have been going there thirty years, and both these people are right, the Mass is too long and too short. It depends who says it. It depends what day.</em></p>
+  <p>She put the phone back in her apron.</p>
+  <p><em>Fadi. You think this is new, because it's on the phone? It's the oldest thing. My father used to say, in the souk in Baghdad, the customer who wants to complain will complain if you talk to him and complain if you don't. And before my father, Our Lord.</em> And she said it the way she said everything, standing behind the counter with her hands flat on it, without any special voice, as if she were reading a price. She said it in English for the phone, from an old English translation her priest in Baghdad had given her because it came straight from the Syriac, the Bible of their own church.</p>
+  <div class="verse">
+    <p>To what, therefore, shall I compare this generation? and to what are they like? They are like children, that sit in the market-place, and call to their fellows and say: We have piped to you, and ye did not dance; we have howled to you, and ye did not weep. For John the Baptizer came, not eating bread, and not drinking wine; and ye say: He hath a demon. The Son of man came, eating and drinking; and ye say: Behold, a gluttonous man, and a wine drinker, and one fond of publicans and sinners. But wisdom is justified by all her children.</p>
+    <p>&mdash; Luke 7:31–35 (Peshitta, tr. Murdock)</p>
+  </div>
+  <p><em>They didn't like John because he fasted and they didn't like Jesus because he ate. If they could find nothing wrong with Our Lord, they could find nothing wrong with anybody, and they found plenty. So. There was never anybody everybody blamed and never anybody everybody praised. Not the monk. Not Abouna Raad. Not Danny. Not you. Not me.</em> She jerked her chin at the door. <em>Not the Lions.</em></p>
+  <p><em>So then nothing counts,</em> said Fadi. <em>If everybody's blamed. Five stars, one star, who cares.</em></p>
+  <p><em>I didn't say that.</em></p>
+</section>
+
+<section>
+  <h2>V. The Stone</h2>
+  <p class="dateline">Royal Star Market · near midnight</p>
+  <p>She reached under the counter, below the lottery machine, and brought out a small black stone, flat and smooth, a touchstone the size of a bar of hotel soap, and set it on the counter on her side of the plexiglass, where the phone could see it.</p>
+  <p>Fadi had seen it all his life and never asked about it. It sat next to the register, under a rubber mat, with the rolls of quarters.</p>
+  <p><em>My father's,</em> said Suhaila. <em>From the shop.</em> Her father, Yousif, had been a goldsmith in Baghdad for forty years, she said, and his father before him, and in all that time he had never once asked a customer whether a piece was gold. People would come in to sell a bracelet and swear on their mothers it was twenty-one karat, and he would smile and say, of course, of course, and take out the stone. She slid her wedding ring off her finger and drew it across the stone, firmly, once. It left a short bright streak, like a struck match. <em>You don't ask the man. You ask the stone. And the stone doesn't care who is the man. And my father,</em> she said, <em>tested his own gold. Every piece, before he sold it, even the pieces he made with his own hands that morning. Every day. Forty years. Because one day, he said, you will get tired, or greedy, and you will think, this time I don't need to test. And that's the day.</em></p>
+  <p>She looked at the streak. Gold on black, a little line, steady.</p>
+  <p><em>Who praises? That's the question. Not how many stars. A girl in Sydney who watched you for forty seconds? She doesn't know you. She doesn't know the monk. She can say whatever she wants, it's like rain on the window. But somebody who knows, who watches you every day, a year, ten years, who tests you every day like my father tested the gold, if that person says you're good, then you're good. If that person says you're cheating, then you're cheating.</em> She tapped the stone. <em>The monk sat in a cave nineteen years. Every day God tested him. Abouna Raad studied in Rome until his eyes went. Danny gets up at five to bring Communion to the old people in the nursing homes on Dequindre, every Tuesday, nobody sees. These people, I've been watching them. I know what they are. Who is going to give gold one star?</em></p>
+  <p>She said the other one then, from the same Bible, the same plain way.</p>
+  <div class="verse">
+    <p>so that the proof of your faith may appear more precious than refined gold that is tested by fire, unto glory and honor and praise, at the manifestation of Jesus the Messiah</p>
+    <p>&mdash; 1 Peter 1:7 (Peshitta, tr. Murdock)</p>
+  </div>
+  <p><em>Tested by fire,</em> she said. <em>Not by Google.</em></p>
+  <p>Then she put the ring back on her finger, and wiped the stone with her apron, and put it under the rubber mat with the quarters, and turned to sell a bottle of Faygo Rock &amp; Rye to a boy in a hockey jacket, and asked him how his grandfather was.</p>
+</section>
+
+<section>
+  <h2>VI. Five Hundred</h2>
+  <p class="dateline">Warren and the world · after midnight</p>
+  <p>Fadi did not notice the phone until she had locked the door behind the last customer and turned off the beer cave lights.</p>
+  <p>It was still live, propped against the hot sauces. It had been live for fifty-one minutes. In the corner it said that four hundred and ninety-six people were watching. It was the number it had said when she began.</p>
+  <p>He picked it up. He scrolled back through the comments, and then he scrolled again, because he did not understand what he was looking at. There were no comments. From the moment Suhaila had held her phone up to the plexiglass, nobody had typed anything at all. Not <em>amen</em>, not <em>lol</em>, not <em>boring</em>, not a single heart. For fifty-one minutes, four hundred and ninety-six people in Sterling Heights and El Cajon and Sydney and Toronto and Amman and the other places, people who had left the monk and left Father Raad and complained about Father Danny, had watched a woman in an apron sell lottery tickets and talk about a stone, and none of them had said a word, and none of them had gone.</p>
+  <p>He told people afterward and they did not believe him. Then his cousin in El Cajon, who had been watching, said it was true, she had been there the whole time, she had not been able to type, she said, she did not know why, she had felt as if somebody were testing something in her and she wanted to hold still for it. A woman in Toronto wrote to him that she had called her mother for the first time in four years when the live ended. A man in Amman who had been waiting three years for a visa said he had stopped being angry at the embassy that night, and did not start again. A girl in Sydney wrote that she was sorry about the forty seconds. There were others, all that winter, more than he could keep track of, and he kept track of them in a note on his phone, until the note said four hundred and ninety-six, and then he stopped counting because it seemed like the kind of thing you should not count.</p>
+  <p>He did not do Faith with Fadi much after that. He went to the parish hall on the nights the monk sat by the urn, until the monk went home to Alqosh in the spring, and sat in a folding chair next to him, and said nothing either, sometimes for an hour, and found that it was harder than selling Jeeps, and better. He read Father Raad's book, slowly, with a dictionary, and got as far as page ninety. He started bringing Communion with Father Danny to the nursing homes on Tuesdays, and carried the little case.</p>
+  <p>Once in a while somebody at the dealership gave him a bad review on the website, because the trade-in was low, or the coffee was cold, or he had talked too much or not enough. He read them all, and he thought about the Grand Canyon.</p>
+  <p>And on the nights he stopped at the Royal Star for a shawarma, near midnight, he would sometimes watch Suhaila, when she thought nobody was looking, take out the black stone from under the mat by the register and slide her ring off and draw it across, once, the way her father had done every day for forty years in Baghdad. She would look at the little line of gold for a moment under the fluorescent lights. Then she would wipe it away with her apron, and put the stone back with the quarters.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">This is an old saying, O Atula, this is not only of to-day: &lsquo;They blame him who sits silent, they blame him who speaks much, they also blame him who says little; there is no one on earth who is not blamed.&rsquo;<cite>Dhammapada 227, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">There never was, there never will be, nor is there now, a man who is always blamed, or a man who is always praised.<cite>Dhammapada 228, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">But he whom those who discriminate praise continually day after day, as without blemish, wise, rich in knowledge and virtue, who would dare to blame him, like a coin made of gold from the Gambu river? Even the gods praise him, he is praised even by Brahman.<cite>Dhammapada 229&ndash;230, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the lay follower Atula takes his five hundred companions to hear the Dhamma. Elder Revata, a solitary who delights in seclusion &ldquo;as a lion delights in solitude,&rdquo; says nothing, and Atula leaves angry. Elder Sāriputta expounds the Abhidhamma at great length, and Atula finds it too abstruse. Elder Ānanda teaches briefly and simply, and Atula is angry at him too. At last he goes to the Buddha, who tells him that people have always blamed the silent, the talkative and the moderate, that even kings, the earth, the sun and moon and the Buddha himself are blamed by some and praised by others, and that only the praise of the wise, who examine a person day after day, counts. All five hundred enter the stream. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-07.htm">the full commentary story</a>.</p>
+    <h3>Macomb County, Michigan, 2023</h3>
+    <p>Metro Detroit holds the largest community of <a href="https://en.wikipedia.org/wiki/Assyrian_Americans">Chaldean and Assyrian Americans</a> in the country, around 150,000 people. Most Chaldean families trace their roots to villages on the Nineveh plain such as <a href="https://en.wikipedia.org/wiki/Tel_Keppe">Tel Keppe</a>, which the Islamic State captured in August 2014 and Iraqi forces retook in January 2017. Over the decades many families moved from Detroit&rsquo;s Seven Mile &ldquo;Chaldean Town&rdquo; to suburbs such as Sterling Heights, Warren, Troy and West Bloomfield, and Chaldean grocers came to run a large share of the region&rsquo;s party stores. The <a href="https://en.wikipedia.org/wiki/Chaldean_Catholic_Church">Chaldean Catholic Church</a> keeps the East Syriac rite; the cathedral of its Detroit eparchy is in Southfield. In 1994 Pope John Paul II and Patriarch Dinkha IV of the Assyrian Church of the East signed a Common Christological Declaration, closing a dispute over the natures of Christ that went back to the fifth century. Three weeks before Lent, East and West Syriac churches keep the three-day <a href="https://en.wikipedia.org/wiki/Fast_of_Nineveh">Fast of the Ninevites</a> (Ba&rsquo;utha).</p>
+    <p>The monk&rsquo;s home is near Alqosh, below the cliff monastery of <a href="https://en.wikipedia.org/wiki/Rabban_Hormizd_Monastery">Rabban Hormizd</a>, founded about 640 and honeycombed with hermits&rsquo; cells cut into the rock; in 1859 a new monastery, Our Lady of the Seeds, was built on the plain about a mile away. Suhaila&rsquo;s scripture is the <a href="https://en.wikipedia.org/wiki/Peshitta">Peshitta</a>, the Syriac Bible of her church, in the English of <a href="https://en.wikipedia.org/wiki/James_Murdock_(scholar)">James Murdock</a>, who in 1851 published the first English translation of the New Testament made from it. Her father&rsquo;s <a href="https://en.wikipedia.org/wiki/Touchstone_(assaying_tool)">touchstone</a> is the goldsmith&rsquo;s old test: gold drawn across the dark stone leaves a streak whose color shows its purity.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the lay follower Atula from the Dhammapada commentary (verses 227&ndash;230). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-07.htm">The original</a>. Scripture from the Syriac Peshitta New Testament in James Murdock&rsquo;s translation (1851). Written by Claude Opus 5.5.
+  <div class="pager"><a href="rice-water.html">&larr; Rice Water</a><a href="index.html">All stories</a><a href="neats-tongue.html">Neat’s Tongue &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, streaks = [], next = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function marginX() {
+    // keep streaks out of the reading column where there is room
+    var col = Math.min(W, 640), left = (W - col) / 2;
+    if (left > 90) return Math.random() < 0.5 ? Math.random() * (left - 40) + 10 : W - left + 30 + Math.random() * (left - 40);
+    return Math.random() * W;
+  }
+  function spawn(t) {
+    var len = 40 + Math.random() * 70;
+    streaks.push({ x: marginX(), y: 40 + Math.random() * (H - 80), len: len,
+      ang: -0.25 + Math.random() * 0.5, born: t, draw: 900, hold: 4200 + Math.random() * 2500, fade: 3500,
+      w: 2.2 + Math.random() * 1.6, seed: Math.random() * 10 });
+  }
+  function grainy(s, upto, alpha) {
+    var steps = Math.max(2, Math.floor(s.len * upto / 2));
+    for (var i = 0; i < steps; i++) {
+      var f = i / steps, along = f * s.len * upto;
+      var jitter = Math.sin(s.seed + i * 1.7) * 0.7;
+      var x = s.x + Math.cos(s.ang) * along, y = s.y + Math.sin(s.ang) * along + jitter;
+      var taper = Math.min(1, f * 6) * Math.min(1, (1 - f) * 4 + 0.35);
+      ctx.globalAlpha = alpha * taper * (0.75 + 0.25 * Math.sin(s.seed * 3 + i));
+      ctx.fillRect(x, y - s.w / 2, 2.2, s.w);
+    }
+    ctx.globalAlpha = 1;
+  }
+  function frame(t) {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce && t > next) { spawn(t); next = t + 2600 + Math.random() * 2600; }
+    ctx.fillStyle = 'rgb(236,198,108)';
+    for (var i = streaks.length - 1; i >= 0; i--) {
+      var s = streaks[i], age = t - s.born, upto = 1, a = 0.42;
+      if (age < s.draw) upto = age / s.draw;
+      else if (age > s.draw + s.hold) a *= Math.max(0, 1 - (age - s.draw - s.hold) / s.fade);
+      if (age > s.draw + s.hold + s.fade) { streaks.splice(i, 1); continue; }
+      ctx.shadowColor = 'rgba(236,198,108,0.5)'; ctx.shadowBlur = 6;
+      grainy(s, upto, a);
+      ctx.shadowBlur = 0;
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size();
+  if (reduce) {
+    for (var k = 0; k < 3; k++) { spawn(0); streaks[k].born = -2000; }
+    frame(0);
+  } else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); if (reduce) frame(0); });
+})();
+</script>
+</body>
+</html>

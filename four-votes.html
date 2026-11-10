@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four Votes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over an interstate at night seen from a high cab; the dashed lane lines slide slowly toward the reader out of a far vanishing point, and now and then a pair of tail lights recedes ahead; datelined sections. */
+  --ground: #0d1214;
+  --ground-2: #161d20;
+  --paper: #e9e5da;
+  --paper-dim: #9ea59e;
+  --quince: #d9b540;
+  --lamp: #f2d680;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #1a2428 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,229,218,.2); }
+.series a:hover { color: var(--quince); }
+a:focus-visible { outline: 2px solid var(--quince); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--quince); text-wrap: balance; text-shadow: 0 0 28px rgba(217,181,64,.22); }
+.epigraph { border-left: 1px solid rgba(217,181,64,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--quince); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--quince); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(22,29,32,.82); border: 1px solid rgba(233,229,218,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--lamp); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,229,218,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--quince); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--quince); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--quince); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--quince); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--quince); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--quince); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(22,29,32,.82); border-left: 2px solid var(--quince); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 1.7 &middot; Devadatta</span></nav>
+<header>
+  <h1>Four Votes</h1>
+  <div class="epigraph">but the raiment of restraint from evil, that is best.<br>&mdash; Qur&rsquo;an 7:26</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ovako sam &#269;uo,</span> on Gravois Avenue.</p>
+
+<section>
+  <h2>I. The Guests</h2>
+  <p class="dateline">Bevo Mill, St. Louis, Missouri &middot; Ramadan, June 2017</p>
+  <p>For the last ten nights of Ramadan the d&#382;emat on Gravois had two guests from Bosnia. Hafiz Senad Mehi&#263; taught at a medresa in Sarajevo and carried the whole Qur&rsquo;an in his head, and he had been sent for the month, the way scholars are sent every year to the congregations abroad, to lead the long night prayers and recite. With him came a young muezzin named Adem. They slept in the two rooms over the hall, which had been a furniture store, and they had one suitcase each.</p>
+  <p>Nobody let them eat a meal alone. To feed a guest who is fasting is counted a great good, a sevap, and the families of Bevo had divided up the thirty evenings back in April, by twos and threes and sometimes a whole street together. Emir Selimovi&#263;&rsquo;s wife had the eleventh night with her sisters and cooked for two days.</p>
+  <p>Emir drove a truck. A good third of the men in the d&#382;emat did. He was thirty-six and owned his own Freightliner, leased on to Fadil Kova&#269;&rsquo;s company, and ran refrigerated freight to upstate New York and back. He had come to America at sixteen, to Utica, with his mother and without his father, and to St. Louis at twenty-two because a cousin said there was work and the houses were cheap.</p>
+  <p>On the twenty-fifth night, after the dates and the soup, the hafiz stood up at the end of the long tables to thank the families who had cooked. He was a narrow man with a short gray beard and he spoke quietly, so that the back tables had to stop scraping their chairs.</p>
+  <p><em>One man gives, and never asks his neighbor to give,</em> he said. <em>On the other side that man will find his table full and nobody sitting at it. Another man goes up and down the street telling everybody else to give, and gives nothing himself. He will find a crowd around him and no bread. A third neither gives nor asks. He will not get so much as a bowl of thin sour soup. And the fourth gives, and goes and knocks on his neighbor&rsquo;s door as well. That one will have the bread and the company both, a hundred times over, a thousand times, more times than I can count for you.</em></p>
+  <p>Then he recited, and gave it afterward in plain words for the young people, who had their Arabic from Saturday school and their Bosnian from their grandmothers.</p>
+  <div class="verse">
+    <p>Hast thou observed him who belieth religion?<br>That is he who repelleth the orphan,<br>And urgeth not the feeding of the needy.</p>
+    <p>&mdash; Qur&rsquo;an 107:1&ndash;3</p>
+  </div>
+  <p><em>You see what is counted against him,</em> the hafiz said. <em>That he did not urge.</em> And he sat down and asked for more of the soup.</p>
+</section>
+
+<section>
+  <h2>II. The Thousand</h2>
+  <p class="dateline">Gravois Avenue &middot; the next two days</p>
+  <p>Mirsad Begi&#263; had the bakery across from the windmill. He had given all his life. He had never once asked. He lay awake on it, and in the morning he went up the stairs over the hall.</p>
+  <p><em>Efendija, tomorrow is the twenty-seventh night. Be my guest.</em></p>
+  <p><em>Gladly. How many are you feeding?</em></p>
+  <p><em>How many come to pray on the twenty-seventh night?</em></p>
+  <p><em>With the people from Affton and the county, they tell me a thousand.</em></p>
+  <p><em>Then bring the thousand.</em></p>
+  <p>He went down Gravois with a notebook. He went into the butcher&rsquo;s and the caf&eacute;s and the insurance office and the place that sent money home, and he stood in the door of each and said the same thing. <em>I have invited a thousand people to break the fast tomorrow. How many can you feed? How many can you?</em></p>
+  <p>They told him. The butcher said two hundred and wrote down six lambs. The women of Itaska Street said a hundred, in pita, cheese and potato and meat. A widow on Morganford said ten, and it was the most she could do, and he wrote it down the same size as the lambs. The trucking men said the tea and the sugar and the dates and the water, for everyone. By evening the notebook came to a thousand and some over.</p>
+  <p><em>Good,</em> Mirsad said. <em>Now nobody cooks at home. Bring it all to the hall and we cook it as one house.</em> So the flour came, and the onions and the lamb, the walnuts and the sugar and the tubs of kajmak, and all that night and the next day the hall smelled like a wedding. Mirsad baked eleven hundred somuns and for the first time in twenty years did not sell one.</p>
+  <p>Emir peeled onions with the other drivers at a folding table by the back door, forty-pound sacks of them, and wept with the rest and was laughed at by the women. Nermin Had&#382;i&#263; was there too, as he was everywhere, in his black robe, showing the boys how to turn the spits.</p>
+  <p>Late in the afternoon Fadil Kova&#269; came in with a dry cleaner&rsquo;s bag over his arm. Fadil had forty trucks. He laid the bag on the table where the women were cutting baklava, and unzipped it, and the women put down their knives.</p>
+  <p>It was a &#263;urak, the long fur-lined cloak that judges and scholars wore in the old days, the wool the yellow of a ripe quince and the lining red fox. Fadil&rsquo;s great-grandfather had been a kadija in Fo&#269;a, and the cloak had been made for him in Sarajevo in the time of the Austrians. In April of 1992 Fadil&rsquo;s mother had walked out of Fo&#269;a with it folded in a plastic shopping bag under two loaves of bread. It had lain since in a cedar chest with rose oil, and when he opened the bag the whole end of the hall smelled of roses.</p>
+  <p><em>A dealer in Chicago offered me thirty thousand dollars,</em> Fadil said. <em>If the food comes up short, sell it to him and buy what you need. If there is enough, give it to whichever efendija you see fit. It should be on somebody&rsquo;s shoulders. It has been in a box for a hundred years.</em></p>
+</section>
+
+<section>
+  <h2>III. The Count</h2>
+  <p class="dateline">The hall &middot; the twenty-seventh night</p>
+  <p>There was enough. A thousand and sixty people broke the fast at tables that ran out the back door and across the parking lot, and when the last of them had eaten there were somuns left to send to the shelter on Chippewa and lamb to send home with the students. Nothing had to be sold.</p>
+  <p>So after the night prayer, while the men were stacking chairs, Mirsad held up the cloak in its bag. <em>Brothers, this was given for a purpose, and the purpose is met. Who gets it?</em></p>
+  <p><em>The hafiz,</em> somebody said, and a good many said it after him. <em>Who else?</em></p>
+  <p>Then Zijad the roofer spoke up from the back. <em>The hafiz is a fine man. The hafiz comes when the cherries are ripe and goes home before the plums. Who is here in February? Who washed my father&rsquo;s body? Who stood in line with my mother at Social Security for four hours? Nermin. Nermin is here on Bajram and he is here on a wet Tuesday. He&rsquo;s like the sebilj on the corner. Give it to Nermin.</em></p>
+  <p>Nermin Had&#382;i&#263; had no diploma from any medresa. He had a good voice and a black robe, and when the imam was away he led the prayer. He washed the dead. He recited at the seventh day and the fortieth. He knew which window at the county building and which form. There was hardly a family in the hall he had not done something for, and it was true that he was always there.</p>
+  <p>They talked it over for an hour. In the end Mirsad said to raise hands, and counted, and did not trust it, and counted again. It was a hundred and thirty-one for Nermin and a hundred and twenty-seven for the hafiz. Four votes.</p>
+  <p>One of them was Emir&rsquo;s. Nermin had sat with him through his citizenship forms in 2009, question by question. Emir had paid him sixty dollars for it and thought nothing of it. He put his hand up, and then he went home to sleep three hours before he had to drive.</p>
+  <p>The hafiz had been at the sink the whole time with his sleeves rolled, washing the big pots. When they told him the count he said, <em>May he wear it in health,</em> and asked for a dry towel.</p>
+  <p>Nermin took the cloak that night to Rasim the tailor on Delor Street. A long cloak is no use in America, he said. He had Rasim cut it off at the hip to make a jacket, and make a vest out of the skirt, with the fox showing at the collar of each. And since the yellow had faded along the folds, he had the whole of it dipped, the color of strong tea. Rasim did what he was paid to do. He kept the pieces he cut away in a drawer and did not say why.</p>
+  <p>By Friday Nermin was walking up Gravois in the jacket and the vest, one over the other. People stopped to shake his hand and look. When he had gone by, they said it to each other quietly, in front of the butcher&rsquo;s and the bakery. <em>It doesn&rsquo;t sit on him. On the hafiz it would have sat. Look how he goes about in it.</em></p>
+</section>
+
+<section>
+  <h2>IV. Exit 31</h2>
+  <p class="dateline">Utica, New York &middot; Friday, June 23</p>
+  <p>Emir went out at three on Thursday morning with forty thousand pounds of frozen ravioli for a warehouse in Syracuse. A traveler is excused from the fast and can make up the days in winter, when they are short. He kept it anyway. The cab was cool, and it gave him something to do with Ohio. He wrote his hours in the paper log with a ruler, as he always had. In December the government was going to put a box in every truck to do it for him.</p>
+  <p>Indiana went by in the dark and Ohio in the heat. On the phone the Bosnian drivers kept one another awake the way they always did, one long conversation running from Des Moines to Jacksonville about the price of diesel and whose son was marrying whose daughter, and that day it was all the cloak. Before Columbus he had heard his own vote described to him by a man in Kentucky who did not know whose it was.</p>
+  <p>He was empty by ten on Friday, and at noon he came off the Thruway at Exit 31 and parked the tractor behind the mosque that had been a Methodist church. Then he walked four blocks with a bag of Mirsad&rsquo;s somuns to see his bula.</p>
+  <p>Hatid&#382;a Had&#382;iavdi&#263; was seventy-four. In the village above the Drina where she was born she had been the bula, the woman who teaches the children their letters and leads the women&rsquo;s prayers for the dead, and she had kept a class in the room over the shop all through the years when the state would have preferred she did not. In 1992 the men who came to the village killed her husband and her son on the same afternoon. She had been in Utica since 1997. She taught the children there on Saturdays, in the church basement, and in 1998 she had taught a boy of seventeen who was ashamed to be learning his alif-ba with eight-year-olds. She sat him at her own kitchen table instead, in the evenings, and nobody knew.</p>
+  <p>She looked at the somuns and put them in the freezer for the evening and made him sit.</p>
+  <p><em>Two of mine are in your city this month,</em> she said. <em>Senad was the quickest child I ever had. He had the short suras before he had his front teeth. Does he still read too fast? And Nermin was in the same class, on the same bench. How are my two boys?</em></p>
+  <p>So Emir told her. He told her about the thousand and the notebook, the widow&rsquo;s ten, the cloak that smelled of roses. He told her about the count and about his own hand. And he told her what he had seen on his phone at a truck stop outside Erie, in a photograph his wife sent, Nermin on Gravois in a jacket the color of tea with a fox collar.</p>
+  <p>The bula listened to all of it with her hands flat on the oilcloth.</p>
+  <p><em>That is not the first time Nermin has put on something that didn&rsquo;t suit him,</em> she said. <em>When he was nine the old hod&#382;a left his turban on the windowsill to dry. Nermin put it on his head and went from house to house collecting eggs for the mosque. He got forty eggs. The mosque did not see one.</em> She looked out the window at the neighbor&rsquo;s tomatoes. <em>My grandmother had a story about a man like that. She told it at the loom, and you had to hold the wool or she stopped.</em></p>
+</section>
+
+<section>
+  <h2>V. The Spring</h2>
+  <p class="dateline">Her grandmother&rsquo;s story</p>
+  <p>In the time of the sultans, the bula said, there was a spring under a cliff, and beside the spring a house of dervishes. They were poor men. Each had a bowl and one cloak, a hrka, patched until you could not find the first cloth.</p>
+  <p>Red deer lived in the beech woods above, a great herd of them, and they came down a certain path every morning to the meadows and went back by it at night. One day the deer saw the dervishes at the spring. From that day, going and coming, every deer that passed stopped on the path and bent its forelegs and lowered its head to the ground, as a deer does to drink, though there was no water in that place. Then it got up and went on.</p>
+  <p>There was a hunter in the town who lived by killing deer and selling the hide and the antler and the meat. Deer are hard to come near. He watched them on the path, and he thought, what is it they see that makes them go down like that? He decided it was the cloak. So he waited by the spring until one of the dervishes took off his hrka to wash for prayer and laid it on a rock, and he stole it.</p>
+  <p>The next morning he sat down beside the path with the cloak drawn over his head and a spear under it. The deer came down. They saw the cloak and knelt, each one, and rose and went on. The last of them he killed, with one thrust, while its head was on the ground. He took what he could sell and buried the rest. He did the same the next day, and the next.</p>
+  <p>After some time a new stag came to lead that herd. He was bigger than the others, and he noticed things. He saw that the herd had grown small. <em>Where are they going?</em> he asked. Nobody knew. He thought about the man who sat by the path every morning with a cloak over his head, and he thought, that one wants watching.</p>
+  <p>The next morning he sent all the others ahead and came last himself, slowly. The deer knelt and passed. When the hunter saw the big stag coming he drew the cloak aside and threw the spear. But the stag had kept his eyes on him the whole way down, and he stepped back, and the spear went by. <em>This is the one who has been killing mine,</em> the stag thought, and he went for him. The hunter ran behind a walnut tree and crouched there. The stag lowered his head to take the man and the tree together and break him against it.</p>
+  <p>Then the hunter pulled off the cloak and held it out in front of him, around the tree, where the stag could see it.</p>
+  <p>The stag stopped. He stood with his horns a hand&rsquo;s width from the cloth. He thought, if I strike a man who is holding that, I am shamed in front of every true one who ever wore it. And he held himself back, though it shook him to do it.</p>
+  <p><em>Was it you who killed my people?</em></p>
+  <p><em>It was,</em> said the hunter.</p>
+  <p><em>Why would you do a thing like that? You have put on a cloak that suits a man who has finished with wanting. It does not suit you. You did a great wrong when you put it on, before you ever picked up the spear.</em></p>
+  <p>That was all he did to him. He told him so, and went down to the meadow.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Emir had been fourteen in July of 1995. He had gone out of Poto&#269;ari on a bus with his mother. His father and his uncle had gone the other way, into the woods, with the column of men that tried to walk to Tuzla. His uncle was one of those who got there. He told it once, in Utica, at this table, and the bula had been in the room. He said that on the second day there were men down on the asphalt road in blue helmets, with a white vehicle, calling up into the trees through a loudspeaker that it was safe now, that the United Nations was here, to come down. Emir&rsquo;s father had gone down.</p>
+  <p>The bula did not mention it. She got up and put the kettle on for the evening, though it was hours yet, and stood with her back to him until it had no more reason to take so long.</p>
+</section>
+
+<section>
+  <h2>VI. Raiment</h2>
+  <p class="dateline">Utica &middot; that evening, and St. Louis &middot; Sunday, June 25</p>
+  <p>He stayed to break the fast with her. The sun went down at a quarter to nine. They ate Mirsad&rsquo;s bread and her soup at the kitchen table where he had learned his letters, and afterward she spoke about it once more and not again.</p>
+  <p><em>Senad gave you the first half of that sura,</em> she said. <em>He is polite. He stops before the hard part. I am old and I will give you the rest.</em></p>
+  <div class="verse">
+    <p>Ah, woe unto worshippers<br>Who are heedless of their prayer;<br>Who would be seen (at worship)<br>Yet refuse small kindnesses!</p>
+    <p>&mdash; Qur&rsquo;an 107:4&ndash;7</p>
+  </div>
+  <p><em>Nermin does not refuse them. He sells them. Sixty dollars, you said. For a widow it is forty, I hear, he is not a monster. A kindness with a price on it is a shop. There is no sin in keeping a shop. But you don&rsquo;t give a shopkeeper the kadija&rsquo;s cloak.</em></p>
+  <p>She gathered the crumbs on the oilcloth into her palm.</p>
+  <p><em>And the cloak itself. Listen. He told us there were two kinds of clothes, and He told us which one He meant.</em></p>
+  <div class="verse">
+    <p>O Children of Adam! We have revealed unto you raiment to conceal your shame, and splendid vesture, but the raiment of restraint from evil, that is best. This is of the revelations of Allah, that they may remember.</p>
+    <p>&mdash; Qur&rsquo;an 7:26</p>
+  </div>
+  <p><em>A man who has not washed himself out, who does not hold himself back, who is loose with the truth, can be voted any cloak you like. It will hang on him like washing on a fence. And the one who has cleaned out what was in him, and stands steady, and holds back, and is true, that one is wearing it already. You could give him a flour sack. Tell them that on Gravois. Say the old woman said it.</em></p>
+  <p>At the door she put a paper bag in his hand. It held a pair of wool socks, gray, with a red band, the kind the village women knit. <em>For Senad. For the winter. Tell him he still reads too fast.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>He loaded yogurt at New Berlin on Saturday at dawn and drove his eleven hours and slept his ten outside Dayton, and so he missed the Bajram prayer. He came down Gravois a little before noon on Sunday with the windows open. They were all still there, in the lot behind the hall, under the pop-up tents, the girls in their new dresses, the old men kissing one another on both cheeks, the last of the lamb on paper plates.</p>
+  <p>He said what she had told him to say. He said it to Mirsad first, at the tea urn, and then to Zijad the roofer, and each of them carried it to another table, and by one o&rsquo;clock it had been around the lot and people were standing a little differently.</p>
+  <p>Nermin was by the fence having his picture taken with a family from Affton. He wore the jacket over the vest. It was June in St. Louis and the sun was straight overhead, and he was lined with fox. He smiled for the telephone and then for another telephone. The tea-colored dye had started to come off the collar. There was a brown line around his neck where it touched, and below it the color was going down into his white shirt, slowly, like water into a sugar cube.</p>
+  <p>The hafiz was stacking chairs. He had taken off his black robe after the prayer and folded it over the fence, and he was in his shirtsleeves, carrying four chairs at a time. Emir gave him the paper bag. The hafiz looked inside, and then he held the socks against his face with both hands and breathed in, and stood like that long enough that Emir looked away.</p>
+  <p><em>She says you read too fast.</em></p>
+  <p><em>She has said it for forty years.</em> He pushed the socks down into his shirt pocket, where they made a gray lump over his heart with the red band showing, and went back for more chairs.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">He who wishes to put on the yellow dress without having cleansed himself from sin, who disregards temperance and truth, is unworthy of the yellow dress.<cite>Dhammapada 9, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">But he who has cleansed himself from sin, is well grounded in all virtues, and regards also temperance and truth, he is indeed worthy of the yellow dress.<cite>Dhammapada 10, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha&rsquo;s two chief disciples visit R&#257;jagaha, and S&#257;riputta preaches on the four kinds of givers: those who give, those who urge others to give, those who do neither and those who do both. A layman is moved to feed all thousand monks and canvasses the city; the food is pooled and cooked in one place. A householder adds a perfumed yellow robe worth a hundred thousand, to be sold if the food falls short and otherwise given to any monk. By a majority of four the people give it to Devadatta, who is always among them, &ldquo;ever ready like a waterpot,&rdquo; and not to S&#257;riputta, who comes and goes. Devadatta cuts it up and wears it, and people say it does not suit him. When the Buddha hears of it he tells of an elephant hunter who stole a holy man&rsquo;s robe so that the elephants would kneel to him, and of the elephant king who caught him and spared him out of respect for the robe. In P&#257;li the verses turn on a pun between <em>kas&#257;va</em>, a stain, and <em>k&#257;s&#257;va</em>, the dyed robe. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-07.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Devadatta">Devadatta</a>.</p>
+    <h3>Little Bosnia, 2017</h3>
+    <p>During and after the Bosnian war of 1992&ndash;1995, St. Louis took in more Bosnian refugees than any other American city. With later arrivals from other states the community grew to an estimated 70,000, centered on the old German neighborhood of <a href="https://en.wikipedia.org/wiki/Bevo_Mill,_St._Louis">Bevo Mill</a>, where Bosnians opened bakeries, butcher shops, caf&eacute;s and trucking firms (see <a href="https://en.wikipedia.org/wiki/Bosnian_Americans">Bosnian Americans</a>). In 2014 the community gave the city a replica of the <a href="https://en.wikipedia.org/wiki/Sebilj_in_Sarajevo">Sebilj</a>, the wooden public fountain in Sarajevo&rsquo;s old market. Utica, New York, has another large Bosnian community. The d&#382;emat, its people and its hall in this story are invented. A <em>hafiz</em> is someone who has memorized the Qur&rsquo;an; a <em>bula</em> is a Bosnian woman who teaches children and leads women&rsquo;s religious gatherings; a <em>&#263;urak</em> is a fur-lined cloak. In 2017 Ramadan ended with Bajram (Eid al-Fitr) on June 25, and American truckers still kept paper logs; electronic logging devices became mandatory that December.</p>
+    <p>In July 1995, after Bosnian Serb forces took the United Nations &ldquo;safe area&rdquo; of Srebrenica, women and children were deported by bus from the UN base at Poto&#269;ari, and a column of some ten to fifteen thousand men tried to walk through the woods to Tuzla. More than eight thousand men and boys were killed in what international courts have ruled a <a href="https://en.wikipedia.org/wiki/Srebrenica_massacre">genocide</a>. The <a href="https://www.icty.org/x/cases/krstic/tjug/en/krs-tj010802e-1.htm">trial judgment in the Krsti&#263; case</a> records that soldiers called to the men in the forest with megaphones, and that some used stolen UN equipment to make them believe the UN was present to see them treated properly. The Qur&rsquo;an passages are from Marmaduke Pickthall&rsquo;s translation, <em>The Meaning of the Glorious Koran</em> (1930); sura 107 is the one he titles &ldquo;Small Kindnesses.&rdquo;</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Devadatta from the Dhammapada commentary (verses 9 and 10). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-07.htm">The original</a>. Scripture from the Qur&rsquo;an in Marmaduke Pickthall&rsquo;s translation (1930). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-cooling-board.html">&larr; The Cooling Board</a><a href="index.html">All stories</a><a href="the-slats.html">The Slats &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = null, car = null;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  // road geometry: vanishing point high on the page, two dashed lines spreading toward the bottom corners
+  function pt(lane, z) { // z: 0 far .. 1 near
+    var vx = W * 0.5, vy = H * 0.34, k = z * z;
+    return [vx + lane * W * 0.62 * k, vy + (H * 1.04 - vy) * k];
+  }
+  function frame(now) {
+    if (t0 === null) t0 = now;
+    var t = reduce ? 0 : (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var lanes = [-1, 1], n = 9, speed = 0.045;
+    for (var li = 0; li < lanes.length; li++) {
+      for (var i = 0; i < n; i++) {
+        var z0 = ((i / n) + t * speed) % 1, z1 = z0 + 0.045;
+        if (z1 > 1) z1 = 1;
+        var a = pt(lanes[li], z0), b = pt(lanes[li], z1);
+        var al = 0.05 + 0.2 * z0 * z0;
+        ctx.strokeStyle = 'rgba(233,229,218,' + al + ')';
+        ctx.lineWidth = 0.6 + 3.2 * z0 * z0;
+        ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+      }
+    }
+    // a pair of tail lights receding now and then
+    if (!reduce) {
+      if (!car && Math.random() < 0.0012) car = { s: now };
+      if (car) {
+        var p = (now - car.s) / 26000;
+        if (p >= 1) car = null;
+        else {
+          var z = 0.62 * (1 - p) * (1 - p) + 0.02, q = pt(-0.32, z), w = 16 * z * z + 1.5;
+          var al2 = 0.5 * Math.min(1, p * 6) * Math.min(1, (1 - p) * 3);
+          for (var s = -1; s <= 1; s += 2) {
+            var g = ctx.createRadialGradient(q[0] + s * w, q[1], 0, q[0] + s * w, q[1], w * 1.6 + 2);
+            g.addColorStop(0, 'rgba(230,80,50,' + al2 + ')'); g.addColorStop(1, 'rgba(230,80,50,0)');
+            ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0] + s * w, q[1], w * 1.6 + 2, 0, Math.PI * 2); ctx.fill();
+          }
+        }
+      }
+    }
+    // a faint sodium glow at the vanishing point
+    var vg = ctx.createRadialGradient(W * 0.5, H * 0.34, 0, W * 0.5, H * 0.34, Math.min(W, H) * 0.35);
+    vg.addColorStop(0, 'rgba(217,181,64,0.07)'); vg.addColorStop(1, 'rgba(217,181,64,0)');
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size();
+  if (reduce) frame(0); else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); if (reduce) frame(0); });
+})();
+</script>
+</body>
+</html>

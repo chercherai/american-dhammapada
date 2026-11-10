@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four Redfish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on summer-noon newsprint; a great bicycle wheel turns slowly in the corner, its wobble easing until it runs true; datelined sections. */
+  --ground: #f2e9d8;
+  --ground-2: #e7dbc3;
+  --paper: #2b231c;
+  --paper-dim: #6d6052;
+  --accent: #a8432b;
+  --glow: #b7832f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f7f0e2 0%, var(--ground) 50%, #ebdfc8 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,35,28,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(168,67,43,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(231,219,195,.78); border: 1px solid rgba(43,35,28,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,35,28,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,35,28,.12); border-bottom: 1px solid rgba(43,35,28,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(231,219,195,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 6.5 &middot; Paṇḍita</span></nav>
+<header>
+  <h1>Four Redfish</h1>
+  <div class="epigraph">He that is slow to anger is better than the mighty; and he that ruleth his spirit than he that taketh a city.<br>&mdash; Proverbs 16:32</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Here&rsquo;s how it was told to me,</span> on Forty-Seventh Street.</p>
+
+<section>
+  <h2>I. Big Poor</h2>
+  <p class="dateline">Pass Christian, Mississippi &middot; 1903</p>
+  <p>The family tells it starting with Isom Pruitt, who was so poor that everybody on the Coast called him Big Poor, and he answered to it.</p>
+  <p>That was the year the Moderator came down from Jackson for the District Association, with twenty preachers behind him and a choir from Hattiesburg, and the whole Black side of Pass Christian turned itself inside out to feed them. On the Sunday before, at Mount Pilgrim, the church clerk, Brother Toles, stood up after the sermon with a ledger book and a pencil, and he said that the Moderator had taught them something that morning. He said there is the man who gives and does not ask anybody else to give, and he will have plenty but nobody beside him. And there is the man who asks everybody else to give and gives nothing, and he will have friends but no bread. And there is the man who does neither, and he will eat what other people leave. And there is the man who gives and gets his neighbors giving too, and he will have bread and company both. Brother Toles said he meant to be that last kind of man. Then he went up and down the aisles writing down how many preachers each family would feed.</p>
+  <p><em>Two,</em> said the Battles, who had the oyster house and the ice house. <em>Five,</em> said the Battles' cousins. One family said ten. Brother Toles wrote them all down in a column.</p>
+  <p>Big Poor was standing at the back by the door, because he did not own a coat good enough to sit down in. Brother Toles came to him last, and Big Poor said, <em>Brother Toles, what have I got to do with preachers? Preachers want feeding by people with something. I haven't got meal for my own children tomorrow.</em></p>
+  <p>Brother Toles could have let it go. But a man who asks other people to give has to be careful how he asks. He said: <em>Isom, look around this church. There are people in here who eat fried chicken on a Tuesday. You work harder than any of them and you never have a dime. Did you ever think maybe the reason you never have anything is that you never gave anything away?</em></p>
+  <p>Big Poor stood there a while. Then his eyes filled up and he said, <em>Put me down for one. However little I make, I will feed one preacher.</em></p>
+  <p>Brother Toles looked at the ledger, and looked at Big Poor's shoes, and thought, <em>What's the use of writing down one,</em> and he did not write it.</p>
+  <p>Big Poor went home and told his wife, Hettie, and she did not say what another woman might have said. She said, <em>You did right. We're poor because we never gave. We'll both hire out tomorrow, and we'll feed him.</em></p>
+  <p>So on Monday he split stove wood for Mr. Aurelius Battle, who was the richest colored man on the Coast and was feeding thirty preachers himself, and he split it so hard and so fast, axe and then hatchet and then axe again, that Mr. Battle came out on the gallery to watch. <em>Isom, I never saw you work like that.</em> <em>I'm feeding a preacher Sunday, Mr. Battle.</em> And Mr. Battle was pleased, and thought, <em>That's a hard thing he's taken on,</em> and paid him four dollars where he had said two. Out back, Hettie did Mrs. Battle's washing on a rub-board, singing over the tub as if she were at a dance, and Mrs. Battle asked her why, and when she heard, she gave her coffee and flour and lard and a sack of rice and a jar of fig preserves besides her pay.</p>
+  <p>On Saturday morning Hettie sent him for greens. There were none at the store, so he went down along the bayou picking wild mustard and poke, and he sang while he picked, because he was going to feed a preacher. Down at the mouth of the bayou an old fisherman named Dave Lyle was hauling a seine, and he knew that voice.</p>
+  <p><em>Isom! What are you so happy about, picking weeds?</em></p>
+  <p><em>I'm feeding a preacher tomorrow.</em></p>
+  <p><em>Lord help that preacher, eating your weeds.</em> But he called him down, and set him to stringing mullet and croakers on palmetto strips to sell for a nickel and a dime, and all day the women of Pass Christian came down to the beach and bought fish for the preachers they were feeding, and Big Poor strung until it was all gone. Then Dave Lyle went to a place above the tide line and dug in the wet sand with his hands and brought up four redfish he had buried there to keep cool for his own Sunday dinner, each one as long as a man's arm, with the black spot on the tail.</p>
+  <p><em>If you mean to feed a preacher,</em> he said, <em>you can't feed him weeds. Take these.</em></p>
+</section>
+
+<section>
+  <h2>II. The Bible</h2>
+  <p class="dateline">Pass Christian &middot; Sunday</p>
+  <p>That same Saturday evening a tall man in a white jacket like a dining-car waiter came walking up the shell road to Big Poor's cabin and asked if anybody needed help. He said he could cook anything. Big Poor said they could not pay him. The man said a man feeding a preacher shouldn't have to pay for a cook, and wasn't it right to do a good thing when you saw one, and he went in and took the redfish from Hettie and sent everybody else out of the kitchen.</p>
+  <p>On Sunday after preaching, Brother Toles went down the ledger column and sent each preacher off with the family that had him. Big Poor stood waiting with his hat in his hands until the churchyard was empty, and then he went up to the clerk.</p>
+  <p><em>Brother Toles. Where's my preacher?</em></p>
+  <p>Brother Toles put his hand over his mouth. <em>Isom. I didn't write you down.</em></p>
+  <p>The family says it went into Big Poor like a knife. He said, <em>You told me to give. My wife and I worked all week for hire. I was on the bayou since daylight picking greens. Give me one preacher.</em> And he wrung his hands and cried right there in the churchyard, a grown man, and people came back to see what it was, and when they heard, they turned on Brother Toles and asked him what kind of a clerk raises up a poor man's hopes and then forgets him. Brother Toles said every preacher was gone already and he couldn't take one out of anybody's house. <em>But the Moderator is still in the parsonage,</em> he said, <em>washing his face. Go to him. Tell him you're poor. He's always had a soft place for poor folks.</em></p>
+  <p>The yard of the parsonage was full of important people. Mr. Battle was there, and the undertaker, and the principal of the colored school, and two lawyers from Gulfport, all waiting to walk the Moderator to dinner. They said, <em>Isom, what are you doing here? Dinner's not handed out at the back door today.</em> Big Poor said, <em>I didn't come for dinner.</em> He went up the steps and knelt down on the porch boards outside the Moderator's door and put his forehead on the sill.</p>
+  <p><em>There's nobody on this Coast poorer than me,</em> he said through the door. <em>Have mercy on me.</em></p>
+  <p>The Moderator opened the door. He was an old man with white hair, and he did not say anything. He took his Bible from under his arm, the big one with the brass corners that he preached out of, and put it in Big Poor's hands.</p>
+  <p>Everybody in the yard sucked in their breath. To carry the Moderator's Bible to dinner meant the Moderator was eating at your table. Mr. Battle said, <em>Isom, let me carry that. I'll give you ten dollars for it.</em> The lawyers offered fifteen, and then twenty-five. Big Poor held the Bible against his chest and said he didn't want money, he wanted to feed the man, and they could not take it from him, because nobody takes from a man what the Moderator himself has put in his hands. But Mr. Battle walked along behind them, thinking that when he saw what Big Poor had cooked he would take the old man home to a proper table.</p>
+  <p>Big Poor's cabin had a door so low that he had to stoop to go in his own house. The Moderator did not stoop. He walked in standing straight, and nobody who was there could ever agree afterward whether the floor went down or the lintel went up, only that he did not bend his neck and did not hit his head.</p>
+  <p>Inside, the tall man in the white jacket had set a chair at the table with a clean flour sack across it. He took the lids off the pots. There was redfish fried and redfish baked in red gravy and rice and the greens from the bayou cooked down with fatback, and biscuits, and the fig preserves. The smell went out the door and up the shell road and over the whole town, and people at their own tables in Pass Christian put down their forks and lifted their heads.</p>
+  <p>Mr. Battle looked at the table a long time. Then he said, <em>Moderator, I came here thinking I'd take you away to my house. I've never seen a table like this in my life. If I stay, I'll shame him.</em> And he took off his hat and went.</p>
+  <p>When the Moderator had eaten and given thanks, he got up to leave, and the tall man nodded to Big Poor to carry the Bible and walk him back. Then the tall man stood in the cabin door and looked up at the sky.</p>
+  <p>It rained silver dollars. The family is plain about this. It rained silver dollars into that cabin until the pots were full and the drawers were full and the floor was covered to the knee, and Hettie had to carry the children out on her hips and stand them in the yard. When Big Poor came back from the parsonage he found them all standing outside in their Sunday clothes, and the cook was gone, and nobody ever saw him again.</p>
+  <p>Big Poor went straight to Mr. Battle and said, <em>Mr. Battle, my house is full of money. Come take it.</em> It took Mr. Battle's oyster wagons all night to haul it, and they piled it in his yard, and the pile was as high as a chinaberry tree. On Monday he called the people together and asked if anybody on the Coast had money like that. They said nobody did. <em>Then he's the rich man now,</em> said Mr. Battle, and that is how Big Poor came to be called Mr. Pruitt. Mr. Battle sold him the lot where the old Eustis house had burned, and when Big Poor's sons were clearing the ground to build on it, their shovels struck the rims of buried crocks, one after another, mouth to mouth in a row, full of gold. Mr. Battle said that was his luck and his only. Big Poor built his house. Then he fed the whole Association, preachers and choir and all, for seven days.</p>
+</section>
+
+<section>
+  <h2>III. Solomon</h2>
+  <p class="dateline">South Side, Chicago &middot; 1944&ndash;1952</p>
+  <p>Big Poor lived to be seventy-one. His son Royal took a share of the money north in 1922 and opened Pruitt &amp; Sons Funeral Home on Forty-Seventh Street, with a Cadillac hearse and a chapel that seated a hundred, and every Baptist church on the South Side had Pruitt &amp; Sons on the cardboard fans in its pews, with a picture of Jesus in the garden on one side and the telephone number on the other. Royal's daughter Odessa married a man who taught printing at the trade school, and the Pruitts were among the people who kept Deacon Lucius Mabry in barber chairs and kept his church in folding chairs, and had for twenty years.</p>
+  <p>Big Poor died in Pass Christian in the winter of 1944. That same winter Odessa found out she was carrying a child.</p>
+  <p>Her craving was not for pickles. She told her mother that she wanted, more than anything, to fry redfish for the whole church, the choicest pieces, and serve the deacons and the mothers' board with her own hands, and then put on a plain white usher's dress and sit on the last bench in the back and eat whatever they left. Her mother laughed at her and then telephoned to Gulfport, and a barrel of redfish came up on the Illinois Central packed in ice, and Odessa had her way. After that she did it seven times more before the baby came.</p>
+  <p>He was born in August of 1945, the week the war ended. When Deacon Mabry came to the house to pray over him and asked what they were calling him, Odessa said: <em>From the day I knew he was coming, Uncle Tal, who hasn't said a sensible thing since he came back from France in 1918, started talking sense at the supper table. Aunt Bert, who's deaf, heard the radio. My husband's brother quit drinking. His name is Solomon.</em></p>
+  <p>The old women at church held him and looked into his face and said what old women from Mississippi say about some babies. <em>That child's been here before.</em> Some of them said, privately, which old man they thought it was.</p>
+  <p>Odessa made up her mind the day he was born that she would never stand in the way of anything he wanted. And for seven years he did not want very much.</p>
+</section>
+
+<section>
+  <h2>IV. Seeking</h2>
+  <p class="dateline">Forty-Seventh Street &middot; July 1952</p>
+  <p>It was the polio summer, the worst one anybody could remember, and Odessa kept Solomon out of the public pools along with every other mother on the South Side. He spent July in the barbershop, sitting on the shoeshine stand and watching Deacon Mabry cut hair.</p>
+  <p>One evening at supper he put down his fork and said, <em>Mama, I want to go seeking. I want Deacon Mabry for my spiritual father.</em></p>
+  <p>In some of the old country churches back home, children went seeking when they were old enough to know what they were asking for. They went off by themselves to pray, in the woods or the cotton, for days, and told their dreams every evening to an old man or woman of the church they had picked for their spiritual father or mother, who listened and said, <em>Not yet,</em> or <em>Keep on,</em> until the morning the child came back with a face that showed it had come through, and the church took them in. Most of the churches in Chicago had let it go. Deacon Mabry's church had not. It met in a storefront on Forty-Seventh Street that had been a shoe store, with the old pastor's name painted on the glass, and it still kept a mourners' bench up front, a plank bench with no back.</p>
+  <p>Solomon was seven. Odessa looked at her husband, and her husband looked at his plate.</p>
+  <p><em>All right, baby,</em> she said. <em>I said I'd never stop you.</em></p>
+  <p>She invited Deacon Mabry to Sunday dinner and told him. Then she called her people and said they would be doing a fish fry for the whole church, all week, every night of the revival, and she sent to Gulfport for the redfish.</p>
+  <p>Deacon Mabry did not make it sound easy. He sat Solomon on the chair across from him and told him what seeking was. No ball. No picture show. No Regal Theater on Saturday, no funny papers, no running with the other boys. You pray, and you watch, and you tell me what you see, and if I say keep on, you keep on.</p>
+  <p><em>Yes, sir,</em> said Solomon. <em>I'll do what you tell me.</em></p>
+  <p><em>Then come on.</em></p>
+  <p>On Monday he put the boy in his own barber chair and wet his hair down with the water bottle and cut it close to the scalp, the way you cut a boy's hair for summer. While he cut, he gave him his first lesson. <em>Start with what the Lord gave you that you can see,</em> he said. <em>Your hair. Your fingernails. Your teeth. Your skin. Study on them. Where did they come from. Whose are they. What do they do when you're not telling them anything.</em> Solomon sat very still under the cloth and looked at his own hair falling in the mirror.</p>
+  <p>All that week the Pruitts fried redfish in the church kitchen every night of the revival and fed everybody who came, the old pastor first, and Odessa sat in the back in her white usher's dress and ate last.</p>
+</section>
+
+<section>
+  <h2>V. Three Things</h2>
+  <p class="dateline">The eighth day</p>
+  <p>On the eighth morning Deacon Mabry took the boy with him on his rounds.</p>
+  <p>He did not go out with the other deacons, who had left early to visit the sick and the shut-in and would eat where they were fed. He went late. First he opened the church himself, and swept the floor where nobody had swept it, and filled the water cooler, and set the folding chairs back in their rows where the revival had knocked them every which way, because the Holiness church was right across the street and he did not mean to give them a chance to say that Baptists keep a dirty house. Then he showed Solomon how to carry a Bible properly, the deacon's big one, against the chest with both arms and not swinging by the cover, and how to walk on a street beside a grown man, and they went out.</p>
+  <p>It was hot already. The L went over at Forty-Seventh like a long iron roll of thunder.</p>
+  <p>In a vacant lot on Evans Avenue an old man in overalls had planted collards and okra and tomatoes in rows, the way he had planted them in Mississippi, and he was watering. He had a hose run from a basement window, and he did not spray it. He laid it down at the top of the row and let the water run, and walked beside it with a hoe, and wherever it wanted to spill over he scraped a little dirt and turned it, and the water went down the row where he led it, and around the end, and back up the next.</p>
+  <p><em>Deacon, what's he doing?</em></p>
+  <p><em>Watering his greens. Leading the water down the rows.</em></p>
+  <p><em>Does water have a mind?</em></p>
+  <p><em>No, son. Water hasn't got a mind.</em></p>
+  <p><em>But he can lead it wherever he wants.</em></p>
+  <p><em>Look like it.</em></p>
+  <p>Solomon walked on and did not say anything. He was thinking that if a man could lead water, that had no mind, wherever he wanted it to go, then a person who had a mind ought to be able to lead his own.</p>
+  <p>Further on, in the window of Madam Estelle's beauty shop, a woman in a pink smock was pressing hair. She had a steel comb heating on the little gas plate beside her chair, and she took it off the flame and touched it to a damp towel so it hissed, and drew it slow through a girl's hair from the root out, and the hair came out behind the comb lying straight and shining, and the girl held her ear down with her finger and did not move.</p>
+  <p><em>What's she doing, Deacon?</em></p>
+  <p><em>Pressing that girl's hair.</em></p>
+  <p><em>Does hair know anything?</em></p>
+  <p><em>No more than water.</em></p>
+  <p>Solomon put his hand up to his own head, where the hair was a quarter-inch long and his. If heat and a steady hand could straighten what had no mind, he thought, why couldn't he straighten what did.</p>
+  <p>At the corner of Prairie there was a bicycle shop with Schwinns hung up by their front wheels in the window, and in the doorway a man had a bent wheel off a boy's bicycle clamped in a stand. He spun it and watched where the rim wobbled against a pointer, and stopped it, and turned a spoke a little with a key, and spun it again, sighting along it with one eye shut. Every time he spun it, it wobbled less. Then it did not wobble.</p>
+  <p><em>Does that wheel have a mind?</em></p>
+  <p><em>Son, a wheel hasn't got a mind.</em></p>
+  <p>Solomon stood there with the Bible against his chest and watched the wheel go around, true, humming, until the man put his hand on the tire and stopped it. Then he turned to Deacon Mabry and held out the Bible.</p>
+  <p><em>Deacon, would you take your Bible, please, sir. I want to go back.</em></p>
+  <p>Deacon Mabry had been a deacon for thirty-one years, and he could have said, <em>Boy, who do you think you're talking to, the pastor?</em> He did not say it. He did not even think it. He said, <em>Hand it here,</em> and took his Bible.</p>
+  <p><em>And Deacon. When you come back, will you bring me something to eat? Redfish.</em></p>
+  <p><em>Son, where am I going to find redfish in Chicago in July?</em></p>
+  <p><em>If you can't get it on your account,</em> said Solomon, <em>you'll get it on mine.</em></p>
+  <p>Deacon Mabry thought that a boy alone in the street on a polio summer might come to harm, so he took the key to the church off his ring and gave it to him. <em>Go in and lock the door behind you. Don't open it for anybody but me.</em></p>
+</section>
+
+<section>
+  <h2>VI. Still</h2>
+  <p class="dateline">Forty-Seventh Street &middot; noon</p>
+  <p>Solomon let himself into the storefront and locked the door and sat down on the mourners' bench in the half-dark behind the painted glass, and put his hands on his knees and looked at them. Then he closed his eyes and looked at them anyway. He looked at his hair and his fingernails and his teeth and his skin, the way the Deacon had told him, and then he went further in, and began to lead his own mind down the row where he wanted it, and every time it spilled over he turned it back.</p>
+  <p>This is the part people on Forty-Seventh Street still argue about.</p>
+  <p>They say that a little after noon the pigeons all got up off the roof of the Regal Theater at once and flew east toward the lake and did not come back. They say that four policemen, nobody knew from what station, came and stood one on each corner of the block where the storefront was, in their summer uniforms, and turned the traffic down the side streets with their white gloves, and would not say why. They say the L stopped. It stopped up on its tracks over Forty-Seventh Street with the people still in it and did not move, and the people in the cars did not complain, and the motorman sat with his hands in his lap. They say that a tall man in a white jacket, like a dining-car waiter, came from somewhere and stood with his back to the church door and his arms folded, and that when the ice man came by with his tongs he took one look at the tall man and went around. They say the sun stopped over the street at a little past noon and stayed there. Nobody's shadow moved. There was not a sound on the whole block, not a radio, not a screen door, not a dry leaf on the sidewalk.</p>
+  <p>Inside, the boy on the bench went down into himself as easy as a man walking into still water, and kept going.</p>
+  <p>Deacon Mabry, meanwhile, was thinking that the boy was alone and hungry and that he knew a house where he could get something to carry back. He went to Sister Ola Bell Crump's apartment on Vincennes, three flights up, because Sister Crump had loved him since he baptized her daughter and he knew it. When she opened the door, the whole hallway smelled of frying fish.</p>
+  <p><em>Deacon! Come in here. We were just now sitting here waiting for somebody. My sister sent a box up from Gulfport on the train this morning, redfish, packed in ice, and I said to Junior, now who in Chicago am I going to give all this fish to?</em></p>
+  <p>They sat him down and fed him. When he told them what he had come for, Sister Crump said, <em>You eat first, Deacon, and you'll carry some away besides,</em> and when he had eaten she filled a plate with the best pieces, the thick part behind the head, and covered it with a dish towel. Deacon Mabry thanked her and went down the three flights faster than he had come up, because the boy must be hungry.</p>
+  <p>The old pastor was already sitting outside the storefront when he got there.</p>
+  <p>His name was the Reverend Elias Tolliver. He was eighty-one, and had preached in Mississippi before he preached in Chicago, and he had eaten his breakfast early that morning and come down on the streetcar and set a folding chair in front of the church door, right in front of it, as if he were sitting in the door of a tent. Afterward he told them he could not stay in his chair at home. He sat in the heat with his hat on his knee and watched the Deacon come down the block with the plate.</p>
+  <p><em>Deacon. What you got there?</em></p>
+  <p><em>Fish, Reverend. For the boy.</em></p>
+  <p><em>What does fish do?</em></p>
+  <p>Deacon Mabry looked at him. <em>Fills you up. Makes you feel good.</em></p>
+  <p><em>And what does feeling good do?</em></p>
+  <p><em>Puts a shine on you, Reverend. Puts some meat on your bones.</em></p>
+  <p><em>And what does that shine do?</em></p>
+  <p>Deacon Mabry thought about it, because the old man was waiting, and the old man did not ask questions he did not want answered. <em>Lets you lay down easy at night,</em> he said. <em>Lets you sit down easy anywhere you sit.</em></p>
+  <p>Reverend Tolliver nodded as if that were the right answer, which it was.</p>
+  <p>And behind the painted glass, in the minute it took to ask four questions and answer them, the boy on the mourners' bench came through. People who were there say that is the only way to put it. He came through, and he came through with understanding, the way an old person comes through, so that afterward when grown people brought him their dreams and their troubles he could tell them what they meant, and what they ought to do, and say it in words they could use.</p>
+  <p><em>Go on,</em> said Reverend Tolliver, and moved his chair aside. <em>Give the boy his fish.</em></p>
+  <p>Deacon Mabry knocked. Solomon unlocked the door and came out into the light. He took the plate from the Deacon's hands with both of his, and set it down on the folding chair inside the door, and took one of the Pruitt &amp; Sons fans out of the rack on the back of a pew, his own grandfather's name on one side and Jesus in the garden on the other, and began to fan the Deacon, slowly, the way the ushers fan the old mothers when it gets hot in church.</p>
+  <p><em>Son, sit down and eat.</em></p>
+  <p><em>What about you, Deacon?</em></p>
+  <p><em>I already ate. You eat yours.</em></p>
+  <p>So the boy sat down on the mourners' bench with the plate on his knees, seven years old, eight days a seeker, and ate his redfish, and his face looked like a morning glory on a back fence just after it opens.</p>
+</section>
+
+<section>
+  <h2>VII. Dark</h2>
+  <p class="dateline">Forty-Seventh Street &middot; evening</p>
+  <p>When he had eaten, he took the plate to the little sink in the back and washed it and dried it and put it on the shelf.</p>
+  <p>Then the L started. The pigeons came back over the roof of the Regal all at once in a long grey sheet. The four policemen walked off in four directions and nobody ever found out what station they were from. The tall man was not at the door. And the sun, which had been standing over the street since a little past noon, went down like a stone dropped in a well, all at once, so that the streetlights along Forty-Seventh Street came on by themselves, and in the kitchenettes up and down the block women came to the windows holding dishrags to see what had happened.</p>
+  <p>Some of the church people were put out about it. They said it got dark in the middle of the day and the Pruitt boy had only just eaten his breakfast, and what kind of a thing was that. They said it to Reverend Tolliver that night before the revival service, on the sidewalk outside the storefront, and he heard them out.</p>
+  <p><em>Yes,</em> he said. <em>While that boy was in there seeking, the sun stood still over this street, and the police held the corners, and somebody stood at the door. And I could not sit in my own house. I came down here and sat in the door of the church to keep watch over my son.</em></p>
+  <p>Then he told them about the three things the boy had seen. A man leading water down the rows. A woman with a hot comb, straightening what does not know it is being straightened. A man truing a wheel with one eye shut. <em>Things that haven't got a mind,</em> he said. <em>And a child looked at them and took hold of the one thing he's got that does.</em></p>
+  <p>He went inside, and stood up behind the table that served for a pulpit, and before he did anything else he read them one verse.</p>
+  <div class="verse">
+    <p>He that is slow to anger is better than the mighty; and he that ruleth his spirit than he that taketh a city.</p>
+    <p>&mdash; Proverbs 16:32</p>
+  </div>
+  <p>That was the last night of the revival. Eleven people came to the mourners' bench, grown men among them, and the old women said afterward that nine of them came through before the summer was over.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Solomon was still sitting in the back row when the service let out. The streetlights were on. Across Forty-Seventh Street the bicycle man had left his stand out in the doorway, with somebody's front wheel still in it, and on the way home the boy stopped and gave it a turn with one finger, and watched it go around in the light from the street, true, without a sound, until it stopped by itself.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Well-makers lead the water (wherever they like); fletchers bend the arrow; carpenters bend a log of wood; wise people fashion themselves.<cite>Dhammapada 80, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary opens in a past age with a man so poor he is called Mahā Duggata, the Great Pauper. When a neighbor goes around writing down how many monks each household will feed, the pauper pledges one and is left off the list. He and his wife hire themselves out, a fisherman gives him four redfish, and Sakka, king of the gods, comes disguised as a cook. The Buddha of that age hands the poor man his own bowl; the king offers money for it and is refused; the Buddha enters the low house without bowing, and afterward jewels rain down until the family has to carry the children outside. Reborn ages later to a merchant's daughter who craves to feed the monks redfish, the child is named Paṇḍita, "the Wise," and at seven becomes a novice under Sāriputta. On his eighth day, walking to the village, he sees irrigators leading water, fletchers straightening arrows over a fire and carpenters shaping wheels, asks whether these things have minds, and turns back to master his own. Sakka sets guards, the sun and moon stand still, and the Buddha himself keeps watch at the door, delaying Sāriputta with four questions about food so that the boy reaches awakening before his meal arrives. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-05.htm">the full commentary story</a>.</p>
+    <h3>Bronzeville, 1952</h3>
+    <p>Almost half of the Black Mississippians who left the state in the first decades of the <a href="https://en.wikipedia.org/wiki/Great_Migration_(African_American)">Great Migration</a> went to Chicago, many of them straight north by train, and in the second wave, from 1940 to 1960, the city's Black population nearly tripled, from 278,000 to 813,000. Hemmed in by white neighborhoods and industrial districts, they crowded into the South Side's Black Belt, where <a href="https://en.wikipedia.org/wiki/Bronzeville,_Chicago">Bronzeville</a> grew its own businesses, churches, insurance companies and newspapers. Forty-Seventh Street was its main stem; the 3,000-seat <a href="https://en.wikipedia.org/wiki/Regal_Theater_(Chicago)">Regal Theater</a> stood at 4719 South Parkway, the street later renamed for Martin Luther King Jr. From the Mississippi Gulf Coast, the old <a href="https://en.wikipedia.org/wiki/Gulf_and_Ship_Island_Railroad">Gulf and Ship Island Railroad</a> ran from Gulfport north to Jackson, and after 1925 it belonged to the Illinois Central, the line most Mississippians rode to Chicago.</p>
+    <p>Migrants brought their churches with them, many of them small congregations meeting in rented storefronts, and some kept the old practices of the rural South, including the <a href="https://en.wikipedia.org/wiki/Mourner%27s_bench">mourners' bench</a>, where seekers knelt or sat until they "came through" to conversion. The summer of 1952 was the worst <a href="https://en.wikipedia.org/wiki/Polio">polio</a> season in American history, with about 58,000 cases nationwide, and parents across the country kept their children out of public swimming pools (<a href="https://oprfmuseum.org/this-month-in-history/under-shadow-polio">Oak Park River Forest Museum</a>).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the novice Paṇḍita from the Dhammapada commentary (verse 80). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-05.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-placemat.html">&larr; The Placemat</a><a href="index.html">All stories</a><a href="kaneezs-mother.html">Kaneez’s Mother &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A large bicycle wheel turns slowly in the corner; its wobble eases out until it runs true.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, cx, cy, R, t = 0, rot = 0;
+  var TRUING = 2600, HOLD = 2200, CYCLE = TRUING + HOLD;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    R = Math.max(220, Math.min(W, H) * 0.48);
+    cx = W - R * 0.45; cy = H - R * 0.35;
+  }
+  function wobble() {
+    if (reduce) return 0;
+    var k = t % CYCLE;
+    if (k > TRUING) return 0;
+    var p = k / TRUING;
+    return (1 - p) * (1 - p) * R * 0.035;
+  }
+  function rim(r, A, phase) {
+    ctx.beginPath();
+    for (var i = 0; i <= 120; i++) {
+      var a = i / 120 * Math.PI * 2;
+      var rr = r + A * Math.sin(a * 2 + phase) + A * 0.5 * Math.sin(a * 3 - phase * 0.7);
+      var x = cx + Math.cos(a) * rr, y = cy + Math.sin(a) * rr;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var A = wobble();
+    var phase = rot * 1.0;
+    ctx.lineCap = 'round';
+    // tire and rim
+    ctx.strokeStyle = 'rgba(43,35,28,0.07)'; ctx.lineWidth = 9; rim(R, A, phase);
+    ctx.strokeStyle = 'rgba(168,67,43,0.10)'; ctx.lineWidth = 2; rim(R * 0.94, A, phase);
+    // spokes
+    ctx.strokeStyle = 'rgba(43,35,28,0.06)'; ctx.lineWidth = 1;
+    var n = 36;
+    for (var i = 0; i < n; i++) {
+      var hubA = rot + i / n * Math.PI * 2;
+      var rimA = hubA + (i % 2 ? 0.55 : -0.55);
+      var rr = R * 0.94 + A * Math.sin(rimA * 2 + phase) + A * 0.5 * Math.sin(rimA * 3 - phase * 0.7);
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(hubA) * R * 0.05, cy + Math.sin(hubA) * R * 0.05);
+      ctx.lineTo(cx + Math.cos(rimA) * rr, cy + Math.sin(rimA) * rr);
+      ctx.stroke();
+    }
+    // hub
+    ctx.fillStyle = 'rgba(183,131,47,0.12)';
+    ctx.beginPath(); ctx.arc(cx, cy, R * 0.055, 0, Math.PI * 2); ctx.fill();
+    if (!reduce) { t++; rot += 0.0016; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

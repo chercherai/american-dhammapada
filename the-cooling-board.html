@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cooling Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on whitewashed plaster; faint stalks of broomcorn along the bottom margin lean in the gusts and straighten. */
+  --ground: #f1ece0;
+  --ground-2: #e3dccb;
+  --paper: #26282a;
+  --paper-dim: #666660;
+  --accent: #2f5770;
+  --glow: #9a4a2c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f6f2e8 0%, var(--ground) 55%, #e7e0cf 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(38,40,42,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(47,87,112,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(227,220,203,.78); border: 1px solid rgba(38,40,42,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(38,40,42,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(38,40,42,.12); border-bottom: 1px solid rgba(38,40,42,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(227,220,203,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 1.6 &middot; Culla Kāḷa and Mahā Kāḷa</span></nav>
+<header>
+  <h1>The Cooling Board</h1>
+  <div class="epigraph">And the rain descended, and the floods came, and the winds blew, and beat upon that house; and it fell not: for it was founded upon a rock.<br>&mdash; Matthew 7:25</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is the way I heard it told,</span> on Shawnee Run.</p>
+
+<section>
+  <h2>I. The Drove</h2>
+  <p class="dateline">The Harrodsburg road, Mercer County, Kentucky &middot; November 1831</p>
+  <p>There were three Cole brothers on the Salt River below Harrodsburg, and the county told them apart by size. Josiah, the eldest, was Big Cole. Thomas, the youngest, was Little Cole, though he stood half a head taller than Josiah and always had. Absalom, in the middle, kept the store at the crossroads, and nobody called him anything but Ab.</p>
+  <p>Every fall, when the hogs had fattened on the mast, Big Cole and Little Cole bought up a drove in the Bluegrass and walked it south, down the Wilderness Road and through the Gap and over the mountains into Carolina, eight miles a day, buying corn at the stands as they went. They came home in February with money sewn into the linings of their coats and a wagon of coffee, sugar, calico and salt for Ab to sell, and the women of the three houses came out to the road to meet them.</p>
+  <p>That November they had four hundred and twenty hogs, six hired drivers and a wagon of corn, and on the Saturday night they turned the drove into a woods lot by the turnpike, a mile below the Shaker village at Pleasant Hill. The hogs settled. The drivers built a fire. Little Cole took off his boots.</p>
+  <p>On Sunday morning the road was full. Buggies came down from Lexington, and a carriage with a coachman, and farm wagons with whole families in the bed, and people on foot in their good clothes, all going the same way.</p>
+  <p><em>Where's everybody headed?</em> Big Cole asked a man on a mule.</p>
+  <p><em>Shaker meeting. You never seen them dance?</em></p>
+  <p>Big Cole had heard about it his whole life and never gone. He was fifty-four years old. He stood a minute with his hat in his hand.</p>
+  <p><em>Tom, keep an eye on the hogs,</em> he said. <em>I believe I'll go hear them.</em></p>
+  <p>The meetinghouse was white and plain, with two doors in front. The world's people sat on benches along the walls. The Believers came in, the men by one door and the women by the other, and the men hung their coats on the pegs along the wall in a row, all alike, and stood in their shirtsleeves in ranks facing the women across the open floor. Nobody played an instrument. They sang, a tune with no words in it that Big Cole could catch, and then they began to step, forward and back, turning, all of them together, and their feet on the boards were like a hard rain on a tin roof. The floor gave under it. Big Cole felt it in the bench.</p>
+  <p>When the dance ended, a man stepped out from the rank of brothers to speak to the visitors. He was in his forties, lean, with big scarred hands that hung at his sides, and he looked at the benches a while before he said anything. Later Big Cole learned he was Elder Jonas, and that he was a joiner, and that he had made half the tables and chests in the village.</p>
+  <p>Elder Jonas did not shout. He talked about the things a man works for. A farm, a wife, children, hogs, a good name at the courthouse. He went down them one at a time as if he were counting boards. He said what each one costs, and what each one comes to, and who gets it after. He did not say any of it was wicked. He said a man goes out of the world the way he came in, and that his hogs do not go with him and his kin do not go with him, and then he went back to his place in the rank and they sang again.</p>
+  <p>Big Cole walked back down the turnpike in the cold with his hands in his coat. He had a farm on the Salt River and a brick house with an upstairs, and a wife and a mother and three daughters and two sisters-in-law and a daughter-in-law under his roof, and four hundred and twenty hogs in a woods lot, and he understood, walking, that none of it was coming with him. He turned around at the creek and walked back up the hill.</p>
+  <p>Elder Jonas was in the yard by the meetinghouse with his coat on again. He listened. Then he asked a question.</p>
+  <p><em>Is there anybody you have to ask?</em></p>
+  <p><em>My brother,</em> Big Cole said.</p>
+  <p><em>Go ask him.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Little Cole was sitting by the fire in his sock feet.</p>
+  <p><em>Tom, take it all,</em> said Big Cole. <em>The hogs, the money, the wagon. Split it with Ab. I'm going up the hill.</em></p>
+  <p>Little Cole argued until dark. He brought up Rhoda, Josiah's wife of thirty years. He brought up their mother, who was seventy-six and had buried a husband and two babies and would not live through this. He brought up the girls. He said the Shakers would take the farm, and when Josiah said the farm was Rhoda's from tonight and the hogs were Tom's, Little Cole said that was the craziest thing he had ever heard a grown man say and he had been to Frankfort when the legislature was sitting. Big Cole listened to all of it and nodded and did not change his mind, and at last Little Cole threw a stick in the fire.</p>
+  <p><em>All right, Josiah. Suit yourself.</em></p>
+  <p>On Monday morning he sent the drove on south with the head driver and a letter to Ab, and walked up the hill with his brother and gave his name at the Gathering Family too. He told himself it would take a month. A month of bean soup and singing, and Josiah would come to his senses, and Little Cole would be there to walk him home.</p>
+</section>
+
+<section>
+  <h2>II. Two Labors</h2>
+  <p class="dateline">Pleasant Hill &middot; winter 1831</p>
+  <p>The village sat on the high ground above the Kentucky River, where the river had cut down through the limestone and left cliffs on either side, grey walls three hundred feet high with red cedars growing out of the cracks. The Believers were building a great house of that stone, quarried out of the cliffs and hauled up the hill. They had been at it seven years and it was not done. Big Cole hauled stone. Little Cole was put in the broom shop, where he talked.</p>
+  <p>After a month Big Cole went to Elder Jonas in the joiner's shop. The Elder was planing a drawer front and did not stop.</p>
+  <p><em>How many works are there here?</em> Big Cole asked him.</p>
+  <p><em>Two,</em> said Elder Jonas. <em>One is to learn the gift. The songs, the steps, the order, the testimonies of Mother. Some of them are a long time learning it. The other is to labor with yourself until you're clean.</em></p>
+  <p><em>I'm too old to learn all those songs,</em> said Big Cole. <em>I can't keep the steps now. I'll take the other.</em></p>
+  <p>Elder Jonas set the plane down and looked at him a while, the way he had looked at the benches.</p>
+  <p><em>Then go sit with the dead,</em> he said. <em>After the retiring bell. Come in before the rising bell. I'll square it with your elders.</em></p>
+  <p>So every night, when the family had knelt and gone up the brothers' stair to bed, Big Cole went out by the brothers' door and across the frozen pasture to the burying ground on the rise, and sat down among the graves. The Believers buried their dead in rows, the brothers and the sisters, with the same plain marker over each. There were a good many of them by then. He sat on the ground with his back to the fence and his coat buttoned up. Sometimes he stood and walked the rows. Sometimes he sat until his legs went dead. At four in the morning, before the bell, he crossed the pasture again and went in.</p>
+  <p>In the broom shop, Little Cole tied broomcorn and talked about his wife Polly, and her biscuits, and her sister Jane who lived with them and could not be got to marry, and the store, and how Ab would be making a hash of the accounts without him, and the hogs, wherever they were by now. He talked about his brother.</p>
+  <p><em>Sitting out in a graveyard all night in January,</em> he said. <em>I couldn't do it. I wouldn't. That's a hard thing he's doing.</em></p>
+</section>
+
+<section>
+  <h2>III. The Rules</h2>
+  <p class="dateline">The burying ground &middot; winter and spring 1832</p>
+  <p>Sister Dorcas had laid out every sister who died at Pleasant Hill for sixteen years, and dug some of their graves. She had come over the mountains from Virginia as a girl, the property of a family who heard the Shakers preach and signed the covenant, and when that family lost its faith and went back to the world, the Society paid them her price so she could stay. She sat at the end of the sisters' rank in meeting. She ate where she was put. She kept the key to the little stone house by the burying ground where the bodies waited, and she kept the burying ground, and she had seen a man in it at night.</p>
+  <p>She watched him for most of a week. He came after the retiring bell and went before the rising bell. He did not dig. He did not carry anything. He sat, and stood, and walked the rows. She could not make him out.</p>
+  <p>So one night she lit the lantern in the dead-house and left it burning in the window, and took the two children from the Children's Order who were given to her charge, a boy and a girl, and waited with them behind the cedar at the corner of the fence. When the man came over the pasture and sat down, she came out with the children holding her skirt.</p>
+  <p><em>Brother,</em> she said. <em>Do you stay here?</em></p>
+  <p><em>Yes, Sister.</em></p>
+  <p><em>Then there's rules for staying here.</em></p>
+  <p>He was a white man and a rich one, or had been, and she had known plenty of men like him to tell her that her rules were none of his concern. He took off his hat.</p>
+  <p><em>What ought I to do, Sister?</em></p>
+  <p><em>You tell the Elder you're out here. You tell the Trustee. And you tell the squire down at Harrodsburg.</em></p>
+  <p><em>The squire?</em></p>
+  <p><em>The doctors' boys come out from Lexington with a wagon and spades,</em> she said. <em>They want the new ones, for cutting. Somebody hears them and runs them off, and they drop what they've got and go, and whoever comes after them finds a body on the ground and a man sitting in the burying ground at three in the morning. You want people to say, that's Brother Josiah, he's sat out here every night since November, he's no resurrection man.</em></p>
+  <p>Big Cole thought about that. <em>Is there anything else?</em></p>
+  <p><em>As long as you sit out here, you don't eat meat. Not pork, not beef, not fish. No grease. No wheat bread. No molasses, no honey. Cornbread and beans and water. You don't sleep in the daytime. You don't idle. You don't say one thing to the Elder and another to me. You come after the bell and you go before the bell.</em> She shifted the boy on her hip. <em>And I'll tell you this. If you come to what you're looking for out here, then when they bring me the next one I'll lay it out with lavender and rosemary and sing over it. And if you don't, I'll roll it in the hole like a sack of meal and stamp the dirt down on it.</em></p>
+  <p><em>All right,</em> said Big Cole. <em>Sister, if they bring you one that would teach me something, would you come and tell me?</em></p>
+  <p>She looked at him a long time over the lantern.</p>
+  <p><em>I'll do that,</em> she said.</p>
+  <p>He went down to Harrodsburg the next week and told the squire, who thought he was making a joke.</p>
+</section>
+
+<section>
+  <h2>IV. The Cooling Board</h2>
+  <p class="dateline">July 1832</p>
+  <p>The summer came in hot and stayed. The corn curled in the fields by noon. The Trustee came back from Lexington with a newspaper and said there was cholera in New York, a hundred dying in a day, and that it was coming down the rivers.</p>
+  <p>Lovina Shryock was seventeen. Her mother had brought her to the Children's Order when she was six, and her father, who grew hemp in Woodford County and did not believe in anything, had never forgiven any of them. She had a high clear voice that came over the top of the singing. She had a face that the brothers were taught not to look at and looked at anyway, across the open floor, in the dance, so that more than once a brother lost the step, and once a whole rank of them came down a half-beat late with a sound like a dropped load of lumber, and the Elder stopped the meeting. Big Cole had looked at her too. He had been a man in the world for fifty-four years.</p>
+  <p>On a Thursday evening she sat down on the bench by the wash house and said she was tired, and an hour later she was dead. There was no fever and no sweating. She had not been sick a day. The doctor said it was her heart, and could not say why.</p>
+  <p>Her father sent a rider. He was coming, and nobody was to put her in the ground before he saw her. So Sister Dorcas washed her and dressed her in a clean white gown and laid her on the cooling board in the dead-house by the burying ground, with a sheet over her and coins on her eyes and cloths soaked in soda water laid on her face and hands to keep the color, and when she had done all that, she went out in the dusk to the man who sat by the fence.</p>
+  <p><em>Brother Josiah,</em> she said. <em>I have one to show you.</em></p>
+  <p>He came. She lifted the sheet, and took the cloths away. He looked at Lovina Shryock from the soles of her feet to her hair, a long time, the way he had once looked over a hog before he bought it. She was as she had been in meeting. She was more so. There was not a mark on her.</p>
+  <p><em>Cover her,</em> he said. <em>When the heat has hold of her, come and tell me.</em></p>
+  <p>And he went back to his place by the fence and sat down.</p>
+  <p>Friday was the hottest day of that summer. The dead-house was stone and half sunk in the hill, but it was not enough. Sister Dorcas wet the cloths every hour and it was not enough. The father did not come on Friday. At dusk she went out to the fence.</p>
+  <p>Big Cole came and stood by the cooling board, and she lifted the sheet.</p>
+  <p>Where the heat had taken hold, the girl's skin had gone mottled, like the hide of a roan cow, dark and pale in patches. Her feet had swelled and turned outward and hung over the end of the board. Her hands had drawn back at the wrists. When Sister Dorcas lifted the cloth from her forehead, the skin came with it.</p>
+  <p>Big Cole did not turn away. He looked at her the way he had looked the night before, from her feet to her hair. He thought: this is the face that made a whole rank of grown men lose the step. A day ago. Yesterday.</p>
+  <p>Then he went out and sat down by the fence among the graves, and stayed there through the short hot night, saying one verse over to himself, over and over, the way a man says a thing to get the shape of it.</p>
+  <div class="verse">
+    <p>For the sun is no sooner risen with a burning heat, but it withereth the grass, and the flower thereof falleth, and the grace of the fashion of it perisheth: so also shall the rich man fade away in his ways.</p>
+    <p>&mdash; James 1:11</p>
+  </div>
+  <p>Sister Dorcas saw him from the door of the dead-house a little before four. He was sitting with his hands open on his knees. She did not know what had happened to him, and she did not ask, but she knew that something had, and she had kept her side of the bargain all her life.</p>
+  <p>Lovina's father came on Saturday and stood in the door of the dead-house with his handkerchief over his mouth, and would not go in, and went back to Woodford County. They buried her that evening. Sister Dorcas laid lavender and rosemary in the box, and sang over her in a voice nobody at Pleasant Hill had heard her use, low and strong, and the sisters who had come out with her looked at each other.</p>
+</section>
+
+<section>
+  <h2>V. A Coat and a Hat</h2>
+  <p class="dateline">The Salt River &middot; September 1832</p>
+  <p>Late that summer Elder Jonas went out on a journey with six brothers to open the testimony in the country south of Harrodsburg, and the Cole brothers went with him, because the country was theirs.</p>
+  <p>The word went ahead of them. In Little Cole's house on the Salt River, Polly and her sister Jane heard it and looked at each other across the churn.</p>
+  <p><em>Now we'll get him back,</em> said Polly.</p>
+  <p>So they sent word to the Elder that he and his brethren were welcome to hold meeting at the Coles' and take their dinner there. Elder Jonas would not eat in a house of the world unless it was set in the Believers' order, so one brother always went on ahead to tell the family how things were to be set, since the Believers did not sit as the world sat: the brothers at one table and the sisters at another, the elders at the head, and the meal taken in silence. Big Cole, who was standing with the brothers' hats, turned to his younger brother.</p>
+  <p><em>Tom, you go on ahead and tell them how to set the tables.</em></p>
+  <p>Polly and Jane saw him coming down the lane in his broad hat and his drab coat with no collar on it, and they started laughing before he reached the gate. While he stood in the yard explaining, they carried the tables out and set them up wrong on purpose. They put the nail kegs at the head, where the Elder was to sit, and the good chairs at the foot. They set the men's places and the women's places side by side.</p>
+  <p><em>That's not right,</em> said Little Cole. <em>You've got the low seats up top and the high seats down the bottom. The Elder doesn't sit on a keg.</em></p>
+  <p>They acted as if they had not heard him.</p>
+  <p><em>Who are you to be giving orders in this yard?</em> said Polly. <em>Who told you you could go off to the Shakers? Who took you in? What are you doing here?</em></p>
+  <p>And laughing, the two of them, they took hold of him and pulled the drab coat off his back and the broad hat off his head. Jane went in the house and came out with his blue broadcloth wedding coat and the flowered waistcoat he had worn to the Fourth of July barbecue at Harrodsburg, and they got him into them, and Polly picked a fistful of goldenrod out of the fence row and stuck it in the band of his old straw hat and set it on his head.</p>
+  <p><em>Now go and fetch your Elder,</em> she said. <em>We'll set the tables.</em></p>
+  <p>Little Cole had been a Shaker for ten months. He had never learned the songs, and he had never really learned to be ashamed of anything either, and he did not mind the coat. It fit him. He walked back up the lane in the blue broadcloth with the goldenrod in his hat and met the Elder and the brethren at the creek, and said dinner was ready, and led them down to the house.</p>
+  <p>They ate. Nobody said a word about the coat. When the Elder and the brothers walked back up the lane that afternoon, Little Cole was standing at the gate with his wife.</p>
+</section>
+
+<section>
+  <h2>VI. The Roof</h2>
+  <p class="dateline">Big Cole&rsquo;s house &middot; the next day</p>
+  <p>In the brick house a mile down the river, Rhoda Cole heard about it before dark.</p>
+  <p>Big Cole's house held eight women. There was Rhoda, who had been married to him thirty years. There was his mother, seventy-six. There were their three daughters, Sarah, Lucy and little Rhoda. There were Rhoda's widowed sisters Ellen and Prudence, who had come to live with them after the fever of 1822, and their son William's wife Martha, who stayed with them while William was off in Missouri. Ab's house up the road held four, and Little Cole's held two. People in the county did the arithmetic.</p>
+  <p><em>Polly got hers back,</em> said Rhoda. <em>We'll get ours.</em></p>
+  <p>So the next day the Elder and the brethren were invited to the brick house. But that morning a different brother went ahead to tell them how to set the tables, a quiet young man from the West Family named Brother Eli, and Rhoda's women could not think how to make sport of him, and set everything as he asked. The brothers ate at one table and the sisters at another, and the Elder sat at the head, and the meal was taken in silence. Big Cole ate cornbread and beans and drank water.</p>
+  <p>When they had finished, Rhoda came and stood by the Elder's chair.</p>
+  <p><em>Elder,</em> she said, <em>Josiah always gave thanks at this table. Let him stay and kneel with his family and return thanks the old way, and he'll come along after you.</em></p>
+  <p><em>Very well,</em> said Elder Jonas, and got up, and put on his hat, and went out the gate.</p>
+  <p>The brethren followed him up the river road, and before they had gone a quarter of a mile they were muttering among themselves.</p>
+  <p><em>Did he do that knowing, or not knowing?</em> they said. <em>Yesterday Thomas went ahead and that was the end of Thomas. Today it's Josiah. He's a good brother. He's as steady as they come. Will they take him too?</em></p>
+  <p>Elder Jonas stopped in the road.</p>
+  <p><em>What are you saying back there?</em></p>
+  <p>They told him.</p>
+  <p><em>You think Josiah is like Thomas?</em></p>
+  <p><em>Elder,</em> said one of them, <em>Thomas had two women in his house, and they got him. Josiah has eight. If eight women get hold of a man, what can he do?</em></p>
+  <p>Elder Jonas looked back down the road at the brick house. The sun was on the roof.</p>
+  <p><em>Thomas was busy every minute,</em> he said. <em>He let his mind go wherever it was pleased to go, and it was pleased to go everywhere. Josiah sat with the dead.</em> And then he said the rest of it, standing in the dust of the river road with the brethren around him, in the voice he used for counting boards.</p>
+  <div class="verse">
+    <p>Therefore whosoever heareth these sayings of mine, and doeth them, I will liken him unto a wise man, which built his house upon a rock: And the rain descended, and the floods came, and the winds blew, and beat upon that house; and it fell not: for it was founded upon a rock.</p>
+    <p>And every one that heareth these sayings of mine, and doeth them not, shall be likened unto a foolish man, which built his house upon the sand: And the rain descended, and the floods came, and the winds blew, and beat upon that house; and it fell: and great was the fall of it.</p>
+    <p>&mdash; Matthew 7:24&ndash;27</p>
+  </div>
+  <p>In the brick house the eight women had closed the door.</p>
+  <p>They stood around Big Cole in a ring, his mother and his wife and his daughters and his wife's sisters, and they talked at him all at once. Who gave you leave? Who told you you could go? Thirty years, Josiah. Your mother, Josiah. Look at your mother. Will you come home now? Will you come home? And they took hold of his drab coat, the sleeves and the collarless neck of it, all of them together, to pull it off his back.</p>
+  <p>This next part is the part people on the Salt River tell, and they tell it the same way every time.</p>
+  <p>Big Cole stood up from the table. He did not push anybody. He went straight up, the way a man gets up out of a chair, and kept going, and the women's hands came off his coat one at a time as he rose out of their reach. He went up through the ceiling and through the loft, and the roof of the brick house opened over him, and the oak shingles went up into the air all at once, a whole square yard of them, like a covey of quail flushed out of a fence row. Rhoda's sister Prudence said afterward that she saw the soles of his boots. The girls said there was sky where the roof had been. The neighbor across the river, who was pulling fodder, looked up and saw the shingles in the air and a man among them, and said so to the end of his life, to anybody, sober or not.</p>
+  <p>Up the river road, Elder Jonas came to the end of the verse. <em>And great was the fall of it,</em> he said. And Big Cole came down out of the air and stood in the road in front of him, in his drab coat, with his broad hat in his hand, and a little plaster dust on his shoulders.</p>
+  <p>The brethren did not mutter any more after that. They walked back to Pleasant Hill without a word among them, the eight of them, in a line, and Big Cole at the end of the line where he liked to be.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Little Cole lived another forty years on the Salt River and ran the store with Ab and drove hogs south every November until the railroad came. He was a good brother to everybody and a good husband to Polly, and he never did learn to sit still. He told the story of the roof himself, at the store, the same as everybody else did, and when he got to the shingles he always laughed.</p>
+  <p>Rhoda had the roof mended that same week, with new white oak shingles split out of a tree on the place. For a long time you could see it from the road, a bright square in the grey, where the hole had been. Then the rain came, and the frost, and the summer sun, and did to the new shingles what it does, until they were as grey as all the rest, and you could not have told anybody where it was.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">He who lives looking for pleasures only, his senses uncontrolled, immoderate in his food, idle, and weak, Mara (the tempter) will certainly overthrow him, as the wind throws down a weak tree.<cite>Dhammapada 7, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He who lives without looking for pleasures, his senses well controlled, moderate in his food, faithful and strong, him Mara will certainly not overthrow, any more than the wind throws down a rocky mountain.<cite>Dhammapada 8, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, two merchant brothers, Mahā Kāḷa and Culla Kāḷa, are halted with their caravan of five hundred carts when the elder hears the Buddha teach and decides to go forth. The younger follows him into the order, privately meaning to bring him home. Mahā Kāḷa practices at night in a charnel ground, where Kāḷī, the woman who burns the dead, gives him her rules and promises to show him a fitting body. She shows him a beautiful young woman who died suddenly, and he asks to be told when the fire has taken hold. He sees the burned body and reaches awakening. When the Buddha visits the brothers' town, Culla Kāḷa's wives mock him, strip off his robes and send him back into lay life. Mahā Kāḷa's eight wives try the same thing the next day. While the monks are asking whether he can hold out, the Buddha speaks of the weak tree and the rocky mountain, and Mahā Kāḷa rises through the roof of the house and comes down at the Teacher's feet. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-06.htm">the full commentary story</a>.</p>
+    <h3>Pleasant Hill, Kentucky, 1832</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Shakers">Shakers</a> (the United Society of Believers in Christ's Second Appearing) followed Mother Ann Lee, lived celibate and held their property in common. Brothers and sisters lived as separate orders under one roof, and their worship was a disciplined dance. Missionaries from New Lebanon, New York, came to Kentucky after the great revivals of 1801, and in 1806 converts near Harrodsburg signed a covenant that became <a href="https://en.wikipedia.org/wiki/Pleasant_Hill,_Kentucky">Pleasant Hill</a>, on the high ground above the Kentucky River palisades. By the early 1830s it had several communal families, including a gathering family for newcomers, along with a meetinghouse built in 1820 to take the shock of the dancing and a great Centre Family dwelling of limestone, begun in 1824 and finished in 1834. The Sunday meetings drew curious visitors from the surrounding country. When a married person joined, the spouse left behind sometimes fought back, in court and in print, and those quarrels were among the bitterest in the Shakers' history. The village is preserved today as <a href="https://www.nps.gov/places/shaker-village-at-pleasant-hill.htm">Shaker Village of Pleasant Hill</a>.</p>
+    <p>The Pleasant Hill Shakers opposed slavery in a slave state and bought the freedom of enslaved people who wished to stay among them. Over the community's history about <a href="https://blog.shakervillageky.org/?p=996">twenty-eight Black and mixed-race Believers</a> lived there, often, as the village's own historians note, at the margins of its social life. Kentucky drovers walked hogs, cattle and mules south across the mountains to the <a href="https://www.scencyclopedia.org/sce/entries/drovers/">Carolina markets</a>, about eight miles a day. American medical schools were short of cadavers, and <a href="https://en.wikipedia.org/wiki/Body_snatching">grave robbing</a> for the dissecting rooms was a real fear. Families watched new graves at night. In the summer of 1832 Asiatic cholera reached New York and spread down the river valleys, and in 1833 it killed about one Lexingtonian in fourteen.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Culla K&#257;&#7735;a and Mah&#257; K&#257;&#7735;a from the Dhammapada commentary (verses 7 and 8). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-06.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-washing-cup.html">&larr; The Washing Cup</a><a href="index.html">All stories</a><a href="four-votes.html">Four Votes &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Stalks of broomcorn along the foot of the page lean when a gust comes through, then come back upright.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, stalks = [], t = 0, gust = 0, gustT = 0, next = 240;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    stalks = [];
+    var n = Math.round(Math.max(30, Math.min(110, W / 12)));
+    for (var i = 0; i < n; i++) {
+      var x = Math.random() * W;
+      // keep the reading column mostly clear
+      var mid = Math.abs(x - W / 2) < Math.min(300, W * 0.3);
+      stalks.push({ x: x, h: (mid ? 0.08 : 0.14) * H + Math.random() * (mid ? 0.06 : 0.16) * H,
+        stiff: 0.5 + Math.random() * 0.8, ph: Math.random() * 6.28, a: mid ? 0.05 : 0.11 });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      t += 1;
+      if (--next <= 0) { gustT = 1; next = 420 + Math.random() * 600; }
+      gustT *= 0.992;
+      gust += ((Math.sin(t * 0.004) * 0.15 + gustT * 1.0) - gust) * 0.02;
+    } else { gust = 0.12; }
+    for (var i = 0; i < stalks.length; i++) {
+      var s = stalks[i];
+      var sway = (gust + 0.05 * Math.sin(t * 0.02 + s.ph)) / s.stiff;
+      var bx = s.x, by = H + 4;
+      var tx = bx + sway * s.h * 0.55, ty = H - s.h * (1 - 0.18 * Math.min(1, Math.abs(sway)));
+      ctx.strokeStyle = 'rgba(122,98,58,' + s.a + ')';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(bx, by);
+      ctx.quadraticCurveTo(bx + sway * s.h * 0.1, H - s.h * 0.55, tx, ty); ctx.stroke();
+      // the brush head
+      ctx.fillStyle = 'rgba(154,74,44,' + (s.a * 0.9) + ')';
+      for (var k = 0; k < 5; k++) {
+        ctx.beginPath();
+        ctx.ellipse(tx + (k - 2) * 1.6 + sway * 3, ty - 4 - k % 2 * 2, 1.4, 6, 0.25 * (k - 2) + sway * 0.6, 0, 6.283);
+        ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

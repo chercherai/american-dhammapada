@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Thousand Stamps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a winter kitchen dark; along the foot of the page, batteries of stamps lift and drop without stopping. */
+  --ground: #12100f;
+  --ground-2: #1d1916;
+  --paper: #e6dccb;
+  --paper-dim: #a59985;
+  --ember: #d8743c;
+  --spark: #f0a35a;
+  --line: rgba(230,220,203,.11);
+  --panel: rgba(29,25,22,.8);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 118%, #2c1c14 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--ember); }
+a:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--ember); text-wrap: balance; text-shadow: 0 0 26px rgba(216,116,60,.22); }
+.epigraph { border-left: 1px solid var(--ember); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--ember); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--ember); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--spark); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--ember); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--ember); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--ember); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--ember); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--ember); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--ember); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 5.13 &middot; Sa&#7789;&#7789;hik&#363;&#7789;apeta</span></nav>
+<header>
+  <h1>A Thousand Stamps</h1>
+  <div class="epigraph">He that binds up a stone in a sling, is like one that gives glory to a fool.<br>&mdash; Proverbs 26:8 (Septuagint)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ovako sam &#269;uo,</span> on Gwinn Avenue.</p>
+
+<section>
+  <h2>I. The Oak</h2>
+  <p class="dateline">Lead, South Dakota &middot; Christmas Eve by the old calendar, January 6, 1917</p>
+  <p>Two men went up the ridge above the Open Cut before daylight to cut the Christmas oak. Marko Radulovi&#263; was past fifty and had been a timberman in the Homestake for twenty-six years. Luka was nineteen and had come from Grahovo in the spring. Oak does not like that altitude, but there was a draw on the south side where a few had held on, and the Montenegrins and the Serbs of Gwinn Avenue had been going there on this morning since before Luka was born.</p>
+  <p>They did it properly. Marko took off his cap and wished the tree good morning and a happy Christmas Eve, and threw a handful of wheat at it, and cut on the east side so it would fall toward the sunrise. He did not let it touch the ground. Then they started down with the log on their shoulders, Marko in front.</p>
+  <p>It was fourteen below. Under them the town lay in its gulch with every lamp lit, and along the hillside stood the mills, one above another, steaming from every joint. The noise came up to meet them.</p>
+  <p>There were a thousand and twenty stamps in the Homestake mills that winter. A stamp is an iron shoe on the end of an iron stem, the whole thing as heavy as a saddle horse. A turning cam lifts it the length of a hand and lets it drop on wet ore in an iron box, and then lifts it again. They stood in rows of five, and the rows stood in ranks down the length of each mill, and each one fell better than eighty times a minute, day and night and Sunday. The rock went in at the top of the hill in pieces the size of a man&rsquo;s head and came out at the bottom as gray water. People in Lead did not hear it. It was only when a mill shut down for a broken shaft that the whole town woke at once in the dark and lay wondering what was wrong. Babies born there could not sleep in the country. Men who went home to the old villages wrote back that the quiet had made them ill.</p>
+  <p>Luka had been in Lead eight months and still heard it. He heard it in his teeth. He was a mucker on the eight-hundred level, three dollars and a half for eight hours, and he had sent home more money since May than his father had seen in his life. He had not yet decided what he thought of the place.</p>
+  <p>Where the path came out of the trees above the highest mill, Marko stopped. Luka, behind him under the heavy end, saw his head lift and turn toward the mills. He stood so for the space of three or four breaths, and then he smiled.</p>
+  <p>It was a small smile and it did not last. Luka thought afterward that it was the look of a man who has been told all his life about some animal, a camel or a whale, and then comes around a corner and finds one standing in the road.</p>
+  <p>Marko Radulovi&#263; was not a man who smiled at nothing. He was known on the Avenue for seeing more than other people. He had walked his whole shift out of a stope in 1907 an hour before it burned, and he would not say afterward how he knew.</p>
+  <p><em>What is it, striko?</em></p>
+  <p><em>Not here,</em> said Marko. <em>Ask me tonight, in front of Baba Stana.</em> And he went on down with the oak.</p>
+</section>
+
+<section>
+  <h2>II. Baba Stana&rsquo;s</h2>
+  <p class="dateline">Gwinn Avenue &middot; that evening</p>
+  <p>The Americans called Gwinn Avenue Slavonian Alley. It was Dalmatians and Likans at one end and Montenegrins at the other, Catholic and Orthodox, and in a snowstorm they shoveled each other out. Stana Vukoti&#263; had kept a boardinghouse there for thirty years. She was seventy. She had buried a husband out of the mine and raised three sons into it, and fourteen men ate at her table. On paper it was a business. In fact the house was the nearest thing to a church the Orthodox end of the Avenue had, with the nearest priest of their own a long way off by train. She had the icon and the lamp, and she had the Psalter by heart, in the old language, from a childhood of standing through services at Cetinje. Men came to her kitchen with questions they would not have taken to a priest anyway.</p>
+  <p>She spoke little. When she had said a thing she did not say it again.</p>
+  <p>At dusk Marko carried the oak in over the threshold, right foot first. Stana threw wheat at him and he wished the house a good evening and a happy Christmas Eve, as is done. There was straw on the floor under the table, for the stable. They laid the log on the fire and poured a little wine on it. When it had caught, they ate the fast-day supper standing up to it at first and then sitting: beans cooked without fat, salt cod, bread, walnuts, dried plums, and red wine that the Dalmatians at the other end of the Avenue had trodden in October from a railroad car of California grapes.</p>
+  <p>There were fourteen at the table and they were not all friends. Seven years before, the company had shut the whole mine for the winter to break the union, and when it opened again a man could go down only if he signed a card that said he belonged to no union and never would. Some at that table had signed in the first week. Some had held out until their children were hungry and then signed. It was still in the room, most nights. On this night nobody brought it.</p>
+  <p>Afterward Luka asked.</p>
+  <p><em>Striko. This morning above the mills you stopped and smiled. You said to ask you here.</em></p>
+  <p>Marko looked at the fire a while.</p>
+  <p><em>I saw a man standing in the gulch,</em> he said. <em>He was as tall as the hill. His feet were down in Gold Run and his head was level with us. And every stamp in the Homestake was coming down on the top of it. All thousand of them, and red, like iron out of the forge. They broke his skull the way they break rock. I saw it open. Then the cams lifted and it closed over whole, and they came down again.</em> He turned his cup around on the table. <em>I smiled because I am fifty-three and I had heard there were such beings and never seen one.</em></p>
+  <p>Nobody at the table laughed. It was Marko.</p>
+  <p>Baba Stana had her hands in her lap.</p>
+  <p><em>I have seen him too,</em> she said. <em>I saw him the first night he stood there. That is twenty-six years, and I have seen him most nights since when I go out for wood. I did not speak of it. If I had told it, there are people who would have called it a lie, and it would have gone badly for them to say so. I kept quiet for their sake. Now there are two of us. So I will tell you who he is.</em></p>
+</section>
+
+<section>
+  <h2>III. The Cottonwood</h2>
+  <p class="dateline">Lead &middot; the summer of 1889</p>
+  <p>There was a man from Cuce named Vuko Perovi&#263; who lost the use of his legs in the mine in 1885, when a set of timbers let go. The company gave him a stool. He was to sit at the foot of Mill Street, where the Deadwood road comes into town past the Brick Store, and count the wood wagons going up to the boilers. There was a big cottonwood there, the only real shade in the gulch.</p>
+  <p>As a boy Vuko had kept goats on the stone above Cuce with a sling. Sitting on that stool all day he found that he could do with a thumb and a finger what he used to do with the sling. He kept a pocket of creek gravel. He could flick a pebble the size of a pea through one leaf of that cottonwood, forty feet up, and not move the leaf beside it.</p>
+  <p>The children found him out. They came down from every part of town, Cornish and Finn and Italian and ours, and stood around the stool. <em>Make a horse, Vuko. Make a bear.</em> And he would look up into the tree for a while, and then his hand would go, tick, tick, tick, faster than a sewing machine, and bits of green would come spinning down. When he was done the children looked at the ground. The sun came through the holes he had cut and lay on the dust of the road in the shape of a bear. They paid him in bread and plums. One boy brought him half a pasty every noon for a summer. He would do a horse, a bear, an eagle, a goat with a beard. A little Finnish girl asked him once for an elephant, which he had never seen. She drew it for him in the dust with a stick, and he looked at it and looked at the tree, and that noon there was an elephant on the Deadwood road, with a trunk, and the freighters drove their teams around it.</p>
+  <p>I was cook that year for Mr. Crane, who had charge of all the mills. One noon in July he came down Mill Street on foot and stopped under the cottonwood to wipe his neck. He looked down at his own coat. There was a horse on it, in sunlight, and an eagle on his sleeve.</p>
+  <p><em>Whose work is this?</em></p>
+  <p>They told him, and he had Vuko carried up to the house.</p>
+  <p>Now Mr. Crane had a trouble. The company kept a lawyer at Deadwood named Colonel Parmalee, and the Colonel talked. If you said to him good morning, he gave you the history of mornings. Mr. Crane had to sit with him every Thursday at dinner and could not finish a sentence.</p>
+  <p><em>Could you put a pint of goat droppings into a man&rsquo;s mouth,</em> Mr. Crane said, <em>a pellet at a time, without his knowing where they came from?</em></p>
+  <p><em>I could, sir,</em> said Vuko. <em>Hang a curtain in the pantry door and seat him facing it.</em></p>
+  <p>I had a nanny goat. I dried the pellets on the stove lid myself, a tin pint of them. On Thursday we set Vuko in the pantry behind the door curtain, and he made a hole in the cloth with the point of my paring knife, and I stood beside him with the coffee and watched.</p>
+  <p>The Colonel sat down and opened his mouth to begin, and something went into it. He swallowed and went on. He opened it again. Every time that man parted his teeth, for an hour and ten minutes, Vuko put a pellet between them, and the Colonel swallowed each one and never lost his place. When the cup was empty Vuko shook the curtain.</p>
+  <p>Mr. Crane put down his fork. <em>Colonel,</em> he said, <em>I have been trying for two years to get a word in with you. You have just eaten a pint of goat dung at my table and it has not slowed you down.</em></p>
+  <p>The Colonel shut his mouth. He kept it shut on Thursdays from then on, and Mr. Crane grew quite fond of him.</p>
+  <p>For that, Mr. Crane gave Vuko a new suit and a chair with wheels and the rents of four company houses for his life, one on each side of the Open Cut, north, east, south and west. The women in the kitchen could not get over it. A lame Montenegrin with four rents. I said to them what is written.</p>
+  <div class="verse">
+    <p>It is fit that an observant man and one diligent in his business should attend on kings, and not attend on slothful men.</p>
+    <p>&mdash; Proverbs 22:29 (Septuagint)</p>
+  </div>
+  <p>I was proud of it. A craft is a good thing, I said. Look at Vuko.</p>
+</section>
+
+<section>
+  <h2>IV. The Pupil</h2>
+  <p class="dateline">The winter of 1889 and the summer after</p>
+  <p>There was a young man boarding on the Avenue then, a mucker, twenty-two. I will call him Mitar. His mother is dead now and it cannot hurt her. Mitar looked at the four rents and the chair with wheels, and he thought, a cripple got all that by flicking gravel. So he went to Vuko and took off his cap.</p>
+  <p><em>Teach me.</em></p>
+  <p><em>I can&rsquo;t do that, friend,</em> said Vuko.</p>
+  <p>Mitar did not argue. He went to the stove and heated water. All that winter, every night after shift, he came to Vuko&rsquo;s room and washed his feet and rubbed his dead legs with brandy and bear grease from the ankle to the hip. He carried him on his back to the bathhouse on Saturdays. He did this for five months and did not ask again until spring.</p>
+  <p>And Vuko thought, this boy has been a son to me. He could not go on refusing him. He taught him. Mitar was quick. By June he could put out a candle across the room.</p>
+  <p>It is written somewhere else, and I did not think of it in time.</p>
+  <div class="verse">
+    <p>He that binds up a stone in a sling, is like one that gives glory to a fool.</p>
+    <p>&mdash; Proverbs 26:8 (Septuagint)</p>
+  </div>
+  <p><em>You have it all now,</em> Vuko said to him. <em>What will you do with it?</em></p>
+  <p><em>Go out and show it.</em></p>
+  <p><em>Show it how?</em></p>
+  <p><em>Drop a cow. Or a man. Something people will talk about.</em></p>
+  <p>Vuko was frightened then. He said: <em>Listen to me. A cow is fifty dollars to the Cornishman who owns her, and he will take it out of you. A man is a thousand to his lodge, and after that a rope for you at Deadwood. You have no fifty dollars. Do not kill anything. If you must throw at something, find a thing that has no mother and no father and nobody to go to the judge for it.</em></p>
+  <p>He meant a stump. He meant a bottle on a fence. I knew Vuko. That is all he ever meant.</p>
+  <p>Mitar filled his pocket with gravel and went looking. He saw the Cornishman&rsquo;s cow on the hill and thought, she has an owner. He saw a man coming off shift and thought, he has a mother somewhere, and a lodge. He let them both go by. He was careful, you see. He had listened to every word.</p>
+  <p>In those years there was an old man who lived up Poorman Gulch in a shelter of pine boughs and sod. Nobody knew his name or his country. He did not speak. The Finns said he was a Finn, and the Italians said he was a friar who had been put out of his house for holiness. We called him <em>Deda</em>, grandfather, and said he was a man of God, and let it go at that. He came down into town every morning with a lard pail and stood at one back door or another. He never knocked. If you put something in the pail he looked at you, and you felt all day as you feel coming out of church at Easter. If you had nothing, he looked at you the same way and went on. He had been coming for nine years. No woman in Lead baked without thinking of him. In the big snow of 1888 the men of three lodges dug a path up Poorman to his shelter, and found him sitting in it with no fire, and the snow melted back from the boughs the width of a doorstep all the way around.</p>
+  <p>On a morning in July he came in by the Deadwood road as always, past the Brick Store, under the cottonwood.</p>
+  <p>Mitar was sitting on Vuko&rsquo;s old stool. He saw him and thought: <em>This one. He has no mother and no father. He has no lodge and no country, and nobody will go to the judge. I will try it on him.</em></p>
+  <p>He took a stone the size of a hazelnut and aimed at the right ear. It went in at the right ear and came out at the left.</p>
+  <p>The old man stopped. He did not put his hand to his head. He bent and set the pail down on the road, on its bottom, carefully, so it would not spill. Then he turned around and went back up the gulch. The widow Niemi was hanging wash on the hillside, and she swore to her death that he passed below her yard a hand&rsquo;s breadth above the road, and his feet left no mark in the dust. He went into his shelter and lay down and did not get up.</p>
+</section>
+
+<section>
+  <h2>V. The Gulch</h2>
+  <p class="dateline">Poorman Gulch &middot; the next day</p>
+  <p>By noon the next day every kitchen in town knew he had not come. Somebody found the pail under the cottonwood with yesterday&rsquo;s bread in it. So they went up. The Finns and the Cornish and the Italians went, and all of the Avenue, some two hundred people on that goat track, the women with their aprons on.</p>
+  <p>He was lying on his side on the pine boughs with his hands under his cheek. There was a little blood at each ear. The women began to cry out, each in her own language, and the men took off their caps.</p>
+  <p>Mitar had come up with the crowd to see what the noise was. He pushed in and looked. He had not known, you understand, that anybody would mind. He said it out loud, in a voice of plain surprise, the way you would say you recognized a horse.</p>
+  <p><em>Why, that&rsquo;s the one I met at the cottonwood. I tried my hand on him.</em></p>
+  <p>I will not tell you all of it. It is Christmas Eve. The men had come straight off shift and had in their hands what they had. They did it there in the gulch, in front of the shelter, and it did not take long, and no one who was there has ever said which of them it was. I will say that I did not look away, and I have asked forgiveness for that every year since. The coroner came up from Deadwood for the two of them and wrote <em>persons unknown</em> twice.</p>
+  <p>That night I sat up with the old man. We had laid him out in the lodge hall, and I had washed him. At midnight the whistle blew for the change of shift and I went to the door for air.</p>
+  <p>Mitar was standing in the gulch. He was as tall as the hill. There were six hundred and fifty stamps in the mills that year, and all six hundred and fifty were coming down on the crown of his head, red hot, and his head broke and closed and broke. He did not cry out. He had the same look of surprise.</p>
+  <p>We buried the old man two days after, in ground the three lodges bought together. Nobody could agree what he was, so the Finns&rsquo; pastor read over him, and then the Italian priest, and then I said the psalms, since there was no one else on our side to say them. The board had no name on it. The children put the lard pail at the foot, and it stood there until it rusted through.</p>
+  <p>Mitar the county buried. I went to that one too. There were four of us.</p>
+  <p>The company has built since then. Every stamp they have added, he has had.</p>
+</section>
+
+<section>
+  <h2>VI. Sparks</h2>
+  <p class="dateline">Gwinn Avenue &middot; the same night, 1917</p>
+  <p>The oak had burned halfway through. Out past the window, down the hill, the mills went on as they always did, and for once every man at the table heard them.</p>
+  <p><em>And Vuko?</em> said Luka.</p>
+  <p><em>They told him in his chair. He asked which ear. Then he asked them to wheel him to the bridge, and he emptied his pocket into the creek. He never flicked a stone again, not for any child, though they came and stood around him for a year. He signed the four rents over to the lodge for widows, and he went back to the stool, and he died on it in 1903.</em></p>
+  <p>She was quiet a moment.</p>
+  <p><em>I was wrong, what I said in Mr. Crane&rsquo;s kitchen. A craft is not a good thing. Nor a bad one. Vuko had that craft for thirty years and it made bears for children and shut one lawyer&rsquo;s mouth. Mitar had it for a day. Whatever a fool learns, he learns to his own hurt. He would have been better off with his shovel.</em></p>
+  <p>Then she said the psalm, the two verses, in the old language first and then so the young ones could follow.</p>
+  <div class="verse">
+    <p>He has opened a pit, and dug it up, and he shall fall into the ditch which he has made. His trouble shall return on his own head, and his unrighteousness shall come down on his own crown.</p>
+    <p>&mdash; Psalm 7:16&ndash;17 (Septuagint)</p>
+  </div>
+  <p>Nobody spoke. After a time Stana nodded at Luka, because he was the youngest. He got up and took the poker and struck the burning oak as it is struck on that night, so that the sparks went up the chimney in a rush. He said what is said. <em>As many sparks, so many lambs. As many sparks, so many coins. As many sparks, so much health in this house.</em> His voice shook a little on it.</p>
+  <p>Marko went out for wood before bed. He stood in the yard some time, with his back to the house, looking down the gulch. He was not smiling when he came in.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The cottonwood at the foot of Mill Street put out whole leaves every spring after 1890, like any tree. Even so, there were summers when a child crossing the road at noon would stop and call the others. They would stand in a ring and look down, the Cornish and the Finns and ours, at a bear made of sunlight lying in the dust.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">And when the evil deed, after it has become known, brings sorrow to the fool, then it destroys his bright lot, nay, it cleaves his head.<cite>Dhammapada 72, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the elder Mah&#257; Moggall&#257;na, coming down from Vulture&rsquo;s Peak with a companion, smiles at something and will explain only in front of the Buddha: he has seen a <a href="https://en.wikipedia.org/wiki/Preta">peta</a>, a suffering ghost, three-quarters of a league tall, whose skull is crushed again and again by sixty thousand blazing hammers. The Buddha says he saw the same being long ago and kept silent out of compassion for those who would not have believed him, and then tells its past. A lame man of Benares could flick pebbles so well that he cut leaves into the shapes of animals for children; a king hired him to flick goat dung into the mouth of a talkative chaplain, and rewarded him with four villages. A man who envied this served the cripple until he was taught the art, was warned to aim only at something &ldquo;with neither mother nor father,&rdquo; and killed a solitary holy man, a paccekabuddha, with a stone through the ear. The crowd beat him to death. The verse the Buddha draws from it, in the commentary&rsquo;s own reading, is that whatever skill a fool acquires works only to his ruin. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-13.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Maudgalyayana">Moggall&#257;na</a>.</p>
+    <h3>Lead, South Dakota, 1889&ndash;1917</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Homestake_Mine_(South_Dakota)">Homestake Mine</a> at <a href="https://en.wikipedia.org/wiki/Lead,_South_Dakota">Lead</a>, in the Black Hills, was bought by George Hearst and his partners in 1877 and became one of the richest gold mines in the country. Its ore was crushed in <a href="https://en.wikipedia.org/wiki/Stamp_mill">stamp mills</a> that ran around the clock: 650 stamps by the late 1880s and 1,020 at the peak in 1916. Under superintendent Thomas Grier (1885&ndash;1914) Lead was a company town with a company store (the &ldquo;Brick Store&rdquo;), a free library and kindergarten paid for by Phoebe Hearst, a standard wage of $3.50 a day, and, from 1906, an eight-hour shift; in the winter of 1909&ndash;10 the company locked out its whole workforce to break the miners&rsquo; union and rehired only men who signed a non-union pledge. See Richards and Myers, <a href="https://www.sdhspress.com/journal/south-dakota-history-38-2/an-iron-hand-in-a-velvet-glove-thomas-j-griers-management-of-the-homestake-mine-1885-1914">&ldquo;An Iron Hand in a Velvet Glove&rdquo;</a> (<em>South Dakota History</em>, 2008). Mr. Crane, Colonel Parmalee and everyone on the Avenue are invented.</p>
+    <p>Lead&rsquo;s miners came from Cornwall, Finland, Italy, Scandinavia and the South Slav lands of Austria-Hungary and Montenegro. Gwinn Avenue was known as <a href="https://southdakotamagazine.com/leads-international-flavor">Slavonian Alley</a>, remembered for its Christmas-week open houses and for wine pressed from grapes that came in by iced railroad car. Serbs and Montenegrins keep Christmas by the Julian calendar, so that Christmas Eve falls on January 6. On that morning the men of a household cut a young oak, the <a href="https://en.wikipedia.org/wiki/Badnjak_(Serbian)"><em>badnjak</em></a>, greet it, and bring it in at dusk to burn on the hearth over straw; someone strikes it so the sparks fly and wishes the house as many lambs and coins as there are sparks. The Orthodox Old Testament is the Greek Septuagint, quoted here in Sir Lancelot Brenton&rsquo;s English translation of 1851, in which the psalm is numbered 7:16&ndash;17.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the peta with sixty hammers from the Dhammapada commentary (verse 72). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-13.htm">The original</a>. Scripture from the Septuagint, tr. Sir Lancelot C. L. Brenton (1851). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-blue-cup.html">&larr; The Blue Cup</a><a href="index.html">All stories</a><a href="the-placemat.html">The Placemat &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, stamps = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    // batteries of five stamps along the foot of the page, each stamp on its own point of the cam
+    stamps = [];
+    var gap = 22, group = 5, x = 18, i = 0;
+    while (x < W - 10) {
+      stamps.push({ x: x, ph: ((i * 3) % 5) / 5 + Math.floor(i / 5) * 0.137, sp: 0.0042 + (Math.floor(i / 5) % 3) * 0.0004 });
+      i++; x += (i % group === 0) ? gap * 1.9 : gap;
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var base = H - 6, lift = 22;
+    ctx.fillStyle = 'rgba(230,220,203,.05)';
+    ctx.fillRect(0, base, W, 1);
+    for (var i = 0; i < stamps.length; i++) {
+      var s = stamps[i];
+      var p = (t * s.sp + s.ph) % 1;
+      // slow lift on the cam, then the drop
+      var up = p < 0.86 ? p / 0.86 : Math.max(0, 1 - (p - 0.86) / 0.05);
+      var y = base - up * lift;
+      ctx.fillStyle = 'rgba(230,220,203,.07)';
+      ctx.fillRect(s.x + 3, y - 96, 2, 84);          // stem
+      ctx.fillRect(s.x - 1, y - 62, 10, 4);          // tappet
+      ctx.fillStyle = 'rgba(230,220,203,.10)';
+      ctx.fillRect(s.x, y - 14, 8, 14);              // shoe
+      if (p > 0.91 && p < 0.99) {                    // the blow
+        var a = (0.99 - p) / 0.08 * 0.22;
+        var g = ctx.createRadialGradient(s.x + 4, base, 0, s.x + 4, base, 26);
+        g.addColorStop(0, 'rgba(240,150,80,' + a + ')');
+        g.addColorStop(1, 'rgba(240,150,80,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s.x + 4, base, 26, 0, 6.283); ctx.fill();
+      }
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

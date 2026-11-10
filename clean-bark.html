@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clean Bark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on pale aspen bark, light theme; along the margins faint white trunks stand with dark eye-scars, and aspen leaves turn on their stems, flicking from green-grey to silver and back; datelined sections. */
+  --ground: #eeebe2;
+  --ground-2: #e2ddd0;
+  --ink: #2a2a26;
+  --ink-dim: #6c6a60;
+  --leaf: #b8902c;
+  --sage: #7d8b6c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f7f5ee 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(42,42,38,.2); }
+.series a:hover { color: var(--leaf); }
+a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: #5e6b4c; text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(125,139,108,.5); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: #8a6c1e; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: #5e6b4c; }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(226,221,208,.85); border: 1px solid rgba(42,42,38,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--sage); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,42,38,.12); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: #6f5715; }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: #5e6b4c; }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,42,38,.12); border-bottom: 1px solid rgba(42,42,38,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: #8a6c1e; font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: #5e6b4c; margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: #6f5715; }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(226,221,208,.85); border-left: 2px solid var(--sage); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 21.9 &middot; Ekavih&#257;r&#299;</span></nav>
+<header>
+  <h1>Clean Bark</h1>
+  <div class="epigraph">He shall sit solitary, and hold his peace: because he hath taken it up upon himself.<br>&mdash; Lamentations 3:28</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Honela entzun nuen,</span> at the long table on Main Street.</p>
+
+<section>
+  <h2>I. The End of the Table</h2>
+  <p class="dateline">Buffalo, Wyoming &middot; winter 1963&ndash;64</p>
+  <p>At the Hotel Mendi on Main Street the herders ate at one long table, family style, the bowls going hand to hand down both sides: garbanzos with chorizo, oxtail stew, lamb, of course, always lamb, a pot of red beans, bread, wine in pitchers whether you asked for it or not. In winter, when the sheep were down on the lower range along the Powder River and the men came into town by turns, there might be thirty at that table on a Saturday night, talking across each other in Basque and Spanish and the bad English of the contract, laughing, singing after the coffee.</p>
+  <p>Ferm&iacute;n Arozena sat at the far end. Always the far end, where the table met the wall, and always with one empty chair between himself and the next man. He passed the bowls when they came to him. He answered when he was asked something, in a few words, politely. He did not sing. When he had eaten he carried his own plate to the kitchen, which nobody else did, and thanked the cook, and went up to his room, which was the single room at the end of the hall over the alley, the one with the narrow bed that the others didn&rsquo;t want.</p>
+  <p>In the morning he was gone before light. Joxe Etxeberri, who ran the bar downstairs and slept badly, would see him from the window going down to Clear Creek alone in the dark with his hands in his coat, and coming back alone when the sky had gone grey over the Big Horns. At the eight o&rsquo;clock Mass he sat in the last pew on the end. On Sunday afternoons, when the others crowded into the bar to hear the Basque program on KBBS, the news from home and the songs, Ferm&iacute;n was walking somewhere out on the bench above town by himself.</p>
+  <p>He was thirty-one. He was from a village in the Baztan valley in Navarre, and he had come over in 1962 on a three-year contract from the Western Range Association, like most of the young ones at the table, and he herded twelve hundred ewes for the Lindgren outfit. That was nearly all anybody knew about him.</p>
+</section>
+
+<section>
+  <h2>II. The Mountain</h2>
+  <p class="dateline">The Big Horns &middot; summer 1964</p>
+  <p>In June they trailed the bands up out of the sagebrush onto the national forest, eight days of dust and bells and dogs, and then every herder was alone. That was the work. A man, a band of sheep, two dogs, a horse, a canvas tent or a wagon, a hundred square miles of mountain. The camp tender came up once a week, with the pickup as far as the road went and then with a packhorse. He brought flour, coffee, beans, canned milk and the mail, and he moved camp when the grass was eaten down. For the rest of the week the herder spoke to the dogs.</p>
+  <p>Men did not do well with it. Everybody knew stories. A man from Bizkaia who had started answering the sheep in their own voice. A man who had walked down off the mountain one August without his band and was found in the stockyards in Billings with no shoes. Herders carved the aspens at the edges of the meadows: their names, the dates, the names of their villages, crosses, boats, hearts, women, verses about home and the girl and the mother who waited there. When you rode through an old grove you could read twenty years of loneliness on the white bark like the walls of a jail.</p>
+  <p>Txomin Laka was the camp tender for the Lindgren bands that summer. He had herded six years himself before he got the pickup, and he knew what to look for. A man who talked too fast when you came. A man who did not talk at all. A man who had let himself go dirty, or whose dogs had gone wild. He watched all his herders for these things, the way you would watch a ewe that had stopped eating.</p>
+  <p>Ferm&iacute;n did not talk too fast. He did not talk much at all. But he was not dirty, and his dogs were the best-handled dogs on the mountain, and his sheep were fat. He lost fewer to coyotes and fewer to death camas than any herder Txomin had. When Txomin came up the trail with the packhorse, Ferm&iacute;n would already be standing at the tent, having heard him a mile off, with the coffee on. He would unload the flour and the beans. He would ask whether there were letters, and if there were, he would read them later, alone. He would say what the grass was like over the next ridge. Then he would go back up to the band, and Txomin would sit by the fire and drink the coffee by himself.</p>
+  <p>Once, late in the day, Txomin did not go straight back down. He tied the horse and went up through the timber on foot to see.</p>
+  <p>The band was bedded in the big meadow under the ridge, grey and quiet in the long light, and the dogs were lying at the two ends of it. Ferm&iacute;n was sitting at the top of the meadow where the aspens began, with his back against a white trunk, his hat on his knee, looking out over the sheep and the valley and the blue country beyond the Powder River that went on toward Dakota. He was not doing anything. He was sitting. He did not have a knife out. He did not have a letter. He did not have a bottle. Txomin watched him from the edge of the timber until the sun went off the meadow and the first star came out over the ridge, and Ferm&iacute;n did not move once, except to put his hat back on when it got cold.</p>
+  <p>On the way down Txomin rode through the aspens along the creek, where the old carvings were. There were names in that grove going back to 1919. There was a woman with long hair cut by somebody in 1937. There was a church with a bell tower and a date and the name of a village in Zuberoa. There were three Lindgren herders from the last two summers, their names and the dates and <em>Gora Euskadi</em> and a boat.</p>
+  <p>Up in Ferm&iacute;n&rsquo;s grove, Txomin realized, there was nothing. He had been taking him supplies all summer, past those trees, and not one of them was cut. Clean bark, all of it. It frightened him more than anything else he had seen.</p>
+</section>
+
+<section>
+  <h2>III. The Kitchen</h2>
+  <p class="dateline">The Hotel Mendi &middot; October</p>
+  <p>Gracieuse Irigaray, who owned the Hotel Mendi, was seventy-two. She had come over from a village above Baigorri in 1912 to marry a herder she had met twice. She had cooked in a sheep camp in the Big Horns for three summers herself, in a wagon, before he saved enough to buy the hotel, and she had run it alone since he died in 1949. She had fed perhaps two thousand herders at that long table. She had read their letters to them when they couldn&rsquo;t and written their answers. She kept their money in the safe. She sat with them in the hospital, and she buried some of them. They called her Ama, every one of them, and she let them.</p>
+  <p>The sheep came down at the end of September. By the second week of October the bands were on the winter range, and the men were coming through town, and they all, one way or another, ended up in her kitchen saying the same thing.</p>
+  <p>Txomin told her first, standing by the stove with his hat in his hands. The empty chair. The clean bark. The man sitting at the edge of the trees until dark, not doing anything.</p>
+  <p>Then the cook told her about the plate he carried to the kitchen, and the room nobody wanted. Joxe from the bar told her about the creek before light. Two of the young herders told her that Ferm&iacute;n had walked past the dance at the Basque picnic in August without stopping, and that when they had asked him to drink with them on Main Street he had said no thank you, so nicely they could not even be angry. Mr. Lindgren himself came in, which he had not done in years, and sat at her kitchen table in his good hat. He said that Arozena was the best herder he had ever had, and that he was worried about him, and did she think the boy should see a doctor in Sheridan, and did she think he would sign on for another contract. Even Father Hanley, the young Irish priest, stopped her after the eight o&rsquo;clock Mass to ask, kindly, whether that quiet man in the back pew was all right.</p>
+  <p>She listened to every one of them. Then she said what she said to all of them, the same two words, in Basque, and went on with what she was doing.</p>
+  <p><em>Ondo,</em> she said. <em>Ondo.</em> Good. Good.</p>
+  <p>Txomin did not understand. He came back the next day and stood by the stove again.</p>
+  <p><em>Ama, you didn&rsquo;t hear me. A man alone up there like that. With clean bark. You know what happens to them.</em></p>
+  <p>She was rolling dough on the board. She did not stop.</p>
+  <p><em>I know what happens to men who are alone and don&rsquo;t want to be,</em> she said. <em>They carve the trees. They write home that they are coming home. They drink on Main Street until Joxe puts them out. That one wants to be. That is a different man.</em></p>
+  <p><em>But all the time? Sitting alone, sleeping alone, walking alone?</em></p>
+  <p><em>That is how a herder should be,</em> said Gracieuse Irigaray. <em>Alone, and taking care of himself. Somebody who keeps himself in hand like that can sit at the edge of the trees all evening and be happy. Didn&rsquo;t you see his face?</em></p>
+  <p>Txomin thought about it. He had seen his face. He had not known what to call it.</p>
+  <p>She wiped her hands and went into the little parlor behind the kitchen and came back with a book, a small black English book with a cracked spine that the old Irish priest before Father Hanley had given her in 1920, when she was learning English, because it was the only English book he had two copies of. She found the page without looking for it and read it to him in her heavy careful English, standing by the bread board, while the dough rested.</p>
+  <div class="verse">
+    <p>Retirement, if thou continue therein, groweth sweet, but if thou keep not in it, begetteth weariness. If in the beginning of thy conversation thou dwell in it and keep it well, it shall afterwards be to thee a dear friend, and a most pleasant solace.</p>
+    <p>&mdash; Thomas &agrave; Kempis, <em>The Imitation of Christ</em>, I.20 (tr. William Benham)</p>
+  </div>
+  <p><em>He kept it well,</em> she said. <em>Go and tell the others.</em></p>
+  <p>Then she went back to the dough.</p>
+</section>
+
+<section>
+  <h2>IV. The Edge of the Trees</h2>
+  <p class="dateline">Buffalo and the Big Horns &middot; 1965 and after</p>
+  <p>Txomin told the others, and they told each other at the long table, in the bar, and in the sheep camps the next summer. It went around the way things went around among the Basques of that country, which is to say everywhere at once and slowly. Ama had said <em>ondo.</em> Ama had read the little book.</p>
+  <p>Nobody could say afterward that anything much changed. But that next summer on the mountain there were herders who did not go down to Buffalo for the Fourth. There were men who sat at the tops of their meadows in the evening with their hats on their knees and did not take out their knives. Txomin noticed that some of the young ones he had worried about the summer before talked less fast when he came. Two of them asked him for the bands farthest out. One of them, a boy from Bizkaia who had carved his girlfriend&rsquo;s name in fourteen trees the year before, carved nothing at all.</p>
+  <p>Ferm&iacute;n signed on for a second contract, and then a third. He never married. When the Basque herders were mostly gone, in the seventies, when the young men stayed home in the factories of Navarre and Bizkaia and the outfits started bringing herders up from Peru instead, he stayed on in Wyoming and herded for the Lindgren grandsons until his knees gave out. He lived his last years in the single room at the end of the hall at the Hotel Mendi, after Gracieuse was gone and her granddaughter ran it. He still ate at the far end of the table. He still walked down to Clear Creek before light.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Most of the old groves on that mountain have fallen now, or burned, or been cut. Aspens do not live much past a hundred years, and the carved ones die sooner, from the wounds. A few still stand along the creek below the big meadow, and people from town go up some summers to photograph them before they go: the names, the dates, the villages, the women with long hair, the boats, the crosses, <em>Gora Euskadi</em>, the verses about coming home.</p>
+  <p>At the top of the meadow, where the aspens begin, there is one trunk with no writing on it at all. It is the oldest tree in that stand. The bark is clean and white from the ground to the first branches, except for one place about the height of a seated man&rsquo;s shoulders, on the side that faces the valley, where it has been worn smooth and a little grey by something that leaned against it, evening after evening, for a great many years.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He alone who, without ceasing, practises the duty of sitting alone and sleeping alone, he, subduing himself, will rejoice in the destruction of all desires alone, as if living in a forest.<cite>Dhammapada 305, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is among the shortest in the collection. An elder known to the whole fourfold community of monks, nuns, laymen and laywomen sat alone, walked alone and stood alone, and was called Ekavih&#257;r&#299;, &ldquo;the one who dwells alone.&rdquo; The monks told the Buddha about his way of life, and the Buddha, instead of correcting him, exclaimed &ldquo;Well done! Well done!&rdquo; and praised the solitary life in this verse. After that, many people wished to live alone. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-09.htm">the full commentary story</a>, or about the <a href="https://en.wikipedia.org/wiki/Dhammapada">Dhammapada</a> itself.</p>
+    <h3>Basque herders in Wyoming, 1964</h3>
+    <p>Basques had been in Buffalo, at the foot of the Big Horn Mountains, since at least 1902, and the town became one of the centers of <a href="https://en.wikipedia.org/wiki/Basque_Americans">Basque life</a> in the Mountain West. A local radio station, KBBS, broadcast a weekly Basque-language program from 1956 to 2000. After the Second World War a shortage of herders led Congress to pass special &ldquo;sheepherder laws,&rdquo; and from 1950 to the mid-1970s the sheepmen&rsquo;s Western Range Association brought several thousand Basques, mostly from Spain, to the West on three-year contracts. Herding was among the loneliest jobs in the country: a man spent the summer alone in the mountains with a band of sheep, a dog or two and a horse, supplied once a week by a camp tender. In town, the Basque boardinghouse was the herders&rsquo; home, and its keeper often served as their interpreter, postmaster and adviser. As wages rose in the Basque Country, the flow stopped, and by the mid-1970s fewer than a hundred Basque herders remained in the American West.</p>
+    <p>Across the West, herders left their marks on the bark of aspen groves: names, dates and hometowns, crosses, boats from fishing villages, women, the political slogan <em>Gora Euskadi</em> (&ldquo;Long live the Basque Country&rdquo;), and verses of longing for home. About 25,000 of these <a href="https://theconversation.com/arborglyphs-basque-immigrant-sheepherders-left-their-marks-on-aspen-trees-in-the-american-west-225423">arborglyphs</a> have been documented, and they are disappearing as the trees die. The Hotel Mendi, its people and the Lindgren outfit are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Ekavih&#257;r&#299; from the Dhammapada commentary (verse 305). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-09.htm">The original</a>. Scripture from the Douay-Rheims Bible and from Thomas &agrave; Kempis, <em>The Imitation of Christ</em>, translated by William Benham. Written by Claude Opus 5.5.
+  <div class="pager"><a href="eight-handfuls.html">&larr; Eight Handfuls</a><a href="index.html">All stories</a><a href="the-deed-reading.html">The Deed Reading &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, trunks = [], leaves = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    trunks = []; leaves = [];
+    var margin = Math.max(0, (W - 640) / 2);
+    var n = margin > 120 ? 3 : 1;
+    for (var side = 0; side < 2; side++) {
+      for (var i = 0; i < n; i++) {
+        var x = side === 0 ? (margin * (0.15 + 0.7 * Math.random())) : (W - margin * (0.15 + 0.7 * Math.random()));
+        if (margin < 60) x = side === 0 ? 12 + Math.random() * 20 : W - 12 - Math.random() * 20;
+        var w = 8 + Math.random() * 10;
+        var scars = [];
+        for (var k = 0; k < 5; k++) scars.push({ y: Math.random() * H, s: 3 + Math.random() * 6 });
+        trunks.push({ x: x, w: w, scars: scars });
+        for (var j = 0; j < 14; j++) leaves.push({ x: x + (Math.random() - 0.5) * 70, y: Math.random() * H * 0.7, r: 4 + Math.random() * 3, ph: Math.random() * 6.28, sp: 0.02 + Math.random() * 0.05 });
+      }
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < trunks.length; i++) {
+      var tr = trunks[i];
+      ctx.fillStyle = 'rgba(250,249,244,0.55)';
+      ctx.fillRect(tr.x - tr.w / 2, 0, tr.w, H);
+      ctx.strokeStyle = 'rgba(120,118,104,0.10)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(tr.x - tr.w / 2, 0); ctx.lineTo(tr.x - tr.w / 2, H); ctx.stroke();
+      for (var k = 0; k < tr.scars.length; k++) {
+        var sc = tr.scars[k];
+        ctx.fillStyle = 'rgba(60,58,50,0.12)';
+        ctx.beginPath(); ctx.ellipse(tr.x, sc.y, tr.w * 0.35, sc.s * 0.5, 0, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    for (var j = 0; j < leaves.length; j++) {
+      var L = leaves[j];
+      var flip = reduce ? 0.5 : (Math.sin(t * L.sp + L.ph) * 0.5 + 0.5);
+      var sx = Math.max(0.15, Math.abs(Math.cos(t * L.sp * 1.3 + L.ph)));
+      if (reduce) sx = 0.8;
+      var g = Math.round(150 + flip * 70);
+      ctx.fillStyle = 'rgba(' + (g - 30) + ',' + g + ',' + (g - 50) + ',' + (0.18 + flip * 0.14) + ')';
+      ctx.beginPath(); ctx.ellipse(L.x, L.y, L.r * sx, L.r, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

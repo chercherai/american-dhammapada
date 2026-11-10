@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heart Mountain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on a pale sagebrush flat; a fine dust drifts on the wind and, now and then, one mote catches a slow gold light and lifts. */
+  --ground: #e9e6dc;
+  --ground-2: #dcd8ca;
+  --paper: #2b2a26;
+  --paper-dim: #6d6a60;
+  --accent: #8a5a2b;
+  --glow: #c9962e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f2efe6 0%, var(--ground) 50%, #dcd6c4 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,42,38,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(138,90,43,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(220,216,202,.8); border: 1px solid rgba(43,42,38,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,42,38,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,42,38,.12); border-bottom: 1px solid rgba(43,42,38,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(220,216,202,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 25.11 &middot; Vakkali</span></nav>
+<header>
+  <h1>Heart Mountain</h1>
+  <div class="epigraph">Since they have meditated on Buddha&rsquo;s body, they will also see Buddha&rsquo;s mind. It is great compassion that is called Buddha&rsquo;s mind.<br>&mdash; Amit&acirc;yur-dhy&acirc;na-s&ucirc;tra &sect; 18</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Nyoze gamon,</span> in Block 22.</p>
+
+<section>
+  <h2>I. The Bucket</h2>
+  <p class="dateline">Pomona Assembly Center, Los Angeles County Fairgrounds &middot; May 1942</p>
+  <p>Shigeru Nakai was nineteen, and until the second week of May he had been a sophomore at U.C.L.A. with a slide rule in a leather case and a plan to be an engineer. His father, a doctor on East First Street, had been taken by the F.B.I. on the night of December 7 with his medical bag still in his hand, and was in a camp in Montana, and wrote once a month on paper with holes cut in it. Shig had brought his mother and his little sister to the fairgrounds at Pomona on the bus, with the two suitcases each that they were allowed, and had stood in the line for typhoid shots and in the line for mattress ticking to stuff with straw, and on the third evening, sitting on the step of Barrack 14 in the heat with the asphalt still soft from the day, he saw the gardener.</p>
+  <p>He was a man of about fifty, in a clean khaki shirt with the sleeves rolled, carrying a bucket of water down the row between the barracks. Somebody had planted a little pepper tree at the end of the row, a seedling a foot high in a coffee can, and the man knelt and gave it water a cupful at a time, watching it go into the dirt, and then stood up and went back for more. That was all he did. Shig watched him make the trip four times.</p>
+  <p>He could not afterward explain what it was. The man was not handsome, exactly, though he had a fine straight back and a face that looked as if it had been out in the weather a long time and come to terms with it. It was the way he carried the bucket. It was the way he knelt. Everything else in the fairgrounds that week was waiting in a line, or shouting about a lost suitcase, or crying behind a sheet hung across a barrack room, and this man was watering a pepper tree as though nobody had told him there was anything wrong.</p>
+  <p><em>That's Mr. Hamada,</em> a woman on the next step said. <em>He was a gardener in Sawtelle. He taught the Sunday school at the temple out there, and when they took the sensei he did the services himself. He's very good.</em></p>
+  <p>Shig went to the young people's study group in the mess hall that Sunday because Mr. Hamada would be there. He went the next Sunday, and the Wednesday evening, and then he went everywhere Mr. Hamada was. He did not much care what was said at the meetings. He sat where he could see the man's face, and looked at it, and was content in a way he had not been since December.</p>
+  <p>His mother noticed and said nothing. His mother had a good deal else to notice that summer.</p>
+</section>
+
+<section>
+  <h2>II. The Stone Garden</h2>
+  <p class="dateline">Heart Mountain, Wyoming &middot; autumn 1942 to spring 1943</p>
+  <p>The trains brought them to Wyoming in August, three days and nights with the blinds pulled down, and let them off on a sagebrush flat between Cody and Powell where hundreds of tar-paper barracks stood in rows inside a barbed-wire fence. West of the camp, eight miles off across the flat, the mountain stood up by itself out of the plain, grey limestone with a steep blunt head on it, and whichever way you turned in Heart Mountain you saw it. It was in the window of every barrack. It was at the end of every street.</p>
+  <p>The Nakais were put in Block 22. Mr. Hamada and his wife were in Block 22 too, four barracks down, and Shig took that as a sign, though he did not believe in signs.</p>
+  <p>The camp gave him a job on the staff of the high school, which would open in October in barracks with no desks, teaching algebra to boys only three years younger than himself at nineteen dollars a month. He went for two weeks and then stopped going. He had signed up for correspondence courses from a university extension office back East, and the books came in the mail, and he did not open them. His mother asked him what he did all day. He said he was studying.</p>
+  <p>What he did all day was stand where he could see Mr. Hamada.</p>
+  <p>Mr. Hamada was on the landscaping crew. When the first snow came he was given a crew of old men and a truck, and they drove down to the Shoshone River and brought back rocks, river stones rounded and grey and speckled, and set them in the firebreak by the Block 22 mess hall, one at a time, a few each day. Shig stood at the corner of the laundry building with his hands in his pockets in the wind and watched him set them. He watched him at the mess hall, three tables away. He watched him at the Buddhist church on Sunday mornings, where the young people sat in folding chairs and chanted the Amida Sutra from the gatha books, <em>nyo ze ga mon, ichi ji butsu</em>, and where Mr. Hamada sometimes gave the talk when the ministers were busy, and where Shig did not chant but only looked. He walked behind him on the way back across the frozen mud, at a little distance, so as not to be a nuisance. In the evenings he stood in the dark outside the Hamadas' barrack and looked at the lit window.</p>
+  <p>Mr. Hamada knew. Everybody in Block 22 knew. The other young people made jokes about it and then stopped making jokes about it, because it was not funny, exactly, and because Mr. Hamada did not seem to mind. He said nothing to Shig all that fall. He nodded to him in the mess line. He let him stand at the corner of the laundry. He set his stones.</p>
+  <p>The winter came down hard. In January it was thirty below and the coal pile by the block ran low and the water froze in the pipes to the latrines, and the loyalty questions came in February, the two questions that every man in the camp argued over in the mess halls until the cooks put them out, and Shig's mother cried over the form at the table and signed it, and Shig signed his without reading it. He was looking out the window at the stone garden, where Mr. Hamada was brushing snow off a rock with a whisk broom.</p>
+  <p>It was in March, on a raw grey afternoon with the wind going, that Mr. Hamada straightened up from the stones and looked at the corner of the laundry building and said, <em>Shig. Come here.</em></p>
+  <p>Shig came. Mr. Hamada was holding a stone in both hands. His hands were red and cracked from the cold, and there was dirt in the creases of his knuckles.</p>
+  <p><em>Six months you've been standing there,</em> he said in Japanese. <em>What are you looking at?</em></p>
+  <p>Shig could not answer him.</p>
+  <p><em>This?</em> Mr. Hamada set the stone down and held out his hands, front and back, as if he were showing Shig they were empty. <em>This is an old gardener. He has bad knees and one bad tooth. One of these days he'll be dead, and they'll burn him, and give my wife a box. You want to spend your life looking at that?</em></p>
+  <p>He took a small book out of his coat, a sutra book with a cloth cover, and opened it to a place he had marked with a strip of newspaper, and read it to him in English, slowly, because Shig's Japanese was not good enough for sutras, and both of them knew it.</p>
+  <div class="verse">
+    <p>Those who have practised this meditation are said to have contemplated the bodies of all the Buddhas. Since they have meditated on Buddha&rsquo;s body, they will also see Buddha&rsquo;s mind. It is great compassion that is called Buddha&rsquo;s mind.</p>
+    <p>&mdash; Amit&acirc;yur-dhy&acirc;na-s&ucirc;tra &sect; 18</p>
+  </div>
+  <p><em>Whoever sees the teaching sees me,</em> said Mr. Hamada. <em>Whoever looks at only me sees an old man with dirty hands.</em> He shut the book and gave it to Shig, and picked up the stone again, and went back to work.</p>
+  <p>Shig kept the book. He stood at the corner of the laundry building the next day, and the day after that.</p>
+</section>
+
+<section>
+  <h2>III. Go Back</h2>
+  <p class="dateline">Block 22 &middot; May to August 1943</p>
+  <p>In May the farmers around Powell came to the camp office looking for hands to thin sugar beets. They had been glad enough of the camp's labor at harvest the fall before, though in town the workers had not always been made welcome. Mr. Hamada signed up for the summer. He would be on a farm on the Shoshone flats below the mountain, he and five other men from the block, sleeping in a bunkhouse, hoeing beets from dawn to dark at a wage the farmer would set, until the season was over.</p>
+  <p>Shig went to the camp office the same afternoon and asked to be put on the same crew.</p>
+  <p>That evening Mr. Hamada came down the row to the Nakais' barrack and knocked on the door, which he had never done, and asked Mrs. Nakai's pardon, and asked if he could speak to her son outside.</p>
+  <p>They stood on the step. The mountain was black against the last of the light.</p>
+  <p><em>I went to the office,</em> Mr. Hamada said. <em>I told them to take you off the list. You're not coming.</em></p>
+  <p><em>Hamada-san&mdash;</em></p>
+  <p><em>Go back,</em> he said. <em>Go back inside to your mother. Stay here.</em> And he went down the step and up the row in the dusk, and did not look around.</p>
+  <p>The truck left for Powell on a Tuesday morning. Shig did not go to see it off. He lay on his cot with his face to the tar paper and listened to it grind away down the camp road, and to the gravel, and then to nothing.</p>
+  <p>The summer was long. It was a hundred degrees in the barracks in July, and the wind brought the dust in through the cracks in the floorboards until there was a fine grey skin of it on the blanket every morning, and on the tin cup, and on the sutra book. The stone garden by the mess hall stood the way Mr. Hamada had left it, half finished, with a pile of river stones waiting at one end. Nobody touched them. Shig stood at the corner of the laundry building some days out of habit, and looked at them.</p>
+  <p>Mrs. Hamada said her husband was well. She said he did not write letters. He had never written letters.</p>
+  <p><em>He doesn't speak to me anymore,</em> Shig said to his sister, who was eleven and did not understand what he meant. <em>He sent me away. He doesn't speak to me.</em></p>
+  <p>He began reading the sutra book at night, by the one bulb, after his mother and sister were asleep behind their sheet. He read the English slowly, the way Mr. Hamada had read it to him. It was the story of a queen whose son had taken the throne and shut her up in a room in the palace and set a guard on the door, and of what happened to her there. He read one passage until the book fell open to it by itself, and he would sit on the edge of the cot with it open on his knee and look out the window at the mountain.</p>
+  <div class="verse">
+    <p>When Vaidehî was thus shut up in retirement she became afflicted by sorrow and distress. She began to do homage to Buddha from afar, looking towards the Mount Gridhrakûta.</p>
+    <p>&mdash; Amit&acirc;yur-dhy&acirc;na-s&ucirc;tra &sect; 4</p>
+  </div>
+  <p>He did not read the rest of it. He did not want to know what came next for the queen. He read that part and looked at the mountain, and Mr. Hamada was somewhere on the other side of it in the beets, and did not speak to him, and would not, and the fence was there, and the towers, and his father was in Montana writing on paper with holes in it, and the war would go on for ten years or forever, and he was twenty years old and had spent a year looking at one man's face and now could not see that either.</p>
+  <p>In August, in the third week, he thought for the first time: what is the use of going on with this.</p>
+  <p>Then he thought it every day.</p>
+</section>
+
+<section>
+  <h2>IV. The Mountain</h2>
+  <p class="dateline">Heart Mountain &middot; August 1943</p>
+  <p>By that summer the camp let the young people out in parties to hike to the mountain, with a pass from the office and a promise to be back before dark. The Boy Scouts went, and the Y.B.A., and boys from the high school in twos and threes with canteens and sandwiches from the mess hall. Shig got on the list for a Saturday with a group from Block 24 he did not know. He did not take a canteen.</p>
+  <p>They left at four in the morning through the gate and walked west across the flat in the dark, eight miles through the sage, and the mountain grew in front of them as the light came until it filled the sky. The others stopped to rest on the lower slopes, in the timber, and ate their sandwiches. Shig went on alone.</p>
+  <p>He climbed all morning. There was a trail of sorts and then there was not. He went up over loose rock and through stunted pines bent all one way by the wind, and then out onto the bare grey limestone of the summit, with the wind pushing at him, and walked to the edge of the north face, where the rock broke off and went straight down for a very long way.</p>
+  <p>He could see everything from there. He could see the whole Big Horn Basin laid out yellow and green, and the river, and the checkerboard of fields around Powell, and in the middle of the flat, small and square and very neat, the camp. The rows of barracks. The fence. The smoke of the hospital chimney going straight up and then bending. He found Block 22. He thought he could see the mess hall, and the little grey pile of stones beside it.</p>
+  <p>He stood there a long time. He was not frightened. He felt nothing very much, which was the worst of it. He thought about his mother and sister, and that it would be hard on them, and that they would be better off. He thought about Mr. Hamada in a beet field somewhere down there in the checkerboard with a hoe, not thinking about him. He took the sutra book out of his shirt and held it. He put one foot forward to the edge.</p>
+  <p>Then the light changed.</p>
+  <p>The light came from in front of him, out over the drop, where there was nothing but air, and it was the color of the sun through a jar of honey, and it was Mr. Hamada. He was standing in the air off the edge of the rock, as easily as he had stood in the firebreak by the mess hall, in his khaki shirt with the sleeves rolled, with the light coming from him so that it hurt to look and Shig could not stop looking. His face was the face Shig had watched for a year. It was the same face and it was not the same at all.</p>
+  <p>Shig's sorrow went out of him. It went the way water goes out of a bucket when you turn the bucket over, all at once, and he stood empty on the edge of the rock, and then the other thing came pouring in where the sorrow had been, so fast that it hurt, like water into dry ground that has not had rain all summer, faster than the ground can take it.</p>
+  <p>Mr. Hamada held out his hand to him across the drop, the dirty cracked hand with the soil in the knuckles.</p>
+  <p><em>Shig,</em> he said. <em>Come. Don't be afraid. Look at me. I'll pull you out, the way we pulled the trucks out of the gumbo.</em></p>
+  <p><em>Come. Don't be afraid. Look at me. I'll bring you out, the way the sun comes out after the eclipse.</em></p>
+  <p><em>Come. Don't be afraid. Look at me. I'll bring you out, the way the moon comes out of the shadow.</em></p>
+  <p>Shig thought: he has come. He speaks to me. He says come. And then he thought: but how do I go? There is no path. There was no path. There was the edge of the rock and then a long way down. He looked at Mr. Hamada and not at the drop, and stepped off.</p>
+  <p>This is the part of it that they tell in Block 22, and there are people who will tell you they saw it, from the camp, eight miles off. A woman hanging laundry behind Block 27 who said she saw a spark come off the top of the mountain and go out over the basin, slow, like a bird with the sun on it. A boy on the irrigation canal crew who said it was a man, walking. Shig himself never said much. He said he walked on the air the way you walk down a flight of stairs in the dark in your own house, without looking, because you know they are there. He said that somewhere over the canal, with the whole basin turning under him, he stopped being glad, which he had been, more glad than he had ever been in his life, and that the gladness went quiet, and then it went still, and then there was only the stillness, very large, with everything in it, the camp and the fence and the beets and his father in Montana and the queen in her room and the mountain, and nothing left over that was Shig to want any of it.</p>
+  <p>He came down in a beet field on the Shoshone flats in the middle of the afternoon, between two rows, and stood up.</p>
+  <p>Mr. Hamada was at the end of the row with his hoe. He was sunburned, and his shirt was black with sweat down the back, and he had dirt to the elbows. He looked at Shig for a while. Then he took off his hat and wiped his forehead with his sleeve, and Shig bowed to him, there in the beets, all the way down, the way he had seen his grandfather bow at the temple when he was a little boy, and stayed down a long time.</p>
+  <p>When he straightened up he found he had the sutra book still in his hand. It had fallen open where it always did, and he turned the pages past that place, to the end, and read the part he had not wanted to read, about what happened to the queen.</p>
+  <div class="verse">
+    <p>With her mind filled with joy she praised them, saying: &lsquo;Never have I seen such a wonder!&rsquo; Instantaneously she became wholly and fully enlightened, and attained a spirit of resignation, prepared to endure whatever consequences might yet arise.</p>
+    <p>&mdash; Amit&acirc;yur-dhy&acirc;na-s&ucirc;tra &sect; 31</p>
+  </div>
+  <p>The farmer came out from the house at suppertime and found an extra Japanese boy in his field without a pass and was angry about it, and then confused, because the boy said he had come from the camp that morning and the farmer had been on the road all day and seen nobody. He drove him back to the gate in the pickup with Mr. Hamada riding along in the bed to vouch for him. The M.P. at the gate wrote it up as a hiker who had come down the wrong side of the mountain. The hiking party from Block 24 had already reported him missing. They had looked for him on the summit for an hour, and found nothing but his footprints in the dust, going to the edge of the north face, and stopping.</p>
+</section>
+
+<section>
+  <h2>V. Shinjin</h2>
+  <p class="dateline">Block 22 &middot; September 1943 and after</p>
+  <p>Mr. Hamada came back from the beets in September with his wages in an envelope and finished the stone garden by the mess hall before the snow. Shig helped him. He did not stand at the corner of the laundry anymore. He carried the stones, and set them where he was told, and when Mr. Hamada was not there he went on with it by himself and did not seem to notice the difference. He went back to teaching algebra. He opened the correspondence books.</p>
+  <p>At the Buddhist church that winter, on a Sunday when the ministers asked Mr. Hamada to give the talk, he spoke about <em>shinjin</em>, the true entrusting, which is the heart of the Shin teaching and the hardest thing in it to explain. He did not explain it. He said there were people who studied it for fifty years and people who knew it in one afternoon, and that the second kind were rarer, and that he had known only one of them. He did not say who. Nobody in Block 22 needed him to.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The camp closed in November 1945. Those who were left were given twenty-five dollars and a train ticket, and the barracks were sold off for lumber to homesteaders, and the wind came over the flat and filled in the streets with sage.</p>
+  <p>The stone garden by the Block 22 mess hall was too much trouble for anybody to haul away. For a while, people who drove out from Powell to look at the place where the camp had been could still find it if they knew where to look: a low ring of grey river stones in the sage, set close, each one turned so that its best face was up. The mountain stood behind it in the west, the way it always had, at the end of what had been the street.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The Bhikshu, full of delight, who is calm in the doctrine of Buddha will reach the quiet place (Nirvana), cessation of natural desires, and happiness.<cite>Dhammapada 381, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the young Brahmin Vakkali is so taken with the Buddha&rsquo;s physical beauty that he becomes a monk only to be able to look at him, and gives up study and meditation to do nothing else. The Buddha waits, then tells him: &ldquo;What shall it profit you to look upon this body? Whoever sees the Dhamma sees me.&rdquo; Vakkali still cannot leave him, so at the start of the rains the Buddha sends him away. After three months apart, believing the Teacher will never speak to him again, Vakkali climbs Vulture&rsquo;s Peak to throw himself off. The Buddha sends a radiant image of himself, speaks the verse, and stretches out his hand: &ldquo;Come, Vakkali, do not fear, look upon the Realised One.&rdquo; Vakkali springs into the air toward him, reaches awakening in flight, and comes down at the Teacher&rsquo;s feet. He was later named foremost among those inclined to faith. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-11.htm">the full commentary story</a>, or the <a href="https://suttacentral.net/sn22.87/en/sujato">Vakkali Sutta</a> (SN 22.87), where the Buddha tells him, &ldquo;One who sees the teaching sees me.&rdquo; The scripture quoted in the story is the <a href="https://en.wikipedia.org/wiki/Contemplation_Sutra">Contemplation Sutra</a>, one of the three Pure Land sutras that Shin Buddhists hold as their scripture. It tells how Queen Vaidehī, imprisoned by her son, prayed toward Vulture&rsquo;s Peak, and how the Buddha came to her there.</p>
+    <h3>Heart Mountain, Wyoming, 1942&ndash;1943</h3>
+    <p>After Pearl Harbor, the F.B.I. arrested Issei community leaders, Buddhist priests among them, and held them in Justice Department camps such as Fort Missoula in Montana. Under Executive Order 9066, some 120,000 people of Japanese ancestry on the West Coast were then removed from their homes. Many from Los Angeles County were held first at the <a href="https://en.wikipedia.org/wiki/Pomona_Assembly_Center">Pomona Assembly Center</a> on the county fairgrounds, and most of them were sent on to the <a href="https://en.wikipedia.org/wiki/Heart_Mountain_Relocation_Center">Heart Mountain Relocation Center</a>. The first inmates arrived there on August 12, 1942. The camp held 10,767 people at its peak in January 1943, which made it the third-largest town in Wyoming. Its barracks stood inside a barbed-wire fence with nine guard towers, on a sagebrush flat between Cody and Powell, with Heart Mountain about eight miles to the west. Winter lows reached about thirty below zero. Early in 1943 the government&rsquo;s &ldquo;loyalty questionnaire&rdquo; divided the camp, and in 1944 the Heart Mountain Fair Play Committee organized a draft resistance that ended in the largest mass trial in Wyoming history.</p>
+    <p>About two-thirds of Heart Mountain&rsquo;s people were Buddhist. In 1942 the camp&rsquo;s eight priests, of several sects, formed the <a href="https://americanbuddhism.pages.wm.edu/heart-mountain-buddhist-federation/">Heart Mountain Buddhist Federation</a>, and services, Sunday school and O-Bon were held in a makeshift church. Hundreds of inmates left the camp on seasonal leave to work the <a href="https://www.wyominghistoryday.org/theme-topics/collections/items/865-volunteer-japanese-workers-have-been-recruited-october-9-1942">sugar beet harvest</a> in Wyoming and Montana, where farmers needed their labor and townspeople often met them with hostility. Inmates also went out in hiking parties to the mountain. The camp closed on November 10, 1945. Most of the barracks were sold and hauled away, and the site is now a National Historic Landmark with an <a href="https://www.heartmountain.org/history/">interpretive center</a>. Block 22, the Nakai and Hamada families and the stone garden are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Vakkali from the Dhammapada commentary (verse 381). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-11.htm">The original</a>. Scripture from the Amit&acirc;yur-dhy&acirc;na-s&ucirc;tra, tr. J. Takakusu, in <em>Buddhist Mah&acirc;y&acirc;na Texts</em>, Sacred Books of the East vol. 49 (1894). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-scythe.html">&larr; The Scythe</a><a href="index.html">All stories</a><a href="the-rock-spring.html">The Rock Spring &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Dust blown sideways across the flat; once in a while a single mote turns gold and rises against the wind.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, motes = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(m, anywhere) {
+    m.x = anywhere ? Math.random() * W : -10;
+    m.y = Math.random() * H;
+    m.vx = 0.25 + Math.random() * 0.6; m.vy = (Math.random() - 0.5) * 0.08;
+    m.r = 0.6 + Math.random() * 1.3; m.ph = Math.random() * 6.28;
+    m.gold = 0; m.rise = 0;
+    return m;
+  }
+  function make() {
+    motes = [];
+    var n = Math.round(Math.max(40, Math.min(140, W * H / 9000)));
+    for (var i = 0; i < n; i++) motes.push(spawn({}, true));
+    if (reduce && motes.length) { motes[0].gold = 1; motes[0].x = W * 0.82; motes[0].y = H * 0.3; }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      t++;
+      if (t % 700 === 0) { var m0 = motes[(Math.random() * motes.length) | 0]; m0.rise = 1; }
+    }
+    for (var i = 0; i < motes.length; i++) {
+      var m = motes[i];
+      if (!reduce) {
+        var gust = 0.6 + 0.4 * Math.sin(t * 0.003 + m.ph);
+        if (m.rise) {
+          m.gold = Math.min(1, m.gold + 0.01);
+          m.vx *= 0.985; m.y -= 0.35; m.x += Math.sin(t * 0.01 + m.ph) * 0.15;
+          if (m.y < -20) spawn(m, false);
+        } else {
+          m.x += m.vx * gust; m.y += m.vy + Math.sin(t * 0.02 + m.ph) * 0.05;
+          if (m.x > W + 10) spawn(m, false);
+        }
+      }
+      if (m.gold > 0) {
+        var R = 3 + m.gold * 22;
+        var g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, R);
+        g.addColorStop(0, 'rgba(232,180,70,' + (0.55 * m.gold) + ')');
+        g.addColorStop(0.25, 'rgba(201,150,46,' + (0.22 * m.gold) + ')');
+        g.addColorStop(1, 'rgba(201,150,46,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(m.x, m.y, R, 0, 6.283); ctx.fill();
+      } else {
+        ctx.fillStyle = 'rgba(120,108,88,0.18)';
+        ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, 6.283); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

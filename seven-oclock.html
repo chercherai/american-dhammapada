@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seven O'Clock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in an empty seminar room on a winter night on the plains, dark theme; low in the margin a faint wall clock stands just short of seven, its thin scarlet second hand sweeping round, the minute hand never quite arriving; datelined sections. */
+  --ground: #14171c;
+  --ground-2: #1c2027;
+  --paper: #e6e3dc;
+  --paper-dim: #9a9a95;
+  --accent: #c4473a;
+  --glow: #d9b56a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -20%, #232832 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,227,220,.14); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(196,71,58,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(28,32,39,.8); border: 1px solid rgba(230,227,220,.14); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse .src { font-style: normal; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,227,220,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(230,227,220,.14); border-bottom: 1px solid rgba(230,227,220,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(28,32,39,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 19.6 &middot; Hatthaka</span></nav>
+<header>
+  <h1>Seven O'Clock</h1>
+  <div class="epigraph">It is necessary to the happiness of man, that he be mentally faithful to himself.<br>&mdash; Thomas Paine, The Age of Reason, Part I (1794)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Here's how I heard it, for what it's worth,</span> in Hays.</p>
+
+<section>
+  <h2>I. The Pin</h2>
+  <p class="dateline">Fort Hays State University &middot; fall 2013</p>
+  <p>Travis Dreher shaved his head every Sunday morning, at the hour his mother was at Mass in Victoria, and he wore a red letter A on a pin on his jacket, the scarlet A that atheists had started wearing a few years before so they could find each other. He was twenty-one and a junior in political science. He had grown up in the shadow of St. Fidelis, the big twin-towered church out on the plain at Victoria that his great-great-grandfather had helped build, hauling limestone in a wagon the way every man in the parish had to, and he had quit believing at fifteen, all at once, the way some people get saved. Now he ran the Fort Hays Freethinkers, nine members on a good night, in a seminar room on the second floor of the student union, and he ran a YouTube channel called Prairie Reason, which had four thousand subscribers.</p>
+  <p>He was a good talker. He had read everything. He would stand at the tables outside the union with his phone propped on a stack of books, filming, and take on anybody: the Baptist preacher who came up from Great Bend twice a semester with a sign, the Mormon elders in their white shirts, the Newman Center kids. He won most of the time. When he won, he posted it.</p>
+  <p>When he lost, which was not often, he did something else.</p>
+  <p>The first time was in September, with Annie Pfannenstiel. She was a nursing student from Schoenchen who taught Sunday school at her home parish and said very little, and she had stopped at his table on her way to anatomy lab and asked him one quiet question about something he had said. Then she asked another one. Ten minutes later a small crowd had gathered, and Travis could feel it going the wrong way, the way you can feel a car start to slide on gravel. So he smiled and said, <em>Look, this deserves a real format. Thursday, seven o'clock, the seminar room upstairs. I'll stream it. Bring whoever you want.</em> She said all right.</p>
+  <p>On Thursday he went live at a quarter to seven. He sat alone at the front of the empty room with the camera on him and the clock on the wall behind him, and he said, <em>So, we're here. We said seven. Let's see if she shows.</em> At three minutes to seven he said, <em>This is what happens, guys. Every time. They'll talk to you on the sidewalk, but put a camera on it and set a time and they run.</em> At one minute to seven he ended the stream. The clip he cut from it was called CATHOLIC NO-SHOW, and it got eleven thousand views by Sunday.</p>
+  <p>Annie Pfannenstiel came up the stairs at three minutes after seven, out of breath from the parking lot, and found the room dark.</p>
+</section>
+
+<section>
+  <h2>II. The Format</h2>
+  <p class="dateline">The student union, second floor &middot; October and November</p>
+  <p>After that it was what he did. He lost a long argument in October to one of the Mormon elders, a boy from Idaho who had read more Hume than he had. He lost one in November to an old Lutheran pastor from Ellis who had come to the table only to buy a raffle ticket. Each time Travis said the same easy thing. <em>This deserves a real format.</em> Each time he named a day, a time and the room upstairs. Each time he went live early, talked to the empty chairs, and cut the clip. ELDER GHOSTS DEBATE. PASTOR WON'T SHOW. The comments loved them. Subscribers went past six thousand. A man in Phoenix sent him a fifty-dollar tip with a note that said <em>keep exposing them.</em></p>
+  <p>The Freethinkers loved it too, most of them. They had grown up in Ellis, Russell and Rooks Counties, in towns with a church on every corner and nobody to say any of this out loud to. Travis said it out loud for them, with his shaved head and his red pin. When he came into the Tuesday meeting after a clip went up, they clapped.</p>
+  <p>Not all of them. Mariah Leiker, who kept the club's money in a cash box, said one night that it was funny how none of them ever showed. Travis said that was the point. Mariah did not say anything else. But she had been at the table the day the Lutheran pastor beat him, and had heard what time Travis told him. She had been sitting in the union food court with her calculus homework when the old man came up the stairs at four minutes past the hour, holding a printout of the event, and found the door locked and the lights off.</p>
+</section>
+
+<section>
+  <h2>III. Mrs. Haas</h2>
+  <p class="dateline">Twenty-second Street, Hays &middot; a Saturday in December</p>
+  <p>The oldest member of the Fort Hays Freethinkers was Lorene Haas, who was seventy-nine and not a student. She came to every Tuesday meeting in a quilted coat with her cane hooked over the back of her chair, and mostly she listened. She had been a preacher's wife for thirty-one years, in Holiness churches in Russell, Osborne and Smith Counties. She had played the piano for every service, taught the women's Bible study, and buried a daughter. Then one winter, the year after her husband died, she sat down at her kitchen table with the Bible she had taught from all her life and read it straight through, Genesis to Revelation, like a book, in nineteen days. When she closed it she did not believe any of it anymore. She said so out loud, to her sister, her son and her pastor, and lost most of her friends in Russell County. That had been twenty-two years ago. She said it was the most honest thing she had ever done and she would do it again.</p>
+  <p>Mariah Leiker went to see her on a Friday. On Saturday morning Lorene called Travis on the phone and asked him to come by the house.</p>
+  <p>She lived in a small brick house on Twenty-second Street with a wheelchair ramp her son had built. She let him in and sat him at the kitchen table and did not offer him anything. On the table, between them, was an old book with a cracked brown cover and the spine taped. She had her phone in her hand, and on the phone was the clip with the Lutheran pastor, paused on Travis sitting alone in front of the clock.</p>
+  <p><em>Travis,</em> she said. <em>Mariah tells me you give these people one time and then go on the air before it. That you say seven o'clock and start at a quarter till, and tell everybody they didn't come. Is that so?</em></p>
+  <p>He thought about it. He had a good many answers ready, about format and fairness and how they would have run anyway. He found that he did not want to say any of them in this kitchen.</p>
+  <p><em>It's so,</em> he said.</p>
+  <p><em>Why?</em></p>
+  <p>He did not have an answer to that one.</p>
+  <p>Lorene Haas put the phone face down on the table. <em>I sat in a church for thirty-one years with men who had the collar and the Bible and the right words,</em> she said. <em>Some of them were the best men I ever knew. Some of them would lie to you about what time it was, to win. It wasn't the collar that made the difference. That pin doesn't make you anything either, and neither does shaving your head. A man who'll fake a no-show to get eleven thousand views is not a freethinker. He's just a preacher for the other side.</em></p>
+  <p>Travis looked at the table.</p>
+  <p><em>You want to know what makes one,</em> she said, <em>it's the little lies. You quit those. The little ones and the big ones, every one of them, all the way down, until there aren't any left to quit. Then call yourself whatever you want.</em></p>
+  <p>She pulled the old book over and opened it to a place she had marked with a feed-store receipt. It was a Paine, an <i>Age of Reason</i> from 1900 that her father had kept in the barn, she said, where her mother would not find it. She read it to him the way she had once read the Psalms to the women's Bible study, slowly, with her finger under the line.</p>
+  <div class="verse">
+    <p>But it is necessary to the happiness of man, that he be mentally faithful to himself. Infidelity does not consist in believing, or in disbelieving; it consists in professing to believe what he does not believe.</p>
+    <p>It is impossible to calculate the moral mischief, if I may so express it, that mental lying has produced in society. When a man has so far corrupted and prostituted the chastity of his mind, as to subscribe his professional belief to things he does not believe, he has prepared himself for the commission of every other crime.</p>
+    <p class="src">&mdash; Thomas Paine, The Age of Reason, Part I (1794)</p>
+  </div>
+  <p><em>He's talking about priests there,</em> Lorene said, and closed the book. <em>He means it for us too.</em></p>
+</section>
+
+<section>
+  <h2>IV. Seven O'Clock</h2>
+  <p class="dateline">The student union &middot; January 2014</p>
+  <p>He took the three clips down that night. It cost him about four hundred subscribers, and the man in Phoenix wrote to ask what had happened to him. He did not answer.</p>
+  <p>He wrote to Annie Pfannenstiel instead, and to the elder from Idaho, who had gone home, and to the Lutheran pastor at Ellis, and told each of them what he had done, in so many words. Then he asked Annie whether she would still have the debate.</p>
+  <p>They had it on the third Thursday in January, at seven, in the seminar room on the second floor. Twenty-two people came, which was more than had ever come to anything the Freethinkers did, and Lorene Haas sat in the front row with her cane hooked on her chair. Travis did not go live early. He sat at the front of the room with the camera off and his hands on the table and watched the clock on the wall, and nobody in the room said anything. He had let his hair start to grow out over Christmas, a dark fuzz, and he had left the pin on his dresser.</p>
+  <p>At 7:01 the door opened and Annie Pfannenstiel came in, out of breath from the parking lot, and said she was sorry, the lot behind the union was full.</p>
+  <p>He lost, narrowly. He knew it, and so did the room. He posted all of it, an hour and forty minutes, with nothing cut, under the title <em>Pfannenstiel v. Dreher, January 16.</em> It got three hundred views. Mariah Leiker watched it twice. A few of the others in the club said afterward that they had not much liked watching it, at first, because some of the little things he was owning up to on camera were things they did too, the easy story, the round number, the thing you say to win, and they had never once thought of those as lies.</p>
+  <p>The video is still up. In the first frame, before anyone has said anything, the camera is on the wall behind the empty chair at the front of the room, and the clock on the wall says seven.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Not by tonsure does an undisciplined man who speaks falsehood become a Samana; can a man be a Samana who is still held captive by desire and greediness?<cite>Dhammapada 264, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He who always quiets the evil, whether small or large, he is called a Samana (a quiet man), because he has quieted all evil.<cite>Dhammapada 265, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a monk named Hatthaka wins his arguments with other sects by a trick. Whenever he is losing, he names a time and place to continue the debate, goes there early, and tells the people gathered that his opponents are too afraid to come, which he calls an admission of defeat. The Buddha hears of it and sends for him. When Hatthaka admits it is true, the Buddha tells him that a shaven head does not make a man a monk if he lies and is driven by desire and greed. He is a monk who has quieted wrongdoing of every kind, small and great. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-06.htm">the full commentary story</a>.</p>
+    <h3>Hays, 2013</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Hays,_Kansas">Hays</a> is the seat of Ellis County in western Kansas and home to <a href="https://en.wikipedia.org/wiki/Fort_Hays_State_University">Fort Hays State University</a>. <a href="https://en.wikipedia.org/wiki/Volga_Germans">Volga Germans</a>, German-speaking Catholics from Russia, began settling the county in 1876, and their villages of Victoria, Schoenchen, Munjor and Pfeifer still give the county its character. At Victoria the parishioners built the <a href="https://en.wikipedia.org/wiki/Basilica_of_St._Fidelis">church of St. Fidelis</a>, the "Cathedral of the Plains," finished in 1911. Every member of the parish twelve or older was asked to give $45 and to haul six wagonloads of Fencepost limestone and four of sand each year until it was built.</p>
+    <p>In the years around 2010 a wave of public atheism sometimes called the New Atheism reached small campuses through student groups, books and YouTube channels, where filmed debates with believers drew large audiences. The <a href="https://en.wikipedia.org/wiki/Out_Campaign">Out Campaign</a>, endorsed by Richard Dawkins, gave atheists a scarlet letter A to wear on pins and shirts. Many in the movement took <a href="https://en.wikipedia.org/wiki/The_Age_of_Reason">The Age of Reason</a> (1794&ndash;1807), Thomas Paine's attack on revealed religion, as a founding text. Its first part opens with Paine's own creed, in which he says he believes in one God and declares that "my own mind is my own church."</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Hatthaka from the Dhammapada commentary (verses 264&ndash;265). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-06.htm">The original</a>. Text from Thomas Paine, The Age of Reason (1794). Written by Claude Opus 5.5.
+  <div class="pager"><a href="neats-tongue.html">&larr; Neat’s Tongue</a><a href="index.html">All stories</a><a href="the-stringer.html">The Stringer &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function hand(cx, cy, ang, len, w, col) {
+    ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(cx - Math.sin(ang) * len * 0.12, cy + Math.cos(ang) * len * 0.12);
+    ctx.lineTo(cx + Math.sin(ang) * len, cy - Math.cos(ang) * len);
+    ctx.stroke();
+  }
+  function draw(now) {
+    var s = reduce ? 0 : (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var narrow = W < 760, k = narrow ? 0.55 : 1;
+    var R = narrow ? Math.min(W, H) * 0.2 : Math.min(150, H * 0.18);
+    var cx = narrow ? W - R * 0.55 : Math.max(W * 0.5 + 420, W * 0.86);
+    if (!narrow && cx > W - R - 20) cx = W - R - 20;
+    var cy = H - R - (narrow ? 20 : 50);
+    // face
+    ctx.strokeStyle = 'rgba(230,227,220,' + (0.10 * k) + ')'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.283); ctx.stroke();
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, cy, R * 0.94, 0, 6.283); ctx.stroke();
+    for (var i = 0; i < 60; i++) {
+      var a = i * Math.PI / 30, big = i % 5 === 0;
+      var r1 = R * (big ? 0.80 : 0.87), r2 = R * 0.91;
+      ctx.strokeStyle = 'rgba(230,227,220,' + ((big ? 0.16 : 0.07) * k) + ')';
+      ctx.lineWidth = big ? 2 : 1;
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.sin(a) * r1, cy - Math.cos(a) * r1);
+      ctx.lineTo(cx + Math.sin(a) * r2, cy - Math.cos(a) * r2);
+      ctx.stroke();
+    }
+    // the minute hand creeps toward the hour and slips back each minute, never arriving
+    var sec = s % 60;
+    var minute = 58 + sec / 60;               // 6:58 to 6:59, then round again
+    var hourAng = (6 + minute / 60) * Math.PI / 6;
+    var minAng = minute * Math.PI / 30;
+    var secAng = Math.floor(sec) * Math.PI / 30 + (reduce ? 0 : Math.min(1, (sec % 1) * 6) * Math.PI / 30);
+    hand(cx, cy, hourAng, R * 0.5, 3, 'rgba(230,227,220,' + (0.16 * k) + ')');
+    hand(cx, cy, minAng, R * 0.76, 2, 'rgba(230,227,220,' + (0.16 * k) + ')');
+    hand(cx, cy, secAng, R * 0.84, 1, 'rgba(196,71,58,' + (0.42 * k) + ')');
+    ctx.fillStyle = 'rgba(196,71,58,' + (0.45 * k) + ')';
+    ctx.beginPath(); ctx.arc(cx, cy, 3, 0, 6.283); ctx.fill();
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+  if (reduce) draw(0); else requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

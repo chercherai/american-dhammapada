@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Wayland</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of night-reading prose over a firefly field; datelined sections. */
+  --night: #0d1513;
+  --night-2: #13201c;
+  --linen: #e4dccb;
+  --linen-dim: #a79f8e;
+  --lamp: #e3b25e;
+  --fly: #d9f27a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #1d2e28 0%, var(--night) 55%) fixed, var(--night);
+  color: var(--linen);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#flies {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+main {
+  position: relative; z-index: 1;
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 7rem;
+}
+header { text-align: left; margin-bottom: 4rem; }
+.kicker {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--linen-dim);
+  font-size: 1rem;
+  margin: 0 0 1rem;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 9vw, 4.2rem);
+  line-height: 1;
+  margin: 0 0 1.5rem;
+  color: var(--lamp);
+  text-wrap: balance;
+  text-shadow: 0 0 28px rgba(227,178,94,.25);
+}
+.epigraph {
+  border-left: 1px solid rgba(227,178,94,.35);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--linen-dim);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+section { margin-top: 4.5rem; }
+h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.9rem;
+  margin: 0;
+  color: var(--linen);
+  text-wrap: balance;
+}
+.dateline {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--lamp);
+  opacity: .8;
+  font-size: .95rem;
+  margin: .25rem 0 1.75rem;
+  letter-spacing: .02em;
+}
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter {
+  font-family: var(--font-display);
+  float: left;
+  font-size: 3.6rem;
+  line-height: .85;
+  padding: .35rem .5rem 0 0;
+  color: var(--lamp);
+}
+.verse {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  background: rgba(19,32,28,.7);
+  border: 1px solid rgba(228,220,203,.08);
+  font-style: italic;
+  line-height: 1.7;
+}
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk {
+  text-align: center;
+  color: var(--fly);
+  letter-spacing: 1.2em;
+  margin: 2.5rem 0;
+  opacity: .55;
+  font-size: .8rem;
+}
+footer {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(228,220,203,.1);
+  color: var(--linen-dim);
+  font-size: .9rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+footer a { color: var(--lamp); }
+footer a:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+em { font-style: italic; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--linen-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--linen-dim); text-decoration: none; border-bottom: 1px solid rgba(228,220,203,.2); }
+.series a:hover { color: var(--lamp); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--linen-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--lamp); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--lamp); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--lamp); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--lamp); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(19,32,28,.7); border-left: 2px solid var(--lamp); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--linen-dim); }
+@media (max-width: 420px) {
+  body { font-size: 1.05rem; }
+  main { padding-top: 3.5rem; }
+}
+</style>
+</head>
+<body>
+<canvas id="flies" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 2.3 &middot; Culla Panthaka</span></nav>
+<header>
+  <h1>Little Wayland</h1>
+  <div class="epigraph">Not that which goeth into the mouth defileth a man; but that which cometh out of the mouth, this defileth a man.<br>&mdash; Matthew 15:11</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Now this is how I heard it,</span> on Hackberry Street.</p>
+
+<section>
+  <h2>I. The Road</h2>
+  <p class="dateline">Caddo Springs, Alabama &middot; 1938</p>
+  <p>The Pruett house sat on the only hill in Caddo Springs, three stories of white board and green shutter, and Harlan Pruett kept his daughter in it the way he kept the deeds in his safe. He locked her up, counted on her every night, and brought her out for church.</p>
+  <p>Eleanor was nineteen that summer. Amos Reed was twenty-four. He drove the Packard, cut the grass, and hauled the ice up from the depot wrapped in croker sacks. Nobody in town would ever be able to say how it started, because nobody in town could imagine that it had, and the two people who knew never told. It went the way water goes through a levee, one grain and then another, and then there was no levee.</p>
+  <p>They left in October on the night train to Birmingham with forty dollars and a cardboard suitcase. In Birmingham they did not sit together. In Memphis they did not walk together. They did not stop being afraid until somewhere north of Cairo, Illinois, and even then they never stopped all the way.</p>
+  <p>Detroit took them in the way Detroit took everybody, without asking and without caring. Amos found work at a foundry on the river. Eleanor found a room above a tailor's on Hastings Street where nobody looked twice, because everybody there had a reason not to.</p>
+  <p>When she was carrying her first, she wanted her mother. She said it every night. A girl wants her mother for that, Amos, it don't matter what she did. So in the eighth month, against everything he knew, Amos bought two tickets south. The baby came in the back of a Trailways bus outside Kankakee with a nurse from Gary holding Eleanor's hand, and they got off at the next town and turned around.</p>
+  <p>She named him Wayland, because he was born on the way.</p>
+  <p>Two years later she wanted her mother again, and two years later it happened again, on the shoulder of Highway 51 in Kentucky, in the front seat of a borrowed Ford with the hood up and steam coming off it like a kettle. Having used the name once, she gave it to him too. They called him Little Wayland, then Little Way, and finally, because the world is lazy, just Little.</p>
+</section>
+
+<section>
+  <h2>II. The Carriage House</h2>
+  <p class="dateline">Caddo Springs &middot; 1952</p>
+  <p>It was Wayland who asked first. Other boys on Hastings Street had grandmothers who came on Sundays with pound cake. Where were theirs? Eleanor said far. Wayland asked how far. Eleanor said Alabama, and Wayland, who was quick, went to the library and found it on a map, and came home and said that wasn't so far, he'd measured it with a string.</p>
+  <p>Eleanor wrote her father that winter. He answered in March, two lines in his bank hand. <em>I will not see you or that man. Send the boys.</em></p>
+  <p>Amos said no. Amos said it for a year. Then the ladle chain at the foundry let go and a pour of iron came down where his feet had been half a second before, and took his left foot anyway, and the money ran out the way it does. In June of 1952 Eleanor pinned paper tags to two jacket lapels and put her sons on the City of New Orleans and did not cry until the train was gone.</p>
+  <p>Harlan Pruett met them at the Caddo Springs depot after dark with his hat pulled low. He looked at Wayland a long time, because Wayland had his mother's eyes and the town's own color, nearly. He looked at Little a shorter time, because Little was darker, and had his father's quiet, and looked at the old man the way a dog looks at weather.</p>
+  <p>The boys did not go in the big house. They went up the outside stairs to the rooms over the carriage house where Hattie Greer, who had cooked for the Pruetts for thirty-one years, was told to tell anybody who asked that they were her sister's boys from up north. Hattie looked at Mr. Pruett when he said it. Then she said yes sir, and took the boys up, and fed them, and never said one word about it to anybody, then or later.</p>
+  <p>Their grandmother watched them from the upstairs window. She sent down pie. She did not come down.</p>
+  <p>Their grandfather came down. Sunday nights, after the house was dark, he would climb the carriage house stairs and sit in the one good chair and ask about their sums. Wayland always had his sums. Little never did. The old man would look at Little's tablet, at the numbers that started out right and wandered off somewhere in the middle, and he would say nothing, and set it down very carefully, as if it might break.</p>
+</section>
+
+<section>
+  <h2>III. The Grove</h2>
+  <p class="dateline">The old Mabry place, on the Tombigbee &middot; 1956</p>
+  <p>Past the end of the Pruett land, where the road gave up and turned to sand, there was a pecan grove that had belonged to the Mabrys until the Mabrys died out. A man named Sutton lived there now. Some said he had taught chemistry at Tuskegee. Some said he had done eleven years at Kilby. Some said both, and that the order mattered. He was tall and grey at the temples and he moved slowly, as if he had already been everywhere he was going.</p>
+  <p>Men came out to the grove to hear him, and some of them stayed. A sharecropper from Sumter County. A veteran who did not sleep. A white boy from Mobile with burn scars up both arms. A man who had been the worst drunk in Marengo County and was now nothing at all, which he said was better. They wore plain khaki. They owned what they could carry. Mornings they walked into town with tin pails and stood quiet at back doors, and took what people gave, and said thank you either way.</p>
+  <p>There were fifty of them, give or take, and the town did not know what to make of them, and so mostly left them alone. That was the closest thing to a miracle anybody in Caddo Springs would admit to.</p>
+  <p>Wayland was seventeen when he started going out there on Sunday afternoons. He sat at the edge and listened. Brother Sutton did not preach the way the preachers in town preached. He did not raise his voice. He talked about what a man wants and what wanting does to him, and how the wanting was not the man. He talked as if he had looked at the inside of a person the way a doctor looks at a lung.</p>
+  <p>The fourth Sunday, Wayland asked if he could stay.</p>
+  <p>Harlan Pruett said a great many things that night that Hattie, listening at the kitchen door, would not repeat. But in the end he signed whatever there was to sign, because Wayland was quick, and had already decided, and the old man knew that look. He had seen it on his daughter.</p>
+  <p>Wayland was good at it. Of course he was. He learned everything Sutton said, word for word, and could say it back better than most men could say the Lord's Prayer. By nineteen he kept the roll and set the work and decided who walked which road in the mornings. Men twice his age asked him what Brother Sutton had meant.</p>
+  <p>In the spring of 1958 he walked up the hill and asked his grandfather to let Little come out too.</p>
+  <p>The old man looked out the window at the carriage house for a long while. <em>Take him,</em> he said. <em>Lord knows I don't know what to do with him.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Verse</h2>
+  <p class="dateline">The grove &middot; spring and summer, 1959</p>
+  <p>Little was not stupid. He could tell what was wrong with a truck by listening to it idle. He knew every bird on the river by its call and most of them by the sound of their wings. He could walk the grove in the black dark and never touch a tree. But words slid off him like rain off a tin roof. They hit, and they made a sound, and they were gone.</p>
+  <p>Every man who came to the grove learned one verse first. Brother Sutton gave it to them the first week. Wayland gave it to Little.</p>
+  <div class="verse">
+    <p>Consider the lilies of the field, how they grow;<br>
+    they toil not, neither do they spin:<br>
+    And yet I say unto you, That even Solomon in all his glory<br>
+    was not arrayed like one of these.</p>
+    <p>&mdash; Matthew 6:28&ndash;29</p>
+  </div>
+  <p>Little said it at the well. He said it in the outhouse. He said it walking to town with his tin pail and walking back. He said it in his sleep; men heard him. Every morning he would have the first two lines. By noon the second line would have pushed the first one out, the way a new hen pushes an old one off the roost. By night he would have the lilies of the field and nothing else, standing there with no idea how they grew.</p>
+  <p>That went on for four months.</p>
+  <p>On the first Friday in August, Wayland took him out past the last row of trees where the others couldn't hear. He was not cruel about it. That was the worst part. He was patient, the way you are patient with a mule that is not going to pull.</p>
+  <p><em>I have watched you since April. You can't hold four lines. There are men in town would give anything for the place you're taking up. Go on back up the hill, Little. Granddaddy will find you something.</em></p>
+  <p>The next day Dr. Jervis Coleman came out to the grove in his Buick. He was the only Negro doctor in three counties, and he had set the veteran's arm for nothing and pulled the drunk back from the edge twice, and he wanted to feed the whole fellowship Saturday evening at his house on Hackberry Street.</p>
+  <p>Wayland had the roll. <em>Forty-nine,</em> he said.</p>
+  <p>Dr. Coleman looked over the grove. <em>I make it fifty.</em></p>
+  <p><em>Forty-nine. My brother's going home.</em></p>
+  <p>Little heard it from the well. He set the bucket down. He decided that night, lying on his cot listening to the cicadas saw at the dark, that he would leave at first light. Not up the hill. North. He had eleven dollars Hattie had given him over the years, a nickel at a time, and he knew how to find Highway 51, because he had been born on it.</p>
+</section>
+
+<section>
+  <h2>V. The Gate</h2>
+  <p class="dateline">First light, Saturday</p>
+  <p>Brother Sutton was sitting on an upturned bucket by the gate, as if he had been there all night. Maybe he had.</p>
+  <p><em>Where you headed?</em></p>
+  <p><em>My brother says I'm no good for it.</em></p>
+  <p><em>Your brother didn't bring you in here,</em> Sutton said. <em>I did. A man doesn't go home because his brother says so. Come here.</em></p>
+  <p>He took a handkerchief out of his shirt pocket. It was white cotton, ironed, still holding the creases from the iron. He shook it out and handed it over.</p>
+  <p><em>Sit on that step where the sun's going to hit. Rub this between your hands. And while you rub it, say: taking the dirt out. Just that. Can you hold three words?</em></p>
+  <p><em>Yes sir. I can hold three words.</em></p>
+  <p>So he sat. The sun came up over the river the color of a peach, then the color of brass. He rubbed the handkerchief between his hands and said <em>taking the dirt out, taking the dirt out,</em> low, under his breath, the way he had said the lily verse, except this time nothing slid off, because there was nothing to slide.</p>
+  <p>His hands had been washed. He had washed them at the pump. But the sun climbed, and the heat came up out of the ground, and the handkerchief went from white to the color of dishwater to the color of a mule's flank, and it was his hands doing it, his own clean hands.</p>
+  <p>He stopped rubbing and looked at it.</p>
+  <p>And he remembered, from nowhere, his father in the yard behind the tailor's on Hastings Street, a Saturday in August, home from the foundry, taking a white handkerchief out of his back pocket and wiping his forehead with it. How it came away dark. How his father stood there in the heat and looked at it for a long time, longer than a man looks at a handkerchief, and then folded it and put it away and never said what he'd been thinking.</p>
+  <p>Little knew now what he'd been thinking. It went into him the way cold water goes into a dry field, not across the top but down. A thing starts out clean, and it does not stay how it starts. Nothing does. Not the cloth, and not the hands, and not the boy holding them, and not the hill, and not the house on it, and not whatever it was in that house that would not come down the stairs.</p>
+  <p>He was still sitting there when Brother Sutton came back across the yard and stood over him so his shadow fell across the cloth.</p>
+  <p><em>It ain't the cloth, son,</em> Sutton said. <em>Listen.</em></p>
+  <div class="verse">
+    <p>Not that which goeth into the mouth defileth a man; but that which cometh out of the mouth, this defileth a man.</p>
+    <p>But those things which proceed out of the mouth come forth from the heart; and they defile the man. For out of the heart proceed evil thoughts, murders, adulteries, fornications, thefts, false witness, blasphemies:</p>
+    <p>These are the things which defile a man: but to eat with unwashed hands defileth not a man.</p>
+    <p>&mdash; Matthew 15:11, 18&ndash;20</p>
+  </div>
+  <p>He said it once.</p>
+  <p>Little had it. All of it, the way you have your own name. And the lily verse came up behind it like a fish rising, all four lines, in order, and behind that came every word he had heard Brother Sutton say in fifteen months of sitting at the back, words he had not known he'd kept, words that had gone into him and lain down in the dark and waited. They came up now and stood in a row in the morning light, and he could see every one of them.</p>
+  <p>Sutton put his hand on Little's head for a moment, the way you'd test a melon, and went off to town in his khakis with his tin pail, like any other day.</p>
+</section>
+
+<section>
+  <h2>VI. The Supper</h2>
+  <p class="dateline">Hackberry Street &middot; Saturday evening</p>
+  <p>Dr. Coleman had strung bulbs through the chinaberry trees in his yard and set out sawhorse tables with white sheets on them, and his wife and Hattie Greer and four women from Mount Pisgah had been cooking since Thursday. Ham and greens and butter beans and sliced tomatoes and cornbread in iron skillets, and peach cobbler under dish towels against the flies.</p>
+  <p>When the men were seated, the doctor brought out a basin and a pitcher, as was his custom, to pour water over Brother Sutton's hands before the meal. Sutton put his hand flat over the basin.</p>
+  <p><em>Is there anybody left out at the grove?</em></p>
+  <p>Wayland answered. He had the roll in his shirt pocket. <em>No sir. Nobody.</em></p>
+  <p><em>There's somebody.</em></p>
+  <p>Wayland started to say something and didn't. Dr. Coleman looked from one of them to the other and then called for his son Marcus, who was eleven and had a red Schwinn, and told him to ride out to the Mabry place and bring back whoever he found.</p>
+  <p>Marcus was gone a half hour. He came back slow, walking the bike, and he was the color of ash, and he went straight to his daddy and not to Brother Sutton.</p>
+  <p><em>Daddy, it's full.</em></p>
+  <p><em>What's full?</em></p>
+  <p><em>The grove. There's men under every tree. There's men on the porch roof. There's men sitting on the well. I couldn't count them. I said I'm looking for Little Reed, and every one of them said, that's me. All at once. Every one.</em></p>
+  <p>The yard went quiet enough to hear the bulbs hum.</p>
+  <p>Brother Sutton turned his water glass a quarter turn on the sheet. <em>Go on back,</em> he said to the boy, kindly. <em>Whichever one says it first, you take him by the hand. The rest will see themselves out.</em></p>
+  <p>Marcus went back, because the doctor nodded. Afterward he told it all his life, at barbershops and at funerals and, many years later, to a reporter from Birmingham who did not print it. He said he stood at the gate and said the name, and one man was a little quicker than the others, and Marcus took him by the hand, and when he looked up the grove was just the grove, pecan trees in the last light, empty, the way a room is empty after you wake up.</p>
+  <p>Little walked into the yard on Hackberry Street holding the boy's hand, and sat at the end of the last table, and ate a plate of butter beans like any man who had been working.</p>
+  <p>When the cobbler was gone, Dr. Coleman stood and asked Brother Sutton to give thanks for the meal.</p>
+  <p>Sutton looked down the table. <em>Little,</em> he said.</p>
+  <p>Wayland's face did something then that he would think about for the rest of his life.</p>
+  <p>Little stood up. He said the lily verse first, all four lines, plain, with the lilies and the toiling and the spinning and Solomon in all his glory each in its place. Then he kept going. He talked for a long time, and nobody shifted on the benches. He said things Brother Sutton had said in the grove in 1957 that Wayland had been there for and had forgotten. He said things about the doctor's hands, and the women's hands, and the hog's life, and the field the greens came out of, and the man who had sharecropped that field, and the man who owned it, and how all of it came down to this one table under these bulbs, and how none of it would stay. He said what defileth a man and what defileth not. He said it the way you would tell somebody the river's rising.</p>
+  <p>Hattie Greer stood at the kitchen door with a dish towel over her shoulder and cried the whole time, without making a sound, the way she had done everything for thirty-eight years.</p>
+</section>
+
+<section>
+  <h2>VII. The Island</h2>
+  <p class="dateline">The grove &middot; that night</p>
+  <p>The men built a fire by the river after, because nobody was going to sleep. They kept saying it to each other. Four months he couldn't hold a verse. One breakfast with Brother Sutton and he held all of it.</p>
+  <p>Sutton came down and sat on a stump and listened to them a while.</p>
+  <p><em>He's always been slow,</em> he said. <em>And I've always been around. That's all it is.</em></p>
+  <p>Somebody asked him what he meant, always, and he told them a story instead, which was his way.</p>
+  <p>There was a rich man in Mobile, he said, a cotton factor, walking down Dauphin Street with his clerk, and he stepped over a dead rat in the gutter, and he said, half a joke, <em>A sharp boy could make a living off that.</em> A shoeshine boy on the corner heard it and did not take it for a joke. He picked up the rat by the tail and sold it to a woman down by the wharf who had a cat to feed, for one penny. With the penny he bought a jar of cane syrup, and he carried a bucket of well water and the syrup down to where the flower women came in off the boats in the heat, and gave them sweet water for nothing, and they gave him flowers. He sold the flowers. With the flower money he bought a hatchet, and cut the deadfall after a storm, and sold the firewood. He gave the grass cutters at the racetrack a drink every morning, and they owed him, and when a horse barge came in, he had bought up every bale of grass in Mobile with a promise and a handshake. Out of a rat. By the end, he was a man of some account, and he walked into the cotton factor's office and put half of it on the desk and said, <em>You told me how.</em> And the cotton factor looked at that boy a long time, and at the money, and at the rat he must have remembered, and he stood up from his desk and gave him his daughter's hand.</p>
+  <p>Nobody around the fire said anything to that. A cotton factor on Dauphin Street. A shoeshine boy. The white boy from Mobile with the burned arms looked into the coals like he was trying to picture the office. Wayland looked at Little, and Little was looking at the river, and both of them were thinking about a tailor's shop on Hastings Street, and a woman who had wanted her mother twice and never once got there.</p>
+  <p><em>That happen?</em> the veteran said finally.</p>
+  <p><em>It's a story,</em> Sutton said. <em>It's older than Mobile. It's just waiting on Mobile to catch up.</em></p>
+  <p><em>For who hath despised the day of small things?</em> Sutton said. <em>Zechariah. A small fire, you blow on it right, it'll come up.</em></p>
+  <p><em>Who was the boy?</em> the veteran asked.</p>
+  <p>Sutton poked the fire with a stick. <em>Same boy as always.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Later, when the fire was mostly coals, Wayland found his brother down at the water. The Tombigbee was running high from rain upriver, brown and fast, carrying whole trees past them in the dark.</p>
+  <p>Wayland stood there and tried to start four or five sentences. Little let him try. Then he said, <em>You don't owe me nothing, Way. You ain't the one kept me out. I was.</em></p>
+  <p>They stood a while. A heron went over, low, and Little named it without looking up.</p>
+  <p>Brother Sutton's voice came down from the fire, talking to nobody in particular, or to the river.</p>
+  <div class="verse">
+    <p>Therefore whosoever heareth these sayings of mine, and doeth them, I will liken him unto a wise man, which built his house upon a rock: And the rain descended, and the floods came, and the winds blew, and beat upon that house; and it fell not: for it was founded upon a rock.</p>
+    <p>&mdash; Matthew 7:24&ndash;25</p>
+  </div>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The next Sunday, Little walked up the hill. Not to the carriage house stairs. Up the front walk, between the boxwoods, onto the porch, to the front door with the brass knocker that he had never once in seven years touched.</p>
+  <p>Harlan Pruett opened it himself. Behind him on the stairs, with one hand on the rail, was a small grey woman Little had only ever seen through glass.</p>
+  <p>Nobody said anything for a long time. The cicadas went on in the pecans. Somewhere down in the town a screen door slapped.</p>
+  <p><em>I came to say the blessing,</em> Little said. <em>If you'll have it.</em></p>
+  <p>His grandfather looked at him the way he used to look at the tablet with the wandering sums. Then he stepped back from the door, and held it.</p>
+  <p>In Little's shirt pocket was a handkerchief, folded square, grey as a mule's flank. He had not washed it. He did not mean to.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">By rousing himself, by earnestness, by restraint and control, the wise man may make for himself an island which no flood can overwhelm.<cite>Dhammapada 25, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary tells this verse's story through Culla Panthaka, the slowest of the Buddha's disciples, who could not learn four lines in four months, was turned out by his own brother, and woke to the whole teaching while rubbing a clean cloth in the sun. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C5%9Auddhipanthaka">Culla Panthaka</a> in the wider tradition.</p>
+    <h3>Alabama, 1959</h3>
+    <p>Alabama's 1901 constitution forbade the legislature from ever authorizing a marriage between a white person and a Black person, and state law made such a marriage a crime. A couple like Eleanor and Amos had no lawful way to exist in the state; leaving was the only option, and leaving was dangerous. The U.S. Supreme Court struck down these laws nationwide in <a href="https://en.wikipedia.org/wiki/Loving_v._Virginia"><em>Loving v. Virginia</em></a> in 1967, but the dead language stayed in Alabama's constitution until voters removed it in <a href="https://en.wikipedia.org/wiki/2000_Alabama_Amendment_2">2000</a>, with about 40 percent voting to keep it. More at <a href="https://en.wikipedia.org/wiki/Anti-miscegenation_laws_in_the_United_States">anti-miscegenation laws in the United States</a>.</p>
+    <p>The road north the couple took was the road of the <a href="https://en.wikipedia.org/wiki/Great_Migration_(African_American)">Great Migration</a>, which carried some six million Black Southerners to Northern and Western cities between 1910 and 1970. In Detroit, Hastings Street ran through <a href="https://en.wikipedia.org/wiki/Black_Bottom,_Detroit">Black Bottom and Paradise Valley</a>, the center of Black business and music in the city, until urban renewal and the I-375 freeway cleared it in the late 1950s and early 1960s. The grove sits on the <a href="https://en.wikipedia.org/wiki/Tombigbee_River">Tombigbee</a>, which runs south through Alabama's western Black Belt.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Culla Panthaka and his brother from the commentary on Dhammapada verse 25. <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-03.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="paid-in-rice.html">&larr; Paid in Rice</a><a href="index.html">All stories</a><a href="folding-chairs.html">Folding Chairs &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('flies');
+  var ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, dpr, flies = [];
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * dpr; c.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.min(38, Math.max(14, W * H / 40000)));
+    flies = [];
+    for (var i = 0; i < n; i++) {
+      flies.push({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .2,
+        phase: Math.random() * Math.PI * 2,
+        speed: .006 + Math.random() * .012,
+        r: 1 + Math.random() * 1.6
+      });
+    }
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < flies.length; i++) {
+      var f = flies[i];
+      if (!reduce) {
+        f.phase += f.speed;
+        f.vx += (Math.random() - .5) * .03; f.vy += (Math.random() - .5) * .03;
+        f.vx = Math.max(-.4, Math.min(.4, f.vx)); f.vy = Math.max(-.3, Math.min(.3, f.vy));
+        f.x += f.vx; f.y += f.vy;
+        if (f.x < -20) f.x = W + 20; if (f.x > W + 20) f.x = -20;
+        if (f.y < -20) f.y = H + 20; if (f.y > H + 20) f.y = -20;
+      }
+      var glow = reduce ? .35 : Math.pow(Math.max(0, Math.sin(f.phase)), 3);
+      if (glow < .02) continue;
+      var g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 9);
+      g.addColorStop(0, 'rgba(217,242,122,' + (.75 * glow) + ')');
+      g.addColorStop(.25, 'rgba(217,242,122,' + (.22 * glow) + ')');
+      g.addColorStop(1, 'rgba(217,242,122,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(f.x, f.y, f.r * 9, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rice Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a foggy Pacific night; small lights climb slowly up a diagonal stair behind the text, a steadier white one leading, while bands of fog drift across; datelined sections. */
+  --night: #11171f;
+  --night-2: #1a222d;
+  --fog: #e2e4e3;
+  --fog-dim: #9aa3ab;
+  --lamp: #e6c171;
+  --glow: #f2ead2;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #232c38 0%, var(--night) 60%) fixed, var(--night);
+  color: var(--fog);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--fog-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--fog-dim); text-decoration: none; border-bottom: 1px solid rgba(226,228,227,.22); }
+.series a:hover { color: var(--lamp); }
+a:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--lamp); text-wrap: balance; text-shadow: 0 0 26px rgba(230,193,113,.22); }
+.epigraph { border-left: 1px solid rgba(230,193,113,.4); padding-left: 1rem; font-style: italic; color: var(--fog-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--lamp); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--lamp); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(26,34,45,.78); border: 1px solid rgba(226,228,227,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(226,228,227,.14); color: var(--fog-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--lamp); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--fog-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--lamp); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(226,228,227,.14); border-bottom: 1px solid rgba(226,228,227,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--lamp); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--lamp); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--lamp); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(26,34,45,.78); border-left: 2px solid var(--lamp); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--fog-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 17.6 &middot; Pu&#7751;&#7751;&#257;</span></nav>
+<header>
+  <h1>Rice Water</h1>
+  <div class="epigraph">And what I say to you, I say to all: Watch.<br>&mdash; Mark 13:37</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ganito ang narinig ko,</span> on the stairs below the hill.</p>
+
+<section>
+  <h2>I. The Grinding</h2>
+  <p class="dateline">Daly City, California &middot; December 2023</p>
+  <p>The house was pink stucco with a garage underneath, like every other house on the street, and six old people lived in it who could not live anywhere else. Mr. Rolando Bautista owned it. He owned four of them, two in Daly City and two in South San Francisco, and a black Lexus, and a house in the hills above Westlake with a view of the ocean on the days when there was no fog, and people called him Boy Bautista the way they had called him that in Batangas, though he was sixty-three.</p>
+  <p>Purificaci&oacute;n Dagdag took care of the six old people in the pink house. She was fifty-one. She had come in 2009 on a tourist visa to see a cousin and stayed when it ran out, and she had been tago nang tago ever since, hiding and hiding, which meant she could not go home. She had not gone home when her mother died in 2021, in the second year of the sickness, and had watched the funeral in Calasiao on a phone propped against the toaster. She sent money every two weeks to a daughter who was twenty-four now and a son who was twenty-one and whose faces she knew better from the screen than from memory. Everyone called her Puring.</p>
+  <p>She worked twenty-four hours a day, five days a week, and slept in the garage on a folding cot behind a curtain, between the washing machine and the boxes of adult diapers, with a baby monitor on the pillow beside her head. Mr. Bautista paid her ninety dollars a day. She knew that this was not legal. She also knew who in the house had papers and who did not.</p>
+  <p>On the fourth night of Simbang Gabi, at nine o'clock, Mrs. Bautista came to the back door with her son carrying two big blue Igloo coolers full of glutinous rice that had been soaking since morning. Everyone called her Tita Baby. Every December she sold bibingka in the churchyard after the dawn Mass at Holy Child, up the hill, nine mornings running, the real kind, in clay pots lined with banana leaf with coals underneath and coals on top, the way they made it in front of the churches at home, and the line for it went down the steps. This year she had taken orders from three parish groups besides. She had twelve hundred cakes to make.</p>
+  <p><em>The grinder at my house broke,</em> Tita Baby said. <em>You have the big blender. It has to be galapong by four-thirty. Junior will come for it.</em></p>
+  <p>So Puring ground rice all night.</p>
+  <p>She did it in the kitchen with only the light on over the stove, so it would not wake anyone, in batches, a scoop of the soaked rice and a cup of its water into the blender and then the roar, and then the white batter poured into the stockpots on the floor, and then the next scoop. Every twenty minutes the baby monitor in her apron pocket crackled and she went down the hall. Mrs. Lim needed the bedpan. Mr. Haggerty was trying to get dressed for work, at eleven at night, for a job at the shipyards that had closed in the nineteen-seventies, and she sat on the edge of his bed and buttoned his pajamas back up and told him it was Saturday. Mrs. Ocampo was crying in her sleep in Ilocano. Then back to the kitchen, and the roar.</p>
+  <p>Her shoulders went first and then her wrists. The motor of the blender got so hot she could smell it, and she had to stop and let it cool with the jar in the sink full of cold water. Her mother had done this at home on a stone, the old gilingang bato, turning the top stone by its wooden handle with one hand and feeding the wet rice into the hole with the other, and Puring as a girl had thought it was the hardest work in the world. Now she thought her mother at least had been allowed to sit down.</p>
+  <p>At two in the morning she was soaked through. She opened the back door to let the heat of the kitchen out and stepped onto the back step in her T-shirt, into the wind.</p>
+</section>
+
+<section>
+  <h2>II. The Stairs</h2>
+  <p class="dateline">Two in the morning</p>
+  <p>Daly City in December is fog and wind off the ocean, and the wind came straight up the street from the Pacific and went through her wet shirt like water. She stood in it with her arms out from her sides. It was the best she had felt all night.</p>
+  <p>Behind the houses on her side of the street the hill went up steep, too steep to build on, with ice plant on it and a few cypresses bent over sideways by eighty years of wind. A concrete stairway went up the hill from the end of the street, a hundred and forty steps, to the parking lot of Holy Child at the top. On the upper side of the parking lot, apart from the church, there was a small chapel with a glass door, and in the chapel there was a gold monstrance on the altar with the Host in it, and somebody was always there. Somebody had been there every hour of every day and night since 1994, kneeling or sitting, keeping watch, one hour each. They called it perpetual adoration. Puring had never been in it. She had never had an hour.</p>
+  <p>The lamps along the stairs had been broken since the storms the winter before, when a cypress came down across them. But there were lights on the stairs now. She counted seven. They were going up, slowly, one behind the other, the way people climb a hundred and forty steps at two in the morning.</p>
+  <p>In front of them all was a small light, steadier than the others, not swinging the way a flashlight swings. She would tell this part afterward to only a few people, and only if they asked. She said that it was Mang Dado, the old sacristan, who kept the keys of the church and the book with every hour of the adoration in it, every name written in for every hour, who had been doing it for twenty-nine years. She said he had his right hand held up in front of him with the first finger raised, as if he were telling somebody to wait one minute, and it was his finger that was shining. It was not a candle and it was not a phone. It was his finger, lit from inside, like a hand held over a flashlight, but white, and it lit every step in front of him, and the people behind him came up the stairs by it.</p>
+  <p>Puring watched them go up. At the top they crossed the parking lot and the glass door of the chapel opened and closed, and opened and closed, and the people who had been in there for the one o'clock hour came out and started down, with their phones lit.</p>
+  <p>She thought: I am up because I hurt. My shoulders hurt and my wrists hurt and I have twelve hundred cakes of rice to grind before four-thirty, and Mrs. Lim will need the bedpan again at three. That is why I am awake. Why are they awake? Nobody is making them grind anything.</p>
+  <p>In Calasiao, when she was a girl, if you saw lights moving on the dikes between the rice fields at night, it meant a man had been bitten by a snake out in the paddies and they were carrying him to the hilot. Or else somebody was dying, and they were going for the priest.</p>
+  <p>Somebody must be sick up there, she thought. One of the priests, maybe. The old one with the bad heart.</p>
+  <p>Then the monitor crackled in her apron pocket, and she went in.</p>
+</section>
+
+<section>
+  <h2>III. The Cake</h2>
+  <p class="dateline">Before dawn</p>
+  <p>Junior came for the galapong at four-thirty in his mother's Sienna with the engine running and loaded the stockpots into the back without saying anything, and Puring stood in the driveway in her slippers and watched the taillights go up the hill.</p>
+  <p>There was some left. There always was, at the bottom of the coolers, the broken grains and the cloudy water, and in the bottom of the blender jar a coarse paste, gritty, the part that had not ground fine. Tita Baby did not want it. Tita Baby did not use anything that was not perfect, because people paid six dollars a cake.</p>
+  <p>Puring scraped it all together in a bowl with her fingers. There was not much, a cupful. She did not have an egg to spare or any sugar she could account for, so she put in nothing, only a pinch of salt and a spoon of baking powder from the cupboard. In the garage Tita Baby kept bags of charcoal for the churchyard, and Puring took eight briquettes, which she would replace, and lit them in a coffee can on the back step with a sheet of the Filipino newspaper they gave away free at the grocery. There was a packet of banana leaves in the freezer. She tore off a square and ran it under hot water until it went soft and dark and smelled like home, and laid it in a pie tin and poured the paste on it, and set the tin on the coals, and put the lid of a saucepan on top, with three coals on the lid.</p>
+  <p>It came out grey and flat and a little burnt on the bottom, the size of her palm. It was not a bibingka anybody would pay for. She wrapped it in foil and put it in the pocket of her jacket. She thought she would eat it on the way to the laundromat.</p>
+  <p>Because the sheets had to be done too. The washer in the garage had been broken since Thanksgiving, and every morning at six she carried the night's sheets down the hill in a laundry bag on her back to the laundromat on Mission Street, which opened at six, and sat with them while they washed. It was the only hour of the day when no one was calling her. She took the bag and her jacket and went out. The sky over San Bruno Mountain had just begun to go grey.</p>
+</section>
+
+<section>
+  <h2>IV. The Bench</h2>
+  <p class="dateline">The foot of the stairs</p>
+  <p>The dawn Mass had let out. People were coming down the hundred and forty steps in the half dark in their good coats, with plates of Tita Baby's bibingka held out in front of them and steam coming off the plates, and at the bottom of the stairs, where there was a bus bench under a streetlight, Puring saw Lola Charing.</p>
+  <p>Everybody in that part of Daly City knew Lola Charing. She was eighty-six. She had come from the Philippines in 1969 on a nurses' exchange visa with twenty other girls from the same school in Manila and had worked nights in a hospital in San Francisco for forty-one years. Nights, always, by choice: she said the night was when people were most afraid and there were fewer people there to see it. She had buried a husband and outlived two of her own girls from that school who died in the sickness, still nursing at seventy, and she still did not sleep at night. She kept the three o'clock hour in the chapel every day of the week, and had for years, and then went home and slept until noon. She was very small and wore a red wool coat and walked with a cane she mostly did not use. Her grandnephew Jun-jun walked with her, a big young man in hospital scrubs under a fleece, who was a night nurse himself in the ICU at Seton and came off his shift in time to walk her down the hill.</p>
+  <p>Lola Charing did not give sermons. She did not say much of anything. People told her things.</p>
+  <p>Puring had seen her a hundred times. When she saw her, she never had anything to give her, and on the days she had something, she never saw her. This morning she had something and there Lola Charing was, ten feet away, coming down the last of the steps on Jun-jun's arm.</p>
+  <p>Puring stopped. She thought: if she will take it without looking at what it is, I will give it to her.</p>
+  <p>She set the laundry bag down on the sidewalk. She went to Lola Charing and took the old woman's right hand and touched the back of it to her own forehead, the way she had done with her grandmother, the way you do with any elder at home. <em>Mano po, Lola.</em> Then she took the foil packet out of her pocket.</p>
+  <p><em>Lola, it's nothing. It's only from the bottom of the blender. Please take it, and pray for me.</em></p>
+  <p>Lola Charing looked at Jun-jun. Jun-jun reached inside his fleece and took out a plate. It was an old plate, white enamel with a blue rim, chipped, with the Three Kings painted on it on their camels, faded nearly to nothing. Lola Charing had carried it for years. Someone had given it to her a long time ago, and nobody now remembered who, and whatever people gave her she took on that plate.</p>
+  <p>Lola held the plate out, and Puring unwrapped the foil and put the grey cake on it, among the Three Kings.</p>
+  <p><em>Lola,</em> Puring said, and found that her voice was not working well. <em>Whatever it is you see up there, at three o'clock. Let it be for me too.</em></p>
+  <p><em>Siya nawa,</em> said Lola Charing. So be it. And standing where she was, at the bottom of the stairs, she said the blessing over it, the short one, the one you say over food, and made the sign of the cross over the cake and over Puring.</p>
+  <p>Puring picked up the laundry bag. And she thought, because she could not help it: she will not eat it. She was kind to me, but she will not eat it. She will carry it a little way, and when I am gone she will give it to the crows on the wire, or to somebody's dog, and then she will go up to the parish hall where Tita Baby has the good bibingka and Mr. Bautista has sent a whole lechon from the Filipino market on Mission, the way he does every year, and she will have breakfast there.</p>
+  <p>Lola Charing looked at her. Then she looked at Jun-jun and pointed with her chin at the bus bench.</p>
+  <p>Jun-jun took off his fleece and spread it on the bench, and Lola Charing sat down on it, in the streetlight, with the people coming down the stairs around her with their plates of real bibingka, and broke the grey cake in two and ate it. She ate it slowly, all of it. She ate the burnt part on the bottom. When there was a little left she broke off a corner and gave it to Jun-jun, and he ate it, and she ate the rest.</p>
+  <p>Puring stood on the sidewalk with the laundry bag on her back and watched. The people on the stairs stopped to watch too.</p>
+  <p>What happened next was told a great many ways afterward in that parish, and Puring never argued with any of them. She said only this. She had put nothing in it but salt. There had been no sugar in that kitchen she could account for, and no coconut and no egg. But when Lola Charing broke it open there was honey in it, running, golden, so much that it ran down onto the Three Kings and Lola had to lick it off her fingers, and the smell of it came across the sidewalk in the cold, honey and toasted banana leaf. Jun-jun said for the rest of his life, to anyone who asked and to a good many who did not, that it was the best thing he had ever put in his mouth, and that he had been raised by a grandmother who made bibingka in Laguna.</p>
+  <p>When she had finished, Jun-jun poured her a cup of hot water from a thermos, and she drank it. Then she handed him the plate and looked up at Puring.</p>
+  <p><em>Puring,</em> she said. <em>Why do you blame my people?</em></p>
+  <p><em>Lola? I don't blame anybody.</em></p>
+  <p><em>Last night. On your back step. What did you say when you saw them on the stairs?</em></p>
+  <p>Puring had not said it out loud. She was sure she had not. But she told her.</p>
+  <p><em>I only thought, Lola. I thought, I'm awake because I hurt. My arms and my back. I can't sleep because I can't, because of the work. So why are they awake? They don't have to be. So I thought somebody up there was sick. Or dying. Like at home, when somebody was bitten in the fields.</em></p>
+  <p>Lola Charing nodded slowly.</p>
+  <p><em>You are awake because you are hurting,</em> she said. <em>That is true. I know it. I did it for forty-one years. They are awake because they are watching. That's a different thing. It is the only thing.</em></p>
+  <p>And then, sitting on the bus bench in her red coat with honey still on her fingers, she said the Gospel they had read in every Catholic church in the world on the first Sunday of Advent, three weeks before, in the old words she had learned it in at the convent school in Manila after the war.</p>
+  <div class="verse">
+    <p>Take ye heed, watch and pray. For ye know not when the time is. Even as a man who, going into a far country, left his house and gave authority to his servants over every work and commanded the porter to watch. Watch ye therefore (for you know not when the lord of the house cometh, at even, or at midnight, or at the cock crowing, or in the morning): Lest coming on a sudden, he find you sleeping. And what I say to you, I say to all: Watch.</p>
+    <p>&mdash; Mark 13:33&ndash;37</p>
+  </div>
+  <p>Puring heard <em>servants</em>. She heard <em>every work</em>. She heard <em>at midnight, or at the cock crowing</em>, and thought of Mr. Haggerty buttoning himself into his pajamas for the shipyard, and Mrs. Lim calling, and the roar of the blender at two, and the lights going up the stairs.</p>
+  <p>Then something happened to her that she could not explain, standing on Mission Street at six in the morning with the sheets on her back. She thought of the rice in the coolers the night before, how when you first pour in the water it goes cloudy, all of it, every grain turning over, and you cannot see the bottom. And how if you leave it alone, only leave it, the grains go down one by one and lie still, and the water above them clears until you can see every grain.</p>
+  <p>It was like that. Nothing had been taken away. The work was the same and the garage was the same and her mother was still dead in Calasiao and Mr. Bautista still owed her whatever it was he owed her. But all of it had gone to the bottom and lay there, and she could see down through to it, every piece, and the water over it was clear and very still. She knew, standing there, that it would not go cloudy again. Not all the way. Not ever.</p>
+  <p>The people on the stairs said afterward that a good many of them felt something too, that morning, without knowing what it was, and went on to work quieter than usual.</p>
+  <p>Lola Charing got up off the bench. Jun-jun shook out his fleece and put it back on. Puring took the old woman's hand once more and touched it to her forehead, and then she went down the hill to the laundromat, and Lola went up the stairs again, slowly, on Jun-jun's arm, to the parish hall.</p>
+</section>
+
+<section>
+  <h2>V. Rice Water</h2>
+  <p class="dateline">The parish hall of Holy Child</p>
+  <p>In the parish hall the ladies of the Couples for Christ and the Legion of Mary had heard all about it before Lola Charing got through the door. Someone had seen from the top of the stairs. Lola Charing had sat on a bus bench on Mission Street and eaten a burnt thing that Boy Bautista's TNT caregiver had cooked in a coffee can, when there were two hundred of Tita Baby's bibingka on the tables and a whole lechon with the skin still crackling.</p>
+  <p><em>Kawawa naman si Lola,</em> they were saying, poor Lola, at the coffee urn. <em>To eat that. She's too kind. At her age.</em></p>
+  <p>Lola Charing heard it. She sat down at the end of a long table and Jun-jun brought her a cup of salabat, the ginger tea, and she asked the ladies what they were talking about, though she knew.</p>
+  <p>They told her, a little embarrassed.</p>
+  <p><em>It's not the first time,</em> Lola said. <em>That I've eaten her rice.</em></p>
+  <p>They waited.</p>
+  <p><em>I was born in Calasiao,</em> she said. <em>Did you know that? Same as Puring. In 1937. My mother had no milk, and there was no money for milk, and an old woman next door who had nothing at all fed me am from a spoon. Rice water, from the top of the pot. That is what I was raised on. That old woman fed me am every day until I could eat rice.</em> She drank some of her salabat. <em>My lolo used to tell a story about that.</em></p>
+  <p>And she told it to them, there at the long table, the way her grandfather had told it in Calasiao when she was a girl, with the rain on the roof.</p>
+  <p>In the old days, when the Spanish were still in Manila, a horse trader came down the north road from Ilocos with five hundred horses to sell in the city. On the road there was a big old house that had once belonged to a rich family, and the family had come down in the world until there was nobody left but one old woman, and the trader paid her to keep his horses in her yard for a few nights. While he was there one of his mares foaled. When he left, the old woman asked him for the rent, and said, <em>Instead of money, give me the colt,</em> and he did.</p>
+  <p>The old woman loved the colt like a son. She had nothing to give it, so she gave it what she had. Rice water, and the scrapings from the bottom of the pot, and grass.</p>
+  <p>Some time after, another trader came down the north road with five hundred horses and stopped at the same house. But his horses would not go into the yard. They smelled the colt, and they stood in the road with their ears back and would not go in. <em>Lola,</em> the trader said, <em>do you have a horse here?</em> And she said, <em>Only a colt I raise like my own child.</em> When the colt came back from grazing, with its belly full of rice water, the trader looked at it and knew what it was. The colt went into its own stall, and then all five hundred horses walked into the yard as quiet as lambs.</p>
+  <p>The trader asked to buy it. <em>You don't sell your own child,</em> said the old woman. <em>What do you feed him?</em> the trader asked. <em>Rice water,</em> she said, <em>and scrapings, and grass.</em> <em>If you give him to me,</em> the trader said, <em>he will eat the best there is. He will stand on a carpet under an awning.</em> So she let him go. And the trader paid her for each of the colt's four legs separately, and for its tail and for its head, a purse of silver for each, six purses, and bought her a new dress and earrings and stood her in front of the colt in them. And the colt looked at her and cried. And she stroked his back and said, <em>I have had my pay. Go on, anak.</em></p>
+  <p>The next morning the trader put a bucket of rice water in front of the colt to test it, and the colt would not touch it. <em>That's what you ate before,</em> the trader said. <em>Why not now?</em> And the colt said, <em>Where nobody knows who you are, there's plenty of rice water. You know me now. I won't eat it.</em> And the trader laughed and said he was only testing, and fed it the best there was.</p>
+  <p>In Manila he took the colt to the racetrack at San Lazaro to show it to the governor general. When he let it run it went so fast that nobody could see it at all, and he tied a red ribbon to its side so they could see where it was, and all they could see was the ribbon going around. He rode it across the fishponds at Dagupan and it did not wet its hooves. He rode it across the lotus leaves in a pond and did not sink one leaf. At the end he held out his hand, palm up, and the horse stepped up onto it and stood there with all four feet together on the trader's palm. The governor general was so pleased that he made the horse his own and gave the trader half of everything, and from that day, the trader told him to be generous, and he was, and all the islands did well.</p>
+  <p>Lola Charing put her cup down.</p>
+  <p><em>My lolo said the old woman in that story was from Calasiao,</em> she said. <em>He said all the old women in all the good stories are from Calasiao.</em> She looked at the ladies at the coffee urn. <em>That girl fed me this morning out of the bottom of the blender. She fed me better than I have been fed in a long time.</em></p>
+  <p>Then she asked Jun-jun to take her home, because it was past seven and she had been up all night.</p>
+</section>
+
+<section>
+  <h2>VI. The Watch</h2>
+  <p class="dateline">Christmas Eve</p>
+  <p>Puring went on working in the pink house. Nothing about it changed. She ground the rice for Tita Baby every night of the novena, nine nights, and carried the sheets down the hill every morning, and slept behind the curtain in the garage with the monitor by her head.</p>
+  <p>But on the night of the twenty-fourth, at three o'clock in the morning, with the galapong poured and the blender cooling in the sink and the six old people asleep down the hall, she went out and sat on the back step in her jacket. Mr. Haggerty was asleep in his pajamas. Mrs. Lim had not called since one. Mrs. Ocampo had stopped crying in her sleep three nights before, and nobody knew why.</p>
+  <p>Up the hill the lights were going up the stairs, and in front of them the small white one, steady. The chapel door opened and closed at the top.</p>
+  <p>She did not have an hour in Mang Dado's book. She could not leave the house. She sat on her step with her hands in her lap and listened to the house breathing behind her, six old people asleep, and kept the hour from there. The monitor in her pocket was quiet. In the kitchen behind her, in the blue coolers, the last of the soaked rice lay on the bottom in the dark under its water, every grain gone down and still, and the water over it clear.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">Those who are ever watchful, who study day and night, and who strive after Nirvana, their passions will come to an end.<cite>Dhammapada 226, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Pu&#7751;&#7751;&#257; is a slave woman in the house of a rich man of R&#257;jagaha who is made to pound rice late into the night. Stepping outside to cool off, she sees monks walking up the mountain by a light that the elder <a href="https://en.wikipedia.org/wiki/Dabba_Mallaputta">Dabba Mallaputta</a>, steward of lodgings, makes shine from his finger, and she supposes one of them must be sick or snakebitten. At dawn she bakes a coarse cake of rice-flour scrapings on the coals and offers it to the Buddha on the road, sure he will throw it to a dog. Instead he has &#256;nanda spread a robe, sits down, and eats it, while the gods squeeze heavenly nectar into it. He tells her that she stays awake because she suffers, and his monks stay awake because they watch, and speaks this verse; she is established in the first stage of awakening on the spot. When the monks marvel that he ate such poor food, he tells a birth story of a thoroughbred colt raised by an old woman on rice-water and scraps, which refuses that food once it is recognized and goes on to run over water and stand on its master's palm. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-06.htm">the full commentary story</a>.</p>
+    <h3>Daly City, 2023</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Daly_City,_California">Daly City</a>, on the foggy ridge just south of San Francisco, has the highest concentration of Filipinos of any midsized city in North America; a third of its residents were Filipino in the 2020 census, and it is known as the &ldquo;<a href="https://en.wikipedia.org/wiki/Pinoy_Capital">Pinoy Capital</a>.&rdquo; Its Westlake tract inspired Malvina Reynolds' 1962 song &ldquo;Little Boxes.&rdquo; Many <a href="https://en.wikipedia.org/wiki/Filipino_Americans">Filipino Americans</a> work in health care: nearly a fifth of Filipina Americans have worked as registered nurses, and during the COVID-19 pandemic Filipinos, about 4 percent of the nation's registered nurses, made up nearly a third of nurse deaths, according to a <a href="https://www.gmanetwork.com/news/pinoyabroad/news/765930/over-30-of-nurses-who-died-due-to-covid-19-in-us-were-filipinos-report/story/">2020 report by National Nurses United</a>. Many others, documented and not, work as caregivers in small residential homes for the elderly. &ldquo;Tago nang tago&rdquo; (&ldquo;hiding and hiding&rdquo;) is the common Filipino term for an immigrant without papers.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Simbang_Gabi">Simbang Gabi</a>, the nine-day novena of Masses from December 16 to 24, began in the Spanish Philippines in the seventeenth century as a dawn Mass for farmers who had to be in the fields by sunrise; the parol, the star lantern, first lit the way to church in the dark. After Mass people eat <a href="https://en.wikipedia.org/wiki/Bibingka">bibingka</a> in the churchyard: a cake of galapong, rice soaked overnight and ground on a millstone, baked in a clay pot lined with banana leaf with coals below and above. Puring's hometown, <a href="https://en.wikipedia.org/wiki/Calasiao">Calasiao</a> in Pangasinan, is famous for its own rice cake, <a href="https://en.wikipedia.org/wiki/Puto_Calasiao">puto Calasiao</a>. The Gospel Lola Charing recites, Mark 13:33&ndash;37, was read at Mass on the First Sunday of Advent in 2023, December 3. It is quoted here in the Douay-Rheims version as revised by Bishop Challoner.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Pu&#7751;&#7751;&#257; from the Dhammapada commentary (verse 226). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-06.htm">The original</a>. Scripture from the Douay-Rheims Bible (Challoner revision). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-red-umbrella.html">&larr; The Red Umbrella</a><a href="index.html">All stories</a><a href="the-touchstone.html">The Touchstone &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, lights = [], fog = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  // the stair: a line from lower left margin to upper right margin
+  function stair(p) { return { x: W * (0.06 + 0.88 * p), y: H * (0.96 - 0.82 * p) }; }
+  function make() {
+    lights = [];
+    var lead = { p: Math.random() * 0.3, lead: true, v: 0.00016, sway: 0 };
+    lights.push(lead);
+    for (var i = 1; i <= 6; i++) lights.push({ p: lead.p - i * 0.022, lead: false, v: 0.00016, sway: Math.random() * 6 });
+    fog = [];
+    for (var j = 0; j < 5; j++) fog.push({ y: Math.random() * H, x: Math.random() * W, w: 0.5 + Math.random() * 0.6, s: 0.06 + Math.random() * 0.1, a: 0.035 + Math.random() * 0.03 });
+  }
+  function glow(x, y, r, col, a) {
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, 'rgba(' + col + ',' + a + ')');
+    g.addColorStop(0.25, 'rgba(' + col + ',' + (a * 0.35) + ')');
+    g.addColorStop(1, 'rgba(' + col + ',0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t++;
+    for (var i = 0; i < lights.length; i++) {
+      var L = lights[i];
+      if (!reduce) { L.p += L.v; if (lights[0].p > 1.08) { make(); return requestAnimationFrame(draw); } }
+      if (L.p < 0 || L.p > 1) continue;
+      var pt = stair(L.p);
+      var a, r, col;
+      if (L.lead) { a = 0.5; r = 34; col = '242,234,210'; }
+      else { a = reduce ? 0.28 : 0.22 + 0.1 * Math.sin(t * 0.05 + L.sway); r = 22; col = '230,193,113'; pt.x += reduce ? 0 : Math.sin(t * 0.03 + L.sway) * 1.5; }
+      var edge = Math.min(1, L.p * 8, (1 - L.p) * 8);
+      glow(pt.x, pt.y, r, col, a * edge);
+    }
+    for (var j = 0; j < fog.length; j++) {
+      var f = fog[j];
+      if (!reduce) { f.x += f.s; if (f.x - W * f.w > W) { f.x = -W * f.w; f.y = Math.random() * H; } }
+      var g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, W * f.w);
+      g.addColorStop(0, 'rgba(200,208,214,' + f.a + ')');
+      g.addColorStop(1, 'rgba(200,208,214,0)');
+      ctx.save(); ctx.translate(f.x, f.y); ctx.scale(1, 0.18); ctx.translate(-f.x, -f.y);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(f.x, f.y, W * f.w, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make();
+  if (reduce) { lights[0].p = 0.62; for (var k = 1; k < lights.length; k++) lights[k].p = 0.62 - k * 0.022; }
+  draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

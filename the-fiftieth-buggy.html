@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Fiftieth Buggy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale dust of an August road, light theme; low on the page the round shadows of white umbrellas pass in a slow file, and the last of them never sways; datelined sections. */
+  --ground: #f1e8d4;
+  --ground-2: #e7dcc3;
+  --paper: #2b2218;
+  --paper-dim: #6c5d48;
+  --accent: #7a4a1e;
+  --glow: #b0752f;
+  --rule: rgba(43,34,24,.16);
+  --panel: rgba(231,220,195,.8);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f6efe0 0%, var(--ground) 60%, #e6d8bb 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse .gloss { font-size: .95rem; color: var(--paper-dim); }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.39 &middot; The Elder Aṅgulimāla</span></nav>
+<header>
+  <h1>The Fiftieth Buggy</h1>
+  <div class="epigraph">There is no fear in love; but perfect love casteth out fear.<br>&mdash; 1 John 4:18</div>
+</header>
+
+<p class="heard"><span class="heard-lead">They tell it this way,</span> around the square at Harrisonville.</p>
+
+<section>
+  <h2>I. The Colonel&rsquo;s Dinner</h2>
+  <p class="dateline">Cass County, Missouri &middot; August 1869</p>
+  <p>There were fifty Dunkard brethren on Big Creek that August, counting old Elder Ebersole and his own few. The rest had come into Cass County on the cars to Pleasant Hill and then on foot, from Illinois and Iowa and the new settlements in Kansas, to hold a council and to raise a second meetinghouse, the first one having grown too small. They wore the plain coat with the standing collar and the broad black hat, and beards with no mustache. They would not swear an oath or go to law or carry a gun, and during the war both armies had shot some of them for it.</p>
+  <p>Mallie Pryce watched them go by on the Pleasant Hill road from her own front gallery, two and two, carrying their tools.</p>
+  <p>Her husband watched too. Abner Pryce had been a colonel of the state militia and was now the largest dealer in horses and mules between the Osage and the Kansas line. Four years before, he had ridden into the Dunkards&rsquo; yard with forty men and a rope to take the worst bushwhacker in western Missouri, the one they called Beads, who wore dead men&rsquo;s fingers on a string around his neck. He had found an old man mending harness and a young one splitting kindling, and he had ridden out again without either. He did not talk about it. But he was a man who paid what he owed, and he had never been able to work out what he owed for that morning, or to whom.</p>
+  <p><em>I&rsquo;ll feed them,</em> he said. <em>All fifty. Tell Lon to kill two shoats.</em></p>
+  <p><em>They didn&rsquo;t ask to be fed, Abner.</em></p>
+  <p><em>They never ask for anything. That&rsquo;s what is the matter with them.</em></p>
+  <p>So on the Monday the brethren sat down at trestles in the Pryces&rsquo; yard to roast pork and light bread and sweet potatoes and buttermilk. They ate what was set in front of them and thanked God for it at some length and thanked the Colonel briefly. The one who had been Beads sat at the foot of the last table. Gabriel Mantooth was twenty-five and had a scar over his left ear where the hair did not grow. He ate a piece of bread and some potato and carried the brethren&rsquo;s plates to the wash kettle.</p>
+  <p>Half of Harrisonville drove out in wagons to look. They stood along the yard fence and counted the shoats.</p>
+</section>
+
+<section>
+  <h2>II. The Town&rsquo;s Dinner</h2>
+  <p class="dateline">Harrisonville &middot; the same week</p>
+  <p>Nobody in Cass County agreed about the war. The Colonel&rsquo;s party had won it and held the courthouse, and under the new constitution a man could not vote or hold any office until he swore he had never once fed or pitied a rebel, and most of the families who had come back to their chimneys could not swear that, or would not. They traded at the same stores as the Colonel&rsquo;s people and did not speak to them. And each side wanted the Dunkards at its table, the way two brothers who have quarreled will each want the preacher to come home with him after church.</p>
+  <p>On Tuesday morning Mr. Tolliver Reese, who kept the dry goods store on the square and had spent the war years in Texas, walked out to Big Creek and asked the Elder if the brethren would take dinner with the town.</p>
+  <p>They set the tables in the square under the locusts. There were eleven hams and every hen in Harrisonville that had quit laying, and pies down the middle of the boards the whole length. The Colonel went, because it would have looked small not to, and Mallie went with him and counted the hams.</p>
+  <p>She had stood in that square on a court day two summers before. She had been coming out of Reese&rsquo;s with a card of buttons when a boy shouted a name, and she had seen what a town can do with clods and sticks and paving stones. She had seen the young man with the meal sack walk out through the middle of it. He had not run or lifted his arms, and the blood had gone down into his collar. She remembered which men had been throwing. Two of them were carrying platters now, and one of the two set a plate of ham in front of Gabriel Mantooth and stood there a moment as though he had something to add to it, and then went back for another plate.</p>
+  <p><em>Elder,</em> said one of the Illinois brethren, low, <em>this is a great deal of feasting for a people who came to drive pegs.</em></p>
+  <p><em>They need to give it more than we need to eat it,</em> the Elder said. <em>Eat.</em></p>
+  <p>On Wednesday the Colonel had a whole beef turned over a trench of hickory coals from midnight on. On Thursday the town had a beef too, and cove oysters besides, put up in tins in Baltimore, forty dozen tins with soda crackers, and the cornet band. On Friday the Colonel sent to the river bottoms for a wagonload of melons and had three freezers of ice cream cranked in the yard. On Saturday the women of Harrisonville brought out fifty layer cakes, one to a brother, and set each man&rsquo;s cake in front of him whole.</p>
+  <p>The brethren worked from first light until the dinner horn and from the dinner until dark, and in between they were hauled back and forth across the county to be fed. They bore it patiently. Gabriel Mantooth sat at the foot of the last table in the square as he had in the Colonel&rsquo;s yard, and what he was given he mostly passed up the board to the old men. Children came and stood behind him in a half circle to look at the scar. He let them look.</p>
+  <p>Six times it went back and forth. The meetinghouse frame was up and half the roof was on. The town had not left one thing off its tables that a person could have named.</p>
+  <p>On Saturday night Abner Pryce went up to bed without his supper and lay down with his boots on and his face to the wall.</p>
+</section>
+
+<section>
+  <h2>III. Mallie&rsquo;s Plan</h2>
+  <p class="dateline">The Pryce place &middot; Saturday night</p>
+  <p>She let him lie an hour. Then she went up with the lamp.</p>
+  <p><em>Abner. What ails you?</em></p>
+  <p><em>You know what.</em></p>
+  <p><em>I don&rsquo;t.</em></p>
+  <p>So he told her, to the wall. He had fed them three times and been bettered three times. He had put down the rebellion in this county and he could not put down a dry goods merchant with a ham. If he could not give those people more than Tolliver Reese could, he did not know what he was for.</p>
+  <p>Mallie had trimmed bonnets in a shop in Lexington before he married her, and the town had never let her forget it. She had learned in that shop that people do not remember what was on the hat. They remember that nobody else had one.</p>
+  <p><em>Did you ever hear of a colonel whipped by a county seat?</em> she said. <em>Turn over and listen. You can&rsquo;t beat them at victuals. Every woman in Harrisonville can cook. So don&rsquo;t cook against them.</em></p>
+  <p>He turned over.</p>
+  <p><em>Have Lon build a pavilion in the walnut grove. Make it round and open at the sides, out of that new walnut plank from the steam mill, and big enough for fifty to sit. Send to Kansas City on the cars for fifty white umbrellas, the kind that screw to a buggy seat. Borrow every buggy from here to the state line. Put one of your horses to each buggy, and in each one set a daughter of the regiment to drive. There must be fifty girls among the families of your old command who can handle a horse. Fetch the brethren from Big Creek that way, eleven miles, each man riding under his own shade. Then buy the ten copper wash boilers at the hardware, new, and stand them down the middle of the pavilion and fill them from our icehouse, and have lemons off the cars, and mint out of the spring branch. Let the girls crush the mint and dip the lemonade and fan the old men while they eat.</em> She set the lamp down. <em>The town has wagons. Its buggies were burnt in sixty-three or stolen. There isn&rsquo;t a pound of ice on that square in August, and they could not find fifty horses if they emptied every lot they have.</em></p>
+  <p>The Colonel sat up and reached for his boots, and found he had them on.</p>
+</section>
+
+<section>
+  <h2>IV. Forty-Nine Horses</h2>
+  <p class="dateline">The Pryce place &middot; the next week</p>
+  <p>It took six days. The walnut came from the mill still wet, purple-brown and smelling sour, and Lon and four men framed the pavilion in a ring among the trees. The umbrellas came down from Kansas City in two crates, white cotton on steel ribs. Buggies came from Pleasant Hill and Peculiar and from over the line at Paola, some with their owners&rsquo; daughters still in them. The lemons came in a barrel, each one wrapped in paper. Mallie went down into the icehouse herself with a lantern and scraped back the sawdust and counted the blocks left from January, and there were enough. The girls slept four to a bed in the Pryces&rsquo; house, and it sounded like a henhouse until midnight.</p>
+  <p>On the Friday evening the Colonel came in from the lots with his hat in his hand.</p>
+  <p><em>Mallie. I&rsquo;m a horse short.</em></p>
+  <p><em>You have two hundred head out there.</em></p>
+  <p><em>I have forty-nine broke to harness. I sent that string to the railroad graders in July. The rest are mules that never had a collar on and the ones in the back lot, and you know what&rsquo;s in the back lot. Let those see a man on foot and they come on like a March wind.</em></p>
+  <p>She did know. And she knew which one he was not naming.</p>
+  <p>There was a bay stud colt back there, three years old. His dam had been the Colonel&rsquo;s own saddle mare, the best horse in western Missouri, and the bushwhackers had taken her out of the barn in sixty-three. In the spring of sixty-five an old Dunkard had led her up to the gate one morning and tied her there and walked off without giving his name. Her wind was broken. She had been ridden until something tore in her, and she was in foal, and nobody could say to what. She dropped the colt the next spring and never let a man near her again, and the colt had learned it from her. He had laid a hostler&rsquo;s scalp open to the bone. He had broken the collarbone of Lon&rsquo;s boy. He had not had a strap on him since March.</p>
+  <p><em>Put the bay colt to the last buggy,</em> Mallie said.</p>
+  <p><em>I will not. I won&rsquo;t put a girl behind that horse, and I wouldn&rsquo;t put a man there I had any use for.</em></p>
+  <p><em>No girl. Let that one go without a driver. I know who will take the lines.</em></p>
+  <p>He looked at her a long time. He had been in that meetinghouse yard with forty men, and she had been in the square on court day. They had neither of them told the other all of what they saw.</p>
+  <p><em>If he&rsquo;s killed,</em> the Colonel said, <em>I&rsquo;ll have done with a horse what I wouldn&rsquo;t do with a rope.</em></p>
+  <p><em>He won&rsquo;t be killed.</em></p>
+  <p><em>How do you know it?</em></p>
+  <p><em>I don&rsquo;t know how I know it,</em> she said. <em>I saw him walk out of that town.</em></p>
+</section>
+
+<section>
+  <h2>V. The Fiftieth Buggy</h2>
+  <p class="dateline">Big Creek meetinghouse &middot; Saturday, first light</p>
+  <p>Forty-nine buggies stood in the meetinghouse lane before sunup with their umbrellas furled, and forty-nine girls in their summer muslins sat holding the lines and not talking much, now that it had come to it. The brethren came out from morning prayer and stopped at the sight.</p>
+  <p><em>Elder,</em> said the brother from Illinois, <em>this is show. This is the very thing we left the world to be shut of.</em></p>
+  <p><em>It&rsquo;s his show,</em> said the Elder. <em>It needn&rsquo;t be ours. Get up in it, Daniel, and hurt nobody&rsquo;s feelings.</em> And he climbed into the first buggy himself, an old man of sixty-eight, and thanked the child who was driving it.</p>
+  <p>The fiftieth buggy stood at the end of the line with its shafts on the ground.</p>
+  <p>Then the colt came up the lane. Lon had him on two ropes with a man on each, and a third man walked well behind with a whip, and they had tied a coat over the animal&rsquo;s head. He came sideways, in jumps. The horses nearest him began to back in their breeching, and a girl cried out.</p>
+  <p>Mallie had driven out in the Colonel&rsquo;s own rig. She got down and went to where Gabriel Mantooth was standing at the tail of the line. He was the last, as he was the last at every table.</p>
+  <p><em>Mr. Mantooth, there is a buggy for you and no driver. I couldn&rsquo;t ask anyone to sit behind that horse.</em> She found her mouth was dry. <em>I am asking you.</em></p>
+  <p>He looked at the colt, and he seemed to her to look longest at the head under the coat, at the set of it. Then he walked up the lane. Lon said afterward that he said <em>Mister, don&rsquo;t</em> three times, and that the young man put his hand on the near rope and took it from the fellow holding it, and then took the other, and then reached up and lifted the coat off the colt&rsquo;s head.</p>
+  <p>Forty-nine girls saw what happened, and fifty brethren, and Lon and his three men, and the Colonel&rsquo;s wife. In later years they told it a good many ways, and they agreed on these things.</p>
+  <p>The colt saw him. It put its tail down between its hocks like a whipped dog. Both its ears dropped to the sides. It shut its eyes. It stood in the lane with its feet square under it and did not move a muscle.</p>
+  <p>Gabriel stood at its shoulder for a time with his hand flat on its neck. Mallie was near enough to hear him, and no one else was.</p>
+  <p><em>I knew your mother,</em> he said. <em>I did her a great wrong.</em></p>
+  <p>Then he harnessed the colt himself, collar and hames and traces. It had never been harnessed in its life. He backed it between the shafts and it went back. He got up on the seat and opened the white umbrella, since every other brother had one over him and he would not be the one to make a point of himself, and took up the lines.</p>
+  <p>They went the eleven miles at a walk. It was the road he had come along two years before with his head open and his meal spilling out behind him. There were houses along it now where there had been bare chimneys in the ragweed, and people stood at the fences. At one cabin, built up against old brick, a woman lifted a boy of three onto the top rail so that he could see, and she kept her eyes on the last buggy the whole time it was passing. They saw fifty white umbrellas coming over the rise with the sun on them, and under the first an old Dunkard sitting bolt upright beside a girl of fifteen. Under the last sat the man some of them had stoned. He was driving a horse most of them knew by reputation, and its lines hung slack.</p>
+  <p>They passed through the square. Nobody shouted anything. Mr. Tolliver Reese stood in the door of his store with his thumbs in his vest, and as the last buggy went by he took his hat off. Mallie did not think he had planned to do it.</p>
+</section>
+
+<section>
+  <h2>VI. The Grove</h2>
+  <p class="dateline">The Pryce place &middot; noon</p>
+  <p>The brethren sat in a ring in the walnut pavilion with the copper boilers shining down the middle like ten small suns. The ice had been cut from the Pryces&rsquo; pond in January and kept under sawdust, and it knocked against the copper. Girls crushed mint in their hands and dropped it in. They went around with dippers and with palm-leaf fans. The old men from Iowa sat very straight and were fanned, and bore it. All of Harrisonville had followed the buggies out and stood among the trees. They looked at the ice and at the walnut. They looked at forty-nine horses on a picket line, and at one bay colt standing loose beside the pavilion with his eyes half shut. Nobody had tied him, and he did not offer to go.</p>
+  <p>The town knew when it was beaten. Mr. Reese said so to the Colonel, in so many words, and the Colonel, who had gone to bed over a ham, found it did not taste the way he had expected. He stood up at the end of the meal.</p>
+  <p><em>Elder Ebersole. Whatever is under this roof is yours and your people&rsquo;s. The boilers, the benches, the umbrellas, whatever is good in it and whatever isn&rsquo;t. The roof too, and the posts.</em> He stopped and looked out at the colt. <em>And that horse, if any man of yours will have him.</em></p>
+  <p>The Elder thanked him, and said they would find a use for all of it. Then he turned on the bench and looked at Mallie, who was standing by the end post with a dipper in her hand.</p>
+  <p><em>Whose notion was the last horse?</em></p>
+  <p><em>Mine, Elder.</em></p>
+  <p><em>You were sure of him.</em></p>
+  <p><em>I was sure of your man. I wasn&rsquo;t sure of the horse.</em></p>
+  <p><em>It comes to the same,</em> the Elder said, and that was all he said to her, then or ever.</p>
+  <p>It was afterward, while the girls were clearing, that the brethren got around Gabriel Mantooth by the picket line. Mallie was counting dippers into a basket and heard it.</p>
+  <p><em>Brother,</em> said Daniel from Illinois, <em>tell us truly. When they brought that animal up the lane with a coat on its head, weren&rsquo;t you afraid?</em></p>
+  <p><em>No, brother. I wasn&rsquo;t.</em></p>
+  <p>They looked at one another. They were men who did not swear oaths because their yes was supposed to be yes, and they took a plain untruth harder than most people take a theft. Three of them went straight to the Elder where he sat on a bench with his hat beside him.</p>
+  <p><em>Elder, Brother Gabriel has said a thing that is not so. No man living could take hold of that horse and feel nothing. He says he wasn&rsquo;t afraid. It is either a boast or a falsehood, and he should be spoken to.</em></p>
+  <p>The Elder looked across the grove. Gabriel was at the wash kettle again with his sleeves rolled, and the colt had followed him over and was standing behind him like a dog.</p>
+  <p><em>My son is not afraid,</em> the Elder said. <em>What would he be afraid for? He isn&rsquo;t holding anything.</em> And he said the verse first in the German his mother had it in, and then in English for the young ones.</p>
+  <div class="verse">
+    <p>Furcht ist nicht in der Liebe, sondern die v&ouml;llige Liebe treibt die Furcht aus; denn die Furcht hat Pein. Wer sich aber f&uuml;rchtet, der ist nicht v&ouml;llig in der Liebe.</p>
+    <p class="gloss">There is no fear in love; but perfect love casteth out fear: because fear hath torment. He that feareth is not made perfect in love.</p>
+    <p>&mdash; 1 John 4:18</p>
+  </div>
+  <p>The three brethren stood a while. Then Daniel from Illinois went over to the wash kettle and picked up a towel and began to dry.</p>
+  <p>Mallie Pryce finished counting the dippers. There were fifty. She counted them again, because her eyes had blurred the first time.</p>
+</section>
+
+<section>
+  <h2>VII. Walnut</h2>
+  <p class="dateline">Cass County &middot; autumn 1869</p>
+  <p>The brethren went home on the cars the next week with the meetinghouse roofed. Each man from Illinois and Iowa and Kansas carried a white cotton umbrella under his arm, which caused some talk in the congregations there. The copper boilers went to the sisters on Big Creek for apple butter.</p>
+  <p>The pavilion came down a board at a time. Lon drew the nails himself and would not let his men split a plank. It was good walnut, and by the first frost it had dried to the color of a saddle.</p>
+  <p>That fall anybody on the Harrisonville road could see a bay horse coming along in the shafts of a borrowed wagon with a load of walnut plank, and a young man with no mustache walking at his head. The young man held no line and carried no whip. They went north a long day&rsquo;s haul to a place near the ford on the Little Blue, where a widow and four children had come back in September to a chimney and a cellar hole. The walnut went up around the chimney. It took three weeks.</p>
+  <p>The horse stood in the yard the whole of every day without a halter while the walls rose. Children climbed his legs. A dog slept under him. The hammering started each morning and stopped each night, and the widow came out with water for the man and then, after the first week, with water for the horse. People drove out from town on Sundays to look. Some of them brought a ham.</p>
+  <p>On the last evening Gabriel hung the door and went in and laid a fire, and came out again, and stood by the bay&rsquo;s shoulder to watch the chimney. The horse shut its eyes. After a while the smoke came up out of the old brick, thin and then thicker, and stood straight up over the new roof in the still air.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana, the manly, the noble, the hero, the great sage, the conqueror, the impassible, the accomplished, the awakened.<cite>Dhammapada 422, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, King Pasenadi and the citizens of Sāvatthī take turns feasting the Buddha and his monks, each trying to outgive the other. After six rounds the king lies down in despair, and Queen Mallikā devises the Gifts beyond Compare: a pavilion of sāla wood, golden boats of perfume, noble girls to fan the monks, and five hundred elephants each holding a white parasol over a monk. One monk is left without an elephant, and only rogue elephants remain. The queen has a young rogue stood beside the Elder Aṅgulimāla, once a murderer who wore a garland of his victims&rsquo; fingers; the animal tucks its tail, drops its ears, closes its eyes and stands motionless. The king then gives away everything in the hall. When Aṅgulimāla tells the monks he felt no fear, they accuse him of lying, and the Buddha answers, &ldquo;My son Aṅgulimāla has no fear.&rdquo; Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-39.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Angulimala">Aṅgulimāla</a> and <a href="https://en.wikipedia.org/wiki/Pasenadi">King Pasenadi</a>. The series told how Gabriel Mantooth came to the Brethren in <a href="stand-still.html">Stand Still</a>.</p>
+    <h3>Cass County, Missouri, 1869</h3>
+    <p>Western Missouri came out of the Civil War emptied and burned. In August 1863 <a href="https://en.wikipedia.org/wiki/General_Order_No._11_(1863)">General Order No. 11</a> expelled most rural families from Cass, Jackson and Bates counties, and for years afterward returning families found little standing on their farms but chimneys. The Pacific Railroad reached Pleasant Hill, on Big Creek, in 1865. Missouri&rsquo;s constitution of that year kept former Confederates and their sympathizers from voting, holding office, practicing law, teaching or preaching unless they swore a sweeping test oath. The Supreme Court struck down the oath for clergy in <a href="https://en.wikipedia.org/wiki/Cummings_v._Missouri">Cummings v. Missouri</a> (1867), but the voting ban stood until 1870, and it kept the war&rsquo;s two sides apart in every county seat.</p>
+    <p>The German Baptist Brethren, called Dunkers or Dunkards (see <a href="https://en.wikipedia.org/wiki/Schwarzenau_Brethren">Schwarzenau Brethren</a>), began in Germany in 1708 and came to Pennsylvania in the 1720s. They dressed plainly, refused oaths and lawsuits, and would not bear arms. Many older members in the 1860s still read Luther&rsquo;s German Bible. The Pryces, Mr. Reese, the Big Creek congregation and the dinners are fictional.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Aṅgulimāla from the Dhammapada commentary (verse 422). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-39.htm">The original</a>. Scripture from Luther&rsquo;s German Bible and the King James Version. Written by Claude Fable 5.2.
+  <div class="pager"><a href="thirteen-pleats.html">&larr; Thirteen Pleats</a><a href="index.html">All stories</a><a href="black-honey.html">Black Honey &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Round shadows of white umbrellas pass slowly across the road dust in a long file; the last one in the line does not sway.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, N = 9, gap, R;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    R = Math.max(26, Math.min(46, W / 22)); gap = R * 3.4;
+  }
+  function shade(x, y, r, a) {
+    var g = ctx.createRadialGradient(x, y, r * 0.2, x, y, r);
+    g.addColorStop(0, 'rgba(86,62,34,' + a + ')');
+    g.addColorStop(0.8, 'rgba(86,62,34,' + (a * 0.85) + ')');
+    g.addColorStop(1, 'rgba(86,62,34,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(x, y, r, r * 0.62, 0, 0, Math.PI * 2); ctx.fill();
+  }
+  function draw(now) {
+    var t = reduce ? 0 : now / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var span = W + N * gap + 200;
+    var lead = reduce ? W * 0.82 : ((t * 9) % span) - 100;     // nine pixels a second: a walk
+    var base = H * 0.86;
+    for (var i = 0; i < N; i++) {
+      var x = lead - i * gap, last = (i === N - 1);
+      if (x < -R * 2 || x > W + R * 2) continue;
+      var sway = last ? 0 : Math.sin(t * 0.9 + i * 1.7) * 3.2;
+      var bob = last ? 0 : Math.sin(t * 1.3 + i * 2.3) * 1.6;
+      shade(x + sway, base + bob + (i % 2) * 5, R, last ? 0.105 : 0.075);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size();
+  if (reduce) draw(0); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+
+</script>
+</body>
+</html>

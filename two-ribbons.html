@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Ribbons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a dim church on a rainy Northwest evening, dark theme; in the margins two long faded ribbons, one once red and one once blue, hang from the dark and stir slowly in a draft; datelined sections. */
+  --ground: #15181b;
+  --bg-image: radial-gradient(ellipse at 50% 0%, #232a2f 0%, #15181b 60%) fixed;
+  --paper: #e5e3dd;
+  --paper-dim: #a3a39d;
+  --accent: #d39189;
+  --glow: #9db0c8;
+  --panel: rgba(30,35,39,.78);
+  --rule: rgba(229,227,221,.1);
+  --accent-line: rgba(211,145,137,.4);
+  --title-shadow: 0 0 26px rgba(211,145,137,.2);
+  --body-weight: 300;
+  color-scheme: dark;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg-image), var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: var(--title-shadow); }
+.epigraph { border-left: 1px solid var(--accent-line); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 22.4 &middot; Khema</span></nav>
+<header>
+  <h1>Two Ribbons</h1>
+  <div class="epigraph">Can a man take fire in his bosom, and his clothes not be burned?<br>&mdash; Proverbs 6:27 (Revised Version)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Na ou fa&rsquo;alogo fa&rsquo;apea,</span> at the long tables behind the church on South Tacoma Way.</p>
+
+<section>
+  <h2>I. The Rear Detachment</h2>
+  <p class="dateline">Lakewood, Washington · summer 2009</p>
+  <p>Everyone in Lakewood who knew the Aumua family knew that the youngest son was too good-looking, and said so, the way you might say a house was too close to the river.</p>
+  <p>Iosefa Aumua was twenty-two. He had his mother's eyes, long-lashed and slow, and his father's shoulders, and a smile that he did not seem to know he was using. When he was small the aunties at church passed him from lap to lap and pinched his cheeks until he cried. When he was fifteen the girls from three high schools came to his wrestling meets and sat together in the bleachers in a row and did not watch the other matches. At seventeen he won the state title at his weight at Mat Classic in the Tacoma Dome, pinned a boy from Yakima in the third period, and when the referee raised his arm the noise from the Samoan side of the stands was so loud that people on the other mats stopped to look.</p>
+  <p>His father was Tavita Aumua, Command Sergeant Major, retired. Thirty years in the Army, three wars, a Bronze Star from Mosul he never spoke of, and on the Samoan side of Lakewood he held the family's chiefly title and was called Leaupepe, and on the other side everybody from the post commander's driver to the Korean grocer on South Tacoma Way called him Sergeant Major. He worked now as a civilian on post, in the building where soldiers were processed before they deployed. Every soldier at Fort Lewis who had gone to Iraq or Afghanistan since 2006 had passed by his desk, and he had looked at every one of them over his reading glasses and asked whether their wills were in order, and a good many of the officers on post had been lieutenants under him once, and remembered.</p>
+  <p>Iosefa, whom everyone called Sefa, had enlisted the summer after high school, because his father had and his father's brothers had, and because in American Samoa, where the family came from, so many households had someone in the Army. He made it through basic and through his first year in a Stryker infantry company at Fort Lewis. Then in the spring of 2009, in a pickup game of basketball behind the barracks, he came down wrong on his left knee and tore it apart, and the surgeons at Madigan rebuilt it with a piece of tendon from his hamstring. In July his brigade left for Kandahar without him. He stayed behind on the rear detachment, on a profile, limping, issuing parts in the motor pool, with a few dozen other soldiers who were sick or hurt or waiting on paperwork, and the wives and children of the whole brigade all around him in the family housing and the apartments off Gravelly Lake Drive.</p>
+  <p>There is a cadence the Army has sung on morning runs since the Second World War, about a man named Jody. Jody is the one who stays home. Jody drives your car and wears your clothes and sleeps in your bed while you are overseas, and the platoon sings his name in time with its feet, and laughs, because the joke is that every man running has a Jody somewhere and does not know his name.</p>
+  <p>That summer, at Fort Lewis, his name was Sefa.</p>
+  <p>It started with the wife of a sergeant from his own company. She had a baby and a toddler and a husband in a valley in Afghanistan whose name she could not pronounce, and her car would not start, and Sefa, who was in the parking lot of the commissary, fixed it. He did not mean anything by it. He never meant anything by it. That was the thing about him that his mother, years later, would try to explain to people and fail. The women looked at him and could not look away, and he let them, and did not think, and the not thinking was a kind of sweetness in him, like the smile, that made it worse.</p>
+</section>
+
+<section>
+  <h2>II. The First Time</h2>
+  <p class="dateline">Family housing, Fort Lewis · August</p>
+  <p>The military police found him at two in the morning in the second week of August, coming over the back fence of a duplex in the family housing, with his shoes in his hand.</p>
+  <p>A neighbor had called it in as a prowler. Two MPs came with flashlights and put him against their car and asked him what he was doing, and he told them the truth, more or less, because he could not think of anything else, and one of them laughed and the other did not. They took him to the station. In the morning, because he was a soldier, they called his unit, and his unit sent the rear detachment commander, a tired major named Ochoa who had three hundred families to look after and a list on his office wall of the brigade's wounded and dead that grew every week.</p>
+  <p>Major Ochoa had been a lieutenant in Mosul in 2004, and the platoon sergeant beside him there had been a staff sergeant named Tavita Aumua, who had kept him alive at least twice and taught him most of what he knew about being an officer.</p>
+  <p>He read the blotter. He looked through the glass at Sefa, sitting on the bench in the hallway in yesterday's T-shirt with his shoes still in his hand, and he saw the Sergeant Major's face in the boy's face, and he felt something he would describe later to his wife as shame, though it was not his shame. He thought about what he was supposed to do. Adultery was a crime under the Uniform Code of Military Justice, Article 134, if it brought discredit on the service, and this was the kind of thing that brought discredit. The woman's husband was in a platoon that had lost two men the week before.</p>
+  <p>The major tore the page out of the blotter, folded it into quarters and put it in his pocket. He went out into the hallway and stood in front of Sefa for a moment. Then, without saying anything to him at all, he jerked his head toward the door, and Sefa got up and went out.</p>
+  <p>He did not tell the Sergeant Major. He told himself it would not happen again.</p>
+</section>
+
+<section>
+  <h2>III. The Knock</h2>
+  <p class="dateline">An apartment off Gravelly Lake Drive · September</p>
+  <p>It happened again.</p>
+  <p>The second woman's husband was a specialist in the scouts, and she lived in an apartment complex outside the gate, off Gravelly Lake Drive, with a view of the parking lot and a picture of him in his uniform on the television. She was twenty years old. She had come out from Ohio to marry him a month before he deployed, and she did not know anyone in Washington, and it rained.</p>
+  <p>At six-thirty on a Sunday morning in September, somebody knocked on her door.</p>
+  <p>Sefa woke at the sound and saw her face. She was sitting straight up in the bed, with the sheet held against her, absolutely still, and her face had gone the color of the wall.</p>
+  <p>Every wife at Fort Lewis knew about the knock. The Army did not tell you on the telephone. When your husband was killed the Army sent two soldiers in dress greens to your door, an officer and a chaplain, and they stood on your step until you opened it, and you knew before they said a word. They came between six in the morning and ten at night. Every woman in that apartment complex had at some point looked out a window at a car pulling into the lot and stopped breathing until it parked in front of somebody else's door. That autumn the brigade's dead were coming home from the Arghandab valley week after week. There had been memorials at the chapel on post nearly every Thursday. The women went to all of them.</p>
+  <p>The knock came again. She got up, holding the sheet, and went down the hall like a sleepwalker, and he heard her open the door.</p>
+  <p>It was not the notification team. It was two MPs. The woman downstairs, whose husband was in the same troop, had seen a man go up the stairs at midnight and had called the gate.</p>
+  <p>He heard what she said to them in the doorway. It was not words, really. It was the sound a person makes when they have been dropped from a great height and caught at the last second, and it was relief, and terror, and shame, all in the one breath, and he would hear it at night for years.</p>
+  <p>He sat on the edge of the bed in her husband's apartment and looked at her husband's picture on the television, and he was afraid too. He was more afraid than he had been on the mat in the Tacoma Dome, more afraid than on the operating table at Madigan, and the fear was not of the MPs. It was of what he had just heard. And the strange thing, the thing he could not have explained to anyone, was how little there had been underneath all that fear, how small the thing was that they had been doing, the two of them, in the dark, frightened, listening for cars.</p>
+  <p>The MPs took him in again. Major Ochoa came again. He looked at the report and looked at the boy on the bench, and he thought about the specialist in the scouts, and he thought about Staff Sergeant Aumua in Mosul pulling him down behind a wall by his body armor. He tore the page out of the blotter a second time. This time he did not even go out into the hallway. He sent a sergeant to tell Sefa he could go.</p>
+</section>
+
+<section>
+  <h2>IV. The Third Time</h2>
+  <p class="dateline">Lakewood · October</p>
+  <p>The third time it was a Samoan woman, and that was the end of it, because there are no secrets on the Samoan side of Lakewood. Her husband was a sergeant in the same brigade, from a family in Carson that knew the Aumuas, and her mother-in-law sang in the same church choir as Sefa's mother. The MPs caught him in the parking lot of her building at four in the morning, sitting in his truck with the engine off, waiting for her neighbor's lights to go out. There was nothing on the blotter but a man in a truck. Major Ochoa let him go a third time, and said nothing a third time, and went home and told his wife he did not know what he was going to do.</p>
+  <p>But by the next Sunday the women of the church knew. By Sunday night the men knew, and by Monday morning Sefa's uncle Pita knew, because Pita knew everything that happened among the Samoans of Pierce County, sooner or later, across his kitchen table.</p>
+  <p>Pita was the Sergeant Major's older brother. He had never been in the Army. He had worked thirty years on the docks at the Port of Tacoma, and since he retired he had done one thing, which was feed people. Every Sunday after church his house on the Hilltop filled up with whoever was hungry, young soldiers far from home, Tongans, Fijians, white boys from Kentucky in their PT shorts, old men who lived alone, a homeless veteran who came every week and never said his name. Pita made an umu in the backyard, an earth oven, when it was not raining, and when it was raining he made one anyway under a blue tarp, and there was taro and palusami, the young taro leaves cooked in coconut cream, and pork, and chop suey the Samoan way, and he sent everybody home with a foil pan. People said nobody in Tacoma had gone hungry on a Sunday in twenty years if they knew the way to Pita's. People called his house the Hilltop Embassy. When he retired, his wife had wanted to go home to the family land in Leone, on Tutuila, and so had he, and the tickets were bought, and in the end he stayed, and sent her for a month every year instead, because, he said, if he went home, who would cook?</p>
+  <p>Pita drove to his brother's house on Monday morning and sat down at the kitchen table and told him.</p>
+  <p>The Sergeant Major did not say anything for a long time. Then he took off his reading glasses and folded them and put them in his shirt pocket. He telephoned Major Ochoa, and Major Ochoa, who had been dreading the call for two months, told him everything, all three times, and apologized, and the Sergeant Major said, <em>Sir, you did nothing wrong, you did me a kindness,</em> and hung up, and sat at the kitchen table with his hands flat on it.</p>
+  <p>Sefa came home from the motor pool at five. His father was still sitting there.</p>
+  <p><em>Put on a white shirt,</em> said his father. <em>And your lavalava. We're going to see the faifeau.</em></p>
+</section>
+
+<section>
+  <h2>V. The Faifeau</h2>
+  <p class="dateline">The parsonage, South Tacoma · that evening</p>
+  <p>The Reverend Elisaia Tuilagi had come to Seattle from Apia in 1964, the year the first Samoan Congregational church in Washington was started in the south end of Seattle, and he had been the pastor of the Samoan church in Tacoma for thirty-one years. He was seventy-nine. He had baptized Sefa, and Sefa's older brothers and sisters, and he had married the Sergeant Major's daughters and buried the Sergeant Major's mother. He was a heavy, slow, silent man with a white crew cut and enormous hands, and on Sundays he preached in Samoan for an hour and the children slept against their mothers and the old people wept, and on weekdays he hardly spoke at all.</p>
+  <p>His wife let them in. The parsonage smelled of fried bananas and of the rain. The Reverend Elisaia was sitting in an armchair in the front room, under a framed picture of the church in Apia where he had been ordained, with his Bible on his knee, and he did not get up. The Sergeant Major sat down on the couch. Sefa remained standing, because nobody told him to sit.</p>
+  <p><em>Faifeau,</em> said his father, <em>my son has something to tell you.</em> And then, to Sefa, in the voice that had once carried across parade grounds: <em>All of it.</em></p>
+  <p>So Sefa told the old man all of it, standing in the front room of the parsonage in his white shirt and lavalava with his hands at his sides. He told it badly, with long stops. He told about the car at the commissary and the fence and the shoes in his hand. He told about the apartment off Gravelly Lake Drive and the picture on the television. He told about the knock, and when he got to the sound she had made at the door, he could not go on for a while, and nobody helped him. He told about the woman in Carson's family and the truck in the parking lot. He told about Major Ochoa tearing the page out of the blotter three times without saying a word to him.</p>
+  <p>When he was finished, his father said, quietly, to the old man, <em>Teach him. Please. I can't.</em></p>
+  <p>The Reverend Elisaia had listened to all of it with his eyes closed. He opened them now and looked at Sefa for a long time, a heavy, unhurried, not unkind look, the way a man looks at weather coming in over the water. Then he opened the Bible on his knee, which was the Samoan Bible the missionaries had made, and read from Proverbs in Samoan. Then, because Sefa's Samoan was a church Samoan, a grandmother Samoan, good for prayers and scoldings and not much else, he took the old English Revised Version from the side table, which had been given to him when he was a young man in Apia, and read the same thing again in English, slowly, with his finger on the page.</p>
+  <div class="verse">
+    <p>Can a man take fire in his bosom, and his clothes not be burned? Or can one walk upon hot coals, and his feet not be scorched?</p>
+    <p>He that committeth adultery with a woman is void of understanding: he doeth it that would destroy his own soul. Wounds and dishonour shall he get; and his reproach shall not be wiped away.</p>
+    <p>&mdash; Proverbs 6:27–28, 32–33 (Revised Version)</p>
+  </div>
+  <p>He closed the book on his finger.</p>
+  <p><em>Four things,</em> he said. His voice was very deep and very quiet. <em>I have watched this happen to men for fifty years, in Apia and Pago and Seattle and here. There are four things, always. First the soul. You lose something you cannot buy back. Second the bed. You have not slept, I think.</em></p>
+  <p>Sefa shook his head. He had not slept through a night since September.</p>
+  <p><em>You lie down on coals. Third, the name. Your name, your father's name, his title, your mother at choir practice. Fourth,</em> and he opened the book again and turned back a few pages, <em>this.</em></p>
+  <div class="verse">
+    <p>Stolen waters are sweet, and bread eaten in secret is pleasant. But he knoweth not that the dead are there; that her guests are in the depths of Sheol.</p>
+    <p>&mdash; Proverbs 9:17–18 (Revised Version)</p>
+  </div>
+  <p><em>Sweet,</em> said the old man. <em>Tell me how sweet it was. A man who is afraid and a woman who is afraid, in the dark, listening for the car. Tell me how sweet.</em></p>
+  <p>Sefa could not answer.</p>
+  <p><em>And the husbands,</em> said the Reverend Elisaia, <em>are soldiers. And the Army has its law, and the major will not tear up the paper a fourth time. And one of these husbands will come home from Kandahar, and nobody will tear up anything. That is the rage of a man, the book says. He will not regard any ransom. You know that. Your father knows that. The major knew it, and was kind to you three times, for your father's sake, and you used up his kindness like a boy using up his mother's money.</em></p>
+  <p>He was quiet for a while. The rain ran down the window behind him.</p>
+  <p><em>But the worst is not the husbands,</em> he said. <em>The worst is the dead. You heard the woman at the door. You heard what was in her. Those women go to the chapel every Thursday and stand there with their children for the men who are not coming home, and you went into their houses. That is the place the book means. You have been living in the depths, my son, with the dead all around you, and you did not know where you were.</em></p>
+  <p>Sefa stood in the front room of the parsonage, and something gave way in him.</p>
+  <p>He said afterward that it was like the knee, in the basketball game behind the barracks, that moment of coming down and hearing the inside of himself make a sound, and knowing before the pain came that something had changed and was not going to change back. He saw the women's faces, all three of them, and their husbands' faces in the pictures, and Major Ochoa's face, and his father's, and his mother's at choir practice, and he saw the knock at the door and the sound, and he saw himself, and it was as if he had been looking at everything through a window with the curtains drawn and somebody had opened them. He did not fall down. He stood there in his lavalava and wept like a child, without covering his face, and his father did not look away, and the old man did not look away, and the rain came down on South Tacoma Way.</p>
+  <p>The Reverend Elisaia's wife said later that she had heard it from the kitchen, and had put the bananas aside, and had known there was no need to go in.</p>
+</section>
+
+<section>
+  <h2>VI. The Ribbons</h2>
+  <p class="dateline">The church on South Tacoma Way · November</p>
+  <p>He went to Major Ochoa the next morning, by himself, and asked to make a statement. The major looked at him for a long moment, then got out the form. Sefa took an Article 15 that winter and a reduction in rank, and a letter in his file that followed him the rest of his time in the Army, and he did not complain about any of it. In January he wrote three letters, and the Reverend Elisaia read them and told him to burn two of them, and he did, and mailed the third, to the husband in Carson's family, who did not answer. Some debts are not paid. He knew that now. He went to the chapel on post every Thursday that the memorials went on, and stood at the very back, by the door, in uniform, and left before the end, so as not to be seen.</p>
+  <p>The women stopped looking at him. Or perhaps they looked at him the same as before, and he did not notice, because he no longer looked back. His mother said that his face had changed; that it was the same face, and that she could not explain it. Uncle Pita said it was simpler than that. He said the boy had finally put down a fork and gone to wash the dishes.</p>
+  <p>On the Sunday before Thanksgiving, after the service, the Reverend Elisaia called Sefa over to the front of the church, near the pulpit, where the big brass cross hung on the wall above the communion table, polished every Saturday by the women's committee until it shone like gold. The old man pointed up at it with one enormous hand. Two ribbons were tied around the foot of the cross, at the back, where you could hardly see them from the pews. They had been there so long that they were the color of the wall. One had been red once, and one blue.</p>
+  <p><em>You remember,</em> said the Reverend Elisaia.</p>
+  <p>Sefa remembered. He had not thought of it in five years.</p>
+  <p>It was the Sunday after Mat Classic, when he was seventeen. He had come to church with his two medals, the regional and the state, in the pocket of his good trousers, and after the service, while everybody was outside on the steps, he had climbed up on the communion table in his socks and tied the two ribbons from the medals around the foot of the cross, because a cousin had dared him and because he was happy. Then, standing on the table, with his arms up, he had said a prayer out loud, the kind of prayer a boy of seventeen says to make his cousins laugh. He had asked God to make every girl who ever saw him fall in love with him. Then, being careful, he had added: except my sisters, and my cousins. His cousins had laughed until they fell into the pews, and the Reverend Elisaia, who had come back in for his glasses, had stood in the doorway and watched the whole thing, and said nothing, and never taken the ribbons down.</p>
+  <p><em>Children pray for all kinds of things,</em> said the old man. <em>Most of the time God is merciful and does not listen. Sometimes He gives them what they ask, so they can find out what it weighs.</em></p>
+  <p>Sefa climbed up on the communion table in his socks. He reached up behind the brass cross and untied the two ribbons, one and then the other, slowly, with his fingers, because the knots had gone hard as wood, and climbed down. He stood in front of the pulpit with them in his open hand. They were light as nothing. They had faded to the color of dust, one with a little pink still in it along the fold and one with a little grey, and they lay across his palm in the light from the windows like two dry leaves.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Four things does a wreckless man gain who covets his neighbour&rsquo;s wife,&mdash;a bad reputation, an uncomfortable bed, thirdly, punishment, and lastly, hell.<cite>Dhammapada 309, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">There is bad reputation, and the evil way (to hell), there is the short pleasure of the frightened in the arms of the frightened, and the king imposes heavy punishment; therefore let no man think of his neighbour&rsquo;s wife.<cite>Dhammapada 310, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Khema, a rich man&rsquo;s son and nephew of the great donor Anāthapiṇḍika, is so handsome that women who see him cannot help themselves, and he runs after other men&rsquo;s wives. Three times the king&rsquo;s men arrest him at night, and three times the king, ashamed before the boy&rsquo;s father, lets him go without a word. When the father hears, he takes his son to the Buddha and makes him tell the whole story, and the Buddha answers with these verses; Khema is stirred to conscience and enters the stream. The commentary explains his beauty by a past life: as a champion wrestler in the time of an earlier Buddha, he planted two colored banners on a golden shrine and wished that every woman who saw him, except his kinswomen, would fall in love with him. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-04.htm">the full commentary story</a>.</p>
+    <h3>Fort Lewis, 2009</h3>
+    <p>In the summer of 2009 a Stryker brigade from Fort Lewis deployed to Kandahar province in the <a href="https://en.wikipedia.org/wiki/War_in_Afghanistan_(2001%E2%80%932021)">war in Afghanistan</a> and took heavy losses in the Arghandab valley that autumn. On February 1, 2010, Fort Lewis and McChord Air Force Base merged into <a href="https://en.wikipedia.org/wiki/Joint_Base_Lewis%E2%80%93McChord">Joint Base Lewis&ndash;McChord</a>, the Army&rsquo;s main installation west of the Rockies, beside <a href="https://en.wikipedia.org/wiki/Lakewood,_Washington">Lakewood</a> and Tacoma. Deaths are reported to families in person by a uniformed casualty notification team. Adultery that brought discredit on the service was a crime under Article 134 of the <a href="https://en.wikipedia.org/wiki/Uniform_Code_of_Military_Justice">Uniform Code of Military Justice</a>; since 2019 the offense has been called extramarital sexual conduct. Soldiers have long sung about &ldquo;Jody,&rdquo; the civilian who stays home with your girl, in the marching chants called <a href="https://en.wikipedia.org/wiki/Military_cadence">jody calls</a>.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Samoan_Americans">Samoan Americans</a> have served in the U.S. armed forces in large numbers since the Second World War, and the Seattle&ndash;Tacoma area has one of the larger Samoan communities on the mainland; the first Samoan Christian Congregational church in Washington was founded in southeast Seattle in 1964. Washington&rsquo;s high school wrestling championships, Mat Classic, are held each February in the <a href="https://en.wikipedia.org/wiki/Tacoma_Dome">Tacoma Dome</a>. The Reverend Elisaia reads Proverbs from the Samoan Bible translated by the London Missionary Society, and then from the English Revised Version of 1885.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Khema from the Dhammapada commentary (verses 309 and 310). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-04.htm">The original</a>. Scripture from the English Revised Version (1885). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-deed-reading.html">&larr; The Deed Reading</a><a href="index.html">All stories</a><a href="the-ear-mark.html">The Ear-Mark &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, ribbons;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    var col = Math.min(W, 640), left = (W - col) / 2;
+    var xl = left > 70 ? left * 0.45 : W * 0.06, xr = left > 70 ? W - left * 0.45 : W * 0.94;
+    ribbons = [
+      { x: xl, len: H * 0.52, w: 11, col: [205, 140, 132], ph: 0.0, sp: 0.00021 },
+      { x: xr, len: H * 0.46, w: 10, col: [150, 170, 196], ph: 2.1, sp: 0.00017 }
+    ];
+  }
+  function ribbon(r, t) {
+    var n = 40, pts = [];
+    for (var i = 0; i <= n; i++) {
+      var f = i / n, y = -4 + f * r.len;
+      var sway = Math.sin(t * r.sp * 6.283 + r.ph - f * 2.4) * (4 + 22 * f * f)
+               + Math.sin(t * r.sp * 2.7 + r.ph * 1.7 - f * 5) * 3 * f;
+      var twist = Math.cos(t * r.sp * 4.1 + r.ph - f * 3.2);
+      pts.push({ x: r.x + sway, y: y, tw: twist });
+    }
+    for (var j = 0; j < n; j++) {
+      var a = pts[j], b = pts[j + 1];
+      var hw = r.w / 2 * (0.25 + 0.75 * Math.abs(a.tw));
+      var lit = 0.10 + 0.10 * (a.tw * 0.5 + 0.5);
+      ctx.fillStyle = 'rgba(' + r.col[0] + ',' + r.col[1] + ',' + r.col[2] + ',' + lit + ')';
+      ctx.beginPath();
+      ctx.moveTo(a.x - hw, a.y); ctx.lineTo(a.x + hw, a.y);
+      ctx.lineTo(b.x + hw, b.y + 0.6); ctx.lineTo(b.x - hw, b.y + 0.6);
+      ctx.closePath(); ctx.fill();
+    }
+    // the cut end, forked like a medal ribbon
+    var e = pts[n], hw2 = r.w / 2;
+    ctx.fillStyle = 'rgba(' + r.col[0] + ',' + r.col[1] + ',' + r.col[2] + ',0.14)';
+    ctx.beginPath(); ctx.moveTo(e.x - hw2, e.y); ctx.lineTo(e.x, e.y + 9); ctx.lineTo(e.x + hw2, e.y);
+    ctx.lineTo(e.x + hw2, e.y + 14); ctx.lineTo(e.x, e.y + 7); ctx.lineTo(e.x - hw2, e.y + 14); ctx.closePath(); ctx.fill();
+  }
+  function frame(t) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < ribbons.length; i++) ribbon(ribbons[i], t);
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size();
+  if (reduce) frame(1200); else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); if (reduce) frame(1200); });
+})();
+</script>
+</body>
+</html>

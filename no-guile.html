@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>No Guile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on kitchen muslin in August; now and then a faint steel needle shows in the margin, a seed slides off its point and drops, and both fade; datelined sections. */
+  --muslin: #f1ebdf;
+  --muslin-2: #e6dece;
+  --ink: #2d2721;
+  --ink-dim: #70665a;
+  --brine: #5d6f33;
+  --seed: #a77b1e;
+  --steel: #7e8a91;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, #f9f5ec 0%, var(--muslin) 60%) fixed, var(--muslin);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(45,39,33,.2); }
+.series a:hover { color: var(--brine); }
+a:focus-visible { outline: 2px solid var(--brine); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--brine); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(93,111,51,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--seed); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--brine); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(230,222,206,.82); border: 1px solid rgba(45,39,33,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--seed); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(45,39,33,.12); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--brine); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--brine); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(45,39,33,.14); border-bottom: 1px solid rgba(45,39,33,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--brine); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--brine); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--brine); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--brine); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(230,222,206,.82); border-left: 2px solid var(--brine); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.24 &middot; Mah&#257; Panthaka</span></nav>
+<header>
+  <h1>No Guile</h1>
+  <div class="epigraph">Behold an Israelite indeed, in whom is no guile!<br>&mdash; John 1:47</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Now this is how I heard it,</span> in the barbershop on Depot Street.</p>
+
+<section>
+  <h2>I. The Count</h2>
+  <p class="dateline">The grove on the Tombigbee &middot; August 1959</p>
+  <p>By Monday the men in the grove had told it to each other so many times that it had worn smooth, like a step. They told it at the well in the morning, filling the buckets. They told it walking into Caddo Springs with their tin pails, two by two, along the sand road. They told it at night by the fire on the riverbank, where Brother Sutton was not, because Brother Sutton had walked up to Demopolis on Sunday to sit with a dying man and had not come back.</p>
+  <p>They told it about Wayland.</p>
+  <p><em>Put him out,</em> said the man from Sumter County, whose name was Ike Walley, and who had sharecropped cotton for thirty years for a man who once docked him a week for a broken hoe handle. <em>His own brother. Walked him out past the last row like you&rsquo;d walk a dog off to shoot it.</em></p>
+  <p><em>He wasn&rsquo;t ugly about it,</em> somebody said.</p>
+  <p><em>That&rsquo;s what I&rsquo;m saying. That&rsquo;s worse.</em></p>
+  <p>The veteran, Royce Pettaway, who had been at the Chosin Reservoir and did not sleep, said nothing for a long time, and then said the thing they had all been coming around to. <em>Doctor asked him how many. He said forty-nine. Little was standing at the well with a bucket in his hand, fifty feet off. Forty-nine.</em></p>
+  <p>The white boy from Mobile, Dale, with the burn scars up both arms, said he had seen Wayland&rsquo;s face Saturday night at the doctor&rsquo;s table, when Brother Sutton looked down the benches and said <em>Little</em> instead of anybody else. He said he had seen a face like that once, on a man at the shipyard watching another man get the foreman job. Two or three of the others nodded. They had seen it too.</p>
+  <p>Mr. Teague, who had been the worst drunk in Marengo County and was now nothing at all, which he said was better, poked the fire and said it in the slow, reasonable way he said everything now, as if he were reading it off a sign.</p>
+  <p><em>Well. It just goes to show. You can come out here and give up your name and your money and your liquor and your wife, and sit under these trees till you&rsquo;re forty, and it&rsquo;s still in there. A man gets mean. Even the best one we got. It&rsquo;s still in there somewhere.</em></p>
+  <p>Nobody said it wasn&rsquo;t.</p>
+  <p>Wayland was on the other side of the fire with the roll book on his knee, writing down who would walk which road in the morning. He heard every word of it. Everybody knew he heard. He finished the list, and tore it out, and tacked it to the pecan by the well where it always went, and went to bed.</p>
+</section>
+
+<section>
+  <h2>II. The Back Doors</h2>
+  <p class="dateline">Caddo Springs &middot; the same week</p>
+  <p>It went into town with them. That was how things went in Caddo Springs; you could not set a word down on the sand road without it walking itself up to Depot Street by noon. Marcus Coleman, who was eleven and had seen the grove full of men and had not slept right since, told it in the barbershop on Depot Street on Tuesday, the part about the grove and the part about the gate, and when the barber asked him why Little had not been at the supper in the first place, he told that too. By Wednesday the women at Mount Pisgah knew it. By Wednesday night it had gone up the hill.</p>
+  <p>Wayland walked his road every morning that week, the same as always, the road he had set for himself, which was the long one, out past the gin to the Negro quarter by the tracks and then up the back alley behind the big houses on the hill. He stood at back doors with his tin pail and his eyes on the ground and took what people gave, and said thank you either way, the way Brother Sutton had taught them. Some doors gave him the same as always. Some doors that had always given him something gave him nothing that week, and looked at him a while through the screen first, so that he would know it was not for lack of biscuits.</p>
+  <p>He said thank you either way.</p>
+  <p>On Thursday he came up the alley to the kitchen door of the Pruett house, where Hattie Greer had cooked for thirty-eight years, and where for three years she had put something in his pail every morning without being asked: a biscuit and a piece of side meat, a jar of figs, a cold sweet potato wrapped in a napkin with his initials sewn in the corner because she had sewn them. She came to the screen. She was drying her hands on her apron. She looked at him through the wire for a long time, the boy she had taken up the carriage house stairs at thirteen years old in the dark and fed, the boy whose sums she had checked by lamplight because his grandfather only came on Sundays.</p>
+  <p><em>Morning, Miss Hattie.</em></p>
+  <p>She did not open the screen. She did not say anything at all. After a while she turned around and went back to the stove, and he stood at the bottom step with his pail a decent minute, the way you are supposed to, and then he said <em>Thank you, Miss Hattie,</em> to the screen, in the same voice he had always said it, and went on up the alley.</p>
+  <p>She heard him say it. She stood at the stove with her back to the door and her hand on the handle of a skillet that had nothing in it, and she did not turn around, and she was angrier at him for that than for anything.</p>
+</section>
+
+<section>
+  <h2>III. The Face</h2>
+  <p class="dateline">The grove &middot; the same week</p>
+  <p>Here is what Wayland knew, and did not say, because nobody asked him, and because a man who stands up to explain himself has already started to tell a story about himself, and he had come out to the grove to stop doing that.</p>
+  <p>He knew he had watched his brother for four months with the lily verse. He had heard him at the well and in the outhouse and walking the sand road and in his sleep, saying the first two lines and losing the second two, every day, over and over, like a man bailing a boat with a sieve. He had watched it wear Little down. He had seen him stop eating. He had seen him sit at the back during Brother Sutton&rsquo;s talks with his hands between his knees and his face shut, a boy who could name every bird on the river by the sound of its wings, being made to feel stupid every day by the one thing in the world he loved. Wayland knew, because he had been out to the grove three years and had watched men come and go, that a man can sit under the pecans until he dies and get nothing out of it but sore knees and shame, and that the shame is worse than the drinking it replaced. He had seen two men go back to the bottle from it. He did not intend to see his brother go.</p>
+  <p>And he knew there were men in town who would have given anything for the place Little was taking up. That was true too. A man had come out from Linden in July and stood at the gate two days and been turned away because there was no room under the trees.</p>
+  <p>So he had walked Little out past the last row and said it. He had not been angry. He had looked inside himself for anger beforehand, carefully, the way Brother Sutton taught them to look, the way you look under a house for a snake, and there had not been any there. There had been something heavy, like a sack of feed carried a long way, and he had set it down.</p>
+  <p>Then the doctor had asked how many, and he had said forty-nine, because it was true. He had already taken Little off the roll. He did not keep a roll that said a thing that was not so.</p>
+  <p>And then Saturday night, under the doctor&rsquo;s bulbs, Brother Sutton had looked down the table and said <em>Little,</em> and Little had stood up and said the lily verse, all four lines, and kept going.</p>
+  <p>Wayland had felt it in his face before he knew what it was. It had felt like a cramp. It was the feeling of having held one end of something heavy for four months, for a whole spring and summer, and of feeling the other end lifted, all at once, by somebody else. It was so strong it hurt. He had not known what his face was doing. He had found out afterward, from the way the men looked at him.</p>
+  <p>All week he heard what they said it was. Each time, he turned around inside himself and looked again, honestly, the way you go back to check a stove you know good and well you turned off. Each time there was nothing there but the stove, cold. He did not hold it against them that they saw something else. He would have seen something else too, if it had been somebody else&rsquo;s face. He kept the roll and set the roads and walked the long one himself every morning and said thank you at the back doors, and what they said about him came down on him all week like dust on a hat, and he brushed it off at night without thinking about it, and in the morning there was more, and he brushed that off too.</p>
+  <p>Little did not take part. He was the only one in the grove who did not. When the men started in at the well he would pick up his bucket and go, and once, when Ike Walley said something about Wayland to his face, expecting to be thanked for it, Little looked at him the way he looked at a bird he had not seen before, and said, <em>Mr. Ike, I don&rsquo;t believe you know my brother,</em> and went off down to the river. He still had the handkerchief in his shirt pocket, folded square, grey as a mule&rsquo;s flank. He had not washed it.</p>
+</section>
+
+<section>
+  <h2>IV. The Needle</h2>
+  <p class="dateline">The Pruett kitchen &middot; Friday morning</p>
+  <p>Brother Sutton came back from Demopolis on Thursday night, and Friday morning he walked into town with his tin pail like any other man, and his road that day, for no reason anybody could see, took him up the alley to the Pruett kitchen.</p>
+  <p>Hattie Greer was putting up pickles. It was the time of year for it. There were cucumbers soaking in a crock of brine on the floor, and quart jars in a row on the table, and a bowl of little yellow mustard seed, and dill, and garlic, and the whole kitchen smelled of vinegar coming to a boil. She had a needle stuck in the front of her apron, because she had been letting out the seam in Mrs. Pruett&rsquo;s housedress between batches, and she was in no humor for anybody.</p>
+  <p>She opened the screen for him. She would not have opened it for anybody else from the grove that week. She put a biscuit in his pail with more force than a biscuit needs.</p>
+  <p><em>You come about Wayland,</em> she said.</p>
+  <p><em>I come for breakfast,</em> said Sutton. <em>But go ahead.</em></p>
+  <p>She went ahead. She told him about carrying the two of them up the carriage house stairs in 1952 with paper tags pinned to their jackets. She told him about Little&rsquo;s wandering sums and the old man setting the tablet down like it might break. She told him about the eleven dollars she had given Little a nickel at a time for seven years, against the day, and how the day had come, and it was his own brother brought it. She told him she had raised that boy Wayland and she did not know where he had learned to be so cold, because it was not from her. She was crying by the end, the way she did everything, without any noise.</p>
+  <p>Sutton heard all of it. Then he reached over and took the needle out of the front of her apron, gently, the way you take a splinter out of a child, and held it up between his thumb and his finger with the point to the ceiling. With his other hand he picked one mustard seed out of the bowl on the table and set it on the point of the needle.</p>
+  <p>It fell off. It ticked on the oilcloth and rolled.</p>
+  <p>He set another one on the point. It fell off.</p>
+  <p><em>Try it,</em> he said, and held the needle out.</p>
+  <p>Hattie looked at him like he had lost his mind. Then, because she had a habit of doing what was in front of her, she took the needle and a seed and tried. She had threaded ten thousand needles in her life by lamplight with her eyes half shut. She set that seed on the point as careful as she had ever done anything. It sat for no time at all. It fell off.</p>
+  <p><em>That&rsquo;s that boy,</em> Sutton said. <em>You can set anything you want on him. Mean. Proud. Jealous. Cold. I been watching three years. It don&rsquo;t stay. There&rsquo;s nothing on him for it to hold to.</em> He took his pail off the table. <em>He did what he did for his brother, Miss Hattie. Not against him. He put the thing first that ought to come first, and he put himself last behind it, and his brother right behind himself. That&rsquo;s all it was.</em></p>
+  <p>He went out the screen door and down the step. Hattie stood at the table with the needle in her hand. On the oilcloth in front of her there were three mustard seeds, small and round and yellow, and she looked at them for a long time while the vinegar boiled over on the stove behind her and hissed in the burner and filled the kitchen with steam.</p>
+</section>
+
+<section>
+  <h2>V. The Fire</h2>
+  <p class="dateline">The riverbank &middot; Friday night</p>
+  <p>That night by the fire they started in on it again, because it had become the thing they did by the fire, the way some men whittle. Ike Walley said it. Dale said it. Mr. Teague said his piece about how it is still in there, even in the best one, and Royce Pettaway said forty-nine. Wayland was not there. He had walked out to the Mabry gate after supper to sit with the man from Linden, who had come back and was sleeping by the road, to tell him there was a place for him now.</p>
+  <p>Brother Sutton came down from his cot and stood at the edge of the firelight with his hands in his pockets, and they did not hear him until he spoke.</p>
+  <p><em>What are y&rsquo;all sitting here talking about?</em></p>
+  <p>They told him. It took a while, because they each told their part, and they had had a week to get good at it. He listened to the whole thing with his head a little to one side, the way he listened to everything, as if it were music from a long way off and he was trying to make out the tune.</p>
+  <p><em>No,</em> he said, when they were done.</p>
+  <p>It was quiet enough to hear the river.</p>
+  <p><em>That man doesn&rsquo;t have it in him,</em> Sutton said. <em>Not mean, not proud, not jealous. Not the thing you saw on his face Saturday either, Dale. I saw his face too. I was looking right at it. You saw a man getting passed over. I saw a man that had been carrying a load uphill by himself since April and just felt somebody take the other end. That&rsquo;s all that was.</em></p>
+  <p><em>He put his own brother out,</em> Ike Walley said. <em>I heard him.</em></p>
+  <p><em>He did. And he&rsquo;d do it again. He put that boy out because he put the teaching in front of everything, his brother and himself both, and he loved his brother enough to say it to his face and take what come of it. You think that&rsquo;s easy? You try it. You go up the hill tomorrow and tell somebody you love the plain truth about theirself, with no meanness in it, and walk away, and let the whole county call you cold for a week, and say thank you at every back door that shuts on you. You try it and see what&rsquo;s in you.</em></p>
+  <p>Nobody said anything. Mr. Teague looked into the fire.</p>
+  <p><em>There&rsquo;s a place in John,</em> Sutton said, after a while, quieter, <em>where they bring a man to Jesus that hadn&rsquo;t done a thing yet. Hadn&rsquo;t preached, hadn&rsquo;t healed nobody, hadn&rsquo;t said hardly a word. Just a man walking up. And Jesus looked at him coming, and said this.</em></p>
+  <div class="verse">
+    <p>Jesus saw Nathanael coming to him, and saith of him, Behold an Israelite indeed, in whom is no guile!</p>
+    <p>&mdash; John 1:47</p>
+  </div>
+  <p><em>That&rsquo;s all,</em> he said. <em>No guile. Nothing hid. Nothing in there for it to catch on. You can know a man like that by the way he walks up to you. I knew Wayland Reed the first Sunday he walked into this grove, at seventeen, and sat down at the back, and listened, and asked me could he stay. I knew it then.</em></p>
+  <p>He stood a while longer. Then he said goodnight to them and went back up toward his cot, and halfway there he turned around, as if he had forgotten something.</p>
+  <p><em>Royce,</em> he said. <em>How many are we tonight?</em></p>
+  <p>Royce Pettaway looked around the fire, and out at the dark under the pecans where the cots were, and up at the gate.</p>
+  <p><em>Fifty-one,</em> he said. <em>Counting the new man from Linden that Wayland went out to fetch.</em></p>
+  <p><em>That&rsquo;s right,</em> said Sutton, and went to bed.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Hattie Greer did not say anything to anybody about the needle. But on Saturday morning, when Wayland came up the alley with his pail, the screen door was already open and propped with a brick, and there was a plate on the step with a napkin over it, and on the napkin, in the corner, his initials, which she had sewn there herself in 1953, in blue thread. He ate on the step. When he brought the plate in she was at the stove with her back to him, and she did not turn around, and she said, to the skillet, <em>Charity suffereth long,</em> and he said, <em>Yes ma&rsquo;am,</em> and she said, <em>Is not easily provoked,</em> and he said, <em>No ma&rsquo;am, I don&rsquo;t guess it is,</em> and she said, <em>Well, go on, then,</em> and he went on.</p>
+</section>
+
+<section>
+  <h2>VI. The Roll</h2>
+  <p class="dateline">The grove &middot; 1983</p>
+  <p>The reporter from Birmingham came down in the spring of 1983, twenty-four years later, because Marcus Coleman, who was a doctor himself by then, with his father&rsquo;s practice on Hackberry Street, had told him the story of the full grove over a long lunch at a medical meeting, and the reporter had thought it would make a Sunday feature. He drove out to the Mabry place in a rented Chevrolet. Brother Sutton had been dead nine years and was buried at the edge of the pecans under a fieldstone with nothing on it. Little Reed talked to the men under the trees in the afternoons now, and there were seventy of them, and people came from as far as Atlanta to sit at the back. Little would not talk to the reporter about himself. He said he did not have anything to say about himself that the reporter would find interesting, and went down to the river.</p>
+  <p>So the reporter talked to Wayland. Wayland was forty-four. He still kept the roll and set the roads, and he still walked the long one himself every morning with a tin pail, out past where the gin had been to the houses by the tracks and up the back alleys on the hill, where some of the back doors were opened now by the grandchildren of the people who had opened them in 1959, and some of the big houses had been sold to people from Mobile who did not know what the pail was for and gave him money, which he gave to somebody else.</p>
+  <p>The reporter had heard the whole story from Marcus. He asked the question he had driven down from Birmingham to ask.</p>
+  <p><em>Is it true you put your brother out?</em></p>
+  <p><em>Yes sir.</em></p>
+  <p><em>Were you jealous of him?</em></p>
+  <p>Wayland thought about it. He thought about it for so long that the reporter shifted on the bench. Then he shook his head.</p>
+  <p><em>I&rsquo;d like to tell you I was,</em> he said. <em>It&rsquo;d make you a better story. But I&rsquo;ve looked. I&rsquo;ve been looking twenty-four years. It isn&rsquo;t there.</em></p>
+  <p>The reporter asked to see the roll. Wayland went and got it, a stack of black ledger books tied with twine, one for each year, kept in a lard can against the damp. He untied the one for 1959 and opened it on the bench between them to the second week of August.</p>
+  <p>Down the page, in a neat schoolboy hand, ran the names, fifty of them, and the roads each man walked. One name had a single line ruled through it, clean, with a straightedge: <em>Reed, Little.</em> At the bottom of the column, the count: <em>49.</em> And then, under it, a day later, in the same hand, the same ink, the line through the name left exactly where it was, so that anybody could read what had been there and what had been done: the count written again. <em>50.</em></p>
+  <p>The reporter turned the pages forward, and back. Twenty-four years of ledgers. He could not find another correction in any of them.</p>
+  <p>He did not print the story. He told people afterward he could not figure out how to make it come out right. He kept the picture he took, though, which was of the open book on the bench in the shade, with a man&rsquo;s hand flat beside it, and on the page, if you looked close, a mustard seed somebody had pressed there to mark the place, long ago, gone flat and brown in the crease.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana from whom anger and hatred, pride and envy have dropt like a mustard seed from the point of a needle.<cite>Dhammapada 407, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>This is a sequel to <a href="little-wayland.html">Little Wayland</a> (commentary 2.3). In the Dhammapada commentary, the elder Mah&#257; Panthaka expels his younger brother Culla Panthaka from the monastery when, after four months, he still cannot learn a single verse. After Culla Panthaka&rsquo;s sudden awakening, the monks gossip that even a fully awakened elder like Mah&#257; Panthaka must sometimes feel anger. The Buddha corrects them: those who have destroyed the defilements have no anger, and Mah&#257; Panthaka acted only because he put the meaning and the teaching before everything else. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-24.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C5%9Auddhipanthaka">the two brothers</a> in the wider tradition.</p>
+    <h3>Alabama, 1959 and 1983</h3>
+    <p>Caddo Springs is fictional, set on the <a href="https://en.wikipedia.org/wiki/Tombigbee_River">Tombigbee</a> in the western <a href="https://en.wikipedia.org/wiki/Black_Belt_in_the_American_South">Black Belt</a>, named for its band of rich dark soil, where cotton plantations held the largest numbers of enslaved people. Demopolis and Linden, the real towns mentioned, are in Marengo County; Demopolis stands on the Tombigbee. Royce Pettaway, the veteran, fought at the <a href="https://en.wikipedia.org/wiki/Battle_of_Chosin_Reservoir">Chosin Reservoir</a> in Korea in the winter of 1950, two years after President Truman&rsquo;s <a href="https://en.wikipedia.org/wiki/Executive_Order_9981">Executive Order 9981</a> ordered the desegregation of the armed forces, a change carried out largely during the Korean War.</p>
+    <p>The men of the grove go out each morning with tin pails and stand silent at back doors, as Buddhist monks go on the alms round; in 1950s Alabama the back door was also the door of segregation, where Black visitors were expected to call at white homes. The scripture Hattie Greer quotes at the stove is 1 Corinthians 13:4&ndash;5 in the King James Version: &ldquo;Charity suffereth long, and is kind &hellip; is not easily provoked, thinketh no evil.&rdquo;</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder Mah&#257; Panthaka from the Dhammapada commentary (verse 407). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-24.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="hombre-sincero.html">&larr; Hombre Sincero</a><a href="index.html">All stories</a><a href="the-sway-pole.html">The Sway Pole &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A faint needle appears in the margin, a seed sits on its point, slides off and drops; both fade.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, items = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(now, delay) {
+    var side = Math.random() < 0.5 ? 0 : 1;
+    var margin = Math.max(30, (W - 640) / 2);
+    var x = side === 0 ? margin * (0.2 + Math.random() * 0.6) : W - margin * (0.2 + Math.random() * 0.6);
+    if (W < 700) x = Math.random() * W;
+    return { x: x, y: H * (0.15 + Math.random() * 0.6), start: now + delay,
+             len: 34 + Math.random() * 18, ang: -Math.PI / 2 + (Math.random() - 0.5) * 0.5 };
+  }
+  function draw(it, t) {
+    // t in ms since start; phases: needle fades in (0-1500), seed sits (to 3200), falls (to 4400), fade (to 6000)
+    var fadeIn = Math.min(1, t / 1500), fadeOut = t > 4400 ? Math.max(0, 1 - (t - 4400) / 1600) : 1;
+    var a = 0.32 * fadeIn * fadeOut;
+    if (a <= 0.004) return;
+    var tx = it.x + Math.cos(it.ang) * it.len, ty = it.y + Math.sin(it.ang) * it.len;
+    ctx.strokeStyle = 'rgba(126,138,145,' + a + ')';
+    ctx.lineWidth = 1.1; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(it.x, it.y); ctx.lineTo(tx, ty); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(it.x + Math.cos(it.ang) * 4, it.y + Math.sin(it.ang) * 4, 1.6, 0.8, it.ang, 0, Math.PI * 2);
+    ctx.stroke();
+    var sx = tx, sy = ty - 2.4, sa = 0.55 * fadeIn;
+    if (t > 3200) {
+      var f = (t - 3200) / 1000;
+      sx = tx + f * 6; sy = ty - 2.4 + 0.5 * 140 * f * f;
+      sa = 0.55 * Math.max(0, 1 - f / 1.2);
+    }
+    if (sa > 0.01) {
+      ctx.fillStyle = 'rgba(167,123,30,' + sa + ')';
+      ctx.beginPath(); ctx.arc(sx, sy, 2.3, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  function frame(now) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < items.length; i++) {
+      var t = now - items[i].start;
+      if (t > 6000) { items[i] = spawn(now, 3000 + Math.random() * 9000); continue; }
+      if (t > 0) draw(items[i], t);
+    }
+    requestAnimationFrame(frame);
+  }
+  function still() {
+    ctx.clearRect(0, 0, W, H);
+    var margin = Math.max(30, (W - 640) / 2);
+    draw({ x: margin * 0.5, y: H * 0.3, len: 40, ang: -Math.PI / 2 + 0.15 }, 2500);
+    draw({ x: W - margin * 0.5, y: H * 0.65, len: 38, ang: -Math.PI / 2 - 0.2 }, 2500);
+  }
+  size();
+  if (reduce) still();
+  else { var n = performance.now(); items = [spawn(n, 1200), spawn(n, 6500), spawn(n, 11000)]; requestAnimationFrame(frame); }
+  window.addEventListener('resize', function () { size(); if (reduce) still(); });
+})();
+</script>
+</body>
+</html>

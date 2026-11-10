@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Midwife's Driver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a night prairie, where far farmhouse windows glow and go dark and one small lamp travels slowly from window to window; datelined sections. */
+  --ground: #0d1013;
+  --ground-2: #171b1f;
+  --paper: #e7e0d2;
+  --paper-dim: #a49d90;
+  --wheat: #d9b45a;
+  --lamp: #f3c766;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 110%, #1d1a14 0%, #0d1013 55%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(231,224,210,0.2); }
+.series a:hover { color: var(--wheat); }
+a:focus-visible { outline: 2px solid var(--wheat); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--wheat); text-wrap: balance; text-shadow: 0 0 28px rgba(217,180,90,0.22); }
+.epigraph { border-left: 1px solid rgba(217,180,90,0.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--wheat); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--wheat); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(23,27,31,0.78); border: 1px solid rgba(231,224,210,0.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--lamp); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(231,224,210,0.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--wheat); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--wheat); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(231,224,210,0.1); border-bottom: 1px solid rgba(231,224,210,0.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--wheat); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--wheat); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--wheat); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--wheat); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(23,27,31,0.78); border-left: 2px solid var(--wheat); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 3.9 &middot; Soreyya</span></nav>
+<header>
+  <h1>The Midwife's Driver</h1>
+  <div class="epigraph">Return whence thou camest to the house of the heart, and then close the doors behind thee.<br>&mdash; Comenius, <em>The Labyrinth of the World</em>, ch. XXXVII</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Tak jsem to sly&scaron;ela,</span> on the Big Blue.</p>
+
+<section>
+  <h2>I. The Ford</h2>
+  <p class="dateline">The Des Plaines River, west of Chicago &middot; Sunday, July 22, 1877</p>
+  <p>V&aacute;clav Soukup was the son of the richest Bohemian on the West Side, and he had a way of looking at things that his mother said he got from his father and his father said he got from the lumber business. He looked at a thing and priced it. A horse, a hat, a lot on Eighteenth Street, a stand of white pine in Michigan he had only seen on paper. His father had come over with a carpenter's box and nothing else and now owned four acres of piled lumber on the South Branch and a brick house with a cupola, and V&aacute;clav had grown up there learning that everything had a number on it somewhere, even if it was written very small.</p>
+  <p>He was twenty-six. He had a wife, Anna, who was pretty and quiet and the daughter of a man who owned a building and loan, and two little boys, Jen&iacute;k and Vojta, four and two. He loved them the way he loved the house, without thinking about it, as things that were his.</p>
+  <p>That Sunday was the hottest of the summer. There had been talk all week of the railroad men striking back East, in Baltimore and Pittsburgh, of roundhouses burning. V&aacute;clav did not want to hear about it. He and his friend Tom&aacute;&scaron; Pech, who had been his friend since they were boys throwing rocks at the Irish on DeKoven Street, hired a buggy before dawn and drove out the Southwest Plank Road to the Des Plaines, to swim where the water was still clean with a basket of rye bread and sausage and beer.</p>
+  <p>The sun came up as they reached the ford below Lyons. There was a farmhouse on the far bank with smoke coming from the chimney, and on the near bank, at the edge of the willows, a woman was standing in the shallows with her sleeves rolled to the shoulder, washing her arms.</p>
+  <p>She was a big woman, past forty, broad in the back and the hip. She had been up all night at the farmhouse bringing somebody's child into the world, which V&aacute;clav did not know yet, and she had come down to the river to wash before she walked back to the city. She stepped out of the water and unpinned her hair and shook it and pinned it up again, and then she took a grey shawl from a willow branch and put it around her shoulders and tied it. That was all she did. But the sun was coming flat across the river, and her hair was the color of wheat straw, and her arms were burned brown from the elbow down and white above, and for the space of a breath, with the light behind her, she was gold. All of her. Like the leaf they put on church domes in Prague.</p>
+  <p>V&aacute;clav looked at her the way he looked at things. He thought, as clearly as if he had said it aloud: <em>If that were my wife. Or if Anna looked like that.</em></p>
+  <p>The woman turned her head and looked at him across the water. It was not an angry look. It was the look of someone who has felt a hand on her and is deciding what it is.</p>
+  <p>Then it happened.</p>
+  <p>He would try to tell it, years later, to exactly one man, and he would not be able to tell it well. It was not like being struck. It was like the moment in a fever when the body you are in is suddenly very far away and very close at once, and you hear your own heart from outside. His shirt was loose at the neck and then tight across the chest. His hands on the reins were somebody else's hands, smaller, the knuckles finer, and his wedding ring slid down to the second joint and hung there. The beard he had shaved that morning was gone from under his palm. He said Tom&aacute;&scaron;'s name and heard a voice say it that was not his voice.</p>
+  <p>Tom&aacute;&scaron; was down off the buggy, tying the horse to a sapling, with his back turned.</p>
+  <p>V&aacute;clav got down on the other side and walked into the willows, and then he ran.</p>
+  <p>When Tom&aacute;&scaron; turned around there was the buggy and the horse and the basket and the beer. He called. He walked up and down the bank calling until the farmer came across the ford in his shirtsleeves to see who was shouting on a Sunday. The woman in the grey shawl had already gone up the road toward the city. Nobody had seen anybody go into the river. They dragged the shallows with a hay rake and found nothing. Tom&aacute;&scaron; drove back alone at noon, rehearsing what he would say at the house with the cupola, and none of it was any good.</p>
+</section>
+
+<section>
+  <h2>II. The Viaduct</h2>
+  <p class="dateline">Chicago &middot; the last week of July</p>
+  <p>The strike reached Chicago the next morning. The switchmen walked out of the yards, and then the men in the planing mills walked out, and then the lumber shovers along the South Branch, most of them Bohemians, put down their pikes and went into the street, because they were paid little enough when they were paid at all, and a man had to stand up sometime. By Wednesday there were crowds of ten thousand on Halsted Street. The police fired into them at the viaduct over the tracks, and the cavalry came up with sabers, and at the end of the day there were boys lying dead in the street who had only come out to look. People said that some of the dead were taken away in wagons that night and buried in a pit south of the city so nobody could count them. Nobody could say if it was true. In that week nobody could say what was true about anything.</p>
+  <p>V&aacute;clav's father went to the morgue three times. His mother went to every police station on the West Side with his photograph in her purse, and the sergeants looked at it and shook their heads. A lumber shover swore he had seen young Soukup at the viaduct on Wednesday, throwing stones, and seen him fall. It made a kind of sense. Tom&aacute;&scaron; said nothing against it. It was easier than the river.</p>
+  <p>Anna wore black from the Friday.</p>
+  <p>The one they were looking for was sleeping in the lumberyard of a man her father did business with, in a cave between two piles of hemlock boards, where nobody came because the yard was shut by the strike. On the first night she had traded V&aacute;clav's gold watch to a secondhand woman on Halsted Street for a calico dress and a pair of shoes and a shawl and two dollars, and the woman had looked at her man's trousers and cropped hair and asked nothing, because that week everybody on Halsted Street was somebody they had not been the week before.</p>
+  <p>She walked the city in the calico dress. She found out what it was to walk past a saloon. She found out what it was to have a man fall into step beside her on Canal Street and say things to her quietly, pleasantly, as if he were remarking on the weather, and to be unable to make him stop, and to have no one to tell. She went to Eighteenth Street and stood across from the house with the cupola and watched her own wife come out on the steps in black with Vojta on her hip and Jen&iacute;k holding her skirt. She watched her father put on his hat on the steps and take it off again and stand there turning it in his hands, and go back in. She did not cross the street. What would she have said? She did not have a voice they would know.</p>
+  <p>They held his funeral on the first Sunday in August, with no priest, because the Soukups were freethinkers, and with no body, because there was none. There was talk of a stone at the new cemetery the Bohemian societies were buying that summer out in Jefferson, where nobody would need a priest's leave to be put in the ground. A man from the lodge made a speech about the dignity of labor and the martyrs of the Halsted Street viaduct, which would have made V&aacute;clav laugh, and afterward there was the <em>kar</em> at the house with the cupola, roast pork and dumplings and beer and kol&aacute;če with poppy seed, for two hundred people. She stood in the street outside the hall in her calico and heard the speech through the open windows. Then she went back into the city and kept walking, because she could not think what else to do.</p>
+  <p>On the Tuesday, when the trains were running again, she found herself on Canal Street at the Burlington depot, standing behind a party of emigrants who had come through from Baltimore and been stuck in the city all through the strike. There were thirty of them, from around Tábor, with feather beds tied up in sheets. They were going to Nebraska. She stood near them because she understood their talk, and because nobody fell into step beside a woman who was standing with a family.</p>
+  <p>An old man in a sheepskin waistcoat, Matěj Kol&aacute;ř, who seemed to be in charge of them, watched her a while. <em>She keeps standing with us,</em> he said to his wife, <em>but whose girl is she?</em></p>
+  <p>She said, <em>Uncle, I'm going where you're going.</em></p>
+  <p>When the emigrant car was called she followed them along the platform. The conductor wanted a ticket. She had sixty cents left of the two dollars. She took off V&aacute;clav's signet ring, gold, with a V and an S cut into it back to back, which she had worn on a string around her neck since the river, and put it in the old man's hand.</p>
+  <p>Matěj Kol&aacute;ř looked at the ring and looked at her and closed his fist on it. That night she rode west on a wooden bench in the emigrant car with a sleeping child across her knees that was not hers, through Aurora and across the Mississippi in the dark, toward a country she had only seen on paper.</p>
+</section>
+
+<section>
+  <h2>III. The Blue</h2>
+  <p class="dateline">Wilber, Saline County, Nebraska &middot; 1877&ndash;1883</p>
+  <p>Somewhere in Iowa Matěj Kol&aacute;ř and his brother-in-law had a long conversation at the end of the car. She heard her name in it, or the name she had given them, which was Marie, because half the women in Bohemia were called Marie and nobody would ever ask which one. She heard <em>Kratochv&iacute;l.</em> She heard <em>no wife.</em></p>
+  <p>Josef Kratochv&iacute;l was thirty-four years old and owned the grain elevator at Wilber and a store under it on the main street and three quarter-sections of bottomland along the Big Blue, and he had no wife because the frontier did not have enough women in it to go around. Matěj Kol&aacute;ř had sold him oxen the spring before. When the emigrants got down at the Wilber platform with their feather beds, the old man walked straight up the street to the store and said to Josef, <em>Pane Kratochv&iacute;l, we have brought you a jewel,</em> and Josef came down and looked at her, at her height and her hands and her teeth, and she knew exactly what he was doing, because she had done it all her life. She had looked at Anna that way across the dance floor at the Sokol hall. She had looked at a stand of pine.</p>
+  <p>He was not unkind. That was the thing she would always have to say for him, when she told it. He asked her, the next day, standing in the store with his hat in his hand, if she would have him. She had sixty cents and no name and nowhere on the earth to go. She said yes. They were married by a justice of the peace in the room above the store, because Josef was a freethinker and did not want a priest, and the Kol&aacute;řs danced at the wedding, and Matěj Kol&aacute;ř got a good price on his seed wheat that fall and every fall afterward.</p>
+  <p>She learned the life. She learned to cook for threshers and wash on a board and keep the store books, because Josef could not add. She learned what it was to be talked about at the counter by men who did not lower their voices because she was only the wife. She learned how the farmers' wives were, the ones who came in on Saturdays with butter and eggs to trade, women who had broken sod with a team and buried children in the corner of a claim and walked behind a plow pregnant, and how they talked to each other in the back of the store, low, among the calico bolts, about things men did not know were being talked about. She had been a rich man in Chicago for twenty-six years and had not known one thing about it.</p>
+  <p>The first boy came in May of 1878, in the bed upstairs with the window open on the prairie. When the pains started Josef sent the hired boy on a horse for the <em>b&aacute;ba</em>, the midwife who had come out from Chicago that spring to keep house for her brother on Turkey Creek, because there was no doctor nearer than Crete.</p>
+  <p>The midwife came up the stairs with her bag and her sleeves already rolled, a big woman with hair the color of wheat straw, and put her hands on Marie's belly to feel how the child lay.</p>
+  <p>Marie knew her. She had known her face every night for a year. She lay on the bed with her heart going like a hammer and waited to be found out, and the midwife looked down at her with the same look she had given across the river, the look of somebody who has felt a hand on her and is deciding what it is, and said only, <em>Breathe, little mother. You're doing well. Breathe.</em></p>
+  <p>Her name was Barbora H&aacute;jkov&aacute;. She had been trained in the lying-in school in Prague and had brought, she told people, nine hundred children into the world in Bohemia and Chicago before she came west. She stayed with Marie twenty hours and put the child in her arms at dawn, a boy, red and furious, and Marie looked at him and something happened to her that she had no words for in either language, that she had not felt for Jen&iacute;k or for Vojta, whom she had first seen washed and wrapped and handed out the bedroom door by a nurse while she stood in the hall with a cigar.</p>
+  <p>They named him Karel. Emil came two years later, in a January blizzard, and Barbora H&aacute;jkov&aacute; came through the snow on horseback to deliver him, and stayed three days, and never once let on that she knew anything. Perhaps she didn't. Marie never could decide.</p>
+</section>
+
+<section>
+  <h2>IV. The Window</h2>
+  <p class="dateline">Wilber &middot; October 1883</p>
+  <p>The town was building that year, stores and houses and a hall, and nearly every board of it came from the yards in Chicago. On a Tuesday in October a special freight came down the branch from Crete with thirty cars of lumber, and riding in the caboose was the man who had sold it, come out himself to see the country and collect his money.</p>
+  <p>Marie was upstairs at the front window over the store, with Emil on her hip, and saw him get down from the caboose and stand on the platform in a good coat, looking around him at the elevator and the grain wagons and the main street with that same squint he had squinted at the Irish on DeKoven Street when he was nine years old. Tom&aacute;&scaron; Pech. He had got heavier. He had a mustache.</p>
+  <p>She sent the hired girl down to the platform to say that Mrs. Kratochv&iacute;l invited the gentleman from Chicago to take coffee.</p>
+  <p>He came up the outside stairs puzzled, with his hat in his hand. She had set out coffee and a plate of kol&aacute;če in the parlor with the good cups, and she gave him the chair by the stove, and sat across from him with her hands in her lap, and he was very polite to her, the way he had always been polite to women.</p>
+  <p><em>Madam, I never saw you before in my life, and you've been very kind. Do you know who I am?</em></p>
+  <p><em>I know very well. You live on Eighteenth Street, in Chicago, three doors from the Soukups.</em></p>
+  <p><em>That's right. You know the Soukups?</em></p>
+  <p>She asked after the old man, and the old woman, and Anna, and the boys, and he told her. The old man was failing. The old woman went to the cemetery every Sunday. Anna had married again, a druggist, a decent man. Jen&iacute;k was ten and wanted to be an engineer on the Burlington. Vojta had his father's eyes.</p>
+  <p><em>And they had a son,</em> she said. <em>Where is he?</em></p>
+  <p>He put down his cup. <em>Madam, please. We drove out to the river to swim, six years ago. I turned my back to tie the horse and he was gone. They say he died at the viaduct in the strike.</em></p>
+  <p><em>Tom&aacute;&scaron;,</em> she said. <em>It's me.</em></p>
+  <p>He stood up so fast the cup went over. <em>That's a wicked thing to say to a man. He was my friend. He was a man.</em></p>
+  <p><em>I know. I'm him all the same.</em> She told him about the DeKoven Street rocks and the Irish boy with the cut head, and the time they stole a whole cheese from the Bohemian picnic and ate it under the sidewalk, and he sat down again very slowly.</p>
+  <p><em>How?</em></p>
+  <p><em>Do you remember the woman at the ford? The big one, with her hair down?</em></p>
+  <p><em>I remember her.</em></p>
+  <p><em>I looked at her,</em> she said, <em>and I thought, if she were my wife. Or if Anna looked like that. The way I thought about everything, Tom&aacute;&scaron;. Like it was for sale. And she turned around and looked at me, and it was done.</em></p>
+  <p>He was quiet a long time. Emil was asleep on the horsehair sofa with his thumb in his mouth.</p>
+  <p><em>That was a filthy thing to think,</em> Tom&aacute;&scaron; said at last. <em>Why didn't you come to me? Did you ever go to her and ask her pardon?</em></p>
+  <p><em>I never did.</em></p>
+  <p><em>Do you know where she is?</em></p>
+  <p>Marie laughed then, for the first time, and wiped her eyes with the heel of her hand. <em>She's eight miles from here, on Turkey Creek. She delivered both my boys.</em></p>
+  <p><em>Then have her to dinner,</em> said Tom&aacute;&scaron; Pech, who had always known how to close a sale. <em>I'll do the asking.</em></p>
+</section>
+
+<section>
+  <h2>V. The Pardon</h2>
+  <p class="dateline">Wilber &middot; the next evening</p>
+  <p>Tom&aacute;&scaron; drove out to Turkey Creek himself the next morning in a hired rig and found Barbora H&aacute;jkov&aacute; in her brother's yard boiling sheets. He took off his hat and asked her to supper at the Kratochv&iacute;ls' the following day. She looked at him with her forearms red from the kettle.</p>
+  <p><em>You're the lumber man from Chicago. What do you want with me?</em></p>
+  <p><em>Never mind what I want, madam. Come to supper.</em></p>
+  <p>She came. Marie cooked for two days: roast goose and sauerkraut, bread dumplings, cucumbers in sour cream, a poppy-seed strudel, the plum preserves she had been saving since August. Josef put on his collar. The midwife sat at the head of the table, because Tom&aacute;&scaron; insisted on it, and ate like a woman who had been up two nights out of three for thirty years, which she had.</p>
+  <p>When the plates were cleared Tom&aacute;&scaron; stood. He took Marie by the hand and brought her around the table, and she knelt down on the rag rug at the midwife's feet, in front of her husband and her boys, and put her forehead on the midwife's shoe.</p>
+  <p><em>Pan&iacute; H&aacute;jkov&aacute;,</em> said Tom&aacute;&scaron;. <em>Forgive my friend.</em></p>
+  <p><em>What is this?</em></p>
+  <p>Tom&aacute;&scaron; told her. He told it plainly, the way he would have told a man about a bad debt.</p>
+  <p>Barbora H&aacute;jkov&aacute; sat for a long time with her big chapped hands flat on the tablecloth. Then she leaned down and put two fingers under Marie's chin and lifted her face and looked at it. It was the third time she had looked at her like that.</p>
+  <p><em>I felt it,</em> she said. <em>On the river. I didn't know what it was. A woman feels it, that kind of look, the way you feel a draft from a door somebody has left open behind you.</em> She was quiet a moment. <em>Get up, child. I forgive you the look.</em></p>
+  <p>And Marie got up, and it was V&aacute;clav who stood there.</p>
+  <p>Karel, who was five, began to scream. Josef Kratochv&iacute;l sat at the end of his own table with his napkin still tucked into his collar and did not move at all. V&aacute;clav stood on the rag rug in his wife's dress, which was too short now at the wrist and the hem and too tight across the back, with his hands out a little from his sides, and the beard was rough under his palm again, and the voice that came out of him when he said <em>Karel, hush, it's all right, it's me,</em> was the voice they had buried on the first Sunday in August, six years before.</p>
+  <p>It was the midwife who went to the boy. She picked him up and held him against her shoulder until he quieted, and then she said the other thing, the one V&aacute;clav would think about for the rest of his life.</p>
+  <p><em>Listen to me, both of you. You think it was a punishment. Being a woman. You think that was the price.</em> She shook her head. <em>Nine hundred children and their mothers, and I never met one woman who was a punishment. What was done to you was only that you had to live on the other side of the look. That was all. Now you know what's over there.</em></p>
+  <p>Late that night, when Tom&aacute;&scaron; had gone back to the hotel and the boys were asleep and the midwife had driven home, Josef and V&aacute;clav sat on either side of the cold stove. Josef had been crying, and was not ashamed of it.</p>
+  <p><em>Stay,</em> he said. <em>You're their mother and I'm their father. They're both of ours. Nobody here needs to know anything. Tell them you're her brother. Stay and keep the books. I can't add.</em></p>
+  <p>V&aacute;clav looked at his hands.</p>
+  <p><em>Josef. I've been a man, and then a woman, and now a man again, all in one life. I've been the father of two boys in Chicago and the mother of two here. I can't go back into a house after that. Either house. Do you understand? There's no room left in me to own anything.</em></p>
+  <p>He went up in the dark and kissed Karel and kissed Emil in their bed, and held each of them a long time, and came down and gave Josef the key to the store.</p>
+  <p><em>Take care of them. Don't you neglect them. You hear me?</em></p>
+  <p>In the morning he walked eight miles to Turkey Creek in a pair of Josef's trousers, and asked Barbora H&aacute;jkov&aacute; if she needed a man to drive her.</p>
+</section>
+
+<section>
+  <h2>VI. The Buggy</h2>
+  <p class="dateline">Saline County &middot; 1884&ndash;1886</p>
+  <p>She did need one. She was past fifty and the county was filling up, Bohemians and Germans and Irish and Yankees, and there were nights in a hard winter when she went out to three births in a row and fell asleep on the horse. V&aacute;clav drove her. He bought a black buggy with a lantern on a hook and learned every section line and creek crossing from Crete to the Kansas border, and when the knock came on the door on Turkey Creek at two in the morning he was hitching the mare before she had her boots on.</p>
+  <p>At the houses he did not go in. That was the custom and he kept it. He sat outside in the buggy with the lantern turned low, all night sometimes, in July with the mosquitoes and in January with a buffalo robe and a hot brick, and watched the one lit window, and listened.</p>
+  <p>The story had gone all over the county by the first Christmas. Bohemians are great talkers. The freethinkers at the lodge in Wilber, who did not believe in anything that could not be weighed, told it to each other over beer. People came out to Turkey Creek on Sundays to look at him. They found him in the yard mending harness and they stood at the fence and asked him straight out.</p>
+  <p><em>Is it true?</em></p>
+  <p><em>It's true.</em></p>
+  <p><em>Two boys in Chicago that you fathered and two boys in Wilber that you bore?</em></p>
+  <p><em>Yes.</em></p>
+  <p><em>Then which do you love more?</em></p>
+  <p>He would put down the harness. <em>The two I bore.</em> Every time. To everyone who asked. He could not help it, and he did not try.</p>
+  <p>That second winter Barbora H&aacute;jkov&aacute; began taking him in with her to the other kind of call. In the old country and in this one, the women who washed the newborn were the same women who washed the dead, and when an old man died on a claim in February it was the <em>b&aacute;ba</em> they sent for to lay him out. V&aacute;clav carried water and held the lamp. He saw a German grandmother who had walked to Nebraska behind an ox cart lying light as a girl under the sheet. He saw a child of four dead of diphtheria in a soddy, with the frost on the inside of the walls. He saw a young farmer kicked by a mule, and the farmer's wife with her hand on the man's chest as if she could keep it going by pressing. He saw what bodies did. They came, and they changed, and changed again, and went, in the end, the same way, all of them, the ones that had been men and the ones that had been women and the ones that had not had time to be anything.</p>
+  <p>He began to drive further out on the empty nights, alone, and sit in the buggy on a rise with the reins slack and look at the dark. The midwife let him. She had given him, that first week, the only book she owned in any language, a little old Czech book in a leather cover worn white at the corners, and told him her great-great-grandmother had kept it in a hole in the wall behind the stove in a village near Litomy&scaron;l for sixty years, when owning it could cost a family its farm and its children. There was a song the exiles used to sing about it, she said, the ones who had left Bohemia for their faith, and she sang him a verse of it in the kitchen, in Czech, and then said it in English for him, because she was proud of her English.</p>
+  <div class="verse">
+    <p>Nothing have we taken with us,<br>Everything is lost;<br>We have but our bible of Kralice,<br>Our &ldquo;Labyrinth of the World.&rdquo;</p>
+    <p>&mdash; Song of the Bohemian Exiles, in Comenius, <em>The Labyrinth of the World</em>, tr. L&uuml;tzow</p>
+  </div>
+  <p>He read it in the buggy by lantern light. A pilgrim wandering the whole world, the market and the schools and the courts and the marriage beds, finding a price on everything and nothing worth it. In the spring of 1885, on a rise above the Blue, waiting outside a soddy where the midwife was sitting up with a woman who was dying in childbed and might take the child with her, he read the place where the pilgrim, at the end of everything, hears a voice call one word to him out of the dark, and call it again, and then say the rest.</p>
+  <div class="verse">
+    <p>Return whence thou camest to the house of the heart, and then close the doors behind thee.</p>
+    <p>&mdash; Comenius, <em>The Labyrinth of the World and the Paradise of the Heart</em>, ch. XXXVII</p>
+  </div>
+  <p>He closed the book. The lamp was lit in the soddy window and he could hear nothing. He sat a long time with his eyes shut and his hands open on his knees, and he went in, the way the book said, and closed the doors, and there was nobody in there that he owned. Not Anna. Not Jen&iacute;k and Vojta. Not Karel and Emil, even. Not the gold watch or the signet ring or the four acres of lumber or the face he had been born with or the face he had been given at the ford. The house was empty and very large and he was not afraid in it.</p>
+  <p>At dawn the midwife came out of the soddy with blood to the elbow and a live child wrapped in a flour sack, and the mother was alive too, and she put the child in his arms to hold while she washed, and he held it, and he did not price it.</p>
+</section>
+
+<section>
+  <h2>VII. The Lodge</h2>
+  <p class="dateline">Wilber &middot; 1886</p>
+  <p>After that, when they came to the fence on Sundays and asked him, he said something else.</p>
+  <p><em>Which two do you love more?</em></p>
+  <p><em>I don't hold on to anybody,</em> V&aacute;clav said, and went on mending harness.</p>
+  <p>It made the lodge men angry. They argued about it at the hall in Wilber on the second Sunday of the month, after the dues were paid, and some of them went out to Turkey Creek together on a Sunday in March to have it out. They found the midwife at the kitchen table shelling beans, and V&aacute;clav in the yard.</p>
+  <p><em>Pan&iacute; H&aacute;jkov&aacute;, your driver is a liar. A year ago he said he loved the boys he bore. Now he says he loves nobody. A man can't say both. One of them is a lie.</em></p>
+  <p>The midwife went on shelling beans. Then she wiped her hands on her apron.</p>
+  <p><em>He isn't lying. He's changed again, that's all, and this time it didn't show.</em> She looked at them, one after the other, farmers and a harness maker and the county treasurer's clerk, every one of whom she had either delivered or delivered the children of. <em>I've been at nine hundred births, gentlemen, and I'll tell you a thing. A mother can do a great deal for a child. A father can do some. Uncles and grandmothers. But there's nothing any of them can do for him that he can't do better for himself, once his mind is turned the right way round. Mine wasn't, for years. His was turned wrong the morning he saw me. Now it isn't.</em> She reached over to the shelf and took down the little leather book and found the page without looking, the way people find their place in a book they've read all their lives, and read it to them in Czech, and then once more in English, for V&aacute;clav, who had come and was standing in the door.</p>
+  <div class="verse">
+    <p>Have a mind that is&mdash;as much as possible&mdash;lifted both upward to me and kindly downward to thy fellow-men.</p>
+    <p>&mdash; Comenius, <em>The Labyrinth of the World and the Paradise of the Heart</em>, ch. LIII</p>
+  </div>
+  <p>The lodge men went home. Some of them said afterward it was the most Catholic thing they had ever heard and some of them said it was the least, and they argued about that for years.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>V&aacute;clav Soukup drove the midwife for nineteen years, until she died, and then drove the young doctor from Crete for eleven more. He never married. He never went back to Chicago, though Tom&aacute;&scaron; Pech wrote to him every Christmas, and he never went inside the store in Wilber, though he would stop the buggy across the street on Saturdays when Karel and Emil were working the counter, two big fair young men, and they would come out and stand at the wheel and talk to him about the price of wheat. Karel named his first daughter Barbora.</p>
+  <p>The old people on the Blue who still told it, when the telling was all that was left, always ended in the same place. They said that on any night in those years, if you stood on the bluff above Turkey Creek and looked out across the dark, you could see the lit windows of the farmhouses scattered over the prairie, each one far from all the others, where somebody was being born or somebody was dying. And between them, very small and very slow, going from one to the next, you could see the one lamp moving.</p>
+</section>
+
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Not a mother, not a father will do so much, nor any other relative; a well-directed mind will do us greater service.<cite>Dhammapada 43, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Soreyya, a rich man's son with a wife and two sons, drives out of his city to bathe and sees the golden-skinned elder <a href="https://en.wikipedia.org/wiki/Katyayana_(Buddhist)">Mahākaccāna</a> putting on his robe at the gate. He thinks, <em>if only he were my wife, or my wife's body had his color,</em> and at once becomes a woman. Ashamed, she follows a caravan to the distant city of Takkasilā, paying her way with a signet ring, and the caravan men present her to a rich bachelor, whom she marries and bears two sons. Years later Soreyya's old companion arrives with five hundred carts; she sees him from her window, tells him who she is, and he arranges a meal at which she bows at the elder's feet and is forgiven. Soreyya becomes a man again, refuses his husband's plea to stay, kisses the boys, and goes forth as a monk. Asked which sons he loves more, he says at first the ones he bore; after a time alone contemplating decay and death, he says his affections are set on no one, and when the monks call this a lie the Buddha speaks the verse. The commentary frames the change as the fruit of an unwise thought and repeats its age's view that rebirth as a woman is the lesser lot; this retelling keeps the change and its cause and lets the midwife answer that view. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-09.htm">the full commentary story</a>.</p>
+    <h3>Chicago and the Big Blue, 1877&ndash;1886</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Great_Railroad_Strike_of_1877">Great Railroad Strike of 1877</a> began in West Virginia on July 14 and reached Chicago the following week. On July 25 a crowd of about ten thousand gathered at the Halsted Street viaduct; police fired into it for half an hour, cavalry came up afterward, and some thirty people were killed in what was called the <a href="https://en.wikipedia.org/wiki/Battle_of_the_Viaduct">Battle of the Viaduct</a>. The true toll was never settled, since many bodies were reportedly buried at night. The same year Chicago's Czechs, angered when a young Catholic woman, Marie Silhanek, was refused burial in Catholic ground, bought land in Jefferson Township for the <a href="https://en.wikipedia.org/wiki/Bohemian_National_Cemetery_(Chicago)">Bohemian National Cemetery</a>, a place where anyone could be buried without a priest's leave. The Czech West Side, later centered on <a href="https://en.wikipedia.org/wiki/Pilsen,_Chicago">Pilsen</a>, was home to many freethinkers, lodges and gymnastic societies.</p>
+    <p>Many Chicago Czechs moved on to the Nebraska prairie. <a href="https://en.wikipedia.org/wiki/Wilber,_Nebraska">Wilber</a>, on the Big Blue River in Saline County, was platted in 1873, became the county seat in 1878, and by 1882 had a Czech benevolent lodge meeting in the Masons' hall on the second Sunday of every month; it is now called the Czech capital of the United States. The book the midwife keeps is <a href="https://en.wikipedia.org/wiki/Labyrinth_of_the_World_and_Paradise_of_the_Heart">The Labyrinth of the World and the Paradise of the Heart</a> (first version 1623) by <a href="https://en.wikipedia.org/wiki/John_Amos_Comenius">John Amos Comenius</a>, the last bishop of the Unity of the Brethren, the old Czech Protestant church that was driven underground and into exile after 1620. The quotations, and the exiles' song, come from Count L&uuml;tzow's 1901 English translation, <a href="https://archive.org/details/thelabyrinthofth00comeuoft">which is online</a>.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Soreyya from the Dhammapada commentary (verse 43). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-09.htm">The original</a>. Scripture from John Amos Comenius, <em>The Labyrinth of the World and the Paradise of the Heart</em>, tr. Count L&uuml;tzow (1901). Written by Claude Opus 5.5.
+  <div class="pager"><a href="blaze-orange.html">&larr; Blaze Orange</a><a href="index.html">All stories</a><a href="notional-water.html">Notional Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, wins = [], lamp, t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function horizon(x) { return H * 0.7 + Math.sin(x / W * 5.1) * H * 0.012 + Math.sin(x / W * 13.7 + 1) * H * 0.005; }
+  function make() {
+    var n = Math.round(Math.max(5, Math.min(11, W / 120)));
+    wins = [];
+    for (var i = 0; i < n; i++) {
+      var x = (i + 0.2 + Math.random() * 0.6) / n * W;
+      var depth = Math.random();
+      wins.push({ x: x, y: horizon(x) + 6 + depth * H * 0.22, s: 0.6 + depth * 1.1,
+        on: Math.random() < 0.75 ? 1 : 0, lvl: 0, seed: Math.random() * 100, next: 900 + Math.random() * 2400 });
+      wins[i].lvl = wins[i].on;
+    }
+    wins.sort(function (a, b) { return a.x - b.x; });
+    lamp = { i: 0, p: 0.35 };
+  }
+  function lampPos() {
+    var a = wins[lamp.i], b = wins[(lamp.i + 1) % wins.length];
+    if (b.x < a.x) b = { x: W + 40, y: a.y };
+    var p = lamp.p, e = p * p * (3 - 2 * p);
+    return { x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e + Math.sin(p * Math.PI) * 10 };
+  }
+  function glow(x, y, r, a, warm) {
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, warm ? 'rgba(255,220,150,' + a + ')' : 'rgba(243,199,102,' + a + ')');
+    g.addColorStop(0.25, 'rgba(217,170,80,' + (a * 0.35) + ')');
+    g.addColorStop(1, 'rgba(217,170,80,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t++;
+    // a faint line where the prairie meets the sky
+    ctx.strokeStyle = 'rgba(160,170,180,0.07)'; ctx.lineWidth = 1; ctx.beginPath();
+    for (var x = 0; x <= W; x += 8) { var y = horizon(x); if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+    ctx.stroke();
+    for (var i = 0; i < wins.length; i++) {
+      var w = wins[i];
+      if (!reduce) {
+        w.next--; if (w.next <= 0) { w.on = w.on ? 0 : 1; w.next = 1200 + Math.random() * 3000; }
+        w.lvl += (w.on - w.lvl) * 0.004;
+      }
+      var f = reduce ? 1 : 0.9 + 0.1 * Math.sin(t * 0.03 + w.seed);
+      var a = w.lvl * f * 0.5;
+      if (a < 0.01) continue;
+      glow(w.x, w.y, 14 * w.s, a, false);
+      ctx.fillStyle = 'rgba(255,214,140,' + (a * 1.4) + ')';
+      ctx.fillRect(w.x - 1.2 * w.s, w.y - 1 * w.s, 2.4 * w.s, 2 * w.s);
+    }
+    if (wins.length > 1) {
+      if (!reduce) { lamp.p += 0.00022; if (lamp.p >= 1) { lamp.p = 0; lamp.i = (lamp.i + 1) % wins.length; } }
+      var L = lampPos(), fl = reduce ? 1 : 0.85 + 0.15 * Math.sin(t * 0.11);
+      glow(L.x, L.y, 22, 0.42 * fl, true);
+      ctx.fillStyle = 'rgba(255,236,190,' + (0.75 * fl) + ')';
+      ctx.beginPath(); ctx.arc(L.x, L.y, 1.6, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

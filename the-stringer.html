@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Stringer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on hazy June river light; cottonwood fluff drifts slowly across the page from the island trees; datelined sections. */
+  --ground: #efe8da;
+  --ground-2: #e4dccb;
+  --ink: #2b2620;
+  --ink-dim: #6e665a;
+  --river: #2f6466;
+  --brass: #b0742e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f4efe4 0%, var(--ground) 45%, #e6dfcf 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(43,38,32,.25); }
+.series a:hover { color: var(--river); }
+a:focus-visible { outline: 2px solid var(--river); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--river); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(47,100,102,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--brass); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--river); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(228,220,203,.85); border: 1px solid rgba(43,38,32,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--brass); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,38,32,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--river); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--river); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,38,32,.15); border-bottom: 1px solid rgba(43,38,32,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--river); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--river); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--brass); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--river); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(228,220,203,.85); border-left: 2px solid var(--river); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 19.9 &middot; Ariya the Fisherman</span></nav>
+<header>
+  <h1>The Stringer</h1>
+  <div class="epigraph">Uprightness, heed to injure nought which lives.<br>&mdash; Bhagavad Gita 16, tr. Edwin Arnold</div>
+</header>
+
+<p class="heard"><span class="heard-lead">I heard it like this,</span> on Hastings Street.</p>
+
+<section>
+  <h2>I. Big Boy</h2>
+  <p class="dateline">Detroit &middot; spring 1943</p>
+  <p>His mother named him Noble because she wanted the white folks in Lowndes County to have to say it. She told him so when he was small. They will call you boy till you are ninety, she said, but every time they want you they will have to say Noble first, and it will cost them something in their mouths.</p>
+  <p>It did not work out that way. In Alabama they called him boy. In Detroit, where he came up in 1937 on the Dixie Highway with nine dollars and a cardboard suitcase, they called him Big Boy. He was six foot three and weighed two hundred and twenty pounds, and he had boxed for two years out of the Brewster Center, where Joe Louis had trained, and had won eleven fights and lost two, and in the last one, in Toledo, he had hit a man named Sweeney so hard that Sweeney went to the hospital and never walked right again. Noble quit after that. He went to work in the foundry at Ford&rsquo;s Rouge plant in Dearborn, pouring iron, where most of the colored men at the Rouge worked because it was the hottest and dirtiest work in the place. The foreman on his line called him Big Boy. The men on the line called him Big Boy, or Tate. At the Rouge, nobody called him Noble.</p>
+  <p>The foundry was like working inside a stove. The cupolas roared day and night, and the iron came down the spouts into the ladles white as noon, and the sand off the molds got into a man&rsquo;s lungs and his hair and the creases of his eyelids so that he went home every night with a black rim around his eyes, and Lurline made him wash at the sink before he touched the children. It paid better than anything in Alabama ever had. In the spring of 1943 the Rouge was making aircraft engines for the war, and Noble worked six days, and some weeks seven, and slept in the afternoons with a wet towel over his face because the flat on the second floor never cooled down. He had three children, Carl and Ruth and the baby, Odessa, and when he came home they ran to the door and stopped a little short of him, the way everybody did.</p>
+  <p>On Hastings Street they mostly called him nothing. They stepped out of his way. There had been a night in 1941 at a bar on Hastings when a man had said something about his wife, and three men had needed carrying out, and after that the street knew who he was. He was not proud of it, or he told himself he was not. He went to work and came home and put his pay envelope on the kitchen table for Lurline, and on Sundays he went fishing.</p>
+  <p>He fished off the shore of Belle Isle, on the Canada side, below the big willows, where the current ran slow along the riprap. Perch, mostly, and rock bass, and white bass in the spring, and now and then a sheepshead that Lurline would not cook. He was good at it the way he had been good in the ring. He did not waste motion. He set the hook short and hard and swung the fish up onto the rocks and had it off and on the stringer before it knew it was out of the water, and the stringer hung down off a willow root into the river with the fish on it alive and turning, so they would keep.</p>
+  <p>Since March, meat cost red points out of the ration book, and there were never enough red points and never enough meat at the butcher on Hastings even if there had been. A perch off the island cost nothing at all. Every Sunday that spring Noble took the Jefferson streetcar to the bridge and walked across and came home at dark with fifteen or twenty fish, and Lurline floured them and fried them for him and the three children and for whoever on the second floor of the building needed fish that week, and nobody on the second floor went hungry, and nobody said thank you to his face, because they were a little afraid of him.</p>
+</section>
+
+<section>
+  <h2>II. Names</h2>
+  <p class="dateline">Belle Isle &middot; Sunday, June 20, 1943</p>
+  <p>That Sunday was the hottest of the year so far, and it seemed like all of Detroit had come out to the island to get out of the heat. Colored and white, war workers, sailors from the armory, families with baskets, kids in the canals up to their knees. The ball fields were full. The beach was full. The grass under every tree was covered with blankets, and along the shore below the willows there was a fisherman every twenty feet.</p>
+  <p>Noble had his line out and a dozen perch on the stringer by two o&rsquo;clock. He had taken his shirt off and folded it on the rocks. His knuckles were still scarred white from the ring and from Hastings Street, and the sun was on his shoulders, and he was as easy as he ever got.</p>
+  <p>Then he saw them coming down the path along the shore.</p>
+  <p>It was an old woman in a black straw hat and a gray dress buttoned to the throat, walking slow with a cane, and behind her in a line two by two came eleven colored children in their Sunday clothes, holding hands, not one of them running, not one of them hollering. Noble had never in his life seen eleven children that quiet on a hot day. Every so often the old woman stopped and pointed with her cane at something, a heron in the shallows, a turtle on a log, the swallows going in and out under the bridge, and all eleven heads turned to look where she pointed, and stayed looking until she moved on.</p>
+  <p>He did not know why, but he set his pole down on the rocks. He stood up and wiped his hands on his trousers and stood there with his shirt off, the way you would stand up if a funeral was going by.</p>
+  <p>The old woman stopped on the path not ten feet from him and turned around to the children.</p>
+  <p><em>Now,</em> she said. Her voice was not loud. It carried anyway. <em>Who are we? I want to hear it. Whole name. Stand up straight.</em> She pointed her cane at the first child.</p>
+  <p><em>Calvin Lee Hughes, Miss Pruitt.</em></p>
+  <p><em>Mister Calvin Lee Hughes. Say it like that. Mister.</em></p>
+  <p><em>Mister Calvin Lee Hughes.</em></p>
+  <p><em>Thank you, Mr. Hughes.</em> The cane moved. <em>And you?</em></p>
+  <p><em>Miss Dorothy Mae Barnes.</em></p>
+  <p><em>Thank you, Miss Barnes. And you?</em></p>
+  <p>All down the line. Mister Willie Pettaway. Miss Ernestine Coleman. Mister James Earl Sims, who was about five and had to be helped with the Mister. Every one of them said it loud, and every one of them stood up straighter after, as if their name were a coat somebody had just put on them.</p>
+  <p>Noble stood on the rocks and listened. He felt a thing he had not felt since he was a boy in Lowndes County, in the back of the church, wanting the preacher to call on him. She was asking every one. She was going down the line asking every one, and he thought, she is going to ask me too, and he wanted her to so badly that his hands shook, and he put them behind his back.</p>
+  <p>When the last child had said his name the old woman turned around on the path and looked straight at him, as if she had known all along he was there.</p>
+  <p><em>And you, sir? What is your name?</em></p>
+  <p><em>Noble, ma&rsquo;am,</em> he said. His voice came out strange. <em>Noble Tate.</em></p>
+  <p><em>Mister Noble Tate.</em> She said it slowly, the way she had said all of them.</p>
+  <p>Then she looked at the stringer hanging off the willow root, where the perch were turning in the brown water, a dozen of them, with the cord through their gills, and the one at the bottom on its side, and she looked at his hands, the white scars on the knuckles, and she looked back up at his face.</p>
+  <p><em>That&rsquo;s a fine name, Mr. Tate,</em> she said. <em>But nobody gets to be noble by hurting things. Not fish. Not men. Not anything that&rsquo;s alive. A man is noble when he&rsquo;s got pity on everything that&rsquo;s living, and won&rsquo;t hurt it. That&rsquo;s the only way anybody ever was.</em></p>
+  <p>The children looked at him. The heron in the shallows behind them lifted one foot and put it down.</p>
+  <p>Miss Pruitt took a little book out of the pocket of her dress, a small worn book with a green cloth cover, and opened it where a ribbon was, and did not look at the page.</p>
+  <p><em>There was a man in India who carried this in his pocket,</em> she said. <em>He has the English locked up in a jail right now for being too much like it. Listen.</em></p>
+  <div class="verse">
+    <p>Uprightness, heed to injure nought which lives,<br>Truthfulness, slowness unto wrath, a mind<br>That lightly letteth go what others prize;<br>And equanimity, and charity<br>Which spieth no man&rsquo;s faults; and tenderness<br>Towards all that suffer; a contented heart,<br>Fluttered by no desires; a bearing mild,<br>Modest, and grave, with manhood nobly mixed,<br>With patience, fortitude, and purity;<br>An unrevengeful spirit, never given<br>To rate itself too high.</p>
+    <p>&mdash; Bhagavad Gita 16:1&ndash;3, tr. Edwin Arnold (1885)</p>
+  </div>
+  <p><em>Manhood nobly mixed,</em> she said, and shut the book. <em>Good afternoon, Mr. Tate.</em></p>
+  <p>She turned and went on down the path with her cane, and the eleven children went after her two by two, and James Earl Sims looked back at him over his shoulder the whole way until they were around the bend.</p>
+  <p>Noble stood there a long time. He did not know what had happened to him. He would try for the rest of his life to tell Lurline, and never get closer than this: that it was as if somebody had opened a door in a hot room that he had not known was a room.</p>
+  <p>Then he got down on his knees on the riprap and pulled the stringer up out of the water. He worked the cord out of the gills of the first perch, careful, and held it in the river in his two hands until it found its strength and went. Then the next one. A boy fishing twenty feet down the shore stopped and watched him with his mouth open. <em>Mister, what you doing? You turning them loose?</em> Noble did not answer. He did not have an answer. He did it eleven times. The twelfth one, the one at the bottom, had been on its side too long, and he held it in the current a long time, and it did not go, and finally he let it drift away downstream, white side up.</p>
+  <p>He left the pole on the rocks. He did not decide to. He just never picked it up again.</p>
+</section>
+
+<section>
+  <h2>III. The Bridge</h2>
+  <p class="dateline">Belle Isle &middot; Sunday evening</p>
+  <p>The trouble had been going on all afternoon in little pieces, on the far side of the island and by the casino and the ball fields, colored boys and white boys, a shove, a fistfight, somebody&rsquo;s girl, somebody&rsquo;s blanket, things people said. Noble had heard it the way you hear thunder off over Canada. Toward evening it was not little pieces anymore.</p>
+  <p>A hundred thousand people were trying to get off the island at the same time, and there was only the one bridge, the long bridge they had just renamed for General MacArthur, half a mile of it, and by the time Noble got to the foot of it with his shirt back on, it was packed rail to rail with people and cars, and there were fights breaking out on it in the middle of the crowd, and sailors in white were wading in from the island end.</p>
+  <p>He found Miss Pruitt and her children at the foot of the bridge, against the stone railing. She was standing in front of them with her cane, very straight, and the children were holding hands in a knot behind her, and James Earl Sims was crying without making any sound at all.</p>
+  <p>He did not ask her. He picked up James Earl Sims and set him on his shoulders, and picked up the Coleman girl, who was the next smallest, on his arm, and said, <em>Hold on to each other. Hold on to my coat. Miss Pruitt, you hold on to me.</em> And he walked them across.</p>
+  <p>It took most of an hour. The crowd was so thick in places it moved like one thing. Somewhere ahead there was a sound of glass. Somewhere behind them a woman was screaming a name. Halfway over, a white boy no older than seventeen, in a sailor&rsquo;s undershirt, with blood running out of his nose, turned around in the crush and saw Noble coming, the size of him, and swung at him with everything he had, and hit him on the cheekbone.</p>
+  <p>Noble stopped. The boy stood there in front of him with his fist up, white in the face, waiting to die. Noble could have broken him in half. Every man within ten feet of them knew it, colored and white, and they all went still, and in that whole roaring bridge there was a little space of quiet around the two of them.</p>
+  <p>Noble put his free hand up and steadied James Earl Sims, who was holding on to his ears.</p>
+  <p><em>Let us by, son,</em> he said.</p>
+  <p>The boy let them by.</p>
+  <p>On the Jefferson Avenue side Noble put the children down in a line and Miss Pruitt counted them, all eleven, twice, touching each head. Then she looked at the bruise coming up on his cheek. She did not say anything about it. She said, <em>Thank you, Mr. Tate,</em> and took them home on foot, two by two, up toward Hastings Street.</p>
+</section>
+
+<section>
+  <h2>IV. Hastings Street</h2>
+  <p class="dateline">Paradise Valley &middot; Sunday night</p>
+  <p>The story came down Hastings Street a little before midnight, from the bars and the clubs, from mouth to mouth up the stoops and through the open windows of the flats where nobody could sleep for the heat: that white men had thrown a colored woman and her baby off the Belle Isle bridge into the river.</p>
+  <p>It was not true. Nobody knew that yet. Across town, in the white neighborhoods, a different story was going around just as fast, about a white woman on the same bridge, and that was not true either. But on Hastings Street that night there was not a man who did not believe it, because there was not a man who could not believe it. Every one of them had come up from somewhere it could have happened.</p>
+  <p>By one o&rsquo;clock there were men in the street with bricks and bottles and pieces of pipe. Windows were going on the white-owned stores along Hastings. Somebody had set a fire.</p>
+  <p>Three men came up the stairs to the second floor and knocked on Noble&rsquo;s door. He knew them all. One was from his line at the Rouge. <em>Come on, Big Boy,</em> they said. <em>They threw a baby in the river. Come on. We need you. You know what you can do.</em></p>
+  <p>He did know. That was the thing. He stood in the doorway in his undershirt with the bruise on his cheek and he knew exactly what he could do, and his hands knew it, and the old heat came up in him the way it used to in the ring when the bell rang, and he wanted to go. He wanted to go more than he had wanted anything since the afternoon.</p>
+  <p>Behind him Lurline stood in the kitchen doorway with the baby, not saying anything.</p>
+  <p>He thought about the perch on its side, drifting off downstream, white side up. He thought about the boy on the bridge with his fist in the air, waiting to die.</p>
+  <p><em>My name is Noble,</em> he said. The men in the hall looked at each other. <em>I&rsquo;m not going.</em></p>
+  <p>When they had gone down the stairs he went down after them, and sat on the front stoop of the building the rest of the night, a big man in an undershirt in the dark, and nobody came up those steps, and nobody went down them.</p>
+</section>
+
+<section>
+  <h2>V. Monday</h2>
+  <p class="dateline">Paradise Valley &middot; June 21</p>
+  <p>Before dawn on Monday white mobs were on Woodward Avenue, a few blocks west, pulling colored men off the streetcars on their way to the early shift and beating them in the street, and turning over colored people&rsquo;s cars. By the middle of the morning they had come east, into the Valley, and the police came in after them in squad cars and on foot, with riot guns, and it was the colored people the police were shooting.</p>
+  <p>Noble had not gone to work. Nobody on Hastings Street had gone to work.</p>
+  <p>A little after noon, from the stoop, he saw a boy he knew come running out of an alley across the street with something in his arms, a carton of cigarettes, or nothing, Noble never found out. It was the Pettaway boy&rsquo;s older brother, Leon, fifteen. A patrolman at the corner fired twice. Leon went down on the sidewalk with his leg turned under him and lay there calling for his mother.</p>
+  <p>Noble went across the street. The patrolman swung the riot gun around at him, a big colored man coming at a run, and for a moment it was all going to end right there on Hastings Street with Noble Tate face down on the sidewalk, the way it ended that week for seventeen colored men in Detroit. Noble stopped in the middle of the street and held his hands out from his sides, open, both of them, the white knuckles turned up. He held them there.</p>
+  <p><em>He&rsquo;s a child,</em> he said. <em>I&rsquo;m going to carry him to the hospital. That&rsquo;s all I&rsquo;m going to do.</em></p>
+  <p>The patrolman looked at him a long time over the barrel. Then he looked away, up the street, and Noble went and picked up Leon Pettaway and carried him nine blocks to the hospital in his arms, with the blood running down into his own shoes, and stayed there until a doctor came.</p>
+  <p>The hospital hallway was full. People sat on the floor along both walls, holding towels to their heads, holding each other. A colored doctor with his sleeves rolled to the shoulder went down the line looking at each one and saying a word to the nurse behind him, and when he got to Leon he looked at the leg and then up at Noble, who was standing over the boy with his hands hanging at his sides, red to the wrist.</p>
+  <p><em>You his father?</em></p>
+  <p><em>No, sir. I live across the street.</em></p>
+  <p><em>What&rsquo;s your name?</em></p>
+  <p>It was the second time in two days. <em>Noble Tate,</em> he said.</p>
+  <p><em>Well, Mr. Tate, you can go wash. You got him here in time.</em></p>
+  <p>Monday night the soldiers came, federal troops in trucks, with bayonets, and set up in the streets, and there was a curfew, and it was over. Thirty-four people were dead. Twenty-five of them were colored. Leon Pettaway lived, and walked with a limp the rest of his life, like a man named Sweeney in Toledo whom he never heard of.</p>
+</section>
+
+<section>
+  <h2>VI. Walden</h2>
+  <p class="dateline">Hastings Street &middot; July</p>
+  <p>Her name was Augusta Pruitt. She had taught school for forty-one years in Macon, Georgia, and had come north in 1940 to live with her niece over a barbershop on Hastings Street, and she did not go to church, which the church women on Hastings Street could not forgive her. She spent her Sundays instead taking whatever children she could collect on the streetcar to Belle Isle, to look at things. She called it nature study. She did not charge.</p>
+  <p>Leon Pettaway&rsquo;s little brother Willie was one of hers, and that was how she found out where Noble lived. Willie told her the whole thing on the streetcar going out to the island the next Sunday, the policeman and the riot gun and the big man in the middle of Hastings Street with his hands out, and she listened all the way across the bridge without saying anything, and then she pointed out a kingfisher.</p>
+  <p>She came to see Noble one evening in July, when the bruise on his cheek had gone yellow. She climbed the two flights with her cane and sat at the kitchen table and drank a glass of Lurline&rsquo;s iced tea, and talked with Lurline about Macon, and did not say much to Noble at all.</p>
+  <p>When she was getting up to go he asked her the one thing.</p>
+  <p><em>Miss Pruitt. That book. The man in India.</em></p>
+  <p><em>Mr. Gandhi.</em></p>
+  <p><em>He give up fishing too?</em></p>
+  <p>She laughed, the first time he had heard her. <em>I don&rsquo;t know that he ever started. There was a man in Massachusetts who did, though. Mr. Thoreau. He lived by himself in the woods by a pond and wrote it all down, and Mr. Gandhi read him too. He wrote, No humane being, past the thoughtless age of boyhood, will wantonly murder any creature which holds its life by the same tenure that he does.</em> She said the words carefully, as if she had them by heart. <em>And he wrote, I cannot fish without falling a little in self-respect. He said he was good at it, too. He had a knack for it, like you.</em></p>
+  <p><em>Same tenure,</em> Noble said.</p>
+  <p><em>Same terms. Same lease. You and the perch.</em> She put her hand on the doorframe. <em>And the boy on the bridge, Mr. Tate. And the policeman. All of us on the same terms.</em></p>
+  <p>She went down the stairs one at a time, and he listened to her cane all the way down.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On Sundays after that he went out to the island with Miss Pruitt and the children. He carried the little ones over the bridge on his shoulders when their legs gave out. He learned the names of the birds. At the Rouge the foreman still called him Big Boy, and Noble answered to it, because a man has to eat, but on Belle Isle, every Sunday, an old woman in a black straw hat would stop on the path and turn and point her cane at him at the end of the line.</p>
+  <p><em>And you, sir?</em></p>
+  <p><em>Mister Noble Tate.</em></p>
+  <p>Down below the willows, on the riprap, a pole lay out in the weather all summer where he had left it, until the line rotted off it, and the reel rusted, and the cottonwood fluff drifted over it and caught in the guides, and the children ran past it without looking, and the perch went by it in the brown water, holding their lives on the same terms as anybody.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">A man is not an elect (Ariya) because he injures living creatures; because he has pity on all living creatures, therefore is a man called Ariya.<cite>Dhammapada 270, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a fisherman whose name is Ariya, &ldquo;Noble,&rdquo; is fishing with hook and line near the north gate of Sāvatthī when the Buddha and his monks pass by. He throws down his pole and stands still. The Buddha stops nearby and asks Sāriputta and the other elders their names one by one, and the fisherman thinks, he will ask me too. The Buddha does ask, and when the fisherman answers &ldquo;Ariya,&rdquo; the Buddha says that those who take life are not called noble, and that the noble are those who harm no living thing. At the end of the verse the fisherman enters the stream. The word <em>ariya</em>, noble, is the same one used for the Buddha&rsquo;s Four Noble Truths. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-09.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C4%80rya">the word ārya</a>.</p>
+    <h3>Detroit, 1943</h3>
+    <p>Between 1941 and 1943 nearly 400,000 people, Black and white, moved to Detroit from the South to work in the war plants. Housing was desperately short and tension ran high. In February 1942 white residents fought to keep Black defense workers out of the Sojourner Truth housing project, and in June 1943 some 25,000 white workers walked out at Packard when three Black men were promoted to the assembly line. By the end of the decade about a quarter of the workers at Ford&rsquo;s <a href="https://en.wikipedia.org/wiki/Ford_River_Rouge_complex">River Rouge</a> complex, which built aircraft engines and other war goods, were Black. Meat had been rationed by red points since March 1943, as the National Park Service&rsquo;s account of <a href="https://www.nps.gov/articles/000/meat-rationing-on-the-world-war-ii-home-front.htm">home-front meat rationing</a> describes.</p>
+    <p>On Sunday, June 20, 1943, fights between Black and white youths broke out on <a href="https://en.wikipedia.org/wiki/Belle_Isle_Park_(Michigan)">Belle Isle</a>, and that evening they spread onto the crowded bridge, renamed for Douglas MacArthur the year before, as more than 100,000 people tried to leave the island. False rumors raced through the city overnight: in Paradise Valley, that whites had thrown a Black mother and her baby off the bridge; in white neighborhoods, that Black men had attacked a white woman. White mobs beat Black riders pulled off Woodward Avenue streetcars, and police poured into Paradise Valley. By the time federal troops arrived on the night of June 21, <a href="https://en.wikipedia.org/wiki/1943_Detroit_race_riot">thirty-four people were dead</a>, twenty-five of them Black, seventeen of those killed by police. Edwin Arnold&rsquo;s translation of the Gita, <a href="https://en.wikipedia.org/wiki/The_Song_Celestial"><em>The Song Celestial</em></a>, was the first version Gandhi ever read, as a student in England, and Thoreau&rsquo;s reflections on giving up fishing appear in the chapter &ldquo;Higher Laws&rdquo; of <a href="https://www.gutenberg.org/ebooks/205"><em>Walden</em></a> (1854).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Ariya the Fisherman from the Dhammapada commentary (verse 270). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-09.htm">The original</a>. Scripture from the Bhagavad Gita in Edwin Arnold&rsquo;s translation, <em>The Song Celestial</em> (1885), with words from Henry David Thoreau&rsquo;s <em>Walden</em>. Written by Claude Opus 5.5.
+  <div class="pager"><a href="seven-oclock.html">&larr; Seven O&#x27;Clock</a><a href="index.html">All stories</a><a href="sweet-root.html">Sweet Root &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, tufts = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(f, anywhere) {
+    f.x = anywhere ? Math.random() * W : -20 - Math.random() * 60;
+    f.y = Math.random() * H;
+    f.r = 2.2 + Math.random() * 3.2;
+    f.vx = 0.12 + Math.random() * 0.22;
+    f.vy = (Math.random() - 0.5) * 0.08;
+    f.ph = Math.random() * 100;
+    f.a = 0.35 + Math.random() * 0.35;
+    f.n = 5 + Math.floor(Math.random() * 4);
+    f.rot = Math.random() * Math.PI;
+    return f;
+  }
+  function make() {
+    var n = Math.round(Math.max(14, Math.min(40, W * H / 42000)));
+    tufts = [];
+    for (var i = 0; i < n; i++) tufts.push(spawn({}, true));
+  }
+  function tuft(f) {
+    ctx.save(); ctx.translate(f.x, f.y); ctx.rotate(f.rot);
+    var g = ctx.createRadialGradient(0, 0, 0, 0, 0, f.r * 2.4);
+    g.addColorStop(0, 'rgba(255,255,252,' + f.a + ')');
+    g.addColorStop(1, 'rgba(255,255,252,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, f.r * 2.4, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(120,110,95,' + (f.a * 0.35) + ')'; ctx.lineWidth = 0.6;
+    for (var k = 0; k < f.n; k++) {
+      var an = k / f.n * Math.PI * 2;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(an) * f.r * 1.6, Math.sin(an) * f.r * 1.6); ctx.stroke();
+    }
+    ctx.fillStyle = 'rgba(110,96,74,' + (f.a * 0.6) + ')';
+    ctx.beginPath(); ctx.arc(0, 0, 0.8, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+  function draw() {
+    t++;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < tufts.length; i++) {
+      var f = tufts[i];
+      if (!reduce) {
+        f.x += f.vx + Math.sin((t + f.ph * 10) * 0.004) * 0.12;
+        f.y += f.vy + Math.sin((t + f.ph * 7) * 0.011) * 0.18;
+        f.rot += 0.002;
+        if (f.x > W + 30 || f.y < -30 || f.y > H + 30) spawn(f, false);
+      }
+      tuft(f);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

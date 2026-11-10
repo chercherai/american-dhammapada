@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four Saplings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a blocky night garden; square dark-oak leaves fall in the margins one grid step at a time; datelined sections. */
+  --ground: #0f150e;
+  --ground-2: #18211a;
+  --paper: #e2e6d5;
+  --paper-dim: #9aa38c;
+  --accent: #a6c861;
+  --glow: #e8c86a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #1c2a1a 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(226,230,213,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(166,200,97,.22); }
+.epigraph { border-left: 1px solid rgba(166,200,97,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,33,26,.75); border: 1px solid rgba(226,230,213,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(226,230,213,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(226,230,213,.1); border-bottom: 1px solid rgba(226,230,213,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,33,26,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 17.2 &middot; A&ntilde;&ntilde;atarabhikkhu</span></nav>
+<header>
+  <h1>Four Saplings</h1>
+  <div class="epigraph">I govern it well in its course by the bridle of knowledge; it does not go astray with me, it keeps to the right path.<br>&mdash; Uttar&#257;dhyayana S&#363;tra 23:56</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Evu me sambhalyu chhe,</span> on the Vora family Realm.</p>
+
+<section>
+  <h2>I. Peaceful</h2>
+  <p class="dateline">Schaumburg, Illinois &middot; spring 2020</p>
+  <p>Kanchanben Vora was seventy-four the spring the derasar in Bartlett locked its doors, and in eleven years she had hardly missed a morning there. Now she did her samayik in the bedroom over the garage, forty-eight minutes by the sand timer, facing a calendar picture of Shatrunjay. After that there was the whole day.</p>
+  <p>Her granddaughter Riya put the game on the iPad in the second week of March. It was so Ba could see the cousins. The family was in eleven houses in three countries and nobody could go to anybody. Riya made the world on Ba's own account, which made Ba its owner, and that suited everyone, since Ba was the one person all the branches of the family would obey. They named the world Vadi, the orchard.</p>
+  <p>Ba learned to walk in it in two days and to look up in four. She wanted every setting read out to her. At Difficulty she stopped Riya.</p>
+  <p><em>What is Peaceful?</em></p>
+  <p><em>No monsters. Nobody gets hungry. It's kind of the baby setting, Ba.</em></p>
+  <p><em>That one. Nothing is hunted in my house.</em></p>
+  <p>She had other rules. Nobody killed the cows or the chickens. Nobody dug up a carrot or a potato where she could see it. The cousins called this Jain mode, laughed about it for a week, and came anyway, forty of them by May, because it was where Ba was. She stood at the gate in the plain blue shirt the game gives everyone and asked each one who arrived whether they had eaten.</p>
+  <p>She built at the place where people first appear, a low hall of birch with a garden behind it and a wall around both, and for three months the rule was that everybody built inside the wall where she could see them. By June the compound was packed like a pol in old Ahmedabad, roof against roof. So Ba gave permission. Whoever wanted could go out through the gate, take ground that was empty, and build there.</p>
+  <p>One house stood outside already. Hetal was married to Ba's grandson Ankit and lived on the ninth floor of a building in Brampton, Ontario, with their son Aarav, who was five. Ankit was a respiratory therapist. Since March he had slept in a motel near the hospital so as not to carry anything home, and he waved to the boy from the parking lot on Sundays. The playground behind the building was wrapped in yellow tape.</p>
+  <p>In her first week in the world Hetal had walked out past where the wall would be and set four dark oak saplings in a square, which is the only way that tree will grow. It came up as thick as a room. She built a floor in its crown, with a bed for her, a bed for Aarav and a chest for his things, and Ba let it be. Every afternoon that spring, while the swings stood taped, Aarav was out in his tree.</p>
+</section>
+
+<section>
+  <h2>II. Outside the Wall</h2>
+  <p class="dateline">The Realm &middot; August, the third night of Paryushan</p>
+  <p>Kunal was fifteen, the grandson of Ba's sister, in Edison, New Jersey. He had drawn his house on graph paper before he placed a block of it: a long hall with a dark roof, the first big thing anyone had planned beyond the gate. He had counted the logs. The dark oak forest was most of an hour's walk to the north. One dark oak stood a minute from the wall.</p>
+  <p>He came to it with an iron axe a little after nine, Eastern time, and started at the root.</p>
+  <p>Hetal was upstairs in it with Aarav. In the kitchen in Brampton the boy sat beside her at the table with the old tablet, up too late, as he had been all summer. She typed fast.</p>
+  <p><em>Kunal please don't. This is our house. I can't go wandering around with him looking for somewhere else to live.</em></p>
+  <p><em>There's no other tree like this one, bhabhi,</em> he typed back. <em>I'll be quick.</em></p>
+  <p>He did not stop. He had his headphones on and his thumb down on the button, the way you hold it for a trunk that size, and the axe rose and fell without his deciding each stroke.</p>
+  <p>If he sees the child he will stop, Hetal thought. She said it aloud in the kitchen. <em>Go stand on the low branch, beta, where Kunal bhaiya can see you.</em> Aarav walked out along the branch and stood over his cousin's head with the poppy he always carried.</p>
+  <p>The axe was already coming up. It caught the boy, knocked him off the branch, and he fell the height of the tree.</p>
+  <p>All that Aarav had ever seen of himself in that world was his own right arm, held out in front of him with the flower in it. The screen went red. The arm was gone. Then there were gray words he could not read yet. He was five, and he screamed in the kitchen as if it had been done to him, and when Hetal reached for him he got down under the table and would not be touched.</p>
+  <p>A line came up in the corner of everyone's screen saying that Aarav had fallen from a high place. Kunal read it and went on with the tree. It was a game, and people fell.</p>
+</section>
+
+<section>
+  <h2>III. Both Hands</h2>
+  <p class="dateline">Brampton, Ontario &middot; the same night</p>
+  <p>Hetal had been given operator rights in April, to fix things for Ba. There was one line she could type that would drop Kunal dead where he stood and spill everything he carried on the grass. She typed it with her right thumb and did not send it.</p>
+  <p>Her phone was in her left hand, open to Vora Parivar, sixty-three members. She had four lines written there about Kunal, who had been told, who had seen a child and kept swinging. She had one more about his mother, who had said a thing at Hetal's wedding that Hetal had carried for six years. Both thumbs were up.</p>
+  <p>Under the table Aarav had stopped screaming and was only breathing loudly.</p>
+  <p>Three thoughts came to her, one behind the other, and she remembered afterward that they came in order. He was a decent boy. He sat his pratikraman on a screen beside his grandmother every evening that week, and what she did to him tonight she would carry herself for a long time. Then she thought of the other mothers in that group. If she set the price of a tree at a boy's name in front of sixty-three people, every auntie would know the price by morning, and it would be paid again on other children. And the place had an owner. This was Ba's house.</p>
+  <p>She put the game down first, and then the phone, on its face. She got under the table and brought her son out against her shoulder, and with her free hand she called Illinois.</p>
+</section>
+
+<section>
+  <h2>IV. The Bridle</h2>
+  <p class="dateline">Schaumburg &middot; later that night</p>
+  <p>Ba had finished the evening pratikraman and was sitting with her mala. She propped the iPad against the steel dabba on the dresser. For the first minute all she could see was a ceiling in Brampton, and all she could hear was crying. She waited.</p>
+  <p>Hetal told her all of it: the four saplings in March, the axe, the branch, the arm. She said what she had written with each hand, read both aloud, and told the three things she had thought. She had sent nothing.</p>
+  <p><em>Shabash, beta,</em> Ba said. <em>Shabash.</em></p>
+  <p>Then she told her about Kesi and Gautama, two monks of two lineages who met in a park outside Shravasti, where the elder asked the younger one riddle after another. She told it in Gujarati, as her own mother had told it during the rains. In the old English translation that Riya later found for the cousins, the part she told runs like this.</p>
+  <div class="verse">
+    <p>'The unruly, dreadful, bad horse, on which you sit, runs about, Gautama! how comes it to pass that it does not run off with you?'</p>
+    <p>'I govern it well in its course by the bridle of knowledge; it does not go astray with me, it keeps to the right path.'</p>
+    <p>&mdash; Uttar&#257;dhyayana S&#363;tra 23:55&ndash;56</p>
+  </div>
+  <p><em>It was up and running tonight,</em> Ba said. <em>Most of us only sit behind and hold the reins while it takes us where it likes. You drove.</em></p>
+  <p>Hetal heard that, and something in her that had been braced since half past nine gave way and was quiet. The family tells that part as she told it. She went on crying all the same.</p>
+  <p><em>What is it now?</em></p>
+  <p><em>Ba, the tree is gone. He took it down to the dirt. Where are we supposed to live?</em></p>
+  <p><em>Bas. Enough,</em> said Ba. <em>There is the birch by my garden wall, the one that stands by itself. Dhruv had his room in it. Yesterday he started back at the warehouse and he tells me he is finished with games. Go in there.</em></p>
+</section>
+
+<section>
+  <h2>V. The Tree by Itself</h2>
+  <p class="dateline">The Realm &middot; to Samvatsari</p>
+  <p>They moved that night, the chest and both beds. For two days Aarav would not hold the tablet. On the third he sat in his mother's lap and let her walk him to the window of the new house, which looked into Ba's garden, where Ba in her blue shirt was putting in wheat.</p>
+  <p>The morning after the call, when her samayik was done, Ba wrote a rule on a sign at the gate, with one finger, and it took her some time. Nobody cuts a tree that someone lives in. Nobody cuts any tree or growing thing without need, and whoever cuts, plants.</p>
+  <p>The older cousins brought it to her on the family call. <em>Ba, they're blocks.</em></p>
+  <p><em>Then who was crying?</em> she said.</p>
+  <p>Riya had started looking things up by then, and in another volume of the same old translation she found a man and a plant set side by side, a line the cousins took to quoting at one another over every sapling: <em>as this falls sick when cut, so that falls sick when cut.</em></p>
+  <p>The birch became a game of its own. Everybody tried it. Kunal's older brother came with a diamond axe and operator rights he had talked Riya into, and the cracks spread across the white bark as they should, and then closed. The log stayed. Two uncles tried, one of whom writes software for a bank. Riya went through every setting the Realm had, twice, and found nothing that could do that. When they asked Ba she said she had given the tree to Hetal and the child, and that was all she had done.</p>
+  <p>Samvatsari fell on the Saturday. When the long pratikraman ended, the phones in eleven houses filled with the same two words, micchami dukkadam, sixty-three times over, and Kunal's came among them like everyone's.</p>
+  <p>Afterward he went into the world alone. He walked out through the gate to the bare square of dirt a minute from the wall and set four saplings in it, close together, two and two. He had bone meal in his pack that would have brought the tree up at once, and he left it there. He stood and waited the slow way.</p>
+  <p>From the top of the wall Aarav watched him, with a poppy held out in front of him in his right hand, where he could see it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He who holds back rising anger like a rolling chariot, him I call a real driver; other people are but holding the reins.<cite>Dhammapada 222, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha has just allowed his monks to build lodgings outside the monastery walls. A monk of &#256;&#7735;av&#299; picks a tree and starts to cut it down. The spirit who lives in the tree comes out with her infant on her hip and begs him to spare her home; he says he will not find another tree like it. Hoping the sight of the child will stop him, she sets the child on a branch, but the axe is already swinging and it cuts off the child's arm. She raises both hands to strike the monk dead, then thinks better of it for three reasons and goes weeping to the Buddha, who praises her, speaks the verse, gives her a tree near his own chamber that no one afterward can shake, and makes it a rule that monks must not injure trees and plants. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-02.htm">the full commentary story</a>.</p>
+    <h3>A Jain family, 2020</h3>
+    <p>Jains have lived in the United States and Canada in numbers since the 1960s; see <a href="https://en.wikipedia.org/wiki/Jainism_in_the_United_States">Jainism in the United States</a>. The temple of the Jain Society of Metropolitan Chicago stands in Bartlett, Illinois. Non-violence toward every living thing, plants included, is the center of Jain practice, and many observant Jains avoid root vegetables because pulling them kills the whole plant. In the eight days of <a href="https://en.wikipedia.org/wiki/Paryushana">Paryushana</a>, which in 2020 ran from August 15 to August 22 for most &#346;vet&#257;mbara Jains, families fast and sit the evening rite of repentance. On the last day, Samvatsari, each person asks forgiveness of everyone they know with the words <em>micchami dukkadam</em>. With temples closed by the pandemic that year, the rites were held by video call. The dialogue of Kesi and Gautama is the twenty-third lecture of the <a href="https://en.wikipedia.org/wiki/Uttaradhyayana">Uttar&#257;dhyayana S&#363;tra</a>, quoted here from Hermann Jacobi's translation in the <em>Sacred Books of the East</em> (1895). The line about a plant falling sick is from his translation of the &#256;c&#257;r&#257;&#7749;ga S&#363;tra (1884).</p>
+    <p><a href="https://en.wikipedia.org/wiki/Minecraft">Minecraft</a> reported 126 million monthly players in May 2020, and in that lockdown spring many families used it as a place to meet. On a private Realm the owner sets the difficulty, and Peaceful removes monsters and hunger. A dark oak grows only from four saplings planted in a square. Playgrounds across Ontario were closed by emergency order that spring.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a certain bhikkhu from the Dhammapada commentary (verse 222). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-02.htm">The original</a>. Scripture from the Uttar&#257;dhyayana and &#256;c&#257;r&#257;&#7749;ga S&#363;tras, tr. Hermann Jacobi (1895, 1884). Written by Claude Fable 5.2.
+  <div class="pager"><a href="cowhage.html">&larr; Cowhage</a><a href="index.html">All stories</a><a href="the-red-umbrella.html">The Red Umbrella &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, G = 8, leaves = [], tick = 0;
+  var cols = ['#3f6b2a', '#5d8a35', '#9fc25a', '#2f5223'];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(l, anywhere) {
+    var side = Math.random() < 0.5;
+    var band = Math.max(40, (W - 620) / 2);
+    l.x = side ? Math.random() * band : W - Math.random() * band;
+    l.y = anywhere ? Math.random() * H : -G;
+    l.step = 5 + Math.floor(Math.random() * 9);
+    l.drift = Math.random() < 0.5 ? -1 : 1;
+    l.col = cols[Math.floor(Math.random() * cols.length)];
+    l.a = 0.10 + Math.random() * 0.16;
+    return l;
+  }
+  function make() {
+    var n = Math.round(Math.max(10, Math.min(34, W / 40)));
+    leaves = [];
+    for (var i = 0; i < n; i++) leaves.push(spawn({}, true));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    tick++;
+    for (var i = 0; i < leaves.length; i++) {
+      var l = leaves[i];
+      if (!reduce && tick % l.step === 0) {
+        l.y += G / 2;
+        if (Math.random() < 0.12) l.x += l.drift * G;
+        if (Math.random() < 0.04) l.drift = -l.drift;
+        if (l.y > H + G) spawn(l, false);
+      }
+      ctx.globalAlpha = l.a;
+      ctx.fillStyle = l.col;
+      ctx.fillRect(Math.round(l.x / G) * G, Math.round(l.y / (G / 2)) * (G / 2), G, G);
+    }
+    ctx.globalAlpha = 1;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

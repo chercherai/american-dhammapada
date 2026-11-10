@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sway Pole</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on dusty October-afternoon paper, light theme; in the right margin a thin carnival sway pole bends slowly out and back, a small figure on its plate, and at the far end of each arc a faint gold glint marks the moment of weighing nothing; datelined sections. */
+  --ground: #eee5d3;
+  --ground-2: #e3d7c0;
+  --paper: #2b2620;
+  --paper-dim: #74695a;
+  --accent: #9a3a28;
+  --glow: #b08a3e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 30% -10%, #f7f0e2 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,38,32,.15); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(154,58,40,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(227,215,192,.7); border: 1px solid rgba(43,38,32,.15); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse .src { font-style: normal; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,38,32,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,38,32,.15); border-bottom: 1px solid rgba(43,38,32,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(227,215,192,.7); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.35 &middot; Naṭapubbakatthera</span></nav>
+<header>
+  <h1>The Sway Pole</h1>
+  <div class="epigraph">Stand fast therefore in the liberty wherewith Christ hath made us free, and be not entangled again with the yoke of bondage.<br>&mdash; Galatians 5:1</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Так я слыхал,</span> in the Flats.</p>
+
+<section>
+  <h2>I. The Lot</h2>
+  <p class="dateline">The Flats, Los Angeles &middot; 1919&ndash;1921</p>
+  <p>Vasily Novikoff was the boy who climbed things. He came over from the Kars country in his mother's arms in 1908, when he was two, and by the time he was nine he had been to the top of everything in the Flats that would hold a boy. He went up the lumber stacks at the yard on Alameda Street where his father drove a team, and walked the ridge of the planing-mill roof with his arms out. He went up the telephone poles on Utah Street by the spikes and sat on the crossbar with his feet hanging and watched the river. The year he was eleven he went up the water tank by the railroad tracks and stood on the rim of it in the wind, and a railroad bull pulled him down by the ankle, and he went before the juvenile court with a great many other Russian boys that year and stood there with his cap in his hands while the judge talked to his father through a girl from the Bethlehem Institutions who could interpret.</p>
+  <p>His father was Pavel Novikoff, a big, quiet man who had driven freight wagons over the mountain roads between Kars and Erzurum, and who in Los Angeles drove a lumber dray for four dollars a day and came home too tired to eat. His mother was Avdotya. She baked bread on Saturdays for the whole street and on Sundays put a clean shirt on Vasya and a rope belt around it and walked him to sobranie on Clarence Street, morning and afternoon, where the men sat on one side on long benches and the women on the other side in their white kerchiefs and lace, and the elders sat at the table at the front with the Bible on a white cloth, and everybody sang. They sang the psalms in the long old melodies, so slow that a boy could forget which word they were on. And when the Spirit came down on the meeting, the people rose, and the old men and old women lifted their hands and went up off the floor in little jumps, light as children, and the boards shook. Vasya watched them do it from the bench. It looked to him like the beginning of something that nobody ever finished.</p>
+  <p>In the spring of 1921 a carnival set up on a lot down by the river. It had a merry-go-round and a ten-in-one and a cookhouse, and in the middle of the lot it had a pole. It was steel tube, ninety feet, set in a socket in the ground and stayed with four wires halfway up, and the top half was left free so that it would bend. Every night at nine o'clock the band played and an old man in white tights climbed to the top of it by a rope ladder and stood up there on a little plate, and then, slowly, he began to sway. He leaned and the pole leaned with him, out over the crowd, farther than you would believe a pole could go, until the people under it backed away screaming and laughing, and then it went back the other way, out over the merry-go-round, and back, and back, the arc getting longer each time, and the old man at the top of it standing on one foot with his arms out as if he were walking somewhere in the sky.</p>
+  <p>His name was Garnier. His people had been on the rope in this country since before the Revolution, he said, and one of them had danced on a ship's topmast at Newport in Rhode Island and then gone off and married into the Quakers, and the family had never got over it. He said it as if the Quakers were a kind of drowning.</p>
+  <p>Vasya went down to the lot three nights running. On the fourth night, after the crowd had gone, he went up the ladder in the dark. Garnier found him at the top of it, on the plate, with his knees bent, feeling the pole move under him in the little night wind off the river.</p>
+  <p><em>Well, come down,</em> said the old man from the foot of the ladder. <em>You'll want to learn it properly.</em></p>
+  <p>When the carnival went north up the valley to Bakersfield, Vasya went with it. He left a note on the table for his mother, written in the Russian letters she had taught him, under the edge of the bread.</p>
+</section>
+
+<section>
+  <h2>II. The Pictures</h2>
+  <p class="dateline">The road, and Culver City &middot; 1921&ndash;1935</p>
+  <p>Garnier taught him for five years. He taught him the ladder and the plate and the handstand on the plate, and the slide for life down the long wire to the ground, and he taught him the sway. That was the whole of it, the old man said. A pole will carry you if you let it. You lean, it comes with you. You go out to the end and it bends and slows, and at the very end of the arc there is a moment when it has stopped going out and has not yet started back, and in that moment you weigh nothing at all. Nobody in the crowd can see it. Only the one at the top knows it is there. <em>That's what they pay you for,</em> Garnier said, <em>and they don't even know they're paying for it.</em></p>
+  <p>They played county fairs from Phoenix to Klamath Falls, Fresno and Salinas and Tulare and Yakima, and the free act was the thing that brought the crowd onto the lot. When the old man's hands began to shake, Vasya took the pole himself. The bills said BILL NOVAK, THE HUMAN COMET, and he went up it every night in white tights with a spangled sash around his waist, and the people backed away screaming under him the way they had for Garnier. In the winter of 1926 Garnier died in his bed in a rooming house in Riverside, and left Vasya the pole and the sash.</p>
+  <p>A man from one of the studios saw the act at the Pomona fair and gave him a card. After that it was the pictures. He did high falls into nets and into water tanks and once into a pile of cardboard boxes behind a bank on a back lot, and saddle falls out at the movie ranch in Chatsworth, and he went from one roof to another in comedies with his coat flying, doubling for men whose names were on the theater fronts on Broadway. He got fifty dollars for a fall that took one afternoon, when his father was making four dollars a day at the yard. He drove a cream-colored Packard. He shaved every morning and oiled his hair, and the girls at the commissary called him Bill.</p>
+  <p>He sent money home in envelopes. His mother did not open them. She put them in the drawer of the table under the cloth, in a stack, with the stamps still on, because she did not know what was right to do with money that came from the picture shows, and his father would not touch them. When his father died in the winter of 1931, Vasya was on location in Utah, standing on a red cliff in another man's hat, and the telegram reached him four days after the burial.</p>
+</section>
+
+<section>
+  <h2>III. Come Down</h2>
+  <p class="dateline">Clarence Street &middot; March 1935</p>
+  <p>His mother died in March of 1935, in her bed on Utah Street, of the dropsy, with the neighbor women around her. This time the telegram came in time. He drove in from Culver City in the Packard in a camel-hair coat, and parked it in the street in front of the house, where the little boys stood around it and would not touch it.</p>
+  <p>They had laid her out in the front room in her white kerchief, and all that night the singers sat with her and sang. Vasya did not go in. He stood outside the door in the dark yard with his hat in his hands, a clean-shaven man in a good coat among men with beards, and the brothers who came and went nodded to him and did not say anything. Through the door he could hear the old men leading and the others coming in behind them, the long notes going up and holding and coming down, and after midnight he heard old Lukyan Ivanovich lead a psalm he remembered from the bench when he was five years old, and the whole room took it up.</p>
+  <div class="verse">
+    <p>Душа наша избавилась, как птица, из сети ловящих: сеть расторгнута, и мы избавились.</p>
+    <p>Our soul is escaped as a bird out of the snare of the fowlers: the snare is broken, and we are escaped.</p>
+    <p class="src">&mdash; Psalm 124:7 (Synodal 123:7; King James Version)</p>
+  </div>
+  <p>Lukyan Ivanovich Sysoev was past eighty. He had driven a team over the mountains with Pavel Novikoff in the old country, and hauled lumber beside him on Alameda Street for twenty years, and now he was the presbyter of the little sobranie on Clarence Street, chosen by the brothers, because he spoke so seldom that when he did they listened. His beard came down to his belt and was as white as the tablecloth. He walked with a stick cut from a eucalyptus in Hollenbeck Park.</p>
+  <p>They buried Avdotya in the morning at the cemetery out past the city line, and came back to the Flats for the meal. The tables were set end to end in the sobranie with the backless benches along them, and the bread laid right on the cloth the way it was always done, and the women carried in borshch and lapsha and stewed beef and compote. Vasya sat at the end of a bench. He did not eat. When the meal was over he went up the room to where Lukyan Ivanovich sat at the head table, and took out a roll of bills with a rubber band around it, and held it out.</p>
+  <p><em>For the dinner,</em> he said. <em>For the singing. Whatever it costs.</em></p>
+  <p>The old man looked at the money and then at him. He put out his big dry hand, the hand of a man who had held reins for fifty years, and closed Vasya's fingers back over the roll and pushed it toward him until it was against his coat.</p>
+  <p><em>Then what do I owe?</em> said Vasya. <em>Tell me what I owe.</em></p>
+  <p><em>Nothing,</em> said Lukyan Ivanovich. <em>Come down.</em></p>
+  <p>He said <em>слезай</em>, the word you call up to a boy in a tree. Then he turned back to the man beside him, and that was all.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Vasya drove back to Culver City that afternoon. On Monday he was called for a fall from a water tower on the back lot. He went up the ladder in another man's clothes, and at the top, with the camera crew small on the ground below him and the director lifting his megaphone, he heard it, the one word, the way you remember a word. He stood on the rim of the tower a while in the wind. Then he turned around and came down the ladder, rung by rung, the slow way, and walked past the director and the crew and out the gate, and did not go back.</p>
+  <p>He sold the Packard. He took the money from it and the roll of bills and the stack of unopened envelopes from his mother's table drawer, and gave all of it to the brothers on Clarence Street for the widows, who were many that year. He let his beard grow. He went to work on a rubbish route with Semyon Kalugin, who had a truck and a city contract and no son old enough to help him, and they went out before light every morning through the alleys of Boyle Heights, hauling ashes and cans and newspapers, the work other men would not do in the Depression because they were too proud. On Sunday he put on a clean shirt and a rope belt and walked to sobranie, morning and afternoon. Lukyan Ivanovich motioned him to the singers' bench. Vasya said he could not sing.</p>
+  <p><em>Sit there,</em> said the old man. <em>Open your mouth.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Top of the Swing</h2>
+  <p class="dateline">The Flats &middot; 1935&ndash;1937</p>
+  <p>The young men of the sobranie watched him. Most of them had been to the picture shows on Brooklyn Avenue on Saturday nights against their fathers' wishes, and some of them had seen him fall off a roof in a black coat with his arms out and had not known it was him. They asked him about the stars, at first, the cowboys and the comedians. He said they were men like other men. They asked him what the pole was like, up there at the top. He said it was very high.</p>
+  <p>What they watched most was what he did when the Spirit came. Everybody knew that the Spirit came on the meeting in its own time, and when it came the people rose, and the old men went up in their little jumps, and the women, and sometimes a young man would go up so high and so long, his hands in the air, that the elders would stop singing to watch him. The young men waited for Vasily Novikoff to do it. A man who could stand on one foot at the top of a ninety-foot pole in a wind would jump in the Spirit, surely, so that the whole Flats would hear about it. And he did not. When the hall rose and the boards began to shake, Vasya rose too, and lifted his hands, and went up a little on his toes, the way old Lukyan did, and that was all. Some of the young men said he was cold. Others said he was saving it, the way a performer does, for the night when it would count.</p>
+  <p>It came to him in the summer of 1935, on a Sunday morning in July, in the middle of the meeting, and nobody saw it but the old man at the table.</p>
+  <p>The Spirit had come down. The whole room was up, the singing loud and broken, the benches walking on the floor, a woman near the window crying out in a voice like a bird. Vasya was standing with the others with his hands lifted, and as he stood there it came on him, the thing he had known only at the top of the swing. It was the moment at the very end of the arc, when the pole has stopped going out and has not yet started back, and you weigh nothing. He had known it a thousand times, for the space of a breath, ninety feet in the air. Now he knew it standing on the floor of the sobranie on Clarence Street with the boards shaking under him, and it did not end. He did not go up and he did not come down. He stood in the middle of the jumping with his eyes open and his hands at his sides and was perfectly still, and the room went on around him like weather.</p>
+  <p>Lukyan Ivanovich, at the table, looked up from under his white eyebrows and saw his face, and looked at it a long time, and then looked down again at the Bible on the cloth.</p>
+  <p>Vasya never spoke of it. But the women on the other side of the hall said afterward that something had happened to the Novikoff boy that summer, because he slept now, and laughed easily, and had stopped looking at the sky.</p>
+</section>
+
+<section>
+  <h2>V. The Free Act</h2>
+  <p class="dateline">Mission Road &middot; a Sunday in October 1937</p>
+  <p>That fall the Agafonoffs, out in Karakala, had a new son, and on the third Sunday of October the whole sobranie walked out from Clarence Street after morning meeting to bless him and to eat at their table. They went the way they always went, in a long slow file up the hill and along the streets, the old men in front, the women behind with their kerchiefs bright in the sun, the young men straggling at the back. Lukyan Ivanovich walked at the head of them with his eucalyptus stick, and the singers sang as they walked, so that people came out on their porches along the way to see the Russians go by.</p>
+  <p>On a vacant lot off Mission Road a carnival had come in. It had a Ferris wheel and a merry-go-round and a cookhouse that smelled of onions and hot grease, and a banner over the gate that said BIG SUNSET SHOWS, and in the middle of the lot it had a pole. It was taller than Garnier's had been, a hundred and ten feet at least, painted silver and red in a spiral, and stayed with wires halfway up. A boy in white tights was at the top of it, and the band was playing, and the crowd under him was the crowd of every Sunday on the east side, Mexican families in their good clothes, Jewish boys from Brooklyn Avenue in sweaters, Japanese girls with their hair cut short, a policeman with his cap pushed back.</p>
+  <p>The boy at the top began to sway.</p>
+  <p>The file of Russians slowed. The old men went on walking, but the young men stopped at the edge of the lot and stood in a bunch and looked up, and some of the women looked too, behind their hands. The boy went out over the crowd, and the crowd backed away screaming, and the pole bent like a buggy whip, and he went back the other way, out over the merry-go-round, and back. At the end of every swing he stood on one foot with his arms out. Then he did a headstand on the plate, and the pole went out with him upside down at the top of it, and a girl in the crowd covered her eyes.</p>
+  <p>Mitya Kalugin was nineteen, Semyon's eldest. He fell back beside Vasya, and Fedya Sorokin and Grisha Babin came with him, and the three of them walked along at his elbow with their faces turned up.</p>
+  <p><em>Vasya,</em> said Mitya. <em>Look at him. That's what you did, isn't it? That exact thing.</em></p>
+  <p><em>That's it,</em> said Vasya.</p>
+  <p><em>And you don't want it? You don't miss it at all, up there?</em></p>
+  <p>Vasya looked up at the boy on the pole. He looked for a while, the way he would have looked at a hawk or a cloud. Then he said, <em>No, brothers,</em> and went on walking after the old men, and after a moment, not knowing what else to do, the three young men followed him.</p>
+  <p>At the Agafonoffs' they sang over the baby and ate at long tables in the yard under a pepper tree, lapsha and bread and watermelon. All through the meal the three of them watched him. They watched him eat his soup and talk with old Marfa Agafonova about her tomatoes. Over the roofs, the band at the carnival lot could be heard starting up again for the four o'clock show, and they watched his face when it started, and it did not change.</p>
+  <p><em>He's lying,</em> said Grisha under his breath, on the walk home.</p>
+  <p><em>Fourteen years,</em> said Fedya. <em>Fifty dollars a fall. Nobody stops wanting that.</em></p>
+  <p><em>You saw him look up,</em> said Mitya. <em>You saw how long he looked.</em></p>
+</section>
+
+<section>
+  <h2>VI. The Yoke</h2>
+  <p class="dateline">Clarence Street &middot; Monday evening</p>
+  <p>On Monday, after the trucks were in, the three young men went to see Lukyan Ivanovich. Old Ivan Stepanovich Popoff went with them, because the young men had told him, and he agreed it was a serious thing. A lie spoken among the brothers was a sin, and a man who had come back from the picture shows had to be watched more carefully than other men. That was only right.</p>
+  <p>The old man was sitting in his yard behind the house on an upturned crate, in the last of the light, with a set of harness across his knees. It had belonged to the gray horse he drove for twenty years on Alameda Street, and the horse was long dead and he had no wagon, but every so often he took the harness down from its nail and oiled it. He did not look up. He went on working the oil into the leather with his thumb while they told him. Mitya did most of the talking. He told about the carnival and the pole and the boy on top, and what they had asked and what Vasya had answered.</p>
+  <p><em>He said no,</em> said Mitya. <em>He said it to our faces. He did that for fourteen years, Lukyan Ivanovich. He was famous. A man doesn't do a thing like that for fourteen years and then stop wanting it. He said what isn't so.</em></p>
+  <p><em>He should be spoken to,</em> said Ivan Stepanovich. <em>Before the brothers.</em></p>
+  <p>Lukyan Ivanovich oiled the length of a trace to the end of it. Then he hung it over his knee and looked at them.</p>
+  <p><em>My son,</em> he said, <em>has come out from under every yoke there is.</em></p>
+  <p>They waited. He did not usually say more, and they did not expect it. But he moved the harness a little on his knee, the collar and the hames and the long reins, and laid his hand on it.</p>
+  <p><em>The pictures had a yoke on him,</em> he said. <em>The crowd had a yoke on him. The money. He put those down. You all saw him put those down. And there is one you can wear in the sobranie, too, with your hands in the air. Wanting to go up. You've watched him when the Spirit comes. He doesn't want up anymore. Up and down are all one to him now.</em> He looked at Mitya. <em>He looked at that boy on the pole the way I look at this harness. You can look at a thing a long time without wanting to put it on.</em></p>
+  <p>Then, because the young men were still standing there and the light was going, he said the verse, the way he said it in meeting, from memory, with his eyes shut.</p>
+  <div class="verse">
+    <p>Итак стойте в свободе, которую даровал нам Христос, и не подвергайтесь опять игу рабства.</p>
+    <p>Stand fast therefore in the liberty wherewith Christ hath made us free, and be not entangled again with the yoke of bondage.</p>
+    <p class="src">&mdash; Galatians 5:1 (Synodal; King James Version)</p>
+  </div>
+  <p>Mitya Kalugin stood in the old man's yard a long time after the others had gone. He was thinking about the boy at the top of the pole, and about how high his own face had been turned, and for how long. He was thinking about Saturday nights on Brooklyn Avenue, and the dark of the picture show, and a man in a black coat falling off a roof with his arms out, and how he had felt watching it. It came to him that the longing they had gone to report had been their own, all three of them, and that they had carried it up Clarence Street in their arms like a sick child to set it down in front of the one man in the Flats who did not have it. It was not a comfortable thing to know. He knew it anyway. Fedya and Grisha came to know it in their own time, and Ivan Stepanovich, who was sixty-one and had never been inside a picture show in his life, said later that it had been a lesson to him as well, though he would not say about what.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The carnival tore down on Tuesday night and went north. On Thursday the lot off Mission Road was on Semyon Kalugin's route, and Semyon was sick, so Vasya drove, and Mitya rode on the running board.</p>
+  <p>The lot was trampled flat and white with paper. They went over it with rakes and forks and loaded what the carnival had left, the paper cups and peanut shells and torn tickets, a burned-out bulb from the Ferris wheel, a pennant on a stick, a child's shoe. In the middle of the lot was the place where the pole had stood. There was a round hole there as deep as a man's arm, where the socket had been set, and four stake holes around it where the guy wires had been pinned, and the dirt around them was beaten hard by a week of feet.</p>
+  <p>Vasya stood and looked at it, and Mitya watched him look.</p>
+  <p>Then Vasya took the shovel off the truck. He filled the hole from the loose dirt at its edge, and filled the four stake holes, one after another, and walked round and round on the fill, tamping it down with his heel the way you would tamp the dirt around a fence post, until there was nothing to show where anything had been. He scraped the shovel clean on the edge of the truck bed and threw it up on the load. Then he wiped his hands on his trousers, and got in behind the wheel, and waited with the engine running for Mitya to climb on.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who, after leaving all bondage to men, has risen above all bondage to the gods, and is free from all and every bondage.<cite>Dhammapada 417, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, an acrobat who performs from place to place hears the Buddha teach, goes forth as a monk, and soon becomes an arahat. One day, walking into the village for alms with the whole community of monks behind the Buddha, the monks see another acrobat going through the same act he used to do, and ask him whether he still longs for that life. He says he does not. The monks go to the Buddha and accuse him of speaking falsely. The Buddha answers that his son has passed beyond all bonds, and speaks the verse, which in the Pāli speaks of a human yoke, a divine yoke, and freedom from every yoke. The commentary tells the same story again word for word for the next verse (418), where the Buddha says instead that the monk has left behind both delight and discontent. The series met an earlier acrobat, Uggasena, in <a href="cloud-of-witnesses.html">Cloud of Witnesses</a>. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-35.htm">the full commentary story</a>.</p>
+    <h3>The Flats, 1937</h3>
+    <p>Between about 1904 and the early 1910s some thousands of <a href="https://en.wikipedia.org/wiki/Molokans">Molokans</a> and related <a href="https://en.wikipedia.org/wiki/Spiritual_Christianity">Spiritual Christians</a> left Transcaucasia, many from the Kars region, and settled on the east side of Los Angeles. Most of the Los Angeles families were Pryguny, or "Jumpers," whose worship includes leaping when the Holy Spirit is felt to descend. Refusal of military service was one of their chief reasons for leaving Russia, and during the First World War dozens of Molokan men in the United States went to jail for defying the draft. They kept no icons and no priests, chose elders to lead their meetings (sobranie), sang psalms in long unwritten melodies, and ate no pork. The first neighborhood was "the Flats," on the low ground along the east bank of the Los Angeles River below <a href="https://en.wikipedia.org/wiki/Boyle_Heights,_Los_Angeles">Boyle Heights</a>. The men worked in lumber yards and mills, and in the Depression many took up city rubbish routes. Their elders worried that the picture shows were pulling their children away, and many families moved out toward Karakala and East Los Angeles in the 1920s and '30s.</p>
+    <p>Hollywood's stunt trade grew out of rodeo and the circus. Cowboys like <a href="https://en.wikipedia.org/wiki/Yakima_Canutt">Yakima Canutt</a> did falls and horse work in westerns, while acrobats and high divers took the falls from roofs and towers in comedies and thrillers. On the carnival lots and at county fairs, the "free act" that drew crowds onto the midway was often a high act, such as a high dive into a tank or a <a href="https://www.circopedia.org/Category:Swaypole">sway pole</a>, a tall flexible pole that the performer bent far out over the crowd from a small platform at the top. One of the best known, Arzeno Selden, "the Stratosphere Man," built himself a sway pole 175 feet tall and toured carnivals and fairs with it until a fall in Florida ended his life in 1951.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder who had been an acrobat, from the Dhammapada commentary (verse 417). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-35.htm">The original</a>. Scripture from the Russian Synodal Bible (1876) and the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="no-guile.html">&larr; No Guile</a><a href="index.html">All stories</a><a href="thirteen-pleats.html">Thirteen Pleats &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw(now) {
+    var t = reduce ? 0 : (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var narrow = W < 760;
+    var base = narrow ? 0.07 : 0.16;               // overall ink strength
+    var bx = narrow ? W * 0.93 : Math.max(W * 0.5 + 440, W * 0.84);
+    if (bx > W - 30) bx = W - 30;
+    var L = H * (narrow ? 0.62 : 0.72);
+    var by = H + 4, my = by - L * 0.5;
+    var T = 9.5;                                   // seconds per full sway
+    var amp = L * 0.16 * (0.6 + 0.4 * Math.sin(t * 2 * Math.PI / 80));
+    var ph = t * 2 * Math.PI / T;
+    var dx = reduce ? L * 0.05 : amp * Math.sin(ph);
+    var tipX = bx + dx, tipY = by - L + Math.abs(dx) * 0.22;
+    // the arc the tip travels
+    ctx.strokeStyle = 'rgba(154,58,40,' + (base * 0.35) + ')';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([2, 7]);
+    ctx.beginPath();
+    for (var i = -20; i <= 20; i++) {
+      var ax = bx + amp * i / 20, ay = by - L + Math.abs(amp * i / 20) * 0.22;
+      if (i === -20) ctx.moveTo(ax, ay); else ctx.lineTo(ax, ay);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+    // guy wires to the halfway point
+    ctx.strokeStyle = 'rgba(43,38,32,' + (base * 0.45) + ')';
+    ctx.beginPath();
+    ctx.moveTo(bx - L * 0.14, by); ctx.lineTo(bx, my);
+    ctx.moveTo(bx + L * 0.14, by); ctx.lineTo(bx, my);
+    ctx.stroke();
+    // the pole: stiff below the stays, bending above them
+    ctx.strokeStyle = 'rgba(43,38,32,' + base + ')';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(bx, by); ctx.lineTo(bx, my);
+    ctx.quadraticCurveTo(bx, by - L * 0.82, tipX, tipY);
+    ctx.stroke();
+    // the figure on the plate, arms out
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(tipX - 7, tipY); ctx.lineTo(tipX + 7, tipY);
+    ctx.moveTo(tipX, tipY); ctx.lineTo(tipX, tipY - 12);
+    ctx.moveTo(tipX - 6, tipY - 8); ctx.lineTo(tipX + 6, tipY - 8);
+    ctx.stroke();
+    ctx.beginPath(); ctx.arc(tipX, tipY - 15, 2.6, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(43,38,32,' + base + ')'; ctx.fill();
+    // the weightless moment at the end of each arc
+    var still = reduce ? 0 : Math.max(0, 1 - Math.abs(Math.cos(ph)) / 0.18);
+    if (still > 0) {
+      var g = ctx.createRadialGradient(tipX, tipY - 8, 0, tipX, tipY - 8, 34);
+      g.addColorStop(0, 'rgba(176,138,62,' + (still * base * 2.2) + ')');
+      g.addColorStop(1, 'rgba(176,138,62,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(tipX, tipY - 8, 34, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+  if (reduce) draw(0); else requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

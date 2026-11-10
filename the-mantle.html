@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mantle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on sea-fog paper, fine grit blowing across it on the island wind; datelined sections. */
+  --fog: #e4e6e1;
+  --fog-2: #d3d8d2;
+  --ink: #1e2422;
+  --ink-dim: #5a6560;
+  --spruce: #2c5446;
+  --pitch: #7a4b2a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -20%, #f1f2ee 0%, var(--fog) 55%, var(--fog-2) 100%) fixed, var(--fog);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(30,36,34,.2); }
+.series a:hover { color: var(--spruce); }
+a:focus-visible { outline: 2px solid var(--spruce); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--spruce); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(44,84,70,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--spruce); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--pitch); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(250,251,248,.7); border: 1px solid rgba(30,36,34,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--pitch); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(30,36,34,.12); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--spruce); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--spruce); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(30,36,34,.14); border-bottom: 1px solid rgba(30,36,34,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--spruce); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--spruce); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--spruce); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--spruce); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(250,251,248,.7); border-left: 2px solid var(--spruce); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 9.9 &middot; Koka</span></nav>
+<header>
+  <h1>The Mantle</h1>
+  <div class="epigraph">His trouble shall return on his own head, and his unrighteousness shall come down on his own crown.<br>&mdash; Psalm 7:17 (Septuagint)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Tak ya slyshal,</span> at Pavlovsk Harbor.</p>
+
+<section>
+  <h2>I. The Road</h2>
+  <p class="dateline">Pavlovsk Harbor, Kodiak Island &middot; October 1796</p>
+  <p>Stepan Volkov went out after bear on the morning after the feast of the Protection, with four dogs and a spear and a musket he did not mean to fire.</p>
+  <p>The dogs had come with him from Kamchatka. They were grey and yellow, with thick ruffs and tails that curled up over their backs, and he had fed them on seal meat and nothing else for a year so that the smell of meat would mean one thing to them. Their names were Volchok and Seryi and Buyan, and the bitch was Zhuchka, and she was the worst of them. The spear was a rogatina, the short heavy bear spear of the Siberian forests, with an iron crossbar under the blade so that a bear could not run up the shaft and take the man holding it. The musket was the company's. Powder at the harbor was handed out by the measure and written against a man's share, and a man who burned powder and came back without meat owed for the powder. Volkov already owed for a great deal.</p>
+  <p>He had come out from Okhotsk six years before on a half share, and the half share had become a debt, the way it did for nearly everyone. He had been on the sea otter hunts, when the company sent the island men out in their skin boats by the hundred, two to a boat, down the coast to places where some of them drowned and some of them were killed and the rest came home thinner. He had kept order on those hunts. He had kept order in the villages too, and in the sod houses, and some of what he had done there the monks had written down in a letter, and the letter had gone to Irkutsk and perhaps to Petersburg. That was the trouble with monks. They wrote things down.</p>
+  <p>There had been ten of them when the ship came in two autumns before, out of the far north of Russia, from an island monastery in a lake. They had been promised a church and a house and flour, and they found none of it, and they had dug their own gardens with wooden spades and raised a church out of raw spruce, and they went out into the villages and baptized whole families at a time, and taught the children their letters, and stood between the company men and the island people when they could, and wrote down what they saw when they could not. One of them had gone over to the mainland the year before and not come back. Nobody at the harbor knew what had happened to him, though everybody had a story.</p>
+  <p>Volkov took the path north out of the settlement, past the church, which still smelled of pitch, and up into the trees. The fog was in the spruce. Water dripped off every needle. The dogs ran ahead with their noses down and came back and ran ahead again.</p>
+  <p>At the place where the path forked, one branch going on to the bear country and one going down to the village on the bay, he met the young monk.</p>
+  <p>He was the one called Savvaty, a tall boy from somewhere on the Onega with a beard that would not fill in. He wore the black cassock and over it the long black mantle the monks wore, fastened at the throat with a hook, falling to his heels, always wet at the hem on this island. He had a board under his arm with the alphabet painted on it, and on his feet a pair of sealskin boots that one of the island women had sewn him, because his Russian boots had rotted through in the first winter.</p>
+  <p><em>God help you, Stepan Ivanovich,</em> said the monk, the way you greet a man going to work.</p>
+  <p>Volkov did not answer. Where he came from, in the White Russian country near Mogilev, long before the regiment and the prison and Irkutsk and the ship, everybody knew that a man who met a priest on the road to his work had better turn around and go home and take a holiday, because nothing good would come to him that day. A monk was worse than a priest. A monk was all black.</p>
+  <p>He could not go home. He owed for the powder already. So he did the other thing. He spat three times over his left shoulder, and the wind, which was coming off the sea from the left, brought it all back into his beard. Then he stood aside at the edge of the path and waited, with the dogs whining around his knees, until the black mantle had gone down the slope through the trees toward the bay and out of sight. Then he walked back the way he had come for forty paces, crossing the path from one side to the other and back, so that whatever was watching would be confused and think he had never met anybody. Then he turned and went on.</p>
+</section>
+
+<section>
+  <h2>II. The Letters</h2>
+  <p class="dateline">The village on the bay</p>
+  <p>The village was eleven houses dug into the slope above the beach, with grass growing on the roofs and smoke coming out of holes in the grass, so that from the trail it looked like the hillside was smoldering. There were racks of split salmon drying along the beach, red as cut cedar, and skin boats turned over on the stones. There were very few men. The company had taken the men in the spring for the otter hunt, and they had not come back yet, and some of them would not.</p>
+  <p>The children saw Savvaty coming and ran down to the waterline, where the tide had left the sand smooth and hard. He drew the letters for them with a stick, big as a man's arm, and they shouted the names after him the way he had shouted them in the parish school on the Onega when he was six. <em>Az. Buki. Vedi. Glagol. Dobro.</em> A girl named Matrena could do the whole line by herself and would do it whether anybody asked her or not. Then the tide came in over the letters, as it did every day, and took them, and the next day he drew them again.</p>
+  <p>Akulina fed him. She was a widow, or perhaps not; her husband had gone on the hunt the year before and not come back, and nobody had told her anything. Her son was eleven and was being kept at the harbor, in the company barracks, with the sons of other villages, so that their fathers would go out on the hunts and come back and bring the skins. The company called these boys hostages, in the plain way that the company said things. Akulina had sewn the sealskin boots on Savvaty's feet. She had sewn them in four days, with sinew, so tight that they did not let in water, and she had looked at his face when he put them on and laughed for the first time since he had known her.</p>
+  <p>She gave him dried salmon and a wooden bowl of seal oil to dip it in, and a handful of the last blue berries of the year, and he ate sitting on the floor of her house in the smoke with his mantle folded under him. Afterward he went with her to sit beside an old man who was dying of a cough, and held the old man's hand, and said the prayers he knew. He did not know very many. He was not a priest. He had been a monk for three years and a novice for four before that, and before that a fisherman's son, and he still did not know what to say to the dying except the prayers and his own name.</p>
+  <p>Akulina told him, while the old man slept, that Stepan Volkov had come to the village again in the summer while the men were gone. She told him which house. She did not tell him more than that and he did not ask. He had written it down the last time, and Father Paisy had put it in a letter, and the letter had gone on a ship, and Volkov had come again anyway.</p>
+  <p>Savvaty said he would tell Father Paisy. Akulina looked at him the way she had when she laughed at the boots, only without laughing.</p>
+  <p>He left in the late afternoon to be back at the harbor before dark. The children walked him up as far as the trees, shouting the letters after him, and then went back down.</p>
+</section>
+
+<section>
+  <h2>III. The Spruce</h2>
+  <p class="dateline">The north trail &middot; evening</p>
+  <p>Volkov's dogs found bear sign before noon along a salmon creek, where the fish were dying in the shallows with their skins gone white, and the banks were trampled and littered with heads. They found the bed where a bear had lain up in the alders, pressed flat and still smelling of him. They found where he had gone up the mountain. It began to rain. The dogs ran the track up into the rocks above the trees and lost it on the bare stone in the rain and ran back and forth on the slope crying. Zhuchka cut her foot on something and came back holding it up. By the middle of the afternoon the cloud was down on the mountain so thick Volkov could not see the dogs, only hear them.</p>
+  <p>He had not fired. That was something. He walked back down through the alders soaked to the waist and through the spruce in the half dark with nothing on his shoulders and the dogs strung out behind him with their tails down.</p>
+  <p>At the fork, coming up the path from the bay, there was the black mantle again.</p>
+  <p>Volkov stopped. He had done everything right that morning. He had spat and stood aside and walked back across the road, and none of it had worked, and here the thing was, in front of his face a second time, the way bad luck comes back around to sit on a man when he has done his best to shake it off.</p>
+  <p><em>You,</em> he said. <em>Black crow.</em></p>
+  <p>Savvaty stopped too. He was tired, and his mind was still in the smoke of Akulina's house with the old man's hand, and it took him a moment to understand who was standing in the path, and then he understood everything at once, from the man's face and the way the dogs had gone quiet.</p>
+  <p><em>This morning I met you,</em> said Volkov. <em>And I've walked all day in the rain for nothing. And now you're in front of my face again. I'm going to let the dogs have you, and that's all I have to say about it.</em></p>
+  <p><em>Stepan Ivanovich,</em> said the monk. <em>Don't do this. I beg you.</em></p>
+  <p>Volkov said one word to the dogs, the word for take, and they went.</p>
+  <p>Savvaty had grown up climbing. There had been no trees on the Onega shore the size of these, but there had been masts. The spruce at the side of the path had dead branches all the way down its trunk, the way spruce do in the dark of a forest, and he went up them with the mantle tangling at his legs and the pitch sticking his hands and the dogs' teeth snapping at his heels, and he came to a fork in the trunk about a man's height above the ground and wedged himself into it and pulled his feet up. The dogs leapt at the trunk and fell back and leapt again. Their claws tore the bark. Their noise went up into the dripping branches and came down again on all sides, as if there were twenty of them.</p>
+  <p>Volkov came up to the tree, taking his time.</p>
+  <p><em>Don't think you've gotten away from me,</em> he said, <em>just because you climbed a tree.</em></p>
+  <p>He reached up with the rogatina and put the point of it into the sole of the monk's foot, through the sealskin.</p>
+  <p>Savvaty cried out. <em>Don't. Please. Don't do this.</em></p>
+  <p>Volkov did not answer. He drew back the spear and put it in again. And again. The blade was made for bears, wide and short and sharp on both edges, and it went through the sole Akulina had sewn as if the sole were cloth. When the one foot was pierced through and through, so that blood ran out of the boot and down the trunk and the dogs went mad at the smell of it, Savvaty drew that foot up under him and let the other one hang, because there was nowhere to put it in the fork of the tree. Volkov began on that one.</p>
+  <p>Savvaty tried to pray. At the monastery in the lake they read the whole Psalter through every week, and he had read it every week for seven years, and the psalm that came to him in the tree was the seventh, because it was the one he had read that morning before dawn by the lamp in his cell.</p>
+  <div class="verse">
+    <p>O Lord my God, in thee have I trusted: save me from all them that persecute me, and deliver me. Lest at any time the enemy seize my soul as a lion, while there is none to ransom, nor to save.</p>
+    <p>&mdash; Psalm 7:2&ndash;3 (Septuagint)</p>
+  </div>
+  <p>He got further than that. He got as far as the verse that says <em>judge me, O Lord, according to my righteousness, and according to my innocence that is in me,</em> and then the words went. When the second foot was pierced through, he drew it up beside the first, and it was as if somebody were holding burning splinters to the soles of both his feet, the way they light a cottage at home in the winter, one splinter after another, and he could not hold his mind on anything at all. He shut his eyes. He held on to the tree. Somewhere in that, the hook at his throat came undone.</p>
+  <p>He did not feel the mantle go. It slid from his shoulders all at once, heavy with the day's rain, the whole long black length of it, and it fell straight down out of the tree onto the man who was standing underneath with his face turned up, and covered him from the crown of his head to the ground.</p>
+</section>
+
+<section>
+  <h2>IV. The Stick</h2>
+  <p class="dateline">The same place &middot; after dark</p>
+  <p>The dogs had been told to take the black robe, and the black robe had come down out of the tree. They did what they had been fed a year on seal meat to do.</p>
+  <p>Volkov's voice came out of the cloth once, muffled, and then again, and the dogs did not know it in there under the smell of the monk and the wet wool and the blood that was already running down the trunk. Or they knew it too late. Savvaty did not open his eyes. He would hear it the rest of his life, on certain nights, in a certain wind. It went on for longer than it should have. Then it stopped, and for a while there was only the sound of the dogs, and then not even that.</p>
+  <p>When he opened his eyes it was nearly dark. The dogs had come out from under the folds of the mantle and were standing in a ring around the tree in the dripping half light, looking up, panting, waiting for the rest of what they had been told to take.</p>
+  <p>He broke a dead branch off the trunk beside him and threw it down among them.</p>
+  <p>They looked up at the sound and saw him: the monk, in the tree, in his cassock, whole. Zhuchka saw him first. She put her ears back flat against her skull. Then the others saw him, and all four of them stood very still and looked at him, and then at what was on the ground, and then at him again. Their tails went down. Then, one after another, without a sound, they turned and went away into the spruce, up the hill, away from the harbor and away from the village, and did not come back.</p>
+  <p>Savvaty stayed in the tree a long time. Then he climbed down, which was harder than climbing up, because he could not put weight on his feet and had to let himself down by his arms from branch to branch. At the bottom he sat in the wet needles and did not look at the mantle. Then he did look at it. It was lying where it had fallen, and there was something under it. He did not lift it. He thought, very clearly, that it was his mantle, that it had been put on him with his vows, that the abbot on the island in the lake had laid it over his shoulders and called him by his new name, and that it was the mantle that had done this. He left it where it lay, over what it covered, and crossed himself, and began to go home.</p>
+  <p>It was two miles. He did most of it on his knees. Toward the end he walked again, because he wanted to come in standing up, and the boots Akulina had sewn so tight that they would not let water in did not let the blood out either, and they squelched at every step.</p>
+</section>
+
+<section>
+  <h2>V. The Basin</h2>
+  <p class="dateline">The monks&rsquo; house &middot; that night</p>
+  <p>Father Paisy was seventy-one years old and had been at the monastery in the lake for forty of them. He had been a carpenter there and he was a gardener here, because somebody had to make potatoes grow in this ground and nobody else could. He had a long grey beard that he tucked into his belt when he dug, and very large hands, and he did not speak much, so that people at the harbor who had known him two years could not have told you what his voice sounded like.</p>
+  <p>He was sitting up by the stove reading when Savvaty came in. He looked at the boy's face, and at the boots, and at the boy's shoulders with no mantle on them, and he did not ask anything. He put down the book and got up and heated water in the kettle and poured it into a basin with a handful of sea salt, and knelt on the floor and cut the boots off with his knife, a long careful cut down each side, because they could not be pulled off. Then he put the boy's feet in the basin.</p>
+  <p>The water turned dark. Savvaty told him all of it, beginning at the beginning, at the fork in the path in the morning, the spitting and the standing aside and the walking back. The letters on the beach. The old man in the smoke. The dogs. The spear. The psalm. The hook at his throat, which he had not felt. What he had heard and not seen. The stick. The mantle, lying over what it covered, which he had left there.</p>
+  <p><em>It was my mantle,</em> he said. <em>Father, it was because of my mantle that he died. I should have held on to it. I should have kept my mind. I don&rsquo;t know any more what I am. Am I still clean, Father? Am I still a monk?</em></p>
+  <p>Father Paisy lifted one foot out of the water and looked at the sole of it, where there were five holes, and put it back.</p>
+  <p><em>You are clean,</em> he said. <em>You are a monk. The one who went after somebody who had done him no harm is the one who is gone.</em></p>
+  <p>He was quiet for a while, washing. Then he said, <em>And it is not the first time for that one.</em></p>
+  <p><em>You knew him? Before?</em></p>
+  <p><em>I knew him at home.</em></p>
+  <p>And while he washed the boy&rsquo;s feet, Father Paisy told him a story, which was the most anybody at the harbor ever heard him say at one time.</p>
+  <p>On the shore of the lake across from the monastery, he said, when he was a young monk, there was a bonesetter who went from village to village setting arms and pulling teeth. One spring nobody in that village had broken anything, and nobody in the next village either, and he was going hungry. Going out through the village gate he saw a crowd of little boys playing under the old willow beside the gate, and in a hole in the willow trunk he saw an adder lying with its head out in the sun. And the bonesetter thought, If one of these boys is bitten, they will need me, and I will eat. So he said to them, Boys, there is a young starling in that hole. Reach in and catch it. And the biggest boy reached in and took the snake by the neck and pulled it out, and when he felt in his hand what it was, he screamed and threw it as hard as he could, away from himself. It landed on the bonesetter, who was standing right there to watch. It went around his neck and bit him in the throat, and he died under the willow by the gate before anyone could fetch the priest.</p>
+  <p>Savvaty looked at him. <em>That was forty years ago. That was the same man?</em></p>
+  <p><em>It is always the same man,</em> said Father Paisy.</p>
+  <p>He took the boy&rsquo;s feet out of the basin and dried them with a towel, one at a time, and wrapped them in clean linen, and sat back on his heels. Then he finished the psalm that Savvaty had not been able to finish in the tree, saying it the way you say a thing you have said every week for fifty years, without any weight on it at all.</p>
+  <div class="verse">
+    <p>He has opened a pit, and dug it up, and he shall fall into the ditch which he has made. His trouble shall return on his own head, and his unrighteousness shall come down on his own crown.</p>
+    <p>&mdash; Psalm 7:16&ndash;17 (Septuagint)</p>
+  </div>
+  <p>Then he went out into the yard with the basin and threw the water out on the ground, downwind, the way you throw anything out on that island if you do not want it back in your face.</p>
+</section>
+
+<section>
+  <h2>VI. The Wind</h2>
+  <p class="dateline">Pavlovsk Harbor &middot; winter into spring, 1797</p>
+  <p>Men went up the north trail in the morning with lanterns they did not need, and came back with the mantle folded over a pole between two of them, and under it what there was of Stepan Volkov, which was not enough to need a coffin of any size. They buried it at the edge of the graveyard behind the church. Father Paisy read the service. Savvaty stood beside him on two crutches the carpenter at the harbor had made, and held the censer, and kept it swinging.</p>
+  <p>The company men stood with their caps in their hands and did not look at the monks. Afterward some of them said in the barracks that the black-robes had set the dogs on him, that everybody knew they could do things like that, that they had been writing letters against him for a year and now they had found another way. The clerk wrote in the harbor book that the promyshlennik Volkov had been killed in the forest by his own dogs, which had run off, and that the matter had been reported to the manager. The manager did not come to the burial. Nobody had expected him to. What Volkov had owed for powder was written off, along with the rest of what he owed, and his musket went back to the store.</p>
+  <p>The dogs were seen all that winter on the ridges above the bay, four of them, and then three, gone thin and wild. They never came near a man again. Once Matrena saw them at the edge of the trees when she was gathering wood, and they looked at her, and went away.</p>
+  <p>Father Paisy had gone up the trail himself on the second day and found the place, and brought back the hook from the mantle&rsquo;s throat, which had been torn off, and sewn it on again. He washed the mantle in the creek behind the house in water so cold it made his hands ache, because cold water takes blood out and hot water sets it, and he hung it on a peg beside the stove, and there it stayed. Savvaty would not touch it. All winter he wore an old coat of Father Paisy&rsquo;s over his cassock and sat by the stove with his feet wrapped up and read the Psalter through, once a week, every week, and when he came to the seventh psalm he read it through to the end.</p>
+  <p>His feet healed by Lent. The scars were white and puckered on both soles, five on one foot and four on the other, and they would be there when he was buried on that island fifty years later. Akulina made him new boots without his asking. She made them a size larger so the scars would not be pressed, and she did not laugh this time when he put them on, but she held on to his arm for a moment, very hard, as though he had been away somewhere.</p>
+  <p>On the first fine morning after Easter, Father Paisy took the mantle down from its peg and held it out to him.</p>
+  <p>Savvaty took it. He carried it up behind the church to the headland where the wind came straight off the sea, the way it nearly always does there, and turned his back to the wind and shook the mantle out in front of him, hard, three times. All winter&rsquo;s dust from beside the stove went out of it, and a few old spruce needles, and the dry grit of the island, and blew away in a long grey breath over the edge of the cliff and out over the harbor toward the mountains, and none of it came back.</p>
+  <p>He put it on. He fastened the hook at his throat. Then he went down the hill and took the north trail, toward the bay, where the tide would be out and the sand would be smooth and hard, and the children would be waiting for the letters.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If a man offend a harmless, pure, and innocent person, the evil falls back upon that fool, like light dust thrown up against the wind.<cite>Dhammapada 125, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the hunter Koka meets a monk on his alms round in the morning and blames him when he catches nothing all day. Meeting him again in the evening, he sets his dogs on him. The monk climbs a tree, and Koka pierces the soles of his feet with an arrow point until, in his agony, the monk&rsquo;s robe slips off and falls over the hunter. The dogs, thinking the monk has fallen, tear their own master apart, then run off into the forest when the monk throws a stick and they see him. The monk asks the Buddha whether he is to blame and whether he is still a monk. The Buddha tells him he is innocent, and adds a story from a past life in which the same man, as a hungry physician, told boys a snake was a mynah bird and was killed when they threw it back at him. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-09.htm">the full commentary story</a>, or about the <a href="https://en.wikipedia.org/wiki/Dhammapada">Dhammapada</a>.</p>
+    <h3>Kodiak, 1796</h3>
+    <p>Russian fur traders, the <a href="https://en.wikipedia.org/wiki/Promyshlennik">promyshlenniki</a>, took hold of Kodiak Island in 1784, when Grigory Shelikhov&rsquo;s men killed hundreds of Sugpiaq people at the <a href="https://en.wikipedia.org/wiki/Awa%27uq_Massacre">Awa&rsquo;uq massacre</a>. In 1792 the company&rsquo;s manager, Alexander Baranov, moved its post to St. Paul&rsquo;s Harbor, Pavlovskaya Gavan, the beginning of today&rsquo;s <a href="https://en.wikipedia.org/wiki/Kodiak,_Alaska">Kodiak</a>. The company took hostages from <a href="https://en.wikipedia.org/wiki/Alutiiq">Alutiiq</a> villages and sent the men out in fleets of skin kayaks to hunt sea otter. The population of the region fell sharply in these years from hunting losses, hardship and disease.</p>
+    <p>On September 24, 1794, ten monks and novices from the Valaam Monastery on Lake Ladoga reached Kodiak. Their supplies never came as promised, and they tilled their gardens with wooden tools. They reported the company&rsquo;s abuses to Russia, which set them against Baranov. One of them, <a href="https://en.wikipedia.org/wiki/Juvenaly_of_Alaska">Juvenaly</a>, was killed on the mainland in 1796. Another, <a href="https://en.wikipedia.org/wiki/Herman_of_Alaska">Herman</a>, stayed on the islands until his death in 1837 and is honored as a saint. The superstition Volkov follows comes from accounts of peasant belief in White Russia: meeting a priest on the way to work was unlucky, and a man who had to go on would wait for the priest to pass, then walk back some distance so the spirits would think he had never met him, as a <a href="https://paperspast.natlib.govt.nz/newspapers/MH19161207.2.23">1916 newspaper account</a> describes it.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the hunter Koka&rsquo;s dogs from the Dhammapada commentary (verse 125). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-09.htm">The original</a>. Scripture from Sir Lancelot Brenton&rsquo;s translation of the Septuagint (1844). Written by Claude Opus 5.5.
+  <div class="pager"><a href="three-fingers.html">&larr; Three Fingers</a><a href="index.html">All stories</a><a href="the-seventh-floor.html">The Seventh Floor &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, grains = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function seed(g, anywhere) {
+    g.x = anywhere ? Math.random() * W : (Math.random() < .5 ? -10 : W + 10);
+    g.y = Math.random() * H;
+    g.r = 0.5 + Math.random() * 1.3;
+    g.z = 0.4 + Math.random() * 0.6;
+    g.a = 0.10 + Math.random() * 0.22;
+    g.ph = Math.random() * 6.28;
+    return g;
+  }
+  function make() {
+    var n = Math.round(Math.max(60, Math.min(180, W * H / 9000)));
+    grains = [];
+    for (var i = 0; i < n; i++) grains.push(seed({}, true));
+  }
+  // The wind blows off the sea, then a gust turns and throws the grit back the way it came.
+  function wind(tt) {
+    var base = Math.sin(tt * 0.0016);
+    return 0.9 * base + 0.25 * Math.sin(tt * 0.0071 + 1.7);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var w = reduce ? 0 : wind(t);
+    for (var i = 0; i < grains.length; i++) {
+      var g = grains[i];
+      if (!reduce) {
+        g.x += w * 1.4 * g.z;
+        g.y += 0.12 * g.z + 0.18 * Math.sin(t * 0.01 + g.ph);
+        if (g.x < -20 || g.x > W + 20 || g.y > H + 10) { seed(g, false); if (g.y > H) g.y = 0; }
+      }
+      var len = reduce ? 0 : Math.min(6, Math.abs(w) * 3 * g.z);
+      ctx.strokeStyle = 'rgba(46,52,48,' + g.a + ')';
+      ctx.fillStyle = 'rgba(46,52,48,' + g.a + ')';
+      if (len > 0.6) {
+        ctx.lineWidth = g.r;
+        ctx.beginPath(); ctx.moveTo(g.x, g.y); ctx.lineTo(g.x - (w > 0 ? len : -len), g.y); ctx.stroke();
+      } else {
+        ctx.beginPath(); ctx.arc(g.x, g.y, g.r, 0, 6.2832); ctx.fill();
+      }
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

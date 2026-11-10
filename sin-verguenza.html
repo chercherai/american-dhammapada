@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sin Vergüenza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on high-meadow paper, light theme; low on the page a clothesline sags across the whole width, hung full of shirts, sheets and quilts that stir in the wind and are taken down one at a time until a single shirt is left, then hung out again; datelined sections. */
+  --ground: #e3e7d6;
+  --ground-2: #f1f2e6;
+  --paper: #232a20;
+  --paper-dim: #5c6553;
+  --accent: #8b3a22;
+  --glow: #b98a2e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, #eef0e2 0%, var(--ground) 65%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(35,42,32,.25); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(185,138,46,.16); }
+.epigraph { border-left: 1px solid rgba(139,58,34,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(241,242,230,.7); border: 1px solid rgba(35,42,32,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse p.en { color: var(--paper-dim); }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(35,42,32,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(35,42,32,.16); border-bottom: 1px solid rgba(35,42,32,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(241,242,230,.7); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 10.8 &middot; Bahubhaṇḍika</span></nav>
+<header>
+  <h1>Sin Vergüenza</h1>
+  <div class="epigraph">Y rasgad vuestros corazones, y no vuestros vestidos.<br>And rend your hearts, and not your garments.<br>&mdash; Joel 2:13</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it came around the fire,</span> on the Rio San Antonio.</p>
+<section>
+  <h2>I. The Outfit</h2>
+  <p class="dateline">Bus Village, Carson National Forest, New Mexico &middot; the last week of June 1995</p>
+  <p>Lyle Hoagland's wife died in October, in the hospital in Alamosa, and by Christmas he knew he could not stay in the house. He was sixty-four. He had raised malting barley and seed potatoes on three quarters outside Manassa, in the San Luis Valley of Colorado. For twelve seasons in the middle of his life he had also been the water commissioner on the Conejos, which meant that from May to September he drove the river and its ditches in a state pickup and shut the headgates of men he had known since grade school. He had been good at both trades and they had left him well off. In February he sold the ground, and the water with it, to a neighbor's son.</p>
+  <p>Ardith had gone once to one of the Gatherings. That was the first one, in 1972, over the mountains at Strawberry Lake. Her sister talked her into it. She was gone five days and came home sunburned, wearing a string of clay beads, and for a month afterward she would stop in the middle of the dishes and laugh. All she ever told him about it was that nobody up there had asked her what her husband did. He found the beads in her dresser in January. In April a boy at the feed store in Antonito, with hair to his belt, told him the Family was coming to the Carson that summer, to the head of the Rio San Antonio, forty miles of road from where the two of them stood. Lyle took it as a thing addressed to him. He told people he was through with all of it, that he was going up to live with the Rainbows and own nothing. He meant it. He had meant everything he ever said.</p>
+  <p>Then he got ready. He bought a thirty-one-foot Winnebago with an Onan generator under the floor. Behind it he pulled a trailer with his elk-camp outfit, which was a wall tent fourteen by sixteen, a second tent for a cookhouse, a four-burner propane range and a chest freezer that ran off the Onan. Half a beef went into the freezer. Into the wall tent went a sixty-pound tin of valley honey, ten pounds of butter, two gallons of olive oil, flour, coffee and a case of green chile. He hired Benny Archuleta, who had irrigated for him nineteen years, and Benny's wife Ernestina, at sixty dollars a day apiece, to come along and keep the camp. Ernestina was the best cook between Antonito and the state line. Lyle had eaten at her table every harvest since 1976 and did not see why he should stop.</p>
+  <p>The way in was Forest Road 87, which leaves the highway north of Tres Piedras, under San Antonio Mountain, and runs west for eighteen miles of gravel and cattle guards. At the far end the Family had laid out parking in a long meadow. Beside the parking was a place for people who lived in their vehicles, which was called Bus Village, and the Gathering itself lay three miles farther on by foot trail, in the meadows along the river. Lyle looked at the trail and at the Winnebago and set up where he was. Benny leveled the rig and pitched the tents under the firs. Ernestina had beans on by dark.</p>
+  <p>At the gate a girl with bells on her ankles had put her arms around him and said, <em>Welcome home.</em> He stood for it. A man on the parking crew walked the length of the Winnebago and said mildly that the Family didn't really do generators, brother, or money. Lyle said he understood. He ran the Onan four hours a day, on account of the freezer.</p>
+  <p>He had two sets of clothes for the new life. In the daytime he wore what he had bought for it in Taos, drawstring trousers of unbleached cotton, a shirt with no collar, sandals, and Ardith's beads. The meadow lay at better than nine thousand feet, and when the cold came down off the ridge at sundown he changed into wool trousers, a flannel shirt, a down vest and sheepskin slippers. He slept in the rig, between sheets, under two of his mother's quilts. Twice in the first week he walked down to the Gathering and stood at the edge of the big meadow at suppertime. Several thousand people sat there in rings on the ground, eating rice and lentils that were ladled out of plastic buckets into whatever bowl each one had brought. He watched it to the end both times and then walked the three miles back to Ernestina's cooking. He told himself he would go down for good once he had the hang of it.</p>
+</section>
+
+<section>
+  <h2>II. The Line</h2>
+  <p class="dateline">Bus Village &middot; July 2</p>
+  <p>They kept coming. By the second of July the rangers were guessing fifteen thousand, with the Fourth still ahead. The good ground near the river was taken, and people arriving late went looking along the edges.</p>
+  <p>Four of them came up through the firs that morning. One was a woman of forty or so called Marigold, who cooked at Kid Village. There was a couple from Arkansas with a baby in a sling. The fourth was a boy of about nineteen that people called Sonny Rich, who had been on the land nine days. He had made it his business to eat at every kitchen and to ask whoever was stirring the pot what was the main thing they had found out so far. The four of them walked out of the trees into Lyle's camp and stopped.</p>
+  <p>Ernestina had washed that morning. Benny had strung a hundred feet of rope from the awning to a fir, and it was full. There were two cotton shirts on it and two flannel, the drawstring trousers and the wool ones, four sheets, six towels, both quilts, a down comforter, a bathrobe, and two sleeping bags, one for cold nights and one for colder. Past the line stood the wall tents. Through the door of one they could see the white corner of the freezer, and they could hear the generator.</p>
+  <p><em>Whose is all this, brother?</em> Marigold said. She thought it might be a kitchen she hadn't heard about.</p>
+  <p><em>Mine.</em></p>
+  <p><em>All of it?</em></p>
+  <p><em>All of it.</em></p>
+  <p>The boy was counting shirts. Marigold looked at the line for a while. <em>You know what we say coming in,</em> she said. <em>We walk lightly on the land. A bowl, a cup and a spoon, something to sleep in, and what you can carry down the trail. There are kids down there sleeping under a sheet of plastic, and they think they're rich. You've come home, brother. You brought the whole house.</em></p>
+  <p><em>And two people on wages,</em> Sonny Rich said. He had seen Benny splitting wood behind the cook tent and Ernestina at the range. <em>Nobody pays anybody here. That's sort of the entire thing.</em></p>
+  <p><em>They are paid fair,</em> Lyle said.</p>
+  <p><em>I bet they are.</em></p>
+  <p>Marigold was not angry and did not pretend to be. <em>Walk down with us,</em> she said. <em>There's council after dinner circle. We'll put it in front of the Family. That's all we ever do about anything. Nobody is going to make you do one thing.</em></p>
+  <p>He went. He had held hearings on ditch banks for twelve years and had never ducked one.</p>
+  <p>The trail dropped through aspen and came out above the river, and he saw by daylight what he had seen only from the edge. The kitchens stood along the meadow under tarps, with their names painted on boards, Lovin' Ovens, Tea Time, Granola Funk. Down at the river the Family had dammed a pool and dug a mud bath beside it. Thirty people lay on the bank coated gray to the eyes, drying like adobes. A man went by with his hair in ropes that hung to the backs of his knees. A girl sat outside the healers' camp with a card around her neck that said she was fasting and silent until noon on the Fourth. On a flat rock above the trail a man squatted on his heels facing the sun, and the boy said he had been there since it came up. Two people were asleep on the bare ground at midday with nothing under them. A good many people wore no clothes at all, and nobody looked at them. The trails had been walked to powder, so that everyone, dressed or not, was the same color to the knee.</p>
+  <p>Beside the trail ran a line of white plastic pipe. It came down off the east slope from somewhere in the timber, and at each kitchen a tee went off to a spigot with a filter can under it.</p>
+  <p><em>That's Chuy's,</em> Sonny Rich said. <em>The water. He's done it since Arizona.</em></p>
+</section>
+
+<section>
+  <h2>III. The Circle</h2>
+  <p class="dateline">Main Meadow &middot; that evening</p>
+  <p>Somebody blew a conch shell at the hour when the light went long, and the meadow filled. The kitchens carried their buckets in. People sat down in rings around the fire pit, ring outside ring, and the servers went along the rows. Musicians walked the Magic Hat around behind them.</p>
+  <p>There were other people in the meadow that evening. All week families had been driving in from Tres Piedras and Vallecitos and the plazas up along the Colorado line to see it for themselves. They stood along the edge in clean shirts with their arms folded. Their people had three hundred years in that country, and the Forest Service wrote them a ticket for a pickup load of firewood without a permit. Now they were watching eighteen thousand strangers build a town in the elk pasture without asking anyone. Among them stood a small old woman in a blue headscarf with two grandchildren by the hands. She had come eighty miles round from Conejos County because her nephew was mixed up in this. She wanted to see what he did every July instead of helping with the first cutting.</p>
+  <p>Her nephew was Jesús Maestas, called Chuy, who was forty-six and a plumber in Antonito. He had been born in a plaza of fourteen houses on the lower San Antonio, on the Colorado side, where this same water was turned out of the river into his family's ditch after it had run north across the line. In the Army he had kept the water point for an engineer battalion. He came home in 1970 and had not said a great deal since. He walked into the Gathering in Arizona in 1979 behind a girl from Tucson. The girl went home. Chuy had seen a kitchen dipping its water out of a creek below the latrines, and he stayed and fixed that. He had laid the line at every Gathering since. Seed camp had him three weeks before anyone else came, finding the springs, and he was always among the last off the land. He could have quit any year, and the people who had been to all sixteen said the water would not have been fit to drink.</p>
+  <p>He was sitting on an upturned bucket at the edge of the inner ring, with a hacksaw and a can of pipe cement by his foot, when Marigold brought Lyle in. He looked up and knew him. Lyle knew the face without the name. It was Eliseo Maestas's boy.</p>
+  <p>Marigold took the feather and told it the way things are told in council, without meanness, and left nothing out. She told about the clothesline, the two tents, the freezer and the generator, the two cooks on wages, and two of everything. <em>This brother says he has come home for good,</em> she said. <em>I believe him. I just don't know what he thinks home is.</em> She passed the feather on. It went around a little, and then people looked at Chuy, as they did when a question was practical.</p>
+  <p><em>Don Lyle,</em> Chuy said. <em>Is that how it is?</em></p>
+  <p><em>It is. It's all so.</em></p>
+  <p><em>How come? You told the boy at the feed store you were coming up here to own nothing. He's my cousin's kid.</em></p>
+  <p>It was a small thing to say, and there was no edge on it. But Lyle Hoagland was sixty-four years old. He had been walked three miles in sandals to be read out in front of ten thousand barefoot strangers and a neighbor's son, and the blood came up in his face.</p>
+  <p><em>Well, then,</em> he said. <em>If that's what is wanted.</em></p>
+  <p>He pulled the collarless shirt over his head and threw it down. He stepped out of the drawstring trousers and kicked the sandals after them. He stood there in the middle of the circle in his undershorts, white as a root from the neck down, with his arms brown to the elbow.</p>
+  <p><em>There,</em> he said. <em>Is that little enough? I'll go around like this.</em></p>
+  <p>Nobody gasped. There were two hundred people in that meadow wearing less, and some of them were sitting within reach of him. Nobody there minded skin. What stopped the talk was the way he had thrown the shirt. It landed at Chuy's feet, thrown the way a man throws down money when he believes he is being robbed. A child laughed and was hushed. At the edge of the meadow the old woman in the blue scarf took her two grandchildren by the shoulders and turned them to face the trees.</p>
+  <p>Chuy got up off the bucket. He picked up the shirt and shook the dust out of it and stood holding it.</p>
+  <p><em>My father cursed you every summer for twelve years,</em> he said. <em>In 'seventy-seven the river didn't make half its water and you had the call on by the tenth of June. You shut us off with the hay half up. You chained the gate and hung your tag on it. He said things about you I won't repeat in front of my aunt.</em></p>
+  <p><em>I remember it,</em> Lyle said.</p>
+  <p><em>Then he would say the other thing, and he said it every time.</em> Ese tiene vergüenza. <em>That one has shame. He said you never locked a gate without coming to the door first, with your hat in your hand, to say what you were doing and whose right the water was going to. You never came at night. You never did it in front of a man's children. In 'seventy-seven you shut off your own brother-in-law the same morning you shut us. For twelve years the whole river hated the sight of your truck, and nobody on it could say you had shamed him. You had a lock in your hand that whole time, and you kept your shame.</em></p>
+  <p>He held out the shirt.</p>
+  <p><em>Now you come up here to the Family, where nobody is asking you for anything but the truth, and you throw it down in the dirt in front of these kids and my tía. She is calling you a sinvergüenza over there right now. I can hear her. Put your clothes on, Don Lyle.</em></p>
+  <p>Lyle stood where he was. The color left his face and came back more slowly. He took the shirt and put it on. He got into the trousers, which took some time on one leg, and nobody helped him and nobody laughed. Then he turned toward the edge of the meadow and said, <em>I beg your pardon, ma'am,</em> loud enough to carry. He came back to the inner ring and let himself down onto the ground beside Chuy's bucket, and sat with his stiff knees up, like a man who has come late into church.</p>
+</section>
+
+<section>
+  <h2>IV. The Thing in the Lake</h2>
+  <p class="dateline">Main Meadow &middot; the same night</p>
+  <p>It was Sonny Rich who asked. He said that where he came from, shame was the thing people came up here to get rid of, and he would like to know what Chuy's father had meant by it.</p>
+  <p>Chuy thought about that for some time. He said it was a different word. He said he couldn't explain it and never had been able to, but his grandmother had a story she told when she wanted the children to have it. The drums had stopped. He told it the way she did, with his hands on his knees, and he did not hurry.</p>
+  <p>There was a rico on the Chama who had two sons. Their mother died and he married again, and the second wife gave him a third. The day that boy was born the old man was so pleased that he told her she could ask him for anything. She said she would ask later.</p>
+  <p>When her son was grown she asked. She wanted the ranch for him, all of it. The old man said no. <em>My two older boys walk around this country like two fires burning,</em> he said. <em>I can't put them out for yours.</em> She asked again every week. He began to be afraid of what she might do. So he called the two older sons and told them how it was. <em>Go up into the sierra and stay there,</em> he said. <em>When I am dead, come down and take what is yours.</em></p>
+  <p>They kissed his hand and went. In the yard their little brother was playing. He saw them go by with their blankets rolled, found out why, and went with them.</p>
+  <p>High in the mountains the eldest sat down under a tree. He said to the youngest, <em>There is a lake down there. Go wash, and drink, and bring us some water back in your hat.</em></p>
+  <p>Now that lake belonged to a thing. Whoever it is that hands out such places had given it the lake, with one rule. It could keep anybody who came down into the water, except a person who knew who God's own people are. So it asked that of everyone who came.</p>
+  <p>The boy waded in and the thing rose up and asked him. He said, <em>The sun and the moon.</em> It said, <em>You don't know,</em> and took him under and shut him in its house at the bottom.</p>
+  <p>When he did not come back the eldest sent the second brother. The thing asked him too. He said, <em>The four directions.</em> It said, <em>You don't know,</em> and took him down to the same place.</p>
+  <p>Some of the people around the fire shifted a little at that, because they had been honoring the four directions every morning for a week. Chuy went on.</p>
+  <p>The eldest waited and then went down himself. He saw two sets of tracks going into the water and none coming out, and he knew what kind of lake it was. He put his knife in his belt and stood on the bank and would not go in.</p>
+  <p>The thing saw he was not coming, so it came to him. It made itself a woodcutter with an ax on its shoulder. <em>Friend, you look tired,</em> it said. <em>Why don't you go in and wash, and drink, and cool off?</em></p>
+  <p><em>It was you that took my brothers.</em></p>
+  <p><em>It was.</em></p>
+  <p><em>Why?</em></p>
+  <p><em>I take everybody who goes down in. Everybody but the ones who know who God's own people are.</em></p>
+  <p><em>Do you want to know that?</em></p>
+  <p><em>I do,</em> said the thing.</p>
+  <p><em>I can't tell it dirty like this, off the road.</em></p>
+  <p>So the thing washed him and brought him water to drink. It gave him a clean shirt and sat him on a bench in the shade. Then it sat down on the ground at his feet.</p>
+  <p><em>Listen, then,</em> the eldest said. <em>The ones who have shame, and are afraid to do wrong even with nobody looking. Quiet people, clean underneath. Those are God's own in this world. There aren't any others.</em></p>
+  <p>The thing believed him. <em>You can have one brother back,</em> it said. <em>Which?</em></p>
+  <p><em>The little one.</em></p>
+  <p><em>You know it and you don't do it,</em> said the thing. <em>You pass over your full brother, who is older, for your stepmother's boy.</em></p>
+  <p><em>I know it and I do it. We are in these mountains on that boy's account. His mother wanted the ranch for him. If I go home without him and say a thing in a lake ate him, who will believe me? I couldn't walk past a door in that valley.</em></p>
+  <p><em>Take both,</em> the thing said. <em>You are the one who knows.</em></p>
+  <p>It brought both brothers up. The eldest sat a while longer and told the thing what a life it had there, eating travelers, and the thing listened to him and gave it up. It kept watch over the three of them in the mountains after that. When the old man died they went down, and the thing went with them. The eldest took the ranch. He made one brother his mayordomo and the other his caporal. For the thing he built a little house in a good place by the ditch and saw that it never went without.</p>
+  <p><em>My grandma said it lived there twelve years,</em> Chuy said, <em>and in twelve years nobody saw it do a thing it would have minded being seen at. She said that kind comes around again. You can tell them. They stand by the water and ask everybody the same question.</em></p>
+  <p><em>What's your number,</em> Lyle said, to nobody.</p>
+  <p>It was what he had asked at every headgate on the Conejos, twelve summers. He meant the priority, the year a ditch was decreed, which settled who drank in a dry year.</p>
+</section>
+
+<section>
+  <h2>V. Ash Wednesday</h2>
+  <p class="dateline">Main Meadow &middot; later</p>
+  <p>The fire had been built up. Sonny Rich was not finished. He wanted to know what did it, then. He said he had been to every kitchen. He had talked to the girl who was fasting, and the man on the rock, and the mud people, and he had half a mind to go without clothes till the Fourth himself.</p>
+  <p><em>Go ahead,</em> Chuy said. <em>It's warm enough in the daytime.</em></p>
+  <p>He turned the can of pipe cement around on the ground with his foot.</p>
+  <p><em>I've been coming sixteen years,</em> he said. <em>I've seen people go the whole week with nothing on. I've seen hair that never met a comb, and that mud at the river. I've seen people who don't eat till the Fourth, and people who sleep on the rocks on purpose. That man sits on his heels up there every year from sunup to dark. Most of them are good people and I've got nothing against any of it. But I never saw it wash anybody. If a man still doesn't know what he came for, he goes home the same as he came. He's dirtier, or he's thinner.</em></p>
+  <p>He looked at Lyle.</p>
+  <p><em>The freezer isn't it either, Don Lyle. You could give every bit of it away tonight and you'd still be standing there in your shorts.</em></p>
+  <p>Then he told about his father. Eliseo Maestas had been an Hermano of the morada above the plaza for fifty years. On Good Friday he went up to it on his knees over the rocks with the others, and there was more that Chuy said he would not tell. His father had believed in it and had done it until he was seventy. His people had come up from the Cañada in the 1850s, and they still told about a hermano down there in the old days who belonged to no brotherhood at all, and lived in a hut under the black mesa, and people went to sit with him anyway. Every Ash Wednesday, when the family came back from church with the ashes on their foreheads, Eliseo said the same thing at the table. It was out of the reading for the day.</p>
+  <div class="verse">
+    <p>Y rasgad vuestros corazones, y no vuestros vestidos.</p>
+    <p>— Joel 2:13, tr. Félix Torres Amat (1825)</p>
+    <p class="en">And rend your hearts, and not your garments.</p>
+    <p class="en">— Joel 2:13, Douay-Rheims</p>
+  </div>
+  <p><em>He said the rocks were for him, and God had no use for them. He said he had known men to come down from the morada on Friday with their backs open and be the same sinvergüenzas on Saturday morning. It's not the clothes. On you or off you, it's not the clothes.</em></p>
+  <p>A girl came running from Tea Time to say a fitting had let go and the kitchen was flooding. Chuy picked up his hacksaw and went.</p>
+  <p>Lyle sat on until the fire was low. The local people were leaving by the upper trail with flashlights. The old woman in the blue scarf stopped beside him with the children, looked him over, and said something in Spanish across his head to Marigold, who had some.</p>
+  <p><em>She says her brother was right about you,</em> Marigold said. <em>And that you're too thin. And that she didn't see anything.</em></p>
+</section>
+
+<section>
+  <h2>VI. The Spring</h2>
+  <p class="dateline">The Rio San Antonio &middot; July 3 to August 4</p>
+  <p>He walked back up in the dark. In the morning he shut off the Onan, and the four of them emptied the camp, Benny and Ernestina and Lyle and the boy, who had turned up at sunrise without being asked. The food at Main Circle was vegetarian, so the beef went to a kitchen by the parking lot that fed the gate crew. The honey, butter, oil and flour went down the trail to Supply on a garden cart. The quilts went to Kid Village and the comforter to the healers. The cotton trousers and the collarless shirt went into the free bin, and were seen all that week on a tall man from Oregon.</p>
+  <p>He paid Benny and Ernestina through the month and asked Benny to drive the Winnebago home and sell it. Ernestina would not leave until she had seen where her beans were going. She followed the cart down, looked into the kitchen at Lovin' Ovens, and took an apron off a nail. She made tortillas there for two days for some nine hundred people. Nobody paid her, and she talked about how those children kept a kitchen for the rest of her life.</p>
+  <p>Lyle kept the wool trousers and the flannel shirt, because of the nights. He kept one sleeping bag, and a bowl, a cup and a spoon out of the Winnebago's drawer, and Ardith's beads.</p>
+  <p>On the Fourth the whole Gathering was silent from sunrise. He woke on the ground at the edge of the meadow and lay looking along the grass. Every blade had a drop of dew on it, and in every drop he could see the meadow upside down, the tents and the smoke of the kitchens and all the other drops. Toward noon the people came down out of the trees from every side and joined hands in a circle so wide that he could not see the far side of it. He stood in it between Marigold and a man still gray from the river. The sound they made together began low and lasted a long while. Then the children came in from Kid Village in a parade, and everyone shouted. He said later that he had not felt a great deal, and that nobody had asked him what he did.</p>
+  <p>By the seventh most of them were gone. About fifty stayed, as some always do, and Lyle stayed with them. The summer rains came, better than seven inches before they were through. He filled latrines and scattered the stones of fire rings. He broke up the packed ground of the kitchens with a digging bar and laid slash across the new trails so they would not wash. He walked fifteen miles of Forest Road 87 with a sack and picked up mufflers and windshield glass. He slept in the one bag. Chuy worked beside him most days and said about as much as he ever did.</p>
+  <p>The water came out last. They pulled the pipe from the bottom up, cut it at the couplings and coiled what would coil, and on the fourth of August, with the ranger from Tres Piedras walking the meadows below them, they climbed to the highest spring. Chuy unbolted the box. The two of them lifted out the plastic liner and carried it off, and left the hollow in the ground the way it was, for the elk.</p>
+  <p>The water stood in it a minute, brown, and then cleared. It rose to the low place in the rim and went over. It ran down through the bent grass toward the river, which runs north there, over the line and past the Maestas gate into the Conejos.</p>
+  <p>Lyle watched it out of sight. He had on the flannel shirt, which had not been washed since the Fourth, and his hands were empty.</p>
+</section>
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">Not nakedness, not platted hair, not dirt, not fasting, or lying on the earth, not rubbing with dust, not sitting motionless, can purify a mortal who has not overcome desires.<cite>Dhammapada 141, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a householder of Sāvatthī becomes a monk after his wife dies, but first has a cell, a kitchen and a storeroom built for himself, fills the storeroom with ghee, honey and oil, and sends for his own slaves to cook for him. He keeps one set of robes for the day and another for the night. Monks looking for lodging see his robes and bedding hung out to dry and bring him before the Buddha, who asks how a man gone forth under a teaching of wanting little came to own so much. Stung, the monk throws off his outer robe in the middle of the assembly and says he will go about like that. The Buddha reminds him that once, even as a water demon, he kept his sense of shame and fear of wrongdoing for twelve years; the monk covers himself and sits down. The Buddha then tells the birth story of the three princes and the demon of the lake, who released his captives when the eldest told him that the godlike are those who have conscience and concern (<a href="https://en.wikipedia.org/wiki/Hiri_(Buddhism)">hiri</a> and ottappa), and ends with the verse on the ascetic practices that cleanse no one. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-08.htm">the full commentary story</a>. The birth story is the Devadhamma Jātaka, the sixth of the <a href="https://en.wikipedia.org/wiki/Jataka_tales">Jātaka</a> collection. M&uuml;ller's "desires" in the last clause renders a word the commentary takes as doubt.</p>
+    <h3>The Rio San Antonio, 1995</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Rainbow_Gathering">Rainbow Family of Living Light</a> has gathered on national forest land in the first week of July every year since 1972, when the first Gathering was held at Strawberry Lake in Colorado. It has no leaders, members or fees; no money changes hands on the land; kitchens are fed from a common Supply paid for by the Magic Hat; each person brings a bowl, a cup and a spoon; and the Family's own handbook says that generators are not appropriate to a Gathering and asks everyone to walk lightly on the earth. The 1995 Gathering was held on the Tres Piedras Ranger District of the <a href="https://en.wikipedia.org/wiki/Carson_National_Forest">Carson National Forest</a>, at the head of the Rio San Antonio, eighteen miles in on Forest Road 87. The Forest Service estimated more than 18,000 people. The district ranger's <a href="https://senecass.com/rainbow/sites/nm95/fs/951103.nm.cleanup.htm">cleanup letter of November 3, 1995</a> records Bus Village and its three to four miles of new trail, the mud baths and pools on the river, the spring boxes and PVC pipe, the fifty or so people who stayed from July 7 to August 4 to restore the site, more than seven inches of rain, and the spring depressions left as wildlife water. It also records the feeling of the Hispano villages nearby, some of whose residents protested the Gathering, and their advice that the Family "needs to listen more than talk."</p>
+    <p>The Rio San Antonio runs north out of New Mexico and joins the <a href="https://en.wikipedia.org/wiki/Conejos_River">Conejos</a> in Colorado's San Luis Valley, where water is divided by <a href="https://en.wikipedia.org/wiki/Prior-appropriation_water_rights">prior appropriation</a>: in a short year the oldest decreed ditches drink first, and a state water commissioner closes the headgates of the junior ones. The winter of 1976&ndash;77 brought one of the worst droughts in Colorado's record. <em>Vergüenza</em> in the Spanish of the upper Rio Grande means a sense of honor and of what is owed to other people, and a <em>sinvergüenza</em> is someone who has lost it. The lay brotherhood of the <a href="https://en.wikipedia.org/wiki/Penitentes_(New_Mexico)">Penitentes</a> has kept its moradas and its Holy Week penances in these villages since Spanish times. The passage from Joel is the old reading for Ash Wednesday; the Spanish here is from the Catholic translation of Félix Torres Amat. Lyle Hoagland, Chuy Maestas and his family, Marigold and Sonny Rich are invented, and so is the plaza on the lower San Antonio.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the bhikkhu with many possessions from the Dhammapada commentary (verse 141). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-08.htm">The original</a>. Scripture from the Spanish Bible of Félix Torres Amat (1825) and the Douay-Rheims Bible. Written by Claude Fable 5.2.
+  <div class="pager"><a href="piedra-negra.html">&larr; Piedra Negra</a><a href="index.html">All stories</a><a href="seven-palms.html">Seven Palms &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, items = [];
+  var kinds = ['shirt','sheet','trousers','shirt','towel','quilt','shirt','trousers','sheet','towel','shirt'];
+  var cols = ['214,205,180','236,232,220','120,104,84','150,70,48','226,222,206','96,120,128','198,186,150','84,92,78','238,234,224','200,170,110','150,70,48'];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    items = [];
+    var n = W < 600 ? 6 : kinds.length, keep = Math.floor(n * 0.62);
+    for (var i = 0; i < n; i++) items.push({ u: (i + 0.8) / (n + 0.6), k: kinds[i], col: cols[i], keep: i === keep, order: (i * 7) % n, n: n });
+  }
+  function lineY(u) { return H - 150 + 26 * 4 * u * (1 - u) * 1.6; }
+  function garment(g, x, y, sway, a) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(sway);
+    ctx.fillStyle = 'rgba(' + g.col + ',' + a + ')';
+    ctx.strokeStyle = 'rgba(40,46,34,' + (a * 0.55) + ')'; ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    if (g.k === 'shirt') { ctx.moveTo(-13, 0); ctx.lineTo(13, 0); ctx.lineTo(25, 13); ctx.lineTo(19, 19); ctx.lineTo(13, 13); ctx.lineTo(13, 42); ctx.lineTo(-13, 42); ctx.lineTo(-13, 13); ctx.lineTo(-19, 19); ctx.lineTo(-25, 13); }
+    else if (g.k === 'trousers') { ctx.moveTo(-11, 0); ctx.lineTo(11, 0); ctx.lineTo(13, 50); ctx.lineTo(3, 50); ctx.lineTo(0, 16); ctx.lineTo(-3, 50); ctx.lineTo(-13, 50); }
+    else if (g.k === 'sheet') { ctx.moveTo(-26, 0); ctx.lineTo(26, 0); ctx.lineTo(25, 54); ctx.lineTo(-25, 56); }
+    else if (g.k === 'quilt') { ctx.moveTo(-22, 0); ctx.lineTo(22, 0); ctx.lineTo(22, 46); ctx.lineTo(-22, 46); }
+    else { ctx.moveTo(-10, 0); ctx.lineTo(10, 0); ctx.lineTo(10, 30); ctx.lineTo(-10, 30); }
+    ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var cyc = (t % 4200) / 4200;
+    ctx.strokeStyle = 'rgba(40,46,34,0.22)'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (var s = 0; s <= 40; s++) { var u = s / 40, x = u * W, y = lineY(u); if (s) ctx.lineTo(x, y); else ctx.moveTo(x, y); }
+    ctx.stroke();
+    for (var i = 0; i < items.length; i++) {
+      var g = items[i], a = 0.3;
+      if (!g.keep) {
+        if (reduce) a = 0;
+        else {
+          var off = 0.12 + 0.4 * (g.order / g.n), on = 0.86 + 0.1 * (g.order / g.n);
+          if (cyc > off && cyc < on) a = Math.max(0, 0.3 - (cyc - off) * 9);
+          else if (cyc >= on) a = Math.min(0.3, (cyc - on) * 7);
+        }
+      }
+      if (a > 0.004) garment(g, g.u * W, lineY(g.u), reduce ? 0.02 : Math.sin(t * 0.012 + i * 1.7) * 0.05 + Math.sin(t * 0.004 + i) * 0.03, a);
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

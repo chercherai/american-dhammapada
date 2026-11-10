@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Children&rsquo;s House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over an indigo marsh before sunrise; a low light gathers slowly at the eastern edge, and now and then three drops fall one after another and go into the ground; datelined sections. */
+  --ground: #141a2a;
+  --ground-2: #1b2236;
+  --paper: #e7e2d4;
+  --paper-dim: #a3a8b4;
+  --accent: #d9a66b;
+  --glow: #8fb0cf;
+  --rule: rgba(231,226,212,.14);
+  --panel: rgba(27,34,54,.78);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, var(--ground) 0%, #0f1422 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse .gloss { font-size: .95rem; color: var(--paper-dim); }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 20.12 &middot; Paṭācārā</span></nav>
+<header>
+  <h1>The Children&rsquo;s House</h1>
+  <div class="epigraph">So when thou art relieved, still toil<br>And strive to please thy Lord.<br>&mdash; Qur&rsquo;an 94:7&ndash;8</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The old people told it so,</span> on the Altamaha.</p>
+
+<section>
+  <h2>I. The Driver&rsquo;s Daughter</h2>
+  <p class="dateline">Tarbert plantation, on the Altamaha, McIntosh County, Georgia &middot; 1817&ndash;1823</p>
+  <p>Tenah was five the year the driver&rsquo;s daughter came across from the Island in a stolen canoe, and it was the first thing in her life she remembered whole.</p>
+  <p>The Island was the cotton place, out past the marsh where the river met the salt. The same family owned it that owned Tarbert, and everybody at Tarbert knew about the driver there. He was a Fula man named Samba who had come by way of the Bahamas, tall, with a red cap. He prayed on a mat three times a day with his face to the east, and ran two hundred hands for old Mr. McAllan with nothing but his voice. He lived in a tabby house with a plank floor and a sleeping loft, the only loft in any quarter on that coast, and he kept his daughters up in it. He meant them for men of his own faith. There were some. There were more on Sapelo, under the old driver there, and Samba had promised his girl Medina to a boatman of that place, a man who could say his prayers.</p>
+  <p>Medina wanted Cato, who was a ditcher at Tarbert and could say no prayers at all. She had seen him twice, when the flats went over with seed rice. She took a canoe in the dark of the moon and came nine miles through the creeks on the flood tide, and she was sitting on the landing at Tarbert when the horn blew, seventeen years old, with her feet cut by oyster shell.</p>
+  <p>The overseer could have sent her back with stripes. He wrote to the old man instead, and the old man said a contented wench was worth two in the sulks and to leave her where she had lit. Her father sent word by the boatmen that he had four daughters now and not five.</p>
+  <p>She did not know how to do anything. Tenah remembered that. The women in the street watched her try to beat rice in the mortar and get the pestle going crooked, and they laughed until they had to sit down, and then they showed her. They showed her how to fan it in the wide basket and let the wind take the chaff. They showed her how to stand in the field with the water at her shins and not think about what else was standing in it. She learned. She worked her quarter acre with the rest. But she carried her head like a driver&rsquo;s daughter all the same, and she never did come to sit on a step in the evening and talk, and people held it against her a little, in an ordinary way.</p>
+  <p>Her boy Sam was born the next year. Twice she sent word across to the Island that there was a grandchild, and twice nothing came back.</p>
+  <p>Cato was mending the bank by the lower trunk in August of 1823, up to his thighs in the ditch, when he put his hand on a moccasin. He walked back to the street on his own legs. By dark his arm was the size of his thigh and black to the shoulder, and he died before the tide turned. Medina was four months gone with the second child. She did not scream. She washed him herself and would let no one help her.</p>
+  <p>The baby came at Christmas, another boy. By then Tenah was eleven and a nurse girl at the children&rsquo;s house, and they gave him to her to carry.</p>
+</section>
+
+<section>
+  <h2>II. The Pencil</h2>
+  <p class="dateline">Tarbert &middot; spring 1824</p>
+  <p>The children&rsquo;s house stood at the high end of the street, on the shell bluff. All the children too small to work stayed there in the day under Maum Kadi, and four or five nurse girls helped her, and three times between sunup and dark each girl took her baby on her hip and walked out along the banks to wherever its mother was hoeing, so it could be fed.</p>
+  <p>Maum Kadi was older than anybody. She had been a grown girl when they took her, on a road in a country she called Futa, where her father had kept a school and taught boys to write on boards. She kept a white cloth over her head and a long string of beads in her bosom. She prayed when Samba prayed, sunrise and noon and sunset, on a square of rice sacking behind the house. On one day in the year she soaked rice overnight and beat it to paste with honey and patted it into flat cakes, and she called the children in a row and put a cake in each one&rsquo;s two hands and said a word over it, and they said <em>Ameen</em> because she had taught them to, and ate. She did not talk much. Women brought her their trouble on the step in the evening anyhow, since she would hear all of it and usually say one thing.</p>
+  <p>The old master died that winter in Savannah. In April his factor came up the river in a sloop with a paper.</p>
+  <p>He had the driver stand every child on the place between six and twelve along the landing. He walked down the row with a pencil. He was a neat man in a gray hat, and when he stopped in front of a child he put two fingers under its chin and turned its face to the light. Tenah stood in that row with Medina&rsquo;s baby on her hip. He stopped in front of her. He looked at her, and at the baby, and at the yaws scars on her shins, and he wrote something and went on.</p>
+  <p>He took nine. Sam was the smallest. He had just had his sixth birthday, if a child born at Tarbert could be said to have one.</p>
+  <p>The women were not allowed on the landing. They stood up on the bluff with the driver in front of them. When the sloop cast off, Medina went through the driver as though he were a gate left open, and down the bluff and into the river. She waded out until it was at her waist and threw both arms up over her head and screamed at the boat. She screamed three times. The man in the gray hat was sitting on a keg in the stern with the paper on his knee, and he did not look around. Sam did. Then the sloop came into the current and went down toward Darien.</p>
+  <p>Tenah watched it from the landing. The baby was heavy on her hip and she held him so hard he cried. She was thinking that the pencil had stopped in front of her, and that there was no reason she knew of why it had moved on.</p>
+</section>
+
+<section>
+  <h2>III. The Water</h2>
+  <p class="dateline">Tarbert &middot; Tuesday, September 14, 1824</p>
+  <p>The rice was cut. It lay in the fields on its own stubble to dry, a whole year of it, and another two days would have seen it tied and stacked.</p>
+  <p>All that Tuesday afternoon the sky was the color of a pot bottom, and the wind blew steadily out of the northeast with rain in it. The old people did not like the look of the tide, which came up at the ebb when it should have been going down. At dark the driver sent everybody into the rice barn on the bluff, the one building at Tarbert with a second floor, and the overseer went up the river road on his mule and was not seen until Thursday.</p>
+  <p>By the time a person could have walked to the lower trunk and back, it was blowing harder than Tenah had known wind could blow. It made a noise like surf on a bar. The river came up over the banks and over the fields and took the cut rice off the stubble all at once, like a cloth pulled from a table. Then it came up the bluff. It came into the street and through the cabins, and the cabins began to go.</p>
+  <p>There were a hundred and sixty people in the loft of the rice barn in the dark. Tenah lay against her mother with the floor shaking under her. Maum Kadi sat by the ladder hole with five babies in her lap and against her knees. She was saying something over and over, low, and passing the beads through her fingers.</p>
+  <p>Medina was not in the loft.</p>
+  <p>She had gone back down to her cabin for something. Nobody ever found out what it was. She had the baby tied on her back in her blue wrapper, and when the water came through the street she got to the big live oak behind the children&rsquo;s house and climbed. A man in the barn door saw her go up by the lightning.</p>
+  <p>Near midnight the wind stopped. It did not ease. It stopped, and for as long as it takes to shell a basket of peas there was no sound at all except water running. In that quiet they heard her from the oak. She was calling a name, the same one, over and over, and it was the baby&rsquo;s. She kept asking somebody to look. She kept saying the cloth had come open.</p>
+  <p>Then the wind came back from the other side and blew until almost morning, harder than before.</p>
+  <p>Day came up mild and clear. The street was gone. There were six cabins standing of thirty-one. The fields were a lake with nothing on it, and the banks were cut in forty places. Eleven people at Tarbert were dead, and Medina&rsquo;s baby was one of them. They found him two days later in the marsh wrack with the rice straw. Medina was sitting in the fork of the oak with the empty wrapper around her shoulders, and it took two men to bring her down.</p>
+</section>
+
+<section>
+  <h2>IV. The Landing</h2>
+  <p class="dateline">Tarbert &middot; that week</p>
+  <p>On Thursday a boat came up from the Island for meal. The boatman was an old man called Ishmael who had carried Medina&rsquo;s two messages across, years before, and carried back nothing. She was at the landing before he had his line fast.</p>
+  <p><em>Uncle. You come from the Island.</em></p>
+  <p><em>I come from where it was.</em></p>
+  <p><em>The tabby house by the cotton barn. The driver&rsquo;s house.</em></p>
+  <p>He busied himself with the line. <em>Daughter, don&rsquo;t ask me about that house. Ask me about any other house on the Island, and I&rsquo;ll tell you.</em></p>
+  <p><em>I don&rsquo;t care about any other house.</em></p>
+  <p>Tenah was on the bluff with the other nurse girls, and she saw the old man stand up straight in his boat and take off his hat.</p>
+  <p><em>The sea came over the Island six feet deep,</em> he said. <em>Samba put every soul on the place up in the cotton house before dark and counted them in. Then he went back for your mother. She would not leave the house without something of hers. Your brother Hamadi went after the two of them. The wave took the east wall and the loft came down on all three. We dug them out Wednesday. We put them in the sand together with their faces the way he would have wanted.</em> He pointed down the river, where a brown smoke stood over the marsh. <em>That&rsquo;s the cattle. Four hundred head drowned, and they are burning them on the beach. It was after the burying. I would not have you think otherwise.</em></p>
+  <p>Medina looked at the smoke.</p>
+  <p>She did not fall down. That was what frightened Tenah. She turned around and walked up off the landing, and the blue wrapper slid from her shoulders and lay on the planks, and she walked out of it. Her other cloth had been rotting on her since the oak. By the time she reached the top of the bluff it had gone too, and she did not know it. She walked out along what was left of the main bank with nothing on, and around the square of the first field, and back, and around. She was talking.</p>
+  <p><em>One of my boys the hawk took. One the water took. My husband is dead of the snake. My mother and my father and my brother lie under one wall.</em></p>
+  <p>She said it all day. She said it the next day. She did not come when the horn blew, and there was work at Tarbert that week for every hand on the place and the half-hands too, and for the children. The driver went out to her with the strap and came back without using it. He said there was nobody there to whip.</p>
+  <p>People would not have her near them. It was not hardness. Every person on that bluff had somebody under the mud or down the river in a sloop, and she was saying it out loud, around and around, and they could not stand to hear it said. They told her to get away. They said she would bring the rest of it down on them.</p>
+  <p>The children threw mud. There was plenty of it, the whole place was mud, gray and stinking, and you could pick it up anywhere. Tenah threw first. She was twelve years old. She had carried that woman&rsquo;s baby on her hip for nine months, and she picked up a double handful of marsh mud and threw it as hard as she could, and it hit Medina between the shoulders and stuck. After that they all did.</p>
+  <p>Medina never turned her head.</p>
+</section>
+
+<section>
+  <h2>V. The Step</h2>
+  <p class="dateline">The children&rsquo;s house &middot; Saturday, sunset</p>
+  <p>The children&rsquo;s house had stood. It was on the highest of the shell, and the water had only come to its sill. Half the street was sleeping in it and under it, and in the evening they sat about the step, for there was nowhere else to sit.</p>
+  <p>Maum Kadi had finished her sunset prayer and come around to the front with her beads in her hand. She saw Medina a long way off, coming along the bank against the red sky with a crowd of children behind her.</p>
+  <p>Tenah was in that crowd. She had mud in both hands.</p>
+  <p>The people at the step stood up. <em>Maum, don&rsquo;t let her in here among the babies. She&rsquo;s gone in her head. Somebody turn her.</em></p>
+  <p><em>Let her come,</em> said Maum Kadi. <em>Move out of her road.</em></p>
+  <p>They moved. Medina came up the shell path saying it, <em>one the hawk took, one the water took,</em> and stopped at the foot of the step, because the step was in front of her and there was an old woman on it.</p>
+  <p>Maum Kadi spoke to her. It was only a few words, and Tenah did not understand them. Nobody there did, except the one they were said to. They were in the language of Futa, which Samba had spoken in the tabby house and nowhere else, and which Medina had not heard in seven years.</p>
+  <p>The ones who were at the step that evening told about it as long as they lived. They said the woman&rsquo;s eyes had been open all week with nobody behind them, and that when the old woman spoke, somebody came and stood behind them again. She looked at the people. She looked down at herself. She made a sound and went down on the shell with her arms around her knees and her head between them.</p>
+  <p>Tenah dropped the mud. She did not decide to. She had on a blue wrapper of her own, her mother&rsquo;s, cut down, and she pulled it loose from her waist and went forward and put it over the woman&rsquo;s back. She stood there in her shift with her hands empty and stinking.</p>
+  <p>Medina got the cloth around her. She crawled the rest of the way to the step and laid her forehead on Maum Kadi&rsquo;s feet.</p>
+  <p><em>Mother. Help me. One of my boys the hawk took, the man in the gray hat. One the water took out of the cloth on my own back. Cato is dead of the snake. The wall fell on my mother and my father and my brother, and my father never sent me one word.</em></p>
+  <p>Maum Kadi heard it to the end. Then she laid her hand on the woman&rsquo;s head, mud and all.</p>
+  <p><em>All of that is so,</em> she said, in English, so that the step could hear. <em>Now be still. You have come where you can be still. You think you are the first. I cried on the ship. Every woman on that ship cried, and every woman on every ship before it and since, and the ones left standing on the shore. Put all that crying in one place, daughter, and it is more than the salt water we were carried over. You have been crying a long time. Longer than you have been alive, I think. Rest from it a little.</em></p>
+  <p>She said nothing else that night. She had Tenah bring a piggin of water, and she washed the mud from Medina&rsquo;s back with her own hands, and put her to sleep on the floor among the babies.</p>
+</section>
+
+<section>
+  <h2>VI. The Day of the Cakes</h2>
+  <p class="dateline">The children&rsquo;s house &middot; October 1824</p>
+  <p>Medina went to the field on Monday with the rest and shoveled mud back into the breaks. She did her task. At night she slept in the children&rsquo;s house. She cried when she had to, quietly, and Maum Kadi let her, and waited.</p>
+  <p>It was better than three weeks. The day for the cakes came round, and there was no honey on the place and little enough rice, but the old woman had put by a gourd of each on the rafters, and they had ridden out the water there. She soaked the rice overnight. In the morning Medina took the pestle from her without being asked and beat it, with the stroke the women of the street had taught her, and the children held out their hands in a row and said their word.</p>
+  <p>That evening the two of them sat on the step. Tenah was inside the door with a baby asleep on her, and other women were about, mending.</p>
+  <p><em>You are lighter,</em> Maum Kadi said.</p>
+  <p><em>A little.</em></p>
+  <p><em>Then you can hear me. I would not say it to you before.</em> She had her beads in her lap, and she did not look at Medina but out at the fields. <em>Your father could not keep you. He built a loft to keep you in, and he could not. You could not keep your sons. You tied one to your back with a good knot. Cato could not keep himself. This is not because you are a slave. The man in the gray hat thinks it is his paper that parts us. He thinks he wrote that. People were parted before there was any paper. There are kings in Futa with a hundred sons, and when the hour comes for one of them, not one son can go in his place or go with him. The Book says it.</em></p>
+  <p>She said it first as it was written, in a language none of the women on the step knew, and it sounded like water going over a trunk gate. Then she put it into plain words for them, and Tenah, inside the door, got those by heart without trying.</p>
+  <div class="verse">
+    <p>O mankind! Keep your duty to your Lord and fear a Day when the parent will not be able to avail the child in aught, nor the child to avail the parent. Lo! Allah&rsquo;s promise is the very truth. Let not the life of the world beguile you, nor let the deceiver beguile you, in regard to Allah.</p>
+    <p>&mdash; Qur&rsquo;an 31:33</p>
+  </div>
+  <p><em>So I must not lean on them,</em> said Medina.</p>
+  <p><em>Love them. I love my father yet, and it is fifty years. But you cannot stand on them. Nobody can. What you can stand on is what you do with your own two hands between now and your own hour, and that hour is not far off for anybody on this river. So don&rsquo;t sit. You have been eased a little. Get up and clear your road while you can see it.</em></p>
+  <div class="verse">
+    <p>But lo! with hardship goeth ease,<br>Lo! with hardship goeth ease;<br>So when thou art relieved, still toil<br>And strive to please thy Lord.</p>
+    <p>&mdash; Qur&rsquo;an 94:5&ndash;8</p>
+  </div>
+  <p>Nobody on the step said anything. A woman named Binah, who had two children in the same sloop as Sam, put down her mending and wiped her face with the back of her wrist, and after a moment took the mending up again and went on with it, and her needle was steadier than it had been since April.</p>
+  <p>Tenah sat inside the door. The baby on her chest breathed in and out. She thought of her own mother, who was down the street in one of the six cabins, and she understood that her mother could not have stopped the pencil, and that she would never be able to stop anything for her mother. It did not make her love her mother less. It made her want to get up. She laid the baby down in its box and went and found the broom.</p>
+  <p><em>Teach me the washing,</em> Medina said on the step. <em>My father would have taught me. I didn&rsquo;t stay for it.</em></p>
+</section>
+
+<section>
+  <h2>VII. The Gourd</h2>
+  <p class="dateline">Tarbert &middot; afterward</p>
+  <p>Before sunup the next morning Tenah was sent to the well with the piggin and the dipping gourd. She carried them around behind the children&rsquo;s house. The square of rice sacking was laid out on the shell, and beside it now there was a second.</p>
+  <p><em>Pour for her,</em> said Maum Kadi.</p>
+  <p>Medina held out her hands. Tenah poured from the gourd. The water ran over the two hands and off the fingers onto the shell and was gone into it. Maum Kadi said to do it again, and she poured again, and a third time. Then the mouth, three times. Then the face. Then the right arm to the elbow and the left. The old woman said the order of it, and Medina did it, slowly, like someone learning to beat rice. The light was coming up gray over the broken fields, and every time the water ran off into the shell Tenah watched where it went.</p>
+  <p>Then the two women stood on their sacking with their faces to the place where the sun would rise, toward the marsh and the Island and the salt water, and Tenah took the empty gourd back to the house, since the babies would be waking.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Medina kept the children&rsquo;s house after Maum Kadi, for twenty-two years. She never left a child alone with its trouble and never told one a thing that was not so. Tenah kept it after her. She was not of their faith and did not pray on sacking. She was baptized in the river at forty by a Baptist exhorter, and was content with that. But she would not pick up a newborn, hers or anybody&rsquo;s, until someone had poured water over her hands three times, and the girls who poured for her learned to do it without asking why.</p>
+  <p>She was fifty-three and still at Tarbert in the winter that freedom came up the river. She had her hands held out over the piggin when the shouting started down the street, and a girl of twelve was pouring.</p>
+  <p><em>Again,</em> Tenah said. <em>Go on. That&rsquo;s two.</em></p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Sons are no help, nor a father, nor relations; there is no help from kinsfolk for one whom death has seized.<cite>Dhammapada 288, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">A wise and good man who knows the meaning of this, should quickly clear the way that leads to Nirvana.<cite>Dhammapada 289, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary tells the life of Paṭācārā at length under verse 113: a rich man&rsquo;s daughter who ran off with a servant and then lost her husband to a snake, one son to a hawk, the other to a river, and her parents and brother under a fallen house, all within a few days. She went mad and wandered naked, driven off with clods, until the Buddha told her to come back to her right mind. This second, short entry returns to what he said next. Seeing that her grief had eased, he told her that neither sons nor kin can be a shelter for anyone at death, and that the wise therefore lose no time in clearing their own path. She and many who were listening were changed by it. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-12.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Patacara">Paṭācārā</a>. The series told the long version as <a href="spilt-water.html">Spilt Water</a>, set in another storm on another shore.</p>
+    <h3>The Georgia rice coast, 1824</h3>
+    <p>A good many of the West Africans enslaved on the Georgia and Carolina sea islands were Muslims, often Fula people from Futa Jallon in what is now Guinea. The best documented is <a href="https://www.georgiaencyclopedia.org/articles/arts-culture/bilali-mohammed/">Bilali Mohammed</a>, head driver on Thomas Spalding&rsquo;s plantation on <a href="https://en.wikipedia.org/wiki/Sapelo_Island">Sapelo Island</a>, who left a thirteen-page <a href="https://en.wikipedia.org/wiki/Bilali_Document">Arabic manuscript</a> on belief, ablution and prayer. In the 1930s his great-grandchildren told interviewers for <a href="https://en.wikipedia.org/wiki/Drums_and_Shadows"><em>Drums and Shadows</em></a> that he and his wife prayed on a mat at sunrise, noon and sunset with a long string of beads, and that a grandmother who &ldquo;come by Bahamas&rdquo; made flat cakes of pounded rice and honey called <em>saraka</em> on the same day each year and put one in every child&rsquo;s hands. The descendants of these communities are the <a href="https://en.wikipedia.org/wiki/Gullah">Gullah Geechee</a> people.</p>
+    <p>Tidewater rice was grown in diked fields flooded and drained through wooden gates called trunks, and worked by the task. Infants were minded in a children&rsquo;s house by an old woman and young nurse girls. Children could be sold away from their mothers, and often were when an estate was settled. On the night of September 14, 1824, a major hurricane came ashore near Darien and St. Simons Island at harvest. The eye passed over Darien around midnight, the sea swept across the islands, and well over a hundred people drowned, many of them enslaved; the <a href="https://www.usdeadlyevents.com/1824-sep-14-15-offshore-and-coastal-ga-hurricane-landfall-near-st-simons-ga-169/">surviving reports</a> are collected by plantation. Tarbert, the Island and everyone on them are fictional. The Fula words spoken on the step are left unquoted, and the Qur&rsquo;an is given in Marmaduke Pickthall&rsquo;s English of 1930.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of Paṭācārā from the Dhammapada commentary (verses 288 and 289). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-12.htm">The original</a>. Scripture from the Qur&rsquo;an, translated by Marmaduke Pickthall (1930). Written by Claude Fable 5.2.
+  <div class="pager"><a href="dry-mustard.html">&larr; Dry Mustard</a><a href="index.html">All stories</a><a href="the-brass-tray.html">The Brass Tray &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Before sunrise over the marsh: a low band of light slowly gathers at the eastern edge, and now and then three drops fall one after another and go into the ground.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, sets = [], next = 1500, last = 0, clock = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function dawn(k) {
+    var g = ctx.createRadialGradient(W * 0.96, H * 1.02, 0, W * 0.96, H * 1.02, Math.max(W, H) * 0.75);
+    g.addColorStop(0, 'rgba(217,166,107,' + (0.10 + 0.05 * k) + ')');
+    g.addColorStop(0.35, 'rgba(150,110,120,' + (0.05 + 0.02 * k) + ')');
+    g.addColorStop(1, 'rgba(20,26,42,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(8,11,20,0.55)';                    // the marsh line
+    ctx.beginPath(); ctx.moveTo(0, H);
+    for (var x = 0; x <= W; x += 6) ctx.lineTo(x, H - 10 - 5 * Math.sin(x * 0.013) - 3 * Math.sin(x * 0.071 + 1));
+    ctx.lineTo(W, H); ctx.closePath(); ctx.fill();
+  }
+  function drop(x, y, a) {
+    ctx.fillStyle = 'rgba(160,190,215,' + a + ')';
+    ctx.beginPath(); ctx.ellipse(x, y, 1.6, 3.4, 0, 0, Math.PI * 2); ctx.fill();
+  }
+  function frame(now) {
+    var dt = last ? Math.min(now - last, 100) : 16; last = now; clock += dt;
+    ctx.clearRect(0, 0, W, H);
+    dawn(0.5 + 0.5 * Math.sin(clock / 9000));
+    if (clock > next && sets.length < 2) {
+      var side = Math.random() < 0.5 ? 0.04 + Math.random() * 0.1 : 0.86 + Math.random() * 0.1;
+      sets.push({ x: W * side, y0: H * (0.15 + Math.random() * 0.3), t: 0, fall: H * (0.28 + Math.random() * 0.15) });
+      next = clock + 7000 + Math.random() * 6000;
+    }
+    for (var i = sets.length - 1; i >= 0; i--) {
+      var s = sets[i]; s.t += dt; var alive = false;
+      for (var k = 0; k < 3; k++) {
+        var tt = (s.t - k * 900) / 1500;                    // each drop a little after the last
+        if (tt < 0) { alive = true; continue; }
+        if (tt > 1) continue;
+        alive = true;
+        drop(s.x, s.y0 + s.fall * tt * tt, 0.34 * (1 - tt * tt));
+      }
+      if (!alive) sets.splice(i, 1);
+    }
+    requestAnimationFrame(frame);
+  }
+  function still() {
+    ctx.clearRect(0, 0, W, H); dawn(0.6);
+    var x = W * 0.08; drop(x, H * 0.30, 0.3); drop(x, H * 0.40, 0.2); drop(x, H * 0.50, 0.1);
+  }
+  size();
+  if (reduce) still(); else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); if (reduce) still(); });
+})();
+
+</script>
+</body>
+</html>

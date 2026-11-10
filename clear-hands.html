@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clear Hands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a cold garage at three in the morning, dark theme; along the foot of the page lies a row of sixty small cells, one sixtieth of a second each, and a faint light steps through them while a single cell holds steady; datelined sections. */
+  --ground: #0f1215;
+  --ground-2: #171c21;
+  --paper: #dde2e4;
+  --paper-dim: #8d979f;
+  --accent: #e2b65a;
+  --glow: #62c4b8;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1b2a2b 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(221,226,228,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(226,182,90,.22); }
+.epigraph { border-left: 1px solid rgba(226,182,90,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(23,28,33,.82); border: 1px solid rgba(221,226,228,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(221,226,228,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(221,226,228,.12); border-bottom: 1px solid rgba(221,226,228,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(23,28,33,.82); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 3.3 &middot; Ukkaṇṭhitabhikkhu</span></nav>
+<header>
+  <h1>Clear Hands</h1>
+  <div class="epigraph">&hellip; and let thy principles be brief and fundamental.<br>&mdash; Marcus Aurelius, <em>Meditations</em> IV.3</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it got told to me,</span> on the back tables at the Thursday weekly on Spring Mountain Road.</p>
+<section>
+  <h2>I. The List</h2>
+  <p class="dateline">Summerlin, Las Vegas &middot; 2011 and 2012</p>
+  <p>Goodwin Sayre was eighteen and his father built houses. Sayre Homes had put up a good part of the northwest valley, and after the crash, when whole streets of it stood empty with the pools gone green, his father had bought the paper back cheap and waited. By 2011 there was money again. There was a house out toward Red Rock with a room over the garage, and in the room were two consoles, two of the flat monitors the tournaments used, and a hole in the drywall beside the door with a calendar hung over it.</p>
+  <p>He played Street Fighter. He had played it online since he was fourteen and was good the way a boy alone in a room gets good, and every loss went through him like something swallowed wrong. He could feel it coming in the second round. Heat behind the eyes, cold hands, then a noise in his head like a room full of people talking about him. Afterward he couldn't eat. He had thought that winning more would stop it. He won more, and it got worse.</p>
+  <p>Ro Mendez came to the house on Tuesdays. Ro was thirty-one and ran the Thursday weekly in the back of a card shop on Spring Mountain Road. He gave lessons for forty dollars an hour and whatever was in the refrigerator, which at the Sayres' was a great deal. One Tuesday in the fall, after Ro had taken ten straight games without seeming to try, Goodwin set his stick down on the carpet.</p>
+  <p><em>I want to stop feeling like this. Tell me how.</em></p>
+  <p>Ro looked at the calendar on the wall. It still said June.</p>
+  <p><em>Okay. Give.</em></p>
+  <p><em>Give what?</em></p>
+  <p><em>You've got money. Half the kids at my weekly can't cover the five dollars at the door. Cover it. Buy the pizza every other Thursday. We never have enough setups, so bring yours. Evo's in July, right in the monsoon, and there'll be guys in from Fresno and El Paso who plan on sleeping in a Corolla. Put them up. Whatever comes to you, cut it three ways. A third for school, a third to live on, a third for the scene.</em></p>
+  <p>Goodwin did all of it, in that order. In March he came back.</p>
+  <p><em>Is there anything else I should be doing?</em></p>
+  <p><em>Yeah.</em> Ro counted on his fingers. <em>Don't quit out of a match. Don't blame the stick. Don't play for money you don't have on you. Shake the hand. Show up when you said you would.</em></p>
+  <p>He kept the five and came back and asked again. Ro gave him five more, about sleep, about eating before a bracket, about watching his own losses with the sound off, and he kept those too. By then they had a name for him on Spring Mountain Road. Nobody had ever seen him skip a step or take two at once, so they called him Checklist, and he answered to it.</p>
+  <p>In August, when the six players who had slept at his father's house over Evo weekend had gone home, he asked one more time.</p>
+  <p><em>Yeah,</em> Ro said. <em>Quit school. Come live in the house.</em></p>
+  <p>He moved in on Labor Day.</p>
+</section>
+
+<section>
+  <h2>II. The House</h2>
+  <p class="dateline">Off Jones Boulevard &middot; fall 2012</p>
+  <p>The house was a four-bedroom rental that a headset company paid for. Five players lived in it with an analyst and a manager, and the living room had been cleared down to a row of stations and a camera on a tripod.</p>
+  <p>The analyst was called Ko. He had the whole game in a three-ring binder and again in a spreadsheet with eleven tabs: thirty-nine characters, and for every move of every one of them the number of sixtieths of a second it took to come out, the number it stayed out, the number it left you standing there afterward with your arm extended. Ryu's uppercut came out in three. Some combinations had to be struck inside a single sixtieth or they did not happen. Whenever Goodwin sat down beside him Ko had the binder open. <em>Here this is correct. Here that is incorrect. You pressed a button there. You can't ever press a button there.</em></p>
+  <p>The manager was Dana Whitlock, who had run a call center before this and ran the house off a laminated sheet on the refrigerator. Up by nine. Eight hours on the stream. Nothing to drink the night before a bracket and nothing posted for an hour after one. Wrist stretches on a timer. The sheet had a paragraph on where the heel of the hand should rest on the stick, with a photograph. <em>That's fine. That isn't. That's how we do it here. That's how we don't.</em></p>
+  <p>They were both right. He could see it, and it made things worse.</p>
+  <p>By November he had a thought he could say word for word. <em>I got into this to stop feeling a certain way. There isn't room in here to stretch out my hands. People live regular lives and come out all right. I'll go back to school. My father has an office with a door waiting for my name.</em></p>
+  <p>After that he stopped opening the practice mode and stopped watching his losses. He dropped eleven pounds he didn't have to drop. Under the light strips in the living room his skin went the yellow of a legal pad. The veins came up along his forearms, and the skin over his knuckles cracked and scabbed and cracked again and left flecks on the buttons.</p>
+  <p>The two youngest in the house were seventeen. They found him one night sitting at a station with the monitor off.</p>
+  <p><em>Check. Wherever you sit down lately you look sick. What did you do?</em></p>
+  <p><em>I didn't do anything. I'm not happy here.</em></p>
+  <p><em>Why not?</em></p>
+  <p>He told them. They told Ko and Dana, who talked in the kitchen for a while with the door shut. Then Dana came out with her keys.</p>
+  <p><em>We're going to see Uncle. Bring a jacket. He keeps the garage cold.</em></p>
+</section>
+
+<section>
+  <h2>III. The Garage</h2>
+  <p class="dateline">North Las Vegas &middot; 2:40 a.m.</p>
+  <p>Dennis Kaneshiro was forty-four. He had grown up in Kalihi and come to Las Vegas at twenty, like half of Kalihi, and he dealt blackjack and pai gow on swing shift at a downtown house where the coffee shop served oxtail soup after midnight and the players at his table talked to him in pidgin. People who had been around in the early nineties said that for three years there had been no Street Fighter cabinet between San Diego and Seattle he could be beaten on. Then he married and had two daughters, and the tournaments saw him about once a year.</p>
+  <p>He got off at two and was home by half past. From then until half past three he played, with his wife and the girls asleep on the other side of the wall, and then he slept until it was time to drive them to school. One hour. Players who trained ten hours a day drove out to North Las Vegas at that hour to sit beside him, and they drove home quiet.</p>
+  <p>He was at the utility sink in his black-and-whites with the bow tie off, washing his hands, when Dana's car pulled in.</p>
+  <p><em>What brings you folks?</em></p>
+  <p><em>This one isn't happy in the house,</em> Ko said.</p>
+  <p>Dennis dried his hands on a shop towel. He looked at Goodwin's knuckles before he looked at his face.</p>
+  <p><em>That true?</em></p>
+  <p><em>Yes.</em></p>
+  <p><em>How come?</em></p>
+  <p><em>I got into this because I wanted to stop feeling a certain way. Ko taught me the frames. Dana taught me the rules. They're right about all of it. There isn't room left to stretch out my hands. I think a person can get free of it living a regular life, so I'm going home.</em></p>
+  <p>Dennis hung up the towel.</p>
+  <p><em>If you could watch one thing, you wouldn't have to watch the rest.</em></p>
+  <p><em>What thing?</em></p>
+  <p><em>Can you watch what you're thinking?</em></p>
+  <p>Goodwin considered it honestly, the way he considered everything.</p>
+  <p><em>I can do that.</em></p>
+  <p><em>Then watch that. Only that.</em></p>
+  <p>He pulled a folding chair around and sat. <em>Where I work there's a procedure for everything these two hands do. How I hold the deck. Which hand goes to the rack. There's a camera over my table, and somebody upstairs whose whole job is my hands. When I walk away from a game I do this.</em> He clapped once, softly, and turned his hands over, palms and then backs. <em>Clear hands. So upstairs can see I'm carrying nothing off. My first year I tried to hold every procedure in my head at the same time. I broke out to the elbows and shorted somebody about once a night. Nobody can watch all that. So I watch up here. If I know what I've got in my head, my hands keep procedure by themselves. If I don't know, the binder can't save me. No disrespect to the binder.</em></p>
+  <p>Ko, standing by the water heater, lifted one shoulder.</p>
+  <p>There was a lunch cooler on the workbench. Dennis took a paperback out of it with a cover gone soft as cloth, the kind that had cost a dollar new. <em>A dealer gets twenty minutes off out of every eighty. Sixteen years of twenty minutes. This guy ran Rome and wrote it down for himself at night, in a tent.</em> He found the place without hunting for it.</p>
+  <div class="verse">
+    <p>We ought then to check in the series of our thoughts everything that is without a purpose and useless, but most of all the over-curious feeling and the malignant; and a man should use himself to think of those things only about which if one should suddenly ask, What hast thou now in thy thoughts? with perfect openness thou mightest immediately answer, This or That.</p>
+    <p>&mdash; Marcus Aurelius, <em>Meditations</em> III.4</p>
+  </div>
+  <p><em>That's all he's got,</em> Dennis said. <em>Somebody asks you cold what you're thinking, and you can tell them. This or that.</em> He turned forward to a page with the corner folded.</p>
+  <div class="verse">
+    <p>Therefore the mind which is free from passions is a citadel, for man has nothing more secure to which he can fly for refuge and for the future be inexpugnable.</p>
+    <p>&mdash; Marcus Aurelius, <em>Meditations</em> VIII.48</p>
+  </div>
+  <p>He put the book back in the cooler. <em>Sit down. Ryu, both sides.</em></p>
+  <p>They played. In the middle of the second round Dennis spoke without taking his eyes off the screen.</p>
+  <p><em>What have you got in your head?</em></p>
+  <p>Goodwin had a lie ready and let it go. <em>That I'm about to drop this.</em></p>
+  <p><em>Okay. That's one. Now you know where it is.</em></p>
+  <p>He dropped it anyway. In the next game Dennis asked again. <em>That my dad's going to want to know what I do all day.</em> <em>This or that,</em> said Dennis, and took the round. It went on that way until the clock on the microwave said a quarter past three, and somewhere before then Dennis quit asking and Goodwin went on asking himself. The room full of people talking was still there. But when he turned and looked at it, it was one thought at a time, and each one, looked at, sat down.</p>
+  <p>He lost every game. On the drive back he noticed he was hungry.</p>
+  <p>At half past three Dennis switched off the monitor and stood. He clapped once, softly, and turned his hands over above the stick, and did not seem to know he had done it.</p>
+</section>
+
+<section>
+  <h2>IV. Pools</h2>
+  <p class="dateline">Bally's Event Center &middot; July 12, 2013</p>
+  <p>He stayed in the house. The binder was still the binder and the sheet was still on the refrigerator. He kept what he could of both and watched the one thing, and over the spring he found that most of the rest got kept without his standing over it. He ate. The skin closed over his knuckles and came in pink. Ko, who had heard all of it from beside the water heater, took to stopping a session in the middle to ask a player what he had in his head. The seventeen-year-olds started saying it to each other across the kitchen, <em>this or that</em>, as a joke at first.</p>
+  <p>Evo that year drew more than thirty-five hundred players to the Strip. Six of them slept at his father's house.</p>
+  <p>His pool was called on Friday morning, at a long table under ballroom lights with a number taped to the monitor. He won twice. His third match was against a boy from Fresno who had his sleeping bag in the Sayres' guest room. In the last round it came the way it always had, the heat and the cold hands and the room full of people. He turned and looked. <em>They're all going to see.</em> There it was. He let it sit where it was, and his hands did what they knew, and he lost the round by a sliver. He lost the next match to someone else and was out of the tournament by noon.</p>
+  <p>He shook the hand. He unplugged his stick and wound the cord. Then, standing over the station, he clapped once, softly, and turned his hands over above the buttons, palms and then backs.</p>
+  <p><em>What's that?</em> said the boy from Fresno.</p>
+  <p><em>Nothing. Clearing.</em></p>
+  <p>He was hungry. He had six guests and a list in his pocket of what each of them would eat, and he went to see about lunch.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">Let the wise man guard his thoughts, for they are difficult to perceive, very artful, and they rush wherever they list: thoughts well guarded bring happiness.<cite>Dhammapada 36, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a rich man's son asks a monk who comes to his house for alms how to be released from suffering. The monk tells him to give: meal tickets, fortnightly food, lodging for the rains, bowls and robes, a third of everything he has. He does it all and asks if there is anything else. He is given the five precepts, then the ten, then told to go forth, and because he does each thing in order he comes to be called Anupubba, &ldquo;Gradual.&rdquo; As a monk he has one teacher who drills him in the Abhidhamma and another who drills him in the monastic rule, until he decides there is &ldquo;not even room for me to stretch out my hands&rdquo; and that he may as well be free as a householder. He stops practicing and grows thin, jaundiced and scabbed. His teachers bring him to the Buddha, who tells him that if he can guard one thing he need not guard the rest: his own thoughts. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-03.htm">the full commentary story</a>.</p>
+    <h3>Las Vegas and the fighting-game scene, 2013</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Fighting_game_community">fighting-game community</a> grew out of arcades in the early 1990s and still runs largely on small local weeklies and volunteer organizers. Its largest gathering, the Evolution Championship Series, moved to Las Vegas in 2005. <a href="https://en.wikipedia.org/wiki/Evo_2013">Evo 2013</a> took place on July 12&ndash;14 in the Bally's Event Center and the ballroom of Paris Las Vegas, with open registration and a record 3,538 competitors across nine games, among them <a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_IV:_Arcade_Edition">Super Street Fighter IV: Arcade Edition</a>. The game runs at sixty frames a second, and serious players study &ldquo;frame data,&rdquo; tables of how many frames each attack takes to start, stay active and recover. Some of its combinations allowed a window of a single frame. Players speak of protecting their &ldquo;mental&rdquo; much as the verse speaks of guarding thoughts.</p>
+    <p>Las Vegas has so many residents from Hawai&#699;i that islanders call it the ninth island, and for decades the downtown casinos have courted them. Table-game dealers work under surveillance cameras and a long list of hand procedures. Before leaving a table a dealer &ldquo;clears&rdquo; the hands, turning them palm up and palm down for the camera to show they are empty; the usual rotation is a twenty-minute break after an hour or so of dealing (see <a href="https://en.wikipedia.org/wiki/Croupier">croupier</a>). The <a href="https://en.wikipedia.org/wiki/Meditations"><em>Meditations</em></a> of Marcus Aurelius were written in Greek as private notes, some of them on campaign. The passages here are from <a href="https://www.gutenberg.org/ebooks/15877">George Long's translation</a> of 1862, the text of many cheap paperback editions.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a dissatisfied bhikkhu from the Dhammapada commentary (verse 36). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-03.htm">The original</a>. Passages from the <em>Meditations</em> of Marcus Aurelius, tr. George Long (1862). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-dinner-bell.html">&larr; The Dinner Bell</a><a href="index.html">All stories</a><a href="hot-water.html">Hot Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now(), N = 60, hold = 22;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    var pad = Math.max(14, W * 0.04), gap = 2;
+    var cw = (W - pad * 2 - gap * (N - 1)) / N, ch = Math.max(5, Math.min(9, cw * 1.4));
+    var y = H - 26 - ch;
+    // one cell is lit about every 0.7 s: a slowed sixtieth of a second
+    var pos = reduce ? 37 : ((now - t0) / 700) % N;
+    for (var i = 0; i < N; i++) {
+      var x = pad + i * (cw + gap);
+      var d = pos - i; if (d < 0) d += N;
+      var a = 0.07 + (d < 6 ? 0.22 * (1 - d / 6) : 0);
+      ctx.fillStyle = 'rgba(98,196,184,' + a.toFixed(3) + ')';
+      ctx.fillRect(x, y, cw, ch);
+      if (i === hold) {
+        var b = reduce ? 0.5 : 0.42 + 0.1 * Math.sin((now - t0) / 2600);
+        ctx.fillStyle = 'rgba(226,182,90,' + b.toFixed(3) + ')';
+        ctx.fillRect(x, y, cw, ch);
+        var g = ctx.createRadialGradient(x + cw / 2, y + ch / 2, 0, x + cw / 2, y + ch / 2, 70);
+        g.addColorStop(0, 'rgba(226,182,90,' + (b * 0.22).toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(226,182,90,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x + cw / 2, y + ch / 2, 70, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>

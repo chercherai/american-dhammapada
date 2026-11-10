@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Slats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over night fields with one far yard light and low mist drifting over the stubble; datelined sections. */
+  --ground: #0e1013;
+  --ground-2: #181b20;
+  --paper: #e3e1dc;
+  --paper-dim: #9b9a96;
+  --accent: #e2b77a;
+  --accent-2: #c9824f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #0b0d10 0%, #11141a 60%, #1a1712 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(227,225,220,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(226,183,122,.22); }
+.epigraph { border-left: 1px solid rgba(226,183,122,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > p.dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,27,32,.78); border: 1px solid rgba(227,225,220,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(227,225,220,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,27,32,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 1.10 &middot; Cunda</span></nav>
+<header>
+  <h1>The Slats</h1>
+  <div class="epigraph">Thine own wickedness shall correct thee, and thy backslidings shall reprove thee<br>&mdash; Jeremiah 2:19</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Zo heb ik het gehoord,</span> in Sioux County.</p>
+
+<section>
+  <h2>I. Fifty-Five Years</h2>
+  <p class="dateline">Sioux County, Iowa &middot; 1954&ndash;2008</p>
+  <p>Gerrit Brink killed his first hog in the fall of 1954, when he was eighteen, in his father's locker plant on the main street of town, where farm families rented a frozen-food locker by the year and brought in their own steer or hog to be cut and wrapped and labeled in grease pencil, and he killed his last one fifty-five years later in the machine shed behind his house on the gravel road east of Hull. In between he killed more hogs than anybody could count, though people in the county tried. When the locker closed in the seventies, because the big plants in Sioux City and Sioux Falls could do it cheaper, Gerrit put up a confinement barn on the home place and then another, and kept killing at home on the side, for anybody who wanted a hog done cheap and did not want to watch.</p>
+  <p>Everybody in that part of the county had a story about how he did it. He did not stun them right. He did not care to. He drove them out of the pen with a length of steel pipe and beat them along the alley to make them run, because he said a hog that had been run bled out better and the meat came up red. He hung them by a hind leg off the hoist and stuck them while they were still kicking, and he caught the blood in a dishpan, and his wife made blood sausage with it, the old way. He ran his scald tank hotter than he needed to and sometimes put them into it before they were done. The Mexican boys who worked for him the summer of 1998 quit in a body after two weeks, and one of them said in the caf&eacute; in Hull, in front of everybody, that he had worked in the packing plant in Worthington and never seen a man do what that man did.</p>
+  <p>Gerrit had been baptized at First Reformed and made profession of faith at sixteen, and after that, as far as anybody knew, he never set foot in the church again. He did not tithe. He did not give to the mission auction or the disaster fund or the hospital. He worked on Sunday, which in Sioux County was a thing people still noticed, loading on the Lord's Day with the yard light on so the whole section could see. He did not send his boy to the Christian school, though he could have paid the tuition ten times over, and though the woman who had taught first grade there for forty-one years lived directly across the gravel from him.</p>
+  <p>Her name was Jantje Rozeboom. She had taught half the men in the county to read, and their children, and some of their grandchildren, and she was eighty-four. She had never married. She lived in her parents' house across the road from the Brinks and kept a garden and drove to church twice every Sunday in a Buick she had bought new in 1987. On summer evenings she sat on the porch, and from the porch she could see straight down Gerrit's driveway to the door of the machine shed, and hear what came out of it. People brought her things all year. Rhubarb and eggs and a quarter of beef, a pie at Christmas from a girl she had taught in 1962, a load of firewood every October from boys who were grandfathers now, who stacked it in her shed and would not take a dollar for it. She gave most of it away again. In forty years Gerrit Brink never once crossed the road. He did not take her a pound of sausage at Christmas or an ear of sweet corn in August, and he did not wave.</p>
+  <p>She had been a quiet teacher. She did not raise her voice, and she did not use the paddle the principal kept in his office for the purpose. When a child in her room did something cruel, she had one thing she did. In the spring of 1951 Arend Hulstein, who was seven, brought down a barn swallow with a slingshot in the schoolyard at noon recess and carried it in by one wing to show the other boys. Miss Rozeboom took it from him and laid it on a clean handkerchief on the corner of his desk, and he sat with it there the whole afternoon, through arithmetic and reading and the closing prayer, with its blue back and its rust-colored throat and its eye half open, and she did not say one word to him about it. At three o'clock she let him bury it by the flagpole. Fifty-eight years later he could still have told you how many feathers were in its tail.</p>
+</section>
+
+<section>
+  <h2>II. Swine Flu</h2>
+  <p class="dateline">Spring 2009</p>
+  <p>That April the news came out of Mexico about the new flu. Within a week the television was calling it swine flu, and it did not matter how many times the men from the pork board and the Department of Agriculture went on the air to say you could not catch it from a hog or a pork chop. People quit buying pork. China and Russia shut their doors to it. Hog prices, which had already been under water a year because the ethanol plants had run the price of corn up and feed had nearly doubled, fell through the floor.</p>
+  <p>By June there were men in that county losing twenty dollars and more on every hog they shipped. Some of them had been in hogs three generations. Some of them sat up nights at the kitchen table with a calculator and the paper from the bank. Young men who had built barns on borrowed money in 2006 called around to see if anybody would take their feeder pigs, because they could not afford the corn to finish them.</p>
+  <p>Gerrit Brink took them. He drove his gooseneck from one farm to the next all that summer and took weaned pigs off men's hands for five and ten dollars a head, and some for nothing, from a few who just wanted them gone. He took them from the sons of men he had gone to grade school with.</p>
+  <p>Kevin Den Hartog was twenty-nine and had built a nursery barn on his grandfather's eighty in 2006, when the bank was glad to lend on hogs. In July he had nine hundred weaned pigs in it, eating corn he could not pay for, and a buyer in Minnesota who had backed out. Gerrit pulled into his yard on a Tuesday afternoon with the gooseneck and did not get out of the truck. He rolled down the window and named a price. Kevin said that would not pay for the vaccine. Gerrit said then Kevin could keep them, and put the truck in gear, and Kevin's wife came out on the step with the baby on her hip and watched the two of them, and Kevin said all right. Gerrit backed up to the chute and they loaded until dark. Some of the smallest ones went down in the trailer and got stepped on, and Gerrit said those were Kevin's loss, not his, and paid him for the count that came off alive at the other end.</p>
+  <p> He filled the old barn behind his house, the one he had stopped using in the nineties, with pigs nobody wanted. The fans in it had half quit and the pit under the slats had not been pumped in two years. He fed them on spoiled distillers' grain he got cheap from the ethanol plant, and on bakery waste, and on whatever else. In August the smell of that barn lay across the road on Miss Rozeboom's porch like a wet blanket, and she sat out in it anyway in the evenings, shelling peas. When people said to his face that it was a hard thing to do to a neighbor, he said he was only doing what the neighbor asked.</p>
+  <p>That fall, when the price came back some, he killed them in the shed and sold the meat for cash, or sold them live off the farm to the Mexican and Laotian families from the packing towns who wanted a whole hog for a party. Then he had them all, the meat and the money and the barn.</p>
+  <p>He killed through October, Saturdays and Sundays both, because Sunday was when the families could come. They drove up from Storm Lake and Sioux City in vans with the children in the back, and stood at the door of the machine shed in their good clothes, and some of them went back to the vans after the first one. From her porch Miss Rozeboom could hear it on a still afternoon. She did not go inside. She sat with her hands in her lap and her eyes open and listened to every one of them until it was done, and then she went in and washed her supper dishes.</p>
+  <p>Wes had grown up with it. When he was small his father used to make him hold the dishpan. He was forty-four now, with a family and a quarter section of his own two miles west, and he had not stood in that shed in twenty years, and he came over less every year, and every year he did not say why.</p>
+</section>
+
+<section>
+  <h2>III. The Slats</h2>
+  <p class="dateline">November 2009</p>
+  <p>The stroke took him in the machine shed on a Thursday morning, standing over the scald tank. His son Wes found him on the concrete by the drain. The doctor in Orange City said it had not been a bad one, as strokes went, and sent him home on Saturday with pills and a walker.</p>
+  <p>On Saturday night he started to see the fire.</p>
+  <p>He sat up in the bed and told Alida the barn was burning. She went to the window. The barns were dark under the yard light, the way they always were. He said not that barn. He said the floor. He said he was standing on the slats and they had gone red under his feet, the whole floor of the barn red-hot, all the way out, farther than a barn went, farther than the section, for miles, and under the slats the pit was boiling. He said there was no end to it. He said he could not get off it. Alida called Wes, and Wes came over from his own place and sat up with him, and Gerrit talked about the slats until it got light.</p>
+  <p>He was not raving. That was what frightened Wes. His father talked about the fire the way he talked about the price of corn, in the same flat voice, as if it were a thing anybody could see who bothered to look, and he described it exactly: how far it went, the color of it under the slats, the sound the pit made boiling, the heat coming up through the soles of his feet. Toward morning he stopped in the middle of a sentence and looked past Wes at the wall, and said, <em>They're all here.</em></p>
+  <p><em>Who is, Dad?</em></p>
+  <p><em>All of them. Every one. They're standing on it with me.</em> And then, very quietly, as if he were counting, <em>Look at them. Look at them.</em></p>
+  <p>On Sunday morning he got out of the bed onto his hands and knees.</p>
+  <p>He crawled through the house the way a hog goes down an alley, putting his head against the walls, nosing at the doors, from the kitchen to the front room and back to the kitchen, and the sounds he made were hog sounds. Grunting, and then the long high sound a hog makes when it is down in the pen and cannot get up. Alida screamed at him to stop. Wes got hold of him and wrestled him back onto the bed, and he was seventy-three and had had a stroke three days before, and Wes could not hold him down. They tried a towel over his mouth. He bit through it. He got loose and went back down onto the floor and crawled for the back door.</p>
+  <p>Alida had been married to him fifty-one years. She had cleaned his boots and washed his coveralls and stirred his blood into the sausage in the dishpan on the kitchen table every fall of her married life, and never once said a word against any of it, and now she stood in the doorway of her own front room in her housecoat and watched him go past her on his hands and knees with his face against the baseboard, and she said the Lord's Prayer out loud, over and over, until Wes took her into the kitchen and sat her down. They were afraid he would get out into the cold, or into the barns, or across the road. So Wes locked the doors and nailed a plank across the back one, and pulled the shades, and the two of them sat up in the kitchen in their coats in turns, with the lights on, and listened to him go back and forth through the house in the dark.</p>
+  <p>On Wednesday the minister came out from First Reformed, a young man from Michigan who had been there two years, and stood on the back step in the wind, and Wes talked to him through the door with the plank across it and would not open it. Wes called the doctor, who said bring him in, and Wes said he could not get him into the truck. The doctor said call the sheriff, then, and Wes said his father would not want the sheriff, and the doctor said what his father wanted was beside the point now, and Wes said he would think about it, and did not call.</p>
+</section>
+
+<section>
+  <h2>IV. Seven Nights</h2>
+  <p class="dateline">The gravel road east of Hull &middot; Sunday to Sunday</p>
+  <p>It had been a cold, wet fall, and the harvest was the latest in years. That second week of November two-thirds of the corn in Iowa was still standing, and every man on that road was running his combine past midnight under the lights, trying to get it out before the snow. They would shut down at one or two in the morning and climb down out of the cab into the quiet, and hear it. Sound carries on that ground at night, with nothing between one farmstead and the next but a windbreak and the corn. That week nobody slept on the section. The Van Peurs, a half mile north, heard it through closed windows. The Hulstein boys, who had a sow unit on the next road over, went out at two in the morning with flashlights, thinking a sow had gotten loose and was down in the ditch with a broken leg. Mrs. Vander Berg, who was ninety and nearly deaf, called her daughter in Sioux Center to say something was screaming out there and would not stop. In the old Kooiker house on the corner, which the Hulsteins rented to the family of the man who ran their sow barn, Mrs. Ram&iacute;rez got up and lit the candle under the picture of the Virgin of Guadalupe on her dresser and sat with it on the edge of the bed, and her children came in one after another in the dark and got into the bed with her, all four of them, and stayed there until it was light. There were seven houses within a mile and a half of the Brink place, and in all seven of them people lay awake.</p>
+  <p>Everybody had a guess. It was the dead of night, it went on hour after hour, it came from the Brink place, and it sounded like hogs. And everybody on that road knew what Gerrit Brink had in his old barn, and what he did in his shed, and that he did not keep the Lord's Day or any other.</p>
+  <p>On Sunday evening four men drove home together from the second service at First Reformed. Their wives had gone home after the morning service. These four went to both. They had been in first grade together in the fall of 1950, in Miss Rozeboom's room at the Christian school, and they were sixty-five now, and two of them were in hogs and one had been and one sold seed. They drove east on the gravel with the windows cracked, and when they came past the Brink place they heard it plain over the engine and the tires. The truck slowed. Nobody said anything for a while.</p>
+  <p><em>On a Sunday night,</em> said Arend Hulstein, who was driving. <em>On a Sunday night, he's running hogs through that shed.</em></p>
+  <p><em>He's been at it all week,</em> said Bert Van Peursem. <em>Ask my wife. Every night since last Sunday.</em></p>
+  <p><em>He's killing out that barn. Those pigs he got off the Den Hartog boy and the rest of them.</em></p>
+  <p><em>He's not killing them. Listen to it. You don't kill a hog that slow. He's doing something to them.</em></p>
+  <p><em>Seven nights,</em> said Bert. <em>All those hogs. You'd think a man would have one thought for the animal. One. Fifty years of it, and not one.</em></p>
+  <p>Across the road Miss Rozeboom's porch light was on, which it never was that late. They turned in. She was in her kitchen in her Sunday dress with her Bible on the table and the lamp on, and she let them in and sat them down at the oilcloth, four old men in their church coats, the way she had sat them down at a little table with a box of crayons in 1950. She had heard it all week. She had not slept either.</p>
+  <p>They told her what they thought.</p>
+  <p>She heard them out. Then she said, <em>He hasn't killed a hog since a week ago Thursday. He's not in the shed. He's in his own house. Wes came over this afternoon. Gerrit's been down on his hands and knees on his kitchen floor for a week, and that's him you hear. He thinks he's standing on the slats and the slats are on fire.</em></p>
+  <p>Nobody at the table said anything.</p>
+  <p>The noise had stopped. They all heard it stop. The kitchen clock went on, and the furnace came on in the basement, and out across the road there was no sound at all.</p>
+  <p>After a while she said, <em>That's it, then. That's the end of it.</em> And a few minutes later Wes's pickup came out of the Brink drive with the headlights on and turned toward town.</p>
+</section>
+
+<section>
+  <h2>V. The Teacher</h2>
+  <p class="dateline">Miss Rozeboom's kitchen &middot; Sunday night, late</p>
+  <p>Her kitchen had not changed since their mothers sat in it. The same oilcloth with the little blue windmills, the same clock over the sink, the same calendar from the elevator in Hull. Arend Hulstein, who had been in hogs forty years himself, sat with his hands flat on the oilcloth.</p>
+  <p><em>Then he got it here,</em> he said. <em>And he's going where he gets it there too.</em></p>
+  <p><em>Yes,</em> she said.</p>
+  <p>Arend looked at his hands. <em>I've run hogs through that sale barn in Rock Valley when I didn't care what shape they were in. I've had men work for me I knew were rough on them and I let it go because they were cheap.</em> He did not finish.</p>
+  <p>Miss Rozeboom said it did not matter whether a man wore a church coat or never had one on. A man who did not watch what he was doing paid for it in this life and in the next one, and the paying was nothing but seeing, finally, what he had done. She did not say more about it than that. She opened the Bible on the table to a place she did not have to look for, the old American Standard her father had read at that table, and put her finger on the line and read it to them the way she used to read to them at the end of the day, before the bell.</p>
+  <div class="verse">
+    <p>Thine own wickedness shall correct thee, and thy backslidings shall reprove thee: know therefore and see that it is an evil thing and a bitter, that thou hast forsaken Jehovah thy God, and that my fear is not in thee, saith the Lord, Jehovah of hosts.</p>
+    <p>&mdash; Jeremiah 2:19</p>
+  </div>
+  <p>Then she closed it.</p>
+  <p><em>Did you ever say anything to him?</em> Bert asked. <em>Forty years across the road.</em></p>
+  <p><em>He never asked me anything,</em> she said. <em>You can't hand a man something across a road if he won't come over for it.</em> She got up and put the coffee on, because it was after ten and none of them was going to sleep.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Gerrit Brink was buried out of First Reformed on Thursday, because Alida asked and the minister would not say no to her. The four men were there. So was Miss Rozeboom, in the back, in the same Sunday dress.</p>
+  <p>Wes sold the barns that winter to an outfit from Sioux Falls. Before the trucks came for the last of the pigs in the old barn behind the house, he cut the hoist chain down off the beam in the machine shed and sold the scald tank for scrap.</p>
+  <p>Arend Hulstein went home that Sunday night and did not go to bed. He put on his chore coat and walked out across his own yard to his own finishing barn, and let himself in, and stood in the alley with the lights turned low. Four hundred hogs lay on the slats in the warm dark, breathing, and the ones nearest the alley got up and came to the gates to look at him. He stood a long time with his hand on a gate, the way he had sat once at a desk with a handkerchief on the corner of it, and looked at them, and made himself see them, every one. After a while, one by one, they lay back down.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">The evil-doer mourns in this world, and he mourns in the next; he mourns in both. He mourns and suffers when he sees the evil of his own work.<cite>Dhammapada 15, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Cunda makes his living for fifty-five years by killing pigs near the monastery where the Buddha lives. In famine years he trades a little rice in the villages for piglets and fattens them behind his house, and he kills them with deliberate cruelty, clubbing them and pouring boiling water down their throats. He never gives the Buddha so much as a handful of flowers or a spoonful of rice. When he falls ill, the fire of the <a href="https://en.wikipedia.org/wiki/Av%C4%ABci">Av&#299;ci</a> hell rises up before him, and for seven days he crawls through his house grunting and squealing like a pig while his family keeps the doors barred and no one in the seven houses around can sleep. Monks passing by assume he is slaughtering pigs for a feast and say so to the Buddha, who tells them that Cunda has not been killing anything: his own deeds have overtaken him, he died that day, and he will suffer in the next world as he did in this one. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-10.htm">the full commentary story</a>.</p>
+    <h3>Sioux County, 2009</h3>
+    <p>Dutch immigrants began arriving in <a href="https://en.wikipedia.org/wiki/Sioux_County,_Iowa">Sioux County</a> in northwest Iowa in 1869, and Dutch is still the most commonly reported ancestry there. The county's Reformed churches shape its life, and Sioux Center has been called <a href="https://www.pbs.org/newshour/nation/ray-suarez-sioux-center-iowa-and-the-ins-and-outs-of-tractor-country">the place with the most Dutch Americans</a> in the country, though Mexican immigrants have come to do much of the hard work in town. It is also hog country. A 2020 study by the state's pork producers ranked Sioux County <a href="https://klem1410.com/?p=64987">second in Iowa</a>, with about 1.3 million hogs.</p>
+    <p>In April 2009 a new strain of H1N1 influenza was first identified in Mexico, and the press called it <a href="https://en.wikipedia.org/wiki/2009_swine_flu_pandemic">swine flu</a>, though it passed from person to person and required no contact with pigs. China, Russia and more than a dozen other countries <a href="https://en.wikipedia.org/wiki/2009_swine_flu_pandemic_actions_concerning_pigs">banned American pork</a>. Hog farmers had already been losing money for a year as feed costs nearly doubled; the scare pushed prices down further, and economists estimated it cost the industry <a href="https://www.npr.org/transcripts/120004284">more than $900 million</a>. That autumn was also one of the latest harvests in memory: as of November 8, <a href="https://crops.extension.iastate.edu/cropnews/2009/11/crop-and-weather-report-nov-9">only 34 percent</a> of Iowa's corn had been harvested.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Cunda the pig butcher from the Dhammapada commentary (verse 15). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-10.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Opus 5.5.
+  <div class="pager"><a href="four-votes.html">&larr; Four Votes</a><a href="index.html">All stories</a><a href="the-izote.html">The Izote &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A distant yard light seen across dark fields: a cold point that breathes, and slow mist drifting over the stubble.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, bands = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    bands = [];
+    for (var i = 0; i < 5; i++) {
+      bands.push({ y: H * (0.7 + i * 0.065), x: Math.random() * W, w: W * (0.5 + Math.random() * 0.6), h: 18 + Math.random() * 26, v: (0.06 + Math.random() * 0.12) * (i % 2 ? 1 : -1), a: 0.035 + Math.random() * 0.03 });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += reduce ? 0 : 1;
+    // yard light, far off, low on the horizon at the right
+    var lx = W * 0.82, ly = H * 0.68;
+    var breathe = reduce ? 1 : 0.85 + 0.15 * Math.sin(t * 0.01);
+    var g = ctx.createRadialGradient(lx, ly, 0, lx, ly, 120 * breathe);
+    g.addColorStop(0, 'rgba(255,214,150,' + (0.5 * breathe) + ')');
+    g.addColorStop(0.05, 'rgba(255,190,120,' + (0.22 * breathe) + ')');
+    g.addColorStop(0.4, 'rgba(200,120,70,0.04)');
+    g.addColorStop(1, 'rgba(200,120,70,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(lx, ly, 120 * breathe, 0, Math.PI * 2); ctx.fill();
+    // mist drifting across the fields
+    for (var i = 0; i < bands.length; i++) {
+      var b = bands[i];
+      if (!reduce) { b.x += b.v; if (b.x - b.w > W) b.x = -b.w; if (b.x + b.w < 0) b.x = W + b.w; }
+      var m = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.w);
+      m.addColorStop(0, 'rgba(190,196,200,' + b.a + ')');
+      m.addColorStop(1, 'rgba(190,196,200,0)');
+      ctx.save(); ctx.translate(b.x, b.y); ctx.scale(1, b.h / b.w); ctx.translate(-b.x, -b.y);
+      ctx.fillStyle = m; ctx.beginPath(); ctx.arc(b.x, b.y, b.w, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Brass Tray</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a dark prairie night the color of old brass; at the margins fine bright lines are cut one stroke at a time, glint at the point, and dull again; datelined sections. */
+  --ground: #13100c;
+  --ground-2: #1e1913;
+  --paper: #e9e1cf;
+  --paper-dim: #a89d86;
+  --accent: #cfa24e;
+  --glow: #e8cf96;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #2a2216 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,225,207,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(207,162,78,.22); }
+.epigraph { border-left: 1px solid rgba(207,162,78,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(33,27,19,.8); border: 1px solid rgba(233,225,207,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,225,207,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(233,225,207,.14); border-bottom: 1px solid rgba(233,225,207,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(33,27,19,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 21.5 &middot; Dārusākaṭikaputta</span></nav>
+<header>
+  <h1>The Brass Tray</h1>
+  <div class="epigraph">I laid me down and slept, and rose up again; for the Lord sustained me.<br>&mdash; Psalm 3:5</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Heek smi&rsquo;it,</span> on the Little Muddy.</p>
+
+<section>
+  <h2>I. The Can on the Post</h2>
+  <p class="dateline">Williams County, North Dakota &middot; summer 1907</p>
+  <p>There were eleven Syrian claims on the flats north of the Little Muddy that summer, nine sod houses and two of lumber, strung out a half mile apart along the section lines like beads somebody had dropped and not picked up. The men had come out on the Great Northern as peddlers, with their cases on their backs, and had seen all that land lying open and free for anybody who would file on it and live on it five years. They wrote home to the villages above Zahleh, and the cousins came. By 1907 there were wives on the flats, and babies born in sod houses, and a cemetery with two Syrian graves in it at the corner of the Saba claim, marked with crosses cut from packing-case boards.</p>
+  <p>The boys of the colony played ball against the side of the Saba barn. There were not enough of them to make up nine, so they played a game of their own. Somebody set a tomato can on a fence post forty paces off, and you threw at it, and if you knocked it off you threw again, and the one who knocked it off most times before dark was the winner. The ball had been wound by Mikhail Saba's mother out of an old wool sock around a rubber ball, sewn over with harness thread, and it went where you sent it.</p>
+  <p>Mikhail Saba won. He won nearly every evening. He was eleven, small for it, with his father's long hands, and before every throw he crossed himself, three fingers together, right shoulder before left the way the Orthodox do, and as the ball left his hand he said, not loudly, <em>Ya Rabb, irham.</em> Lord, have mercy. His father Hanna was the chanter for the colony, the one who led the prayers on Sundays when there was no priest, which was nearly every Sunday, because the nearest priest was at Rugby, nearly two hundred miles east on the Great Northern. In the Saba house they said <em>Ya Rabb, irham</em> the way other people breathed. Mikhail said it throwing a ball.</p>
+  <p>Faris Malouf lost. He was eleven too, and bigger, and he threw harder than anybody, and he shouted <em>Abu Zayd!</em> every time he threw, because that was what his father did. Assaad Malouf knew the whole story of Abu Zayd al-Hilali, the black hero of the Bani Hilal who rode out of Arabia and took cities with his sword, and he told it the way men told it in the coffeehouses at home, in the long rhymed lines, night after night, so that Faris had grown up with Abu Zayd sitting at the supper table like an uncle. Assaad did not cross himself. He said priests ate the first lamb and the last lamb and blessed the bones for the poor. He wore a blue glass bead on a string under his shirt against the eye of envious people, and he trusted that, and his two arms, and the price of lace, and nothing else.</p>
+  <p>Faris shouted <em>Abu Zayd!</em> and the ball went a foot wide of the can. Mikhail crossed himself and said what he said and the can went over into the grass.</p>
+  <p>It was not the words, Faris told himself. Mikhail had a good eye. But he watched. He watched for a whole week from the side of the barn, how Mikhail stood still before he threw, how something in his face went quiet, as if he had gone into another room, and how out of that quiet the ball went straight. And one evening when nobody was looking, when the others had gone in and he was throwing alone at the can in the long yellow light that lasts until ten o&rsquo;clock in a Dakota July, he crossed himself, badly, left before right, and said it.</p>
+  <p>The can went over.</p>
+  <p>He said it the next throw, and the next. He said it under his breath for the rest of that summer, throwing at the can, carrying water from the slough, lying on his pallet at night listening to his father snore. He said it when he was frightened and when he was bored and when there was nothing at all in his head, until it was like a stone he carried in his pocket and turned over without knowing. He did not say it in front of his father.</p>
+  <p>Old Imm Jirjis saw him at it once, from the road. She was walking past with her case on her back, as she had walked the roads of four states for twenty years, a little brown woman in a black dress with a kerchief over her hair and a man&rsquo;s shoes. She stopped and watched him throw. She did not say anything. She only nodded, the way you nod at somebody doing a job right, and went on toward the Saba house to sell Mikhail&rsquo;s mother a paper of needles.</p>
+</section>
+
+<section>
+  <h2>II. The Coal Bank</h2>
+  <p class="dateline">The road to Lindahl &middot; September 1907</p>
+  <p>Assaad Malouf had gone up in the world. He had a team now, two bay geldings he called Hamdan and Zayd, and a spring wagon with a box built on behind the seat that opened out like a cupboard, and in the cupboard there were drawers: needles and pins, thread on wooden spools, buttons on cards, shoelaces, suspenders, combs, mirrors, a drawer of lace that the women of the colony had made over the winter, a drawer of little olive-wood crosses and rosaries from Jerusalem that he sold to the Catholics and laughed at in Arabic as soon as he was out of the yard. He had a county license for a single horse, which cost thirty-five dollars a year, and drove two, and dared anybody to count.</p>
+  <p>Every fall he took Faris out with him for a week on the circuit, west and north among the Norwegian farms, to learn the trade. Faris learned to stand in a farm kitchen and open the drawers one at a time, slowly, so the lace came last. He learned to say <em>Good morning, Missus</em> and <em>very fine</em> and <em>for you, special.</em> He learned that the Norwegian women would buy anything if you let them look long enough, and that they would give you coffee whether you wanted it or not, and a piece of lefse, and sometimes, when the man was out, ask you in a low voice whether you had anything for female trouble.</p>
+  <p>On the last day of the week they turned for home by way of a coal bank on a coulee south of Lindahl. Everybody on the flats burned lignite. There was no wood on that prairie worth the name, only the willows along the creek, and the lignite lay in a black seam right in the bank of the coulee where the water had cut it, so soft you could dig it with a spade. The Norwegian who owned the quarter let his neighbors dig their own for a dollar a wagonload. Assaad paid him the dollar, and he and Faris dug all afternoon, the boy in the seam with the spade and the man on the wagon spreading the load so it rode level, and the coal was brown-black and smelled of old leaves when you broke it, and in some of the chunks you could still see the grain of the wood it had been, a long time ago, when it was a tree.</p>
+  <p><em>A tree,</em> Faris said, holding one up.</p>
+  <p><em>A tree,</em> said his father. <em>And then it lay down, and then it was coal, and now we burn it, and then it&rsquo;s ash. And Abu Zayd is dead too. Throw it in the wagon.</em></p>
+  <p>The wagon was heavy and the geldings were tired, and it was near sundown when they came up out of the coulee within sight of Lindahl. Lindahl was a Great Northern town of four hundred people, a depot and two elevators and a Lutheran church with a white steeple, and on the north side of it, where the colony road came in, a man named Elias Haddad kept the only Syrian store between Minot and the Montana line. Haddad was the dealer. He had brought most of the colony out, one cousin at a time. He stocked their cases on credit and they paid him back in the fall, and his word was law on the flats in a way no sheriff&rsquo;s was. He was the one who wrote their letters and read the ones that came. He had a cast-iron safe and a gold watch and a brass tray from Damascus as wide as a wagon wheel, with verses from the old poets running around its rim in letters inlaid with silver.</p>
+  <p>That night was the eve of the Feast of the Cross. Haddad kept it every year in the old way, and the whole colony came in to his store for it, the women a day ahead to cook. Latifeh Malouf had gone in on the Sabas&rsquo; wagon the morning before. Assaad had not gone. He had told her, in front of the boy, that he would go and eat Haddad&rsquo;s lamb when Haddad came out and dug Haddad&rsquo;s own coal.</p>
+  <p>So they did not go into town. Assaad stopped the wagon a quarter mile short of it, where the road passed the Lutheran cemetery, because there was a well there with a pump and a trough for the people who drove out on Sundays, and good grass along the fence. He unhooked the traces and watered the geldings and hobbled them and gave them their oats in a nosebag each, and he and Faris ate bread and olives and the last of the cheese sitting on the wagon tongue, with their backs to the graves.</p>
+  <p>Off to the north, on the high ground past the edge of town, a fire went up. It was the bonfire for the Feast, which at home they lit on the hilltops so that one village could see the next one&rsquo;s, all the way down the valley. Here there was only the one. Faris watched it a long time, a red point on the dark prairie, the sparks going up off it.</p>
+</section>
+
+<section>
+  <h2>III. Under the Wagon</h2>
+  <p class="dateline">The Lutheran cemetery outside Lindahl &middot; that night</p>
+  <p>It was a cattle drive that did it. A rancher from up on the Missouri breaks was bringing a hundred head of steers in to the stockyards by the depot to load for St. Paul in the morning, and they came along the road in the dusk with two men riding behind them, and the geldings lifted their heads out of the nosebags and watched them pass. Then Zayd, who had always been the fool of the two, went after them, hobbles and all, in a kind of rocking hop, and Hamdan went after Zayd, and the two of them were carried away down the road into Lindahl in the dust and bawling, like two pieces of wood in a flood.</p>
+  <p>Assaad swore by everything Faris had ever heard him swear by and went after them on foot. <em>Stay with the wagon,</em> he shouted back. <em>Stay with the coal. Nobody touches it.</em></p>
+  <p>Faris stayed with the wagon.</p>
+  <p>What happened in town he heard afterward. His father found the geldings without much trouble, in the corral behind the livery barn, where the steers had been turned in to wait for the cars. But the liveryman said they had eaten his hay and wanted fifty cents, and Assaad had spent his last money on the coal, and he took a card of lace out of his coat and said, <em>For your wife, very fine, for you, special.</em> And the town marshal was standing in the door of the livery, a Norwegian named Bratlie with a star on his vest, and he said that was peddling, and the town of Lindahl had its own license for peddlers within the corporate limits, five dollars, and did Assaad have that one too, or only the county&rsquo;s.</p>
+  <p>Assaad had only the county&rsquo;s. He tried to explain about the horses, and the coal, and the boy at the cemetery, but when he was angry his English left him, and what was left was loud. They put him in the town lockup behind the depot for the night, to go before the justice in the morning. It was a plank building eight feet by ten with one barred window, and he stood at the window and shouted his son&rsquo;s name toward the cemetery until the marshal told him to shut up or he would gag him.</p>
+  <p>Faris did not hear him. A quarter of a mile is a long way on the prairie when the wind is from the west.</p>
+  <p>He waited until it was full dark. The bonfire had burned down to a red eye on the hill. He heard the cattle bawling in the stockyards, and a dog, and once the Great Northern going through without stopping, its headlight sweeping across the cemetery fence and the white stones, and then nothing. He was not afraid, at first. He was eleven and he had been left with the wagon before. He took the horse blanket off the seat and crawled under the wagon between the wheels, where the coal smell was and the dry grass was soft, and pulled the blanket over him, and lay looking at the bottom boards of the wagon bed. He said it a few times, under his breath, the way he had all summer. Then he slept.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The women on the flats had a word for what lived in graveyards, and every child of the colony knew it. The ghoul. In the stories the grandmothers told, the ghoul lay up in the ruins and the burying grounds outside the villages and ate the dead, and when the dead ran short it took the living, and it could look like anything it wanted: a camel, a goat, an old woman, your own cousin calling you by name in the dark. The grandmothers said it had come over to America in the steerage like everybody else. They said it hid in the bedding.</p>
+  <p>There were two of them in the cemetery outside Lindahl that night, Faris said later, and he never said otherwise, not when he was a grown man, not when he was old. He did not see their faces. He heard them over him in the dark, talking in Arabic, the Arabic of the mountain villages, which nobody in Lindahl but the Syrians could have spoken.</p>
+  <p><em>Look what they left us,</em> said the one.</p>
+  <p><em>Let him alone,</em> said the other. <em>He&rsquo;s a child. Get away from him.</em></p>
+  <p><em>He&rsquo;s left. Nobody left him for you.</em></p>
+  <p>Then there were hands on his ankles, cold and very strong, and he was being drawn out from under the wagon into the open on his back, the blanket bunching under him, the grass going by, the stars coming out over him one after another as the wagon bed slid away. And out of him, before he knew he had it to say, came the thing he had said ten thousand times at the tomato can.</p>
+  <p><em>Ya Rabb, irham.</em></p>
+  <p>The hands let go. He heard whatever it was go backward through the grass a long way, fast, the way a cat goes from water.</p>
+  <p>Then it was quiet, and the other one spoke, close by him, low. <em>We did a wrong thing. It will be paid for. Lie still.</em></p>
+  <p>He lay still. He felt himself lifted under the arms and set back under the wagon, out of the wind, the blanket pulled straight and tucked under his feet. Somebody went away and came back. There was a smell of bread, and of lamb and onions and cinnamon, and he was sat up and held against somebody&rsquo;s shoulder while a cup of water was put to his mouth, and then pieces of food, kibbeh still warm from the oven and bread folded around it, the way his mother did it when he was sick, a mouthful and then another, and a man&rsquo;s coat that smelled of tobacco and horse was put over him on top of the blanket. Somebody sat by his head and somebody sat by his feet. He thought, <em>My mother has come out from town. My father has come back with Hamdan and Zayd.</em> And because they were there he was not afraid of anything, and he lay down again and slept like a stone.</p>
+  <p>A Norwegian dairyman named Ole Fosse, driving his milk cans in to the depot before light, said afterward that as he came along the cemetery road he saw two people standing by the Syrian wagon, one at the front wheel and one at the back, very still, like fence posts. He said he took them for the peddler and his wife. He said that when he came up even with the wagon there was nobody there but a boy asleep underneath it with his arm over his face, and he did not think anything of it until later, when it was all over town, and then he thought about it the rest of his life.</p>
+  <p>Faris woke when the sun came over the edge of the prairie and lay flat across the grass into his eyes. He was alone. There was no coat on him. There was the horse blanket, and the dew on it, and the smell of coal.</p>
+  <div class="verse">
+    <p>I laid me down and slept, and rose up again; for the Lord sustained me. I will not be afraid for ten thousands of the people, that have set themselves against me round about.</p>
+    <p>&mdash; Psalm 3:5&ndash;6</p>
+  </div>
+  <p>He crawled out and stood up and stretched, and that was when he saw the tray. It was lying on top of the coal in the wagon bed, catching the first sun. Brass, as wide as a wagon wheel, with a few crumbs of bread on it and a smear of grease where the kibbeh had been, and silver letters running all around the rim.</p>
+</section>
+
+<section>
+  <h2>IV. The Tray</h2>
+  <p class="dateline">Lindahl &middot; the Feast of the Cross</p>
+  <p>The Haddad women had set out the feast the night before, as they did every year, on the big tray on the table in the back room of the store, so that it would be ready for the morning: the kibbeh in its pan, the stuffed cabbage, the bread, the olives from the barrel that came out from New York, the white cheese, the honey cakes, everything under a clean cloth. In the morning the cloth was lying folded on the table and the tray was gone with everything on it.</p>
+  <p>Elias Haddad&rsquo;s wife screamed. Then Haddad&rsquo;s clerk ran for the marshal, and the marshal, who had already had one Syrian in his lockup that night, said he knew where to look for Syrian thieves. They went through the stockyards and the livery and the section house and the depot. Then they went out the cemetery road.</p>
+  <p>They brought Faris back walking between the marshal and the clerk, the clerk carrying the tray in both arms against his chest like a shield. Half of Lindahl followed them up the street, and the whole of the colony was waiting in front of the store in their feast clothes. Latifeh Malouf came running out through the door with flour on her arms and stopped when she saw who it was. At the same moment, from the other end of the street, Assaad came up from the justice&rsquo;s office, released, with the lace still in his pocket, because the justice was a practical man who had decided that a Syrian with no money was not worth the board of a Syrian in jail.</p>
+  <p>So the three of them came together in front of the store, the boy and the man and the woman, from three directions, and stood there.</p>
+  <p>Elias Haddad came out onto the step. He was a heavy man with a grey mustache and a gold chain across his vest, and he looked at the boy, and at the father, whom he had not seen at his feast in four years, and he held out his hands for the tray.</p>
+  <p>The clerk gave it to him. And Haddad saw the letters.</p>
+  <p>They were cut into the brass inside the old inlaid verses, in the plain open center where the food went, new and bright in the dark of the old metal, the way a fresh scratch shows bright on a pan. They were Arabic. Haddad turned the tray to the light and read them, and his lips moved, and his face changed.</p>
+  <p>The clerk had looked at the tray all the way up the street and said afterward that there was nothing on it but scratches, like a hen had walked on it. Haddad&rsquo;s wife looked and saw scratches. Hanna Saba the chanter, who read Arabic better than anybody on the flats, looked over Haddad&rsquo;s shoulder and saw scratches. Haddad read it to nobody. He told it once, many years later, to the boy, when the boy was a grown man, and the boy told it to nobody either, until he was old.</p>
+  <p>What it said, as near as anybody knows, was this: <em>Elias son of Mikhail. A child of yours was put outside the gate in the dark, and his father shut in, and the dead were hungry. We fed him from your table. We have paid for it with fear. Keep him.</em></p>
+  <p>Haddad was quiet a long time. Then he said to the boy, in Arabic, very gently, <em>Habibi. What is this?</em></p>
+  <p><em>I don&rsquo;t know, Ammo,</em> said Faris. <em>I didn&rsquo;t take anything. I slept under the wagon. My mother and my father came in the night and gave me something to eat and put a coat on me and sat with me. I thought, my mother and father are here, and I wasn&rsquo;t afraid, and I went to sleep. That&rsquo;s all I know.</em></p>
+  <p>Latifeh put her hand over her mouth. Assaad stood in the street and looked at his son and then at his own empty hands, and did not say anything at all. Everybody in the colony knew where Latifeh had slept that night, on a pallet in Haddad&rsquo;s back room with four other women. Everybody in Lindahl knew where Assaad had slept.</p>
+  <p>The marshal asked what the writing said. Haddad said it was a verse about hospitality, from the old poets, and that the tray was not stolen, it had been lent, and he had forgotten, and he apologized to the marshal for the trouble and invited him in to eat, and the marshal, who knew when he was being told to go away, went away.</p>
+</section>
+
+<section>
+  <h2>V. Six</h2>
+  <p class="dateline">The back room of the Haddad store</p>
+  <p>Imm Jirjis had come in for the Feast on the Saba wagon, as she did every year, and she was sitting in the back room by the stove with a cup of coffee, where it was warm, because she was old and the cold got into her now. She had walked for twenty years with that case on her back, from Duluth to Havre, through the Red River Valley in the mosquitoes and the Montana high line in the snow, sleeping in haystacks and barns and on the kitchen floors of women who could not say her name. Her husband had died of a fever in a boarding house in St. Paul the first year. Her son, the Jirjis she was mother of, nobody in the colony had ever seen; he had died in the old country before she came, or had not, nobody knew, and nobody asked. She did not peddle anymore. She lived in a claim shack on the Saba quarter and did the Sabas&rsquo; mending, and when anybody on the flats was in trouble they went and sat with her, and came away feeling as though they had been to church.</p>
+  <p>Haddad brought them in to her, the three Maloufs, and set the tray on the table in front of her, and the whole colony came crowding into the doorway behind.</p>
+  <p>He told her all of it. The ball and the tomato can, which Hanna Saba told him; the cattle and the livery and the lockup; the boy under the wagon; the hands on his ankles; the word. He did not tell her what the tray said. She did not ask.</p>
+  <p><em>Imm Jirjis,</em> he said. <em>He had one word. Lord, have mercy. He said it and the thing let go of him. Is it only that word that keeps us? Or is there more?</em></p>
+  <p>She drank her coffee. She was quiet so long that the children in the doorway began to shift. Then she set down the cup.</p>
+  <p><em>That word is enough,</em> she said. <em>It held him. But it&rsquo;s one door, Elias. The house has six.</em></p>
+  <p>She held up her hand and counted them on her fingers, the way she used to count spools for a farm wife.</p>
+  <p><em>Remember the Lord. Day and night. That&rsquo;s the boy&rsquo;s word.</em></p>
+  <p><em>Remember what He said. The Gospel. The psalms. Have them in your mouth when you&rsquo;re walking.</em></p>
+  <p><em>Remember the people. The church. Not the building, we haven&rsquo;t got one. Us. The ones in this room and the two out at the corner of the Saba place under the boards, and the Norwegians in their graveyard too.</em></p>
+  <p><em>Remember your body.</em> She touched her own chest with her thumb. <em>Bones and blood and the lungs going in and out. It came over in the steerage and it&rsquo;s going in the ground like theirs. Don&rsquo;t forget it for a day.</em></p>
+  <p><em>Hurt nothing.</em> She looked at Assaad when she said this, and then away. <em>Not a horse. Not a dog. Not a Norwegian marshal. Not a priest, either.</em></p>
+  <p>She had one finger left. She folded it down slowly.</p>
+  <p><em>And pray. Sit still and pray, morning and night, until the praying goes on by itself and you&rsquo;re only listening to it.</em></p>
+  <p><em>A man who keeps one of those, any one, day and night, doesn&rsquo;t need a blue bead,</em> she said. <em>He doesn&rsquo;t need a gun or a lawyer or a license or a charm from the Moghrabi. Six. Like the six psalms at Matins, that the reader reads in the dark before the light comes, when the priest stands before the altar praying to himself and nobody in the church moves.</em> And she said a piece of one of them, in the old church Arabic, in her cracked voice, so that Hanna Saba, standing in the door, joined in on the second line without meaning to.</p>
+  <div class="verse">
+    <p>Have I not remembered thee in my bed, and thought upon thee when I was waking? Because thou hast been my helper; therefore under the shadow of thy wings will I rejoice.</p>
+    <p>&mdash; Psalm 63:7&ndash;8</p>
+  </div>
+  <p>Then she picked up her cup again and found it empty and looked into it.</p>
+  <p>Assaad Malouf reached under his collar and found the string with the blue bead on it and broke it with one pull, and put the bead on the table beside the tray. Nobody in the room said anything. Latifeh took his arm. Faris stood between them and looked at the bright scratches in the middle of the tray that he could not read, and that nobody but Haddad could read, and felt, he said later, the way he had felt under the wagon with somebody sitting at his head and somebody at his feet.</p>
+</section>
+
+<section>
+  <h2>VI. Matins</h2>
+  <p class="dateline">The flats &middot; 1907 and after</p>
+  <p>Assaad went to Haddad&rsquo;s feast that day, and ate the lamb, and told the story of Abu Zayd afterward to the children in the long rhymed lines until they fell asleep on the floor. He kept telling it all his life. But that winter, on the Sundays when the colony met in Hanna Saba&rsquo;s front room to say the prayers with no priest, he came, and stood at the back with his hat in his hands, and on the third Sunday, when Hanna got to the six psalms and his voice gave out with a cold, Assaad Malouf, who said priests ate the first lamb and the last, read them in his place, in the dark before the lamp was lit, from memory, because he had heard them every morning of his boyhood in the village and had never once forgotten a word.</p>
+  <p>He took out a second license that spring, for two horses, fifty dollars. Latifeh asked him why, when nobody had ever counted. He said he had counted.</p>
+  <p>Imm Jirjis died in the hard winter of 1911, in the claim shack, with the stove going. Latifeh had been sitting with her. In the spring Latifeh took the old case down from its nail, and filled it, and put it on her back, and walked the county with it for eleven years, and the farm wives who could not say her name said afterward that she would come into a kitchen and open the drawers one at a time, slowly, and sit, and that somehow you told her things.</p>
+  <p>When Latifeh died, Assaad sold the claim and the team and the wagon and went east, an old man, to a monastery in the Pennsylvania hills that the Russian bishop had started for the Orthodox of America, and lived out his life there cutting wood. He wrote to his son once a year. The letters were short and in Arabic and were mostly about the weather and the wood. The last one said, <em>I am still saying the boy&rsquo;s word.</em></p>
+  <p>Faris went east too, years before, on Haddad&rsquo;s money, and studied, and was ordained, and served parishes in Ohio and Michigan and Iowa for fifty-one years. Mikhail Saba stood up at his ordination. In every parish the boys knew that if you went out in the churchyard after Vespers the old priest would come out in his cassock and play catch with you until it was too dark to see the ball, and that before every throw he would go still for a moment, as if he had stepped into another room, and say something under his breath that you could not quite hear.</p>
+  <p>Elias Haddad left him the tray. It came to him in a crate in 1934, with a letter from the lawyer in Williston, and he hung it on the wall of his kitchen in the rectory in Toledo, where he could see it from the table. Parishioners who came for coffee admired the old silver verses around the rim and asked what the scratches in the middle were. He said a child had done that. He got up at four every morning of his life, and before he went over to the church to read Matins he sat at that table in the dark with his coffee, under the tray, and said the six psalms through once to himself, and by the time he got to the end of them the window was grey, and then it was light, and the light came across the kitchen and found the scratches in the brass and lit them up one at a time, like somebody writing.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">The disciples of Gotama (Buddha) are always well awake, and their thoughts day and night are always set on Buddha.<cite>Dhammapada 296, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The disciples of Gotama are always well awake, and their thoughts day and night are always set on the law.<cite>Dhammapada 297, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The disciples of Gotama are always well awake, and their thoughts day and night are always set on the church.<cite>Dhammapada 298, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The disciples of Gotama are always well awake, and their thoughts day and night are always set on their body.<cite>Dhammapada 299, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The disciples of Gotama are always well awake, and their mind day and night always delights in compassion.<cite>Dhammapada 300, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The disciples of Gotama are always well awake, and their mind day and night always delights in meditation.<cite>Dhammapada 301, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, two boys of Rājagaha play ball. One calls out praise of the Buddha as he throws and always wins; the other, whose family follows another teacher, copies him until the recollection becomes his own. One evening the second boy's father, a wagon driver hauling firewood, stops near a charnel ground outside the city; the oxen wander through the gate, the father follows, and the gate is shut behind him. The boy sleeps alone under the wagon. Two spirits find him. One means to eat him and drags him by the feet, but when the boy cries out homage to the Buddha it falls back in terror. The other stands guard, and together, ashamed, they bring him food in the king's golden dish, care for him "as would a mother and a father," and cut letters into the dish that only the king can read. In the morning the boy is arrested as a thief and says only that his parents came in the night. The king takes the boy and his parents to the Buddha and asks whether recollection of the Buddha is the only protection; the Buddha answers with six verses naming six recollections, and all three later reach awakening. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-05.htm">the full commentary story</a>.</p>
+    <h3>Syrians in North Dakota, 1907</h3>
+    <p>Arabic-speaking immigrants from Ottoman Syria, most of them from the villages of Mount Lebanon and the Bekaa, began arriving in the United States in numbers in the 1880s, and many started out as peddlers, carrying cases of notions, lace and religious goods from farm to farm. In North Dakota the <a href="https://news.prairiepublic.org/show/dakota-datebook-archive/2022-05-21/syrians-on-the-prairie">peddlers came first</a> and sent word home about free land; in the early 1900s more than 350 Syrians took up homesteads in the state, Christians and Muslims both. A peddler there needed a county license under the state's <a href="https://ndlegis.gov/api/assembly/sessionlaws/1895/pdf/peddling.pdf">1895 peddling act</a>: twenty dollars a year on foot, thirty-five with one horse, fifty with two, with up to thirty days in the county jail for peddling without one, and incorporated towns kept the right to license peddlers on top of that. Fuel on the treeless western prairie was lignite, which lay exposed in coulee banks; some landowners simply <a href="https://learn.lignite.com/?p=3436">opened the seam and let neighbors dig their own for a dollar a wagonload</a>.</p>
+    <p>Orthodox Syrians on the plains rarely saw a priest. <a href="https://en.wikipedia.org/wiki/Raphael_of_Brooklyn">Raphael Hawaweeny</a>, consecrated in New York in 1904 as the first Orthodox bishop consecrated in North America, spent years traveling by train and on foot to scattered Arabic-speaking communities and established some thirty parishes; between his visits, laymen led the prayers. Matins (<a href="https://en.wikipedia.org/wiki/Orthros">Orthros</a>) in the Orthodox Church begins with the Six Psalms, read before daylight while the church stands still. The psalms quoted in the story are in the Coverdale translation as printed in the English <i>Service Book of the Holy Orthodox-Catholic Apostolic Church</i> published in 1906 by <a href="https://en.wikipedia.org/wiki/Isabel_Florence_Hapgood">Isabel Hapgood</a>. The Feast of the Exaltation of the <a href="https://en.wikipedia.org/wiki/Feast_of_the_Cross">Cross</a>, in September, is kept in Syria and Lebanon with <a href="https://www.soschretiensdorient.fr/en/news/between-constantinople-and-jerusalem-the-holy-cross-lights-up-syrias-mountain-peaks/">bonfires on the hilltops</a>, recalling the chain of fires said to have carried the news of the Cross's finding from Jerusalem to Constantinople.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the son of a wagon driver from the Dhammapada commentary (verses 296&ndash;301). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-05.htm">The original</a>. Scripture from the Psalter (Coverdale) as printed in Isabel Hapgood&rsquo;s <i>Service Book of the Holy Orthodox-Catholic Apostolic Church</i> (1906). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-childrens-house.html">&larr; The Children&#x27;s House</a><a href="index.html">All stories</a><a href="eight-handfuls.html">Eight Handfuls &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Engraving: fine bright lines are cut, one stroke at a time, into dark brass at the margins, glint at the cutting point, and dull again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, cuts = [], last = 0, gap = 1800;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function marginX() {
+    var col = Math.min(W, 640), left = (W - col) / 2;
+    if (left < 60) return Math.random() < 0.5 ? 10 + Math.random() * 40 : W - 50 + Math.random() * 40;
+    return Math.random() < 0.5 ? 20 + Math.random() * (left - 50) : W - left + 30 + Math.random() * (left - 50);
+  }
+  function make() {
+    // a short calligraphic stroke: a curve built from a few arcs, like a letter's tail or a rim flourish
+    var x = marginX(), y = 60 + Math.random() * (H - 120);
+    var pts = [], a = Math.random() * Math.PI * 2, r = 10 + Math.random() * 26, turn = (Math.random() < 0.5 ? -1 : 1) * (0.02 + Math.random() * 0.05);
+    var n = 50 + Math.floor(Math.random() * 60), px = x, py = y, step = 1.4 + Math.random();
+    for (var i = 0; i < n; i++) {
+      a += turn + Math.sin(i * 0.12) * 0.03;
+      px += Math.cos(a) * step; py += Math.sin(a) * step * 0.8;
+      pts.push([px, py]);
+    }
+    var dot = Math.random() < 0.45 ? [x + (Math.random() - 0.5) * r, y - 8 - Math.random() * 10] : null;
+    return { pts: pts, dot: dot, t: 0, cut: 90 + n, hold: 260, fade: 420 };
+  }
+  function drawCut(k, still) {
+    var drawn = still ? k.pts.length : Math.min(k.pts.length, Math.floor(k.t / k.cut * k.pts.length * 1.0));
+    var after = k.t - k.cut, alpha = 0.32;
+    if (!still && after > k.hold) alpha = 0.32 * Math.max(0, 1 - (after - k.hold) / k.fade);
+    if (still) alpha = 0.2;
+    if (drawn < 2 || alpha <= 0) return;
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.strokeStyle = 'rgba(214,176,98,' + alpha + ')'; ctx.lineWidth = 1.1;
+    ctx.beginPath(); ctx.moveTo(k.pts[0][0], k.pts[0][1]);
+    for (var i = 1; i < drawn; i++) ctx.lineTo(k.pts[i][0], k.pts[i][1]);
+    ctx.stroke();
+    if (k.dot && drawn === k.pts.length) { ctx.fillStyle = 'rgba(214,176,98,' + alpha + ')'; ctx.beginPath(); ctx.arc(k.dot[0], k.dot[1], 1.4, 0, 6.283); ctx.fill(); }
+    if (!still && drawn < k.pts.length) {
+      var p = k.pts[drawn - 1];
+      var g = ctx.createRadialGradient(p[0], p[1], 0, p[0], p[1], 14);
+      g.addColorStop(0, 'rgba(255,236,190,0.55)'); g.addColorStop(1, 'rgba(255,236,190,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p[0], p[1], 14, 0, 6.283); ctx.fill();
+    }
+  }
+  function frame(now) {
+    ctx.clearRect(0, 0, W, H);
+    if (now - last > gap && cuts.length < 5) { cuts.push(make()); last = now; gap = 1400 + Math.random() * 2600; }
+    for (var i = cuts.length - 1; i >= 0; i--) {
+      var k = cuts[i]; k.t++;
+      drawCut(k, false);
+      if (k.t > k.cut + k.hold + k.fade) cuts.splice(i, 1);
+    }
+    requestAnimationFrame(frame);
+  }
+  function still() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < 6; i++) drawCut(make(), true);
+  }
+  size();
+  if (reduce) still(); else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); cuts = []; if (reduce) still(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eight Handfuls</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on cream paper the color of mock-orange; low along the bottom a far range of snow peaks, where a slow evening alpenglow travels from summit to summit; datelined sections. */
+  --ground: #f4f0e6;
+  --ground-2: #ebe5d8;
+  --ink: #2c2b30;
+  --ink-dim: #6c6a72;
+  --range: #4b6283;
+  --alpen: #b8696a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #fbf8f1 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(44,43,48,.2); }
+.series a:hover { color: var(--range); }
+a:focus-visible { outline: 2px solid var(--range); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--range); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(75,98,131,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--range); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--alpen); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(235,229,216,.85); border: 1px solid rgba(44,43,48,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--range); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(44,43,48,.12); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--range); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--range); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(44,43,48,.14); border-bottom: 1px solid rgba(44,43,48,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--range); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--range); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--range); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--alpen); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(235,229,216,.85); border-left: 2px solid var(--range); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 21.8 &middot; Cull&amacr; Subhadd&amacr;</span></nav>
+<header>
+  <h1>Eight Handfuls</h1>
+  <div class="epigraph">Ye are the light of the world. A city set on a hill cannot be hid.<br>&mdash; Matthew 5:14 (Revised Version)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As I had it told me,</span> up Mill Street.</p>
+
+<section>
+  <h2>I. The Promise</h2>
+  <p class="dateline">Camborne, Cornwall, and Grass Valley, California · 1852–1891</p>
+  <p>John Trevenna and Dick Uglow went down the same mine at Camborne the same week, at eleven years old, and learned their letters together at the same Sunday school in the same Wesleyan chapel, from an old tinner who had taught half the parish to read off the backs of hymnbooks. They were closer than brothers. One Sunday walking home over the downs, at fourteen, they shook hands on a thing they had heard men say in the count house. When we're grown and married, and have sons and daughters, if one of us asks the other for his daughter for his son, the other one shall give her.</p>
+  <p>Then the mines in Cornwall failed, the way they did in those years, and the two of them went where the Cornish went. John went to California, to the gold quartz at Grass Valley, where they said a mine was a hole in the ground with a Cornishman at the bottom of it. Dick went to Colorado. In forty years John rose to be a mine captain, the best-paid man underground in Nevada County, with a white house on the hill above Mill Street. Dick found silver at Leadville and became something nobody in Camborne had a word for, and built a house of red sandstone on Capitol Hill in Denver with a tower on the corner and a ballroom on the top floor.</p>
+  <p>John Trevenna had kept the chapel. Dick Uglow had not. He had kept the money.</p>
+  <p>In the spring of 1891 Dick Uglow came to Grass Valley in his own railroad car, with two engineers and a lawyer and a secretary, to look at a mine he was thinking of buying. He would not hear of the hotel. He stayed with John.</p>
+  <p><em>Your Uncle Dick has come,</em> John said to his daughter. <em>He's as good as your father. See he has all a man should have in this house.</em></p>
+  <p><em>Yes, Father.</em></p>
+  <p>Tamsin was nineteen. She did it herself. She baked the pasties for his dinner pail when he went down the mines with the engineers, with the initials in the crust the way her grandmother had done it in Camborne, and the saffron cake, and heavy cake for his tea. She had the water heated for his bath when he came up out of the shaft and laid out his clean things and saw his boots blacked. She did not hover, and she did not leave him wanting. When he spoke she listened, and when he was tired she let him be. Dick Uglow watched her for a week. On the last evening, sitting on the porch with his cigar, looking down on the lights of the stamp mills, he said to John, <em>You remember what we said on the downs, coming home from chapel. I've a son, Harry, twenty-four, at the bank. I'm asking.</em></p>
+  <p>John Trevenna sat a long while.</p>
+  <p><em>Dick,</em> he said, <em>you've gone a different road from me.</em></p>
+  <p><em>I have. Ask me what I keep in my parlor of a Sunday, if you want to hear something.</em></p>
+  <p>John did not ask. He went the next evening up the hill to the cottage where Uncle Jabez Hocking lived and told him the whole of it.</p>
+  <p>Uncle Jabez was seventy-four. He had worked underground fifty years, in Cornwall and then in Grass Valley, and the dust of it was in his chest now, so that he could not climb a hill without stopping. For forty of those years he had been a local preacher of the Methodists, which is to say that he worked his shift all week and on Sunday walked to whatever chapel had no minister and preached for nothing, and had never once been paid a penny for it and would have been insulted to be offered. He did not preach long. Half of Grass Valley would walk out to Rough and Ready in the rain to hear him not preach long. Men said he had a way of being quiet that made a room quiet.</p>
+  <p>He heard John out. Then he said, <em>Let her go, John. Uglow will come round. There's more in him than he knows.</em></p>
+</section>
+
+<section>
+  <h2>II. The Gifts</h2>
+  <p class="dateline">Grass Valley · autumn 1891</p>
+  <p>They were married in the Methodist chapel in October. John Trevenna gave his daughter away the way men in Camborne talked about for years afterward, when the news reached them: a wagon of linen and plate and furniture, a piano, a set of china from Stoke with her initials on it, a gold brooch from a jeweler in San Francisco made in the shape of a peacock with a tail of seed pearls, a buggy and a pair of matched bays, and a deed to a block of shares. He gave a dinner to every man on his shift and every woman in the chapel, and to Uncle Jabez and all the preachers on the circuit, and sent a purse to the miners' hospital. People said it was as if he were showing the world what she had coming to her.</p>
+  <p>The night before she left, he sat with her in the front room and gave her his advice. She remembered it all her life and tried to write it down once and found it did not sound like much on paper.</p>
+  <p><em>Don't carry out of the house what goes on in it, and don't carry into it what goes on in the street. Lend to them as pays back. Don't lend to them as don't. But to some you'll give whether they pay or no, and you'll know which. Sit easy at table and eat easy and sleep easy, and don't let them see you fret. Keep the fire. And honor your husband's father and mother as if they were your own, in everything you can do with a clean heart.</em></p>
+  <p>And because she was going a thousand miles from anybody who knew her, he wrote to eight Cornishmen in Colorado whom he had known as boys, men who worked at Leadville and Central City and Black Hawk, and asked each of them to stand for her. <em>If any fault is ever laid against my girl in that house,</em> he wrote, <em>you go and hear it, and settle it fairly.</em> All eight wrote back yes.</p>
+  <p>She went east by the train, over the Sierra and across the desert and over the mountains, with her mother's sister to see her settled. At Denver the whole Uglow household was at the depot to meet her, and a good many of Denver's people besides, because Dick Uglow had seen to it that they knew. She did not hurry from the depot to the house. She rode up Seventeenth Street and up the hill in an open carriage, in her traveling dress and her good hat, sitting straight, so that the town could look at her. The town looked. In the next weeks the wives on Capitol Hill sent her calling cards and cakes and a silver card case and a great many opinions, and she returned every call and sent each of them something chosen for that one woman and nobody else, a book, a shawl, a jar of her mother's quince jelly, and inside a month there was not a parlor on the Hill where they did not speak well of Harry Uglow's Cornish wife.</p>
+</section>
+
+<section>
+  <h2>III. The Dark Room</h2>
+  <p class="dateline">Capitol Hill, Denver · winter 1891–1892</p>
+  <p>What Dick Uglow kept in his parlor of a Sunday was mediums.</p>
+  <p>He had come to it after his first wife died, the way a good many rich men did then. Now there were half a dozen of them who came to the house on Sundays and holidays and sat at his table and were paid. There was a Madame Vesper, who went into the cabinet, and a Professor Clary, who tied her in, and a pale young man who played the parlor organ in the dark, and others. On Thanksgiving and Christmas and New Year's they held a great circle in the ballroom at the top of the house, with the gas turned down to nothing and every guest holding the hands of the guests on either side, and out of Madame Vesper's black-curtained cabinet came the spirits in their muslin, glimmering, and walked among the circle and touched the sitters on the face. Dick Uglow believed his first wife came. He wept when she did.</p>
+  <p><em>Tell Harry's wife to come up,</em> he sent word on Thanksgiving. <em>Tell her to come and pay her respects to our friends.</em></p>
+  <p>Tamsin would not go. She could not look at them, she told her husband. She had seen Madame Vesper laughing in the back hall with her stockings rolled down and the muslin over her arm, and the professor with his hand on her, and she knew what went on in that room with the gas out, between the men and the spirits, and she would not sit in the dark and hold hands with it.</p>
+  <p>At Christmas he sent again. At New Year's he sent again. At New Year's he came down himself, red in the face, and stood in her doorway.</p>
+  <p><em>Put her out,</em> he said to Harry. <em>She'll not shame my friends in my house. Put her on the train.</em></p>
+  <p><em>Nobody puts me out of this house without cause,</em> Tamsin said. <em>And a fair hearing.</em></p>
+  <p>She sent the telegrams herself that night. Within the week the eight came down from the mountains on the train, in their Sunday blacks, eight Cousin Jacks with their hats in their hands, and sat in a row in Dick Uglow's library under the elk heads. They heard him. They heard her. They went out together into the hall and talked a while, low, in the old way of talking, and came back in.</p>
+  <p><em>Mr. Uglow,</em> said the eldest, a timberman from Central City, <em>we find no fault in her. She don't want to sit in the dark. We don't see that's a sin.</em></p>
+  <p>Uglow looked at the eight of them a long time. He had been one of them once. <em>No,</em> he said at last. <em>No. All right.</em></p>
+  <p>That night he said to his wife Grace, <em>She'll not do reverence to our friends. She says they've no shame.</em></p>
+  <p>Grace Uglow was his second wife, a quiet woman from Ohio, who had sat through the circles on Sundays for nine years without a word and never once been touched on the face by anybody she knew. She went down the next morning and found Tamsin sewing in the window of the small parlor, and sat down across from her.</p>
+  <p><em>Tell me about your preachers,</em> she said. <em>You must think a good deal of them, to stand up to Dick. What are they like?</em></p>
+</section>
+
+<section>
+  <h2>IV. Such Are My Preachers</h2>
+  <p class="dateline">The small parlor · the same morning</p>
+  <p>Tamsin put her sewing down.</p>
+  <p><em>They're men that work, mostly,</em> she said. <em>Miners. A blacksmith. A man who keeps a store. They work all week and walk to chapel on Sunday and preach, and nobody pays them. They're quiet men. They're quiet when they walk and quiet when they stand. They look down when they pass you in the road, and they don't say much, and what they say you remember.</em></p>
+  <p><em>What they do is decent, and what they say is gentle, and what they think, as near as I can tell, is clean. You'd not find a stain on Uncle Jabez if you turned him inside out. That's what my preachers are like.</em></p>
+  <p><em>Most folks are up when they're paid and down when they're not. My preachers aren't paid, so they're neither. When the mine shut down at Rough and Ready and there were no wages for a year, Uncle Jabez was the same on Sunday as he'd been when we were all eating meat.</em></p>
+  <p><em>Most folks are proud when they're well spoken of and sore when they're not. They called Uncle Jabez a fool in the Union, in print, for something he said about the saloons. He read it out at class meeting, the whole piece, and laughed, and went on to the next thing.</em></p>
+  <p><em>Most folks are glad when they're praised and sick when they're blamed. My preachers don't seem to hear either one. They're the same.</em></p>
+  <p><em>And most folks are glad when they're easy and miserable when they hurt. Uncle Jabez has the miner's con. He can't get a whole breath. I never heard him say so. That's what my preachers are like.</em></p>
+  <p>She said a good deal more. Grace Uglow sat with her hands in her lap and listened until the clock struck noon.</p>
+  <p><em>Could we see them?</em> she said at last. <em>Could we see one of them here?</em></p>
+  <p><em>I think we could.</em></p>
+  <p><em>Then do it,</em> said Grace. <em>See to it.</em></p>
+  <p><em>I will,</em> Tamsin said.</p>
+</section>
+
+<section>
+  <h2>V. Eight Handfuls</h2>
+  <p class="dateline">The tower · June 1892</p>
+  <p>She waited until the syringa bloomed.</p>
+  <p>It grew along the carriage drive below the tower, the old-fashioned white mock orange that smells like a sweeter jasmine, and in the second week of June it came out all at once, so that the whole of Capitol Hill smelled of it in the evenings. She told the cook to lay in for a dinner of a hundred and to have it ready from the next noon on. Then in the long light of the evening she cut the syringa, armfuls of it, and carried it up the narrow stairs to the top of the tower, where there was a little railed walk around the roof.</p>
+  <p>From there you could see the whole of the Front Range, west across the city and the plains, with the snow still on it in June, white and pink in the last of the sun, a hundred miles of it from Pikes Peak to Longs. And beyond it, she knew, more mountains, and the desert, and the Sierra, and Grass Valley.</p>
+  <p>She faced west. She knelt on the tin roof, which was still warm from the day, and said the things she had been taught to say, and thought about Uncle Jabez for a long time, about his breathing and his hands and the way he stood at the front of the chapel waiting for people to finish coughing before he began. Then she stood up and took the syringa by handfuls and threw it into the air, toward the mountains, eight handfuls, one after another.</p>
+  <p><em>Uncle Jabez,</em> she said, <em>I'm asking you to dinner tomorrow, you and all of them. Know by these that you're asked.</em></p>
+  <p>The wind took the flowers. It took them up and west, over the city and the river and the plains and the mountains, and she stood on the tower and watched them go, white, then small, then gone.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>In Grass Valley that same evening, an hour behind the Denver clock, it was class meeting at the chapel, and the windows were open for the heat. Uncle Jabez was sitting at the front with his Bible on his knee, the new Revised Version that John Trevenna had sent from San Francisco when it came out, and the others in a ring, miners and their wives, a blacksmith, a widow who kept boarders. He had just finished saying something short, and they were waiting to see if there was more.</p>
+  <p>The flowers came in at the windows. They came in a white stream, over the sills, over the heads of the people, and gathered themselves under the ceiling over Uncle Jabez's chair and stayed there, turning slowly, a canopy of syringa a yard thick, not falling. The whole chapel smelled of it. A child laughed and was hushed. Nobody else made a sound.</p>
+  <p>John Trevenna was at the meeting. When it was done he went up to the front, under the flowers, with his hat in his hand, not looking up at them, and said, <em>Uncle Jabez, will you and the brothers come to my house for dinner tomorrow? I've a mind to give a dinner.</em></p>
+  <p><em>Thank you, John. I'm asked already.</em></p>
+  <p><em>Asked? Who's asked you? There's nobody spoke to you before me. I was waiting by the door.</em></p>
+  <p><em>Tamsin asked me.</em></p>
+  <p>John stood there. <em>Tamsin's in Denver. That's a thousand mile.</em></p>
+  <p>Uncle Jabez looked up then, at the flowers. He took a breath, as much as he could get, and let it go.</p>
+  <p><em>It is,</em> he said. <em>The good show from a long way off, John, like the snow on the Sierra. You can see that from the top of Osborne Hill, and it's a long way off. And the other kind, you never see them at all. They're in the dark, shooting.</em> Then, because they were Methodists and wanted it from the Book, he opened the Revised Version on his knee and found the places, which he knew without looking, and read them out.</p>
+  <div class="verse">
+    <p>Ye are the light of the world. A city set on a hill cannot be hid.</p>
+    <p>&mdash; Matthew 5:14 (Revised Version, 1881)</p>
+  </div>
+  <div class="verse">
+    <p>For, lo, the wicked bend the bow, they make ready their arrow upon the string, that they may shoot in darkness at the upright in heart.</p>
+    <p>&mdash; Psalm 11:2 (Revised Version, 1885)</p>
+  </div>
+  <p>He closed the book. The flowers had begun, one at a time, to come down. They came down for a week. The chapel women swept them out every morning and every morning there were more.</p>
+</section>
+
+<section>
+  <h2>VI. Five Hundred Roofs</h2>
+  <p class="dateline">Over the mountains · the next morning</p>
+  <p>Uncle Jabez chose five hundred men. He chose them by walking up Mill Street before sunup and down Main and out along the roads to the mines, stopping to get his breath, and putting his hand on a shoulder here and there. Men who had been sober the longest. Men who had never shorted a partner on a contract. Men who had sat up with the dying in the boarding houses and paid for the burying out of their own pay and never said whose. A good many of them were not Methodists. One was a Chinese cook from Boston Ravine who had been coming to class meeting in the back for two years without a word. One was Irish. Uncle Jabez did not seem to think it mattered.</p>
+  <p>And they went through the air.</p>
+  <p>That is how it is told in Grass Valley, and in Denver, and in Camborne, where it got to eventually by letter. Five hundred little houses with peaked roofs, like the cabins on the hills above the mines, one man in each, rose up off the flat at the foot of Mill Street at first light and went east together, over the Sierra and the snow, over the desert of Nevada and the salt and the Wasatch, over the Green River and the Laramie plains and the high peaks, and came down the long slope of the Front Range in the afternoon like a flight of geese.</p>
+  <p>Dick Uglow was on the tower. Tamsin had told him where to stand, and he had stood there since noon, in his shirtsleeves, with a pair of field glasses, telling himself he was a fool. He saw them come over the mountains. He went down the stairs of his tower two at a time, at fifty-one years old, and out of his front door and down the hill in the street, bareheaded, running, the way he had not run since he was a boy on the downs at Camborne, and he met the first of them as they came down in the road, and he took off the hat he did not have on, and stood there with his hand on his head.</p>
+  <p>He was not a man who did anything halfway. He put the five hundred up all over the Hill, in his house and his neighbors' houses and in the Brown Palace downtown, which had not yet opened its doors to anybody and opened them to Cornish miners first. He fed them for seven days. He gave them every honor he knew how to give, which was a good many, and some that he made up. On the first night, after the dinner, he went and sat on the floor of his own library at the feet of a consumptive old tinner from Grass Valley, in his good trousers, like a boy at Sunday school, and asked him questions until two in the morning. Uncle Jabez answered them, briefly, between breaths.</p>
+  <p>On the fourth night Dick Uglow went up to the ballroom at the top of the house and turned up the gas as high as it would go, and stood there a while in the light looking at Madame Vesper's cabinet with the black curtains. Then he sent for a man to take it away.</p>
+  <p>More than Uglow listened. Before the week was out Grace Uglow had been to every meeting, and the cook, and the coachman, and the wives of the men who had laughed at Harry's Cornish wife, and a great many people on the Hill who had never in their lives been inside a Methodist chapel, and a great many people who were not from the Hill at all.</p>
+  <p>On the seventh day, when the five hundred went home the way they had come, Uncle Jabez put his hand on the shoulder of the youngest of them, Will Angove, who was twenty-two and could preach.</p>
+  <p><em>You stop here, Will,</em> he said. <em>For Tamsin.</em></p>
+  <p>Will stopped. He preached in Denver forty-one years.</p>
+</section>
+
+<section>
+  <h2>VII. The Snow</h2>
+  <p class="dateline">Capitol Hill · 1893 and after</p>
+  <p>The next summer silver broke. The price went from eighty-three cents an ounce to sixty-two, and the mines at Leadville shut down and the smelters went cold, and the banks in Denver failed one after another, and men who had owned whole streets were selling their carriages in the newspaper. Dick Uglow lost the most of it. Not all; he had John Trevenna's mine in Grass Valley, which was gold. But the most.</p>
+  <p>They let the house on Capitol Hill go in 1895 and moved into a smaller one on Pearl Street, without a tower, with a little yard. Will Angove came there to supper every Sunday. Harry went to work for a mining company as a clerk. Grace kept house herself, with one girl.</p>
+  <p>People who had known Dick Uglow in his silver days came to see how he was taking it. They were curious. They went away puzzled. He was the same, they said. He was easy. He was the same as he'd been before. He sat in his little yard in the evening in his shirtsleeves with his granddaughter on his knee and looked at the mountains, and when they asked him how he could bear it, he said that he had a daughter-in-law who had told him once what a man ought to be like, and he had been trying it for a year, and he found he liked it.</p>
+  <p>Tamsin outlived all of them. In her old age she kept the Revised Version that had belonged to Uncle Jabez, which Will Angove brought back from Grass Valley after the old man died in the winter of 1897 and had given to her because nobody had a better right. It had syringa in it. White petals, gone the color of tea, between the pages at the Sermon on the Mount and the eleventh Psalm, where the old man had pressed them on the night they came in at the chapel windows.</p>
+  <p>She would take it down sometimes in the evening and open it at those places and hold it to her face. Then she would go to the west window and look out at the Front Range, where the snow was, a hundred miles off, and plain to see.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Good people shine from afar, like the snowy mountains; bad people are not seen, like arrows shot by night.<cite>Dhammapada 304, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the merchant An&amacr;thapi&#7751;&#7693;ika and his boyhood friend Ugga, who studied with the same teacher, promise each other their children in marriage. Years later Ugga visits S&amacr;vatth&imacr;, is served so well by An&amacr;thapi&#7751;&#7693;ika&rsquo;s daughter Cull&amacr; Subhadd&amacr; that he asks for her for his son, and takes her far away to his own city, where his household honors naked ascetics. Out of modesty she refuses to pay them reverence; her father-in-law orders her out, but the eight sponsors her father sent with her find her blameless. Her mother-in-law asks what her own teachers are like, and Subhadd&amacr; describes monks unmoved by gain and loss, fame and blame, praise and censure, pleasure and pain. Asked to bring them, she climbs to the top of the house and throws eight handfuls of jasmine into the air toward the Buddha, a hundred and twenty leagues away; the flowers form a canopy over him as he teaches, and he tells An&amacr;thapi&#7751;&#7693;ika that he is already invited. The next day the Buddha and five hundred monks travel through the air in gabled halls to Ugga&rsquo;s city, and the household is converted. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Anathapindika">An&amacr;thapi&#7751;&#7693;ika</a>.</p>
+    <h3>Grass Valley and Denver, 1892</h3>
+    <p>When the copper and tin mines of Cornwall declined in the nineteenth century, Cornish miners carried their hard-rock skills, their pasties and their Methodism to mining camps across America. <a href="https://en.wikipedia.org/wiki/Grass_Valley,_California">Grass Valley</a>, in the Sierra foothills, was one of their strongholds, with the North Star, Empire and Idaho-Maryland gold mines, and it still keeps a Cornish Christmas and St. Piran&rsquo;s Day. More on <a href="https://en.wikipedia.org/wiki/Cornish_Americans">Cornish Americans</a>. Methodism ran on <a href="https://en.wikipedia.org/wiki/Methodist_local_preacher">local preachers</a>, laymen accredited to lead worship and preach while keeping their own trades. The <a href="https://en.wikipedia.org/wiki/Revised_Version">Revised Version</a> of the Bible, the first official revision of the King James text, appeared in 1881 (New Testament) and 1885 (Old Testament).</p>
+    <p>Silver from <a href="https://en.wikipedia.org/wiki/Leadville,_Colorado">Leadville</a> made Denver rich in the 1880s, and the money built mansions on Capitol Hill and the <a href="https://www.historichotels.org/us/hotels-resorts/the-brown-palace-hotel-and-spa-autograph-collection/history.php">Brown Palace Hotel</a>, which opened on August 12, 1892. Spiritualism had a following there too: in 1876 the <em>Rocky Mountain News</em> reported s&eacute;ances in a West Denver home with a curtained spirit cabinet and materialized &ldquo;forms&rdquo; (<a href="https://coloradonewsline.com/?p=44826">Colorado Newsline</a>). In the <a href="https://en.wikipedia.org/wiki/Denver_Depression_of_1893">Denver Depression of 1893</a> silver fell from 83 to 62 cents an ounce, banks collapsed and many lost their savings.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Cull&amacr; Subhadd&amacr; from the Dhammapada commentary (verse 304). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-08.htm">The original</a>. Scripture from the English Revised Version (1881, 1885). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-brass-tray.html">&larr; The Brass Tray</a><a href="index.html">All stories</a><a href="clean-bark.html">Clean Bark &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, peaks = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    peaks = []; var x = -40, s = 7;
+    while (x < W + 80) {
+      s = (s * 9301 + 49297) % 233280; var r = s / 233280;
+      var w = 70 + r * 120; peaks.push({ x: x + w / 2, w: w, h: H * (0.06 + 0.07 * r) }); x += w * 0.62;
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var base = H + 2, glowX = reduce ? W * 0.3 : ((t * 0.25) % (W + 600)) - 300;
+    for (var i = 0; i < peaks.length; i++) {
+      var p = peaks[i], top = base - p.h;
+      ctx.fillStyle = 'rgba(75,98,131,0.10)';
+      ctx.beginPath(); ctx.moveTo(p.x - p.w / 2, base); ctx.lineTo(p.x, top); ctx.lineTo(p.x + p.w / 2, base); ctx.closePath(); ctx.fill();
+      var d = Math.abs(p.x - glowX), g = Math.max(0, 1 - d / 260);
+      var sn = 0.32;
+      ctx.fillStyle = 'rgba(255,255,255,0.55)';
+      ctx.beginPath(); ctx.moveTo(p.x - p.w / 2 * sn, top + p.h * sn); ctx.lineTo(p.x, top); ctx.lineTo(p.x + p.w / 2 * sn, top + p.h * sn); ctx.closePath(); ctx.fill();
+      if (g > 0) {
+        ctx.fillStyle = 'rgba(214,140,140,' + (0.28 * g) + ')';
+        ctx.beginPath(); ctx.moveTo(p.x - p.w / 2 * sn, top + p.h * sn); ctx.lineTo(p.x, top); ctx.lineTo(p.x + p.w / 2 * sn, top + p.h * sn); ctx.closePath(); ctx.fill();
+      }
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

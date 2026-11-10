@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Washing Cup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over dark water where single drops fall and their rings widen; datelined sections. */
+  --ground: #0d1311;
+  --ground-2: #16201c;
+  --paper: #e4e7e1;
+  --paper-dim: #98a39c;
+  --accent: #a9c8cc;
+  --accent-2: #b08a5a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1b2a26 0%, #0d1311 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,231,225,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(169,200,204,.22); }
+.epigraph { border-left: 1px solid rgba(169,200,204,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > p.dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(22,32,28,.78); border: 1px solid rgba(228,231,225,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,231,225,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(22,32,28,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 1.5 &middot; Kosamb&#299;</span></nav>
+<header>
+  <h1>The Washing Cup</h1>
+  <div class="epigraph">For we must needs die, and are as water spilt on the ground, which cannot be gathered up again<br>&mdash; 2 Samuel 14:14</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Azoy hob ikh gehert,</span> on Sheldrake Hill.</p>
+
+<section>
+  <h2>I. The Cup</h2>
+  <p class="dateline">Sheldrake Hill, Sullivan County, New York &middot; autumn 1905</p>
+  <p>Fourteen Jewish families farmed the stony side of Sheldrake Hill above Centreville Station, on land the Yankees had given up on. The Society in New York had lent them the money to buy it. They kept a few cows each and shipped the milk down to the creamery by the depot, where it went into the cans on the Ontario and Western and was in the city by morning. In summer they took boarders, garment workers and their wives who came up on the train for two weeks of air, and sometimes a young man with a cough who had been sent up from the East Side because the big hotels at Liberty advertised in the newspapers, <em>No Hebrews or Consumptives.</em> In winter there was nothing but cows and snow and Torah.</p>
+  <p>Their prayer house had been a wagon shed. It had a stove, an ark built by a cabinetmaker from Minsk out of pine boards, and behind it a privy, and in the privy a tin basin and a two-handled washing cup, so that a man could wash his hands before he went back in to stand before God.</p>
+  <p>Two learned men lived on the hill, and each of them had his following. Feivel Melnik was the melamed. He taught the boys their Hebrew in his kitchen through the winter, and on Sabbath afternoons he preached, and when he preached the boarders sat on the benches in their city clothes and wept, and the young men who worked winters in the shops on Hester Street said there was nobody in New York to touch him. Hirsh Kagan was the shochet. He slaughtered for the whole hill, chickens on Thursdays and a calf when there was a calf, and he knew the law of every knife and every knot. Feivel knew what the law was for. Hirsh knew what it said.</p>
+  <p>One morning in the month of Cheshvan, after the holidays, Feivel went out to the privy, and washed his hands, and came back in, and left the water standing in the basin.</p>
+  <p>Hirsh went out after him and saw it. When he came back in he waited until the end of the prayers and then took Feivel by the sleeve.</p>
+  <p><em>Reb Feivel, was it you that left the water?</em></p>
+  <p><em>Yes.</em></p>
+  <p><em>You don't know that it's forbidden? That water has to be poured out right away, where people don't walk.</em></p>
+  <p><em>I didn't know.</em></p>
+  <p><em>Well, it's forbidden.</em></p>
+  <p><em>Then I'll make it right,</em> said Feivel, and he was already turning to go and pour it out when Hirsh put a hand on his arm.</p>
+  <p><em>If you didn't know, it's nothing,</em> Hirsh said. <em>Leave it.</em></p>
+  <p>So Feivel left it, and thought no more about it.</p>
+  <p>But that week Hirsh said to the men who came to him with their chickens, <em>Our melamed breaks the law and doesn't know it when he does.</em> And the men who came with chickens said it to the men who sent their boys to Feivel. <em>Your teacher breaks the law and doesn't know it.</em> And the fathers of the boys told Feivel. Feivel put down his book.</p>
+  <p><em>On Monday he said it was nothing. Now it's a sin. He's a liar.</em></p>
+  <p>And that went back up the road too.</p>
+  <p>By Chanukah Hirsh Kagan and the men on his side had declared that Feivel Melnik could not be counted in a minyan or called up to the Torah until he acknowledged his transgression, and Feivel's side had declared that a shochet who passed judgment on a scholar over a basin of dirty water was no judge, and they took their prayers to the dining room of Gitl Rapoport's boarding house, which stood empty in winter, and set a bookcase where the ark should be. Two minyanim on a hill that could barely make one. Husbands went one way and wives' brothers the other. The milk wagons stopped going down together. At the creamery the Sheldrake men stood in two lines on the platform and would not hand one another a can. The Society in New York received two letters about the same basin of water, in Yiddish, each eleven pages long.</p>
+  <p>The old women said it went higher than that. They said that in the little burying ground on the ridge, where nine of their dead were lying under the hemlocks, the dead had taken sides too, and that if you went up there at night you could hear them at it.</p>
+</section>
+
+<section>
+  <h2>II. The Old Man</h2>
+  <p class="dateline">The upper farm &middot; December</p>
+  <p>Reb Ezra Lifshitz had been the rav of a town of four thousand Jews in Volhynia, and now he kept six cows on the last farm at the top of the road, where the fields gave out into woods. He was seventy-one. He had buried a wife there and a daughter in Brooklyn. Both of the learned men had been his pupils. When the colony first came up to the hill it was Reb Ezra they had followed, and he still came down for the Sabbath in a long coat gone green at the seams, walking, with his stick.</p>
+  <p>His grandson Leybl, who was nineteen and hauled the milk, carried word down the hill. <em>The Rov says, be one congregation.</em> He came back up. <em>They say they can't.</em></p>
+  <p>The second time the same.</p>
+  <p>The third time Reb Ezra put on his coat and said, <em>The congregation is torn. The congregation is torn,</em> and walked down in the snow.</p>
+  <p>He stood in the wagon shed with both of them in front of him and told Hirsh his wrong, which was that he had passed a sentence over a cup of water against a man he had already forgiven. He told Feivel his wrong, which was that he would not see a fault because it was Hirsh who had found it. He told them both to pray under one roof. Where they could not stand to sit together at a table, he said, let them sit at separate tables, but in one room.</p>
+  <p>It held for a week and a half. Then it broke again, over who would read the portion. Reb Ezra came down again.</p>
+  <p><em>Enough. No more of this.</em> And because the hill was full of boys who had heard the story from him a hundred times, he told it again. A flock of quail lived in a field where a fowler set his net every morning, and every morning they lifted the net together, all of them at once, and flew off with it and dropped it in a thornbush, and the fowler went home with nothing. Then one morning in landing one quail stepped on another's head, and the other said, <em>Who stepped on me?</em> and the first said, <em>I didn't step on anybody,</em> and the next morning when the net came down each was waiting for the other to lift it. The fowler went home with a full sack.</p>
+  <p>They listened, and nodded, and a young man from Feivel's side named Mottel Gross stood up near the stove.</p>
+  <p><em>Rebbe, with respect. Go home to your cows. Let it alone. We'll make our own shame without you.</em></p>
+  <p>Reb Ezra looked at him a while. Then he told them another story, from the old country, from the days of the Polish lords.</p>
+  <p>There were two inns on a river, he said, an upper inn and a lower, and both were leased from the count by Jews. The man at the lower inn, Zalman, was rich and wanted both. He went to the count's steward with a purse and took the lease of the upper inn out from under Reb Dovid, who had kept it thirty years, and Reb Dovid and his wife went off with their little boy and lived in a village two days away, where Reb Dovid sold needles from a box and nobody knew who he had been. Years later Zalman heard where he was, and went to the steward again, and said Reb Dovid was a thief who owed the count a year's rent. The count's men took Reb Dovid and his wife and hanged them in the marketplace of the town. Their son was grown by then. He stood in the crowd. His father saw him there and said, loud enough for him to hear and nobody else to understand, <em>Not long, Yankel. Not short.</em></p>
+  <p>Yankel went and hired himself to Zalman as a coachman, under another name. He was a good coachman. Zalman came to trust him above everybody. One winter they were driving home through the forest at night, and the horses were tired, and Zalman lay down in the sleigh with his head on Yankel's knee and slept. Yankel took out his knife. Three times he took it out, and three times he heard his father, <em>Not long, not short,</em> and put it back. Then Zalman woke up shaking and said he had dreamed that Dovid's son had come for him with a knife.</p>
+  <p><em>I am Dovid's son,</em> said Yankel. And he told him. And they made their peace in the sleigh, in the forest, in the snow.</p>
+  <p><em>That was a Jew who had a reason,</em> said Reb Ezra. <em>You have a basin of water.</em></p>
+  <p>It did no good. That night Feivel's people went back to the dining room at Gitl Rapoport's.</p>
+</section>
+
+<section>
+  <h2>III. The Road Up</h2>
+  <p class="dateline">After Chanukah &middot; winter 1905&ndash;06</p>
+  <p>Reb Ezra lay awake in the upper farmhouse. The house was too full. Leybl had his bed in the kitchen and his cousins came up every evening to argue it out by the stove, one for Hirsh and one for Feivel, and the cows below the floor shifted and coughed all night, and nobody he spoke to listened to a word. He said to himself, <em>I could go up where there are no people.</em></p>
+  <p>On Friday he came down for the Sabbath and stood in one shul and then walked to the other and stood there, and said nothing in either. On Sunday before light he put his tallis and tefillin in their bag, and a loaf and a block of cheese and a tin cup in a sack, and left the cows to Leybl, and went up the road without saying goodbye to anybody.</p>
+  <p>The first night he slept at the hut of an old man who burned charcoal alone in the woods above the Sheldrake Kill and had not spoken to another living soul since the fall. The old man was not a Jew and said he was nothing. They sat by his pit and watched the smoke come up out of the earth, and Reb Ezra told him, in his bad English, that he had picked a good way to live. The old man said, <em>I didn't pick it. Nobody would have me.</em> Reb Ezra said that was how most people picked things.</p>
+  <p>The second night he came down off the ridge to a cabin by a pond where three young men from the East Side were living out the winter, consumptives, sent up for the air. They were cutters from the same shop on Division Street and had come up together, and they split their own wood and took turns cooking, and one of them read to the other two at night. When Reb Ezra asked them how they lived so well together in so small a place, the oldest one said, <em>Each of us does what the other two want, and we find out it's what I wanted.</em> Reb Ezra said to them, <em>Three bodies and one mind. I wish you could come down and teach on the hill.</em> He stayed a day with them and said the morning prayers with them, because they had forgotten how.</p>
+  <p>Then he went up into the hemlocks. Above the pond, in a hollow on the north side of the mountain, there was a shanty left from when the tanneries still ran, when the bark peelers had stripped the hemlocks all through those hills and left the trunks to lie. It had four walls and a roof and a stone fireplace. He swept it with a branch and lit a fire and stayed.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On Sheldrake Hill they missed him on the Sabbath. Gitl Rapoport went up to the farm herself and found Leybl milking.</p>
+  <p><em>Where is the Rov?</em></p>
+  <p><em>He went up into the woods.</em></p>
+  <p><em>For what?</em></p>
+  <p><em>He asked them to make peace and they wouldn't.</em></p>
+  <p>Gitl Rapoport came back down the hill and went from kitchen to kitchen. The two learned men had been eating their days the way scholars always had in the old country, Sunday at one table and Monday at another, a different farm every day of the week. That week there was no plate set for either of them anywhere. When Hirsh came to the Sabbath service, the women in the back did not wish him a good Sabbath. When Feivel came into the store the men at the stove looked at the stove. Nobody brought a chicken to the shochet. Nobody sent a boy to the melamed. Hirsh's wife fed him potatoes and Feivel lived on tea.</p>
+  <p>It took eight days. Then the two of them stood in the wagon shed and each asked the other's pardon in front of everybody, and each said he had been a fool, and they told Gitl Rapoport, <em>We've made peace. Let it be as before.</em></p>
+  <p><em>Did you ask the Rov's pardon?</em></p>
+  <p><em>Not yet.</em></p>
+  <p><em>Then go ask him. When he forgives you, we'll set your plates.</em></p>
+  <p>That night it snowed, and it snowed for three days, and the drifts on the north road came up over the fences. Nobody could get up the mountain until spring. The two learned men spent the rest of that winter eating potatoes and tea.</p>
+</section>
+
+<section>
+  <h2>IV. The Bear</h2>
+  <p class="dateline">The hemlock hollow &middot; January to March 1906</p>
+  <p>What happened up there was told afterward by Amos Dibble, a Yankee who trapped mink along the Kill and had no reason to make up stories about Jews. He told it in the store at Centreville Station to anybody who would buy him a cigar, and he never changed it.</p>
+  <p>There was a big black bear in those woods, an old male, that had denned every winter under the same ledge. That year, Amos said, he didn't den. Amos had seen his sign around the ledge in the fall, two other bears and a sow with cubs crowding him out of his own place, the young ones tearing open his logs and the sow eating the beechnuts he wanted. It was as if he had looked at all of it and thought, <em>I could go off and be by myself.</em> And he came down through the snow to the hollow where the shanty was, where the old Jew was sitting on a log in the sun with his coat around him, and stood in front of him a long time, and then lay down.</p>
+  <p>After that he kept house. Amos saw it with his own eyes. The bear broke a hemlock bough off with his paw and swept the snow from the front of the shanty with it. He dragged in down wood for the fire. He carried water from the spring in the old man's bucket, holding the bail in his teeth, and set it by the hearth so it would warm. Amos said that in all that winter he never once saw the old man light the fire, and in all that winter he never once saw it out.</p>
+  <p>On Fridays Reb Ezra walked down to the Dibble place on the edge of the woods, because Mrs. Dibble was a Christian woman who would give to anybody, and she gave him what a Jew was allowed to take from her, eggs and potatoes and once a sack of flour, and he baked his own Sabbath loaves in the ashes. The bear carried his sack in his mouth as far as the line of the woods. There the old man took it from him. <em>You can't come any farther than this,</em> he said. <em>Give it here.</em> And the bear sat down in the snow among the trees and waited, and when Reb Ezra came back up with his eggs the bear got up and took the sack again. At night, Amos said, the bear walked. Around and around the shanty in the dark, with a broken limb in his jaws, all night until the sun came up, so nothing would come near. Amos's dog would not go into that hollow. After that winter the hunters called it the Rabbi's Hollow, and some of them still call it that, without knowing why.</p>
+  <p>There was a raccoon too, Amos said. It came down out of a hollow beech on the warm days and watched the bear doing for the old man, and you could see it thinking. One afternoon it came out of the woods with a piece of honeycomb from a bee tree, frozen hard, nearly as big as its head, and laid it on the log next to Reb Ezra. Reb Ezra picked it up and looked at it and set it down again on his knee. The raccoon came and took it back and turned it over and over in its little black hands, the way they do, and found the brood cells in it, the young bees still in the comb, and picked out every one of them, one at a time, and gave it back to him clean. Reb Ezra said a blessing and ate it.</p>
+  <p>The raccoon went up the beech and ran out along the limbs and jumped from one to another as if it had lost its mind, and a dead limb broke under it, and it came down on the sharp stub of a broken hemlock and was killed.</p>
+  <p>The children on Sheldrake Hill, when they heard that part, said the raccoon went straight to heaven, and there was a little boy in the cheder who wouldn't let anybody say otherwise.</p>
+</section>
+
+<section>
+  <h2>V. Leybl</h2>
+  <p class="dateline">The spring road &middot; Adar</p>
+  <p>By the time the roads opened, the whole county had heard that the old rabbi was living in the woods with a bear. A paper in Monticello printed a paragraph about it under the heading <em>A Hebrew Hermit</em>. Gitl Rapoport and Moishe Sacks, who kept the store and had given the land for the wagon shed, came to Leybl and said, <em>Bring him down. We want to see him.</em> A letter came from the Society in New York saying the same, more politely. And when the young men of the hill came home in March from their winter work in the city, they came to Leybl too. <em>We haven't heard him since the fall. Take us up.</em></p>
+  <p>There were nineteen of them. Leybl took them up the north road and over the ridge and down past the pond, and when he could see the smoke from the shanty he stopped and told them to wait by the water. <em>He's been alone near three months. You don't walk in on a man like that with a crowd.</em> He went on alone.</p>
+  <p>The bear saw him first. It came out of the hollow at a run with the limb in its jaws, and Leybl stood where he was because there was nothing else to do.</p>
+  <p><em>Let him be,</em> said Reb Ezra from the doorway. <em>Let him come. He's mine.</em></p>
+  <p>The bear dropped the limb. It came and stood in front of Leybl and nosed at the sack on his shoulder, as if it wanted to carry it for him. Leybl did not give it up. He went to the shanty and saw his grandfather's bench in the sun by the door, the split log where the old man sat, and he did not set his sack on it. He set it on the ground. The bear watched him do it.</p>
+  <p>He kissed his grandfather's hand and sat down to one side.</p>
+  <p><em>You came alone?</em></p>
+  <p><em>The boys are down at the pond. Nineteen of them. I didn't know if you'd want them.</em></p>
+  <p><em>Tell them to come up.</em></p>
+  <p>They came up, and stood around in their city shoes in the snow, looking at the bear, which looked back at them. One of them said, <em>Rebbe, you've suffered up here. Alone in the woods all winter, an old man. Nobody to carry your water, nobody to cook.</em></p>
+  <p>Reb Ezra said the bear had carried his water. The bear had done everything. <em>If you find a good companion,</em> he said, <em>go with him, and be glad. If you can't find one, go alone. Better alone than with a fool.</em> Then he said it in the words of the Writings, the way he had taught most of them to say things when they were small.</p>
+  <div class="verse">
+    <p>He that walketh with wise men shall be wise; but the companion of fools shall smart for it.</p>
+    <p>&mdash; Proverbs 13:20</p>
+  </div>
+  <p>And because he could see from their faces what kind of winter it had been on the hill, he said the other one too, from the psalm.</p>
+  <div class="verse">
+    <p>And I said: &lsquo;Oh that I had wings like a dove! then would I fly away, and be at rest. Lo, then would I wander far off, I would lodge in the wilderness. Selah</p>
+    <p>&mdash; Psalm 55:7&ndash;8</p>
+  </div>
+  <p>The young men stood in the snow and something went through them that most of them never talked about afterward. Mottel Gross, the one who had told him to go home to his cows, sat down on the ground and put his face in his hands.</p>
+  <p>Then Leybl gave the message. <em>Gitl Rapoport says come down. Moishe Sacks says come down. The Society says. The whole hill wants you home.</em></p>
+  <p><em>Good,</em> said Reb Ezra. <em>Take my bag.</em></p>
+</section>
+
+<section>
+  <h2>VI. The Edge of the Woods</h2>
+  <p class="dateline">The north road &middot; two days in March</p>
+  <p>They had not gone fifty yards before the bear walked out ahead of them and lay down across the path.</p>
+  <p><em>What does he want?</em></p>
+  <p><em>He wants to give you something before you go,</em> said Reb Ezra. <em>He's done for me all winter. You don't hurt him. Turn around.</em></p>
+  <p>So they turned around and went back to the shanty, twenty men in a shanty built for four, and slept on the floor and in the woodshed. In the morning there was food piled in front of the door: beechnuts, and frozen wild grapes, and cranberries from the bog, and apples. Apples in March, red, sound, as if they had just come off the tree. Nobody could say where the bear had found them. There was more than twenty men could eat, and they ate until they could not eat any more and filled their pockets, and Mottel Gross went home with apples in his hat.</p>
+  <p>Then Reb Ezra took his stick and started down, and the bear went past all of them and lay down across the path again, in front of him.</p>
+  <p><em>Now what?</em></p>
+  <p><em>Now he wants me to stay.</em></p>
+  <p>Reb Ezra stood and looked at the bear. <em>I'm going down,</em> he said to it, <em>and I won't come back. You can't come with me where I'm going. Up here there's nothing more for you to learn from me. Get up.</em></p>
+  <p>The bear got up. It put a paw over its face and backed away into the hemlocks very slowly, and the young men said afterward that it made a sound none of them had ever heard come out of an animal. Then it came along behind them at a distance all the way down the north road, through the woods, to the stone wall where the Dibble fields began.</p>
+  <p>At the wall Reb Ezra turned around.</p>
+  <p><em>Here you stop,</em> he said. <em>Past here it isn't safe for you. Down there they have guns and dogs. Stay.</em></p>
+  <p>The bear stopped. It stood up against the wall on its hind legs to watch him go, with its paws on the top stones, and stayed like that while the old man went down across the white field with the young men around him, smaller and smaller, until he went into the trees on the other side and was gone.</p>
+  <p>Amos Dibble found it there the next morning, lying along the foot of the wall, dead, with no mark on it. He would not skin it. He and his boy dragged it back up into the woods with the team and put stones over it.</p>
+  <p>The children on Sheldrake Hill said it had gone where the raccoon went. Nobody had the heart to tell them different.</p>
+</section>
+
+<section>
+  <h2>VII. The Water</h2>
+  <p class="dateline">The wagon shed &middot; the Sabbath before Purim, 1906</p>
+  <p>When the two learned men heard that Reb Ezra was home, they put on their good coats to go up and beg his pardon.</p>
+  <p>The Society's man happened to be up from New York that week, Mr. Adler, to see about the loans, and when he heard who was coming he went to Reb Ezra. <em>Rabbi, I'll tell you frankly. I've had those letters. If it were up to me, neither of those two would set foot in that shul again.</em> Moishe Sacks said the same. It was his land the shul was on.</p>
+  <p><em>They're good men,</em> said Reb Ezra. <em>They had a quarrel, and they didn't listen to me. Now they're coming to say so. Let them come.</em></p>
+  <p>And Moishe Sacks was quiet.</p>
+  <p>On the Sabbath Reb Ezra had a bench set for the two of them by themselves, against the back wall, and nobody sat with them or stood near them. Every farmer and every farmer's wife and every child who came in through the door looked around and asked the same thing. <em>Where are they?</em> And Reb Ezra pointed. <em>There.</em> And they said it to each other all down the benches, <em>There they are, there,</em> and pointed with their chins, and the boys pointed with their fingers, until Hirsh Kagan and Feivel Melnik could not lift their heads. Then the two of them got up off their bench and came and went down on their knees on the floor in front of the old man and asked him to forgive them.</p>
+  <p>He said it was a hard thing they had done. He had raised them. He had brought them up this hill. They had heard him ask them three times, and they had not listened.</p>
+  <p>Then he told them the end of the story of the two inns, which he had never told on the hill before.</p>
+  <p>When Reb Dovid stood under the gallows in the marketplace, he said, and saw his son in the crowd, and said to him, <em>Not long, not short,</em> the people around Yankel thought the old man had lost his wits. But Yankel understood him. Not long meant, do not carry your hatred a long time. Not short meant, do not be quick to break with a friend. Because hate is never finished by more hate. It is finished only by not hating. That is an old rule. Yankel kept his father's word while they were hanging his father, and he kept it in the sleigh with the knife in his hand. And afterward Zalman gave him his daughter, and when Zalman died Yankel kept both inns on the river, the upper and the lower, and people came from three districts to drink there because there was never a fight in either one.</p>
+  <p><em>He listened to his father while his father was dying,</em> said Reb Ezra. <em>You couldn't listen to me while I was alive and standing in front of you.</em></p>
+  <p>Then he got up, slowly, with his stick, and went out the back of the wagon shed to the privy, and the whole congregation came out behind him into the cold and stood in the yard. He took the washing cup and dipped it full from the barrel and washed his hands, right, left, right, left, right, left, the way they had all been taught as children. The water ran off his fingers into the tin basin. He held up the basin so they could all see it.</p>
+  <p>Then he walked past them out to the edge of the yard, where the snow lay unbroken in the shade of the woodpile and nobody ever walked, and poured it out.</p>
+  <div class="verse">
+    <p>For we must needs die, and are as water spilt on the ground, which cannot be gathered up again; neither doth God respect any person; but let him devise means, that he that is banished be not an outcast from him.</p>
+    <p>&mdash; 2 Samuel 14:14</p>
+  </div>
+  <p>Hirsh Kagan looked at the place where it had gone, and Feivel Melnik looked at it, and every person in that yard looked at it, the old women and the boys and the young men from the city and Mr. Adler of the Society in his Sabbath hat. Each of them would go into the ground on that hill or some other hill. The old man would go first, and then the rest of them, a few at a time, and not one of them would come back up to say who had been right about the basin.</p>
+  <p>Hirsh took the empty basin out of the old man's hands. Feivel took the cup. They hung them up together on the nail inside the privy door, where they had always hung, and went back in to finish the prayers.</p>
+  <p>Out by the woodpile the water had gone down into the snow and left a dark place the shape of a hand, already beginning to freeze at the edges.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verses</h3>
+    <blockquote class="pd">The world does not know that we must all come to an end here;&mdash;but those who know it, their quarrels cease at once.<cite>Dhammapada 6, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">If a man find a prudent companion who walks with him, is wise, and lives soberly, he may walk with him, overcoming all dangers, happy, but considerate.<cite>Dhammapada 328, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">If a man find no prudent companion who walks with him, is wise, and lives soberly, let him walk alone, like a king who has left his conquered country behind,&mdash;like an elephant in the forest.<cite>Dhammapada 329, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">It is better to live alone, there is no companionship with a fool; let a man walk alone, let him commit no sin, with few wishes, like an elephant in the forest.<cite>Dhammapada 330, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, two monks of <a href="https://en.wikipedia.org/wiki/Kosambi">Kosamb&#299;</a>, a teacher of the Dhamma and an expert in the monastic rules, fall out because one of them left his washing water standing in a vessel in the latrine. The quarrel splits their pupils, the lay supporters and, the text says, the gods up to the highest heaven. The Buddha asks them three times to make peace, tells them fables of quarrelling quails and the story of Prince D&#299;gh&#257;vu, who spared his father's killer, and is told to leave them to it. He walks off alone into the Protected Forest, where a great elephant who has left his own crowded herd serves him through the rains and a monkey brings him honey, picking out the insect eggs first. The lay people refuse the quarrelling monks seats and food until they repent. &#256;nanda comes with five hundred monks to bring the Buddha home; the elephant follows him to the edge of the village and dies of grief. The Buddha forgives the monks and closes with verse 6. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-05.htm">the full commentary story</a>.</p>
+    <h3>Sullivan County, 1905&ndash;06</h3>
+    <p>After the death of the financier <a href="https://en.wikipedia.org/wiki/Maurice_de_Hirsch">Baron Maurice de Hirsch</a>, his fund in New York incorporated the <a href="https://en.wikipedia.org/wiki/Jewish_Agricultural_Society">Jewish Agricultural and Industrial Aid Society</a> in 1900 to help Jewish immigrants buy and keep farmland, including by issuing mortgage loans. Financed in large part by the Hirsch money, an organized effort moved Jews from the city tenements to <a href="https://kerhonksonsynagogue.org/sholam">thousands of small farms</a> in the Neversink and Rondout valleys, especially in Sullivan County, and hundreds of them survived by taking in summer boarders. Some of the great resorts of the later <a href="https://en.wikipedia.org/wiki/Borscht_Belt">Borscht Belt</a> grew out of farms that Jewish immigrants established in the early twentieth century, in part because some established hotels advertised &ldquo;No Hebrews or Consumptives.&rdquo; The <a href="https://en.wikipedia.org/wiki/New_York,_Ontario_and_Western_Railway">New York, Ontario and Western Railway</a> carried both the boarders and the milk.</p>
+    <p>Consumptives came anyway. Around 1900 the large Loomis Sanatorium for tuberculosis patients was established at <a href="https://en.wikipedia.org/wiki/Liberty,_New_York">Liberty</a>, and the mountain air drew many more to farms and cottages. The woods they came to were second growth. Through much of the nineteenth century the Catskills' hemlock stands were cut for the tannin in their bark, until the tanneries closed one after another; at <a href="https://en.wikipedia.org/wiki/Grahamsville_Historic_District">Grahamsville</a> in Sullivan County the last one shut in 1878. The rule Feivel forgets belongs to Jewish <a href="https://en.wikipedia.org/wiki/Handwashing_in_Judaism">ritual handwashing</a>: by custom, water once used to wash the hands is not to be left standing where people pass or put to any other use, but poured away at once.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the monks of Kosamb&#299; from the Dhammapada commentary (verse 6, with verses 328&ndash;330). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-05.htm">The original</a>. Scripture from the Jewish Publication Society Tanakh (1917). Written by Claude Opus 5.5.
+  <div class="pager"><a href="dinner-on-the-ground.html">&larr; Dinner on the Ground</a><a href="index.html">All stories</a><a href="the-cooling-board.html">The Cooling Board &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Drops of water falling on still dark water: rings open, widen and are gone.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, rings = [], last = 0, next = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function drop(age) {
+    var y = H * (0.55 + Math.random() * 0.43);
+    rings.push({
+      x: Math.random() * W, y: y,
+      t: age || 0,
+      max: 260 + Math.random() * 220,
+      r: 60 + Math.random() * 110,
+      flat: 0.28 + 0.12 * ((y / H) - 0.55)
+    });
+  }
+  function drawRing(g) {
+    var p = g.t / g.max;
+    if (p >= 1) return false;
+    var a = Math.pow(1 - p, 1.5) * 0.42;
+    for (var k = 0; k < 3; k++) {
+      var q = p - k * 0.07;
+      if (q <= 0) continue;
+      var R = g.r * Math.sqrt(q) * 1.6;
+      ctx.strokeStyle = 'rgba(176,206,210,' + (a * (1 - k * 0.3)) + ')';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.ellipse(g.x, g.y, R, R * g.flat, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    return true;
+  }
+  function frame(now) {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce && now - last > next) { drop(); last = now; next = 700 + Math.random() * 1900; }
+    for (var i = rings.length - 1; i >= 0; i--) {
+      if (!reduce) rings[i].t++;
+      if (!drawRing(rings[i])) rings.splice(i, 1);
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  function still() {
+    rings = [];
+    for (var i = 0; i < 4; i++) drop(60 + Math.random() * 140);
+    frame(0);
+  }
+  size();
+  if (reduce) still(); else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); if (reduce) still(); });
+})();
+</script>
+</body>
+</html>

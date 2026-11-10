@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Quills</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a mill loft at night; a low band of yellow silk warp glows faintly at the foot of the page, and now and then a shuttle darts across it; datelined sections. */
+  --ground: #16131a;
+  --ground-2: #221d27;
+  --paper: #e9e3d6;
+  --paper-dim: #a59d90;
+  --accent: #e2c46e;
+  --glow: #c98a62;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #2a2230 0%, var(--ground) 58%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,227,214,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(226,196,110,.18); }
+.epigraph { border-left: 1px solid rgba(226,196,110,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(34,29,39,.78); border: 1px solid rgba(233,227,214,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,227,214,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(233,227,214,.14); border-bottom: 1px solid rgba(233,227,214,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(34,29,39,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 13.7 &middot; Pesak&amacr;radh&imacr;t&amacr;</span></nav>
+<header>
+  <h1>The Quills</h1>
+  <div class="epigraph">For man also knoweth not his time.<br>&mdash; Ecclesiastes 9:12</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Azoy hob ikh gehert,</span> on the Golden Stairs.</p>
+
+<section>
+  <h2>I. The Snake and the Stick</h2>
+  <p class="dateline">Paterson, New Jersey &middot; February 1921</p>
+  <p>That winter the mills were dark. After the war the silk trade had fallen down a well, and in Paterson the looms stood under dust sheets for eight and nine and ten months together, and the weavers who had come from Bia&#322;ystok and &#321;&oacute;d&#378; to escape the old country&rsquo;s hunger walked the cobbles of Temple Street with their hands in their pockets and their bellies talking. When a mill did take people back, it took them back at sixty cents on the dollar. Everybody said it. Sixty cents on the dollar, and be grateful.</p>
+  <p>In February Rivke Shapiro died. She was twenty-four and a broad-silk weaver at one of the big mills on the river, a good one, and she had the cough two years, and the Workmen&rsquo;s Circle sent her to its sanatorium in the mountains at Liberty, nine months free, and she came home looking better, and then she had it in the blood, and then she was a weight under a sheet in her mother&rsquo;s front room on the hill. It was the weavers&rsquo; sickness. Everybody had somebody. The lint got into you and the damp of the weave rooms got into you, and the doctors said tuberculosis and the weavers said <em>di shvindzukht</em>, the wasting, and buried their girls.</p>
+  <p>The Workmen&rsquo;s Circle held a memorial meeting for her in its rooms on the second floor over a harness shop, and because the Shapiros were Bundists from way back, and because there was no rabbi any of them would have let near a coffin, they sent to New York for Dvoyre Mazur to speak.</p>
+  <p>Bashe Reznik went with her father. She was sixteen. She had been a winder in the same mill until the shutdown, filling quills for the weavers from the big bobbins of raw silk, and she had sat beside Rivke Shapiro at lunch for a year and been given half her apples. She sat on a folding chair at the end of a row in a hall that smelled of wet wool and coal smoke and herring, and when the old woman came to the front she did not look like much. She was short and broad and wore a man&rsquo;s overcoat over a black dress, and her hair was white and cut like a boy&rsquo;s, and she put both her hands on the back of a chair and leaned on it as if it were a cart she was pushing uphill.</p>
+  <p>Everybody in the room knew her story, or a piece of it. A Bundist in Bia&#322;ystok from before anybody there was born. Arrested in 1906 with a bag of pamphlets and a revolver she swore she had never fired. Sentenced to hang. Five months in a cell in the Warsaw Citadel waiting for the morning they would come for her, and then the sentence changed to Siberia, and she walked out of Siberia, people said, the long way, across Manchuria to the sea. Now she taught Yiddish to children in the Workmen&rsquo;s Circle schools in the Bronx and on the East Side, and believed in nothing that anyone could put in a prayer book. People said she had once thrown a Hasid out of a lecture hall with her own two hands.</p>
+  <p>She did not talk about Rivke Shapiro&rsquo;s politics, or about the bosses, or the cough, though everybody expected her to. She talked about the Citadel.</p>
+  <p><em>For five months,</em> she said, <em>every morning at four o&rsquo;clock, I heard the boots in the corridor. Sometimes they went past my door. Sometimes they stopped at a door near mine. I learned the sound of a man who was ready and the sound of a man who was not. The ones who were not ready screamed. Big men, brave men, men who had thrown bombs. They screamed like a man who comes on a snake in the road with nothing in his hands.</em></p>
+  <p><em>There was a shoemaker in the cell next to mine, a boy from Grodno. Every night he knocked on the wall to me in the prisoners&rsquo; code, the same thing every night. I will die. I do not know when. I will die. When they came for him he went the way a man goes who sees a snake in the path a long way off, and has a stick in his hand, and puts the snake off the path with the stick, and goes on walking. I heard him go. He said good morning to the guards.</em></p>
+  <p>She was quiet a while.</p>
+  <p><em>Nobody here is going to hang. But everyone in this room is going to die, and does not know when. Rivke did not know. So this is what I tell my pupils, and I will tell you. Every night, before you sleep, say it. My life is not certain. My death is certain. I will die. I do not know when. Not to frighten yourselves. You are frightened enough. To have a stick in your hand.</em></p>
+  <p>Then she sat down. There was some coughing. Somebody started the <em>Shvue</em>, the Bund&rsquo;s oath song, and they all stood and sang it, and then they went down the stairs into the snow and talked about whether the big mills would open in March, and whether it would be three looms to a weaver or four, and whether you could get a job in Passaic.</p>
+  <p>Bashe Reznik walked home behind her father up the Golden Stairs, the long wooden staircase that climbed the hill above the mills. She counted the steps. At the top she said it to herself for the first time. <em>My life is not certain. My death is certain.</em> She did not stop saying it for three years.</p>
+</section>
+
+<section>
+  <h2>II. Quills</h2>
+  <p class="dateline">The Reznik shop, Van Houten Street &middot; 1921&ndash;1924</p>
+  <p>Her mother was already dead. The influenza had taken her in the fall of 1918, in nine days, and Bashe and her father had lived since then in two rooms on the hill, with her mother&rsquo;s sewing machine under a cloth in the corner because neither of them could stand to sell it or to use it.</p>
+  <p>Hershl Reznik was a weaver the way some men are tall. He had been a weaver in Bia&#322;ystok, and his father before him, and his grandfather on the hand looms in the cottages before there were mills, and he had the soft clean hands of the trade and its bad back and its habit of sleeping all Saturday afternoon like a dead man. In 1922, when the mills began to call people back, he did not go back. He took the money he and his wife had put by for Bashe&rsquo;s wedding and bought two old Crompton looms from a shop that was closing, and rented a corner of the top floor of a brick mill by the raceway, with power off the shaft, and set up for himself. It was done all over Paterson in those years. A man with two looms and a commission from a converter in New York could weave by himself for himself and be nobody&rsquo;s four-loom slave, if he did not mind working until midnight. Hershl did not mind. He worked until midnight and later. He was saving for the wedding money again.</p>
+  <p>Bashe wound his quills. She sat on a stool by the window at the end of the shop with the winding frame, and the raw silk came off the big bobbins in a fine yellow thread, finer than hair, and went onto the little wooden quills that fit inside the shuttles, layer on layer, until each quill was fat and gold and shining. She filled a box of them every afternoon, a hundred or so, and carried them down the aisle to her father&rsquo;s looms, and he took them out one at a time all evening, slid each into its shuttle, drew the end of the thread through the eye with his shuttle hook, and sent the shuttle flying.</p>
+  <p>The room was a pounding. Thirty or forty looms on that floor in a dozen little shops like theirs, the shafts rising and falling, the leather belts slapping on the pulleys, the lays banging forward and back, and the shuttles going across the warps so fast you could not see them, only a dart of light and a crack at either end. Children were warned. Everybody knew of somebody who had been hit by a shuttle that jumped the shed. Hershl wore his eyeglasses down on his nose and pushed them up with the back of his wrist.</p>
+  <p>Every quill, Bashe said it. It took about a minute to fill a quill. <em>My life is not certain.</em> The thread going on, gold. <em>My death is certain.</em> The thread going on. <em>I will die.</em> Snap it off, set the full one in the box, take an empty one. <em>I do not know when.</em> A hundred times an afternoon. Then at night on her cot, with the window open a crack for the air, as the old woman had said.</p>
+  <p>She did not tell her father. She did not tell anybody. At first it was like a stone she carried in her chest. Then for a long time it was like nothing; it was like the pounding of the looms, which you stop hearing in a week. Then, sometime in the second year, she found that she was not afraid of things. She was not afraid of the foreman at the dye house who had put his hand on her at the Christmas party. She was not afraid of the man from the converter in New York who came to cheat her father on the yardage and went away cheated himself because she had kept the count. When her father had pleurisy in the second winter she sat up with him five nights with the cold rag and the mustard plaster and was not afraid of that either, and he got well. She found she was not afraid of being an old maid, or of not being one. Things in the street looked very clear to her, as if somebody had washed the windows of the town.</p>
+  <p>Nobody else in Paterson remembered what Dvoyre Mazur had said at Rivke Shapiro&rsquo;s memorial. Bashe asked a few of them, carefully, and they remembered the old woman, and her haircut, and the Citadel, and that she had been very good; they could not remember what about.</p>
+</section>
+
+<section>
+  <h2>III. The Hall</h2>
+  <p class="dateline">The Workmen&rsquo;s Circle rooms &middot; a Thursday in April 1924</p>
+  <p>The notice was on the board at the cooperative bakery on Tyler Street. Comrade Dvoyre Mazur of New York would speak on Thursday evening at eight on the subject of I. L. Peretz and the Jewish worker. Bashe read it with a loaf of rye under her arm and felt her heart turn over, the way it had not turned over in three years about anything.</p>
+  <p>On Thursday her father had a warp to finish. A converter wanted forty yards of a yellow crepe by Friday noon, and it was eleven yards short. He came home at six to eat and said it at the table without looking up from his soup.</p>
+  <p><em>Bashele, I need quills tonight. The whole box. I&rsquo;m out by nine o&rsquo;clock.</em></p>
+  <p><em>Tate, Dvoyre Mazur is speaking tonight. At eight.</em></p>
+  <p><em>So go after.</em> He looked at her. He was not a hard man; he was a tired one. <em>I&rsquo;ll be there until two in the morning if I don&rsquo;t have quills. You want to go to a lecture, go, but bring me the quills first.</em></p>
+  <p>She sat with that a minute. Then she put on her coat and went down to the shop instead of to the hall, and sat at the winding frame under the bare electric bulb, and filled a hundred quills of yellow silk as fast as she had ever done it in her life, saying it on every one, and it was after eight-thirty when she put the box under her arm and ran.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The hall was full. They had put out every folding chair in the building and men stood along the walls. Dvoyre Mazur had come in at eight, and taken off the man&rsquo;s overcoat, and put her hands on the back of the chair, and looked out over the room for a long time.</p>
+  <p>Then she sat down in the chair and said nothing.</p>
+  <p>It went on. A minute. Five. The chairman of the branch, a presser named Gurevitsh, leaned over and asked her quietly if she was well. She said she was perfectly well. She had come twenty miles, she said, from the Bronx, on the subway and a ferry and the Erie, for the sake of one person in this room, and that person was not here yet, and she would wait. Then she folded her hands and waited, and the hall, after some shifting and muttering and a man in the back saying loudly that he had paid a nickel, went quiet, because people who had not been afraid of the police in 1913 were somehow afraid of that small old woman sitting still.</p>
+  <p>That was how it was when Bashe came up the stairs. A hall full of people sitting in silence and looking at the front.</p>
+  <p>She stopped at the back, inside the door, with the box of quills under her arm and silk lint on her sleeves and her face red from running. She meant only to look. Her father was waiting.</p>
+  <p>Dvoyre Mazur lifted her head and looked down the length of the room at her, past all those heads, and Bashe understood that look the way you understand someone calling your name. She set the box of quills on the floor by the door and walked up the aisle between the chairs, and the people turned and watched her go, and she came and stood beside the old woman&rsquo;s chair.</p>
+</section>
+
+<section>
+  <h2>IV. Four Questions</h2>
+  <p class="dateline">The same evening</p>
+  <p>The old woman did not get up. She spoke to her in Yiddish, quietly, the way you speak to someone across a kitchen table, but in that silence the whole room heard it.</p>
+  <p><em>Bashe Reznik. Where do you come from?</em></p>
+  <p><em>I don&rsquo;t know, Dvoyre.</em></p>
+  <p><em>Where are you going?</em></p>
+  <p><em>I don&rsquo;t know.</em></p>
+  <p><em>You don&rsquo;t know?</em></p>
+  <p><em>I know.</em></p>
+  <p><em>You know?</em></p>
+  <p><em>I don&rsquo;t know.</em></p>
+  <p>The hall did not like it. A man laughed out loud. Somebody said, not quietly, that Hershl Reznik&rsquo;s girl had a mouth on her, to make fun of an old revolutionary to her face. A woman in the third row said that if the girl came from the Reznik shop she should say so, she had silk all over her, everybody could see where she came from, and where she was going was back to her father, so why the riddles? Somebody else said it was the kind of thing you heard from a <em>rebbe</em>&rsquo;s daughter, mysticism, superstition, and they had not come out on a Thursday night to hear superstition. Gurevitsh the chairman stood up to say something and the old woman put a hand on his sleeve and he sat down.</p>
+  <p><em>Bashe. When I asked where you come from, why did you say you don&rsquo;t know?</em></p>
+  <p><em>You know I came from my father&rsquo;s shop on Van Houten Street,</em> Bashe said. <em>Everybody can see. You weren&rsquo;t asking that. You were asking where I was before I was born. That I don&rsquo;t know.</em></p>
+  <p><em>Good,</em> said Dvoyre Mazur. <em>And where you are going?</em></p>
+  <p><em>I&rsquo;m going back to the shop with the quills. You weren&rsquo;t asking that either. You were asking where I go after I die. I don&rsquo;t know.</em></p>
+  <p><em>Good. And when I said you don&rsquo;t know, why did you say you know?</em></p>
+  <p><em>Because I know I&rsquo;m going to die.</em></p>
+  <p><em>And when I said you know?</em></p>
+  <p><em>I know I&rsquo;m going to die. I don&rsquo;t know when. Tonight or in the morning or when I&rsquo;m an old woman. That I don&rsquo;t know.</em></p>
+  <p>The old woman nodded four times, slowly, once for each answer. Then she turned in her chair to face the room.</p>
+  <p><em>You laughed at her. All of you. A hall full of freethinkers. You read the papers, you read Marx, you read Peretz, you can tell me the price of raw silk in Yokohama. And this child is the only one here who answered me honestly.</em></p>
+  <p><em>When I was a girl my father made me learn the Sayings of the Fathers by heart, a chapter every Sabbath afternoon in the summer. I threw out the rest of what he taught me a long time ago. This one I kept, because it is a good question, even if the old men had their answers ready before they asked it.</em></p>
+  <div class="verse">
+    <p>Consider three things, and thou wilt not come within the power of sin: know whence thou camest, and whither thou art going, and before whom thou wilt in the future have to give an account and reckoning.</p>
+    <p>&mdash; Pirke Avot 3:1</p>
+  </div>
+  <p><em>The rabbis knew where you came from and where you were going. They had it written down. I don&rsquo;t know. This girl doesn&rsquo;t know. She is not ashamed to say so, and she knows the one thing that is certain, and she knows that it is not certain when. You think she was talking in riddles. You are the ones who can&rsquo;t see. Most people can&rsquo;t see. I have known that since the Citadel.</em></p>
+  <p>Then she said a thing in Hebrew, which surprised the room more than anything else she had done that night, and then said it again in Yiddish, and the older people who had been to <em>kheyder</em> as boys in Bia&#322;ystok knew where it came from, one from Koheleth and one from the Psalms, and some of them had not heard either one since their own fathers&rsquo; funerals.</p>
+  <div class="verse">
+    <p>For man also knoweth not his time; as the fishes that are taken in an evil net, and as the birds that are caught in the snare, even so are the sons of men snared in an evil time, when it falleth suddenly upon them.</p>
+    <p>&mdash; Ecclesiastes 9:12</p>
+    <p>Our soul is escaped as a bird out of the snare of the fowlers; the snare is broken, and we are escaped.</p>
+    <p>&mdash; Psalm 124:7</p>
+  </div>
+  <p>Bashe stood beside the chair and heard it, and something in her that had been pulled tight for three years, so tight she had forgotten it was a thing that could be loosened, gave way. It did not break. It was like a thread going slack when the shuttle stops. She saw the hall all at once, every face, the laughing man and the woman in the third row and Gurevitsh with his hands on his knees and the bare bulbs and the coats on the hooks and the windows black with April, and all of it was going to die, and none of it knew when, and she was not afraid for any of it, and she loved it. It was the simplest thing she had ever seen. She did not know how she had not seen it before.</p>
+  <p>Dvoyre Mazur looked up at her and saw her see it. She took Bashe&rsquo;s hand in both of hers, the old dry hands of a woman who had been in prison, and held it a moment, and let it go.</p>
+  <p><em>Go on,</em> she said. <em>Your father is waiting for the quills.</em></p>
+  <p>Then she stood up and put both hands on the back of the chair and talked for an hour and a half about I. L. Peretz and the Jewish worker, and it was very good, and afterward nobody could remember what about.</p>
+</section>
+
+<section>
+  <h2>V. The Shuttle</h2>
+  <p class="dateline">The mill by the raceway &middot; near ten o&rsquo;clock</p>
+  <p>The building was dark except for the top floor, where two or three of the little shops were still running, and the stairwell shook with them. Bashe went up with the box under her arm. She was not tired. She felt as if she could have climbed the stairs to the roof and stepped off and walked across the air over the raceway and the Falls and the whole of Paterson.</p>
+  <p>Her father had run out of quills. He had stopped his looms and was sitting on his box between them with his back against the post, and he was asleep. His chin was on his chest and his glasses were in his lap and his mouth was open a little, and his hand was still resting on the shipper handle of the near loom, the iron lever that throws the belt over and sets the loom running. A shuttle with an empty quill lay in the shuttle box where he had dropped it, not seated right.</p>
+  <p>She did not want to wake him. She came very quietly down the aisle and set the box of quills on the breastbeam of the loom, by his hand, so it would be the first thing he saw.</p>
+  <p>The breastbeam is a smooth, rounded bar of maple, polished by a thousand weavers&rsquo; aprons. The box slid. It went off the far side and hit the floor and burst, and a hundred quills of yellow silk went rolling and clattering across the boards in every direction, and Hershl Reznik came awake all at once the way a man wakes in a pounding shop when the pounding stops, and did what his hand had done ten thousand times. He threw the handle.</p>
+  <p>The loom banged on. The lay came forward. The shuttle, which was not seated, jumped the shed.</p>
+  <p>It went out of the loom the way they do, faster than anything can be seen, a dart of light, a crack, a steel-tipped piece of hardwood the length of a man&rsquo;s forearm. It struck Bashe in the temple and she went down among the quills.</p>
+  <p>Hershl threw off the loom. He was on his knees on the floor with her head in his lap before it had stopped. A weaver from the next shop came running, and then another, and one of them ran down the four flights for a doctor, and it did not matter. She did not open her eyes. There was not much blood. The man from the next shop said afterward that he had seen a good many people hurt in mills, and he had never seen a face like that one on any of them. Not frightened. A little surprised, maybe, and then not even that. He said it was like somebody who has seen a snake a long way off in the path, and knows what it is.</p>
+  <p>The quills lay all over the floor, yellow, under the looms and against the walls, some of them still rolling a little on the boards.</p>
+</section>
+
+<section>
+  <h2>VI. All the Rivers</h2>
+  <p class="dateline">East Broadway, New York &middot; May 1924</p>
+  <p>They buried her in the Workmen&rsquo;s Circle ground, next to her mother, and there was a rabbi after all, because Hershl at the last minute wanted one, and the Bundists stood at the back with their hats on and did not say anything about it. Hershl tore his lapel. He sat the seven days on a low box in the two rooms on the hill with the mirror covered and the sewing machine in the corner, and people came up the Golden Stairs with food and went down again, and he did not speak.</p>
+  <p>On the eighth day he got up and put on his coat and took the Erie to Jersey City and the ferry across and the elevated down to East Broadway, where somebody had told him Dvoyre Mazur had a room over a printer&rsquo;s. He climbed the stairs. She opened the door and looked at him and stood aside to let him in.</p>
+  <p><em>You filled her head with death,</em> he said, <em>and then death came.</em> He said it standing in the middle of her room, with his hat on. <em>Three years. Every night. I heard her through the wall, I thought she was praying, I thought, so let her pray, it doesn&rsquo;t hurt anybody. You came for her. You said so. Everybody in Paterson heard you say so. You came twenty miles for her and she came to you and then she went back to me and I killed her with my own hand.</em></p>
+  <p>The old woman did not defend herself. She took his hat off for him and put it on the table and sat him down in her one chair and sat on the edge of the bed across from him, so that their knees were nearly touching, and let him weep. It went on a long time. When it slowed she gave him her handkerchief, and it was not very clean, and he used it.</p>
+  <p><em>Hershl,</em> she said. <em>How many have you buried?</em></p>
+  <p>He did not understand.</p>
+  <p><em>Your father. Your mother. Your brother in the pogrom in 1906. Your wife. Your daughter. Who else? Children? There were children before Bashe, I think.</em></p>
+  <p>There had been two. Both in Bia&#322;ystok, both before they were a year old.</p>
+  <p><em>And your father, how many did he bury? And his father? And theirs? Every one of them sat on the box with his coat torn, like you. Every one cried like you are crying. If you put it all together, Hershl, all the crying of all the Rezniks for all the Rezniks, back as far as there were Rezniks, it would go over the Falls in Paterson for a year. It would go over them for a hundred years. And it doesn&rsquo;t fill anything.</em></p>
+  <div class="verse">
+    <p>All the rivers run into the sea, yet the sea is not full; unto the place whither the rivers go, thither they go again.</p>
+    <p>&mdash; Ecclesiastes 1:7</p>
+  </div>
+  <p><em>I didn&rsquo;t come for her because she was going to die,</em> Dvoyre said. <em>She was going to die. Everybody is. I came because she was ready to see, and she saw. I watched her see it. She walked out of that hall with a stick in her hand.</em> The old woman looked at him a long time. <em>You have none. You never had one. Neither did I, until the Citadel. Stay a while. Sit.</em></p>
+  <p>He stayed the night in the chair. In the morning she made tea and they drank it at the window over East Broadway, and he did not go back to Paterson for a month.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>He sold the two Crompton looms that summer, to a man from Haledon, for less than he had paid. He did not go back to the mills. In the fall the Workmen&rsquo;s Circle school in Paterson needed a man to keep the stove and sweep the rooms and walk the little ones home down the Golden Stairs in the dark, and he did that, and then he was helping with the lessons, and then by the end of the decade he was teaching the older children their Yiddish himself, Peretz and Sholem Aleichem and Morris Rosenfeld&rsquo;s sweatshop poems, a weaver with soft hands and his glasses down his nose. The children were a little afraid of him and liked him very much. He was a man, they said afterward, grown up, who never seemed to be in a hurry, and never seemed to be afraid of anything, and every year on the first day of school he went down the rows and asked each of them the same thing, and waited for them to answer. <em>Where do you come from?</em></p>
+  <p>On Sunday mornings in the summer he got up in the dark the way weavers do and climbed to the Heights above the Great Falls to see the sun come up over the town. He took one quill with him, a little wooden quill with yellow silk on it, wound fat and even, the last of a hundred. He found it under the loom the week he sold them. He sat in the grass at the top of the gorge with the quill in his hand and watched the Passaic come over the edge, brown and white and roaring, the whole river, all of it going over and none of it ever the same water twice, and the sun came up and found the silk, and it shone.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">This world is dark, few only can see here; a few only go to heaven, like birds escaped from the net.<cite>Dhammapada 174, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha tells the people of Āḷavi to practice <a href="https://en.wikipedia.org/wiki/Mara%E1%B9%87asati">mindfulness of death</a>: one who has done it meets death like a man who flicks a snake away with a stick, while one who has not screams like a man caught empty-handed. Everyone goes back to their business except a weaver&rsquo;s daughter of sixteen, who practices it for three years. The Buddha returns for her sake and sits in silence until she comes, though she is late because her father has asked her to fill his shuttle. He asks her where she comes from, where she is going, whether she knows, and whether she does not know. Her answers (I don&rsquo;t know, I don&rsquo;t know, I know, I don&rsquo;t know) offend the crowd until she explains them: she does not know where she came from before birth or where she will go after death; she knows she will die, but not when. He speaks the verse and she enters the stream. Going on to her father&rsquo;s workshop, she startles him awake; he jerks the loom, and its end strikes and kills her. When the grieving father comes to the Buddha, he is told he has wept more tears over the dead than there is water in the four oceans, and he becomes a monk. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-07.htm">the full commentary story</a>.</p>
+    <h3>Paterson, 1921&ndash;1924</h3>
+    <p>Paterson, New Jersey, built on the water power of the <a href="https://www.nps.gov/pagr/index.htm">Great Falls of the Passaic</a>, was America&rsquo;s Silk City. After 1900 skilled Jewish textile workers came there from &#321;&oacute;d&#378; and Bia&#322;ystok, and by 1913 close to five thousand Jewish men and women worked in its <a href="https://kehilalinks.jewishgen.org/Paterson/silk_mills.htm">silk mills</a>, most of them as broad-silk weavers. In the <a href="https://en.wikipedia.org/wiki/1913_Paterson_silk_strike">1913 strike</a> they walked out with Italian, German and other weavers against the three- and four-loom system; in 1917 Jewish workers founded a cooperative bakery on Tyler Street. After the First World War the silk trade collapsed, mills closed for months at a time and wages were cut by more than forty percent. In August 1924 the broad-silk weavers struck again against the spread of three and four looms to a weaver. Tuberculosis was the trade&rsquo;s great killer; a labor magazine in 1924 counted it behind nearly two in five deaths among women in silk work.</p>
+    <p>Many of the Jewish weavers had been members of the <a href="https://en.wikipedia.org/wiki/General_Jewish_Labour_Bund">Bund</a>, the Jewish socialist party of the Russian Empire, whose members filled the tsarist prisons after 1905, among them the Tenth Pavilion of the <a href="https://en.wikipedia.org/wiki/Warsaw_Citadel">Warsaw Citadel</a>. In June 1906 a <a href="https://en.wikipedia.org/wiki/Bia%C5%82ystok_pogrom">pogrom in Bia&#322;ystok</a> killed scores of Jews. In America former Bundists built the <a href="https://en.wikipedia.org/wiki/The_Workers_Circle">Workmen&rsquo;s Circle</a>, a mutual-aid order that paid for burials, ran a tuberculosis sanatorium at Liberty, New York, and from 1918 opened secular Yiddish schools for children. Dvoyre Mazur&rsquo;s text, from the <a href="https://en.wikipedia.org/wiki/Pirkei_Avot">Sayings of the Fathers</a>, is quoted in Joseph I. Gorfinkle&rsquo;s 1913 translation. The Reznik family, Dvoyre Mazur and the Paterson hall are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the weaver&rsquo;s daughter from the Dhammapada commentary (verse 174). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-07.htm">The original</a>. Scripture from the Jewish Publication Society translation (1917) and the Sayings of the Fathers, tr. Joseph I. Gorfinkle (1913). Written by Claude Opus 5.5.
+  <div class="pager"><a href="stand-still.html">&larr; Stand Still</a><a href="index.html">All stories</a><a href="only-you-and-i.html">Only You and I &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A low band of yellow silk warp at the foot of the page; now and then a shuttle darts across it.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, top, threads = [], shuttle = null, wait = 120, t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    top = H * 0.8;
+    threads = [];
+    for (var x = 2; x < W; x += 5 + Math.random() * 3) threads.push({ x: x, a: 0.05 + Math.random() * 0.07, ph: Math.random() * 6.28 });
+  }
+  function launch() {
+    var dir = Math.random() < 0.5 ? 1 : -1;
+    shuttle = { x: dir > 0 ? -60 : W + 60, y: top + 18 + Math.random() * (H - top - 36), dir: dir, v: Math.max(18, W / 45) };
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t++;
+    // warp: fine vertical silk threads fading in from above
+    for (var i = 0; i < threads.length; i++) {
+      var th = threads[i];
+      var a = th.a * (reduce ? 1 : 0.85 + 0.15 * Math.sin(t * 0.01 + th.ph));
+      var g = ctx.createLinearGradient(0, top - 40, 0, H);
+      g.addColorStop(0, 'rgba(230,204,120,0)');
+      g.addColorStop(0.3, 'rgba(230,204,120,' + a + ')');
+      g.addColorStop(1, 'rgba(230,204,120,' + (a * 1.3) + ')');
+      ctx.strokeStyle = g; ctx.lineWidth = 0.7;
+      ctx.beginPath(); ctx.moveTo(th.x, top - 40); ctx.lineTo(th.x, H); ctx.stroke();
+    }
+    if (!reduce) {
+      if (!shuttle) { if (--wait <= 0) launch(); }
+      else {
+        shuttle.x += shuttle.v * shuttle.dir;
+        var tail = shuttle.dir * -160;
+        var sg = ctx.createLinearGradient(shuttle.x + tail, 0, shuttle.x, 0);
+        sg.addColorStop(0, 'rgba(240,214,130,0)');
+        sg.addColorStop(1, 'rgba(250,228,160,0.5)');
+        ctx.strokeStyle = sg; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.moveTo(shuttle.x + tail, shuttle.y); ctx.lineTo(shuttle.x, shuttle.y); ctx.stroke();
+        var h = ctx.createRadialGradient(shuttle.x, shuttle.y, 0, shuttle.x, shuttle.y, 10);
+        h.addColorStop(0, 'rgba(255,236,180,0.55)'); h.addColorStop(1, 'rgba(255,236,180,0)');
+        ctx.fillStyle = h; ctx.beginPath(); ctx.arc(shuttle.x, shuttle.y, 10, 0, 6.2832); ctx.fill();
+        if (shuttle.x < -200 || shuttle.x > W + 200) { shuttle = null; wait = 240 + Math.random() * 360; }
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

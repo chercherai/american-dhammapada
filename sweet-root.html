@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sweet Root</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on pale ash-colored paper; low brown water washes in and out at the foot of the page. */
+  --ground: #efe9de;
+  --ground-2: #e4dccd;
+  --ink: #2c2621;
+  --ink-dim: #6f655a;
+  --saffron: #b8651c;
+  --chili: #9c3326;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #d9cdb8 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(44,38,33,.25); }
+.series a:hover { color: var(--saffron); }
+a:focus-visible { outline: 2px solid var(--saffron); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--saffron); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(184,101,28,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--chili); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--saffron); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(228,220,205,.82); border: 1px solid rgba(44,38,33,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--chili); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(44,38,33,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--chili); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--saffron); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(44,38,33,.15); border-bottom: 1px solid rgba(44,38,33,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--saffron); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--saffron); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--chili); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--chili); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(228,220,205,.82); border-left: 2px solid var(--saffron); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 20.8 &middot; A Company of Old Elders</span></nav>
+<header>
+  <h1>Sweet Root</h1>
+  <div class="epigraph">Our throats are tired, our mouths are sore;<br>The sea refilleth evermore.<br>&mdash; Jātaka 146</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Evaṃ me sutaṃ,</span> on Pakse Street.</p>
+
+<section>
+  <h2>I. The Committee</h2>
+  <p class="dateline">Iberia Parish, Louisiana &middot; 1986</p>
+  <p>There were five of them, and in the Lao families between Lafayette and New Iberia they were called the Committee, though they had never been elected to anything. They were old men. They had been somebodies on the other side of the Mekong. Khamsing had bought and sold rice in Savannakhet and owned two trucks. Bounlieng had been a district officer under the King and had spent four years after 1975 in a seminar camp in Houaphan, which was what the new government called the places where it sent men like him, and had come out with no teeth on one side. Phoumy had been a captain. Thongdy had taught school. Sengdao had owned a pharmacy in Pakse and still could not walk past one in Lafayette without going in to read the labels.</p>
+  <p>They had swum the river or been rowed across it at night, and waited in the camp at Nong Khai for one year or three, and been sent by the Catholic diocese to a place none of them had heard of, where the land was as flat as the land around Vientiane and the water was the color of tea and the summers were the same, and the first thing every one of them said, getting off the bus in New Iberia in the wet heat, was that it was like home. Then they went to work. They peeled crawfish and shucked oysters. Khamsing sorted potatoes into cans. Phoumy picked peppers on Avery Island for the hot sauce, and came home with his hands burning. Two of them got on in the oil yards in the boom, welding and cleaning pipe, and made more money than they had ever seen, and in 1986 the price of oil fell to thirteen dollars a barrel and Louisiana had the worst unemployment in the country and the yards let them go, and it did not matter much by then, because they were old and their sons were working.</p>
+  <p>They had always done things together. On the other side of the river they had built a school, and here they did what there was to do. They found sponsors for cousins. They drove people to the hospital and the immigration office and translated. They collected money, twenty dollars and fifty dollars at a time, from families who had very little, and in the spring of 1986 they used it to buy eleven acres of cut-over cane land at the end of a shell road north of town, cheap, because nobody else wanted it, and they laid out three streets and named them for Lao towns, Pakse and Vientiane and Luang Prabang, and the families began to build. People called it Ban Mai, the new village.</p>
+  <p>At the end of Pakse Street, against the cane, they bought a ranch house for a temple and wrote to a temple in Thailand for a monk.</p>
+  <p>The monk they got was Achan Khamphan, who was sixty and very thin and had spent nine years in the forest temples of the northeast before the war came over the river and he went into the camps to teach. He arrived in July of 1986 with a bowl, three robes, a razor and a water filter, and a paperback dictionary that he gave to the first child who asked him a question in English. He did not say much. When he did say something, people repeated it to each other for a week.</p>
+  <p>Mae Wan cooked for all of it.</p>
+  <p>She was Khamsing&rsquo;s wife, a small round woman with her hair pulled back tight and a laugh you could hear on the next street, and her name meant sweet, and everybody said it fit. She had a garden that ran the whole depth of the lot behind her house on Pakse Street: lemongrass and galangal and three kinds of chili, holy basil, long beans on a trellis made from oilfield pipe, eggplants the size of marbles, and along the back fence a row of the tall coarse grass that the Cajun lady next door called vetiver and dug up every fall to dry the roots and fold in with her sheets, and that Mae Wan called faek and used for the same thing. Her shelves were jars. Jeow bong, black-red and sweet and hot, that she made with dried buffalo skin when she could get it and pork skin when she couldn&rsquo;t. Jeow made with roasted tomatoes, with roasted eggplant, with fish. And in the shed, in a crock with a plate on it and a brick on the plate, padaek, the fermented fish sauce without which nothing tasted like anything, that she made from buffalo fish she bought from a Cajun fisherman at Henderson on the levee, because nobody in Louisiana sold the right fish.</p>
+  <p>Every meeting the Committee ever held, they held on her porch. Every meeting, she fed them.</p>
+</section>
+
+<section>
+  <h2>II. The Robes</h2>
+  <p class="dateline">The temple at the end of Pakse Street &middot; July 1987</p>
+  <p>The new hall was finished in the summer of 1987, cinder block with a steep tin roof that the men of the village had cut and bent by hand to sweep up at the corners the way the roofs did at home, and it was painted gold at the eaves. On the first day of the rains retreat the whole village came, the women in their silk skirts with the sticky rice in baskets, the men in their good shirts with a silk sash across them, and Achan Khamphan gave the sermon.</p>
+  <p>He talked about old age. He did not talk long. He said that a man is born and works and marries and has children and builds a house and builds a temple, and all of it is good, and then he is old, and the house and the children and the temple go on without him, as they should. He said there are two kinds of old men. One kind holds on harder every year to what is leaving him. The other kind puts it down while he can still choose to. He said that was all.</p>
+  <p>The five of them talked about it on Mae Wan&rsquo;s porch that night. Khamsing said it first.</p>
+  <p><em>We are old men. What are we doing? We bought the land. The temple is up. Our sons have jobs. What are we waiting for, to die in a recliner in front of the Thai videos?</em></p>
+  <p>Mae Wan, who was bringing out the rice, put the basket down and looked at her husband for a long time. Then she laughed her big laugh and said: <em>Go on. I always knew I would have to give you to the temple sooner or later. Better now, while you can still sweep.</em></p>
+  <p>They divided what they had among their children that summer. Khamsing gave his car to his oldest son and the house to Mae Wan. Sengdao, who had saved the most, gave the most. In October, at the end of the rains, two monks drove over from the temple in Texas and two from the one in Tennessee, because it took that many to ordain a monk properly, and in the new hall in front of the whole village the five old men had their heads and eyebrows shaved and put on the saffron robes, and became monks.</p>
+  <p>Then the trouble began, which was that they could not learn anything.</p>
+  <p>A monk is supposed to know the chanting by heart. The morning chant and the evening chant, the blessings, the verses for the dead, and on the full moon and the new moon the long recitation of the rules, two hundred and twenty-seven of them, which takes most of an hour. The young monks who came to the temple from Thailand had learned it all as boys. The five of them sat up at night in the hall with the books and their reading glasses and the Pali swam on the page, and in the morning it was gone. Bounlieng had once been able to recite whole provincial budgets from memory. Now he could not hold four lines. Thongdy, who had taught school for thirty years, wept with shame over it once and then never again.</p>
+  <p>Achan Khamphan did not scold them. He told them to learn what they could and to sweep the hall.</p>
+  <p>The temple was small and there was no room for them in the monks&rsquo; house, so they built themselves a hut at the edge of the temple land, against the cane, out of plywood and a sheet of tin and a window from the dump, with a mosquito net over five mats, and lived there together the way they had always done everything. In the evenings they could hear the young monks chanting in the hall, and they sat in the door of the hut and listened, and moved their lips.</p>
+</section>
+
+<section>
+  <h2>III. The Porch</h2>
+  <p class="dateline">Pakse Street &middot; 1987&ndash;1988</p>
+  <p>Every morning at six the monks walked out of the temple gate barefoot in a line, oldest in ordination first, with their bowls in front of them under their robes, down Pakse Street and up Vientiane and back along Luang Prabang, and the women knelt at the edge of their yards on mats with the rice baskets and put a ball of sticky rice in each bowl as it passed, and something wrapped in a banana leaf or a twist of plastic, and bowed, and the monks did not thank them, because it was the giver who was being done a favor.</p>
+  <p>The five old men walked at the end of the line, because they were the youngest monks, and the oldest. And the thing everybody noticed, though nobody said it out loud for a long time, was that they walked slower and slower as they came down Pakse Street, and slower still in front of their own houses. Phoumy&rsquo;s daughter-in-law put fried fish in his bowl that she put in nobody else&rsquo;s. Thongdy&rsquo;s wife cried every morning when he passed and he looked at the ground. And at Mae Wan&rsquo;s gate the line simply came apart, and the old men stopped.</p>
+  <p>Monks eat once a day, in the morning, and must finish before noon, and they may eat where they are invited. Mae Wan invited them. So the young monks went on with Achan Khamphan to eat in the hall, and the five old men went up onto Mae Wan&rsquo;s porch, where she had laid a clean cloth on the boards and set out every jar on her shelf, and sat down in a row and ate there, out of their bowls, with their fingers, the sticky rice rolled into a ball and pressed into the jeow bong, the way they had eaten on that porch every day of their lives.</p>
+  <p>She did not sit with them. She could not. A monk may not touch a woman or take a thing from her hand, so she set each dish on the cloth and pushed it toward them, and knelt a little way off with her hands together, and watched them eat. Khamsing was her husband for forty-one years and now he was a monk and she was a woman kneeling on her own porch, and she did not seem to mind it. She made fun of them. She told Bounlieng he chewed like a goat. She told Sengdao he had been too stingy with sugar his whole life and was going to get it all now, and gave him the sweet jeow. She asked them every morning if they had learned the chanting yet, and they said no, and she laughed, and they laughed, and ate.</p>
+  <p>The young monks did not like it. One of them, Phra Sone, who was twenty-four and very correct and had come from a great temple in Ubon, said so to Achan Khamphan: that the old men did not keep to the line, that they went every day to the same house, that they ate on a woman&rsquo;s porch and laughed with her, that people were talking. Achan Khamphan listened and nodded and did nothing.</p>
+  <p>In the spring the village rented two vans and drove down to Cypremort Point on Vermilion Bay for the day, where there was a beach of trucked-in sand and you could look at salt water. The monks came. The five old men sat in a row on a picnic table in their robes, under a tin shelter, and watched the brown water come in and go out. A gang of crows was working the edge of it, walking along the wet sand with their shoulders up, picking at what the water left. Mae Wan sat on a cooler in the shade behind them with a plate of food.</p>
+  <p><em>It looks like the river at home in the flood,</em> she said. <em>Big and brown. Except it never goes down.</em></p>
+  <p>The crows came round the picnic table for scraps and she threw them sticky rice, and they fought over it, and she laughed until she had to wipe her eyes.</p>
+</section>
+
+<section>
+  <h2>IV. The Hut</h2>
+  <p class="dateline">October 1988</p>
+  <p>She had the sweet sickness. The Lao called it that, and the doctors in New Iberia called it diabetes, and she had had it for years and paid it no attention, because she felt fine and because she made a great deal of jeow bong. In September of 1988 her feet began to swell. She went to the hospital in New Iberia and came home and went back again. Her kidneys were going. In the second week of October, during the cane harvest, she lay down for a rest in the afternoon in the room at the back of the house and did not get up.</p>
+  <p>The village did what you do. The monks went to the funeral home in Lafayette and sat in a row along the wall of the chapel while the people of the village came through, and a white cotton thread ran from her coffin to the monks&rsquo; hands, and the young monks chanted the verses for the dead, and the five old men moved their lips. Khamsing did not touch her. He could not. He sat with the thread in his fingers and looked at the coffin and did not look away from it.</p>
+  <p>They came home after dark. They walked back to the temple from the van and went into their hut, and the door shut, and for a few minutes it was quiet.</p>
+  <p>Then the whole village heard it.</p>
+  <p>It came out of the hut at the edge of the cane like nothing anybody in Ban Mai had heard since the camps, five old men weeping out loud, howling, the way children do, the way nobody does after the age of six. Phra Sone was the first one there. He ran across the temple yard in his bare feet with his robe hitched up and two of the others behind him, and he pulled open the door of the hut, and the five old monks were standing in the middle of it holding on to each other, their arms around each other&rsquo;s necks, their shaved heads together, rocking, with the tears running down into their robes.</p>
+  <p><em>Brothers. Brothers. What is it? What happened?</em></p>
+  <p>It was Sengdao who answered, because he could still talk.</p>
+  <p><em>Mae Wan is dead. Mae Wan is dead. Our friend&rsquo;s wife. She fed us every day of our lives. Where are we going to find another one like her? Where? Who is going to feed us now?</em></p>
+  <p>And they all began again.</p>
+  <p>Phra Sone stood in the door and did not know what to do. Behind him the others came running, the rest of the monks and then half of Pakse Street in their house slippers, children, Mae Wan&rsquo;s own sons, people with flashlights. Monks do not weep for women. Monks of sixty-eight and seventy do not stand in a hut with their arms around each other&rsquo;s necks and cry for a woman&rsquo;s cooking. Somebody laughed and was hushed. Somebody else was crying too, out in the dark. Phra Sone said, <em>Brothers, please, people can hear you,</em> and they did not stop.</p>
+</section>
+
+<section>
+  <h2>V. The Crows</h2>
+  <p class="dateline">The hall &middot; the same night</p>
+  <p>The young monks went back to the hall. They sat in the lamplight under the gold Buddha and talked about it in low voices, all of them at once: how it looked, how it would look, what the families would say, what the temple in Texas would say if it heard. A monk weeping for his wife like a husband. The other four weeping for their dinners.</p>
+  <p>Achan Khamphan came in from his room and sat down.</p>
+  <p><em>What are you all talking about?</em></p>
+  <p>They told him. He listened to all of it. Then he was quiet a while, and the young monks waited, and outside the hut had gone quieter too, and you could hear the old men through the wall of cane, not howling now, only talking to each other in their hoarse voices, and once Bounlieng blowing his nose.</p>
+  <p><em>This is not the first time they have done this,</em> Achan Khamphan said. <em>They did the same thing before. Long ago, when they were crows.</em></p>
+  <p>And he told them the story the way the old monks used to tell it in the forest temples, in the evenings, with the lamps lit.</p>
+  <p>Once there was a crow and his wife, he said, and a whole company of crows who were their friends, and they lived by the sea. One day some people came down to the shore to make an offering to the serpents who live under the water. They set out rice and milk and fish and meat and strong drink, and went away. The crows came down and ate all of it, and drank all the drink, and got very drunk, the whole company, and they decided to go swimming. They hopped into the surf, laughing, and a big wave came and took the crow&rsquo;s wife out to sea, and a fish ate her.</p>
+  <p>Her husband began to wail. The whole company came running to see what was wrong, and when he told them, they all began to wail with him. Then one of them said, <em>We are crows. We are strong. We will empty the sea and get her back.</em> So all of them, every crow, began to bail out the ocean, taking up the water in their beaks a mouthful at a time and flying up the beach to spit it out on the sand, and flying back, and taking another mouthful. They worked all day. Their beaks were raw from the salt and their eyes were red and their throats were burning, and every time they emptied out one place the water ran back in. At last they stopped and looked at each other, and said:</p>
+  <div class="verse">
+    <p>Our throats are tired, our mouths are sore;<br>The sea refilleth evermore.</p>
+    <p>&mdash; Jātaka 146</p>
+  </div>
+  <p>And then, Achan Khamphan said, instead of going home, they sat down on the shore and began to tell each other how beautiful she had been. Her eyes. Her beak. Her feathers. Her sweet voice. It was because she was so beautiful, they said, that the sea had wanted her and taken her. They were still sitting there telling each other that when the spirit who kept that shore got tired of the noise, and rose up out of the water with a terrible face, and frightened them so badly that they flew away and did not stop until they were home.</p>
+  <p>Phra Sone said, <em>And the spirit of the shore?</em></p>
+  <p>Achan Khamphan smiled a little, which he did not often do. <em>Somebody has to make a face at them,</em> he said, <em>or they would still be there.</em></p>
+  <p>One of the youngest monks laughed and then looked frightened that he had. Achan Khamphan stood up and put his robe straight on his shoulder and went out across the yard to the hut.</p>
+</section>
+
+<section>
+  <h2>VI. The Cane</h2>
+  <p class="dateline">The edge of the cane &middot; October</p>
+  <p>The next morning they were burning the cane.</p>
+  <p>The farmer who owned the land behind the temple had cut the field the week before with the big harvesters, and the stalks lay in long rows on the ground the way the machines left them, and before daylight his men went down the rows with drip torches and set the leaves on fire, as they did every fall all over the parish, to burn off the trash. By the time the monks came back from the almsround the whole field was a low wall of flame moving slowly away from the temple with the wind, and the smoke stood up off it brown and white, and the ash came down all over Ban Mai in black flakes as light as paper, on the cars and the laundry and the gold roof of the hall, and on the shaved heads of the old monks sitting in the door of their hut.</p>
+  <p>They had not gone on the almsround. They had not eaten. Achan Khamphan had sat with them in the hut until very late, and nobody knew what he had said to them, and in the morning he came back and sat down on the ground in front of the door, and the young monks came and stood behind him, and some of the village came too, because they had heard the night before and wanted to see.</p>
+  <p>Across the road, in the Cajun farmer&rsquo;s pasture, they were weaning the calves. The cows were in one pen and the calves in the next one over, with a fence between, and the calves had been bawling for their mothers since before light, a raw, steady, helpless sound, and the cows bawled back, and the calves pushed their heads through the wire toward them, and would not stop, and would not stop.</p>
+  <p>Achan Khamphan pointed to the cane fire.</p>
+  <p><em>When the farmer cuts,</em> he said, <em>he does not cut one stalk. He cuts the whole field. Then he burns what is left on the ground, all of it. If he cut one stalk, the field would stand there laughing at him. You cut one thing. You cut the house. You cut the car and the bank account and the business, you gave it all to your sons, you cut your hair and your eyebrows. Good. That was one stalk. The field is still standing. The field is all the wanting. Wanting the house, wanting the wife, wanting the sons, wanting the porch, wanting the jeow bong. That is where the fear comes from. That is where the crying comes from.</em></p>
+  <p>He nodded across the road at the weaning pens.</p>
+  <p><em>Listen to them. As long as there is any of that left in a man, even a little, even this much, he is tied like that calf to the milk.</em></p>
+  <p>Then he said the verses he had brought them, slowly, in Lao, the way the old teachers had, and afterward one of the boys in the village who was at the university in Lafayette found them for Phra Sone in an old English book in the library, and copied them out, and the young monk kept the paper in his bag for years.</p>
+  <div class="verse">
+    <p>Whom she doth overcome,&mdash;the shameful jade,<br>Craving, the poisoner of all mankind,&mdash;<br>Grow for him griefs as rank as jungle-grass.</p>
+    <p>This word to you, as many as are here<br>Together come: May all success be yours!<br>Dig up the root of craving, as ye were<br>Bent on the quest of sweet usira root.</p>
+    <p>&mdash; Theragāthā 400, 402</p>
+  </div>
+  <p>Usira is the old name for the root Mae Wan grew along her back fence, the one the Cajun lady next door dug up every fall and dried and folded in with her sheets. Faek. Vetiver. Anybody who has dug it knows that you cannot pull it. You have to dig, and keep digging, because the roots go straight down as far as a man is tall, and the sweetness is all down there in the root, in the dark, and none of it in the grass.</p>
+  <p>Khamsing was the first to stand up. He went into the hut and came out with his bowl, and the others came out after him with theirs, and they put their robes straight, and Achan Khamphan nodded at them, and that was all.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>People said afterward that the five old men were different after that, though they never did learn the chanting, not even the short ones. Mae Wan&rsquo;s sons gave her jars to the temple kitchen, and the women cooked with them until they were gone. The crock in the shed they gave to Bounlieng&rsquo;s daughter-in-law, who had always wanted to know how Mae Wan did it, and opened it, and found it had gone exactly right.</p>
+  <p>The next morning, and every morning after that, the monks walked out of the temple gate at six in a line with their bowls, down Pakse Street. Mae Wan&rsquo;s daughter-in-law knelt at the edge of the yard where Mae Wan had knelt, on the same mat, with the rice basket, and put a ball of sticky rice in each bowl as it passed, and in Khamsing&rsquo;s too. He did not slow down. The line did not come apart. Behind the house the row of faek stood along the back fence, tall and coarse and green, with the ash from the cane fires settling on it, and the crows walking up and down the burned field behind the temple, picking at what the fire had left.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Cut down the whole forest (of lust), not a tree only! Danger comes out of the forest (of lust). When you have cut down both the forest (of lust) and its undergrowth, then, Bhikshus, you will be rid of the forest and free!<cite>Dhammapada 283, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">So long as the love of man towards women, even the smallest, is not destroyed, so long is his mind in bondage, as the calf that drinks milk is to its mother.<cite>Dhammapada 284, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a company of rich old householders of Sāvatthī, friends who did good works together, hear the Buddha and decide that they are too old to stay in the world. They become monks, but they are too old to learn the teachings by heart, so they build a hut of leaves at the edge of the monastery and live there together, and on their almsround they eat at their own wives&rsquo; and sons&rsquo; houses, above all at the house of one monk&rsquo;s former wife, Madhurapācikā, the &ldquo;sweet cook,&rdquo; who feeds them all from her store of sauces and curries. When she dies, the old monks fall on one another&rsquo;s necks and weep. The other monks come running, and the Buddha tells them that the old men did the same in a former life, as crows who tried to bail out the sea to get back a drowned friend. That past-life story is the <a href="https://en.wikipedia.org/wiki/Jataka_tales">Kāka Jātaka</a> (Jātaka 146), quoted here in Robert Chalmers&rsquo;s translation (1895). The closing verses are from the <a href="https://en.wikipedia.org/wiki/Theragatha">Theragāthā</a>, the verses of the early monks, in C. A. F. Rhys Davids&rsquo;s <em>Psalms of the Brethren</em> (1913). Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-08.htm">the full commentary story</a>.</p>
+    <h3>Iberia Parish, 1986&ndash;1988</h3>
+    <p>After 1975, tens of thousands of refugees from Laos crossed the Mekong into camps in Thailand, many of them men of the old Royal Lao Government and army, and thousands of officials were sent to the new government&rsquo;s <a href="https://countrystudies.us/laos/41.htm">re-education camps</a>, which it called seminars, many of them in Houaphan province. Many who resettled in the United States came to south Louisiana through Catholic diocese sponsorship, and found work peeling shrimp and crawfish, shucking oysters, picking peppers for the Tabasco factory, and in the oil boom. Ban Mai is fictional, but it is modeled on <a href="https://en.wikipedia.org/wiki/Laotian_Americans">Lane Xang Village</a> between Lafayette and New Iberia, where, as historian Davorn Sisavath <a href="https://journals.ku.edu/amsj/article/view/16863">describes</a>, Lao families bought land in 1986, laid out streets named for Lao cities, and built a temple in 1987. The oil price collapse of 1986, part of the <a href="https://en.wikipedia.org/wiki/1980s_oil_glut">1980s oil glut</a>, gave Louisiana the highest unemployment rate in the nation that year.</p>
+    <p>Elderly Lao men often ordain as monks late in life, and in Lao and Thai temples the monks walk an almsround at dawn while laypeople kneel to place sticky rice in their bowls. In the fall harvest, south Louisiana cane growers <a href="https://www.louisianalandcan.org/article/Louisiana-Smoke-Management-Guidelines-for-Sugarcane-Harvesting/1578">burn the cut fields</a> to clear the leafy trash, and the ash drifts over the towns. <a href="https://en.wikipedia.org/wiki/Chrysopogon_zizanioides">Vetiver</a>, the Pali <em>usīra</em>, has long been grown in Louisiana, and New Orleans families folded its <a href="https://pitothouse.org/blog/2020/9/11/5nh75xbm88d5ql10lfadexjg8bypdg">dried roots in with their stored linens</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a company of old elders from the Dhammapada commentary (verses 283 and 284). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-08.htm">The original</a>. Scripture from <em>The Jātaka</em>, vol. 1, tr. Robert Chalmers (1895), and <em>Psalms of the Early Buddhists II: Psalms of the Brethren</em>, tr. C. A. F. Rhys Davids (1913). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-stringer.html">&larr; The Stringer</a><a href="index.html">All stories</a><a href="gold-leaf.html">Gold Leaf &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Brown bay water washes up the foot of the page and draws back; now and then a crow dips at the edge and the water fills in behind it.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, crows = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function makeCrows() {
+    crows = [];
+    var n = W > 700 ? 3 : 2;
+    for (var i = 0; i < n; i++) crows.push({ x: (0.1 + Math.random() * 0.8) * W, ph: Math.random() * 6.283, dir: Math.random() < 0.5 ? -1 : 1 });
+  }
+  function shore(x, k) {
+    // height of waterline above the bottom at position x
+    var base = H * 0.07;
+    var swell = reduce ? 0.5 : 0.5 + 0.5 * Math.sin(t * 0.004 + k);
+    return base + swell * H * 0.035 + Math.sin(x * 0.006 + k * 2 + t * 0.002) * 6 + Math.sin(x * 0.017 - t * 0.003) * 3;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var layer = 0; layer < 3; layer++) {
+      var k = layer * 1.7;
+      ctx.beginPath();
+      ctx.moveTo(0, H);
+      for (var x = 0; x <= W + 10; x += 10) ctx.lineTo(x, H - shore(x, k) + layer * 9);
+      ctx.lineTo(W, H);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(120,92,58,' + (0.07 + layer * 0.03) + ')';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(248,242,230,' + (0.35 - layer * 0.08) + ')';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (var x2 = 0; x2 <= W + 10; x2 += 10) {
+        var y2 = H - shore(x2, k) + layer * 9;
+        if (x2 === 0) ctx.moveTo(x2, y2); else ctx.lineTo(x2, y2);
+      }
+      ctx.stroke();
+    }
+    for (var i = 0; i < crows.length; i++) {
+      var cr = crows[i];
+      if (!reduce) { cr.x += 0.06 * cr.dir; if (cr.x < 20 || cr.x > W - 20) cr.dir *= -1; }
+      var wl = H - shore(cr.x, 0) - 4;
+      var bob = reduce ? 0 : Math.max(0, Math.sin(t * 0.012 + cr.ph)) * 3;
+      var y = wl - 6;
+      ctx.fillStyle = 'rgba(30,26,24,0.32)';
+      ctx.beginPath();
+      ctx.ellipse(cr.x, y, 6, 3.6, 0, 0, 6.283);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cr.x + 5 * cr.dir, y - 3 + bob, 2.4, 0, 6.283);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(cr.x + 7 * cr.dir, y - 3 + bob);
+      ctx.lineTo(cr.x + 11 * cr.dir, y - 1 + bob * 1.4);
+      ctx.lineTo(cr.x + 7 * cr.dir, y - 2 + bob);
+      ctx.fill();
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); makeCrows(); draw();
+  window.addEventListener('resize', function () { size(); makeCrows(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

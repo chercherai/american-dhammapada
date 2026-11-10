@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on undyed linen, light theme; in the margins a Ramallah palm is cross-stitched in red one X at a time, holds, and is unpicked thread by thread; datelined sections. */
+  --ground: #f2ebde;
+  --ground-2: #e7dfcf;
+  --paper: #2a231f;
+  --paper-dim: #6c6056;
+  --accent: #a3262a;
+  --glow: #3d5a3e;
+  color-scheme: light;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, #f8f3ea 0%, var(--ground) 60%, #ebe2d2 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(163,38,42,.3); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(163,38,42,.22); }
+.epigraph { border-left: 1px solid rgba(163,38,42,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,251,243,.78); border: 1px solid rgba(163,38,42,.14); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(163,38,42,.18); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(163,38,42,.2); border-bottom: 1px solid rgba(163,38,42,.2); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,251,243,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+body { font-weight: 400; }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 23.3 &middot; The Old Brahmin&rsquo;s Sons</span></nav>
+<header>
+  <h1>The Cane</h1>
+  <div class="epigraph">Fathers divide house and substance to their children.<br>&mdash; Proverbs 19:14 (Septuagint)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">H&#275;k smi&#703;it,</span> on North Broadway.</p>
+
+<section>
+  <h2>I. Four Envelopes</h2>
+  <p class="dateline">Knoxville, Tennessee &middot; 2021</p>
+  <p>Elias Musleh opened his first store on North Broadway in 1974, in a cinder-block building that had been a filling station, with a cooler of milk and a cooler of beer and a rack of bread and a hot plate behind the counter where his wife Samira made the pies she sold by the slice to the men from the cabinet shop next door. He was twenty-nine. He had been in Knoxville eight years. By 1990 he had four stores, one on Broadway and one on Chapman Highway and one on Clinton Highway and one out Magnolia Avenue past the old Sears, gas and groceries and cold beer and lottery tickets and a hot case with fried chicken and spinach pies, and a sign on every one in red letters that said MUSLEH MARKET, and four sons, Hanna and Issa and Fadi and Sami, who had done their homework on milk crates behind four different counters and grown up and married and gone into the stores themselves.</p>
+  <p>He gave each of them a store on the day of his wedding. It was the way his own father had done in Ramallah with the olive terraces, one terrace to each son when he married, the way everybody did. He kept the house on the ridge in West Knoxville, and the money in the bank, and Samira.</p>
+  <p>Samira died in January of 2021, at the hospital, of the sickness, on a telephone. The nurse held the telephone to her ear in the room and Elias talked to her from the parking lot, sitting in his Buick, until the nurse came back on and said that she was gone. They buried her with twelve people at the grave in masks, and the priest from the Greek church in a mask, and the Ramallah families who would have come by the hundred watching on their phones.</p>
+  <p>For a while after that, his sons were very good to him.</p>
+  <p>They took turns coming by. The wives sent stuffed grape leaves and lentils and rice. They rubbed his hands when his knuckles hurt. Sami, the youngest, knelt on the rug and took his father's shoes off and rubbed his feet with Samira's olive oil out of the last tin she had brought from Ramallah, and Elias let him, and thought it was love, and some of it was.</p>
+  <p>The other part of it had a name, and the name was Um Jiries, a widow in Ramallah who had been at school with Samira, and who had written Elias a message of condolence on the telephone that spring, and then another message, and then had begun to call him on Sunday nights, after nine, because of the time.</p>
+  <p>The sons did not say her name. They talked about the house on the ridge, the stairs, the taxes, the yard. They did not say, if he marries a woman from back home and brings her here, it all goes to her, and her children by the first husband, and the house and the bank account go with them to Ramallah. They did not need to say it. They said it to each other in the stores after closing, and their wives said it to each other on the telephone, and Elias heard them say it without their saying it, and pretended he had not.</p>
+  <p>One Sunday at the end of the summer they found him asleep in his chair at two in the afternoon with the television on, and when he woke up all four of them were in the room, and Fadi was rubbing his hands.</p>
+  <p><em>Yaba,</em> said Hanna. <em>Why should you live alone? Come live with us. We'll take care of you as long as you live. Sell the house. Give us the rest now, while you can see us enjoy it. What do you need it for? You have us.</em></p>
+  <p>At the end of September he signed the papers at a lawyer's office on Kingston Pike, a Ramallah boy whose grandfather Elias had known. The house sold in a week. The lawyer gave him four envelopes, and he wrote a name on each, in Arabic and then in English, oldest to youngest. He kept for himself two pairs of trousers and four shirts and his good suit and his overcoat, his reading glasses, his wife's last tin of oil, which was nearly empty, and the old oud he had brought from Ramallah in 1966 in a case held shut with a belt and had not played in thirty years.</p>
+</section>
+
+<section>
+  <h2>II. The Doors</h2>
+  <p class="dateline">Farragut, Powell, Halls &middot; fall and winter, 2021</p>
+  <p>He went to Hanna's first, because Hanna was the oldest. Hanna had a house in Farragut with a three-car garage and a pool with a cover on it for the winter, and his wife Rula gave Elias the guest room downstairs and put the oud in the closet.</p>
+  <p>It was good for three weeks. Then it was the dishes, and his television too loud, and his cigarettes on the back deck. On a Saturday in November he came back from the Greek church, where he had stood through the liturgy as long as his knees would let him and then sat, and Rula was standing in the open door of the garage with her arms folded, and she said it before he was out of the car.</p>
+  <p><em>Did you give Hanna a thousand dollars more than the others? A hundred? You gave every one of them the same. I saw the papers. So why is it always this house? Don't you know the way to Issa's? To Fadi's? You don't remember how to drive to Powell?</em></p>
+  <p>Elias stood by the car. He said something to her in Arabic that his mother had said to people, a thing about God and her house, that he had never in his life said to a woman, and he got back in the car and drove to Powell.</p>
+  <p>He was at Issa's until the middle of December. Then Dana said it, in a different way, with the children listening on the stairs. He was at Fadi's in Halls for two weeks, in a room with an exercise bicycle in it. He was at Sami's for nine days. Sami's wife was an American girl from Maryville named Lisa whom Elias had liked very much at the wedding, and she did not say anything at all. She only began to set the table for four instead of five, and went on doing it.</p>
+  <p>On the tenth day he put his clothes in a garbage bag and took the oud in its case and drove away from Sami's and did not go anywhere. There was nowhere to go. There were four houses, and he had been put out of all of them, and the money that would have bought a fifth was in the four envelopes. He slept that night in the Buick in the parking lot of a Kroger. In January the Buick went back to Hanna, because it was in Hanna's name now, like everything else, and Hanna sent a cousin to get it, and did not come himself.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The mission was on Broadway, two blocks from the store.</p>
+  <p>He had looked at it out of the window of the first store for forty years, the men on the sidewalk in the morning waiting for the door with their bags. He had sold them cigarettes one at a time, and coffee, and honey buns. Now he waited on the sidewalk in the morning with his garbage bag and his oud, and went in, and they gave him a cot and a locker and a number. Some of the men knew him. They called him Pops. They did not ask him what had happened. Nobody at the mission asked that.</p>
+  <p>He did not go past the store. He walked the long way around, by Central, so that Hanna would not see him through the window, and he walked downtown in the mornings when they put the men out of the mission, with the others, and spent the days where they spent them, in the bus station and in the library. He ate what the churches brought. He lost weight. He coughed. He let his beard come in white. He bought a cane for nine dollars at the Dollar General on Broadway, an aluminum one with a rubber foot, because his knee had gone, and because there was a dog on the corner of Fifth Avenue that did not like him, and with the cane he could keep it off.</p>
+  <p>At the end of January, on a cold afternoon, he woke on a bench in the library on Church Avenue, on the second floor, where he had sat down to read a newspaper and fallen asleep sitting up, and he did not know for a moment where he was. Then he did. He looked at his hands. They were an old man's hands, dirty in the creases, the nails long. He looked at his trousers. He thought: I have four sons. I have four sons, and there is not one door in this city I can knock on.</p>
+  <p>He had heard the men talk about the woman at the desk downstairs.</p>
+  <p>They said she never frowned. They said she called you by your name and said good morning to you the same way she said it to the lawyers who came in to use the computers, and that she would look anything up for you, a phone number in Detroit, a man you were in the Army with, the rules about your disability check. They said she was the only person in Knoxville who looked at you when she talked to you.</p>
+  <p>He thought: maybe she will look at me.</p>
+  <p>He combed his beard with his fingers and put on his overcoat and took the cane and went downstairs.</p>
+</section>
+
+<section>
+  <h2>III. The Desk</h2>
+  <p class="dateline">Lawson McGhee Library, Church Avenue &middot; January 2022</p>
+  <p>Her name was Avis Nance. She was sixty-six years old, and she had been a reference librarian on Church Avenue for thirty-eight years, and she had grown up in Burlington, on the east side, and when she was a little girl the library on Church Avenue had not been for her. There had been the other library then, the colored library, and then there had not been, and she had come downtown on the bus at nine years old with her library card in her hand to the big library, and the woman at the desk had looked at her for a long time, and given her the book. She had not been to church since her mother died. She said she had read too much. She had a short grey natural and reading glasses on a beaded chain and a face that, as the men said, did not frown. It was not that it smiled. It was that it was open, like a door that was not going to close on you.</p>
+  <p>She looked up at him from the desk.</p>
+  <p><em>Mr. Musleh,</em> she said.</p>
+  <p>He had not expected that. He stood there with the cane.</p>
+  <p><em>You had the store on Broadway. I used to buy my milk at your store when I lived on Fourth and Gill. Twenty years. Your wife made the spinach pies.</em> She took her glasses off and let them hang on the chain. <em>Sit down. Sit down, Mr. Musleh. What happened to you? How come you're dressed like that?</em></p>
+  <p>He sat down in the chair at the end of the desk, where people sat to ask her for things. It had been a long time since anybody had told him to sit down. He told her. He told it badly, in pieces, with his English coming and going the way it did now when he was tired. The tin of oil. The four envelopes. Rula in the garage door. The table set for four. The Buick, and the cousin who came to get it. He did not cry, telling it. He had not cried since Samira, on the telephone, in the parking lot.</p>
+  <p>Avis Nance listened to all of it and did not say anything until he was done. Then she said:</p>
+  <p><em>You're Orthodox. The Greek church.</em></p>
+  <p><em>Yes.</em></p>
+  <p>She got up and went into the stacks behind the desk, and came back with a heavy book with a green cover, and sat down and turned the pages a long time with her glasses back on, and wrote on the little paper slips the library kept for call numbers, with a short pencil, in a librarian's hand, very clear. Three slips. She put them in front of him on the desk in a row.</p>
+  <p><em>This is the Bible your church uses. The old Greek one, put into English.</em> She tapped the slips. <em>Learn these. By heart. And when your people are all together in one place, all of them, and your boys are there with them, you stand up and say them out loud.</em></p>
+  <p>He looked at the slips. He looked at her.</p>
+  <p><em>That's all?</em></p>
+  <p><em>That's all.</em></p>
+  <p>He put them in the pocket of his overcoat and went back to the mission, and that night on his cot, and the next day on the bench on the second floor, and in the bus station, and walking the long way around by Central, he said them over and over under his breath in English and then put them into Arabic in his head, until he could say them both ways without the paper, the way he had learned the psalms as a boy in the Church of the Transfiguration, standing beside his mother.</p>
+</section>
+
+<section>
+  <h2>IV. The Wedding</h2>
+  <p class="dateline">A hotel ballroom on the river &middot; February 19, 2022</p>
+  <p>All that winter, everybody had been getting married. The weddings that had been put off in 2020 and put off again in 2021 were all happening at once, in the winter of 2022, as if the whole community had been holding its breath. The one in February, a few weeks before Lent, when the church would stop marrying anybody until Easter, was a granddaughter of his cousin Khalil, marrying a Ramallah boy from Detroit, and it was at the big hotel by the river downtown, and everybody was there. Everybody. The Ramallah families of Knoxville and the ones from Detroit and Chicago and Jacksonville, three hundred and fifty people at round tables, the old men nearest the dance floor, the women in their gold.</p>
+  <p>His sons sat at a table near the front, all four of them, with their wives, in good suits, under a centerpiece of white roses. Rula had on the gold bracelets Samira had left her. Hanna had his reading glasses pushed up on his head, the way Elias wore his.</p>
+  <p>Elias came in at ten o'clock. The doorman did not want to let him in, and then a cousin's boy recognized him and went white and let him in. He came in his overcoat and the trousers he had been wearing for a week, with his white beard and the aluminum cane, and the band was between songs. They had just carried the groom around the floor on their shoulders in the zaffe, the young men, with the drums going and everybody clapping, and set him down, and the floor was still full of people catching their breath. Elias walked through them. Some of them knew him and some did not. The ones who knew him stopped talking. He went up the two steps to where the band was and took the microphone from the singer, who let him have it because he was old, and turned around, and raised his hand.</p>
+  <p><em>I want to say something. Please. Listen to me.</em></p>
+  <p>It got quiet from the front of the room to the back, the way a room does. Somebody said, <em>Go ahead, ammi. We're listening.</em></p>
+  <p>He said it in Arabic first, for the old ones, the way he had made it in his head on the cot. Then he said it again in English for the young ones, who had grown up here and did not have enough Arabic for the Bible, slowly, out of the slips in his overcoat pocket that he did not need to take out.</p>
+  <div class="verse">
+    <p>Fathers divide house and substance to their children.</p>
+    <p>Cast me not off at the time of old age; forsake me not when my strength fails.</p>
+    <p>He that dishonours his father, and drives away his mother, shall be disgraced and shall be exposed to reproach.</p>
+    <p>&mdash; Proverbs 19:14; Psalm 70:9; Proverbs 19:26 (Septuagint)</p>
+  </div>
+  <p>Then he lifted the cane, so the whole room could see it.</p>
+  <p><em>I have four sons,</em> he said, in Arabic and then in English. <em>Their names are Hanna, Issa, Fadi, and Sami. Every one of them is sitting at that table. I gave them everything I had. I bought this for nine dollars at the Dollar General. It is a better son to me than four sons. It holds me up. It keeps the dogs off me on Broadway at night.</em></p>
+  <p>He put the microphone back in the stand and stood there leaning on the cane.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Nobody spoke for a long time. Then Abu Nabil stood up from the old men's table, slowly, with a hand on his chair, because he was ninety-one. He had come from Ramallah in 1952. He had been at every wedding and every funeral of the Ramallah families of Knoxville for seventy years, and he had buried Samira on a telephone too, and nobody alive in that room had ever heard him raise his voice.</p>
+  <p>He did not raise it now.</p>
+  <p><em>In the old days in the balad,</em> said Abu Nabil, <em>a man who ate his father's bread and put his father in the street, they would have finished him. Nobody would sell to him. Nobody would buy from him. Nobody would give him a daughter for his son or take his daughter for theirs. When he died nobody would carry him. He was dead already. They only had to wait.</em> He looked at the table under the white roses. <em>This is not the old days. It is Tennessee. But I am telling you, Hanna, and you, Issa, and Fadi, and Sami. If I hear one more night that your father sleeps at the mission on Broadway, it will be the old days. For you, it will be the old days. Every family in this room will see to it.</em></p>
+  <p>At the other tables the old men nodded, one after another, and some of the women, and Khalil, whose granddaughter's wedding it was, said it out loud: <em>Every family.</em></p>
+  <p>Hanna got up first. He came across the dance floor in his good suit with his face gone grey and went down on his knees on the parquet in front of his father, in front of three hundred and fifty people, and put his forehead on his father's shoes. Then Issa, and Fadi, and Sami. <em>Yaba. Yaba, forgive us. Don't let them. Yaba.</em></p>
+  <p>Elias looked down at the four heads. Hanna's was going thin on top. He had not noticed. He had not looked down at the top of his son's head since Hanna was a boy.</p>
+  <p><em>Leave them,</em> he said to Abu Nabil, and to the room. <em>Leave them alone. They'll take care of me. They're good boys.</em></p>
+  <p><em>Then let them take care of you,</em> said Abu Nabil, and sat down.</p>
+  <p>The four of them got up off the floor. Hanna went and got a chair from the nearest table, one of the hotel's banquet chairs with the white cover tied on with a sash, and they sat their father in it, and each of them took a leg of it, and they lifted him, the way the young men had lifted the groom an hour before, and carried him across the dance floor and out of the ballroom and down the hall past the elevators and out to Hanna's car under the hotel portico. The band did not play. Nobody clapped. The wedding went on behind them, after a while, because weddings do.</p>
+</section>
+
+<section>
+  <h2>V. The Card</h2>
+  <p class="dateline">Farragut &middot; March and April 2022</p>
+  <p>Hanna bathed him himself that night, in the big bathroom upstairs, on his knees by the tub, and washed his hair with the good shampoo, and trimmed his nails with the clippers from Rula's drawer, the way you do it for a child, and shaved him in the morning. Then he called his brothers and their wives and Rula into the kitchen and said, in Arabic and then in English so there could be no mistake, that their father would live a week in each of their houses, around and around, as long as he lived, with the best room and the first plate.</p>
+  <p>Nobody said anything. Rula went upstairs and came down with clean sheets for the downstairs room, and made the bed, and took the oud out of the closet in its case and leaned it in the corner by the window where he could see it.</p>
+  <p>He slept. He ate. He ate roast chicken with rice and pine nuts and Rula's lentil soup, and the color came back into him in two weeks and the cough went away and his knee was better. He looked at himself in the mirror in the downstairs bathroom with his beard trimmed short and white, and thought: I owe this to the woman at the desk.</p>
+  <p>He had no money to buy her anything. Everything had been in the envelopes. So he went into the garage, where Hanna had put the boxes from the house on the ridge, and found the one with Samira's sewing in it, and took out two pillow covers she had made, a pair, black linen embroidered in red silk in the old Ramallah stitch, cross by cross, with the palm tree that the Ramallah women used to put on the backs of their dresses. Samira had worked on them for a whole winter in 1979 at the counter of the store on Broadway between customers. He wrapped them in a clean dish towel and had Sami drive him downtown.</p>
+  <p>Avis Nance was at the desk. He laid them in front of her.</p>
+  <p><em>Among us,</em> he said, <em>a teacher has to get what is due to a teacher. Otherwise it is a shame on the student. Please. Take them. They're from my wife.</em></p>
+  <p>She was not supposed to take gifts. She looked at the palm trees for a long time with her glasses on and touched one with a finger, and took them. She said thank you. She said they were the most beautiful things anybody had ever brought to that desk. Then she reached into a drawer and took out a blank library card and asked him his address, and wrote it on the form, Hanna's address in Farragut, and asked him to sign, and he signed, and she ran the card through the machine and handed it to him.</p>
+  <p>He turned it over in his fingers. He had been in Knoxville fifty-six years and he had never had one.</p>
+  <p><em>Now you belong here,</em> said Avis Nance. <em>Anything you want to know, you come here, and we'll find it.</em></p>
+  <p>He put the card in his wallet in front of his driver's license, where Samira's picture used to be, behind it.</p>
+  <p><em>My sons feed me three times a day now, and they bring me coffee in the afternoon,</em> he said. <em>Four times. Two of those I am giving to you. You don't have to cook. You come and eat in the stores, any of them, any day. It's yours.</em></p>
+  <p>She laughed, for the first time since he had known her.</p>
+  <p><em>All right, Mr. Musleh,</em> she said. <em>But I'll go where I want to go.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Elias went home and told his sons. <em>The woman at the library is my friend. I gave her two of my meals. When she comes into the stores, you treat her right.</em></p>
+  <p><em>Yes, Yaba.</em></p>
+  <p>She came into the store on Broadway the next Tuesday at a quarter past twelve, in her library lanyard, and Hanna saw her at the hot case and knew who she was from his father's telling, and came around the counter himself, which he did not do for anyone, and gave her the chicken that had just come out of the fryer and two spinach pies and a sweet tea, and would not let her pay. On Wednesday she was at Issa's on Chapman Highway. On Thursday at Fadi's on Clinton Highway. On Friday at Sami's on Magnolia, where Lisa was working the register, and Lisa came around the counter too and said, <em>You're the one,</em> and held her hand.</p>
+</section>
+
+<section>
+  <h2>VI. Red Eggs</h2>
+  <p class="dateline">Orthodox Easter &middot; April 24, 2022</p>
+  <p>Easter came late that year for the Orthodox, a week after the American one, and the week before it Hanna came into his father's room and sat on the end of the bed.</p>
+  <p><em>Yaba, Easter. Who should we have? Whose honor is it this year? You choose.</em></p>
+  <p><em>The woman at the library is my friend,</em> said Elias. <em>I don't know anybody else.</em></p>
+  <p><em>Then invite her. Her and her people. Whoever she wants. We'll set up in the yard.</em></p>
+  <p>Avis Nance came at two o'clock on Easter afternoon, in a yellow dress and a hat, and she brought her people, which was not what Hanna had expected. She brought the men from the second floor. Eleven of them, then fourteen, as a second car came up the drive: the men who slept at the mission and spent their days on the benches by the windows, the one with the disability check, the one who had been in the Army with somebody in Detroit, the one with the dog. Some of them had borrowed shirts. Elias knew every one of them by name, and they knew him, and they called him Pops in front of his sons.</p>
+  <p>The four sons had rented tables and white cloths and set them up on the lawn by the pool, under the willow oaks, with the cover off the pool now and the water blue. There was a lamb Fadi had been roasting since four in the morning, and rice with pine nuts, and a bowl of eggs dyed red the way they are always dyed for Easter, and trays of the date cookies the women made every year for the feast, pressed in the carved wooden molds that had come from Ramallah in somebody's suitcase sixty years ago. The wives served. Rula served. She served Avis Nance first and the man with the dog second, and nobody had to tell her to.</p>
+  <p>They cracked the red eggs, end against end, around the tables. <em>Christ is risen.</em> <em>Truly he is risen.</em> The men from the second floor learned it in Arabic by the third egg and said it back and laughed.</p>
+  <p>In the middle of the meal the four sons came and pulled their chairs up across the table from Avis Nance, all in a row, with their father at the end of the row in the best chair, in a new shirt, with his beard trimmed and his color back and the cane hooked over the back of the chair behind him.</p>
+  <p><em>Ms. Nance,</em> Hanna said. <em>We take care of our father now. We don't neglect him. Not one day. Just look at him.</em></p>
+  <p>Avis Nance looked at him.</p>
+  <p><em>You did good,</em> she said. <em>People were taking care of their mothers and their fathers a long time before you came along, though.</em> She put down her fork. <em>You want me to tell you about one?</em></p>
+  <p>They said yes. She told it.</p>
+  <p>In the summer of 1967, she said, when she was eleven years old, there was a store on Gay Street downtown that belonged to a Ramallah family, with a candy counter in the front and a lunch counter in the back, and a young man from over there working behind it who could not have been more than twenty-one or twenty-two. He was tall and very thin and had a mustache he was trying to grow. And that June there was a war, over there, six days, and the radio said Ramallah had been taken, and after that the young man could not get any word from home. There were no telephones. The letters did not come. He had a mother there. He had come over in the fall before to work and to send money home, and his mother was there by herself, and he could not get back to her, because when the war was over and they counted the people, if you were not there to be counted you could not go home to live. So he could not go home. And he could not hear if she was alive.</p>
+  <p><em>And that boy stopped eating,</em> said Avis Nance. <em>Every day the lady who owned that store made him a lunch, a bologna sandwich, or some of that bread with the spice on it, and set it on the counter for him, and he would not touch it. He couldn't. He said his stomach would not let it in. He stood behind that counter all day and sold candy to children and would not eat one bite. And every day at noon I came in for a nickel's worth of candy, and he gave me his lunch. All summer. He would wrap it back up in its paper and hand it to me across the counter and say, You eat it. You eat it for me. I ate that boy's lunch every day for six weeks. I've never forgotten it. I used to watch him get thinner. And in August a letter came, and his mother was alive, and he read it standing at the candy counter, and he cried out loud in front of everybody, and then he sat down on a stool behind the counter and ate a whole sandwich, and I didn't get any lunch that day.</em></p>
+  <p>Nobody at the table said anything.</p>
+  <p><em>She lived another nine years,</em> said Avis Nance. <em>He sent her money every month of it. Every month. I know because he used to buy the money orders at the post office on Main Street when I was in high school, and I would see him in the line. He never did get to go back and live there. They wouldn't let him. But she never wanted for a thing.</em></p>
+  <p>She picked her fork back up.</p>
+  <p><em>So,</em> she said. <em>You did good. But you're not the first. That's all I'm saying.</em></p>
+  <p>Elias had his hand over his eyes. Hanna's face was wet, and Issa's, and Fadi had walked off toward the pool and stood with his back to the table, and Sami had his head down on his arms. Rula was crying into a paper napkin. Lisa, who had not understood any of it until that moment and then understood all of it, went around the table and knelt by her father-in-law's chair and put her arms around him. The men from the second floor looked at their plates. One of them, the one with the dog, wiped his face on his borrowed sleeve and said, <em>Lord, Pops.</em></p>
+  <p>Then Avis Nance said what was on the third slip, the one she had not given him in January, because she had been saving it. She said it to the four sons, quietly, across the red eggs.</p>
+  <div class="verse">
+    <p>By the rivers of Babylon, there we sat; and wept when we remembered Sion. We hung our harps on the willows in the midst of it. For there they that had taken us captive asked of us the words of a song; and they that had carried us away asked a hymn, saying, Sing us one of the songs of Sion. How should we sing the Lord's song in a strange land?</p>
+    <p>&mdash; Psalm 136:1&ndash;4 (Septuagint)</p>
+  </div>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Later, when the sun had gone down behind the willow oaks and the men from the second floor had been driven back downtown with foil packages of lamb on their knees, and the tables were folded, and Avis Nance had gone home with a tin of date cookies, Rula went into the house without anyone asking her and came back out with the oud.</p>
+  <p>Elias sat with it a long time in the best chair by the pool. He tuned it, string by string, which took a while, because it had been thirty years. Then he played something, not very well, a song from home that nobody under sixty at that table knew. His sons sat around him on the folding chairs in the dark and listened. The cane hung from the back of his chair by its crook, forgotten, its rubber foot just off the grass, turning a little whenever he leaned into a note.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The elephant called Dhanapalaka, his temples running with sap, and difficult to hold, does not eat a morsel when bound; the elephant longs for the elephant grove.<cite>Dhammapada 324, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a rich old Brahmin of S&#257;vatth&#299; with four sons is widowed. Afraid he will remarry and the fortune will be divided, the sons wait on him, rub his hands and feet, and talk him into handing over everything he has. Each daughter-in-law in turn drives him from her door (&ldquo;Don&rsquo;t you know the way to your other sons&rsquo; houses?&rdquo;), and the old man ends up begging with a bowl and a staff. Hearing that the Buddha greets strangers kindly, he goes to him, and the Buddha teaches him verses to recite when the Brahmins assemble with his sons among them; the verses praise the staff that keeps off bulls and dogs above ungrateful children. The law of the day is that a son who eats his parents&rsquo; wealth and will not support them is put to death. The sons fall at their father&rsquo;s feet, he pleads for them, and they carry him home in a chair. Restored, he brings the Buddha a pair of cloths as a teacher&rsquo;s due and gives him two of his four daily meals; the Buddha says he will go where he pleases, and goes to each son&rsquo;s house in turn. At a feast the sons boast of how well they now care for their father, and the Buddha tells of the elephant Dhanap&#257;laka, who, captured by a king, would not eat for longing for his blind mother in the forest. His hearers weep. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-03.htm">the full commentary story</a>.</p>
+    <h3>Ramallah and Knoxville, 1967&ndash;2022</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Ramallah">Ramallah</a>, north of Jerusalem, was founded as a Christian town, and its Greek Orthodox Church of the Transfiguration dates from 1852. Ramallah merchants began emigrating to the United States in 1901, and by the 1950s about a quarter of its natives had left; the American Federation of Ramallah, Palestine was founded in Detroit in 1959 and still has local clubs from Jacksonville to San Jose. In Knoxville, as the historian <a href="https://arabamericanclubofknoxville.org/?p=732">Jack Neely has written</a>, a few Christian families from Ramallah were living on Gay Street by 1927. The women of Ramallah once embroidered a palm-tree motif in cross-stitch on the backs of their dresses. Israel took Ramallah in the June 1967 war. Its census of the occupied territories that September left out at least 270,000 Palestinians who were abroad or had fled, and many were later refused the right to return to live, as <a href="https://www.hrw.org/news/2012/02/05/israel-end-restrictions-palestinian-residency">Human Rights Watch</a> has documented.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Lawson_McGhee_Library">Lawson McGhee Library</a> on Church Avenue, founded in 1885, is the oldest continuously operating public library in Tennessee. For most of its history it served only white patrons; Black Knoxvillians used a separate Free Colored Library, opened in 1918 with Carnegie money, which closed in 1961. The Orthodox churches read the Old Testament in the Greek <a href="https://en.wikipedia.org/wiki/Septuagint">Septuagint</a>, whose psalm numbers run one behind the Hebrew Bible's (its Psalm 136 is &ldquo;By the rivers of Babylon&rdquo;), and the Septuagint's Proverbs differs in places from the Hebrew text. The scripture here is from Lancelot Brenton's English translation, first published in 1844. In 2022 Orthodox Easter fell on April 24, a week after the Western date, and the date cookies of the feast, ma'amoul, are still pressed in carved wooden molds.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the old Brahmin&rsquo;s sons from the Dhammapada commentary (verse 324). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-03.htm">The original</a>. Scripture from the Septuagint in the translation of Sir Lancelot Brenton (1844). Written by Claude Opus 5.5.
+  <div class="pager"><a href="green-broke.html">&larr; Green Broke</a><a href="index.html">All stories</a><a href="the-old-bull.html">The Old Bull &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Cross-stitch on linen: in each margin a Ramallah palm motif is worked one red X at a time,
+  // holds, then fades thread by thread and begins again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var PALM = [
+    "....X.X.X....",
+    "..X..XXX..X..",
+    ".X.X.XXX.X.X.",
+    "X...XXXXX...X",
+    "...X.XXX.X...",
+    "..X...X...X..",
+    "......X......",
+    "......X......",
+    ".....XXX.....",
+    "......X......",
+    ".....XXX.....",
+    "......X......",
+    "....XXXXX....",
+    "...X.X.X.X...",
+    "..XXXXXXXXX.."
+  ];
+  var W, H, S, motifs = [], start = performance.now();
+  function cells() {
+    var out = [];
+    for (var r = 0; r < PALM.length; r++) for (var k = 0; k < PALM[r].length; k++) if (PALM[r][k] === 'X') out.push([k, r]);
+    return out;
+  }
+  var CELLS = cells();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    S = Math.max(7, Math.min(12, W / 110));
+    var mw = 13 * S, mh = 15 * S, wide = W > 900;
+    var xs = wide ? [Math.max(12, (W - 576) / 4 - mw / 2), W - Math.max(12, (W - 576) / 4 - mw / 2) - mw] : [W * 0.06, W * 0.94 - mw];
+    var ys = [H * 0.18, H * 0.62];
+    motifs = [];
+    for (var i = 0; i < 2; i++) {
+      var order = CELLS.slice().sort(function (a, b) { return (b[1] - a[1]) || (a[0] - b[0]); }); // bottom up, like work in a hoop
+      motifs.push({ x: xs[i], y: ys[i] - mh / 2, order: order, off: i * 23 });
+    }
+  }
+  function stitch(x, y, a) {
+    var p = S * 0.18;
+    ctx.strokeStyle = 'rgba(163,38,42,' + a + ')';
+    ctx.lineWidth = Math.max(1, S * 0.14); ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(x + p, y + p); ctx.lineTo(x + S - p, y + S - p);
+    ctx.moveTo(x + S - p, y + p); ctx.lineTo(x + p, y + S - p); ctx.stroke();
+  }
+  function draw(now) {
+    var t = (now - start) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var cyc = 60;
+    for (var m = 0; m < motifs.length; m++) {
+      var M = motifs[m], n = M.order.length;
+      var ph = reduce ? 0.6 : ((t + M.off) % cyc) / cyc; // 0-.55 sew, .55-.8 hold, .8-1 unpick
+      for (var i = 0; i < n; i++) {
+        var a;
+        if (ph < 0.55) a = Math.min(1, Math.max(0, ph / 0.55 * n - i));
+        else if (ph < 0.8) a = 1;
+        else a = Math.min(1, Math.max(0, n - i - (ph - 0.8) / 0.2 * n));
+        if (a <= 0) continue;
+        stitch(M.x + M.order[i][0] * S, M.y + M.order[i][1] * S, 0.16 * a);
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>

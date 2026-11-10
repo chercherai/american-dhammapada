@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Dinner Bell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose under a monsoon evening over the Verde Valley, dark theme; grey veils of virga hang from the top of the page, sway a little, and thin out before they reach the ground; datelined sections. */
+  --ground: #1b1820;
+  --ground-2: #26212b;
+  --paper: #ebe2d6;
+  --paper-dim: #a99e98;
+  --copper: #cf8a5c;
+  --rain: #9fa6b8;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #3a2a28 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,226,214,.2); }
+.series a:hover { color: var(--copper); }
+a:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--copper); text-wrap: balance; text-shadow: 0 0 28px rgba(207,138,92,.22); }
+.epigraph { border-left: 1px solid rgba(207,138,92,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--copper); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--copper); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(38,33,43,.78); border: 1px solid rgba(235,226,214,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--rain); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,226,214,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--copper); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--copper); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--copper); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--copper); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--copper); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(38,33,43,.78); border-left: 2px solid var(--copper); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 3.2 &middot; Aññatarabhikkhu</span></nav>
+<header>
+  <h1>The Dinner Bell</h1>
+  <div class="epigraph">Sobre toda cosa guardada guarda tu coraz&oacute;n; porque de &eacute;l mana la vida.<br>&mdash; Proverbios 4:23</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; me lo contaron,</span> on the Verde below Cottonwood.</p>
+
+<section>
+  <h2>I. The Bend</h2>
+  <p class="dateline">Verde River below Cottonwood, Arizona &middot; June 2021</p>
+  <p>They came up from Phoenix the week the heat broke the records down there, when it was a hundred and eighteen at the airport on a Thursday and the radio said not to touch the seat belt buckle. There were sixty of them. They came in Subarus, pickups, a Prius with a cracked windshield, and one old school bus painted the color of a cantaloupe. At the Circle K on Main Street they asked the man buying ice where a person could stay cheap for the summer, near water, where nobody would bother them.</p>
+  <p>The man buying ice was Matt Matkovich. Matt ran the volunteer fire company on that stretch of the river, sat on the ditch board, and knew whose well was going dry and whose cows were on whose lease. People called him the mayor of the river road, though the river road was not a town and had never had a mayor. He looked at the bus. He said they had better talk to his mother.</p>
+  <p>Dora Matkovich was seventy-five. She had been born in Jerome in 1946, up on the side of Cleopatra Hill, when the mine was still working and her father went underground every morning with his lunch in a lard can. When the mine closed in 1953 the family came down the mountain to Clarkdale, like almost everybody else, and she grew up in the smelter town with the black slag heap along the river and married Steve Matkovich, whose grandfather had come from Dalmatia to work for the United Verde. She and Steve had built the Verde Bend RV Park out of a hayfield: sixty spaces under the cottonwoods on a bend of the river, a cinderblock bathhouse, a ramada, an office with a porch, and on a cedar post by the porch a school bell Steve had bought at a salvage sale in Prescott for nine dollars and hung there for no reason except that he liked it.</p>
+  <p>Steve had been dead four years. In summer the park was empty. Nobody wants to camp at a hundred and eight.</p>
+  <p>She came down to the office in her housedress and looked at them standing in the gravel. They were all ages. A big old man with a white beard and a Kingman Bulldogs cap. A thin Indian girl with a laptop bag. A Black man in a pressed shirt who looked like a preacher and turned out to have been one. A Mormon mother from Gilbert. Kids with tattoos. A woman in hospital scrubs, faded, who said she had quit. Dora made them sit on the porch and brought out sun tea in a pickle jar and a plate of coyotas from the panader&iacute;a in Cottonwood, and when they had eaten she asked them where they were going.</p>
+  <p><em>Somewhere good,</em> the old man said. <em>Somewhere we can sit still till the rains are over.</em></p>
+  <p>She understood then what they were looking for. She looked at the sixty spaces, every one of them empty, and the cottonwoods, and the river going by low and green.</p>
+  <p><em>Stay here,</em> she said. <em>Stay till the rains are done, and I'll charge you what the electric costs. And if you stay,</em> and here she surprised herself, <em>I'll go back to Mass. I haven't been since my husband.</em></p>
+  <p>They looked at each other and said yes. Afterward some of them admitted that what they had thought was: with this woman here, we won't have to worry about anything. We can do the work.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The work was Graciela's. All sixty of them had found it the same way, alone, at night, on a phone: a woman in a parked car in a hospital garage, still in her scrubs, the mask pulled down under her chin and the marks of it pressed into her face, saying almost nothing for one minute. She was an ICU nurse in Phoenix. In the first winter of the pandemic she had started filming herself after her shifts, before she drove home, and she had made thirty-two of the videos and then stopped. Each one was a part of the body. <em>Hair of the head.</em> <em>Nails.</em> <em>Teeth.</em> <em>Skin.</em> All the way down the list to the blood, the sweat, the tears, the spit. In each one she said where she had seen that part of a person the night before, and what it had looked like, and then she said the same word at the end, every time, and turned off the camera.</p>
+  <p><em>Prestado.</em> Borrowed.</p>
+  <p>The sixty had found each other in the comments. In the spring they had gone down to Phoenix and waited for her on the fourth level of the parking garage at seven in the morning, when the night shift came off, and asked her how to do it for real, all day, for a whole season. She had looked at them a long time over the roof of her car. Then she had told them: go through the thirty-two. One at a time. Find each one in yourself. See where it came from and where it goes. Don't skip the ugly ones.</p>
+  <p>That evening under the ramada they made their rules. The old man, Hollis, who had driven a truck for forty years out of Kingman and was the oldest, let the others talk.</p>
+  <p><em>We didn't come here for summer camp,</em> said Marcus, the one who had been a preacher. <em>Every one of us has seen the inside of a COVID unit, if only on a screen. That door is standing open for every one of us like the door of our own house. You can watch every video she ever made and still not do one thing she said.</em></p>
+  <p>So: phones in a Christmas cookie tin in the office, turned off. Each person in their own space, and never two of them together in one place, not to talk, not to sit, not even to stand. At six in the morning they would walk the river road together, once, without speaking. In the evening they would sit for an hour outside Hollis&rsquo;s trailer, because he was the oldest. Otherwise alone. If anybody got sick, they would go to the post by the office and ring Steve&rsquo;s bell, and everybody would come.</p>
+  <p><em>It&rsquo;s not a dinner bell,</em> Hollis said. It was the only thing he said all night.</p>
+</section>
+
+<section>
+  <h2>II. The Bell</h2>
+  <p class="dateline">Verde Bend &middot; July</p>
+  <p>In the second week of July Dora went down the bank in the late afternoon with her grandson Nico carrying a cooler. She had made a jug of agua de jamaica, red as a stoplight, and a pan of empanadas de calabaza, and two pounds of grapes from the Safeway because it seemed to her those people did not eat fruit. The park was silent. The trailers had their blinds down. The tents had their flaps tied. Nobody was in the ramada or the bathhouse or the river.</p>
+  <p>Old Mr. Esquivel was fishing for carp off the gravel bar, as he had every evening for thirty years, and she asked him where they had all gone.</p>
+  <p><em>They&rsquo;re here,</em> he said. <em>Each one in his hole. You want them, ring the bell. They come running.</em></p>
+  <p>So she rang it.</p>
+  <p>It was louder than she remembered. The sound went down the river and came back off the bluff, and then the doors began to open. They came out of trailers, tents, cab-over campers, the cantaloupe bus, and the mesquite thickets along the bank where some of them had been sitting on folded blankets. She watched them cross the gravel toward her. It was the strangest thing. They came one at a time. Each one by his own path. Two would be coming from the same end of the park, and one would bend wide around the bathhouse so as not to walk beside the other. Sixty people, and no two of them together.</p>
+  <p>She had raised three children and buried one. She knew what that meant.</p>
+  <p><em>All right,</em> she said, when they were standing in front of her. <em>Who&rsquo;s fighting?</em></p>
+  <p><em>Nobody, Mrs. Matkovich.</em></p>
+  <p><em>Don&rsquo;t tell me nobody. When you came up to my porch in June you came all together like ducks. Now you come one by one from every direction like you can&rsquo;t stand each other. Somebody&rsquo;s fighting.</em></p>
+  <p>Priya, the thin girl with the laptop bag, who had tested software in Chandler until she couldn&rsquo;t anymore, explained it. Each of them sat by themselves all day, she said, doing the practice. That was the rule. Alone was the point.</p>
+  <p><em>What practice?</em></p>
+  <p><em>The thirty-two parts,</em> Priya said. <em>You go through the body, one thing at a time. Hair, nails, teeth, skin. You find each one in yourself and look at it till you see it&rsquo;s not yours to keep. It goes. All of it goes.</em></p>
+  <p>Dora stood with the jug of jamaica sweating against her hip and thought about it.</p>
+  <p><em>Is that only for you people? Or can an old woman do that?</em></p>
+  <p><em>It isn&rsquo;t forbidden to anybody,</em> Hollis said.</p>
+  <p><em>Then show me.</em></p>
+  <p>Priya got her phone out of the cookie tin, which was breaking the rule; everyone let her. They sat Dora in the office chair on the porch, and she watched all thirty-two videos straight through while the sixty stood in the gravel at a polite distance from one another and the sun went down behind Mingus Mountain. Graciela in her car. The grey concrete of the garage behind her. The red mark of the mask across her nose. <em>Cabello,</em> she said in the first one, and then in English: <em>Hair of the head. Last night I washed a man&rsquo;s hair because his wife couldn&rsquo;t come in. He had a lot of it. Black, a little grey on the sides. I combed it the way she said he liked. He died at four-ten.</em> And then the word, and the screen went dark.</p>
+  <p>When she had seen all of them Dora gave the phone back and stood up.</p>
+  <p><em>Drink the jamaica before it gets warm,</em> she said, and went up the bank to her house.</p>
+</section>
+
+<section>
+  <h2>III. Thirty-Two</h2>
+  <p class="dateline">The monsoon &middot; July and August</p>
+  <p>The rains came that year like they had not come in two summers. The Weather Service counts the monsoon from the middle of June to the end of September, but for two years there had been next to nothing, and people in the valley had started to say the word as a joke. In the third week of July a wall of brown dust came up the valley from the south in the late afternoon, a mile high, and swallowed Cottonwood, and right behind it came the rain. The whole valley smelled of wet creosote and hot stone. The Verde came up brown and fast, full of sticks. Matt&rsquo;s fire company pulled a man and his dog off the roof of a pickup at a low-water crossing. In Flagstaff the water came down off the burned mountain and went through people&rsquo;s houses.</p>
+  <p>Dora did the practice at her kitchen table at four in the morning, before the heat, with the window open on the noise of the river.</p>
+  <p>She did not have to look far for any of it. Hair of the head: grey, thin at the crown, the same hair her mother had brushed out every night on the back step in Jerome with a tortoiseshell brush. Nails: ridged, yellow on the big toes. Teeth: eleven of her own and a partial plate she took out at night and put in a glass. Skin: the brown spots on the backs of her hands, which had appeared one summer and stayed. Bones: the left hip, which told her about the weather. The heart, which the cardiologist in Cottonwood listened to every six months with his head tilted like a bird. The blood they drew from her arm every three months for the sugar. She went down the list the way you go down a list at the store, and when she got to the bottom she went back to the top.</p>
+  <p>She had sat beside Steve for the last nine days in the hospital in Prescott. She had seen what she had seen. So she was not frightened by the list, and it went quickly with her, more quickly than it had gone with any of the sixty. On a morning at the end of July she was standing at the sink with the water running, and she was looking at the backs of her hands under the water, and something that had been holding on in her for seventy-five years let go. It did not hurt. It was like setting down a box of canned goods you had carried in from the car and forgotten you were carrying. She turned off the water. She dried her hands on the towel. She stood in her kitchen and was not afraid of anything.</p>
+  <p>The old women in Jerome would have had a word for what happened to her after that. She found she could see her sixty. She would be sitting at her table and she would know that the preacher was lying on his back in the bed of his pickup with his fists closed, going over and over something a deacon had said to him in 2019. She would know that Priya had not slept, and the Mormon mother from Gilbert was crying for her children, and the boy from Flagstaff with the tattoos was angry at his father, who was dead. All of them still caught. Not one of them through.</p>
+  <p>So she asked herself, the way you would go through a list: did they have what they needed?</p>
+  <p>A good place? They had the river and the cottonwoods and the bend where the water slowed down. Yes.</p>
+  <p>Good company? They had each other, and old Hollis in the evenings, and the practice. Yes.</p>
+  <p>Food?</p>
+  <p>She looked, and she saw it. Ramen. A jar of peanut butter and a spoon. Gas-station taquitos warmed on a dashboard. Protein bars gone soft in the heat. Beans out of the can, cold. They were losing weight. They were dizzy in the afternoons and they thought the dizziness was spiritual. They were trying to sit still with their stomachs empty and their blood sugar on the floor in a hundred and eight degrees, and she nearly laughed out loud at the kitchen table.</p>
+  <p>The next day she rang the bell at noon.</p>
+  <p>They came running, one at a time, each from his own direction, thinking somebody was sick. She stood by the post with her apron on.</p>
+  <p><em>Up the bank,</em> she said. <em>All of you. To the house. Now it&rsquo;s a dinner bell.</em></p>
+  <p>She had set the long folding tables end to end under the big mesquite in her yard, and covered them with oilcloth, and every one of the sixty found at their place exactly the thing they had been wanting at four o&rsquo;clock that morning and had not told anyone. Hollis found biscuits and sausage gravy. Marcus found cornbread in a skillet and a bowl of greens with a ham hock in them, the way his grandmother in Tallulah had made them, and he sat with his spoon in his hand and could not use it for a while. Priya found dal, yellow, with too much ginger, which was how she liked it and how her mother had never made it. The Mormon mother found a grilled cheese sandwich cut corner to corner. The boy from Flagstaff found a carne asada burro from the truck on Main Street, still in its foil. Dora went among them pouring tea and did not explain anything, and they did not ask, because by then they were all too busy eating.</p>
+  <p>After that she fed them every day. Nico ran trays down the bank. Matt complained about the grocery bill and paid it. And because they were fed, they slept, and because they slept, their minds came down and got quiet, the way the river came down after a storm and you could see the stones on the bottom again. One by one through August, each of them alone, each in their own place, they finished. That was the word they used among themselves afterward. Not one of them ever said it any bigger than that.</p>
+  <p>On the last night of September they sat in a circle under the ramada, close together for the first time since June, and each one in turn asked the others to say if he had done anything wrong that summer. Nobody had much to say. Then Hollis spoke for the second time.</p>
+  <p><em>That woman held us up,</em> he said. <em>Without her we&rsquo;d have quit by August. Let&rsquo;s go tell Graciela.</em></p>
+  <p>In the morning they packed. Dora walked with them down the gravel road as far as the cattle guard, the way her mother had walked people to the edge of the yard in Jerome, and stood there while the cars went over it one by one, rattling.</p>
+  <p><em>Come see me,</em> she said to each window. <em>Don&rsquo;t be strangers. You know where I am.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Garage</h2>
+  <p class="dateline">Phoenix &middot; September</p>
+  <p>The second summer of the sickness was worse in the hospitals than anyone outside them wanted to know. Over July and August the number of COVID patients in the state&rsquo;s intensive care beds had gone up three times over. The new ones were younger. They came in at twenty-four and thirty-eight and forty-one, and the nurses who had been through the first winter said this one was harder, because the first time nobody had known and this time everybody could have.</p>
+  <p>Graciela came down the stairwell to the fourth level at ten past seven in the morning. Two of hers had died in the night. She was forty-four and had grown up in the Apostolic church on South Seventh Avenue, where her grandmother had taught her to read out of a black Reina-Valera with a zipper on it, and she was carrying her lunch bag, which she had not opened.</p>
+  <p>The sixty were waiting by her car. They were standing close together, talking quietly, which she had not seen them do before.</p>
+  <p>She looked at them.</p>
+  <p><em>You all ate,</em> she said.</p>
+  <p>They laughed, all of them at once, and then they told her about Dora. The bell. The tables under the mesquite. How she knew what each one of them wanted before they knew it themselves; how they would be sitting in their trailers at four in the morning thinking about their grandmother&rsquo;s greens, and at noon there were the greens.</p>
+  <p>There were always a few other people in that garage at shift change by then. Strangers who had seen the videos came to stand at the far end of the row and just look at her, and the security man on the golf cart had given up chasing them off. One of them that morning was a man named Shane Goodwin, thirty-four, from Mesa, who sold solar panels door to door when he worked and had been divorced for a year and a half and had watched the thirty-two videos more times than he could count. He listened from behind a concrete pillar to everything the sixty said, and when they had gone he came out and asked Graciela for the practice.</p>
+  <p><em>You already have it,</em> she said. <em>It&rsquo;s thirty-two minutes long.</em></p>
+  <p><em>I want to do it up there. At that place. With her.</em></p>
+  <p>Graciela unlocked her car. She looked tired enough to lie down on the concrete.</p>
+  <p><em>Then go,</em> she said.</p>
+</section>
+
+<section>
+  <h2>V. What He Wanted</h2>
+  <p class="dateline">Verde Bend &middot; October</p>
+  <p>Shane drove up the Black Canyon Freeway on a Friday afternoon and came over the cattle guard after dark. Dora&rsquo;s son had left a key under a rock on the step of the trailer where Hollis had stayed. He opened the door and turned on the light and stood there. Nobody had been in it for two weeks. There was dust on everything, a dead moth in the sink, a smell of hot plastic. He had driven a hundred miles. He thought: <em>I can&rsquo;t clean this tonight. I wish she&rsquo;d send somebody.</em></p>
+  <p>Ten minutes later there was a knock. A tall boy of fifteen stood on the step with a broom, a bucket, and a bottle of Pine-Sol.</p>
+  <p><em>My grandma said,</em> said Nico, and swept the trailer out, and wiped the sink, and went away.</p>
+  <p>Shane sat on the clean bed. He was thirsty. He wanted something cold and sweet, not water. When he opened the door to get air there was a jar on the step, sweating in the dark, red as a stoplight, with ice in it.</p>
+  <p>In the morning he woke up thinking about rice pudding, the warm kind, with butter melting on top, which his grandmother had made in Safford when he was small. There was a covered bowl on the step. Arroz con leche, still warm, with a pat of butter going soft in the middle and cinnamon on the butter. When he had eaten it he thought, almost as a joke, <em>a machaca burro, with green chile,</em> and before he had rinsed the bowl it was on the step in its foil.</p>
+  <p>He sat on the step and looked at the foil for a long time.</p>
+  <p>Then he thought, <em>I want to see her. I want her to come herself. With something hot.</em></p>
+  <p>She came down the bank at noon in her housedress with a pot of caldo de queso wrapped in a towel, potatoes and green chile and white cheese going soft in the broth, and a plate of her mother-in-law&rsquo;s povitica, the walnut bread rolled up like a carpet, cut in slices. She set it all on the picnic table and sat down across from him while he ate.</p>
+  <p>When he was finished he said, <em>You&rsquo;re Matt&rsquo;s mother.</em></p>
+  <p><em>That&rsquo;s right, mijo.</em></p>
+  <p><em>Mrs. Matkovich, do you know what people are thinking?</em></p>
+  <p><em>Why do you ask me that?</em></p>
+  <p><em>Because everything I&rsquo;ve thought since I got here, you&rsquo;ve sent. The broom. The jamaica. The rice. The burro. You.</em></p>
+  <p><em>Lots of people know what other people are thinking.</em></p>
+  <p><em>I&rsquo;m not asking lots of people. I&rsquo;m asking you.</em></p>
+  <p>Dora gathered the spoon and the bowl and the plate and stacked them.</p>
+  <p><em>People who can&rsquo;t read anybody&rsquo;s mind do the same thing, mijo,</em> she said. <em>Mothers do it all day long.</em></p>
+  <p>She went back up the bank, and Shane sat at the picnic table and was afraid.</p>
+  <p>He knew what was in his head. He knew it better than anyone. He had been sitting with it for a year and a half in an apartment in Mesa with the blinds down. Kayla, and the man from her gym she had left him for, and the things he would like to do to that man in a parking lot. The girl at the Circle K counter that morning, and what he had thought about her. How much money the guy in the next trailer down probably had. His brother&rsquo;s new truck. Who he could beat in a fight. Who he could get to buy panels if he lied a little. Contempt for the sixty, for their pickle-jar tea and their clean faces. Contempt for himself. All of it going through his head like traffic, day and night, the good thoughts and the rotten ones, and the rotten ones were most of it. And she could see it. She sat at her table up there on the bank and watched it go by.</p>
+  <p>One wrong thought, he told himself, and she&rsquo;ll throw me off this place like somebody caught stealing out of the office.</p>
+  <p>In the morning he packed the car. She was at the office when he dropped the key.</p>
+  <p><em>Where are you going, mijo?</em></p>
+  <p><em>Back to Graciela.</em></p>
+  <p><em>Stay a while. You just got here.</em></p>
+  <p><em>I can&rsquo;t stay, Mrs. Matkovich. I have to go.</em></p>
+  <p>He went over the cattle guard fast, rattling, and did not look in the mirror.</p>
+</section>
+
+<section>
+  <h2>VI. Above Everything</h2>
+  <p class="dateline">Phoenix &middot; October</p>
+  <p>He waited for her by the car on the fourth level. She came out of the stairwell at ten past seven and saw him and stopped.</p>
+  <p><em>You&rsquo;re not up there.</em></p>
+  <p><em>I can&rsquo;t be up there.</em></p>
+  <p><em>Why not?</em></p>
+  <p><em>She knows everything I think. Everything. And I think garbage, Graciela. All day. You don&rsquo;t know what goes on in here.</em> He put his hand flat on his chest as if it were a door. <em>One bad thought and she&rsquo;ll run me off that place like a thief.</em></p>
+  <p>Graciela set her lunch bag on the roof of the Corolla.</p>
+  <p><em>That&rsquo;s the place for you,</em> she said. <em>That&rsquo;s exactly the place.</em></p>
+  <p><em>I can&rsquo;t. I won&rsquo;t.</em></p>
+  <p><em>Okay.</em> She leaned on the car. <em>Can you guard one thing?</em></p>
+  <p><em>What thing?</em></p>
+  <p><em>Just what goes on in there. Your thinking. Not her. Not what she sees or doesn&rsquo;t see. Not anything else. Just that one thing. It&rsquo;s hard enough by itself. It goes wherever it wants. It lands on anything.</em> She shut her eyes for a moment, standing up. <em>My grandma&rsquo;s Bible has it. She made me say it every night before I could have the light off.</em></p>
+  <div class="verse">
+    <p>Sobre toda cosa guardada guarda tu coraz&oacute;n; porque de &eacute;l mana la vida.</p>
+    <p>&mdash; Proverbios 4:23</p>
+  </div>
+  <p>She said it again for him in English, her own way, slowly. <em>Of everything you&rsquo;re guarding, guard your heart. Your whole life comes out of it.</em></p>
+  <p><em>That&rsquo;s it?</em></p>
+  <p><em>That&rsquo;s it. Go back up there. Don&rsquo;t worry about anything else.</em></p>
+  <p>The man in the parking booth on the ground level had been leaning out his window to listen, as he did most mornings now. When Shane had driven out past him, he took a yellow Post-it off the pad by his register and wrote on it, in capitals, GUARD ONE THING, and stuck it to the inside of the booth&rsquo;s glass, where it stayed through the winter and the next summer, curling in the heat, until somebody painted the booth.</p>
+</section>
+
+<section>
+  <h2>VII. The Hundredth</h2>
+  <p class="dateline">Verde Bend &middot; November</p>
+  <p>Dora was at her kitchen table on the Sunday afternoon when the car came back over the cattle guard. She did not get up to look.</p>
+  <p><em>He found a teacher,</em> she said, to nobody, and got up and put the beans on.</p>
+  <p>He took Hollis&rsquo;s trailer again. He did not think about her anymore, or about what she could see. He thought about his thinking, and when it went somewhere, he went and got it and brought it back, the way you bring back a dog that has got out of the yard, without hitting it. Hair of the head. Nails. Teeth. Skin. The food came every day on the step, the right food, and he ate it and washed the bowl and set it back out. In the mornings he walked the river road alone. On the third morning there was a rattlesnake stretched across the path in the first sun, as thick as his wrist. He stood a long time. Then he found a long cottonwood stick and lifted the snake gently into the brush, and it went.</p>
+  <p>In a few days he finished.</p>
+  <p>He was sitting in a camp chair facing the river when it happened, and afterward he sat on there in the clear blank peace of it for a long time. The first thing he thought when he could think again was of her. <em>She held me up. Without that woman I&rsquo;d never have got here.</em> And then, because the sixty had talked about such things on the long nights and he had half believed them, he thought: <em>Was it only this time? Or has she been holding me up before?</em></p>
+  <p>He looked back.</p>
+  <p>He saw a hundred lives less one, and in every one of them she was his wife. In a rooming house in a mining town on a mountain she put something in his coffee. In a farmhouse with a dirt floor she opened the door at night to a man with a knife, and stood back. On a riverboat, in a city of canals, in a village of reed houses, in a stone house in the snow, again and again, ninety-nine times, she loved somebody else and he was in the way, and she put him out of the way. He saw all of it at once, the way you see a whole valley from a bluff. He sat in the camp chair in the sun with his hands on his knees.</p>
+  <p><em>My God,</em> he thought. <em>What that woman has done.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Up the bank Dora sat at her kitchen table with a cup of coffee going cold and saw that he had finished. She saw him think of her and say she had held him up. She saw him look back. She saw what he saw, all of it, the coffee and the knife and the door, and what he thought of her.</p>
+  <p>She did not argue with any of it. It was true. She turned her cup a little on the oilcloth and looked further back herself, past the ninety-nine, and found the one she was looking for.</p>
+  <p>Then she said out loud, in her kitchen, in an ordinary voice, as if he were sitting across the table:</p>
+  <p><em>Look further, mijo.</em></p>
+  <p>He heard it down by the river as plainly as if she had been standing beside his chair.</p>
+  <p>So he looked further. Past the stone house and the reed houses and all the rest, back to the oldest of them, older than any name for a place. A river much like this one, low and green, with stones in it. He was asleep on the bank in the heat of the day. She was his wife there too, and there was another man there too, waiting in the trees, and she was standing over him with a stone in both hands, a river stone the size of a loaf of bread. He saw how long she stood. He saw her arms shake with the weight of it.</p>
+  <p>Then she set it down on the sand beside his head, carefully, so as not to wake him. She went down to the water and washed her hands. Then she came back and sat beside him until he woke.</p>
+  <p>Shane sat in the camp chair and was so glad that he could not move. <em>She held me up,</em> he thought. <em>She has always been holding me up.</em> He sat there in the gladness of it, and went over the thirty-two one last time, slowly, from the hair of the head to the urine, and found nothing in any of it that was his, and was glad of that too.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Matt found him in the morning when he came down to check the water line. He was sitting in the camp chair facing the river with Dora&rsquo;s blue quilt over his knees and his hands open on top of it. The deputy came, and then the medical examiner&rsquo;s van from Prescott. They said his heart had stopped. They could not find any reason for it to stop. He was thirty-four and had nothing wrong with him.</p>
+  <p>Dora went down the bank after the van had gone over the cattle guard. The wind was coming up the river from the south, the last warm wind of the year, turning the cottonwood leaves over so they showed their pale sides. Out over Mingus Mountain a single grey cloud was letting its rain down in long veils that hung in the air and dried away before they reached the ground.</p>
+  <p>The wind took hold of Steve&rsquo;s bell on its post and swung it a little, and the clapper rocked toward the lip. Before it could ring, she put her hand on the bronze and held it still until the wind had passed.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">It is good to tame the mind, which is difficult to hold in and flighty, rushing wherever it listeth; a tamed mind brings happiness.<cite>Dhammapada 35, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, sixty monks spend the rains retreat in the village of M&#257;tika, where the headman&rsquo;s mother builds them a monastery. They agree that no two of them will ever be together and that a bell will be struck only if someone falls sick. When she strikes it herself and sees them come one by one, she thinks they have quarrelled; they teach her the meditation on the thirty-two parts of the body, and she attains insight before they do. Seeing that only their food is lacking, she feeds them exactly what each one wishes, and they reach the goal. Another monk hears of her and comes, wishes for one thing after another, and receives each; frightened that she knows his every thought, he flees back to the Buddha, who tells him this is the very place for him and that he need guard only one thing, his mind. He returns, attains, and looking back sees ninety-nine lives in which she, as his wife, killed him; she tells him to look further, and in the hundredth he sees that she spared him. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-02.htm">the full commentary story</a>, or about the <a href="https://en.wikipedia.org/wiki/Patikulamanasikara">meditation on the thirty-two parts of the body</a>.</p>
+    <h3>The Verde Valley, 2021</h3>
+    <p>Dora&rsquo;s family history follows the valley&rsquo;s. <a href="https://en.wikipedia.org/wiki/Jerome,_Arizona">Jerome</a>, built on Cleopatra Hill above the Verde, was one of the great copper camps of the West; by 1930 about sixty percent of its people were Latino, alongside Irish, Italian and Slavic miners. The United Verde mine ran from 1876 to 1953, and when it closed the town shrank to fewer than a hundred people. Its smelter town, <a href="https://en.wikipedia.org/wiki/Clarkdale,_Arizona">Clarkdale</a>, founded by William A. Clark in 1912 on the river below, closed its smelter the same year and left a long black slag pile along the Verde.</p>
+    <p>In June 2021 a record heat wave struck the Southwest, and Phoenix hit 118&deg;F on June 17. After two nearly rainless summers, the <a href="https://en.wikipedia.org/wiki/North_American_monsoon">North American monsoon</a> returned in force: Tucson had its wettest July on record, and floods off the 2019 Museum Fire burn scar ran through Flagstaff neighborhoods. At the same time the Delta variant filled Arizona&rsquo;s hospitals. COVID patients in the state&rsquo;s intensive care beds tripled over July and August, the patients were younger than in earlier waves and mostly unvaccinated, and nurses who had worked through the first winter described themselves as burned out. More on the <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic_in_Arizona">COVID-19 pandemic in Arizona</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a certain monk and the mother of M&#257;tika from the Dhammapada commentary (verse 35). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-02.htm">The original</a>. Scripture from the Reina-Valera 1909. Written by Claude Opus 5.5.
+  <div class="pager"><a href="julie-mango.html">&larr; Julie Mango</a><a href="index.html">All stories</a><a href="clear-hands.html">Clear Hands &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, veils = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(v, fresh) {
+    v.x = Math.random() * W;
+    v.w = 60 + Math.random() * 160;
+    v.len = H * (0.25 + Math.random() * 0.35);
+    v.lean = (Math.random() - 0.3) * 0.25;
+    v.life = fresh ? 0 : Math.random();
+    v.speed = 0.0006 + Math.random() * 0.0008;
+    v.seed = Math.random() * 1000;
+    v.strands = [];
+    var n = Math.round(v.w / 6);
+    for (var i = 0; i < n; i++) v.strands.push({ o: Math.random() * v.w, l: 0.55 + Math.random() * 0.45, a: 0.4 + Math.random() * 0.6 });
+    return v;
+  }
+  function make() {
+    var n = Math.round(Math.max(3, Math.min(7, W / 220)));
+    veils = [];
+    for (var i = 0; i < n; i++) veils.push(spawn({}, false));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < veils.length; i++) {
+      var v = veils[i];
+      if (!reduce) { v.life += v.speed; if (v.life > 1) spawn(v, true); }
+      var env = Math.sin(Math.PI * Math.min(1, Math.max(0, v.life)));
+      var sway = reduce ? 0 : Math.sin(t * 0.004 + v.seed) * 10;
+      for (var k = 0; k < v.strands.length; k++) {
+        var s = v.strands[k];
+        var x0 = v.x + s.o - v.w / 2;
+        var L = v.len * s.l;
+        var x1 = x0 + v.lean * L + sway * s.l;
+        var g = ctx.createLinearGradient(0, 0, 0, L);
+        var a = 0.16 * env * s.a;
+        g.addColorStop(0, 'rgba(159,166,184,' + a + ')');
+        g.addColorStop(0.6, 'rgba(159,166,184,' + (a * 0.45) + ')');
+        g.addColorStop(1, 'rgba(159,166,184,0)');
+        ctx.strokeStyle = g; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(x0, 0);
+        ctx.quadraticCurveTo(x0 + (x1 - x0) * 0.3, L * 0.6, x1, L);
+        ctx.stroke();
+      }
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

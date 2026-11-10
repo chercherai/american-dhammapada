@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gold Leaf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose behind dark storefront glass at evening; a few flecks of leaf hang in it, and now and then a slow band of late light slides across and lights them; datelined sections. */
+  --ground: #101614;
+  --ground-2: #1a2320;
+  --paper: #ece6d8;
+  --paper-dim: #a39d8f;
+  --accent: #dba648;
+  --glow: #d98b9a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(160deg, #18211e 0%, var(--ground) 45%, #0c110f 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(236,230,216,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(219,166,72,.18); }
+.epigraph { border-left: 1px solid rgba(219,166,72,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(26,35,32,.78); border: 1px solid rgba(236,230,216,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(236,230,216,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(236,230,216,.14); border-bottom: 1px solid rgba(236,230,216,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(26,35,32,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 20.9 &middot; Suva&#7751;&#7751;ak&amacr;ra</span></nav>
+<header>
+  <h1>Gold Leaf</h1>
+  <div class="epigraph">I loved the garish day, and, spite of fears,<br>Pride ruled my will.<br>&mdash; &ldquo;Lead, Kindly Light&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it,</span> on Kenilworth Avenue.</p>
+
+<section>
+  <h2>I. Five Hundred Windows</h2>
+  <p class="dateline">U Street, Washington &middot; 1919&ndash;1968</p>
+  <p>Augustus Pettaway lettered his first window in 1919, for a barber on U Street who paid him four dollars and a free shave every Saturday for a year. He lettered his last one in the spring of 1968. In between, by the count in the black ledger he kept in a cigar box under the counter of his shop on Ninth Street, he did five hundred and eleven windows in gold leaf between Seventh Street and Fourteenth, and some on Georgia Avenue, and a few out in Northeast. Barbershops and beauty parlors. Funeral homes. Pharmacies, insurance companies, a bank, two theaters, a dozen lawyers, a great many churches. When people said Black Broadway, the gold on the glass up and down U Street was a good part of what they meant, and most of it was his.</p>
+  <p>It was done on the inside of the glass, backward. That was the first thing his grandson Calvin learned, at five, standing on an apple crate in a doorway with a book of leaf in his hand. You laid out the letters in reverse on a paper pattern and taped it to the street side, and then you went inside and worked the letters from behind, so that from the sidewalk they read true. You mixed the size, a pinch of gelatin dissolved in hot water from a thermos, and flowed it on the glass with a soft brush. Then you took a leaf of twenty-three karat gold out of the book. You did not touch it. Nothing touched it except the gilder&rsquo;s tip, a wide flat brush of squirrel hair, which you drew once across your own cheek to give it a little of your skin&rsquo;s oil, and then held near the leaf until the leaf leapt up to it and hung there trembling. Then you brought it to the wet glass, and the instant it came near, the water pulled the gold off the brush and laid it flat, and it took.</p>
+  <p>Calvin&rsquo;s job, until he was eight, was to hold the book and not breathe. A leaf of gold is so thin a breath will crumple it. His grandfather said it was a thousand times thinner than a page of the Bible. When Calvin was nine his grandfather let him lay a leaf himself, the dot over the <em>i</em> in <em>Dentist</em>, and when he was twelve he did a whole word, and when he was fourteen he could burnish leaf with a wad of cotton until you could see your face in it, and back up the letters with paint, and wipe away the gold that wasn&rsquo;t letters, and lay a black shadow line along each stroke so it stood up off the glass like something you could pick up and carry away. He had the hands for it. His father had the hands for it. His grandfather said the Pettaways had been working gold since Africa and maybe before Africa, and nobody could prove different.</p>
+  <p>On the night of April fourth, 1968, word came up Fourteenth Street that Dr. King had been shot in Memphis, and by morning U Street was burning.</p>
+  <p>It went on four days. When it was over and the troops were standing on the corners, Augustus Pettaway walked up and down Fourteenth and Seventh and U with Calvin, who was nineteen, and looked at his windows. Most of them were not there. Where they were, the fire had been at them from inside and the gold had curled up off the glass and gone black, like the edges of a paper you hold over a match. He stood a long time in front of a pharmacy he had lettered in 1931, where there was nothing left in the frame but three black curls of leaf stuck to a shard. He did not say anything. He went home to Ninth Street and put the ledger back in the cigar box and closed the shop, and in August he died.</p>
+  <p>In 1969 Calvin was drafted. In Vietnam, at a firebase in the hills west of Hu&#7871;, a boy from Detroit showed him what you could buy from the children at the wire for two dollars, in a little glass vial, white as talcum and stronger than anything that had ever been on Fourteenth Street. By the time they put him on the plane home in 1971 he had it in him like a second blood. He was back in Washington six weeks before he was on Fourteenth Street looking for it. He was back eight months before he sold his grandfather&rsquo;s gilder&rsquo;s tip.</p>
+</section>
+
+<section>
+  <h2>II. The Tape</h2>
+  <p class="dateline">Kenilworth House, Northeast &middot; spring 1972</p>
+  <p>The house was a big tired frame house on a street of tired frame houses east of the Anacostia, a few blocks from Kenilworth Avenue. It had a porch with a swing on it and a back yard that ran down to a chain-link fence and a weedy lot, and eleven men lived in it, and a few women in the house next door, and none of them was allowed to leave for ninety days. It was not a hospital and not a jail and not a church. It was a house where people who had been on heroin lived together and told each other the truth until they could stand it. There were several like it in the city that year. This one belonged to Miss Odessa Bright, who owned the house outright and had started it in 1969 with her pension from thirty years of cleaning government offices at night, and who had not had a drink since the spring of 1946. She could have spent those years on her own porch, people said, and been entitled to them. She said she would keep the door open until the last one came through it, and she did not say who the last one was.</p>
+  <p>Calvin came in April, with a paper bag of clothes and a court letter. The man who took him in at the door was Bernard Hollins.</p>
+  <p>Bernard was thirty-eight and ran the house day to day. He had used for fourteen years and done two bids at Lorton, and he had been clean four years, and everybody in the house would have walked through a wall for him. He was patient and he was hard and he had a way of knowing which way a man was going to run before the man knew it himself. He looked at Calvin the first night, a good-looking boy, thin, with a jaw like his grandfather&rsquo;s and beautiful hands that would not keep still, and he thought what he always thought about young ones. The want is strongest in the young. You had to put something in front of it.</p>
+  <p>What Bernard put in front of it was the tape.</p>
+  <p><em>Every morning,</em> he told Calvin, <em>before you do anything, you sit down and you play the tape. Your worst one. All the way to the end. You don&rsquo;t stop it where it feels good. You run it right on through. The abscess on your arm. The man you saw dead in the bathtub on Swann Street. The time you came to with your face in the toilet in the Greyhound station. Your mama&rsquo;s face when the TV was gone. You look at it. You keep looking at it. That&rsquo;s the ugliness that&rsquo;s waiting for you if you go back out there. When the want comes up, you play the tape.</em></p>
+  <p>It worked on most of them. Bernard had seen it work on a hundred men.</p>
+  <p>It did not work on Calvin. He sat on the edge of his bed every morning and tried. He could get the tape started, the bathtub, the toilet, his mother&rsquo;s face. But it would not run. It slid. His mind came off it the way a leaf of gold comes off dry glass, and he would find himself thinking about the light on the water stain on the ceiling, or the green of the paint on the window frame, or the way a blue jay&rsquo;s feather looked on the sidewalk outside, and the want would come up under all of it like water under a floor. He could not hold the tape for a minute together. For a month he could not hold it.</p>
+  <p>He told Bernard, because in that house you told. Bernard took him through it again, slower, with the whys and wherefores. Play it like a movie. Make it detailed. Smell it. Calvin tried for another two weeks and came back and said it slid. Bernard took him through it a third time, with examples, his own tapes, the worst things that had happened to him in fourteen years, things he had never said in a group. Calvin listened with his whole face and went away and tried and came back. It slid. It would not hold.</p>
+  <p>Bernard sat on the porch swing that night a long time by himself. He knew the boy was not lying. He knew what a lying man looked like. This one was trying, he was not off the path, he was working. And whatever was going on inside of him, Bernard could not see it.</p>
+  <p>In the morning he took Calvin into the kitchen to see Miss Odessa.</p>
+</section>
+
+<section>
+  <h2>III. Miss Odessa</h2>
+  <p class="dateline">The kitchen &middot; a morning in July</p>
+  <p>She was seventy-four. She was small and dark and straight-backed and wore a man&rsquo;s grey cardigan in all weathers, and her hair under a hairnet was white as cotton. She sat at the kitchen table in the mornings with a cup of coffee and a newspaper she did not read, and anybody in the house could come and sit across from her, and most of them did, sooner or later. She did not counsel. She did not run groups. She listened. People said she knew what was in a person the way you know what is in a jar by holding it up to the window, and nobody in the house, not even Bernard, knew how she did it. Bernard had said it to Calvin the first week. <em>I can see where a man is fixing to run. Miss Odessa can see what he&rsquo;s made of. That&rsquo;s hers. Don&rsquo;t ask me.</em></p>
+  <p>Bernard told her the whole thing standing up, with his hands in his pockets: the tape, and three times through it, and the boy sliding off it, and three months nearly gone.</p>
+  <p>Miss Odessa looked at Calvin over her coffee for a long time.</p>
+  <p><em>Who are your people, baby?</em></p>
+  <p>He told her. He told her about his grandfather and the ledger and the shop on Ninth Street, the gelatin in the thermos, the squirrel-hair tip drawn across his cheek, the leaf that jumps up to the brush, the letters done backward on the inside of the glass so they read true from the street. He did not mean to tell her all of it. He found he was moving his hands while he talked, laying leaf in the air. He told her about the five hundred and eleven windows. He did not tell her about the black curls on the shard in the pharmacy, but she looked at his face and he understood she had seen that too.</p>
+  <p>When he was done she turned to Bernard.</p>
+  <p><em>You been giving this boy the ugly,</em> she said. <em>The ugly works on you because you&rsquo;re a man who had to look at ugly to see it for what it was. This one&rsquo;s been looking at gold since before he could walk. His granddaddy, his daddy, his daddy&rsquo;s daddy, five hundred windows. Ugly won&rsquo;t stick to him. It slides right off. You can&rsquo;t lay leaf on a dry glass.</em></p>
+  <p>Bernard said nothing for a minute. Then he nodded, slowly, like a man setting something down.</p>
+  <p><em>Go on, Bernard,</em> she said. <em>Go see about the others. He&rsquo;ll come through it today. Before supper.</em></p>
+  <p>Bernard looked at her, and at Calvin, and went.</p>
+</section>
+
+<section>
+  <h2>IV. The Lotus</h2>
+  <p class="dateline">The back fence &middot; the same morning</p>
+  <p>Miss Odessa got up from the table and went out the back door onto the porch and was gone about a minute. When she came back in she was carrying a lotus.</p>
+  <p>The cook, a big quiet woman named Mrs. Tolliver who had been at the stove the whole time, said afterward that it was as big across as a hubcap, on a stalk as long as a broom handle, and that it was dripping. Water ran off the leaves and the stalk onto the linoleum as if it had just come up out of a pond, and there was no pond nearer than the aquatic gardens a mile away, and Miss Odessa had not been gone long enough to walk to the end of the yard. That was one thing. The other thing was that it was gold. Not yellow, the way the wild lotuses in the gardens are yellow. Gold. Mrs. Tolliver had seen gold. She had a gold tooth and her mother&rsquo;s gold locket and she knew gold when she saw it, and she said that flower was gold all the way through, petals and pod and stalk, and threw the light off it onto the kitchen ceiling the way a window does in the late afternoon.</p>
+  <p>Miss Odessa put it in Calvin&rsquo;s hands.</p>
+  <p>It was heavy. It was cool. It was the color of the leaf in his grandfather&rsquo;s book when you first fold back the tissue, and his hands, which had not kept still in fifteen months, stopped moving. They held it the way they had once held the book of leaf: steady, not breathing. Something in his chest that had been running for a year and a half sat down.</p>
+  <p><em>There&rsquo;s a pile of sand by the back fence where they fixed the walk,</em> Miss Odessa said. <em>Go on out there. Stick it in the sand, right by the fence, and sit down in front of it, and look at it. And say gold. Just that. Gold. When your mind goes off someplace, you bring it back and say gold.</em></p>
+  <p>He went out the back door and down the yard to the end, where the chain-link fence was, and the lot beyond it, and the sand pile by the post. It was as far as you could go and still be in the house. He pushed the stalk down into the sand and it stood up. He sat cross-legged in the dirt in front of it like a boy, and looked at it, and said it.</p>
+  <p><em>Gold.</em></p>
+  <p>It was like the moment the water takes the leaf off the brush. That is the only way he could ever tell it afterward. There was a pull, and then he was flat on the glass. The yard was there, and the July heat, and a radio somewhere on the next street, and the buses going by out on Kenilworth Avenue, but all of it was a long way off and none of it was pulling at him. The want was down there under the floor, and he could feel it, and it did not come up. He said <em>gold</em> and looked at the flower and was glad.</p>
+  <p>After a while he did not need to say it. After a while longer the gladness went quiet too, the way the excitement goes out of the work when you have done a hundred letters and your hand knows them. Then there was nothing but the flower and his looking at it, even and still, like a sheet of glass in a frame with nothing written on it yet. He sat like that he did not know how long. The shadow of the fence post went from one side of him to the other. Bernard came to the back door twice and looked down the yard and went away again without a word.</p>
+</section>
+
+<section>
+  <h2>V. The Pond</h2>
+  <p class="dateline">Kenilworth Aquatic Gardens &middot; the afternoon</p>
+  <p>Mrs. Tolliver said that sometime after three o&rsquo;clock Miss Odessa, who was sitting at the kitchen table with her coffee gone cold, looked out the window over the sink at the boy by the fence for a while and said, not to anybody, <em>That&rsquo;s far as he goes by himself. That&rsquo;s enough now.</em></p>
+  <p>Down by the fence Calvin felt it before he saw it. The light changed. He looked, and the lotus was black.</p>
+  <p>It had not wilted. It had burned. The great gold petals had curled in on themselves and gone black and brittle at the edges, the stalk had sagged in the sand, and the whole flower looked like something that had been through a fire and come out the other side. It looked like the three curls of leaf stuck to the shard in the window of the pharmacy on Fourteenth Street. It looked exactly like that.</p>
+  <p>He sat and looked at it, and he thought: <em>Gold did that.</em> Gold, that doesn&rsquo;t want anything. That doesn&rsquo;t need a fix, that doesn&rsquo;t need a woman or a dollar or a window with its name on it. Gold did that. And I want everything.</p>
+  <p>Then it went through him like the fire went up U Street. All of it, the windows and the ledger and his grandfather in his coffin on Georgia Avenue and the boy from Detroit and the vial and his own hands and his own face, was going the way the flower had gone, and none of it would stay, and none of it could be held, and none of it was his, and none of it ever had been, not even the boy sitting by the fence. He sat there with it burning in him, and he was afraid, and it was the first time in a year and a half he had been afraid of anything but being sick.</p>
+  <p>He got up. He did not decide to. He went out the gate in the fence and across the weedy lot and down to Kenilworth Avenue and across it, walking fast, the mile to the aquatic gardens, as if somebody had called him.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The ponds were full of lotuses. It was the third week of July, the high bloom, when the people who come out from the rest of Washington come out with cameras. There were not many that afternoon. The ponds lay in rows between dikes of mowed grass, all the way down to the marsh and the river, and in every one the lotuses stood up out of the water on their long stalks higher than a man&rsquo;s head, the big round leaves like green umbrellas turned inside out, and the flowers among them pink and white and pale yellow, as big as plates, and the seed pods like the spouts of watering cans.</p>
+  <p>Four boys from the neighborhood were in the pond nearest the gate, where they were not supposed to be, up to their waists in the brown water. They were snapping off lotuses and throwing them up onto the dike, laughing, splashing each other, and there was already a pile of them on the grass.</p>
+  <p>Calvin stood on the dike and looked at the flowers in the pond, standing up out of the water with the water still running off them, every one of them perfect, and then he looked down at the pile on the grass by his feet. The boys had only been at it half an hour. Already the petals on the bottom of the pile had gone soft and brown at the tips, and curled, and the ones on top were starting. The sun was on them. In an hour they would all be like that.</p>
+  <p>He thought, <em>And those weren&rsquo;t even holding on to anything.</em></p>
+  <p>He saw it then, all the way down, clearer than by the fence. The fire had gone out of it. It was only true.</p>
+</section>
+
+<section>
+  <h2>VI. Lead Thou Me On</h2>
+  <p class="dateline">The dike &middot; late afternoon</p>
+  <p>Something brushed his face. It was warm, like the light that comes off a window across the street when the sun gets low and finds it. He put up his hand and turned to see where it was coming from.</p>
+  <p>Miss Odessa was standing on the dike a few yards off, in her grey cardigan and her hairnet, with the pond and the lotuses behind her and the light coming off her the way it comes off gold leaf when it has been burnished right.</p>
+  <p>Mrs. Tolliver said afterward that Miss Odessa did not leave the kitchen table that afternoon, not once, from breakfast until she got up to set the table for supper, and Mrs. Tolliver would put her hand on the Bible to it. Bernard said he did not know anything about it and was not going to say. Calvin said she was there. He said he got up on his feet and put his hands together in front of him without knowing he was doing it, the way people do in church, and she smiled at him the way she smiled at people across the kitchen table, and she sang him a verse of a hymn, in an old woman&rsquo;s cracked voice that was not loud, that he had heard in his grandmother&rsquo;s church at Nineteenth Street when he was a boy and had not thought about since.</p>
+  <div class="verse">
+    <p>I was not ever thus, nor prayed that Thou<br>Shouldst lead me on;<br>I loved to choose and see my path; but now<br>Lead Thou me on.<br>I loved the garish day, and, spite of fears,<br>Pride ruled my will: remember not past years.</p>
+    <p>&mdash; John Henry Newman, &ldquo;Lead, Kindly Light&rdquo; (1833)</p>
+  </div>
+  <p>Then she talked to him the way she did, plainly.</p>
+  <p><em>Baby, it isn&rsquo;t the dope. You know that now. Dope&rsquo;s just what you were using to hold on with. It&rsquo;s you. It&rsquo;s that boy you&rsquo;ve been taking care of all your life like he was the last window on U Street. You cut him loose. Like those children are doing yonder. With your own hand. Like a lotus at the end of summer. Then you go on.</em></p>
+  <p>And she sang the first verse, which everybody knows.</p>
+  <div class="verse">
+    <p>Lead, kindly Light, amid the encircling gloom,<br>Lead Thou me on;<br>The night is dark, and I am far from home;<br>Lead Thou me on:<br>Keep Thou my feet; I do not ask to see<br>The distant scene,&mdash;one step enough for me.</p>
+    <p>&mdash; &ldquo;Lead, Kindly Light&rdquo;</p>
+  </div>
+  <p>Calvin reached out with his hand into the pond and broke off a lotus at the stalk, the nearest one, a pale yellow one past its best, with its petals already starting to loosen. It came away easily. It made a small wet snap. He stood there on the dike holding it, and whatever it was in him that had been holding on, all those years, to the windows and the ledger and the vial and the boy, came away with it just as easily, and he let it go on the grass with the others.</p>
+  <p>When he looked up there was nobody on the dike but the four boys climbing out of the pond, and one of them was asking him for a cigarette.</p>
+  <p>He walked back to the house in time for supper. Bernard met him at the back door and looked at his face for a long time, the way he looked at men to see which way they were going to run, and then put his arms around him, which he had never done to anybody in that house, and held on.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>He stayed at Kenilworth House four years, the last three of them on staff, working beside Bernard. People said afterward that there was something about him the men who came in could not get around: he never seemed to want anything from them, not even for them to get well, and somehow that made them want to. When Miss Odessa died in 1979 he and Bernard carried her out the front door between them.</p>
+  <p>But before any of that, in the fall of 1972, he went to a sign shop on Rhode Island Avenue and spent forty dollars of the house&rsquo;s money on a book of leaf and a gilder&rsquo;s tip, squirrel hair, three and a half inches. Then he lettered the glass of the front door. He laid it out backward on a pattern and taped it on the porch side, and went inside and mixed the size in a coffee cup with water from the kettle, and flowed it on. He drew the tip once across his cheek and held it over the open book, and the leaf leapt up to it and hung there trembling, and he brought it to the wet glass, and the water took it.</p>
+  <p>KENILWORTH HOUSE. Gold, with a black shadow line. It read true from the street. He knew how long it would last, about as long as anything. He burnished it with a wad of cotton until Miss Odessa, standing on the porch, could see her face in it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">Cut out the love of self, like an autumn lotus, with thy hand! Cherish the road of peace. Nirvana has been shown by Sugata (Buddha).<cite>Dhammapada 285, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a handsome young goldsmith&rsquo;s son goes forth under the Buddha&rsquo;s chief disciple <a href="https://en.wikipedia.org/wiki/Sariputta">Sāriputta</a>, who gives him the meditation on the impurity of the body, since passion is strong in the young. The young monk cannot even fix his mind on it. Sāriputta teaches it to him three times, with reasons and similes, and finally brings him to the Buddha, who says that knowing another&rsquo;s inclinations belongs only to Buddhas. Seeing that the youth has been born into goldsmiths&rsquo; families for five hundred lives, the Buddha makes a golden lotus as big as a cartwheel, dripping water, and tells him to set it in a heap of sand at the edge of the monastery and repeat &ldquo;Red! Red!&rdquo; The monk&rsquo;s mind settles through the four absorptions. Then the Buddha makes the flower wither and turn black, and the monk sees impermanence. Watching boys break lotuses from a pool and pile them on the bank, where they wilt at the tips, he sees it more clearly. A radiant image of the Buddha brushes his face and speaks the verse, and he is freed. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-09.htm">the full commentary story</a>.</p>
+    <h3>Washington, 1968&ndash;1972</h3>
+    <p>By 1920 the <a href="https://en.wikipedia.org/wiki/U_Street_(Washington,_D.C.)">U Street corridor</a> was the center of Black Washington, called &ldquo;Black Broadway,&rdquo; its theaters, churches, shops and offices lettered in the gold leaf that sign painters laid on the back of the glass, a craft related to the old art of <a href="https://en.wikipedia.org/wiki/Verre_%C3%A9glomis%C3%A9">verre &eacute;glomis&eacute;</a>. After Martin Luther King Jr. was killed on April 4, 1968, crowds gathered at Fourteenth and U, and four days of rioting and fire followed; about 6,000 troops were sent into the city, 13 people died and more than 6,100 were arrested (see the <a href="https://en.wikipedia.org/wiki/1968_Washington,_D.C.,_riots">1968 Washington riots</a>). The corridor did not recover for decades. In May 1971 two congressmen came back from Vietnam reporting that some 15 percent of American servicemen there were addicted to heroin; that June the White House created a new federal drug office, and enlisted men were tested before they flew home (<a href="https://www.npr.org/sections/health-shots/2012/01/02/144431794/what-vietnam-taught-us-about-breaking-bad-habits">NPR&rsquo;s account</a> of what happened to them afterward).</p>
+    <p><a href="https://en.wikipedia.org/wiki/Kenilworth_Park_and_Aquatic_Gardens">Kenilworth Aquatic Gardens</a>, on the east bank of the Anacostia in Northeast Washington, began as a Civil War veteran&rsquo;s water-lily ponds in the 1880s and became a national park site in 1938. Its <a href="https://www.nps.gov/keaq/index.htm">lotuses</a>, including the yellow <a href="https://en.wikipedia.org/wiki/Nelumbo_lutea">American lotus</a>, peak in July. Recovery houses like the fictional Kenilworth House drew on the <a href="https://en.wikipedia.org/wiki/Therapeutic_community">therapeutic community</a>, a model of shared living, shared responsibility and plain talk that took hold in American psychiatry and prisons in the 1960s. &ldquo;Lead, Kindly Light&rdquo; was written by John Henry Newman in 1833 and became one of the best-loved hymns in English (<a href="https://en.wikipedia.org/wiki/Lead,_Kindly_Light">its history</a>). The Pettaways, Kenilworth House, Odessa Bright and Bernard Hollins are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Suva&#7751;&#7751;ak&amacr;ra from the Dhammapada commentary (verse 285). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-09.htm">The original</a>. Hymn text from John Henry Newman, &ldquo;Lead, Kindly Light&rdquo; (1833). Written by Claude Opus 5.5.
+  <div class="pager"><a href="sweet-root.html">&larr; Sweet Root</a><a href="index.html">All stories</a><a href="dry-mustard.html">Dry Mustard &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Window glass at evening: now and then a slow band of light slides across it,
+  // the way late sun catches burnished leaf on a storefront.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, sweep = -1, wait = 90, flecks = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    flecks = [];
+    var n = Math.round(Math.max(18, Math.min(50, W / 28)));
+    for (var i = 0; i < n; i++) flecks.push({ x: Math.random() * W, y: Math.random() * H, r: 0.6 + Math.random() * 1.6, k: Math.random() });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var span = W + H;                       // the band travels along the diagonal
+    var pos = reduce ? 0.35 : sweep;        // 0..1 while sweeping, <0 while waiting
+    var bx = pos * (span + 600) - 300;      // band centre measured along x + y
+    for (var i = 0; i < flecks.length; i++) {
+      var f = flecks[i];
+      var base = 0.05 + 0.05 * f.k;
+      var lit = pos >= 0 ? Math.max(0, 1 - Math.abs((f.x + f.y) - bx) / 140) : 0;
+      var a = base + lit * 0.6;
+      ctx.fillStyle = 'rgba(226,182,90,' + a + ')';
+      ctx.beginPath(); ctx.arc(f.x, f.y, f.r * (1 + lit), 0, 6.2832); ctx.fill();
+    }
+    if (pos >= 0) {
+      ctx.save();
+      ctx.translate(bx / 2, bx / 2);
+      ctx.rotate(-Math.PI / 4);
+      var g = ctx.createLinearGradient(-120, 0, 120, 0);
+      g.addColorStop(0, 'rgba(240,200,110,0)');
+      g.addColorStop(0.5, 'rgba(240,200,110,0.06)');
+      g.addColorStop(1, 'rgba(240,200,110,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(-120, -span, 240, span * 2);
+      ctx.restore();
+    }
+    if (!reduce) {
+      if (sweep < 0) { if (--wait <= 0) sweep = 0; }
+      else { sweep += 0.0025; if (sweep > 1) { sweep = -1; wait = 300 + Math.random() * 420; } }
+      requestAnimationFrame(draw);
+    }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hot Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a hot plum-dark night over the vineyards; a few loose feathers rise slowly on the warm air; datelined sections. */
+  --ground: #1d1417;
+  --ground-2: #2a1d20;
+  --paper: #ebdfcc;
+  --paper-dim: #a8978a;
+  --accent: #d0673f;
+  --glow: #d9a441;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #3a2422 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,223,204,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 26px rgba(208,103,63,.22); }
+.epigraph { border-left: 1px solid rgba(208,103,63,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(42,29,32,.78); border: 1px solid rgba(235,223,204,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,223,204,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(235,223,204,.12); border-bottom: 1px solid rgba(235,223,204,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(42,29,32,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 3.7 &middot; Pūtigatta Tissa</span></nav>
+<header>
+  <h1>Hot Water</h1>
+  <div class="epigraph">&hellip;for dust thou art, and into dust thou shalt return.<br>&mdash; Genesis 3:19</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ganito ang narinig ko,</span> on the Garces Highway.</p>
+
+<section>
+  <h2>I. The Walkout</h2>
+  <p class="dateline">Delano, California &middot; September 1965</p>
+  <p>Celestino Abellana came from Bohol, from a town above the river where his father taught the fourth grade and owned four hundred coconut trees. That made the Abellanas people of some standing. In 1929, when Celestino was nineteen, his father sold sixty of the trees and bought him passage to San Francisco and a fountain pen, so that he could study at the university in California and come home an engineer.</p>
+  <p>He got as far as the asparagus. By the spring of 1930 he was on his knees in the peat of the Delta islands west of Stockton with a long knife, cutting spears at first light, and the fountain pen was in a pawnshop on Lafayette Street. He never went home. Nobody he knew went home. For thirty-six years he followed the crops up and down the state, asparagus and lettuce and apricots and tomatoes and grapes, and by the time he was fifty-five he was what all of them were, a manong, an old bachelor in a bunkhouse with a good suit in a cardboard box under his cot, because California would not let him marry a white girl and there were hardly any Filipinas to marry.</p>
+  <p>On the night of the seventh of September, 1965, he sat on a folding chair in the Filipino Community Hall in Delano with more than a thousand other men, and they voted to walk out of the vineyards in the morning. The vote was all hands. Celestino raised his with the rest, and found that his heart had gone up with it. He felt as if he had been waiting thirty-six years to put it somewhere.</p>
+  <p>The growers turned off the water in the camps. Then they put the men out. Celestino left the camp where he had slept for eleven seasons with his suitcase in one hand and the suit box under his arm, and nine of them together rented an old ranch house on the Garces Highway with a pepper tree in the yard and a kitchen big enough to cook for twenty.</p>
+  <p>He gave up the cards. He gave up the dice. He swept the hall and stood on the picket lines with a sign until his legs shook, and when the younger men from the other union, the Mexicans, called the old Filipinos <em>los manongs</em> and brought them coffee, he thanked them in Spanish and drank it. The men in the Garces house called him Tino. They said that of all of them, Tino had come over the furthest.</p>
+  <p>There was one man in the house who called him Celestino. That was Ambrosio Dacanay, an Ilocano from Laoag, sixty-three years old, who had been a houseboy in Berkeley in the twenties and had read his employers' books while he dusted them. He had a library card from the Kern County library and kept it in his shirt pocket behind a pencil. The men called him Propesor. He had not been inside a church since the year the boy Fermin Tobera was shot through the wall of a bunkhouse at Watsonville, which was 1930, and if anyone asked him about God he talked about something else.</p>
+  <p>He did not talk much about anything. But twice a day, once at first light and once after supper, Propesor walked the house and the yard and looked in on every man. He looked at who was coughing and who had not eaten. He looked at whose hands were shaking and whose shoes were by his cot and whose were not. Then he went to bed or went to work. The men were used to it. They hardly saw him do it anymore.</p>
+</section>
+
+<section>
+  <h2>II. The Mustard Seed</h2>
+  <p class="dateline">Delano &middot; spring and summer 1973</p>
+  <p>The first one came up on his shin in March, a red point no bigger than a mustard seed. Tino scratched it and forgot it.</p>
+  <p>By April there were a dozen of them, on both shins and on the backs of his hands, and the first one was the size of a monggo bean. In May they were the size of garbanzos. That spring and summer the union's grape contracts ran out, first down in the desert at Coachella and then here, and the growers signed with the Teamsters instead, and the strike began again, the whole thing, the pickets and the sheriff's deputies and the trucks coming out of the vineyards with their windows rolled up. The old men in the Garces house went out on the line in the mornings in their straw hats. Tino went with them, in long sleeves buttoned at the wrist.</p>
+  <p>In June the sores on his shins were the size of Thompson seedless grapes. In July they were as big as walnuts, and the biggest, on his left ankle, was as big as a Santa Rosa plum and the same dark color. Then, one after another, they opened.</p>
+  <p>After that there was no hiding them. The smell went before him into a room. His long-sleeved shirt stuck to his forearms and had to be peeled off at night, and the cotton undershirt underneath it dried stiff and brown with what came out of him, until it was like the crust at the bottom of the rice pot, the tutong, that comes away in one piece. The men in the house started calling him Tino Bulok, rotten Tino, behind his back. Then, because he did not seem to mind, they called him that to his face.</p>
+  <p>He went to the union clinic out at the Forty Acres, and the doctor there, a young man with a beard, looked at the ankle a long time. He said it was the sugar diabetes and an infection on top of it, and that the infection had gone into the bone of the foot and was eating the bone. He said Tino had to go to the county hospital in Bakersfield and let them take the foot off, and maybe the leg below the knee.</p>
+  <p>Tino said, <em>I came into this country on this foot.</em> He said it pleasantly. He did not go to Bakersfield.</p>
+  <p>That summer, out at the Forty Acres, the union was building a house for the old men. It was going to be called Agbayani Village, after Paulo Agbayani, a manong who had dropped dead of a heart attack on a picket line, and it was going to have fifty-nine rooms around a courtyard, with white walls and a red tile roof, and a kitchen that cooked Filipino food, and a garden. Volunteers had come from all over California to build it, college students from Los Angeles and Berkeley, Filipino and Japanese and Chinese kids with long hair and bandanas who called the old men <em>Manong</em> and asked them questions about 1930 and wrote the answers in notebooks. On Sundays the men from the Garces house drove out in Siso's Plymouth to watch the walls go up. Each of them had picked out his room. Tino had picked one on the east side, for the morning.</p>
+  <p>By August he could not walk out to see it anymore. The bones of his left foot had begun to go. He could feel them moving against each other when he put his weight on it, like gravel in a sack.</p>
+</section>
+
+<section>
+  <h2>III. The Pepper Tree</h2>
+  <p class="dateline">The Garces house &middot; August 1973</p>
+  <p>It was a hundred and six degrees in Delano on the day they moved him out.</p>
+  <p>Nobody decided it, exactly. It was decided at the kitchen table over rice and dried fish, the way everything in the house was decided, with the radio on. Siso said the smell got into the rice. Pidiong said his brother in Stockton had caught something like that from a man in a bunkhouse in 1948 and lost an eye. Andoy, who was Visayan like Tino and the oldest of them after Propesor, said nothing for a long time and then said the word they had all been not saying, which was <em>gaba</em>. It was the old word from home for the thing that comes back on you. You waste rice, you mock an old person, you are cruel to an animal, and one day it comes back on you. Nobody has to send it. It comes by itself.</p>
+  <p><em>He must have done something,</em> said Andoy. <em>A man doesn't rot like that for nothing.</em></p>
+  <p>Propesor was at work that day, weeding a Japanese family's strawberries out by McFarland, because a man has to eat during a strike too. So the others carried Tino's cot out into the yard and set it under the pepper tree by the chicken wire, where there was shade until two in the afternoon. They gave him a gallon jug of water and a fly swatter and a coffee can. They told him it was cooler outside.</p>
+  <p>It was not cooler outside. Tino thanked them anyway.</p>
+  <p>That night the radio said that a young striker from Yemen, one of the Arab boys who had walked the lines with them, was dead in Kern County after a deputy had hit him in the head. Two days later it said that a man named Juan de la Cruz, sixty years old, had been shot on a picket line near Arvin. The men in the house sat at the table with the radio and did not go to bed, and out in the yard under the pepper tree Tino lay and listened to it through the screen door, because they had left the door open so they could hear him if he called. He did not call.</p>
+  <p>On the third night the canvas of the old army cot gave way under him at one end, and he slid down onto the dirt and lay there. He did not have the strength to get up and he did not want to wake anybody. The ants found the ankle before morning.</p>
+</section>
+
+<section>
+  <h2>IV. The Kaldero</h2>
+  <p class="dateline">The next morning</p>
+  <p>Propesor came out into the yard at first light, as he always did, and stood by the chicken wire and looked.</p>
+  <p>Tino was lying half on the broken cot and half on the ground, on his side, with his cheek in the dirt and his eyes open. His shirt had dried onto him. There were ants going in a line up the cot leg and down again.</p>
+  <p>Propesor stood there longer than he usually stood anywhere. He was thinking that the men in the house were not bad men. They were old and they were scared and they had nothing, and when you have nothing you are careful with it, even your own nose, even your own fear. He was thinking that Tino had no brother and no wife and no son, and that his father and his four hundred coconut trees were forty years in the ground in Bohol, and that the union had its hands full and the priest did not come out this far. He was thinking that the man had nobody now but him.</p>
+  <p>He did not go to Tino. He went into the kitchen.</p>
+  <p>He took down the big aluminum kaldero they cooked the rice in for nine men, and he scrubbed it out at the sink with steel wool until it shone, and filled it at the tap, and put it on the big burner and lit the gas. Then he stood by the stove with his arms folded and waited for it, the way you stand by rice. Pidiong came in yawning in his undershirt and looked at Propesor and looked at the pot and opened his mouth and shut it again. The water ticked against the bottom. It began to tremble. When it came up to a boil Propesor turned down the flame, and walked out through the screen door into the yard, and bent down and took hold of the end of Tino's cot with both hands.</p>
+  <p>He was seventy-one years old and the cot was heavy. It did not move.</p>
+  <p>By then Pidiong was at the screen door and Siso was behind him and Andoy behind Siso, and all of them were barefoot and none of them looked at each other.</p>
+  <p><em>Manong,</em> said Siso. <em>Leave it. Go on, go inside. We'll carry him for you.</em></p>
+  <p>Four of them carried him in, one at each corner, and set him down on a blanket on the kitchen floor by the stove, and stood back against the counters.</p>
+  <p>Propesor brought the white enamel dishpan and poured the hot water into it and tempered it with cold until he could hold his hand in it. Then he knelt and began to work Tino's long-sleeved shirt off him, wetting it where it stuck, a little at a time, button by button, and when it was off he held it up without looking at anyone in particular.</p>
+  <p><em>Wash this,</em> he said. <em>Hot water. Soap. Rinse it twice and hang it on the fence.</em></p>
+  <p>Andoy took it. He put it in the sink and poured hot water from the kaldero over it and rubbed it with the yellow bar of laundry soap, and the water went brown and he poured it out and did it again. Then he carried it out and pinned it to the chicken wire in the sun. It was not yet eight o'clock in the morning and it was already ninety-four degrees.</p>
+  <p>Propesor soaked the undershirt off Tino the way you soak a label off a jar. Then he washed him.</p>
+  <p>He did it with a dish towel and the yellow soap, the way a man washes a man, not gently and not roughly. He washed his face and his ears and the back of his neck. He washed his chest, where the ribs were, and his arms, and his hands, which were swollen and split and still had the knuckles of a man who had cut asparagus for nine seasons. He washed the shins where the sores were, and what was left of the ankle, holding the foot in his palm as if it were something he was buying and wanted to see from underneath. Twice he sent Pidiong to pour out the dishpan in the yard and fill it again from the kaldero. Nobody in the kitchen said anything. The radio was off.</p>
+  <p>When he was finished he sat back on his heels. Siso went out to the fence and came back with the long-sleeved shirt, and it was dry. He held it out with a puzzled face, as if he had expected to have to explain why it was not.</p>
+  <p>Propesor put it on Tino, one arm and then the other, and buttoned it to the throat and at both wrists. Then he unbuckled Tino's work trousers and drew them off and gave them to Andoy, and Andoy washed them in the sink and took them out and pinned them on the wire by the cuffs. Propesor dried Tino's legs with a clean towel, carefully, between the toes. He did not finish. By the time he stood up to look for the second towel, the last of the water had gone off Tino's skin by itself in the heat of the kitchen, and Andoy was coming back through the screen door with the trousers over his arm, dry and stiff and warm as bread.</p>
+  <p>They dressed him. They put him in Propesor's own cot in the front room, where the shade was, on a clean sheet. Propesor wet a comb at the sink and combed back Tino's hair with brilliantine from the tin Tino kept in his suitcase, and parted it on the left, the way he had worn it in 1930.</p>
+  <p>Tino lay on his back with his hands on the sheet. He looked at the ceiling, and then at the window, and then at Propesor. His face had changed. He looked like a man who has been carrying a sack of something all day in the sun and has just put it down and has not yet straightened up.</p>
+  <p>Propesor pulled a kitchen chair to the head of the cot and sat on it.</p>
+  <p><em>Celestino,</em> he said. <em>It won't be long now. You'll go out like a lamp. And then they'll put this in the ground, and it won't know anything. It'll lie there like one of those old vines they pull up at the end of the row and throw on the pile.</em></p>
+  <p>Tino looked at him.</p>
+  <p>Then Propesor said the thing the priest says on Ash Wednesday, with his thumb in the ashes, the thing every boy in the Ilocos and every boy in Bohol had heard said over his own forehead every year of his childhood, except that he said all of it, the way it was written, from the beginning.</p>
+  <div class="verse">
+    <p>In the sweat of thy face shalt thou eat bread till thou return to the earth, out of which thou wast taken: for dust thou art, and into dust thou shalt return.</p>
+    <p>&mdash; Genesis 3:19</p>
+  </div>
+  <p>Tino was quiet a while. Then he smiled, with his eyes more than his mouth.</p>
+  <p><em>You don't even believe that, Ambo.</em></p>
+  <p><em>No,</em> said Propesor. <em>It's true anyway.</em></p>
+  <p>Out in the yard a mockingbird was going through every song it knew in the pepper tree. Tino turned his head on the pillow toward the window to listen to it. A little before noon he let out a long breath, the kind a man lets out when he sits down after a day in the rows, and did not take another.</p>
+</section>
+
+<section>
+  <h2>V. The East Room</h2>
+  <p class="dateline">Delano &middot; August 1973 to spring 1974</p>
+  <p>Propesor did all of it. He went to the county office in Bakersfield for the papers. He went to the funeral home in town and argued about the price in Ilocano and English and paid it out of the coffee can where the house kept its money for the dead, because they had always buried each other and there was nobody else to do it. He went to the rectory, and the priest came, and the funeral Mass was said at the church in town, and Propesor stood at the very back by the holy water with his hat in his hands, where the men from the Garces house could see that he had come inside.</p>
+  <p>They buried Tino in the cemetery at the edge of town, in his good suit, the brown one from 1931 that was too big for him now. Volunteers came from the Forty Acres, some of the long-haired kids, and stood at the grave in their work boots with mortar still on them. One of the girls had brought her notebook and did not know what to do with it and held it against her chest.</p>
+  <p>In the spring of 1974 Agbayani Village was finished, and the union opened it with a big ceremony at the Forty Acres, and the old men moved in with their suitcases and their suit boxes, each man to his own room, with a bed that was not a cot and a window that opened. Propesor went last. Before he carried his own things in, he took a hammer and a nail and went along the east side of the courtyard to the room Tino had picked, and hung a photograph on the wall beside the door.</p>
+  <p>It was the only picture of Tino anyone could find. It had been taken on Lafayette Street in Stockton in 1931 by a man who did it for a quarter. In it Celestino Abellana is twenty-one years old, in a wide-shouldered suit, with his hair parted on the left and shining. He is holding a gamecock in his two hands against his chest, a red one with a black tail, and he is looking down at it instead of at the camera.</p>
+  <p>Nobody ever moved into that room. The union put an old man from Lamont in it in the fall, and he said there were too many birds in the morning, and moved to the west side.</p>
+</section>
+
+<section>
+  <h2>VI. Talunan</h2>
+  <p class="dateline">Agbayani Village &middot; 1974</p>
+  <p>The men from the Garces house still ate together at one end of the long table in the new dining hall, and still argued, and still said the things they had said in the old kitchen, only now there were twenty other men to hear them. One night in the summer, after the plates had gone back, Andoy said it.</p>
+  <p><em>Propesor. Where is he now?</em></p>
+  <p><em>Who?</em></p>
+  <p><em>Tino. Heaven? Purgatory? Where?</em></p>
+  <p>Propesor turned his coffee cup a quarter turn on the table.</p>
+  <p><em>Nowhere,</em> he said. <em>He finished.</em></p>
+  <p>Andoy did not like that answer. None of them did. Siso said that was no answer. Pidiong said what kind of a thing was that to say about a man. Andoy put his two hands flat on the table.</p>
+  <p><em>Then tell me this. He was the best of us. On the line he was the best of us. Why does a man like that rot like a dead dog under a tree? Why do his bones go? And then, at the end, why does he go so easy? I have seen men die. Nobody dies like that. He went like a man getting on a bus.</em></p>
+  <p>Propesor did not say anything for a long time, and they thought he was not going to. Then he said: <em>You want gaba, Andoy. I'll give you gaba. But you have to take the whole thing.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>In the thirties, he said, he and Tino had shared a room in Stockton over a barbershop on Lafayette Street, two cots and one window, when they were not out in the camps. In those years Celestino Abellana was the best cocker in the Delta. He had the hands for it. He raised his birds under the bunkhouse on Roberts Island in wire pens he built himself, and on Saturday nights he carried them in sacks to the pits out on the islands, where the men stood around a square of boards under gasoline lanterns and the money changed hands faster than anyone could count it. The pits were against the law. Everybody went.</p>
+  <p>His best birds he sold to the big men, the labor contractors who drove Packards and the gamblers who came out from town in white shoes. The birds he kept and fought himself, and when they won, he won. When they lost, he had a bird with the blade still in it.</p>
+  <p>A dead bird spoils by morning in the Delta in July. A live one keeps. So Celestino did not kill the losers. He took each one in his good hands behind the pit, and snapped its legs, and snapped its wings at the first joint, so that it could not beat itself to pieces or get out of the crate, and he laid it in the crate on top of the others. Propesor said you could hear the crates all night from the road. In the morning Celestino sold them to the camp cooks, for talunan, which is what you make from a losing bird, a sour stew, with vinegar and ginger, because the meat is tough. The ones nobody bought he cooked for himself.</p>
+  <p><em>That's your gaba,</em> said Propesor. <em>If you need some.</em></p>
+  <p>Nobody at the end of the table said anything. Across the dining hall the cook was stacking pans.</p>
+  <p><em>Now the other part,</em> Propesor said.</p>
+  <p>In the winter of 1933 there was no work anywhere. Men were sleeping in the asparagus sheds. One day in January Celestino had a pot of adobo on the hot plate in the room on Lafayette Street, made from his own birds, the good ones, the thighs, with garlic and black pepper, cooked down until it shone. There was enough for a week if he was careful. He was setting the table, which was a suitcase, when somebody knocked.</p>
+  <p>It was an old man. Older than any of them were then. A manong from one of the first boats, maybe, from before the war, walking from the asparagus camps to wherever he was walking to, in a coat with no buttons and a cardboard suitcase tied with twine. He did not ask for anything. He stood in the hall with his hat in his hand and looked past them at the pot.</p>
+  <p>Propesor said he had watched Celestino look at the old man, and look at the pot, and look at the old man again. And then Celestino took the one good plate they had and filled it, all the thighs, all the way to the edge, and put rice beside it, and gave it to him with both hands. And then he did a thing Propesor had never seen him do for anybody, not for the contractors, not for the priest. He took the old man's free hand and pressed the back of it against his own forehead, the way you do for your grandfather.</p>
+  <p><em>Manong,</em> he said. <em>Wherever it is you're going, pray that I get there too.</em></p>
+  <p>And the old man looked at him a while, with the plate in one hand, and said, <em>Sige. Okay.</em></p>
+  <p>He ate it in the hall, standing up. Then he put on his hat and went down the stairs, and they never saw him again.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p><em>That's all of it,</em> said Propesor. <em>The legs and the wings. And the plate. You want to know why he rotted, that's why. You want to know why he went easy, that's why. It's the same man. You don't get to keep one half.</em></p>
+  <p>He got up and took his cup to the window where the dishes went. The men sat for a while, and then one at a time they went to their rooms.</p>
+  <p>Propesor was the last one in the dining hall. The cook had left a pot of chicken on the back of the stove for the morning. He took a bowl down from the shelf and filled it, the best pieces on top, all the way to the edge, and spooned rice beside them, and carried it out through the kitchen door and set it on the step, in the warm dark, facing east. Then he went inside and turned out the light and did not look to see who came.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Before long, alas! this body will lie on the earth, despised, without understanding, like a useless log.<cite>Dhammapada 41, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a young man of good family from Sāvatthī becomes a monk named Tissa. Sores break out over his body, growing from the size of mustard seeds to the size of large fruit, until they burst; his robes stiffen with blood and his bones begin to break apart, and his fellow monks, unable to bear it, put him out on the ground. The Buddha, who surveys the world at dawn and at dusk, sees him. He goes to the fire-hall, washes a pot and heats water, and takes hold of the end of Tissa's bed, and the monks hurry to carry it in for him. The Buddha has Tissa's robes washed and dried in the sun while he bathes him with his own hands, dresses him, and speaks this verse at his pillow. Tissa reaches awakening and dies. When the monks ask why so good a monk suffered so, the Buddha tells them that in a past life Tissa was a fowler who broke the legs and wings of his captive birds so they could not escape, and who once filled the bowl of a saint at his door with his best food and asked to reach what the saint had reached. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-07.htm">the full commentary story</a>.</p>
+    <h3>Delano, 1973</h3>
+    <p>Young Filipino men came to California in large numbers in the 1920s and early 1930s, until the Tydings&ndash;McDuffie Act of 1934 all but closed the door, and they did much of the state's migrant field work. Laws against interracial marriage, and how few Filipina women had come, left most of them single for life; they are remembered as the <a href="https://en.wikipedia.org/wiki/Manong_generation">manong generation</a>, from the Ilocano word for elder brother. Stockton's <a href="https://en.wikipedia.org/wiki/Little_Manila,_Stockton,_California">Little Manila</a> was their winter home, and they met violence across the state, most notoriously in the <a href="https://en.wikipedia.org/wiki/Watsonville_riots">Watsonville riots</a> of January 1930, when Fermin Tobera was shot dead in a bunkhouse. On September 7, 1965, Filipino members of the Agricultural Workers Organizing Committee met at the Filipino Community Hall in Delano and voted to strike the table-grape growers the next morning, the beginning of the five-year <a href="https://en.wikipedia.org/wiki/Delano_grape_strike">Delano grape strike</a>. Many of the strikers were past fifty. Growers cut off water to the labor camps and put the men out.</p>
+    <p>When the union's grape contracts expired in 1973 and growers signed with the Teamsters, the strike resumed, and in mid-August two strikers were killed in Kern County: Nagi Daifallah, a young Yemeni immigrant struck by a sheriff's deputy, and Juan de la Cruz, shot on a picket line near Arvin (<a href="https://welgadigitalarchive.omeka.net/exhibits/show/interraciallabor/1973-strike">Welga Digital Archive</a>). That same season some thousand volunteers were building <a href="https://www.nps.gov/places/000/agbayani-village.htm">Agbayani Village</a>, a fifty-nine-room retirement home for the old Filipino strikers at the union's <a href="https://www.nps.gov/places/000/forty-acres.htm">Forty Acres</a> outside Delano, named for Paulo Agbayani, who died of a heart attack on a picket line. It opened in 1974. Andoy's word <a href="https://en.wikipedia.org/wiki/Gab%C3%A2"><em>gabà</em></a> is the Visayan idea of a comeuppance that falls on wrongdoers, cruelty to animals among them, with no god needed to send it; <a href="https://en.wikipedia.org/wiki/Talunan"><em>talunan</em></a>, "loser," is the sour stew made from the tough meat of a rooster that lost its fight.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Pūtigatta Tissa from the Dhammapada commentary (verse 41). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-07.htm">The original</a>. Scripture from the Douay-Rheims Bible. Written by Claude Opus 5.5.
+  <div class="pager"><a href="clear-hands.html">&larr; Clear Hands</a><a href="index.html">All stories</a><a href="blaze-orange.html">Blaze Orange &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A few loose feathers rise slowly on the warm night air.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, feathers = [];
+  var tints = ['196,87,58', '217,164,65', '150,120,95', '120,70,60'];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(f, anywhere) {
+    f.x = Math.random() * W;
+    f.y = anywhere ? Math.random() * H : H + 40 + Math.random() * 120;
+    f.len = 22 + Math.random() * 26;
+    f.rise = 0.12 + Math.random() * 0.18;
+    f.sway = 10 + Math.random() * 22;
+    f.phase = Math.random() * Math.PI * 2;
+    f.spin = 0.004 + Math.random() * 0.006;
+    f.tilt = (Math.random() - 0.5) * 1.2;
+    f.tint = tints[Math.floor(Math.random() * tints.length)];
+    f.a = 0.10 + Math.random() * 0.12;
+    f.t = 0;
+    return f;
+  }
+  function make() {
+    var n = Math.round(Math.max(6, Math.min(12, W / 120)));
+    feathers = [];
+    for (var i = 0; i < n; i++) feathers.push(spawn({}, true));
+  }
+  function feather(f) {
+    var x = f.x + Math.sin(f.phase + f.t * 0.01) * f.sway;
+    var ang = f.tilt + Math.sin(f.phase + f.t * f.spin) * 0.5;
+    var L = f.len, w = L * 0.22;
+    // fade near the top and bottom edges
+    var edge = Math.min(1, Math.max(0, f.y / (H * 0.25)), Math.max(0, (H + 60 - f.y) / 120));
+    var a = f.a * edge;
+    if (a <= 0.005) return;
+    ctx.save();
+    ctx.translate(x, f.y); ctx.rotate(ang);
+    ctx.fillStyle = 'rgba(' + f.tint + ',' + a + ')';
+    ctx.beginPath();
+    ctx.moveTo(0, -L / 2);
+    ctx.bezierCurveTo(w, -L * 0.25, w * 0.9, L * 0.2, w * 0.15, L * 0.42);
+    ctx.lineTo(-w * 0.15, L * 0.42);
+    ctx.bezierCurveTo(-w * 0.8, L * 0.15, -w * 0.9, -L * 0.25, 0, -L / 2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(234,223,205,' + (a * 0.9) + ')';
+    ctx.lineWidth = 0.8;
+    ctx.beginPath(); ctx.moveTo(0, -L / 2 + 2); ctx.lineTo(0, L / 2 + 4); ctx.stroke();
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < feathers.length; i++) {
+      var f = feathers[i];
+      if (!reduce) {
+        f.t++; f.y -= f.rise;
+        if (f.y < -60) spawn(f, false);
+      }
+      feather(f);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Placemat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a rain-dark September night; pale sycamore branches reach in from the margins, and now and then gold travels out along their twigs like leaf laid on an icon, holds, and fades; datelined sections. */
+  --ground: #0f141b;
+  --ground-2: #18202a;
+  --paper: #e8e4da;
+  --paper-dim: #a3a093;
+  --gilt: #d8b45c;
+  --saffron: #e2913f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #1d2633 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(232,228,218,.2); }
+.series a:hover { color: var(--gilt); }
+a:focus-visible { outline: 2px solid var(--gilt); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--gilt); text-wrap: balance; text-shadow: 0 0 28px rgba(216,180,92,.22); }
+.epigraph { border-left: 1px solid rgba(216,180,92,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--gilt); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--gilt); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,32,42,.75); border: 1px solid rgba(232,228,218,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--saffron); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(232,228,218,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--gilt); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--gilt); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--gilt); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--gilt); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--gilt); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--gilt); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,32,42,.75); border-left: 2px solid var(--gilt); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 6.4 &middot; Mah&#257; Kappina</span></nav>
+<header>
+  <h1>The Placemat</h1>
+  <div class="epigraph">And thou shalt cause them to drink of the full stream of thy delights.<br>&mdash; Psalm 35:9 (Septuagint)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">&#904;&#964;&#963;&#953; &#964;&#959; &#940;&#954;&#959;&#965;&#963;&#945;,</span> on Route 46.</p>
+
+<section>
+  <h2>I. The King of Route 46</h2>
+  <p class="dateline">Clifton, New Jersey · summer 2011</p>
+  <p>Vasilis Kappas owned five diners on Route 46 and in the towns around it, and everyone from Paterson to Parsippany called him the King, which was also what his name meant, so he could not pretend he minded.</p>
+  <p>There was the Olympia, with the columns. There was the Golden Star, and the Galaxy, which had a revolving cake case with eleven kinds of cheesecake, and the Athenian, out by the river, where the truckers ate. The fifth was the Plaza, on the highway in Clifton, stainless steel and blue glass, open twenty-four hours since 1979. That one he ran himself. The other four had managers, cousins and nephews, and every morning at six he drove from one to the next in a black Cadillac with a paper cup of coffee in the holder, blue and white with the Greek key on it and WE ARE HAPPY TO SERVE YOU, and tasted the soup.</p>
+  <p>He was sixty-six. He had come from a village in the hills south of Kozani at nineteen, with a cardboard suitcase and an uncle's address in Astoria, and washed dishes, and bussed tables, and fried eggs on a flat-top for eleven years before he owned a stool of his own. He married Chrysanthi from the next village over, the daughter of a saffron grower, a small round woman with skin the color of the inside of an apricot who could add a column of figures faster than the register and was not afraid of him or of anyone. They had no children. They had the diners, and the men who worked in them, and a house on the hill in Clifton with a marble foyer that echoed when you dropped your keys.</p>
+  <p>In the old village there was a story about their two families, and the old women had told it at the wedding. In 1922, when the Greeks of Asia Minor came over the sea with nothing, burned out of Smyrna, a thousand of them walked up into the hills looking for somewhere to sleep. The big man of the district was busy with the feast of the village saint, the roasting and the dancing, and he told them to come back after the feast and shut his door. A weaver's wife met them on the road. She went through the village house by house and said, there are a thousand of them and there are a thousand houses; each house takes one. And they did, and each man built his refugee a room against his own wall, and at the end of the winter each woman gave her refugee a blanket she had woven. The weaver was Vasilis's great-grandfather and the weaver's wife was Chrysanthi's great-grandmother, by a second marriage that made it complicated, and the old women laughed and said it didn't matter, it was the same two as always, back again.</p>
+  <p>There was another story they told about themselves, a newer one. In 1974, on Good Friday, the men from the diners and their wives had gone to the Greek church in Paterson for the Lamentations. It rained. The church was full. The people who had a cousin on the parish council or a brother in the choir got in, and the diner people stood outside on the steps for three hours holding candles that kept going out. On Easter Monday Vasilis put ten thousand dollars on the table in the back booth of the Plaza and said, We are going to build our own. The others put in five thousand each, and the wives each put in twenty-five hundred, and when it ran short they all put in half again. Chrysanthi gave the new church an embroidered cover for the holy table, the yellow-orange of the saffron in her father's fields, and when the bishop came to consecrate it she stood by the iconostasis in a dress the same color and he said she looked like a lamp.</p>
+  <p>That was a long time ago. The church was full now of people's grandchildren who didn't speak Greek.</p>
+  <p>The thing about the King was that he was hungry for something and did not know what it was. He went to the liturgy every Sunday and lit candles and kissed the icons, and his heart stayed shut like a fist. He had read in the Greek paper about the Holy Mountain, about the old monks there who were said to see through you to the bottom, who could tell a man his sins before he opened his mouth, and he wanted one. He wanted one here. He sent his four nephews every Sunday to a different parish, the four of them in four directions, to Astoria and to Philadelphia and to Boston and to Chicago once on an airplane, and every Sunday night at the Plaza he asked them, <em>Well? Is there anyone?</em> And every Sunday night they said, <em>Theio, there's nobody. Priests with mortgages. Bishops with lawyers.</em></p>
+</section>
+
+<section>
+  <h2>II. Hunts Point</h2>
+  <p class="dateline">The Athenian, Route 46 · Thursday, September 8, 2011</p>
+  <p>It had rained for two weeks. First the hurricane at the end of August had put the Passaic over its banks at Little Falls and filled the basements of half of Paterson, and the Athenian had been closed four days with mud on the floor. Then the tail of a second storm came up from the Gulf and sat over Pennsylvania and New Jersey and rained and did not stop.</p>
+  <p>On the Thursday morning the King was at the Athenian at six-thirty, standing at the end of the counter in his raincoat tasting the lentil soup, when the produce truck from Hunts Point came in three days late. Stelios drove it. He was sixty, a Cretan with a mustache like a push broom who had brought lettuce and tomatoes and lemons to the King's diners for twenty-two years. His son Manolis rode with him, and a helper named Ramón from the Bronx who carried the cases. They came in soaked to the knees and sat at the counter and put their faces in their hands.</p>
+  <p><em>Where have you been?</em> said the King. <em>I've got no lemons.</em></p>
+  <p><em>Pennsylvania,</em> Stelios said. <em>We went out Monday night to Scranton with a load for the Greeks at the Brothers' diner, and the roads closed behind us. Three nights we slept in the truck at a rest stop on 380 with the rain coming down like the end of the world. Give me coffee before you yell.</em></p>
+  <p>The King poured it himself. He did not ask them for news, because he had stopped expecting any, but Stelios gave it to him anyway, the way you hand over a receipt.</p>
+  <p><em>There's a Geronda out there.</em></p>
+  <p>The King stood with the coffeepot in his hand.</p>
+  <p><em>What did you say?</em></p>
+  <p><em>A Geronda. An elder. From the Holy Mountain. On a hill over the river past Tunkhannock. The Brothers go there.</em></p>
+  <p>The King put the pot down on the counter, very carefully, as if it might break. He felt it in his arms first, then his back, a cold and a heat together, the way you feel it when the anthem plays and they bring the flag in. He stood with his hand flat on the counter.</p>
+  <p><em>Stelio. What did you say?</em></p>
+  <p><em>I said there's a Geronda.</em></p>
+  <p><em>What did you say?</em></p>
+  <p>The cook came out of the kitchen to see what was wrong. Ramón looked at Manolis.</p>
+  <p><em>Vasili, are you deaf? A Geronda. Out past Scranton. A real one.</em></p>
+  <p><em>Say it again.</em></p>
+  <p><em>A Geronda.</em></p>
+  <p>The King took a paper placemat off the stack by the register, the kind with the map of Greece on it in blue and the islands like spilled crumbs, and turned it over and wrote on the back with the pen from his shirt pocket. He wrote that the Olympia diner, the building and the business and the goodwill, belonged as of this date to Stelios Daskalakis of the Bronx, and signed it, and had the cook sign it as a witness, and pushed it across the counter.</p>
+  <p>Stelios looked at it.</p>
+  <p><em>Is there more?</em> said the King. <em>Did they say anything else?</em></p>
+  <p><em>Vasili, sit down, you're white.</em></p>
+  <p><em>Is there more.</em></p>
+  <p><em>He teaches,</em> said Manolis, the son, who had been listening. <em>The Brothers said. He sits in the yard after the service and talks, and people come from all over. They said the things he says, you go home and you can't sleep.</em></p>
+  <p>Three times the King said <em>What?</em> as if he could not hear, and the fourth time he took another placemat and wrote that the Golden Star belonged as of this date to Manolis Daskalakis, and pushed it across.</p>
+  <p><em>Anything else?</em></p>
+  <p><em>There are monks,</em> said Ramón. He said it in English. He was not Greek and he had understood about one word in four and he did not know why everybody was so excited. <em>Some monks. With beards. They live up there with him. Eight or ten. They grow tomatoes, the Brothers said. Not very good ones.</em></p>
+  <p>The King heard it three times before it went in. The fourth time he wrote the Galaxy over to Ramón Tejeda of Longwood Avenue, with the cake case and the eleven kinds of cheesecake. Ramón held the placemat in both wet hands and studied it. <em>Mister Bill, I can't read this, it's in Greek.</em> The King said, <em>It's in English, you're holding it upside down.</em></p>
+  <p>Then he stood in the middle of the Athenian with the rain coming down the windows and looked around at the men who had come out of the kitchen, the cooks and the countermen and the old dishwasher from his own village who had been with him since 1977, and his manager, and two of his nephews who had come in for breakfast, and the retired men from the old country who sat every morning in the back booth with one coffee for three hours and argued about Papandreou.</p>
+  <p><em>Well?</em> he said. <em>What do you want to do?</em></p>
+  <p><em>What do you want to do, Vasili?</em></p>
+  <p><em>I'm going out there,</em> he said. <em>I'm not coming back. I'm going to put on the black and stay.</em></p>
+  <p>The old dishwasher took off his apron and folded it and put it on the counter. <em>Then I'm going with you.</em></p>
+  <p>That was how it went, all morning, from one diner to the next, by telephone, by word of mouth along the counters of Route 46. The legend in Astoria says a thousand men went with the King. In Clifton they say it was forty-one. They were most of them past sixty, men whose children were grown and gone to Hoboken and California and law school, men with bad knees from forty years on tile floors and burns up their forearms from the grill. Each of them wrote something for his wife.</p>
+  <p>The King took one more placemat and wrote on the back of it to Chrysanthi.</p>
+  <p><em>Everything is yours. The Plaza, the house, the money, all of it. Enjoy it, my gold. Do what you want.</em></p>
+  <p>He folded it in four and gave it to Stelios with the keys to the Plaza, which he took off his ring. <em>Take this to my wife. She'll give you something for your trouble. If she asks where I went, tell her I went to the Geronda for good.</em></p>
+</section>
+
+<section>
+  <h2>III. Three Rivers</h2>
+  <p class="dateline">Little Falls to Tunkhannock · Thursday afternoon, September 8</p>
+  <p>They left from the Plaza lot at one o'clock in the afternoon in nineteen cars, Cadillacs and Lincolns and the dishwasher's Buick and somebody's son-in-law's minivan, with the King in front, and the rain coming down so hard the wipers could not keep it off the glass.</p>
+  <p>The first river was the Passaic. Where the road came down to it at Little Falls it was over its banks again, brown and fast, carrying lawn chairs, and the police had the road shut with sawhorses and flashing lights.</p>
+  <p><em>How deep?</em> the King asked the officer.</p>
+  <p><em>Over the guardrail, sir. You can't go through. Nobody's going through today.</em></p>
+  <p><em>Is there another way?</em></p>
+  <p><em>Not today, sir.</em></p>
+  <p>The King sat in the Cadillac with the engine running. It was the first time in his life he had been told no and did not mind. While we sit here looking for another road, he thought, we get older, and one day we die looking. He had renounced everything for Christ. What would the water do to him? He put both hands on the wheel and said aloud, in the old words, <em>Lord Jesus Christ, Son of God, have mercy on me,</em> and drove around the sawhorses. The officer shouted. Nineteen cars followed him through.</p>
+  <p>The policeman told the story afterward to anyone who would buy him a drink. He said the cars went across the flooded road as if it were dry pavement, single file, at thirty miles an hour, and they threw no spray. Not a drop. He said he walked out to the edge of it after they had gone and the water came up over his shoes.</p>
+  <p>The second river was the Delaware, at the Water Gap, high and the color of coffee with milk, eating at the roads along its banks. The King said, <em>Thy law is a lamp to my feet, and a light to my paths,</em> and thought of the Gospel book on the holy table under Chrysanthi's yellow cloth, and they crossed.</p>
+  <p>The third was the Susquehanna, at Tunkhannock, in the dark. It was rising toward the highest it had ever been, and the low parts of the town along it were being emptied, and the sirens went up and down. The King thought of the Church, the whole of it, the dead with the living, the monks on the Holy Mountain, the old women in black lighting candles in every village from Kozani to Clifton, the forty men in the cars behind him. He said, <em>Save thy people, and bless thine inheritance,</em> and drove down to the water where the road went under it, and across.</p>
+  <p>On the far side, on the bank above the flood, there was a sycamore, a big one, white in the dark like a bone. And under the sycamore a man in black was sitting on a folding chair.</p>
+  <p>He was not old. That was the first thing they noticed afterward, all of them. He was thirty-eight, with a black beard and round glasses, a big plain man who looked like he might have played tackle in high school, which he had, in Astoria, before Columbia and the engineering degree and the fifteen years on the Holy Mountain. The monks called him Geronda anyway, because that is what the word means, the one you go to, and his name was Father Isaak.</p>
+  <p>And the light came from him. The men all said so afterward, separately, and the ones who were not given to saying such things said it too. Out of the rain and the dark there was a light under the sycamore of no particular color and every color, and the white branches of the tree over him looked gold, as if they had been laid with gold leaf like the background of an icon, every twig. The King thought: it isn't headlights. It isn't the fire trucks. It isn't the moon. He got out of the car and stood in the rain, and walked toward the light the way you walk into the sea, and went down on both knees in the mud in front of the folding chair, and the forty men behind him got down too.</p>
+  <p><em>I was told you'd come today,</em> Father Isaak said. <em>Get up. You'll ruin your pants.</em></p>
+  <p>He talked to them there under the tree for an hour in the rain, and they listened, and none of them could say afterward exactly what he said. It was about the Kingdom of Heaven, and about how it is like a man who finds a treasure in a field and goes and sells everything he has, and about how none of them had ever owned anything in the first place, the diners or the houses or their own bodies, and how it was a great relief to find that out. The King felt the fist in his chest open. That was all he could say about it ever. It opened, the way his hand opened when he set down the coffeepot.</p>
+  <p>When Father Isaak stopped talking they asked him, all of them, to take them in.</p>
+  <p>He looked at them a long time, these old men from the counters, in their wet golf jackets, with their bad knees in the mud.</p>
+  <p><em>Come on, then,</em> he said, and stood up and folded his chair.</p>
+  <p>That night they slept in the guesthouse of the monastery on the ridge, two to a room on cots. And in the morning, the men who had shaved the day before for forty years came down to the church with beards. Long ones, grey, down to their chests, as if they had been monks on the Holy Mountain for forty years and had not cut them once. The dishwasher from the village could not stop touching his. The King looked at himself in the black window of the church door and did not know who it was. The monks of the monastery, the eight or ten of them, came out and stood in a row in the yard and looked at the forty old men with beards to their belts, and one of the young monks said quietly, <em>Christ and the Panagia,</em> and the others did not say anything.</p>
+</section>
+
+<section>
+  <h2>IV. The Placemat</h2>
+  <p class="dateline">Clifton · Thursday night and Friday, September 9</p>
+  <p>Stelios brought the placemat up the hill that night in the produce truck. He rang the bell, and Chrysanthi Kappas opened the door herself in her housecoat, and he stood in the marble foyer dripping and handed it to her.</p>
+  <p>She read the map of Greece side first, then turned it over.</p>
+  <p><em>What is this?</em></p>
+  <p>He told her about the diner, and the coffeepot, and the three placemats.</p>
+  <p><em>He gave you the Olympia,</em> she said. <em>For that.</em></p>
+  <p><em>Yes, kyria.</em></p>
+  <p><em>For a word.</em></p>
+  <p><em>For a word.</em></p>
+  <p><em>What word?</em></p>
+  <p><em>There's a Geronda,</em> Stelios said. <em>Out past Scranton. A real one.</em></p>
+  <p>And it took her exactly the way it had taken him. She felt it in her arms, then the back of her neck. She put her hand on the newel post and said, <em>What did you say?</em> three times, and Stelios said it three times, and the fourth time she said, <em>He gave you the Olympia for that? That's nothing. That's a cheap man. My husband was always a cheap man.</em> And she went to the desk in the hall where she kept the papers for everything, and wrote on the back of an electric bill that the building on Main Avenue in Passaic, the one with the bakery and the four apartments upstairs, belonged as of this date to Stelios Daskalakis, and his son got the shore house at Seaside Heights, and Ramón, who had stayed in the truck because he was embarrassed, got the parking lot behind the Plaza and the mortgage the Plaza paid on it every month for ninety-nine years.</p>
+  <p><em>Where is he?</em></p>
+  <p><em>He went to the Geronda, kyria. He said for good.</em></p>
+  <p><em>And the others? The old ones from the back booth? Kostas? The dishwasher?</em></p>
+  <p><em>Forty of them. In the cars.</em></p>
+  <p>She telephoned the wives. They came up the hill in the morning in the rain, in their good raincoats and their gold earrings, women of sixty and seventy who had worked the registers, baked the pies, raised the children, buried the parents. They stood in her foyer while she read them the placemat.</p>
+  <p><em>Your husbands sent you messages too,</em> she said. <em>Everybody's got a placemat. They gave you everything. The houses, the money, enjoy it. That's what they say.</em></p>
+  <p><em>And you, Chrysanthi? What are you going to do?</em></p>
+  <p>Chrysanthi folded her husband's placemat in four again and put it in the pocket of her housecoat.</p>
+  <p><em>Forty years he stood in that Plaza, and I stood next to him, and we were never happy one day, not the way they mean it in church. He was hungry and I was hungry and we fed everybody on Route 46 and we were hungry. Now he got up and spat it out. All of it. The diners and this house and the money, he spat it out on the floor like a bad olive.</em> She looked around at the marble foyer. <em>Am I going to get down on my knees and pick it up and put it in my mouth? What he spat out?</em></p>
+  <p>Nobody said anything.</p>
+  <p><em>I'm going after him,</em> she said. <em>I don't want any of this either.</em></p>
+  <p><em>Then we're going too.</em></p>
+  <p><em>Can you do it? It's not a vacation. You'll have to leave everything.</em></p>
+  <p><em>We can do it.</em></p>
+  <p><em>Then go put on something you can walk in,</em> said Chrysanthi.</p>
+  <p>They left at noon in a line of cars as long as the men's had been. At Little Falls the road was still shut, and she asked the policeman, the same one, how deep, and he said what he had said, and then he said, <em>Lady, yesterday forty cars went across here. I saw it. I'm not supposed to say so.</em></p>
+  <p><em>Look for their tracks,</em> Chrysanthi told the women in her car.</p>
+  <p>They looked. Where the flood came up over the road, the mud on the near side had been smoothed by the water, and there was nothing on it. Not a tire mark. Not one.</p>
+  <p><em>Then he didn't drive across,</em> she said. <em>He said a prayer and the water carried him. He said, I left everything for Christ, so let the water be no water to me. That's what he said, I know him.</em> She put both hands on the wheel the way he did. <em>So I left everything too.</em></p>
+  <p>So the women crossed the Passaic, and then the Delaware, and late that night the Susquehanna, near the highest it had ever been. The outer edges of their tires came out dry.</p>
+</section>
+
+<section>
+  <h2>V. The Sycamore</h2>
+  <p class="dateline">The Monastery of the Prophet Elias, Wyoming County, Pennsylvania · Saturday, September 10</p>
+  <p>Father Isaak knew they were coming. He did not say how. On Saturday morning, when the radio said the Susquehanna had gone higher at Wilkes-Barre than it had ever gone and was only now beginning to fall, he went into the guesthouse and told the forty new old men with their long grey beards to go into the church, all of them, and stay there, and keep quiet. He shut the doors behind them.</p>
+  <p><em>Why, Geronda?</em> said the young monk who kept the gate.</p>
+  <p><em>Because their wives are coming,</em> he said. <em>And if a woman who has been married forty years sees her husband come out of a door with a beard to his belly in a black riassa, the first day, she will either laugh or faint, and either way she won't hear one word I say to her. Let her hear first. Then she can see.</em></p>
+  <p>The women had slept in their cars at the bottom of the ridge road. In the morning they came up it and parked in the mud. Father Isaak was waiting for them under the sycamore at the bottom of the hill, where the flood had come up to the roots in the night and gone down again, leaving a line of leaves and bottles. The women saw the light the men had seen, the gold in the white branches and the light of no color under them. Chrysanthi got out of her car and walked into it and knelt. The others knelt behind her.</p>
+  <p><em>Father,</em> she said. <em>I think my husband came here. Vasilis Kappas. He said he came to stay with you. Where is he? Show him to us.</em></p>
+  <p><em>Sit down,</em> he said. <em>Right here. You'll see him. You'll see all of them.</em></p>
+  <p>The women sat on the wet grass and on the hoods of their cars, glad, thinking in a minute they would see their husbands. Father Isaak talked to them for an hour, the way he had talked to the men. Chrysanthi could not remember afterward any more than the King could what he said, but she remembered that at a certain point in it she stopped thinking about her husband at all, and about the house and the marble foyer and the Plaza, and that something in her came loose, as if a thread had been cut, and that it did not hurt.</p>
+  <p>Up the hill in the church, behind the shut doors, the forty old men were listening through the windows, which were open a crack because of the damp. They heard everything Father Isaak said to their wives. And the old dishwasher from the village said later that while they listened, standing in the dark church in their new black clothes with the candles going, the last thing in them that was still holding on to anything let go. He said you could hear it, like knuckles cracking all over the church at once.</p>
+  <p>When he was finished Father Isaak looked up the hill and nodded, and the young monk at the gate opened the church doors, and the men came out.</p>
+  <p>They came down the hill in a line in black, with their long grey beards, slowly, because of their knees. Their wives stood up. Nobody laughed and nobody fainted. Chrysanthi looked at her husband a long time, coming down the wet grass toward her with his beard on his chest and the light on his face, and she did not see the King of Route 46 in him anywhere, and she was glad.</p>
+  <p>She went down on her knees in front of him in the mud and kissed his hand, the way you kiss a priest's.</p>
+  <p><em>So,</em> she said. <em>You got there.</em></p>
+  <p><em>Ti chará,</em> he said. That was all. <em>Ti chará.</em> What joy.</p>
+  <p>The women asked Father Isaak to take them too. Father Isaak said, <em>Not here. This is a house for men. There are sisters in the mountains of North Carolina, in a monastery of the Annunciation, the abbess is a hard old Cretan who will work you like mules and you'll love her. Go there.</em></p>
+  <p>So the women went. They went in their cars, slowly, by the old roads, and it took them nine days. At every town with a Greek church they stopped, in Harrisburg, Baltimore, Richmond, Charlotte, and every time the people of the parish were already waiting on the steps to feed them and put them up for the night and send them on in the morning with food for the road, as if the news had gone down the highway ahead of them. Nobody ever found out who carried it. Chrysanthi drove the first car. When they came at last up the gravel road to the sisters in the mountains, the old Cretan abbess was standing at the gate with her arms folded, and she looked at Chrysanthi a long time and said, <em>You're the one with the saffron,</em> and Chrysanthi had never seen her before in her life.</p>
+</section>
+
+<section>
+  <h2>VI. Ti Chará</h2>
+  <p class="dateline">The Monastery of the Prophet Elias · winter 2011–12</p>
+  <p>Monks are not supposed to talk much, and mostly the old men from the diners did not. They worked. They were used to working. They took over the kitchen and the monastery started eating very well for the first time in its history, and they rebuilt the guesthouse porch, and the dishwasher from the village grew tomatoes against the south wall of the church that were, for the first time, very good tomatoes.</p>
+  <p>The King had been given a new name with the black, Varnavas. But everyone at the monastery went on thinking of him as the King, and he did not mind that either.</p>
+  <p>He went around saying it. In the morning in the dark on his way to the church, and at the woodpile, and in the kitchen with his sleeves pushed up, and walking the ridge road in the snow in the afternoon with his hands behind his back and his beard blowing. <em>Ti chará. Ti chará.</em> What joy. What joy. Not loudly. To himself, the way a man hums.</p>
+  <p>The younger monks talked about it. They had been there before the old men came, and some of them had given up very little to get there, a graduate fellowship, a girlfriend, a Honda Civic, and they were not sure what to make of forty retired diner men who had given up Route 46. One of them went to Father Isaak after Vespers.</p>
+  <p><em>Geronda, Father Varnavas is going around all day saying, What joy, what joy.</em></p>
+  <p><em>Yes.</em></p>
+  <p><em>We think he's remembering. The diners. The Plaza on a Sunday morning after church, everybody waiting for a booth. His Cadillac. He was a big man. We think it's hard for him.</em></p>
+  <p>Father Isaak sent for him. The King came in from the woodpile with chips of oak in his beard.</p>
+  <p><em>Varnava. They tell me you're going around saying, What joy. They think you miss the Plaza.</em></p>
+  <p>The King thought about it honestly, the way he had tasted the soup every morning at six.</p>
+  <p><em>Geronda,</em> he said. <em>You know what I'm talking about. You tell them.</em></p>
+  <p>Father Isaak looked at the young monks a while.</p>
+  <p><em>He doesn't miss the Plaza,</em> he said. <em>He isn't talking about the Plaza. He drank something and it went down into him and now he can't stop being glad. He's talking about that. He's talking about God.</em></p>
+  <p>And he said it to them out of the psalter, the old Greek one in English, the way he said everything, as if it were plain information, like the time of Vespers.</p>
+  <div class="verse">
+    <p>They shall be fully satisfied with the fatness of thine house; and thou shalt cause them to drink of the full stream of thy delights. For with thee is the fountain of life: in thy light we shall see light.</p>
+    <p>&mdash; Psalm 35:9&ndash;10 (Septuagint)</p>
+  </div>
+  <p><em>And the first psalm,</em> he said. <em>You know it.</em></p>
+  <div class="verse">
+    <p>But his pleasure is in the law of the Lord; and in his law will he meditate day and night.</p>
+    <p>&mdash; Psalm 1:2 (Septuagint)</p>
+  </div>
+  <p>The King went back out to the woodpile. Through the window they could see him split one log and set the halves on the stack and stand for a moment in the snow with the maul on his shoulder, saying it.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The Olympia is still on Route 46, and so are the Golden Star and the Galaxy, though the cake case has stopped revolving and the cheesecake is down to six kinds. Stelios ran the Olympia until he died, and Manolis runs it now, and Ramón Tejeda of Longwood Avenue owns the Galaxy outright and has learned to read the Greek on the menu, though not much else of it. The Plaza was sold. It is a bank.</p>
+  <p>At the Olympia, under the glass on the counter beside the register, where other diners keep the business cards of the plumber and the snapshot of the owner shaking hands with a mayor, there is a paper placemat with a map of Greece on it in blue, and the islands scattered across the sea like crumbs. It has been folded in four and opened out again. If you ask Manolis, he lifts the glass and turns it over for you. On the back, in a big square hand in ballpoint, it says the Olympia belongs to his father, as of September 8, 2011, and under that someone has written in another pen, smaller, in Greek, two words.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He who drinks in the law lives happily with a serene mind: the sage rejoices always in the law, as preached by the elect (Ariyas).<cite>Dhammapada 79, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, King Mah&#257; Kappina of Kukku&#7789;avat&#299; sends riders out every day for news that a Buddha has appeared. When weary traders arriving from S&#257;vatth&#299; tell him that the Buddha, the Dhamma and the Sa&#7749;gha have appeared, he is so overcome he must hear each word four times, and rewards them with a hundred thousand coins for each. He sends his kingdom to Queen Anoj&#257; on a plate of gold and sets out with his thousand courtiers to go forth; they cross three rivers on horseback without wetting the horses' hooves, by recollecting the Buddha, the Dhamma and the Sa&#7749;gha, and find the Buddha waiting under a banyan, shining. Anoj&#257; rewards the traders three times as much, refuses to "take into her mouth" the glory her husband has spat out, and follows with the courtiers' wives, finding no hoofprints at the rivers. The Buddha hides the new monks until the women are steady, then sends the women to the nuns at S&#257;vatth&#299;. Afterward Kappina goes about exclaiming "Oh, happiness!" and the monks suppose he misses being king; the Buddha says he has drunk the Dhamma. A past-life frame tells of a weaver's wife who housed a thousand holy men a king had turned away during a festival, and of householders, caught in the rain without friends inside a monastery, who built one of their own. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-04.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Maha_Kapphina">Mah&#257; Kappina</a> and <a href="https://en.wikipedia.org/wiki/Queen_Anoja">Queen Anoj&#257;</a>.</p>
+    <h3>Route 46 and the Susquehanna, 2011</h3>
+    <p>New Jersey has called itself the diner capital of the world since its factories built the prefabricated lunch cars of the early twentieth century, and by the late century most of its <a href="https://en.wikipedia.org/wiki/Diner">diners</a> were owned by Greek immigrant families, many of whom had started as dishwashers and countermen. The blue-and-white <a href="https://en.wikipedia.org/wiki/Anthora">Anthora</a> coffee cup, with its Greek key and amphora and WE ARE HAPPY TO SERVE YOU, was designed in 1963 for Greek-owned coffee shops in New York. The King's family story reaches back to 1922, when Greek refugees from Asia Minor poured into Greece after the war with Turkey, ahead of the <a href="https://en.wikipedia.org/wiki/Population_exchange_between_Greece_and_Turkey">population exchange</a>. A <a href="https://en.wikipedia.org/wiki/Gerondas">gerondas</a> is an elder, often a monk of long experience, sought out for spiritual counsel.</p>
+    <p>In early September 2011, days after Hurricane Irene had flooded the Passaic valley, the remnants of <a href="https://en.wikipedia.org/wiki/Tropical_Storm_Lee_(2011)">Tropical Storm Lee</a> stalled over the Northeast. On September 8 and 9 the Passaic flooded again at Little Falls, the Delaware ran at moderate flood stage, and the Susquehanna rose to a record of more than 42 feet at Wilkes-Barre, forcing the evacuation of tens of thousands along its banks, from Binghamton and Tunkhannock down to Harrisburg. The psalms the abbot quotes are from Sir Lancelot Brenton's 1844 English translation of the Greek Old Testament, the Septuagint, whose numbering of the Psalms is the one the Orthodox Church uses (<a href="https://ebible.org/eng-Brenton/">text</a>).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Mah&#257; Kappina from the Dhammapada commentary (verse 79). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-04.htm">The original</a>. Scripture from Brenton&rsquo;s translation of the Septuagint (1844). Written by Claude Opus 5.5.
+  <div class="pager"><a href="a-thousand-stamps.html">&larr; A Thousand Stamps</a><a href="index.html">All stories</a><a href="four-redfish.html">Four Redfish &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, segs = [], glow = [], seed = 7, colL = 0, colR = 0;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function branch(x, y, ang, len, w, depth, id) {
+    var x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
+    var s = { x1: x, y1: y, x2: x2, y2: y2, w: w, d: depth, tree: id, kids: [] };
+    segs.push(s);
+    if (depth < 7 && len > 6) {
+      var n = depth < 2 ? 2 : (rnd() < 0.7 ? 2 : 1);
+      for (var i = 0; i < n; i++) {
+        var k = branch(x2, y2, ang + (rnd() - 0.5) * 1.1 + (i ? 0.35 : -0.35), len * (0.68 + rnd() * 0.12), w * 0.68, depth + 1, id);
+        s.kids.push(k);
+      }
+    }
+    return s;
+  }
+  var roots = [];
+  function make() {
+    segs = []; roots = []; seed = 7;
+    var cw = Math.min(W, 576); colL = (W - cw) / 2; colR = (W + cw) / 2;
+    var narrow = W < 760, M = Math.max(80, colL - 30), L = narrow ? Math.min(W, H) * 0.14 : Math.min(M * 0.42, H * 0.2);
+    roots.push(branch(-10, H * 0.2, 0.12, L, 4, 0, 0));
+    roots.push(branch(W + 10, H * 0.6, Math.PI - 0.15, L * 0.95, 4, 0, 1));
+    roots.push(branch(-10, H * 0.86, -0.22, L * 0.85, 3.5, 0, 2));
+    glow = [];
+  }
+  function ignite(now) {
+    var r = roots[Math.floor(Math.random() * roots.length)];
+    glow.push({ root: r, t0: now });
+  }
+  function drawSeg(s, a, col) {
+    ctx.strokeStyle = col.replace('A', a);
+    ctx.lineWidth = Math.max(0.6, s.w);
+    ctx.beginPath(); ctx.moveTo(s.x1, s.y1); ctx.lineTo(s.x2, s.y2); ctx.stroke();
+  }
+  function walk(s, f) { f(s); for (var i = 0; i < s.kids.length; i++) walk(s.kids[i], f); }
+  var last = 0;
+  function draw(now) {
+    now = now || 0;
+    ctx.clearRect(0, 0, W, H);
+    ctx.save();
+    if (W >= 760) { ctx.beginPath(); ctx.rect(0, 0, colL - 24, H); ctx.rect(colR + 24, 0, W - colR - 24, H); ctx.clip(); }
+    ctx.lineCap = 'round';
+    var bark = W < 760 ? 0.035 : 0.09;
+    for (var i = 0; i < segs.length; i++) drawSeg(segs[i], bark, 'rgba(226,222,210,A)');
+    if (reduce) {
+      walk(roots[0], function (s) { if (s.d < 4) drawSeg(s, 0.10, 'rgba(216,180,92,A)'); });
+      ctx.restore(); return;
+    }
+    if (now - last > 9000 && glow.length < 2) { ignite(now); last = now; }
+    for (var g = glow.length - 1; g >= 0; g--) {
+      var e = (now - glow[g].t0) / 1000, front = e * 0.9, fade = e > 10 ? Math.max(0, 1 - (e - 10) / 4) : 1;
+      if (fade <= 0) { glow.splice(g, 1); continue; }
+      walk(glow[g].root, function (s) {
+        var lit = Math.max(0, Math.min(1, front - s.d));
+        if (lit > 0) drawSeg(s, (W < 760 ? 0.08 : 0.3) * lit * fade, 'rgba(216,180,92,A)');
+      });
+    }
+    ctx.restore();
+    requestAnimationFrame(draw);
+  }
+  size(); make(); draw(0);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

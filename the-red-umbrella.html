@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Red Umbrella</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose above a dark river where paper lanterns drift downstream; datelined sections. */
+  --ground: #0e1114;
+  --ground-2: #181b1f;
+  --paper: #ece3d4;
+  --paper-dim: #a39a8c;
+  --accent: #d6633f;
+  --glow: #e9a35a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #1c2228 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(236,227,212,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(214,99,63,.25); }
+.epigraph { border-left: 1px solid rgba(214,99,63,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,27,31,.78); border: 1px solid rgba(236,227,212,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(236,227,212,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(236,227,212,.1); border-bottom: 1px solid rgba(236,227,212,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,27,31,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 17.3 &middot; Uttarā</span></nav>
+<header>
+  <h1>The Red Umbrella</h1>
+  <div class="epigraph">to recompense injury with kindness.<br>&mdash; Tao Teh King 63:1</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ngo teng yan gam gong,</span> under the temple eaves on the Feather River.</p>
+
+<section>
+  <h2>I. The Furrow</h2>
+  <p class="dateline">Oroville, California &middot; New Year, 1875</p>
+  <p>Lau Ping worked for the merchant Fong Yat-sun, who kept the biggest store in Chinatown and a fan-tan house behind it, and who owned four mules, a wagon, two ditches and a strip of river bottom below the town where his men grew bok choy and winter melon to sell to the miners up the canyons. Lau Ping hauled for him, dug for him, plowed for him, and was paid a dollar a day when there was work and nothing when there was not. His wife cooked in the Fong kitchen. His daughter, Ah Lin, who was sixteen and had been born in a tent on the river at Bidwell Bar, swept the Fong floors and carried the Fong wash down to the water. All three of them slept in a lean-to against the back wall of the store, the last place in Chinatown before the willows.</p>
+  <p>On the last night of the old year the whole street went up in firecrackers. Red paper hung on every door, and the smell of powder and roast pork lay over the town so thick the white people from up the hill came down to the edge of it to look. The merchants shut their counters for a week. The miners came in from Cherokee Flat and Morris Ravine in clean blue cotton and gambled away the winter.</p>
+  <p>In the morning old Fong stood in the door of the store with a red envelope in his hand and said: <em>Ping, the men want New Year. Will you take New Year, or will you work?</em></p>
+  <p><em>New Year is for people with money,</em> Lau Ping said. <em>I don't have rice in the house for tomorrow's jook. Let me take the mules and go plow.</em></p>
+  <p><em>Plow, then.</em></p>
+  <p>Lau Ping put his head into the lean-to and said to his wife: <em>Everybody is eating today. I'm plowing. When you bring my rice, cook me twice what you usually cook.</em> And he took the mules and went down to the bottom.</p>
+  <p>There was a man at the temple called Brother Hui. He was younger than the Old Teacher who kept the place, perhaps forty, with a long jaw and shoulders like a boatman's, and he had been sitting in the back room of the temple since the twenty-fourth day of the last month, the day the Kitchen God goes up to heaven. He had not eaten or moved or spoken in seven days, and the men who came in to burn incense walked around him on their toes. On New Year's morning, while the street was still smoking from the night, he got up, took his bowl and a square of cotton he used to strain water, and walked out past the last house into the willows. He stood on the bank of an irrigation ditch above the field where Lau Ping was plowing and looked for a long time at a bush of wild rose.</p>
+  <p>Lau Ping saw him there. He left the mules standing in the furrow, went and bowed to the ground on the wet earth, and stood up and said: <em>You'll want something to clean your teeth.</em> He cut a willow twig, chewed the end of it soft for him, and handed it up. Brother Hui gave him the bowl and the square of cotton. <em>He wants water,</em> Lau Ping thought, and went down to the ditch and strained the water through the cloth until it ran clear of the river silt, and brought it back.</p>
+  <p>Brother Hui drank. Then he stood a while longer on the bank. The lean-to was the last house of all, back against the wall where no one could see a man standing at its door, and so he waited where he was until he saw Lau Ping's wife come out of the willows on the path with the rice pot wrapped in a cloth, and then he started toward the town as if he had only been passing.</p>
+  <p>Lau Ping's wife saw him on the path and stopped. She thought: <em>Once when I had something to give I never saw one of them. Once when I saw one of them I had nothing to give. Today I see one, and I have rice in my hands.</em> She set the pot down on the path and bowed to the earth.</p>
+  <p><em>Don't think about whether it's coarse or fine,</em> she said. <em>Just let it be a blessing.</em></p>
+  <p>He held out the bowl. She held the pot on her hip and filled it with her hand. When she had given him half, he put his palm over the bowl and said, <em>Enough.</em></p>
+  <p><em>One meal can't be cut in two,</em> she said. <em>Don't bless me in this life. Bless me in the next one. Let me give it all.</em> She tipped the pot and the rest went in, and she said: <em>Let me see what you have seen.</em></p>
+  <p><em>So be it,</em> said Brother Hui. He said the words of thanks standing there on the path. Then he went and sat by the ditch where the water ran clean and ate, and she went back to the lean-to and found more rice somewhere, nobody ever said where, and cooked it.</p>
+  <p>Lau Ping plowed half an acre and could not plow any more. He unhitched the mules and sat down under a valley oak by the path to watch for her. When she came out of the willows with the pot she saw him sitting with his head down and the mule whip across his knees, and she thought, <em>If he says I'm late and hits me with the handle, what I did this morning goes for nothing.</em> So she spoke first.</p>
+  <p><em>Husband, be patient with me today, only today. Don't spoil what I did. I was on my way here at sunrise, and I met the man from the temple who sits, and I gave him your rice. I went back and cooked again. Be glad.</em></p>
+  <p><em>What did you say?</em></p>
+  <p>She told him again.</p>
+  <p><em>You did right,</em> said Lau Ping. <em>I gave him a willow twig and clean water this morning myself.</em> He ate, and then, because he had not eaten since the day before and the sun was warm on that side of the oak, he put his head in her lap and slept.</p>
+  <p>When he woke the furrows were gold. All the ground he had broken that morning lay turned up and shining the color of the poppies that come out on Table Mountain in March, a whole hillside of them at once.</p>
+  <p><em>Look at that field,</em> he said. <em>Is that gold? Or am I seeing things because I'm hungry?</em></p>
+  <p><em>I see it too.</em></p>
+  <p>He walked out into the furrow and picked up a clod and knocked it against the plowshare, and it rang.</p>
+</section>
+
+<section>
+  <h2>II. The Umbrella</h2>
+  <p class="dateline">The company hall &middot; the same week</p>
+  <p>He sat down in the field with the clod in his hand and thought about what happens on this river to a Chinese man with gold.</p>
+  <p>He had paid the Foreign Miners' Tax at Bidwell Bar for nine years, three dollars a month and then four, every month, to a collector with a pistol and a receipt book, and he had seen what the collectors did when a man said he had paid already. He had seen claims jumped, and cabins burned, and a man from his own village tied by his queue to a hitching rail. He had seen a judge in Marysville send a Chinese witness home because a Chinese witness could not speak against a white man. You could not hide a field. You could not spend it either.</p>
+  <p>So he filled his wife's rice basket with gold dirt, put a cloth over it, and carried it up through the New Year crowds to the company hall beside the temple, where Old Ma, the president of the company, sat in a carved chair with a teacup and settled the quarrels of four thousand men.</p>
+  <p><em>What is it?</em> said Old Ma.</p>
+  <p><em>Uncle, all the ground I plowed this morning has turned to gold. You should send carts and bring it here, before somebody else does.</em></p>
+  <p><em>Who are you?</em></p>
+  <p><em>Lau Ping. I work for Fong Yat-sun.</em></p>
+  <p><em>And what did you do this morning?</em></p>
+  <p>Lau Ping told him: the willow twig, the water strained through the cloth, the rice his wife had given on the path. Old Ma set down his cup.</p>
+  <p><em>Then that's what this is,</em> he said. <em>You're seeing it come back to you on the same day. Well, friend, what should I do?</em></p>
+  <p><em>Send carts.</em></p>
+  <p>Old Ma sent every cart in Chinatown and every man who could push a wheelbarrow, and they went down to the bottom shouting to each other over the firecrackers, and as they shoveled they said what anybody would have said: <em>This belongs to the company.</em> And every shovelful turned back to river mud the moment it was lifted. They tipped the barrows out and filled them again, and it was mud again. They came back up the hill with mud to the elbows and stood in the hall and told Old Ma.</p>
+  <p><em>What were you saying while you dug?</em></p>
+  <p><em>That it was the company's.</em></p>
+  <p>Old Ma laughed until he had to wipe his eyes. <em>Who am I? Go back down. Say it belongs to Lau Ping.</em></p>
+  <p>They went back down and said it, and the mud in their shovels was gold again. They brought it up the hill all afternoon and all the next day and heaped it in the yard between the hall and the temple, and the heap rose past the eaves and past the incense urn, until the boys climbing it on a dare could look down on the temple roof.</p>
+  <p>Old Ma had the merchants and the headmen of every village association in town brought into the yard. <em>Is there anybody on this river with as much as this?</em></p>
+  <p><em>Nobody, Uncle.</em></p>
+  <p><em>What should he have?</em></p>
+  <p>Somebody said the umbrella. In the old country, when a district magistrate had done well by the people, they gave him the ten-thousand-people umbrella when he left, red silk with the names of the givers stitched all over it in gold thread. There was one in the company hall that had come over on a ship years ago for some reason nobody remembered, folded in paper in a camphor chest. Old Ma had it brought out and opened over Lau Ping's head in the yard, and the silk was faded to the color of a ripe persimmon, and the gold names on it had gone brown, and nobody could read half of them.</p>
+  <p><em>Let him be called Lau Daai Fu,</em> said Old Ma. <em>Lau the Greatly Rich.</em> And everything in the yard was his.</p>
+  <p><em>Uncle,</em> said Lau Ping, under the umbrella, <em>all my life I've slept in other people's houses. Give me somewhere to build one.</em></p>
+  <p>Old Ma pointed across the street to the lot where the old Sam Kee store had stood until it burned, which was nothing now but a chimney and a thicket of blackberry. <em>Clear that and build there.</em></p>
+  <p>He built a house of brick from the yard at Palermo, two stories, with an iron door like the stores had against fire. When it was done he held two feasts on the same day, one for the house and one for the umbrella, and for seven days after that he fed the Old Teacher and every man who lived at the temple at his own table. On the last day, after the meal, the Old Teacher spoke a little, the way he did, about what is given and what is kept.</p>
+  <div class="verse">
+    <p>The sage does not accumulate (for himself). The more that he expends for others, the more does he possess of his own; the more that he gives to others, the more does he have himself.</p>
+    <p>&mdash; Tao Teh King 81:2</p>
+  </div>
+  <p>Lau Ping and his wife and Ah Lin sat on the floor at the edge of the room and listened, and when he had finished, all three of them knew something they had not known that morning and would never not know again. Nobody in the town could have said what it was. You could only see it afterward, in how they put down a cup.</p>
+</section>
+
+<section>
+  <h2>III. The Match</h2>
+  <p class="dateline">Chinatown &middot; spring 1876</p>
+  <p>Old Fong came across the street in the spring with his hat in his hand.</p>
+  <p>That was the year after the Congress in Washington passed the law about Chinese women. In Hong Kong now every woman who wanted to sail had to stand in front of the American consul with her photograph and answer him about her father, her husband, her feet, her character, and the way she walked across the room, and then answer the harbor master, and then answer again on the dock in San Francisco, where they held the photograph up beside her face. Most of them did not come. Wives who had been sent for in letters stayed in the villages. Fong's son Wing had been promised a girl from Toishan since he was eleven years old, and she was not coming. In all of Butte County there were perhaps a dozen Chinese girls who were not owned by somebody, and one of them was Ah Lin.</p>
+  <p><em>I won't give her,</em> said Lau Ping.</p>
+  <p><em>Ping. Don't be this way. All those years you lived against my wall. Now you're rich and you have the umbrella. Give her to my son.</em></p>
+  <p>Lau Ping said nothing more to Fong, but he said to his wife that night: <em>That house laughs at the temple. There's a fan-tan table in the back and the boy has never burned a stick of incense in his life. The girl can't live without the Old Teacher. I won't do it.</em></p>
+  <p>Then the merchants came, one after another, and the headmen, and the company bookkeeper, and at last Old Ma himself, and every one of them said the same thing. <em>Don't break with the Fongs over this. You'll need friends on this street when the gold is gone. And who else is there for her? Who else is there for him?</em> And at last he gave in to them. On the fifteenth day of the fourth month, under the full moon that opens the summer retreat, when the Old Teacher and the men at the temple begin their summer of sitting, Ah Lin went across the street to the Fong house in the teak sedan chair from the temple, behind a band of gongs and a string of firecrackers that the whole town heard.</p>
+</section>
+
+<section>
+  <h2>IV. The Bargain</h2>
+  <p class="dateline">The Fong house &middot; summer 1876</p>
+  <p>From the day she went across the street she did not see the inside of the temple. She was not allowed to burn incense or carry rice to the Old Teacher's door or sit at the edge of the room where he talked. Fong's wife kept the household money and gave her none. Wing kept his evenings at the fan-tan table and his afternoons in bed. When she asked to go across the street on the first and fifteenth, the days everybody went, her mother-in-law said the girl had married into a house of business, not a house of beggars, and that the shaved heads could feed themselves.</p>
+  <p>Two months and a half went by like that. One evening in the seventh month she asked the old woman who did her hair: <em>How much of the summer is left?</em></p>
+  <p><em>Half a month, Young Mistress. Then it's the Ghost Festival.</em></p>
+  <p>So she sent a message across the street by the boy who carried the water. <em>Why did you put me in this prison? It would have been better to brand me on the face and sell me on the upper street like a girl off the ship than to give me to a house like this one. Since the day I came here I have not once seen the Teacher or given one bowl of rice to anyone.</em></p>
+  <p>Lau Ping read it standing in the door of his brick house and said, <em>My poor girl. My poor girl.</em> Then he went upstairs to the iron box.</p>
+  <p>There was a woman in Marysville they called Chin Gam, Thousand Gold, because that was what she cost. She had come over before the law, at fourteen, under a paper that sold her for four years to a house on the alley behind First Street, and at eighteen she had paid off the paper and bought the house. She sang the old operas with a voice that made grown men from the Sze Yup districts weep into their sleeves. She had her own carriage and her own driver. A visit with her was a hundred dollars for a single night, and men paid it.</p>
+  <p>Lau Ping sent fifteen hundred dollars in twenty-dollar gold pieces across the street in a lacquer box, and a letter. <em>Send for Chin Gam. Give her this. Put her in your husband's rooms for a fortnight. Then do as you like.</em></p>
+  <p>Ah Lin sent the water boy to Marysville on the stage. Chin Gam came up the next day in her carriage, in grey silk, with two maids, and sat in the Fong parlor drinking tea as if it were her own.</p>
+  <p><em>Elder Sister,</em> said Ah Lin, and set the lacquer box on the table between them. <em>Take this, and look after my husband for fifteen days.</em></p>
+  <p>Chin Gam opened the box and looked into it for a moment and closed it. <em>Very well.</em></p>
+  <p>Ah Lin took her upstairs to Wing, who was lying in his shirt with the shutters closed.</p>
+  <p><em>What's this?</em></p>
+  <p><em>For fifteen days my friend will keep your rooms. For fifteen days I'm going to give rice and listen to the Teacher.</em></p>
+  <p>Wing looked at Chin Gam, who was the most beautiful woman between Sacramento and the mountains and knew it, and wanted her so badly his mouth went dry. <em>Fine,</em> he said. <em>Do what you want.</em></p>
+  <p>The same afternoon Ah Lin crossed the street to the temple for the first time since spring, went in under the lanterns, knelt on the floor in front of the Old Teacher and said: <em>Teacher, for the next fifteen days, until the Ghost Festival, eat at my house. Don't go anywhere else.</em> He looked at her for a while and nodded once. She walked back across the street so lightly the water boy said afterward that her shoes did not touch the dust.</p>
+</section>
+
+<section>
+  <h2>V. The Ladle</h2>
+  <p class="dateline">The Fong kitchen &middot; the fourteenth day of the seventh month</p>
+  <p>For two weeks the Old Teacher and the temple men came every noon and ate in the Fong front room, and the Fong women stayed out of it, and Wing stayed upstairs. Ah Lin was in the kitchen from before light. It was a long brick room at the back of the house with two iron woks set in a clay stove the length of one wall, and a chopping table, and a door open onto the yard because the heat of the valley at the end of summer came up out of the ground and lay on the town like a lid. She cooked rice and rice and rice. She steamed buns. She sent the boy for winter melon, bean curd, dried mushrooms off the ship from San Francisco. For the last day, the eve of the festival, she had the women making sesame balls, the round ones you fry slowly in a full wok of peanut oil until they swell up hollow and gold, a hundred and more, for the Teacher's men and for the hungry dead who would be fed at the river the next night.</p>
+  <p>That afternoon Wing stood at his window upstairs looking down across the yard into the kitchen door. <em>Tomorrow's their festival,</em> he thought. <em>What is that fool doing?</em> He saw her going back and forth between the stove and the table in an old blue jacket with the sleeves tied back, her face streaked where she had wiped it with her wrist, her hair grey with ash from the firebox and her hands black with charcoal, and she was smiling. <em>Look at her,</em> he thought. <em>She could be lying upstairs on silk. She'd rather sweat in a kitchen for a gang of shaved heads, and it makes her happy.</em> He laughed out loud and went away from the window.</p>
+  <p>Chin Gam was in the room behind him, combing out her hair. She had been mistress of those rooms for fourteen days. She had given orders to the Fong servants, and the Fong servants had obeyed her, and somewhere in those fourteen days she had stopped remembering that she was being paid. She thought she was the woman of the house.</p>
+  <p><em>What made him laugh?</em> She went to the window and looked where he had looked, and saw Ah Lin in the kitchen door. <em>So that's it,</em> she thought. <em>There's something between them still.</em></p>
+  <p>It went through her like a burn. She put down the comb, went down the back stairs and across the yard and into the kitchen, straight to the stove where the oil sat rolling in the big wok with the sesame balls turning in it, and she took the long iron ladle off its hook and dipped it full.</p>
+  <p>Ah Lin turned from the table and saw her coming across the brick floor with the ladle smoking in her hand.</p>
+  <p>She thought: <em>This woman has done me the greatest kindness of my life. The world is very small and heaven is very low, and her goodness is bigger than both, because of her I've had fifteen days with the Teacher. If I hold anything against her, let this burn me. If I hold nothing, let it not.</em> And she stood still, and as Chin Gam came toward her she wished her well, the whole of her, the grey silk and the bare feet on the brick and the face twisted up with hurt, as plainly and as entirely as she would have wished her own mother well.</p>
+  <p>Chin Gam threw the oil over her head.</p>
+  <p>It ran down Ah Lin's hair and her face and inside the collar of the blue jacket, and it was cool. It was like a dipper of water from the well at the back of the yard on the hottest afternoon of the year, poured over her head for no reason by somebody who loved her.</p>
+  <p><em>The next one will be hot,</em> said Chin Gam, and turned to the wok and dipped the ladle full again.</p>
+  <p>The kitchen women saw it. They came at her from every side of the room with whatever they had in their hands. <em>You dog! You thing! Pour oil on our mistress?</em> They tore the ladle out of her hand and beat her with their fists and kicked her with their cloth shoes and pulled her down on the brick floor by the hair, and Ah Lin, with oil still running out of her own hair into her eyes, tried to stop them and could not.</p>
+  <p>At last she got in among them. She pushed them back one by one with both hands until she was standing over Chin Gam, who lay on the floor with her arms over her face and the grey silk torn off one shoulder.</p>
+  <p><em>Why would you do such a thing?</em> said Ah Lin.</p>
+  <p>Then she sent the women for hot water. She knelt and bathed Chin Gam's face and arms where they had scratched her and her ribs where they had kicked her, and when that was done she sent across the street to her mother's house for the little jar of camellia oil, the good one, pressed so many times it was clear as water, that her mother had saved for the day she died. Ah Lin rubbed it into the bruises with her fingers, slowly, the way you would for a child who had fallen.</p>
+  <p>Chin Gam lay on the kitchen floor and felt it. Somewhere in the middle of it she understood, all at once, that this was not her house. She had been bought for fifteen days with a lacquer box, and the fifteen days were nearly over, and the woman with her fingers on her ribs was the one who had bought her. And she thought: <em>I threw boiling oil at her because a man laughed. And she pulled them off me and did this.</em> She thought that if she did not ask to be forgiven her head would split open on the brick.</p>
+  <p>She got up onto her knees and put her forehead down on Ah Lin's feet. <em>Forgive me, Young Mistress.</em></p>
+  <p><em>I'm somebody's daughter, and my father is living,</em> Ah Lin said. <em>If my father forgives you, I'll forgive you.</em></p>
+  <p><em>Then I'll go and ask Lau Daai Fu.</em></p>
+  <p><em>Lau Daai Fu is my father in this life. If my father outside of this life forgives you, I'll forgive you.</em></p>
+  <p><em>Who is that?</em></p>
+  <p><em>The Teacher.</em></p>
+  <p>Chin Gam sat back on her heels on the kitchen floor with her hair down. <em>I don't believe in that old man.</em></p>
+  <p><em>I'll make you believe in him,</em> said Ah Lin. <em>Tomorrow he's coming here with all of them. Bring whatever you can bring and come and ask him.</em></p>
+</section>
+
+<section>
+  <h2>VI. The Lanterns</h2>
+  <p class="dateline">The fifteenth day of the seventh month &middot; the Ghost Festival</p>
+  <p>Chin Gam went down to Marysville that night on the late stage and did not sleep. In the morning she came back up the valley road in her carriage with two wagons behind it, and in the wagons were the women of her house and of every house on the alley behind First Street, the singing girls and the ones who were not singing girls, the ones who had paid off their paper and the ones who were still four years from it, forty-one of them, in the best clothes they had. They had roast duck and soy-sauce chicken and steamed white cakes and a whole roast pig on a board, and nobody in Oroville had ever seen anything like it come up the road, and half the town walked alongside the wagons to the Fong door to see what it was.</p>
+  <p>When they got to the front room the Old Teacher and his men were already sitting down with their bowls, and the women stood along the wall with the dishes in their hands and did not dare to come forward and put anything in a single bowl. Ah Lin went down the wall and took the dishes from them one at a time and carried them to the table and served everything out herself.</p>
+  <p>When the meal was finished, Chin Gam and the forty-one women came and knelt on the floor in front of the Old Teacher, all at once, with a sound like a flock of birds coming down.</p>
+  <p>He was a small man with a sparse white beard and a herbalist's yellow fingers. He had lived in the back of the temple for eleven years and almost nobody knew where he had come from. He looked at Chin Gam a long time.</p>
+  <p><em>What have you done?</em></p>
+  <p><em>Teacher, yesterday I did such and such.</em> She told it all, the window and the laugh and the ladle. <em>And she only pulled her women off me and couldn't do enough for me. I knew what she was and I asked her to forgive me, and she said if you forgive me she will.</em></p>
+  <p><em>Is this so, Ah Lin?</em></p>
+  <p><em>Yes, Teacher. My friend poured boiling oil on my head.</em></p>
+  <p><em>And what did you think while she was pouring it?</em></p>
+  <p><em>I thought: this woman has done me the greatest kindness of my life. The world is very small and heaven is very low, and her goodness is bigger than both, because of her I've had fifteen days with the Teacher. If I hold anything against her, let this burn me. If I hold nothing, let it not.</em></p>
+  <p><em>Good,</em> said the Old Teacher. <em>Good, Ah Lin. That's the way.</em> And then, to all of them, the way he said everything, as if he were telling somebody where the well was:</p>
+  <div class="verse">
+    <p>To those who are good (to me), I am good; and to those who are not good (to me), I am also good;&mdash;and thus (all) get to be good. To those who are sincere (with me), I am sincere; and to those who are not sincere (with me), I am also sincere;&mdash;and thus (all) get to be sincere.</p>
+    <p>&mdash; Tao Teh King 49:2</p>
+  </div>
+  <p>He was quiet for a while. Somebody's chopsticks fell. Then he said one line more.</p>
+  <div class="verse">
+    <p>(It is the way of the Tao) to act without (thinking of) acting; to conduct affairs without (feeling the) trouble of them; to taste without discerning any flavour; to consider what is small as great, and a few as many; and to recompense injury with kindness.</p>
+    <p>&mdash; Tao Teh King 63:1</p>
+  </div>
+  <p>The women on the floor did not move. The ones who were there would say later that it was like setting down a load you had carried so long you had stopped knowing it was there. Chin Gam knelt with her hands flat on the floorboards and her bruised face lifted up toward the old man, and whatever turned over in her then never turned back. Of the forty-one women, every one of them felt it, and not one of them could ever say what it was, except that they came back up the valley road to the temple on the first and fifteenth of every month for the rest of their lives, and some of those lives were long.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>That night the town went down to the river for the hungry dead. There were paper lanterns shaped like lotus flowers with a candle in each, and paper houses and paper money burned on the bank for the ones who had died on this river with nobody to feed them, the men drowned at the bars and crushed in the tunnels and shot on their claims and buried in the gravel without a name. The Old Teacher's men chanted. The children ran with sparklers. White people stood on the levee in the dark to watch.</p>
+  <p>Ah Lin came down to the water with Chin Gam beside her. It had begun to rain a little, a warm thin summer rain off the mountains, and Lau Ping walked behind the two of them with the old red umbrella open, the ten-thousand-people umbrella with the gold names worn brown, and held it over both their heads.</p>
+  <p>Chin Gam lit her lantern from Ah Lin's and set it on the water. Then she put her hand up and touched Ah Lin's hair, where the oil had gone, and it was soft and black and smelled of sesame, and there was not a mark on her anywhere. The two lanterns turned once together in the eddy below the bank and went out into the current, and the Feather River took them down in the dark toward Marysville, with all the others, a long slow line of little lights on the black water as far as anybody could see.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Let a man overcome anger by love, let him overcome evil by good; let him overcome the greedy by liberality, the liar by truth!<cite>Dhammapada 223, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Puṇṇa is a poor laborer in Rājagaha who chooses to plow on a city holiday. He gives the Elder Sāriputta a tooth-stick and strained water, and his wife gives the elder the rice she was bringing to her husband. The plowed field turns to gold. When the king's men gather it as the king's property it turns back to earth, and it turns to gold again once they call it Puṇṇa's. Made a rich man, Puṇṇa is pressed into marrying his daughter Uttarā to the son of an unbelieving family, where she can neither give alms nor hear the teaching. Her father sends money to hire the courtesan Sirimā as her husband's companion for a fortnight, so that Uttarā can feed the Buddha and his monks until the end of the rains. When the husband laughs at Uttarā sweating in the kitchen, Sirimā throws boiling oil on her head. Uttarā holds no anger, and the oil feels cool. She pulls her servants off Sirimā and tends her wounds, and Sirimā begs forgiveness before the Buddha, who praises Uttarā with the verse above. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Uttar%C4%81nandam%C4%81t%C4%81">Uttarā Nandamātā</a>.</p>
+    <h3>Oroville, 1875</h3>
+    <p>Chinese gold-seekers, most of them from Guangdong, began reaching the Feather River in 1849, and for decades they worked claims that others had abandoned as played out. The state taxed them for it. The <a href="https://en.wikipedia.org/wiki/Foreign_Miners%27_Tax_Act_of_1850">Foreign Miners' Tax</a> began at twenty dollars a month in 1850 and was reset at three dollars in 1852. By 1853 it was four dollars, collected monthly, and in practice it fell mainly on the Chinese. In <a href="https://en.wikipedia.org/wiki/People_v._Hall">People v. Hall</a> (1854) the California Supreme Court ruled that Chinese witnesses could not testify against a white man. The town first called Ophir City was renamed <a href="https://en.wikipedia.org/wiki/Oroville,_California">Oroville</a> in 1854 and grew up as the head of navigation on the Feather River. Its brick <a href="https://en.wikipedia.org/wiki/Oroville_Chinese_Temple">Chinese Temple</a>, finished in 1863 after two earlier buildings burned, served the largest Chinese community north of Sacramento. It still stands, with its altars, its processional shrines and its teak bridal sedan chair.</p>
+    <p>On March 3, 1875, President Grant signed the <a href="https://en.wikipedia.org/wiki/Page_Act_of_1875">Page Act</a>, which barred Asian women brought for prostitution. In practice it shut out nearly all Chinese women. Each woman had to be examined by the American consul in Hong Kong, then by the harbor master, then again on arrival in San Francisco, where officials compared her face to her photograph and judged her answers, her feet and her bearing. In 1882 only 136 of 39,579 Chinese arrivals were women. That year Congress passed the <a href="https://en.wikipedia.org/wiki/Chinese_Exclusion_Act">Chinese Exclusion Act</a>, and the bachelor communities of the gold country slowly grew old and dwindled.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the lay disciple Uttarā from the Dhammapada commentary (verse 223). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-03.htm">The original</a>. Scripture from the <em>Tao Teh King</em>, tr. James Legge (1891). Written by Claude Opus 5.5.
+  <div class="pager"><a href="four-saplings.html">&larr; Four Saplings</a><a href="index.html">All stories</a><a href="rice-water.html">Rice Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* Paper lanterns drifting downstream on a dark river, each with a broken reflection beneath it. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, lamps = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(l, anywhere) {
+    l.y = H * (0.66 + Math.random() * 0.32);
+    var depth = (l.y - H * 0.66) / (H * 0.32);
+    l.s = 0.55 + depth * 0.75;
+    l.x = anywhere ? Math.random() * W : -40;
+    l.v = (0.08 + Math.random() * 0.12) * l.s;
+    l.ph = Math.random() * 6.28;
+    l.burn = 0.7 + Math.random() * 0.3;
+    return l;
+  }
+  function make() {
+    var n = Math.round(Math.max(5, Math.min(12, W / 110)));
+    lamps = [];
+    for (var i = 0; i < n; i++) lamps.push(spawn({}, true));
+    lamps.sort(function (a, b) { return a.y - b.y; });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    /* faint current lines */
+    ctx.lineWidth = 1;
+    for (var k = 0; k < 9; k++) {
+      var yy = H * (0.64 + k * 0.04);
+      var off = (t * (0.15 + k * 0.03)) % 160;
+      ctx.strokeStyle = 'rgba(160,180,200,' + (0.025 + k * 0.004) + ')';
+      ctx.setLineDash([60 + k * 8, 100]);
+      ctx.lineDashOffset = -off;
+      ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(W, yy); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    for (var i = 0; i < lamps.length; i++) {
+      var l = lamps[i];
+      if (!reduce) { l.x += l.v; if (l.x > W + 40) spawn(l, false); }
+      var bob = reduce ? 0 : Math.sin(t * 0.02 + l.ph) * 1.2 * l.s;
+      var fl = reduce ? 1 : 0.85 + 0.1 * Math.sin(t * 0.13 + l.ph) + 0.05 * Math.sin(t * 0.31 + l.ph * 2);
+      var a = 0.42 * l.burn * fl;
+      var x = l.x, y = l.y + bob, s = l.s;
+      /* reflection: short broken streaks below */
+      for (var r = 1; r <= 4; r++) {
+        var ry = y + r * 5 * s + 4 * s;
+        var w = (10 - r * 1.5) * s * (reduce ? 1 : 0.8 + 0.3 * Math.sin(t * 0.05 + r + l.ph));
+        ctx.fillStyle = 'rgba(230,140,70,' + (a * 0.35 / r) + ')';
+        ctx.fillRect(x - w, ry, w * 2, 1.4 * s);
+      }
+      /* glow */
+      var g = ctx.createRadialGradient(x, y - 3 * s, 0, x, y - 3 * s, 34 * s);
+      g.addColorStop(0, 'rgba(255,190,120,' + a + ')');
+      g.addColorStop(0.25, 'rgba(214,92,58,' + (a * 0.45) + ')');
+      g.addColorStop(1, 'rgba(214,92,58,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y - 3 * s, 34 * s, 0, 6.2832); ctx.fill();
+      /* the paper lotus: a low cup */
+      ctx.fillStyle = 'rgba(232,120,82,' + (a * 1.3) + ')';
+      ctx.beginPath();
+      ctx.moveTo(x - 7 * s, y - 5 * s);
+      ctx.quadraticCurveTo(x - 6 * s, y + 1 * s, x, y + 1.5 * s);
+      ctx.quadraticCurveTo(x + 6 * s, y + 1 * s, x + 7 * s, y - 5 * s);
+      ctx.lineTo(x + 3 * s, y - 2 * s); ctx.lineTo(x, y - 7 * s); ctx.lineTo(x - 3 * s, y - 2 * s);
+      ctx.closePath(); ctx.fill();
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

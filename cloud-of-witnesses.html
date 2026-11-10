@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloud of Witnesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on sea-fog paper, with spangles tumbling slowly down behind it; datelined sections. */
+  --ground: #eceae4;
+  --ground-2: #e2dfd6;
+  --paper: #2a2a2b;
+  --paper-dim: #6b6863;
+  --accent: #9e2f28;
+  --glow: #a9852b;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -20%, #f7f6f2 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(42,42,43,.25); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(158,47,40,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,255,255,.55); border: 1px solid rgba(42,42,43,.14); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,42,43,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,42,43,.14); border-bottom: 1px solid rgba(42,42,43,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,255,255,.55); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 24.6 &middot; Uggasena</span></nav>
+<header>
+  <h1>Cloud of Witnesses</h1>
+  <div class="epigraph">Our soul is escaped as a bird out of the snare of the fowlers: the snare is broken, and we are escaped.<br>&mdash; Psalm 124:7</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Thus it was told me,</span> on the Point at Newport.</p>
+
+<section>
+  <h2>I. The Benches</h2>
+  <p class="dateline">Newport, Rhode Island &middot; summer 1754</p>
+  <p>Once a year, or once in two years, a company of rope-dancers and tumblers came up the coast from the southern colonies and played a week at Newport, on the open ground below the Colony House at the head of the Long Wharf. Their master was a Frenchman out of London named Garnier, and they were eleven in all, with three wagons, a sea-chest of spangles and a great many ropes. They stretched the tight rope between two masts and the slack rope between two others, and they set up a spar of sixty feet in the middle of the ground and stayed it with lines to the corners like a ship's mast. People came in from Portsmouth and Middletown and over the ferry from Jamestown, and they stood on benches set on top of other benches and threw coppers and Spanish silver and the Colony's paper money, which was worth so little by then that a gentleman would throw it by the handful and think nothing of it.</p>
+  <p>On the fourth day Garnier's daughter climbed the spar. She went up it hand over hand with her feet bare, turned over once in the air at the top, and came down standing on the cap of the mast, on a board no wider than a Bible, sixty feet over the cobbles. Then she danced there. She sang a French song and danced to it with her arms out, stepping on the air beside the board and back onto it, and the wind off the harbor took her skirts and the song both.</p>
+  <p>Edmund Lisle was standing on the top of a stack of benches with his friend Caleb Hart, eating oysters out of a paper. He was twenty-two. His father was Josiah Lisle, who owned a distillery on Thames Street and a third share in four ships, and the ships went out to the coast of Guinea with rum and came home by way of Barbados, and the Lisles had a house with a carved doorway and a man named Cudjo, whom they owned, to open it. Edmund watched Nan Garnier dance on the air, the way she used her hands and her feet, and he dropped the paper of oysters and did not pick it up.</p>
+  <p>He went home and lay down on his bed in his boots.</p>
+  <p><em>If I can have her I'll live,</em> he said. <em>If I can't I'll die here.</em> And he would not eat.</p>
+  <p>His mother sat by the bed and said, <em>Ned, don't be a fool. We'll find you a girl of our own sort, with a portion.</em> His father stood in the door and said worse than that, and then said all of it again the next day, and Edmund lay with his face to the wall and drank only water. On the sixth day Josiah Lisle sent for Caleb Hart, counted a thousand pounds in Rhode Island bills into a leather bag, and said: <em>Take this to the Frenchman and tell him to give his girl to my son.</em></p>
+  <p>Garnier was mending a rope in the back of a wagon. He looked into the bag, then at Caleb, and then he laughed.</p>
+  <p><em>Old Tenor,</em> he said. <em>There's not forty pound sterling in it. And I don't sell my daughter for money, not for good money either. But if it's true he can't live without her, let him come along with us. If he'll do that, I'll give her to him.</em></p>
+  <p>Caleb took the word back. Edmund got up off the bed. <em>Of course I'll go.</em> His mother wept and his father swore and neither of them could stop him. He put on his oldest coat and walked down to the Long Wharf, where the company was loading for New York, and Garnier married his daughter to him in the cabin of the sloop before they cleared the harbor, by the sloop's master, with the tumblers for witnesses.</p>
+</section>
+
+<section>
+  <h2>II. The Wagon</h2>
+  <p class="dateline">The road &middot; 1754&ndash;1755</p>
+  <p>They played New York and Perth Amboy and Philadelphia, and went down through the Jerseys and Maryland to Annapolis and Williamsburg, and the next spring north again. They played courthouse greens and tavern yards and fairs, wherever the magistrates would let them, and left in the night wherever they would not.</p>
+  <p>Edmund drove the lead wagon. Wherever they stopped he cut grass and carried water for the horses. Wherever they played he set up the masts and the scaffolds and stayed the spar, swept the ground, took the money at the rope, and when it was over he struck it all and loaded it again. He had never done a day's work in his life. His hands bled for a month and then were horn.</p>
+  <p>In the spring at Annapolis Nan had a son. They named him Josiah, for Edmund's father, who did not answer the letter. Nan went back up on the rope three weeks after, and in the evenings she sat on the wagon step with the boy on her knee and bounced him and sang to him. She made the songs up as she went, in English and in French, to old tunes.</p>
+  <p><em>Hush, my little carter's son,</em><br><em>carter's son, carter's son,</em><br><em>son of a hewer of wood and drawer of water,</em><br><em>son of a know-nothing, hush.</em></p>
+  <p>Edmund was greasing a wheel. He listened to it three nights running.</p>
+  <p><em>Is that me in the song?</em></p>
+  <p><em>Yes, that's you.</em></p>
+  <p><em>Then I'll run off and leave you.</em></p>
+  <p><em>Go or stay,</em> said Nan. <em>What is it to me?</em> And she sang it again, and the boy laughed. She was the best rope-dancer between Boston and Charles Town and she knew it. She brought in more money in a week than the rest of the company together, and every man on every bench in every town looked up at her as if she were the moon. She did not need him for anything.</p>
+  <p>He sat a long time on the wagon tongue in the dark. <em>Why is she so proud?</em> he thought. And then, because he was not a fool, only young: <em>Because of what she can do up there.</em> And then: <em>Very well.</em></p>
+  <p>In the morning he went to his father-in-law. Garnier looked at him a while, and looked at his hands, and nodded.</p>
+  <p>He was a year learning. He fell off the slack rope at Elizabeth Town and broke two ribs. He fell off the tight rope into a hay wagon at New Brunswick, on purpose, Garnier said afterward, which was the first thing he had done right. He learned the balance on the pole and the turn in the air and the lighting on the cap of the mast, and how to stand up there in a wind. He learned it on a twelve-foot pole and then a twenty and then a forty. Nan watched him from the wagon step with the boy and did not sing the song anymore, but she did not say anything else either.</p>
+  <p>In the summer of 1756 he played the spar alone at Providence, and the people of Providence stood on their benches and roared. Then the company went down the bay to Newport.</p>
+</section>
+
+<section>
+  <h2>III. The Spar</h2>
+  <p class="dateline">Newport &middot; Yearly Meeting week, 1756</p>
+  <p>The war with France had been declared that spring, and every wharf in the town was fitting out a privateer. Edmund got a sixty-foot topmast out of a brig at the Long Wharf that would not be ready for sea for a month, and he had the crier go through the town and printed bills put up on the doors of the taverns: <em>Seven Days Hence, on the Ground below the Colony House, Mr. EDMUND LISLE, Son of a Merchant of this Town, will Perform upon the Spar.</em> His father tore the bill off the door of the distillery with his own hand. His mother read it at the window and sent him a cold chicken by Cudjo.</p>
+  <p>It was the week of the Yearly Meeting, when the Friends of all New England came to Newport to sit together in the Great Meeting House, from Nantucket and Dartmouth and Lynn and Smithfield, and every Quaker house on the Point had six to a bed. So the town was full. On the seventh day the people built the benches up three and four high around the ground, and stood on them, and sat on the Colony House steps, and climbed the rigging of the ships at the Long Wharf to see.</p>
+  <p>Among the Friends that week was an old woman from the mainland named Mercy Dunbar, a public Friend, which is to say a minister, who had traveled in the ministry for forty years from Carolina to Nova Scotia with a minute from her meeting in her pocket and some other Friend always beside her for company. She was seventy-seven. Her companion that summer was Deborah Pell of Nantucket, a widow of fifty, broad as a door and nearly as tall, whose husband had gone down with a whaling sloop and who had carried the oars in her own boat since.</p>
+  <p>On the morning of the seventh day Mercy Dunbar woke before light in a Friend's house on the Point and lay still a long while with her eyes open. Then she said to Deborah, who was dressing: <em>We'll go up through the town this forenoon.</em></p>
+  <p><em>There's a rope-dancer on the Colony House ground,</em> said Deborah. <em>The whole town's gone to it. Friends are advised to keep away.</em></p>
+  <p><em>I know it,</em> said Mercy Dunbar. <em>Get thy bonnet.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Edmund went up the spar in white stockings and a scarlet jacket sewn all over with spangles, that had been Garnier's. He went up it the way Nan had gone up it two summers before, hand over hand, and the benches went quiet under him. At the top he stood on the cap, on the board, and let go of the mast with both hands, and looked down.</p>
+  <p>He could see the whole town. The harbor full of masts. The roof of his father's house on Thames Street and the smoke of the still-house behind it. The Long Wharf, Goat Island, the fort, the Jamestown ferry coming over. Two thousand faces turned up at him like plates on a dresser. Somewhere on the ground below was Nan, with the boy on her hip, looking up. He raised one arm to the crowd for the noise, and they gave it to him, and he bent his knees and went up into the air and turned over seven times, one after another, and came down standing on the board sixty feet over the cobbles with his arms out.</p>
+  <p>Nobody shouted. Nobody threw anything. He looked down.</p>
+  <p>Mercy Dunbar was coming up the slope from the Long Wharf with Deborah Pell beside her and a few other Friends behind, a small old woman in a grey gown and a plain bonnet, walking slowly with a stick. She was not doing anything. She was only walking up the hill. And every face on the benches had turned away from the spar to look at her, all together, the way a field of barley turns in one wind. People on the Colony House steps stood up to see her better. A sailor in the rigging of a snow at the wharf hung out over the yard by one hand with his mouth open. Not one of them was looking at Edmund Lisle.</p>
+  <p>He stood on the cap of the mast and felt it go out of him like water out of a cracked jug. <em>A year,</em> he thought. <em>Two broken ribs. A year of Elizabeth Town and New Brunswick, and an old Quaker woman walks up the hill and they turn around to look at her bonnet. It's failed. The whole of it has failed.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Invitation</h2>
+  <p class="dateline">The Colony House ground &middot; the same forenoon</p>
+  <p>Mercy Dunbar stopped at the edge of the crowd and looked up at him a long while with her hand shading her eyes. Then she said something to Deborah Pell, and Deborah came forward through the benches, and the people let her by, and she went straight across the empty ground to the foot of the spar and stood there with her feet apart and put back her head and called up to him, in a voice that had called across a good deal of water.</p>
+  <p><em>Look down here, Edmund Lisle! Thou that art so strong on the rope! Make a stage for the people! Make them laugh!</em></p>
+  <p>Edmund looked down at her. Something came back into him all at once, warm, the way blood comes back into a hand. <em>Even the Quakers want to see it,</em> he thought. <em>The old woman wants to see me do it.</em> And he called down from the cap of the mast:</p>
+  <p><em>Look up here, Friend! Thou that art so wise and strong! I'll make a stage for the people! I'll make them laugh!</em></p>
+  <p>And he went up off the board into the air and turned fourteen times, over and over, so fast the spangles on the scarlet jacket made one ring of light around him, and came down standing on the cap of the mast with his arms out, and the benches came back to him with a roar that sent the gulls up off every roof on the harbor.</p>
+  <p>Mercy Dunbar had come forward to the foot of the spar. When the noise was gone she spoke up to him. She did not raise her voice much, and yet the ones who were there said afterward that everyone on the benches heard every word of it, and so did the sailors in the rigging, and so did Josiah Lisle, who was standing with his hat over his face at the corner of Thames Street and had sworn he would not come.</p>
+  <p><em>Edmund. Let go of what's behind thee. Let go of what's before thee. Let go of where thou standest now.</em> And then she said it the way she would have said it in meeting:</p>
+  <div class="verse">
+    <p>Wherefore seeing we also are compassed about with so great a cloud of witnesses, let us lay aside every weight, and the sin which doth so easily beset us, and let us run with patience the race that is set before us, Looking unto Jesus the author and finisher of our faith; who for the joy that was set before him endured the cross, despising the shame, and is set down at the right hand of the throne of God.</p>
+    <p>&mdash; Hebrews 12:1&ndash;2</p>
+  </div>
+  <p>Edmund heard it standing on the board on the top of the mast, sixty feet over the cobbles, with nothing in his hands.</p>
+  <p>He let go of Thames Street and the carved doorway and the bag of Old Tenor. He let go of the carter's son and the know-nothing and the song on the wagon step. He let go of the year and the broken ribs and the fourteen turns and the roar, and of whatever was coming tomorrow, and of the board under his feet, and of the boy, and of Nan. He let go of Edmund Lisle. Two thousand people were looking up at him and there was nobody there for them to see. He stood on the cap of the mast in the wind off the harbor, and it was the stillest he had ever been in his life.</p>
+  <p>Those who were nearest said that his face changed. Some said it went pale, and some said it went bright, and one Friend from Dartmouth who wrote it down in a letter that night said only that it looked like the face of a man who has been a long time in a dark room when somebody opens the shutter.</p>
+  <p>It was not only his face. Of the two thousand on the benches that forenoon, a great many went home quieter than they had come, and could not have said why. Men who had come to see a merchant's son break his neck walked down Thames Street with their hats in their hands. That year more strangers sat down on the back benches of the Great Meeting House than anyone could remember, and some of them stayed, and the Friends of the Point, who kept careful books, could never account for it.</p>
+</section>
+
+<section>
+  <h2>V. The Ground</h2>
+  <p class="dateline">The foot of the spar</p>
+  <p>Then he came down. He did not climb. He walked off the board onto the stays as if they were a staircase and came down the line to the ground, hand over hand and sometimes no hands at all, and stepped off onto the cobbles and went across to where the old woman stood and knelt down in front of her.</p>
+  <p><em>Let me come with thee,</em> he said. <em>Let me be one of you.</em></p>
+  <p>Mercy Dunbar put out her right hand and he took it. <em>Come then, Friend,</em> she said.</p>
+  <p>This is the part that people would not agree about afterward and that the Friends never put in any minute. A good many people on the benches swore to it, and the sailor in the rigging of the snow swore to it, and Caleb Hart, who was not given to fancies, swore to it all his life: that when Edmund Lisle stood up from his knees he was not wearing the scarlet jacket or the white stockings or the spangles, but a plain coat of grey drugget and a broad hat, like any Friend from the Point. And that his hair, which had been as brown as a chestnut, was white, and his face was the face of a man of sixty, quiet and lined and very kind. And then they looked again and he was Edmund Lisle, twenty-four years old, in a scarlet jacket, holding an old woman's hand. And yet they could not get the other face out of their eyes, and when they met him on the street in after years, grey-coated, they said they knew it again.</p>
+  <p>Deborah Pell and the other Friends walked back down to the Point with the two of them that afternoon. On the way the young Friends from Lynn and Dartmouth fell in alongside Edmund and asked him what they had all been wanting to ask.</p>
+  <p><em>Friend Lisle. When thou camest down off that mast with no hands. Wast thou not afraid?</em></p>
+  <p><em>No,</em> said Edmund. <em>I wasn't afraid.</em></p>
+  <p>The young Friends looked at each other. Friends do not say what is not so, and they are hard on one another about it. When they reached the house on the Point they went to Mercy Dunbar where she sat by the hearth with her shoes off.</p>
+  <p><em>He says he had no fear coming down. Sixty feet with no hands. That is not the truth, and we think he should not be let to say it.</em></p>
+  <p>Mercy Dunbar looked at them over her spectacles. <em>Friends,</em> she said, <em>when everything that tied a man is cut, there's nothing left in him to tremble.</em> And she said:</p>
+  <div class="verse">
+    <p>Our soul is escaped as a bird out of the snare of the fowlers: the snare is broken, and we are escaped.</p>
+    <p>&mdash; Psalm 124:7</p>
+  </div>
+</section>
+
+<section>
+  <h2>VI. The Smile</h2>
+  <p class="dateline">The Point &middot; after Yearly Meeting</p>
+  <p>The talk went all through the Quaker houses on the Point that week, and the young Friends kept it up longest. How could a man who had it in him to come to that in a single forenoon have run off down the coast after a rope-dancer's girl, and carried water for a Frenchman's horses for two years? And if he had been that kind of man, how had he come to it at all?</p>
+  <p>Mercy Dunbar heard them at it one evening and asked what they were talking about, and they told her.</p>
+  <p><em>It's the one thing,</em> she said. <em>Both of them.</em> And she told them a story.</p>
+  <p>When she was a girl of twenty, she said, Friends raised the Great Meeting House here on the Point, and Friends came from all over the colony with wagons of food to feed the men who were raising it. On the road from Portsmouth she was walking with an old public Friend from England who had come over in the ministry. A young man and his wife came up behind them with a cart full of bread and cheese and salt fish for the raising. The young woman saw the old Friend walking and said to her husband: <em>Look, there's a minister going in, and we've a whole cart of victuals. Give him something.</em> So the husband got down and filled the old man's hat with bread and cheese, and the two of them stood in the road and said to him: <em>Friend, let us come one day to what thou hast come to.</em></p>
+  <p>The old Friend looked at the two of them a long while, and then he smiled. It was a broad, sweet, foolish smile, Mercy Dunbar said, like a boy at a fair, and she had never seen a Friend smile like that before or since.</p>
+  <p>The young woman looked at him and said to her husband, under her breath, as they went on up the road: <em>Didst thou see him grin? He's no minister. He must be some kind of play-actor.</em></p>
+  <p>And the husband said, <em>He must be, my dear.</em> And laughed, and went on up to the raising with his cart.</p>
+  <p><em>Who were they?</em> said one of the young Friends.</p>
+  <p><em>I never knew their names,</em> said Mercy Dunbar. <em>They're the same two as always.</em> And she would not say any more about it, then or later, though she lived three years longer.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Nan Garnier sat on the wagon step on the Colony House ground the evening after it happened, with the boy asleep on her lap and the spar still standing in the dusk with nobody on it, and her father struck the rest of the rig around her. She had not gone down to the Point. She had not been asked.</p>
+  <p>She sat there until it was dark. Then she said to her father: <em>Wherever he's gone, I'll go there too.</em></p>
+  <p>Garnier did not argue. He had seen her face when the old woman spoke.</p>
+  <p>She took off the spangled slippers and set them on the wagon step side by side, and walked down Thames Street to the Point in her stockings with the boy on her shoulder, and knocked at the door.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>They were both received into membership by the monthly meeting in the spring, after the usual waiting, and the usual visits, and a good deal of talk. Within ten years each of them had been acknowledged a minister. Edmund traveled in the ministry as far as Georgia, always with some Friend beside him for company, and had nothing to say about the rope to anyone who asked. Nan traveled it with the women Friends from Nantucket to the Carolinas, and spoke in meeting so seldom that when she rose, the old Friends said, you could hear the benches creak all through the house as people leaned forward.</p>
+  <p>The spangled slippers stayed in the bottom of a chest in the house on the Point for sixty years. Their granddaughter found them there when she was a girl, and put them on, and walked the length of the ridgepole of the barn in them one summer afternoon, barefoot inside the satin, with her arms out, while her grandmother stood in the yard below in her grey gown and shaded her eyes and watched her the whole way across, and did not call her down.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Give up what is before, give up what is behind, give up what is in the middle, when thou goest to the other shore of existence; if thy mind is altogether free, thou wilt not again enter into birth and decay.<cite>Dhammapada 348, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Him I call indeed a Brahmana who has cut all fetters, who never trembles, is independent and unshackled.<cite>Dhammapada 397, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Uggasena, a rich man's son of Rājagaha, falls in love with an acrobat's daughter he sees dancing on top of a pole. He refuses food until he can have her, and her father agrees only if he will travel with the troupe. He drives their carts and hauls their gear, and his wife mocks him in songs to their baby son. Stung, he learns the art himself and comes home to perform on a pole sixty cubits high. At the height of his act the Buddha enters the city, and the whole crowd turns to look at him. The Buddha sends the Elder Moggallāna to invite Uggasena to go on. He turns fourteen somersaults, and the Buddha tells him to let go of past, future and present. Uggasena is freed where he stands, comes down unafraid and is ordained. When the monks doubt his claim that he felt no fear, the Buddha speaks the second verse. A past-life story tells of a young couple who fed an elder on their way to work at a shrine, and when he smiled, called him an actor. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-06.htm">the full commentary story</a>, or the entry on <a href="https://aimwell.org/DPPN/uggasena.html">Uggasena</a> in the Dictionary of Pāli Proper Names.</p>
+    <h3>Newport, 1756</h3>
+    <p>By the middle of the eighteenth century <a href="https://en.wikipedia.org/wiki/Newport,_Rhode_Island">Newport</a> was one of the busiest ports in British America, with a population of 6,753 in 1755. Much of its wealth came from the triangle trade: molasses from the Caribbean was distilled into rum, the rum was shipped to West Africa, and it was traded there for captive people. In 1764 the town had twenty-two rum distilleries. Rhode Island's paper money, the "Old Tenor" bills, had lost so much value that when the colony converted them to lawful money in 1763 it took twenty-six and two-thirds Old Tenor shillings to make one (<a href="https://en.wikipedia.org/wiki/Rhode_Island_pound">Rhode Island pound</a>). The town's <a href="https://en.wikipedia.org/wiki/Old_Colony_House">Colony House</a>, built in 1739, stood at the head of the open ground where the Long Wharf ran out into the harbor.</p>
+    <p>Quakers had been welcome in Newport since 1658, and they rose high in its trade and government. Their <a href="https://en.wikipedia.org/wiki/Great_Friends_Meeting_House">Great Friends Meeting House</a>, raised in 1699, is the oldest surviving house of worship in Rhode Island. Each year it hosted the <a href="https://newporthistory.org/properties/great-friends-meeting-house/">New England Yearly Meeting</a>, when Friends from all over the region crowded into the town. Recognized ministers, women as well as men, were called "public Friends." Many traveled in the ministry for months or years at a time, carrying a <a href="https://nyym.org/node/951">certificate from their monthly or quarterly meeting</a> and relying on the hospitality of Friends along the way. Newport had no theatre of its own in these years. When a London company of players opened a playhouse on Easton's Point in 1761 in defiance of a town council vote, the colony soon answered with <a href="https://newporthistory.org/theatre-in-newport/">a law against stage plays</a> that stopped performances for decades.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Uggasena from the Dhammapada commentary (verses 348 and 397). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-06.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-yellow-cod.html">&larr; The Yellow Cod</a><a href="index.html">All stories</a><a href="the-near-bank.html">The Near Bank &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* Spangles shaken loose from a scarlet jacket, tumbling slowly down through sea light; each catches the sun only as it turns. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, sp = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(s, anywhere) {
+    s.x = Math.random() * W;
+    s.y = anywhere ? Math.random() * H : -10;
+    s.r = 2 + Math.random() * 2.6;
+    s.vy = 0.12 + Math.random() * 0.22;
+    s.sw = 0.4 + Math.random() * 0.8;
+    s.ph = Math.random() * 6.28;
+    s.spin = 0.008 + Math.random() * 0.02;
+    s.ang = Math.random() * 6.28;
+    s.red = Math.random() < 0.35;
+    return s;
+  }
+  function make() {
+    var n = Math.round(Math.max(14, Math.min(40, W / 36)));
+    sp = [];
+    for (var i = 0; i < n; i++) sp.push(spawn({}, true));
+  }
+  var t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < sp.length; i++) {
+      var s = sp[i];
+      if (!reduce) {
+        s.y += s.vy; s.ang += s.spin;
+        s.x += Math.sin(t * 0.01 + s.ph) * 0.15 * s.sw;
+        if (s.y > H + 10) spawn(s, false);
+      }
+      var face = Math.cos(s.ang);               /* -1..1: edge-on at 0 */
+      var w = Math.max(0.35, Math.abs(face)) * s.r;
+      var flash = Math.pow(Math.max(0, face), 12); /* brief glint when it faces us */
+      var base = 0.16, a = base + flash * 0.5;
+      var x = s.x + Math.sin(t * 0.013 + s.ph) * 6 * s.sw;
+      ctx.save();
+      ctx.translate(x, s.y);
+      ctx.rotate(s.ph);
+      ctx.fillStyle = s.red ? 'rgba(168,50,43,' + a + ')' : 'rgba(184,144,47,' + a + ')';
+      ctx.beginPath(); ctx.ellipse(0, 0, w, s.r, 0, 0, 6.2832); ctx.fill();
+      if (flash > 0.05) {
+        ctx.fillStyle = 'rgba(255,248,225,' + (flash * 0.7) + ')';
+        ctx.beginPath(); ctx.arc(-w * 0.3, -s.r * 0.3, s.r * 0.45, 0, 6.2832); ctx.fill();
+      }
+      ctx.restore();
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

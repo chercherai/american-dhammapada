@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Last Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a cream bill-of-fare card, light theme; in the margins faint lines of a copperplate menu write themselves, and now and then a pencil stroke is drawn through the last one and the line fades; datelined sections. */
+  --ground: #f3eee3;
+  --ground-2: #e9e1cf;
+  --paper: #2b2521;
+  --paper-dim: #6e6458;
+  --accent: #7d2230;
+  --accent-2: #a5812f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #fbf8f1 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,37,33,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(125,34,48,.22); }
+.epigraph { border-left: 1px solid rgba(125,34,48,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(233,225,207,.75); border: 1px solid rgba(43,37,33,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,37,33,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,37,33,.1); border-bottom: 1px solid rgba(43,37,33,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(233,225,207,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 15.6 &middot; Pasenadi Kosala</span></nav>
+<header>
+  <h1>The Last Course</h1>
+  <div class="epigraph">There is no riches above a sound body, and no joy above the joy of the heart.<br>&mdash; Ecclesiasticus 30:16</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ainsi je l&rsquo;ai entendu,</span> in the kitchens under Fifth Avenue.</p>
+
+<section>
+  <h2>I. Breakfast</h2>
+  <p class="dateline">Fifth Avenue, New York &middot; January 1884</p>
+  <p>Josiah Ruland ate breakfast at half past eight in a room panelled in walnut, under a painting of a stag at bay, and on an ordinary weekday it went like this. A dozen Blue Points on the half shell. A porterhouse steak. Two mutton chops, because the steak was never enough by itself. Four eggs, shirred. Fried potatoes, a stack of buckwheat cakes with butter and Vermont syrup, a dish of stewed kidneys if the cook had them, rolls, and a pot of coffee with a pitcher of cream. He did not think of this as a large breakfast. He thought of it as breakfast. His father had been a canal-boat captain on the Lehigh who ate cornmeal mush out of a tin plate, and Josiah Ruland had made his own money out of the anthracite, and the coal roads, and the iron, and every morning he sat down to that table like a man settling an account.</p>
+  <p>He was fifty-eight that winter. He had been the best rider in his club when he was forty, and now he could not mount a horse without a block and a groom, and he had not been out with the hounds in four seasons. He wheezed on the stairs. He slept badly at night and heavily in the day, in the library, in his carriage, in the pew at Grace Church through the whole of the sermon, and when he woke his mouth was sour and his temper was worse.</p>
+  <p>His temper fell, most mornings, on his nephew.</p>
+  <p>Christopher Ruland was twenty-eight and his uncle&rsquo;s private secretary, which meant he opened the letters, kept the engagements, carried the papers to the directors&rsquo; meetings at the office on Wall Street and was spoken to in front of the clerks like a boy who had broken a window. He was the son of Josiah&rsquo;s younger brother Will, who had been a partner in the first mines and had gone to the war and been mortally wounded at Cold Harbor. In the spring of 1865 Josiah had bought Will&rsquo;s shares from his widow for a fair price, he always said, a fair price for the time. Kit had been eight years old and had not thought about it until he was twenty, and since he was twenty he had thought about little else. He did not say it. He did not need to. It was in the way he laid the letters on the desk.</p>
+  <p>There was a daughter, too, Adela, who was twenty-two, and grave, and fond of her cousin, and the two of them had been forbidden to speak of it since the summer.</p>
+  <p>On the second Monday of January Josiah Ruland finished his breakfast, called for his carriage, and told Kit to come with him and bring the cheque-book. He was going down to Rivington Street.</p>
+</section>
+
+<section>
+  <h2>II. The Dispensary</h2>
+  <p class="dateline">Rivington Street &middot; the same morning</p>
+  <p>The dispensary was in the ground floor of a tenement east of the Bowery, two rooms and a hall, with a bench along the wall of the hall and a stove at the end of it, and it had been there for eleven years. Ruland&rsquo;s wife Cornelia had given the money to open it, before she died, and Ruland went on paying the rent and the coal and the doctor&rsquo;s small salary because Cornelia had asked him to, and once a quarter he went down to look at it, the way he looked at a mine.</p>
+  <p>The doctor was Hester Ashdown. She was sixty-one years old, the daughter of a country rector in Connecticut, and she had taken her degree at the Female Medical College in Philadelphia in 1857, when the men students at the other colleges in that city still hissed women in the street. In the war she had been one of Miss Dix&rsquo;s nurses, who had to be over thirty-five and plain, and she said she had qualified on both counts with room to spare. She had nursed the wounded from the Wilderness and from Cold Harbor in the long sheds at Fredericksburg and in the river hospitals, and she had been in the ward where they brought the officers from the Second Corps, and she had sat one night with a captain named Ruland who was asking for his boy. She had never told the uncle this. She had told the nephew, once, years ago, when he was a student and came down with his aunt&rsquo;s Christmas parcels, and he had never told anyone either.</p>
+  <p>She was with a patient when they came in, and the bench was full of women from the street with babies in shawls, so Ruland walked. He walked up the hall and down it in his sealskin coat, with his hat in his hand, breathing hard. He looked like a man who had been sent for and could not remember why. He stopped by the stove. His eyes kept closing. He would not lie down on anything in that place and he would not sit among the women, and after a time a young Polish mother moved her two children onto her lap and made room for him at the end of the bench without a word, and he sat. In two minutes his chin was on his chest. The babies watched him.</p>
+  <p>When the doctor came out at last she stood in front of him until he woke.</p>
+  <p><em>Did you come here before you&rsquo;d had your sleep, Mr. Ruland?</em></p>
+  <p><em>I&rsquo;ve slept,</em> he said. <em>I&rsquo;m always like this after a meal. It&rsquo;s a misery to me. I&rsquo;ve had the best men on Madison Avenue and they give me pills and send me to Saratoga for the waters.</em></p>
+  <p>She looked at him a while, at the coat and the colour of his face and the way his chest moved. She did not take his pulse. She said she supposed he had eaten a good breakfast.</p>
+  <p>He told her what he had eaten. Kit, standing by the door, listened to the list go by and watched the faces of the women on the bench, who were eating, that winter, bread and tea and herring when there was herring.</p>
+  <p><em>Well,</em> said Dr. Ashdown. <em>That is what eating like that does. It brings exactly this.</em> And she said it to him, plainly, the way she would have told him he had a fever.</p>
+  <div class="verse">
+    <p>Sound sleep cometh of moderate eating: he riseth early, and his wits are with him: but the pain of watching, and choler, and pangs of the belly, are with an unsatiable man.</p>
+    <p>&mdash; Ecclesiasticus 31:20</p>
+  </div>
+  <p>Ruland said that his wife&rsquo;s father had been fond of quoting the Apocrypha too.</p>
+  <p><em>Then you know there&rsquo;s more of it,</em> she said, and gave him the rest of what she had to give him, which was the same thing from further on in the same book. A man should know the measure of what he eats. He should be watchful at the table the way he would be watchful at a contract. And if he were, he would have fewer pains, and age slowly, and keep his life.</p>
+  <p>He tried to say it back to her and could not hold it. He could have told her the price of a ton of egg coal at tidewater in every month since 1859, and he could not keep three lines of Ecclesiasticus in his head for the length of the hall.</p>
+  <p>So she went into the back room and took a prescription blank off the pad, and wrote on it, and came out and gave it, not to him, but to Kit.</p>
+  <p><em>Learn this,</em> she said.</p>
+  <p>Kit read it. <em>And when I&rsquo;ve learned it, Doctor, what do I do with it?</em></p>
+  <p><em>At dinner, when your uncle comes to the last course, and he has his fork in his hand, you say it to him. Out loud, at the table. He&rsquo;ll understand you. He&rsquo;ll put it down. And in the morning you take the card from that dinner down to the kitchen, and you draw a line through that course, and you tell the cook that tonight it isn&rsquo;t to be made at all.</em></p>
+  <p><em>And the next night?</em></p>
+  <p><em>The same, with whatever is last.</em></p>
+  <p><em>Until when? Until he&rsquo;s eating bread and water?</em></p>
+  <p><em>Until he can get up from the table and walk to the top of his own stairs without stopping on the landing,</em> said Dr. Ashdown. <em>Then leave it where it is.</em></p>
+  <p>Ruland looked at the two of them. He did not like to be talked over. But he had been talked over by the men on Madison Avenue too, and paid them for it, and they had never said anything to him half so plain. He took out the cheque-book and wrote a cheque to the dispensary and gave it to her, and she thanked him and put it in her apron pocket without looking at it, and went back to the women on the bench.</p>
+</section>
+
+<section>
+  <h2>III. The Card</h2>
+  <p class="dateline">Fifth Avenue &middot; winter and spring 1884</p>
+  <p>Even when the family dined alone in that house there were nine courses, and when there was company there were thirteen or fourteen, and every dinner had its card in a silver holder by each plate, written out in French in the hand of Monsieur Achille Bréval, who had cooked for an ambassador in Paris and for Mr. Ruland for nine years and was paid, the servants said, more than the president of a bank. The card for that Monday read: oysters; a clear turtle soup; a timbale of sweetbreads; a turbot with lobster sauce; a saddle of mutton with French beans; terrapin in the Maryland style; a sorbet of Roman punch; canvasback duck with fried hominy and celery; and an iced pudding with fruits and bonbons.</p>
+  <p>Ruland came down to it in a bad humour, and Adela came down in a grey silk, and Kit came down with a paper folded small in his waistcoat pocket. They went through it. They always went through it. The servants came and went. The candles burned in the silver. When the iced pudding came round, molded like a castle, and the footman set a slice of it before Ruland and he took up his spoon, Kit put down his own.</p>
+  <div class="verse">
+    <p>Be not unsatiable in any dainty thing, nor too greedy upon meats: For excess of meats bringeth sickness, and surfeiting will turn into choler. By surfeiting have many perished; but he that taketh heed prolongeth his life.</p>
+    <p>&mdash; Ecclesiasticus 37:29&ndash;31</p>
+  </div>
+  <p>He said it to the tablecloth the first time, and his voice was not steady. Adela stared at him. The footman stood like a post. Ruland held his spoon above the plate and looked at his nephew down the length of the table, and the look went on so long that Kit thought he would be put out of the house that night. Then Ruland laid the spoon down beside the plate, and pushed the plate an inch away with two fingers, and got up.</p>
+  <p>He went into the library and sat down at the desk and wrote out a cheque to the Rivington Street Dispensary for one hundred dollars, and sealed it in an envelope, and rang for a man to take it down in the morning. Then he went up to bed. He stopped twice on the stairs.</p>
+  <p>In the morning Kit went down to the kitchen with the card. He had never been in his uncle&rsquo;s kitchen. It was the size of a chapel, tiled white to the ceiling, with copper on every wall and a range as long as a railway car, and Monsieur Achille stood at the end of it in his white cap and looked at the young gentleman as if he were a rat that had come up the dumbwaiter. Kit drew a line through the iced pudding with a pencil and explained. Monsieur Achille said several things in French that Kit, who had studied French at Columbia, mostly understood.</p>
+  <p>That night there was no pudding. The last course was the canvasback. When Ruland lifted his fork to it, Kit said the verse again, steadier, and Ruland laid down the fork and pushed the plate away and went and wrote the cheque. In the morning Kit drew a line through the canvasback.</p>
+  <p>It went on like that. The sorbet went. The terrapin went, and Monsieur Achille said that in his professional life he had never been so insulted, and gave notice, and withdrew it the same afternoon. The saddle of mutton went. Every night Kit said it, and every night the old man heard it to the end with his fork in the air, and put the fork down, and went into the library and wrote a cheque for a hundred dollars to the dispensary, and the envelope went down to Rivington Street in the morning. Below stairs they began to call it the Doctor&rsquo;s course. The second footman, who was from Cork, said the old man was being read his sentence nightly like a felon in the dock, and the butler told him to hold his tongue.</p>
+  <p>On the nineteenth night the card in the silver holder had three lines on it: a soup; a chop with potatoes; an apple. Ruland ate the soup and the chop, and when Kit opened his mouth to speak he looked at the apple and put up his hand and said, <em>I know.</em> And he got up and went out into the hall and climbed the stairs, slowly, one hand on the rail, all the way to the top, without stopping on the landing. Kit stood at the bottom and watched him do it.</p>
+  <p>In the morning Kit took the card down to the kitchen and did not draw a line through anything. He told Monsieur Achille it was to stay as it was. Monsieur Achille looked at the three lines for a long time, and then he said that if he was only to have a soup and a chop and an apple to cook, then by God they would be the best soup and the best chop and the best apple in the city of New York, and they were.</p>
+  <p>The card stayed at three lines. When there was company, the company had their fourteen courses and Ruland had his three, and the company talked about it afterward in their carriages, and he did not care. The cheques went on. They went on through Lent and Easter and into the spring. With them Dr. Ashdown took the second floor of the tenement and put eight beds in it for lying-in, and hired a nurse, and paid a woman on the fourth floor to keep a stove going for the hot water.</p>
+  <p>By May Ruland had let out his waistcoats twice the other way. He sat through the sermon at Grace Church awake, with his arms folded, and found he disagreed with most of it. He began to taste his food. It surprised him. He said to Kit one evening, over the chop, as if he were reporting a discovery in the coalfields, that mutton tasted of mutton.</p>
+</section>
+
+<section>
+  <h2>IV. The Sauceboat</h2>
+  <p class="dateline">Fifth Avenue &middot; April</p>
+  <p>Cornelia Ruland&rsquo;s diamond had been lost on New Year&rsquo;s night.</p>
+  <p>It was a single stone the size of a hazelnut on a fine gold chain, which Ruland had bought in Paris the year the first mine paid, and which Cornelia had worn at every dinner of her married life, and which Adela wore now. On New Year&rsquo;s night, at a dinner for twenty-four, the clasp had given way, and the stone had gone somewhere between the soup and the ices, and was not found. The rugs were taken up. The chairs were turned over. The detectives came from the Pinkerton office and talked to the servants one by one in the butler&rsquo;s pantry. Ruland dismissed the second footman, a boy named Daly who had served Adela&rsquo;s side of the table and had the misfortune to have a brother who had been in the Tombs, and Daly went out of the area door in January without a character, and Adela cried, and Ruland said that was what came of it.</p>
+  <p>In April, when the turbot had been off the card for two months and Monsieur Achille had given up hoping it would come back, the butler had the fish service brought out of the pantry to be wrapped in flannel and put away in the strong room for the summer. It was a great silver set, the fish dishes and the slices and the sauceboats, and when the under-butler turned the big sauceboat over to polish the foot, something rolled out of the scroll under the handle where the lobster sauce had dried around it on New Year&rsquo;s night, and rang on the pantry table, and lay there in the gaslight.</p>
+  <p>Ruland sent Kit to find Daly. It took Kit nine days and most of the Fourth Ward. He found him at last unloading oranges on a pier on South Street, and brought him back up the avenue in a hansom, and Ruland gave him his place again and his back wages and a letter in his own hand that Daly kept in his pocket for the rest of his life and showed to anyone who doubted him.</p>
+</section>
+
+<section>
+  <h2>V. Grace Church</h2>
+  <p class="dateline">Broadway and Long Island &middot; June to October</p>
+  <p>The quarrel did not end in a day. It ended a little each night, at the table, over the card. A man cannot say the same words to another man every evening for three weeks, and be obeyed, without something changing between them. Kit found he could not hate a man who put down his fork when he was asked. Ruland found that the boy he had spoken to like a clerk for six years had a voice he did not mind hearing. One evening in the library, with the cheque drying on the blotter, he said without looking up that Will&rsquo;s shares had been worth twice what he had paid for them in &rsquo;65, and he had known it, and he had told himself it was a fair price for the time. Kit said nothing for a while. Then he said that he knew it too, and that he had known for eight years, and that he was tired of knowing it.</p>
+  <p>In June, Ruland gave his daughter to his nephew at Grace Church, with a bishop and the choir and half of Washington Square in the pews and a crowd on Broadway outside the railings to see the dresses go in. There were people who said first cousins ought not to marry and people who said the Rulands had done it to keep the money in the family, and both kinds of people came to the wedding. Ruland walked Adela up the aisle under his own power, and stood at the rail without leaning on it. He gave the young couple the place on Long Island, the white house with the pond below the lawn where Adela had learned to swim as a child, so that she would have, he said, her own water to bathe in, and he made Kit a partner in the firm, on the same terms as his father had been.</p>
+  <p>In the summer he asked Dr. Ashdown whether she had any family that wanted a place. She had a grand-niece, it turned out, Nell, the daughter of a nephew who had gone west and done poorly and died, a sharp girl of nineteen who had taught herself the type-writing machine. Ruland took her into the house to keep his correspondence and the accounts of his charities, which were now considerable, and she sat in Kit&rsquo;s old chair at the desk in the library and rattled at a Remington from nine to five and put the cheques in their envelopes. He did not ask who her mother had been. Dr. Ashdown, who would have told him, was not asked.</p>
+  <p>In September he rode again. He went out to the Meadow Brook country on Long Island and hired a big steady bay from a dealer at Hempstead, and on a grey morning in October he was out with the hounds over the plains, a lean man in an old scarlet coat that had been taken in by a tailor on Twenty-third Street, and he took the first wall clean and the second one badly and stayed on. He came home with mud to his collar and ate a chop and an apple and slept nine hours.</p>
+  <p>At the end of that month the money men of the city gave a dinner at Delmonico&rsquo;s for Mr. Blaine, who was running for president, and Ruland was asked, and sent his regrets. The next morning the <em>World</em> printed a cartoon across its front page of the millionaires at the dinner feasting like Belshazzar while a working man and his wife and child begged for the crumbs, and the Democrats passed the menu of the dinner from hand to hand as if it were an indictment. Monsieur Achille read the menu in the kitchen aloud to the staff, all of it, the oysters and the terrapin and the canvasback and the ices, in a voice of deep contempt.</p>
+</section>
+
+<section>
+  <h2>VI. The Bench</h2>
+  <p class="dateline">Rivington Street &middot; November 1884</p>
+  <p>Ruland went down to Rivington Street the week after the election, on foot from the elevated at Grand Street, in the cold, with no one with him. The bench was full, as it was always full, and he did not walk up and down this time. He sat at the end of it, among the women, with his hat on his knee, and waited his turn like anyone, and a little girl in a red hood sat next to him and looked at his watch-chain for half an hour while he let her.</p>
+  <p>When Dr. Ashdown came out and saw him she brought him back into the small room and gave him the patients&rsquo; chair and sat down at her desk.</p>
+  <p><em>Doctor,</em> he said, <em>I have come to tell you I&rsquo;m a happy man. I don&rsquo;t believe I have been one before.</em></p>
+  <p>She waited.</p>
+  <p>He told her. He told it like a report to his directors, item by item, as if he were afraid of leaving something out. He was well. He slept. He could ride again, and had taken a wall on Long Island at fifty-eight with men half his age watching, and had not fallen off. He had quarrelled with his brother&rsquo;s son for six years, and now his brother&rsquo;s son had his daughter and his brother&rsquo;s share, and they did not quarrel, and he had not known how much the quarrel cost him until it stopped. His wife&rsquo;s diamond, which had been lost, had come back to him, out of a sauceboat, if she could believe it, and he had been able to give a boy back his name. And he had her own niece&rsquo;s child in his house, which he had done because he wished her to know that he did not hold himself apart from her, and the girl was the best secretary he had ever had and kept him honest.</p>
+  <p>He stopped. He looked at his hands, which were thinner, and at the cheap clock on her desk.</p>
+  <p>Dr. Ashdown sat a while. Then she said it to him, from the same book, the way she said everything, as if she were telling him the dose.</p>
+  <div class="verse">
+    <p>Better is the poor, being sound and strong of constitution, than a rich man that is afflicted in his body. Health and good estate of body are above all gold, and a strong body above infinite wealth. There is no riches above a sound body, and no joy above the joy of the heart.</p>
+    <p>&mdash; Ecclesiasticus 30:14&ndash;16</p>
+  </div>
+  <p>And when he had heard it and was getting up, she gave him one thing more, about the nephew, and he stood holding his hat and heard that too.</p>
+  <div class="verse">
+    <p>A faithful friend is the medicine of life; and they that fear the Lord shall find him.</p>
+    <p>&mdash; Ecclesiasticus 6:16</p>
+  </div>
+  <p><em>The joy of the heart,</em> he said. <em>I don&rsquo;t know what that is, Doctor. I&rsquo;m an old coal man.</em></p>
+  <p><em>No,</em> she said. <em>Not yet. But you&rsquo;ve stopped standing in front of it.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>He went out into the hall. The light was going. Somebody had lit the gas, and the women on the bench were wrapped up in their shawls with the children asleep on them, waiting, and the stove ticked, and the little girl in the red hood had gone in to the doctor with her mother. He stood by the stove a minute buttoning his coat.</p>
+  <p>Then he took out of his breast pocket the thing he had carried there since the spring, which was the prescription blank from January, in Hester Ashdown&rsquo;s hand, gone soft as a handkerchief from being taken out and read at the table and folded and put away again, and the card from the nineteenth night, with its three lines in Monsieur Achille&rsquo;s French: a soup; a chop; an apple. He put the card back in his pocket. The prescription he folded once more and laid on the warm iron of the stove shelf, where the doctor would find it, for the next one.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">If a man becomes fat and a great eater, if he is sleepy and rolls himself about, that fool, like a hog fed on wash, is born again and again.<cite>Dhammapada 325, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Health is the greatest of gifts, contentedness the best riches; trust is the best of relationships, Nirvana the highest happiness.<cite>Dhammapada 204, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, King Pasenadi of Kosala eats rice by the bucketful and comes to the Buddha so heavy with sleep that he paces up and down rather than lie down. The Buddha warns him with a verse about the overeater who rolls about like a fattened hog, then gives him a verse on knowing the measure in food. The king cannot memorize it, so the Buddha has his nephew Sudassana learn it and recite it at every meal just as the king is about to take the last ball of rice; the king throws the ball away, and the next meal is cooked with that many fewer grains. Each time he hears the verse he gives a thousand coins in alms. He grows lean and cheerful, and returns to tell the Buddha that he can hunt again, that he has made peace with his nephew by giving him his daughter Vajirā, that a lost jewel has come back to him, and that he has taken a daughter of the Buddha&rsquo;s own kin into his household. The Buddha answers that health is the greatest gain, contentment the greatest wealth, trust the best kin, and nibbāna the highest happiness. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-06.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Pasenadi">Pasenadi</a>.</p>
+    <h3>New York, 1884</h3>
+    <p>In the Gilded Age a formal dinner in a rich New York house ran to a dozen courses or more, set out on a card written in French: oysters, a soup, fish, entr&eacute;es, a roast, a Roman punch to clear the palate, game such as canvasback duck, terrapin, ices and sweets. The great public table of the city was <a href="https://en.wikipedia.org/wiki/Delmonico%27s">Delmonico&rsquo;s</a>, then at Fifth Avenue and Twenty-sixth Street. On the night of October 29, 1884, days before the presidential election, a crowd of the city&rsquo;s millionaires gave a dinner there for the Republican candidate, James G. Blaine. The next morning the <em>New York World</em> ran Walt McDougall&rsquo;s front-page cartoon <a href="https://ibiblio.org/hmake/cartoonsite/feast.html">&ldquo;The Royal Feast of Belshazzar Blaine and the Money Kings,&rdquo;</a> in which a laborer and his family beg for crumbs from the table; Democrats circulated the menu, and the dinner is often counted among the causes of Blaine&rsquo;s narrow defeat. The Meadow Brook Club, founded on Long Island in 1881, gave the rich a <a href="https://en.wikipedia.org/wiki/Meadowbrook_Polo_Club">polo ground</a> and a hunt.</p>
+    <p>Women physicians were still rare and often unwelcome. The <a href="https://en.wikipedia.org/wiki/Drexel_University_College_of_Medicine">Female Medical College of Pennsylvania</a>, founded in 1850, was the second school in the world to train women for the M.D., and many of its graduates worked in free dispensaries for poor women and children in the immigrant wards of the cities. In the Civil War, <a href="https://en.wikipedia.org/wiki/Dorothea_Dix">Dorothea Dix</a> recruited some 3,000 nurses for the Union Army and asked that they be between thirty-five and fifty and plain-looking. The Ruland family, Dr. Ashdown and her dispensary, Monsieur Achille and the diamond are invented. Ecclesiasticus, the Wisdom of Jesus the son of Sirach, is one of the books of the Apocrypha, which the Episcopal Church read in its lessons and the King James translators set between the Testaments.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of King Pasenadi of Kosala from the Dhammapada commentary (verses 204 and 325). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-06.htm">The original</a>. Scripture from Ecclesiasticus in the Apocrypha of the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="bean-bread.html">&larr; Bean Bread</a><a href="index.html">All stories</a><a href="thousand-eyes.html">Thousand Eyes &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, lines = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function margin() {
+    var col = Math.min(576, W - 40), left = (W - col) / 2;
+    var side = Math.random() < 0.5 ? 0 : 1;
+    var mw = Math.max(40, left - 30);
+    var x = side ? W - left + 15 + Math.random() * Math.max(5, mw - 120) : 15 + Math.random() * Math.max(5, mw - 120);
+    return { x: x, w: Math.min(160, mw) * (0.5 + Math.random() * 0.5) };
+  }
+  function spawn(l, init) {
+    var m = margin();
+    l.x = m.x; l.w = m.w; l.y = 40 + Math.random() * (H - 80);
+    l.seed = Math.random() * 1000; l.age = init ? Math.random() * 900 : 0;
+    l.life = 700 + Math.random() * 600; l.struck = Math.random() < 0.35;
+    return l;
+  }
+  function make() {
+    lines = [];
+    var n = W < 760 ? 5 : 12;
+    for (var i = 0; i < n; i++) lines.push(spawn({}, true));
+  }
+  function stroke(l, frac, alpha) {
+    ctx.strokeStyle = 'rgba(165,129,47,' + alpha + ')';
+    ctx.lineWidth = 0.9;
+    ctx.beginPath();
+    var steps = Math.max(2, Math.floor(l.w * frac / 3));
+    for (var i = 0; i <= steps; i++) {
+      var x = l.x + i * 3, k = (x + l.seed) * 0.35;
+      var y = l.y + Math.sin(k) * 2.2 + Math.sin(k * 0.27) * 1.4;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < lines.length; i++) {
+      var l = lines[i];
+      if (!reduce) { l.age++; if (l.age > l.life) spawn(l, false); }
+      var p = reduce ? 0.7 : l.age / l.life;
+      var write = Math.min(1, p * 4);
+      var fade = p > 0.75 ? Math.max(0, 1 - (p - 0.75) / 0.25) : 1;
+      stroke(l, write, 0.22 * fade);
+      if (l.struck && p > 0.4) {
+        var s = Math.min(1, (p - 0.4) * 8);
+        ctx.strokeStyle = 'rgba(125,34,48,' + (0.22 * fade) + ')';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(l.x - 4, l.y + 1); ctx.lineTo(l.x - 4 + (l.w + 8) * s, l.y - 1); ctx.stroke();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

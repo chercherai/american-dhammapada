@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seven Palms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a night sky where a few white kukui blossoms drift down; datelined sections. */
+  --ground: #0a1416;
+  --ground-2: #112326;
+  --paper: #ebe5d8;
+  --paper-dim: #9eaaa6;
+  --lamp: #e2b866;
+  --blossom: #f3eee2;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #123033 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,229,216,.2); }
+.series a:hover { color: var(--lamp); }
+a:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--lamp); text-wrap: balance; text-shadow: 0 0 28px rgba(226,184,102,.22); }
+.epigraph { border-left: 1px solid rgba(226,184,102,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--lamp); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--lamp); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(17,35,38,.75); border: 1px solid rgba(235,229,216,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--blossom); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,229,216,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--lamp); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--lamp); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--lamp); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--lamp); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--lamp); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(17,35,38,.75); border-left: 2px solid var(--lamp); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 10.9 &middot; Santati</span></nav>
+<header>
+  <h1>Seven Palms</h1>
+  <div class="epigraph">&hellip;for man looketh on the outward appearance, but the LORD looketh on the heart.<br>&mdash; 1 Samuel 16:7</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ua lohe au penei,</span> on the Waikīkī road.</p>
+
+<section>
+  <h2>I. The Freedom of the Town</h2>
+  <p class="dateline">Honolulu &middot; November 1886</p>
+  <p>In the spring of that year there was trouble in the Kona uplands, the kind that had been coming for twenty years. A ranch had let its cattle into the taro patches of a whole valley, season after season, and when the planters began to spear the cattle the ranch hired men from town who carried pistols. A house burned. A boy was shot through the arm. The sheriff in Kailua wrote to Honolulu that he could not answer for what came next, and in Honolulu somebody remembered Kimo Haʻaheo.</p>
+  <p>He was forty years old and had been a cowboy on the Big Island since he was twenty, the best roper between Waimea and Kaʻū, a big man with a quiet voice and a rawhide quirt he wore looped at his wrist the way other men wore a watch chain. They swore him in as a deputy and sent him up the mountain. He was there eleven weeks. He rode into the valley alone the first day and into the ranch yard alone the second, and before he was done he had used the quirt on men from both sides, and broken one man's collarbone with the butt of it, and taken eleven pistols away from the ranch's hired men and thrown them in the sea off Keauhou. Nobody else was shot. The cattle went behind a stone wall that the ranch paid for. The planters went back to their patches. People in Kona said it was the first time anybody had seen the law come down that mountain on the side of a taro patch.</p>
+  <p>The King heard about it. The King liked a story, and he liked a man who could ride, and he was about to turn fifty.</p>
+  <p>So on the morning of the sixteenth of November, when the police of the kingdom marched up to ʻIolani Palace at sunrise to pay their respects, Kimo Haʻaheo was among them in a new black coat, and he went up the steps into the hall with the life-size portraits of the old kings along the walls and knelt, and the King pinned a cross on a ribbon to his coat. It was gold and blue enamel, the Royal Order of Kalākaua, Companion class. On the back of it, around the date, was one word worked in gold. <em>KEOLA.</em> The life.</p>
+  <p>That was the honor. The reward was the jubilee. For the first seven days of it Kimo was to be the King's own guest, and the word went around Honolulu that whatever he wanted, he could have. A cottage on the beach at Waikīkī, with a lānai under the coconuts. A grey horse from the royal stables. His name good at every store on Fort Street and every bar on Nuʻuanu, the bills to go to the palace. And because the hula troupes had come down from all the islands to dance on the palace grounds for the jubilee, as they had for the coronation three years before, a girl from one of the Puna troupes was sent to dance for him in the evenings. Her name was Kēhau. She was nineteen. Her name meant the dew.</p>
+  <p>Kimo had not been drunk since he was a boy. He was drunk for seven days. He drank champagne at the palace, where the electric lights the King had put in that summer threw a white glare across the lawns, and he drank gin in the saloons on Nuʻuanu Street, and when that ran out he drank ʻōkolehao out of a jug some Kona men had brought down on the steamer, the ti-root liquor that comes out of the old whaling try-pots and takes the skin off your tongue. He watched the fire companies parade with torches. He watched rockets go up off Punchbowl. He bought a silk shirt and a hat with a band of feathers and every morning somebody put a new lei around the brim of it. He slept in the afternoons. In the evenings Kēhau danced for him on the lānai with the surf behind her, and he did not take his eyes off her, and the quirt stayed looped at his wrist the whole time, because he had forgotten it was there.</p>
+</section>
+
+<section>
+  <h2>II. The Waikīkī Road</h2>
+  <p class="dateline">Kālia &middot; the seventh morning</p>
+  <p>Halfway between town and Waikīkī, where the road ran between the fishponds and the Chinese rice fields, there was a frame house with a grass-roofed schoolroom beside it and a coconut grove behind, and an old woman lived there whom the whole road called Kumu, the teacher.</p>
+  <p>Her name was Lahela. She had been born in the old time, before the kapu fell, and she could remember the year her mother first sat down to eat with her father, and how frightened everybody was, and how nothing happened. When the missionaries came with their letters she was a girl of nine. She learned to read in a month, in the shade of a hau tree, sounding out the words in a little printed primer with her finger, and in the next forty years she taught half of the Waikīkī road to do the same. She taught them in a grass house and then in a frame one. She taught the fishermen's children and the poi-pounders' children and the children of chiefs, and grown men who had been ashamed to come in daylight, and once, for most of a winter, a sea captain from Maine who wanted to read his Hawaiian wife's letters. She went to Kawaiahaʻo on Sundays and sat at the back. She had buried a husband and two sons. She did not talk much, and when she did it was usually short.</p>
+  <p>She was sitting on her steps that morning shelling ʻopihi into a bowl for her grandson, Ioane, who was ten, when the grey horse came down the road from town at a walk.</p>
+  <p>Kimo sat it like a chief. The silk shirt was the color of a ripe mango. There were three lei around the hat, maile and ʻilima and something white, and pinned to the shirt on its ribbon, the King's gold cross. His eyes were red. Behind him came half a dozen of his Kona men on their own horses, laughing, with jugs. People came out of the houses along the road to watch him go by, because by then everybody in Honolulu knew whose guest he was.</p>
+  <p>He saw Kumu on her steps. He had learned his letters from her, thirty years before, on the same steps. He did not get down. He touched two fingers to the brim of the hat with the lei on it and nodded to her, from up there, and rode on toward the beach.</p>
+  <p>Kumu watched him go. Then she smiled.</p>
+  <p><em>What are you smiling at?</em> said Ioane. <em>He didn't even get off the horse.</em></p>
+  <p><em>He'll get off tonight,</em> Kumu said. <em>He'll come back up this road tonight in that hat and sit down on my floor, and I'll say one verse to him, and when I'm done he'll be finished with all of it. Then he'll go up higher than those palms and go home.</em> She lifted her chin at the coconut grove behind the schoolroom, where the trees stood fifty and sixty feet over the house. <em>Today,</em> she said, and went back to the ʻopihi.</p>
+  <p>The poi man was going by with his cart and heard it, and a fish woman from the ponds heard it, and by noon it was all over Kālia and halfway to town. At the saloon on the Waikīkī road the men laughed so hard one of them fell off his bench. <em>Kimo Haʻaheo? Going up in the air? He can't get up off his own lānai.</em> One of them put a silver dollar on the bar, a new one with the King's face on it, and said the old woman was finished, she had been teaching too long, and anybody who wanted to take his money could take it. By two o'clock there were forty dollars on the bar, most of it against her.</p>
+  <p>At the church end of the road the women in their long holokū said nothing about money. They looked at each other. Some of them went home and put on their good dresses, and some of them went and got their lanterns ready, just in case.</p>
+</section>
+
+<section>
+  <h2>III. Kēhau</h2>
+  <p class="dateline">Waikīkī &middot; afternoon</p>
+  <p>Kimo rode the grey horse straight into the water at Waikīkī, the way he had seen chiefs do it when he was a boy, and slid off its back in the shallows and swam out past where the waves broke, still in the silk shirt. The Kona men cheered him from the sand. He lay on his back out there for a long time, under Lēʻahi, with the cross floating on its ribbon on his chest, and let the swells lift him and set him down. Then he came in and slept on the lānai of the King's cottage until the sun was low.</p>
+  <p>When he woke Kēhau was already there.</p>
+  <p>She had been dancing every night of the jubilee, at the palace and then for him, and for seven days she had eaten almost nothing. Nobody had asked her to. The Puna troupe was to dance before the King at the great lūʻau, and she wanted to be light for it. She wanted to come down on the boards of the long lānai they had built for the lūʻau as softly as a leaf. She drank water and a little coconut milk, and each day she felt lighter, and each day she danced better, and her teacher in the troupe looked at her and said nothing because she had never seen the girl dance like that.</p>
+  <p>The sun went down behind Waiʻanae. Somebody lit the lanterns. One of the Kona men took up the gourd drum and Kēhau stood up in her skirt with the green leaves at her wrists and ankles and began.</p>
+  <p>Kimo could not have said afterward what the dance was. He did not know the old words. He knew that her hands went out over the water as if they were smoothing it, and that the surf came in behind her as if she had called it, and that everybody on the lānai had stopped talking, even the drunkest of the Kona men. She went down on her knees, and rose, and turned, and the lantern light went along her arms.</p>
+  <p>In the middle of a turn she stopped.</p>
+  <p>She put both hands flat against her stomach, under her ribs, the way you press a hand to a place where a knife has gone in. She looked at Kimo. Her mouth opened. She went down onto the boards, sideways, without putting out a hand, and lay there with her eyes and her mouth open, and the drum went on for two or three beats more because the man playing it had his eyes shut.</p>
+  <p><em>See to her,</em> said Kimo. <em>See to her. Somebody.</em></p>
+  <p>One of the Kona men knelt by her. He held his hand in front of her mouth, and then he put two fingers on her throat, under the jaw, the way you feel for it in a calf. Then he looked up.</p>
+  <p><em>Kimo. She's dead.</em></p>
+  <p>Kimo had been drunk for seven days, and in that moment all of it went out of him. It went the way water goes when you throw it on the stones of an imu that has been heating all morning. It hissed, and it was gone, and there was nothing left of it, and he was standing on the lānai stone sober in a wet silk shirt with three lei on his hat, looking at a dead girl.</p>
+  <p>He stood there a long time. People were crying. Somebody had run for a doctor. Somebody else was saying that it was the fasting, that he had told her and told her. The surf kept coming in.</p>
+  <p>Kimo thought: There is nobody in this whole kingdom who can put this out. Not the King. Not the doctor. Not the minister at Kawaiahaʻo.</p>
+  <p>Then he thought of the frame house at Kālia, and the old woman on the steps, and he went and got his hat.</p>
+</section>
+
+<section>
+  <h2>IV. Water on a Hot Stone</h2>
+  <p class="dateline">Kālia &middot; evening</p>
+  <p>He walked. He left the grey horse tied at the cottage and walked up the Waikīkī road in the dark with his Kona men behind him, on foot too, leading their horses, not one of them saying anything. Their spurs rang on the coral of the road.</p>
+  <p>They were not the only ones on it. Word had gone up the road ahead of them, the way word did, and by the time they reached Kālia there were lanterns in Kumu's yard and on the road outside her fence and up among the trunks of the coconut grove. The church women were there in their good holokū. The poi man was there, and the fish woman. The men from the saloon were there too, standing back by the road with their hands in their pockets, because forty dollars is forty dollars and they wanted to see it lost or won with their own eyes.</p>
+  <p>Kumu was sitting on a mat on her floor with the doors open and a lamp beside her, the way she sat to hear children read. Kimo took off his hat at the door. He came in and knelt down on the mat in front of her, a big man in a ruined silk shirt with the King's cross hanging off him, and touched his forehead to her hand.</p>
+  <p><em>Kumu,</em> he said. <em>Something has happened to me. You know what it is. I came because I know you can put it out. Be a shelter for me.</em></p>
+  <p><em>You came to the right house,</em> said Kumu.</p>
+  <p>She looked at him for a long time.</p>
+  <p><em>How many times have you cried for her, Kimo?</em></p>
+  <p>He did not understand. <em>I only knew her seven days.</em></p>
+  <p><em>You cried for her when you were two years old,</em> said Kumu, <em>in the measles year, when they carried your mother out of the house in a mat. I was there. You cried for her when you were fourteen and that girl from Mānoa married the Portuguese. You cried for her in Kona when your wife died having the baby, and you cried for the baby. You cried for her every time.</em> She did not raise her voice. <em>It is always the same girl, Kimo. You have been crying for her since before you could walk. Put all of it together, everything you ever cried, and it is more water than the ocean around these islands.</em></p>
+  <p>He was crying now. He did not wipe it.</p>
+  <p>She put her hand on his head, on his wet hair, the way she had put it there when he was nine and could not get past the long words in the third primer, and said a verse to him in Hawaiian, out of the Book, very quietly, so that the people at the door had to lean in.</p>
+  <div class="verse">
+    <p>Remember ye not the former things, neither consider the things of old.</p>
+    <p>&mdash; Isaiah 43:18</p>
+  </div>
+  <p><em>That's all,</em> she said. <em>Don't hold on to what's gone. Don't reach for what hasn't come. And what's in your hands right now, let go of that too. Then you'll be at peace.</em></p>
+  <p>The people at the door said afterward that nothing happened. Kimo knelt there with her hand on his head. The lamp burned. Out past the grove the surf went on. And then they saw his face change, the way the face of a child changes when the long word finally comes apart into its sounds and he can read it, and after that it did not change back.</p>
+  <p>He sat back on his heels. He looked around the little room as if he had never been in it, though he had been in it every day for four years of his childhood. He looked at the lamp. He looked at his own hands. He did not look sad, and he did not look happy, and the fish woman, who was nearest the door, said later that he looked like water when the wind stops.</p>
+  <p><em>Kumu,</em> he said, after a while. <em>It's finished. There's nothing more I have to do. Let me go now.</em></p>
+  <p>She knew what he meant. So did everybody at the door, and one of the church women began to cry.</p>
+  <p><em>Not yet,</em> said Kumu. <em>All these people came out tonight in the dark to see. Some of them came to see me made a liar of. Tell them first. Tell them what you did with your life, that brought you here.</em> Then she said, <em>But don't tell it standing on my floor.</em></p>
+  <p>Kimo understood. He unlooped the rawhide quirt from his wrist, where it had been for twenty years, and laid it down on the mat in front of her, very carefully, the way you put down something that belongs to somebody else.</p>
+  <p>Then he rose into the air.</p>
+</section>
+
+<section>
+  <h2>V. Sandalwood</h2>
+  <p class="dateline">The coconut grove at Kālia &middot; the same night</p>
+  <p>He went up slowly, the way smoke goes up when there is no wind. He went out through the open doors with his knees still bent as if he were kneeling, and up past the eaves of the schoolroom to the height of one coconut palm, and stayed there, with the lanterns shining up on the soles of his boots. Then he came down again, and set his feet on Kumu's steps, and bent and pressed his nose to hers, and breathed, the old greeting.</p>
+  <p>Then he went up again. He went up past one palm, and two, and three, and the lanterns were swinging all over the yard because the people holding them were shaking, and four, and five, and six, and seven, until he was as high above the grove as seven coconut trees standing one on another. There he crossed his legs and sat, the way a man sits on a mat to talk, with the lei on his hat and the King's cross on his chest, against the stars over Lēʻahi. The saloon men took their hands out of their pockets.</p>
+  <p>His voice came down as clear as if he were sitting in the yard.</p>
+  <p><em>Listen,</em> he said. <em>This is what I did.</em></p>
+  <p><em>When I was twelve years old and could read, I sat in that schoolroom and thought: what work is there that takes away people's trouble? And I watched the ones who went around the island with the Book, and I thought, that is the work. So I took Kumu's primers in a sack and I went around Oʻahu on my two feet. Kāneʻohe. Kahuku. Waialua. Waiʻanae. I stopped at every house and said, come and learn to read, come to church, there is nothing in the world as good as this. I said it at every gate.</em></p>
+  <p><em>There was an old chiefess at Waialua. She heard me at her gate and called me in and said, what are you about, boy, going around like this? I told her. She said, how do you travel? I said, on my feet. She said, that won't do, and she took a lei off her own neck and put it on mine, white flowers strung so close together they looked like a strand of pearls, and she gave me a horse.</em></p>
+  <p><em>So I went around on the horse saying the same thing. The next year she called me in again and asked the same question, and I said the same thing, and she said, a horse is not enough, and gave me a buggy and two horses to pull it. The year after that she asked again, and I said again, and she gave me land at Waialua, and money, and a black suit, and a gold watch. And I wore all of it, and went around in the buggy in the black suit, saying the same thing, for years. People said I smelled of sandalwood when I came into a house. I never knew why. There had been no sandalwood in these mountains since my grandfather's time. The chiefs had sent all of it to China.</em></p>
+  <p><em>Then she died, and I went to Hawaiʻi and rode cattle, and I forgot. That's all. That's what I did.</em></p>
+  <p>Everyone in the yard said afterward that while he was telling it they could smell it, faint, the dry sweet smell of the sandalwood that old women used to beat into their kapa when they were young, and that some of them had not smelled it in forty years and began to cry at it before they knew what it was.</p>
+  <p>Then he stopped talking. He sat up there and looked for a long while at the lamp in Kumu's open door, the small yellow flame of it, the way a man looks at a road he is about to take. And then he was burning.</p>
+  <p>It was not like a house burning. There was no smoke and no sound. A light came out of him all at once, from inside, the clear white-gold of a kukui-nut torch, and stood around him in the air in the shape of a man sitting, and went up, and was gone. The people in the yard put their hands over their eyes. When they took them away there was nothing in the sky over the grove but the stars.</p>
+  <p>Then something began to come down.</p>
+  <p>It came down slowly, turning, small and white, the way the blossoms come down off a kukui tree in the wind. Kumu had come out onto her steps. She sent Ioane running for a clean bed sheet, and when he brought it she took two corners and gave him the other two, and they held it out between them under the grove, an old woman and a boy, and the white things came down into it. They lay on the sheet like flowers. They were not flowers. Nobody ever agreed afterward about what they were. Last of all, turning over and over, the King's gold cross came down on its ribbon and landed in the middle of the sheet with a small sound, the enamel not even cracked, and lay face down, so that the word on the back of it was what showed.</p>
+  <p>Kumu folded the sheet. She did not say anything. The saloonkeeper went back to the bar that night and paid out forty dollars and closed his doors.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>She buried what was in the sheet the next morning where the Waikīkī road crossed the lane that went up to Mōʻiliʻili, on the corner, under a flat stone from the beach. She said it should be where the roads met, so that people going any direction would pass it. Kēhau was buried at Kawaiahaʻo the same day, and the Puna troupe danced for the King at the great lūʻau without her.</p>
+  <p>The quirt stayed on the mat in Kumu's front room for the rest of her life. Nobody picked it up.</p>
+</section>
+
+<section>
+  <h2>VI. What to Call Him</h2>
+  <p class="dateline">Kawaiahaʻo &middot; December 1886</p>
+  <p>The deacons at Kawaiahaʻo argued about it into the new year. They argued on the steps after the morning service and in the yard after the afternoon one, under the big trees, in their black coats, and the women listened from the shade.</p>
+  <p>Some of them said he was a saint, and you could see it was so, because nobody else in the history of the kingdom had gone up like that, not even the old kings. Others said he was a chief, a true one at last, the King had as much as made him one. And some said it was a scandal to call him either. He had been drunk for seven days. He had died in a silk shirt with three lei on his hat and champagne in his blood and a dancing girl's death on him, wearing the King's gold, at the height of a jubilee the opposition papers had been complaining about all month. Three years before, the printers of the coronation hula program had been hauled into court for obscenity. A man could not be a saint in a hat like that.</p>
+  <p>In the end two of the old deacons walked out to Kālia to ask Kumu, because she had been there, and because she had taught both of them their letters.</p>
+  <p>She was in the schoolroom. It was afternoon, and the children had gone, and she was cleaning slates with a rag and a bowl of water. She listened to the whole argument without stopping. Then she wrung out the rag.</p>
+  <p><em>You've been looking at his hat,</em> she said.</p>
+  <div class="verse">
+    <p>But the LORD said unto Samuel, Look not on his countenance, or on the height of his stature; because I have refused him: for the LORD seeth not as man seeth; for man looketh on the outward appearance, but the LORD looketh on the heart.</p>
+    <p>&mdash; 1 Samuel 16:7</p>
+  </div>
+  <p><em>He was quiet at the end,</em> she said. <em>He wasn't grabbing at anything. He put the whip down in front of everybody, and he never picked anything up again, not against a man or a horse or anything that lives. He went to the people at Kona with the law in one hand and the quirt in the other and he brought peace down that mountain, and then he came here and put down the quirt. Call him a saint. Call him a chief. Both are right. You want to know what the Lord calls him, it's in Matthew.</em></p>
+  <div class="verse">
+    <p>Blessed are the peacemakers: for they shall be called the children of God.</p>
+    <p>&mdash; Matthew 5:9</p>
+  </div>
+  <p>The deacons stood a while. Then one of them asked if she wanted help with the slates, and she gave him a rag.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Kumu Lahela died in 1893, in the spring, a few months after the Queen was put off her throne, and they buried her at Kawaiahaʻo near the Puna girl. The schoolroom at Kālia came down a few years after that. The fishponds were filled in, and the rice fields, and the Waikīkī road was paved, and given a king's name, and lined with hotels.</p>
+  <p>But the flat stone stayed on its corner a long time, where the roads met. People going by on foot would stop and take off a lei and lay it there, maile and ʻilima and white flowers, and the old women told the children what was under it, and the children did not believe them. In the windy months the kukui trees dropped their blossoms on it, small and white, and the blossoms lay on the stone among the lei, and you could not have said which of them had come down from where.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He who, though dressed in fine apparel, exercises tranquillity, is quiet, subdued, restrained, chaste, and has ceased to find fault with all other beings, he indeed is a Brahmana, an ascetic (sramana), a friar (bhikshu).<cite>Dhammapada 142, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, King Pasenadi rewards his minister Santati for putting down a frontier revolt by giving him the kingdom for seven days and a dancing girl. Drunk on the seventh day and riding the state elephant in all his ornaments, Santati nods to the Buddha without getting down, and the Buddha smiles and says that Santati will come to him that very day, awaken at a four-line verse, and pass away seated in the air. Skeptics wait to catch the Buddha in a lie. That afternoon the dancer, who had fasted for a week to dance more gracefully, collapses and dies in the middle of her dance, and Santati's drunkenness vanishes &ldquo;like a drop of water on a red-hot potsherd.&rdquo; The Buddha tells him he has wept for her more tears than the four oceans hold, and teaches him to let the past dry up, want nothing from the future and grasp nothing now. Santati awakens, asks leave to die, and at the Buddha's request rises seven palm trees high to tell his past good deed: in a former life he went about on foot praising the Buddha, the Dharma and the Sangha, and a king gave him a garland like a string of pearls, then a horse, a chariot and an elephant, and his body smelled of sandalwood. Then he passes away in fire, and his relics fall like jasmine flowers into a white cloth the Buddha holds out, and are enshrined at a crossroads. When the monks ask whether a man who died in finery may be called a monk or a brahmin, the Buddha says he is both. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-09.htm">the full commentary story</a>.</p>
+    <h3>Honolulu, 1886</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Kal%C4%81kaua">King Kalākaua</a> turned fifty on November 16, 1886, and the kingdom marked it with a two-week jubilee that ran from November 15 to 29. The police force paid tribute at <a href="https://en.wikipedia.org/wiki/%CA%BBIolani_Palace">ʻIolani Palace</a> at sunrise on the birthday; rockets went up from Punchbowl; there was a firemen's parade, a regatta, a ball, a state dinner and a lūʻau. The palace had been lit by electricity that July, the first electric lights in the kingdom. The legislature appropriated $15,000 for the jubilee, and the final cost was later reported at $75,000. As at his 1883 coronation, the King had the <a href="https://en.wikipedia.org/wiki/Hula">hula</a> performed openly on the palace grounds. It had been forbidden by law under the Christian convert Kaʻahumanu and kept out of public life for decades after, and many Christian Hawaiians and much of the foreign press still condemned it; after the coronation, two Honolulu publishers were convicted of obscenity for printing the Hawaiian words of some of the coronation hula. Kalākaua had founded the <a href="https://en.wikipedia.org/wiki/Royal_Order_of_Kal%C4%81kaua">Royal Order of Kalākaua</a> in 1874; its badge carries the word <em>KEOLA</em>, &ldquo;eternal life,&rdquo; on the reverse.</p>
+    <p>Hawaiʻi's <a href="https://en.wikipedia.org/wiki/Santalum_freycinetianum">sandalwood</a> was cut for the China trade from 1791 until about 1840, peaking between 1815 and 1826, until no large trees were left; Hawaiians had once beaten the powdered heartwood into kapa cloth as a perfume. In 1886 the road from Honolulu to Waikīkī ran through fishponds, taro patches and rice fields worked by Chinese farmers. It was renamed <a href="https://en.wikipedia.org/wiki/Kal%C4%81kaua_Avenue">Kalākaua Avenue</a> in 1905, and the wetlands around it were drained after the Ala Wai Canal was dug in the 1920s. Seven years after the jubilee, in January 1893, Kalākaua's sister and successor, Queen Liliʻuokalani, was overthrown.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the minister Santati from the Dhammapada commentary (verse 142). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-09.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="sin-verguenza.html">&larr; Sin Vergüenza</a><a href="index.html">All stories</a><a href="the-sugar-sack.html">The Sugar Sack &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Kukui blossoms: a few small white five-petaled flowers drifting down, turning slowly.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, flowers = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(f, anywhere) {
+    f.x = Math.random() * W;
+    f.y = anywhere ? Math.random() * H : -20 - Math.random() * 60;
+    f.r = 3.2 + Math.random() * 3.4;
+    f.vy = 0.12 + Math.random() * 0.22;
+    f.sway = 0.4 + Math.random() * 0.9;
+    f.phase = Math.random() * Math.PI * 2;
+    f.rot = Math.random() * Math.PI * 2;
+    f.vr = (Math.random() - 0.5) * 0.008;
+    f.a = 0.07 + Math.random() * 0.09;
+    return f;
+  }
+  function make() {
+    var n = Math.round(Math.max(6, Math.min(14, W / 90)));
+    flowers = [];
+    for (var i = 0; i < n; i++) flowers.push(spawn({}, true));
+  }
+  function petal(f) {
+    ctx.save();
+    ctx.translate(f.x, f.y); ctx.rotate(f.rot);
+    ctx.fillStyle = 'rgba(243,238,226,' + f.a + ')';
+    for (var k = 0; k < 5; k++) {
+      ctx.rotate(Math.PI * 2 / 5);
+      ctx.beginPath();
+      ctx.ellipse(0, -f.r * 0.7, f.r * 0.55, f.r * 0.75, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.fillStyle = 'rgba(226,184,102,' + (f.a * 1.2) + ')';
+    ctx.beginPath(); ctx.arc(0, 0, f.r * 0.28, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+  var t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t++;
+    for (var i = 0; i < flowers.length; i++) {
+      var f = flowers[i];
+      if (!reduce) {
+        f.y += f.vy;
+        f.x += Math.sin(t * 0.008 + f.phase) * f.sway * 0.25;
+        f.rot += f.vr;
+        if (f.y > H + 20) spawn(f, false);
+      }
+      petal(f);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

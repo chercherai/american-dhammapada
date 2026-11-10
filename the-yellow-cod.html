@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Yellow Cod</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column in a dark meetinghouse by the sea; now and then a gold scale-glint turns in the black water below the text and is gone. */
+  --ground: #0f1517;
+  --ground-2: #172124;
+  --paper: #e4e0d4;
+  --paper-dim: #9aa29c;
+  --accent: #d0a640;
+  --glow: #7fa3a0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1b2a2c 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,224,212,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 26px rgba(208,166,64,.2); }
+.epigraph { border-left: 1px solid rgba(208,166,64,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(23,33,36,.78); border: 1px solid rgba(228,224,212,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,224,212,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(228,224,212,.1); border-bottom: 1px solid rgba(228,224,212,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(23,33,36,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 24.1 &middot; Kapilamaccha</span></nav>
+<header>
+  <h1>The Yellow Cod</h1>
+  <div class="epigraph">Out of the same mouth proceedeth blessing and cursing. My brethren, these things ought not so to be.<br>&mdash; James 3:10</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As I was credibly informed,</span> at Gull Cove.</p>
+
+<section>
+  <h2>I. Two Callings</h2>
+  <p class="dateline">Ipswich, in the Massachusetts Bay &middot; 1641</p>
+  <p>Hannah Golding brought her two sons over from Essex with her daughter Thankful at the breast, and buried her husband at sea the second week out. She settled at Ipswich and kept a little shop of pins and thread and Spanish salt, and she raised the boys hard, on the catechism and on cornmeal, because those were what there was.</p>
+  <p>When they were grown, Samuel at twenty and Elnathan at seventeen, the two of them went together to old Mr. Pell, who had been their minister since the ship, and asked him what was required of a man.</p>
+  <p>Mr. Pell had no teeth left and very little patience, and he answered them as if they had asked the way to Rowley.</p>
+  <p><em>Two things. Learning, and godliness. A man may have the first without the second and be damned. A man may have the second without the first, and be saved, and know very little about it.</em></p>
+  <p>Samuel said he would see to his soul. He was not quick at books and knew it. He took a grant of land up the Merrimack, at the edge of the settled country, where the woods came down to the river, and went up there with an axe and a Bible and a cow, and lived alone, and prayed. He did that for five years, and at the end of it something had been settled in him that never came unsettled again, though he could not have told you in words what it was, and never tried.</p>
+  <p>Elnathan said he was young yet. When he was old, he would see to his soul. He went to the college at Cambridge, where he learned Latin and Greek and Hebrew and the logic of Ramus, and could say the whole Epistle to the Romans from memory, in two languages, and argue either side of any question put to him, and win.</p>
+</section>
+
+<section>
+  <h2>II. Empty Hands</h2>
+  <p class="dateline">Cranfield, on the Merrimack &middot; 1650&ndash;1672</p>
+  <p>The church at Cranfield called him at twenty-six, and in five years he had made it the most talked-of pulpit north of Boston. People rode in from three towns on a Sabbath to hear him. He preached two hours by the glass and turned the glass over and went on, and nobody slept. He had a voice like a bell and a face that warmed when he spoke of the mercy of God, and when he preached on the glory of Christ, old men wept who had not wept since England. The town raised his salary three times. They built him a house with a parlor and gave him a pew for his mother and sister at the front, under the pulpit, and every November the whole town turned out with ox-sleds to bring in the minister's wood, forty cords of it, more than any minister in the Bay was given.</p>
+  <p>He began to notice how much he was given, and to want more, and to know that what he knew was the reason. And he began, slowly, then all at once, to find that the other ministers of the Bay did not know very much.</p>
+  <p>At the meetings of the ministers he took the other side of every question, to see if he could carry it, and he could. When the synod was called on the baptism of the children of half-members, he spoke against it until it passed and for it after, and men who had voted with him found him voting against them. He said a thing was sound doctrine that he had called rotten the year before. He said a man was a heretic whom he had praised. When the elder ministers took him aside and opened the Scriptures to him and said, <em>Brother Golding, you should not speak so,</em> he looked at them and laughed.</p>
+  <p><em>What do you know?</em> he said. <em>You have empty hands. You have no Hebrew. You could not construe a verse of Isaiah if your salvation hung on it.</em></p>
+  <p>They sent for his brother.</p>
+  <p>Samuel came down out of the woods in his patched coat and stood in the minister's parlor at Cranfield, among the books, and talked to him alone. <em>Elnathan, if you are a minister of Christ, then the life of it is in how you live. You have the doctrine. Do not throw away the life for the doctrine.</em> Elnathan heard him out and showed him to the door.</p>
+  <p>Samuel came again in the spring with two of the brethren from the church, as the Scripture says to do, and the three of them told him the same thing. Elnathan did not show them to the door. He kept them standing in the parlor for an hour while he proved them wrong out of the Greek.</p>
+  <p>The third time, Samuel came alone and did not take his hat off.</p>
+  <p><em>Well, brother,</em> he said. <em>Have it your way. You will be a byword.</em></p>
+  <p>He walked home up the river, and after that the ministers of the Bay stopped asking Mr. Golding to their meetings, and stopped going to his. He gathered other men around him who were like him, and they quarreled among themselves when there was nobody else to quarrel with. Twice he left Cranfield for a richer church and twice came back when the richer church had had enough of him, so that the people said he went from pulpit to pulpit like a squirrel in a nut tree.</p>
+  <p>There was a day before the Lord's Supper in the spring of 1669 when he stood up before the church at Cranfield to ask, as the minister does, whether any brother had a matter to bring before the church, any offense not yet confessed, any quarrel not yet healed, before they came to the table. The brethren sat in their pews and looked at the floor. They had decided among themselves what use it was to answer him, which was none. Nobody spoke. The silence went on until a dog barked outside.</p>
+  <p><em>Brethren,</em> said Mr. Golding, <em>then there is no church here, and no discipline, and no ordinances. What does it matter whether you hear me or not?</em> And he came down out of the pulpit and walked out of the meetinghouse with the Supper untouched on the table, and the church at Cranfield did not take the Lord's Supper again for four years.</p>
+  <p>His mother and his sister went with him. They had sat under him every Sabbath for twenty years, and had learned from him how to speak of the brethren, and spoke so. Thankful Golding said in the street that the deacons' wives could not read. Hannah said worse.</p>
+  <p>Samuel died at his place up the river in the winter of 1670, in his chair by the fire, with his Bible shut on his knee. The neighbor who found him said he looked like a man who had just been told good news. Elnathan died two years after, at forty-eight, of a cancer in the mouth. Those who sat with him at the end said that for the last month nobody could stay in the room with him, for the smell of it, and that his mother and sister did, and that he cursed the three of them together until his voice gave out. Hannah and Thankful followed him within the decade, and that was the end of the Goldings of Cranfield.</p>
+</section>
+
+<section>
+  <h2>III. Seven</h2>
+  <p class="dateline">The woods above the Merrimack &middot; October 1666</p>
+  <p>Four years before Samuel died, seven men came to his door in the night.</p>
+  <p>They were runaways, most of them, bound servants who had broken their indentures, and one was a sailor off a Bristol ship, and their captain was a big red-headed man named Harnett who had run from a farm at Andover. All that summer they had lived in the woods and come out at night to rob the farms along the river, cows and pigs and corn and once a whole cellar of cider, and in September they had broken into a house at Haverhill and taken the money out of a chest, and the man of the house had come at them with a fowling piece and been knocked down and lay a week before he could speak. Now the townsmen were out after them, forty men with guns and dogs, and the seven came through the dark with the dogs behind them and saw Samuel's light.</p>
+  <p>They pushed in at the door. Samuel was sitting at the table. He did not get up.</p>
+  <p><em>Hide us,</em> said Harnett. <em>For the love of God, Goodman, be our refuge.</em></p>
+  <p>Samuel looked at them a long time. There was a great deal of mud on them, and blood on one.</p>
+  <p><em>There is no refuge for you in this house,</em> he said. <em>There is no refuge for you anywhere but the commandments. Will you keep them? All of you? Every one of them, from tonight?</em></p>
+  <p>They said they would. Perhaps they thought he was going to hide them if they said so. He took the Bible down and read them the commandments from the twentieth of Exodus, every one, slowly, and when he had read each one he made each man say it back to him. Then he shut the book.</p>
+  <p><em>Now you have promised,</em> he said. <em>Do not break one of them, not to save your lives. Not one. Not by a lie.</em></p>
+  <p>The townsmen came at first light and stood around the cabin in the frost with their guns. They called out to know who was inside. Harnett might have said nobody but the old man and his cow. He went to the door and opened it and said there were seven of them, and that they had robbed the farms and the house at Haverhill, and that they would not fight. The seven came out into the yard with their hands open.</p>
+  <p>The townsmen had been out three nights in the cold, and the man at Haverhill was still lying in his bed not knowing his own wife, and nobody was in a mind to wait for the court at Boston. Somebody fired. Then they all fired. Samuel stood in his doorway and shouted at them to stop until his voice broke, and when it was over he went down into the yard among the seven and knelt there. He buried them himself on the slope behind his cabin, in a row, under the pines, and cut seven stakes for them, and did not know the names of six.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>That same night, fifty miles away at Gull Cove, where the fishing families had their stages and their flakes on the rocks below Cape Ann, a boy was born to Ebenezer Tuck, who owned two shallops and was the first man in the place. By morning Ebenezer had heard from the midwife that she had been run off her feet. He went from house to house down the shore and counted, and there were seven boys born in the Cove between dark and daylight, and not one girl.</p>
+  <p><em>Well,</em> he said. <em>These will be my Ben's crew.</em> And he sent every one of the seven houses a quintal of dry fish and a bushel of meal, and said he would stand to it every year until they were grown.</p>
+  <p>The old women of the Cove said, when they heard about the seven men in the woods, that seven had gone out that night and seven come in on the tide. Nobody at Gull Cove took that for doctrine. They said it anyway.</p>
+</section>
+
+<section>
+  <h2>IV. The First Fare</h2>
+  <p class="dateline">Gull Cove &middot; September 1686</p>
+  <p>The seven grew up together on the rocks and in the boats. They learned to split and salt fish before they could write their names, and some of them never did learn that, and by twelve they were going out with their fathers to the ledges off Cape Ann, and by sixteen to the Isles of Shoals, and by eighteen down east to Cape Sable for the spring fare. Ben Tuck was the best of them in a boat and the first of them in everything else, and the other six followed him as if it had been settled before they were born, which in a sense it had.</p>
+  <p>Gull Cove was not a godly place. It had a meetinghouse, and a minister, and a tithingman with a long staff to wake sleepers. But the men were at sea half the Sabbaths of the year and drunk a fair part of the rest, and when they were in church they sat in the back and smelled of fish. Not one fisherman in ten was in full communion. The ministers of the Bay spoke of Gull Cove as they spoke of the Isles of Shoals, with a sigh.</p>
+  <p>In the summer of 1686, when the seven were twenty, Ebenezer Tuck gave them his old shallop, and they caulked her and rigged her and went out on their own for the first time. It was not a real fare. They had a seine, and they meant to haul for bait in the Cove at the turn of the tide, and they did, at first light, all seven of them on the lines with their feet in the cold water.</p>
+  <p>The seine came in heavy. When they got the bunt of it up on the stones, there were herring in it, and a skate, and in the middle of the herring, thrashing so the whole net shook, a cod as long as a man's leg.</p>
+  <p>It was yellow. Every man of them had seen ten thousand cod, and this one was gold, from the barbel on its chin to the end of its tail, with its spots showing through like the pattern in a damask cloth. The sun came up over the point while they stood looking at it, and it shone.</p>
+  <p>The whole Cove came down to see it. The women came with their sleeves wet from the wash, and the old men from the flakes, and the boys, and the minister's servant. <em>The first time those seven put out a net,</em> they said, <em>and look what they bring in.</em> Somebody said a fish like that was fit for the King. Somebody said Mr. Thorne at Salem sent curiosities to the gentlemen of the Royal Society at London, a two-headed calf once and a stone with a fern in it, and was paid for them, and would pay for this. So they put the cod in a hogshead of seawater on Ebenezer's cart and took it to Salem.</p>
+  <p>The Worshipful Mr. Joseph Thorne, magistrate, came out on his steps and looked into the hogshead for a long time.</p>
+  <p><em>What is it?</em> he said.</p>
+  <p><em>A cod, your worship,</em> said Ben Tuck.</p>
+  <p>Mr. Thorne had sent a great many curious things to London and believed he knew what was natural. He could see that this was not. He was not a superstitious man, but he was a careful one.</p>
+  <p><em>Your minister at the Cove,</em> he said. <em>Mr. Hollings. He was at the college. He will know why it is gold.</em> And he called for his horse, and rode back to Gull Cove behind the cart.</p>
+</section>
+
+<section>
+  <h2>V. The Fish Speaks</h2>
+  <p class="dateline">The meetinghouse at Gull Cove</p>
+  <p>Mr. Amos Hollings was twenty-eight years old. His father had fished out of Marblehead and drowned off Cape Sable, and the church at Marblehead had paid for the boy to go to the college because he could read Latin at nine and there was nothing else to be done with him. He had been called to Gull Cove because no one else would come. He was a plain, quiet young man with chapped hands, who preached for one hour exactly, and who could be found most days in his garden behind the parsonage on his knees, digging quitch grass out of his bean rows with a knife.</p>
+  <p>They carried the hogshead into the meetinghouse because there was nowhere else to put it, and set it down before the pulpit. Half the Cove crowded in after it, and stood in the pews and on the benches.</p>
+  <p>Mr. Hollings looked into the water. The cod hung there, gold, turning slowly. Then it opened its mouth.</p>
+  <p>Every person who was in the meetinghouse that morning said the same thing about it for the rest of their lives, and some of them lived to be very old. They were fishing people, who lived in the smell of fish and never noticed it. This they noticed. It was the smell of a sickroom where somebody has lain a long time dying, and of a privy in August, and of something under that which had no name, and it filled the meetinghouse in a breath, and went out the door, and down the shore, so that women on the flakes a quarter of a mile away put their aprons over their faces. Mr. Thorne put his sleeve to his nose and turned grey.</p>
+  <p><em>Mr. Hollings,</em> he said through the sleeve. <em>How came this fish to be gold? And how came its breath to stink so?</em></p>
+  <p>Mr. Hollings did not answer him. He knelt by the hogshead, as he knelt in his bean rows, and put his face close to the water, closer than anybody else would have stood.</p>
+  <p><em>I will let him answer for himself,</em> he said. And then, to the fish: <em>Are you Elnathan Golding, that was minister at Cranfield?</em></p>
+  <p>The cod's mouth moved. Some of those who were there said afterward that they heard nothing but the water slopping, and some said it was a voice like a bell, and some said it was a voice like a man with his mouth full of earth. But everyone heard the answers, and the answers were the same in every telling.</p>
+  <p><em>I am.</em></p>
+  <p><em>Where have you come from?</em></p>
+  <p><em>From hell.</em></p>
+  <p><em>Where is your brother Samuel?</em></p>
+  <p><em>With God.</em></p>
+  <p><em>Where is your mother Hannah?</em></p>
+  <p><em>In hell.</em></p>
+  <p><em>Where is your sister Thankful?</em></p>
+  <p><em>In hell.</em></p>
+  <p><em>And where are you going now?</em></p>
+  <p><em>To hell.</em></p>
+  <p>And the yellow cod turned in the water, and drove itself headfirst against the side of the hogshead, once, so hard that the staves cracked and the water ran out across the meetinghouse floor, and it lay in the wet on the boards and was dead.</p>
+  <p>Nobody in the meetinghouse moved. The hair stood up on the arms of grown men. Ben Tuck said afterward that he looked down and saw the water running between his feet and could not remember what it was.</p>
+  <p>Mr. Hollings stayed on his knees by the dead fish. When he spoke he did not go up into the pulpit. He spoke from the floor, in the wet, as if he were talking to one person.</p>
+  <p><em>He was gold because for twenty years he preached Christ, and spoke the praises of God, and men wept to hear him. That was true and it stayed true. And his breath was what it is because with the same mouth he cursed the brethren, and called them empty hands, and broke a church in pieces because it would not answer him.</em></p>
+  <div class="verse">
+    <p>Out of the same mouth proceedeth blessing and cursing. My brethren, these things ought not so to be. Doth a fountain send forth at the same place sweet water and bitter?</p>
+    <p>&mdash; James 3:10&ndash;11</p>
+  </div>
+</section>
+
+<section>
+  <h2>VI. Quitch Grass</h2>
+  <p class="dateline">The Sabbath following</p>
+  <p>They buried the cod in the sand above the tide line beyond the point, deep, and the smell did not leave the meetinghouse for a month. They washed the floor with lye and whitewashed the walls and kept the doors open in the rain, and still on the Sabbath you could catch it, under the smell of wet wool, and people looked at each other.</p>
+  <p>Mr. Hollings preached that Sabbath to the fullest meetinghouse Gull Cove had ever had. Men stood in the doorways. The seven sat together in the back, in their good shirts, all in a row.</p>
+  <p>He did not preach on hell. Everyone had expected him to, and he did not. He preached on what the Scripture says a church must do with a scorner, which is to put him out, for the sake of the others and his own, and to have no more to do with him until he mends.</p>
+  <div class="verse">
+    <p>Cast out the scorner, and contention shall go out; yea, strife and reproach shall cease.</p>
+    <p>&mdash; Proverbs 22:10</p>
+  </div>
+  <p>And then he talked about his bean rows.</p>
+  <p>He said that every man in that meetinghouse knew quitch grass, because every man there had a wife with a garden. He said that you could cut it off at the top every morning of your life and it would be back by evening. He said that after a rain it came up twice as thick, and that a man who only ever cut the tops of it would end with a garden of nothing else. He said that the only way was to get down on your knees and follow the root under the earth with your fingers, all the white length of it, and pull it out whole, and that if you broke it and left one joint in the ground it would come again.</p>
+  <p>He said that Elnathan Golding had started with a garden as good as any in the Bay. He had wanted a little more, and then a little more after that, a bigger salary and more wood, a bigger church, a bigger name. He had gone from pulpit to pulpit like a squirrel after nuts, and every time it rained the wanting came up thicker, and choked everything else that was growing there, until there was nothing left in him but the wanting and the mouth.</p>
+  <div class="verse">
+    <p>And these are they which are sown among thorns; such as hear the word, And the cares of this world, and the deceitfulness of riches, and the lusts of other things entering in, choke the word, and it becometh unfruitful.</p>
+    <p>&mdash; Mark 4:18&ndash;19</p>
+  </div>
+  <p>He said that every person in that meetinghouse had the same root in them. He said it was in him, a fisherman's son who had wanted his whole life to be a Cambridge man and be looked at. He said he went into his garden every morning and got down on his knees for that reason as much as for the beans.</p>
+  <div class="verse">
+    <p>Looking diligently lest any man fail of the grace of God; lest any root of bitterness springing up trouble you, and thereby many be defiled.</p>
+    <p>&mdash; Hebrews 12:15</p>
+  </div>
+  <p>Then he said that he wished every soul in Gull Cove good, and sat down, and the people sang the psalm, lined out by the deacon a line at a time the way they did, and went home.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The next month the seven came to the parsonage together and asked to be taken into the church.</p>
+  <p>It was not a small thing at Gull Cove. A man who would come into full communion had to stand up before the whole congregation and tell, in his own words, how God had dealt with his soul, and be questioned on it, and fishermen as a rule would sooner have gone over the side in February. Mr. Hollings examined each of them in his study, one at a time, for an afternoon. Then on a Sabbath in November they stood up one after another in the meetinghouse, Ben Tuck first, and gave their relations. Some were long and some were very short. One of them, a boy named Caleb Pitman who could not read, said only that he had stood in the water on the meetinghouse floor and understood that he had been wanting things his whole life, and that he would like to stop, and sat down, and the church voted him in with the rest.</p>
+  <p>All seven of them took the Supper together that winter, in a row, with their hands still raw from the salt. They fished together for thirty years after that, in the same boat and then in a ketch of their own, and it was said of them at Gull Cove that they never cheated a merchant on the weight of a quintal, and never quarreled over a share, and never in thirty years cursed a man, not even the Salem merchants, not even in February off Cape Sable with the ice on the shrouds.</p>
+  <p>Mr. Hollings watched them go out one morning that first winter from the parsonage window, where he stood with a cup of cider and dirt still on his knees. The seven of them were rowing out of the Cove in the flat calm before sunrise, pulling together. Every time the oars came up out of the sea the water ran off the blades in bright drops, and fell back, and nothing of it stayed on the wood.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">The thirst of a thoughtless man grows like a creeper; he runs from life to life, like a monkey seeking fruit in the forest.<cite>Dhammapada 334, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Whomsoever this fierce thirst overcomes, full of poison, in this world, his sufferings increase like the abounding Birana grass.<cite>Dhammapada 335, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He who overcomes this fierce thirst, difficult to be conquered in this world, sufferings fall off from him, like water-drops from a lotus leaf.<cite>Dhammapada 336, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">This salutary word I tell you, &lsquo;Do ye, as many as are here assembled, dig up the root of thirst, as he who wants the sweet-scented Usira root must dig up the Birana grass, that Mara (the tempter) may not crush you again and again, as the stream crushes the reeds.&rsquo;<cite>Dhammapada 337, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, two brothers become monks in the time of an earlier Buddha, Kassapa. The elder, Sodhana, takes up meditation and reaches awakening. The younger, Kapila, takes up study, becomes famous and rich, and grows so proud that he calls right wrong and wrong right and mocks the other monks as &ldquo;empty-fists.&rdquo; His brother admonishes him and gives him up. When no one will answer him at the recitation of the monastic rule, Kapila declares there is no Dhamma and no discipline, and walks out. His mother and sister follow his example, and all three go to hell. In the same age five hundred bandits take the precepts from a forest monk and keep them even when they are killed. Ages later they are reborn on one day as the sons of five hundred fishermen, and on their first outing they net a golden fish with breath that fouls the whole monastery. The king brings it to the Buddha, who has the fish name its brother, its mother, its sister and its fate. The fish dies, the Buddha teaches on craving, and the fishermen&rsquo;s sons become monks. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-01.htm">the full commentary story</a>.</p>
+    <h3>Massachusetts Bay, 1640s&ndash;1680s</h3>
+    <p>Puritan Massachusetts gave full church membership, with the right to take the Lord&rsquo;s Supper and vote in church affairs, only to those who could give a public account of their conversion. The <a href="https://en.wikipedia.org/wiki/Half-Way_Covenant">Half-Way Covenant</a>, endorsed by a synod in 1662, let the baptized but unconverted children of members bring their own children to baptism. It set off a pamphlet war among the ministers and split congregations. In Boston, members who left First Church in 1667 founded the Third Church, and the two churches did not share communion for fourteen years. Ministers trained at <a href="https://en.wikipedia.org/wiki/Harvard_College">Harvard College</a> read the Scriptures in Latin, Greek and Hebrew, and towns paid them in money, provisions and firewood. In 1684 Increase Mather published <a href="https://en.wikipedia.org/wiki/Remarkable_Providences"><em>An Essay for the Recording of Illustrious Providences</em></a>, a collection of sea deliverances, apparitions and other wonders gathered from ministers and witnesses across New England.</p>
+    <p>Along the North Shore, fishing towns like <a href="https://en.wikipedia.org/wiki/Marblehead,_Massachusetts">Marblehead</a> lived on cod. Small boats worked the near ledges and, farther off, the grounds toward the Isles of Shoals and Nova Scotia, and the catch was split, salted and dried on wooden flakes along the shore, then shipped by the quintal from Salem and Boston to Europe and the West Indies. Marblehead was never firmly under Puritan control, and when its church was formally gathered in 1684 it had only <a href="https://marbleheadmuseum.org/wp-content/uploads/2023/03/Mhead-in-1600s-f.pdf">fifteen men and thirty-nine women</a> in full membership. Gull Cove, Cranfield and every person in this story are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Kapilamaccha from the Dhammapada commentary (verses 334&ndash;337). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-01.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-old-bull.html">&larr; The Old Bull</a><a href="index.html">All stories</a><a href="cloud-of-witnesses.html">Cloud of Witnesses &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Gold scales turning slowly in dark water: each glints as it tilts toward the light, then goes dark again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, scales = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(s) {
+    var side = Math.random() < 0.5 ? 0 : 1, col = Math.min(320, W * 0.32);
+    s.x = side ? W / 2 + col + Math.random() * (W / 2 - col) : Math.random() * (W / 2 - col);
+    if (W < 700) s.x = Math.random() * W;
+    s.y = H * (0.15 + Math.random() * 0.85);
+    s.r = 5 + Math.random() * 7; s.rot = Math.random() * 6.28; s.spin = (Math.random() - 0.5) * 0.01;
+    s.vy = 0.05 + Math.random() * 0.12; s.ph = Math.random() * 6.28; s.rate = 0.006 + Math.random() * 0.01;
+    return s;
+  }
+  function make() {
+    scales = [];
+    var n = Math.round(Math.max(10, Math.min(26, W / 55)));
+    for (var i = 0; i < n; i++) scales.push(spawn({}));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) t++;
+    for (var i = 0; i < scales.length; i++) {
+      var s = scales[i];
+      if (!reduce) { s.y -= s.vy; s.rot += s.spin; s.ph += s.rate; if (s.y < -20) { spawn(s); s.y = H + 20; } }
+      var tilt = Math.cos(s.ph);              // -1..1, the face turning toward and away
+      var glint = Math.pow(Math.max(0, tilt), 6); // sharp flash near facing
+      var a = 0.05 + 0.5 * glint;
+      ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(s.rot); ctx.scale(Math.max(0.15, Math.abs(tilt)), 1);
+      var g = ctx.createRadialGradient(0, -s.r * 0.3, 0, 0, 0, s.r * 1.4);
+      g.addColorStop(0, 'rgba(250,214,120,' + a + ')');
+      g.addColorStop(0.6, 'rgba(208,166,64,' + (a * 0.55) + ')');
+      g.addColorStop(1, 'rgba(208,166,64,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.moveTo(0, -s.r);
+      ctx.quadraticCurveTo(s.r, -s.r * 0.2, 0, s.r); ctx.quadraticCurveTo(-s.r, -s.r * 0.2, 0, -s.r); ctx.fill();
+      ctx.restore();
+      if (glint > 0.2) {
+        var h = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 5);
+        h.addColorStop(0, 'rgba(255,236,180,' + (glint * 0.12) + ')');
+        h.addColorStop(1, 'rgba(255,236,180,0)');
+        ctx.fillStyle = h; ctx.beginPath(); ctx.arc(s.x, s.y, s.r * 5, 0, 6.283); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

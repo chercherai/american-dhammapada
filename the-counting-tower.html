@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Counting Tower</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on grey river light, light theme; along the bottom a pale counting panel lies on the gravel, and dark backs of salmon cross it upstream in a loose band, now many, now none; datelined sections. */
+  --ground: #dde5e1;
+  --ground-2: #eef3f0;
+  --paper: #1c2829;
+  --paper-dim: #506265;
+  --accent: #a23a2c;
+  --glow: #c9584a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #e6ece9 0%, var(--ground) 55%, #cfdad6 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(28,40,41,.25); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(201,88,74,.12); }
+.epigraph { border-left: 1px solid rgba(162,58,44,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(238,243,240,.72); border: 1px solid rgba(28,40,41,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse p.en { color: var(--paper-dim); }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(28,40,41,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(28,40,41,.16); border-bottom: 1px solid rgba(28,40,41,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(238,243,240,.72); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 2.5 &middot; Mahā Kassapa</span></nav>
+<header>
+  <h1>The Counting Tower</h1>
+  <div class="epigraph">Go, set a watchman; let him declare what he seeth.<br>&mdash; Isaiah 21:6</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it,</span> on the Wood River.</p>
+
+<section>
+  <h2>I. Ten Minutes</h2>
+  <p class="dateline">The outlet of Lake Aleknagik, Bristol Bay, Alaska &middot; July 1961</p>
+  <p>The tower stood on the right bank where the lake let go into the Wood River. It was twenty feet of pipe scaffold guyed with cable to four spruce stumps, with a plank floor on top, a rail around the floor, and a canvas fly for the rain. Another like it stood on the far bank. The men from the university in Seattle had put up the first towers some years back, and now the state had them. Alaska had been a state for two years and had managed its own fish for one, and the new Department of Fish and Game wanted to know how many red salmon got past the nets in the bay and up into the lakes to spawn. Nobody had ever known that. The canneries knew to the case what they packed. What went by them, up the rivers, to make the fish of four and five years on, had been anybody's guess for seventy years.</p>
+  <p>The way to know it was a man on a tower. The reds came up out of the bay and they did not use the middle of the river. They kept to the banks, in water a man could wade, in a band four and six and ten fish wide, one band to each side, steady as people going into church. Pale panels had been pinned to the gravel below each tower so the dark backs would show crossing them. A man stood at the rail in Polaroid glasses with a hand counter, the kind with a thumb lever that the cannery tallymen used, and for ten minutes out of each hour he pressed the lever once for every fish that crossed the panel going up. If one dropped back down he took one off. Then he wrote the number on the sheet and multiplied it by six, and that was the hour. Twenty-four hours were the day. The days added up to the escapement, and by the escapement the men in Dillingham decided whether the boats in the bay could fish on Monday.</p>
+  <p>Ten minutes in the hour was all of it. The biologist who drove up the lake road in a jeep to set the camp had explained why. A man could not count all day. His eyes went first and then his mind, and he began seeing fish in the riffle that were not there. So you took a piece of each hour and trusted it to stand for the rest. It had been tried against a weir, he said, with every fish put through a gate, and it came out within a few in a hundred.</p>
+  <p>There were two counters at the right-bank tower that summer. One was a boy named Dale Rasmussen, who had finished two years of fisheries at the university and had never been north of Bellingham. The other was Evon Nicolai, who was fifty-three and lived on the north shore of the lake. The biologist had asked in the village who could be trusted to stay awake, and three different people had given him the same name.</p>
+  <p>Evon was a helper in the Moravian church. The Moravian people on the lake had come over from Togiak and the Kuskokwim side, most of them, and built their chapel on the north shore a few years before, and a helper was what they called a man who was not a minister and did a minister's work when no minister was near, which was nearly always. He had fished the bay for thirty years in the company sailboats, the double-enders, because until 1951 the law allowed no engine in a Bristol Bay fishing boat, and he had been good at it. His wife Matrona died in 1954. They had no children living. After she died he gave his nets and his share in a boat to her nephew and kept a cabin with a stove, a kettle, a Bible, and a cot.</p>
+  <p>What he did after that was go around. Every morning he walked the houses of the north shore and then took a skiff across to the south. He read the day's text out of the Moravian text book wherever somebody wanted it read. He prayed with the sick and split wood for the old. Around the middle of the morning, in whatever house he happened to be in, somebody put food in front of him, and he ate that. It might be a salmon head boiled that hour or a strip of last year's dried fish, hard as a shingle. It might be pilot bread and tea. He ate what there was and said it was good, and he did not carry any of it away, and he did not sit down in the same house twice in one week. The whole lake fed him and no one house felt it.</p>
+  <p>He took the night shift on the tower, six in the evening until six in the morning. The check the state sent him he signed over to the chapel for stove oil. At six he climbed down, made his round, ate where he was fed, and slept.</p>
+</section>
+
+<section>
+  <h2>II. The Small Book</h2>
+  <p class="dateline">Kanakanak &middot; 1919</p>
+  <p>He had learned to count at Kanakanak.</p>
+  <p>The sickness came into Bristol Bay in the spring of 1919, about the time the ice went out. It was the same sickness that had filled the cities the autumn before, and the country had been shut against it all winter, with no travel between the villages and no church, and it came anyway. It did a strange thing. It left the children and the very old and took the grown men and women. Evon was eleven, in a village on the Nushagak shore. His father died on a Tuesday and his mother on the Thursday, and his mother's sister and her husband in the next house, and his grandfather. By the end of that week there was no grown person in the village on his feet.</p>
+  <p>He stayed four days in the house with his sister Akilina, who was three. The dogs had not been fed. They broke their chains and went in and out of the houses, and he sat in the doorway with his father's fish pew across his knees, the pole with the one steel tine, and kept them out of his. He could hear them in the other houses. He was eleven and he tried to work out how many people there had been in the village on the Sunday and how many there were now, and he did not have the figures to do it with. He could count to ten in Yup'ik and to ten in Russian, from church, and it was not enough.</p>
+  <p>The cannery ships came up from the south in May, as they did every year, and found the bay like that. Men from the cannery came along the shore in a boat with rags tied over their faces and carried the children out. All that summer the bunkhouses were full of children. In the fall, when the canneries closed, the children were sent to the government hospital at Kanakanak, near Dillingham, where the doctor took in every one. There were so many that an orphanage grew up beside the hospital to hold them.</p>
+  <p>There was a young woman at the hospital named Anuska who did the washing. She was twenty-two. She had had the sickness and lived. When she was small she had gone to the Moravians' mission school at Carmel, across the bay, until it closed, and she could read and write English, which few could. When the children came off the boat she washed each one in a tub by the laundry stove and cut their hair for the lice. Then she sat the child on a box and opened a cannery tally book with a red spine and wrote down what the child could tell her. The name. The mother's name and the father's. The village. The little ones did not know, and she wrote what the bigger ones said about them.</p>
+  <p>Evon told her his name and his sister's, and his mother's and father's.</p>
+  <p><em>How many died at our place?</em> he asked her.</p>
+  <p><em>I don't know.</em></p>
+  <p><em>Who knows it?</em></p>
+  <p><em>Nobody wrote it,</em> she said. <em>The men who buried them didn't have time to write.</em></p>
+  <p>He thought about that through the whole winter. Akilina died before Christmas, of a cough, and Anuska wrote that in the book too, on the same line as her name, and he watched her write it.</p>
+  <p>In the orphanage school he learned figures faster than any child they had. He counted the beds in the long room and the windows and the nails in the floorboards by his cot. Counting was how he got to sleep. When he was grown and fishing, the canneries still paid by the fish, and a tallyman stood on the scow and counted as you pitched your catch up to him one at a time on the pew. Evon always had his own number before the tallyman said it, and in thirty years the tallyman's was never the higher of the two.</p>
+</section>
+
+<section>
+  <h2>III. All of It</h2>
+  <p class="dateline">The tower &middot; the second week of July</p>
+  <p>The run built through the first days of July. At the start he pressed the lever thirty and forty times in his ten minutes. By the sixth he was counting by tens, a press for every ten backs, and the band below him never broke.</p>
+  <p>The fifty minutes began to trouble him then. He did his ten and wrote his number, and the fish kept going by. They went by all the rest of the hour with nobody's thumb on them. The state was content with that. Evon had never in his life let a fish go past him untallied, and on the night of the eighth, when his ten minutes were up, his thumb kept on.</p>
+  <p>He was honest about it. He wrote the ten-minute number on the state's sheet, where it belonged. The other number, the whole hour's, he wrote in a school composition book he had bought at the store for fifteen cents. Dale came up the ladder at six that morning and found him at the rail where he had left him at six the night before. He had not sat down.</p>
+  <p>After that he came at noon as well. He would finish his round, eat in whatever house it was, and come back and climb the tower in the hours that were his to sleep in. He sat on an upturned lard bucket behind Dale with the composition book on his knee. There were things Dale's ten minutes did not reach, and he began on those.</p>
+  <p>There was the other bank, where two men he had never met counted a band of fish he could not see. There were the fish already in the lake, and the ones gone on up the Agulowak into the lake above. There were the eggs. The biologist had told them a hen carried three thousand and more, and that out of the three thousand perhaps two fish came back, and Evon wanted to know where the others went and at what hour. He thought of the little ones going down to the sea in June, in the dark, each as long as a finger. He thought of the gulls on the bar that took them and the trout that took them. In August the reds that had passed under him would lie spent on the gravel at the heads of the lakes, every one, because a red salmon spawns once and dies, and the bears and the gulls would take those too. He started a page for bears.</p>
+  <p>Then he started one for people. He wrote down the children born on the lake since breakup, and the old man on the south shore who would not see freeze-up. He wrote his village on the Nushagak shore, as near as he could now reckon it, house by house. It was past reckoning and he worked at it anyway.</p>
+  <p>By the twelfth he was sleeping an hour in the day. He did not look unhappy. Dale said afterward that he looked like a man near the bottom of a long column of figures who can see the total coming. He would sit very still on the bucket with his eyes on the lake and the hills behind it, and his lips moved. He was trying to hold it in his head all at one time, everything that was coming into the world and everything going out of it, in the water and on the ground and up on the hills, so that for once the sum would be written down.</p>
+  <p>Dale did not know what to do. He was twenty. He asked Evon if he was all right, and Evon said he was close. In the house where Evon ate that noon, the woman saw that he left half his tea, which he had never done, and she spoke to her husband about it.</p>
+</section>
+
+<section>
+  <h2>IV. The Fish Rack</h2>
+  <p class="dateline">Kanakanak &middot; the same afternoon</p>
+  <p>Anuska was sixty-four that summer. She had buried a husband, who was a helper before Evon was, and she lived in a small house on the bluff at Kanakanak, in sight of the hospital where she had done the washing for thirty years. The Moravian people on the Dillingham side were few then and met where they could, and it was Anuska who kept their book, with the baptisms in the front and the burials in the back. She had the other book too, the cannery tally book with the red spine. It was in a pilot bread tin under her bed.</p>
+  <p>People came to her. She did not preach, and it was not a thing a woman did among them then. But the ones she had washed in the tub in 1919 were grandparents now, on every river that ran into the bay, and when one of them could not get a thing straight, he found a reason to go to Dillingham.</p>
+  <p>That afternoon she was at her rack behind the house, cutting reds her grandson had brought up from the beach. Her granddaughter Nettie, who was twelve, hung them as she cut. Anuska slit a fish along the back with the uluaq and opened it and scored the meat, and reached for the next, and stopped with her hand on it.</p>
+  <p><em>What is Evon doing today?</em> she said.</p>
+  <p>Nettie did not know any Evon. Aleknagik was twenty-five miles off, at the far end of a road the state had cut two summers before, and her grandmother had not been up it.</p>
+  <p>Anuska stood with the knife in her hand and her face turned north. The mosquitoes were bad, and she did not brush at them.</p>
+  <p><em>He is counting,</em> she said. <em>He's trying to count all of it.</em> She said after a moment, quietly, the way a person says a thing over a child's bad cut, <em>That's too much for a person.</em></p>
+  <p>She wiped the uluaq on her apron and laid it on the cutting board. She sat down on the gas box beside the rack with her wet hands in her lap and shut her eyes.</p>
+  <p>Nettie went on hanging fish. She was asked about that hour a good many times in her life and said the same thing each time. Her grandmother sat on the gas box and did not get up from it. Mrs. Olson from the next house came for a loan of salt and saw her there and went away again without it. It was about an hour. Then her grandmother opened her eyes and picked up the knife and finished the fish.</p>
+</section>
+
+<section>
+  <h2>V. The Lard Bucket</h2>
+  <p class="dateline">The tower &middot; three o'clock</p>
+  <p>Dale was at the rail with the counter, four minutes into the three o'clock count. Evon sat behind him on his bucket with the composition book. There was a second bucket on the platform, where the day man put his lunch.</p>
+  <p>Dale heard a woman's voice and turned around.</p>
+  <p>An old woman was sitting on the second bucket. He had not heard the ladder, and the ladder was iron pipe and rang under a cat. She wore a kerchief and a canvas apron wet to the lap, with fish scales on it, and her hands were wet. She was looking at Evon. The day was grey, with cloud down on the hills, and there was a brightness on her that the day did not account for. It was like the shine on the river when the sun gets in under the edge of the cloud. Dale lost his count. It was the only count he lost that summer.</p>
+  <p>She spoke in Yup'ik and he understood none of it. The words out of the Bible she said in English, the way she had learned them from the Moravians at Carmel, and those he understood. The rest he had from Evon later.</p>
+  <p><em>What have you got in the book?</em> she said.</p>
+  <p>Evon held it out to her. She did not take it. She looked at the open page.</p>
+  <p><em>How far have you got?</em></p>
+  <p><em>The fish on this bank since Saturday. The gulls on the bar, nearly. The people on the lake.</em></p>
+  <p><em>And the other bank? And the ones in the nets in the bay this morning? And the ones under the gravel that haven't hatched?</em> She waited. <em>Last night on this lake a child started in some woman, and the woman doesn't know it yet herself. Have you got that one?</em></p>
+  <p>He said nothing.</p>
+  <div class="verse">
+    <p>As thou knowest not what is the way of the wind, nor how the bones do grow in the womb of her that is with child; even so thou knowest not the work of God who doeth all.</p>
+    <p>&mdash; Ecclesiastes 11:5</p>
+  </div>
+  <p><em>You remember my book,</em> she said. <em>I wrote down every one of you that came off the boat. I thought if I got every name, then somebody would have the count of it. Do you know how many I missed? I don't either. Children died on the beaches before any boat came. There were places nobody got to until the next summer. I filled the book, Evon, and it is a small book.</em></p>
+  <p><em>Somebody has to know it,</em> he said.</p>
+  <p><em>Somebody does. Two sparrows are sold for a penny, it says, and not one of them shall fall on the ground without your Father. It says without your Father. It doesn't say without Evon Nicolai.</em></p>
+  <p>She looked over the rail at the river, where the band was going by with Dale's thumb not on it.</p>
+  <p><em>That count is kept. It was kept before there was a tower. It isn't yours, you haven't got the place to stand for it. You have twenty feet of pipe. What did the fish man tell you to do up here?</em></p>
+  <p><em>Ten minutes.</em></p>
+  <p><em>Then that is yours.</em></p>
+  <div class="verse">
+    <p>For thus hath the Lord said unto me, Go, set a watchman; let him declare what he seeth: and when he seeth a troop, horsemen in pairs, a troop of asses, a troop of camels, he shall hearken diligently with much heed. And he cried as a lion: O Lord, I stand continually upon the watch-tower in the day-time, and am set in my ward whole nights;</p>
+    <p>&mdash; Isaiah 21:6&ndash;8</p>
+  </div>
+  <p><em>What he seeth,</em> she said. <em>Watch your ten minutes so that not one fish gets by you in them. Be all the way awake for that. Then put the thing down and let the rest go by, and look at it going.</em> She touched her own chest with a wet hand. <em>You have been down in the water with them since you were eleven. Come up out of it. A man who does his own watch right gets up to where he can see, and you can see the people better from there. You can look at them and it doesn't drown you.</em></p>
+  <p>Dale looked at the river, because it was past his ten minutes and he did not know what number to write. When he looked back there was one man on the platform. On the lid of the second bucket there was a wet place the size of a woman's two hands, and in it three scales off a red salmon, which dried there and stuck.</p>
+</section>
+
+<section>
+  <h2>VI. The Fifty</h2>
+  <p class="dateline">Lake Aleknagik &middot; to the end of the run</p>
+  <p>Evon climbed down and went home and slept until evening. It was the first whole sleep he had had in a week.</p>
+  <p>At six he came up the ladder with the composition book in his coat. He gave it to Dale and said to start the stove with it in the morning. Dale did not. He kept it forty years, through a doctorate and a career of counting fish on four rivers, and he showed it to very few people, and to each of them he told about the old woman and the bucket in the same words, leaving nothing out and adding nothing.</p>
+  <p>That night Evon stood his ten minutes at the top of each hour, and he stood them differently. He set his feet. He did not let his eyes go off the panel. When the lamp on the pole came on for the short dark, he counted under it the same way. Nothing got past him in those ten minutes, up or down, and the biologist came to use Evon Nicolai's sheets as the ones he checked the other towers against. Then he wrote the number, set the counter on the rail, sat down on the bucket, and laid his hands open on his knees.</p>
+  <p>He watched the fish go by for fifty minutes with nobody's thumb on them. They came up out of the dusk at the bend and crossed the pale panel, four and six abreast, and went on into the lake, where he could not follow them and did not try. Somebody had the number of them, and he found he could leave it there.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>From the tower, in the long light, he could see most of the lake people. He could see the fish camps along both shores with the racks gone red and the smoke lying flat out of the smokehouses. He could see the skiffs, and the children on the gravel bar, and directly below him the rack of Wassily Andrew's wife. Wassily's boat had not come back from the Nushagak flats after the blow on the fourth. She was at the rack every day regardless, cutting, because the fish did not wait on anybody's trouble.</p>
+  <p>He had looked at that kind of thing all his life from down inside it. Every death on the bay had been his village again, and he had put his head down and counted. Now he stood at the rail and looked at her, and at the rest of them, each house with its own 1919 in it, and the old fist in his chest did not close. He saw them more plainly than he ever had. In the morning he went down and hauled her water and read her the day's text, and ate what she put in front of him, and came back up.</p>
+  <p>The run thinned after the twentieth. When the state added its sheets that year it had a number for the Wood River, with a comma in it, and the number was good to within a few fish in a hundred. Evon never said it was the fish.</p>
+  <p>On his last night the lamp came on at eleven. He stood his ten minutes and wrote down nineteen. He set the counter on the rail beside the second bucket, with its three scales, and sat down. Below him a few late reds came up out of the dark water onto the panel, one and then two together, and he let every one of them by.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">When the learned man drives away vanity by earnestness, he, the wise, climbing the terraced heights of wisdom, looks down upon the fools, serene he looks upon the toiling crowd, as one that stands on a mountain looks down upon them that stand upon the plain.<cite>Dhammapada 28, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is one of the shortest. The Elder Mahā Kassapa, a great ascetic who lived in a cave and ate what he was given on his morning round, comes back from his round one day, eats, and sits down to survey with his inner sight all living beings as they are born and die, in the water, on the earth and on the mountains. The Buddha, seated far away, asks himself what Kassapa is doing, sees it, and says that the whole of the rising and falling of beings is beyond a disciple's range: a being is conceived in a womb without even its mother or father knowing, and only a Buddha can know all of it. He sends a radiant image of himself to sit face to face with Kassapa and speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-05.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mah%C4%81k%C4%81%C5%9Byapa">Mahā Kassapa</a>.</p>
+    <h3>Bristol Bay, 1919 and 1961</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Bristol_Bay">Bristol Bay</a> has the largest sockeye salmon runs in the world, and until the 1950s nobody could say how many fish escaped the commercial nets to spawn. In 1951 a biologist noticed that migrating <a href="https://en.wikipedia.org/wiki/Sockeye_salmon">sockeye</a> could be counted from a high bank at the outlet of Lake Aleknagik on the <a href="https://en.wikipedia.org/wiki/Wood_River_(Nushagak_River_tributary)">Wood River</a>, because they travel in narrow bands close to each shore. W. F. Thompson of the University of Washington's Fisheries Research Institute tested counting from towers in 1953, and the Wood River towers have been counted every summer since 1956. The method is a systematic sample: an observer with a hand tally counts for a set part of each hour (ten minutes became the standard) and the count is expanded to the whole hour. Compared against weirs, it proved accurate to within a few percent. Carol Ann Woody's <a href="https://wildsalmoncenter.org/wp-content/uploads/2008/07/SFPH-Chapter-11-Tower-Counts.pdf">chapter on tower counts</a> gives the history. Alaska became a state in 1959 and took over its fisheries from the federal government in 1960. Powered fishing boats had been illegal in Bristol Bay until 1951, so men of Evon's age had fished it under sail. The road from Dillingham to <a href="https://en.wikipedia.org/wiki/Aleknagik,_Alaska">Aleknagik</a> was built in 1959, and Moravian families had settled the lake's north shore a few years earlier.</p>
+    <p>The influenza pandemic reached Bristol Bay in the spring of 1919, months after it had burned through the rest of the country, in spite of a winter-long quarantine. It killed adults and largely spared children. When the cannery ships arrived in May they found villages with almost no grown people alive, bodies unburied and loose sled dogs among them. Cannery crews took in the orphaned children for the summer, and in the fall they were sent to the government hospital at Kanakanak, near <a href="https://en.wikipedia.org/wiki/Dillingham,_Alaska">Dillingham</a>, which grew an orphanage to raise them. No complete count of the dead was ever made. Many Bristol Bay families today descend from those children; Alaska Public Media has <a href="https://alaskapublic.org/2016/09/28/1919-the-spanish-flu-in-dillingham/">an account</a>. The Moravian Church came to southwestern Alaska in 1885 and kept a mission and school called Carmel on the Nushagak from 1886 to 1906. From the start it relied on Yup'ik lay "helpers," who led most village congregations. Evon, Anuska and the others in this story are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Mahā Kassapa from the Dhammapada commentary (verse 28). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-05.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Fable 5.2.
+  <div class="pager"><a href="folding-chairs.html">&larr; Folding Chairs</a><a href="index.html">All stories</a><a href="salt-tea.html">Salt Tea &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, fish = [], t = 0, pulse = 0.5, target = 0.5, hold = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function lane() { return H - 26 - Math.random() * 58; }
+  function spawn(x) {
+    var L = 26 + Math.random() * 14;
+    return { x: x, y: lane(), L: L, v: 0.32 + Math.random() * 0.22, ph: Math.random() * 6.28, a: 0.10 + Math.random() * 0.08 };
+  }
+  function seed() {
+    fish = [];
+    var n = Math.max(3, Math.round(W / 190));
+    for (var i = 0; i < n; i++) fish.push(spawn(Math.random() * W));
+  }
+  function drawFish(f) {
+    var w = f.L, h = f.L * 0.2, s = reduce ? 0 : Math.sin(t * 0.09 + f.ph) * 2.2;
+    ctx.save(); ctx.translate(f.x, f.y);
+    ctx.fillStyle = 'rgba(34,52,54,' + f.a + ')';
+    ctx.beginPath();
+    ctx.moveTo(w * 0.5, 0);
+    ctx.quadraticCurveTo(w * 0.15, -h, -w * 0.32, -h * 0.25 + s * 0.3);
+    ctx.lineTo(-w * 0.5, -h * 0.8 + s);
+    ctx.lineTo(-w * 0.43, s * 0.6);
+    ctx.lineTo(-w * 0.5, h * 0.8 + s);
+    ctx.lineTo(-w * 0.32, h * 0.25 + s * 0.3);
+    ctx.quadraticCurveTo(w * 0.15, h, w * 0.5, 0);
+    ctx.fill(); ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    /* the pale panel on the gravel */
+    var px = W * 0.5 - Math.min(W * 0.42, 330), pw = Math.min(W * 0.84, 660);
+    ctx.fillStyle = 'rgba(248,251,249,0.5)';
+    ctx.fillRect(px, H - 96, pw, 84);
+    ctx.strokeStyle = 'rgba(80,98,101,0.12)'; ctx.strokeRect(px + 0.5, H - 95.5, pw - 1, 83);
+    if (!reduce) {
+      t++;
+      if (--hold < 0) { target = Math.random() < 0.25 ? 0 : Math.random(); hold = 500 + Math.random() * 900; }
+      pulse += (target - pulse) * 0.004;
+      if (Math.random() < 0.004 + pulse * 0.022 && fish.length < 26) fish.push(spawn(-30));
+    }
+    for (var i = fish.length - 1; i >= 0; i--) {
+      var f = fish[i];
+      if (!reduce) { f.x += f.v; if (f.x > W + 40) { fish.splice(i, 1); continue; } }
+      drawFish(f);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); seed(); draw();
+  window.addEventListener('resize', function () { size(); seed(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

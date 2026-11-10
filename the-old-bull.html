@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Old Bull</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over dusk on a muddy lake, where slow drumbeats send rings across the water; datelined sections. */
+  --ground: #16140f;
+  --ground-2: #221e17;
+  --paper: #e9e2d4;
+  --paper-dim: #a69c8a;
+  --accent: #e3a33a;
+  --glow: #c98f5a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 18% 115%, #2a2418 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,226,212,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(227,163,58,.22); }
+.epigraph { border-left: 1px solid rgba(227,163,58,.42); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(34,30,23,.78); border: 1px solid rgba(233,226,212,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,226,212,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(233,226,212,.1); border-bottom: 1px solid rgba(233,226,212,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(34,30,23,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 23.6 &middot; Baddheraka</span></nav>
+<header>
+  <h1>The Old Bull</h1>
+  <div class="epigraph">Let each man raise<br>The Self by Soul, not trample down his Self<br>&mdash; Bhagavad Gita 6:5</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Me aam sambhalyu chhe,</span> at the front desk on Highway 70.</p>
+
+<section>
+  <h2>I. The Night Desk</h2>
+  <p class="dateline">Hugo, Oklahoma &middot; spring 1979</p>
+  <p>The Kiamichi Motor Court had twenty-two rooms in an L around a gravel lot on the east side of Hugo, a sign with a neon arrow that had stopped pointing in 1971, and an ice machine that worked when you kicked it. Navin Patel bought it in the fall of 1976 for forty-one thousand dollars, which was the money his wife's brothers in Leicester had raised, and a little more than the forty thousand the government in Washington wanted to see a man put into a business before it would let him stay. No company in Oklahoma would insure it. No bank in Choctaw County would lend on it. Navin's cousins in Durant and Idabel and Paris, Texas, had put in a thousand here and two thousand there, and he was paying them back a room-night at a time.</p>
+  <p>He lived behind the office with his wife and their two daughters. His wife cleaned eleven rooms in the morning and Navin cleaned the other eleven. The girls stripped beds after school. And from eleven at night until seven in the morning, Navin's uncle sat at the front desk.</p>
+  <p>Everyone called him Kaka, which only means uncle. He was seventy. For thirty-four years he had taught English and mathematics at a secondary school in Kampala, and in August of 1972, when the President of Uganda gave the Asians ninety days to leave the country, he had left it, with one suitcase and his wife's ashes in a brass pot and whatever the soldiers at the roadblocks on the way to Entebbe did not take. Now he sat behind the counter at the Kiamichi Motor Court in a grey cardigan, with a book open under the lamp, and handed keys across to truck drivers and roughnecks and once in a while a family headed for Six Flags, and said <em>Good night, sir,</em> in an accent the truck drivers took for English.</p>
+  <p>On Sunday nights the young men came.</p>
+  <p>They came from the motels along 70 and 271, in their fathers' cars, after the Sunday check-outs were done and the rooms were turned. Navin's nephew Raju, who had come over from Leicester the year before to work the Kiamichi's day desk and slept on a cot in Room 22. The two Desai brothers from Antlers, who had not spoken to each other since Diwali. Mahesh, who had been an engineering student in Baroda and was now the night man at a motel in Paris, Texas, and hated every hour of it. Bharat from Durant, whose father had just bought a second motel on a note he could not cover. Dinesh, who was nineteen and had been born in Kampala and remembered the roadblocks. Some Sundays there were five of them and some Sundays nine. They sat on the floor of the office on a bedspread from Room 14, with their backs against the soda machine, and drank the tea Navin's wife sent through, and Kaka read the Gita to them.</p>
+  <p>He read it in English. They had all learned Gujarati at their mothers' knees, but none of them could read the old Sanskrit, and Kaka had a translation from a secondhand bookstall on Kampala Road that he had carried out of Uganda in the suitcase, in place of a second pair of shoes. Mr. Edwin Arnold, 1885. <em>The Song Celestial.</em> He read a page, and closed it on his finger, and said very little, and then they talked about the price of gasoline and the price of rooms until midnight, when the truckers started to come in off the Indian Nation Turnpike and he sent them home.</p>
+  <p>That spring the gasoline was getting short. On the television there were lines of cars around the block in California. The truckers said it would be the same here by summer, and nobody would drive anywhere, and half the motels on Highway 70 would go back to the banks. Across the highway from the Kiamichi Motor Court, the Starlite Motel had put up a new plywood sign in red, white and blue under its old one. It said AMERICAN OWNED.</p>
+</section>
+
+<section>
+  <h2>II. The Bull</h2>
+  <p class="dateline">Winter quarters, Kiamichi road</p>
+  <p>Hugo was a circus town. Three or four shows wintered there, more some years, and from November to March the fields south and east of town were full of trucks with lettering on their sides, and tigers in steel cages in a tin barn, and camels grazing behind barbed wire along the farm roads like something out of the Bible. In March the shows went out on the road. The trucks pulled out one morning in a long line with their horns going, and the town was quiet again until Thanksgiving.</p>
+  <p>Not everything went. At the Bradley Brothers quarters on the Kiamichi road, three miles east of the Kiamichi Motor Court, the old animals stayed behind, the ones who could no longer make the jumps. A lion with no teeth. A pony mare who was blind. And Rani.</p>
+  <p>In a circus every elephant is a bull. Rani was a cow, a female Asian elephant, and the bull men called her the old bull, or Old Lady, or Mama, and she was sixty years old by the best guess anybody had, which made her older than most of them. She had come off a ship in New York before the Depression with a crate number stenciled on her flank. She had worked for six shows under four names. Bradley Brothers had painted RANI on the leather headpiece she wore in the spec, the grand parade that opened every performance, and Kaka, the first time he saw it on a poster in the window of the drugstore, had laughed out loud. It meant queen.</p>
+  <p>She had been the strongest elephant on any lot in America. That was what the old circus men said about her at the café on the square, and they said it the way men talk about a ballplayer. In the days before the shows went to trucks, when everything traveled on wagons and every lot in the rain was a bog, they had called them mud shows, and Rani had pulled wagons out of the mud. She had pushed the pole wagon out of a slough in Arkansas that eight horses could not move. She had raised the center pole of a big top by herself in a wind that was laying flat the corn. When the trucks came in, she pushed trucks. For thirty-one years she had led the spec around the hippodrome track with a bull man named Dewey Haskins walking at her head, both of them in costume, to a march played on a brass band and a bass drum the size of a wagon wheel, and the people in the bleachers stood up for her, every night, in every town.</p>
+  <p>Dewey was seventy-two now. He had bad hips and a pension from nobody. He lived in a trailer at the quarters and fed the old animals and watched the barns at night, and every evening in the spring he walked Rani down the fence line to the pond and back, very slowly, the two of them the same speed now.</p>
+</section>
+
+<section>
+  <h2>III. The Lake</h2>
+  <p class="dateline">Hugo Lake &middot; a Sunday in May</p>
+  <p>It rained for five days that May. The Kiamichi came up, and the Corps of Engineers let water out of the dam, and the arms of the lake spread out over the bottomland and then drew back and left behind them a mile of grey mud as smooth as cake icing, with dead trees standing up out of it. On Saturday night a wind came up out of the southwest ahead of a line of storms, and somewhere in the night it took down a section of the old fence on the far side of the quarters.</p>
+  <p>Dewey found the gap at five in the morning, and her tracks going through it, each one as big around as a washtub and full of rainwater.</p>
+  <p>She had walked a mile and a half through the timber in the dark and come out on the west arm of the lake and gone down the bank into the water to drink, or to bathe, or for the reason old animals go off by themselves, which nobody ever knows. She had waded out thirty yards. And there, on the flat where the water had been ten feet deep the week before, the mud had taken her. She was down in it past her knees, and then past her belly, and when she tried to swing herself free she only went deeper. By the time Dewey limped out of the trees with the sheriff's deputy behind him, she was standing in the grey muck up to her shoulders, with her trunk curled up out of the water on the top of her head, not moving at all.</p>
+  <p>By noon half of Hugo was on the bank. People came out from church in their good clothes and stood under umbrellas, though the rain had stopped. Choctaw families came in pickups from out toward Soper, and the kids from the Black Baptist church on the north side came running down through the timber in their Sunday shoes. The fire department came out with ropes. The man from the radio station in Paris came. A Corps of Engineers man in a hard hat walked up and down saying the flat was not stable, which everybody could see. Bharat had seen the trucks going by on 70 and had called his cousins, and the young men from the motels stood together a little apart at the top of the bank, near the road, the way they stood everywhere.</p>
+  <p>Raju had never seen an elephant except on a poster. In India his grandfather's village had kept one at the temple, and his father had told him about it. He stood at the top of the bank with his hands in the pockets of his windbreaker and looked at her.</p>
+  <p>All along the bank the people were saying the same thing. They said it gently, mostly. Old men who had seen her raise the big top said it, shaking their heads. <em>Would you look at that. That's Rani. That's the old bull that pulled the Floyd show out of the mud in Fort Smith. I saw her do it. And look at her now. Just look at her now.</em></p>
+  <p>The young men heard it, and did not say it. They stood at the top of the bank and talked among themselves in Gujarati, the way they did, about other things. The Desai brothers stood at opposite ends of the row. Bharat kept walking up to the road to look at his watch, because his father was meeting a man from the bank in Durant at five and had told him to be there and keep quiet. Mahesh said that in Baroda they would have had a crane out by now. Raju said nothing. He was looking past the elephant, across the flat and the highway, toward the east side of town, where you could not see the Starlite Motel from here, though he could see it anyway, the red, white and blue sign, the way he saw it every night from the door of the ice room.</p>
+  <p>The firemen got a rope around her neck and tied it off to the winch of a wrecker from the Texaco station, and the wrecker spun its wheels and dug itself into the bank and the rope sang and Rani did not move. They tried two wreckers. They tried thirty men on the rope, the young men from the motels among them, Dinesh at the very end with the rope burning through his hands. A veterinarian from Durant came and looked at her through binoculars and said she was tired and her heart was old and they had better do something quick, because she would not last the night standing in that cold, and if she lay down in it she would drown.</p>
+  <p>Rani stood in the mud with her eyes half shut and let them pull.</p>
+</section>
+
+<section>
+  <h2>IV. The Drum</h2>
+  <p class="dateline">The west arm &middot; that afternoon</p>
+  <p>Ray Bradley, who owned the show, was in a motel room in Joplin, Missouri, between a matinee and an evening performance, when the sheriff got through to him on the telephone. He listened a long while without saying anything. Then he said, <em>Put Dewey on.</em></p>
+  <p>Somebody ran down to the bank and brought Dewey back up to the deputy's car, and he stood bent over with one hand on the roof and the radio handset to his ear.</p>
+  <p><em>Dewey,</em> said Ray Bradley, a long way off and full of static. <em>You get her out of there.</em></p>
+  <p>Dewey Haskins put the handset back. He stood for a moment by the car. Then he asked the deputy to drive him to the quarters, and they went off up the gravel road in a hurry, and the people on the bank looked at each other.</p>
+  <p>He was gone an hour. When the deputy's car came back down through the timber, Dewey got out of it in the spec.</p>
+  <p>He had kept it in a footlocker under his bed for nine years. A white silk turban with a glass jewel in front the size of a hen's egg and a plume of dyed ostrich feathers coming up out of it. A short jacket of purple satin crusted all over with gold braid and sequins, gone green at the edges. A red sash. Baggy white trousers tucked into red boots that curled up at the toes. The ankus, the hook, with its handle wound in gold cord. In the car behind him, in the back seat, with its rim against the window, was the bass drum from the band's storage room at the quarters, BRADLEY BROS. painted around its head in circus letters, and a boy named Lonnie Walker from the north side who played in the high school band.</p>
+  <p>There was some laughing on the bank. Not much. A man near the young men from the motels said, <em>Lord, look at that. He's dressed up like one of yours,</em> and Mahesh looked at the man and looked away, and Raju, beside him, felt the heat come up into his face.</p>
+  <p>Dewey walked down the bank in the curled-up boots, slowly, on his bad hips, to the edge of the mud, and stood there where she could see him, with his chin up and the turban on his head and the ankus held up across his chest the way he had carried it at the head of the spec for thirty-one years. Lonnie Walker set the drum on its side in the grass behind him.</p>
+  <p><em>Hit it, son,</em> said Dewey. <em>Hit it like they're opening the doors.</em></p>
+  <p>Lonnie hit it. He hit it the way a band drummer does on the first beat of a march, all his arm behind the mallet, and the sound went out across the flat like a cannon and came back off the far shore.</p>
+  <p>Rani's eyes opened.</p>
+  <p>He hit it again, and again, the slow heavy four of the spec march, the one every circus band in America knows, and the drum boomed across the water. Up and down the bank people stopped talking. Rani's ears came out from her head, wide, wider, the way they had come out every night of her life when the doors of the big top opened and the band struck up and the light hit her. Her trunk came down off her head and went up into the air, and she trumpeted, one long blast that sent the herons up off every dead tree on the flat, and then she leaned her whole weight into the mud.</p>
+  <p>The mud made a sound nobody on that bank ever forgot. It was like a cow pulling her foot out of a creek bottom, but a thousand times over and so deep it shook in your stomach. She brought one foreleg up out of it, black to the shoulder, and set it down ahead, and sank, and brought the other one up. Dewey stood at the edge of the flat in his turban and did not say a word and did not move. Lonnie Walker kept hitting the drum with the tears running down his face. She came on, one leg and then the other, with the grey muck pouring off her in sheets, and the rope still trailing from her neck, up out of the deep part and across the shallow part and up the bank. She walked past the fire department and past the wreckers and stood on the dry grass at the top of the bank in the evening sun, steaming, with the drum still going, and swung her trunk once, and laid the end of it on Dewey Haskins' turban.</p>
+  <p>Then the bank was nothing but noise. People were clapping and whistling and crying and slapping each other on the back, and the kids from the Baptist church were jumping up and down in their Sunday shoes, and an old man in a Choctaw Nation cap stood with his hat off. The young men from the motels stood at the top of the bank in a row and did not say anything at all.</p>
+</section>
+
+<section>
+  <h2>V. The Other Mud</h2>
+  <p class="dateline">The Kiamichi Motor Court &middot; that night</p>
+  <p>They went straight to the motel. It was not eleven yet and Kaka was still in the back, so they waited for him on the floor of the office on the bedspread from Room 14, in their muddy shoes, and when he came out in his cardigan and sat down behind the counter they all began to tell him at once.</p>
+  <p>He let them. Dinesh held up his hands to show the rope burns. Raju told about the drum and the turban and how the mud had sounded, and Bharat told about the man on the bank, and Mahesh, who did not usually say much on Sundays, told about her ears. <em>Kaka, you should have seen her ears. Like she heard her name.</em></p>
+  <p>Kaka listened to all of it. When they ran out he sat for a while with his hands folded on the closed book. Out on the highway a truck went by, and the lights of the Starlite Motel came and went across the window.</p>
+  <p><em>So,</em> he said. <em>The old bull got herself out of the mud.</em></p>
+  <p>They waited.</p>
+  <p><em>That was only mud. Lake mud. It comes off with a hose.</em> He looked at them, one at a time, the way he had looked at boys across a classroom in Kampala for thirty-four years. <em>And you boys. Every one of you has gone into a worse mud than that. Headfirst. Up to here.</em> He put the edge of his hand against his own throat. <em>Bharat, your father's note. Mahesh, how much you hate that desk in Paris, Texas. You two Desais, over four hundred dollars and a word your mother said at Diwali. Raju, that sign across the road. I have seen you looking at it. Every night you go out and stand by the ice machine and look at it. And I know that one with the beer in the ice room, I won't say who.</em></p>
+  <p>Nobody said anything.</p>
+  <p><em>She had somebody to come with a drum. Nobody is coming for you with a drum. You have to be the drum. Get yourselves out.</em></p>
+  <p>Then he opened the book where his finger had been, and read to them, in the voice that the truck drivers took for English.</p>
+  <div class="verse">
+    <p>Let each man raise<br>The Self by Soul, not trample down his Self,<br>Since Soul that is Self's friend may grow Self's foe.</p>
+    <p>&mdash; Bhagavad Gita 6:5</p>
+  </div>
+  <p>He turned back two pages, and read again.</p>
+  <div class="verse">
+    <p>But, as often as the heart<br>Breaks&mdash;wild and wavering&mdash;from control, so oft<br>Let him re-curb it, let him rein it back<br>To the soul's governance;</p>
+    <p>&mdash; Bhagavad Gita 6:26</p>
+  </div>
+  <p>He closed the book.</p>
+  <p>The young men sat on the bedspread from Room 14 with their backs against the soda machine. None of them could have told you afterward what happened to him then, and most of them never tried. Dinesh said once, years later, at his own daughter's wedding, that it was like the sound of that mud letting go, only on the inside, and without any sound. They sat there a long time. Nobody drank the tea. When the first trucker came in off the turnpike at a quarter to twelve, Kaka stood up and handed him a key and said <em>Good night, sir,</em> and the young men got up off the floor and went out into the lot.</p>
+</section>
+
+<section>
+  <h2>VI. Plates</h2>
+  <p class="dateline">Highway 70 &middot; the summer of 1979</p>
+  <p>The gasoline ran short that summer, the way the truckers had said, and the highway went quiet, and the banks took back four motels between Durant and the Arkansas line. The Kiamichi Motor Court was not one of them. That was the summer the Desai brothers sat down together on the tailgate of a pickup behind the Antlers Motor Inn and settled their four hundred dollars in ten minutes. It was the summer Bharat drove to Dallas and told his father's lender the truth, and Mahesh signed up for a night course in Paris, Texas, and passed his engineering exam three years later, and the summer the beer stopped turning up in the ice room at the Kiamichi Motor Court and nobody ever said a word about it.</p>
+  <p>On the first hot morning in June Raju walked across Highway 70 to the Starlite Motel with a box of his aunt's sweets from the kitchen, the ones she made for Diwali, and knocked on the office door, and the man who owned the Starlite opened it in his undershirt and stood there looking at him a long time. The sign stayed up until the next spring, when the wind took it.</p>
+  <p>Kaka went on sitting at the front desk from eleven until seven. On Sunday nights the young men kept coming, more of them every year, until there was no room for them on the bedspread from Room 14 and Navin had to buy a rug.</p>
+  <p>And the morning after it happened, Raju drove out the Kiamichi road at sunrise on the way to buy ice, and stopped his uncle's car on the gravel by the Bradley Brothers fence, and got out.</p>
+  <p>Rani was standing in the pasture by the barn in the early light, with Dewey sitting on an overturned bucket beside her in his undershirt and his old work boots, drinking coffee out of a thermos lid. Nobody had hosed her off yet. The mud of the lake had dried on her all night into a grey shell, and as the sun came up and warmed her she moved, a little, the way old animals move in the morning, and the mud cracked and came off her in plates, big curved grey plates the size of dinner platters, and fell into the grass around her feet, one, and then another, and another, until she stood there in the sun in her own skin.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Be not thoughtless, watch your thoughts! Draw yourself out of the evil way, like an elephant sunk in mud.<cite>Dhammapada 327, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Baddheraka is an elephant belonging to the king of Kosala, mighty in his youth. Worn out by age, he wades into a great lake one day, sticks fast in the mire and cannot get out, and the people who see him marvel that so strong an elephant has grown so weak. The king orders his elephant-trainer to free him. The trainer appears at the lakeside dressed as if for battle and has the battle-drum beaten. The old elephant's pride is roused, and he rises, walks out of the lake and stands on dry land. When monks report it, the Buddha tells them that the elephant has only pulled himself out of ordinary mud, while they have flung themselves into the far deeper mire of the defilements, and he urges them to strive with all their might to get out. Hearing the verse, those monks reach awakening. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-06.htm">the full commentary story</a>.</p>
+    <h3>Hugo, Oklahoma, 1979</h3>
+    <p>Circuses have wintered in <a href="https://en.wikipedia.org/wiki/Hugo,_Oklahoma">Hugo</a>, in the Choctaw Nation of southeastern Oklahoma, since the Al G. Kelly and Miller Brothers Circus moved there in 1941. As many as twenty shows have been based there at one time or another, and the town calls itself "Circus City, USA." Circus people lie buried in Showmen's Rest at Mount Olivet Cemetery. In circus language every elephant, male or female, is a <a href="https://www.circusesandsideshows.com/Lingo.html">"bull,"</a> and its keeper a bullman. A "mud show" was a circus that moved by wagon from town to town. Its wagons sank so often on wet lots that <a href="https://www.csmonitor.com/1988/0513/ucirc.html">elephants were kept to pull them out</a>. The U.S. Army Corps of Engineers finished damming the Kiamichi River for <a href="https://en.wikipedia.org/wiki/Hugo_Lake">Hugo Lake</a>, seven miles east of town, in 1974. A year later, in July 1975, <a href="https://dickinson.hykucommons.org/concern/generic_works/45a2d5c4-f8ce-436e-b57a-3a46f298c53a">two elephants escaped</a> from a circus's off-season camp near Hugo into the woods.</p>
+    <p>In August 1972 Idi Amin gave the Asians of Uganda ninety days to leave the country, and each could take only a small sum of money with them (<a href="https://en.wikipedia.org/wiki/Expulsion_of_Asians_from_Uganda">expulsion of Asians from Uganda</a>). Most went to Britain, and about a thousand came to the United States. In the mid-1970s Gujarati families from India and East Africa began buying run-down roadside motels, which were cheap during the slump that followed the oil embargo. Investing about $40,000 in a business could qualify an immigrant for permanent residence. Insurers would not cover the motels and banks would not lend on them, so families financed one another and did all the work themselves, and some competitors answered with <a href="https://www.hotel-online.com/press_releases/release/nobody-asked-me-but-no-211-hotel-history-asian-american-hotel-owners-assoc/">"American Owned" banners</a>. Within a generation about half of the motels in the United States were <a href="https://www.nationalgeographic.com/culture/2018/09/south-asia-america-motels-immigration">owned by Indian Americans</a>, most of them Gujarati. In 1979 the <a href="https://en.wikipedia.org/wiki/1979_oil_crisis">second oil crisis</a> brought gasoline lines back to American highways.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elephant Baddheraka from the Dhammapada commentary (verse 327). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-06.htm">The original</a>. Scripture from the Bhagavad Gita, tr. Edwin Arnold, <em>The Song Celestial</em> (1885). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-cane.html">&larr; The Cane</a><a href="index.html">All stories</a><a href="the-yellow-cod.html">The Yellow Cod &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* A bass drum on the bank: each beat of a slow march sends one ring out across still, muddy water. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, rings = [], t = 0, beat = 0;
+  var PERIOD = 78;               /* frames between beats, about 46 to the minute */
+  var PATTERN = [1, 0.55, 0.7, 0.55]; /* the heavy one, then three lighter */
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function origin() { return { x: W * 0.18, y: H * 0.86 }; }
+  function ring(r, strength) {
+    var o = origin(), a = strength * Math.max(0, 1 - r / (Math.max(W, H) * 1.1)) * 0.22;
+    if (a < 0.004) return;
+    ctx.strokeStyle = 'rgba(214,190,150,' + a + ')';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.ellipse(o.x, o.y, r, r * 0.32, 0, 0, 6.2832); ctx.stroke();
+    ctx.strokeStyle = 'rgba(214,190,150,' + (a * 0.45) + ')';
+    ctx.beginPath(); ctx.ellipse(o.x, o.y, r * 0.94, r * 0.3, 0, 0, 6.2832); ctx.stroke();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (reduce) {
+      for (var k = 0; k < 6; k++) ring(60 + k * 150, PATTERN[k % 4]);
+      return;
+    }
+    if (t % PERIOD === 0) { rings.push({ r: 4, s: PATTERN[beat % 4] }); beat++; }
+    for (var i = rings.length - 1; i >= 0; i--) {
+      var g = rings[i];
+      g.r += 1.15;
+      ring(g.r, g.s);
+      if (g.r > Math.max(W, H) * 1.1) rings.splice(i, 1);
+    }
+    t++;
+    requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

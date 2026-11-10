@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Scythe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a hilltop meadow at dusk; now and then a slow scythe stroke crosses the bottom of the page and the grass lies down in a swath behind it, then over a long while stands up again; datelined sections. */
+  --ground: #111412;
+  --ground-2: #1a1e1b;
+  --paper: #e5e3da;
+  --paper-dim: #9da095;
+  --accent: #b9a46a;
+  --glow: #c7c9bf;
+  color-scheme: dark;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #252a22 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(185,164,106,.3); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(185,164,106,.22); }
+.epigraph { border-left: 1px solid rgba(185,164,106,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(26,30,27,.82); border: 1px solid rgba(185,164,106,.14); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(185,164,106,.18); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(185,164,106,.2); border-bottom: 1px solid rgba(185,164,106,.2); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(26,30,27,.82); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 25.10 &middot; Na&#7749;galakula</span></nav>
+<header>
+  <h1>The Scythe</h1>
+  <div class="epigraph">But let the clothes of which he was divested be put aside in the wardrobe and kept there.<br>&mdash; Rule of St. Benedict, ch. 58</div>
+</header>
+
+<p class="heard"><span class="heard-lead">&Iacute;gy hallottam,</span> on the hill above Mount Angel.</p>
+
+<section>
+  <h2>I. The Road</h2>
+  <p class="dateline">Marion County, Oregon &middot; August 1963</p>
+  <p>Ferenc Gál owned a scythe, a pair of work trousers gone white at the knees, one shirt, and a cardboard suitcase with a Red Cross label on it from a camp in New Jersey. He was thirty-three years old. He had been in America six years and nine months, and in that time he had picked strawberries and pole beans and filberts and Christmas trees, he had strung hop yards in the spring and fed vines into the picking machines in August, he had grubbed stumps and pulled mustard out of wheat and plowed for German farmers who did not want to plow on Saturday, and he had mowed ditch banks, which was what he was best at, and what he was doing on the afternoon Brother Meinrad saw him.</p>
+  <p>The scythe was his own. He had bought the blade in Salem, from a hardware store that still carried them for the old Swiss, and made the snath himself out of ash, the way his grandfather had made them on the Great Plain east of the Tisza, with the two handles set to the length of his own arm. Everything else he had was borrowed or given or worn through. The shirt had been a good flannel shirt when a church in Portland gave it to him in 1957. Now it was more hole than shirt, and the holes had been mended with thread of other colors, and the mending had holes.</p>
+  <p>He was walking the road at the foot of the butte with the scythe on his shoulder, going back to the hop grower's bunkhouse at the end of the day, when the abbey's truck came down the hill and passed him and stopped.</p>
+  <p>Brother Meinrad was seventy-four. He had come from a farm in the canton of Obwalden in 1911, at nineteen, because the monks at Engelberg had told him there was land in Oregon and they needed somebody who knew cows, and he had milked the abbey's cows and cut the abbey's hay for fifty-two years. He leaned across the cab and looked at the scythe a long time before he looked at the man.</p>
+  <p><em>You made that snath,</em> he said. His English still had the mountains in it.</p>
+  <p><em>Yes.</em></p>
+  <p><em>Where are you from?</em></p>
+  <p>Ferenc told him. Not all of it. He did not tell people all of it. He said: a village on the Plain, and then the collective, and then Budapest, the island at Csepel, the steel works, a laborer, eight years. He said: 1956. He did not have to say any more than that. Everybody in America in 1963 knew what 1956 meant if you said it in that accent. He did not say what he had done in the steel works in the first eleven days of November, or what he had seen at the end of them, or how he had walked to Austria in the dark across the marsh to the little bridge at Andau with his scythe blade wrapped in a coat because it was the only thing of his grandfather's he had.</p>
+  <p>Brother Meinrad looked at the shirt.</p>
+  <p><em>If this is how you live,</em> he said, <em>why don't you come up the hill?</em></p>
+  <p>Ferenc laughed. It was not a laugh he was proud of.</p>
+  <p><em>Up the hill. Who would take a man like me up the hill? I have no Latin. I have no money. I have a green card and a scythe.</em></p>
+  <p><em>I would take you,</em> said Brother Meinrad. <em>If you'll come.</em></p>
+  <p>Ferenc stood in the road. A pickup full of hop sacks went by and blew dust over both of them. He thought about the bunkhouse, where nine men slept on iron cots and one of them coughed all night. He thought about September, when the hop harvest would be over and the grower would pay them off and there would be nothing until the filberts. He thought about the winter before, and the one before that.</p>
+  <p><em>All right,</em> he said. <em>If you will take me, I'll come.</em></p>
+</section>
+
+<section>
+  <h2>II. The Oak</h2>
+  <p class="dateline">Mount Angel Abbey &middot; August and September</p>
+  <p>The abbey stood on top of the butte, four hundred feet above the town and the fields, the way abbeys stand on top of things in Switzerland, which was why the Swiss had put it there. The Indians had called the hill something else before the Swiss came. Brother Meinrad said the old people in town said it was a place where the tribes had come to pray, from as far as the Klamath country, and that the monks had not chosen it by accident, whatever they told you. There was a church with two towers, and the long brick monastery that had been built after the fire of 1926, and the seminary, and gardens, and a grove of fir, and, out at the edge where the drive came up from the road and the abbey's ground ended, a white oak older than any of it, low and wide, with its lower limbs out flat over the grass like arms.</p>
+  <p>Brother Meinrad took him to the dairy barn first. He ran water into the steel sink where they washed the milk cans, hot, and had him take off the shirt and bend over, and he washed Ferenc's head with a bar of soap and his own old hands, and cut his hair short with the clippers he used on the calves when they had ringworm, and washed it again. Ferenc stood bent over the sink in the barn with his eyes shut and the hot water going down the back of his neck. Nobody had touched his head since his mother. He did not say anything. He could not have.</p>
+  <p>Then Brother Meinrad gave him a set of work clothes out of a closet, clean, patched, smelling of naphtha, and stood holding the old shirt and trousers by two fingers.</p>
+  <p><em>The Rule says we keep a man's old clothes in the wardrobe,</em> he said. <em>So that if he ever goes back to the world, he goes back the way he came. That's in the Rule. Chapter fifty-eight.</em> He looked at the shirt. <em>The wardrobe is full. Come.</em></p>
+  <p>They walked out the drive to the white oak at the edge of the grounds, where you could see the whole valley spread out below, the town and the spire of its church and the hop yards and the wheat stubble and the filbert orchards in their rows, all the way to the Cascades, and Mount Hood standing up white at the end of it. Brother Meinrad hung the shirt on one of the low limbs, and the trousers over it. Then he looked at Ferenc, and Ferenc understood, and reached up and hung the scythe in the crotch of the limb by its snath, with the blade turned in toward the trunk so nobody walking under it would be cut.</p>
+  <p><em>There,</em> said Brother Meinrad. <em>Now they're kept.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>He was a postulant first, and in the spring he would be a novice, and they gave him a black habit for the choir and a work habit for the barn and a name, because in those years the Benedictines still gave you a new name, and the name was Brother Isidore. Isidore the farmer, Brother Meinrad told him. A hired man in Spain who plowed another man's fields, and the angels came and plowed beside him while he prayed. Some of the young monks from the seminary, who had been to college, called him Brother Plowman, and he let them.</p>
+  <p>The novice master was Father Placid. He was eighty-one. He had come from Engelberg as a boy with Brother Meinrad's older brother, and he had been a professor of Greek in the college before the war and had gone almost blind since, and now he sat in a chair by the window of the novitiate with his hands folded on the Rule and taught the novices what was in it, which he had by heart. He spoke so seldom and so quietly that the novices leaned forward when he did. He had a long face and white eyebrows and he did not, as far as Brother Isidore could tell in the first month, ever look at anybody, though everyone agreed he saw everything.</p>
+  <p>At the end of two months, the way the Rule said, Father Placid read Chapter 58 to him, the whole of it, sitting in his chair by the window, and at the end of it he said the thing the Rule says to say, in his quiet voice, looking out the window at nothing.</p>
+  <p><em>Here is the law under which you wish to fight. If you can observe it, enter; if you cannot, you are free to depart.</em></p>
+  <p>Brother Isidore had been free to depart from a great many places in his life, most of them at night. He said he would stay.</p>
+</section>
+
+<section>
+  <h2>III. Bread</h2>
+  <p class="dateline">Autumn and winter, 1963</p>
+  <p>They rose at four-thirty for Vigils. They sang the Office seven times a day in Latin, the whole Psalter in a week, all hundred and fifty, the way the Rule said, and Brother Isidore stood in the back row of the choir with the lay brothers and did not know the Latin and learned it by sound, the way he had learned English by sound in the hop yards. He worked in the dairy with Brother Meinrad and in the orchard and in the woodlot. He ate in the refectory in silence while a monk read aloud from a pulpit, and the food was good. The food was very good.</p>
+  <p>That was the thing he had not expected. The farmers in the valley gave the abbey everything. They brought eggs in flats and cream in cans and sides of beef at butchering, and in November, when they killed hogs, they brought sausages and smoked hams and blood pudding in such quantities that the cellarer stood in the kitchen door with his hands up. The women of Mount Angel brought kuchen and stollen and cookies in tins, and the hop growers brought money, and at Christmas a man who had made a fortune in prunes brought a crate of oranges from California for every monk in the house. They gave it because their grandparents had given it, and because they wanted the monks to pray for them, and because the abbey on the hill was the best thing they had and they wanted it to have the best of what they had. And Brother Isidore, who had stood in line before dawn at the labor contractors' trucks in Salem with a lunch of bread and an onion in a paper sack, ate their hams and their stollen and their oranges, and he put on weight, and his face filled out, and the cough he had brought from the bunkhouse went away.</p>
+  <p>Somewhere in November he began to be ashamed of it.</p>
+  <p>It came on him first at table, with the reader in the pulpit reading something he did not follow and a plate of ham and potatoes in front of him that a farmer's wife had cured in her own smokehouse. He thought: who earned this? Not me. In Csepel, on the wall of the rolling mill, there had been a sign in letters a meter high, the old saying the Party had borrowed from Saint Paul, that he who does not work shall not eat. He had hated that sign for eight years. He found that he believed it. He thought: I am a grown man and I am eating another man's ham. Another man's oranges. I sing in a language I do not understand and they feed me for it. In the hop yards I was paid by the hour and it was mine. In Salem the cannery pays more. A man could have a room. A man could have a car, in two years, and go where he liked, and nobody would ring a bell to tell him when to get up and when to eat and when to stop talking.</p>
+  <p>He thought: I walked across a marsh at night to be free, and I have come to the top of a hill to obey an old man who can't see.</p>
+  <p>On the twenty-second of November, a Friday, the bells of the abbey rang at the wrong hour, slowly, and kept ringing, and the monks came out of the barns and the classrooms and stood on the lawn not knowing why until the prior came out of the house and told them that the President had been shot in Texas and was dead. The town bells answered from the valley below. That night the abbot said a Requiem, and the monks sang the Dies Irae, and Brother Isidore stood in the back row of the choir and thought about the morning of the fourth of November, seven years before, when the tanks came into Budapest at three in the morning and at twenty past five Imre Nagy's voice came over the radio to say that the Soviet troops were attacking, and he could not stop shaking, and could not have said whether it was the grief for a man he had never met or something that had been waiting in him for seven years to come out.</p>
+  <p>The next evening, after Vespers, when the others went in to supper, he went out the drive in the dark to the white oak.</p>
+</section>
+
+<section>
+  <h2>IV. Szégyentelen</h2>
+  <p class="dateline">The white oak &middot; November 1963 to March 1964</p>
+  <p>It was raining, the long fine Willamette rain that does not fall so much as stand in the air. The shirt was still on its limb. It had been out three months and it was black with wet and green along the seams with something growing, and the trousers under it hung straight down heavy with water, and above them in the crotch of the limb the blade of the scythe showed a line of orange rust along its back where the rain had run.</p>
+  <p>He took the shirt down and held it. It smelled of oak and rain and under that, still, of the bunkhouse and the hop kilns and himself.</p>
+  <p>He had meant to put it on. He had meant to put it on and take down the scythe and walk down the hill in the dark and be in Salem by morning and stand in line at the cannery. Instead he stood under the oak holding it, and he heard himself talking out loud, in Hungarian, the way he had talked to himself in the bunkhouses and the berry fields and on the marsh at Andau, because there was nobody else in America to talk to in it.</p>
+  <p><em>Szégyentelen,</em> he said. <em>You shameless one. Look at you. Look at what you want. You want to put this back on. This. You want to go back down there and stand in the dark at five in the morning in front of the contractor's truck with your hat in your hand, so a man with a cigar can look at your arms and decide whether you're worth a day's wage. You want to sleep in a room with nine men and a cough. You want to sell your back by the hour like a horse. That's freedom? You walked to Austria for that? Shameless. They washed your head. An old man washed your head with his own hands in a barn. They fed you. They gave you a name. And you want to put on your rags and go hire yourself out. Go on, then. Put it on. Shameless.</em></p>
+  <p>Then, because it was what was in his mouth, he said the psalm they had sung that week at Compline, the one he had learned the sound of before he learned the meaning, and had then gone and looked up in the English Bible in the novitiate library, because he had wanted to know what it was that the soul was being asked.</p>
+  <div class="verse">
+    <p>Why art thou cast down, O my soul? and why dost thou disquiet me? Hope thou in God, for I will still give praise to him: the salvation of my countenance, and my God.</p>
+    <p>&mdash; Psalm 41:12 (Douay-Rheims)</p>
+  </div>
+  <p>He said it until he was done saying it. Then he stood in the rain with the shirt in his hands, and the thing in him that had been pulling at him for a month like a dog on a rope stopped pulling, and lay down. He hung the shirt back on its limb. He walked back up the drive to the house, and went in to Compline late, and knelt at the back, and slept that night all the way through to the bell.</p>
+  <p>It lasted until the second week of Advent. Then it was the hams again, and the bell, and the Latin, and a letter from his sister in Kecskemét that said their mother was not well and that the parcel he had sent had arrived opened and half empty, and he went down the drive after Vespers to the oak and took down the shirt and said all of it again, out loud, to himself, in Hungarian, in the dark. <em>Szégyentelen.</em> And it lay down again, and he came back.</p>
+  <p>In January he went four times. In February, twice. In March, once, on a night of wind, when the limbs of the oak were knocking together over his head and the scythe blade rang very faintly in the crotch of the limb every time the wind moved it, a thin high note like a struck glass.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The other novices noticed. There were six of them, five young Americans out of the seminary and one German boy from the town, and in a house where everybody is always where they are supposed to be, a man who is not where he is supposed to be after Vespers is noticed. One evening in February the German boy, whose name in religion was Brother Benno and who had grown up on a farm below the hill and knew every tree on it, met him coming back up the drive with his hood up and rain on his face.</p>
+  <p><em>Where do you go, Brother Isidore? Every week. Out to the road.</em></p>
+  <p><em>To see my teacher,</em> said Brother Isidore.</p>
+  <p>Brother Benno thought about that. There was nothing out at the road but the oak and the abbey's cemetery a little way down the slope, where the dead monks lay in their rows under the iron crosses, back to 1882. Brother Benno told the others, and the others decided among themselves that Brother Isidore had some old monk in the cemetery he went to pray to, some Swiss lay brother from the early days, and they thought better of him for it, and asked no more.</p>
+</section>
+
+<section>
+  <h2>V. The Hayfield</h2>
+  <p class="dateline">Spring 1964</p>
+  <p>After March he did not go anymore.</p>
+  <p>He did not decide not to. It was only that the thing that had sent him went quiet one night in the wind under the oak and did not get up again. The hams were hams. The bell was the bell. When it rang he got up, and when he got up he was glad to be up, and when he sang he sang, and when he ate he ate, and when he milked he milked, and there did not seem to be anybody left over standing off to one side watching him do it and adding up whether it was worth it. He could not have explained it any better than that, and nobody asked him to.</p>
+  <p>In June, when the grass on the hilltop meadows was up to a man's waist, Brother Meinrad's tractor broke a pitman arm on the mower and there was a week's wait for the part from Portland, and the hay could not wait a week. Brother Meinrad stood at the edge of the meadow behind the church and looked at it, and then looked at Brother Isidore.</p>
+  <p>Brother Isidore walked out the drive to the oak. He did not take down the shirt. He did not look at it. He reached up and took the scythe out of the crotch of the limb, and walked back with it, and sat on an upturned bucket in the dairy barn for an hour with a whetstone and a hammer and an anvil the size of his fist, drawing the edge out again the way his grandfather had taught him on the Plain, tap and tap and tap, until the rust was gone and the edge was thin as paper. Then he went out into the meadow behind the church and mowed it. He mowed it for three days, in his work habit with the skirts tucked up into his belt, the long even swaths going down behind him and lying in rows in the sun, and the novices came out after their own work to rake, and the old monks came and stood at the edge of the meadow with their hands in their sleeves to watch, because there were men in that house who had not seen a man mow with a scythe since they were boys in Switzerland and had not thought to see it again.</p>
+  <p>When it was done he cleaned the blade and oiled it and carried the scythe back out to the oak and hung it up again in the crotch of the limb, blade in, where it had been. He did not think anything about doing it. It was where the scythe was kept.</p>
+  <p>Brother Benno was raking the last row at the far end of the meadow, and saw him come back.</p>
+  <p><em>Brother Isidore,</em> he said, at recreation that evening, with the others listening. <em>You haven't been out to see your teacher since Lent. Not once. We've been watching. You went out today, but you didn't stay.</em></p>
+  <p><em>No.</em></p>
+  <p><em>Did he die on you, your teacher?</em> said one of the Americans, and the others laughed, not unkindly.</p>
+  <p>Brother Isidore was mending a halter across his knees. He went on mending it.</p>
+  <p><em>When I was in the world,</em> he said, <em>I went back and forth. To the oak and back. To the oak and back. Now I am not in the world anymore. So I don't go back and forth.</em></p>
+  <p>The room was quiet. It was not the kind of thing a novice said. The Americans looked at each other. One of them had a copy of the Rule in the pocket of his habit, as they all did, and he took it out and found the place, because they had been taught to settle things that way, and read it out, Chapter 4, the sixty-first tool of good works: <em>Not to wish to be called holy before one is holy; but first to be holy, that one may be truly so called.</em></p>
+  <p>The next morning two of them went to Father Placid.</p>
+</section>
+
+<section>
+  <h2>VI. The Tools</h2>
+  <p class="dateline">The novitiate &middot; June 1964</p>
+  <p>Father Placid was in his chair by the window with the Rule on his knees, closed. He did not need it open. He listened to the two novices without turning his head. They said that Brother Isidore had been going out to the oak by the road all winter, every week, sometimes twice, in the dark, and that he had told them he was going to see his teacher, and that now he said he did not need to go anymore because he was not in the world anymore. They said that he was a novice of nine months. They said that it was either a lie or pride, and that either way somebody should say something.</p>
+  <p>When they were done Father Placid sat a while longer. Out the window, past the cloister garden, you could see the end of the drive and the white oak, and in the crotch of its lowest limb, if you knew where to look, a short dark curve that was the back of a scythe blade.</p>
+  <p><em>He told you the truth,</em> said Father Placid.</p>
+  <p>The two novices waited.</p>
+  <p><em>He had a teacher,</em> said the old man. <em>It is hanging on that tree. A shirt and a scythe. When he wanted to go back to the world, he went to his teacher, and his teacher showed him what the world was for him, and he scolded himself, and came home. Nobody else scolded him. Nobody else needed to. He has sat in that chair every week since November and told me all of it himself, the way the Rule says a monk should tell his evil thoughts to his spiritual father.</em> He turned his head then, for the first time, and the two novices saw his eyes, which were clouded white and looked at them anyway. <em>He kept guard over himself. Now he doesn't need the guard. That's all. A man who has stopped going back and forth has not left the enclosure, Brother. He has arrived in it.</em></p>
+  <p>Then he said the tools over to them, from the Fourth Chapter, out of his memory, the way he had said them to every novice who had come through that room for twenty years.</p>
+  <div class="verse">
+    <p>To keep constant guard over the actions of one's life. To know for certain that God sees one everywhere. When evil thoughts come into one's heart, to dash them against Christ immediately.</p>
+    <p>Now the workshop in which we shall diligently execute all these tasks is the enclosure of the monastery and stability in the community.</p>
+    <p>&mdash; Rule of St. Benedict, ch. 4</p>
+  </div>
+  <p><em>He told me he used to sell his back by the hour like a horse,</em> said Father Placid. <em>Saint James knew about horses.</em> And he said that too.</p>
+  <div class="verse">
+    <p>For in many things we all offend. If any man offend not in word, the same is a perfect man. He is able also with a bridle to lead about the whole body. For if we put bits into the mouths of horses, that they may obey us: and we turn about their whole body.</p>
+    <p>&mdash; James 3:2&ndash;3 (Douay-Rheims)</p>
+  </div>
+  <p><em>Some of us need the whole bridle all our lives,</em> said Father Placid. <em>I have needed it. Brother Isidore put the bit in his own mouth, and turned himself around with it, and now he has taken it out again because he doesn't need it. Go and learn from him. Go on.</em></p>
+  <p>They went, and did not say anything to Brother Isidore, then or later.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The shirt went the way shirts go. By the next winter it was rags on the limb, and by the one after that it was a few threads, and then one spring it was not there, and nobody saw it go. The trousers lasted a year longer. The scythe stayed.</p>
+  <p>Brother Isidore took it down every June for thirty years and mowed the meadow behind the church, long after the abbey had new mowers and did not need him to, because the old monks liked to watch and then because the young monks did, and every June when it was done he oiled it and hung it back in the crotch of the oak, blade in. When his shoulders would no longer swing it he stopped taking it down. He died in the infirmary in the winter of 2009, seventy-nine years old, and they buried him in the cemetery down the slope, in the row with Brother Meinrad and Father Placid, under an iron cross that said BR. ISIDORE GÁL, O.S.B.</p>
+  <p>The oak is still there at the end of the drive, though the snath rotted out of it long ago. The tree took the blade. Year by year the wood came up around it the way a white oak will around anything you leave in it, a fence wire, a horseshoe, a nail, until there was nothing left showing but the very tip of the back of it, a thin curve of dark iron set into the grey bark of the crotch, which the novices are still shown when they come, on their first walk out the drive, and which in a low evening light, from the right place on the road, looks exactly like the new moon.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Rouse thyself by thyself, examine thyself by thyself, thus self-protected and attentive wilt thou live happily, O Bhikshu!<cite>Dhammapada 379, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">For self is the lord of self, self is the refuge of self; therefore curb thyself as the merchant curbs a good horse.<cite>Dhammapada 380, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a monk meets a poor hired laborer walking along in a ragged loincloth with a plow on his shoulder and asks why he does not go forth. The man asks who would ordain someone like him; the monk says he will, takes him to Jetavana, bathes him with his own hands, ordains him, and has him hang his loincloth and plow on the branch of a tree at the edge of the monastery grounds. He is named Na&#7749;galakula, &ldquo;Plowman.&rdquo; Living on the rich offerings given to the Buddha, he grows discontented and decides to go back to work for hire. But at the tree he scolds himself (&ldquo;Shameless fellow!&rdquo;) and returns, and he does this again each time the discontent comes back. When the monks ask where he keeps going, he says he is visiting his teacher. Soon he reaches arahantship and stops going, and when the monks tease him, he says that while he was bound to the world he went back and forth, and now he does not. They report this to the Buddha as a false claim; the Buddha says it is true, since his son has admonished himself and reached the goal. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-10.htm">the full commentary story</a>. A close twin of the story, about the monk Pilotika, is told in 10.10, <a href="the-sugar-sack.html">The Sugar Sack</a>.</p>
+    <h3>Mount Angel and the Hungarians, 1956&ndash;1964</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Mount_Angel_Abbey">Mount Angel Abbey</a> was founded in 1882 by Benedictine monks from the Abbey of Engelberg in Switzerland. It stands on a butte about 485 feet high above the farm town of Mount Angel in the Willamette Valley, a hill that, as the <a href="https://www.oregonencyclopedia.org/articles/city_of_mt_angel/">Oregon Encyclopedia</a> notes, Native people had long used as a place of prayer. Bavarian Catholic settlers followed the monks, and the monastery was rebuilt after a fire destroyed it in 1926. The surrounding country grew hops, berries, filberts and grain; by the early 1950s <a href="https://www.oregonencyclopedia.org/articles/hop_industry/">machines had replaced the big hop-picking crews</a>. The <a href="https://en.wikipedia.org/wiki/Rule_of_Saint_Benedict">Rule of St. Benedict</a> requires that a newly received monk's own clothes be kept in the wardrobe, so that if he ever leaves he can be sent out in them; the passages here are from Leonard Doyle's 1948 translation.</p>
+    <p>In the <a href="https://en.wikipedia.org/wiki/Hungarian_Revolution_of_1956">Hungarian Revolution of 1956</a>, the Soviet army returned to Budapest early on November 4, and the workers' district of Csepel was one of the last places to hold out, until November 11. About 200,000 Hungarians fled the country. Some 70,000 crossed into Austria over the small bridge at <a href="https://en.wikipedia.org/wiki/Andau">Andau</a>, which James Michener made famous in <i>The Bridge at Andau</i>. Most of those admitted to the United States passed through <a href="https://en.wikipedia.org/wiki/Camp_Kilmer">Camp Kilmer</a> in New Jersey between November 1956 and June 1957 before being resettled around the country.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Na&#7749;galakula from the Dhammapada commentary (verses 379 and 380). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-10.htm">The original</a>. Scripture from the Douay-Rheims Bible (Challoner revision) and the Rule of St. Benedict, tr. Leonard J. Doyle (1948). Written by Claude Opus 5.5.
+  <div class="pager"><a href="thirteen-kettles.html">&larr; Thirteen Kettles</a><a href="index.html">All stories</a><a href="heart-mountain.html">Heart Mountain &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A hilltop meadow at dusk along the bottom of the page. Every so often a slow scythe
+  // stroke passes from left to right and the grass lies down in a swath behind it; then,
+  // over a long while, the grass stands up again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, blades = [], t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    blades = [];
+    var n = Math.round(W / 4);
+    for (var i = 0; i < n; i++) {
+      blades.push({ x: Math.random() * W, h: H * (0.06 + Math.random() * 0.1), lean: (Math.random() - 0.5) * 0.25,
+        ph: Math.random() * 6.28, w: 0.6 + Math.random() * 0.8, depth: Math.random() });
+    }
+    blades.sort(function (a, b) { return a.depth - b.depth; });
+  }
+  function draw(now) {
+    var t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var cyc = 48, ph = reduce ? 0.55 : (t % cyc) / cyc;
+    var sweep = ph < 0.35 ? ph / 0.35 : 1; // the stroke crosses in the first third
+    var front = -0.1 * W + sweep * 1.2 * W;
+    var regrow = ph < 0.45 ? 0 : Math.min(1, (ph - 0.45) / 0.5);
+    for (var i = 0; i < blades.length; i++) {
+      var b = blades[i];
+      var cut = (b.x < front) ? 1 - regrow : 0;
+      var sway = reduce ? 0 : Math.sin(t * 0.6 + b.ph + b.x * 0.004) * 0.06;
+      var ang = b.lean + sway + cut * 1.25; // lie down toward the right
+      var len = b.h * (1 - cut * 0.15);
+      var base = H - b.depth * 6;
+      var x2 = b.x + Math.sin(ang) * len, y2 = base - Math.cos(ang) * len;
+      var a = 0.10 + 0.12 * b.depth;
+      ctx.strokeStyle = 'rgba(185,164,106,' + a + ')';
+      ctx.lineWidth = b.w;
+      ctx.beginPath(); ctx.moveTo(b.x, base);
+      ctx.quadraticCurveTo(b.x + Math.sin(ang) * len * 0.3, base - Math.cos(ang) * len * 0.6, x2, y2);
+      ctx.stroke();
+    }
+    if (!reduce && ph < 0.35) {
+      // the blade itself: a faint crescent of iron at the cutting front
+      var y = H - H * 0.05;
+      ctx.strokeStyle = 'rgba(199,201,191,' + (0.18 * Math.sin(sweep * Math.PI)) + ')';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(front - 40, y + 60, 90, -Math.PI * 0.42, -Math.PI * 0.08); ctx.stroke();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>

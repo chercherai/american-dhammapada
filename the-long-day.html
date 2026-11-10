@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Long Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a desert evening; a low sun hangs and hardly moves, and now and then water is led down one of the furrows below the text; datelined sections. */
+  --ground: #1a1310;
+  --ground-2: #261c16;
+  --paper: #ede2d1;
+  --paper-dim: #ad9f8b;
+  --wheat: #e0a458;
+  --water: #8cbec8;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #2c1f17 0%, #1a1310 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(237,226,209,0.2); }
+.series a:hover { color: var(--wheat); }
+a:focus-visible { outline: 2px solid var(--wheat); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--wheat); text-wrap: balance; text-shadow: 0 0 28px rgba(224,164,88,0.22); }
+.epigraph { border-left: 1px solid rgba(224,164,88,0.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--wheat); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--wheat); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(38,28,22,0.78); border: 1px solid rgba(237,226,209,0.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--water); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(237,226,209,0.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--wheat); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--wheat); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(237,226,209,0.1); border-bottom: 1px solid rgba(237,226,209,0.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--wheat); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--wheat); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--wheat); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--wheat); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(38,28,22,0.78); border-left: 2px solid var(--wheat); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 10.11 &middot; Sukha</span></nav>
+<header>
+  <h1>The Long Day</h1>
+  <div class="epigraph">The king&rsquo;s heart is in the hand of Jehovah as the watercourses: He turneth it whithersoever he will.<br>&mdash; Proverbs 21:1</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is the way they tell it,</span> at Sacaton.</p>
+
+<section>
+  <h2>I. The Window</h2>
+  <p class="dateline">Phoenix and the Gila villages &middot; the years of famine</p>
+  <p>The grandmothers began it the same way every time, so that the children knew where they were.</p>
+  <p>In the dry years, when the settlers at Florence had taken the river into their big canal and there was nothing left in the Gila but stones and tamarisk, the men of the villages cut mesquite. They cut it along the old fields that had no water any more, and stacked it by the railroad at Sacaton Station in cords as high as a house, and hauled it to Phoenix in wagons to sell for stove wood, and the money bought flour. It was the only work there was. Some years the people ate the government's flour, which had worms in it, and the government's bacon, which was green. Boys grew up who had never seen wheat standing in a field in their own village, though their grandfathers had sold wheat to the soldiers and the stage line and the whole Territory of Arizona.</p>
+  <p>Luis Manuel was one of the woodcutters. He was from Blackwater. In the winter of 1897 he hauled a load to Phoenix the week before Christmas and slept in a friend's yard on Jefferson Street to save the price of a camp, and on the Saturday night the friend said, <em>Come, you have to see the rich man eat.</em></p>
+  <p>There was a man in Phoenix who owned a hotel on Washington Street, and a bank, and part of a canal company, and every Christmas he had his dinner set out in the big front window of the hotel dining room with the curtains open, so the town could see it. It was in the newspaper. A band played on the sidewalk. People came from all over the valley and stood in the street in the cold, Mexicans and Chinese and soldiers and cowboys and Pima woodcutters, and watched him eat. Roast turkey. Oysters that had come on ice on the train. Ham, and white bread, and potatoes with butter, and cakes, and oranges, which Luis had never tasted, piled up in a silver dish.</p>
+  <p>The smell of it came out through the door every time a waiter opened it. Luis had eaten one tortilla since morning. He stood in the street and smelled the turkey, and something happened in him that the grandmothers always described with their hands flat against their stomachs. He said, <em>I want that plate. If I don't get that plate I'll die.</em></p>
+  <p>His friend laughed at him. But Luis kept saying it, and at last the friend, who had been to the mission school and was not afraid of white men, pushed to the front of the crowd and called through the glass three times, louder each time, until the rich man put down his fork.</p>
+  <p><em>There's a man here from the reservation who wants your dinner. He says he'll die without it.</em></p>
+  <p><em>Every plate on this table cost me more than his whole wagon,</em> the rich man said, and the crowd laughed. <em>If I fed everybody who wanted it, what would I eat?</em> But he was enjoying himself, and he looked at Luis a long time through the window, and said: <em>Tell you what. Haul wood for my hotel for three years. Three years, every week, and at the end of it you can sit right here in my chair and have my Christmas dinner.</em></p>
+  <p>Luis went home to Blackwater and told his wife. Then he hauled wood to that hotel for three years, every week, through two summers when the thermometer on the hotel porch said a hundred and fifteen, and never once was his cord short or his wood green. And on Christmas Eve of 1900 the rich man, who was a man of his word whatever else, had the band out on the sidewalk and the newspaper man there and the curtains open, and Luis Manuel sat in the big chair in the window in a borrowed collar with the whole dinner in front of him. The turkey. The oysters. The oranges in the silver dish.</p>
+  <p>He had his fork in his hand when the thin old man came to the door.</p>
+  <p>Nobody saw where he came from. The grandmothers said he came out of the dark the way a coyote comes, already there. He was an O'odham man, very old, very thin, with a flour sack over his shoulder and dust to the knee, and he stood just inside the dining room door with nothing in his hands, and waited.</p>
+  <p>Luis looked at him. He looked at the plate. He thought: I have worked three years for one dinner because I never in my life gave anything away. This will feed me one night.</p>
+  <p>He got up out of the rich man's chair with the plate in both hands and walked across the dining room and began to put the food into the old man's flour sack. When it was half gone the old man put his hand over the mouth of the sack. Luis moved his hand away. <em>Grandfather, one plate doesn't cut in two,</em> he said. <em>Take it all.</em> And he put in the rest of it, the oranges last.</p>
+  <p>The old man looked at him and said something in O'odham that the grandmothers would not repeat, because they said it belonged to Luis and nobody else. Then he went out the door with the sack, and down Washington Street to the west, toward the Estrella mountains, and the whole crowd in the street turned and watched him walk until they could not see him. That same night, people said afterward, every house at Komatke under the Estrellas had meat, and white bread, and nobody could ever say where it came from, and nobody asked. Some things you don't ask.</p>
+  <p>When the rich man heard the shouting in the street he thought they were laughing at the Indian, and sent a waiter out to see. The waiter came back and told him. The rich man sat a long time in the empty window. Then he sent for Luis and gave him a team of mules and a new wagon and two hundred dollars in gold, and said, <em>I have eaten in this window for eleven years and I never once gave anybody anything.</em> They were friends after that, the grandmothers said. Luis Manuel bought seed wheat with the gold. He was the great-grandfather.</p>
+</section>
+
+<section>
+  <h2>II. The Longing</h2>
+  <p class="dateline">Sacaton &middot; 1921&ndash;1922</p>
+  <p>His granddaughter Ruth married a man from Sacaton who farmed twenty acres of allotment land on the government ditch, and in the fall of 1921, when she knew she was carrying a child, a longing came on her that she could not explain to anybody.</p>
+  <p>She wanted to feed the church. All of it. Elder Simon and the other elders and the minister and the women's society and every family that came in wagons to the Sacaton meetinghouse on a Sunday, two hundred people, more. She wanted to cook for them herself, a whole day's cooking, and serve them, and then sit down at the very end with the old women behind the cook fires and eat whatever was left in the bottoms of the pots.</p>
+  <p>Her husband told her she was crazy. The flour alone would cost forty dollars. Her mother told her pregnant women got notions. But the longing would not go away, and in the end the family gave it to her, because a longing like that in a woman carrying a child is not a thing you refuse. At the Thanksgiving meeting she and her sisters and aunts cooked over six fires behind the adobe meetinghouse from four in the morning. Beef stew with chili. Tepary beans. Squash. Tortillas as big as a wagon wheel, a hundred of them, two hundred. Pinole to drink. Coffee boiled in washtubs with a sack of sugar in it. Ruth served Elder Simon first, because he was the oldest of the elders, and the whole church after him, and at dark she sat down with the old women on a log behind the fires and ate cold beans out of the bottom of the big pot with a tortilla, and she said it was the best meal of her life.</p>
+  <p>The boy was born in July. From the day they knew he was coming, Ruth said, nobody in that house had been sick. Not a fever, not a cut that went bad. Her husband's mother, who had coughed for nine years, stopped coughing. So when Elder Simon came to the house to pray over the baby, and asked what they would call him, Ruth said, <em>His name is Joseph. But we call him Happy.</em> Elder Simon laughed and put his old hand on the baby's head and said, <em>Happy. Good.</em></p>
+  <p>Ruth said one more thing that day, to her husband, quietly. <em>Whatever he wants to do, when he's big enough to want things, I won't stand in front of him.</em></p>
+</section>
+
+<section>
+  <h2>III. Water, Arrows, Wheels</h2>
+  <p class="dateline">Sacaton &middot; June 1930</p>
+  <p>That spring Mr. Coolidge, who had been President, came out to the new concrete dam up in the canyon at San Carlos and made a speech on it, and the newspapers said the water was coming back to the Pima at last. Some of the old men went up to see it. The lake behind the dam was dry. There was grass growing in it, and they said a man from Oklahoma who made jokes on the radio had looked at it and said if it were his lake he would mow it. The old men came home and did not say much. The fields at Sacaton that June were watered from the government pumps, a little, when the pumps were running, and the wheat was thin.</p>
+  <p>Happy was seven. In May he had said to his mother, <em>I want to go live with Elder Simon.</em></p>
+  <p>Elder Simon was seventy-four that year. He had been an elder of the Sacaton church since before there was an adobe church to be an elder of, and before that, when he was young, he had been the canal boss of his village in the last good years, the man who decided who got water and when, and walked the ditches with a shovel on his shoulder before dawn. He lived alone now in a two-room adobe near the meetinghouse, with a ramada in front and one peach tree that he watered from a bucket. His sister lived in the brush house across the yard. Her name was Juana, and she had been blind since she was a girl, and she sat in the shade by the gate of the yard most of every day, shelling beans by feel, and knew who was coming down the road before the dogs did.</p>
+  <p>Ruth did not stand in front of him. She went to Elder Simon after church and asked, and he said yes. Then she did it properly. She bought Happy new overalls and a white shirt and shoes at the trading post, and the whole family drove him over in two wagons on a Sunday afternoon with the children riding on top of the bedrolls, and handed him over at the gate.</p>
+  <p>Elder Simon looked down at him. <em>It is hard, living with an old man. Getting up in the dark. Praying a long time. Nobody to play with. You think you'll like it?</em></p>
+  <p><em>I'll do what you tell me,</em> Happy said.</p>
+  <p>For seven days the family brought food to the church at noon, and on the eighth day Elder Simon said, <em>Today you carry my things,</em> and they set out walking toward the agency. Happy carried the old man's Bible, and his hat when the old man wanted his hands free, and a lard bucket with water in it.</p>
+  <p>They came first to a field where two men were irrigating. One stood at the head of the ditch with a shovel and cut the bank, and the water came through, brown and slow, and the other man walked ahead of it down the furrows, opening a little dam here with his foot, closing another with a shovelful of mud, and the water turned where he turned it and went where he wanted it to go, row after row, to the end of the field.</p>
+  <p><em>What are they doing?</em></p>
+  <p><em>Leading the water.</em></p>
+  <p><em>Does the water want to go there?</em></p>
+  <p><em>Water doesn't want anything. It goes downhill. They show it which downhill.</em></p>
+  <p>They came next to a ramada where an old man sat over a little bed of mesquite coals with a pile of arrow shafts beside him, arrowweed, for the boys who hunted rabbits along the dry river. He took a shaft and warmed it over the coals and bent it in a grooved stone and held it up to his eye and sighted down it, and bent it again, and sighted, until it was straight as a sunbeam, and laid it aside and took another.</p>
+  <p><em>Does the stick know it's being made straight?</em></p>
+  <p><em>A stick doesn't know anything.</em></p>
+  <p>They came last to the agency shops at Sacaton, where in the shade of the big wagon shed two Pima men and a white blacksmith were putting an iron tire on a wagon wheel. The tire had been in the fire till it glowed, and they carried it with tongs, three of them, and dropped it over the wooden rim, and hammered it down all the way around while the wood smoked, and then poured water on it so it shrank tight with a sound like a man breathing in. The wheel had been boards and spokes and a hub, things that would not go anywhere by themselves. Now it was a wheel.</p>
+  <p><em>Does the wood want to be a wheel?</em></p>
+  <p><em>No.</em></p>
+  <p>Happy stood in the shade a long time with the old man's Bible against his chest, looking at the wheel, and Elder Simon let him.</p>
+  <p>Then the boy said, <em>Grandfather, take your Bible. And your hat. I want to go back.</em></p>
+  <p>The old man did not argue with him, and he did not think, as an old man might, this child has been with me eight days and is giving me orders. He took the Bible and the hat. <em>All right. Go.</em></p>
+  <p>Happy started back up the road, and stopped, and turned around.</p>
+  <p><em>Grandfather. When you bring me something to eat, bring me the good food. All of it. Every good thing there is.</em></p>
+  <p><em>And where am I going to find every good thing there is, in this country, in June?</em></p>
+  <p><em>If you can't find it by your luck,</em> Happy said, <em>find it by mine.</em></p>
+  <p>Elder Simon took the key to his house off the string around his neck and gave it to him, and went on toward the agency alone.</p>
+</section>
+
+<section>
+  <h2>IV. The Long Morning</h2>
+  <p class="dateline">Elder Simon's house &middot; the same day</p>
+  <p>Happy let himself into the old man's house and shut the door and pulled the latch string in, and sat down on the dirt floor in the cool dark with his back against the adobe wall and his new shoes in front of him.</p>
+  <p>Nobody knows what he did in there. He was seven. He said afterward only that he thought about the water, and the stick, and the wheel, and about how they could not do anything for themselves and still a man could make them go right, and that if a man could do that to a ditch and a stick and a piece of wood that did not know anything, then a person who did know something ought to be able to do it to himself. And he sat there, and did it.</p>
+  <p>What other people saw, they told for years.</p>
+  <p>They said that all that morning no bird made a sound anywhere near Elder Simon's yard. The grackles that always quarreled in the cottonwoods by the meetinghouse sat in the branches with their beaks shut. The roosters at the agency did not crow. A woman hanging wash said the doves came down to the ditch to drink, as they always did, and stood on the bank, and did not drink, and flew away again without a sound. Four old men from four different villages, who did not know each other well, each said afterward that they had been on the road that morning, one on each side of Elder Simon's place, north and south and east and west, and each had felt that he should not go any nearer, and had stood a long time in the road, and had turned around and gone home.</p>
+  <p>They said that a man in a black hat, whom nobody knew, stood beside Elder Simon's door all morning with his hand on the latch string, and that when Juana's grandson came across the yard to get a hoe out of the ramada, the man looked at him, and the grandson forgot the hoe.</p>
+  <p>And they said the sun stopped. It was nearly the longest day of the year anyway. But the agency clerk, who kept a log of the readings on the thermometer at the agency office, noticed at what he thought was half past ten that the shadow of the water tank lay across the agency yard exactly where it had lain when he came out at nine, and he looked at it a long time and thought he had sunstroke and went inside and lay down. The trader at the post said his clock stopped, and started again later on its own, and he never had to set it.</p>
+  <p>Juana sat by the gate in the shade with her pan of beans. She did not shell any. She sat with her hands still in the pan and her face turned toward the house, the way blind people turn toward a sound, though there was no sound.</p>
+</section>
+
+<section>
+  <h2>V. Every Good Thing</h2>
+  <p class="dateline">The Allen place, by the agency &middot; noon</p>
+  <p>Elder Simon stood in the road outside the agency with the Bible under his arm and thought: where? Every family he knew was eating government flour and pump-water squash. And then, the way you remember where you put something, he thought of the Allens.</p>
+  <p>Daniel Allen had one of the few fields near Sacaton that had kept its own well, and his wife had come from Salt River, where there was still water in the canals, and her family had sent her a wagonload of things that very week. When Elder Simon came to their gate at noon, the whole family came out, and Mrs. Allen said, <em>Elder! It's good you came today of all days,</em> and they took his Bible and his hat and sat him in the best chair under the ramada and brought him a cup of water from the well and coffee with sugar.</p>
+  <p>Then they asked him to talk to them about the Word until the food was ready, and he did, sitting in the shade with their children at his feet, until he smelled that it was time and stopped.</p>
+  <p>The food came. Beef and chili. Tepary beans, the brown and the white. Tortillas off the griddle, thin as paper. Squash with green corn. Cholla buds that Mrs. Allen's mother had picked and dried in April. Watermelon from Salt River. Peaches. A jar of syrup from the saguaro fruit, dark as molasses. Fried bread with sugar on it. A sweet pudding of roasted wheat. Coffee again. He had not seen a table like it since he was a young man.</p>
+  <p>He told them about the boy and asked if he could take the food to him. Mrs. Allen would not hear of it. <em>You eat first, Elder. Eat all of it. Then we'll fill a bucket for the boy.</em> And they would not let him leave until he had eaten, so he ate, and then Mrs. Allen filled a lard bucket with some of everything and pressed the lid down on it and tied it with a cloth, and Elder Simon thanked them and set out for home at a pace that made the Allen children laugh, an old man of seventy-four half running down the agency road with a lard bucket, thinking, the boy must be hungry. The boy has been alone since morning. The boy is seven.</p>
+</section>
+
+<section>
+  <h2>VI. The Gate</h2>
+  <p class="dateline">Elder Simon's yard &middot; afternoon</p>
+  <p>Juana was standing at the gate when he came. She had never stood at the gate in her life. She had one hand on the gatepost, and her blind face turned toward him on the road, and he slowed down, and stopped.</p>
+  <p><em>Sister. Let me in. I have food for the boy.</em></p>
+  <p><em>What is it you've got?</em></p>
+  <p>He did not understand why she asked, but he answered her, because she was his elder sister and he had answered her all his life. <em>Food.</em></p>
+  <p><em>And what is food for?</em></p>
+  <p><em>For when you're hungry. So you feel good.</em></p>
+  <p><em>And what does feeling good do?</em></p>
+  <p>He thought about it. <em>It fills a person out. Puts color in them. Makes them look well.</em></p>
+  <p><em>And then what?</em></p>
+  <p>Elder Simon stood in the road with the bucket and thought about the famine years, and the green bacon, and all the children he had buried, and his own sons hauling wood to Phoenix. <em>Then they're content,</em> he said. <em>Then they lie down in the shade and they're glad to be alive.</em></p>
+  <p>Juana stood listening to something past him, behind him, in the house. Then she took her hand off the gatepost.</p>
+  <p><em>All right,</em> she said. <em>Go on. Give the boy his food.</em></p>
+  <p>The old man went up to his own door. The latch string was pulled in. He knocked, and called, and pushed, and the door gave, and Happy came out into the yard in his white shirt with dirt on the seat of his overalls, blinking in the light, and took the bucket from him with both hands and set it down, and took the old man's hat and fanned him with it.</p>
+  <p><em>Eat,</em> said Elder Simon.</p>
+  <p><em>Did you eat, Grandfather?</em></p>
+  <p><em>I ate. Mrs. Allen sat on me till I ate. Now you eat.</em></p>
+  <p>So the boy sat down on the bench under the ramada and untied the cloth and ate, slowly, a little of everything, like somebody who has all the time in the world, and when he was done he took the bucket to the ditch and washed it with sand and brought it back and set it upside down on the bench to dry.</p>
+  <p>And the grackles in the cottonwoods by the meetinghouse all began to talk at once. A rooster crowed at the agency. Juana's grandson remembered the hoe. Down at the agency office the shadow of the water tank swung off across the yard toward the east, and the clerk, coming out on the porch, saw that the sun had gone over the top of the sky while he was not looking, and that it was evening.</p>
+</section>
+
+<section>
+  <h2>VII. Which Downhill</h2>
+  <p class="dateline">The Sacaton meetinghouse &middot; that night</p>
+  <p>The elders met at the meetinghouse that night, as they did on Wednesdays, and before they prayed they sat on the benches outside in the dark and talked about the day. Everybody had felt it. The morning that would not end, the noon that went on and on, and then the evening coming all at once, as if somebody had let go of it.</p>
+  <p><em>The boy only just finished his dinner,</em> one of them said. <em>At sundown. What kind of day was that?</em></p>
+  <p>Juana had come over on her grandson's arm, which she never did on Wednesdays, and was sitting on the end of the bench with her cane across her knees.</p>
+  <p><em>That's what a day is like,</em> she said, <em>when somebody inside it is working.</em></p>
+  <p>They waited. She did not say much, ever, and they had learned to wait.</p>
+  <p><em>This morning that boy saw men leading water in a ditch. He saw an old man straightening arrows over the coals. He saw them putting the iron on a wheel down at the agency. And he went home and shut the door and did it to himself.</em> She turned her face toward where her brother was sitting. <em>Simon. You were a canal boss. Say it for them. The one in Proverbs about the water.</em></p>
+  <p>Elder Simon said it in O'odham, and then, because the minister was there, he said it in English, the way it was in the big Bible the church had been given by the Presbytery, the new one that said Jehovah. He said the other one after it, the one from the long Psalm, because it came to him, and his sister nodded.</p>
+  <div class="verse">
+    <p>The king&rsquo;s heart is in the hand of Jehovah as the watercourses: He turneth it whithersoever he will.</p>
+    <p>&mdash; Proverbs 21:1</p>
+    <p>I thought on my ways, And turned my feet unto thy testimonies.</p>
+    <p>&mdash; Psalm 119:59</p>
+  </div>
+  <p>Nobody said anything for a while. Somewhere out past the agency the government pump started up, thudding, and they could hear the water it lifted begin to run in the ditch along the road, not much of it, a little, enough.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Happy lived with Elder Simon until the old man died, in the cold winter of 1937, and walked behind his coffin to the church cemetery with Juana's hand on his shoulder. He went to the Indian school in Phoenix after that, and to the war, and came home, and was an elder himself by the time the water came back down the Gila to Sacaton in his old age, which is another story.</p>
+  <p>But the grandmothers who tell this one always end it on the evening of the long day, after the elders had gone in to pray. They say the boy took the bucket he had washed and filled it from the ditch, and carried it across the yard to the old man's one peach tree, and knelt, and with his finger drew a little channel in the dust from where he was going to pour it to the foot of the tree. Then he poured. And they say the water ran down his channel and did not go anywhere else. It went where he led it, the whole way, into the dark at the roots.</p>
+</section>
+
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Well-makers lead the water (wherever they like); fletchers bend the arrow; carpenters bend a log of wood; good people fashion themselves.<cite>Dhammapada 145, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a poor laborer in an earlier age works three years for a rich man named Gandha, who eats his costly meals on display before the whole city, to earn one bowl of that rice; when the bowl is finally his he gives all of it to a silent holy man, who carries it off through the air and feeds five hundred, and the shamed rich man gives the laborer half his fortune. Reborn in the Buddha's time, he is the son of a woman who longed in pregnancy to feed the elder <a href="https://en.wikipedia.org/wiki/Sariputta">Sāriputta</a> and all his monks and eat their leftovers. Named Sukha, &ldquo;Happy,&rdquo; because no one in the house suffered after he was conceived, the boy goes forth at seven. On the eighth day, walking behind Sāriputta, he sees men leading water in channels, fletchers straightening arrows and carpenters shaping wheels, and reasons that if people can master things without minds, he can master his own. He sends the elder on, asking him to bring back food of a hundred flavors, and shuts himself in the elder's cell. The gods silence the birds, guard the door and hold the sun and moon still; Sāriputta is fed by a devoted household and hurries back with a second portion; the Buddha stands at the gate and delays him with four questions about what food produces, until the boy reaches awakening. Then the boy eats, the sun moves, and the monks wonder why the day was so long. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-11.htm">the full commentary story</a>.</p>
+    <h3>The Gila River, 1897&ndash;1930</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Akimel_O%CA%BCodham">Akimel O'odham</a> (Pima) and their ancestors farmed the middle Gila with canals for many centuries, and in the 1850s and 1860s they sold wheat to emigrants, the overland mail and the army. Upstream settlers then took the river. The Florence Canal, finished in 1889, drew off most of what was left; summer crops failed eleven times between 1892 and 1904, and the community's own history calls these the years of famine. To feed their families, men cut mesquite and sold it as stove wood: by 1905 nearly twelve thousand cords a year were going to Phoenix, and in 1901 a newspaper counted more than thirty thousand cords stacked at Sacaton Station waiting for the railroad. The Presbyterian missionary Charles Cook organized the church at Sacaton in 1889, and a larger adobe meetinghouse was built there in 1918.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Coolidge_Dam">Coolidge Dam</a> on the upper Gila, built by the Bureau of Indian Affairs for the San Carlos Irrigation Project, was meant to bring water back to Pima and non-Indian fields alike. Former President Calvin Coolidge dedicated it on March 4, 1930, before the reservoir had begun to fill; Will Rogers, looking at the grass in the dry lake bed, said that if it were his lake he would mow it. The project did not restore Pima farming. In 2004 the <a href="https://en.wikipedia.org/wiki/Gila_River_Indian_Community">Gila River Indian Community</a> won one of the largest tribal water settlements in American history. The verses Elder Simon recites are from the <a href="https://en.wikipedia.org/wiki/American_Standard_Version">American Standard Version</a> of 1901, which renders the divine name as Jehovah.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the novice Sukha from the Dhammapada commentary (verse 145). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-11.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-sugar-sack.html">&larr; The Sugar Sack</a><a href="index.html">All stories</a><a href="what-shall-i-cry.html">What Shall I Cry &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, rows = [], sunP = 0.38, hold = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    rows = [];
+    var n = 7;
+    for (var i = 0; i < n; i++) {
+      var y0 = H * (0.78 + i * 0.032);
+      rows.push({ y: y0, tilt: (Math.random() - 0.5) * H * 0.02, head: -1, wait: 200 + Math.random() * 1800, speed: 0.0009 + Math.random() * 0.0007 });
+    }
+  }
+  function rowY(r, p) { return r.y + r.tilt * p + Math.sin(p * 6.3 + r.y) * 2; }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t++;
+    // the sun, barely moving along a high arc, and sometimes not moving at all
+    if (!reduce) {
+      if (hold > 0) hold--; else { sunP += 0.000025; if (Math.random() < 0.0008) hold = 1800; }
+      if (sunP > 0.62) sunP = 0.38;
+    }
+    var sx = W * (0.15 + sunP * 0.7), sy = H * (0.2 - Math.sin(sunP * Math.PI) * 0.1);
+    var g = ctx.createRadialGradient(sx, sy, 0, sx, sy, Math.max(W, H) * 0.45);
+    g.addColorStop(0, 'rgba(255,222,160,0.16)');
+    g.addColorStop(0.08, 'rgba(240,180,100,0.08)');
+    g.addColorStop(0.5, 'rgba(200,120,60,0.02)');
+    g.addColorStop(1, 'rgba(200,120,60,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    // furrows, and water led down them one at a time
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      ctx.strokeStyle = 'rgba(190,150,110,0.06)'; ctx.lineWidth = 1; ctx.beginPath();
+      for (var x = 0; x <= W; x += 10) { var p = x / W, y = rowY(r, p); if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+      ctx.stroke();
+      if (reduce) { r.head = (i % 3 === 0) ? 0.55 : -1; }
+      else if (r.head < 0) { r.wait--; if (r.wait <= 0) r.head = 0; }
+      else { r.head += r.speed; if (r.head > 1.25) { r.head = -1; r.wait = 1500 + Math.random() * 3000; } }
+      if (r.head >= 0) {
+        var end = Math.min(1, r.head), fade = r.head > 1 ? 1 - (r.head - 1) / 0.25 : 1;
+        ctx.strokeStyle = 'rgba(140,190,200,' + (0.22 * fade) + ')'; ctx.lineWidth = 1.6; ctx.beginPath();
+        for (var q = 0; q <= end; q += 0.01) { var yy = rowY(r, q); if (q === 0) ctx.moveTo(q * W, yy); else ctx.lineTo(q * W, yy); }
+        ctx.stroke();
+        if (r.head <= 1) {
+          var hx = end * W, hy = rowY(r, end);
+          var gg = ctx.createRadialGradient(hx, hy, 0, hx, hy, 12);
+          gg.addColorStop(0, 'rgba(255,230,180,0.35)'); gg.addColorStop(1, 'rgba(255,230,180,0)');
+          ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(hx, hy, 12, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

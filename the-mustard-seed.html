@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mustard Seed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a low field of votive flames; datelined sections. */
+  --ground: #15110d;
+  --ground-2: #201912;
+  --paper: #e9e0d0;
+  --paper-dim: #a99d8a;
+  --mustard: #d1a331;
+  --flame: #f0b44c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #2b2015 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,224,208,.2); }
+.series a:hover { color: var(--mustard); }
+a:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--mustard); text-wrap: balance; text-shadow: 0 0 28px rgba(209,163,49,.22); }
+.epigraph { border-left: 1px solid rgba(209,163,49,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mustard); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--mustard); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(32,25,18,.75); border: 1px solid rgba(233,224,208,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--flame); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,224,208,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--mustard); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mustard); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--mustard); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mustard); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--mustard); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(32,25,18,.75); border-left: 2px solid var(--mustard); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 8.13 &middot; Kisā Gotamī</span></nav>
+<header>
+  <h1>The Mustard Seed</h1>
+  <div class="epigraph">For a day in thy courts is better than a thousand.<br>&mdash; Psalm 84:10</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Cos&igrave; ho sentito dire,</span> on the stoops below Washington Avenue.</p>
+
+<section>
+  <h2>I. Coal</h2>
+  <p class="dateline">South Philadelphia &middot; 1912</p>
+  <p>Don Saverio Ferrante sold coal in the winter and ice in the summer out of a yard on Montrose Street, and between the two he had become the richest man from Washington Avenue to the Navy Yard. He had a brick house with a parlor nobody sat in and a piano nobody played. He kept some money in the bank on Christian Street and the rest of it under the floor of his bedroom, in a tin box, in gold, because he remembered what banks had done in Palermo.</p>
+  <p>One morning in March he lifted the board and opened the box, and the gold was coal.</p>
+  <p>Every piece. The double eagles were lumps of anthracite the size of walnuts. He ran to the bank in his shirtsleeves and made the teller open his deposit box, and that was coal too, and the teller stepped back from it as if it might catch. His wife's earrings, in the drawer by the bed, were two little black coals on gold wires. Then the gold wires were coal.</p>
+  <p>Don Saverio went to bed and did not get up. He lay there for nine days. The doctor came and left. The priest came and left. On the tenth day Mastro Pino the barber came and sat at the foot of the bed with his hat on his knee.</p>
+  <p><em>Saverio. Get up. Put all of it in the yard by the gate, in a pile, and sit by it like you're selling it.</em></p>
+  <p><em>Selling coal to who? I have a yard full of coal.</em></p>
+  <p><em>You're crazy already. The whole street says so. So be crazy where people can see you. Sometimes a saint walks by.</em></p>
+  <p>So Don Saverio put the coal that had been his gold in its own heap by the gate, apart from the other coal, and set a kitchen chair beside it and sat. People came by to laugh. <em>How much for the fancy coal, Don Saverio?</em> And he would say, <em>I only sell what's mine,</em> and they would go off shaking their heads.</p>
+  <p>Concetta Lo Bianco was sixteen. She lived with her mother in two back rooms on Kauffman Street, and she was so thin the whole neighborhood called her Sicca, the dry one, the stick. She came to the yard that afternoon with her mother's bucket and a nickel for coal. She stopped at the heap by the gate.</p>
+  <p><em>Don Saverio,</em> she said, <em>why do you leave your gold out in the street like this? Somebody's going to take it.</em></p>
+  <p>He looked at her for a long time.</p>
+  <p><em>Hand me some of my gold.</em></p>
+  <p>She put the bucket down and scooped up two handfuls and held them out to him, and what she put in his palms was gold. Double eagles, warm from the sun. Two earrings on gold wires. Everybody on Montrose Street who was watching stopped what they were doing, and some of them crossed themselves, and one of them dropped a crate of peppers.</p>
+  <p><em>Whose girl is this?</em> said Don Saverio.</p>
+  <p>Within the year she married his son Nicola at St. Paul's, in a dress his mother sewed, and the old women said the gold had only been waiting for somebody who could see it.</p>
+</section>
+
+<section>
+  <h2>II. The Wagon</h2>
+  <p class="dateline">October 1918</p>
+  <p>Tonino was born in the summer of 1916. He walked at eleven months and by two he was running the length of the coal yard with black on his knees, chasing the cat, and Don Saverio said he would be a runner in the Olympic Games, and Concetta, who was not called Sicca anymore, said he would be a priest, and Nicola said nothing because Nicola was in France.</p>
+  <p>The sickness came in off the ships at the Navy Yard in September. On the twenty-eighth there was a parade up Broad Street to sell Liberty Bonds, two miles of brass bands and soldiers and Boy Scouts, and two hundred thousand people stood on the sidewalks shoulder to shoulder to watch it. Ten days later the city had closed the schools and the churches and the saloons and the theaters, and it did not matter.</p>
+  <p>By the middle of October more than seven hundred people were dying in a single day. There were not enough coffins in Philadelphia. There were not enough gravediggers, so seminarians came down from Overbrook in their cassocks with shovels, and at Holy Cross they dug trenches with a steam shovel. On every street, doors had crepe on them. Black crepe for a grown person. Grey for an old one. White for a child.</p>
+  <p>Tonino woke with the fever on a Tuesday. On Thursday his lips went the color of a bruise. He died on Friday afternoon in her lap in the kitchen, with the window open, because the doctor, when there had still been a doctor, had said air.</p>
+  <p>Concetta had seen dead people. Everybody in the neighborhood had. She had sat up with her own grandmother and kissed her cold forehead in the box. But she had never seen death come into her own kitchen and take something that was hers, and she did not believe it. She would not believe it. It was a thing that happened on other streets.</p>
+  <p>On Saturday morning the wagon came down Montrose Street, a coal wagon with the coal shoveled out of it, and a young man with a rag over his face walked beside the horse calling out to the doors. Concetta closed hers.</p>
+  <p>She wrapped Tonino in his blue blanket and put him on her hip the way she carried him to the market and went out to find medicine.</p>
+  <p>Rossi's pharmacy had nothing on the shelves but a line out the door. She asked in the line. She asked the women on the stoops. She asked a policeman, and a man selling bananas, and the old women outside St. Paul's, which was locked. <em>Something for my son. He's sick. Something to make him better.</em> They looked at the blanket and they looked at her face, and they stepped back. Mothers pulled children inside and shut the door. She heard somebody say it behind her, not even quietly. <em>Sicca's gone crazy.</em></p>
+  <p>Mastro Pino was sitting in the doorway of his closed shop with a cloth soaked in camphor tied over his nose and mouth. He looked at the blanket for a long time, the way Don Saverio had looked at her six years before.</p>
+  <p><em>I don't have it,</em> he said. <em>But there's a nun at the school on Ellsworth Street where they made the hospital. If anybody has the medicine, she has it.</em></p>
+</section>
+
+<section>
+  <h2>III. The Sister</h2>
+  <p class="dateline">The emergency hospital, Ellsworth Street</p>
+  <p>They had pushed the school desks into the yard and filled the classrooms with cots, so that people lay coughing under blackboards with the alphabet still written along the top in perfect Palmer Method, capital and small, A to Z. Sister Benedicta was sixty-eight years old and had come from County Clare in a ship before the war with the South. She wore an apron over her habit and a gauze mask she kept pulling down so people could see her mouth.</p>
+  <p>She did not tell Concetta to put the child down. She did not tell her what she already knew. She lifted the corner of the blue blanket and looked at Tonino for a long time, and put the blanket back.</p>
+  <p><em>I know the medicine,</em> she said. <em>You'll have to fetch it yourself. A pinch of mustard seed. Black or white, it doesn't matter.</em></p>
+  <p>Concetta almost laughed. Everybody in Philadelphia had mustard that month. They were making mustard plasters in every kitchen in the city, smearing it on flannel and laying it on the chests of the sick.</p>
+  <p><em>But it has to come from a house where nobody has died,</em> said Sister Benedicta. <em>Nobody, ever. Not a baby, not a grandmother. Not a boarder, not a cousin back in the old country. Nobody.</em></p>
+  <p><em>Like the Gospel,</em> Concetta said. <em>Faith like a mustard seed.</em></p>
+  <p><em>Never mind the Gospel,</em> said Sister Benedicta. <em>Go on.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Doors</h2>
+  <p class="dateline">Saturday, all day</p>
+  <p>Mrs. Gallo across from the coal yard had black crepe on her door. She opened it with her sleeves pushed up and said of course, of course, and went to get the jar, and when Concetta asked, she stopped with the jar in her hand. Her husband. Tuesday. They took him on the same wagon.</p>
+  <p>The Dohertys on Federal Street had two crepes on the door, black and white, one above the other. Mrs. Doherty's apron was yellow to the elbow with mustard, because she was still making plasters for the three who were still in bed. <em>Love, you can have all the mustard in the world,</em> she said. <em>My Frank. My Mary Kate. She was four.</em></p>
+  <p>On South Street, in the back of a dry goods store, the mirror was covered with a bedsheet and an old man sat on a low wooden box with his shirt torn at the collar. He had mustard seed in the crock where they made pickles. He said something in Yiddish and his granddaughter, nine years old, stood in the doorway and translated. <em>He says his wife. He says his brother. He says you should take the seed anyway.</em></p>
+  <p>On Lombard Street Mrs. Tucker had brought mustard seed up from South Carolina in a Mason jar, to grow greens in a tub behind the house. <em>Lord, honey,</em> she said, and put her hand on Tonino's blanket as if he were sleeping. <em>My mother, back home, in July. My boy James on Wednesday. He worked at the Navy Yard.</em></p>
+  <p>A Greek who sold fruit. A German baker's wife whose ovens were cold. A policeman's widow. Two sisters from Calabria who would not open the door but talked to her through it. A Chinese laundryman on Race Street who did not understand what she was asking for until she said <em>mustard</em> and pointed to her chest where the plaster goes, and then he understood, and went and got it, and then she asked the other thing, and he held up one finger, and then, slowly, a second.</p>
+  <p>Every house had the seed. No house had the other thing. She stopped counting the doors. She tried to count the dead instead, and lost count of them too, and then something happened that she would never be able to explain to anybody, though she tried for sixty years.</p>
+  <p>It was somewhere around Ninth Street, in the late afternoon, in the long gold light that comes in October across the rooftops. The thing in her chest that had been closed like a fist since Friday opened. It did not break. It opened, slowly, the way a hand does when you stop telling it to hold on. She saw all the doors at once, all the crepe, black and white and grey, on every street in the city and every street in every city, back and back, Palermo and Clare and South Carolina and the place the laundryman came from and wherever it was the old man on South Street had come from, and none of it was hers alone and none of it had ever been. It was everybody's. It was the oldest thing there was.</p>
+  <p>She shifted Tonino to her other hip. He was heavy. He had been heavy all day, and she had not let herself feel it.</p>
+</section>
+
+<section>
+  <h2>V. The Seed</h2>
+  <p class="dateline">Christian Street &middot; evening</p>
+  <p>She found the wagon on Christian Street at dusk. The lamps had not been lit, because the men who lit them were sick or dead. The young man walking beside the horse was one of the seminarians from Overbrook, his cassock tucked up into his belt, his face grey with tiredness above the rag.</p>
+  <p>She stopped him with her hand on his arm.</p>
+  <p><em>This is Antonio Ferrante,</em> she said. <em>He is two years and four months old. His father is Nicola Ferrante, of the 315th Infantry, in France. Will you write it down?</em></p>
+  <p>He wrote it on a card with a pencil stub and pinned it to the blue blanket, and she kissed her son's forehead through the wool and gave him to the young man, who took him the way you take something from a person who is handing it to you, carefully, with both arms, and laid him in the wagon on the clean straw at the front, apart from the others. Then the young man made the sign of the cross over her, which he had no right to do yet, and she let him.</p>
+  <p>She walked back to Ellsworth Street with her arms empty. They felt light, and strange, and they kept rising a little at her sides, as if they had forgotten.</p>
+  <p>Sister Benedicta was at the sink in the teachers' room washing out basins.</p>
+  <p><em>Did you get the seed?</em></p>
+  <p><em>No, Sister. There isn't any.</em> Concetta sat down on a child's chair. <em>In every house the dead are more than the living.</em></p>
+  <p>Sister Benedicta dried her hands and sat down on the other little chair, knees up, two grown women at a school table, and said it to her very quietly, the way you'd tell somebody where the coats were kept.</p>
+  <div class="verse">
+    <p>Thou carriest them away as with a flood; they are as a sleep: in the morning they are like grass which groweth up. In the morning it flourisheth, and groweth up; in the evening it is cut down, and withereth.</p>
+    <p>&mdash; Psalm 90:5&ndash;6</p>
+  </div>
+  <p>Concetta sat for a long time. Then she asked if there was an apron.</p>
+  <p>There was.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The telegram came the week after the Armistice, when the bells were still ringing for the end of the war. Nicola had been killed below Montfaucon on the twenty-ninth of September, the day after the parade, two weeks before his son took sick. Concetta read it standing at the end of a row of cots, and folded it twice, and put it in her apron pocket, and went on taking temperatures. Don Saverio wept in the yard for a whole afternoon, sitting in the same kitchen chair by the gate, and she went and sat on the coal beside him until it got dark.</p>
+</section>
+
+<section>
+  <h2>VI. The Lamp</h2>
+  <p class="dateline">The motherhouse chapel &middot; 1921</p>
+  <p>She entered the Sisters in the spring of 1919. They let widows do that then, if the widow was serious, and nobody doubted she was serious. Sister Benedicta died the next winter, in the last hard wave of the sickness, on a cot in a ward she had been running the day before.</p>
+  <p>The new sisters took turns with the candles. Each night one of them went into the chapel after Compline and lit the votives in their red glasses on the iron stand, and trimmed the wicks, and sat with them for an hour so nothing would catch.</p>
+  <p>It was Concetta's turn on a night in February. She lit them one from another with a taper and sat in the back pew and watched.</p>
+  <p>One flame jumped up high and bright and then settled. One drowned in its own wax and went out with a thread of smoke. One leaned in a draft from under the door and righted itself. Two burned side by side, then one was gone. She watched them come up and go down, all of them, all along the rack, the way she had watched the doors on Ninth Street, and she understood that she was watching the same thing. Flames came and went. People came and went. Tonino. Nicola. Mrs. Doherty's Mary Kate. Sister Benedicta. Mrs. Tucker's James. Everybody had a flame, and the flames went out, and that was not the thing she was looking for.</p>
+  <p>The thing she was looking for was the light.</p>
+  <p>Not the flames. What the flames were in. It had been there before the first candle and it would be there after the last one and it had never once gone out, not in Palermo, not on Ninth Street, not in the coal yard on the day the gold turned black.</p>
+  <p>She did not hear the door. But she would say afterward, to the one person she ever told, that Sister Benedicta was standing just inside it, in her apron, with her mask pulled down so Concetta could see her mouth, and said it the way she said everything.</p>
+  <div class="verse">
+    <p>For a day in thy courts is better than a thousand. I had rather be a doorkeeper in the house of my God, than to dwell in the tents of wickedness.</p>
+    <p>&mdash; Psalm 84:10</p>
+  </div>
+  <p>And then she was not there, and the candles burned, and Concetta Ferrante, whom they had called the stick, who had once put coal in a rich man's hands and seen it for what it was, sat in the back pew of the chapel until morning and saw.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>She ran the clinic on Ellsworth Street for forty-one years. Young mothers came to her, all those years, carrying what they could not put down. She never sent any of them out for mustard seed. She sat with them on the little school chairs, knees up, and let them hold on as long as they needed to.</p>
+  <p>Then she told them it was very heavy. And that they could put it down when they were ready, and not one minute before.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Death comes and carries off that man, praised for his children and flocks, his mind distracted, as a flood carries off a sleeping village.<cite>Dhammapada 287, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">And he who lives a hundred years, not seeing the immortal place, a life of one day is better if a man sees the immortal place.<cite>Dhammapada 114, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Kisā Gotamī ("Gotamī the thin") is a poor girl who turns a ruined merchant's charcoal back into gold and marries his son. When her small son dies, she carries his body from house to house looking for medicine, and the Buddha sends her for a mustard seed from a house where no one has died. Years later, as a nun, she reaches awakening watching lamp flames rise and go out. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-13.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Kisa_Gotami">Kisā Gotamī</a>.</p>
+    <h3>Philadelphia, 1918</h3>
+    <p>The influenza reached Philadelphia through the Navy Yard in September 1918. On September 28 the city went ahead with the <a href="https://en.wikipedia.org/wiki/Philadelphia_Liberty_Loans_Parade">Fourth Liberty Loan parade</a> down Broad Street, and some 200,000 people packed the sidewalks to watch. Within days the hospitals were full. On October 3 the city closed its schools, churches and theaters. On the worst day in October more than 750 people died, and by the end of the epidemic about 12,000 Philadelphians were dead. Coffins ran out, seminarians helped dig graves, and at Holy Cross Cemetery trenches were dug by steam shovel. Families hung crepe on the door: black for an adult, white for a child, grey for the old. More on the <a href="https://en.wikipedia.org/wiki/Spanish_flu">1918 pandemic</a>.</p>
+    <p>Nicola's regiment, the 315th Infantry, belonged to the <a href="https://en.wikipedia.org/wiki/79th_Infantry_Division_(United_States)">79th Division</a>, made up largely of draftees from Philadelphia and the surrounding region. In the opening days of the <a href="https://en.wikipedia.org/wiki/Meuse%E2%80%93Argonne_offensive">Meuse-Argonne offensive</a> at the end of September, the division attacked the heights of Montfaucon and took heavy losses.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Kisā Gotamī from the Dhammapada commentary (verses 114 and 287). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-13.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="spilt-water.html">&larr; Spilt Water</a><a href="index.html">All stories</a><a href="tree-prayer.html">Tree Prayer &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, flames = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(f) {
+    f.x = Math.random() * W;
+    f.y = H * (0.62 + Math.random() * 0.36);
+    f.life = 0; f.max = 600 + Math.random() * 1400;
+    f.r = 18 + Math.random() * 26;
+    f.seed = Math.random() * 100;
+    return f;
+  }
+  function make() {
+    var n = Math.round(Math.max(6, Math.min(14, W / 90)));
+    flames = [];
+    for (var i = 0; i < n; i++) { var f = spawn({}); f.life = Math.random() * f.max; flames.push(f); }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < flames.length; i++) {
+      var f = flames[i];
+      if (!reduce) { f.life++; if (f.life > f.max) spawn(f); }
+      var p = f.life / f.max;
+      var env = Math.min(1, p * 8) * Math.min(1, (1 - p) * 6);
+      var t = f.life * 0.09 + f.seed;
+      var flick = reduce ? 1 : 0.78 + 0.14 * Math.sin(t) + 0.08 * Math.sin(t * 2.7 + 1.3);
+      var a = env * flick * 0.55;
+      if (a < 0.01) continue;
+      var R = f.r * flick;
+      var g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, R * 4);
+      g.addColorStop(0, 'rgba(255,214,140,' + a + ')');
+      g.addColorStop(0.12, 'rgba(240,180,76,' + (a * 0.6) + ')');
+      g.addColorStop(0.45, 'rgba(180,90,30,' + (a * 0.12) + ')');
+      g.addColorStop(1, 'rgba(180,90,30,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(f.x, f.y, R * 4, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

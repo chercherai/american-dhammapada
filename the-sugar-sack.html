@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sugar Sack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on sun-faded straw paper, light theme; cottonwood fluff drifts slowly across the page on a prairie wind, now rising, now settling; datelined sections. */
+  --ground: #efe7d5;
+  --ground-2: #e4d9c1;
+  --paper: #2c271f;
+  --paper-dim: #6c6352;
+  --accent: #b0521c;
+  --accent-2: #6f7d58;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f8f2e4 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(44,39,31,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(176,82,28,.22); }
+.epigraph { border-left: 1px solid rgba(176,82,28,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(228,217,193,.75); border: 1px solid rgba(44,39,31,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(44,39,31,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(228,217,193,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+/* light-theme adjustments */
+body { font-weight: 400; -webkit-font-smoothing: auto; }
+h1 { text-shadow: none; }
+details.bg { border-top-color: rgba(44,39,31,.18); border-bottom-color: rgba(44,39,31,.18); }
+.verse { border-color: rgba(44,39,31,.12); }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 10.10 &middot; Pilotika</span></nav>
+<header>
+  <h1>The Sugar Sack</h1>
+  <div class="epigraph">Do not become like the horse and the mule, who have no understanding.<br>&mdash; Psalm 31:9 (Douay-Rheims)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; me lo contaron,</span> along the North Platte.</p>
+
+<section>
+  <h2>I. The Pail</h2>
+  <p class="dateline">Scottsbluff, Nebraska &middot; September 1933</p>
+  <p>Jes&uacute;s Ortega was eighteen years old in the fall of 1933, the third dry year running, and he owned a shirt, a pair of pants with no seat to speak of, a beet knife, and a lard pail. The shirt his mother had sewn for him in 1931 out of two cotton sacks from the Great Western sugar factory, and if you stood behind him you could still read most of the word WESTERN across his shoulders, faded to the color of weak coffee, and a piece of the word GRANULATED down the left side. The lard pail had held lard once. Now it held whatever people put in it.</p>
+  <p>His family had gone back to Mexico in the spring of 1932, on a train out of Scottsbluff with forty other families, because there was no work, and men from the relief had come around to say there would be nothing more for people like them, and that the tickets would be paid. Jes&uacute;s had been born in a beet shanty outside Minatare. He had never seen Mexico. Somewhere east of North Platte, in the night, while his mother slept against the window with his little sisters across her lap, he had gotten up and walked to the end of the car and stepped off the back of the train onto the ballast and stood there in the dark and watched the red light go away.</p>
+  <p>He had been on the road a year and a half since. He thinned beets in June with the short hoe, bent double, and topped them in October with the hook knife, and in between and after he rode the freights to Cheyenne and Denver and back, and slept in the jungles by the tracks with the other boys and the old men, and walked up to back doors with his lard pail and his hat in his hand. He was good at back doors. He knew which ones. He knew to say ma'am and to say it once.</p>
+  <p>Ram&oacute;n Archuleta saw him at the back door of the Lincoln Caf&eacute; on a Saturday at the end of September, holding out the pail.</p>
+  <p>Ram&oacute;n was twenty-four and had grown up four shanties down from the Ortegas, and he was home on leave from the Civilian Conservation Corps in a pair of Army shoes so shined you could have combed your hair in them. He had gone into the C's in the spring, in the first enrollment, and he was an assistant leader already, which meant six dollars more a month and a stripe, and he had put on so much weight that Jes&uacute;s did not know him at first, and then did.</p>
+  <p>Ram&oacute;n looked at the shirt and the pail and the pants for a long time.</p>
+  <p><em>Chuy,</em> he said. <em>Wouldn't the C's be better than this?</em></p>
+  <p><em>Who's going to take me in the C's? Look at me.</em></p>
+  <p><em>I'll take you,</em> said Ram&oacute;n.</p>
+  <p>He took him home to his mother's house on the south side, past the sugar factory, and his mother heated water on the stove and filled the washtub on the kitchen floor and went out to sit on the step. Ram&oacute;n bathed him himself, with a bar of yellow soap and a scrub brush and a quart of kerosene for the lice, the way you would wash down a horse that had come in off the range, and Jes&uacute;s stood in the tub with his ribs showing and let him. On Monday Ram&oacute;n walked him to the county relief office and stood behind him in the line and told the woman at the desk that Jes&uacute;s Ortega was a citizen of the United States born in Scotts Bluff County, that he was single and unemployed and willing, and that his aunt, Rosario Ortega, a widow on relief on the south side, would be glad of twenty-five dollars a month. All of it was true. The woman wrote it down.</p>
+  <p>The enrollment was in October. Jes&uacute;s went up in the back of an Army truck with eleven other boys from the valley, north, a hundred miles, into the Pine Ridge country.</p>
+</section>
+
+<section>
+  <h2>II. The Cottonwood</h2>
+  <p class="dateline">Fort Robinson, Nebraska &middot; October 1933</p>
+  <p>Fort Robinson lay under the white bluffs at the edge of the pines, a city of red brick barracks and stables and parade ground along Soldier Creek, and in every pasture for miles, in every direction, there were horses. Since the war the Army had made it the largest remount depot in the world. Horses came in by the trainload from the ranches to be broken and schooled and shipped out to the cavalry, and mules for the pack trains and the artillery, thousands of them, bays and sorrels and blacks and greys, and at evening when they were driven in to water you could hear them coming before you saw them, like weather.</p>
+  <p>The CCC company had a row of the old barracks at the end of the post. The boys planted pine seedlings on the burned slopes of the ridge and built check dams in the gullies and strung fence, and the Army officers who ran the camp ran it like the Army, with reveille at six and inspection on Saturday, and the boys complained about it, and ate.</p>
+  <p>At the supply room they took his name and his measurements and gave him two of everything. Two suits of wool underwear. Two olive drab shirts and two pairs of olive drab breeches left over from the war in France, smelling of mothballs. Two suits of blue denim for work. A mackinaw. A wool cap. Two pairs of Army shoes, and socks, and a toothbrush and a razor and a comb. He had never in his life owned two of anything.</p>
+  <p>He put it all on at once in the barracks and stood with the sugar-sack shirt in one hand and the lard pail in the other, and did not know what to do with them. There was no place for them in the footlocker, which was for issue. He could not put them in the stove. He could not have said why he could not.</p>
+  <p>He went out the back of the barracks and down the slope to Soldier Creek, where the cottonwoods stood along the water with their leaves gone yellow, and he hung the shirt over a low branch of the nearest one, and hung the pail from a twig beside it by its bail, and left them there, and walked back up the slope in his new shoes.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The camp had an old man. Every camp did. The rules called them local experienced men, and they were hired to know the country and the work and to keep the city boys from cutting their own feet off with an axe. The old man at Fort Robinson was hired to know mules, because the company worked six teams on the fence lines and nobody else in the camp could get a harness on one without being kicked across the corral.</p>
+  <p>His name was Achille Dupuy. He was seventy-one. He had been born in St. Martin Parish in Louisiana, before the war, a slave's son, and had gone down to New Orleans at nineteen and enlisted in the Ninth Cavalry, and the Ninth had brought him to Fort Robinson in 1885, and he had ridden out of these same stables a thousand times, and to Cuba and back, and when his enlistments were done he had married a woman in Crawford and stayed. He had worked horses for the remount since there had been a remount. He was a big man gone thin, very straight, very black, with a white mustache, and he went to the six o'clock Mass at the church in Crawford every Sunday with his rosary wound around his fingers, and he spoke so seldom that when he spoke the boys stopped whatever they were doing.</p>
+  <p>The boys called him Sarge. He had been a sergeant once, and he did not tell them not to.</p>
+  <p>He looked at Jes&uacute;s on his first morning at the corral, at the new denim and the new shoes and the hands, which were the hands of a boy who had topped beets.</p>
+  <p><em>You know mules?</em></p>
+  <p><em>Some.</em></p>
+  <p><em>Come here then,</em> said Achille Dupuy.</p>
+</section>
+
+<section>
+  <h2>III. Pie</h2>
+  <p class="dateline">The mess hall &middot; November and December</p>
+  <p>Breakfast was oatmeal and hotcakes and bacon and coffee with canned milk, and all you could eat of all of it. Dinner was beef and potatoes and gravy and beans and bread and butter, and stewed tomatoes, and on Sundays a pie, cut in six, and there was always somebody who did not want his. Supper was the same as dinner except when it was better. The cooks were boys from the company who had been taught by an Army cook, and their gravy was famous along the Pine Ridge.</p>
+  <p>The doctor weighed every boy when he came in and again every month. By Thanksgiving Jes&uacute;s had put on eighteen pounds. By Christmas he had put on twenty-six. His face filled out until he did not know it in the mirror over the washstand. The breeches from France would not button. The supply sergeant issued him the next size, and then the size after that, and wrote it down.</p>
+  <p>On the first of every month the company clerk sent twenty-five dollars to Rosario Ortega in Scottsbluff, and Jes&uacute;s got five dollars in his hand, and spent it at the canteen on Bull Durham and candy bars and Coca-Cola.</p>
+  <p>Days, he worked with the old man. Achille Dupuy did not explain much. He handed Jes&uacute;s a halter and pointed at a mule, and watched, and when Jes&uacute;s did it wrong he took the halter back and did it right, slowly, once, and handed it back. He never hit a mule. He carried a whip everywhere, a long one with a braided popper on the end that he said had come with him from the Ninth, and in a month Jes&uacute;s never once saw him use it. He would only lift it a little, or shift it from one hand to the other, and the mules watched it the way the boys in the barracks watched the lieutenant, and did what he wanted. By December the old man was letting Jes&uacute;s take a team out to the fence line by himself, a pair of big sorrel mules called Pat and Mike who had put two boys from Omaha in the post hospital, and the other boys stood around at evening to watch him bring them in.</p>
+  <p>Once, on the fence line, with the wind coming hard off the bluffs and the post-hole digger frozen in the ground, Jes&uacute;s asked the old man why he had stayed in Nebraska all those years, so far from Louisiana, in the cold. Achille Dupuy thought about it so long that Jes&uacute;s decided he had not heard.</p>
+  <p><em>I came here with a horse,</em> the old man said finally. <em>Man stays where his horse is.</em> That was all he said about it, then or ever.</p>
+  <p>The boys in the barracks started calling him Trapos, Rags, after somebody from the valley told the story of the sugar-sack shirt. He did not mind. They called everybody something.</p>
+  <p>And somewhere in December, with his belly full and his feet warm and the wind howling down off the bluffs against the brick, he began to be unhappy, and could not have said why that was either.</p>
+  <p>It was the bugle at six. It was inspection. It was the lieutenant's voice. It was planting pine trees in rows on a hill in the snow and stringing barbed wire across country that had never had a fence on it. It was the freights, which he could hear at night when the wind was right, going down the line toward Crawford with their whistles, the long note and the short. He lay on his cot and listened to them and remembered riding the top of a boxcar across Wyoming in July with the whole sky going by, nobody's anything, his own man. He thought: <em>What am I doing here? Eating the government's pie in the government's pants. A grown man, fat as a hog, taking charity.</em></p>
+  <p><em>I'll put my own shirt back on,</em> he thought. <em>It's still out there. I'll put it on and walk down to the tracks and be done with it.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Branch</h2>
+  <p class="dateline">Soldier Creek &middot; January and February, 1934</p>
+  <p>He went down after supper on a night in January with the snow squeaking under his shoes. The cottonwoods were bare now, grey against the grey snow, and the shirt was still there over its branch, frozen stiff in the shape of the branch, and the pail hung from its twig with a cap of snow in it.</p>
+  <p>He took the shirt down. It cracked when he bent it. He held it up in the last of the light and read WESTERN backward through the cloth, and smelled it, and it smelled like the beet fields and the jungles by the tracks and the back doors and his mother's kitchen, all of it at once, and he stood there and talked to himself out loud, the way men on the road learn to do.</p>
+  <p><em>Sinverg&uuml;enza,</em> he said. <em>You shameless fool. Look at you. Two pairs of shoes, and you want to throw them in the creek. Three meals a day and pie on Sunday, and you want to go back and hold out a lard pail at the Lincoln Caf&eacute;. Twenty-five dollars a month to your t&iacute;a, and you want to stop it. Ram&oacute;n Archuleta washed you in a tub like a horse, and you want to go back to the lice. Go on, then. Put it on. Go knock on doors. Sinverg&uuml;enza.</em></p>
+  <p>He said it until he had no more to say, and then he stood there with the shirt in his hands, and something in him that had been loud for a month went quiet. It was like the moment when a mule that has been fighting the harness all morning stops, and stands, and lets out its breath. He hung the shirt back on the branch, frozen side out, and walked back up the slope to the barracks and went to bed and slept.</p>
+  <p>It lasted nine days. Then the bugle and the lieutenant and the fence lines and the freights in the night, and the government's pie, and he went down to Soldier Creek again, and took the shirt down, and said it all again, out loud, to himself. <em>Sinverg&uuml;enza.</em> And again it went quiet, and he hung the shirt up and came back.</p>
+  <p>In February it happened a third time.</p>
+  <p>The boys in his barracks noticed. A boy does not walk out of a warm barracks after supper in a Nebraska February three times for nothing. On the third night Kenny Albrecht, who had the next cot, a farm boy from up by Hay Springs, caught him going out the back door with his mackinaw on.</p>
+  <p><em>Where you going, Trapos?</em></p>
+  <p><em>To see my teacher,</em> said Jes&uacute;s.</p>
+  <p>Kenny thought it over. Everybody in the camp knew Jes&uacute;s spent his days at the corral with old Dupuy, and that the old man had started letting him handle the green mules nobody else would touch. But Dupuy lived in Crawford and went home at five, and the corral was the other way.</p>
+  <p>Kenny told the others, and the others decided it was a girl.</p>
+</section>
+
+<section>
+  <h2>V. The Shadow of the Whip</h2>
+  <p class="dateline">The remount corrals &middot; April 1934</p>
+  <p>He did not go down to the creek again after that. March went by, and the snow went off the ridge, and the creek ran high and brown with it, and he did not go. He went to the corral every morning with the old man, and to the fence lines, and to the mess hall, and to bed. He slept every night straight through. He did not hear the freights anymore, or if he heard them it was only a train.</p>
+  <p>The boys noticed that too. One night in April in the barracks Kenny Albrecht asked him, with half the room listening.</p>
+  <p><em>Hey, Trapos. You don't go see your teacher anymore?</em></p>
+  <p><em>No.</em></p>
+  <p><em>How come? She throw you over?</em></p>
+  <p>The room laughed. Jes&uacute;s did not. He was sitting on his cot oiling a harness strap across his knees, and he went on oiling it.</p>
+  <p><em>When I was tied up,</em> he said, <em>I had to go to my teacher. I'm not tied up anymore. So I don't have to go.</em></p>
+  <p>Nobody in the room knew what that meant. They decided it meant that he was a liar, or that he thought he was smart, and the next morning three of them went down to the corral before work, because the old man was the only one in the camp whose word they all took, and told him about it. They said Trapos had been sneaking off after dark all winter to see a teacher, and now he said he didn't need a teacher, and wasn't that a lie, and wasn't it a big one.</p>
+  <p>Achille Dupuy was standing in the middle of the round corral with a long whip in his hand, schooling a remount colt on a line, a four-year-old bay that had come in from a ranch on the Niobrara the week before. He let them talk until they were done. The colt went around him at a trot.</p>
+  <p><em>He told you the truth,</em> said the old man.</p>
+  <p>The boys waited.</p>
+  <p><em>When he was tied to something, he went to his teacher,</em> said Achille Dupuy. <em>Now he's cut the rope himself, and he don't need to go. That's all that is. That's no lie.</em></p>
+  <p>He lifted the whip. He did not crack it. He only lifted it, and the shadow of the lash went out across the dirt in the morning sun in front of the colt, and the colt saw the shadow and moved up into a lope, smooth, and went around the corral like water going around a bowl, and the old man lowered the whip again.</p>
+  <p><em>Some horses,</em> he said, <em>you got to lay it on them every time, and they hate you for it, and they never learn a thing. Some you got to touch, just touch, and they go. And then there's a few, not many, all they got to see is the shadow of it. They see the shadow and they go. They put the whip on themselves.</em> He looked at the boys from under his hat. <em>You understand me? I'm not talking about horses.</em></p>
+  <p>Then he said what was in the psalm. He had said it to the boys before, though never all of it at once, and he said it in the voice of a man who had heard it read in a church in Louisiana before any of them were born.</p>
+  <div class="verse">
+    <p>Do not become like the horse and the mule, who have no understanding. With bit and bridle bind fast their jaws, who come not near unto thee.</p>
+    <p>&mdash; Psalm 31:9</p>
+  </div>
+  <p>And then, because they were still standing there with their mouths open, the other thing, from the Epistle, which he had learned in the Ninth from a chaplain, he said, who had made the troopers learn it by heart the way they learned the parts of a saddle.</p>
+  <div class="verse">
+    <p>And you, employing all care, minister in your faith, virtue; and in virtue, knowledge; And in knowledge, abstinence; and in abstinence, patience; and in patience, godliness; And in godliness, love of brotherhood; and in love of brotherhood, charity.</p>
+    <p>&mdash; 2 Peter 1:5&ndash;7</p>
+  </div>
+  <p><em>Go to work,</em> he said, and turned back to the colt.</p>
+  <p>The three boys went to work. They did not talk about it among themselves, then or later, but Kenny Albrecht wrote a letter home that week, which he had not done since Christmas, and told his mother he was sorry about the thing in the barn, and a boy named Weber who had been drinking canteen beer every night since the fall stopped, and a boy from Omaha who had meant to go over the hill at the end of the month stayed out his enrollment, and signed up for another, and later said he could not have told you why, except that he had seen a horse go around a corral without being hit.</p>
+</section>
+
+<section>
+  <h2>VI. The Nest</h2>
+  <p class="dateline">Soldier Creek &middot; May 1934</p>
+  <p>At the end of May, on a Sunday afternoon, Jes&uacute;s walked down to Soldier Creek for the first time since February, because it was warm and there was nothing to do and the cottonwoods were throwing their cotton, and the whole bottom along the creek was white with it, drifting, like snow that had forgotten which way was down.</p>
+  <p>The shirt was not on the branch.</p>
+  <p>The lard pail was there, hanging from its twig by its bail, rusted through at the bottom, full of nothing but light. The shirt was gone. He looked under the tree and along the bank and in the shallows, and did not find it, and he stood under the cottonwood and was surprised to find that it did not matter to him one way or the other.</p>
+  <p>Then he heard the bird.</p>
+  <p>It was an oriole, orange and black, scolding him from somewhere overhead, and when he looked up he saw the nest, hanging from the very end of a high thin branch over the water, a little grey pouch swinging in the wind the way orioles make them, woven out of horsehair from the remount pastures and the cotton off the trees and string and grass. And woven all through it, in and out, around and around, were threads of sugar sack, unraveled and pulled out a strand at a time over the winter and carried up and worked in by a beak. On the side of the nest that faced him, holding the rest of it together, there was one scrap still big enough to read, faded nearly white, and what it said was TERN.</p>
+  <p>He stood under it a long time with his hat pushed back. The oriole scolded. The nest swung over the water on its branch. Up the slope the bugle blew for supper, and he went.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verses</h3>
+    <blockquote class="pd">Is there in this world any man so restrained by humility that he does not mind reproof, as a well-trained horse the whip?<cite>Dhammapada 143, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Like a well-trained horse when touched by the whip, be ye active and lively, and by faith, by virtue, by energy, by meditation, by discernment of the law you will overcome this great pain (of reproof), perfect in knowledge and in behaviour, and never forgetful.<cite>Dhammapada 144, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha's attendant <a href="https://en.wikipedia.org/wiki/%C4%80nanda">&#256;nanda</a> meets a poor youth in a ragged loincloth carrying a begging bowl and asks whether the monk's life would not be better. The youth asks who would ordain him; &#256;nanda says he will, bathes him with his own hand, and ordains him. Finding no other place for his old rag and bowl, the youth hangs them on the branch of a tree. As a monk he eats well, wears fine robes, grows fat and discontented, and goes back to the tree meaning to put his rags on again; there he scolds himself for a shameless fool, his mind grows calm, and he returns. This happens three times. When the other monks ask where he is going, he says, to my teacher. Later he stops going, and says that while he was bound he went to his teacher, but now the bond is cut. The monks report this to the Buddha as a lie, and the Buddha says that Pilotika ("Rags") has spoken the truth, and gives the verses on the good horse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-10.htm">the full commentary story</a>.</p>
+    <h3>Fort Robinson and the CCC, 1933&ndash;1934</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Civilian_Conservation_Corps">Civilian Conservation Corps</a> took unemployed, unmarried young men, usually from families on relief, and gave them food, clothing, shelter and thirty dollars a month, twenty-five of which was sent home. The camps were run by Army officers, and older "local experienced men" were hired to teach the work and look after the boys. Enrollment records sorted men as white or Black only, so no one counted the Mexican Americans who served. In western Nebraska, many of them came out of the sugar-beet country around Scottsbluff, where Great Western Sugar had opened a refinery in 1910 and <a href="https://history.nebraska.gov/nebraskas-mexican-communities-1910-1950/">Mexican families</a> worked the fields. In the Depression many of those families left for Mexico, part of the <a href="https://en.wikipedia.org/wiki/Mexican_Repatriation">Mexican Repatriation</a> in which a large share of those who went were American-born children.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Fort_Robinson">Fort Robinson</a>, near Crawford in the Pine Ridge country of northwest Nebraska, was the headquarters of the <a href="https://en.wikipedia.org/wiki/9th_Cavalry_Regiment_(United_States)">Ninth Cavalry</a> from 1887 to 1898. The regiment had been organized in New Orleans in 1866 with men from Louisiana and Kentucky, and it fought at Kettle Hill and San Juan Hill in 1898. In 1919 the fort became a quartermaster remount depot, eventually the largest in the world, where horses and mules were received, schooled and issued to the Army. From 1933 to 1935 the post also <a href="https://history.nebraska.gov/visit/brief-history-fort-robinson">served as a CCC camp</a>, district headquarters and hospital center.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Pilotika from the Dhammapada commentary (verses 143 and 144). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-10.htm">The original</a>. Scripture from the Douay-Rheims Bible (Challoner revision). Written by Claude Opus 5.5.
+  <div class="pager"><a href="seven-palms.html">&larr; Seven Palms</a><a href="index.html">All stories</a><a href="the-long-day.html">The Long Day &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, fluff = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function spawn(f, anywhere) {
+    f.x = anywhere ? rnd(0, W) : rnd(-60, -10);
+    f.y = rnd(0, H);
+    f.r = rnd(5, 12);
+    f.vx = rnd(0.12, 0.45);
+    f.ph = rnd(0, 6.28); f.fr = rnd(0.003, 0.009);
+    f.a = rnd(0.55, 0.95);
+    return f;
+  }
+  function make() {
+    var n = Math.round(Math.max(14, Math.min(40, W * H / 40000)));
+    fluff = [];
+    for (var i = 0; i < n; i++) fluff.push(spawn({}, true));
+  }
+  function puff(f) {
+    var sh = ctx.createRadialGradient(f.x + 2, f.y + 3, 0, f.x + 2, f.y + 3, f.r * 2);
+    sh.addColorStop(0, 'rgba(150,125,85,' + (f.a * 0.12) + ')'); sh.addColorStop(1, 'rgba(150,125,85,0)');
+    ctx.fillStyle = sh; ctx.beginPath(); ctx.arc(f.x + 2, f.y + 3, f.r * 2, 0, Math.PI * 2); ctx.fill();
+    var g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 2.2);
+    g.addColorStop(0, 'rgba(255,255,252,' + f.a + ')');
+    g.addColorStop(0.45, 'rgba(255,253,245,' + (f.a * 0.45) + ')');
+    g.addColorStop(1, 'rgba(255,253,245,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(f.x, f.y, f.r * 2.2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(110,96,70,' + (f.a * 0.5) + ')';
+    ctx.beginPath(); ctx.arc(f.x + 0.6, f.y + 0.6, 0.9, 0, Math.PI * 2); ctx.fill();
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    var gust = 0.6 + 0.4 * Math.sin(t * 0.002);
+    for (var i = 0; i < fluff.length; i++) {
+      var f = fluff[i];
+      if (!reduce) {
+        f.ph += f.fr;
+        f.x += f.vx * gust;
+        f.y += Math.sin(f.ph) * 0.25 - 0.02;
+        if (f.x > W + 40 || f.y < -40 || f.y > H + 40) spawn(f, false);
+      }
+      puff(f);
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size(); make(); frame();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) frame(); });
+})();
+</script>
+</body>
+</html>

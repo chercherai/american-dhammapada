@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sixteen Oxen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a dark barn on a December night; low in the two bottom corners a pair of oxen breathe out slow clouds into the cold, one side and then the other, and now and then the right side does not breathe; datelined sections. */
+  --ground: #15110f;
+  --ground-2: #221b17;
+  --paper: #ece4d8;
+  --paper-dim: #aa9c8b;
+  --accent: #c8653d;
+  --glow: #b7a2cf;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #2a1f19 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(236,228,216,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 30px rgba(200,101,61,.22); }
+.epigraph { border-left: 1px solid rgba(200,101,61,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(34,27,23,.78); border: 1px solid rgba(236,228,216,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.lines { margin: 1.5rem 0 1.5rem 1.5rem; line-height: 1.6; color: var(--paper); }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(236,228,216,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(236,228,216,.14); border-bottom: 1px solid rgba(236,228,216,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(34,27,23,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 11.7 &middot; L&#257;&#7735;ud&#257;yi</span></nav>
+<header>
+  <h1>Sixteen Oxen</h1>
+  <div class="epigraph">For, lo, the winter is past; The rain is over and gone;<br>&mdash; Song of Solomon 2:11</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Way I heard it,</span> up on Clay Hill.</p>
+
+<section>
+  <h2>I. The Golden Wedding</h2>
+  <p class="dateline">Clay Hill, Merrimack County, New Hampshire &middot; June 2022</p>
+  <p>Lyle Corliss had been chaplain of Clay Hill Grange No. 113 since the year Nixon resigned, and nobody had ever run against him. He was eighty-four. He was still the biggest man in any room he went into, with a neck like a fencepost and hands that had been broken by oxen more times than he could tell you, though he would try. He knew the opening prayer and the closing prayer by heart, and the grace, and the long part he said when the charter was draped for a member who had died. He had been saying all of them for forty-eight years.</p>
+  <p>The hall was white clapboard, built in 1896, two stories, with the suppers downstairs and the meetings upstairs. Upstairs there was an altar in the middle of the floor, and on it a big American Standard Bible that a summer family had given the Grange in 1904, its corners gone soft as felt. The Assistant Stewards opened it at the start of every meeting and closed it at the end. In the corners stood the stations of Ceres, Pomona and Flora, with a sheaf of wheat, a basket of wax apples and a jar of paper roses that had been there so long they had faded to the color of skin.</p>
+  <p>Bud and Arlene Fisk had been married in that hall in 1972, under a bell made of crepe paper, and in June of 2022 they came back for their fiftieth. There were sixty people, which was more than Clay Hill Grange had seen in one place since before the pandemic. There was punch, and a sheet cake from the Market Basket in Concord with a gold 50 on it, and the Fisks' granddaughter had hung Christmas lights along the stage. After the cake the Master asked the chaplain to say a few words from Scripture over the couple.</p>
+  <p>Lyle stood up, which took a while. He had marked his place with an Agway receipt. He put on his glasses and read in the voice he used to read everything, the one he used to call a yoke of steers across a forty-acre field.</p>
+  <div class="verse">
+    <p>Man, that is born of a woman, Is of few days, and full of trouble. He cometh forth like a flower, and is cut down: He fleeth also as a shadow, and continueth not.</p>
+    <p>&mdash; Job 14:1&ndash;2</p>
+  </div>
+  <p>He closed the Bible and sat down. The Christmas lights blinked along the stage. Arlene Fisk went on smiling, because she had been smiling for an hour and her face did not know how to stop. Bud looked at his hands.</p>
+  <p><em>Well,</em> Bud said finally, to the room. <em>That's so.</em></p>
+  <p>Somebody laughed, and then everybody did, and the granddaughter put on a record.</p>
+</section>
+
+<section>
+  <h2>II. The Charter</h2>
+  <p class="dateline">November 2022</p>
+  <p>Vernon Hatch died in the first week of November at ninety-three. He had joined Clay Hill Grange in 1952, and he had been Overseer, Master, Steward and Gatekeeper, and for one year, by a mistake in the balloting nobody ever cleared up, Flora. On the Tuesday after the funeral the Grange draped the charter for him.</p>
+  <p>The charter hung in a black frame on the wall behind the Master's station. For thirty days after a member died it wore a drape of black crepe, and the putting on of the drape was the chaplain's work, with Ceres and the two Assistant Stewards. Ceres was a girl of nineteen from the 4-H dairy club. The Assistant Stewards were the Fisks. Lyle walked to the altar with the folded crepe over his arm and opened the Bible to the place he had marked with the receipt, and read.</p>
+  <div class="verse">
+    <p>For, lo, the winter is past; The rain is over and gone; The flowers appear on the earth; The time of the singing of birds is come, And the voice of the turtle-dove is heard in our land;</p>
+    <p>&mdash; Song of Solomon 2:11&ndash;12</p>
+  </div>
+  <p>Outside the windows it was sleeting sideways across the parking lot.</p>
+  <p>Dot Hatch was in the front row in her good coat. She put her face in her hands, and the people behind her thought she was crying, and she was, but when she took her hands away she was laughing too, and could not stop for a while, and Ceres had to bring her a glass of water.</p>
+  <p>Lyle hung the crepe on the charter as straight as a plumb line, because he had done it a hundred times. Afterward, downstairs over coffee, he said to Bud Fisk that he thought it had gone off all right.</p>
+  <p>That was the thing about Lyle. He never knew. He set out from his own kitchen with the right words in his mind, the way you set out with the right tool in your truck, and somewhere between his kitchen and the altar the words changed places, and he did not feel them change. At the 4-H show in August he had blessed the steers with a prayer for the sick. At the Christmas supper the year before he had read the passage about the rich man who pulled down his barns to build bigger and died that night, and the Grange had just finished paying for a new roof on its own barn out back. He gave the wedding words at the burying and the burying words at the wedding, and then he went home and slept like a child.</p>
+</section>
+
+<section>
+  <h2>III. The Sale Barn</h2>
+  <p class="dateline">Wednesday</p>
+  <p>Tess Morin had come to Clay Hill four years before from Hartford, with a husband and two Nubian goats, and now she had twenty-two goats and was Lecturer of the Grange, which meant she planned the programs. She had joined because a Grange hall was the only room in town big enough to teach a cheesemaking class in, and she had stayed because she liked the old people more than she had expected to. She was thirty-one. She thought the Grange might live if somebody ran it right.</p>
+  <p>She and Arlene Fisk drove over to the sale barn on Wednesday afternoon to find the Master.</p>
+  <p>The Master was Sumner Corliss, Lyle's son. He was fifty-seven, and on Wednesdays he sold livestock from a little booth above the ring at the auction barn on the county road: cull cows, bob calves, feeder pigs, goats, lambs, rabbits in wire cages, once a camel. They sat in the bleachers and listened to him sell a Jersey cow with a bad quarter. He did not seem to breathe. The numbers went up out of him in a long rolling chant, and somewhere in the middle of it he would drop in three plain words for one man in the third row, <em>you know her, Walt,</em> and Walt would raise his card. Then the gavel, and the next one.</p>
+  <p>When the sale broke for coffee he came down the stairs, and they caught him by the scale.</p>
+  <p><em>Sumner,</em> Arlene said. <em>We love your father.</em></p>
+  <p><em>That's a bad start,</em> said Sumner.</p>
+  <p><em>He read the Song of Solomon at Vernon's draping,</em> said Tess. <em>The turtle-doves. With Dot sitting right there. He read Job at Arlene's fiftieth. He prayed for the sick over a whole ring of steers. Every single time he gets up, he says the wrong thing, and he has no idea he's doing it. What is the point of having a chaplain who goes to a funeral and says the wedding?</em></p>
+  <p>Sumner took his hat off and looked into it as if something might be written there.</p>
+  <p><em>It isn't the first time,</em> he said. <em>He did the same thing at Pell Gladding's in 1981. That time it was worth sixteen oxen.</em></p>
+  <p>The auction bell rang for the second half.</p>
+  <p><em>Supper's Saturday,</em> he said. <em>I'll tell it then.</em></p>
+</section>
+
+<section>
+  <h2>IV. Three Bales</h2>
+  <p class="dateline">The burying ground on Clay Hill &middot; May 1980</p>
+  <p>In 1980 Lyle Corliss had two Milking Devon oxen called Buck and Bright, red as a brick, with white horns tipped in black, and a hundred and ten acres of hardwood and ledge. He cut cordwood with them in the winter and twitched logs for the mill. In March they drew the sap sled through the sugarbush, and on Old Home Day they pulled the stoneboat for the children. They were nine years old. They had been in the yoke together since they were calves, Buck on the near side and Bright on the off, and they could not be worked any other way.</p>
+  <p>In April Buck swallowed a piece of baling wire with his hay. The vet came out and shook his head and it took Buck four days. Bright stood at the end of the tie-up looking at the empty stall and would not eat.</p>
+  <p>A trained ox was not a thing you could go buy. You could buy a pair of yearling steers and train them for three years, if you had three years, and if you had the money, and money that spring was at twenty percent at the bank in Concord. Lyle had neither. He hung the yoke on two pegs in the barn with one bow empty and worked Bright alone in a single harness, which an ox hates, and he lay awake.</p>
+  <p>His boy Sumner was fifteen that year. For two summers he had been ox-boy on the Gladding place over on the Hopkinton road.</p>
+  <p>Pell Gladding had made his money in a Boston investment house and bought the old Kimball farm when he retired, and he had put back everything the Kimballs had let fall: the long barn, the stone walls, the sugarhouse, the cupola with the copper ox on it. He kept a string of matched Devons in the barn, sixteen head, and showed them at the Hopkinton Fair on Labor Day weekend in a white shirt and a straw hat, and he had taken to Sumner from the first week. The boy could talk. He could talk to a steer that would not come up into the yoke and to a summer woman who wanted to pet one and to Gladding himself, at the end of a long day, about Daniel Webster and the price of hay. Gladding called him the Senator.</p>
+  <p><em>Ask Gladding for an ox,</em> Lyle said at supper. <em>Just one. To go with Bright.</em></p>
+  <p>Sumner looked at his plate. He thought: if I ask him, he'll think that was what I was working on all along. Two summers of being good company, and then the bill.</p>
+  <p><em>You ask him,</em> he said.</p>
+  <p><em>All right,</em> said Lyle. <em>You take me over.</em></p>
+  <p>Sumner thought about his father in Gladding's kitchen. His father did not know how to come into a room. He came in with his cap on and his boots wet and said whatever was on top of his mind, and when the talk was over he did not know how to leave, and stood in the door. When it was time to say one thing he said another. Sumner loved him and was fifteen, and he decided to teach him.</p>
+  <p>On a Sunday evening in May he drove his father up to the old burying ground on Clay Hill. It sat in a square of stone wall at the top of the town road, and the first wives of Clay Hill had planted lilacs along the wall in seventeen-hundred-something, and the lilacs had gone on without them for two hundred years. They were in bloom. You could smell them from the road.</p>
+  <p>Sumner had brought three bales of hay in the back of the truck. He set them on end in the grass between the slate stones, a little apart, the way people stand in a kitchen.</p>
+  <p><em>This is Mr. Gladding,</em> he said. <em>This one's Mr. Swett, who runs the barn for him. This one's Mrs. Gladding. Now. You take your cap off in the dooryard, not in the kitchen. You wipe your feet. You don't sit down till he tells you, and when he tells you, you still don't sit down, because you're asking for something. You say, Afternoon, Mr. Gladding. You nod to Mrs. Gladding. And then you say this.</em></p>
+  <p>He had written it out on the back of a seed packet, four lines, so his father could say it like a piece at the Grange.</p>
+  <p class="lines"><em>I had two oxen, Mr. Gladding,<br>and worked my woodlot with the pair.<br>But one of them is dead. I'd ask you,<br>if you'd let me, for another.</em></p>
+  <p>Lyle said it to the bales. He got it wrong. He said it again. The lilacs moved a little in the wind off Kearsarge, and the bales stood there and took it.</p>
+  <p>He practiced for a year. Sumner had not meant for it to take a year, but Lyle would not go until he had it perfect, and every time he thought he had it, it came out some other way. He went up to the burying ground in the evenings after chores, in haying and in the fall when the maples went red over the wall, and in the winter when the bales stood under caps of snow and he had to knock them off with his mitten so Mr. Gladding could hear him. He said it to them in mud season. Bright worked single all that year and got thin. In May the lilacs came out again, and Lyle stood in front of three gray, weathered bales and said all four lines, with his cap in his hand, without a mistake, and then said them again.</p>
+  <p><em>All right,</em> said Sumner. <em>Saturday.</em></p>
+</section>
+
+<section>
+  <h2>V. The Kitchen</h2>
+  <p class="dateline">The Gladding place, Hopkinton road &middot; May 1981</p>
+  <p>Sumner went over early, because Saturday was a workday for him, and took his place in the barn. Lyle came at two in his good gray shirt with a present, a quart of his own syrup from March in a glass jar with a Grange ribbon on it. He took his cap off in the dooryard. He wiped his feet.</p>
+  <p>Gladding was glad to see him. He came out of the kitchen with his reading glasses pushed up on his head and took Lyle's hand in both of his.</p>
+  <p><em>Lyle Corliss. You came all the way over the hill. Sit down, sit down. Ellen, it's the Senator's father. What can I do for you?</em></p>
+  <p>Mrs. Gladding was at the sink. Mr. Swett was at the table with the feed bills. Sumner had come in from the barn and stood by the door to the shed, where he always stood, and he saw that they were standing exactly where he had set the bales.</p>
+  <p>Lyle did not sit down. He stood in the middle of the kitchen with the cap in his hands, and said it.</p>
+  <p class="lines"><em>I had two oxen, Mr. Gladding,<br>and worked my woodlot with the pair.<br>But one of them is dead. I'd ask you,<br>if you'd let me, take the other.</em></p>
+  <p>Gladding blinked.</p>
+  <p><em>Say that again, Lyle?</em></p>
+  <p>Lyle said it again, exactly as before, with great care, the way he had said it to the bales three hundred times. Take the other.</p>
+  <p>The kitchen clock ticked. Mr. Swett put his pencil down. Gladding looked at Lyle, who was waiting with his whole big body, and then he looked past him to the boy by the shed door, and he began to smile.</p>
+  <p><em>Senator,</em> he said. <em>Sounds like you people have a barnful of oxen up on Clay Hill.</em></p>
+  <p>Sumner did not have time to think, so he didn't.</p>
+  <p><em>Just as many as you've given us, Mr. Gladding.</em></p>
+  <p>Gladding laughed until he had to sit down himself. Mrs. Gladding laughed at the sink with her back to them. Mr. Swett did not laugh, because he had worked for Gladding for nine years and knew what was coming, and it came. Gladding was getting older and his heart was not what it had been, and he had been wondering for a year what to do with sixteen oxen he could no longer show. He wiped his eyes and gave them the sixteen. Eight yoke of Devons, matched, broke to the bow, with their yokes, their chains, the stoneboat and the sap sled. And because Lyle had said it so well, and because he had said it twice, he gave him the tenant house at Gladding's Corner, with forty acres along the brook, for one dollar, which Mr. Swett wrote up on the back of a feed bill.</p>
+  <p>They walked the oxen home that same evening, Lyle in front and Sumner behind with a goad, sixteen red cattle strung out two by two along the Hopkinton road and up over Clay Hill at a walk, with cars stopped behind them a mile back. People came out on their porches. It is still the thing anybody in Clay Hill over fifty will tell you about first, before the hurricane and before the year the mill burned: the night Lyle Corliss came home with sixteen oxen.</p>
+  <p>At the top of the hill they passed the burying ground. The three bales were still standing among the stones, and Lyle, who had led a yoke of steers past them without looking, stopped the whole procession and took off his cap.</p>
+  <p>On the Monday he drove back over to thank Pell Gladding properly. He stood in the dooryard and shook his hand and told him he was sorry for his trouble.</p>
+</section>
+
+<section>
+  <h2>VI. The Bean Supper</h2>
+  <p class="dateline">Clay Hill Grange hall &middot; December 2022</p>
+  <p>Sumner told it on the Saturday at the bean supper, standing by the kitchen pass-through with a dish towel over his shoulder, between the beans and the pie. There were baked beans, yellow-eye and pea beans both, brown bread out of the can, coleslaw, red hot dogs and eleven pies. Lyle sat at the end of the long table under the Christmas lights the Fisks' granddaughter had never taken down, and when Sumner got to the kitchen and the words changed places, Lyle laughed louder than anybody. He had heard it told a hundred times. He liked it best of all the stories about himself.</p>
+  <p><em>Gladding was the king of this town, as far as I knew then,</em> Sumner said. <em>Dad was Dad. I was the boy who did the talking. I've been doing it ever since, on Wednesdays, for two percent.</em></p>
+  <p>Tess Morin was sitting across from Lyle. She had heard the story about the sixteen oxen before, from three different people, but never with the bales in it, and never the part about the year.</p>
+  <p><em>So he hasn't changed,</em> she said.</p>
+  <p><em>No,</em> said Sumner. <em>He hasn't learned a thing since 1981. Not one word.</em> He said it gently, and he looked down the table at his father, who was eating pie, and said the rest of it to him, as if they were alone in the barn.</p>
+  <div class="verse">
+    <p>Man that is in honor, and understandeth not, Is like the beasts that perish.</p>
+    <p>&mdash; Psalm 49:20</p>
+  </div>
+  <p><em>Gladding's oxen got bigger every year I knew them,</em> he said. <em>Bigger and stronger and redder. That's what an ox does. Never got a bit smarter. They were the best things we ever had on the place.</em></p>
+  <p>Lyle nodded with his mouth full. <em>That's so,</em> he said.</p>
+  <p>Arlene Fisk laughed. Dot Hatch, at the far end, laughed too, the way she had at the draping, with her hand over her eyes. Tess did not laugh. She was looking at Lyle Corliss's big ruined hands on the oilcloth, and thinking of a man standing in a burying ground for a year, in all weathers, talking to three bales of hay so that he could ask for one ox properly, and then asking for the wrong thing in front of the king. Something in her that had been keeping a list let go of the list. She took out the Lecturer's notebook and wrote down the verse and the number of it, and under it, <em>sixteen,</em> and underlined it.</p>
+  <p>At eight o'clock the Master asked the chaplain to say the grace for the close of the meal.</p>
+  <p>Lyle stood up, which took a while. Fifty people bowed their heads over the wreck of eleven pies.</p>
+  <p><em>Bless this food,</em> he said, <em>which we are about to receive.</em></p>
+  <p><em>Amen,</em> said Clay Hill Grange.</p>
+  <p>In the barn on Clay Hill, where Lyle still kept a pair of Devon steers at eighty-four because he did not know how to live without them, the old yoke from 1980 hung on its two pegs above the tie-up, one bow worn bright from Bright's neck and the other one empty, and nobody had ever taken it down.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">A man who has learnt little, grows old like an ox; his flesh grows, but his knowledge does not grow.<cite>Dhammapada 152, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the monk L&#257;&#7735;ud&#257;yi always says the wrong thing. He recites funeral verses at festivals and verses of blessing at funerals, and he never notices. The Buddha tells the monks it is not the first time. In a past life, the Brahmin Aggidatta lost one of his two oxen. His son Somadatta was a favorite of the king and would not ask the king for an ox himself, so he coached his slow father in a charnel ground called the Fragrant Bush, with bundles of grass set up to stand for the king and his officers. The father practiced the request for a year, and then asked the king to take his other ox. Somadatta saved the moment with a quick answer, and the king, pleased, gave sixteen oxen and a village. The father was L&#257;&#7735;ud&#257;yi, the king was &#256;nanda and the son was the Buddha himself. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/11-07.htm">the full commentary story</a>.</p>
+    <h3>New Hampshire hill towns, 1980&ndash;2022</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/National_Grange_of_the_Order_of_Patrons_of_Husbandry">Grange</a> (the Order of Patrons of Husbandry) was founded in 1867. Its ritual and its seven degrees borrow from Freemasonry, and many rural towns still have a Grange hall. Each local Grange elects officers who include a chaplain and three Graces, Ceres, Pomona and Flora. Among the chaplain's duties is the <a href="https://orgrange.org/res/info/admin/officer_duties.pdf">charter-draping ceremony</a> for a member who has died. Grange membership fell by forty percent between 1992 and 2007. In 2022 the National Grange reported its first net gain in almost seven decades, some of it from young farmers and homesteaders. Rural New Hampshire also keeps its Old Home Days, which go back to the Old Home Week begun by Governor <a href="https://en.wikipedia.org/wiki/Frank_W._Rollins">Frank W. Rollins</a> at the turn of the twentieth century to call home the sons and daughters who had left for the West.</p>
+    <p>Devon cattle came to New England with the Pilgrims from 1623 and were long the region's working oxen. They are red, with white horns tipped black. The old dairy-and-draft line, now called the <a href="https://livestockconservancy.org/heritage-breeds/heritage-breeds-list/milking-devon-cattle/">Milking Devon</a>, is rare enough to be listed as critical. An ox is a trained steer of four years or more. The teamster walks on the left, and each animal learns its side, near or off, so that a partner is hard to replace (<a href="https://www.concordmonitor.com/Oxen-are-tons-of-fun-19620852">a New Hampshire teamster explains</a>). Ox teams still show and pull at fairs such as the <a href="https://en.wikipedia.org/wiki/Hopkinton_State_Fair">Hopkinton State Fair</a>, held since 1915. In 1980 the Federal Reserve's fight against inflation pushed interest rates to about twenty percent, the start of the <a href="https://en.wikipedia.org/wiki/1980s_farm_crisis">1980s farm crisis</a>. The common lilac, planted in dooryards and burying grounds across the state, has been New Hampshire's <a href="https://en.wikipedia.org/wiki/Syringa_vulgaris">state flower</a> since 1919.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder L&#257;&#7735;ud&#257;yi from the Dhammapada commentary (verse 152). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/11-07.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Opus 5.5.
+  <div class="pager"><a href="outward-adorning.html">&larr; Outward Adorning</a><a href="index.html">All stories</a><a href="the-middle-portion.html">The Middle Portion &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Two oxen breathing in a cold barn: soft clouds from the lower corners, one side and then the other.
+  // Now and then the right side does not breathe (the empty bow), then it does again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, puffs = [], t = 0, beat = 0, skip = false;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function puff(side, age) {
+    var left = side === 0;
+    var p = { side: side, age: age || 0, max: 420 + Math.random() * 120, blobs: [] };
+    var ox = left ? W * 0.04 : W * 0.96, oy = H * 0.94;
+    var dir = left ? 1 : -1;
+    for (var i = 0; i < 7; i++) {
+      p.blobs.push({ x: ox, y: oy, vx: dir * (0.25 + Math.random() * 0.35), vy: -(0.12 + Math.random() * 0.2), r: 10 + Math.random() * 14, g: 0.12 + Math.random() * 0.1 });
+    }
+    return p;
+  }
+  function drawPuff(p) {
+    var k = p.age / p.max;
+    var env = Math.min(1, k * 10) * Math.pow(1 - k, 1.6);
+    for (var i = 0; i < p.blobs.length; i++) {
+      var b = p.blobs[i];
+      var x = b.x + b.vx * p.age, y = b.y + b.vy * p.age;
+      var R = b.r + b.g * p.age * 0.9;
+      var a = 0.11 * env;
+      if (a < 0.003) continue;
+      var g = ctx.createRadialGradient(x, y, 0, x, y, R);
+      g.addColorStop(0, 'rgba(226,218,236,' + a + ')');
+      g.addColorStop(0.6, 'rgba(190,176,206,' + (a * 0.45) + ')');
+      g.addColorStop(1, 'rgba(190,176,206,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, R, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      t++;
+      if (t % 150 === 0) {
+        var side = beat % 2;
+        if (side === 0) skip = Math.random() < 0.28;
+        if (!(side === 1 && skip)) puffs.push(puff(side));
+        beat++;
+      }
+      for (var i = puffs.length - 1; i >= 0; i--) { puffs[i].age++; if (puffs[i].age > puffs[i].max) puffs.splice(i, 1); }
+    }
+    for (var j = 0; j < puffs.length; j++) drawPuff(puffs[j]);
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size();
+  if (reduce) { puffs = [puff(0, 90), puff(1, 160)]; }
+  frame();
+  window.addEventListener('resize', function () { size(); if (reduce) { puffs = [puff(0, 90), puff(1, 160)]; frame(); } });
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bull Snake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on sun-bleached canyon dust in June, light theme; dry cheatgrass stirs along the foot of the page, and now and then the S-curved track of a snake draws itself slowly across the lower margin, crooked a third of the way along, and fills back in with blown dust; datelined sections. */
+  --ground: #ebe3d2;
+  --ground-2: #e0d6c1;
+  --paper: #2d2822;
+  --paper-dim: #6e6556;
+  --rust: #9a552c;
+  --basalt: #4a4842;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f5efe2 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(45,40,34,.25); }
+.series a:hover { color: var(--rust); }
+a:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--rust); text-wrap: balance; text-shadow: 0 0 28px rgba(154,85,44,.12); }
+.epigraph { border-left: 1px solid rgba(154,85,44,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--basalt); opacity: .95; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--rust); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(224,214,193,.8); border: 1px solid rgba(45,40,34,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.card { font-style: normal; letter-spacing: .06em; font-size: .95rem; }
+.brk { text-align: center; color: var(--rust); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(45,40,34,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--rust); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--rust); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(45,40,34,.15); border-bottom: 1px solid rgba(45,40,34,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--rust); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--rust); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--rust); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(224,214,193,.8); border-left: 2px solid var(--rust); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 10.3 &middot; Sambahulakumāraka</span></nav>
+<header>
+  <h1>Bull Snake</h1>
+  <div class="epigraph">That among these are Life, Liberty and the pursuit of Happiness.<br>&mdash; The Declaration of Independence</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Way I heard it told,</span> on the river bar below White Bird.</p>
+
+<section>
+  <h2>I. The Reading</h2>
+  <p class="dateline">Salmon River, Idaho County, Idaho &middot; June 1995</p>
+  <p>Every morning of the muster they ran the flag up a lodgepole on the Hollister bar at seven, and Orval Pruitt read to them. Orval was seventy-three and had been a gunner&rsquo;s mate on a destroyer off Okinawa, and he read in the voice he used at the Grange for the minutes, from a pocket Constitution the size of a deck of cards that had the Declaration in the front. He never read the whole thing. He read down to the part about Safety and Happiness and closed it, and the men said <em>amen</em> or nothing, and the women went back to the cook tent, and the boys went back to whatever they had been doing before somebody made them stand still.</p>
+  <p>There were nineteen families that year on the bar, which belonged to Dale Hollister and ran a quarter mile along the river below the town, cheatgrass and hackberry and basalt, hot by ten in the morning. They called themselves the Camas Prairie Volunteers. They met the second Tuesday at the Grange hall in Grangeville. They had started in the fall of 1992, after what happened to the Weaver family up at Ruby Ridge, which was in the same state and close enough to drive to, and they had grown after Waco. Most of them had worked in the woods or at the mills, or had cattle on Forest Service allotments, and they had watched the mills close and the allotments shrink since the salmon were listed, in a county where the government owned most of the ground. They drilled. They kept food. They took a first aid course. They said, among themselves, that they would never be the ones to start anything.</p>
+  <p>Then on the nineteenth of April, the second anniversary of the fire at Waco, a man parked a truck in front of the federal building in Oklahoma City.</p>
+  <p>At the May meeting at the Grange, three men said the government had done it to itself so it could come for people like them. Two men said nothing. Della Kuehn stood up, which she did not often do, and said that she was a nurse and had watched it all night in the break room at the hospital, and that there had been a day care in that building, and that she would not stand in a room with anybody who thought there was a reason good enough. Then she sat down. After a while Orval Pruitt said he would not either. Two families did not come back. The rest came to the river in June.</p>
+</section>
+
+<section>
+  <h2>II. The Woodpile</h2>
+  <p class="dateline">The Hollister bar &middot; the third morning</p>
+  <p>There were eleven boys on the bar that year between eight and fourteen, and they ran in a pack, the way boys on a river do. Cody Hollister was thirteen and in charge of them because the bar was his father&rsquo;s. They had wooden rifles Dale had cut on the bandsaw, and the men let them drill at the back of the line in the mornings, and the rest of the day they were in the river or under the cook tent or up in the rocks looking for arrowheads they were not supposed to keep.</p>
+  <p>Jesse Ward&rsquo;s little brother found the snake. He was five, and he went to get kindling for his mother from the woodpile behind the cook tent and came back without any, white, and would not say why. Jesse went to look. Then all of them went.</p>
+  <p>It lay along the bottom log in the shade, as long as Cody was tall, yellow-brown with dark blotches down its back. When the boys came close it pulled itself into a loose coil and lifted its head and made the head go wide and flat, and it hissed, a long hard breath like a tire going down, and it shook its tail in the dry hackberry leaves under the pile so that they buzzed.</p>
+  <p><em>Rattler,</em> Jesse said. Nobody had to say it.</p>
+  <p>Cody sent Travis for the shovel. The others got sticks from the woodpile itself, split pine and a length of old fence rail, and the Moffatt twins got tent stakes, and they made a ring around the end of the pile the way they had seen their fathers make a perimeter. Cody was scared. They all were. That was why they did it fast. The first blow missed and hit the log and the snake struck at the stick, and the next blows did not miss. It writhed and threw itself against the logs and tried to go under them, and the shovel came down on its back a third of the way from the head, and it stopped trying to go anywhere and only moved there, slowly, in the leaves, with its mouth open.</p>
+</section>
+
+<section>
+  <h2>III. The Medic</h2>
+  <p class="dateline">The same morning</p>
+  <p>Della made rounds every morning on the bar with a green tackle box full of bandages. She was forty-seven and worked nights in the emergency room at the hospital in Grangeville, and on the river she went from camp to camp after breakfast the way she went from bed to bed: blisters, sunburn, a fishhook in a thumb, a toddler with an ear, ticks. She was coming back from the river with the five-gallon jug on her shoulder when she saw the ring of boys at the woodpile and heard the shovel hit.</p>
+  <p>She set the jug down.</p>
+  <p><em>What are you doing?</em></p>
+  <p><em>Killing a rattler,</em> Cody said. He did not look at her. He was breathing hard.</p>
+  <p><em>Why?</em></p>
+  <p><em>It was going to bite somebody. It was going to bite Jesse&rsquo;s little brother.</em> Some of the others said it too, all at once. <em>It hissed at him. It rattled. We were scared it was going to bite.</em></p>
+  <p>Della came through the ring and knelt down in the leaves. She took the length of fence rail out of the youngest boy&rsquo;s hands without asking and slid the end of it under the snake, gently, and lifted the front half of it up off the ground into the light where they could see. It did not strike. It hung over the rail with its mouth open.</p>
+  <p><em>Look at its eye,</em> she said. <em>Round. A rattler&rsquo;s got a slit like a cat. Look at its tail.</em> She turned the rail. The tail tapered to a point, plain, like the end of a whip. There was nothing on it. <em>No rattle. That was leaves.</em></p>
+  <p><em>It buzzed,</em> said one of the twins.</p>
+  <p><em>It shook its tail in the dry leaves to make you think it was a rattler. It flattened its head out to look like a rattler. It hissed. It did everything it knew how to make you think it was the one thing in this canyon you&rsquo;re scared of.</em> She looked around at them. <em>That&rsquo;s a bull snake. Gopher snake. It eats whistle pigs and mice out of your dad&rsquo;s feed shed. It couldn&rsquo;t hurt you if it tried. It was scared of you.</em></p>
+  <p>Nobody said anything. On the river a drift boat went by with its oars shipped, people in it laughing.</p>
+  <p><em>You know what Orval reads every morning,</em> Della said. <em>You stand there for it. Say it.</em></p>
+  <p>They mumbled. She made them say it again, all of them, the eleven of them kneeling or standing in the hackberry leaves around a snake with its back broken, and they knew it by heart, because they had heard it every morning of their lives on that bar and at the Grange.</p>
+  <div class="verse">
+    <p>We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.</p>
+    <p>&mdash; The Declaration of Independence, 1776</p>
+  </div>
+  <p><em>It says men,</em> Cody said. <em>It doesn&rsquo;t say snakes.</em></p>
+  <p><em>No, it doesn&rsquo;t,</em> Della said. <em>But you look at that thing and tell me what it was doing under there. It was pursuing its happiness. Same as you.</em> She was quiet a moment. <em>Everybody that ever hurt anything was after their own safety and happiness. Everybody. You won&rsquo;t ever get yours that way. I don&rsquo;t know why, but you won&rsquo;t. I&rsquo;ve watched people try for twenty-five years. Leave the thing alone that wants to live, same as you, and maybe yours comes to you. That&rsquo;s all I know.</em></p>
+  <p>Cody was looking at the shovel in his hands as if somebody had handed it to him while he was asleep.</p>
+  <p><em>Like the one in Oklahoma,</em> he said. <em>He thought they were coming for him.</em></p>
+  <p>Della did not answer that. She stood up with the snake still hanging over the end of the rail and carried it, slow, out past the woodpile and up the slope to where the basalt broke into a rockslide, and laid the rail down among the rocks and tipped it, and the snake slid off into a crack between two stones. It went in a little at a time, crooked where the shovel had hit it, until the tail went in.</p>
+  <p>She came back and put the rail on the woodpile, and picked up her jug, and went on to the cook tent to see about the Moffatt baby&rsquo;s ear.</p>
+</section>
+
+<section>
+  <h2>IV. Whistle Pigs</h2>
+  <p class="dateline">The Hollister bar &middot; the last day</p>
+  <p>On the last afternoon of every muster the men drove up onto the benches above the river where the ground squirrels lived and shot whistle pigs, which was what everybody in Idaho County called them, for the noise they made. It was not training. It was the fun part. The boys had always gone, and the older ones shot.</p>
+  <p>That year the boys stayed down at the bar. Cody went to his father and said they would rather set up cans on the rocks by the river, and Dale Hollister looked at his son for a while and said that was fine, and asked why, and Cody did not know how to say it, so he said <em>just because</em>. Some of the men laughed about it in the trucks going up. Orval Pruitt did not go up that year either. He sat in a lawn chair by the river and watched the boys knock the cans off the rocks with a .22, one at a time, and set them back up, and when Jesse&rsquo;s little brother wanted to go up to the rockslide to look for the snake, Orval told him it was resting and to let it be.</p>
+  <p>Nobody on the bar could have said what was different about the eleven of them after that. Their mothers noticed it before their fathers did. They were quieter about some things. None of them, as far as anybody knew, ever again killed a thing because they were frightened of it, though most of them hunted all their lives and several went into the service.</p>
+  <p>The Camas Prairie Volunteers met at the Grange for two more years. Fewer came each month. By the end it was mostly Orval and the coffee, and when Orval died his pocket Constitution went to Della, who kept it in the green tackle box.</p>
+</section>
+
+<section>
+  <h2>V. The Kink</h2>
+  <p class="dateline">Deer Creek road above the Salmon &middot; May 2010</p>
+  <p>Cody Hollister went to work for Idaho Fish and Game when he was twenty-four. He was a conservation officer out of Lewiston, and a good part of his summers was snakes: rattlers in garages, rattlers under porches, gopher snakes in chicken coops, and calls from frightened people who were sure the snake in the yard was a rattler and had a hoe in their hands when he got there. He went to every one of those calls. He carried a long hook in the truck and a lidded bucket, and he always looked at the eye first, and then at the tail, and he talked to the people the whole time in a low voice.</p>
+  <p>In May of 2010 he was driving the gravel road up out of the canyon above the old bar, which his father had sold, when he saw a snake lying across the road in the sun.</p>
+  <p>He stopped the truck. It was a gopher snake, the biggest he had ever seen, yellow-brown with dark blotches, and a third of the way down its back from the head it had a kink in it, an old bend where the spine had healed crooked. It lay there on the warm gravel a long while, not minding him. A gopher snake might live fifteen years in the wild. He knew that. He had looked it up more than once.</p>
+  <p>It could not have been the same one. He sat in the truck with the engine running and waited anyway, until it moved, and crossed the rest of the road in its own time, crooked where the shovel had hit it, and went into the rocks on the uphill side a little at a time, until the tail went in.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">He who seeking his own happiness punishes or kills beings who also long for happiness, will not find happiness after death.<cite>Dhammapada 131, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He who seeking his own happiness does not punish or kill beings who also long for happiness, will find happiness after death.<cite>Dhammapada 132, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha is walking into Sāvatthī for alms when he sees a company of boys beating a house snake with a stick. He asks what they are doing, and why. They say they are afraid it will bite them. He tells them that whoever strikes another to make himself happy will not find happiness, and that those who seek happiness for themselves should not strike others, and he speaks the two verses. At the end of the teaching the boys enter the stream, the first stage of awakening. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-03.htm">the full commentary story</a>; the same incident is told in the Udāna (2.3).</p>
+    <h3>Idaho, 1995</h3>
+    <p>The armed citizen militias of the 1990s grew out of two standoffs with federal agents: the 1992 siege at <a href="https://en.wikipedia.org/wiki/Ruby_Ridge">Ruby Ridge</a> in northern Idaho, in which Randy Weaver&rsquo;s wife and son were killed, and the 1993 <a href="https://en.wikipedia.org/wiki/Waco_siege">siege at Waco</a>, Texas. By the mid-1990s there were <a href="https://en.wikipedia.org/wiki/Militia_organizations_in_the_United_States">militia groups</a> in all fifty states. On April 19, 1995, the second anniversary of the fire at Waco, the <a href="https://en.wikipedia.org/wiki/Oklahoma_City_bombing">Oklahoma City bombing</a> killed 168 people, nineteen of them children, many in the day care center in the Alfred P. Murrah Federal Building. The attention that followed split many groups, and on June 15, 1995, a Senate Judiciary subcommittee held a <a href="https://www.judiciary.senate.gov/committee-activity/hearings/the-militia-movement-in-the-united-states">hearing on the militia movement</a>. The Camas Prairie Volunteers are invented.</p>
+    <p>The gopher snake, also called the bull snake, is Idaho&rsquo;s largest snake. When threatened it <a href="https://idfg.idaho.gov/sites/default/files/wildlife-express-may-2016-gopher-snakes.pdf">flattens its head, hisses, and shakes its tail</a> in dry leaves so that it sounds like a rattlesnake, and Idaho Fish and Game notes that many are killed for it; it has round pupils and no rattle, eats rodents including ground squirrels, and may live about fifteen years in the wild. Gopher snakes and western rattlesnakes share the hot, low canyons of west-central Idaho, where a <a href="https://docs.idahopower.com/pdfs/relicensing/hellscanyon/hellspdfs/techappendices/Wildlife/e32_36.pdf">survey of Hells Canyon in 1995&ndash;1999</a> found them among the commonest reptiles. The Declaration is quoted from the <a href="https://www.archives.gov/founding-docs/declaration-transcript">National Archives transcription</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a company of boys from the Dhammapada commentary (verses 131 and 132). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-03.htm">The original</a>. Scripture from the Declaration of Independence. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-seventh-floor.html">&larr; The Seventh Floor</a><a href="index.html">All stories</a><a href="piedra-negra.html">Piedra Negra &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, grass = [], t = 0, track = null, nextTrack = 200;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    grass = [];
+    var n = Math.round(W / 9);
+    for (var i = 0; i < n; i++) grass.push({ x: Math.random() * W, h: 18 + Math.random() * 46, ph: Math.random() * 6.28, lean: (Math.random() - 0.5) * 0.4 });
+    track = newTrack(); if (reduce) track.p = 1;
+  }
+  function newTrack() {
+    var dir = Math.random() < 0.5 ? 1 : -1;
+    return { y: H * (0.8 + Math.random() * 0.1), dir: dir, p: 0, fade: 1, amp: 9 + Math.random() * 5, wl: 70 + Math.random() * 30 };
+  }
+  function trackPt(tr, u) {
+    var x = tr.dir > 0 ? -40 + u * (W + 80) : W + 40 - u * (W + 80);
+    var y = tr.y + Math.sin(u * (W + 80) / tr.wl * 6.28) * tr.amp;
+    if (u > 0.33) y += 6;
+    return [x, y];
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) t += 1;
+    var wind = reduce ? 0.15 : 0.15 + 0.12 * Math.sin(t * 0.004);
+    ctx.lineWidth = 1;
+    for (var i = 0; i < grass.length; i++) {
+      var g = grass[i];
+      var sway = g.lean + wind * (0.6 + 0.4 * Math.sin(t * 0.02 + g.ph));
+      ctx.strokeStyle = 'rgba(150,120,70,0.16)';
+      ctx.beginPath(); ctx.moveTo(g.x, H);
+      ctx.quadraticCurveTo(g.x + sway * g.h * 0.4, H - g.h * 0.6, g.x + sway * g.h, H - g.h);
+      ctx.stroke();
+    }
+    if (track) {
+      if (!reduce) {
+        if (track.p < 1) track.p = Math.min(1, track.p + 0.0012);
+        else { track.fade -= 0.002; if (track.fade <= 0) { track = null; nextTrack = 400 + Math.random() * 600; } }
+      }
+    } else if (!reduce) { nextTrack--; if (nextTrack <= 0) track = newTrack(); }
+    if (track) {
+      ctx.strokeStyle = 'rgba(90,70,45,' + (0.14 * track.fade) + ')';
+      ctx.lineWidth = 3; ctx.lineCap = 'round';
+      ctx.beginPath();
+      var steps = 220, end = Math.floor(steps * track.p);
+      for (var k = 0; k <= end; k++) { var pt = trackPt(track, k / steps); if (k === 0) ctx.moveTo(pt[0], pt[1]); else ctx.lineTo(pt[0], pt[1]); }
+      ctx.stroke();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

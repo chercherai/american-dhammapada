@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seven Doors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on masa-colored paper; a few bees work the margins and move on. */
+  --ground: #f2ead6;
+  --ground-2: #e7dcc0;
+  --paper: #2a2419;
+  --paper-dim: #6a5f49;
+  --kudzu: #6b3c80;
+  --honey: #b97f14;
+  --line: rgba(42,36,25,.16);
+  --panel: rgba(231,220,192,.75);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f8f2e2 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--kudzu); }
+a:focus-visible { outline: 2px solid var(--kudzu); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--kudzu); text-wrap: balance; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+.epigraph { border-left: 1px solid var(--kudzu); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--kudzu); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--kudzu); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--honey); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--kudzu); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--kudzu); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--kudzu); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--kudzu); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--kudzu); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--kudzu); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--kudzu); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.5 &middot; Macchariya Kosiya</span></nav>
+<header>
+  <h1>Seven Doors</h1>
+  <div class="epigraph">The bee is small among flying things but her fruit hath the chiefest sweetness.<br>&mdash; Ecclesiasticus 11:3</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; lo platican,</span> on Highway 35.</p>
+
+<section>
+  <h2>I. The Tayuyo</h2>
+  <p class="dateline">Ribbon Cane, Mississippi &middot; Thursday, August 8, 2019</p>
+  <p>Efra&iacute;n Maldonado had come to Mississippi in 1996 on a bus the chicken company sent to Texas, and for four years he hung live birds by their feet on a moving line in the dark. Then he saw where the money was. The money was in everything around the chicken. He bought a van and charged eight dollars a day to ride in it. He bought a trailer and rented the beds in it by the shift. He cashed paychecks for three cents on the dollar and wired what was left to Guatemala for a fee. By 2019 he owned the old dime store on what remained of the main street in Ribbon Cane, a two-story brick building with a tienda downstairs and his family upstairs, and nine trailers on a lot behind the feed mill, and four vans, and people said he had a million dollars, and nobody had ever seen him give away a lime.</p>
+  <p>He did not spend it on himself either. He wore the boots he had bought in 2004. His wife Marta cooked on a stove with two working burners. His money was like one of those stock ponds out in the pines with a cottonmouth living in it. The water is right there and nothing goes down to drink.</p>
+  <p>On the Wednesday, the government came to seven chicken plants in six towns with buses and zip ties and took six hundred and eighty people off the lines. It was the first day of school. By Thursday half the trailers in Scott County had nobody in them to pay the rent, and Efra&iacute;n drove the sixty miles up Highway 35 to see the personnel man at the plant about who was going to be working and who was not. The personnel man kept him waiting two hours and told him nothing.</p>
+  <p>He stopped for gas on the way home. On the curb by the ice machine sat a boy of sixteen or so in a plant sweatshirt, thin as a hoe handle, new enough from the mountains that he still looked at the ground when a truck went by. He had a bread bag in his lap, and out of it he took a tayuyo and began to eat.</p>
+  <p>A tayuyo is the plainest thing a person from those mountains can eat. It is a thick corn cake, round, the size of a saucer, with a spoonful of black beans patted into the middle before it goes on the comal. This one was a day old and cold. The boy ate it with both hands, slowly, and a little of the beans showed dark at the edge where he had bitten.</p>
+  <p>Efra&iacute;n had not eaten a tayuyo in twenty years. Marta made tortillas from the bag like everybody. He stood with the gas nozzle in his hand, and his mouth filled with water like a dog&rsquo;s, and he was hungrier than he had been since he was a child.</p>
+  <p>He drove home with it. He thought: <em>If I say I want tayuyos, she will make them. If she makes them the girls from the store will smell it, and the nephews, and the drivers, and every one of them will want one, and then it is five pounds of masa and a pot of beans and lard and gas for the stove, and this week of all weeks, with the whole county looking for somewhere to eat.</em> So he said nothing. He walked around the store all afternoon straightening cans. By evening he was the color of old tallow and the veins stood out in his neck, and he went upstairs and lay down on the bed with his face to the wall and his arms around the pillow.</p>
+  <p>Marta came and sat by him and rubbed his back.</p>
+  <p><em>What is it, viejo?</em></p>
+  <p><em>Nothing.</em></p>
+  <p><em>Did the man at the plant say something to you?</em></p>
+  <p><em>He said nothing to me.</em></p>
+  <p><em>Is it the kids? Did one of the drivers wreck a van?</em></p>
+  <p><em>Nobody wrecked anything.</em></p>
+  <p><em>Then you want something.</em></p>
+  <p>He did not answer. She waited. She had been married to him for thirty-one years.</p>
+  <p><em>Tell me what you want, Efra&iacute;n.</em></p>
+  <p>He said it into the pillow, swallowing half of it. <em>A tayuyo.</em></p>
+  <p><em>A tayuyo! Why didn&rsquo;t you say? Are we poor? I&rsquo;ll make enough for all of Ribbon Cane. God knows they need it this week.</em></p>
+  <p><em>What are they to you? Let them work and buy their own.</em></p>
+  <p><em>Then enough for the people in our trailers.</em></p>
+  <p><em>I always said you had a hole in your hand.</em></p>
+  <p><em>Then for this house. The girls downstairs, the nephews.</em></p>
+  <p><em>You&rsquo;d feed the cat first.</em></p>
+  <p><em>Then for you and me and the children.</em></p>
+  <p><em>What do the children need with tayuyos? They eat pizza.</em></p>
+  <p><em>For you and me, then.</em></p>
+  <p><em>What do you want one for?</em></p>
+  <p>Marta looked at the back of his head for a moment.</p>
+  <p><em>All right,</em> she said. <em>Just for you.</em></p>
+  <p>Then he rolled over. <em>Not in the kitchen. There are too many noses in this building. Take the hot plate and the small comal up to the back storeroom, tomorrow, when the store is busy. Use the masa from the sack that tore, the one I couldn&rsquo;t sell. Use the beans from Sunday. A little lard. Bring the cream and the cheese and that jar of honey the Lopez woman paid with, but only a little of each. I&rsquo;ll come up and eat it by myself.</em></p>
+  <p><em>All right,</em> said Marta.</p>
+</section>
+
+<section>
+  <h2>II. Seven Doors</h2>
+  <p class="dateline">Friday morning</p>
+  <p>The back storeroom was at the top of the building, under the roof, behind everything. To get there from the street a person went through the steel grille and then the glass door with the bell on it. Then there was the gate in the counter, and the stockroom door, and the door to the stairs. At the top of the stairs was the door of the apartment, and at the end of the hall the storeroom door itself, which had a hasp. That made seven.</p>
+  <p>Marta went up first with the hot plate. At ten o&rsquo;clock Efra&iacute;n told the girls he had accounts to do and followed her, and he shut every door behind him. He turned the key in the ones that had keys and shot the bolt on the ones that had bolts. He hung the padlock in the hasp from the inside, where no hasp was ever meant to be locked from, and sat down on a case of lamp oil with his knees together.</p>
+  <p>The room had one window, over the alley, two stories up, painted shut. There was a smoke detector on the ceiling with its cover hanging open. He had taken the battery out in 2011 to use in a flashlight.</p>
+  <p>Marta set the comal on the hot plate and wet her hands and began to pat out the masa.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Sixty miles north, off the same highway, there was a metal building that had been a tractor dealership and was now a mission church. Since Wednesday night it had also been a kitchen and a law office and a place to sleep. There were five hundred people in it that Friday, more or less. Some had come out of the buses with a paper and a court date. Some were waiting on a husband or a wife who was in Louisiana by now. A good many had papers and had done nothing, and were afraid to be seen driving.</p>
+  <p>The one who held it together was Catarina Tom&aacute;s. She was twenty-nine. She had cut wings on the debone line for eleven years, and on Sundays when the priest was at one of his other three churches she led the Celebration of the Word, in Spanish and then in Mam, from a folding table. She had been taken on Wednesday with her knife apron still on. They let her go at one in the morning because she had two children in the second and fourth grades. Before she went they locked a black box the size of a deck of cards around her ankle, and with it they gave her a paper with a line drawn around where she was permitted to be.</p>
+  <p>The box had to be charged two hours a day, on her leg, from the wall. So on Friday morning she was sitting on a folding chair beside the outlet in the corner of the hall with the cord running up under her skirt, and the hall went on around her, and people who needed to know something came to the chair.</p>
+  <p>The old man who kept the keys of the mission was named Lorenzo P&eacute;rez. He was sixty-eight, from the same mountain she was, and had been sacristan in his village until 1982, when it stopped being safe to be one. He had his papers. He drove the church van. He had a way of coming into a room so that you only noticed afterward that he was in it. People called him Tat Lencho, which is how you say it in Mam to a man of that age.</p>
+  <p>Catarina looked up from the chair. She had been looking at the floor, at nothing, the way she did.</p>
+  <p><em>Tat Lencho. Down in Ribbon Cane, Efra&iacute;n Maldonado wanted a tayuyo yesterday and was afraid somebody would see him eat it. Right now his wife is making them for him on a hot plate at the top of the store, and he has locked seven doors. Go down there. Bring him to himself. Then bring him and Do&ntilde;a Marta here, and the tayuyos, and the cream and the cheese and the honey. The people in this building are going to eat today off that comal.</em></p>
+  <p><em>Yes, hermana,</em> said Tat Lencho, and put on his hat.</p>
+</section>
+
+<section>
+  <h2>III. The Window</h2>
+  <p class="dateline">Ribbon Cane &middot; the same minute</p>
+  <p>Efra&iacute;n looked up from the comal and there was a man standing outside the window.</p>
+  <p>The window was twenty feet above the alley. There was no ledge under it and no ladder. The old man stood out there in the open air about a yard from the glass, in a clean white shirt buttoned to the neck, with his hat in his hands, and looked in with the mild face of somebody waiting to be noticed at a counter.</p>
+  <p>Efra&iacute;n&rsquo;s heart went like a fish on a bank. He knew the old man. Everybody did. <em>This is what I locked the doors against,</em> he thought, <em>and he comes to the one place there is no door.</em></p>
+  <p>He was a man whose anger went off like salt thrown on a fire. He put his face to the glass and shouted through it.</p>
+  <p><em>What do you think you&rsquo;ll get, standing in the air? You can walk up and down out there till you wear a path, you&rsquo;ll get nothing from me.</em></p>
+  <p>Tat Lencho put his hat on, and walked up and down, the length of the building and back, over the alley and the dumpster.</p>
+  <p><em>What do you think you&rsquo;ll get by walking? You can sit down out there with your legs crossed, you&rsquo;ll get nothing.</em></p>
+  <p>The old man folded his legs under him and sat down on the air, a little stiffly, as he sat on the floor of the mission with the children.</p>
+  <p><em>What do you get by sitting? Come stand on my windowsill if you like. Nothing.</em></p>
+  <p>Tat Lencho got up and came and stood on the outside sill, with the toes of his boots against the glass.</p>
+  <p><em>Stand there, then! Stand there till you smoke! You&rsquo;ll get nothing!</em></p>
+  <p>Smoke began to come out of the old man. It came from his cuffs and his collar and from under the brim of his hat, gray and thick, with the smell of pine kindling. It came in around the painted window frame and through the wall, until the storeroom was full of it and Marta was coughing over the comal. Efra&iacute;n&rsquo;s eyes felt as if somebody were putting needles in them. He looked up at the smoke detector hanging open and empty on the ceiling, and he thought about a brick building with a tienda full of lamp oil on the ground floor. He had been about to say: <em>burst into flames, then.</em> He did not say it.</p>
+  <p><em>He isn&rsquo;t going to leave,</em> he said to Marta. <em>Make one small one. A little one. Give it to him and get him off my wall.</em></p>
+  <p>Marta pinched off a piece of masa the size of a walnut and patted it flat and put it on the comal. It spread. It rose. It grew out to the rim of the comal and over it, thick as a hand, and lay there steaming, big enough for a family.</p>
+  <p><em>You took too much,</em> said Efra&iacute;n. <em>Give me that.</em> He took a spoon and lifted on the tip of it a bit of masa no bigger than a bean and dropped it on the iron himself. It came up bigger than hers.</p>
+  <p>He tried again, with less. Marta tried. Each one they made was bigger than the last, and the basket filled, and the sack that had torn did not seem to be getting any lower.</p>
+  <p><em>Enough,</em> he said. He was sweating. <em>Give him one out of the basket. One.</em></p>
+  <p>Marta reached into the cloth and took hold of the top one, and the whole basketful came up with it. They had grown together at the edges like biscuits in a pan.</p>
+  <p><em>They&rsquo;re stuck, Efra&iacute;n.</em></p>
+  <p><em>Give it here.</em> He could not part them either. He got his thumbs in and could not. So he took one side and she took the other, and the two of them leaned back with their heels braced on the floorboards, sixty years old apiece, and pulled with everything they had, and the tayuyos held.</p>
+  <p>The sweat ran off him. It ran down his back and into his eyes and dripped from his chin onto his boots from 2004. He stood there with his arms shaking and his shirt stuck to him, breathing. And he found that he did not want one. He looked for the hunger that had put him to bed, and it had gone out of him with the water.</p>
+  <p>He let go of his side.</p>
+  <p><em>I don&rsquo;t need them,</em> he said. <em>Marta. Give him the basket. Give him all of it.</em></p>
+  <p>She got the window up. Nobody afterward could say how, with the paint on it. Tat Lencho stepped down over the sill into the room, and the smoke went out past him into the morning. He did not take the basket. He stood with his hat in his hands again and spoke to them in their own language, which Efra&iacute;n had not let anyone speak to him in for twenty years.</p>
+  <p>He did not say much. He said that what is given does not get lost. That a thing done has a fruit, the good and the bad, whether anybody is keeping the book or not. That there is this side and there is the other side. That a person has a mother and a father and owes them. That there are still people in the world who walk straight, and can tell you what they have seen.</p>
+  <p>Efra&iacute;n heard it. It was nothing he had not been told at seven years old. This time it reached him.</p>
+  <p><em>Sit down, Tat,</em> he said. <em>Sit here on the box. Eat.</em></p>
+  <p><em>Hermana Catarina is waiting to eat these with the people,</em> said Tat Lencho. <em>If you&rsquo;re willing, let Do&ntilde;a Marta bring the basket and the rest, and we&rsquo;ll go to her.</em></p>
+  <p><em>Where is she?</em></p>
+  <p><em>At the mission. Sixty miles.</em></p>
+  <p><em>That&rsquo;s an hour and a quarter. They&rsquo;ll be cold. And they have the road blocked at Raleigh, people say.</em></p>
+  <p><em>We&rsquo;ll take your back stairs,</em> the old man said. <em>The top of them can stay where it is. The bottom will be at her door. You&rsquo;ll be there sooner than you could get down to your own store.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Foot of the Stairs</h2>
+  <p class="dateline">The mission, Scott County &middot; noon</p>
+  <p>Efra&iacute;n took the padlock out of the hasp. He carried the cream and the cheese. Marta carried the basket in both arms with the honey jar riding on top, and Tat Lencho went ahead of them down the back stairs, which were steep and dark and smelled of onions. There were fourteen steps. Efra&iacute;n had counted them every day for fifteen years. At the bottom was the door to the stockroom.</p>
+  <p>The old man opened it, and the noise of five hundred people came through.</p>
+  <p>They stepped out onto a concrete floor under fluorescent lights. There were folding tables end to end, and children asleep on coats along the wall, and a woman in a suit from Jackson with a laptop and a line of forty people in front of her. In the corner by the outlet a young woman in a plant sweatshirt sat on a folding chair with a cord running down to her ankle. She looked up at them as if they were on time.</p>
+  <p><em>It&rsquo;s the hour to eat, hermana,</em> Efra&iacute;n heard himself say. He had not planned to say anything.</p>
+  <p>Catarina unplugged herself, wound the cord around her hand, and came to the head of the first table. People sat down wherever there was a chair, and where there was not they stood.</p>
+  <p>Marta lifted the top tayuyo out of the basket. It came away by itself, easily, as a tayuyo ought to. She put it in Catarina&rsquo;s two hands. Catarina broke it and ate half, which was what she needed, and gave the other half to the child beside her.</p>
+  <p>Then Marta went down the tables with the basket, and Efra&iacute;n went behind her with the cream and the crumbled cheese and the jar of honey and a spoon. He had sold these people phone cards. He had rented beds to most of them. He put cream on their tayuyos one at a time and they said <em>gracias, Don Efra&iacute;n</em> without any surprise, as though this were what he did.</p>
+  <p>An old woman near the end of the second table looked up when he got to her and kept looking.</p>
+  <p><em>You&rsquo;re Tino Maldonado&rsquo;s boy,</em> she said.</p>
+  <p><em>Yes, se&ntilde;ora.</em></p>
+  <p><em>I thought it was Tino himself with the spoon. I thought, he&rsquo;s dead thirty years and here he is feeding people again.</em> She told the table. <em>His father carried the fiesta of the patron four times. Four. The grandfather before him, and the one before that. Seven of them back, they say, one after another. You&rsquo;d sell your mule to do it once. Tino fed the whole town for eight days, and marimba, and he died owing on the mule.</em></p>
+  <p><em>He died owing on everything,</em> Efra&iacute;n said. <em>I was the one they came to for it. I was fourteen.</em> He stood holding the honey. <em>I told the elders I would never carry it. I told them I&rsquo;d sooner leave. So I left.</em></p>
+  <p><em>Well,</em> the old woman said, and held out her plate. <em>You have his face on today.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Five hundred people ate. The lawyers ate, and the children who had been sleeping, and the two deputies in the parking lot who had been sent to keep an eye on things. Efra&iacute;n and Marta sat down last and ate as much as they wanted. He had three. They tasted like six in the morning at his mother&rsquo;s fire.</p>
+  <p>The basket was full. Marta carried it around again, to the families in the Sunday school rooms and the men who would not come inside. It was full when she came back.</p>
+  <p><em>Hermana,</em> she said, <em>they don&rsquo;t run out.</em></p>
+  <p><em>Then put them by the gate,</em> Catarina said, <em>for whoever comes at night and is afraid to knock.</em></p>
+  <p>There was a red clay bank by the gate where the dealership had cut its driveway. They turned the basket out there on clean cardboard, and it made a heap as high as a child. People came in the night. To this day the ones who were there that week call that bank <em>el cerro de los tayuyos</em>, Tayuyo Hill, and their children call it that without knowing why.</p>
+  <p>Before the two of them went back, Catarina thanked them. She did it standing, in front of everyone, in three or four sentences. She did not flatter him. She said the food had been good and the people had been hungry, and that today the one who gave and the ones who ate had been fed off the same comal. Efra&iacute;n stood with his hat in his hands. Something that had been shut in him since he was fourteen came open, quietly, and Marta beside him felt the same thing at the same moment and took hold of his sleeve.</p>
+  <p>They went back through the door in the wall, and up fourteen steps, and they were in their own hall with the smell of smoke still in it.</p>
+  <p>He took the grille off the front of the store that afternoon and never put it back. He forgave August in all nine trailers, and then September. The vans ran to the courthouse in Jackson and the detention center in Louisiana for the price of the gas, and after a while for nothing. He paid bonds. It went on for years, and he did it without speeches, as a man pays down a note. When he had nothing left that was worth locking up, he put the battery back in the smoke detector.</p>
+</section>
+
+<section>
+  <h2>V. The Bee</h2>
+  <p class="dateline">The mission &middot; Saturday evening</p>
+  <p>The next night, when the dishes were done, the people who had been there sat on the folding chairs and talked about it. Mostly they talked about Tat Lencho.</p>
+  <p><em>Efra&iacute;n Maldonado,</em> they said. <em>Of all people. And he never shamed him. He never asked him for a cent. He stood there with his hat in his hands, and the man still has his store and his name and his wife looking at him like a bride. He lost nothing by it. We have had preachers through here who could empty a house in a week, and the family hated God afterward.</em></p>
+  <p>Tat Lencho was not there to hear it. He was out by the gate picking up paper plates.</p>
+  <p>Catarina was in her corner with the cord in the wall. She had with her the one thing she owned that had come over the mountain, a small book with the cover gone, soft as cloth. It had been her grandfather&rsquo;s. A Spanish priest had given it to him in 1975, when he was made a catechist. He had kept it buried in a lard tin through the bad years, and it still smelled a little of the lard. It was the book the bishop of Geneva wrote four hundred years ago for people who have to live in the world and work.</p>
+  <p><em>What are you talking about?</em> she asked.</p>
+  <p>They told her.</p>
+  <p><em>That is how it should be done,</em> she said. <em>Whoever goes into a house for God should go in like that. The house ought to be better for it and no poorer.</em> She opened the book to a page near the front where the paper had gone brown from a thumb. <em>My grandfather had this by heart. He said it was the whole of his trade.</em></p>
+  <div class="verse">
+    <p>Aristotle says that the bee sucks honey from flowers without damaging them, leaving them as whole and fresh as it found them;&mdash;but true devotion does better still, for it not only hinders no manner of vocation or duty, but, contrariwise, it adorns and beautifies all.</p>
+    <p>&mdash; St. Francis de Sales, <span style="font-style:normal">Introduction to the Devout Life</span>, I.3</p>
+  </div>
+  <p><em>That&rsquo;s Tat Lencho,</em> she said. <em>And the other one you know already.</em></p>
+  <div class="verse">
+    <p>The bee is small among flying things but her fruit hath the chiefest sweetness.</p>
+    <p>&mdash; Ecclesiasticus 11:3</p>
+  </div>
+  <p>She closed the book and bent to look at the light on her ankle, which had gone from red to green.</p>
+  <p>Out at the gate the sun was almost down. The kudzu had come over the top of the clay bank that summer and was in bloom, as it is in August, purple, with a smell like grape soda. The old man stood with a trash bag in one hand and watched a single bee go down the vine from flower to flower. It was in and out of each one before the flower had finished nodding. When it lifted off the last of them and went away over the highway, there was nothing on the bank to show it had been there. He tied the neck of the bag and carried it in.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">As the bee collects nectar and departs without injuring the flower, or its colour or scent, so let a sage dwell in his village.<cite>Dhammapada 49, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Kosiya is a rich man of the town of Sakkhara (&ldquo;Jaggery,&rdquo; raw sugar) who never gives away so much as a drop of oil. Seeing a hungry countryman eat a filled cake, he craves one, hides the craving for fear of having to share, and finally has his wife cook for him alone at the top of his seven-storied house behind bolted doors. The Buddha sends the elder Mah&#257; Moggall&#257;na, who stands in the air outside the window, walks, sits, and pours out smoke as the miser dares him to. The cakes swell and stick together; the miser sweats his craving away, gives up the whole basket, and is carried with his wife down his own staircase to the Jetavana monastery, where the cakes feed five hundred monks and never run out. The leftovers are thrown down by the gate at a place afterward called Fried Cake Mountain. The verse is the Buddha&rsquo;s praise of Moggall&#257;na, who won the household without harming its faith or its wealth. An attached birth story tells of the miser Ill&#299;sa, who broke seven generations of family generosity until his dead father came back wearing his face. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-05.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Maudgalyayana">Moggall&#257;na</a>.</p>
+    <h3>Central Mississippi, August 2019</h3>
+    <p>On August 7, 2019, immigration agents raided seven chicken processing plants in six central Mississippi towns, among them Morton, Forest, Carthage and Canton, and arrested 680 workers. It was the largest workplace raid in a single state in American history, and it fell on the first day of school. About three hundred people were released within a day, many of them parents of small children, some wearing GPS ankle monitors; hundreds more were sent to detention centers in Louisiana. The plants had been recruiting Latin American workers for decades, and many of those arrested were Maya from Guatemala&rsquo;s western highlands, the departments of San Marcos and Huehuetenango, where <a href="https://en.wikipedia.org/wiki/Mam_people">Mam</a> is spoken. With paychecks gone overnight, parish halls and mission churches became kitchens, food pantries and legal clinics for months; see reporting in <a href="https://theintercept.com/2019/10/13/ice-raids-mississippi-workers/">The Intercept</a> and <a href="https://mississippicatholic.com/?p=13958">Mississippi Catholic</a>. Ribbon Cane, the mission, and every person in the story are invented.</p>
+    <p>In highland Maya towns the patron saint&rsquo;s festival was traditionally paid for by householders who took the burden in turn, a round of offices known as the <a href="https://en.wikipedia.org/wiki/Cargo_system">cargo system</a>; a man who carried it fed the town and could be left in debt for years. Lay catechists and Delegates of the Word have led rural Central American congregations where priests are scarce since the 1960s, and many were killed or driven out in Guatemala in the early 1980s. Catarina&rsquo;s book is the <a href="https://en.wikipedia.org/wiki/Introduction_to_the_Devout_Life"><em>Introduction to the Devout Life</em></a> (1609) of St. <a href="https://en.wikipedia.org/wiki/Francis_de_Sales">Francis de Sales</a>, bishop of Geneva, long read in Spanish as the <em>Filotea</em>; the line about the bee is quoted from the nineteenth-century English translation in the <a href="https://www.ccel.org/ccel/desales/devout_life.html">Christian Classics Ethereal Library</a>. A tayuyo is a Guatemalan corn cake stuffed with black beans. Kudzu blooms in Mississippi in late summer.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the selfish Kosiya from the Dhammapada commentary (verse 49). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-05.htm">The original</a>. Scripture from St. Francis de Sales, <em>Introduction to the Devout Life</em> (nineteenth-century English translation), and the Douay-Rheims Bible. Written by Claude Fable 5.2.
+  <div class="pager"><a href="since-morning.html">&larr; Since Morning</a><a href="index.html">All stories</a><a href="yesterdays-bread.html">Yesterday’s Bread &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, bees = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.max(3, Math.min(7, Math.round(W / 220)));
+    bees = [];
+    for (var i = 0; i < n; i++) bees.push({
+      cx: Math.random() * W, cy: Math.random() * H,
+      rx: 40 + Math.random() * 90, ry: 25 + Math.random() * 60,
+      a: 0.6 + Math.random() * 0.8, b: 0.9 + Math.random() * 1.1,
+      ph: Math.random() * 6.28, dr: (Math.random() - 0.5) * 0.12, seed: Math.random() * 100
+    });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < bees.length; i++) {
+      var q = bees[i], s = t * 0.012;
+      // a bee works a patch, hovers, then drifts on: slow Lissajous loop round a wandering centre
+      var hover = 0.5 + 0.5 * Math.sin(s * 0.35 + q.seed);
+      var k = s * (0.4 + 0.6 * hover);
+      var x = q.cx + Math.sin(k * q.a + q.ph) * q.rx + Math.sin(s * 7 + q.seed) * 1.5;
+      var y = q.cy + Math.sin(k * q.b + q.ph * 1.7) * q.ry + Math.cos(s * 9 + q.seed) * 1.5;
+      if (!reduce) {
+        q.cx += q.dr; q.cy += Math.sin(s * 0.2 + q.seed) * 0.05;
+        if (q.cx < -120) q.cx = W + 100; if (q.cx > W + 120) q.cx = -100;
+      }
+      var wing = reduce ? 0.5 : 0.5 + 0.5 * Math.sin(t * 1.3 + i);
+      ctx.fillStyle = 'rgba(120,100,60,' + (0.10 + 0.08 * wing) + ')';
+      ctx.beginPath(); ctx.ellipse(x - 1.5, y - 2.6, 3.2, 1.6, -0.5, 0, 6.283); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(x + 1.5, y - 2.6, 3.2, 1.6, 0.5, 0, 6.283); ctx.fill();
+      ctx.fillStyle = 'rgba(150,98,14,.42)';
+      ctx.beginPath(); ctx.ellipse(x, y, 2.6, 1.8, 0, 0, 6.283); ctx.fill();
+      ctx.fillStyle = 'rgba(45,34,20,.38)';
+      ctx.fillRect(x - 0.4, y - 1.7, 0.9, 3.4);
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

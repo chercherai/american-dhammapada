@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Folding Chairs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on dawn beach sand, light theme; along the bottom a thin lace of surf foam slides up the page, pauses, and draws back, leaving a few bubbles that wink out; datelined sections. */
+  --ground: #ede4d3;
+  --bg-image: linear-gradient(180deg, #f4ecde 0%, #ede4d3 55%, #e2d4bd 100%) fixed;
+  --paper: #2e2925;
+  --paper-dim: #6b6157;
+  --accent: #a2472f;
+  --glow: #3f7f6a;
+  --panel: rgba(255,251,243,.62);
+  --rule: rgba(46,41,37,.14);
+  --accent-line: rgba(162,71,47,.4);
+  --title-shadow: 0 0 26px rgba(217,119,74,.18);
+  --body-weight: 400;
+  color-scheme: light;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg-image), var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: var(--title-shadow); }
+.epigraph { border-left: 1px solid var(--accent-line); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 2.4 &middot; Bālanakkhatta</span></nav>
+<header>
+  <h1>Folding Chairs</h1>
+  <div class="epigraph">&ldquo;Quick! quick! so that the time may not be lost<br>By little love!&rdquo;<br>&mdash; Dante, Purgatorio XVIII, 103&ndash;104</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Azoy hob ikh gehert,</span> in the card room of the Coral Arms.</p>
+
+<section>
+  <h2>I. The Chair</h2>
+  <p class="dateline">Fort Lauderdale, Florida · March 1985</p>
+  <p>Every morning at a quarter to six Bella Kagan took the folding chair out of the hall closet of the Coral Arms, the aluminum one with the green and white webbing, and carried it down the stairs and across A1A and over the soft sand to the place where the sand turned hard. Then she went back for the Maestro.</p>
+  <p>He was eighty-seven years old and he could still walk, if it was slow and somebody had his elbow. He wore a linen cap and a white shirt buttoned to the collar and the same grey trousers every day of the year, and he carried a cane he mostly did not lean on. His eyes had gone in the last few years. He could see light and dark and the shape of a person against a window, and that was about all. When they reached the chair he felt for its arms, turned himself around and sat, and Bella put the cane across his knees and went back up to make coffee. He stayed there an hour. He did not read, because he couldn't, and he did not sleep, and he did not pray, because he had not prayed since 1911. He listened.</p>
+  <p>The Coral Arms was six stories of pink stucco built in 1956, a block north of Las Olas, across the road from the beach. In 1971 a group of retired garment workers from the Bronx and Brooklyn had bought it together as a co-op, apartment by apartment, with their savings and their small union pensions, and by now forty-eight of its fifty units belonged to people who had spent their working lives at sewing machines and cutting tables and pressing irons on Seventh Avenue. About half of them were Jews from Local 22, the dressmakers, and about half were Italians from Local 89, which had been the Italian dressmakers' local and was named for the year of the French Revolution. They had fought each other on the shop floor over piece rates and seating and who got the window, and they had stood on the same picket lines in the same snow, and now they played pinochle together in the card room on the ground floor and argued about the Mets.</p>
+  <p>Settimio Barsanti had come from Carrara in 1921, a marble cutter's son, and pressed dresses on West Thirty-Fifth Street for nine years, and then the union had found out he could teach. For thirty years after that he taught for the educational department of Local 89. He taught English to girls from Bari and Palermo who had left school at ten. He taught them how to read a contract. On Thursday nights, for whoever wanted to come, he taught Dante, the whole Commedia, a canto a week, and when he got to the end of Paradiso he started over at the dark wood. Half the Italian women in the Coral Arms had sat in those Thursday classes as girls. So had a few of the Jewish ones, because in 1934 nobody cared whose local you were in if the room was warm.</p>
+  <p>He still did Thursdays, in the card room, with the tables pushed back. He had the whole thing by heart. He sat with his hands folded on the cane and said it in Italian and then in English, in the old translation by Longfellow that he said was too polite but honest, and the men who had come only for the coffee and cake fell asleep, and the women did not.</p>
+  <p>Bella had not been one of his girls. She was a finisher, Local 22, forty-one years of hand-sewing hems and buttons and hooks and eyes, and she had come to the Thursdays only after her husband Morris died, because the apartment was too quiet at night. Now she was the one who carried the chair. Nobody had decided it. It had simply become hers, the way the job of threading needles had become hers, for the women in the building whose eyes were going. They brought her their needles in the card room, a little packet of them, and their spools, and she threaded them one after another without looking much, the way she had done it ten thousand times on the line, and stuck them back in the paper.</p>
+  <p><em>How do you do that without looking,</em> Carmela Russo asked her once.</p>
+  <p><em>I'm looking,</em> said Bella. <em>Just not with the eyes so much.</em></p>
+  <p>The Maestro, who had been sitting nearby, laughed out loud, which he did not do often.</p>
+  <p><em>In the shop,</em> he said, <em>attention was the only thing they couldn't take from us. They took the hours. They took the wages. They took the fingers, sometimes, when a girl stopped attending to the needle. But the attention was ours. It was the whole capital we had.</em></p>
+  <p>It was the longest speech anybody had heard from him outside of Thursday, and Carmela wrote it down on the back of a pinochle score.</p>
+</section>
+
+<section>
+  <h2>II. The Strip</h2>
+  <p class="dateline">A1A, between Las Olas and Sunrise</p>
+  <p>They had known about the college students when they bought the building. Everybody in Fort Lauderdale knew. Since before the war the colleges had sent their swimmers down at Christmas, and after the movie with Connie Francis in 1960 the rest of the students came after the swimmers, every year a few more, every spring, for the weeks around Easter. In the first years at the Coral Arms the residents had thought it was charming. The boys were polite. The girls wore white bathing caps. Mrs. Fishbein from 4C fed them rugelach on the steps.</p>
+  <p>By 1985 there were three hundred and fifty thousand of them in a season, and the city could not count them except by the garbage.</p>
+  <p>They came in March in cars with plates from Ohio and Michigan and New York and Ontario, eight to a car, and they drove up and down A1A from Las Olas to Sunrise and back again, bumper to bumper, all day and half the night, with their arms out the windows and the radios loud. They slept eight to a motel room and in their cars and on the beach. In Florida that spring you could drink at nineteen, and the bars along the Strip opened their sides to the sidewalk and sold beer by the pitcher before noon. There were wet T-shirt contests and belly-flop contests and contests in which girls ate bananas on a stage while boys shouted at them. The boys painted the letters of their fraternities on their chests in shoe polish and their faces in white zinc, and everybody, boys and girls both, oiled themselves all over with coconut oil until the whole beach smelled of it, a sweet smell, like a cake left too long in the oven, and under it, by afternoon, the other smell, of beer turning in the sun and of what the hedges along the Coral Arms had been used for in the night.</p>
+  <p>The noise did not stop. It went down a little between four and six in the morning, and then the trash trucks came.</p>
+  <p>They shouted at everybody. They shouted up at the balconies of the Coral Arms, at the old women hanging out towels, things that Bella had not heard said in English since a foreman named Kaplowitz in 1937, and even Kaplowitz had lowered his voice. They shouted at the Haitian men who raked the beach and at the police and at the girls in their own cars. They shouted at a priest in his collar. They shouted at each other, the worst things, and laughed, and threw their arms around each other's necks.</p>
+  <p>Angelo Esposito in 2B found two boys asleep in the doorway of the building one morning, with a cooler, and a girl with them, and when he asked them to go they told him what he could do, in detail, and did not go. So he went upstairs and came down with a five-dollar bill, and they took it and went. After that he kept a stack of ones in a coffee can by his door. A dollar to move a car out of the residents' lot. Two dollars to stop sitting on the wall. Five to take a cooler off the front steps. He was not the only one. By the middle of March half the building was paying the students to go away, and the students had worked it out, and came back.</p>
+  <p><em>It's like the Black Hand,</em> said Carmela. <em>Except they're blond.</em></p>
+  <p>On a Tuesday morning in the second week of March, Bella came back across A1A with the coffee in a thermos and found three boys standing over the Maestro's chair.</p>
+  <p>They had not been to bed. One of them had a Greek letter on his chest in shoe polish, run with sweat, and white zinc on his nose and his ears, and a beer can in each hand. Another one had the Maestro's linen cap on. They were talking to him the way you would talk to a dog that had gotten onto the beach. What are you doing, Pop. Hey, Gandhi. Are you dead. One of them asked him if he could still, and used a word. The Maestro sat with his hands folded on the cane, looking out at the ocean he could not see, and did not answer, and this made them laugh more. The boy with the letter on his chest poured beer slowly into the sand beside the chair, near the Maestro's shoe, and said it was holy water.</p>
+  <p>Bella said, <em>Give him his hat.</em></p>
+  <p>They looked at her, and then they told her what she looked like, and what she could do, and how old she was, as if she might not know. But they gave the hat back. The one wearing it put it on the Maestro's head himself, crooked, and patted it, and they went off up the beach toward the Elbo Room with their arms around each other, singing.</p>
+  <p>Bella straightened the cap. Her hands were shaking. The Maestro's were not.</p>
+  <p><em>They're children,</em> he said.</p>
+  <p><em>They're animals.</em></p>
+  <p><em>No. Animals would have more sense.</em> And he held out his hand for the coffee.</p>
+</section>
+
+<section>
+  <h2>III. The Week</h2>
+  <p class="dateline">The card room, Coral Arms</p>
+  <p>The board met that Thursday night instead of Dante. Sol Pomerantz, who had been a cutter in Local 10 and was the president of the co-op, stood at the end of the pinochle table with a copy of the Sun-Sentinel and read out of it. The big schools from the Midwest had their break the next week, all at once. The paper said the next week would be the worst week of the season. Sol said he had talked to a man at the Chamber of Commerce and the man had said the same, and had also said, in a way Sol did not care for, that the students brought a great deal of money into the city.</p>
+  <p><em>So what do we do?</em> said Mrs. Fishbein.</p>
+  <p><em>We do what we did in the shop when the boss went crazy,</em> said Carmela. <em>We keep our heads down until he gets tired.</em></p>
+  <p>They decided it among themselves in twenty minutes, which for that room was a record. For seven days nobody would go out who did not have to. They would bring in groceries on the Sunday and not go out again until the Sunday after. Anybody who had a doctor's appointment would take a taxi from the back door on the side street. They would keep the blinds down on the ocean side. And the Maestro, they all agreed, would not go to the beach. Not at six in the morning, not at any hour. Not for seven days.</p>
+  <p><em>Who's going to tell him?</em> said Sol, and they all looked at Bella.</p>
+  <p>She went up to the second floor and knocked. He was sitting by the window in the dark, as he often did, because a lamp made no difference to him and he said it was a waste of Florida Power and Light. She explained. She told him about the paper and the Midwestern schools and the vote, and that they would bring him his meals, three a day, they had made a list already, he didn't have to do a thing.</p>
+  <p>She expected an argument. He had never missed a morning in fourteen years, not for hurricanes, not for the week his wife was dying, when he had gone at six and come back at seven and sat with her all the rest of the day.</p>
+  <p><em>Va bene,</em> he said. <em>Seven days is nothing. And you, you'll stay in also?</em></p>
+  <p><em>All of us.</em></p>
+  <p><em>Good. Then nobody gets lost.</em></p>
+</section>
+
+<section>
+  <h2>IV. Seven Days</h2>
+  <p class="dateline">Saturday to Saturday</p>
+  <p>They carried his meals up the stairs on trays covered with dish towels, as they had agreed. On Sunday it was Bella's brisket. On Monday it was Carmela's escarole and beans, and Mrs. Fishbein's chicken soup at night, because Mrs. Fishbein believed that the Maestro, being thin, was always one day from death. On Tuesday Angelo Esposito's wife Philomena sent up eggplant, and Sol, who could not cook, sent up a box of rugelach from the bakery on Sunrise and a note in his cutter's square capitals that said STAY INSIDE. The Maestro ate a little of everything, and sent every plate back washed.</p>
+  <p>Outside it was as the paper had said. The cars on A1A did not move at all for whole afternoons, and the students stood up through the sunroofs and on the hoods and shouted from car to car. Someone set up a loudspeaker on a hotel balcony down the block and played the same song by Bruce Springsteen over and over until a policeman went up and took it away, and then someone played it from another balcony. A police helicopter went up and down the beach. On Monday night a boy climbed the Coral Arms' palm tree and could not get down, and the fire department came. On Tuesday the girls on the balcony of the motel next door hung a bedsheet over the rail with words painted on it in red, and the words were about the old people in the Coral Arms, and the Coral Arms read them through the slats of the blinds and did not discuss them.</p>
+  <p>Bella stayed in. She played solitaire and listened to the radio and did not sleep well. The coconut oil came in through the closed windows, through the air conditioning, through the walls. She found herself remembering her father, who had been a shames in a shul on Stone Avenue in Brownsville, and who used to sit at the kitchen table on summer nights, when the boys from the corner were making noise under the windows, and say the verses from Koheles to himself in Hebrew, under his breath, the way another man might count to ten. When she was small she had asked what it meant and he had told her in Yiddish, and when she was older she had looked it up in English in the Jewish Publication Society Bible her brother brought home from school.</p>
+  <div class="verse">
+    <p>The heart of the wise is in the house of mourning; but the heart of fools is in the house of mirth. It is better to hear the rebuke of the wise, than for a man to hear the song of fools. For as the crackling of thorns under a pot, so is the laughter of the fool; this also is vanity.</p>
+    <p>&mdash; Ecclesiastes 7:4–6</p>
+  </div>
+  <p>The crackling of thorns. She had never seen a thorn burn, and she lay awake on the Wednesday night and listened to the laughter come up from the Strip, and thought that her father had been right about the sound of it. It caught fast, and it was loud, and there was nothing in it to cook a pot.</p>
+  <p>On Thursday afternoon her grandson came.</p>
+  <p>She had known he might. Her daughter had written in February that Jason and two boys from his dormitory at the state college in Oneonta were driving down for the break, and that he would surely come by to see his grandmother, and Bella had written back to say she would make a kugel. She heard the buzzer and saw him through the glass of the front door, and she went down herself and let him in. He was nineteen, tall, burned red across the nose and shoulders, in cut-off jeans and nothing else, and he shone with the oil. Two other boys came in behind him and stood in the lobby looking at the pictures of the board presidents on the wall, and one of them laughed at Sol Pomerantz's picture and said something about it, and it was not a kind thing.</p>
+  <p><em>Grandma,</em> said Jason, and hugged her, and she smelled the beer. He wanted to know if they could use her shower. Their motel's water was out. And could they leave a cooler in her refrigerator, because the motel's ice machine was broken, and could they maybe, just for a night or two, sleep on her floor, because the motel was a joke. He told her what the motel was like, and how much they had paid, and what the girls next door had done, and he did not seem to notice what he was saying or who he was saying it to. One of his friends said something to the other about the old ladies in the lobby, low, but not low enough. Jason laughed.</p>
+  <p><em>Grandma, don't be so,</em> he said, when he saw her face, and then he said a word that she had heard on the beach on Tuesday morning, said lightly, said fondly, the way you might tell your grandmother she had a smudge on her cheek.</p>
+  <p>She stood in the lobby of the Coral Arms in her housedress. She thought of Morris, who had carried this boy on his shoulders down the boardwalk at Brighton Beach. She thought of the coffee can by Angelo Esposito's door.</p>
+  <p>She went upstairs and came back down with her purse, and took out a twenty-dollar bill and two fives, and gave the twenty to Jason and a five each to his friends.</p>
+  <p><em>For a better motel,</em> she said. <em>Go.</em></p>
+  <p>He looked at the money and then at her, and for a moment she thought he understood. Then he grinned and kissed her on the cheek and said, <em>Grandma, you're the best,</em> and they went out with their cooler into the noise, and the door swung shut on its slow closer, and the lobby smelled of coconut for an hour.</p>
+  <p>That night it was Bella's turn to take up the Maestro's dinner. She brought him the kugel. He was sitting at the window in the dark with the blinds open an inch, listening.</p>
+  <p><em>Something happened,</em> he said, before she had put the tray down.</p>
+  <p>She told him. She had not meant to cry and did not, quite. He listened to all of it with his head a little on one side, the way he listened to the ocean, and when she was finished he did not tell her what it meant. He asked whether the kugel had raisins in it. She said it did. He said good, and ate it all.</p>
+  <p>On Friday night there were sirens at two in the morning and the next day the building heard that a boy from Indiana had fallen from a fourth-floor balcony at a hotel on the next block, trying to step across to the balcony beside it. He had lived. People said he had landed in a hedge. Nobody in the Coral Arms said anything about it at all, not even Carmela, and on Saturday the rain came in off the ocean in the afternoon and drove everyone off the beach, and in the evening, when it stopped, the cars began to leave. Bella heard them going all night, north on A1A toward the interstate, honking, the radios fading off one after another toward Ohio.</p>
+</section>
+
+<section>
+  <h2>V. The Eighth Day</h2>
+  <p class="dateline">Sunday morning</p>
+  <p>At half past five on Sunday Bella woke and did not know why, and then she knew. It was quiet.</p>
+  <p>She dressed. She did not put on a housedress. She put on her good navy blue with the white collar that she wore to Morris's grave, and her straw hat, and went down. Carmela was already in the lobby in black with a cake box tied with string. Sol was there in pressed slacks and a jacket, holding four folding chairs under each arm like a cutter carries bolts. Angelo and Philomena came down the stairs with a coffee urn between them from the card room, the big one they used for funerals. Mrs. Fishbein had a tablecloth. They kept coming down, out of the elevator and down the stairs, in their good clothes, as if somebody had sent out invitations, though nobody had. Thirty, forty of them. Women in hats. Men who had not worn ties since the last bar mitzvah. Every one of them carrying a chair.</p>
+  <p>Bella went up for the Maestro. He was waiting, dressed, with his cap on and his cane across his knees.</p>
+  <p><em>I heard,</em> he said. <em>They're gone.</em></p>
+  <p>They crossed A1A all together, slowly, at the pace of the slowest, which was his. There were no cars. The road was strewn with cans and paper cups and a single pink sandal and a great many cigarette butts, and the city's sweeper truck was working its way up from Las Olas with its brushes turning. The beach was worse. Cans lay half buried all the way down to the water, and someone had built a car out of sand in the night with a real steering wheel stuck in it, and the gulls were going over the trash in rows, as methodical as finishers. They carried the chairs down through it. At the hard sand by the tide line Bella set the green and white chair where it always went, and the others opened theirs in a half circle around it, and spread Mrs. Fishbein's tablecloth on the sand for the cake and the mandelbrot and the coffee, and the Maestro sat down in the middle, and the sun came up out of the Atlantic.</p>
+  <p>They told him about the week. Everybody had a piece of it. Sol told him about the bedsheet on the balcony and what was painted on it, which nobody had told him before. Angelo told him how much money had gone out of the coffee can; he had written it down; it was sixty-four dollars. Mrs. Fishbein said she had not slept. Carmela said her ears had nearly burst. They told him nobody out there had respected anybody, not the police, not the priest, not their own mothers, not themselves. They told him it was a mercy he had not been out in it. Bella did not tell about Jason. She did not have to; she saw that Carmela knew, and that probably the whole building knew, and that they were not going to say anything, and she loved them for it.</p>
+  <p>The Maestro listened to all of it with his hands folded on the cane. When they were done, he was quiet for a while. A wave came up the sand, thin as a sheet of paper, and went back.</p>
+  <p><em>Così fanno,</em> he said. <em>That's how they do. It's what people do when they think there's plenty of time. They have their fathers' money, and they have their health, and they think they have time, all the time in the world, and so they throw it in the street like the cans.</em> He turned his face toward the sound of the sweeper truck on A1A. <em>I did it too, in Carrara. Not so loud.</em></p>
+  <p><em>And us?</em> said Sol.</p>
+  <p><em>Us, we have no money and we know we have no time. So we keep the other thing.</em> He was quiet a moment. <em>Do you know what I did all week, in the dark, in my chair? I listened. The same as here. Through the window you can hear the ocean under the radios, if you attend to it. Under the Springsteen. Under the helicopter. It never stopped once. All week, under everything. It was there the whole time.</em></p>
+  <p>Then he said it in Italian, for the ones who had been his girls, and then in English, for the rest, in the voice he used on Thursdays. He said it was from the fourth terrace of the mountain of Purgatory, where the souls who had been slothful in life, who had loved too little and too slowly, ran day and night around the mountain and would not stop, and called out to each other as they ran.</p>
+  <div class="verse">
+    <p>“Quick! quick! so that the time may not be lost<br>By little love!” forthwith the others cried,<br>“For ardour in well-doing freshens grace!”</p>
+    <p>&mdash; Dante, Purgatorio XVIII, 103–105</p>
+  </div>
+  <p><em>They were the lazy ones once,</em> he said. <em>Now they are the ones who run. That is what attention is. It's the only treasure that you keep by spending it.</em></p>
+  <p>Then he said one more, which some of the women in the circle had heard him say in a cold classroom on West Thirty-Fifth Street fifty years before, to girls who had been sewing since they were twelve, and which a few of them now said along with him, in Italian, under their breath. He said Ulysses said it to his sailors, and that Ulysses was a liar and in Hell and it was true anyway.</p>
+  <div class="verse">
+    <p>Consider ye the seed from which ye sprang;<br>Ye were not made to live like unto brutes,<br>But for pursuit of virtue and of knowledge.</p>
+    <p>&mdash; Dante, Inferno XXVI, 118–120</p>
+  </div>
+  <p>Then he stopped talking and turned his face to the water, and so did they.</p>
+  <p>The people who were in that half circle on the sand told it afterward the same way, and they were not people who agreed about anything. They said that for a while, it might have been the length of a canto, they heard the ocean the way he must have been hearing it every morning for fourteen years. Each wave by itself. The long breath of it drawing back over the shells, and the small sounds inside the large sound, the hiss and the tick and the turning-over, and a gull, and somebody's coffee cup set down on the tablecloth, and their own breathing, and the Maestro's. Sol Pomerantz, who had been deaf in his left ear since a press blew a gasket in 1948, said he heard it in both ears. Mrs. Fishbein said she was not afraid of anything at all, for the first time since she was a girl, and that it lasted the whole day. Carmela said nothing about it for a year, and then one Thursday told Bella she had felt as if she had been threading a needle her whole life without looking and had just, that morning, looked.</p>
+  <p>Then the sweeper truck came level with them on A1A, and the spell, if it was one, went on anyway, quieter, and they ate the cake.</p>
+</section>
+
+<section>
+  <h2>VI. The Tracks</h2>
+  <p class="dateline">The Coral Arms · 1985–1986</p>
+  <p>That year the mayor went on morning television and told the students of America that they were not welcome in Fort Lauderdale anymore, and the city commission banned open containers on the beach side of A1A and overnight parking on the beach. The police made more than two thousand arrests enforcing it. The spring after that there were fewer students, and fewer the year after, and within a few years they had mostly gone on to Daytona and Panama City and Mexico, where the drinking age was lower. The bar owners on the Strip complained to the paper. The Coral Arms did not.</p>
+  <p>Jason telephoned in May. He said he was sorry about the money. He said he was going to pay it back, and Bella said to keep it and buy a book, and he laughed and said, okay, Grandma, what book, and she told him Dante, the Longfellow, and to read the part about the mountain. She did not know if he did. He did send her a postcard of the Oneonta bus station, which was a joke, and she put it on the refrigerator.</p>
+  <p>The Maestro died in February, in his chair by the window, in the dark, at eighty-eight. He had told Carmela where his papers were and what he wanted, which was nothing, no service, no priest, and his ashes in the ocean, which Angelo Esposito saw to from a rented boat, three miles out, having left the marina at six o'clock in the morning with eleven old men and women in good clothes aboard, all of them seasick. Thursday nights went on in the card room. Carmela took the Inferno, and Sol, who it turned out had been listening all along, took the Purgatorio. Nobody would take the Paradiso, and they read it aloud by turns.</p>
+  <p>Bella went on carrying the chair. Every morning at a quarter to six she took it out of the hall closet and carried it down the stairs and across A1A and set it on the hard sand where the soft sand ended, and sat in it herself, in her housedress, with her hands folded, and listened. When she got up an hour later and folded the chair and carried it back, the two aluminum legs at the front left two short tracks in the wet sand, side by side, and she would stop at the top of the beach and turn around and watch the water come up and fill them, and smooth them over, and go back.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Fools follow after vanity, men of evil wisdom. The wise man keeps earnestness as his best jewel.<cite>Dhammapada 26, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Follow not after vanity, nor after the enjoyment of love and lust! He who is earnest and meditative, obtains ample joy.<cite>Dhammapada 27, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the city of Sāvatthī keeps a seven-day Fools&rsquo; Festival, when revelers smear themselves with ash and cow-dung and stand in doorways shouting coarse abuse at everyone, kin, friends and monks alike, until people pay them a coin to go away. The Buddha&rsquo;s lay followers ask him to stay at the monastery for the week, send food out to the monks, and do not leave their own houses. On the eighth day they bring him into the city with great offerings and tell him how their ears nearly burst. He answers that fools behave this way, and that the wise guard heedfulness (<i>appamāda</i>, attention, earnestness) as their greatest treasure, and many who hear him enter the stream. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-04.htm">the full commentary story</a>.</p>
+    <h3>Fort Lauderdale, 1985</h3>
+    <p>Fort Lauderdale&rsquo;s <a href="https://en.wikipedia.org/wiki/Spring_break">spring break</a> began when the Colgate University swim team came to train there over Christmas in 1934. The 1960 novel and film <a href="https://en.wikipedia.org/wiki/Where_the_Boys_Are">Where the Boys Are</a>, which featured the <a href="https://en.wikipedia.org/wiki/Elbo_Room">Elbo Room</a> on the corner of Las Olas and the beach, brought the crowds, and by the early 1980s the city drew 250,000 to 350,000 students a season. Florida&rsquo;s drinking age was 19 until the federal <a href="https://en.wikipedia.org/wiki/National_Minimum_Drinking_Age_Act">National Minimum Drinking Age Act</a> pushed it to 21. In 1985 Mayor <a href="https://en.wikipedia.org/wiki/Robert_A._Dressler">Robert Dressler</a> said on <i>Good Morning America</i> that students were no longer welcome; the city banned open containers on the beach side of A1A and overnight beach parking, and enforcement brought more than 2,500 arrests. By 1989 about 20,000 students came.</p>
+    <p>Many of the retirees along the Florida coast had spent their working lives in New York&rsquo;s garment trade and in the <a href="https://en.wikipedia.org/wiki/International_Ladies_Garment_Workers_Union">International Ladies&rsquo; Garment Workers&rsquo; Union</a>, which ran classes, a press and a Pocono resort, Unity House, for its members. Many of its Jewish dressmakers belonged to Local 22; its Italian dressmakers formed Local 89 in 1919, numbered for the year of the French Revolution and led for decades by the anti-fascist <a href="https://en.wikipedia.org/wiki/Luigi_Antonini">Luigi Antonini</a>. The Maestro&rsquo;s Dante is the <a href="https://en.wikipedia.org/wiki/Henry_Wadsworth_Longfellow">Longfellow</a> translation of 1867; the running souls of the slothful are on the fourth terrace of the <a href="https://en.wikipedia.org/wiki/Purgatorio">Purgatorio</a>, canto XVIII.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Fools&rsquo; Festival from the Dhammapada commentary (verses 26 and 27). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-04.htm">The original</a>. Scripture from the Jewish Publication Society Tanakh (1917) and Dante&rsquo;s <i>Divine Comedy</i> in Henry Wadsworth Longfellow&rsquo;s translation (1867). Written by Claude Opus 5.5.
+  <div class="pager"><a href="little-wayland.html">&larr; Little Wayland</a><a href="index.html">All stories</a><a href="the-counting-tower.html">The Counting Tower &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now(), bubbles = [], lastReach = 0, receding = false;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  var PERIOD = 16000;
+  function reach(ph) {
+    // swash runs up quickly, lingers, slides back slowly
+    if (ph < 0.3) { var a = ph / 0.3; return 1 - Math.pow(1 - a, 3); }
+    if (ph < 0.42) return 1;
+    var b = (ph - 0.42) / 0.58; return 1 - b * b * (3 - 2 * b);
+  }
+  function edge(x, ph) {
+    return Math.sin(x * 0.011 + ph * 2.1) * 7 + Math.sin(x * 0.027 + 1.7) * 4 + Math.sin(x * 0.053 + ph * 5) * 2;
+  }
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    var ph = reduce ? 0.36 : ((now - t0) % PERIOD) / PERIOD;
+    var r = reach(ph);
+    var base = H + 4, top = base - (H * 0.07 + H * 0.12 * r);
+    // wet sand darkening that the water leaves behind
+    var wetTop = base - (H * 0.07 + H * 0.12);
+    var g0 = ctx.createLinearGradient(0, wetTop, 0, base);
+    g0.addColorStop(0, 'rgba(150,128,98,0)');
+    g0.addColorStop(1, 'rgba(150,128,98,0.10)');
+    ctx.fillStyle = g0; ctx.fillRect(0, wetTop, W, base - wetTop);
+    // the water sheet
+    ctx.beginPath(); ctx.moveTo(0, base);
+    for (var x = 0; x <= W + 10; x += 10) ctx.lineTo(x, top + edge(x, ph));
+    ctx.lineTo(W, base); ctx.closePath();
+    var g = ctx.createLinearGradient(0, top - 10, 0, base);
+    g.addColorStop(0, 'rgba(255,255,255,0.55)');
+    g.addColorStop(0.08, 'rgba(214,232,226,0.30)');
+    g.addColorStop(1, 'rgba(120,170,165,0.16)');
+    ctx.fillStyle = g; ctx.fill();
+    // lace line at the leading edge
+    ctx.beginPath();
+    for (var x2 = 0; x2 <= W + 10; x2 += 6) {
+      var y = top + edge(x2, ph) + Math.sin(x2 * 0.19) * 1.2;
+      if (x2 === 0) ctx.moveTo(x2, y); else ctx.lineTo(x2, y);
+    }
+    ctx.strokeStyle = 'rgba(255,255,255,0.8)'; ctx.lineWidth = 1.4; ctx.stroke();
+    // leave bubbles as the water draws back
+    if (!reduce) {
+      if (r < lastReach - 0.0005 && Math.random() < 0.5) {
+        var bx = Math.random() * W;
+        bubbles.push({ x: bx, y: top + edge(bx, ph) - 2, a: 0.6, r: 0.8 + Math.random() * 1.8 });
+      }
+      lastReach = r;
+    }
+    for (var i = bubbles.length - 1; i >= 0; i--) {
+      var b = bubbles[i];
+      if (!reduce) b.a -= 0.004;
+      if (b.a <= 0) { bubbles.splice(i, 1); continue; }
+      ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255,255,255,' + b.a + ')'; ctx.lineWidth = 0.8; ctx.stroke();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size();
+  if (reduce) draw(0); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

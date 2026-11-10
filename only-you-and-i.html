@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Only You and I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a dark town where a red rumor passes from point to point and fades; datelined sections. */
+  --ground: #121013;
+  --ground-2: #1c181b;
+  --paper: #e8e2dc;
+  --paper-dim: #a39a96;
+  --red: #cf4a3a;
+  --ember: #e07a4f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #24161a 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(232,226,220,.2); }
+.series a:hover { color: var(--red); }
+a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--red); text-wrap: balance; text-shadow: 0 0 28px rgba(207,74,58,.22); }
+.epigraph { border-left: 1px solid rgba(207,74,58,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--red); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--red); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(28,24,27,.75); border: 1px solid rgba(232,226,220,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--ember); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(232,226,220,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--red); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--red); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--red); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--red); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--red); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(28,24,27,.75); border-left: 2px solid var(--red); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 13.9 &middot; Ciñcā</span></nav>
+<header>
+  <h1>Only You and I</h1>
+  <div class="epigraph">Thou shalt not bear false witness against thy neighbour.<br>&mdash; Exodus 20:16</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Se konsa m tande l,</span> on the south side of Springfield.</p>
+
+<section>
+  <h2>I. Soup Joumou</h2>
+  <p class="dateline">Springfield, Ohio &middot; January 1, 2024</p>
+  <p>On New Year's morning there was snow on the cars and the fellowship hall of the Methodist church on the south side smelled of squash and beef and scotch bonnet, because Frè Dieudonné had been up since four making soup joumou in the church's two big kettles, the way every Haitian house makes it on the first of January, for independence, because, the way the old people tell it, under the French the slaves cooked that soup for their masters and were not allowed to taste it.</p>
+  <p>By noon there were three hundred people in a hall built for a hundred and twenty. They stood along the walls with their coats on and their bowls in their hands. They came from the two-bedroom houses where fifteen of them lived on air mattresses waiting for work permits, and from the night shifts at the auto parts plants and the Amazon sorting center and the meatpacking plant, and from the apartments out by the highway where the landlords had doubled the rent. Some of them had been in Springfield three years and some three weeks. Many had come the long way, through Brazil or Chile, where they had gone after the earthquake and stayed ten years and learned Portuguese or Spanish and then walked north through nine countries. They ate standing up. Mrs. Marjorie Hale, who was seventy-eight and the head of what was left of the congregation, thirty-one members on a good Sunday, sat in a folding chair by the coffee urn with a bowl in her lap and said it was the best soup she had ever eaten in that building, and she had eaten at every potluck since 1961.</p>
+  <p>Frè Dieudonné did not make a speech. He was sixty-three, small and very dark and very neat, with grey in his hair, and he had taught at a brothers' school in Port-au-Prince for thirty-one years until the gangs burned it, and in all that time he had never married. People said he had made a private vow. He did not say. In Springfield he worked from midnight to seven in the morning on the sanitation crew at the meatpacking plant, hosing blood off the steel in the steam and the cold, and in the afternoons he sat at a long table in the fellowship hall and helped people with their papers.</p>
+  <p>That was how it started. He read English and French and wrote a clear hand, and he filled out the forms for nothing. Work permits, asylum, the parole forms, school enrollment, Medicaid, the letters from the electric company. Then he started a class on Tuesday nights to teach grown people to read Creole, because half of them had never been taught to read their own language. Then on Sunday afternoons, when the Methodists had gone home, he began reading the Bible out loud in the hall and talking about it, plainly, for an hour. He took no offering. When people pushed money at him he told them to send it home. He lived in a back room of the empty parsonage next door, which Mrs. Hale let him have for mowing the church lawn and shoveling the walk.</p>
+  <p>By that New Year there were three hundred people coming on Sunday afternoons, and some of them had stopped going anywhere else.</p>
+</section>
+
+<section>
+  <h2>II. Mirlande</h2>
+  <p class="dateline">A storefront on East Main Street &middot; January</p>
+  <p>There were a dozen Haitian churches in Springfield by then, most of them in rented rooms, and two of them had been doing well. Pastè Wesner had a congregation of four hundred in a former tire store on East Main, with a sound system and a praise band and a sign in the window in Creole and English. Pastè Lucner had two hundred in a Pentecostal hall he rented on Sunday afternoons. And there was a man who called himself Pwofèt Fanfan, who prayed for people on Facebook Live every night at nine and had twelve thousand followers and a Cash App.</p>
+  <p>All three of them, in the year before, had also done a good business in papers. Two hundred dollars to fill out an asylum application. A hundred and fifty for the work permit. A blessing on the envelope for twenty more. Then the people stopped coming. The tithes went down. Pastè Wesner's band had to let its drummer go. In January the three of them met in the back room of the tire store, under the fluorescent light, with the snow coming down past the window, and sat for a long time not saying what they had come to say.</p>
+  <p>Then Pastè Lucner said it. <em>He fills out the forms for free. He reads the Bible for free. Who can compete with free? Is he the only man of God in Springfield?</em></p>
+  <p><em>He's never been married,</em> said Pwofèt Fanfan. <em>Sixty-three years old, never married, lives alone in a back room. You think about that.</em></p>
+  <p>They thought about it. And all three of them, at the same moment, thought of Mirlande.</p>
+  <p>Mirlande Augustin was twenty-four and sang the solos at Pastè Wesner's church, and when she sang the whole tire store went still. She had grown up in Cap-Haïtien and gone to Chile at fourteen with an aunt and worked eight years in a fruit-packing plant outside Santiago and come north through the Darién with a baby who died in Panama. People said that light came off her. People said she could stand at the back of a room and the room would turn around.</p>
+  <p>The next Sunday after the service she came to the back room as she always did, to greet the pastor, and stood in the doorway, and Pastè Wesner did not look up from his papers. Pastè Lucner was there too, and he did not look up either.</p>
+  <p><em>Pastè,</em> she said. <em>What did I do?</em></p>
+  <p>Nobody answered.</p>
+  <p><em>Pastè. Tell me. What did I do wrong?</em></p>
+  <p>Nobody answered. The third time she said it her voice cracked. <em>I'm asking you. What's wrong with me? Why won't you talk to me?</em></p>
+  <p>Then Pastè Wesner looked up. <em>Sè Mirlande. You don't know what Frè Dieudonné is doing to us? Taking the bread out of our mouths? Taking the sheep out of the fold?</em></p>
+  <p><em>I don't know him. I've never seen him.</em> She looked from one to the other. <em>Is there something I can do?</em></p>
+  <p><em>If you love this church,</em> said Pastè Wesner, <em>you can help us. You can put a stop to him.</em></p>
+  <p>She was quiet a moment.</p>
+  <p><em>All right, Pastè,</em> said Mirlande. <em>Leave it to me. Don't worry about any of it.</em> And she went out.</p>
+</section>
+
+<section>
+  <h2>III. The Red Dress</h2>
+  <p class="dateline">The south side &middot; winter into summer</p>
+  <p>She had a red dress, a long one, and a red wool coat she had bought at the Goodwill. On Sunday evenings, when the three hundred people were coming out of the fellowship hall into the parking lot with their Bibles under their arms, Mirlande would be walking in, against the crowd, in the red coat, with a bunch of grocery-store roses and a little bottle of perfume in her hand.</p>
+  <p><em>Where are you going this time of night, Sè Mirlande?</em></p>
+  <p><em>What's it to you where I'm going?</em></p>
+  <p>She went around the side of the church toward the parsonage and did not come back. She spent those nights in Pastè Wesner's car, parked two streets over, with the engine running for the heat. And on Monday mornings a little after seven, when people were coming to the parsonage door to catch Frè Dieudonné on his way home from the plant and ask him to look at a letter before they went to work, there was Mirlande in the red coat walking the other way, down the parsonage steps.</p>
+  <p><em>Where did you sleep last night, Sè Mirlande?</em></p>
+  <p><em>What's it to you where I slept?</em></p>
+  <p>She did it for six weeks. Frè Dieudonné was at the plant every one of those nights, hosing the kill floor, with forty men who could have said so. Nobody thought to ask them.</p>
+  <p>At the end of six weeks, when somebody asked her where she had slept, she smiled and said, <em>In the parsonage. With Frè Dieudonné.</em></p>
+  <p>It went into the WhatsApp groups that afternoon. By Wednesday everybody in Springfield who spoke Creole had heard it, and some of them had heard it four times. Most people did not believe it. But it was in them now, the way a splinter is in you, and every time they saw him at the long table with his reading glasses on, filling out somebody's form, they thought of it, and wondered, and were ashamed of wondering.</p>
+  <p>That spring there was another story going around Springfield, in English, on Facebook. Somebody said three Haitian men had been seen in the park grabbing a duck and a goose. Nobody had seen it. Nobody ever found who said it. It went around anyway, the way those things do, and people who had never met a Haitian repeated it at the Kroger, and Haitians heard them.</p>
+  <p>In April Mirlande began to wrap a folded towel around her belly under the red dress. In May it was a small pillow. She stopped singing solos. She went around the south side saying she was carrying Frè Dieudonné's child, and the date she gave was the night of a Monday in February when he had been on the kill floor until seven. It went into the WhatsApp groups again, with a photograph of her from the side.</p>
+  <p>Once, in the line at the long table, a woman from Gonaïves with a baby on her hip asked him straight out whether it was true. He looked at her over his reading glasses for a long moment, the way he used to look at a boy in the back row who had asked a question to make the others laugh, and then he asked her which form she had come about, and she showed him, and he filled it out.</p>
+  <p>Frè Dieudonné kept on. He filled out the forms. In June, when the government extended the protected status for Haitians and opened it to everyone who had come before the third of that month, there were lines out the fellowship hall door into the parking lot all summer, people with their passports in plastic bags, and he sat at the long table from two in the afternoon until eleven at night and then went to the plant. Some people stopped coming. Most did not. Mrs. Hale heard the story from a woman at the Kroger and told her to go to hell, which was the first time anybody at the Methodist church had heard her say the word.</p>
+  <p>In August, a dozen men in red shirts, with their faces masked, marched through downtown Springfield carrying rifles and swastika flags, on a Saturday when the town had street events going downtown, shouting that the Haitians should go home. Mothers kept their children in. People missed shifts rather than wait at the bus stop. That Sunday there were fewer people in the fellowship hall, and the ones who came sat close.</p>
+  <p>That was the week Mirlande went to Pastè Wesner's deacon, who worked on a loading dock and had a saw, and had him cut a disk out of a pallet, a round of plywood the size of a serving tray, and sand the edges. She tied it against her belly with twine, under the red dress, with a towel between. Then, one night in her room, with the door locked, she took the wooden pilon her aunt had brought from Cap-Haïtien for pounding plantain and garlic, and beat her own hands and her feet and her back with it until they were black and swollen, so that she would look like a woman near her time.</p>
+</section>
+
+<section>
+  <h2>IV. Only You and I</h2>
+  <p class="dateline">The fellowship hall &middot; Sunday, September 8, 2024</p>
+  <p>The side door of the fellowship hall was propped open with a folding chair that Sunday to let in some air, because two hundred people in a room built for a hundred and twenty make their own weather. Frè Dieudonné sat on a stool at the front with his reading glasses on and the Bible open on his knee and was talking about the widow's mite, plainly, the way he talked about everything, when Mirlande came in through the side door.</p>
+  <p>She walked slowly, with one hand at the small of her back, the way women walk at nine months, and the hall went quiet around her. She came up the aisle between the folding chairs and stood in front of him. Her face was puffed. Her hands were swollen and dark. Under the red dress her belly was high and round.</p>
+  <p><em>Great teacher,</em> she said, loud enough for the back row. <em>Look at all these people you have. Look how they come to hear you. Your voice is so sweet. Your mouth is so soft.</em> She let that sit. <em>And this is your child, and my time is any day now. And you haven't found me a midwife. You haven't found me a room. You haven't brought me so much as a bottle of oil or a can of milk. And if you won't do it yourself you could say to somebody, to Madame Hale, to the men with the restaurants, to any of the rich ones who sit in the front here, do what needs doing for this girl. You haven't said one word. You knew how to take your pleasure. You don't know how to take care of what you made.</em></p>
+  <p>Nobody moved. Somebody's baby started to fuss and was quieted. Mrs. Hale, in the back row, who understood about one word in five of Creole, understood all of it.</p>
+  <p>Frè Dieudonné took off his reading glasses and closed the Bible on his finger. And then for the first and only time anybody could remember, he raised his voice, and it filled the hall to the ceiling tiles.</p>
+  <p><em>Sè m. My sister. Whether what you are saying is true or a lie, there are only two people in the world who know it. You and I.</em></p>
+  <p><em>That's right,</em> said Mirlande. <em>Only you and I. So who's going to decide?</em></p>
+  <p>That was when the mice came.</p>
+  <p>The fellowship hall had always had mice. Every old church in Springfield had them, and Mrs. Hale had given up on traps in 1990. Afterward, people agreed there were four. They came out from under the stage, all together, small and brown, and ran straight across the linoleum through two hundred pairs of feet and up under the hem of the red dress, and a woman in the front row screamed. Nobody saw what they did there. It took no time at all. Then they were gone again under the stage.</p>
+  <p>And a wind came in through the propped side door. It was a hot, sudden wind, the kind that comes before a storm, though nobody saw any storm that day. It came straight across the hall and lifted the red dress up to Mirlande's waist, and everyone in the front three rows saw the twine hanging cut, and the towel, and the round of plywood, which slid down her legs and fell edge first onto her feet.</p>
+  <p>She was wearing sandals. The plywood came down on her toes and cut them, both feet, to the bone. There was a great deal of blood on the linoleum.</p>
+  <p>For a moment nobody did anything. Then the hall came up out of its chairs.</p>
+  <p>People who had held their tongues for eight months, who had read it in the WhatsApp groups and wondered and been ashamed of wondering, came up out of their chairs at her, shouting. A man spat on her. Then a woman did. Then somebody threw a Bible, and somebody threw a shoe, and a cup of coffee, and Mirlande turned and ran out the side door the way she had come in, on her cut feet, leaving blood on the steps, and they went after her into the alley behind the church, some of them, and started picking up gravel. Frè Dieudonné was shouting at them to stop. Mrs. Hale was shouting at them to stop. Nobody was listening to either one of them.</p>
+  <p>Mirlande got as far as the corner of the alley, where it came out between the church and the parsonage, and stopped, because she could not see where to go.</p>
+  <p>And there, by every account that was ever given of it, the ground opened.</p>
+  <p>It opened under her and nowhere else. The people at the front of the crowd were close enough to touch her, and they said afterward that the asphalt simply was not there anymore, under her feet, and there was fire in the place where it had been, a red fire, and a heat that made them stagger back with their arms over their faces, and Mirlande went down into it in her red dress like somebody being wrapped up in a red blanket, and did not cry out. Then the ground closed. The asphalt was there, cracked the way it had always been cracked, with the same weeds in the cracks. There was gravel in people's hands. There was blood on the church steps and a smell of burning and nothing else.</p>
+  <p>Several people had been filming on their phones. What the phones show is no help to anybody. A bright square, then the alley, with nobody in it.</p>
+  <p>Her aunt filed a missing-person report on the Tuesday. Two officers came and walked up and down the alley and looked at the asphalt and wrote something down, and asked a great many questions, and went away. The round of plywood stayed on the floor of the fellowship hall until Wednesday, when Mrs. Hale picked it up with a dish towel and put it in the dumpster, and scrubbed the linoleum herself.</p>
+</section>
+
+<section>
+  <h2>V. Krik? Krak!</h2>
+  <p class="dateline">The week of the lie &middot; September 9&ndash;15</p>
+  <p>On Monday the other story came back.</p>
+  <p>It came back bigger. The duck and the goose had turned into cats and dogs. Somebody on the internet said the Haitians in Springfield were eating people's pets, and somebody bigger said it again, and on Tuesday night a man running for president said it on television, at the debate, to the whole country. On Thursday morning somebody emailed bomb threats to City Hall and to the schools, and they emptied the buildings and sent the children home, and the Haitian children walked home past the police dogs. On Friday it happened again. That week a sign turned up in the grass of a city park, professionally lettered, PLEASE DO NOT EAT THE DUCKS, and on Friday the park workers took it down. People did not go to work. People stayed off the porch.</p>
+  <p>Pastè Wesner's church had forty people that Sunday. Pastè Lucner's had eleven. Pwofèt Fanfan did not go live on Facebook at all that week, or the next, and the Cash App went quiet, and by Christmas he had moved to Indiana.</p>
+  <p>The fellowship hall was full. There was a police car parked out front, which Mrs. Hale had asked for. People came in and sat close and did not say much. When it was time, Frè Dieudonné did not open the Bible. He sat on his stool and looked out at them, and then he said what the old people say before a story.</p>
+  <p><em>Krik?</em></p>
+  <p>There was a silence, because nobody had expected it. Then from the back an old woman said it. <em>Krak!</em> And then the whole hall said it. <em>Krak!</em></p>
+  <p><em>There was a king,</em> said Frè Dieudonné, <em>who had a son, a good boy, and the boy's mother died, and the king took a young wife. And the young wife looked at the son. And one day when the king was away she said to the son, come here to me. And the boy said, no, you are my father's wife. So she scratched her own face and tore her own dress and went to the king crying and said, your son did this to me because I wouldn't lie down with him.</em></p>
+  <p><em>And the king believed her. He didn't ask anybody. He didn't look for himself. He took his son up on the cliff over the sea and threw him off.</em></p>
+  <p><em>But there was an old sea turtle down there in the water, as big as a fishing boat. And the turtle caught the boy on its back and carried him away to its island, and the turtles made him a king there, and gave him half of everything they had. He lived with them a year. Then he said, I thank you, but I want to go up into the mountains and pray. So he went up into the mountains, and you know what they say. Dèyè mòn, gen mòn. Behind the mountains, more mountains. He went up behind all of them, and lived there alone, and prayed, and got old.</em></p>
+  <p><em>One day a charcoal burner came up the mountain and saw him and went down and told the king. And the king climbed all the way up there, an old man himself by then, and found his son, and fell on the ground and cried. And he said, come home. Be king. Take all of it. And the son said, no, Papa. I don't want it. But you go home and rule right. Don't decide a thing you haven't seen with your own eyes. And the king went down the mountain crying, and he asked his men, whose fault was it that I lost a son like that? And they said, your wife's. So he took her up on the same cliff, and threw her off the same way. And there was no turtle for her.</em></p>
+  <p><em>And who was the son?</em> said Frè Dieudonné. <em>In those old stories it's always the same boy. And who was the wife? It's always the same girl. She's been doing this a long time. And I was there, and they gave me a kick that sent me all the way here to tell it to you.</em></p>
+  <p>Some people laughed, because that is how the old stories end, and it was the first time anybody in the hall had laughed in a week. Then they were quiet again.</p>
+  <p><em>Here is what I know about it,</em> said Frè Dieudonné. <em>A person who will tell one lie like that, a lie all the way through, has stopped believing that anybody is watching. Not God. Not anybody. And after that there is nothing that person won't do.</em> He opened the Bible then, his old French one with the cracked spine, and read it to them, and then, because Mrs. Hale was sitting in the back row in her cardigan, he read it again from the English one she had given him.</p>
+  <div class="verse">
+    <p>Le faux témoin ne restera pas impuni, Et celui qui dit des mensonges périra.</p>
+    <p>A false witness shall not be unpunished, and he that speaketh lies shall perish.</p>
+    <p>&mdash; Proverbes 19:9 (Louis Segond) &middot; Proverbs 19:9 (King James)</p>
+  </div>
+  <p>A young man near the front asked him about the other liars. The ones on television.</p>
+  <p>Frè Dieudonné closed the Bible on his finger.</p>
+  <p><em>Same verse,</em> he said. <em>It doesn't say when.</em></p>
+</section>
+
+<section>
+  <h2>VI. A Saucer</h2>
+  <p class="dateline">The fellowship hall &middot; that autumn</p>
+  <p>The Methodists voted in October to give the Haitians the use of the sanctuary as well as the hall, since there were thirty-one of them and three hundred of the others. Mrs. Hale made the motion. It passed thirty to one.</p>
+  <p>The lines for the papers went on all that fall, and Frè Dieudonné sat at the long table in the afternoons and went to the plant at midnight, and slept in the mornings in the back room of the parsonage, where anybody who wanted to could look in the window and see him sleeping alone in his clothes with his shoes on the floor beside the bed, and some people did.</p>
+  <p>Mrs. Hale said one evening that she would call the exterminator about the mice in the hall, now that there were so many people eating in there on Sundays. Frè Dieudonné asked her not to. She looked at him over her glasses for a while, and then said all right.</p>
+  <p>So after the soup on Sundays, when the folding chairs had been stacked and the kettles washed and the floor mopped, he would take a little rice and beans from the bottom of the pot and put it in a saucer, and set the saucer on the linoleum by the baseboard under the edge of the stage, where the four of them had come out. In the mornings, when he came off his shift and let himself in to start the coffee, the saucer was always clean.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If a man has transgressed one law, and speaks lies, and scoffs at another world, there is no evil he will not do.<cite>Dhammapada 176, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, rival ascetics in Sāvatthī lose their alms and honor as the Buddha's following grows, and they persuade Ciñcā, a beautiful young woman of their own order, to disgrace him. For months she walks toward his monastery in the evening in a red cloak, carrying perfume and flowers, sleeps at the rivals' place, and walks back in the morning, telling anyone who asks that it is none of their business; then she says she spends her nights with him. She binds cloths around her belly, then a disk of wood, bruises herself with an ox's jawbone, and accuses him before the whole assembly of fathering her child and abandoning her. He answers that only the two of them know whether it is true. The god Sakka sends four young gods as mice to gnaw through the cords, the wind lifts her cloak, and the disk falls and cuts off her toes. The crowd spits on her and drives her out with clods and sticks, and the earth opens and she is swallowed by fire &ldquo;as if wrapped in a scarlet blanket.&rdquo; The Buddha tells the monks it is not the first time: in a former life, as a queen, she falsely accused a virtuous prince who had refused her, and the king threw him from a cliff; the prince was saved by a serpent king, became a hermit, and refused the throne when his father came to him, and the king threw the queen from the same cliff. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-09.htm">the full commentary story</a>.</p>
+    <h3>Springfield, Ohio, 2024</h3>
+    <p>Haitian immigrants began arriving in <a href="https://en.wikipedia.org/wiki/Springfield,_Ohio">Springfield</a>, an industrial city of about 59,000, around 2017, recruited to fill jobs in factories, warehouses and food processing. By 2024 there were an estimated 12,000 to 20,000 of them, most living in the country legally under humanitarian parole or <a href="https://en.wikipedia.org/wiki/Temporary_protected_status">Temporary Protected Status</a>, which the federal government extended and redesignated for Haiti in June 2024. Many Haitians who came north in those years had first spent years in Brazil or Chile after the 2010 earthquake. Every January 1, Haitian households mark independence with <a href="https://en.wikipedia.org/wiki/Soup_joumou">soup joumou</a>, the squash soup that, in the story Haitians tell, enslaved people were forbidden to eat under French rule.</p>
+    <p>In March 2024, unfounded rumors began that Haitians were taking ducks and geese from city parks. On August 10 about a dozen members of a neo-Nazi group marched through downtown with swastika flags. In early September a secondhand Facebook post claiming Haitians were eating pets went viral; on September 9 the Republican vice-presidential nominee repeated it, and on September 10 the presidential nominee repeated it in a televised debate. City, county and police officials said there was no evidence for any of it. Beginning September 12, Springfield received dozens of emailed bomb threats that emptied City Hall, schools and other buildings. More on the <a href="https://en.wikipedia.org/wiki/Springfield_pet-eating_hoax">Springfield pet-eating hoax</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the young brahmin woman Ciñcā from the Dhammapada commentary (verse 176). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-09.htm">The original</a>. Scripture from the King James Version and the Louis Segond Bible (1910). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-quills.html">&larr; The Quills</a><a href="index.html">All stories</a><a href="one-footprint.html">One Footprint &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A rumor moving through a town at night: faint points, one lights red, and the light passes from neighbor to neighbor and fades.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, nodes = [], edges = [], frame = 0, nextStart = 60;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.max(28, Math.min(70, W * H / 22000)));
+    nodes = []; edges = [];
+    for (var i = 0; i < n; i++) nodes.push({ x: Math.random() * W, y: Math.random() * H, glow: 0, due: -1, nb: [] });
+    for (var i = 0; i < n; i++) {
+      var d = [];
+      for (var j = 0; j < n; j++) if (j !== i) {
+        var dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        d.push([dx * dx + dy * dy, j]);
+      }
+      d.sort(function (a, b) { return a[0] - b[0]; });
+      for (var k = 0; k < 3; k++) {
+        var j = d[k][1];
+        if (nodes[i].nb.indexOf(j) < 0) { nodes[i].nb.push(j); nodes[j].nb.push(i); edges.push([i, j]); }
+      }
+    }
+    if (reduce) { var s = nodes[0]; s.glow = 1; s.nb.forEach(function (j) { nodes[j].glow = 0.6; }); }
+  }
+  function start() {
+    var s = nodes[Math.floor(Math.random() * nodes.length)];
+    s.due = frame;
+  }
+  function draw() {
+    frame++;
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      if (frame >= nextStart) { start(); nextStart = frame + 420 + Math.random() * 360; }
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        if (n.due >= 0 && frame >= n.due) {
+          n.due = -1;
+          if (n.glow < 0.2) {
+            n.glow = 1;
+            n.nb.forEach(function (j) { if (nodes[j].glow < 0.2 && nodes[j].due < 0 && Math.random() < 0.8) nodes[j].due = frame + 30 + Math.random() * 50; });
+          }
+        }
+        n.glow *= 0.992;
+      }
+    }
+    for (var e = 0; e < edges.length; e++) {
+      var a = nodes[edges[e][0]], b = nodes[edges[e][1]];
+      var g = Math.min(a.glow, b.glow);
+      ctx.strokeStyle = 'rgba(194,59,46,' + (0.025 + g * 0.16) + ')';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      ctx.fillStyle = 'rgba(232,226,220,0.07)';
+      ctx.beginPath(); ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2); ctx.fill();
+      if (n.glow > 0.02) {
+        var r = 14 + n.glow * 10;
+        var gr = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r);
+        gr.addColorStop(0, 'rgba(224,90,60,' + (n.glow * 0.3) + ')');
+        gr.addColorStop(1, 'rgba(194,59,46,0)');
+        ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

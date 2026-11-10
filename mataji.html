@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mataji</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a desert night; a loop of 108 japa beads lies around the edges of the page, and one bead after another warms as if a thumb were moving round the string; datelined sections. */
+  --ground: #15121a;
+  --ground-2: #211b24;
+  --paper: #ece3d4;
+  --paper-dim: #a59a8b;
+  --accent: #e0913a;
+  --glow: #f2b45a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #2a1c1a 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(236,227,212,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(224,145,58,.22); }
+.epigraph { border-left: 1px solid rgba(224,145,58,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(33,27,36,.78); border: 1px solid rgba(236,227,212,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(236,227,212,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(236,227,212,.1); border-bottom: 1px solid rgba(236,227,212,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(33,27,36,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 12.4 &middot; Kumārakassapamātā</span></nav>
+<header>
+  <h1>Mataji</h1>
+  <div class="epigraph">The wise grieve neither for the living nor for the dead.<br>&mdash; Bhagavad Gita 2:11, tr. Annie Besant (1896)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">I heard it like this, Prabhu,</span> on the Salt River.</p>
+
+<section>
+  <h2>I. The Temple</h2>
+  <p class="dateline">Phoenix &middot; 1973</p>
+  <p>Margaret Ashby wanted to be a nun from the time she was seven years old, and she was raised Presbyterian, which was the first problem. She asked her mother and father at seven and at twelve and at sixteen, in different words each time, and the answer was no each time, in the same words. Her father built shopping centers. He had built half of the ones on Camelback Road, and the house in Paradise Valley had a pool shaped like a kidney and a view of the mountain from every room, and his only daughter was not going to shut herself up in a convent with a lot of Catholics or anybody else.</p>
+  <p>So she married. She married Doug Pruitt, who was gentle and studying architecture at Arizona State and loved her more than she knew what to do with, and she was a good wife to him for two years in a little house in Tempe with a lemon tree in the yard. Then one evening on Mill Avenue she heard the chanting.</p>
+  <p>There were six of them on the sidewalk outside the bookstore, in saris and saffron cloth, with drums and little brass cymbals, and they were singing the same eight words over and over in the hot dusk, and the people coming out of the movie house walked around them as if they were a fire hydrant. Margaret stood and listened until they stopped. She went to the temple on Sunday for the feast. She went the next Sunday and the next. In the spring she sat down across the kitchen table from her husband and asked him, the way she had asked her parents, if she could go.</p>
+  <p>Doug Pruitt thought about it for three days. Then he said yes, because he could see that she would die a little every day if he said no, and he was not that kind of man. He drove her to the temple himself on a Saturday morning in May, in his father&rsquo;s Buick with the top down, with her three suitcases in the back and her mother&rsquo;s silver tea service wrapped in towels for a gift, and he carried the suitcases up the steps and shook hands with the temple president, and kissed her on the forehead in front of everybody, and drove away. She did not know, and he did not know, that she was six weeks pregnant.</p>
+  <p>The temple was an old two-story house on a street of old houses north of downtown, with a peeling porch and a smell of incense and ghee and cooking rice that you could smell from the corner. Margaret was given a sari, and a bed on the floor of the women&rsquo;s ashram upstairs with nine other women, and a string of a hundred and eight wooden beads to chant on, and a name. They called her Kunti.</p>
+  <p>She rose at three-thirty with the others and bathed in cold water and went down for the morning service in the dark. She chanted her rounds. She cut vegetables. In the afternoons she went out with the women in the van to sell the books, in parking lots and on the campus and at the airport, in the heat, and she was good at it, because she had been raised to talk to anybody and she was not afraid of anybody. She was happy. She had not known it was possible to be so happy.</p>
+  <p>In August the other women noticed she was showing.</p>
+  <p><em>Kunti. What does this mean?</em></p>
+  <p>She looked down at herself as if it were somebody else&rsquo;s body. <em>I don&rsquo;t know what it means. But I know I&rsquo;ve kept my vows. Every one.</em></p>
+  <p>The women took her to the temple president. He was a young man from Ohio named Balabhadra who ran the temple as well as anybody ran anything in those years, and better than most; he had paid off the mortgage and doubled the book sales and kept three of his devotees out of the hands of the deprogrammers whom their parents had hired. The newspapers called them a cult. The parents&rsquo; groups held meetings at churches in Scottsdale and passed out pamphlets about brainwashing. Balabhadra had been on the evening news twice that year, defending the temple, and he thought about the evening news all the time.</p>
+  <p>He did not ask Kunti anything. He thought only of what the newspapers would do with a pregnant Hare Krishna nun.</p>
+  <p><em>She has to go,</em> he said. <em>Today. Call her husband.</em></p>
+  <p>Kunti stood up. <em>Prabhu, please don&rsquo;t ruin me. I didn&rsquo;t come here for you. I came for Krishna. Take me to Maharaj at the grove.</em></p>
+</section>
+<section>
+  <h2>II. The Curtain</h2>
+  <p class="dateline">The grove on the Salt River &middot; August 1973</p>
+  <p>The devotees had a farm east of the city on the Salt River, twelve acres of old orange grove that a widow in Mesa had left them, with a farmhouse and a cow barn and an irrigation ditch and a pump house under the tamarisks. Four cows lived there, and a dozen men, and a sannyasi the devotees called Maharaj.</p>
+  <p>He had been born Ellis Batiste in a sugarcane parish in Louisiana in 1931. He had been a cook in the Navy, and a merchant seaman, and a short-order cook in San Francisco, where in the winter of 1967 he had walked into a storefront on Frederick Street to get out of the rain and heard an old man from India explain the Bhagavad Gita to twenty hippies. He was forty-two now. He was a big man, with a grey beard cut close and a deep voice that he rarely raised and rarely used. The devotees in the city said he did not have a head for management. The devotees at the grove said nothing, but when somebody in the movement was in real trouble, sooner or later they ended up at the grove.</p>
+  <p>He listened to the women from the temple tell it on the porch of the farmhouse. He looked at Kunti for a long time. Then he asked a few things that only a man who had grown up in a house with five sisters would have known to ask, and he knew.</p>
+  <p>But knowing was not enough. The newspapers would not take his word for it, or hers.</p>
+  <p>So on the next Sunday he sent for everybody. He sent for Mr. R. K. Bhattacharya, who had been an engineer at Motorola and now owned forty acres of Scottsdale that were worth more every month, and who was the temple&rsquo;s biggest life member. He sent for Mr. and Mrs. Iyer, and old Mr. Sandhu who had the motel on Van Buren, and the Methodist minister from Mesa who sometimes came to the Sunday feast for the food. He sent for Dr. Leela Menon, from Kerala, who had delivered half the Indian babies in the Valley of the Sun and had seven grandchildren of her own and was afraid of nobody on earth. He sent for Balabhadra. And he sent for Purushottam, the head pujari of the city temple, who had been a barber in Glendale before he joined and who knew the rule book better than anybody in Arizona, and told him to clear the girl in front of everybody.</p>
+  <p>Purushottam put the case in Dr. Menon&rsquo;s hands. In the big front room of the farmhouse the women hung four saris on a clothesline from wall to wall, and behind the saris Dr. Menon examined Kunti: her hands and her feet, her eyes, her belly, the height of the womb. Then she asked her the date of her last period, and the date she had come to the temple, and the date her husband had driven away in the Buick, and she counted it out on her fingers and then on a prescription pad, months and weeks and days, and came out from behind the saris and told Purushottam.</p>
+  <p>Purushottam stood up on a chair in front of a hundred and forty people at the Sunday feast and said it in a loud voice, so that the Methodist minister could hear, and the life members, and Balabhadra at the back. <em>This child was conceived while our sister was a married woman living with her husband. Her vows are unbroken. There is nothing to say against her. Nothing.</em></p>
+  <p>The baby came the next February, at the grove, in the back bedroom of the farmhouse, with Dr. Menon there. A boy, nine pounds, with a great deal of black hair, who came out yelling.</p>
+</section>
+<section>
+  <h2>III. Raja</h2>
+  <p class="dateline">Paradise Valley &middot; 1974&ndash;1984</p>
+  <p>One afternoon in March Mr. Bhattacharya came out to the grove about a donation and, walking past the farmhouse to his car, heard a baby crying.</p>
+  <p><em>What&rsquo;s that?</em></p>
+  <p><em>That&rsquo;s Kunti&rsquo;s boy, Prabhu. The one from the curtain.</em></p>
+  <p>Mr. Bhattacharya stood on the path for a while. He had three daughters and no son, and his wife had died two years before. He went and talked to Maharaj in the cow barn. And at the end of the week he came back with his three daughters in the Mercedes and took the boy home with him to Paradise Valley, a mile from the house Kunti had grown up in, and gave him to the girls to raise.</p>
+  <p>Kunti let him go. She told herself that it was Krishna&rsquo;s arrangement, and that a woman who had taken vows had no business with a baby, and that he would have everything in that house that she could never give him. All of it was true. She went back to the city temple, and that summer she joined one of the women&rsquo;s traveling parties that went around the country in a van selling the books, and she was gone for years.</p>
+  <p>The Bhattacharyas named the boy Kashyap, after a sage, at a naming ceremony with a priest and two hundred guests and a cake from the Biltmore. Nobody ever called him that. The daughters called him Raja, because they treated him like one, and the name stuck, and by the time he was in school the whole of Paradise Valley called him Raja Bhattacharya, the little prince, the white boy with the Indian father and the Mercedes and the three sisters who did his homework.</p>
+  <p>When he was ten he hit a boy on the playground at school, hard, over a basketball, and the boy and his friends yelled after him, <em>You don&rsquo;t even have a mom! You don&rsquo;t have a real dad! You&rsquo;re adopted!</em></p>
+  <p>He went home and found Mr. Bhattacharya in his study.</p>
+  <p><em>Baba, they say I don&rsquo;t have a mother or a father. Who&rsquo;s my mother?</em></p>
+  <p>Mr. Bhattacharya pointed through the study door at his daughters, who were at the kitchen counter, arguing. <em>There are your mothers.</em></p>
+  <p><em>I can&rsquo;t have that many mothers. I&rsquo;m supposed to have one. Tell me who she is.</em></p>
+  <p>Mr. Bhattacharya looked at him for a long time and understood that he could not fool this boy and never would be able to.</p>
+  <p><em>Your mother is a devotee, Raja. A Hare Krishna. A good one. I brought you home from the grove on the Salt River when you were six weeks old.</em></p>
+  <p>It was all the boy needed. Something went through him, standing there on the carpet, that he could not have explained to anybody. <em>Baba, take me there. I want to go there. I want to live there.</em></p>
+  <p>Mr. Bhattacharya said, <em>All right, Raja.</em></p>
+  <p>He did it properly. He took the boy out to the grove on a Sunday in the Mercedes with all three daughters crying in the back seat and a second car behind them full of sweets for the feast, two hundred pounds of them, and he gave the boy into the hands of Maharaj in front of everybody. The boy lived at the grove from then on, with the men, and went to the public school in Mesa on the bus, and Mr. Bhattacharya paid for everything. When he was eighteen Maharaj gave him the brahmachari&rsquo;s vows and the saffron cloth, and he shaved his head except for the little tuft at the back, and he was called Kashyap Das. He was a monk now, the way his mother had been a nun.</p>
+  <p>He had asked about her, of course. Maharaj told him she was on the road and that he would meet her when it was time, and not before, and the boy, who was not used to being told no, found to his own surprise that he did not argue.</p>
+</section>
+<section>
+  <h2>IV. Fifteen Questions</h2>
+  <p class="dateline">The pump house &middot; 1993&ndash;1995</p>
+  <p>Maharaj gave him a practice and he took it to India. He went to Vrindavan, where Krishna had been a cowherd boy, and lived in a room by the Yamuna for a year and a half and chanted sixty-four rounds a day and fasted on the holy days and walked the circuit of Govardhan Hill barefoot in the summer heat, and he got nowhere. He could feel himself getting nowhere. It was like pushing on a door that opened the other way.</p>
+  <p>So he came home to the grove. <em>I need something else, Maharaj. What you gave me was too big for me, or too small.</em> Maharaj looked at him and told him to live in the pump house for a while, under the tamarisks at the back of the property where it was dark even at noon, and keep chanting, and wait.</p>
+  <p>In March of 1995, in the pump house, a visitor came. What Kashyap told about it afterward, and never changed in the telling, was that he woke in the middle of the night and an old man in white was sitting on the floor by his mat, a babaji with a white beard and the clay marks of the Vaishnavas on his forehead and his nose, very thin, very old, who said he had done his chanting alone in a cave on Govardhan Hill for longer than anybody now living could remember, and had come a long way. The old man asked him fifteen questions. They were like riddles.</p>
+  <p><em>There is an anthill. At night it smokes. In the day it blazes. A brahmin says to a wise man, Take a knife and dig. The wise man digs and finds a bar across the way. Throw out the bar, says the brahmin. Dig. He digs and finds a toad. Throw out the toad. Dig. He finds a fork in the road, and a sieve, and a tortoise, and an axe and a chopping block, and a piece of meat. Throw them out, dig. And at the bottom he finds a cobra. Leave the cobra, says the brahmin. Do not harm him. Bow down to him.</em></p>
+  <p><em>What is the anthill? What is the smoke? What is the blaze? Who is the brahmin, who is the wise man, what is the knife, what is the digging, what is the bar, what is the toad, the fork, the sieve, the tortoise, the axe and the block, the piece of meat, the cobra?</em></p>
+  <p><em>I can&rsquo;t answer them,</em> Kashyap said.</p>
+  <p><em>No. Only your teacher can answer them. Go and ask him.</em></p>
+  <p>In the morning there was nobody there. There were the marks of bare feet in the dust of the pump house floor, going to the door, and none going away from it.</p>
+  <p>He went to Maharaj in the cow barn and asked him the fifteen questions in order, and Maharaj, milking, answered them in order, without looking up from the cow. The anthill is this body, that your mother made and rice and milk keep up. The smoke at night is what you think over in the dark. The blaze in the day is what you go out and do about it. The brahmin is your teacher. The wise man is you. The knife is knowing the difference. The digging is your effort. The bar is not knowing. The toad is anger. The fork in the road is doubt. The sieve, the five things that strain a mind and leave nothing in it. The tortoise, the five places where you keep yourself, and pull your head and feet back into when you are afraid. The axe and the block, the things you want, that cut you up. The piece of meat, the wanting itself, delight and greed. <em>And the cobra,</em> Maharaj said, and stopped milking for a moment, <em>is what&rsquo;s left when you&rsquo;ve dug all of that out. Leave him be. Bow down to him. That&rsquo;s you, at the bottom. That was always you.</em></p>
+  <p>Kashyap sat on an upturned bucket in the barn and listened, and when Maharaj finished, it was done. The devotees who were there said he did not look any different, only that from then on, whenever you looked at him, he seemed to be already sitting down, even when he was walking.</p>
+</section>
+<section>
+  <h2>V. The Parking Lot</h2>
+  <p class="dateline">Mesa &middot; June 1996</p>
+  <p>For twelve years, from the day the Mercedes took her son out to the grove, Kunti had cried. She cried on the road in the van, between Albuquerque and Amarillo and Tulsa. She cried at the morning service with her face to the wall. She cried in parking lots and airports and on college campuses, holding out the books to strangers with tears running down her face, so that people gave her money just to make her stop, and the other women said she was the best book distributor in the movement and did not know why. She chanted her rounds, sixteen a day, twenty-three years of them, and her face was always wet. Every Christmas Mr. Bhattacharya&rsquo;s eldest daughter sent her a photograph, to whatever temple she was at, and she had them in a tin box: a baby, a boy on a bicycle, a boy in a school blazer, a tall thin young man with a shaved head in saffron cloth.</p>
+  <p>In June of 1996 the traveling party came back through Phoenix, and on a Thursday afternoon at four o&rsquo;clock, at a hundred and fifteen degrees, Kunti was standing in the parking lot of a supermarket on Main Street in Mesa with an armful of books, when a young brahmachari in saffron cloth came across the asphalt from the other side, carrying a cardboard box, with two other men from the grove.</p>
+  <p>She knew him from forty yards away.</p>
+  <p><em>My son,</em> she said. <em>My son. My son.</em> And she dropped the books and ran.</p>
+  <p>The people who were loading groceries into their cars said afterward that they had never seen anything like it. A woman of forty-four in a white sari ran across the parking lot, in that heat, and threw herself down at the young monk&rsquo;s feet on the asphalt, which was hot enough to blister, and rolled there, crying, holding his ankles. And her milk came. Twenty-two years after she had nursed him, the milk ran out of her and soaked the front of her sari through, and she got up off the ground with it running down her and put her arms around him and held on.</p>
+  <p>Kashyap stood very still with the box in his arms. He knew what she was. He had known since he was ten. And he thought: if I am kind to her now, it will finish her. She will hang on to this for the rest of her life, and it will drown her.</p>
+  <p>So he said, coldly, in a voice she had never heard from anyone at the temple, <em>Mataji, what are you doing? Can&rsquo;t you give up this bodily attachment?</em></p>
+  <p>She let go of him and stepped back and looked at him, and the thought that went through her head, then and there, was that he talked like a deprogrammer. Like one of those men in the vans who used to grab the devotees off the street and drive them to motels and keep them there for days, yelling at them, until they broke.</p>
+  <p><em>My son, what did you say?</em></p>
+  <p>He said it again. And then, because she was still standing there with her arms half up, he said the thing that Krishna says first to Arjuna on the battlefield, the very first thing, to a man who is weeping for his family.</p>
+  <div class="verse">
+  <p>Thou grievest for those that should not be grieved for, yet speakest words of wisdom. The wise grieve neither for the living nor for the dead.</p>
+  <p>&mdash; Bhagavad Gita 2:11, tr. Annie Besant (1896)</p>
+  </div>
+  <p>Kunti stood in the parking lot with the sun coming up off the asphalt in waves, and the milk going sticky on her sari, and her son in front of her, and she thought: Twelve years I have cried for this boy. Twelve years I have not been able to stop. And he has hardened his heart. Why should I carry him one more step?</p>
+  <p>And she put him down. She felt it go, the way you feel a heavy box go when somebody finally takes the other end, and then nobody is holding the other end, and it is just gone. She bent down and picked up her books off the asphalt. Her face was dry. It was the first time in twelve years her face had been dry, and it stayed that way for the rest of her life.</p>
+  <p>The two men from the grove said that she went back to her table by the supermarket door and stood there with the books and smiled at the people coming out, and that a man pushing a cart full of beer gave her a twenty-dollar bill without being asked, and that Kashyap Das stood in the middle of the parking lot holding his cardboard box and watched her for a long time before he went on.</p>
+</section>
+<section>
+  <h2>VI. The White Buck</h2>
+  <p class="dateline">The grove &middot; autumn 1996</p>
+  <p>The story went around the movement the way stories did, from temple to temple, and by the fall it had come back to the grove. One evening, after the class on the porch, the men were talking about it in the dark, with the swamp cooler going.</p>
+  <p><em>Balabhadra almost finished them both,</em> one of them said. <em>Her and the boy. Before he was even born. And Maharaj was their shelter, both times.</em></p>
+  <p>Maharaj came out onto the porch with a glass of water and sat down on the step.</p>
+  <p><em>That&rsquo;s not the first time,</em> he said. <em>Let me tell you something from home.</em></p>
+  <p>When I was a boy in St. Mary Parish, he said, the man who owned the land we lived on loved to hunt more than anything in the world. He had his supper off venison every night of the season. And every week he called out every man on the place to drive deer for him, so nobody could get his own work done, until the men got together and said, Let&rsquo;s fence a piece of the swamp and drive the deer into it, and he can shoot them there and leave us alone. So they did. They went out with sticks and pans and beat the woods for miles and drove every deer in the country into that fence.</p>
+  <p>There were two white bucks in the drive. Pure white, with pink eyes. The old people said it was bad luck to shoot a white deer, and the landowner believed it, so he said those two were never to be touched. All the rest he shot whenever he pleased, and they ran from him and got wounded and ran and got wounded again until they dropped.</p>
+  <p>So the older of the white bucks went to the younger one and said, Brother, they&rsquo;re going to die anyway. Let&rsquo;s not have them shot to pieces running. Let one go down to the gate every morning and stand still and be taken. One day from your herd, one day from mine. And that is how they did it.</p>
+  <p>Then the turn came to a doe in the younger buck&rsquo;s herd who was heavy with a fawn. She went to him and said, Let me pass this once. When the fawn&rsquo;s born there&rsquo;ll be two of us to take a turn. And he said, No. I can&rsquo;t put your turn on anybody else. Go on. So she went to the old white buck, and he said, Go on home. I&rsquo;ll see to it. And in the morning he went down to the gate himself and stood still to be taken.</p>
+  <p>The man who did the shooting ran up to the house and got the landowner, and the landowner came down in his truck, and stood there with his rifle and looked at the white buck standing at the gate.</p>
+  <p><em>Didn&rsquo;t I say you were safe? What are you doing down here?</em></p>
+  <p>And the buck told him. And the landowner, said Maharaj, who was not a man anybody on that place had ever seen moved by anything, put the rifle down, and said, I&rsquo;ll spare you, and her. And the buck said, What about the rest of them in the fence? And the man said, All right, them too. What about the deer in the woods? Them too. What about the rabbits and the coons and the birds? Them too. And the fish in the bayou? And the man laughed out loud, they said, standing there in the mud, and said, All right. Them too.</p>
+  <p>He drank his water.</p>
+  <p><em>That doe had her fawn that spring,</em> he said. <em>And the old women on our place used to tell it to us children when we were small: Stay with the white buck. Better to die with the white buck than live with the other one.</em></p>
+  <p>Nobody on the porch said anything. The swamp cooler ran. Then one of the young men asked about Kunti, and whether it had been right, what Kashyap did to her in the parking lot, and Maharaj was quiet for a while.</p>
+  <p><em>She did that herself,</em> he said. <em>He didn&rsquo;t do it. I didn&rsquo;t do it. What one person works out, nobody can hand to anybody else, not a son to a mother, not a mother to a son. She was her own shelter. That&rsquo;s the only kind there is. It&rsquo;s hard to find, and she found it.</em> And he said the verse from the Gita that they all knew, that says it better than he could.</p>
+  <div class="verse">
+  <p>Let him raise the self by the Self, and not let the self become depressed; for verily is the Self the friend of the self, and also the Self the self&rsquo;s enemy; The Self is the friend of the self of him in whom the self by the Self is vanquished; but to the unsubdued self, the self verily becometh hostile as an enemy.</p>
+  <p>&mdash; Bhagavad Gita 6:5&ndash;6, tr. Annie Besant (1896)</p>
+  </div>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Kunti came out to the grove at Janmashtami the next August, for Krishna&rsquo;s birthday, with the women from the traveling party, and cooked for the feast in the farmhouse kitchen where her son had been born. She cooked for three hundred people. Kashyap Das served it, going down the long rows of devotees and guests sitting on the ground under the orange trees with a bucket of rice and a ladle, and when he came to his mother he put the rice on her leaf plate the same as on everybody else&rsquo;s, and she said, <em>Thank you, Prabhu,</em> the same as everybody else, and he went on down the row.</p>
+  <p>Mr. Bhattacharya&rsquo;s eldest daughter was there, and saw it, and could not stand it, and said so to Kunti afterward at the wash basins. Kunti only laughed, and shook the water off her hands, and went back to the kitchen to do the pots. And under the orange trees, a little apart from the rows, in the long gold light of an August evening in the desert, a white cow from the barn was going along with her calf, eating what the guests had left.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Self is the lord of self, who else could be the lord? With self well subdued, a man finds a lord such as few can find.<cite>Dhammapada 160, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a rich man&rsquo;s daughter who has longed all her life to become a nun is finally allowed to by her husband, and goes forth among the nuns of Devadatta&rsquo;s faction without knowing she is pregnant. When it shows, Devadatta orders her expelled to protect his reputation; she appeals to the Buddha, who has the laywoman Visākhā examine her behind a curtain and count the months, and the elder Upāli declares her innocent before the whole assembly. King Pasenadi hears the baby crying, takes him home to be raised by his daughters, and the boy, Kumāra Kassapa (&ldquo;Prince Kassapa&rdquo;), learns from playground taunts that he has a mother among the nuns and asks to be ordained. After failing to progress in the forest, he is set fifteen riddles by a visitor from the Brahma world, and attains arahatship when the Buddha answers them. Twelve years after he left the world, his mother, who has wept all that time, sees him in the street and runs to him with her milk flowing; he speaks harshly to her on purpose, and she lets go of her attachment and is freed. The Buddha then tells the birth story of the banyan deer, who offered his own life in place of a pregnant doe. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-04.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Kumara_Kassapa">Kumāra Kassapa</a>.</p>
+    <h3>The Hare Krishnas in Arizona, 1973&ndash;1996</h3>
+    <p>The International Society for Krishna Consciousness (<a href="https://en.wikipedia.org/wiki/ISKCON">ISKCON</a>) was founded in New York City in July 1966 by A. C. Bhaktivedanta Swami, and in January 1967 he opened a storefront temple on Frederick Street in San Francisco&rsquo;s Haight-Ashbury. Its devotees chanted in the streets, held free Sunday feasts, and funded the movement by selling its books, first on sidewalks and campuses and then in airports and other public places; courts generally upheld their right to do so under the First Amendment. Its central scripture is the <a href="https://en.wikipedia.org/wiki/Bhagavad_Gita">Bhagavad Gita</a>, which the story quotes in the 1896 translation by Annie Besant, rather than the movement&rsquo;s own.</p>
+    <p>In the 1970s, as new religious movements spread, many parents of young converts hired <a href="https://en.wikipedia.org/wiki/Deprogramming">deprogrammers</a>, whose methods often amounted to kidnapping and false imprisonment; the best known, Ted Patrick, was eventually convicted of felonies for it. Kunti, Kashyap, Maharaj, the grove on the Salt River and the Phoenix temple in the story are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the mother of Kumāra Kassapa from the Dhammapada commentary (verse 160). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-04.htm">The original</a>. Scripture from the Bhagavad Gita, translated by Annie Besant (1896). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-middle-portion.html">&larr; The Middle Portion</a><a href="index.html">All stories</a><a href="stand-still.html">Stand Still &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A loop of 108 japa beads lies around the page in the dark; one by one each bead warms, as if a thumb were moving round the string.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, beads = [], N = 108, t0 = performance.now(), STEP = 1600; // ms per bead
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    layout();
+  }
+  function layout() {
+    beads = [];
+    var cx = W / 2, cy = H / 2;
+    var rx = W / 2 - Math.max(14, W * 0.04), ry = H / 2 - Math.max(14, H * 0.04);
+    for (var i = 0; i < N; i++) {
+      var a = -Math.PI / 2 + (i / N) * Math.PI * 2;
+      // a loose loop: slightly squared ellipse, sagging a little at the bottom like a string
+      var ca = Math.cos(a), sa = Math.sin(a);
+      var x = cx + rx * Math.sign(ca) * Math.pow(Math.abs(ca), 0.7);
+      var y = cy + ry * Math.sign(sa) * Math.pow(Math.abs(sa), 0.7) + (sa > 0 ? sa * sa * 6 : 0);
+      beads.push([x, y]);
+    }
+  }
+  function draw(now) {
+    var pos = reduce ? 0 : ((now - t0) / STEP) % N;
+    ctx.clearRect(0, 0, W, H);
+    var r = Math.max(2.2, Math.min(4, W / 260));
+    // the string
+    ctx.strokeStyle = 'rgba(224,170,90,0.05)'; ctx.lineWidth = 0.8; ctx.beginPath();
+    for (var i = 0; i <= N; i++) { var b = beads[i % N]; if (i) ctx.lineTo(b[0], b[1]); else ctx.moveTo(b[0], b[1]); }
+    ctx.stroke();
+    for (var j = 0; j < N; j++) {
+      var b = beads[j];
+      var d = pos - j; if (d < 0) d += N;           // how long since the thumb passed this bead
+      var warm = reduce ? 0 : Math.max(0, 1 - d / 7);  // glow fades over the next few beads
+      var a = 0.10 + warm * 0.45;
+      if (warm > 0.02) {
+        var g = ctx.createRadialGradient(b[0], b[1], 0, b[0], b[1], r * 7);
+        g.addColorStop(0, 'rgba(242,180,90,' + (warm * 0.22) + ')');
+        g.addColorStop(1, 'rgba(242,180,90,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(b[0], b[1], r * 7, 0, 6.283); ctx.fill();
+      }
+      ctx.fillStyle = 'rgba(214,160,92,' + a + ')';
+      ctx.beginPath(); ctx.arc(b[0], b[1], r, 0, 6.283); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size();
+  if (reduce) draw(0); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

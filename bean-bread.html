@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bean Bread</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on dry-summer paper, light theme; beads of dew gather in the margins at first light, catch the sun, and dry away; datelined sections. */
+  --ground: #efe6d2;
+  --ground-2: #e3d6bb;
+  --paper: #2b2219;
+  --paper-dim: #6e604d;
+  --accent: #97461f;
+  --glow: #4f7a74;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f8f1e2 0%, var(--ground) 55%, #e6d9bf 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,34,25,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(151,70,31,.18); }
+.epigraph { border-left: 1px solid rgba(151,70,31,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(227,214,187,.78); border: 1px solid rgba(43,34,25,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,34,25,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,34,25,.14); border-bottom: 1px solid rgba(43,34,25,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(227,214,187,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 15.1 &middot; The Sākiyans and Koliyans</span></nav>
+<header>
+  <h1>Bean Bread</h1>
+  <div class="epigraph">Is not the life more than meat, and the body than raiment?<br>&mdash; Matthew 6:25</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is what the old people told,</span> on Sycamore Branch.</p>
+
+<section>
+  <h2>I. Low Water</h2>
+  <p class="dateline">Sycamore Branch, Cherokee Nation &middot; July 1846</p>
+  <p>In a wet year you could hear Sycamore Branch from the Deerinwater place, a mile below the mill, going over its stones all night like an old man telling himself a long story. By the time the corn was in tassel that summer it had stopped talking. What was left of it lay in green pools along the bed, one below another, with the minnows crowded so thick in them that a child could scoop them out with a gourd, and every morning a few more pools had gone to cracked mud and the smell of fish.</p>
+  <p>Above the pools stood Absalom Ware's dam.</p>
+  <p>He had built it four years before at the narrows, of oak logs and rock and brush packed with clay, and behind it the branch backed up into a long brown pond where his tub mill sat under a shake roof. People brought corn to that mill from twelve miles off, on horses and in sacks over their shoulders, and Ware took his toll, one gallon in eight, and sold the meal at Tahlequah along with the peaches from his orchard and the cotton his people picked. He was a careful man. When the dry weather came in June he shut the gate in the dam and kept it shut, and ground only on Saturdays, so the pond would hold a head of water through August. Below the dam the branch went on dying a pool at a time, and he did not go down to look at it.</p>
+  <p>Thomas Deerinwater went down every morning. He was a big quiet man who wore a hunting shirt and a dark blue turban wound around his head, as men of his age did, and spoke no English and wanted none. He could read and write his own language in Sequoyah&rsquo;s letters, and so could his wife and both his sons. His hogs wallowed in the last pools. His wife Sally carried water for the beans and squash from a spring that was going too, a little less every day, until the bucket came up half sand.</p>
+  <p>Sally Deerinwater and Lucy Ware were sisters. They were Wolf clan, both of them, from the same mother, and the way the Cherokee counted it that made their children Wolf as well, so that Lucy&rsquo;s boy at the mill and Sally&rsquo;s two big sons downstream were not cousins but brothers in the clan. They had not sat at the same fire in seven years.</p>
+  <p>There was a reason for that, and everybody in the Nation had one like it. Absalom Ware&rsquo;s cousin had put his name to the treaty paper at New Echota in the winter of 1835, the paper that sold the old country in Georgia and Tennessee for five million dollars. The cousin and the Ware family had come west in 1837 in wagons, ahead of the soldiers, with their bedsteads and their people. The rest of the Nation, the great part that never agreed to the paper, had been driven west the next year by the army. They went in the fall and the winter, a thousand to a party, mostly on foot. Four thousand of them were buried on the way. Lucy and Sally&rsquo;s mother was buried on the way, in Kentucky, in December, on the bank of the Ohio, while her party waited under a rock bluff for the ferryman to finish with his other customers. Sally had been there. Lucy had been in a log house on Sycamore Branch for a year by then, with a cookstove.</p>
+  <p>Then in June of 1839 men had gone out at dawn and killed three of the treaty signers in one day, and after that the killing did not stop. It went back and forth for seven years. That past November thirty-two armed men had ridden up to a treaty man&rsquo;s house and killed him and his grown son. In the spring there were more. By the summer of 1846 there were treaty families living over the line in Arkansas who would not come back, and there were men on both sides who did not sleep two nights in the same bed, and when two Cherokee met on a road they each looked first at the other&rsquo;s hands.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On a Tuesday morning in the third week of July, John and Walter Deerinwater walked up the dry bed of the branch with two neighbor boys, carrying axes and a grubbing hoe, to open the gate in Ware&rsquo;s dam.</p>
+  <p>Ned and Sam were at the dam already, clearing leaves out of the millrace. They belonged to Absalom Ware. Ned was forty, a broad, slow, careful man who had been born in the old country on the Hiwassee and spoke Cherokee better than his master spoke English. Sam was younger and quicker and had a mouth on him.</p>
+  <p><em>Master says it stays shut till Saturday,</em> Ned said.</p>
+  <p><em>The branch isn&rsquo;t his,</em> said John Deerinwater. <em>It runs through my father&rsquo;s place same as his. Our hogs are dying.</em></p>
+  <p><em>Then go tell him so. He&rsquo;s your kin. I can&rsquo;t open it, and you know I can&rsquo;t.</em></p>
+  <p>It might have ended there. Ned was a reasonable man and John Deerinwater was a reasonable man and both of them knew what the other one could and could not do. But Sam laughed and said that the Deerinwaters could water their hogs in the Illinois River like everybody else, it was only two miles, and Walter, who was seventeen, said that he would not take any talk from a man who belonged to a family that sold its own mothers&rsquo; graves.</p>
+  <p>That was where it went over.</p>
+  <p>Sam said the Wares had never sold anything; it was the chief&rsquo;s own people who had got rich, his kinsmen with the contract for the removal, feeding the people on the road on spoiled beef at a fat price a head, everybody knew it. Walter said that a man who rode west in a wagon eating bacon while other people&rsquo;s grandmothers froze in Illinois had better not talk about beef. Sam said the Ross men were white men in turbans, half of them, and the other half were bean-bread Indians who could not write their own names. Walter said he could write his name in Sequoyah&rsquo;s letters, which was more than the Wares could, who had to get a white man to read them their own paper. One of the neighbor boys said something about Lucy Ware that should not have been said by anybody, and Sam swung the shovel.</p>
+  <p>Walter caught it on the axe handle. He swung back. Ned stepped in between them with both hands up, the way you step between two dogs, and the axe handle came down across his left forearm, and everybody on the dam heard the bone go.</p>
+  <p>Then they all stood still. Ned sat down on the logs and held his arm against his stomach and did not make a sound. John Deerinwater took the axe out of his brother&rsquo;s hands. Nobody opened the gate.</p>
+  <p>They went home, the four boys down the dry branch and Sam up the hill to the mill house with Ned walking behind him, and on the way each of them began to tell it.</p>
+</section>
+
+<section>
+  <h2>II. The Rifles</h2>
+  <p class="dateline">Both sides of the branch &middot; the same day and night</p>
+  <p>By noon, at the mill house, the Deerinwater boys had come up the branch with axes to tear out the dam and had broken Ned&rsquo;s arm when he tried to stop them, and had said in front of witnesses that the Wares would go the way the Starrs had gone. By noon at the Deerinwater place, Absalom Ware had set his black men on Thomas Deerinwater&rsquo;s sons with shovels, and Sam had said that the Ross people should go and drink out of the river with the hogs, and that was what treaty men thought of the Nation.</p>
+  <p>By evening it was older than that. It was New Echota and the wagons and the five million dollars. It was the beef contract. It was June of 1839 and who had ridden out at dawn that day and who had held the knives. It was everybody&rsquo;s dead.</p>
+  <p>Two years before, a quarrel over a mill dam would have gone to the district judge. In the summer of 1846 nobody in the Cherokee Nation trusted a judge who belonged to the other party. Absalom Ware sent his boy David, who was fifteen and had learned English at the mission school, riding east before dark to cousins who had gone over the line into Arkansas the winter before. Thomas Deerinwater sat in front of his cabin in the evening, smoking, and said nothing, and after dark the neighbors began to come in from Flint District on horseback, one and two at a time, with their rifles across their saddles.</p>
+  <p>Lucy Ware set Ned&rsquo;s arm herself, at the kitchen table, with Ned&rsquo;s wife Hannah holding the lamp and Ned holding the edge of the table. She splinted it with two shingles and strips of a petticoat. When it was done Ned thanked her in Cherokee, and she said, also in Cherokee, <em>It was my sister&rsquo;s boy that did this,</em> and he said, <em>Yes, ma&rsquo;am, it was,</em> and she went out on the porch and looked a long time down the dark branch to where there was a light.</p>
+  <p>Down at that light Sally Deerinwater was putting cold mud on her son Walter&rsquo;s hand, where the shovel had skinned the knuckles, and Walter was telling it again, and she said, <em>That is my sister&rsquo;s house you are talking about,</em> and Walter said, <em>She left you on the road,</em> and Sally slapped him, the first time since he was small, and then sat down on the floor and could not get up for a while.</p>
+  <p>In the morning there were eleven men with rifles at the Deerinwater place and nine at the mill, counting the Arkansas cousins, who had ridden all night. Ware did not ask Ned or Sam to carry a gun. He made Sam load for him.</p>
+  <p>They met at the dam an hour after sunrise. The Deerinwater side came up the dry bed of the branch and spread out along the east bank among the sycamores, and the Ware side came down from the mill and spread along the west bank behind the pond, and between them was the dam, and the shut gate, and the brown water with the sky in it, and about forty yards of air.</p>
+</section>
+
+<section>
+  <h2>III. The Preacher</h2>
+  <p class="dateline">The Illinois River, below Tahlequah &middot; before daylight</p>
+  <p>Old Bark had a cabin on a bluff over the Illinois River, sixteen miles from Sycamore Branch by the road, and he got up in the dark every morning of his life and went down to the river to pray.</p>
+  <p>He was the brother of Lucy and Sally&rsquo;s mother. Among the Cherokee that made him something more than an uncle: the mother&rsquo;s brother was the one who taught the children, and corrected them, and spoke for them; a father belonged to another clan. He was past seventy. Evan Jones the Welshman had baptized him in the Valley River in the old country, in the cold, in front of the whole town, and for twenty years he had preached in Cherokee in brush arbors and log meeting houses, though he could not read a word of English. He carried the Gospel of Matthew in Sequoyah&rsquo;s letters, a small brown book that Samuel Worcester and Elias Boudinot had made between them and printed at New Echota in 1829. He had come west in the winter of 1838 with the Baptist detachment, Jesse Bushyhead&rsquo;s, and buried his sister in Kentucky and his wife in Missouri, and preached at both graves out of that book. One of the two men who had put it into Cherokee was among the three killed in June of 1839, a treaty signer. Old Bark had heard of it at a camp meeting and stopped his sermon and stood a long time with the book shut on his thumb, and then opened it and finished.</p>
+  <p>The old people said that when Bark prayed in the mornings he went over the whole Nation in his mind, the way a man walks his fence rows at first light to see where the stock has broken through. Every creek and every cabin. Who was sick, who was hungry, who was about to do something that could not be taken back. Nobody ever heard him claim this. It was only what people said.</p>
+  <p>That morning, on his knees on the gravel by the river, he saw Sycamore Branch. He saw the dam and the brown pond and the dry bed below it. He saw his sister&rsquo;s two daughters, one on each side, and their husbands, and twenty men with rifles, Wolf clan and Paint and Deer and Bird, some of whom he had put under the water himself, and he saw what they were going to do to each other in about an hour, when the sun was up.</p>
+  <p>He got up off his knees and went. He did not saddle his mare.</p>
+  <p>A boy fishing at the ford on the Tahlequah road saw him go by in the grey light, walking, an old man with a stick. A woman milking at Park Hill saw him pass, walking, and said afterward that he did not seem to be in any hurry. That was the last anybody saw of him on the road. Sixteen miles. The sun was not a hand above the trees when he came to Sycamore Branch.</p>
+</section>
+
+<section>
+  <h2>IV. Above the Water</h2>
+  <p class="dateline">Ware&rsquo;s dam &middot; an hour after sunrise</p>
+  <p>Nobody on either bank saw him come. That was the first thing all of them agreed on, afterward, when they would agree on anything.</p>
+  <p>The men on the east bank had their rifles up. The men on the west bank had theirs up. Absalom Ware had just said something across the water in English, which the Deerinwater side did not understand and did not need to, and Thomas Deerinwater had lifted his hand to give the word, and then he did not give it, because there was an old man sitting in the air above the pond.</p>
+  <p>He was out over the water in front of the dam, about the height of a man&rsquo;s head, sitting the way an old man sits on a split-bottom chair in front of his own door, with his knees apart and his hands folded on top of his stick. He had on his black preaching coat and an old grey turban. His moccasins hung a few feet above the brown water, and the water under them reflected him, coat and stick and turban, the way it reflected the sycamores.</p>
+  <p>That was how the Deerinwater side told it. On the mill side some said he had been sitting on the top log of the dam all along and they had simply not seen him. Ned, who was standing behind his master with his arm in a sling, said that he had been looking straight at that spot, and there was nothing there, and then there was the old man, a little above the water, as easy as a bird on a limb, and that was all he had to say about it. Ned said it the same way the rest of his life, to anyone who asked, and he was not a man who embroidered.</p>
+  <p>The rifles came down. Nobody told them to. A man on the east bank, a Baptist, took off his turban. Two of the Arkansas cousins, who were Methodists and had never seen Bark before, stood with their mouths open. Lucy Ware, who had come down behind the men with her shawl over her head, sat down on the bank. Across the water her sister had done the same.</p>
+  <p>Old Bark looked at the men on the west bank and the men on the east bank for a while. Then he spoke to his nephews-in-law, in Cherokee, the way he would have spoken across a supper table.</p>
+  <p><em>Absalom. What is this about?</em></p>
+  <p>Ware said it was about the Deerinwaters coming onto his land with axes.</p>
+  <p><em>Why did they come with axes?</em></p>
+  <p>Ware did not know exactly. Ask his cousins. The cousins from Arkansas said it was about the Ross men killing the Starrs, and before that the Ridges, and they had come to see that it did not happen again on Sycamore Branch. Bark turned on the air and asked Thomas Deerinwater, and Deerinwater said that it was about the treaty, and the road, and the people in the ground. Bark asked Deerinwater&rsquo;s neighbors from Flint, and they said it was about the Ware slaves being set on Cherokee boys with shovels. He asked John Deerinwater, who said it was about the hogs. He asked Walter, who said it was about something that had been said about his aunt.</p>
+  <p>Then he turned to the west bank again, and past Absalom Ware, and past the cousins, and looked at the man with his arm in the sling.</p>
+  <p><em>Ned. You were there. What is it about?</em></p>
+  <p>Ned looked at his master. Ware did not look back at him. Then Ned looked at the old man in the air and said it in Cherokee, so that both banks heard it.</p>
+  <p><em>Water, sir. It is about the water.</em></p>
+  <p>Old Bark nodded. He looked down past his moccasins at the pond, as if he had not noticed it before.</p>
+  <p><em>Absalom. How much is this water worth? If you sold it.</em></p>
+  <p>Ware said, after a while, that you could not sell creek water. It was worth nothing. There was a river two miles off.</p>
+  <p><em>Thomas. How much is a Cherokee man worth? If you sold him.</em></p>
+  <p>Thomas Deerinwater did not answer. Behind Ware, Ned shifted his arm in the sling and looked at the ground. The old man saw that and let it stand, and nobody on either bank said anything for a while, because everybody knew there were men on Sycamore Branch who were bought and sold, and it was not the Cherokee.</p>
+  <p><em>We were sixteen thousand in the old country,</em> Bark said. <em>We left four thousand on the road. I buried my sister on it, your mother, Lucy, and Sally, your mother. I buried my wife. Since we came here we have been burying each other. And this morning you came out to make the road longer, over something that is worth nothing, that you could not sell if you tried.</em></p>
+  <p><em>If I had stayed on my knees by the river this morning, this branch would be running again by noon, and not with water.</em></p>
+  <p>Then he said: <em>It is not right.</em></p>
+  <p>He did not say it loudly. Across the pond Sally Deerinwater put her face down on her knees.</p>
+</section>
+
+<section>
+  <h2>V. Let Us Live</h2>
+  <p class="dateline">The same morning</p>
+  <p>The old man came down out of the air then. Some said he stepped down onto the top log of the dam as if off the last rung of a ladder. Some said he was simply standing there. He leaned on his stick and took the brown book out of his coat and opened it to a place he did not need to look for, and read it out to them in Cherokee, slowly, one word at a time, the way people read Sequoyah&rsquo;s letters who learned them as grown men.</p>
+  <p>David Ware, who had ridden all night to fetch the Arkansas cousins and was standing at the end of the line with an empty shotgun, found the same verses years later in his schoolbook Bible in English. He wrote them down on the flyleaf with the date and the name of the branch. In English they were these:</p>
+  <div class="verse">
+    <p>But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and persecute you; That ye may be the children of your Father which is in heaven: for he maketh his sun to rise on the evil and on the good, and sendeth rain on the just and on the unjust.</p>
+    <p>&mdash; Matthew 5:44&ndash;45</p>
+  </div>
+  <p>He shut the book on his thumb.</p>
+  <p><em>There are men in this Nation who hate me,</em> he said. <em>Because I am a Ross man, and because I am a Baptist, and because I preached at a treaty family&rsquo;s burying when nobody else from our side would go. Let them. I am going to live among them without hating them. I am too old to carry it.</em></p>
+  <p><em>We all came over the road sick. Measles. The whooping cough. The flux. I have it in me yet, some mornings, in my chest. But the worst sickness we brought over the road is this one,</em> and he put his stick out over the pond toward one bank and then the other. <em>The road is in you. Seven years and you are still on it. Every one of you. I am not going to be on it anymore. Let them be sick if they want. I am going to be well among them.</em></p>
+  <p>Then he opened the book again, a little further on.</p>
+  <div class="verse">
+    <p>Therefore I say unto you, Take no thought for your life, what ye shall eat, or what ye shall drink; nor yet for your body, what ye shall put on. Is not the life more than meat, and the body than raiment?</p>
+    <p>&mdash; Matthew 6:25</p>
+  </div>
+  <p><em>Absalom wants the water because he wants the toll. Thomas wants it because Absalom has it. The Arkansas men want something they can never have back. Everybody in this Nation wants something, and I want something too, I am not a liar. But I am going to live among wanting people this way, without it. Look at me. I have a cabin and a mare and this book. I came sixteen miles this morning without breakfast. I am happy.</em></p>
+  <p>It was the most anyone had ever heard him say at one time, and after it he sat down on the dam with his legs over the side, like a boy, and was quiet.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Nobody gave an order. The men on the east bank leaned their rifles against the sycamores. On the west bank Absalom Ware handed his rifle to Sam, and then, after a moment, took it back and unloaded it himself and gave it to him again.</p>
+  <p>Then Ware walked out onto the dam, which he had built, and stood by the gate, and looked across the brown water at his wife&rsquo;s sister&rsquo;s husband. It was forty yards. It took Thomas Deerinwater a long time to come out and meet him on the logs, and when he did they did not shake hands, because they were not men who shook hands. They stood side by side and looked down at the gate.</p>
+  <p><em>If I pull it,</em> said Ware in Cherokee, <em>I lose my head of water and the mill doesn&rsquo;t grind in August.</em></p>
+  <p><em>Then don&rsquo;t pull it,</em> said Deerinwater. <em>Cut it down a foot. Let some go over.</em></p>
+  <p>So that is what they did. John Deerinwater and Sam worked the cross-cut saw, one on each end, and Ned stood over them with his good hand on his hip and told them where, because it was Ned who had laid those logs four years before and knew where the top one was pinned. When the notch was cut the pond came to it and stood there trembling at the lip for a moment, as if deciding, and then it went over, a smooth brown tongue of water the width of a man&rsquo;s shoulders, and dropped into the dry bed below and began to run.</p>
+  <p>Old Bark watched it go.</p>
+  <p>Then he went over to John Deerinwater and said something to him that nobody else heard, and John walked up the bank to where Ned was standing and said, in Cherokee, in front of everybody, that he was sorry about the arm. It was not a small thing for a Cherokee man to say to an enslaved man in front of twenty people in that year, and everyone knew it. Absalom Ware opened his mouth and shut it again. Ned looked at John Deerinwater a while and said, <em>It&rsquo;ll mend,</em> which was true and was not the same thing as yes.</p>
+  <p>He had his own opinions about whose water it was, and about a great many other things. He kept them. He was the only one at the dam that morning who had not been asked what he wanted. Four years before, a party of people held like himself had broken out near Webbers Falls and gone south for Mexico, where there were no slaves, and more than a hundred armed Cherokee and Choctaw men had gone after them and brought them back, and the council had passed harder laws. Ned stood on the bank and watched the water go over the notch toward the Deerinwater place, toward the Illinois, the Arkansas, the Mississippi, the Gulf, all the way down, and nobody at the dam asked him what he was thinking about, and he did not tell them.</p>
+</section>
+
+<section>
+  <h2>VI. Bean Bread</h2>
+  <p class="dateline">The Deerinwater place &middot; September 1846</p>
+  <p>In August word came from Washington that the parties had signed a treaty there, all of them together, with the government. All party distinctions were to cease. Every man in the Nation was pardoned for what he had done to any other. The armed police were done away with, and the light horse, and from now on no Cherokee would be punished for anything except by a jury. People read it to each other in English and in Cherokee, and some cried, and some spat, and the killing slowed down that fall, and then it mostly stopped.</p>
+  <p>On Sycamore Branch it had stopped already. The people who were at the dam that morning said, all the rest of their lives, that something had happened to them there that the treaty had nothing to do with. They did not agree on what it was, any more than they agreed on where exactly the old man had been sitting. Some of the Flint men went to the meeting house that fall and were baptized in the Illinois. One of the Arkansas cousins was baptized too, though he was a Methodist, and had to answer for it at home. Most of them never went near a church, and still could not afterward call a man from the other party a dog. They tried it, some of them, and found that it had gone out of them, the way a fever goes.</p>
+  <p>The rains came back the third week of August. The branch filled up and went over the notch and over the top of the whole dam besides, and talked all night again, so that you could hear it from the Deerinwater place.</p>
+  <p>In September, when the beans were dry, Lucy Ware walked down the branch with a sack of meal on her hip from her husband&rsquo;s mill, with the toll not taken out of it, and knocked at her sister&rsquo;s door.</p>
+  <p>They did not say much. They sat on the floor by the fire the way their mother had sat, with the big kettle between them, and made bean bread the way their mother had made it: the meal and the boiled beans worked together with the bean water, hot enough to scald the hands, and patted into loaves, and each loaf wrapped in a green corn blade and tied with a strip of the blade, and dropped into the boiling kettle. Their mother&rsquo;s hands had been in all of it, the folding and the tying, and so their hands were. Lucy&rsquo;s knots were the same as Sally&rsquo;s knots. They had not been together in seven years, and the knots were the same.</p>
+  <p>They did not talk about the road. Sally talked about Walter, who was courting a Paint girl over toward Park Hill. Lucy talked about David, who wanted to go off to school in the States. They talked about Uncle Bark&rsquo;s chest, which was worse, and whether he would last the winter.</p>
+  <p>He did not. He died in February, in the cabin on the bluff, and they buried him on the bluff above the Illinois with the brown book in his coat. Both families stood at the grave, and Ned stood at the back with his hat in his good hand, and the other one, the one that had mended a little crooked, at his side.</p>
+  <p>But that was later. That afternoon in September the bean bread boiled in the kettle, twelve green bundles turning over and over each other in the rolling water, and the two sisters sat on either side of the fire with their hands in their laps, red to the wrist from the heat, and watched them.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verses</h3>
+    <blockquote class="pd">Let us live happily then, not hating those who hate us! among men who hate us let us dwell free from hatred!<cite>Dhammapada 197, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Let us live happily then, free from ailments among the ailing! among men who are ailing let us dwell free from ailments!<cite>Dhammapada 198, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Let us live happily then, free from greed among the greedy! among men who are greedy let us dwell free from greed!<cite>Dhammapada 199, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Sākiyans and the <a href="https://en.wikipedia.org/wiki/Koliya">Koliyans</a>, two clans joined by generations of marriage, share a dam on the <a href="https://en.wikipedia.org/wiki/Rohini_River">Rohiṇī River</a>. In a dry summer their field hands quarrel over the water, trade insults about the founding of each other&rsquo;s royal houses, and carry the quarrel home, until both peoples march out armed to the river. The Buddha, kin to both, sees it at dawn, travels through the air, and sits above the river. The warriors lay down their weapons. He asks the nobles what the fight is about and gets no answer, and works down the ranks to the laborers, who say it is about water. He asks what water is worth and what the lives of warriors are worth, and tells them it is not right to destroy what is priceless for what is worth almost nothing. He ends with the three verses, each beginning <em>let us live happily</em>. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-01.htm">the full commentary story</a>.</p>
+    <h3>The Cherokee Nation, 1839&ndash;1846</h3>
+    <p>In December 1835 a small faction of Cherokee leaders, the Treaty Party, signed the <a href="https://en.wikipedia.org/wiki/Treaty_of_New_Echota">Treaty of New Echota</a>, giving up the Nation&rsquo;s lands in the Southeast for land in the West and five million dollars. The elected government under John Ross never accepted it. Many treaty families moved west in 1837; the rest of the Nation was rounded up by the army in 1838 and marched west in detachments of about a thousand through an unusually cold winter. About 4,000 died on the <a href="https://en.wikipedia.org/wiki/Trail_of_Tears">Trail of Tears</a>. One detachment was led by the Baptist minister <a href="https://en.wikipedia.org/wiki/Jesse_Bushyhead">Jesse Bushyhead</a>, and another by the Welsh missionary <a href="https://en.wikipedia.org/wiki/Evan_Jones_(missionary)">Evan Jones</a>, who had learned Cherokee and who re-founded the Baptist Mission in the new country. In June 1839 Major Ridge, John Ridge and Elias Boudinot, three treaty signers, were killed on the same day. Boudinot had worked with the missionary Samuel Worcester on the <a href="https://en.wikipedia.org/wiki/Bible_translations_into_Cherokee">Cherokee Gospel of Matthew</a>, printed at New Echota in 1829 in Sequoyah&rsquo;s <a href="https://en.wikipedia.org/wiki/Cherokee_syllabary">syllabary</a>.</p>
+    <p>Killings and revenge killings between the parties went on for seven years. In November 1845 armed men killed the treaty man James Starr and his son Buck at their home, and at least 34 political killings are counted in 1845 and 1846 (see <a href="https://en.wikipedia.org/wiki/Tom_Starr">Tom Starr</a>). On August 6, 1846, the parties signed a <a href="https://treaties.okstate.edu/treaties/treaty-with-the-cherokee-1846-0561/">treaty at Washington</a> declaring that &ldquo;all party distinctions shall cease,&rdquo; pardoning past offenses, abolishing the armed police and light horse, and promising trial by jury. Wealthier Cherokee, many of them treaty men, held Black people in slavery; in November 1842 about twenty enslaved people escaped near Webbers Falls and fled toward Mexico before a force of Cherokee and Choctaw men caught them near the Red River. Afterward the Nation passed harsher slave codes (see the <a href="https://en.wikipedia.org/wiki/1842_Slave_Revolt_in_the_Cherokee_Nation">1842 slave revolt</a>). Sycamore Branch, the Saunders and Deerinwater families and Old Bark are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Sākiyans and Koliyans from the Dhammapada commentary (verses 197&ndash;199). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-01.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="mic-check.html">&larr; Mic Check</a><a href="index.html">All stories</a><a href="the-last-course.html">The Last Course &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Dew: small beads gather in the margins at first light, catch the sun, and dry away.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, beads = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function margin() {
+    // keep beads mostly outside the 36rem text column
+    var col = Math.min(W, 576) / 2 + 24, mid = W / 2, x;
+    if (W < 700) { x = Math.random() < 0.5 ? Math.random() * 28 + 4 : W - Math.random() * 28 - 4; }
+    else { x = Math.random() < 0.5 ? Math.random() * (mid - col) : mid + col + Math.random() * (mid - col); }
+    return x;
+  }
+  function spawn(b) {
+    b.x = margin(); b.y = 20 + Math.random() * (H - 40);
+    b.r = 1.6 + Math.random() * 3.4;
+    b.life = 0; b.max = 900 + Math.random() * 1500;
+    b.glint = 0.25 + Math.random() * 0.5;
+    return b;
+  }
+  function make() {
+    var n = Math.round(Math.max(14, Math.min(40, W / 34)));
+    beads = [];
+    for (var i = 0; i < n; i++) { var b = spawn({}); b.life = Math.random() * b.max; beads.push(b); }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < beads.length; i++) {
+      var b = beads[i];
+      if (!reduce) { b.life++; if (b.life > b.max) spawn(b); }
+      var p = reduce ? 0.45 : b.life / b.max;
+      var grow = Math.min(1, p * 3), dry = Math.min(1, (1 - p) * 2.5);
+      var r = b.r * grow * (0.4 + 0.6 * dry);
+      var a = grow * dry * 0.55;
+      if (r < 0.3 || a < 0.02) continue;
+      // bead body: a faint creek-green lens with a darker rim
+      var g = ctx.createRadialGradient(b.x - r * 0.3, b.y - r * 0.3, r * 0.1, b.x, b.y, r);
+      g.addColorStop(0, 'rgba(250,246,236,' + (a * 0.9) + ')');
+      g.addColorStop(0.6, 'rgba(160,184,176,' + (a * 0.35) + ')');
+      g.addColorStop(1, 'rgba(70,96,92,' + (a * 0.55) + ')');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(b.x, b.y, r, 0, Math.PI * 2); ctx.fill();
+      // the sun catching it near the middle of its life
+      var s = Math.max(0, 1 - Math.abs(p - 0.5) * 4) * b.glint;
+      if (s > 0.02) {
+        var h = ctx.createRadialGradient(b.x - r * 0.35, b.y - r * 0.35, 0, b.x - r * 0.35, b.y - r * 0.35, r * 3.2);
+        h.addColorStop(0, 'rgba(255,236,190,' + (s * 0.8) + ')');
+        h.addColorStop(1, 'rgba(255,236,190,0)');
+        ctx.fillStyle = h; ctx.beginPath(); ctx.arc(b.x - r * 0.35, b.y - r * 0.35, r * 3.2, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

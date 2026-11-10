@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Castile Roses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over embers lifting slowly from a fire below the page; datelined sections. */
+  --ground: #140e0c;
+  --ground-2: #21171a;
+  --paper: #eedfd4;
+  --paper-dim: #ab968b;
+  --accent: #de97a0;
+  --accent-2: #e8955c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #3a1d14 0%, #140e0c 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(238,223,212,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(222,151,160,.22); }
+.epigraph { border-left: 1px solid rgba(222,151,160,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > p.dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(33,23,26,.78); border: 1px solid rgba(238,223,212,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(238,223,212,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(33,23,26,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 2.1 &middot; Udena</span></nav>
+<header>
+  <h1>Castile Roses</h1>
+  <div class="epigraph">Blessed is the man that heareth me, and that watcheth daily at my gates, and waiteth at the posts of my doors.<br>&mdash; Proverbs 8:34</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; lo o&iacute; decir,</span> along the R&iacute;o de Santa Cruz.</p>
+
+<section>
+  <h2>I. The Red Blanket</h2>
+  <p class="dateline">The Truchas peaks, New Mexico &middot; the 1740s</p>
+  <p>Don Bernardo Quintana was the richest man between the Chama and the Truchas. One morning in March his wife do&ntilde;a Isabel sat with him in the sun of the placita, heavy with their first child, wrapped in his red Saltillo blanket, playing with his silver ring, which she had slipped off his finger. A shadow went over the yard. Don Bernardo looked up and ran for the door, and do&ntilde;a Isabel, who was eight months along, could not run.</p>
+  <p>The old people in the valley say it was an eagle, and some say it was something worse. It saw the red blanket and took it for meat. It came down and closed its feet on her and carried her up over the walls, over the river and the black mesa, into the mountains, and set her in the fork of a great yellow pine where it kept the bones of the lambs it took. She kept silent while it flew, knowing it would drop her, and when it settled and bent its head to her she clapped her hands and screamed, and it flew off.</p>
+  <p>That night, in a storm, alone in the tree, she had her baby. He was born as the clouds broke and the morning star came out over the mountain, and she called him Lucero for the star.</p>
+  <p>Below the pine lived a hermit named Anselmo. He had been a rich man in Taos, and he and his oldest friend had given it all up and gone to live on two mountains facing each other, and every Saturday night each lit a fire so the other would know he was alive. One Saturday the other fire did not burn. A week later a stranger came up the trail and asked Anselmo if anything troubled him up there. Only the wild horses, Anselmo said, that came down at night and trampled his beans. The stranger gave him a guitar with three courses of strings and taught him three songs. Play the first, he said, and the horses will run and never look at you. Play the second and they will run looking back. Play the third and the stallion that leads them will come and offer you his back. Then he went down the trail, and Anselmo understood whose fire had gone out.</p>
+  <p>On wet days Anselmo did not go into the woods for pi&ntilde;ones. He went to the foot of the eagle's pine and gathered bones for broth. He was picking up bones when he heard a baby crying above him.</p>
+  <p><em>Who are you?</em></p>
+  <p><em>A woman.</em></p>
+  <p><em>Come down.</em></p>
+  <p><em>Are you a Spaniard? I can't come down to anybody.</em></p>
+  <p><em>I am.</em></p>
+  <p><em>Then say me the Salve Regina.</em></p>
+  <p>He said it in Latin, all of it, and she let him climb up and carry the boy down, and she came down after by herself and would not let him take her hand. He kept her in his hut and fed her honey and never came near her. But she knew that nobody in the world knew where she was except this old man, and if he tired of them and went off up the mountain, she and the boy would die there. So one night she let her hair down and let him see her, and after that they lived together as man and wife.</p>
+  <p>Years later, reading the stars one winter night, Anselmo said, <em>Don Bernardo Quintana of the Ca&ntilde;ada is dead.</em> She wept. <em>Everybody dies,</em> he said. <em>I know it,</em> she said. <em>I'm crying because my son should have had his father's house and his father's land, and now he's a boy in the mountains with nothing.</em> So Anselmo gave the boy the guitar and taught him the three songs.</p>
+  <p>His mother gave him the red blanket and the silver ring and the names of his father's mayordomo and vaqueros. When the wild horses came down to drink, he sat in the lowest branch of the pine and played the third song, and a dun stallion came and stood under him, and he got down onto its back and told it in its ear who he was. The stallion called the herd. It called again, and the old ones and the foals dropped back. It called a third time, and he rode down out of the Truchas at the head of two hundred wild horses.</p>
+  <p>At his father's gate they would not open. Until they knew whether their lady was alive or dead, they said, they would give the house to no one. He said the names of the mayordomo and the vaqueros, and held up the red blanket and the ring, and they opened the gate. From that day the whole valley called him el Lucero.</p>
+</section>
+
+<section>
+  <h2>II. The Luck-Child</h2>
+  <p class="dateline">Santa Cruz de la Ca&ntilde;ada &middot; the 1750s</p>
+  <p>A woman who lived by men at the edge of the plaza had a son, and because a son was no use to her she put him in an old winnowing basket and left him on the dung heap. The dogs and the crows came and sat around him in a ring all morning, and not one of them touched him. A man going by saw the ring of dogs and took the boy home.</p>
+  <p>That same day the padre told don Cosme Baca, who ran the mule trains to Chihuahua, that by the almanac a boy born in the Ca&ntilde;ada that day would be the richest man in the valley. Don Cosme's wife was near her time. He sent his servant Juana to buy the boy, meaning to marry him to his daughter if she had one. She had a son.</p>
+  <p>So don Cosme gave Juana her orders. She laid the baby across the gate of the corral at dawn, where the oxen would come out over him, and the lead ox, that always came out last, came out first that morning and stood over the child with its four feet around him while the herd went by on either side. The herdsman took him home. Juana bought him back. She laid him in the road in front of the carretas leaving for Chihuahua, and the oxen of the first cart threw off their yoke and would not go on, though the drover yoked them again and again until the sun came up. The drover took him home. Juana bought him back. She left him in the brush behind the camposanto for the coyotes, and a nanny goat went into the chamisa and knelt down over him and nursed him, and the goatherd took him home. Juana bought him back. She carried him up the cliff over the river they call the Robbers' Leap and threw him off, and he fell into a willow thicket as if into a feather bed, on the very morning a basket-maker had come with his son to cut withes there. The basket-maker took him home. Juana bought him back.</p>
+  <p>They called him Ventura, the lucky one. The old women said the dogs knew him, and the oxen, and the goat.</p>
+  <p>When he was twelve don Cosme went to the man who burned lime by the river and paid him to kill the boy he would send the next morning and put him in the kiln. In the morning he sent Ventura down with a message. <em>Tell him to finish the job I gave him yesterday.</em> On the way Ventura passed don Cosme's own son losing at knucklebones in the plaza. <em>Where are you going?</em> <em>To the lime-burner, with a message.</em> <em>Let me take it. I've lost everything I have to these boys. Stay and win it back for me.</em> So don Cosme's own son went to the kiln.</p>
+  <p>Don Cosme came running down the river road at evening with his hands in the air. <em>Don't! Don't!</em> And the lime-burner said, <em>Be quiet, patr&oacute;n. It's done.</em></p>
+  <p>After that don Cosme wrote a letter to his mayordomo at the rancho on the Chama. <em>This is my bastard. Kill him and throw him down the well.</em> He pinned it inside Ventura's coat, because Ventura could not read, and told him to eat on the way at his compadre's house. The compadre's daughter Rosal&iacute;a had been taught her letters by the padre. She took the letter from the coat of the young man asleep in her mother's kitchen, read it, burned it, and wrote another in don Cosme's hand. <em>This is my son Ventura. Marry him to the daughter of my compadre. Build him a house in the middle of the rancho with a wall around it, and set men to guard him.</em> The mayordomo did all of it and sent word to the Ca&ntilde;ada that it was done.</p>
+  <p>Don Cosme took to his bed with the bloody flux. He sent for Ventura to tell him before witnesses that he would not leave him a single real. Rosal&iacute;a had told Ventura where to stand. When don Cosme opened his mouth to say <em>I will not give him</em>, he said, <em>I give him,</em> and died, and el Lucero, who was the law in that valley, gave Ventura everything don Cosme had. Ventura set a kitchen at his gate, and every day at noon he fed whoever came.</p>
+</section>
+
+<section>
+  <h2>III. The Fence</h2>
+  <p class="dateline">The Camino Real &middot; winter 1780&ndash;81</p>
+  <p>Ventura had a friend he had never met, don Ferm&iacute;n Ledesma of El Paso del Norte. For twenty years they had sent each other presents by the caravans, wine and brandy north, wool and pi&ntilde;ones south.</p>
+  <p>In the fall of 1780 the smallpox came up the river from Mexico. It went through El Paso and through every pueblo on the Rio Grande. In don Ferm&iacute;n's house the servants died first, and then the children, and when there were three of them left, don Ferm&iacute;n and his wife and their daughter Paz, they broke a hole through the back wall of the house and went out that way, and not by the door the sickness had come in, and started north to find Ventura.</p>
+  <p>They came into the Ca&ntilde;ada in January, black from sun and wind, so starved they could hardly stand, and lay down in a shed by the road. Don Ferm&iacute;n would not go to his friend's door looking like a beggar. They would eat a few days at the kitchen at his gate first. So Paz, who had been brought up never to go out of the house without her mother, covered her face with her rebozo and stood in line with the beggars and the widows and the children of the smallpox. <em>How many?</em> <em>Three.</em> They gave her three bowls. Her father ate all of his, and could not keep it, and died before morning. The next day she asked for two, and her mother ate, and died. The third day she asked for one.</p>
+  <p>The man with the ladle was Ventura's steward Mat&iacute;as. <em>So today,</em> he said, <em>you finally know how much your belly holds.</em></p>
+  <p>She told him why. He put the ladle down in the pot and cried in front of everybody and took her home and called her his oldest daughter.</p>
+  <p>The kitchen at Ventura's gate was a shoving mob every noon that winter, and the shouting carried to Ventura's house across the plaza, and he liked to hear it. <em>That's my kitchen,</em> he would say. Paz said to Mat&iacute;as, <em>Why do you let them fight like that?</em> <em>There's no stopping it.</em> <em>Put a fence around the yard, and two gates, each wide enough for one, and have them come in by one and go out by the other.</em> He did it, and after that there was no more shouting.</p>
+  <p>After three days Ventura asked Mat&iacute;as if the kitchen had closed. Mat&iacute;as told him about the fence, and then about the girl who had thought of it, and then the whole story from the beginning. <em>Ledesma's girl? Why didn't you tell me? My friend's daughter is my daughter.</em> He took her into his house and kissed her on the head and gave her every girl he had taken in that winter to keep her company. There were so many of them that people in the plaza said Paz had five hundred women.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On the feast of San Juan, when the women of the valley go down to bathe in the river, and girls who never go out of their houses walk through the plaza with all the world looking, Paz and her women went down to the Santa Cruz. El Lucero saw them from his roof.</p>
+  <p><em>Whose dancers are those?</em></p>
+  <p><em>Nobody's dancers, patr&oacute;n. That's Ledesma's daughter. Ventura's girl.</em></p>
+  <p>He sent for her that afternoon. Ventura sent back that he did not give away girls to have them talked about. El Lucero's men nailed Ventura's doors shut and put him and his wife out in the road. When Paz came up from the river she found them sitting there.</p>
+  <p><em>Father, don't argue. Send word that I'll go, with my women.</em></p>
+</section>
+
+<section>
+  <h2>IV. The White Horse</h2>
+  <p class="dateline">The R&iacute;o Abajo &middot; 1782</p>
+  <p>Don Ignacio Saavedra, whom they called el Bravo, ran his sheep from Bernalillo to the Puerco, and one day he asked his men whether anybody on the river was as grand as he was. Only el Lucero of the Ca&ntilde;ada, they said, who had a guitar that called horses, and more horses than God. He meant to take him. Nobody could, they said. But el Lucero would ride a long way for a good horse.</p>
+  <p>So el Bravo had a stallion built out of cottonwood and hide, white as the snow on the Truchas, with men inside it to walk it, and set it loose by the hot springs at Ojo Caliente. When el Lucero heard of it he rode out after it and played the third song, and the white horse did not stop, because it had no ears. He rode on alone after it, faster than his men could follow, and el Bravo's riders closed in from both sides.</p>
+  <p>El Bravo locked him in his torre&oacute;n and feasted for three days, until el Lucero sent down word that a man who takes his enemy alive must let him go or kill him, and getting drunk was neither. El Bravo came up. He would let him go, he said, for the songs. El Lucero said he would teach them to anyone who knelt to him first. El Bravo said he would sooner have him hanged. <em>Hang me, then. You're master of my neck. You're not master of my songs.</em></p>
+  <p>So el Bravo told el Lucero there was a hunchbacked woman in his house who would kneel to learn them, behind a blanket so he would not have to look at her. And he told his daughter Dolores there was a leper in the tower who knew a great secret, and she must learn it from behind a blanket so she would not catch his sickness. For a month he played on one side of the blanket and she tried on the other. One day she could not get it right, and he shouted, <em>Thick-lipped hunchback, I'll knock your teeth in!</em> and she shouted back, <em>Leper! Who are you calling a hunchback?</em> and he lifted the blanket.</p>
+  <p>After that there were no more lessons. She went to her father and said the secret needed a root that had to be dug by starlight, so they would need a door and a horse at any hour. He gave her the door and the horses. One night when el Bravo was at a wedding in Bernalillo, they loaded his gray she-mule with two sacks of pesos, gold and silver, and took his two mares, and rode north. When el Bravo's men came after them el Lucero opened the sack of gold and scattered it in the road, and the riders got down to fill their hats, and when they came on again he scattered the silver. By morning he was with his own men at the Ca&ntilde;ada. Dolores came into his house as his second wife.</p>
+</section>
+
+<section>
+  <h2>V. The Footprint</h2>
+  <p class="dateline">Taos &middot; 1783</p>
+  <p>In those years there was a man the valley called el Hermano. He had been born among some people out on the plains, nobody knew which, and taken as a child by the Comanches, and ransomed at the Taos fair by a family of Abiqui&uacute; who raised him to work for them for twenty years and taught him the catechism. When his years were served he went to live alone in a hut below the black mesa by the river. He belonged to no brotherhood and took no vows. People came to sit with him anyway, and some of them stayed.</p>
+  <p>Every winter a band of men who lived summers in the mountains came down to the Ca&ntilde;ada, and three rich men, Ventura and don Gaspar Gallegos and don L&aacute;zaro Tafoya, kept them until spring. One fall, coming down, they sat under a great cottonwood by the river, and the oldest thought how good a drink of water would be, and there was water. He thought of food, and there was food. <em>Who's there?</em> A peon in his work clothes came out of the trunk. He had worked for a family in Abiqui&uacute; that followed el Hermano, and one Holy Thursday he came in from the fields at dark, starving, and found the whole house keeping the fast. He kept it with them, though it was late, and the cramps took him, and he died at dawn on Good Friday. Since then, he said, he had lived in the tree.</p>
+  <p><em>Who is this Hermano?</em> they asked, and made him say the name three times, and went down to the hut below the mesa and never went back up the mountain. That spring the three rich men each built el Hermano a little chapel of adobe on his own land, and el Hermano kept one day in each, and on each day took his bread at that man's door.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Up in Taos lived a Spaniard named don Melit&oacute;n Mondrag&oacute;n with a daughter, Clara, who was the most beautiful girl in the north. Every young man with a horse had asked for her, and don Melit&oacute;n had sent every one of them off, cursing, as not good enough. One morning he saw el Hermano on the road below the pueblo and stood still. He was looking at the most beautiful man he had ever seen.</p>
+  <p><em>Wait here,</em> he said. <em>I have a daughter for you.</em></p>
+  <p>El Hermano said nothing. Don Melit&oacute;n brought Clara back in her silk, with her mother and half of Taos behind them. El Hermano was gone. Where he had stood there was one footprint in the dust.</p>
+  <p>Do&ntilde;a Clara the elder, the girl's mother, had been raised on the frontier and could read a track as well as any scout in the governor's service. She knelt and looked at it a long time. <em>Melit&oacute;n, this is no track of a man who wants anything. A man who wants is up on his toes. A man who hates comes down hard on his heel. This one wants nothing.</em> <em>You see snakes in the water jar,</em> said her husband, and then he looked up and saw el Hermano standing in the field.</p>
+  <p><em>Hermano, I give you my daughter.</em></p>
+  <p>El Hermano said he would tell him something first. He said that when he was young he had gone out into the desert to pray, and the devil's daughters had come to him there, as girls and as women, as everything a man could want. <em>I didn't want them,</em> he said. <em>What is it, a bag of piss and dung? I wouldn't touch it with my foot.</em></p>
+  <p>Don Melit&oacute;n and his wife gave away what they had and went to live by the river near el Hermano. Clara had heard herself called a bag of dung in front of half of Taos. Her uncle, don Severo, took her down to the Ca&ntilde;ada in her silk and showed her to el Lucero, and el Lucero took her for his third wife. From the day she came into his house she waited for el Hermano to walk by.</p>
+  <p>El Lucero kept each of his wives in her own house around the great placita and spent seven days with each, in turn, and the padre at Santa Cruz preached against it every Lent and took his tithes anyway.</p>
+</section>
+
+<section>
+  <h2>VI. Castile Roses</h2>
+  <p class="dateline">The great placita &middot; summer 1783</p>
+  <p>El Lucero gave Paz eight reales a week to buy roses for the altar in her room. Her servant Chona went for them, a hunchbacked genízara who had been bought at the Taos fair as a girl. She bought them from Sim&oacute;n, the gardener of the three rich men, who grew the old roses of Castile along his ditch, and every week she paid him four reales and kept four.</p>
+  <p>One day Sim&oacute;n said, <em>No roses yet. El Hermano is eating at my house today. Stay, and you can have what's left over after.</em> So Chona stood in Sim&oacute;n's doorway while el Hermano ate his bread and said his thanks. What he said was very short. She went home with eight reales' worth of roses.</p>
+  <p><em>Did the patr&oacute;n give us double this week?</em></p>
+  <p><em>No, se&ntilde;ora. Every other week I kept four reales for myself.</em></p>
+  <p><em>Why not this week?</em></p>
+  <p><em>Because I heard el Hermano.</em></p>
+  <p>Paz did not call her a thief. She said, <em>You've had a drink of something. Give me some.</em> She had water heated and bathed Chona herself and put a new skirt on her and her own rebozo, and sat her in her own chair with her painted fan, and Chona told them everything el Hermano had said, word for word, to Paz and all her women. When she was done they said, <em>From now on, don't take anything. Be our mother. Go every day and hear him and come back and tell us.</em> Chona did, every day, so faithfully that el Hermano said later there was no one, man or woman, who had his words by heart the way she did.</p>
+  <p>The women wanted to see him. <em>Se&ntilde;ora, this is a rich man's house,</em> Chona said. <em>You got in. You don't get out.</em> <em>Then what can we do?</em> <em>Make holes in the walls.</em></p>
+  <p>So they dug through the adobe with spindles and kitchen knives, holes just big enough for an eye and a hand. When el Hermano went by on the road to the rich men's doors they stood at the holes and looked, and put their hands out through the walls holding roses.</p>
+</section>
+
+<section>
+  <h2>VII. The Guitar</h2>
+  <p class="dateline">The great placita &middot; autumn 1783</p>
+  <p>Clara Mondrag&oacute;n saw the holes and found out what they were for, and went to el Lucero. <em>Paz and her women are cutting holes in your walls. In a few days they'll kill you.</em> He did not believe her. The third time she told him he went and saw the holes, and said nothing, and had them filled with adobe and new windows set in all the rooms, small, and high up in the wall, so that a woman inside could see the sky and nothing else. That is why the old houses in the Ca&ntilde;ada have their windows so high, people say.</p>
+  <p>Then Clara paid the idlers of the plaza to follow el Hermano. <em>Thief,</em> they shouted, <em>Comanche, dog, mule, devil, you're going to hell.</em> His companion, a young man named Cruz who carried his water jar, said, <em>Hermano, let's go somewhere else.</em> <em>Where?</em> <em>To Santa Fe.</em> <em>And if they shout at us in Santa Fe?</em> <em>Then to Albuquerque.</em> <em>And there?</em> Cruz had no answer. <em>Trouble that starts in one place has to be settled in that place,</em> el Hermano said. <em>I'm like a horse in a fight. The arrows come from every side. It's my work to stand.</em> And he gave Cruz a line to hold on to.</p>
+  <div class="verse">
+    <p>Take all that shall be brought upon thee: and in thy sorrow endure, and in thy humiliation keep patience.</p>
+    <p>&mdash; Ecclesiasticus 2:4</p>
+  </div>
+  <p><em>Seven days,</em> he said. On the eighth day the idlers were quiet.</p>
+  <p>So Clara turned to the women. One night when el Lucero was drinking El Paso brandy, her uncle brought eight live cocks and eight dead ones, and she paid the page, and the page carried the live cocks in. Clara said, <em>Send them to Paz's women, they have nothing to do, let them kill them and cook them for you.</em> The women sent back that since they had heard el Hermano they did not wring the neck of anything, not even a hen's. <em>Then tell them to cook them for el Hermano,</em> said Clara, and el Lucero sent that word, and the page carried them the eight dead cocks instead, and the women took them at the door and thanked him. <em>You see?</em> said Clara. <em>For you, nothing. For him, anything.</em> El Lucero still said nothing.</p>
+  <p>He always carried his guitar, the old one with three courses that had come down out of the Truchas with him, and there was a crack in its belly beside the sound hole. Clara had her uncle bring her a rattlesnake with its fangs dipped in poison, and she put it inside the guitar and stopped the hole with a bunch of Castile roses. On the morning el Lucero was to go to Paz for his seven days, Clara told him she had dreamed something terrible, and begged him three times not to go. When he went anyway she went with him.</p>
+  <p>At Paz's house he ate, and lay down, and set the guitar by the pillow. Clara walked back and forth in the room. As she passed the bed she pulled out the roses. The snake had been three days in the dark without food, and it came out over the strings and coiled on the bed beside his face and sang.</p>
+  <p>Clara screamed. <em>I told you! I told you and you wouldn't listen! What don't these women get from you? And this is how they pay you!</em></p>
+  <p>El Lucero took down the horn bow he had brought home from a fight on the plains and strung it and fitted an arrow. Paz stood in front of him, and her women stood behind her in one line, and she said to them, <em>Hold nothing against him. Nothing against her. Love them both the way you love yourselves.</em></p>
+  <p>He loosed the arrow at her breast. It stopped in the air between them and turned and came back the way it had gone, and fell at his feet. The people who were there said that it went into his heart all the same, by another road.</p>
+  <p>He threw the bow down and knelt. <em>Protect me, Paz. I don't know where I am.</em></p>
+  <p><em>Not me,</em> she said. <em>Go to the one I go to.</em></p>
+  <p>He went down to the hut below the mesa that day and knelt there, and when he came back he told Paz to ask him for anything. She asked that el Hermano come to her house so that she and her women could hear him. El Hermano said he could not always be in one place. He sent Cruz every day instead.</p>
+  <p>One day, when Cruz had talked to them a long time, the women brought him five hundred new blankets of the valley's wool, striped, still smelling of the dye pot. El Lucero saw his wives with their shoulders bare in October and went to find out why.</p>
+  <p><em>What will you do with five hundred blankets?</em></p>
+  <p><em>Keep what we need, patr&oacute;n, and give the rest to those whose blankets are worn out.</em></p>
+  <p><em>And their old ones?</em></p>
+  <p><em>They give them to people whose blankets are worse, who make covers of them for their beds. When the covers wear thin they weave them into jerga for the floors. When the jerga wears through they cut it up and mix it with the mud and straw to plaster the walls.</em></p>
+  <p>El Lucero sent Cruz five hundred more.</p>
+</section>
+
+<section>
+  <h2>VIII. The Morning Star</h2>
+  <p class="dateline">The great placita &middot; Lent 1784</p>
+  <p>Clara could think of nothing else. On a day when el Lucero had ridden out to his sheep camps on the Chama, she sent her uncle into Paz's house. He opened the storerooms, soaked rags in tallow and pi&ntilde;on pitch, and began to wind them around the posts of the portal and the ends of the vigas. Paz's women came out to see. <em>The patr&oacute;n wants the wood cured,</em> he told them. <em>Who knows why they do anything in a rich man's house. Go in, ladies, you'll get pitch on your skirts.</em> When they had all gone into their rooms he barred the doors from outside and set fire to the rags one after another and walked away.</p>
+  <p>Paz called through the walls to her women. <em>Who knows how many times women like us have burned. In this valley, in the raids, in every country there ever was, all the way back. Watch.</em> She did not say watch what. Chona was at Sim&oacute;n's that morning, and so she lived to say that from the road she could hear them through the high windows, praying, not screaming, until the roof came down.</p>
+  <p>Cruz and the mountain men brought the news to el Hermano at noon.</p>
+  <p><em>Paz's house burned with all her women in it. What will become of them?</em></p>
+  <p><em>Not one of them is lost,</em> said el Hermano. <em>Each one of them received what was hers.</em> And that was all he said that day.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>El Lucero came at a gallop when he saw the smoke and found the roof in. He sat in the ashes until night. He knew who had done it, and that she would never tell him if he asked. So in front of his household he said, <em>Every day of my life I've been afraid of that woman and her holes in the walls. Tonight I'll sleep. Whoever did this loved me.</em></p>
+  <p>Clara was standing by. <em>I did it,</em> she said. <em>Who else? I sent my uncle.</em></p>
+  <p>He said no one in the world loved him the way she did, and she should send for all her family, to be honored. They came from Taos, all of them, and others who had paid her uncle to be counted among her cousins. When they were all inside his gates he had pits dug waist-deep in the plaza and stood them in them, and filled the pits, and heaped straw around them and set it on fire. When the fire had burned down, he had them broken with the iron plow, the only one in the valley. He had Clara held, and cut pieces of her flesh away with a knife, and fried them in oil on a brazier in front of her, and made her eat them.</p>
+  <p>The mountain men said to el Hermano that it was not right for women who loved God so much to die like that. If you look at this life alone, he said, it is not right. Then he told them a story. Once, he said, in some country, some women who had been bathing in a cold river came out shivering and saw a heap of brush and set it on fire to warm themselves. When the brush burned down they saw a holy man sitting inside it, praying. They were afraid the lord they served would kill them for it. So they brought more wood from all around and piled it on him, and poured oil on it, and went away. <em>I don't know where that was,</em> el Hermano said. <em>I don't know when.</em></p>
+  <p>Later the mountain men argued by the river. Paz and her women burned in their house. Clara Mondrag&oacute;n and all her people were burned in the plaza and broken with the plow. Which of them were alive and which were dead?</p>
+  <p>El Hermano heard them. <em>Clara was dead the whole time she was walking around,</em> he said. <em>Paz and her women are alive. People who watch don't die.</em> And he said the rest of it from the old books.</p>
+  <div class="verse">
+    <p>For she that liveth in pleasures, is dead while she is living.</p>
+    <p>&mdash; 1 Timothy 5:6</p>
+  </div>
+  <div class="verse">
+    <p>Blessed is the man that heareth me, and that watcheth daily at my gates, and waiteth at the posts of my doors. He that shall find me, shall find life, and shall have salvation from the Lord: But he that shall sin against me, shall hurt his own soul. All that hate me love death.</p>
+    <p>&mdash; Proverbs 8:34&ndash;36</p>
+  </div>
+  <p>El Lucero never had the house roofed again. The walls stood in the great placita for years, black inside, with the small windows set high where he had put them.</p>
+  <p>Chona went there every morning while it was still dark. In summer she carried roses from Sim&oacute;n's ditch and set them along the sill of the high window in the room that had been Paz's. In the winter she stood on the fallen vigas and looked out through that window at the morning star over the Truchas, which was the only thing it showed.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verses</h3>
+    <blockquote class="pd">Earnestness is the path of immortality (Nirvana), thoughtlessness the path of death. Those who are in earnest do not die, those who are thoughtless are as if dead already.<cite>Dhammapada 21, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Those who are advanced in earnestness, having understood this clearly, delight in earnestness, and rejoice in the knowledge of the Ariyas (the elect).<cite>Dhammapada 22, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">These wise people, meditative, steady, always possessed of strong powers, attain to Nirvana, the highest happiness.<cite>Dhammapada 23, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The longest story in the commentary is a cycle about King Udena of Kosamb&#299; and his court. Udena is born in a tree after a monster bird carries off his pregnant mother, grows up with a hermit who gives him a lute that charms elephants, and rides home on an elephant to claim his throne. The foundling Ghosaka survives seven attempts on his life by the rich man who bought him. The orphan <a href="https://en.wikipedia.org/wiki/Samavati">S&#257;m&#257;vat&#299;</a>, named for the fence she builds around an almshouse, becomes one of Udena's three chief queens; another, V&#257;suladatt&#257;, he wins while held prisoner by her father, who lured him with a wooden elephant; the third, M&#257;gandiy&#257;, comes to hate the Buddha after he refuses her in marriage with a scornful verse about the body. S&#257;m&#257;vat&#299;'s hunchbacked maid <a href="https://en.wikipedia.org/wiki/Khujjuttara">Khujjuttar&#257;</a> hears the Buddha while buying flowers and teaches the queen's women. M&#257;gandiy&#257; hires men to revile the Buddha, frames the women with dead cocks and a snake hidden in Udena's lute, and when the arrow Udena shoots at S&#257;m&#257;vat&#299; turns back, she has their house set on fire with all of them inside. Udena punishes her and her kin with fire, plow and knife. Asked which of these women are alive and which are dead, the Buddha speaks verses 21&ndash;23. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-01.htm">the full commentary story</a>.</p>
+    <h3>The Ca&ntilde;ada, 1780&ndash;84</h3>
+    <p>Spanish New Mexico hung off the north end of the <a href="https://en.wikipedia.org/wiki/El_Camino_Real_de_Tierra_Adentro">Camino Real de Tierra Adentro</a>, the road of some 1,590 miles from Mexico City that was used from 1598 to 1882. Governor Diego de Vargas reestablished the villa of <a href="https://en.wikipedia.org/wiki/Santa_Cruz,_New_Mexico">Santa Cruz de la Ca&ntilde;ada</a> in 1695, and its church was built between 1733 and 1748. Trade ran south by mule train and cart to Chihuahua, and so did the wine and brandy of <a href="https://newmexicohistory.org/?p=1253">El Paso del Norte</a>, hundreds of barrels of it in a good year. Down the same road, the <a href="https://en.wikipedia.org/wiki/1775%E2%80%931782_North_American_smallpox_epidemic">smallpox epidemic</a> that swept North America in those years left the Valley of Mexico in 1779 and reached <a href="https://newmexicohistory.org/?p=1275">El Paso and points north</a> in 1780, killing around 5,000 Pueblo people upriver.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Gen%C3%ADzaro">Genízaros</a> were detribalized Native people, most of them captives taken or bought from Comanche, Apache, Navajo and other nations and ransomed into Spanish households, where they typically owed ten to twenty years of service and were taught the Catholic faith. By 1793 they may have made up a third of the colony's people. In 1754 Governor V&eacute;lez Cachup&iacute;n gave 34 genízaro families a land grant at <a href="https://en.wikipedia.org/wiki/Abiqui%C3%BA,_New_Mexico">Abiqui&uacute;</a> on the Chama in return for defending the frontier, and it became the archetypal genízaro settlement. On the feast of San Juan, June 24, the people of the northern valleys still keep <a href="https://www.taosnews.com/opinion/columns/summer-solstice-sun-corona-and-crown-virus/article_35c5ca32-d6ef-50ae-be0c-28917ba618c9.html">old traditions of bathing</a> in the streams, and the rivers and acequias are blessed.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Udena and S&#257;m&#257;vat&#299; from the Dhammapada commentary (verses 21&ndash;23). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-01.htm">The original</a>. Scripture from the Douay-Rheims Bible (Challoner revision). Written by Claude Opus 5.5.
+  <div class="pager"><a href="little-brother.html">&larr; Little Brother</a><a href="index.html">All stories</a><a href="paid-in-rice.html">Paid in Rice &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Embers lifting off a fire below the page: slow, few, fading as they rise.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, embers = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(e, anywhere) {
+    e.x = Math.random() * W;
+    e.y = anywhere ? H * (0.25 + Math.random() * 0.8) : H + 10 + Math.random() * 40;
+    e.vy = 0.18 + Math.random() * 0.35;
+    e.sway = 0.4 + Math.random() * 0.9;
+    e.ph = Math.random() * Math.PI * 2;
+    e.r = 0.8 + Math.random() * 1.6;
+    e.life = 0.75 + Math.random() * 0.25;
+    return e;
+  }
+  function make() {
+    var n = Math.round(Math.max(14, Math.min(34, W * H / 45000)));
+    embers = [];
+    for (var i = 0; i < n; i++) embers.push(spawn({}, true));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < embers.length; i++) {
+      var e = embers[i];
+      if (!reduce) {
+        e.ph += 0.012;
+        e.y -= e.vy;
+        e.x += Math.sin(e.ph) * 0.25 * e.sway;
+        if (e.y < H * 0.15) spawn(e, false);
+      }
+      var h = Math.max(0, Math.min(1, (e.y - H * 0.15) / (H * 0.85)));
+      var flick = reduce ? 0.8 : 0.7 + 0.3 * Math.sin(e.ph * 7);
+      var a = h * e.life * flick * 0.6;
+      if (a < 0.02) continue;
+      var R = e.r * 5;
+      var g = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, R);
+      g.addColorStop(0, 'rgba(255,190,120,' + a + ')');
+      g.addColorStop(0.3, 'rgba(227,130,70,' + (a * 0.45) + ')');
+      g.addColorStop(1, 'rgba(180,60,40,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(e.x, e.y, R, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

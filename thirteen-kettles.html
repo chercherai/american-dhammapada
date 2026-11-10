@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thirteen Kettles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the blue-white of late snow, light theme; along the bottom margin, now here and now there, a single bean vine climbs a hand's breadth, opens two leaves and one white flower, and is gone; datelined sections. */
+  --ground: #e9eef0;
+  --ground-2: #dbe3e6;
+  --ink: #20272b;
+  --ink-dim: #5d6a70;
+  --accent: #8a4a22;
+  --glow: #4f7d4a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f1f4f5 0%, var(--ground) 50%, #dfe6e8 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(32,39,43,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(79,125,74,0.1); }
+.epigraph { border-left: 1px solid rgba(138,74,34,.4); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(219,227,230,0.85); border: 1px solid rgba(32,39,43,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse .en { color: var(--ink-dim); }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(32,39,43,.14); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(32,39,43,.16); border-bottom: 1px solid rgba(32,39,43,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(219,227,230,0.85); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 24.12 &middot; A&#7749;kura</span></nav>
+<header>
+  <h1>Thirteen Kettles</h1>
+  <div class="epigraph">And other fell on good ground, and did yield fruit that sprang up and increased.<br>&mdash; Mark 4:8</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is the way I got it,</span> at Sheep Camp.</p>
+
+<section>
+  <h2>I. The Row of Fires</h2>
+  <p class="dateline">Dyea to Lake Bennett &middot; August 1897 to March 1898</p>
+  <p>Anker Mikkelsen was a wholesale grocer of Tacoma, a Dane, fifty-six years old, a deacon of his Lutheran church and a careful man. In the eight weeks after the <em>Portland</em> came into Seattle with her ton of gold, he sold more beans, bacon, flour and evaporated potatoes than he had sold in the eight years before. The Canadians would let no man over the passes without a year&rsquo;s provisions, the better part of a ton, and every clerk and streetcar conductor on Puget Sound was buying his ton. By the end of August Mikkelsen had forty thousand dollars he had not had in June.</p>
+  <p>He could not sleep on it. He had looked at the men who bought. He had weighed out a year of beans for a consumptive bookkeeper, and for two boys from a hop farm who could not have been seventeen, and he had taken their money and wished them luck. He told his wife he was going north to give some of it back along the road it had come down.</p>
+  <p>He did it the way he did everything, with a plan and a ledger. The trail from tidewater at Dyea to the head of Lake Bennett, where the boats were built, was thirty-three miles, which the old Hudson&rsquo;s Bay men would have called twelve leagues, and it went over the Chilkoot Pass. Mikkelsen set a kettle at every place on it where men stopped. There was one on the flats at Dyea, and one at Finnegan&rsquo;s Point by the toll bridge. There was one at Canyon City, and at Pleasant Camp, and at Sheep Camp under the mountain. There was one at the Stone House, and one at the Scales, where the loads were weighed again before the last climb. Over the summit, on the Queen&rsquo;s side, there were six more, at the Crater, at Happy Camp, at Long Lake and Deep Lake, at Lindeman and at Bennett. That made thirteen kettles. Each was a forty-gallon iron wash boiler on a stone hearth under a fly of canvas, with a hired man to keep the fire and a sign on a board. <em>MIKKELSEN. HOT SOUP &amp; BREAD. NO CHARGE.</em></p>
+  <p>The fires did not go out from the last week of August until spring. At night, from the Scales, a man could look back down the canyon and see four of them, one below the other, like lamps on a stair.</p>
+  <p>He moved up and down the line himself, in a Mackinaw coat, checking the fires. He kept the count in a black book. Each kettle man made a pencil stroke for every bowl, and Mikkelsen added the strokes on Saturday night, the way he had added the day-book in Tacoma. By New Year the figure was past thirty thousand. By the end of March it was sixty-one thousand, four hundred and some, which was nearly twice the number of people the last census had found in the whole District of Alaska.</p>
+  <p>Men ate his soup and went up. That was all anyone could say afterward about what became of it. They ate it standing, with the pack still on, looking over the rim of the bowl at the trail. Each man had his ton to move, forty or fifty trips on his own back from one cache to the next, and every hour he stood still he could see other men passing him toward the gold. They shoved in the line. Two partners from Ohio, who had come north closer than brothers, pulled knives on each other over a place at the Canyon City kettle. A man at Lindeman was found selling Mikkelsen&rsquo;s free bread at fifty cents the loaf. Three boilers were stolen that winter by men who wanted them to boil pitch for their boats. Men cursed the soup when it was thin. When it was thick they came through the line twice with their hats pulled down.</p>
+  <p>Mikkelsen did not hold it against them. He did not hold anything against anybody. He ladled when a kettle man was sick, and he never looked up from the ladle to see whose bowl it was. A bowl came, and he filled it, and it made a stroke in the book.</p>
+</section>
+
+<section>
+  <h2>II. The Spoon</h2>
+  <p class="dateline">The Scales &middot; Saturday, April 2, 1898</p>
+  <p>It had snowed for five days. Then the wind went round to the south and blew warm, and the new snow on the mountain turned heavy and began to talk.</p>
+  <p>Isaac was a Chilkoot man, from the people who had owned that trail before there was any Dyea. His grandfathers had carried eulachon grease over it to trade with the people of the interior, and had let nobody else use it, not even their own cousins the Chilkats. He was thirty or so. He packed for wages. In the bad autumn, when the trail was mud and the stampeders were frantic, the packers had got as much as a dollar the pound to the summit. Now that the tramways were running, it was down to a nickel. Isaac carried a hundred and forty pounds at a trip with a strap across his forehead, and he could tell you what that came to.</p>
+  <p>He had brought one load up to the Scales that morning. It was his last. He sat on it to eat before he went down. He had a tin pail with what was left of his own dinner, beans cooked with a piece of salmon, and a spoon. He did not eat at Mikkelsen&rsquo;s kettle, which was thirty yards off with fifty men around it, pushing. Nobody had told him he could not. He did not like the way they ate.</p>
+  <p>Old Andrew Rudd came down off the Golden Stairs at about noon, with the mail sack.</p>
+  <p>Everybody on the Chilkoot knew Rudd, and nobody could have said what he was for. He had come into the country in 1886, ahead of all of them. He had taken gold out of the Fortymile and spent it, and taken out more and been robbed of it, and lost three toes and a partner, and somewhere on the Yukon ten years before Bonanza Creek he had lost the wanting too. Men said it had gone out of him like a tooth. Now he carried the mail between Dyea and Bennett for whatever the post office paid. He boarded at the widow Garrity&rsquo;s eating tent at Sheep Camp when he was on that side. He owned what was on his back. In March the glare off the snow had taken his eyes for the third time, and this time they had not come back. He went up and down the Chilkoot with his hand on the guide rope and a red handkerchief tied over his face. On the days she could get away, the widow&rsquo;s girl walked him as far as the Stone House by a cord around her wrist.</p>
+  <p>He came along the rope past the kettle. He had not eaten since Lindeman. He stood at the edge of the crowd there with his bowl out, and men went around him on both sides.</p>
+  <p><em>Rudd,</em> said Isaac.</p>
+  <p>The old man turned his handkerchief toward the voice and came over, feeling with his feet.</p>
+  <p>There was one spoonful in the pail. Isaac had been going to eat it. He looked at it, and filled the spoon, and put the handle in the old man&rsquo;s hand.</p>
+  <p>Rudd ate it slowly. He ate it the way he did everything since his eyes went, as if nothing else were happening anywhere. Then he wiped the spoon on his sleeve and gave it back.</p>
+  <p><em>That&rsquo;s good salmon,</em> he said. <em>Thank you.</em> He stood with his face lifted, listening up the slope behind him. <em>Do you hear her?</em></p>
+  <p><em>I hear it,</em> said Isaac. <em>We&rsquo;re all going down. None of us is packing tomorrow. I told them at the tramway. I told the men there.</em> He nodded at the kettle, at the crowd. <em>They say Indians don&rsquo;t want to work on Sunday.</em></p>
+  <p><em>They can&rsquo;t hear anything,</em> said Rudd. <em>They&rsquo;ve got Dawson in their ears.</em></p>
+  <p>He found the rope again and went on down to Sheep Camp, and Isaac shouldered his empty pack frame and went after him.</p>
+</section>
+
+<section>
+  <h2>III. Palm Sunday</h2>
+  <p class="dateline">Above Sheep Camp &middot; April 3</p>
+  <p>The first slide came down on the tents at the Scales at two in the morning and buried twenty men, and they were all dug out alive. That frightened the ones who were left. Toward ten o&rsquo;clock a second buried three people lower down, who were got out, and a third killed three in their blankets on the Long Hill. Then a whole crew of tramway men, coming down to camp, were caught in the ravine above the Stone House, and not one of them walked out.</p>
+  <p>A little before noon the people from the Scales started down together, some two hundred of them, in single file, holding to a rope, in snow so thick they could not see the man ahead. They were in the same ravine when the mountain let go. It made very little noise. It covered a third of them, some as deep as fifty feet.</p>
+  <p>Somebody fired a rifle, and somebody else, and within the hour there were fifteen hundred men up from Sheep Camp with shovels. They had been climbing over each other for eight months. Now they dug in lines, and passed the snow back hand to hand, and did not speak. They dug for four days. A few came out breathing. The rest were laid on sleds and brought down to a tent at Sheep Camp, sixty of them and more, nobody ever knew the right number, and a committee went through their pockets for names.</p>
+  <p>Mikkelsen&rsquo;s man at the Scales, a Swede named Lind, was under it. Mikkelsen dug for him with the others, and when Lind was found he went back down and moved three boilers up to the ravine, and for four days and nights he fed the diggers. He ladled it himself. Those were the last strokes that went into the black book. He thought, and he was ashamed of thinking it at such a time, that it was the best use the soup had ever been put to.</p>
+  <p>Isaac dug. So did his brothers and nine other men from the village, the ones who had said on Saturday that they were not going up.</p>
+  <p>Old Rudd could not dig. He sat on a sled at the mouth of the ravine with the widow&rsquo;s girl beside him. When the men down in the trench heard a voice under the snow and could not tell from where, they stopped and stood quiet and looked up at him, and he turned his covered face a little and pointed.</p>
+</section>
+
+<section>
+  <h2>IV. The Yellow Rock</h2>
+  <p class="dateline">Sheep Camp &middot; Easter Sunday, April 10</p>
+  <p>The girl was Nell Garrity. She was eleven. Her father had died at Sheep Camp of a fever in October, on his way to the Klondike. Her mother had turned his outfit into an eating tent with three plank tables, because the outfit was all they had and there was no money to go home on. Nell waited on the tables. She had carried beans and coffee to perhaps ten thousand men that winter. She was the one person at Sheep Camp, apart from Rudd, who was not going anywhere and did not want to. She had watched them all go by, and she had got so she could tell which ones would be back in a week selling their goods for the fare home. She did not think much of gold. She had seen what it looked like on people.</p>
+  <p>Above the last tents of the camp there was a boulder the size of a cabin, with yellow lichen all down its south face. It was the one dry place to sit in that canyon, and Rudd sat there in the mornings with his face to the sun he could not see, and Nell sat with him when her mother could spare her. She told him who was going by. He told her other things.</p>
+  <p>On Easter morning the snow had stopped at last. The dead were still in the long tent, waiting for the trail to be fit for the sleds, and the camp came up to the rock to hold some kind of service over them, since it was Easter and there were so many. They had sent to Dyea for a preacher. The preacher had not come. Six or seven hundred men stood about in the trampled snow with their hats in their hands, looking at each other.</p>
+  <p>Mikkelsen had come early. He had sat down on a bench close under the rock on the left side, and nobody thought that was anything but right.</p>
+  <p>Isaac had come up with his brothers and meant to stand at the back. Rudd heard his voice and called him. When Isaac came, the old man took hold of his sleeve and sat him down on the rock at Nell&rsquo;s right hand, and kept the sleeve.</p>
+  <p>Then the men who mattered began to arrive. First it was the citizens&rsquo; committee, five of them, who had done the identifying. <em>Mr. Mikkelsen, would you mind?</em> He did not mind. He got up and took the second bench. Then it was the lieutenant from the Fourteenth Infantry at Dyea, with a sergeant and a burial detail. After him came the superintendent of the tramway company, which had lost its whole crew, with his engineers, and the owners of the two hotels, and the doctor, and a man from the Dyea newspaper. Each time somebody touched Mikkelsen on the shoulder, very civilly, and each time he rose and moved back. He was a modest man. It did not seem to him a thing to make a difficulty about, on such a day.</p>
+  <p>The same men looked up at the rock, and at the packer sitting on it in his wool cap beside the child. More than one of them opened his mouth. Rudd had the sleeve. Nobody could find the way to begin, and Isaac stayed where he was.</p>
+  <p>Mikkelsen went back through the standing crowd, and then he was behind it. This is the part they tell at Sheep Camp, and he told it himself, in Tacoma, to the end of his life, and never changed it. He stepped back once more to make room for a man with a crutch, and when he looked around him he was not in the canyon. He was standing by a cold iron boiler under a canvas fly, on the shore of a frozen lake, with the boat-builders&rsquo; tents of Bennett behind him. It was his own thirteenth kettle, at the far end of the whole row. There were thirty-three miles and a mountain between him and the yellow rock. He could see the rock. He could see the child on it as plainly as a figure on a clock across a room.</p>
+  <p>Somebody had asked Rudd to say the words, as the oldest man in the country.</p>
+  <p><em>I can&rsquo;t read them anymore,</em> Rudd said. <em>She has it by heart. Stand up, Nell.</em></p>
+  <p>She stood up on the rock in her mother&rsquo;s shawl. She had one piece by heart. She had learned it for the Sunday school at Sheep Camp, which was held Tuesdays in the dance hall. But she did not begin with it. She was looking over all their heads.</p>
+  <p><em>Mr. Mikkelsen!</em> she said. It was her ordinary voice, the one she called orders in. They heard it at the Scales, and the kettle man at Dyea, on the tide flats, turned his head. <em>Mr. Mikkelsen, you fed everybody all winter. You had thirteen kettles. What are you doing clear back there?</em></p>
+  <p>The crowd looked round, and could not see whom she was speaking to.</p>
+  <p>His answer came up the canyon small and clear. <em>I don&rsquo;t know, child. I have asked myself. I have given sixty-one thousand bowls of soup on this trail. That man beside you gave one spoonful of beans, I am told. And there he sits by you like the moon, and here am I, out among the little stars.</em> He was not complaining of it. He was a grocer, and he wanted to understand the account.</p>
+  <p>Nell turned. <em>Isaac. Why are you up here? Why didn&rsquo;t they move you?</em></p>
+  <p>Isaac was a long time answering. He did not care to talk before so many of them. <em>I don&rsquo;t know about that,</em> he said. <em>If a man throws a sack of seed on the beach, the tide gets it. If he puts a little in good ground, he eats all winter.</em> He looked at the old man holding his sleeve. <em>I had a little. I put it in good ground. That&rsquo;s all.</em></p>
+  <p>Then the child said the thing they remembered. She said it flatly, the way she would have told a man his eggs were coming.</p>
+  <p><em>You never looked who, Mr. Mikkelsen. You gave it to them going up. They weren&rsquo;t hungry for soup. They were hungry for the other thing, and they were so full of it there wasn&rsquo;t any room. It went straight through them. I saw them. They were mad at whoever was in front, and they didn&rsquo;t even know who you were, and all of them wanted and wanted. You can&rsquo;t put anything in a person like that. It&rsquo;s like planting in the fireweed.</em> She put her hand on the red handkerchief beside her. <em>Mr. Rudd doesn&rsquo;t want anything. He isn&rsquo;t mad at anybody. He doesn&rsquo;t think he&rsquo;s anybody. So when you give him something it stays, and it&rsquo;s still there.</em></p>
+  <p>And then she said her piece, with her hands behind her.</p>
+  <div class="verse">
+    <p>And some fell among thorns, and the thorns grew up, and choked it, and it yielded no fruit. And other fell on good ground, and did yield fruit that sprang up and increased; and brought forth, some thirty, and some sixty, and some an hundred.</p>
+    <p>&mdash; Mark 4:7&ndash;8</p>
+  </div>
+  <p><em>And then He tells what the thorns are,</em> she said.</p>
+  <div class="verse">
+    <p>And these are they which are sown among thorns; such as hear the word, And the cares of this world, and the deceitfulness of riches, and the lusts of other things entering in, choke the word, and it becometh unfruitful.</p>
+    <p>&mdash; Mark 4:18&ndash;19</p>
+  </div>
+  <p>There was one more. It had been the Golden Text on a card, the Tuesday before the slide, and she had it still in her apron.</p>
+  <div class="verse">
+    <p>He that receiveth a prophet in the name of a prophet shall receive a prophet&rsquo;s reward; and he that receiveth a righteous man in the name of a righteous man shall receive a righteous man&rsquo;s reward. And whosoever shall give to drink unto one of these little ones a cup of cold water only in the name of a disciple, verily I say unto you, he shall in no wise lose his reward.</p>
+    <p>&mdash; Matthew 10:41&ndash;42</p>
+  </div>
+  <p>She sat down. That was the Easter service at Sheep Camp. Nobody added to it. The lieutenant&rsquo;s detail fired over the long tent, and the echo went up toward the summit and came back.</p>
+</section>
+
+<section>
+  <h2>V. One Kettle</h2>
+  <p class="dateline">The Chilkoot Trail &middot; April to June</p>
+  <p>Mikkelsen walked back. It took him three days, over the summit from the Bennett side, against the whole stream of them going the other way. He came past his own kettles one at a time, Lindeman, Deep Lake, Happy Camp, the Crater, and at each he stopped and looked at the men around it. He had never done that. He saw the eyes over the rims of the bowls, fixed on the trail. He saw that he could have fed them until the Judgment and they would not have known they had eaten.</p>
+  <p>He was not bitter. He told his wife afterward that it was like finding the error in a column that had refused to prove for eight months. The figure had been right. He had entered it on the wrong side of the book.</p>
+  <p>At Sheep Camp he went to the widow&rsquo;s tent and sat down across the plank from old Rudd, and asked if he might buy him his dinner, and Rudd said he might. They ate. Nell brought it. Mikkelsen watched how the old man took a thing that was given him. He took it whole. He did not look past it at anything else.</p>
+  <p>He struck twelve of the kettles before May. The thirteenth he kept, at Sheep Camp, and he stood at it himself. He did not ladle with his eyes down. He looked at each man who came. He turned nobody away. But he found that when he looked, there were some who could be given a thing, and some who had to be given it another day. He learned to tell the difference, slowly, as Nell had learned to tell who would be back in a week. He gave the sick a bed. He gave a boy from a hop farm his fare home, and the boy took it and wept and went, and that stayed where it was put. He stopped keeping the book.</p>
+  <p>Isaac packed until the tramways took the last of the trade. Then he went home to the inlet, and fished. Mikkelsen asked him once, before he left the country, to take something, anything, for the spoonful. Isaac laughed at him. <em>Then it&rsquo;s yours,</em> he said. <em>I&rsquo;d sooner keep it mine.</em></p>
+</section>
+
+<section>
+  <h2>VI. Good Ground</h2>
+  <p class="dateline">Dyea &middot; afterward</p>
+  <p>The railroad went over the other pass, from Skagway, and was through to Bennett in the summer of 1899. After that nobody had any reason to climb the Chilkoot. Dyea had been a town of several thousand, with a long wharf run out over the tide flats. In a few years it had hardly anyone in it, and the hotels were being pulled down for the lumber.</p>
+  <p>The dead of Palm Sunday who were not sent home were buried in a clearing in the spruce behind the town, in rows, and the soldiers of the Fourteenth helped make the ground ready. Every headboard there has the same date on it. Rudd is not among them. He died in his sleep at the widow Garrity&rsquo;s in the fall of 1898, the week the mail contract went to the railroad, and was buried in the little yard at Sheep Camp. Nell and her mother went out on the last boat that year. She taught school in Ballard for thirty-eight years, and was known for being able to tell, in the first week, which of forty children could not be told anything yet, and for waiting.</p>
+  <p>Anker Mikkelsen went back to Tacoma and his scales. He sold groceries until 1911. He gave away a great deal after that winter, though less of it in money, and he was never again heard to say how much. When he died they found the black book in his desk with the total cast up on the last page. Under it, in another ink, in his bookkeeper&rsquo;s hand, he had written: <em>Cr., by one spoon beans, per Isaac. Balance carried.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The Scales are nothing now. There is a flat of broken rock at the foot of the last climb, with a litter of rusted cable and boot soles and tin that the snow uncovers in July. The people who walk the trail in summer stop there to eat before they go up.</p>
+  <p>They say there is a place beside a certain boulder, on the downhill side, about where a man would have sat on his load. In the first week of August, most years, a bean vine comes up there through the stones. It has no business at that height. The frost is never a month off, and nothing else grows there but moss and a little heather. It climbs a hand&rsquo;s breadth and puts out two leaves and one white flower. Nobody has planted it. The rangers have stopped pulling it up.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">The fields are damaged by weeds, mankind is damaged by passion: therefore a gift bestowed on the passionless brings great reward.<cite>Dhammapada 356, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The fields are damaged by weeds, mankind is damaged by hatred: therefore a gift bestowed on those who do not hate brings great reward.<cite>Dhammapada 357, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The fields are damaged by weeds, mankind is damaged by vanity: therefore a gift bestowed on those who are free from vanity brings great reward.<cite>Dhammapada 358, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The fields are damaged by weeds, mankind is damaged by lust: therefore a gift bestowed on those who are free from lust brings great reward.<cite>Dhammapada 359, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary the Buddha has gone up to the heaven of the Thirty-Three to teach, seated on the god Sakka&rsquo;s throne, the Yellowstone Rock. Two gods sit near him: Indaka at his right hand and A&#7749;kura at his left. As greater gods arrive, A&#7749;kura gives way to each until he is sitting twelve leagues off, while Indaka keeps his seat. In his human life A&#7749;kura had given alms for ten thousand years from a row of cooking-fires twelve leagues long; Indaka had once given a single spoonful of his own food to the elder Anuruddha. The Buddha asks A&#7749;kura why he sits so far away, and his voice is heard on earth. A&#7749;kura wonders that so small a gift outshines his &ldquo;as the moon does the stars&rdquo;; Indaka answers that he sowed a little seed in a good field. The Buddha tells A&#7749;kura that gifts should be given with discernment, and speaks the four verses. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-12.htm">the full commentary story</a> and the longer telling inside <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-02.htm">the story of the Twin Miracle</a>, or about <a href="https://en.wikipedia.org/wiki/Anuruddha">Anuruddha</a>, the disciple whose bodily eyes failed and who was called foremost in the divine eye.</p>
+    <h3>The Chilkoot Trail, 1898</h3>
+    <p>News of gold on the Klondike reached Seattle in July 1897, and within months tens of thousands of people were trying to reach the Yukon. Most landed at Skagway or at <a href="https://en.wikipedia.org/wiki/Dyea,_Alaska">Dyea</a> and crossed the Coast Mountains. The <a href="https://en.wikipedia.org/wiki/Chilkoot_Trail">Chilkoot Trail</a>, thirty-three miles from Dyea to Lake Bennett, was an old trade route owned and closely guarded by the Chilkoot Tlingit, many of whom now worked it as packers at rates that reached a dollar a pound. Canadian authorities required each person to bring a year&rsquo;s supply of food, so a stampeder had to relay close to a ton of goods over the pass, climbing it dozens of times. Sheep Camp, the last stop below the summit, held several thousand people that winter. More on the <a href="https://en.wikipedia.org/wiki/Klondike_Gold_Rush">Klondike Gold Rush</a>.</p>
+    <p>After days of heavy snow and a warm south wind, a series of avalanches struck the trail above Sheep Camp on <a href="https://www.juneauempire.com/life/the-palm-sunday-avalanche-on-the-chilkoot-trail">Palm Sunday, April 3, 1898</a>. Native packers had refused to go above Sheep Camp that weekend. The slides came as the story gives them; the last, near noon, buried a column of people coming down from the Scales along a rope. Some fifteen hundred stampeders dug for four days. The dead are usually put at sixty to sixty-five. Many lie in the Slide Cemetery at Dyea, which soldiers of the <a href="https://www.nps.gov/klgo/learn/historyculture/14th-infantry.htm">Fourteenth Infantry</a> helped prepare. The White Pass railroad from Skagway reached Lake Bennett in 1899, and Dyea emptied; its site and the trail are now part of <a href="https://en.wikipedia.org/wiki/Klondike_Gold_Rush_National_Historical_Park">Klondike Gold Rush National Historical Park</a>. Mikkelsen and his kettles, Isaac, Rudd, the Garritys, the yellow rock and the Easter service are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of A&#7749;kura from the Dhammapada commentary (verses 356&ndash;359). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-12.htm">The original</a>. Scripture from the King James Version. Written by Claude Fable 5.2.
+  <div class="pager"><a href="laurel-hell.html">&larr; Laurel Hell</a><a href="index.html">All stories</a><a href="the-scythe.html">The Scythe &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // One bean vine at a time comes up through the stones at the foot of the page, opens two leaves and a white flower, and fades.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, v = null, MAX = 2600;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn() {
+    var col = Math.max(0, (W - 620) / 2), left = Math.random() < 0.5;
+    var span = Math.max(col - 50, 30);
+    v = { x: left ? 25 + Math.random() * span : W - 25 - Math.random() * span,
+          h: 96 + Math.random() * 40, sway: (Math.random() < 0.5 ? -1 : 1) * (8 + Math.random() * 8), life: 0 };
+  }
+  function pt(k) { return [v.x + Math.sin(k * 5.2) * v.sway * k, H - 6 - v.h * k]; }
+  function leaf(k, dir, g, a) {
+    var p = pt(k), L = 13 * g;
+    ctx.save(); ctx.translate(p[0], p[1]); ctx.rotate(dir * 0.9 - 0.2);
+    ctx.fillStyle = 'rgba(79,125,74,' + a + ')';
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(L * 0.5, -L * 0.55, L, 0); ctx.quadraticCurveTo(L * 0.5, L * 0.55, 0, 0); ctx.fill();
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!v) spawn();
+    var p = reduce ? 0.6 : v.life / MAX;
+    var grow = Math.min(1, p / 0.4);
+    var a = 0.42 * Math.min(1, (1 - p) / 0.22);
+    ctx.strokeStyle = 'rgba(79,125,74,' + a + ')'; ctx.lineWidth = 1.4; ctx.lineCap = 'round';
+    ctx.beginPath();
+    for (var i = 0; i <= 30; i++) { var k = (i / 30) * grow, q = pt(k); if (i === 0) ctx.moveTo(q[0], q[1]); else ctx.lineTo(q[0], q[1]); }
+    ctx.stroke();
+    if (grow > 0.45) leaf(0.42, 1, Math.min(1, (grow - 0.45) / 0.3), a);
+    if (grow > 0.7) leaf(0.66, -3.4, Math.min(1, (grow - 0.7) / 0.3), a);
+    if (p > 0.42) {
+      var f = Math.min(1, (p - 0.42) / 0.12), t = pt(1);
+      ctx.fillStyle = 'rgba(255,255,255,' + Math.min(1, a * 2.1) + ')';
+      ctx.strokeStyle = 'rgba(93,106,112,' + a * 0.6 + ')'; ctx.lineWidth = 0.6;
+      ctx.beginPath(); ctx.arc(t[0] - 2.5 * f, t[1] - 1, 3.4 * f, 0, 6.3); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(t[0] + 2.5 * f, t[1] - 2, 3 * f, 0, 6.3); ctx.fill(); ctx.stroke();
+    }
+    if (!reduce) { v.life++; if (v.life > MAX) spawn(); requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); v = null; if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

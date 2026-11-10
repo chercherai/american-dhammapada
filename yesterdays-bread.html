@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yesterday&rsquo;s Bread</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column under a slate August sky; a soft rain falls behind the text and now and then a drop catches gold. */
+  --ground: #111619;
+  --ground-2: #1a2125;
+  --paper: #ece6da;
+  --paper-dim: #a3a39c;
+  --accent: #62bfae;
+  --glow: #e2c46b;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #24313a 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(236,230,218,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(98,191,174,.22); }
+.epigraph { border-left: 1px solid rgba(98,191,174,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(26,33,37,.75); border: 1px solid rgba(236,230,218,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(236,230,218,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(236,230,218,.12); border-bottom: 1px solid rgba(236,230,218,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(26,33,37,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.8 &middot; Vis&#257;kh&#257;</span></nav>
+<header>
+  <h1>Yesterday&rsquo;s Bread</h1>
+  <div class="epigraph">The rainstorm smiteth it and it bringeth forth its fruit twofold.<br>&mdash; Qur&rsquo;an 2:265</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Heik sme&rsquo;t,</span> on Dix Avenue in the Southend.</p>
+
+<section>
+  <h2>I. The Station</h2>
+  <p class="dateline">Toledo, Ohio &middot; 1953</p>
+  <p>When Nawal Darwish was seven years old, an old sheikh from the south of Lebanon came through the Midwest on the train, stopping wherever there were enough Muslims to fill a front room. He had been in Michigan City and Cedar Rapids and would go on to Detroit. In Toledo the Lebanese had been waiting for him a month. Her grandfather, Hajj Mahmoud, who had started with a peddler&rsquo;s pack and now owned the biggest wholesale grocery in the city, said to her that morning, <em>This is a good day for you and a good day for me. Put on your white dress and take your cousins and go and meet him.</em></p>
+  <p>Her uncle drove the girls to the new terminal in the Packard. He pulled up at the curb in front and they all started to climb out, and Nawal said, <em>No, Uncle, you have to drive us around to where the trains are,</em> and he did, as far as cars were allowed to go. Then she got out and walked the rest of the way across the platform with her cousins behind her, and stood a little to one side, and waited. When the sheikh came down the steps of the car with his cane, he looked at the girl in the white dress waiting at exactly the right distance, and smiled, and spoke to her, and nobody remembered afterward what he said, only that she listened to all of it.</p>
+  <p>Her grandfather fed the sheikh for two weeks at his long table on Bancroft Street, and half of Lebanese Toledo came to listen.</p>
+  <p>A few years later the big man of the Southend in Dearborn, Abu Jamal, who ran a coffeehouse, a travel agency and half the votes on Dix Avenue, came down to Toledo and sat in Hajj Mahmoud&rsquo;s parlor. <em>You have five rich families here,</em> he said, <em>and in Dearborn we have the Rouge and the smoke and men who work double shifts and not one family like yours. Give me one of them. I won&rsquo;t go home without one.</em> The old men of Toledo talked it over and told him to take Kamal, Hajj Mahmoud&rsquo;s eldest, Nawal&rsquo;s father. Kamal said, <em>If you send me, I&rsquo;ll go.</em></p>
+  <p>But when he drove up to the Southend and saw it, the houses jammed against the plant fence and the soot on the laundry, he said to Abu Jamal, <em>My family is a large one. Your Southend is full. Let me settle out here,</em> and bought land out past Telegraph Road where the subdivisions were still going up in the cornfields, and built a big brick house, and moved his trucks and his warehouse after it.</p>
+</section>
+
+<section>
+  <h2>II. The Rain</h2>
+  <p class="dateline">Belle Isle, Detroit &middot; August 1964</p>
+  <p>In the Southend lived Hajj Rida Khalifeh, who owned four markets and a Pontiac dealership on Michigan Avenue and was the richest man between the Rouge and the river, and he had a son named Hassan who had just finished at Wayne State and did not want to get married.</p>
+  <p><em>Choose anybody you like,</em> his mother said. <em>A house with no children falls down.</em></p>
+  <p>Hassan said that he would marry when they found him a girl with the five beauties, and not before. Beautiful hair, that fell to the hem of her skirt and curled up at the ends. Lips like a ripe pomegranate. Teeth like a row of pearls. Skin that needed no powder. And a youth that would stay on her, if she had ten children, as if she had had one.</p>
+  <p>So his mother sent out her two sisters, who had married off half the Southend between them, with money for the bus and the train and a gold necklace in a velvet box. <em>When you find her, put it on her.</em> The aunts went to Toledo and Cleveland and Cedar Rapids and as far as Quincy, Massachusetts, and saw a great many lovely girls, and none of them had all five. They came home tired at the end of the summer, on the Sunday of the big Lebanese picnic on Belle Isle, and went to it, and sat down in the stone pavilion out of the sun and fanned themselves.</p>
+  <p>Nawal was seventeen. She came along the path from the river in a green dress, with her cousins and her friends around her, thirty girls at least, with her hair down her back. When they were halfway across the grass the sky over Canada turned purple, and a wind came off the river and turned the leaves over white, and then the rain came down all at once, the way it does in August, in sheets.</p>
+  <p>Every girl on the grass shrieked and ran for the pavilion holding her purse over her head. Nawal walked. She came in at the same pace she had been walking before, and her dress was wet through and her hair was streaming, and her gold bracelets were running with water.</p>
+  <p>The aunts saw four of the beauties right there. One of them said to the other, loud enough to carry, <em>That one&rsquo;s lazy. Her husband will be lucky to get a cup of tea out of her.</em></p>
+  <p><em>What did you say?</em> said Nawal. They said afterward her voice was like a bell in a church across a valley.</p>
+  <p><em>We said all your friends ran in out of the rain and stayed dry, and it was only twenty steps, and you came strolling in like the Queen of England, and look at you.</em></p>
+  <p><em>Khalto, I&rsquo;m stronger than any of them,</em> she said. <em>And I had my reasons. There are four people who never look well running. A king, in all his medals, running across his courtyard. People will say, why is the king running like a delivery boy? A fine horse in a parade, all dressed up. A sheikh, in his robe and turban. And a woman. People will say, look at her, running like a man.</em></p>
+  <p><em>And the other reason?</em></p>
+  <p><em>A girl&rsquo;s mother and father raise her to give her away to another family. Let&rsquo;s be honest, we&rsquo;re merchandise. If I run on wet grass and fall and break my wrist, I&rsquo;m a burden to my father. A dress dries.</em></p>
+  <p>She smiled when she said it, and the aunts saw her teeth.</p>
+  <p>They got up together. They put the gold necklace around Nawal&rsquo;s wet neck, there in the pavilion, in front of everybody. <em>Only you,</em> they said.</p>
+  <p>She asked them where they were from and whose house had sent them. <em>Hajj Rida Khalifeh, of the Southend. For his son Hassan.</em> She thought: a family like ours. And she sent one of her cousins to the parking lot for her father&rsquo;s car, because from the moment that necklace was on her neck she was not going to walk home.</p>
+  <p>Her father asked the aunts what Hajj Rida was worth. They told him, with some pride. <em>Next to us,</em> he said, <em>that&rsquo;s small change. But when a man finds a good house for his daughter, what else is there to count?</em> He gave his consent and kept the aunts two days as his guests and sent them home in his own car with the trunk full of presents.</p>
+</section>
+
+<section>
+  <h2>III. The Peacock</h2>
+  <p class="dateline">Out past Telegraph Road &middot; the winter of 1964</p>
+  <p>Hajj Rida wrote that he would come to fetch the bride himself, and that Abu Jamal would come with him out of respect, and half the Southend with Abu Jamal, and could the house manage? Kamal Darwish wrote back: <em>If ten Abu Jamals are coming, let them come.</em></p>
+  <p>They came after Thanksgiving, two hundred people in a line of cars, and Kamal put up every one of them. It was Nawal, at seventeen, who sat at the kitchen table with a pencil and decided who would sleep in which house up and down the new street and who would carry coffee to whom, so that nobody could say afterward that they came to Nawal Darwish&rsquo;s wedding and spent it parking cars.</p>
+  <p>Kamal had sent for an Armenian goldsmith from downtown and told him to make his daughter a set of bridal gold such as Detroit had never seen. Then the snow came, the first big storm of that winter, and closed the roads, and Kamal told Abu Jamal, <em>Nobody leaves this house until I say so,</em> and kept them all until the gold was finished, which was not until February. For three months that subdivision was one long party. Everybody from Abu Jamal down to the boys who parked the cars thought he was the guest of honor. When the fuel oil ran out in the cold snap in January and no truck could get through, Kamal had his men pull down the old barn that had come with the land and burn it in the furnaces, and when that was gone he had them open the warehouse and soak rags in cooking oil, and they burned those.</p>
+  <p>The gold was finished at last. It went from the crown of her head to her feet, a lace of gold chain and coral and pearls fastened at the brow and the ears and the throat and the wrists and the waist, and on the crown of her head stood a peacock of gold with a thousand feathers, every feather on its own fine wire, so that when she moved her head they shivered and chimed, and you had to stand close to be sure it was not alive.</p>
+  <p>Then her father gave her the rest: silver, dishes, sewing machines, bolts of cloth, a truck full of rice and flour and oil and a truck full of tools, <em>so that in the house where she&rsquo;s going she will never have to send next door and ask to borrow anything.</em> He told his foreman to count out twenty sheep from the farm in Monroe for her wedding feast and shut the gate, and the men swore that sixty jumped the fence and ran down the road after the truck and would not be turned back.</p>
+  <p>The night before she left, her father sat her down in his study with the door half open and gave her his advice. Hajj Rida was in the next room and heard every word of it.</p>
+  <p><em>Daughter. In your husband&rsquo;s house, don&rsquo;t carry the fire from inside to outside. Don&rsquo;t carry the fire from outside to inside. Give to the one who gives back. Don&rsquo;t give to the one who doesn&rsquo;t. Give to the one who gives back and the one who doesn&rsquo;t. Sit happy. Eat happy. Sleep happy. Tend the fire. And honor the ones the house stands on.</em></p>
+  <p>In the morning he called eight of the oldest men of the Toledo families out onto the snowy lawn in front of everybody and said, <em>If anything is ever said against my daughter in that house, you will settle it.</em> Then he put her in the white Cadillac. And when the people who worked for him in the warehouse and drove his trucks and had known Nawal since she was a child heard that she was going, a good many of them got into their own cars and fell in behind, and the line of them went back half a mile.</p>
+  <p>Hajj Rida, at the back of the procession, asked who all those people were. <em>They want to work for the bride.</em> <em>Who&rsquo;s going to feed all of them?</em> He got out on Telegraph Road and shouted them back, and let come only the ones who would not go. Nawal said, <em>Leave them, they&rsquo;ll earn their own bread and yours too,</em> and he did not listen.</p>
+  <p>At the city line she had the top put down, in February, and stood up in the back of the open Cadillac in all her gold with the peacock on her head, and rode standing the whole length of Dix Avenue past the coffeehouses and the mosque and the plant gates, so the whole Southend could see what it had got. The men came out of the coffeehouses with their cards still in their hands.</p>
+  <p>Every family in the Southend sent her a present that week. She sent every one of them on to somebody else, to a widow on Salina Street, a family just off the boat, an old man in a rented room, each with a message in her own words: <em>This is for my mother. This is for my uncle. This is for my little sister.</em> By the end of the week she had made half the Southend her relations.</p>
+</section>
+
+<section>
+  <h2>IV. Yesterday&rsquo;s Bread</h2>
+  <p class="dateline">The Khalifeh house, the Southend &middot; spring 1965</p>
+  <p>Hajj Rida did not ask the old sheikh to the wedding, though the sheikh was living in two rooms over the mosque on Vernor Highway, ten minutes&rsquo; walk away. Hajj Rida had his own holy man. His name was Abu Khalil, and he read coffee cups and wrote charms on paper for a price, and sat in Hajj Rida&rsquo;s best chair in his undershirt with his belly over his belt, with five or six hangers-on around him who laughed when he laughed.</p>
+  <p>In the spring Hajj Rida gave Abu Khalil and his friends a dinner. He had lamb cooked in the yard and rice with pine nuts in the big trays, and when they were eating he sent upstairs for his son&rsquo;s wife. <em>Tell the bride to come down and kiss the hand of the holy man.</em></p>
+  <p>She came down glad, when she heard the words holy man. She stood in the dining room door and looked at Abu Khalil, the undershirt, the grease on his chin, the coffee cups upended on their saucers on the tablecloth, the money folded under one of them. <em>These have no shame at all,</em> she said, <em>and no fear of God either. Why would you call that holy, Uncle? Why would you send for me for this?</em> And she went back upstairs.</p>
+  <p><em>Hajj,</em> said Abu Khalil, <em>that girl is bad luck. I see it in the grounds. Put her out of the house.</em></p>
+  <p>Hajj Rida thought: I can&rsquo;t put Kamal Darwish&rsquo;s daughter in the street because a cup-reader says so. <em>She&rsquo;s young,</em> he said. <em>The young say things. Let it go.</em></p>
+  <p>The next morning he sat alone at the head of the table with honey and fresh bread and white cheese and a silver coffee pot, and Nawal stood beside him pouring his coffee. An old man knocked at the open door. Everyone in the Southend knew him. He went round every week with a tin can, collecting for the mosque and for men hurt in the plant.</p>
+  <p>Nawal stepped aside so that her father-in-law could see the old man. Hajj Rida saw him. He looked down at his plate and went on eating, as if there were nobody at the door.</p>
+  <p>Nawal went to the door herself. <em>Go on to the next house, uncle, God keep you,</em> she said. <em>My father-in-law is eating yesterday&rsquo;s bread.</em></p>
+  <p>Hajj Rida threw down his napkin. <em>Take this away. Get that girl out of my house. In my own dining room she stands and tells the street I eat stale bread like a beggar.</em> But every maid and driver in that house had come in the line of cars behind the white Cadillac. Nobody moved. Nobody said a word.</p>
+  <p><em>Uncle,</em> said Nawal, <em>I don&rsquo;t leave a house for a reason like that. You didn&rsquo;t find me on the beach. I have a father and a mother. My father knew this might happen and he put me in the hands of eight men in front of everybody. Send for them. Let them judge.</em></p>
+  <p><em>She&rsquo;s right,</em> said Hajj Rida, and he sent to Toledo, and the eight old men came up the next Sunday in their good suits.</p>
+  <p><em>I was eating my breakfast,</em> Hajj Rida said, <em>and she told a man at my door I was eating stale bread.</em></p>
+  <p><em>Is that so, daughter?</em></p>
+  <p><em>Not exactly. A man was at the door collecting for the mosque, and my father-in-law saw him and looked at his plate. And I thought: he isn&rsquo;t making any new bread in this life. He&rsquo;s eating what was baked a long time ago, by whoever was good before him, and one day it will be gone. That&rsquo;s what I said. Where&rsquo;s the fault?</em></p>
+  <p><em>No fault. Hajj, why are you angry with her?</em></p>
+  <p><em>All right, there&rsquo;s no fault in that. But one night in the middle of the night she went out behind the house with the help, the men and the women both.</em></p>
+  <p><em>Daughter?</em></p>
+  <p><em>My father gave me a goat from the farm. She was kidding that night in the garage, and it was a hard birth. I didn&rsquo;t think it was right to lie in bed. So I had them bring flashlights, and we went out, and we pulled the kid, and I washed the mother with warm water.</em></p>
+  <p><em>Hajj, she does work in your house your maids wouldn&rsquo;t do. What&rsquo;s the fault?</em></p>
+  <p><em>All right. But the night before she came, her father gave her a lot of advice that I heard with my own ears, and I don&rsquo;t understand a word of it. Don&rsquo;t carry the fire from inside to outside. How do you live on a street and never lend your neighbor a match?</em></p>
+  <p><em>That isn&rsquo;t what he meant,</em> said Nawal. <em>He meant if I see something wrong in my husband or my father-in-law, I don&rsquo;t carry it out of the house and tell it on the street. There&rsquo;s no fire like that one. And don&rsquo;t carry the fire from outside in means if the neighbors say something against this family, I don&rsquo;t bring it home and repeat it at the table.</em> And she went through the rest. Lend to the ones who return what they borrow, not to the ones who never do, but when your own poor come asking, give, whether they can pay or not. Sit happy, eat happy, sleep happy: stand when your elders come in, eat after they&rsquo;ve eaten, go to bed after the house is put to bed. Tend the fire and honor the ones the house stands on: look after your husband and his parents the way you&rsquo;d look after a stove you mean to keep lit.</p>
+  <p>Hajj Rida sat with his head down and said nothing.</p>
+  <p><em>Is there anything else against our daughter, Hajj?</em></p>
+  <p><em>No.</em></p>
+  <p><em>Then why do you want to put her out of your house for nothing?</em></p>
+  <p>Nawal stood up. <em>When I was accused, it wasn&rsquo;t right for me to go. Now you&rsquo;ve said I&rsquo;m clear, it&rsquo;s right.</em> And she told the maids to bring down her suitcases and the drivers to bring round the cars.</p>
+  <p>Hajj Rida stood up too. He asked the eight old men to sit down again. <em>My daughter,</em> he said, <em>I spoke without knowing. Forgive me.</em></p>
+  <p><em>Uncle, I forgive you with all my heart. But I come from a house that can&rsquo;t live without the mosque and the old sheikh. If I can have him to this house whenever I like, and feed him and his people, I&rsquo;ll stay.</em></p>
+  <p><em>Feed him every day of the week,</em> said Hajj Rida.</p>
+</section>
+
+<section>
+  <h2>V. The Curtain</h2>
+  <p class="dateline">The same spring</p>
+  <p>She invited the sheikh for the following Friday, after the prayer. When Abu Khalil heard that the old sheikh was going to Hajj Rida&rsquo;s house, he and his friends came and sat on the porch and on the steps all round it like a ring of crows.</p>
+  <p>Nawal served the sheikh and his people with her own hands. Then she sent word to her father-in-law in the back room. <em>Uncle, everything is ready. Come and sit with the sheikh.</em></p>
+  <p>Hajj Rida wanted to go. Abu Khalil leaned in the window and said, <em>Hajj, don&rsquo;t you go near that man,</em> and Hajj Rida sent word that his daughter-in-law could look after the guest by herself.</p>
+  <p>When the meal was finished she sent a second time. <em>Uncle, the sheikh is going to speak. Come and listen.</em></p>
+  <p>Now Hajj Rida thought it would be a shame not to go, and he had wanted to hear the old man for years. <em>All right,</em> said Abu Khalil, <em>if you have to listen to him, listen from behind a curtain. Don&rsquo;t sit in the same room with him and don&rsquo;t look him in the face.</em> And Abu Khalil&rsquo;s friends went ahead of him and strung a bedsheet across the archway between the dining room and the parlor, and Hajj Rida sat down behind it on a kitchen chair.</p>
+  <p>The sheikh said, to nobody in particular, <em>A man can sit behind a curtain. He can sit behind a wall, or a mountain, or the edge of the world. If God wants him to hear, he hears.</em> And then he began to speak, quietly, in order, the way a man lays bricks.</p>
+  <p>Everyone in that house said afterward that the old man was looking at them alone and talking to them alone, the way everybody on a street thinks the moon is over his own house.</p>
+  <p>Behind the bedsheet Hajj Rida sat with his hands on his knees and listened, and something in him that had been shut since he was a boy in the old country came open. He lifted the corner of the sheet and came through, and went straight past the sheikh to his son&rsquo;s wife and took her face in both his hands and kissed her forehead, and then her hands.</p>
+  <p><em>From today,</em> he said, <em>you are my mother.</em></p>
+  <p>Then he went and knelt by the sheikh&rsquo;s chair and kissed his hands, and said his own name three times, <em>I am Rida Khalifeh, I am Rida Khalifeh, I am Rida Khalifeh,</em> as if he were telling it to somebody for the first time. <em>All my life I didn&rsquo;t know where a gift bears fruit. My daughter-in-law came into my house to save me.</em></p>
+  <p>The next Friday it was his wife&rsquo;s turn. After that the Khalifeh house kept an open door, and the old man with the tin can never left it empty-handed again, and Abu Khalil found other people&rsquo;s cups to read.</p>
+  <p>Hajj Rida had a second set of gold made for her that spring, light enough to wear every day, asleep or awake, and Nawal wore it to her grave. When her first son was born she named him Rida. In the Southend for the rest of her life they called her Umm Rida, the mother of Rida, and some of the old men, who knew why, meant the old man as well as the boy.</p>
+</section>
+
+<section>
+  <h2>VI. Two Fingers</h2>
+  <p class="dateline">Monroe County &middot; the 1970s</p>
+  <p>She had ten children, five sons and five daughters, and they had children, and none of them in all those years was ever seriously sick, and none of them died young, and every family in the Southend asked Umm Rida first to their weddings and housewarmings, for the luck. People said she never got a gray hair. People said that when they saw her coming up the street with all her children and grandchildren around her they could not tell which one was Umm Rida.</p>
+  <p>She was strong, too, everyone knew, though nobody could say how strong. Abu Jamal, getting old and curious, wanted to find out. On the Eid one year, when half the Southend drove down to the farms in Monroe County for the sacrifice, he had the farmer let a young bull out of the pen while Umm Rida was crossing the yard with her daughters. The bull put its head down and came for her. Her daughters screamed and some of them ran and some of them held on to her.</p>
+  <p><em>What is this?</em> she said.</p>
+  <p><em>Yumma, Abu Jamal let it out to see how strong you are.</em></p>
+  <p>She thought: if I grab him hard, I&rsquo;ll kill him. So she reached out and took the bull by the ring in its nose between two fingers and pushed, gently, and it sat down on its haunches in the mud in front of everybody. The men at the farm applauded, and she walked on to the car.</p>
+</section>
+
+<section>
+  <h2>VII. The Gold on the Stair</h2>
+  <p class="dateline">Vernor Highway and the east side &middot; 1980&ndash;1982</p>
+  <p>By 1980 the families were moving out of the Southend to the east side of Dearborn, along Warren Avenue, and new families were coming every month from Lebanon, where the war had been going on for five years, with nothing but what they could carry. The old sheikh was very old.</p>
+  <p>That spring there was a wedding, and after the wedding lunch the whole party walked over to the mosque on Vernor Highway for the sheikh&rsquo;s talk. Umm Rida had worn the great set, the peacock and all, for her niece&rsquo;s sake. At the mosque door she thought: it isn&rsquo;t right to walk into the house of God dressed like this. So she took it off and wrapped it in her shawl and gave it to Sakineh, the girl who looked after her, who was the only one strong enough to carry it, and put on her everyday gold, and went in and listened. When it was over she went out the side door, and Sakineh went with her, and forgot the bundle on the bench.</p>
+  <p>Abu Ali, who had kept the mosque for thirty years, always went round after a gathering to pick up what people had left behind. He found the shawl and what was in it and went to the sheikh. <em>Umm Rida forgot her gold.</em> <em>Put it somewhere safe.</em> So he hung the bundle on the newel post at the foot of the stairs.</p>
+  <p>Umm Rida meanwhile went round the back rooms with Sakineh, the way she did after every gathering, asking the families just come from Beirut and Tyre, who slept there on the floor, what they needed, and writing it down. Then she went out by the back door, and on the sidewalk she said, <em>Sakineh, give me the set, I&rsquo;ll put it back on.</em> Sakineh put her hand over her mouth.</p>
+  <p><em>Go back and get it,</em> said Umm Rida. <em>But if Abu Ali has already picked it up and put it away, don&rsquo;t bring it. Then I&rsquo;ve given it to the mosque.</em></p>
+  <p>Abu Ali told Sakineh where it was. <em>It&rsquo;s on the stair. Take it.</em> But Sakineh would not touch it. <em>Not after you&rsquo;ve had it in your hands, uncle. My lady won&rsquo;t take it back.</em> And she went back to Umm Rida glad.</p>
+  <p><em>She&rsquo;s right,</em> said Umm Rida. <em>I won&rsquo;t wear it again. But a peacock is no use to the mosque. Go and fetch it after all; I&rsquo;ll sell it and give them the money.</em></p>
+  <p>She had the goldsmiths in to price it. No jeweler in Detroit could buy it at that price, or would try. So she wrote the check for it herself, and took the check to the sheikh.</p>
+  <p><em>Sheikh, Abu Ali touched my gold, and from that moment I couldn&rsquo;t wear it. I tried to sell it for you and nobody could buy it, so I bought it myself. Here is the money. What should it be?</em></p>
+  <p>The old man thought for a while. <em>Would it suit you,</em> he said, <em>to build something on the east side? Where the families are going.</em></p>
+  <p>It suited her exactly. With part of the money she bought two lots on the east side, and with the rest she began to build: a prayer hall on the ground floor, and upstairs rooms where a family off the plane from Beirut could sleep in a real bed until they found their feet.</p>
+  <p>That autumn the sheikh told her he was going to Mecca for the Hajj. She went to him at the airport. <em>I&rsquo;m building this for you, and you&rsquo;re leaving. Stay.</em> <em>This is a journey I don&rsquo;t turn back from, my daughter.</em> She thought: he has his reasons. <em>Then leave me one of your people who knows what&rsquo;s right and what isn&rsquo;t.</em> <em>Take whoever you want.</em></p>
+  <p>She loved Abu Ali best. But she chose Kassem Fawaz, who ran the big crane at the Rouge, because everyone knew that Kassem could get anything off the ground, and the sheikh nodded at him, and Kassem stayed. Kassem and his crew went out on Saturdays with flatbeds and came back the same day with steel and timber from places nobody could later find on a map, and no axle broke and no man got tired. In nine months the building stood two stories high. The sheikh came home the next June, just before Ramadan, after nine months on the road, and Umm Rida met him at the airport and made him promise to spend the whole of Ramadan there, and fed every soul who came in the door, every night of the month.</p>
+  <p>A friend of hers, Fatmeh Saad, came to her with a silk rug from Kashan worth more than her husband&rsquo;s house and asked where she could lay it. <em>If I tell you there&rsquo;s no room,</em> said Umm Rida, <em>you&rsquo;ll think I don&rsquo;t want your rug. Go and look for yourself.</em> Fatmeh went through the whole building, the hall and every room upstairs. Everywhere the carpet was better than hers. At the end of the hall she stood with her rug in her arms and cried, because there was no place in the house of God for what she had to give.</p>
+  <p>Abu Ali found her there. <em>Don&rsquo;t cry,</em> he said. <em>Come.</em> He took her downstairs to the washroom, where the men and women made their ablutions before prayer and came out barefoot and wet onto the bare tile. <em>Put it here,</em> he said, <em>between the water and the hall. Everybody who prays in this place will stand on it first.</em> It was the one place Umm Rida had forgotten.</p>
+</section>
+
+<section>
+  <h2>VIII. The Garden on a Height</h2>
+  <p class="dateline">East Dearborn &middot; the end of Ramadan, 1982</p>
+  <p>On the last night of Ramadan, when the building was finished and full of people, Umm Rida went out at sunset and walked round the outside of it, slowly, with her children and her grandchildren and the first of her great-grandchildren behind her in a long line. And as she walked she sang out loud, the way village women sing at a wedding. <em>When will I build a house of God, plastered and painted? Now it&rsquo;s done. When will I give the beds and the blankets? Now it&rsquo;s done. When will I feed the hungry at the breaking of the fast? Now it&rsquo;s done.</em></p>
+  <p>In all those years nobody had ever heard Umm Rida sing. <em>Sheikh,</em> they said, <em>is she all right? Has something happened to her?</em></p>
+  <p><em>She&rsquo;s not singing,</em> said the old man. <em>She&rsquo;s saying thank you. She made a promise a long time ago, and it&rsquo;s kept, and her heart is full.</em></p>
+  <p><em>What promise? When?</em></p>
+  <p>So he told them. How in his own village in the south, when he was a boy, the women sewed the prayer rugs for the mosque by hand, and one of them, an old widow named Hajjeh Zeinab, gave all her thread and all her needles and all her cloth, and asked for nothing for it but one thing. She knelt down on the last rug she finished and asked God to give her, one day, a granddaughter who would build Him a house with her own hands. <em>She was Umm Rida&rsquo;s great-grandmother,</em> said the sheikh. <em>And the little girl who stood on the platform in Toledo in her white dress was the same one, already. I knew her the minute I saw her.</em></p>
+  <p>Then he said a verse they had all heard a hundred times.</p>
+  <div class="verse">
+    <p>The likeness of those who spend their wealth in Allah&rsquo;s way is as the likeness of a grain which groweth seven ears, in every ear a hundred grains. Allah giveth increase manifold to whom He will. Allah is All-Embracing, All-Knowing.</p>
+    <p>&mdash; Qur&rsquo;an 2:261</p>
+  </div>
+  <p><em>Look at her,</em> he said. <em>From one grain.</em></p>
+  <p>The line came round the corner of the building in the dusk, the old woman at the front with her scarf over hair that had never gone gray, and her children, and her children&rsquo;s children, and behind them the families from upstairs who had come off the planes from Beirut that year and had fallen in at the end of the line without being asked, and the children of those families. There were so many by then that the front of the line had come all the way round to where the back of it had started. It went round and round the house. The people on the steps could not tell anymore where it began.</p>
+  <p>Inside, under the bare bulb in the washroom, the Kashan rug lay between the water and the prayer hall, dark with wet footprints, every one of them pointing the same way.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">As many kinds of wreaths can be made from a heap of flowers, so many good things may be achieved by a mortal when once he is born.<cite>Dhammapada 53, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Vis&#257;kh&#257; meets the Buddha at seven and becomes a disciple. Her father is moved by royal request to a new city, and there envoys of the rich man Mig&#257;ra, looking for a bride with the five beauties, see her walk calmly through a sudden rainstorm while her friends run, and hear her explain why. Her father gives her a dowry beyond counting, the jeweled &ldquo;great-creeper&rdquo; ornament with its golden peacock, ten riddling admonitions, and eight sponsors to judge her if she is ever accused. In Mig&#257;ra&rsquo;s house she refuses to honor his naked ascetics and tells a monk at the door that her father-in-law is &ldquo;eating stale food,&rdquo; living on old merit. Cleared by the sponsors, she stays on condition that she may serve the Buddha; Mig&#257;ra, listening from behind a curtain, is converted and calls her his mother. Late in life she leaves her ornament at the monastery, buys it back herself, and with the money builds the Eastern Monastery, and on its opening day walks round it singing. The Buddha explains her vow from ages past and speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Visakha">Vis&#257;kh&#257;</a>.</p>
+    <h3>Dearborn, 1953&ndash;1982</h3>
+    <p>Arab immigrants, many of them from Lebanon, came to work at Ford&rsquo;s <a href="https://en.wikipedia.org/wiki/Ford_River_Rouge_complex">River Rouge complex</a> and settled in Dearborn&rsquo;s Southend, in the shadow of the plant. Muslim Ford workers there built the <a href="https://detroithistorical.org/learn/encyclopedia-of-detroit/american-moslem-society-masjid-dearborn">American Moslem Society</a> mosque on Vernor Highway, its first floor finished by 1937 and the rest added through the 1950s. Smaller Arab Muslim communities had grown up across the Midwest; in Cedar Rapids, Iowa, Lebanese and Syrian immigrants finished the <a href="https://en.wikipedia.org/wiki/Mother_Mosque_of_America">Mother Mosque of America</a> in 1934, considered the oldest purpose-built mosque still standing in the United States.</p>
+    <p>Palestinian refugees began arriving after the 1967 war, and the <a href="https://en.wikipedia.org/wiki/Lebanese_Civil_War">Lebanese Civil War</a>, which began in 1975, brought a long wave of families from Lebanon. According to the <a href="https://thedhm.org/dearborn-timeline/">Dearborn Historical Museum</a>, volunteers founded the social-service agency ACCESS in 1971, and from the late 1970s Arab Americans moved from the Southend to the east side of Dearborn, where by the 1990s a business district had grown along Warren Avenue. The Darwish and Khalifeh families, the sheikh, and the building on the east side are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Vis&#257;kh&#257; from the Dhammapada commentary (verse 53). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-08.htm">The original</a>. Scripture from the Qur&rsquo;an in the translation of Marmaduke Pickthall (1930). Written by Claude Opus 5.5.
+  <div class="pager"><a href="seven-doors.html">&larr; Seven Doors</a><a href="index.html">All stories</a><a href="pond-lilies.html">Pond Lilies &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A soft August rain; now and then a drop catches the light like gold.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, drops = [], slant = 0.18;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(dr, anywhere) {
+    dr.x = Math.random() * (W + H * slant) - H * slant;
+    dr.y = anywhere ? Math.random() * H : -40 - Math.random() * H * 0.5;
+    dr.len = 14 + Math.random() * 22;
+    dr.v = 3 + Math.random() * 3.5;
+    dr.gold = Math.random() < 0.035;
+    dr.a = dr.gold ? 0.2 + Math.random() * 0.15 : 0.05 + Math.random() * 0.07;
+    return dr;
+  }
+  function make() {
+    var n = Math.round(Math.max(60, Math.min(160, W * H / 9000)));
+    drops = [];
+    for (var i = 0; i < n; i++) drops.push(spawn({}, true));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineCap = 'round';
+    for (var i = 0; i < drops.length; i++) {
+      var dr = drops[i];
+      var dx = dr.len * slant, dy = dr.len;
+      if (dr.gold) {
+        ctx.strokeStyle = 'rgba(226,196,107,' + dr.a + ')'; ctx.lineWidth = 1.2;
+      } else {
+        ctx.strokeStyle = 'rgba(190,214,222,' + dr.a + ')'; ctx.lineWidth = 1;
+      }
+      ctx.beginPath(); ctx.moveTo(dr.x, dr.y); ctx.lineTo(dr.x + dx, dr.y + dy); ctx.stroke();
+      if (!reduce) {
+        dr.y += dr.v; dr.x += dr.v * slant;
+        if (dr.y > H + 40) spawn(dr, false);
+      }
+    }
+  }
+  function loop() { draw(); requestAnimationFrame(loop); }
+  size(); make();
+  if (reduce) draw(); else loop();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

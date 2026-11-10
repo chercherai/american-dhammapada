@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thousand Eyes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a dim back bedroom at night, dark theme; a faint net of threads spans the page with a rhinestone at every knot, and when one stone catches the lamp the glint runs out along the threads to the others and fades; datelined sections. */
+  --ground: #16131c;
+  --ground-2: #221d2a;
+  --paper: #ece4dc;
+  --paper-dim: #a79fa6;
+  --stone: #cfd8f0;
+  --rose: #d98fa8;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 30% 0%, #2c2233 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(236,228,220,.2); }
+.series a:hover { color: var(--rose); }
+a:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--rose); text-wrap: balance; text-shadow: 0 0 28px rgba(207,216,240,.25); }
+.epigraph { border-left: 1px solid rgba(217,143,168,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--rose); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--rose); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(34,29,42,.8); border: 1px solid rgba(236,228,220,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--stone); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(236,228,220,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--rose); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--rose); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--rose); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--rose); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--rose); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(34,29,42,.8); border-left: 2px solid var(--rose); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 15.8 &middot; Sakka</span></nav>
+<header>
+  <h1>Thousand Eyes</h1>
+  <div class="epigraph">There is one glory of the sun, and another glory of the moon, and another glory of the stars; for one star differeth from another star in glory.<br>&mdash; 1 Corinthians 15:41</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Now this is the way I heard it, sugar,</span> in the dressing room off Second Avenue.</p>
+
+<section>
+  <h2>I. Bellevue</h2>
+  <p class="dateline">Bellevue, Tennessee &middot; April 1987</p>
+  <p>By Easter she could not get to the bathroom anymore, so the girls rented a hospital bed from the medical supply on Charlotte Pike and set it up in the front room of the little house in Bellevue, where the window looked out on the dogwood and the light was best. They took her bed apart and leaned it against the wall of the back bedroom. They hung her dresses in that closet, all of them, the sequins and the beaded gowns and the white fox stole, so she could see them through the door if she turned her head.</p>
+  <p>Her name on the lease was Clayton Bivens. She had been born in Marshall County in 1936 and raised in the Church of Christ, where they sang without instruments because the New Testament did not mention any, and she had a voice that could hold a note under a tin roof until the old men looked up from their hymnals. She did hair on Belmont Boulevard for thirty years. On Friday and Saturday nights for fifteen of them she had been Miss Glory Darlene at the Satin Slipper off Second Avenue, and before that at places with no names, in basements, in the back rooms of beer joints out on the Murfreesboro Road where you went in through the kitchen. She had taken in more children than anyone could count. Boys whose fathers had put them out on the highway with a grocery sack. Boys who came down from Kentucky on the Greyhound with eleven dollars. She had fed them, found them a room, taught them to sew a hem and walk in a heel and keep their mouths shut at the wrong times and open at the right ones. They called her Mama. Some of them were in the ground already, at Spring Hill and at little country churches whose preachers would not say their names at the graveside. Some of them were taking turns in the front room now.</p>
+  <p>The doctor at Vanderbilt had a name for what was in her bowels, a parasite that would not have troubled a well person for a week. In her it would not stop. It came eight, ten, fifteen times a day. It had taken forty pounds off her since February. The smell of it was in the curtains and the carpet and the girls&rsquo; hair, and no amount of Lysol or lemon Pledge or Jean Nat&eacute; would put it out.</p>
+  <p>They were good about it, mostly. Marva came after her shift at the nursing home on Gallatin Road and did the hard part, the washing and the turning, with her gloves on and her face set. Marva was the only one of them who had ever done it for money. Danny, who was Miss Dinah Shore Leave on Saturdays, did the laundry and cried in the laundry room where she couldn&rsquo;t hear. Little Luis from El Paso, who was nineteen and called himself Lupe Starr, sat by the bed and read her the TV Guide. But the bedpan they passed among themselves at arm&rsquo;s length like a hot dish, and each one of them, when it was his turn, carried it to the toilet with his face turned away and his breath held.</p>
+  <p>She saw it. She did not say anything. In 1987 there were nurses in Nashville who left the meal trays on the floor outside the door.</p>
+</section>
+
+<section>
+  <h2>II. The Visitor</h2>
+  <p class="dateline">The front room &middot; Tuesday night</p>
+  <p>A little after midnight on the Tuesday after Easter a white rental car pulled into the gravel by the carport. Luis looked through the blind and saw a man get out in a tan windbreaker and a seed cap, with no luggage, and stand in the yard a moment looking at the dark house. Then the man came up the steps and knocked very softly, the way you knock when you know someone is sick.</p>
+  <p>Luis opened the door, and then he stood there with it open and could not say anything at all.</p>
+  <p>The man nodded to him and went past him into the front room. He took off the seed cap and held it. Glory was asleep, or near it, with her mouth open and her hands on top of the sheet. He went to the foot of the bed and lifted the sheet back from her feet, which were swollen, grey and cold. He took one of them in both his hands and began to rub it slowly, the heel, the arch, then each toe.</p>
+  <p>She opened her eyes.</p>
+  <p><em>Who is that?</em></p>
+  <p><em>It&rsquo;s Dean, Mama.</em></p>
+  <p>She lifted her head an inch off the pillow and looked at him down the length of the bed. His hair had gone grey since she had seen him. He had a three-day beard and a paper cup of gas station coffee balanced on the footboard.</p>
+  <p><em>What in the world are you doing here?</em></p>
+  <p><em>Come to see about you.</em></p>
+  <p><em>Honey.</em> She let her head down. <em>It smells like a hog lot in here. You&rsquo;ve got a bus with gold faucets in it and a house on the lake with a fountain in the yard. You don&rsquo;t need to be smelling this. Go on home. I&rsquo;ve got my girls to do for me.</em></p>
+  <p><em>I was in London,</em> Dean Sackett said, and kept rubbing her foot. <em>At the Wembley show. Five called me at the hotel at four in the morning their time. I got on the first plane they had. Mama, I could smell how good you are from all the way across the ocean. That&rsquo;s why I came. I&rsquo;ll do for you.</em></p>
+  <p>Luis went into the kitchen, where Danny was asleep with his head on the table, and woke him by the shoulder.</p>
+  <p><em>Dean Sackett is in the front room,</em> he said, <em>rubbing Mama&rsquo;s feet.</em></p>
+  <p><em>Shut up,</em> said Danny. Then he went and looked. He came back and sat down at the table and did not say anything for a long time either.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Everybody in the country knew Dean Sackett. He had been on the Opry since 1959. He had eleven number ones, a duet with a woman whose name everyone knew, a Christmas special on the network, and a jacket. The jacket was famous by itself. It was white, cut in North Hollywood in 1971 by the same tailor shop that made the suits for the big stars, and it had so many rhinestones sewn into it that under the lights of the Ryman he seemed to be made of them, a man-shaped field of sparks. The fans called it the Thousand Eyes. On the cover of his greatest-hits album he stood in it with his arms out, and you could see the photographer in some of the stones.</p>
+  <p>He had not worn it in six years. Nobody in the business knew where it had gone.</p>
+  <p>He stayed three days. He slept in the recliner in the front room with his windbreaker over him. When Glory needed the pan, in the night or the day, he was up before anyone else could move. He did not let any of the girls touch it, or Marva either, and when Marva started to object he looked at her with such plain courtesy that she stopped. He slid it under her himself, gently, talking to her the whole time in a low voice about nothing, about the weather in London, about a dog he had had as a boy in Grundy County. He cleaned her with warm washcloths. Then he lifted the pan and carried it out of the room and down the hall to the bathroom, and the girls in the kitchen doorway watched him go by.</p>
+  <p>He carried it up in front of him, level, in both hands, the way a deacon carries the tray of the Lord&rsquo;s Supper down the aisle so that not one drop will spill in the cups. His face did not change. There was not a wrinkle on it. He might have been carrying a cake with the candles lit.</p>
+  <p>On the third evening the parasite let up a little, the way it sometimes did for a day or two. She kept down some broth. She slept four hours without waking. In the morning she was sitting up against the pillows with color in her face. He kissed her on the forehead, put on his seed cap, and went out to the rental car. They heard the gravel under the tires, then nothing.</p>
+</section>
+
+<section>
+  <h2>III. The Kitchen</h2>
+  <p class="dateline">Bellevue &middot; Friday</p>
+  <p>The girls sat around the kitchen table that afternoon with the coffee going cold and could not leave it alone.</p>
+  <p><em>Dean Sackett,</em> Danny said. <em>Dean Sackett emptied that pan. With his own hands.</em></p>
+  <p><em>Like it was perfume,</em> said Luis. <em>Like it was a box of chocolates.</em></p>
+  <p><em>Did you see his face? I couldn&rsquo;t do that with my face. I love her more than my own mother and I couldn&rsquo;t do that with my face.</em></p>
+  <p><em>That man has got a hundred people working for him,</em> said Marva. <em>He has got people to carry his guitar. He has got people to carry his coffee from the bus to the stage.</em> She turned her cup around. <em>Three days. He wouldn&rsquo;t let me near her.</em></p>
+  <p><em>He must love her,</em> said Luis. <em>He must love her to death.</em></p>
+  <p><em>Y&rsquo;all come in here,</em> Glory called from the front room. Her voice was stronger than it had been in a week. <em>I can hear every word you&rsquo;re saying.</em></p>
+  <p>They came in and stood around the bed, and Marva sat on the edge of it, and Glory looked at them.</p>
+  <p><em>It isn&rsquo;t any wonder he loves me,</em> she said. <em>Sit down. I&rsquo;ll tell you why.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Question</h2>
+  <p class="dateline">The Satin Slipper, off Second Avenue &middot; 1981</p>
+  <p>In the spring of 1981, she told them, Dean Sackett was dying. Not in his body. In the other way, the way the big stars die. He had not had a record in the top forty in three years. The young ones in hats were coming up behind him. At the Opry the flowers they sent to his dressing room wilted before the second show. The Thousand Eyes, which had been white, had gone a little yellow under the arms, and he sweated through it now under the lights in a way he never used to. The stones did not shine the way they had. He could not sit still. He would get up from a chair in the middle of a sentence and walk around the room. He had started waking at three in the morning in the house on the lake with his heart going like a bird against a window, sure he was going to die, and he did not know whether he was afraid of dying or afraid that he was already dead. He had a doctor in Hendersonville and a preacher in Hendersonville and they did not help.</p>
+  <p>His banjo player was a skinny man from Sparta named Lonnie Pruitt, whom everybody called Five, for the five-string. Five had been playing behind him for nineteen years. Five was also one of Glory&rsquo;s, from way back, from the beer-joint days, though nobody in Dean&rsquo;s band knew that, and Five had sat in the dressing room at the Satin Slipper more Saturday nights than he had sat in church.</p>
+  <p>One night after a show at the Opry, Five told Dean he knew somebody who might help him. Dean asked who. Five said, a hairdresser. Dean looked at him a long time. Then he said he would go anywhere.</p>
+  <p>They came after closing, at two-thirty in the morning, in through the alley door off Second Avenue. Dean was still wearing the jacket under a raincoat, because he had not stopped to change. A dozen people were still in the club, the bartender, some of the girls, a few regulars finishing up. They all saw him. Nobody said a word. Glory was in her dressing room with the door shut, taking off her face.</p>
+  <p>Five did not knock. He got his banjo out of its case right there in the hall and sat down on an upturned beer crate outside her door and played. He played &ldquo;Wildwood Flower,&rdquo; slow, the way the Carters did it, an old song about a girl, her ringlets, and the man who left her. Glory said afterward that she had never heard it played that tender, before or since, like a man singing about the one he loved and about his God at the same time and not able to tell the two apart. When he finished she opened the door.</p>
+  <p>She was in her robe with half her lashes off. She looked at Five on the beer crate and at Dean Sackett standing behind him in the hall in his raincoat with the stones showing at the collar, and she understood what was the matter with him the way she would have understood a bad perm.</p>
+  <p><em>Well, come in, honey,</em> she said. <em>Ask me whatever you want. I&rsquo;ll answer you.</em></p>
+  <p>He sat down on the little chair by her vanity, in the light of all those bulbs, and asked her the thing he had been asking himself at three in the morning.</p>
+  <p><em>Why is it everybody hates everybody?</em> he said. <em>I don&rsquo;t mean bad people. I mean everybody. My wife and me. My band. Me and the boys coming up. Me and the boys that came up before me. Everybody wants to get along. Nobody wants to hate anybody. And we all end up hating each other anyhow. Why is that?</em></p>
+  <p>She took off the other row of lashes and laid them on the vanity next to the first ones.</p>
+  <p><em>Jealous and stingy,</em> she said. <em>That&rsquo;s all it ever is. Wanting what somebody else has got and holding on to what you&rsquo;ve got. You show me two people hating each other and I&rsquo;ll show you one of those, or both.</em></p>
+  <p>He sat there a while. Then he asked her where jealous and stingy came from, and she told him. He asked her where that came from, and she told him that too. They went on like that, question and answer, the whole rest of the night, with Five sitting on the beer crate in the hall with the banjo across his knees, and the bartender sweeping around him, and the dozen people in the club pretending to finish their drinks so they could listen. She said she couldn&rsquo;t remember half of what she said. She said it didn&rsquo;t feel like her saying it.</p>
+  <p>At six in the morning he stood up. She said he looked as if somebody had set something heavy down off him that he had been carrying since he was born. Then he took off the Thousand Eyes and laid it over the back of her chair.</p>
+  <p><em>I don&rsquo;t need that anymore,</em> he said. <em>You keep it.</em></p>
+  <p>He walked out the alley door in his shirtsleeves into the first light. The bartender, who had served him at a Christmas party on Music Row in 1974, swore to his dying day that the man who walked out that door was ten years younger than the one who had come in. Most of the girls who were there said the same. And it is a fact that Dean Sackett&rsquo;s next record came out the following spring with his face on the cover in a plain blue work shirt, and that it went to number one, and that people who held it next to the greatest-hits album could not make the arithmetic come out. He swore it was the same photographer and no airbrush. His hair, which had been going, had come back in. The fans started calling him Young Dean, the way they had in 1959, and the name stuck to him from then on.</p>
+  <p>Some of the dozen people in the club that night changed too. The bartender quit drinking. One of the regulars went home to Memphis and told his mother. Five went back on the road with Dean and played behind him six more years, and when Dean&rsquo;s wife found out about Five, from somebody who meant it as a weapon, Dean kept him in the band anyway and said so to anyone who asked.</p>
+  <p><em>So no,</em> Glory said, in the front room in Bellevue, with the girls sitting around her on the bed and the floor, <em>it isn&rsquo;t any wonder he&rsquo;d come. I helped him once when nobody else could. That&rsquo;s all that is.</em></p>
+</section>
+
+<section>
+  <h2>V. Company</h2>
+  <p class="dateline">The front room &middot; Friday evening</p>
+  <p>She had them help her up higher on the pillows. The light through the dogwood was going orange. She looked at each of them a while, Marva and Danny and Luis and the two others who had come in from work, the way she used to look at them in the dressing-room mirror before they went on, checking.</p>
+  <p><em>Listen to me now,</em> she said. <em>I&rsquo;m going to tell you this once and I want you to remember it when I&rsquo;m not here to say it.</em></p>
+  <p>They waited.</p>
+  <p><em>It&rsquo;s a good thing just to look at good people. You don&rsquo;t have to do anything. Just get where you can see them. And it&rsquo;s a better thing to live with them. You stay away from fools. I don&rsquo;t mean dumb, I mean fools. A fool will cost you twenty years and you won&rsquo;t even know you paid it. Living with a fool is like living with somebody who hates you. Living with somebody good is like coming home to your people.</em> She smiled at them. <em>Your real people. The ones you get to pick.</em></p>
+  <p>Then she asked them to sing. Not one of them would have known a hymn from a hole in the ground except Danny, who had been raised Free Will Baptist in Clay County, and Glory herself. But she started it, low, with no piano, the way they did it in Marshall County with the tuning fork, and Danny came in on the harmony, and after the first time through the others had the words and came in too, ragged, in the front room in Bellevue with the window open.</p>
+  <div class="verse">
+    <p>Blest be the tie that binds<br>Our hearts in Christian love;<br>The fellowship of kindred minds<br>Is like to that above.</p>
+    <p>&mdash; John Fawcett, &ldquo;Blest Be the Tie That Binds&rdquo; (1782)</p>
+  </div>
+  <p>When it was done she lay back.</p>
+  <p><em>Find you somebody good,</em> she said, <em>and wise, and kind, and that does what they say they&rsquo;ll do, and go along with them. Go along with them the way the moon goes along with the stars.</em></p>
+  <p>Luis asked her, because he was nineteen and had wanted to ask her since the day he came, why she called herself Glory.</p>
+  <p>She laughed, which made her cough.</p>
+  <p><em>Because when I was eight years old at the Lewisburg Church of Christ,</em> she said, <em>the preacher read out a verse at a funeral and I thought it was the most beautiful thing anybody ever wrote. I thought it was written about me. I still do.</em> And she said it for him, the whole verse, without a mistake.</p>
+  <div class="verse">
+    <p>There is one glory of the sun, and another glory of the moon, and another glory of the stars; for one star differeth from another star in glory.</p>
+    <p>&mdash; 1 Corinthians 15:41</p>
+  </div>
+  <p><em>Now go get me the jacket,</em> she said.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Marva went to the back bedroom and found it at the far end of the closet, in a dry cleaner&rsquo;s bag behind the white fox, where it had hung for six years. She took it out of the bag and brought it to the front room. Glory had worn it in her act at the Satin Slipper exactly once, on the night after Dean gave it to her, and then she had put it away, because it was not hers and she had known that.</p>
+  <p>Glory looked at it.</p>
+  <p><em>Hang it on the door where I can see it,</em> she said.</p>
+  <p>So Marva hung it on a hanger over the top of the open door to the hall, facing the bed, and turned on the little lamp on the dresser, because it was getting dark. It was still white, mostly. The underarms were still a little yellow. The stones were still in it, every one; somebody in North Hollywood had sewn them to last. Each stone took the small light of the lamp and held it. Each held the window with the dogwood going dark beyond it, the bed, the faces of the girls around the bed, and the faces of the girls in all the other stones, so that the whole jacket hung there in the doorway giving back the room a thousand times over, every piece of it shining in every other piece. Glory lay and looked at it until she fell asleep.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">The sight of the elect (Arya) is good, to live with them is always happiness; if a man does not see fools, he will be truly happy.<cite>Dhammapada 206, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He who walks in the company of fools suffers a long way; company with fools, as with an enemy, is always painful; company with the wise is pleasure, like meeting with kinsfolk.<cite>Dhammapada 207, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Therefore, one ought to follow the wise, the intelligent, the learned, the much enduring, the dutiful, the elect; one ought to follow a good and wise man, as the moon follows the path of the stars.<cite>Dhammapada 208, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha lies ill with dysentery near the end of his life at the village of Beḷuva. Sakka, king of the gods, lays aside his immense heavenly body and comes to rub the Buddha&rsquo;s feet. The Buddha tells him that to the gods the smell of human beings is like carrion and sends him away, but Sakka answers that he smelled the fragrance of the Buddha&rsquo;s goodness from 84,000 leagues off. He lets no one else touch the vessel of excrement, and carries it out on his head as if it held perfume, without a flicker of disgust. When the monks marvel, the Buddha explains that Sakka once came to him in terror of death, led by the celestial musician Pañcasikha, who played at the cave entrance; the Buddha invited him to ask any question, answered him, and Sakka was transformed from Old Sakka into Young Sakka. Sakka&rsquo;s first question, in the Sakkapañha Sutta, is why beings who wish to live without hatred live in hatred, and the answer is envy and avarice. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C5%9Aakra_(Buddhism)">Sakka</a>, the Buddhist form of Indra, whom Indian tradition calls the thousand-eyed.</p>
+    <h3>Nashville, 1987</h3>
+    <p>Nashville&rsquo;s gay bars were where the city&rsquo;s first response to AIDS took shape. <a href="https://nashvillesites.org/tours/lgbtq-driving/The-Chute-Warehouse-28">Warehouse 28</a>, a dance club opened in 1978, held drag shows and auctions whose proceeds helped found <a href="https://www.nashvillecares.org/about/">Nashville CARES</a> in 1985; its co-owner Steve Smith, a co-founder of CARES, died of AIDS in 1995. A regular there remembered going to two funerals a week, and sometimes three, in the worst years. Before effective treatment, intestinal infections such as <a href="https://en.wikipedia.org/wiki/Cryptosporidiosis">cryptosporidiosis</a>, which pass in a few weeks in a healthy person, could cause relentless diarrhea and wasting in people with AIDS. Fear of contagion was widespread, and some hospital staff in those years would not enter patients&rsquo; rooms.</p>
+    <p>Country music in the early 1980s was being remade by the <em>Urban Cowboy</em> boom and a younger generation of singers, and the established stars of the Grand Ole Opry, which had moved from the <a href="https://en.wikipedia.org/wiki/Ryman_Auditorium">Ryman Auditorium</a> to Opryland in 1974, felt it. The rhinestone stage suits of the era came from North Hollywood, from the shop of <a href="https://en.wikipedia.org/wiki/Nudie_Cohn">Nudie Cohn</a> and his tailors. Every spring from 1969 to 1991 the promoter Mervyn Conn brought Nashville acts to London for the International Festival of Country Music at Wembley. Dean Sackett, Glory Darlene and the Satin Slipper are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Sakka&rsquo;s attendance from the Dhammapada commentary (verses 206&ndash;208). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-08.htm">The original</a>. Scripture from the American Standard Version (1901) and John Fawcett&rsquo;s hymn &ldquo;Blest Be the Tie That Binds&rdquo; (1782). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-last-course.html">&larr; The Last Course</a><a href="index.html">All stories</a><a href="new-clothes.html">New Clothes &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, nodes = [], cols, rows, pulses = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var step = Math.max(90, Math.min(140, W / 8));
+    cols = Math.ceil(W / step) + 1; rows = Math.ceil(H / step) + 1;
+    nodes = [];
+    for (var r = 0; r < rows; r++) for (var q = 0; q < cols; q++) {
+      nodes.push({ x: q * step + (r % 2 ? step / 2 : 0) + (Math.random() - 0.5) * step * 0.3,
+                   y: r * step * 0.87 + (Math.random() - 0.5) * step * 0.3, g: 0 });
+    }
+    pulses = [];
+  }
+  function idx(q, r) { return (q < 0 || r < 0 || q >= cols || r >= rows) ? -1 : r * cols + q; }
+  function neigh(i) {
+    var q = i % cols, r = Math.floor(i / cols), o = r % 2 ? 1 : -1;
+    return [idx(q - 1, r), idx(q + 1, r), idx(q, r - 1), idx(q + o, r - 1), idx(q, r + 1), idx(q + o, r + 1)].filter(function (j) { return j >= 0; });
+  }
+  function ignite() {
+    var i = Math.floor(Math.random() * nodes.length);
+    pulses.push({ front: [i], seen: {}, step: 0 }); pulses[pulses.length - 1].seen[i] = 1;
+    nodes[i].g = 1;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 0.6;
+    for (var i = 0; i < nodes.length; i++) {
+      var n = neigh(i);
+      for (var k = 0; k < n.length; k++) if (n[k] > i) {
+        var a = nodes[i], b = nodes[n[k]];
+        var gl = Math.max(a.g, b.g);
+        ctx.strokeStyle = 'rgba(207,216,240,' + (0.035 + gl * 0.12) + ')';
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+    }
+    for (var j = 0; j < nodes.length; j++) {
+      var p = nodes[j];
+      var al = 0.12 + p.g * 0.6;
+      ctx.fillStyle = 'rgba(232,236,250,' + al + ')';
+      ctx.beginPath(); ctx.arc(p.x, p.y, 1.2 + p.g * 1.6, 0, Math.PI * 2); ctx.fill();
+      if (p.g > 0.05) {
+        var gr = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 14);
+        gr.addColorStop(0, 'rgba(217,143,168,' + (p.g * 0.25) + ')');
+        gr.addColorStop(1, 'rgba(217,143,168,0)');
+        ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(p.x, p.y, 14, 0, Math.PI * 2); ctx.fill();
+      }
+      if (!reduce) p.g *= 0.975;
+    }
+    if (!reduce) {
+      t++;
+      if (t % 240 === 1) ignite();
+      if (t % 9 === 0) {
+        for (var m = pulses.length - 1; m >= 0; m--) {
+          var pu = pulses[m], nf = [];
+          pu.step++;
+          var strength = Math.max(0, 1 - pu.step * 0.16);
+          for (var f = 0; f < pu.front.length; f++) {
+            var nn = neigh(pu.front[f]);
+            for (var z = 0; z < nn.length; z++) if (!pu.seen[nn[z]]) { pu.seen[nn[z]] = 1; nf.push(nn[z]); nodes[nn[z]].g = Math.max(nodes[nn[z]].g, strength); }
+          }
+          pu.front = nf;
+          if (strength <= 0 || !nf.length) pulses.splice(m, 1);
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+  size(); make();
+  if (reduce) { for (var s = 0; s < 6; s++) nodes[Math.floor(Math.random() * nodes.length)].g = 0.6; }
+  draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

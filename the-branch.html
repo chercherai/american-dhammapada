@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Branch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a gray Northwest dusk; far behind it an eagle hangs on the updraft and drifts in long slow turns; datelined sections. */
+  --ground: #121619;
+  --ground-2: #1b2125;
+  --paper: #e9e5dc;
+  --paper-dim: #a6a399;
+  --accent: #e3a54e;
+  --glow: #8fb0c8;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #1d252a 0%, var(--ground) 50%, #0e1113 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,229,220,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(227,165,78,.2); }
+.epigraph { border-left: 1px solid rgba(227,165,78,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(27,33,37,.8); border: 1px solid rgba(233,229,220,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,229,220,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(233,229,220,.1); border-bottom: 1px solid rgba(233,229,220,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(27,33,37,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 8.3 &middot; Kuṇḍalakesī</span></nav>
+<header>
+  <h1>The Branch</h1>
+  <div class="epigraph">Nanak, only one word, God&rsquo;s name, would be of account; all else would be the senseless discussion of pride.<br>&mdash; Asa ki War</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Main inj suni&#257; hai,</span> on the Guide Meridian.</p>
+
+<section>
+  <h2>I. The Window</h2>
+  <p class="dateline">Lynden, Washington &middot; August 2008</p>
+  <p>Mohinder Singh Gill had six hundred acres of raspberries north of Lynden, a cold storage on the Badger Road, and a house on the Guide Meridian three stories high, the tallest house between Bellingham and the Canadian line. He had come down from Abbotsford in 1986 with a used tractor and a loan from his wife&rsquo;s brother, with forty acres he could barely afford, and he had paid back every dollar and bought every farm that came up for sale on his road. Two-thirds of the raspberries in America came out of that county, and a good share of them came out of his fields. He was proud of that. He said so at the gurdwara, where he gave a great deal of money, and at the Rotary, where he gave a little.</p>
+  <p>His daughter Simran had the whole top floor. She was eighteen, just out of high school, and the most beautiful girl in the Punjabi families from Surrey to Mount Vernon, and her father knew it, and knew what the world was, so the top floor was where she stayed. She had gone to school in Lynden and come straight home. She went to the gurdwara with her mother and sat with the women. In the summers, when the pickers came and the cousins came and the house was full, her father&rsquo;s sister Jaswinder came down from Surrey and slept in the room next to hers, and Bhua Jaswinder did not sleep much.</p>
+  <p>On a hot afternoon in August, Simran heard shouting from the fields and went to the window.</p>
+  <p>Two Whatcom County deputies were walking a young man out of the raspberry rows toward the road. His hands were cuffed behind him and his white T-shirt was torn half off and there was blood on his face. Somebody had been stealing copper all summer, stripping the wire out of the irrigation pumps on the farms along the Guide at night and selling it for scrap in Bellingham, and that afternoon old Sohan Singh Dhillon had caught him at it in broad daylight, and the young man had hit him with a length of pipe and run, and the pickers had run him down in the rows. They lined the farm road now, the pickers and the foremen and the neighbors who had come out at the noise, and at every turn of the road, as the deputies brought him past, somebody yelled at him in Punjabi or in Spanish or in English, and somebody held a phone up to film him, and he turned his face from each one like a man being struck.</p>
+  <p>He was tall. He had cut his hair. Even from the top floor she could see he was from a good family, by the way he walked between the deputies with his back straight, as if they were escorting him somewhere he had been invited.</p>
+  <p>She knew him. Everybody knew him, or about him. Rajbir Sandhu, Raj, from Abbotsford, whose father owned a trucking company, who had gone to university in Vancouver for one year and come home and lost everything his father gave him at the casinos down the I-5, and then gone on losing. This was his third time in front of a judge in Washington. A third strike in Washington meant prison until you died.</p>
+  <p>She stood at the window until the deputies&rsquo; car was gone. Then she lay down on her bed and did not get up.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>She would not eat. Her mother brought her parathas and she turned her face to the wall. Bhua Jaswinder brought her chai and sat on the end of the bed and talked for an hour, and Simran did not answer.</p>
+  <p><em>What is it, beta? What is it? Tell me.</em></p>
+  <p><em>The one they walked out of the field. Raj. If I get him, I&rsquo;ll live. If I don&rsquo;t, I&rsquo;m going to lie here until I die.</em></p>
+  <p><em>Don&rsquo;t talk like this. We&rsquo;ll find you a boy. A good boy, a doctor, our kind of family. Your father has had calls already, from Surrey, from Yuba City.</em></p>
+  <p><em>I don&rsquo;t want anybody else. If I can&rsquo;t have him, I&rsquo;ll die.</em></p>
+  <p>On the fourth day her mother went down to the office in the cold storage and told her father, and on the fifth day her father climbed the stairs to the top floor, which he had not done in years, and stood in the door and looked at her, and saw that she meant it. He went out to the porch and sat until it was dark.</p>
+  <p>She never knew exactly what he did. She never asked. There was money, a great deal of it, and some of it went to a man who knew a man in the county, and some of it went to old Sohan Singh Dhillon, who found he could not be certain after all who had hit him with the pipe. The case against Rajbir Sandhu went away. In the spring, a drifter from Skagit County who already had two strikes and had sold some copper of his own in Bellingham that summer was convicted of the whole thing and went to Walla Walla for the rest of his life, and nobody on the Guide Meridian ever said his name.</p>
+</section>
+
+<section>
+  <h2>II. The Promise</h2>
+  <p class="dateline">The Guide Meridian &middot; 2008&ndash;2009</p>
+  <p>They were married in November at the gurdwara, under the canopy, and walked the four laavan around the Guru Granth Sahib while the ragis sang, and Raj walked ahead of her as the groom does, with the end of her scarf in his hand, and the whole Punjabi Northwest came and ate and went home talking. Mohinder Singh gave them a house on one of the farms.</p>
+  <p>Simran meant to be a good wife. She meant it with everything she had. Every evening she put on her gold, the heavy wedding set her mother had given her, the necklace and the earrings and the bangles, twenty-two karat, and cooked his dinner with her own hands in it, so that he would see her in it. She did not know any other way to say it.</p>
+  <p>It was the gold he looked at.</p>
+  <p>Before the winter was out he was thinking about it every night. Two hundred thousand dollars of gold, maybe more, walking around his kitchen. One of these days, he thought, she would have to take it off, and he could take it to a jeweler he knew in Surrey who asked no questions, and then he could eat dinner at the casino every night for a year and never come home. But she would never take it off while she was alive.</p>
+  <p>He thought about that, and then he saw how to do it.</p>
+  <p>In April he took to his bed. He would not eat. She came to him with a plate.</p>
+  <p><em>Are you sick?</em></p>
+  <p><em>No.</em></p>
+  <p><em>Is it my father? Has he said something to you?</em></p>
+  <p><em>Your father has been good to me.</em></p>
+  <p><em>Then what is it?</em></p>
+  <p>He turned his head on the pillow and looked at her a long time before he said it.</p>
+  <p><em>When they walked me out of that field,</em> he said, <em>with my hands behind me, and everybody filming, I prayed. I never prayed in my life before that. I made a sukhna. I promised Waheguru, if I got free of this, if I got that girl in the top window, I would carry karah prashad up to the highest place I could find and give thanks there where I could see the whole world. And I got free. And I got you. And I never paid it. That&rsquo;s what&rsquo;s eating me.</em></p>
+  <p>She sat down on the bed and took his hand. <em>Don&rsquo;t worry. Don&rsquo;t worry about anything. I&rsquo;ll make it. Tell me what to make.</em></p>
+  <p><em>Karah prashad, the real way, with ghee. Honey in it. And flowers. Five kinds. Marigolds, and whatever else you can find.</em></p>
+  <p>She made the karah prashad herself in the big iron pan, flour and ghee and sugar and a jar of honey from the beekeeper on the Badger Road, stirring it until her arm ached, the way her grandmother had shown her, and put it in a steel dabba wrapped in a clean cloth. She bought marigolds at the Indian grocery in Surrey, and daffodils from the stand on the Guide, and tulips from the Skagit fields, which were just opening, and lilac from her mother&rsquo;s bush, and a sprig of the white flowers on the Saskatoon bushes at the edge of the raspberry rows.</p>
+  <p><em>Come,</em> she said. <em>Let&rsquo;s go.</em></p>
+  <p><em>Put your gold on,</em> he said. <em>All of it. Make it a celebration.</em></p>
+  <p>She did. Two of his cousins drove them south, down the Chuckanut and up the long gravel road on Blanchard Mountain to the overlook where the hang gliders jump off, all of them laughing in the car, Simran in her gold in the back seat with the dabba in her lap.</p>
+  <p>At the top of the road Raj got out and stretched.</p>
+  <p><em>You guys go on back,</em> he said to the cousins. <em>We&rsquo;ll call you. This part is just for the two of us.</em> He turned to her. <em>You carry the prashad. You have to carry it yourself, the whole way, or it doesn&rsquo;t count.</em></p>
+  <p>She carried it. They walked the trail through the woods, two and a half miles, up the gentle back side of the mountain, through the firs and over the creek, and where the creek was high he picked her up and carried her across in his arms, gold and dabba and all, and she laughed and held on.</p>
+</section>
+
+<section>
+  <h2>III. The Dome</h2>
+  <p class="dateline">Blanchard Mountain &middot; April 2009</p>
+  <p>Oyster Dome is a knob of rock at the top of the mountain that the trail comes up to from behind, through the trees, on the easy side. On the other side there is no easy way. The rock ends in the air. Below it the mountain falls away a thousand feet and more, cliff and talus and the tops of trees, down to the highway and the railroad and the gray flat water of Samish Bay, and beyond that the islands, Lummi and Orcas and the others, one behind the other into the haze. The sign at the trailhead says to keep back from the edge. It does not say why. Anyone who has stood there knows why.</p>
+  <p>She stood on the rock in her gold with the dabba in both hands and looked out at all of it.</p>
+  <p><em>Here. Let&rsquo;s give it here. Say the ardas.</em></p>
+  <p>He said nothing.</p>
+  <p><em>Raj? Why aren&rsquo;t you saying anything?</em></p>
+  <p><em>I don&rsquo;t need the prashad,</em> he said. <em>There wasn&rsquo;t any promise. I made it up to get you up here.</em></p>
+  <p><em>Then why are we here?</em></p>
+  <p><em>To kill you,</em> he said, <em>and take your gold, and go.</em></p>
+  <p>The fear went through her so hard that the dabba shook in her hands.</p>
+  <p><em>Raj. My gold is yours. I&rsquo;m yours. Why are you saying this?</em></p>
+  <p>She begged him. She said <em>don&rsquo;t</em> again and again, and every time he only said, <em>I&rsquo;m going to kill you.</em></p>
+  <p><em>But what do you get by killing me? Take it. Take all of it. The necklace, the bangles, the earrings, take everything and let me live. Think of me as your mother from now on. Or let me be your servant. I&rsquo;ll clean for you. I&rsquo;ll work for you. Just let me live.</em></p>
+  <p><em>If I let you live,</em> he said, <em>you&rsquo;ll go straight to your father and tell him everything, and he&rsquo;ll have me in Walla Walla by Tuesday. No. I&rsquo;m going to kill you, and that&rsquo;s all there is. Don&rsquo;t make a lot of noise about it. Take the gold off and put it in a pile and let&rsquo;s get it over with.</em></p>
+  <p>She stood there on the rock and thought, <em>What a thing. What a thing for a man to do.</em> And then she thought a thing her grandmother used to say in the kitchen in Lynden, which was that you can&rsquo;t cook your brains and eat them, so you might as well use them before you jump. <em>All right,</em> she thought. <em>All right. I&rsquo;ll find a way.</em></p>
+  <p><em>Raj,</em> she said. <em>When they walked you out of that field, I went to my father. My father paid all that money to bring you back. He took you into his family. Since that day I&rsquo;ve done everything for you. Do one thing for me today. Let me touch your feet. Let me bow to you the way my mother bows to my father, one last time, before you do it.</em></p>
+  <p><em>All right,</em> he said. <em>Go on.</em></p>
+  <p>And he stood on the edge of the rock with the whole of Samish Bay behind him.</p>
+  <p>She set the dabba down. She walked around him three times, slowly, with him always on her right hand, the way you walk around the Guru, the way she had walked the laavan in November. Then she knelt and touched his feet, the right foot and the left foot, and his right knee and his left knee, and stood up.</p>
+  <p><em>This is the last time I&rsquo;ll see you,</em> she said. <em>You won&rsquo;t see me after this, and I won&rsquo;t see you.</em> She put her arms around him from the front and held him. Then she went around behind him, as if to hold him from behind too, and he stood easy with his back to her and his face to the bay, a man who has never in his life been afraid of a girl. She put one hand flat on his shoulder and the other flat on the small of his back and pushed.</p>
+  <p>He went over the edge without a sound. Then there was a sound, a long way down.</p>
+  <p>She stood alone on the rock. A bald eagle was hanging in the wind just off the edge, at the height of her face, with its wings out, not moving them, the way they do on that mountain when the air comes up the cliff. It had been there the whole time. Afterward she was never sure whether anybody spoke, or whether it was only the wind coming up the face of the mountain. But she heard it plainly, close, in Punjabi, a woman&rsquo;s voice.</p>
+  <p><em>It isn&rsquo;t always the man who&rsquo;s clever. A woman is clever too, when it counts. Look at her.</em></p>
+  <p>The eagle tipped one wing and slid away down the wind toward the bay.</p>
+</section>
+
+<section>
+  <h2>IV. The House of Questions</h2>
+  <p class="dateline">Seattle &middot; 2009&ndash;2011</p>
+  <p>She sat down on the rock and thought it through, the way she would learn to think everything through. If she went home, they would ask, <em>Where is Raj?</em> If she said, <em>I pushed him off Oyster Dome,</em> they would say, <em>We paid for that boy. We bought him back from Walla Walla with our money, for you, and you killed him.</em> If she said, <em>He was going to kill me for my gold,</em> nobody would believe her. A girl like her. A boy like him. They would not believe her at the gurdwara, and they would not believe her at the sheriff&rsquo;s office in Bellingham.</p>
+  <p><em>Then I&rsquo;m finished with home,</em> she thought.</p>
+  <p>She took off the gold. The necklace and the earrings and all the bangles, one by one, and the steel kara from her right wrist, which she had worn since she was two. She laid them on the rock beside the dabba of karah prashad and the five kinds of flowers. Then she walked down the other trail, the steep one, to Chuckanut Drive, and stood at the side of the road until a woman in a pickup stopped. In the restroom of the bus station in Mount Vernon she cut her hair off with a pair of nail scissors, all of it, close to her head, and dropped it in the trash, and got on the bus to Seattle.</p>
+  <p>The sheriff found Raj at the bottom a week later. Hikers found the gold. The newspaper in Bellingham said a young Lynden man had apparently fallen from Oyster Dome, and that his wife was missing, and that the family asked for privacy. Nobody ever found her, because nobody ever looked very hard, because her father would not let them.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>There was a house on Capitol Hill, a big shabby house with a porch, where eight or nine women lived together and argued. They had a podcast that people listened to in other countries, and a reading group, and a debate night on Thursdays that was standing room only, and they took in girls who had nowhere else to go, and did not ask a lot of questions about where they had come from. Somebody on the bus told her about it. She went and stood on the porch with her cropped hair and said, <em>Please let me in,</em> and they let her in.</p>
+  <p>After a month she asked Dana, who had started the house, what it was all for.</p>
+  <p><em>Two ways,</em> said Dana. <em>Some of us sit. Meditation, mostly; you can learn it here. Some of us argue. We learn every question there is about God and gods and souls and scripture, every objection, every answer to every objection, a thousand of them, and we go out and ask them. Either one gets you free, if you go all the way.</em></p>
+  <p><em>I can&rsquo;t sit,</em> said Simran. She had tried, the week before. She had closed her eyes and seen the eagle. <em>I&rsquo;ll learn the questions.</em></p>
+  <p>She learned them. All of them. She learned them the way her father had learned raspberries, all at once and down to the root, and in eighteen months there was nobody in the house who could stand up to her on a Thursday night, and Dana sat her down on the porch.</p>
+  <p><em>You&rsquo;re done here,</em> she said. <em>Go find somebody who can answer you. If you find some ordinary person who beats you, a farmer, a bus driver, whoever, go and work for them. If it&rsquo;s a priest or a preacher or a monk, whatever they are, go and become one.</em></p>
+  <p>And she put a branch of vine maple in Simran&rsquo;s hand, from the tree by the porch, with the leaves just coming out.</p>
+</section>
+
+<section>
+  <h2>V. The Branch</h2>
+  <p class="dateline">The Northwest &middot; 2011&ndash;2012</p>
+  <p>She called herself the Branch, online, and that was what people called her, and before long a great many people knew the name.</p>
+  <p>She went from Bellingham to Eugene and out to Spokane and Boise. Before she went into any town she would find the biggest church, or the mosque, or the temple, or the chaplain&rsquo;s office at the college, and set a bucket of sand by the door and stand her branch up in it, and tape a card to the bucket that said, <em>If you can answer my questions, step on this.</em> Then she went to find something to eat. Nobody stepped on it. When she came back the branch was always standing, and somebody had always filmed it, and by evening it was online. When a branch dried out, she cut a new one. There is vine maple all over the Northwest.</p>
+  <p>Some of them argued with her. Ministers, a rabbi in Portland, a Jesuit at Gonzaga who liked her and lost anyway. She asked them her questions in front of everybody, politely, one after another, and they ran out of answers long before she ran out of questions, and the videos went around. After a while nobody argued with her. When people heard the Branch was coming, they found they had somewhere else to be that week. Pastors went to conferences. The doors were locked when she got there.</p>
+  <p>She was very good at it. She knew she was very good at it. She was twenty-one and she had nothing in the world but a backpack and a thousand questions, and nobody alive could answer her, and some nights in the motel she lay awake and thought that was the same as being free.</p>
+</section>
+
+<section>
+  <h2>VI. The Langar Hall</h2>
+  <p class="dateline">Kent, Washington &middot; August 2012</p>
+  <p>In the second week of August she came to the gurdwara in the valley at Kent.</p>
+  <p>She had stayed away from gurdwaras for three years. She told herself it was not on purpose. But that August a man had walked into a gurdwara in Oak Creek, Wisconsin, on a Sunday morning, while the women were cooking the langar, and killed six people with a pistol, and every gurdwara in America had been on the news since, and she found she could not stay away from this one. She set her bucket of sand by the gate in the chain-link fence, beside the bunches of flowers people had left there for Oak Creek, and stood the vine maple up in it, and taped on her card. Then she went down the street to get coffee.</p>
+  <p>A crowd of boys from the Sunday Punjabi school gathered around the bucket. They knew who she was. Everybody did. They stood around the branch with their patkas on and their hands in their pockets and dared each other, and nobody touched it.</p>
+  <p>Baba Kartar Singh came out the side door of the langar hall a little after one, wiping his hands. He had eaten, and washed the big pots, and was going home to sleep. He was seventy-four. He had driven a truck for thirty-one years, Seattle to Chicago and back, Seattle to Los Angeles, every road in the West, until his back gave out, and now he did seva in the langar and on weekday mornings read from the Guru Granth Sahib to whoever came, which was mostly old people, and on Sundays taught the boys their Gurmukhi letters. He had a white beard to his chest and a dark blue turban and he walked slowly.</p>
+  <p><em>What&rsquo;s all this?</em> he said.</p>
+  <p>They told him. The Branch. The questions. The videos. The pastor in Spokane who went to a conference.</p>
+  <p>Baba Kartar Singh looked at the vine maple for a while.</p>
+  <p><em>Go on,</em> he said. <em>Step on it.</em></p>
+  <p><em>Baba-ji, we&rsquo;re scared to.</em></p>
+  <p><em>Step on it. I&rsquo;ll answer her questions. Go on.</em></p>
+  <p>That was all they needed. They kicked the bucket over and jumped on the branch, all of them at once, yelling, and stamped it flat into the gravel of the parking lot, and kicked the sand everywhere, and somebody filmed that too.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>She came back with her coffee and stopped.</p>
+  <p><em>I wasn&rsquo;t going to argue with you,</em> she said to the boys. <em>I don&rsquo;t argue with children. Why did you do that?</em></p>
+  <p><em>Baba-ji told us to.</em></p>
+  <p>The old man was sitting on the bench by the side door. She went over and stood in front of him.</p>
+  <p><em>Baba-ji. Did you tell them to step on my branch?</em></p>
+  <p><em>Yes, beti.</em></p>
+  <p><em>Then you answer my questions.</em></p>
+  <p><em>All right. Come back tonight.</em></p>
+  <p>By evening it was everywhere. Every Punjabi phone from Surrey to Yuba City had the video of the boys jumping on the branch, and by eight o&rsquo;clock the langar hall was full, families from Kent and Renton and Auburn and Federal Way, people who had driven down from the farms on the Guide, a news van in the parking lot, everybody sitting on the long strips of carpet on the floor with their heads covered and paper plates of dal and roti in front of them, and the sevadars going up and down the rows with buckets. Baba Kartar Singh sat on the floor at the front of the hall in a clean white kurta, with nothing in his hands. She sat facing him. Somebody gave her a scarf for her cropped hair, and she put it on without thinking.</p>
+  <p><em>I want to ask you some questions,</em> she said.</p>
+  <p><em>Ask, beti.</em></p>
+  <p>She asked him everything. She asked him the thousand questions. If there was one God, why were there so many religions, and why did all of them say theirs was right? If God was good, why Oak Creek? Why did the women cook the langar and the men read the Granth, if the Gurus said the women were not less? If everything was God&rsquo;s will, then who did the wrong, the man with the pistol or God? Where was the soul before it was born? What did a child have to do with karma? Why should anybody believe a book that men had written down?</p>
+  <p>He answered every one of them. He did not hurry. He answered in plain Punjabi and plain English, the way he would tell a man where to get off the interstate, and sometimes he answered with a line from the Gurus and sometimes with something he had seen in a truck stop in Wyoming. Every answer was the right one. The people in the hall could feel it, one after another, the way you feel a truck shift into the right gear. Nobody had ever seen her stopped before.</p>
+  <p>At ten o&rsquo;clock she ran out.</p>
+  <p><em>Is that all, beti?</em></p>
+  <p><em>That&rsquo;s all of them.</em></p>
+  <p><em>You asked me a lot of questions. Can I ask you just one?</em></p>
+  <p><em>Ask.</em></p>
+  <p><em>What is one?</em></p>
+  <p>She almost laughed. Every child in the hall knew. It was the first word of the Guru Granth Sahib, the first thing her grandmother had taught her to say, before her own name. It was written in gold over the door.</p>
+  <div class="verse">
+    <p>There is but one God whose name is true, the Creator, devoid of fear and enmity, immortal, unborn, self-existent; by the favour of the Guru.</p>
+    <p>&mdash; Japji, the opening lines</p>
+  </div>
+  <p><em>Ik Oankar,</em> she said. <em>One. Every kid in this room can tell you that.</em></p>
+  <p><em>I didn&rsquo;t ask you what they can say. I asked you what one is.</em></p>
+  <p>She opened her mouth to answer, and there was nothing in it. She knew the words. She had known them all her life. She did not know the thing. She looked at him, and the hall was so quiet she could hear the sevadars setting the buckets down.</p>
+  <p><em>I don&rsquo;t know,</em> she said. <em>Tell me.</em></p>
+  <p><em>That one is the Guru&rsquo;s question, beti. Not mine.</em></p>
+  <p><em>Then tell me the Guru&rsquo;s answer.</em></p>
+  <p><em>Become what I am,</em> said Baba Kartar Singh, <em>and I&rsquo;ll tell you.</em></p>
+  <p><em>What are you?</em></p>
+  <p><em>A Sikh,</em> he said. <em>A learner. That&rsquo;s all the word means.</em></p>
+  <p>She sat on the carpet in the borrowed scarf with the whole hall looking at her, and the news van outside, and the trampled branch out in the parking lot under the lights, and she said, <em>Then make me one.</em></p>
+</section>
+
+<section>
+  <h2>VII. Curly</h2>
+  <p class="dateline">Kent &middot; 2013</p>
+  <p>Baba Kartar Singh did not make her anything. He sent her to the women. She stayed that winter with a widow from the sangat who had a room over her garage, and she worked in the langar kitchen, and she did not argue with anyone. At Vaisakhi in April, with the other initiates, she took amrit from the Panj Pyare in the gurdwara at Kent, and put on the five things, and a new steel kara on her right wrist, and kept her hair from that day uncut.</p>
+  <p>It came in curly. It had been straight all her life, down to her waist, and she had cut it off in a bus station in Mount Vernon, and now it came back in tight curls that would not stay under her chunni, and the boys from the Punjabi school, who had jumped on her branch, called her Ghungrali Bibi, Curly Bibi, and then everybody did.</p>
+  <p>Some time in that first spring, nobody could ever say exactly when, the thing happened to her that she had come for. She did not talk about it. People who had known the Branch did not recognize her. She rolled roti in the langar kitchen for three hundred people on a Sunday and did not say a word all morning, and the women who worked beside her said later that it was like standing next to a window with the sun coming in.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The men who sat on the bench by the side door after langar could not let it alone. One Sunday in May they were at it again while Baba Kartar Singh sat at the end of the bench with his eyes closed.</p>
+  <p><em>She heard one evening of it. One. Baba-ji answered her questions and asked her one, and that was the end of it. My cousin&rsquo;s been coming here forty years and he&rsquo;s still the same man.</em></p>
+  <p><em>And before that, you know what she did, everybody knows. That boy on the mountain. She beat him, a girl of eighteen. Whatever you want to call it, she beat him.</em></p>
+  <p>Baba Kartar Singh opened his eyes.</p>
+  <p><em>Don&rsquo;t count it,</em> he said. <em>Don&rsquo;t measure it by how much. That girl came in here with a thousand questions in her and all of them empty, and every one of them was a fight, and she won every fight. It doesn&rsquo;t matter. One word with something in it is worth more than all of that. Guru Nanak said it.</em></p>
+  <div class="verse">
+    <p>A man may load carts with books; he may load men with books to take with him;</p>
+    <p>Books may be put on boats; pits may be filled with them.</p>
+    <p>A man may read books for months; he may read them for years;</p>
+    <p>He may read them for life; he may read them while he hath breath&mdash;</p>
+    <p>Nanak, only one word, God&rsquo;s name, would be of account; all else would be the senseless discussion of pride.</p>
+    <p>&mdash; Asa ki War, slok of Guru Nanak</p>
+  </div>
+  <p><em>And the boy on the mountain,</em> he said. <em>Forget the boy on the mountain. You can beat a thousand men, beat them a thousand times, on a mountain or in a debate or in a war, and you haven&rsquo;t won anything. The one you have to beat is yourself. Beat that one and you&rsquo;ve won it all. That&rsquo;s the only fight. She&rsquo;s won it.</em></p>
+  <div class="verse">
+    <p>Make association with men thine Ai Panth, and the conquest of thy heart the conquest of the world.</p>
+    <p>&mdash; Japji 28</p>
+  </div>
+  <p><em>The Ai Panth were the yogis,</em> he said. <em>The proudest order there was. Make everybody you meet your order, the Guru says, and beat your own heart. That&rsquo;s the whole world beaten.</em></p>
+  <p>The men on the bench were quiet. One of them, Sohan Singh Dhillon&rsquo;s nephew, who had driven down from Lynden for Sunday, looked at the kitchen door a long time.</p>
+  <p>Inside, Ghungrali Bibi was at the big griddle with flour to her elbows, turning roti with her bare fingers the way the old women do, one after another, hundreds of them, each one rising and filling with steam and going onto the pile, and her curls had come out from under her chunni again, and she did not stop to push them back.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verses</h3>
+    <blockquote class="pd">Though a man recite a hundred Gathas made up of senseless words, one word of the law is better, which if a man hears, he becomes quiet.<cite>Dhammapada 102, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">If one man conquer in battle a thousand times thousand men, and if another conquer himself, he is the greatest of conquerors.<cite>Dhammapada 103, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a rich merchant&rsquo;s daughter of R&#257;jagaha, kept on the top floor of her father&rsquo;s house, sees a young robber being whipped through the streets to his execution and refuses to eat until she has him. Her father bribes the officer to free him and execute another man in his place. The robber marries her, wants her jewels, and pretends he owes an offering to the deity of Robbers&rsquo; Cliff. At the top he tells her he means to kill her. She asks to honor him one last time, walks around him three times, embraces him and pushes him over. Unable to go home, she joins a band of women wanderers, masters a thousand philosophical views, and travels from town to town planting a rose-apple branch at the gates and challenging anyone who can answer her to trample it. At S&#257;vatth&#299; the elder S&#257;riputta has some boys trample it. He answers all her questions, then asks her one, &ldquo;What is one?&rdquo; She cannot answer it, asks to be ordained, takes the name Ku&#7751;&#7693;alakes&#299; (&ldquo;curly hair&rdquo;) and soon becomes an arahant. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Kundalakesi">Ku&#7751;&#7693;alakes&#299;</a> and the Tamil epic that retold her story.</p>
+    <h3>Sikhs in western Washington, 1907&ndash;2012</h3>
+    <p>In September 1907 a mob of about five hundred men drove the Sikh mill workers out of Bellingham. Sikhs did not come back to Whatcom County in numbers for most of a century. When they did, beginning in the 1980s, they came mostly as farmers who had first prospered across the border in British Columbia. Today nearly a hundred Sikh farmers work some five thousand acres of berries there, in a county that grows about two-thirds of the raspberries in the United States (<a href="https://www.kuow.org/stories/100-years-ago-whites-drove-sikhs-out-of-bellingham-now-sikh-farmers-flourish">KUOW</a>). In 1993 Washington voters approved Initiative 593, the first true <a href="https://en.wikipedia.org/wiki/Three-strikes_law">three-strikes law</a> in the country. On August 5, 2012, a white supremacist killed six worshippers at the <a href="https://en.wikipedia.org/wiki/Wisconsin_Sikh_temple_shooting">Sikh Temple of Wisconsin</a> in Oak Creek while the langar was being prepared.</p>
+    <p><a href="https://www.wta.org/go-hiking/hikes/oyster-dome">Oyster Dome</a> is a rock promontory on Blanchard Mountain above Samish Bay. The trail approaches it through the forest from the Samish Overlook, a hang-gliding launch, and ends at an unfenced edge with an unforgiving drop. The scripture in the story is from the Guru Granth Sahib in Max Arthur Macauliffe&rsquo;s translation, <a href="https://archive.org/details/thesikhreligion01macauoft"><em>The Sikh Religion</em>, volume 1 (1909)</a>, which renders the opening words, Ik Oankar, as &ldquo;There is but one God.&rdquo; In Sikh weddings the couple walks four times around the Guru Granth Sahib, and at initiation, amrit, the five Ks include kesh, uncut hair. The word <em>Sikh</em> means a learner or disciple. Everyone in the story is fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Ku&#7751;&#7693;alakes&#299; from the Dhammapada commentary (verses 102 and 103). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-03.htm">The original</a>. Scripture from the Guru Granth Sahib, tr. Max Arthur Macauliffe, <em>The Sikh Religion</em> (1909). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-kings-bowl.html">&larr; The King’s Bowl</a><a href="index.html">All stories</a><a href="spilt-water.html">Spilt Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, last = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function eagle(x, y, s, bank, flex) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(bank); ctx.scale(s, s);
+    ctx.beginPath();
+    ctx.moveTo(0, -6);
+    ctx.quadraticCurveTo(-20, -9 - flex, -44, -4 - flex * 1.5);
+    ctx.lineTo(-52, -2 - flex * 1.6); ctx.lineTo(-47, 1 - flex); ctx.lineTo(-50, 4 - flex);
+    ctx.quadraticCurveTo(-24, 3, -6, 6);
+    ctx.lineTo(-5, 14); ctx.lineTo(0, 17); ctx.lineTo(5, 14); ctx.lineTo(6, 6);
+    ctx.quadraticCurveTo(24, 3, 50, 4 - flex);
+    ctx.lineTo(47, 1 - flex); ctx.lineTo(52, -2 - flex * 1.6); ctx.lineTo(44, -4 - flex * 1.5);
+    ctx.quadraticCurveTo(20, -9 - flex, 0, -6);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath(); ctx.ellipse(0, -9, 3.2, 4.2, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+  function draw(now) {
+    if (!reduce) {
+      if (last && now - last < 33) { requestAnimationFrame(draw); return; }
+      t += last ? Math.min(now - last, 100) : 16; last = now;
+    }
+    ctx.clearRect(0, 0, W, H);
+    var p = t * 0.000045;
+    var cx = W * 0.5, cy = H * 0.32, rx = W * 0.38, ry = H * 0.16;
+    var x = cx + Math.sin(p) * rx, y = cy + Math.sin(p * 2) * ry * 0.5 + Math.cos(p * 0.7) * ry * 0.3;
+    var dx = Math.cos(p) * rx, dy = Math.cos(p * 2) * ry;
+    var bank = Math.max(-0.35, Math.min(0.35, -Math.sin(p) * 0.3 + dy / (Math.abs(dx) + 400) * 0.2));
+    var s = Math.max(0.9, Math.min(2.0, W / 700));
+    var flex = reduce ? 0 : Math.sin(t * 0.0006) * 1.2;
+    ctx.fillStyle = 'rgba(190,205,215,0.07)';
+    eagle(x, y, s, bank, flex);
+    ctx.fillStyle = 'rgba(190,205,215,0.025)';
+    eagle(x + 6 * s, y + 10 * s, s * 1.04, bank, flex);
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size();
+  if (reduce) { t = 4000; draw(0); } else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

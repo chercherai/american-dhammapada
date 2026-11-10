@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Ladders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose under a hot Harlem night; high above, a faint path of light arches from river to river, its colors slowly turning like the inside of an oyster shell; datelined sections. */
+  --ground: #0d1018;
+  --ground-2: #171b26;
+  --paper: #ece6dc;
+  --paper-dim: #9c9a9a;
+  --mango: #e8734f;
+  --pearl: #cfe2e4;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #231a24 0%, var(--ground) 58%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(236,230,220,.2); }
+.series a:hover { color: var(--mango); }
+a:focus-visible { outline: 2px solid var(--mango); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--pearl); text-wrap: balance; text-shadow: 0 0 28px rgba(207,226,228,.22); }
+.epigraph { border-left: 1px solid rgba(232,115,79,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mango); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--pearl); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(23,27,38,.8); border: 1px solid rgba(236,230,220,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--mango); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(236,230,220,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--mango); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mango); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--mango); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--mango); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mango); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--pearl); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(23,27,38,.8); border-left: 2px solid var(--mango); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 14.2 &middot; Yamakap&amacr;&#7789;ih&amacr;riya</span></nav>
+<header>
+  <h1>Three Ladders</h1>
+  <div class="epigraph">Surely I have behaved and quieted myself, as a child that is weaned of his mother.<br>&mdash; Psalm 131:2</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how I hear it,</span> on Lenox Avenue.</p>
+
+<section>
+  <h2>I. The Bowl</h2>
+  <p class="dateline">Harlem · spring 1927</p>
+  <p>Cyril Pemberton ran the biggest policy bank north of 125th Street, and every morning from May until the first frost he swam in the Harlem River, the way he had swum off the bay in Basseterre as a boy. His driver brought him down to the water at six with a wicker hamper, and he put his watch and his diamond stickpin and his good suit in the hamper so they would not walk off while he was in the water, and the driver sat on the hamper and smoked.</p>
+  <p>One morning in April a block of wood came down the river on the tide and fetched up against the hamper and stayed there. It was about the size of a coal scuttle, worn round by the water, slick with weed. Pemberton came out dripping and turned it over with his foot and had the driver scrape it with his penknife, and under the weed it was red. Mahogany, Honduras mahogany, red as a cut plum, off some lighter or some barge that had broken up in the Bronx Kills.</p>
+  <p>Pemberton was not a churchman and not a heathen. He had money in four churches and a gold tooth he said was for luck, and he did not believe in luck. He stood there on the rocks in his drawers and thought.</p>
+  <p>Every corner in Harlem had a holy man on it. There were bishops in storefronts and prophets over barbershops, and mystics in turbans who read your number in a glass of water for fifty cents, and a man on 131st Street who said he was God and had cards printed. Pemberton had listened to all of them. He had paid most of them. He had never once met a man he believed.</p>
+  <p>He took the wood to a cabinetmaker on Lenox Avenue and had it turned on the lathe into a bowl, the size you would put rice in, polished till it glowed. Then he had his men lash scaffold poles end to end, up and up, ninety feet, and stay them with cables over the corner of 135th Street and Lenox, and at the top they hung the bowl on a cord. And he put a notice in the Amsterdam News.</p>
+  <p>If there is a holy man in Harlem, let him fly up and take it down. Whoever does it, I will follow him, and my wife, and my house.</p>
+  <p>The holy men came. There were six of them who mattered. Bishop Graves of the Temple of the Cosmic Fire, and Mother Hattie of the Spiritual Science Church, and a man called Professor Aziz who said he had studied in India, and Elder Purcell, and Daddy Joy, and the one with the cards. They came one at a time to Pemberton's office over the cigar store and said the same thing in different words. That bowl is just the thing for me. Do not insist that a man of God make a show of himself for a wooden dish. Give it here.</p>
+  <p><em>Fly up and take it,</em> Pemberton said.</p>
+  <p>On the sixth day Bishop Graves came himself, with his people. He went out into the middle of Lenox Avenue under the poles and lifted one hand and one foot, slowly, like a heron, and before the foot was off the ground his deacons had him by the arms and the coattails. <em>Bishop, Bishop, what are you doing? You will not show them the power of God for a piece of wood.</em> And they pulled him down and laid him on the asphalt, gently, and he lay there and said to Pemberton, <em>You see, my people will not allow it. Give me the bowl.</em></p>
+  <p><em>Fly up and take it,</em> said Pemberton.</p>
+  <p>On the seventh morning two men of Mr. Thorne's came out of the subway at 125th Street. Clement Mayers was a stevedore on the Hudson piers, a quiet thick-shouldered man from St. Lucy, and Pindar Bascombe was a Pullman porter with a laugh you could hear across a rail yard. They had stopped at the big rock in Mount Morris Park, the old hill of black stone with the fire tower on top, so Pindar could change his porter's jacket for his own coat, and while he did it some loafers on the bench below were talking.</p>
+  <p><em>Seven days that bowl's been hanging. Every saint in Harlem's had a go. Well, now we know. There's no such thing.</em></p>
+  <p>Clement looked at Pindar. <em>You hear them. You go.</em></p>
+  <p><em>You go. You're the strong one.</em></p>
+  <p><em>You go,</em> said Clement.</p>
+  <p>So Pindar went into himself the way Mr. Thorne had taught them, quiet, down to the bottom, and came up again, and then he put the toe of his shoe against the rock of Mount Morris and drew a line around it, and lifted it. The whole hill. Fire tower, bell and all, as easy as a man lifts a hat. He carried it up into the air over Harlem and walked it around seven times, east to the river and west to the bluff, so that the rock hung over the town like a lid on a pot. People on Lenox Avenue looked up and screamed and put washtubs over their heads and crawled under the stoops. On the seventh time around, Pindar broke a hole in the rock with his heel and put his head through so they could see him, laughing, and they all cried out, <em>Pindar! Hold it, man, hold it, don't drop it on us!</em> And he kicked it away from him, back to the park, where it settled in its place so neatly that the bell in the tower only rang once. Then he came down on the roof of Cyril Pemberton's house on 139th Street, and took the bowl.</p>
+  <p>Pemberton came up through the roof hatch in his dressing gown. He went down on his face on the tar. <em>Master, come down.</em> And when Pindar came down, Pemberton took him into the kitchen and filled the bowl with sugar cake, guava cheese, condensed milk and honey, and gave it back to him. Pindar walked off up Lenox Avenue with it, and everybody who had been under a washtub and missed it ran after him, <em>Do it again, do it again,</em> and he laughed, and did it again.</p>
+  <p>Mr. Thorne was walking up from 125th Street with Ernest, the boy who carried his parcels, when he heard the roaring.</p>
+  <p><em>What are they cheering, Ernest?</em></p>
+  <p>Ernest told him.</p>
+  <p>Mr. Thorne sent for Pindar. He did not raise his voice; he never did. He asked him was it true, and Pindar said yes, and Mr. Thorne asked him why, and Pindar had nothing to say. Then Mr. Thorne took the bowl out of his hands and gave him a hatchet and told him to split it, there on the stoop, into kindling, and give the kindling to the old women on the block for their stoves. And he told all of them who walked with him, there were perhaps forty that year, that none of them was ever to do such a thing again for anybody to look at.</p>
+</section>
+
+<section>
+  <h2>II. The Peach Tree</h2>
+  <p class="dateline">Harlem · spring and summer, 1927</p>
+  <p>Josiah Thorne had been a ship's carpenter out of Bridgetown, Barbados, forty years, on schooners and then on the big steamers of the Royal Mail, until his eyes went too far for fine work. He was past seventy. He had a room on 133rd Street and worshipped at the West Indian Episcopal church on Sundays at the back, and the rest of the week he sat on his stoop, or walked, and men came and sat on the steps below him, and some of them came back. He did not preach. He did not take collections or print cards. He talked when he was asked, briefly, and spent a good deal of time sitting very still, which the children on 133rd Street tried to imitate and could not.</p>
+  <p>When the holy men heard that he had made his people split the bowl, they were glad. <em>Now we have him,</em> they said. <em>His men won't break his rule, and he won't break it either.</em> And they went up and down Lenox Avenue with a bass drum telling everybody that they had kept their powers hidden out of modesty, and that Thorne's people had made a show of themselves for a dish, and that from now on they would work wonders against nobody but Thorne himself.</p>
+  <p>The district leader heard it. His name was Royall, and he gave out the turkeys at Thanksgiving and the coal in February and the jobs at the Department of Sanitation, and there was not much in Harlem he did not hear. He came to 133rd Street in his car and sat on the stoop beside Mr. Thorne in his good coat.</p>
+  <p><em>They tell me you've made a rule. No miracles.</em></p>
+  <p><em>Yes.</em></p>
+  <p><em>And the bishop says now he'll match you, wonder for wonder.</em></p>
+  <p><em>If he does, I will too.</em></p>
+  <p><em>But it's your rule.</em></p>
+  <p><em>It's my rule for them. I didn't make it for me.</em></p>
+  <p>Royall laughed. <em>That's a fine rule. A rule for everybody but the man that made it.</em></p>
+  <p>Mr. Thorne looked at him. <em>You have a peach tree,</em> he said. <em>In the yard behind your house on 139th Street. I've seen it over the wall.</em></p>
+  <p><em>I do.</em></p>
+  <p><em>If the boys on the block climb your wall and eat your peaches, what do you do?</em></p>
+  <p><em>I call the precinct.</em></p>
+  <p><em>And when you eat them yourself?</em></p>
+  <p><em>They're my peaches.</em></p>
+  <p><em>Well,</em> said Mr. Thorne. That was all he said about it. Royall sat a while longer, and then asked him when, and where. Mr. Thorne said four months from now, on the full moon in July, and he would do it uptown, at the top of the hill, so there would be room for everybody.</p>
+  <p>The holy men followed him after that. Wherever Mr. Thorne ate his supper, they slept the night; wherever he slept, they took their breakfast. When people asked what they were doing, they said, <em>He said he'd meet us and now he's running. We won't let him get away.</em> In July they hired a tent from a revival outfit in Newark and put it up on a vacant lot on St. Nicholas Avenue, and covered the poles with blue cornflowers from the market, and sat under it in a row and said, <em>Here. Here is where it will be done.</em></p>
+  <p>Royall came again. <em>They've put up a tent. Let me put one up for you.</em></p>
+  <p><em>I have a builder.</em></p>
+  <p><em>Who? There's nobody in Harlem can put up a tent but me.</em></p>
+  <p>Mr. Thorne pointed up with one finger, and did not explain.</p>
+  <p><em>Where will you do it?</em> Royall asked.</p>
+  <p><em>At the foot of the fruit man's tree.</em></p>
+  <p>The holy men heard that and sent their people out the same night with saws and spades. They cut down every tree for a mile around, every ailanthus in every back yard, every young plane tree the city had planted along the avenues with a little iron fence around it, and they pulled the geraniums out of the window boxes and the seedlings out of the lard tins on the fire escapes, where West Indian women grew peppers and mango seedlings from home, and they threw it all in the river.</p>
+</section>
+
+<section>
+  <h2>III. The Mango</h2>
+  <p class="dateline">St. Nicholas Avenue · the full moon of July</p>
+  <p>That morning a Grenadian named Gant, who had a pushcart of fruit on Lenox Avenue, found one perfect mango in a crate off the banana boat from Kingston. It was a Julie mango, the kind that goes from green to gold to red at the shoulder, and it was ripe, and the smell came off it so that the flies followed his cart. He wrapped it in tissue paper and set out with it to Royall's house. Royall would give him a dollar for it, maybe two.</p>
+  <p>On the way he met Mr. Thorne walking with Ernest. He stood there with the mango in his hands. A dollar or two, he thought. That will not keep me alive past Tuesday. And he held it out.</p>
+  <p>Mr. Thorne looked at Ernest. Ernest took the tissue paper off and put the mango in Mr. Thorne's hands, and Mr. Thorne sat down on the stone curb of the vacant lot at the top of St. Nicholas Avenue, across from the holy men's tent. Ernest borrowed a glass from a soda fountain and squeezed the mango into it with water and a sliver of ice from the iceman's cart, and Mr. Thorne drank it.</p>
+  <p><em>Dig a hole here, Mr. Gant,</em> he said, <em>and plant the seed.</em></p>
+  <p>Gant scratched a hole in the cinders of the lot with a piece of slate and put the seed in it. Mr. Thorne poured the last of the water over his hands into the hole.</p>
+  <p>The tree came up while they watched. It came up the thickness of a lamppost, and then a telegraph pole, sixty, seventy feet, and put out five great limbs, four to the four corners of the street and one straight up, and it leafed out dark and shining and came into flower and then into fruit, all in the time it takes to say it, and on one side the fruit was already ripe and falling. Mr. Thorne's men ate the mangoes standing in the lot with the juice running down to their elbows. Royall heard about it and sent two patrolmen to stand under it so nobody would cut it down, and it was called Gant's tree from that day.</p>
+  <p>The boys of the block ate too. Then they took the seeds and threw them at the tent across the street. <em>You chopped down every tree in Harlem,</em> they shouted, <em>and look here what we got.</em></p>
+  <p>In the afternoon a wind came off the river. It took the holy men's tent up off its stakes like a sheet off a line and carried it east, cornflowers and all, and dropped it in the Harlem River at the mouth of the big sewer. Then the sun came out white and hot and stood still over St. Nicholas Avenue, and the holy men in their black coats and robes sat there sweating, and the wind came back and blew the dust of the lot all over them, so that they were red from head to foot, and then the rain came down in drops as big as quarters, and they were spotted like Holstein cows. They ran.</p>
+  <p>Elder Purcell ran down toward the river. On the way he met a man of his own church coming up, a coal heaver with a pail of soup for his supper and a coil of rope over his shoulder. <em>Elder, I'm going to see you work your wonder. Where are you going?</em></p>
+  <p><em>What do you want with a wonder?</em> said Elder Purcell. <em>Give me your pail and your rope.</em></p>
+  <p>The man gave them to him. Elder Purcell went down to the end of the pier at 135th Street, and poured out the soup, and tied the pail to his neck with the rope, and filled it with river water, and went over. The coal heaver saw the bubbles come up and stop. The police dragged the river for two days. He was sixty-one and had a wife in Raleigh. The holy men buried him in Woodlawn and spoke a long time over him, and Mr. Thorne came and stood at the back, and Ernest saw that he was weeping.</p>
+</section>
+
+<section>
+  <h2>IV. Not for You</h2>
+  <p class="dateline">The top of the hill · that evening</p>
+  <p>At dusk a path appeared in the air. It ran from the East River to the Hudson, high over 145th Street, and it shone the way the inside of an oyster shell shines, so that the people coming up the hill stopped and stood with their mouths open. By full dark there were people on every street from the river to the river, on the roofs and the fire escapes and the elevated platforms and the cliffs of St. Nicholas Park, more people than Harlem had ever held, and Mr. Thorne came out from the house where he had been resting and stood on the stoop.</p>
+  <p>Mother Gertrude came to him first. She was a laundress, a widow, sixty, and some people said she had been seen walking on the surface of the reservoir in Central Park at four in the morning. <em>Mr. Thorne, while you have a daughter like me, you don't need to trouble yourself. Let me. I will turn the whole island to water and go down in it like a cormorant and come up at Coney Island, and at Yonkers, and at Jersey City, and right here in the middle. People will say, who is that, and they'll say, that's only Gertrude the washerwoman, and what must he be.</em></p>
+  <p><em>I know you can, Gertrude,</em> he said. <em>This basket wasn't packed for you.</em></p>
+  <p>She stepped aside. Then they came one after another. Young Mr. Inniss, the caterer, who fed half the funerals in Harlem, said he would stand up as tall as the Woolworth Building and stamp his foot and shake the island like thunder. A little girl of seven named Clara, who sang in the junior choir and had answered the bishop of New York's catechism questions at her confirmation in words that made him sit down, said she would bring the Palisades and the Catskills and Bear Mountain and set them in a row and fly over them like a gull without touching. A boy of seven named Cuthbert said he would pull up the great elm in Central Park and carry it on his shoulder and shake down fruit for everybody. Sister Lillian, an old woman who had nursed in Panama when they cut the Canal, said she would come up Seventh Avenue as the Queen of England with a regiment behind her and kneel to him in the street.</p>
+  <p><em>I know you can,</em> he said, to each.</p>
+  <p>Last came Clement Mayers. <em>I'll crack the Palisades between my teeth like a peanut. I'll roll the island up like a rug and hold it in one hand. I'll take every soul here to Africa and bring them back before morning.</em></p>
+  <p><em>I know you can, Clement. This one isn't yours. What I carry, nobody else carries. It's always been so.</em> And he sat down on the stoop, because Clement looked so stricken, and told him a story.</p>
+  <p><em>When I was a boy in St. Philip there was an old woman kept a black ox. A carter left it with her for his rent, and she raised it on cornmeal pap like a child, and the children rode on it. One day a merchant came to the gully with a string of carts and could not get them up the far bank, not with every team he had, and the ox went down and stood by the gully till the man asked whose it was. Nobody's, they told him. So he put a rope through its nose, and it would not move a step until he said what he would pay. Then it took the carts up the bank one by one. And when the man tied half the money round its neck, the ox stood across the road in front of the first cart and would not let him pass until he tied on the rest. And it went home to the old woman with the money, so tired its eyes were red, and she washed it in warm water and cried, and said, Did I ask you to do this for me?</em></p>
+  <p>Clement waited.</p>
+  <p><em>There was another,</em> said Mr. Thorne, <em>belonged to a parson in Christ Church parish, and the parson bet a planter it could pull a hundred carts of stone. And on the day, the parson sat up on the first cart and shouted at it, Pull, you wretch, pull, you worthless brute. And it planted its feet and would not move, and the parson lost his money. And the ox came home and said to him, Parson, in all my years with you did I ever break a pot? Then why call me a brute? Go bet him double. And the next time the parson said, Pull, my beauty, pull, my fine one, and it pulled all hundred carts at once.</em></p>
+  <p><em>Who was the ox?</em> Clement said.</p>
+  <p>Mr. Thorne got up off the step. <em>Speak sweet to people, Clement,</em> he said. <em>That's the whole of it.</em> And he went up the stairs that were not there into the air, onto the path of light over 145th Street.</p>
+  <p>What happened next was told afterward by more people than were alive in Harlem, and no two of them told it the same, but on this they all agreed. Fire came out of the top of him and water out of the bottom of him, and then water from the top and fire from the bottom, and from his right side and his left, fire from his right eye and water from his left, from his hands, from his feet, out of every pore of him, fire and water both, and the fire did not dry the water and the water did not put out the fire. It went up out of sight and came down again over the rivers. There were colors in it that the women who sewed could not name. And while he walked, there was another of him, exactly him, in his old brown suit, standing; and when that one walked, he stood; and the other one asked him questions, out loud, the questions the crowd would have asked if they had known how, and he answered them. He did not tire anybody. He stopped often and let them breathe. Old men who had not believed in anything since the war came down off the elevated platforms and sat in the street.</p>
+</section>
+
+<section>
+  <h2>V. Three Months</h2>
+  <p class="dateline">Mount Morris Park · summer and autumn, 1927</p>
+  <p>Then he was gone, the way the moon goes behind a building.</p>
+  <p>They looked for him all night. <em>He's gone to Brooklyn. He's gone home to Barbados. He was ashamed to do such a thing before so many people, and he's gone where nobody knows him.</em> Women sat on the curbs and cried. In the morning they went to Clement, who knew, and Clement said, <em>Ask Mr. Andrews.</em></p>
+  <p>Mr. Andrews had been blind since a boiler burst in the engine room of a Royal Mail steamer in 1899, and he saw more than anybody. <em>He's gone up to his mother,</em> he said. <em>She died having him, in Bridgetown, in the hurricane year. He never got to tell her anything. He's telling her now. Three months. He'll come down when the summer's over and the rains are done.</em></p>
+  <p><em>Then we'll wait,</em> said the crowd. And they did. They camped in Mount Morris Park, on the grass and the rock, under the fire tower, with the sky for a roof, thousands of them, all summer and into the fall. The newspapers came to look and went away again. And this was a wonder too, that there were so many and the park was never dirty. The ground took whatever they dropped.</p>
+  <p>Before he went, Mr. Thorne had told Clement to answer them, and told young Inniss to feed them. So every morning Inniss came with his wagons, oatmeal and cocoa tea and salt-fish cakes and bread, and every evening Clement sat on the rock and answered questions until the questions ran out.</p>
+  <p>Mr. Andrews told some of what went on up there, to anybody who would sit with him. That the dead from every country sat around Mr. Thorne at his mother's feet. That close at his right hand sat a dead man from Lenox Avenue nobody had thought much of, who had once poured half his own bowl of soup into Mr. Andrews' cup at a lunch counter, and far off at the back sat a rich man who had given ten thousand dollars to the churches of New York and never once looked at who he gave it to. And Mr. Thorne said to the rich man, <em>Why are you sitting so far away?</em> and the poor man said, <em>A little seed in good ground, Mr. Thorne. That's all.</em> Mr. Andrews said that while the nights lasted, Mr. Thorne talked to his mother about every thought a person can have, one after another, the good ones and the bad ones and the ones that are neither, and that she listened the way she had not been able to listen in Bridgetown. And that every day at noon he came down for his dinner, somewhere in the city, and told it to Gus Lashley, who was a doorman on Edgecombe Avenue, and Gus told it at night in the lobby to five hundred young men who had come to him after the miracle, so many that they sat up the stairwell to the fifth floor. And the young men learned it all before the summer was out. They had always had the ears for it, Mr. Andrews said. They were the boys who used to sit under the window of the Episcopal church choir practice and listen, years ago, not understanding a word, because they loved the sound.</p>
+</section>
+
+<section>
+  <h2>VI. Three Ladders</h2>
+  <p class="dateline">Edgecombe Avenue · October 1927</p>
+  <p>Seven days before the end, the crowd went to Clement. <em>We will not go home till we see him. Tell us when.</em></p>
+  <p>Clement went down into the ground right there in Mount Morris Park, between two rocks, and came up eight miles south at the foot of the Woolworth Building, which was then the tallest building in the world, and climbed it. He climbed the outside. All Harlem was on its roofs to watch, and they could see him from there, the way you can see a yellow thread pulled through a bead, going up the white face of it. <em>He's past the twentieth floor. He's past the fortieth.</em> At the top he went into the sky, and found Mr. Thorne, and asked him.</p>
+  <p><em>Where's Gus?</em> said Mr. Thorne.</p>
+  <p><em>At his door on Edgecombe Avenue.</em></p>
+  <p><em>Seven days, then. At Gus's door. Tell them to fast, and come as if they were coming to church in their own parish, and not to bring anything.</em></p>
+  <p>On the seventh day, in the evening, three ladders came down out of the sky onto the sidewalk in front of Gus Lashley's building on Edgecombe Avenue, where the hill falls off toward the Harlem flats and you can see the whole valley. On the right was a ladder of gold, and the dead came down it, the ones Mr. Andrews had seen, in their best clothes. On the left was a ladder of silver, and a very big old man came down it with an umbrella, and all his people after him. In the middle was a ladder made of something that broke the light into colors, and Mr. Thorne came down that one, in his brown suit.</p>
+  <p>At the top, before he started down, he did it once more, the fire and the water. Then he looked up, and everybody on Edgecombe Avenue could see all the way up as far as there is. And he looked down, and they could see all the way down, which some of them never forgot. And he looked around to all sides, and they could see everybody, the living and the dead, and the living and the dead could see each other. A man with a guitar came down beside him on the right, playing, and a woman on the left threw flowers. The big old man held the umbrella over him. Somebody fanned him with a cardboard fan from a funeral parlor on Seventh Avenue.</p>
+  <p>He set his right foot on the sidewalk first.</p>
+  <p>Gus Lashley came out of his doorway in his uniform with the brass buttons. He had held that door eleven years. He went down on his knees on the pavement.</p>
+  <p><em>I never saw such a thing,</em> he said. <em>Nobody ever heard of such a thing. A teacher speaking so sweet, coming down out of heaven with all his company.</em> He was crying. <em>Mr. Thorne, today everybody loves you. The dead and the living. Everybody wants you.</em></p>
+  <p>Mr. Thorne put his hand on Gus's shoulder and made him stand up.</p>
+  <p><em>That's the quiet they love, Gus,</em> he said. <em>People love it when they see it on somebody.</em> And then, because Gus was a churchman and liked to have it from the Book, he said it the way they say it at Evensong.</p>
+  <div class="verse">
+    <p>LORD, my heart is not haughty, nor mine eyes lofty: neither do I exercise myself in great matters, or in things too high for me.</p>
+    <p>Surely I have behaved and quieted myself, as a child that is weaned of his mother: my soul is even as a weaned child.</p>
+    <p>&mdash; Psalm 131:1–2</p>
+  </div>
+  <p><em>And the angels,</em> he said, <em>the angels desire to look into it.</em></p>
+  <div class="verse">
+    <p>which things the angels desire to look into.</p>
+    <p>&mdash; 1 Peter 1:12</p>
+  </div>
+  <p>Then he stood on the sidewalk and asked them a question. He asked it so that the newest of them could answer it, and they did. Then he asked it again, deeper, so that only those who had been sitting on the steps a year could answer, and then deeper, so that only Clement could, and then deeper still, and Clement could not. The whole of Edgecombe Avenue and the steps and the roofs and the valley below waited, the living and the dead, and nobody could answer it. <em>Leave it, Mr. Thorne,</em> somebody called. <em>There's nobody here can answer that.</em></p>
+  <p>He looked at Gus. Gus was standing in his doorway with his face working. He understood the question. What he did not understand was why it was being asked of him, and where to begin.</p>
+  <p><em>Augustus,</em> Mr. Thorne said, <em>what's a person?</em></p>
+  <p>It was a clue, nothing more. But Gus took hold of it the way a man takes hold of a rope in the dark, and pulled, and the whole answer came up out of him, and he gave it, standing in the doorway in his uniform, and when he was done there was not a sound anywhere from the river to the river.</p>
+  <p>Then Gus laughed out loud, like a man who has found money. <em>Mr. Thorne,</em> he said, <em>if you asked me a thousand more like that, I could count you every drop of rain that has ever fallen on the sea, and on the land, and on the mountains, since the world began. I could count them for you and set it down in a ledger.</em></p>
+  <p>Mr. Thorne smiled at him. <em>I know you can count, Gus,</em> he said.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>That was the end of it, the way they tell it. The ladders went back up, and the people went home to their own beds for the first time since July, and Cyril Pemberton gave up the policy bank the next year and went into the funeral business with young Inniss, which some said was not as much of a change as he thought. Gant's tree stood on the lot on St. Nicholas Avenue until the city put up a building there, and the building had a mango tree carved over the door, and nobody inside it knew why.</p>
+  <p>The night Josiah Thorne died, in 1931, in his room on 133rd Street, the men on the steps asked him what he had gained by all of it. He said, <em>Nothing,</em> and closed his eyes. Some of them went away hurt, and said that the old man had admitted it at last. Gus explained to them, again and again, what he had meant. Some of them believed Gus. Some did not.</p>
+  <p>On Edgecombe Avenue, in front of the building where Gus held the door, there is a place in the sidewalk where the concrete is smoother than the concrete around it, about the size of a man's right shoe. The super has had it relaid twice. It comes back. Children step over it without being told.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Even the gods envy those who are awakened and not forgetful, who are given to meditation, who are wise, and who delight in the repose of retirement (from the world).<cite>Dhammapada 181, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary&rsquo;s longest story begins at R&amacr;jagaha, where a rich man hangs a red sandalwood bowl high on bamboo poles for any arahant who can fly up and take it. The rival teachers fake an attempt; the Buddha&rsquo;s disciple Pi&#7751;&#7693;ola Bh&amacr;radv&amacr;ja lifts a great rock over the city and takes the bowl, and the Buddha has the bowl broken up and forbids his disciples such displays. When the rivals challenge him, he says the rule binds his disciples, not himself, and promises a miracle in four months at S&amacr;vatth&imacr;. A gardener gives him the mango meant for the king; the seed becomes a great tree overnight; wind, sun, dust and rain rout the rivals, and one drowns himself. The Buddha declines his disciples&rsquo; offers to work wonders in his place, tells two birth stories about a bull, and performs the Twin Miracle of fire and water. Then he goes up to the Heaven of the Thirty-Three to teach his mother for three months while the crowd camps and waits, and comes down on three ladders at the gate of Sa&#7749;kassa, where S&amacr;riputta praises him and answers a question no one else can. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-02.htm">the full commentary story</a>, or about the <a href="https://en.wikipedia.org/wiki/The_Twin_Miracle">Twin Miracle</a>.</p>
+    <h3>Harlem, 1927</h3>
+    <p>By the 1920s Harlem was the capital of Black America, filled by the <a href="https://en.wikipedia.org/wiki/Great_Migration_(African_American)">Great Migration</a> from the South and by immigrants from the Caribbean, who by 1920 made up roughly a quarter of New York&rsquo;s Black population and built their own Episcopal and Methodist congregations and mutual-aid societies. Hundreds of storefront churches operated out of empty shops and basements, and in the years before the Second World War Harlem also produced a run of flamboyant charismatic leaders, of whom <a href="https://en.wikipedia.org/wiki/Father_Divine">Father Divine</a> became the most famous. More on <a href="https://en.wikipedia.org/wiki/Harlem">Harlem</a>.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Numbers_game">numbers</a>, or policy, made fortunes in Harlem in the 1920s. Bettors picked three digits, the winning number was taken from the published Clearing House totals, and a payoff of 600 to 1 was typical. Among the biggest bankers was <a href="https://en.wikipedia.org/wiki/Casper_Holstein">Casper Holstein</a>, born on St. Croix, who also funded Harlem Renaissance literary prizes. The rock of <a href="https://en.wikipedia.org/wiki/Marcus_Garvey_Park">Mount Morris Park</a> (now Marcus Garvey Park), a hill of Manhattan schist, still carries its cast-iron fire watchtower and bell. The <a href="https://en.wikipedia.org/wiki/Woolworth_Building">Woolworth Building</a> downtown was the tallest building in the world from 1913 to 1930.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Twin Miracle from the Dhammapada commentary (verse 181). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-02.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="one-footprint.html">&larr; One Footprint</a><a href="index.html">All stories</a><a href="mic-check.html">Mic Check &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0;
+  var hues = [[110,150,220],[232,190,90],[236,236,226],[222,92,70],[236,150,170],[180,226,232]];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function mix(a, b, f) { return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; }
+  function col(p) {
+    var x = ((p % 1) + 1) % 1 * hues.length, i = Math.floor(x), f = x - i;
+    return mix(hues[i], hues[(i + 1) % hues.length], f);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var n = Math.max(60, Math.round(W / 9));
+    var cx = W / 2, top = H * 0.16, span = W * 0.62, sag = H * 0.11;
+    for (var i = 0; i < n; i++) {
+      var u = i / (n - 1), x = -W * 0.05 + u * W * 1.1;
+      var y = top + sag * Math.pow((x - cx) / span, 2) * 4;
+      var k = col(u * 1.5 - t * 0.0006);
+      var tw = reduce ? 1 : 0.7 + 0.3 * Math.sin(t * 0.02 + i * 0.7);
+      var a = 0.13 * tw;
+      var g = ctx.createRadialGradient(x, y, 0, x, y, 16);
+      g.addColorStop(0, 'rgba(' + (k[0]|0) + ',' + (k[1]|0) + ',' + (k[2]|0) + ',' + a + ')');
+      g.addColorStop(1, 'rgba(' + (k[0]|0) + ',' + (k[1]|0) + ',' + (k[2]|0) + ',0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 16, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

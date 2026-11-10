@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Since Morning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Night harbour at Fulford: cedar-dark water, wild-rose pink, rose-hip red. */
+  --ground: #0e1615;
+  --ground-2: #16211f;
+  --paper: #ebe4da;
+  --paper-dim: #a3a49b;
+  --mustard: #e59aa6;
+  --flame: #c4473a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #1d2d2a 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,224,208,.2); }
+.series a:hover { color: var(--mustard); }
+a:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--mustard); text-wrap: balance; text-shadow: 0 0 28px rgba(229,154,166,.2); }
+.epigraph { border-left: 1px solid rgba(229,154,166,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mustard); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--mustard); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(22,33,31,.8); border: 1px solid rgba(233,224,208,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--flame); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,224,208,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--mustard); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mustard); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--mustard); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mustard); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--mustard); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(22,33,31,.8); border-left: 2px solid var(--mustard); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.4 &middot; Patip&#363;jik&#257;</span></nav>
+<header>
+  <h1>Since Morning</h1>
+  <div class="epigraph">Let us crown ourselves with roses, before they be withered.<br>&mdash; Wisdom 2:8</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it,</span> at Isabella Point.</p>
+
+<section>
+  <h2>I. The Tree</h2>
+  <p class="dateline">Isabella Point, Salt Spring Island &middot; spring 1874</p>
+  <p>Peter Kauwila's girl did not talk until she was nearly three, and then one evening in the kitchen she said a whole thing at once, as if she had been saving it.</p>
+  <p><em>I was up in the tree throwing flowers down for my husband,</em> she said, <em>and then I was here.</em></p>
+  <p>Her mother was a Quamichan woman from across the channel, and she was gutting rock cod at the table, and she stopped. Peter laughed. He had been laughing at that child since the day she came, because she had come in the middle of May with the wild roses out on every bank down to the water, and he had named her Lokelani, which is a rose in the language he still dreamed in, and Father at St. Ann's had written it down as Rosalie.</p>
+  <p><em>What tree?</em> he said.</p>
+  <p>She could not say what tree. A big one, in a garden, with flowers on it all the way up, and a great many girls in it, more than she could count, some up in the branches throwing and some down on the grass picking up what fell and fastening it on him. On the man. Her husband. He was sitting in the middle and they were dressing him in flowers.</p>
+  <p>Peter had come out to Fort Vancouver on a Company ship in 1845 and had not seen Oʻahu since. He knew what she was describing, or thought he did. He told her about the women on the wharf at Honolulu with yellow ilima strung so thick you could not see the thread, and the maile vine that smelled sweet for a week after it was cut, and the men going down to the boats with their necks hung so heavy with flowers they had to lift their chins. <em>That is where you were,</em> he said. <em>Before you were born. You were over there watching for me.</em> He was pleased with this and told it at the next luau, when they had the pig in the ground at the Point under seaweed and sacking, and everybody agreed that the girl had the islands in her though she had never been nearer to them than Victoria.</p>
+  <p>Only old Kaʻai did not laugh. He was sitting on an upturned box by the imu, eating clams out of the shell with his fingers, already grey. He had come to the river in 1830, a boy of fourteen, and had dug potatoes and rolled fur bales and buried other Hawaiians at Fort Vancouver for twenty years before he came out to the islands to grow apples. He wiped his hands on his trousers and called the child over and looked at her a while.</p>
+  <p><em>In that garden,</em> he said. <em>Was it morning?</em></p>
+  <p><em>Morning,</em> she said, very sure.</p>
+  <p>He nodded as if that settled something, and gave her a clam, and that was all he said about it. She did not say it again, not to anyone. By the time she was six she had either forgotten it or had learned which things people laugh at.</p>
+</section>
+
+<section>
+  <h2>II. Henry's Rosie</h2>
+  <p class="dateline">Fulford Harbour &middot; 1884&ndash;1901</p>
+  <p>But she made garlands. Every child on the Point could string a lei, because their fathers were homesick and showed them how, but Rosalie strung them the way other girls breathe. Nootka rose in May and June, the little pink single ones that drop their petals if you look at them, so she picked them in bud at dawn and strung them wet. Ocean spray in July, the creamy heads that look like foam on the bank. Honeysuckle off the fences. In August pearly everlasting, which dried on the stem and kept its shape all winter. In winter, when there was nothing, cedar tips and salal and the red berries of the kinnikinnick. She hung them on the posts of the porch, on the cow, on her small brothers, and when St. Paul's was finished at the head of Fulford Harbour she began to hang them in the church.</p>
+  <p>The church was the first on the island. The Hawaiian men had built most of it, with Cowichan men from across the channel, out of lumber they skidded down themselves, and the door and the windows had come over by boat from the old stone church at Cowichan Bay. In 1887 a bell arrived from a foundry in Troy, New York, and the whole south end walked up to hear it rung the first time. There was no priest on Salt Spring. Father came over from St. Ann's at Quamichan when the weather let him, perhaps once a month in summer, less in winter, rowing or sailing across Satellite Channel with his bag on his knees. On the other Sundays the people came anyway, and old Kaʻai led the rosary in the front pew in a voice like a bucket being let down a well.</p>
+  <p>Somebody had to keep the place. Nobody asked Rosalie to. She simply began, at thirteen, walking up from the Point on Saturday with a broom over her shoulder, and after a while it was hers. She swept out the pine needles and the dried mud and the mice. She filled the bucket at the creek and set it inside the door with the tin dipper on a nail above it, because people walked four and five miles to Mass or rowed across from Russell and Portland Islands and came in thirsty. She set out the benches for the overflow. She wiped the windows that had come from Cowichan. She hung a garland on the statue of St. Paul, who was holding his sword and his book, and on the feast of St. Peter and St. Paul at the end of June she hung so many roses in the church that the women said you could smell it from the water.</p>
+  <p>When Father came, it was Rosalie who fed him. The families sent things up to the church with their children. Smoked salmon, eggs in a pail, a loaf, a sack of apples, a jar of blackberry jam. <em>Give this to Rosalie for Father,</em> they said, because it was easier, and she would carry it all to the little room behind the altar and set it out on a clean flour sack. She kept the list of whose turn it was to give him a bed. She knew which families wanted a baby baptized and which wanted a marriage blessed that had already been a marriage for three years, and she told him quietly, in the doorway, before he went out to them, so nobody would have to say it aloud.</p>
+  <p>And every time, putting down the eggs or the salmon or setting the dipper on its nail, she said the same few words under her breath. Some of the girls heard her and repeated it.</p>
+  <p><em>Let this help me get back to my husband.</em></p>
+  <p>She was married by then. She married at sixteen, in St. Paul's, to Henry Naone from Beaver Point, whose father had been a Company man like hers and whose mother was from Saanich. Henry was a sealer. Every January he went to Victoria and signed on one of the schooners that crowded the inner harbour, seventy or eighty of them some years, and was gone down the coast after the herd, and in the summer up to the Bering Sea, and home in the fall smelling of oil and smoke with his money sewn into his coat. In 1888 he came home and there was a son. In 1890 there was another, in 1893 a third, in 1896 the fourth, and Henry was away at the birth of every one.</p>
+  <p>So of course they understood her. All summer long, while Henry was off the Pribilofs in fog, she was in the church with her broom and her bucket and her four boys trailing after her, and every time she put something down she prayed to get back to her husband. The women thought it was the sweetest thing on the island. The men teased Henry about it on the wharf at Fulford. They called her Henry's Rosie, and then just Henry's, as in <em>ask Henry's</em>, <em>give it to Henry's for Father</em>, and she answered to it without minding, and never once corrected anybody.</p>
+  <p>The only one who never called her that was old Kaʻai. He called her <em>keiki</em>, child, until she was a grown woman with four boys of her own, and once when she was hanging a garland on St. Paul he stopped behind her on his two sticks and said, <em>Still morning?</em> and she laughed and said, <em>Uncle, I don't know what you mean,</em> and went red to the ears.</p>
+</section>
+
+<section>
+  <h2>III. The Lamp</h2>
+  <p class="dateline">A Sunday in August 1901</p>
+  <p>Father came over on the Saturday that month, a young Fleming named Father Cyriel who had been in the country two years and still blessed himself every time the boat heeled. Rosalie had been up since four. She had walked to the church in the dark with the two older boys carrying the benches between them, and swept, and filled the bucket at the creek, and set the dipper on its nail. She had hung St. Paul with pearly everlasting and the last of the fireweed. At Mass she knelt at the end of the second pew with the four boys in a row beside her, the youngest asleep against her arm, and she went up to the rail and received, and came back, and listened to the whole of the sermon, which was in an English the young priest was still building as he went along, and was about the ten virgins and their lamps.</p>
+  <p>Afterward she fed him at the table behind the altar. Salmon, new potatoes, a plate of blackberries, coffee. Three families had sent food that day and she had set it all out and named each family to him as he ate, so he would know whom to thank. Then she washed the plates in the bucket and swept again where the boys had tracked in the dust, and walked home with them along the shore in the long light, with the youngest on her hip.</p>
+  <p>At home she milked. She put the boys to bed. She sat down at the kitchen table to fill the lamps, which was the last thing every night, and she was pouring the coal oil from the can into the second lamp when she put her hand to the side of her head behind the eye and said to her eldest boy, who was thirteen and still awake, <em>Joe, go and get your grandmother.</em></p>
+  <p>By the time he came back with his grandmother she was on the floor beside the table. She was dead before the moon came up over Cowichan. The coal oil had run across the boards and the lamp she had lit to see by was still burning on the table, and her mother turned it down, and it went out.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>What happened next is what old Kaʻai said happened, and on the south end of Salt Spring nobody has ever argued with him.</p>
+  <p>In the garden it was still morning. The girls in the branches were throwing down flowers, the girls on the grass were fastening them on the man in the middle, and the light had not moved. She was in her tree again, on the same branch, with her lap full of blossoms. She threw them down. He looked up.</p>
+  <p><em>We haven't seen you since this morning,</em> he said. <em>Where did you go?</em></p>
+  <p><em>I died, husband. I went out of here.</em></p>
+  <p><em>What are you saying?</em></p>
+  <p><em>It's true.</em></p>
+  <p><em>Where did you go?</em></p>
+  <p><em>To an island. Way off. I was born to a man from one island and a woman from the next one over, in a family that was all right.</em></p>
+  <p><em>And how long were you there?</em></p>
+  <p>She told him. Nine months and then born. Sixteen years and married. Four boys. A church to keep, a bucket and a broom, a garland on a saint every feast day, and every time she set a thing down, a prayer to get back to him.</p>
+  <p><em>How long do they live there, the people?</em></p>
+  <p><em>A hundred years, if they're lucky. Mostly less.</em></p>
+  <p><em>That's all?</em></p>
+  <p><em>That's all.</em></p>
+  <p>He was quiet a while, with the flowers still falling on him.</p>
+  <p><em>With so little time,</em> he said, <em>what do they do with it? Do they sleep it away? Or do they give and work and look after each other?</em></p>
+  <p><em>Husband, they live as if they had a thousand years. As if they would never get old. As if it would never come for them.</em></p>
+  <p>The man in the garden was troubled by this as he had not been troubled by anything, because for him not one day had passed since she fell out of the tree. It had not been an hour. A hundred of our years, old Kaʻai said, is one day and one night in that garden, and the people there live a thousand of their years, and if you want to know what that comes to you had better ask the schoolteacher at Beaver Point, because he could not do the arithmetic and did not need to.</p>
+  <p><em>If they have so little,</em> said the man in the garden, <em>and spend it asleep, when do they ever get out?</em></p>
+</section>
+
+<section>
+  <h2>IV. The Dipper</h2>
+  <p class="dateline">St. Paul's, Fulford Harbour &middot; Monday</p>
+  <p>Father Cyriel had stayed the night at the Point so he could say a Mass on the Monday morning for the people who had come too late on the Sunday, and he walked up to the church at seven with three or four of the men. The door was shut. Inside, the benches were stacked against the wall where the boys had left them, and the floor had the boys' tracks on it, and the bucket by the door was empty and dry, with the dipper hanging over it on its nail.</p>
+  <p>He stood and looked at it. In two years he had never once come into that church and found the bucket empty.</p>
+  <p><em>Where is Henry's?</em> he said, the way everyone said it.</p>
+  <p>One of the men had already heard. He took off his hat. <em>Father, you won't see her. Last night, after you ate and she went home, she died.</em></p>
+  <p>The young priest sat down on the end of a bench. He had eaten her salmon not eighteen hours before and she had told him which family had caught it. He put his face in his hands and wept the way a young man does when he has not yet buried many people he knew, and the men stood around him not knowing where to look. Two of them wept as well. The older ones did not. They stood very still, the way you stand on a schooner deck when the glass has dropped and nobody has said so yet.</p>
+  <p>Old Kaʻai had come up behind them on his two sticks. He did not weep either. He took the bucket off the floor and went out with it, and they heard him going down to the creek, very slowly, and coming back. He set it inside the door and hung the dipper over it. Then he took the broom from the corner and began to sweep.</p>
+  <p>They said the rosary for her on Monday night, in her mother's house, with Rosalie laid out on the table where she had been filling the lamps. Kaʻai led it. Afterward, when the women had gone out to the kitchen and the boys were asleep in a heap on the bed, the priest and the men sat on with him by the body, and it was the priest who asked, because he was young enough to.</p>
+  <p><em>She was so busy all her life,</em> he said. <em>She did every good work there was, and she only wanted to be with her husband. Now she's dead. Where is she?</em></p>
+  <p><em>With her husband,</em> said Kaʻai.</p>
+  <p><em>Henry's in the Bering Sea. He doesn't even know.</em></p>
+  <p><em>Not that husband.</em></p>
+  <p>The men looked at each other. Kaʻai shifted on his chair and told it to them then, all of it, the tree and the garden and the girls and the man sitting in the middle being dressed in flowers, the way a child of three had told it in that same kitchen twenty-seven years before, and what she had asked him every time she set a thing down, and where she had gone back to on Sunday night after she filled the first lamp and before she could fill the second.</p>
+  <p><em>Uncle,</em> said one of the men. <em>Is that true?</em></p>
+  <p><em>It's true.</em></p>
+  <p>Father Cyriel did not say it was not. He sat with his breviary shut on his knee and his thumb in it, looking at the woman on the table, and after a while he said, half to himself, a line out of the psalms he said every week in his breviary, as though it had just been explained to him.</p>
+  <div class="verse">
+    <p>For a thousand years in thy sight are as yesterday, which is past. And as a watch in the night.</p>
+    <p>&mdash; Psalm 89:4 (Douay-Rheims)</p>
+  </div>
+  <p><em>She gave you breakfast,</em> said one of the men, to the priest, as if he could not get over it. <em>She gave you your dinner yesterday, and last night she was gone. How short is that?</em></p>
+  <p><em>Short,</em> said Kaʻai. <em>All of it is short. And everybody here goes on like they had a thousand years in the bank. Reaching for one more thing. One more boat, one more season, one more flower. It comes and takes them with their hands still full, and they cry the whole way.</em></p>
+  <p>That was a long speech for him, and he looked tired after it. The priest put the breviary away and took out the little Douay Bible he carried in his coat, and turned in it a while by the lamp, and found the place, and read it out to the men in his careful built English, the words of the people who say life is short and so let us have all of it.</p>
+  <div class="verse">
+    <p>Come therefore, and let us enjoy the good things that are present, and let us speedily use the creatures as in youth. Let us fill ourselves with costly wine, and ointments: and let not the flower of the time pass by us. Let us crown ourselves with roses, before they be withered: let no meadow escape our riot.</p>
+    <p>&mdash; Wisdom 2:6&ndash;8</p>
+  </div>
+  <p>Nobody said anything. Outside the tide was coming in over the flats with the small sound it makes on gravel. One of the men, a sealer who had shipped with Henry on three different schooners, got up and went to the door and stood looking at the water for a long time with his hat in his hands, and when he came back in he said he would not go up north next year, and he did not go.</p>
+</section>
+
+<section>
+  <h2>V. Rose Hips</h2>
+  <p class="dateline">St. Paul's cemetery &middot; October 1901</p>
+  <p>They buried her on the Wednesday in the ground beside the church, among the Hawaiians and the Cowichan people and the babies, and Father Cyriel read over her the place in Wisdom about the just man taken young.</p>
+  <div class="verse">
+    <p>Being made perfect in a short space, he fulfilled a long time.</p>
+    <p>&mdash; Wisdom 4:13</p>
+  </div>
+  <p>Henry came home in the middle of October. The schooner had put into Victoria on the ninth, and he had heard it on the wharf there from a man off another boat, and come up on the island steamer with his money still sewn in his coat. He walked from the landing to the church before he went to his own house, and found the bucket full inside the door and the floor swept. Kaʻai had done it every Saturday since. The old man could carry the bucket only half full now and had to rest twice on the way up from the creek, but it was done.</p>
+  <p>Henry did not go into the church. He went around to the side, to the new grave, where his eldest boy Joe was kneeling in the wet grass. It was too late in the year for any flowers. The roses on the banks along the harbour had gone to hips weeks before, hard and red and shining, and Joe had picked a hat full and was stringing them on a length of his mother's thread with her needle, the way she had shown all four of them, pushing the needle through each one and sliding it down. It was slow work. The hips were tough and the needle kept sticking. When the string was long enough he tied it in a ring and laid it on the turned earth below the cross, and it lay there in the rain, very red.</p>
+  <p>In the garden it was not yet noon. The man in the middle sat with his chin lifted under the weight of the flowers, and he had not said a word since she told him about the island. The girls on the grass were still fastening on him the roses she had thrown down from her branch that morning, before she fell.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Death subdues a man who is gathering flowers, and whose mind is distracted, before he is satiated in his pleasures.<cite>Dhammapada 48, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a goddess of the Heaven of the Thirty-Three is up a tree in a pleasure garden, throwing down flowers to deck her husband, the god M&#257;l&#257;bh&#257;r&#299; (&ldquo;Garland-Wearer&rdquo;), when she dies out of that world like a lamp flame and is born a girl in S&#257;vatth&#299;, remembering him. She grows up, marries at sixteen, bears four sons, keeps the monks&rsquo; hall, sets out water and seats, and with every offering prays to be reborn with her husband, so the monks call her Patip&#363;jik&#257;, &ldquo;Husband-Honorer,&rdquo; assuming she means the husband she has. One day she gives alms, hears the teaching, keeps the precepts, and dies that evening. In heaven no time has passed, for a hundred human years are one day and night there, and her divine husband is shaken to hear how short and careless human lives are. The next morning the monks find the hall untended and weep; the Buddha tells them she has gone back to her true husband, and speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-04.htm">the full commentary story</a>, or about the <a href="https://en.wikipedia.org/wiki/Trayastri%E1%B9%83%C5%9Ba">Heaven of the Thirty-Three</a>.</p>
+    <h3>Salt Spring Island, 1870s&ndash;1901</h3>
+    <p>Hawaiian men, called Kanakas, worked for the Hudson&rsquo;s Bay Company all over the Pacific Northwest in the first half of the nineteenth century, at Fort Vancouver, Fort Langley and the fur brigades, and many married First Nations women and stayed (<a href="https://en.wikipedia.org/wiki/Kanaka_(Pacific_Island_worker)">Kanaka workers</a>). When <a href="https://en.wikipedia.org/wiki/Salt_Spring_Island">Salt Spring Island</a> opened to settlement after 1859, Black settlers from California took up land in the north and Hawaiian families in the south. By the late 1870s about a dozen Hawaiian families had claimed land at Isabella Point and Beaver Point and on Portland and Russell Islands, and by the 1890s there were about two dozen. Most were Catholic. St. Paul&rsquo;s Church at the head of Fulford Harbour, built largely by Hawaiian parishioners and consecrated in the 1880s, was the island&rsquo;s first church; its bell arrived in 1887, and the island was served by priests from St. Ann&rsquo;s at Quamichan in the Cowichan Valley. Leis are still laid on the Hawaiian graves in its cemetery (<a href="https://www.saltspringarchives.com/kanaka/barb/timeline.html">Salt Spring Archives timeline</a>).</p>
+    <p>Many Salt Spring Hawaiian men fished, logged or worked on the coastal steamers, and some went sealing. From the 1880s the Victoria fleet of pelagic sealing schooners, at its height over a hundred vessels, followed the northern fur seal herd from the coast up to the Bering Sea and the Pribilof Islands, carrying Indigenous hunters in canoes and mixed crews of every origin. The hunt ended with the <a href="https://en.wikipedia.org/wiki/North_Pacific_Fur_Seal_Convention_of_1911">North Pacific Fur Seal Convention of 1911</a>. The Hawaiian language did not last on the island, since most of the men&rsquo;s wives never learned it; a few words did.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Patip&#363;jik&#257; from the Dhammapada commentary (verse 48). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-04.htm">The original</a>. Scripture from the Douay-Rheims Bible. Written by Claude Opus 5.5.
+  <div class="pager"><a href="thin-shade.html">&larr; Thin Shade</a><a href="index.html">All stories</a><a href="seven-doors.html">Seven Doors &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Night tide in the harbour: a few rose blossoms ride the dark water, drifting very slowly
+  // sideways on the swell, each with a faint broken reflection under it.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, rows = [], blooms = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    make();
+  }
+  function bloom(anywhere) {
+    return { x: anywhere ? Math.random() * W : -30, y: H * (0.72 + Math.random() * 0.25),
+      vx: 0.05 + Math.random() * 0.08, r: 3.5 + Math.random() * 3, ph: Math.random() * 6.3,
+      rot: Math.random() * 6.3, hip: Math.random() < 0.25 };
+  }
+  function make() {
+    rows = [];
+    for (var y = H * 0.68; y < H; y += 7 + (y - H * 0.68) * 0.05) rows.push({ y: y, ph: Math.random() * 6.3, len: 30 + Math.random() * 90 });
+    blooms = [];
+    var n = Math.max(5, Math.min(11, Math.round(W / 140)));
+    for (var i = 0; i < n; i++) blooms.push(bloom(true));
+  }
+  function petals(b, y, a) {
+    var col = b.hip ? '196,71,58' : '229,154,166';
+    for (var k = 0; k < 5; k++) {
+      var ang = b.rot + k * 1.2566;
+      ctx.fillStyle = 'rgba(' + col + ',' + a + ')';
+      ctx.beginPath();
+      ctx.ellipse(b.x + Math.cos(ang) * b.r * 0.8, y + Math.sin(ang) * b.r * 0.35, b.r * 0.7, b.r * 0.38, ang, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.fillStyle = 'rgba(240,214,140,' + a + ')';
+    ctx.beginPath(); ctx.arc(b.x, y, b.r * 0.28, 0, Math.PI * 2); ctx.fill();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // glints on the swell
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i], depth = (r.y - H * 0.68) / (H * 0.32);
+      var a = 0.05 + depth * 0.06;
+      var x0 = (Math.sin(r.ph + t * 0.004) * 0.5 + 0.5) * W;
+      ctx.strokeStyle = 'rgba(190,210,205,' + a + ')';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x0 - r.len, r.y); ctx.lineTo(x0 + r.len, r.y); ctx.stroke();
+    }
+    for (var j = 0; j < blooms.length; j++) {
+      var b = blooms[j];
+      if (!reduce) { b.x += b.vx; b.rot += 0.0008; if (b.x > W + 30) blooms[j] = b = bloom(false); }
+      var bob = Math.sin(b.ph + t * 0.012) * 1.6;
+      petals(b, b.y + bob, 0.42);
+      // reflection, broken into slivers
+      for (var s = 0; s < 3; s++) {
+        ctx.fillStyle = 'rgba(229,154,166,' + (0.08 - s * 0.02) + ')';
+        ctx.fillRect(b.x - b.r + Math.sin(t * 0.02 + s) * 1.5, b.y + bob + b.r * 1.2 + s * 3, b.r * 2, 1);
+      }
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

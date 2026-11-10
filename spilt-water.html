@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spilt Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on sun-bleached sand; now and then a thread of spilt water runs a little way across the page and dries back from its far end; datelined sections. */
+  --ground: #efe8d9;
+  --ground-2: #e4dccb;
+  --paper: #2b2722;
+  --paper-dim: #6e6658;
+  --accent: #39586a;
+  --glow: #6f93a6;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f7f2e7 0%, var(--ground) 55%, #e6ddca 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,39,34,.22); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(57,88,106,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,252,244,.6); border: 1px solid rgba(43,39,34,.13); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,39,34,.13); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,39,34,.13); border-bottom: 1px solid rgba(43,39,34,.13); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,252,244,.6); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 8.12 &middot; Paṭācārā</span></nav>
+<header>
+  <h1>Spilt Water</h1>
+  <div class="epigraph">For we must needs die, and are as water spilt on the ground, which cannot be gathered up again.<br>&mdash; 2 Samuel 14:14</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it told,</span> on the muck.</p>
+
+<section>
+  <h2>I. The Upstairs Room</h2>
+  <p class="dateline">Chosen, Florida &middot; 1925</p>
+  <p>Josiah Pinder came over from Andros on a sponging schooner when he was fourteen with one shirt and a cane knife, and by the time he was fifty he was the richest colored man on the lake. He had cut cane, and picked beans on his knees in the black muck by the hamper, and saved, and bought a truck, and hauled other men to the fields in it at a dime a head, and bought another truck. Now he had three trucks and a store in Chosen with a gallery on the front and a boarding house behind it with twenty rooms, and a two-story house of Dade County pine on the canal bank, painted white, the only painted house in the quarters. He was a class leader at the African Methodist church and could recite the General Rules from the Discipline without looking, and he did, often.</p>
+  <p>His daughter Ozella lived on the second floor of the white house. She had been born in it. At sixteen she was the prettiest girl on the south shore of the lake, and her father knew exactly what the south shore of the lake was. There were jook joints on every road out of Belle Glade, and men who came in for the bean season with knives in their boots and left without paying their board, and the muck was full of trouble. So he kept her upstairs. She had her own room with a window on the canal and a bed with a store-bought spread, and her Aunt Bertha to sit with her and see that she stayed in it. She went to church and to the store and to the schoolhouse until she was fourteen, and nowhere else. In the spring of 1925 her father promised her to a young man from West Palm Beach whose father taught school, a young man who wore a collar on weekdays, and they set the wedding for the first Sunday in June.</p>
+  <p>Cleon Hardy drove Josiah Pinder&rsquo;s best truck. He was from Thomasville, Georgia, and had no people on the lake and no money, and three times a week he carried the groceries up the back stairs to Aunt Bertha&rsquo;s kitchen and set them on the table. For a year he had done it. For a year Ozella had stood in the kitchen door while he did it.</p>
+  <p>Ten days before the wedding she said it to him on the back stairs, low, while Aunt Bertha was in the pantry.</p>
+  <p><em>Once I&rsquo;m in that man&rsquo;s house in West Palm, you can bring me all the groceries in the world and you won&rsquo;t ever get in the door. If you mean it, get me out of here. Don&rsquo;t wait.</em></p>
+  <p><em>Tomorrow,</em> said Cleon. <em>First light. I&rsquo;ll be at the canal bridge.</em></p>
+  <p>She got up in the dark. She put on the oldest dress she had, one her aunt had cut down for rags, and took her shoes off and left them by the bed, and rubbed muck on her face and her arms and her feet until she looked like any girl who had come in off a bean field. Then she took the slop bucket and went down the back stairs as if she were going to empty it, and two of the boarding-house women were out at the pump, and they looked straight at her and did not see her. She set the bucket down at the end of the yard and walked out to the canal bridge, and Cleon was there with a borrowed Ford, and they went north up the lake on the Conners toll road with the sun coming up out of the sawgrass on the right hand, and they did not stop until Okeechobee.</p>
+</section>
+
+<section>
+  <h2>II. The Fish Camp</h2>
+  <p class="dateline">The north shore &middot; 1925&ndash;1928</p>
+  <p>They married at the courthouse in Okeechobee, and Cleon got on at a fish house on Taylor Creek, cleaning catfish for the fish cars that went north on the railroad, and they took a shack on stilts at the edge of the camp. Ozella hauled water from the creek in a lard bucket. She washed clothes in a tub and scrubbed fish scales off Cleon&rsquo;s overalls with lye, and cooked on a kerosene stove that smoked, and learned to cut wood. She had never cut wood. Her hands had never been hard. The women at the fish camp laughed at her the first month, and then stopped laughing and showed her how, and that was where she learned what it cost to live, which she had not known in the white house.</p>
+  <p>She was happy. She would say so, afterward, when she could say anything. She had been happy.</p>
+  <p>When the first baby was due, in the summer of 1926, she began to ask him.</p>
+  <p><em>I want to go home to have it. There&rsquo;s nobody here. A mother and a father always come around for a grandbaby. Take me home.</em></p>
+  <p><em>Your daddy will kill me,</em> said Cleon. <em>You know he will. He&rsquo;ll get his pistol out from under the counter in the store and shoot me in the road in front of everybody, and the sheriff won&rsquo;t even come out for a thing like that. I can&rsquo;t go back there.</em></p>
+  <p>She asked him every day for a month. Every day he said the same. So one morning while he was at the fish house she told the woman in the next shack, <em>If Cleon asks where I&rsquo;ve gone, tell him home,</em> and she shut the door and started walking south down the toll road toward Chosen, forty miles off. Cleon came after her in a borrowed truck and caught her up a few miles below town and begged her to get in, and she would not get in. While they were standing in the road arguing, the pains came on. She went in among the palmettos and lay down on the sand, and had her son there, by herself, with Cleon outside the palmettos walking back and forth.</p>
+  <p>When it was over she came out with the baby wrapped in her slip.</p>
+  <p><em>Well,</em> she said. <em>What I was going home for is done.</em> And she got in the truck and they went back to the fish camp.</p>
+  <p>They called him Josiah, for her father, who did not know he existed.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>In the summer of 1928 she was carrying again, and she asked again, and he said the same thing again, and in the middle of September, when she was near her time, she took Josiah on her hip, who was two, and told the woman next door, and shut the door, and started south on the toll road.</p>
+  <p>It had rained for weeks. The lake was higher than anyone at the fish camp could remember, up near the top of the little muck dike, and the radio in the fish house had been talking about a storm in the islands since Thursday. The storm was supposed to have come and gone already, out to sea. People were laughing about it.</p>
+  <p>Cleon came after her and caught her up on the Saturday afternoon, below Port Mayaca, and she would not get in the truck, and the truck would not start again, and they walked on together down the shore road with the boy between them.</p>
+</section>
+
+<section>
+  <h2>III. The Storm</h2>
+  <p class="dateline">The east shore of Lake Okeechobee &middot; Sunday, September 16, 1928</p>
+  <p>The wind came up on Sunday afternoon out of the northeast, and the rain came with it, and by dark there was no telling one from the other. The sky went white with lightning and stayed white, and the thunder came on top of it so close that Ozella felt it in her teeth. The sawgrass lay down flat. The lake, on their right hand, which had been gray and quiet all day, stood up and began to come over the road.</p>
+  <p>Then her pains started.</p>
+  <p><em>Cleon. It&rsquo;s coming. I can&rsquo;t walk. Find me something. Find me a place out of this.</em></p>
+  <p>He had the axe from the truck. There was a spoil bank by the road where they had dug a ditch years before, and on top of the spoil bank was a clump of palmetto and myrtle, the only thing standing up out of that whole flat country. He put her down in the lee of it with the boy and went up the bank with the axe to cut fronds for a lean-to. She saw him in the lightning, up on the bank, swinging. She saw him stop.</p>
+  <p>The moccasin had come up out of the roots of the palmetto to get out of the water, and it was as thick as a man&rsquo;s wrist, and it struck him in the calf and then again in the hand. By the next flash he was down on his knees. He tried to come down the bank to her. He did not get there. In the lightning she saw his arm go purple and swell, and his face, and then he was lying on the spoil bank with the axe under him, and he did not get up again, and she could not go to him.</p>
+  <p>She waited for him to come back. She knew he was not coming back. She waited anyway.</p>
+  <p>The baby came in the middle of the night, in the rain, on the sand in the lee of the bank, a boy. She had nothing to wrap him in but her own dress. The wind screamed across the top of the spoil bank all night and the rain came sideways, and both children screamed with it, the new one and Josiah, so loud she could hear them over the storm, and she got down over the top of the two of them on her hands and knees, with her knees pressed together and her elbows in the sand and her body over them like a roof, and stayed there until the sky went gray. By morning there did not seem to be any blood left in her. Her skin was the color of a dead palmetto frond.</p>
+  <p>Away to the south, all that night, across the black water, she had heard something she could not put a name to. A long roar, under the wind. She did not know until later that it was the lake coming over the dike at Belle Glade and South Bay and Chosen.</p>
+</section>
+
+<section>
+  <h2>IV. The Canal</h2>
+  <p class="dateline">The shore road &middot; Monday morning</p>
+  <p>At first light the wind dropped. She took the new baby, who was red all over as a piece of fresh meat, and put him on her hip, and gave Josiah her finger to hold.</p>
+  <p><em>Come on, baby. Your daddy&rsquo;s gone on ahead of us.</em></p>
+  <p>She went up the spoil bank the way he had gone. He was lying there on top of it in the gray light, swollen, purple, stiff, with the axe under him and the palmetto half cut.</p>
+  <p><em>On account of me,</em> she said. <em>On account of me you died out here on the road.</em> She said it over and over, walking. She did not stop walking.</p>
+  <p>A mile on, the road went down under the water where a canal came out of the lake. The rain had filled it all night. It was over her knees where the road had been and up to her waist in the middle, and moving, brown, with sawgrass and boards and a drowned hog going by in it. She could not carry them both. She was too weak to carry one. So she sat Josiah down on the road on the near side and told him to be still, and waded across with the baby held up high, and on the far side she broke a branch off a myrtle and laid it down on the bank and laid the baby on the leaves.</p>
+  <p>Then she started back for Josiah. In the water she kept turning around to look at the baby. She could not stop. Every three steps she looked back.</p>
+  <p>She was in the middle, up to her waist, when the hawk came down out of the sky. A big brown chicken hawk, that had been hanging over the flooded country all morning looking for what the storm had left. It saw something red on a green branch. It came down on it.</p>
+  <p>She threw both her arms up out of the water and screamed. <em>Get away! Get away! Get away!</em> Three times. The hawk was too far off. It took the baby up off the branch and went up with him, heavy, low over the sawgrass, and away.</p>
+  <p>On the near bank, Josiah saw his mother stop in the middle of the water and throw up her arms and scream. He thought she was calling him. He was two. He came running down the road to her into the water, and the water took him off his feet and turned him over once and took him down the canal, and she saw his little shirt once in the brown, and then she did not see it.</p>
+  <p>She got out on the far side somehow. She did not remember getting out.</p>
+  <p><em>One of my boys a hawk took,</em> she said, walking. <em>One the water took. And my husband is lying dead on the road.</em></p>
+</section>
+
+<section>
+  <h2>V. The Smoke</h2>
+  <p class="dateline">Above Canal Point &middot; later in the week</p>
+  <p>She did not know how many days she walked. She slept on the road. People went by her in trucks going north and boats going south. On the third day, or the fourth, she met a man walking north along the dike road, a colored man in a white shirt gone gray, with a sack over his shoulder, coming up out of the south shore.</p>
+  <p><em>Mister. Where are you coming from?</em></p>
+  <p><em>Chosen, sister. What&rsquo;s left of it.</em></p>
+  <p><em>In Chosen, in the white house on the canal, by the store, there&rsquo;s a family named Pinder. Do you know them?</em></p>
+  <p>He stopped. <em>I know them. Don&rsquo;t ask me about them, sister. Ask me about anybody else in Chosen and I&rsquo;ll tell you.</em></p>
+  <p><em>I don&rsquo;t want to know about anybody else in Chosen. That&rsquo;s the only one I want to know about.</em></p>
+  <p>The man looked at her for a long time. He put his sack down. <em>You didn&rsquo;t leave me any way out of it,</em> he said. <em>You felt it rain Sunday night?</em></p>
+  <p><em>Felt it. Mister, I&rsquo;m the only one in the world it rained on Sunday night. I&rsquo;ll tell you about it some time. Tell me about the Pinders and I won&rsquo;t ask you anything else.</em></p>
+  <p><em>Sunday night the water came over the dike,</em> he said, <em>and the wind took that white house up off its blocks and turned it over, and it came down on Josiah Pinder and his wife and their boy Eldridge, all three, and they died under it. They found them Tuesday. There&rsquo;s too many to bury down there, sister. No coffins. They&rsquo;re saving the coffins for the white folks. The ones of us they find, they&rsquo;re stacking them up with the wood from the houses and burning them, all together. They&rsquo;re burning Chosen right now.</em> He turned and pointed back the way he had come. <em>Look yonder. That&rsquo;s the smoke.</em></p>
+  <p>She looked. Away down at the south end of the lake, over the flat drowned country, a column of black smoke was going up into the white sky and leaning over at the top in the wind.</p>
+  <p>Something went out of her then.</p>
+  <p>Her dress had been rotting on her for days, torn on the palmettos, soaked and dried and soaked, and now it came apart and fell off her and she did not know it. She walked on down the dike road naked in the sun, round and round, around the trucks and the boats and the people, crying and saying it out loud, the same thing, over and over, like a song somebody had taught her.</p>
+  <p><em>Both my boys gone. My husband dead on the road. Mama and Papa and my brother burning up all in one fire.</em></p>
+  <p>People on the road yelled at her. <em>Crazy woman! Look at that crazy woman!</em> Some of them threw things. Muck off the road, wet, in clods. Children threw it. It hit her in the back and in the hair, and she did not know that either.</p>
+</section>
+
+<section>
+  <h2>VI. Forbid Her Not</h2>
+  <p class="dateline">West Palm Beach &middot; October 1928</p>
+  <p>The refugees from the lake had been brought out to West Palm Beach by truck and boat, the colored ones to the colored side of town, and on the lot beside one of the colored churches there was a tarpaulin stretched between two trees where an old woman sat on a kitchen chair every evening with the people from the muck sitting on the ground around her.</p>
+  <p>Her name was Lettie Brinson. She was seventy-three. She had been born a slave in Madison County and licensed as an evangelist by the African Methodist Episcopal Church in 1889, the year Ozella&rsquo;s father came over from Andros, and in forty years she had preached in turpentine camps and phosphate camps and convict camps from the Georgia line to Key West, but she was past most of that now. Now she sat on the kitchen chair. She did not preach much anymore. People came and sat by her anyway, because she listened, and because when she did say something it was usually the one thing.</p>
+  <p>They had been to Tamarind Avenue that week, some of them, where the trucks from the lake had brought six hundred and seventy-four colored dead and laid them in one long trench with no service said. They had come back and sat by Lettie Brinson under the tarpaulin and not said anything at all.</p>
+  <p>Lettie saw Ozella a long way off, coming down the street in the late sun with nothing on and muck in her hair and a crowd of boys behind her throwing things.</p>
+  <p>She knew her. She had seen her once before, though Ozella would not remember it. At a camp meeting on the lake in 1919 a little girl in a white dress had stood at the edge of the brush arbor with her father and watched Lettie Brinson take an old woman by the hand and stand her up in front of the whole meeting and give her the class book to keep. The old woman knew the Discipline better than any preacher on the lake. Lettie said so. And the little girl had pulled at her father&rsquo;s coat and said, loud enough for everyone to hear, <em>I want to be the one that knows it best,</em> and the people had laughed, and Lettie had not.</p>
+  <p><em>That&rsquo;s her,</em> said Lettie Brinson to nobody. <em>She&rsquo;s here.</em></p>
+  <p>The people under the tarpaulin saw what was coming down the street and got up. <em>Mother, don&rsquo;t let her in here. That&rsquo;s a crazy woman. Somebody run her off.</em></p>
+  <p><em>Let her come,</em> said Lettie. <em>Get out of the way. Forbid her not.</em></p>
+  <p>They got out of the way. Ozella came in under the tarpaulin still saying it, <em>both my boys gone, both my boys,</em> and stood in front of the kitchen chair, and the old woman looked up at her.</p>
+  <p><em>Daughter,</em> she said. <em>Come back to yourself.</em></p>
+  <p>And Ozella came back.</p>
+  <p>The people who were under the tarpaulin that evening told it the rest of their lives, and none of them ever told it any differently. The old woman said four words, and the girl came back into her own eyes the way a lamp comes up when you turn the wick. She looked around her. She looked down. She saw that she had nothing on, and she dropped down on the ground and wrapped her arms around her knees, and the shame came into her face, which was the first thing that had come into it in a week.</p>
+  <p>A man by the tree took off his coat, a brown suit coat with the lining torn, and threw it to her. She put it on. Then she came on her knees across the dirt to the kitchen chair and put her forehead down on the old woman&rsquo;s shoes.</p>
+  <p><em>Help me,</em> she said. <em>Mother, help me. Hold me up. One of my boys a hawk took and the other one the water took. My husband&rsquo;s dead on the road at Port Mayaca. The storm turned my daddy&rsquo;s house over and it fell on him and my mama and my brother and they&rsquo;re burning them in one fire at Chosen. I saw the smoke.</em></p>
+  <p>Lettie Brinson heard all of it. She did not hurry it. When it was done she put her hand on Ozella&rsquo;s head, on the muck in her hair.</p>
+  <p><em>Be still, now. You&rsquo;ve come to the right place. All you said is so. A hawk took one, and the water took one, and your husband&rsquo;s dead on the road, and your mama and your daddy and your brother are gone in that fire. It&rsquo;s so. Now hear me. You aren&rsquo;t the first. Every woman that ever lived on that lake has cried over somebody. Every woman back to Eve. You put all those tears together, daughter, and there&rsquo;s more of them than there was water in Okeechobee. More than came over the dike. You&rsquo;ve been crying a long, long time, longer than you know. It&rsquo;s time to stop being careless with yourself.</em></p>
+  <p>Ozella stayed on her knees with her head on the old woman&rsquo;s shoes. After a while the crying in her went down, a little, the way the lake had gone down a little by Wednesday, not enough to see a road but enough to know where the road was.</p>
+  <p>Lettie felt it go down and went on.</p>
+  <p><em>Your children couldn&rsquo;t hold you up, daughter. Your daddy couldn&rsquo;t. Your husband couldn&rsquo;t. Nobody&rsquo;s people can hold them up when the end comes for them. Not when it&rsquo;s here, and not after, and not anywhere. The Book says it.</em></p>
+  <div class="verse">
+    <p>None of them can by any means redeem his brother, nor give to God a ransom for him.</p>
+    <p>&mdash; Psalm 49:7</p>
+  </div>
+  <p><em>So don&rsquo;t lean on them. You know now. Clear your own road while you&rsquo;ve got the light, and walk it. That&rsquo;s all there is to do.</em></p>
+  <p>Ozella lifted her head off the shoes. Something had moved in her that would not move back. The people under the tarpaulin could see it, though they could not have said what it was, and some of them, sitting on the ground with their own dead in them, felt it move in themselves.</p>
+  <p><em>Let me stay with you,</em> said Ozella. <em>Let me be one of your women.</em></p>
+  <p>Lettie Brinson sent her to the deaconesses at the church that night, in the man&rsquo;s brown coat, and they washed the muck out of her hair and gave her a dress.</p>
+</section>
+
+<section>
+  <h2>VII. Three Pourings</h2>
+  <p class="dateline">Belle Glade &middot; 1934</p>
+  <p>She was consecrated a deaconess of the African Methodist Episcopal Church at the annual conference in the spring of 1930, in a plain black dress with a white collar. People had stopped calling her the crazy woman by then, and most of them had stopped calling her Ozella. They called her Sister Pinder. The women at the church in West Palm said that in two years she had learned the Discipline better than any preacher in the conference, and they were not exaggerating. She knew every rule in the book and the reason behind every one, and she could tell a young woman what was right without making her feel like dirt for not knowing it, which is harder.</p>
+  <p>In 1932 she asked to go back to the lake, and they let her.</p>
+  <p>The Army engineers were building the big dike around the south shore by then, a long wall of rock and earth higher than a house where the little dike had been, and the bean fields had come back, and the pickers had come back, from Georgia and the Carolinas and the islands, and the jooks had come back, and the girls of sixteen, and their trouble. Sister Pinder had a room behind the church in Belle Glade. The girls came to her there. She sat with them on the back step.</p>
+  <p>One evening in the summer of 1934 she came in from the fields hot, with muck to her ankles, and sat on the back step and filled the enamel pitcher from the pump to wash her feet.</p>
+  <p>She poured the first pitcher over her feet, and some of it went past them onto the ground. It ran a little way on the hard-packed sand, a hand&rsquo;s width, and soaked in and was gone.</p>
+  <p>She poured again. The second time it ran farther, a foot or more, toward the pump, and then that sank in too.</p>
+  <p>She poured the third time. The third time it ran farther yet, almost to the pump, a long dark thread across the yard, and stopped, and she watched it go into the ground and the ground go pale again where it had been.</p>
+  <p>She sat with the empty pitcher in her lap and looked at the three marks.</p>
+  <p>The little one was the baby on the myrtle branch. The water had not run a hand&rsquo;s width with him. The second was Josiah and Cleon and her brother Eldridge, who had all run a little way, a little farther, and gone in. The third, the long one, was her mother and her father and Aunt Bertha and Lettie Brinson, who had all run about as far as water can run in this world before it goes into the ground. And she knew which line she would be. She would be one of those three. Everybody was. The ground was taking all of them. The ground had been taking them all along, every day, since before she was born, and she had not been looking. She had been looking at the water, and never at where it went.</p>
+  <p>Some words came up in her that she had read years before in the upstairs room, in the Book, without knowing she had kept them.</p>
+  <div class="verse">
+    <p>For we must needs die, and are as water spilt on the ground, which cannot be gathered up again; neither doth God respect any person: yet doth he devise means, that his banished be not expelled from him.</p>
+    <p>&mdash; 2 Samuel 14:14</p>
+  </div>
+  <p>And Lettie Brinson was standing in the yard.</p>
+  <p>She was forty miles away in West Palm Beach that evening, sitting in her kitchen chair, everybody at the church agreed on that afterward, and she was eighty years old and had not been out to the lake since the storm. But she was standing in the yard behind the church in Belle Glade, by the pump, where the third line of water had gone into the sand, in her old black hat. Sister Pinder saw her plain. The light was behind her, the long gold light of evening that comes across the muck in summer, and it came through her a little, the way it comes through a curtain.</p>
+  <p><em>Now you see it,</em> Lettie said. <em>You see it going. A body can live a hundred years and never once look at that. One day of looking at it is worth more. One evening like this one, daughter. Pray the Psalm.</em></p>
+  <div class="verse">
+    <p>LORD, make me to know mine end, and the measure of my days, what it is: that I may know how frail I am.</p>
+    <p>&mdash; Psalm 39:4</p>
+  </div>
+  <p>Then there was nobody by the pump. There was the pump, and the yard, and the evening, and the dark of the bean fields beyond the church, and the long new dike against the sky.</p>
+  <p>Sister Pinder sat on the step. She did not get up for a long time. She watched the third line dry. It went from the far end first, the way they always do, back toward the step, until there was nothing to show where any of it had run. Then she set the pitcher down by her feet, and went in, and lit the lamp, because one of the girls from the bean camp was coming at dark, and would need to be told, gently, what the rules were, and why.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verses</h3>
+    <blockquote class="pd">Sons are no help, nor a father, nor relations; there is no help from kinsfolk for one whom death has seized.<cite>Dhammapada 288, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">A wise and good man who knows the meaning of this, should quickly clear the way that leads to Nirvana.<cite>Dhammapada 289, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">And he who lives a hundred years, not seeing beginning and end, a life of one day is better if a man sees beginning and end.<cite>Dhammapada 113, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Pa&#7789;&#257;c&#257;r&#257; is a rich merchant&rsquo;s daughter, kept on the top floor of her father&rsquo;s house, who runs away with a servant on the eve of an arranged marriage. Twice, near her time, she sets out for her parents&rsquo; house to give birth. The first time her son is born by the road. The second time a storm out of season catches them. Her husband is killed by a snake while cutting brush for a shelter. At dawn a hawk carries off her newborn, and her older boy drowns in a swollen river. Then a traveler tells her that her parents and brother died in the same storm when their house fell, and points to the smoke of their pyre. She goes mad and wanders naked, pelted with dirt, until the Buddha says, &ldquo;Sister, return to your right mind.&rdquo; He tells her that her tears over the dead are more than the four oceans and that kin are no refuge, and she becomes a nun. Years later, washing her feet, she watches spilled water run a short way, then farther, then farther yet, and sees in it death in youth, in middle age and in old age. The Buddha appears before her and speaks verse 113. She became the nun foremost in knowledge of the Discipline. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-12.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Patacara">Pa&#7789;&#257;c&#257;r&#257;</a>.</p>
+    <h3>Lake Okeechobee, 1928</h3>
+    <p>By the 1920s, drainage canals and the <a href="https://markers.flheritage.com/home/details/564">Conners toll highway</a> had opened the black muck south and east of Lake Okeechobee to farming. Towns like Belle Glade, Pahokee, South Bay, Canal Point and Chosen filled with Black farmworkers from Georgia, the Carolinas and the Bahamas, who picked beans and cut cane. On the night of September 16, 1928, the <a href="https://en.wikipedia.org/wiki/1928_Okeechobee_hurricane">Okeechobee hurricane</a> drove the lake over the low muck dike on its south shore and flooded hundreds of square miles, in places more than twenty feet deep. At least 2,500 people died, about three-quarters of them migrant farmworkers, most of them Black. The few coffins were kept for white victims. Many Black dead were burned on funeral pyres in the Glades. About 1,600 were buried in a mass grave at Port Mayaca, and 674 in a mass grave at Tamarind Avenue and 25th Street in West Palm Beach. That grave went unmarked until a state historical marker was placed in 2003 (see the <a href="https://education.pbchistory.org/the-hurricane-of-1928/">Historical Society of Palm Beach County</a>). Chosen never recovered. Between 1932 and 1938 the Army Corps of Engineers built the dike that now rings the lake.</p>
+    <p>The African Methodist Episcopal Church began licensing women as lay preachers and evangelists in 1884 and created the office of deaconess in 1888. Women could not be ordained deacons until 1948 or elders until the 1950s and 1960s (see <a href="https://en.wikipedia.org/wiki/African_Methodist_Episcopal_women_preachers">AME women preachers</a>). Its rulebook, like that of other Methodist churches, is called the Discipline. Ozella, Lettie Brinson and their families are fictional, and so is the camp meeting of 1919.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Pa&#7789;&#257;c&#257;r&#257; from the Dhammapada commentary (verses 113, 288 and 289). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-12.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-branch.html">&larr; The Branch</a><a href="index.html">All stories</a><a href="the-mustard-seed.html">The Mustard Seed &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, threads = [], clock = 0, lastT = 0, nextSpawn = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function makeThread(kind) {
+    var len = [40, 110, 230][kind] * (0.8 + Math.random() * 0.4);
+    var x = Math.random() * W, y = H * (0.25 + Math.random() * 0.7);
+    var ang = (Math.random() < 0.5 ? 0 : Math.PI) + (Math.random() - 0.5) * 0.9;
+    var pts = [[x, y]], seg = 4, n = Math.ceil(len / seg);
+    for (var i = 0; i < n; i++) {
+      ang += (Math.random() - 0.5) * 0.35;
+      x += Math.cos(ang) * seg; y += Math.sin(ang) * seg * 0.6;
+      pts.push([x, y]);
+    }
+    return { pts: pts, grow: 1200 + len * 18, hold: 900, dry: 2500 + len * 12, age: 0, w: 2.2 + kind * 0.5 };
+  }
+  function drawThread(th, headFrac, tailFrac, alpha) {
+    var n = th.pts.length - 1, a = Math.floor(n * tailFrac), b = Math.ceil(n * headFrac);
+    if (b - a < 1) return;
+    ctx.strokeStyle = 'rgba(70,96,110,' + alpha + ')';
+    ctx.lineWidth = th.w; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(th.pts[a][0], th.pts[a][1]);
+    for (var i = a + 1; i <= b; i++) ctx.lineTo(th.pts[i][0], th.pts[i][1]);
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(70,96,110,' + (alpha * 0.6) + ')';
+    ctx.beginPath(); ctx.arc(th.pts[0][0], th.pts[0][1], th.w * 2.2, 0, Math.PI * 2); ctx.fill();
+  }
+  function frame(now) {
+    var dt = lastT ? Math.min(now - lastT, 100) : 16; lastT = now; clock += dt;
+    if (clock > nextSpawn && threads.length < 5) {
+      threads.push(makeThread(Math.floor(Math.random() * 3)));
+      nextSpawn = clock + 1800 + Math.random() * 2600;
+    }
+    ctx.clearRect(0, 0, W, H);
+    for (var i = threads.length - 1; i >= 0; i--) {
+      var th = threads[i]; th.age += dt;
+      var g = Math.min(1, th.age / th.grow), head = 1 - Math.pow(1 - g, 2.2), keep = 1;
+      if (th.age > th.grow + th.hold) keep = 1 - Math.min(1, (th.age - th.grow - th.hold) / th.dry);
+      if (keep <= 0) { threads.splice(i, 1); continue; }
+      drawThread(th, head * keep, 0, 0.16);
+    }
+    requestAnimationFrame(frame);
+  }
+  function still() {
+    ctx.clearRect(0, 0, W, H);
+    for (var k = 0; k < 3; k++) drawThread(makeThread(k), 1, 0, 0.12);
+  }
+  size();
+  if (reduce) still(); else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); if (reduce) still(); });
+})();
+</script>
+</body>
+</html>

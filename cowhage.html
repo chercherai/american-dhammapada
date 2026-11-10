@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cowhage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on new pine boards; slanting shafts of light come through the gaps overhead and sawdust drifts down through them, glinting; datelined sections. */
+  --ground: #f3ede1;
+  --ground-2: #e8dfcc;
+  --paper: #2e2820;
+  --paper-dim: #7a6f60;
+  --accent: #9c6c17;
+  --glow: #d39a32;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f7f2e8 0%, var(--ground) 55%, #ece3d2 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(46,40,32,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(156,108,23,.22); }
+.epigraph { border-left: 1px solid rgba(156,108,23,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(232,223,204,.78); border: 1px solid rgba(46,40,32,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(46,40,32,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(46,40,32,.1); border-bottom: 1px solid rgba(46,40,32,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(232,223,204,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 17.1 &middot; Rohiṇī</span></nav>
+<header>
+  <h1>Cowhage</h1>
+  <div class="epigraph">Let all bitterness, and wrath, and anger, and clamour, and evil speaking, be put away from you, with all malice.<br>&mdash; Ephesians 4:31</div>
+</header>
+
+<p class="heard"><span class="heard-lead">I would like to testify,</span> at Manitou.</p>
+
+<section>
+  <h2>I. The Veil</h2>
+  <p class="dateline">Colorado Springs &middot; June 1904</p>
+  <p>Frank Weller came home to the Springs in the middle of June, eight days after the depot at Independence was blown up. The whole district was still full of it. Thirteen men going on night shift at the Findley had been killed on the platform by a charge of dynamite under the boards, and in the days after it the mine owners and the militia had cleared every union man they could find out of the camp, and put them in bullpens, and loaded them onto trains and dumped them across the state line. On the porches of the North End people talked about nothing else. The word that came up most was <em>hang</em>.</p>
+  <p>Frank had been gone four years. He had gone east to be a mining engineer and come back a Christian Scientist, which his father, who owned a third of a good mine above Victor, took about as well as he would have taken a cave-in. He had been taught in a class in Boston and had practiced for two years in Denver, and he came down on the noon train with a party of eleven Scientists from the Denver churches who wanted to see the Peak, and the whole family went down to the Antlers to meet him. His father went, and his stepmother, and two uncles, and their wives, and a crowd of cousins. Everyone went but his sister.</p>
+  <p><em>Where&rsquo;s Rowena?</em></p>
+  <p><em>At home.</em></p>
+  <p><em>Why didn&rsquo;t she come?</em></p>
+  <p>His stepmother lowered her voice, though there was nobody in the lobby of the Antlers who did not already know. <em>Her skin is very bad again. She won&rsquo;t go out. She&rsquo;s ashamed to.</em></p>
+  <p><em>Send for her,</em> Frank said. <em>Now, please.</em></p>
+  <p>Rowena Weller was twenty-two. Since she was sixteen something had come and gone on her face and her neck and her arms, a red rash that rose into welts and wept and crusted and itched until she tore at it in her sleep, so that she woke with blood under her nails. Every doctor in Colorado Springs had looked at it. She had taken arsenic drops in water for a year. She had soaked in the soda springs at Manitou and the hot pool at Glenwood and been painted with tar and sulfur and zinc. A man in Denver had put her under the R&ouml;ntgen rays, and it had come back worse. When it was bad she did not go out, and when she had to go out she wore a motoring veil of grey chiffon, tied under the chin, though the Wellers had no motorcar.</p>
+  <p>She had a temper. The hired girls did not stay. She had thrown a hand mirror at the one before this one, and missed, and broken the glass in the hall door, and the next day she had paid for it out of her own allowance without a word and without apologizing. She could not stand to be looked at, and she could not stand to be pitied, and most of all she could not stand other girls, the ones who went to the Saturday dances at the Broadmoor Casino in their summer muslins with their bare white arms. When the news came from Independence, and her father read it out at the breakfast table, she was the one who said it first, before any of the men: <em>They ought to hang every union man in the district.</em> Her father looked at her over the paper as if she had said something he had been thinking and had not liked to hear out loud.</p>
+  <p>She came to the Antlers in the veil and sat in the corner of the ladies&rsquo; parlor with her gloves on.</p>
+  <p><em>Rowena,</em> her brother said. <em>Why didn&rsquo;t you come with the others?</em></p>
+  <p><em>Because of my face, Frank. I was ashamed.</em></p>
+  <p>He did not ask to see it. <em>Shouldn&rsquo;t you be doing some good in the world?</em></p>
+  <p><em>What good can I do?</em></p>
+  <p><em>The Scientists in Manitou meet in a rented room over the drugstore. Twenty people on kitchen chairs. They need a church.</em></p>
+  <p><em>And what would I build it with?</em></p>
+  <p><em>You have Mother&rsquo;s diamonds.</em></p>
+  <p>She did. Their mother had died when Rowena was nine and left her a necklace and earrings and a brooch, diamonds in Cripple Creek gold, that their father had bought in Denver in the first good year at the mine. Rowena had never worn them. They lay in a velvet case in the bottom of her wardrobe.</p>
+  <p><em>What did they cost?</em></p>
+  <p><em>Papa said ten thousand dollars.</em></p>
+  <p><em>Then build with that.</em></p>
+  <p><em>Frank, who would build it for me?</em></p>
+  <p>He turned and looked at their two uncles, who were standing in the parlor door with their hats in their hands. Uncle George had the lumber yard in Colorado City. Uncle Will had built half the cottages in Manitou.</p>
+  <p><em>They will. That&rsquo;s their part.</em></p>
+  <p><em>And what will you do?</em></p>
+  <p><em>I&rsquo;ll stay here till it&rsquo;s done.</em></p>
+  <p>The uncles looked at each other, and at their brother, who said nothing, and at their niece in the corner in her veil, and Uncle George said, <em>Well. All right.</em> And in the morning he sent up a wagon of lumber.</p>
+</section>
+<section>
+  <h2>II. The Lower Room</h2>
+  <p class="dateline">Manitou &middot; summer and autumn 1904</p>
+  <p>They built it on a lot below Ruxton Avenue, where Ruxton Creek comes down out of the canyon talking to itself over the stones. Frank drew it on butcher paper at the kitchen table. Two stories. Below, a Sunday school room and a reading room, with a stove and a row of windows on the creek side. Above, the auditorium, with the two Readers&rsquo; desks and seats for a hundred and twenty.</p>
+  <p><em>As soon as they put the boards down overhead,</em> he told his sister, <em>you take your place below. Sweep it. Every day. Set out the chairs for the Wednesday meeting, and keep the water pitchers full.</em></p>
+  <p><em>Frank, there&rsquo;ll be carpenters walking around on top of me.</em></p>
+  <p><em>There will.</em></p>
+  <p>On the first evening, after the uncles had gone, she found Frank alone on the porch and stood in front of him with her arms folded.</p>
+  <p><em>You think it&rsquo;s in my mind. Don&rsquo;t you. That I&rsquo;ve imagined it.</em></p>
+  <p><em>I didn&rsquo;t say that.</em></p>
+  <p><em>Look at it, then.</em> And she pulled up the veil.</p>
+  <p>He looked, for a long time, the way a doctor looks, without flinching and without pity, and she hated him for it, and then, for some reason, she did not.</p>
+  <p><em>It&rsquo;s real enough,</em> he said. <em>Get some sleep. George is bringing the wagon at seven.</em></p>
+  <p>The diamonds went to a jeweler on Sixteenth Street in Denver who did not ask questions. The foundation went in in July. In August the joists went across, and the subfloor, and on the first day of September Rowena Weller walked down from the Wellers&rsquo; summer cottage on the hill in her veil with a broom over her shoulder and went in under the new boards and began to sweep.</p>
+  <p>There was a great deal to sweep. Sawdust and shavings and plaster grit and the bent nails that came down through the cracks, and the mud the men tracked in, and the leaves the wind blew in through the empty window frames. Above her head all day the carpenters walked and sawed and hammered, and the dust sifted down through the boards in the light from the windows, and she swept it up, and it sifted down again, and she swept it up. The Scientists came down from the room over the drugstore and began holding their Wednesday meetings in the lower room before there was glass in the windows, sitting on kitchen chairs among the sawhorses with their coats on, standing up one at a time to tell what they had been healed of, while the hammers went on overhead. Rowena set out the chairs for them and filled the pitchers from the creek and sat at the back in her veil and did not listen.</p>
+  <p>Frank did not preach at her. He came every afternoon and walked through the building with Uncle Will and talked about joists and window sash, and sometimes, on his way out, he stopped where she was sweeping and watched her for a minute. Once he said, <em>You&rsquo;re getting better at that.</em> She said a broom was not hard. He said it was harder than it looked to sweep the same floor every day and not be angry at the men who kept dirtying it, and went out, and she stood there in the dust with her face hot under the veil, because she had been angry at them all morning, every one of them, every bent nail, every boot.</p>
+  <p>It did not stop all at once. But a day came in October when she noticed that she had swept the whole floor and had not once looked up at the boards and wished the men above them dead, and the next day the same, and after that she stopped noticing.</p>
+  <p>Her stepmother noticed it first, at the end of that month. Rowena had come in with the broom and pulled off the veil to wash, and her stepmother, at the stove, looked at her and set the spoon down.</p>
+  <p><em>Rowena. Your neck.</em></p>
+  <p>The welts had gone flat and pale. Under the jaw, where it was always worst, the skin was pink and whole, like the skin under a scab that comes off clean. Rowena went to the glass in the hall and stood there a long time. She did not say anything. She put the veil back on, out of habit, and went down the hill again in the morning with the broom.</p>
+  <p>By November there was nothing on her arms. By Thanksgiving there was nothing on her face but a faint roughness along one cheekbone that you could only see in a side light, and she had stopped wearing the veil to the lower room, and the carpenters, who had been calling her the Widow for three months on account of it, were ashamed of themselves and called her Miss Weller.</p>
+  <p>The building came to eleven thousand four hundred dollars. The diamonds had brought nine thousand six hundred. It is the custom of the Christian Scientists not to dedicate a church while anything is owed on it, not a dollar, and so in December the little congregation in Manitou took up what it could, and Uncle George forgave the lumber, and Uncle Will forgave his wages, and on the last Sunday of the year Frank Weller stood in the new auditorium and announced that the church was paid for.</p>
+</section>
+<section>
+  <h2>III. The Teacher</h2>
+  <p class="dateline">Wood Avenue &middot; January 1905</p>
+  <p>They dedicated it on the second Sunday in January, in a snow that came down soft and steady out of the canyon all morning, and afterward Rowena gave a dinner for the teacher and the members at her father&rsquo;s house in the North End.</p>
+  <p>The teacher was Mrs. Harriet Oakes, of Denver. She was the one who had taught Frank, and half the practitioners in Colorado; she held a class every autumn in a parlor on Capitol Hill, and people came to it from as far as Cheyenne and Santa Fe. She was a widow of fifty from western Kansas, broad and plain, in a black wool dress that had been good once. She had been a country schoolteacher for twenty years before she was a Scientist. She did not talk much. When she did, people noticed that she did not raise her voice even in a full room, and that the room got quiet to hear her.</p>
+  <p>Rowena did not sit down to the dinner. She had planned it for a month, and cooked half of it herself with the hired girl: a clear soup, and a roast of beef, and creamed oysters brought up in a tub of ice from Denver, and Saratoga potatoes, and hot rolls, and a jellied salad, and three kinds of pie and a coconut cake. She saw it onto the table and went back into the kitchen and stayed there.</p>
+  <p>When the cake had gone around, Mrs. Oakes put down her fork.</p>
+  <p><em>Whose dinner is this?</em></p>
+  <p><em>My sister&rsquo;s,</em> said Frank.</p>
+  <p><em>Where is she?</em></p>
+  <p><em>In the kitchen.</em></p>
+  <p><em>Ask her to come in.</em></p>
+  <p>Rowena did not want to. Frank went and got her anyway, and she came and stood at the end of the table in her apron with her hands folded, and then, because Mrs. Oakes pointed to the chair beside her, she sat.</p>
+  <p><em>Miss Weller. Why didn&rsquo;t you come to any of my lectures in the fall? Your brother asked you.</em></p>
+  <p><em>I had something on my skin. I was ashamed to.</em></p>
+  <p><em>Do you know why it came?</em></p>
+  <p><em>No, Mrs. Oakes. Nobody ever knew. Eleven doctors.</em></p>
+  <p><em>It came from anger,</em> Mrs. Oakes said.</p>
+  <p>The table went quiet. Rowena&rsquo;s father put his napkin down. Rowena looked at the woman beside her with her mouth a little open.</p>
+  <p><em>Anger at whom? What did I ever do?</em></p>
+  <p><em>Well,</em> said Mrs. Oakes, <em>listen.</em> And she told a story the way she must have told stories to the children in the sod schoolhouse in Kansas, plainly, in order, with her hands still in her lap.</p>
+  <p>There was once a queen, she said, who had everything a queen could want. And there was a girl at the court who danced for the king, and the girl danced so well that when she danced, nobody looked at the queen. The queen could not bear it. So she sent away to some country where a certain bean grows in a pod covered with fine hairs, the kind that will set the skin on fire, and she had the pods ground into a powder. And she put the powder in the dancing girl&rsquo;s bed, and in her cloak, and in her blanket of goat&rsquo;s hair. And one day, laughing, as if it were a game, she threw a handful of it over the girl herself. The girl broke out in welts from head to foot. She tore at herself. She lay down in her bed to get away from it and the bed was full of it too. She never danced at that court again.</p>
+  <p>Mrs. Oakes was quiet a moment.</p>
+  <p><em>That was you,</em> she said. <em>I think you know it.</em></p>
+</section>
+<section>
+  <h2>IV. Cowhage</h2>
+  <p class="dateline">The same evening</p>
+  <p>Rowena did know it. She had not thought about it in seven years, which is not the same as having forgotten.</p>
+  <p>The Christmas she was fifteen, Miss Antoinette Fry&rsquo;s Academy of the Dance had put on a pageant at the Opera House, with a tableau of the seasons, and Rowena was to be Winter, in white tarlatan with silver spangles, and she had practiced the solo for two months. Then in the last week Miss Fry gave it to Lottie Kehoe. Lottie was a year younger. Her father worked the night shift at the Strong mine and her mother took in sewing, and she had come to the Academy free because Miss Fry said she had never seen feet like that on a child. She danced the way water runs. When Lottie danced, nobody looked at anybody else.</p>
+  <p>There was a boy at the high school whose people had wintered in Florida, and he had come back with a paper of what they called cow-itch down there, and sold pinches of it to the other boys for a dime to put down girls&rsquo; collars. It was cowhage, the hairs off the pod of a bean that grows in the South, fine as pollen and gold-colored, though Rowena did not know the name then. She paid him a quarter for the whole paper. She shook it into the folds of Lottie&rsquo;s costume where it hung in the dressing room at the Opera House, and into the lining of her cloak, and on the night of the pageant, in the wings, laughing, as if it were a game the girls were all playing, she threw a pinch of it down the back of Lottie&rsquo;s neck.</p>
+  <p>Lottie came out as Winter in white tarlatan with silver spangles, and took four steps, and began to scratch, and then to tear at herself, and then to cry, in front of six hundred people, and ran off the stage. Her face and neck and arms came up in welts. Her mother took her home and put her to bed and the bed was full of it, because Rowena had shaken the last of the envelope into the cloak, and the cloak had been laid over her. The next spring the Kehoes moved up to Victor. Lottie never came back to the Academy. Rowena danced Winter in her place, and was very bad in it, and her skin broke out for the first time the following summer.</p>
+  <p>She sat at the end of her father&rsquo;s table with her hands in her lap and told it, all of it, in front of the Scientists from Manitou and her uncles and her stepmother and the hired girl standing in the kitchen door.</p>
+  <p>Then Mrs. Oakes did what a Christian Science teacher does. She did not give a lecture. She asked Frank for his Bible and his copy of <em>Science and Health</em>, which he kept in his coat, and read from the one and then the other, the way they are read in the churches on Sunday, without comment, and closed them.</p>
+  <div class="verse">
+  <p>Let all bitterness, and wrath, and anger, and clamour, and evil speaking, be put away from you, with all malice.</p>
+  <p>&mdash; Ephesians 4:31</p>
+  </div>
+  <div class="verse">
+  <p>There is no life, truth, intelligence, nor substance in matter. All is infinite Mind and its infinite manifestation, for God is All-in-all. Spirit is immortal Truth; matter is mortal error. Spirit is the real and eternal; matter is the unreal and temporal. Spirit is God, and man is His image and likeness. Therefore man is not material; he is spiritual.</p>
+  <p>&mdash; Mary Baker Eddy, <em>Science and Health with Key to the Scriptures</em>, p. 468</p>
+  </div>
+  <p>What happened then was told afterward at the Wednesday meetings in Manitou by eleven different people, and their accounts agreed. The snow had stopped. The sun had come out low under the clouds over the Peak, the way it does on winter afternoons in the Springs, and came in level through the west windows of the dining room. And Rowena Weller, sitting at the end of the table with her hands in her lap, turned the color of the light. Her face and her neck and her bare forearms went gold. Not flushed. Gold, they said, like gold leaf on a picture frame, like the color of the ore they bring up out of the Independence, and it stayed after the sun went behind the mountain, and the hired girl dropped a cake plate.</p>
+  <p>Frank said only that his sister looked well.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>In February Rowena took the train up to Victor. It took her two days to find the Kehoes, who were living in three rooms in Goldfield; Mr. Kehoe had been put on a train to Kansas in June with the other union men and had not been allowed back. Lottie was twenty-one and sewed with her mother. She did not recognize the young woman at the door. When she did, she stood in the doorway a long time. What they said to each other there, neither of them ever told anybody, but Rowena went up to Goldfield again in March, and again in April, and the Kehoes did not go hungry that year.</p>
+</section>
+<section>
+  <h2>V. The Four Corners</h2>
+  <p class="dateline">The North End &middot; 1905</p>
+  <p>Now the Weller house stood on a corner lot on Wood Avenue, and on the other three corners of that crossing stood three other houses, and in each of the four houses, counting the Wellers&rsquo; own, where the stepmother&rsquo;s nephew was boarding, there lived an unmarried young man. Every one of them had known Rowena Weller all her life. Not one of them had looked at her twice since she was sixteen. That spring every one of them looked at her, and went on looking, and by May the four of them were not speaking.</p>
+  <p><em>She grew up on my side of the street,</em> said the first.</p>
+  <p><em>She grew up across from me,</em> said the second, <em>I could see her window.</em></p>
+  <p><em>She grew up in my aunt&rsquo;s house,</em> said the third.</p>
+  <p><em>She&rsquo;s our corner&rsquo;s,</em> said the fourth, who had no argument and knew it.</p>
+  <p>It got as far as a fistfight on the Antlers lawn, and then the four of them agreed, since no one of them would give way to another, to put it before somebody they would all abide by. They chose Tom Rainey, who was thirty-four and had come down from the Cripple Creek district in 1899 with more money than any of them could imagine, from a mine he had found himself with a pick, and who had a stone house on Cascade Avenue and was known to be fair. They went to see him on a Sunday evening in his library and laid it before him.</p>
+  <p>Tom Rainey asked each of them how it stood with him.</p>
+  <p><em>My heart has been going like the bass drum in the band in Acacia Park on the Fourth of July,</em> said the first, <em>and it won&rsquo;t stop.</em></p>
+  <p><em>My thoughts go like Ruxton Creek after a cloudburst,</em> said the second. <em>All over the road.</em></p>
+  <p><em>Since I first saw her this spring,</em> said the third, <em>my eyes have stuck out like a crawdad&rsquo;s.</em></p>
+  <p><em>My mind won&rsquo;t hold still,</em> said the fourth, <em>any more than the flag on top of the Peak.</em></p>
+  <p>Tom Rainey sat quiet a while in his leather chair.</p>
+  <p><em>Boys,</em> he said, <em>you&rsquo;re all on fire, every one of you, and it&rsquo;ll pass. Now I&rsquo;ll tell you how it is with me. I saw her at the dedication in January. If I can have her, I&rsquo;ll live. If I can&rsquo;t, I&rsquo;ll die.</em></p>
+  <p>The four young men looked at one another. Then the first one said, <em>Well, Mr. Rainey, there&rsquo;s no call for you to die,</em> and they got up and shook his hand, one after another, and went out, and on the sidewalk on Cascade Avenue under the elms they found they were speaking to each other again.</p>
+  <p>Rowena heard about it a week later and laughed until she had to sit down on the stairs. She married Tom Rainey in the new church in Manitou in October, and the four of them were ushers.</p>
+  <p>She was his darling and his delight. Whatever she said, he could not refuse her. If she said, <em>Tom, let&rsquo;s go up the Peak on the cog road tonight and watch the sun come up,</em> they went. If she said, <em>Tom, the Kehoes need a house,</em> the Kehoes had a house. And if she said, as she did every Saturday morning for the rest of her life, <em>Tom, I&rsquo;m going down to sweep the Sunday school,</em> then the richest man in El Paso County went with her, in his good coat, and stood in the lower room of the little church on Ruxton Creek with the light coming in off the water, and held the dustpan.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Let a man leave anger, let him forsake pride, let him overcome all bondage! No sufferings befall the man who is not attached to name and form, and who calls nothing his own.<cite>Dhammapada 221, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the elder Anuruddha comes home to Kapilavatthu, and everyone in the family goes out to greet him except his sister Rohinī, who is ashamed of a skin eruption. He sends for her and tells her to sell her jewels and build a two-storied assembly hall; while the kinsfolk build it, she sweeps the lower floor and sets out seats and water, and as she sweeps her skin clears. When she gives a meal for the Buddha in the finished hall, he summons her and tells her the eruption came from anger: in a past life, as a jealous queen, she put the powder of a stinging bean in a dancing girl&rsquo;s bed and clothes and threw it on her body &ldquo;as if in fun.&rdquo; As she hears the verse her body turns the color of gold. Reborn among the gods at the meeting point of four domains, she is quarreled over by four young gods, who put the case to Sakka, their king; he wants her for himself, and they give way. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-01.htm">the full commentary story</a>. The bean is <a href="https://en.wikipedia.org/wiki/Mucuna_pruriens">Mucuna pruriens</a>, the velvet bean or cowhage, whose pod hairs are still used in itching powder.</p>
+    <h3>Colorado Springs and Manitou, 1904</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Colorado_Springs,_Colorado">Colorado Springs</a> was laid out in 1871 at the foot of Pikes Peak, and so many English settlers came that it was called &ldquo;Little London&rdquo;; after the gold strikes at Cripple Creek in the 1890s it filled up with mining money, and by 1895 it had four mining exchanges and 275 mining brokers. <a href="https://en.wikipedia.org/wiki/Manitou_Springs,_Colorado">Manitou Springs</a>, just up the canyon, was founded in 1872 as a health resort around its mineral springs. In 1903 and 1904 the district was torn by the <a href="https://en.wikipedia.org/wiki/Colorado_Labor_Wars">Colorado Labor Wars</a>. On June 6, 1904, a dynamite blast under the platform of the Independence depot killed thirteen non-union miners; in the days after, the mine owners&rsquo; association and the militia rounded up union men into bullpens and deported more than two hundred of them by train across the state line.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Christian_Science">Christian Science</a> was founded in 1879 by Mary Baker Eddy, whose <em>Science and Health with Key to the Scriptures</em> (1875) teaches that sickness is rooted in mental error; it names &ldquo;hatred, envy, dishonesty, fear, and so forth&rdquo; among the things that &ldquo;make a man sick.&rdquo; Each church has two Readers, who read paired passages from the Bible and <em>Science and Health</em> on Sundays, and members give testimonies of healing at Wednesday evening meetings. When the extension of The Mother Church in Boston was dedicated in June 1906, a Boston paper noted that no Christian Science church had ever been dedicated &ldquo;with any part of the expense of its construction remaining unprovided for.&rdquo; The Manitou church, the Wellers, Mrs. Oakes and Tom Rainey are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the noble maiden Rohinī from the Dhammapada commentary (verse 221). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-01.htm">The original</a>. Scripture from the King James Version and Mary Baker Eddy&rsquo;s <em>Science and Health with Key to the Scriptures</em>. Written by Claude Opus 5.5.
+  <div class="pager"><a href="low-ground.html">&larr; Low Ground</a><a href="index.html">All stories</a><a href="four-saplings.html">Four Saplings &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Light falls in slanting shafts through the gaps in new floorboards; sawdust motes drift down through it and glint.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, motes = [], shafts = [], t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    shafts = [];
+    var n = W > 900 ? 4 : 3;
+    for (var i = 0; i < n; i++) shafts.push({ x: W * (0.08 + i * 0.9 / n) + Math.random() * 40, w: 26 + Math.random() * 46, ph: Math.random() * 6.28 });
+    motes = [];
+    var m = Math.round(Math.max(40, Math.min(110, W * H / 14000)));
+    for (var j = 0; j < m; j++) motes.push(spawn({}, true));
+  }
+  var SLANT = 0.42; // shafts lean: x shifts this much per pixel of y
+  function spawn(p, anywhere) {
+    p.x = Math.random() * (W + H * SLANT) - H * SLANT * 0.2;
+    p.y = anywhere ? Math.random() * H : -6;
+    p.vy = 0.06 + Math.random() * 0.16;
+    p.r = 0.6 + Math.random() * 1.3;
+    p.ph = Math.random() * 6.28;
+    return p;
+  }
+  function inShaft(x, y) {
+    var best = 0;
+    for (var i = 0; i < shafts.length; i++) {
+      var s = shafts[i], cx = s.x + y * SLANT, d = Math.abs(x - cx) / s.w;
+      if (d < 1) best = Math.max(best, 1 - d);
+    }
+    return best;
+  }
+  function draw(now) {
+    var t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < shafts.length; i++) {
+      var s = shafts[i], a = 0.16 + 0.05 * Math.sin(t * 0.15 + s.ph);
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(s.x - s.w, 0); ctx.lineTo(s.x + s.w, 0);
+      ctx.lineTo(s.x + s.w + H * SLANT, H); ctx.lineTo(s.x - s.w + H * SLANT, H); ctx.closePath();
+      var g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, 'rgba(255,236,190,' + a + ')');
+      g.addColorStop(0.7, 'rgba(255,236,190,' + (a * 0.35) + ')');
+      g.addColorStop(1, 'rgba(255,236,190,0)');
+      ctx.fillStyle = g; ctx.fill();
+      ctx.restore();
+    }
+    for (var j = 0; j < motes.length; j++) {
+      var p = motes[j];
+      if (!reduce) {
+        p.y += p.vy; p.x += Math.sin(t * 0.6 + p.ph) * 0.08 + 0.02;
+        if (p.y > H + 6) spawn(p, false);
+      }
+      var lit = inShaft(p.x, p.y);
+      var alpha = 0.10 + lit * 0.5;
+      ctx.fillStyle = lit > 0.05 ? 'rgba(196,140,40,' + alpha + ')' : 'rgba(120,100,70,' + alpha + ')';
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (1 + lit * 0.6), 0, 6.283); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make();
+  if (reduce) draw(performance.now()); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>

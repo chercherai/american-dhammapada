@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mic Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a snowy October night in a stone plaza, dark theme; low in the page a loose crowd of small warm lights waits, and now and then a phrase of light passes outward from the middle in rings, each ring repeating the last, while a few wet flakes fall; datelined sections. */
+  --ground: #0f1217;
+  --ground-2: #191d24;
+  --paper: #e6e4df;
+  --paper-dim: #9a9fa8;
+  --warm: #e2a95c;
+  --tarp: #6f93c2;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1c222c 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,224,216,.2); }
+.series a:hover { color: var(--warm); }
+a:focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--warm); text-wrap: balance; text-shadow: 0 0 28px rgba(226,169,92,.2); }
+.epigraph { border-left: 1px solid rgba(226,169,92,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--tarp); opacity: .95; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--warm); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(25,29,36,.8); border: 1px solid rgba(228,224,216,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.card { font-style: normal; letter-spacing: .06em; font-size: .95rem; }
+.brk { text-align: center; color: var(--warm); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,224,216,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--warm); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--warm); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--warm); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--warm); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--warm); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(25,29,36,.8); border-left: 2px solid var(--warm); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 14.8 &middot; Sambahulabhikkhu</span></nav>
+<header>
+  <h1>Mic Check</h1>
+  <div class="epigraph">Behold, how good and how pleasant it is<br>For brethren to dwell together in unity!<br>&mdash; Psalm 133:1</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Mic check, this is how I heard it,</span> in Liberty Square.</p>
+
+<section>
+  <h2>I. The Two Hours</h2>
+  <p class="dateline">Zuccotti Park, Lower Manhattan &middot; October 2011</p>
+  <p>Nadège Pierre-Louis had played the djembe in the drum circle at the west end of the park since the second week, when she came down from Flatbush on her day off from the home care agency to see what the noise was about and stayed until two in the morning. She was twenty-four. She had bought the drum on Canal Street for sixty dollars the year before and taught herself on YouTube, in her bedroom, with a towel over the skin so her grandmother could sleep. At Zuccotti there was no towel. The circle went eight and ten hours a day, and when it was going the whole park leaned toward it, and people who had never danced in their lives danced on the granite, and she would look up after an hour and find the sky had gone dark over Broadway without her noticing.</p>
+  <p>The neighbors could not sleep. They went to the community board to say so, and some of them came into the park and stood in the stack at the General Assembly and waited their turn: a man from Liberty Street with a baby who would not go down, a woman who worked nights and slept days, an old man in a bathrobe under his coat. Community Board 1 voted to back the occupation and asked the drummers to keep it to two hours a day. Some of the drummers said they would play four if they were told two, and said it loud. In the end the circle settled on two sessions of two hours.</p>
+  <p>Nadège stood at the back of the Assembly that night and listened to the old man in the bathrobe through the people&rsquo;s mic, his sentences coming back to her in pieces from three rings of strangers, <em>I have lived here forty years</em>, <em>I have lived here forty years</em>, <em>I am on your side</em>, <em>I am on your side</em>, <em>I would like to sleep</em>, <em>I would like to sleep</em>. When he finished, people all over the plaza held up their hands and wiggled their fingers at him, which was how you said <em>yes, I hear you</em>, and she did it too. After that she came to the park without the drum most days. When she brought it she played one session, never two, and the rest of the time she carried trays for the kitchen.</p>
+</section>
+
+<section>
+  <h2>II. The Best Thing</h2>
+  <p class="dateline">The kitchen &middot; Saturday, October 29</p>
+  <p>On Friday the fire department came with the police and took the generators and the gas cans, six generators and a dozen cans, for safety, they said. The media tent went dark and the kitchen went cold. The bicycles that were supposed to make the electricity were still on their way from Boston. On Saturday it snowed, in October, which almost nobody in New York had ever seen, wet heavy snow that piled on the blue tarps until they sagged and dumped it on whoever was underneath. By dark there were three inches on the granite and the park smelled of wet wool and wet cardboard.</p>
+  <p>About twenty of them ended up in the kitchen that night because it was the only place with a tarp that did not leak. They sat on milk crates and food-bank boxes in their coats and the donated blankets, eating cold peanut butter on cold bread, and somebody asked the question people ask when they are too cold to sleep.</p>
+  <p><em>What&rsquo;s the best thing? In the world. Honestly.</em></p>
+  <p>Rob Szymanski said power. He had been a corporal in Anbar and had come home to a foreclosure. He did not mean the bad kind. He meant the day they were the ones the city had to listen to, the day somebody at Brookfield or City Hall picked up the phone and asked what Liberty Square wanted and then did it. <em>That,</em> he said. <em>Being the ones who decide. Nothing beats that.</em></p>
+  <p>Leah, who was writing a dissertation she had not touched since September, said love. She had met Danny in the stack at the Assembly on the fourth night, both of them waiting to speak, and they had said the same thing in a row and laughed, and now they shared a tent by the library. <em>You can keep power,</em> she said. Danny put his face in her hair.</p>
+  <p>Biscuit said food. He had been a line cook at a place in midtown until it closed, and he ran the kitchen&rsquo;s night shift, and he said the best thing in the world was a hot plate of rice and beans handed to somebody who has been standing in the snow all day, and the look on their face when they take it, and he said it so hungrily that everybody laughed, and then he said they would see who laughed when the bikes came.</p>
+  <p>The argument went round. Somebody said power was what they were there to take apart. Somebody said love was just food you could talk to. Rob said Biscuit could have his rice and beans in the new world after it was won. It got sharp in the way things got sharp that week, with the generators gone and the cold and the cops on the corner and everyone knowing, without saying so, that the city was going to come for the park sooner or later.</p>
+  <p>Nadège came in from the snow with the drum on her back in a garbage bag. She had not played that day. She stamped her boots and stood under the edge of the tarp and listened for a while.</p>
+  <p><em>What y&rsquo;all talking about?</em></p>
+  <p>They told her. Power, love, food. Which was best.</p>
+</section>
+
+<section>
+  <h2>III. The People&rsquo;s Mic</h2>
+  <p class="dateline">The same night</p>
+  <p>She set the drum down on a crate and pulled the garbage bag off it and did not play it.</p>
+  <p><em>That&rsquo;s all the same thing,</em> she said. <em>You get it and you want it again tomorrow. Biscuit, how many plates you hand out? Every one of them was hungry again by night.</em> She looked at Rob. <em>And they pick up the phone, and then what? You want them to pick it up again.</em></p>
+  <p>Nobody said anything. Snow slid off the tarp outside with a sound like a sack dropped.</p>
+  <p><em>You want to know the best thing I saw in this park,</em> she said. <em>I saw a man come in here the first week so mad he couldn&rsquo;t talk, and I saw him three weeks later sitting by the library like somebody turned the lights on in him. That&rsquo;s one. Two is when somebody stands up in the Assembly and says the true thing, and you hear it come back to you from all those mouths and you know it&rsquo;s true. Three is the night the man in the bathrobe said he wanted to sleep, and the whole plaza put their hands up for him. That&rsquo;s the best thing. Everybody together and nobody fighting.</em> She put her palm flat on the drumhead. <em>And four is staying in it. That&rsquo;s the hard one.</em></p>
+  <p>Then she said, in the voice they used at the Assembly, <em>Mic check.</em></p>
+  <p>Out of habit, twenty voices answered her. <em>Mic check.</em></p>
+  <p>She gave it to them a phrase at a time, the way the people&rsquo;s mic worked, the way her grandmother used to read the Psalms to her in the kitchen on Rogers Avenue, slowly, in pieces, waiting for the child to say each one back. Each piece came back to her from the crates and boxes, a little ragged at first and then together.</p>
+  <div class="verse">
+    <p>Behold, how good and how pleasant it is<br>For brethren to dwell together in unity!<br>It is like the precious oil upon the head,<br>That ran down upon the beard,<br>Even Aaron&rsquo;s beard;<br>That came down upon the skirt of his garments;<br>Like the dew of Hermon,<br>That cometh down upon the mountains of Zion:<br>For there Jehovah commanded the blessing,<br>Even life for evermore.</p>
+    <p>&mdash; Psalm 133:1&ndash;3</p>
+  </div>
+  <p>Rob said it back with the rest of them, every phrase. Afterward he said he had not been to church since boot camp and could not have told you what Hermon was. He said that halfway through it he stopped hearing the words come out of his own mouth separate from anybody else&rsquo;s, and that was the thing he remembered. Leah said the same, in other words, in a paper she published three years later about something else. Biscuit did not say anything about it, ever, but he got up when it was over and lit the little butane burner they kept for coffee and heated rice and beans from the cooler, a pot at a time, for twenty people, and nobody argued about who got the first plate.</p>
+  <p>They were quiet after that, the whole tent. People said later that it was the quietest the kitchen ever was, quieter than the hours before dawn, and that it was warm under the tarp for a while, though the snow kept coming. Then Rob and Danny went out with brooms and knocked the snow off every sagging tarp along the east side of the park, one after another, so it would not fall on anyone sleeping.</p>
+  <p>The bicycles came from Boston a few days later. Biscuit put the first one by the kitchen and anyone who wanted a hot plate rode it for ten minutes first, and people lined up to ride.</p>
+</section>
+
+<section>
+  <h2>IV. Fifty-Seventh Street</h2>
+  <p class="dateline">November 15, 2011, and after</p>
+  <p>The police came a little after one in the morning on the fifteenth of November, with the sanitation trucks behind them. They gave people a few minutes to leave. Then they took the park apart. The tents went into the trucks, and the kitchen, and the bicycles, and the library, five thousand books, thrown into dumpsters and garbage trucks with the wet sleeping bags. About two hundred people were arrested. By morning the granite had been power-washed, and there were barricades around it.</p>
+  <p>Nadège was in Flatbush that night, asleep, with the drum under her bed. She heard about it at six from her phone.</p>
+  <p>The kitchen crew never got the kitchen back together. Rob went to work on the Sandy relief a year later out of a church in Sunset Park, running a warehouse of donated blankets, and the people who worked with him said he never once raised his voice. Leah finished her dissertation. Biscuit cooked at a soup kitchen in the Bronx. When any of them ran into each other, anywhere, one of them would sometimes say <em>mic check</em> under their breath, and the other would say it back.</p>
+  <p>The city said the books had been taken to the sanitation garage on Fifty-Seventh Street and could be picked up there. The library people went with boxes. They came back with twenty-six boxes, and of the five thousand books, about eight hundred were whole enough to keep. Nadège went with them, because she had a free afternoon and strong arms. In the back of the garage, in a cage of things nobody had claimed, under a heap of soaked blankets and a broken tent pole, she found a djembe in a garbage bag with its skin split. It was not hers. She carried it out anyway.</p>
+  <p>She never fixed it. It sat in the corner of her room in Flatbush for years, with the split skin, beside the good one. Some nights, when her grandmother was asleep, she sat on the edge of the bed with the good drum between her knees and laid both palms flat on the head, and did not strike it, and felt the trucks go by on Flatbush Avenue come up through the skin into her hands.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Happy is the arising of the awakened, happy is the teaching of the True Law, happy is peace in the church, happy is the devotion of those who are at peace.<cite>Dhammapada 194, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, five hundred monks sitting in the hall at Jetavana argue over what the best thing in the world is. Some say the pleasure of ruling, some the pleasures of love, some the pleasure of eating rice and meat. The Buddha comes in, asks what they are talking about, and tells them that all of these belong to the round of suffering, and that the good things are the arising of a Buddha, the hearing of the Dhamma, and harmony in the Sangha. He speaks the verse, and the monks reach arahantship. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-08.htm">the full commentary story</a>.</p>
+    <h3>Zuccotti Park, 2011</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Occupy_Wall_Street">Occupy Wall Street</a> began in Zuccotti Park, which the occupiers called Liberty Square, on September 17, 2011. It was governed by a General Assembly that worked by modified consensus, with speakers queued in a &ldquo;stack.&rdquo; Because the city required permits for amplified sound, the occupiers used the human or people&rsquo;s microphone, the crowd repeating each phrase of a speaker so those farther back could hear. The park&rsquo;s drum circle became a sore point with residents, and in October, Community Board 1 voted to back the occupation while <a href="https://www.npr.org/sections/thetwo-way/2011/10/26/141719274/community-board-backs-occupy-protesters-asks-them-to-quiet-down">asking for drumming to be limited to two hours a day</a>. On October 28 fire marshals <a href="https://www.cbsnews.com/newyork/news/protesters-in-the-cold-dark-after-generators-removed-from-zuccotti-park/">removed six generators and the gasoline</a>, and the occupiers turned to bicycle-powered generators. The next day the <a href="https://en.wikipedia.org/wiki/2011_Halloween_nor%27easter">Halloween nor&rsquo;easter</a> dropped 2.9 inches of snow on Central Park, a record for October.</p>
+    <p>Shortly after midnight on November 15, police cleared the park and arrested about two hundred people. <a href="https://en.wikipedia.org/wiki/The_People%27s_Library">The People&rsquo;s Library</a>, which had grown from a single cardboard box to 5,554 catalogued books, was loaded into sanitation trucks. Mayor Bloomberg said the books could be retrieved from the sanitation garage on 57th Street; the librarians recovered twenty-six boxes, of which 802 books were usable. The kitchen crew and Nadège are invented. Psalm 133 is quoted from the American Standard Version (1901).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a company of bhikkhus from the Dhammapada commentary (verse 194). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-08.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Opus 5.5.
+  <div class="pager"><a href="three-ladders.html">&larr; Three Ladders</a><a href="index.html">All stories</a><a href="bean-bread.html">Bean Bread &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, pts = [], flakes = [], cx, cy, wave = -1, waitN = 120;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    pts = []; flakes = [];
+    cx = W * 0.5; cy = H * 0.86;
+    var n = Math.round(Math.max(70, Math.min(170, W / 7)));
+    for (var i = 0; i < n; i++) {
+      var r = Math.pow(Math.random(), 0.7) * Math.max(W * 0.55, 300);
+      var a = Math.random() * Math.PI * 2;
+      var x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * 0.22;
+      if (y > H - 4) continue;
+      pts.push({ x: x, y: y, r: r, glow: 0, tw: Math.random() * 6.28 });
+    }
+    var m = W > 700 ? 40 : 24;
+    for (var j = 0; j < m; j++) flakes.push({ x: Math.random() * W, y: Math.random() * H, v: 0.25 + Math.random() * 0.35, s: 0.8 + Math.random() * 1.4, ph: Math.random() * 6.28 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      if (wave < 0) { waitN--; if (waitN <= 0) wave = 0; }
+      else { wave += 1.6; if (wave > Math.max(W * 0.6, 340)) { wave = -1; waitN = 260 + Math.random() * 420; } }
+    }
+    for (var i = 0; i < pts.length; i++) {
+      var p = pts[i];
+      if (!reduce) {
+        var ringHit = false;
+        if (wave >= 0) for (var k = 0; k < 3; k++) { var w = wave - k * 70; if (w > 0 && Math.abs(p.r - w) < 8) ringHit = true; }
+        if (ringHit) p.glow = Math.min(1, p.glow + 0.25); else p.glow *= 0.975;
+        p.tw += 0.02;
+      }
+      var a = 0.1 + 0.03 * Math.sin(p.tw) + 0.35 * p.glow;
+      var R = 1.4 + 2.2 * p.glow;
+      var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, R * 4);
+      g.addColorStop(0, 'rgba(240,190,120,' + a + ')');
+      g.addColorStop(1, 'rgba(240,190,120,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, R * 4, 0, 6.283); ctx.fill();
+    }
+    ctx.fillStyle = 'rgba(230,232,238,0.22)';
+    for (var j = 0; j < flakes.length; j++) {
+      var f = flakes[j];
+      if (!reduce) { f.y += f.v; f.ph += 0.01; if (f.y > H + 4) { f.y = -4; f.x = Math.random() * W; } }
+      ctx.beginPath(); ctx.arc(f.x + Math.sin(f.ph) * 8, f.y, f.s, 0, 6.283); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

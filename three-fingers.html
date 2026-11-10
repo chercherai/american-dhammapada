@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Fingers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a dark kitchen under a tarped roof, dark theme; low in one corner stands a wide aluminum pot, and every few seconds one drop falls the height of the page into it, so that over a long while the pot fills to the rim and is emptied; datelined sections. */
+  --ground: #0f151c;
+  --ground-2: #18222d;
+  --paper: #e7e2d4;
+  --paper-dim: #9aa3a8;
+  --accent: #6fa8dc;
+  --glow: #d9b65a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, #17212c 0%, var(--ground) 65%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(231,226,212,.25); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(217,182,90,.16); }
+.epigraph { border-left: 1px solid rgba(111,168,220,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,34,45,.7); border: 1px solid rgba(231,226,212,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse p.en { color: var(--paper-dim); }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(231,226,212,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(231,226,212,.16); border-bottom: 1px solid rgba(231,226,212,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,34,45,.7); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 9.6 &middot; Biḷālapādaka</span></nav>
+<header>
+  <h1>Three Fingers</h1>
+  <div class="epigraph">Little drops of water,<br>Little grains of sand,<br>Make the mighty ocean<br>And the pleasant land.<br>&mdash; Julia A. Carney, &ldquo;Little Things&rdquo; (1845)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Comme on m&rsquo;a dit,</span> along Highway 90.</p>
+<section>
+  <h2>I. The Pot</h2>
+  <p class="dateline">Rougeau, Jefferson Davis Parish, Louisiana &middot; August 27 to September 2, 2020</p>
+  <p>Laura came ashore at Cameron at one in the morning on a Thursday, and by daylight the town of Rougeau had no roof that was whole. Rougeau was eleven hundred people on Highway 90 in the rice country east of Lake Charles, with a water tower, a Catholic church, and a rice dryer whose bins could be seen for six miles. The poles were down the length of the highway. The water went off that afternoon. It was ninety-four degrees, and the power company was talking about weeks.</p>
+  <p>Curtis Ledet drove a school bus for the parish and had been an usher at Sacred Heart for thirty years. He and his wife Loretta rode it out in the hall closet with her mother's rosary. When they came out there was sky over the back bedroom. He got a blue tarp on it by Friday, but a tarp will leak at a nail, and this one leaked over the kitchen, a drop about every four seconds. Loretta set her big aluminum gumbo pot under it. It did not look like anything. In the morning the pot was full to the rim, and they flushed the toilet with it and set it back.</p>
+  <p>On Sunday the trucks came. There were fourteen of them, pulling trailers with black iron pots on them the size of washtubs, and propane burners, and paddles like boat oars. The man in the first truck was Marcus Papillion of Opelousas, thirty-three years old, who until April had been a galley hand on a production platform a hundred miles out in the Gulf. Oil had gone below nothing that month and they laid off his whole hitch. He had gone home, set a telephone on a tripod in his mother's yard, and started cooking for it. He hardly talked in the videos. A person watching saw the pot, the roux going from the color of peanut butter to the color of a penny, and his forearms, and at the end he would look up and say what it was and who it was for. By August three hundred thousand people were watching him do that. When he said he was taking the pots to Lake Charles, forty of them got in their trucks and came along, from Lafayette and Houston and as far as Mobile. Nobody had sent for them. People in Rougeau said afterward that they seemed to come up out of the ground.</p>
+  <p>They set up in the lot beside the church hall and fed the town twice a day. They fed the linemen too, crews from Oklahoma and Indiana who had been sleeping in their trucks. Rougeau was their sixth town in a week. In the evenings, when the pots were scrubbed, Marcus sat on a tailgate and went live for ten minutes to give thanks. He read out the names of people who had sent money, every one, the five-dollar ones the same as the five-hundred.</p>
+  <p>On the Wednesday, Curtis was standing behind the truck when he did it. Marcus finished the names. Then he said something else, which was more than he usually said.</p>
+  <p><em>I been watching this page four months,</em> he said to the telephone. <em>I see four kinds of people on it. Some of y'all send, and don't share it with nobody. You going to have plenty, and you going to eat it by yourself. Some of y'all share and share, and never send a dollar. You going to have a big crowd around you someday and nothing in the pot for them. Some don't send and don't share. Y'all going to be eating off what's left on somebody else's plate. And some of y'all give, and then go get somebody else to give. Them ones get it both ways. They get the plenty, and the people to eat it with.</em> He looked up. <em>That's all. Red beans tomorrow.</em></p>
+  <p>Curtis stood there after the light on the telephone went off. Then he walked around the tailgate.</p>
+  <p><em>Mr. Papillion. Tomorrow you don't cook. Friday either. Friday y'all sit down and we feed you.</em></p>
+  <p>Marcus looked at him, and at the town behind him with the tarps on it.</p>
+  <p><em>How many of us you want?</em></p>
+  <p><em>All y'all. Every one that came.</em></p>
+  <p><em>That's forty-three.</em></p>
+  <p><em>I counted,</em> Curtis said.</p>
+</section>
+
+<section>
+  <h2>II. The Wagon</h2>
+  <p class="dateline">Rougeau &middot; Thursday, September 3</p>
+  <p>He started at seven, with his grandson's wagon. In the wagon he had a five-gallon bucket for dry goods, an ice chest, and a spiral notebook. He went to every door in Rougeau that still had one, and where there was no door he called into the yard.</p>
+  <p><em>Mama, Daddy,</em> he said at each place, the way an usher talks. <em>I asked the cooks to supper tomorrow, all of them. Give what you can spare. Rice, beans, whatever you got that'll go in a pot. We'll cook it all in one place, at the hall, and it'll be from everybody.</em></p>
+  <p>Nobody in that town had much that week, and most of it was thawing. They gave it. Mrs. Guillory gave him four pounds of smoked sausage out of a freezer that had been dead a week and packed in ice from the relief truck. He got onions and bell pepper from one house and a sack of rice with the top rolled down from the next. He got two pounds of red beans, half a bottle of oil, and a jar of cane syrup from Abbeville. A woman who had moved over from Iberia Parish gave him three jars of pepper paste that her Lao neighbors there had taught her to put up. A man with nothing in his house but a case of water gave the water. Curtis wrote each name in the notebook and what it was. By ten the wagon had been home twice to unload.</p>
+  <p>Trahan's Dryer and Feed stood on the highway at the east end of town. Vernon Trahan was sixty-seven. He had four million pounds of other men's rough rice in his bins, drying, and he had kept the fans turning on it since Thursday with a diesel generator the size of a van. Inside the store, milled rice in twenty-five-pound sacks was stacked to the rafters by the door. Behind the office was a room he called the hurricane room. He had begun stocking it the week after Rita in 2005, and he had told no one what was in it. There was enough in it to feed his family a year.</p>
+  <p>He was not a hard man in the usual way. He had carried half the farmers in the parish through one bad year or another. But he held it for a principle that a person should promise what he could deliver out of his own pocket and no more. He saw Curtis Ledet coming along the highway with a child's wagon and he knew what it was about. The whole town knew by then.</p>
+  <p><em>There's a man,</em> he said to his yard hand, <em>who invited forty-three people to supper and hasn't got forty-three plates. So now he goes door to door writing checks on everybody else's account. If he wanted to feed five, he ought to have asked five.</em></p>
+  <p>Curtis stopped in the door of the store and said his piece.</p>
+  <p><em>Bring your bucket here,</em> Vernon said.</p>
+  <p>He slit a sack with his pocketknife. He put in his thumb and two fingers, as a man takes snuff, and brought out what they would hold, and dropped it in the bucket. It was perhaps forty grains. He did the same from a sack of red beans. Then he took a coffee can off the counter and set it down inside the bucket, so it filled one side, and into the corner that was left he tipped a jug of cooking oil until a thread ran, and stopped it. He had a box of sugar cubes for the coffee. He dropped in three of them, one at a time.</p>
+  <p><em>There you go,</em> he said.</p>
+  <p><em>Thank you, Mr. Vernon,</em> Curtis said. He wrote it in the notebook. Then he took a clean handkerchief out of his back pocket and lifted Vernon's rice, beans and sugar out of the bucket into it. He tied the corners and put it in his shirt pocket by itself. The oil he poured off into the cap of his water bottle and carried in his hand.</p>
+  <p>Vernon watched him go down the highway that way, pulling the wagon with one hand and holding the bottle cap level in the other.</p>
+  <p><em>Now why did he put mine separate?</em> he said. Nobody answered him. The yard hand was a boy named Dustin, and Vernon turned to him. <em>Go on up to the hall tonight and see what he does with it.</em></p>
+  <p>By noon it was all over Rougeau, the thumb and the two fingers. They called him Trois-Doigts before the day was out, Three Fingers, and he carried the name for the rest of his life.</p>
+</section>
+
+<section>
+  <h2>III. The Spoon</h2>
+  <p class="dateline">The church hall &middot; that night</p>
+  <p>They cooked in the yard of the hall on the krewe's own burners, which Marcus lent and would not touch. He sat in a lawn chair with his hands on his knees, the first evening in three weeks that he had not held a paddle. Loretta Ledet had the jambalaya. There was a pot of red beans, a pot of white beans with the sausage, a rice dressing, a pot of plain rice, and a dishpan of bread pudding going into the hall oven, which ran on bottled gas.</p>
+  <p>Dustin stood by the fence and watched.</p>
+  <p>When the pots were all on, Curtis took the handkerchief out of his shirt pocket and untied it on the table. He counted the rice into six small heaps with the tip of a teaspoon. He went to each pot and put in its heap, six or seven grains, and into the two bean pots he put the red beans, a few to each. He had the oil in the bottle cap still. He let one drop of it fall from the spoon into every pot. The sugar cubes went into the bread pudding. At each pot he said the same thing, quietly, as he would have said a response at Mass.</p>
+  <p><em>May Mr. Vernon get it back full.</em></p>
+  <p>Loretta asked him what in the world he was doing.</p>
+  <p><em>He gave,</em> Curtis said. <em>If I dump his in with the rest, it's only in the one pot. I want him in every plate.</em></p>
+  <p>Dustin went back down the highway and told it exactly.</p>
+  <p>Vernon Trahan did not sleep. He sat in the office with the generator running outside and went over it. He did not believe the blessing. He believed he was being set up. Tomorrow the whole town would be in that yard, and the cooks with their telephones, and three hundred thousand people behind the telephones. The usher would stand up and thank everyone by name out of that notebook, as the cook did every night. He would come to the T's. <em>Vernon Trahan, who has rice to the rafters, gave what a man can pick up with three fingers.</em> Then every soul in the parish would know what he was. And they would start to wonder what else he had back there, with the stores empty from here to Lafayette.</p>
+  <p>Toward morning he opened the desk drawer and took out the .38 he kept for the night deposit. He looked at it for a while. <em>If he calls my name to shame me,</em> he said to himself, <em>I will shoot him where he stands.</em> He was horrified to hear himself think it, and he put the pistol in his waistband under his shirt all the same.</p>
+</section>
+
+<section>
+  <h2>IV. The Hall</h2>
+  <p class="dateline">Friday, September 4</p>
+  <p>They ate at five, when the yard was in shade. The krewe sat down at the long tables, forty-three of them, in masks pulled under their chins, looking as if they did not know what to do with their hands. The linemen sat down. The town stood and served them. Vernon Trahan stood at the back, by the fence, with his shirt out.</p>
+  <p>When everyone had a plate, Curtis got up on the hall steps with the notebook. Marcus Papillion had set his telephone on its tripod and turned it around to face the steps.</p>
+  <p><em>Mr. Papillion,</em> Curtis said. <em>You and your people been feeding us five days. Tonight this is from Rougeau. I went around and asked, and everybody I asked gave something. They gave what they could. Some of them gave by the sack and some gave by the pinch.</em> He did not open the notebook. <em>I'm not going to read no names. It's all in the pots together now, and I couldn't tell you whose is whose. May every one of them that gave get it back full. That's all. Y'all eat.</em></p>
+  <p>He came down the steps.</p>
+  <p>Vernon had his hand flat against his shirt. He stood a moment longer. He said afterward that he had come there ready to kill a man for something the man had never meant to do. He said he had understood, standing by that fence, that if he walked away from it without a word, he would deserve whatever fell on him and his bins.</p>
+  <p>He came up through the tables. People saw his face and made room. He stopped in front of Curtis Ledet and got down on both knees in the shell gravel, a heavy man of sixty-seven.</p>
+  <p><em>Curtis. Forgive me.</em></p>
+  <p><em>For what, Mr. Vernon? Get up.</em></p>
+  <p>Vernon did not get up. He told it from there, all of it, loud enough for the tables. He told about the three fingers and the coffee can in the bucket, and about sending the boy to spy. He told what he had sat up thinking. He reached under his shirt, and took out the .38, and laid it on the gravel between them.</p>
+  <p>Nobody moved. Then Marcus got out of his chair and came over. He looked at the pistol, and at the man kneeling, and at Curtis.</p>
+  <p><em>What's this about?</em></p>
+  <p>Curtis told him, from Thursday morning on. He told it plainly and did not make it worse.</p>
+  <p><em>That right, sir?</em> Marcus said.</p>
+  <p><em>That's right,</em> said Vernon. <em>Every bit.</em></p>
+</section>
+
+<section>
+  <h2>V. Little Things</h2>
+  <p class="dateline">The same evening</p>
+  <p>Marcus picked the pistol up by the barrel, broke it open, and shook the shells out into his hand. He gave the shells to Vernon and the pistol to a deputy who was eating at the second table.</p>
+  <p><em>Get up, Mr. Trahan,</em> he said. <em>You wrong about one thing still. You think what you gave was nothing.</em></p>
+  <p>He helped him up by the elbow.</p>
+  <p><em>It wasn't nothing. I ate it. It was in the jambalaya and it was in the beans.</em> He turned a little, so that he was speaking to the tables as well, and to the telephone on its tripod, though he seemed to have forgotten it. <em>Don't none of y'all look down on a little bit of good and say it won't ever amount to nothing, it won't ever come back around to me. My maw-maw used to tell us</em> petit à petit, l'oiseau fait son nid. <em>Little by little the bird builds her nest. Mr. Curtis told me they got a pot at his house under a leak in the roof. One drop. You wouldn't cross the room for it. In the morning they can't lift the pot. A person with sense fills up the same way, a pinch at a time. So don't call it a pinch.</em></p>
+  <p>That was all he said. He went back to his plate.</p>
+  <p>There was an old woman at the end of the first table, Miss Odile Citizen, ninety-one, who had been taught as a child in Lafayette by the Sisters of the Holy Family, before the war. She had not followed all of it. She had heard the part about the drop. She began to sing, in a high cracked voice, what the Sisters had made the first grade sing with their hands folded on the desks, and the tables went quiet for her.</p>
+  <div class="verse">
+    <p>Little drops of water,<br>Little grains of sand,<br>Make the mighty ocean<br>And the pleasant land.</p>
+    <p>Little deeds of kindness,<br>Little words of love,<br>Help to make earth happy<br>Like the heaven above.</p>
+    <p>— Julia A. Carney, "Little Things" (1845)</p>
+  </div>
+  <p>Vernon Trahan ate standing up, a full plate, and looked at each forkful before he put it in his mouth. Then he went and got his truck. He came back with the bed loaded. He had twelve sacks of rice and six of beans, four cases of oil, and the whole box of sugar. The krewe was leaving for DeQuincy in the morning, and he put it on the first trailer himself and would not be helped. Afterward he ran three hundred feet of cord from the dryer's generator to the hall, so that the freezer in the kitchen ran that night for the first time in nine days. The hurricane room he opened on Monday. People who were let into it said he stood in the door calling out what was on each shelf, like a man reading a will.</p>
+  <p>They went on calling him Three Fingers. He answered to it, and after a year or so he signed it on the dryer's Christmas card.</p>
+  <p>It rained that Friday night, late, a plain rain off the Gulf with no wind in it. Curtis woke and heard the tarp. He got up in the dark and went to the kitchen. Loretta's pot was on the stove where she had left it after washing. He carried it over and set it down under the nail, and listened to the first drop strike the bottom.</p>
+</section>
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">Let no man think lightly of good, saying in his heart, It will not come nigh unto me. Even by the falling of water-drops a water-pot is filled; the wise man becomes full of good, even if he gather it little by little.<cite>Dhammapada 122, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha thanks the people of Sāvatthī for a meal by describing four kinds of people: the one who gives but does not urge others, who will have wealth without a following; the one who urges but does not give, who will have a following without wealth; the one who does neither, who will live on leftovers; and the one who does both and has both. A layman who hears this invites the Buddha and all his monks for the next day and goes through the town asking each household for rice and whatever else it can spare, to be cooked in one place. A rich merchant, angry that the man has invited more than he can feed himself, gives him rice and beans pinched up in three fingers and dribbles out oil and sugar; from that day he is called Biḷālapādaka, Cat's Foot, after a tiny measure. The layman keeps the merchant's gift apart, and the merchant sends a servant to watch, who sees him put a few grains and drops into every pot with a blessing. Sure that he will be shamed by name, the merchant comes to the meal with a knife hidden in his clothes. The layman blesses all the givers alike. The merchant falls at his feet and confesses, and the Buddha says that no good deed should be called a trifle. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-06.htm">the full commentary story</a>.</p>
+    <h3>Southwest Louisiana, 2020</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Hurricane_Laura">Hurricane Laura</a> made landfall at Cameron, Louisiana, about one in the morning on August 27, 2020, as a Category 4 storm, tied for the strongest landfall in the state's record. It wrecked Lake Charles and the rice parishes to the east, brought down the transmission lines that fed the region, and left some two hundred thousand people without drinking water; power in places was out for weeks, and six weeks later Hurricane Delta came ashore twelve miles away. In <a href="https://en.wikipedia.org/wiki/Jefferson_Davis_Parish,_Louisiana">Jefferson Davis Parish</a>, Entergy described crews <a href="https://www.entergy.com/?p=8062">cutting trees off the lines and setting new poles along Highway 101</a>. Most of the first rice crop was already cut, and growers <a href="https://www.ricefarming.com/departments/louisiana-growers-continue-to-assess-hurricane-laura-damage/">kept their bins and dryers going on generators</a>. The same country had been hit by <a href="https://en.wikipedia.org/wiki/Hurricane_Rita">Hurricane Rita</a> in 2005. Volunteer cooks with trailers of cast-iron pots, many of them organized online, fed storm towns across the region that fall.</p>
+    <p>It was also the first year of the pandemic. On April 20, 2020, the price of American crude <a href="https://en.wikipedia.org/wiki/2020_Russia%E2%80%93Saudi_Arabia_oil_price_war">fell below zero</a> for the first time, and offshore crews along the Gulf were laid off by the hitch. The prairie parishes of southwest Louisiana are Cajun and <a href="https://en.wikipedia.org/wiki/Louisiana_Creole_people">Creole</a>, largely Catholic, and many older people still have French; <em>petit à petit, l'oiseau fait son nid</em> is an old French proverb. The <a href="https://en.wikipedia.org/wiki/Sisters_of_the_Holy_Family_(Louisiana)">Sisters of the Holy Family</a>, a congregation of Black Catholic women founded in New Orleans in 1842, taught in Lafayette from 1913. <a href="https://en.wikipedia.org/wiki/Little_Things_(poem)">"Little Things"</a> was written by Julia A. Carney in Boston in 1845 and sung by schoolchildren for a century afterward; its last stanza was added in later printings. Rougeau and everyone in it are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the rich man Biḷālapādaka from the Dhammapada commentary (verse 122). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-06.htm">The original</a>. Verse from "Little Things" by Julia A. Carney (1845). Written by Claude Fable 5.2.
+  <div class="pager"><a href="going-home-money.html">&larr; Going-Home Money</a><a href="index.html">All stories</a><a href="the-mantle.html">The Mantle &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, level = 0.08, drop = -1, ring = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var pw = Math.min(150, W * 0.3), ph = pw * 0.52;
+    var px = W > 900 ? W * 0.5 + 330 : W - pw - 18, py = H - ph - 22;
+    if (px + pw > W - 8) px = W - pw - 8;
+    var lv = reduce ? 0.55 : level, wy = py + ph - 4 - (ph - 10) * lv;
+    /* water */
+    ctx.fillStyle = 'rgba(96,150,205,0.16)';
+    ctx.fillRect(px + 3, wy, pw - 6, py + ph - 3 - wy);
+    ctx.strokeStyle = 'rgba(150,195,235,' + (0.22 + 0.25 * ring) + ')'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.ellipse(px + pw / 2, wy, (pw / 2 - 5) * (0.15 + 0.85 * (1 - ring)), 2.2, 0, 0, 6.283); ctx.stroke();
+    /* the pot */
+    ctx.strokeStyle = 'rgba(205,205,196,0.3)'; ctx.lineWidth = 1.6; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + 2, py + ph - 8); ctx.quadraticCurveTo(px + 3, py + ph, px + 12, py + ph);
+    ctx.lineTo(px + pw - 12, py + ph); ctx.quadraticCurveTo(px + pw - 3, py + ph, px + pw - 2, py + ph - 8); ctx.lineTo(px + pw, py); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(px - 2, py + 12); ctx.lineTo(px - 13, py + 12); ctx.moveTo(px + pw + 2, py + 12); ctx.lineTo(px + pw + 13, py + 12); ctx.stroke();
+    /* the drop */
+    if (!reduce) {
+      if (drop < 0 && t % 250 === 0) drop = 0;
+      if (drop >= 0) {
+        var dy = drop * drop * 0.09;
+        if (dy >= wy) { drop = -1; ring = 1; level += 0.012; if (level > 0.97) level = 0.08; }
+        else {
+          ctx.fillStyle = 'rgba(150,195,235,0.5)';
+          ctx.beginPath(); ctx.ellipse(px + pw / 2, dy, 1.6, 3.2, 0, 0, 6.283); ctx.fill(); drop++;
+        }
+      }
+      if (ring > 0) ring = Math.max(0, ring - 0.012);
+      t++; requestAnimationFrame(draw);
+    }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

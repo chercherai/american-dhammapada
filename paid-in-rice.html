@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paid in Rice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column over an indigo pre-dawn street; a lantern's call ripples outward through the dark. */
+  --ground: #0e1225;
+  --ground-2: #171c35;
+  --paper: #ebe5d6;
+  --paper-dim: #a19fae;
+  --accent: #d6ae5a;
+  --glow: #f2d48a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #232a4a 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,229,214,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(214,174,90,.22); }
+.epigraph { border-left: 1px solid rgba(214,174,90,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(23,28,53,.75); border: 1px solid rgba(235,229,214,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,229,214,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(235,229,214,.12); border-bottom: 1px solid rgba(235,229,214,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(23,28,53,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 2.2 &middot; Kumbhaghosaka</span></nav>
+<header>
+  <h1>Paid in Rice</h1>
+  <div class="epigraph">The reward of humility is the fear of the LORD, even riches, and honour, and life.<br>&mdash; Proverbs 22:4</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Assim o ouvi,</span> along the Bay in Charles Town.</p>
+
+<section>
+  <h2>I. The Wall</h2>
+  <p class="dateline">Charles Town, South Carolina &middot; January 1760</p>
+  <p>Moses Valverde bought deerskins from the packhorse men who came down out of the Cherokee hills, and indigo from the planters on the Santee, and he sold both to London. In twenty years of it he had become one of the richest Jews between New York and the Spanish islands. He had a house on Elliott Street with a brick kitchen in the yard behind it and a fig tree against the back wall, and he kept his money in gold, in the ground, because his own father had left Lisbon in a single night with nothing but what was sewn into the lining of his coat.</p>
+  <p>The smallpox came down to the town that winter with the soldiers coming home from the Cherokee war. By the middle of January nobody on Elliott Street was counting funerals anymore, and the carts went by at night.</p>
+  <p>In the Valverde house it went the way the old women always said it went. First the ones who carry the water, then the ones who give the orders. Jemmy, who was eleven and fetched water from the pump on the corner, took sick first, and his mother Phibbah nursed him in the loft over the kitchen and buried him on a Monday, and on the Thursday she was lying where he had lain. Then the mistress. Then the master.</p>
+  <p>David was fourteen. His father would not let him past the door of the bedroom, so he stood in the doorway, and his father and mother looked at him from the big bed with their faces already changed, and his mother wept, and his father talked. He talked the way he talked to captains, quickly, with the important part last.</p>
+  <p><em>Listen to me. With this sickness the ones who live are the ones who go. Don&rsquo;t stay for us. Go up the country and keep going and don&rsquo;t come back until it&rsquo;s finished and finished twice. Under the kitchen hearth, the third brick from the left side of the fire-back, two feet down, there&rsquo;s an iron pot. Everything is in it. When you come back, you dig it up and you live on it. Say it back to me.</em></p>
+  <p>David said it back, the third brick, two feet down, crying so hard he could hardly say it.</p>
+  <p>There was no going out the front. Nobody in Charles Town that month would let a boy from a sick house pass in the street. So Scipio, who drove Moses Valverde&rsquo;s dray and slept over the stable, took the iron bar from the dray and pried four courses of soft old brick out of the back wall behind the fig tree, and made a hole there, and put his big hand flat on the boy&rsquo;s back and pushed him through it into the alley, and handed his coat after him.</p>
+  <p><em>Go on,</em> Scipio said. <em>Don&rsquo;t look at the house.</em></p>
+  <p>He went out over the Neck in the dark, past the last farms, and up the Broad Path into the pines. Behind him the town lay along its two rivers with a few lights in it and the steeple of St. Philip&rsquo;s white against the sky, and he did not look at it.</p>
+  <p>He was gone twelve years. He hired out to Germans on the Congaree, who fed him well and worked him to the bone and taught him to swear in their language. He packed skins for a trader over the mountains to the Cherokee towns after the peace. He hunted. He slept on the ground more nights than not. He lost count of the Sabbaths, but he never lost count of the years, and he never once said the words out loud again, though he said them in his head nearly every night before he slept. The third brick. Two feet down.</p>
+</section>
+
+<section>
+  <h2>II. The Woodsman</h2>
+  <p class="dateline">Charles Town &middot; the spring of 1772</p>
+  <p>He came back down the Broad Path in a hunting shirt and leggings, with his hair to his shoulders and a beard that had never seen a razor, and nobody in Charles Town knew him. The town had grown. There was a new Exchange at the foot of Broad Street with a cupola on top of it, and ships so thick at the wharves that the masts looked like a burnt wood.</p>
+  <p>The house on Elliott Street was gone. A fire had taken that end of the street some years back, and since there was no heir anyone could find, the lot had gone into Chancery, and the lawyers had let it sit. Weeds stood in the yard as high as his chest. The fig tree had grown wild over the hole in the back wall, which nobody had ever closed. The brick kitchen stood with no roof, and its chimney stood above it, black inside.</p>
+  <p>He went in by the old hole that night with a borrowed spade. The third brick from the left. He lifted the hearth bricks one by one and laid them in a row in the order he took them up, and he dug, and at two feet the spade rang on iron. The pot was just where they had left it. Inside, wrapped in oilcloth that was still sound, the gold lay as if somebody had put it there that afternoon: Portuguese joes and half-joes, Spanish doubloons, stacks of them, and a paper in his father&rsquo;s hand on the inside of the lid with the sum written on it in Portuguese.</p>
+  <p>He sat back on his heels in the dark and thought.</p>
+  <p>Nobody here knew him. If a man in a hunting shirt walked up to the Exchange with a bag of gold, nobody would believe a word he said. They would say he had robbed a ship or dug up a pirate&rsquo;s hoard. They would have him in the gaol by suppertime, and some lawyer from Chancery would have the pot, and the lot, and his name, and that would be the end of Moses Valverde&rsquo;s son. He had seen what happened in the backcountry to men who could not prove what was theirs.</p>
+  <p>So he put the lid back on the pot and filled the hole and laid the bricks back in their order, and he went looking for work.</p>
+  <p>The congregation met in those years in the long room of a house, as it always had, with the Ark against the east wall and the reading desk in the middle and benches on three sides. The shamash was old Jacob Nathan, who had come from Hamburg and had been sweeping that floor since before David was born, and whose knees had given out on him the winter before. David stood in the yard with his hat in his hands and asked whether anybody had need of a man.</p>
+  <p>Old Nathan looked at the buckskin and the beard. <em>Are you a Jew?</em></p>
+  <p><em>Yes.</em></p>
+  <p><em>Can you get up in the dark?</em></p>
+  <p><em>I&rsquo;ve done nothing else for twelve years.</em></p>
+  <p>So that was the work. Before light every morning he was to go round to the houses and call the men to make the minyan, ten men for morning prayers, and they would not come unless they were called. Then he was to fetch water for washing, trim the candles, sweep, carry the parnas&rsquo;s messages, and do whatever else old Nathan&rsquo;s knees would not let him do. For this the congregation&rsquo;s charity paid him a peck of rice a week and two candles, and gave him the room over the woodshed at the back of the yard, which had a bed in it and a door with no lock.</p>
+  <p><em>Very well,</em> said David.</p>
+  <p>He did it every morning. He went down King Street and along Broad and round by Tradd and Church in the dark, with a lantern, and stood under the windows, and called up to them. He called the way the old shamash had taught him, which was the way it had always been done. <em>Up, gentlemen. Up, it&rsquo;s nearly light. In a quarter hour you&rsquo;ll be able to tell the blue from the white.</em> Shutters opened. Men cursed him in Portuguese and English and came down buttoning their coats. By the time the bells of St. Michael&rsquo;s rang the hour he would have his ten.</p>
+  <p>They called him the woodsman, or <em>o montero</em>, the hunter, and that was all the name they needed for him. He told them his name was David, and there were a great many Davids.</p>
+</section>
+
+<section>
+  <h2>III. The Ear</h2>
+  <p class="dateline">Tradd Street</p>
+  <p>Mordecai Lobo had been parnas of the congregation more than once. He was past seventy, and his eyes had gone milky, so that he could tell light from dark and not much else. But he had been a merchant for fifty years, and a merchant learns to listen. He knew every man in Charles Town by his voice. He knew them by their coughs, by the way they set down a glass. Men said you could not lie to Mordecai Lobo across a table, because he would hear it, and men who had tried it said the same.</p>
+  <p>He lay awake before dawn, as old men do. On the third morning that the new man came calling up Tradd Street, he lifted his head off the pillow.</p>
+  <p><em>Esther. Who is that?</em></p>
+  <p>Esther Carvajal kept his house. She was a widow from Jamaica with a daughter, and she had been in that house eight years, and there was nothing that happened in it that she did not know about before it happened. She was at the window already, building up the fire.</p>
+  <p><em>The shamash&rsquo;s new man. The one from the woods.</em></p>
+  <p><em>That,</em> said Mordecai Lobo, <em>is the voice of a rich man.</em></p>
+  <p>Esther said nothing. But she thought: it doesn&rsquo;t matter what he says, a thing like that ought to be looked into. And when the old man was dressed and gone down, she sent the boy who swept the counting-house round to the back of the yard to have a look.</p>
+  <p>The boy came back and said: <em>He&rsquo;s nobody. He has one shirt. He sleeps over the woodshed and the door doesn&rsquo;t lock. They pay him in rice.</em></p>
+  <p>She told the old man. He said nothing. But the next morning, when the call came up the street, he said it again, the same words, <em>That is the voice of a rich man,</em> and she sent the boy again, and the boy said again that he was nobody. And the third morning the same.</p>
+  <p>Esther Carvajal stood at the window that third morning with the poker in her hand and thought it through. The old man has heard the report three times and he doesn&rsquo;t believe it. He has never been wrong about a voice that I know of. So there&rsquo;s a reason, and somebody ought to find it out, and it might as well be me.</p>
+  <p><em>Senhor Lobo,</em> she said. <em>Give me twenty pounds, currency, and let me have Rebecca for a month, and I&rsquo;ll bring that man&rsquo;s money into this house.</em></p>
+  <p>He laughed, which he did not often do. Then he had the twenty pounds counted out to her.</p>
+</section>
+
+<section>
+  <h2>IV. The Rope Bed</h2>
+  <p class="dateline">The yard behind the synagogue house</p>
+  <p>She put Rebecca into an old calico gown with a torn hem and put on another herself, and they went out of the back of the Lobo house with one bundle between them like two women on the road. At the poor rooms behind the synagogue house she knocked and said they were going on to Savannah and wanted a place to lie down for a day or two.</p>
+  <p>Mrs. Nathan said there were nine of them in two rooms and it was out of the question. <em>But the woodsman is all alone over the woodshed. Ask him.</em></p>
+  <p>David said no. She asked again, and he said no again. She stood in his doorway and asked a third time and a fourth, and finally said, <em>One night only, master, just this one night, and we&rsquo;re gone at first light,</em> and set her bundle down inside the door and would not pick it up again.</p>
+  <p>In the morning she was still there. When he came back from calling the minyan she said, <em>Master, before you go to your work, give me what you would spend on your dinner, and I&rsquo;ll cook it for you.</em></p>
+  <p><em>Never mind that. I cook for myself.</em></p>
+  <p>She asked him again, and again, and in the end he gave her his rice and the few coppers he had. She went to the market with them and with some of the twenty pounds besides, and when he came in that evening from carrying water she put in front of him a supper such as he had not eaten since he was fourteen years old. Fish fried in oil and laid in vinegar with onions, the way they made it in Lisbon and London and in Mordecai Lobo&rsquo;s kitchen. Rice cooked in broth with saffron until every grain stood apart. A little pie of chicken and almonds. Sweet oranges.</p>
+  <p>He ate it all. He sat back against the wall with his eyes half closed, and his hands lay open on his knees.</p>
+  <p><em>Master,</em> said Esther, <em>we&rsquo;re tired. We&rsquo;ll stay a day or two more.</em></p>
+  <p><em>Very well,</em> he said.</p>
+  <p>The next night she cooked for him again, and the night after that, and each time when he was full and slow she said, <em>a few days more,</em> and he said, <em>very well,</em> and so she was living there.</p>
+  <p>The bed was a rope bed. The ropes ran through holes in the frame, back and forth and across, and the straw tick lay on them. One afternoon while he was out she took a kitchen knife and got down on the floor and cut the cords underneath in several places, close to the frame, where they would not show. When he lay down that night the tick sank in the middle like a hammock.</p>
+  <p><em>What&rsquo;s happened to this bed?</em></p>
+  <p><em>Master, I can&rsquo;t keep the boys from next door from coming in and jumping on it.</em></p>
+  <p><em>Woman, this is all on account of you. Before you came I shut the door and went where I liked.</em></p>
+  <p><em>What can I do, my friend? I can&rsquo;t stop them.</em></p>
+  <p>Three days she did it, and three nights he lay in the sag and cursed her, and she said the same thing every time. On the fourth day she cut every cord but two. That night when he lay down the whole tick went through to the floor with a crack, and he went with it, folded up in the frame with his knees against his chin.</p>
+  <p>He climbed out and stood in the dark. <em>What do I do now? Where am I supposed to sleep?</em></p>
+  <p><em>Oh, what can I do? Those boys. Well, don&rsquo;t fret, let me think where you can go.</em> And then, as if it had just come to her: <em>Rebecca, my heart, move over and make room for your brother.</em></p>
+  <p>Rebecca was eighteen. She lay on the pallet by the wall with her face to the wall and did not move, and her mother said it again, and then Rebecca moved over, and said without turning, <em>Master, there&rsquo;s room here.</em> And Esther said, <em>Go on, lie down by your sister.</em></p>
+  <p>Before light Rebecca was crying. She cried without making noise, the way you learn to cry in a house that is not your own. Her mother sat up in the dark.</p>
+  <p><em>What is it?</em></p>
+  <p>Rebecca told her.</p>
+  <p><em>Well,</em> Esther said. <em>What&rsquo;s done is done. You ought to have a husband, and he ought to have a wife.</em></p>
+  <p>By noon she had two old men from the poor rooms in to witness it, and David said the words to Rebecca over a copper penny with his face burning, and that was a marriage, as far as the poor rooms were concerned. He did not look at Esther. He could not look at Rebecca. He went and called the minyan the next morning as if nothing had happened, because he did not know what else to do.</p>
+  <p>It was Rebecca who spoke first, a week later, in the dark, in a whisper so her mother would not hear.</p>
+  <p><em>What&rsquo;s your name? Your other name.</em></p>
+  <p>He lay a long time without answering. Then he told her. He told her about the hole in the wall and the twelve years, and he did not tell her about the pot. She did not say anything. In the morning he waited for Esther to know it, and she did not know it, and the next morning she did not know it either. That was how he found out what kind of wife he had.</p>
+</section>
+
+<section>
+  <h2>V. The Feasts</h2>
+  <p class="dateline">Purim and Passover, 1772</p>
+  <p>A few days later Esther sent a note round to Tradd Street. Let the parnas and the elders give out from the reading desk that this year every householder of the congregation is to keep Purim properly, to send portions to his neighbors and give to the poor, and that any householder who does not will pay a fine of forty shillings and have his name read out.</p>
+  <p>The old man had it given out. Congregations had their rules in those days, and their fines, and nobody thought this one strange except that it was strict.</p>
+  <p><em>My son,</em> Esther said to David, <em>the elders say every householder has to keep Purim this year or pay. What shall we do?</em></p>
+  <p><em>Mother, I live on a peck of rice. What do you want me to do?</em></p>
+  <p><em>My son, a man with a door of his own can borrow. The elders have to be obeyed, but a debt gets paid somehow or other. Go and find a coin or two somewhere.</em></p>
+  <p>He was angry enough to break something. He went out that night in a black temper by the old hole in the wall behind the fig tree, and lifted the third brick and the others in their order, and dug, and took out one coin, a single half-joe, and filled it all in again and came back with the dirt still under his nails and put it in her hand. Esther sent the half-joe round to Tradd Street in a twist of paper, and paid for the Purim portions out of the twenty pounds.</p>
+  <p>Before Passover she sent another note. The elders gave out that every householder must buy his unleavened bread and his wine from the congregation&rsquo;s baker, at the congregation&rsquo;s price, on pain of the same. And again Esther said what she had said before, word for word, and again David went out in the night to the ruined kitchen, and this time took three, and she sent the three round to Tradd Street.</p>
+  <p>Mordecai Lobo sat at his table with the four coins in front of him. He could not see them. He picked them up one at a time and turned them in his fingers, and his thumb found on the edge of each of them a small cut, a little nick from a knife, the same on every one.</p>
+  <p>After a few more days Esther sent a last note. <em>Now send for him.</em></p>
+</section>
+
+<section>
+  <h2>VI. The Drays</h2>
+  <p class="dateline">The house on Tradd Street</p>
+  <p>Two porters and the beadle came for him while he was sweeping. <em>Which of you is the woodsman? The parnas wants you.</em></p>
+  <p>David was frightened. He said the parnas did not know him and he had done nothing. He said a good deal more. The porters took him by the arms, and when he would not walk they took him by the arms and legs and carried him out of the yard like a sack of meal, with the broom still in his hand until he dropped it.</p>
+  <p>Esther came flying down the stairs. <em>You dogs. You&rsquo;re not fit to put your hands on my son-in-law.</em> And to David: <em>Go along, my son. Don&rsquo;t be afraid. When I see the parnas I&rsquo;ll see to it that these two never carry another load for this congregation as long as they live.</em> Then she took Rebecca by the hand and ran ahead of them all the way to Tradd Street, and went in by the back door, and took off the torn calico and put on her own good black silk and her garnets, and put Rebecca into the blue silk the old man had given her at New Year, and the two of them stood together at the door of the front room.</p>
+  <p>The porters brought David in and set him on his feet. He bowed to the old man in the armchair and stood in front of him.</p>
+  <p><em>You are the woodsman?</em></p>
+  <p><em>Yes, sir.</em></p>
+  <p><em>Why do you hide your money and go about pretending?</em></p>
+  <p><em>What money, sir? I work for a peck of rice.</em></p>
+  <p><em>Don&rsquo;t do that. Why do you lie to us?</em></p>
+  <p><em>I&rsquo;m not lying to you, sir. I have nothing.</em></p>
+  <p>Mordecai Lobo held out his hand, and on his palm were the four gold pieces. <em>Then whose are these?</em></p>
+  <p>David knew them. He thought: I&rsquo;m finished. How did they get here? He looked around the room, and saw the two women in the doorway in their silks with their hands folded, and knew them too, and thought: so that&rsquo;s it. They were his from the beginning. The whole thing was laid like a trap for a fox.</p>
+  <p>The old man ran his thumb along the edge of the top coin. <em>Your father put his knife to every coin he owned,</em> he said, <em>so he&rsquo;d know them if they ever came home. I sat across a table from Moses Valverde for thirty years. When I heard you under my window I thought for a moment he&rsquo;d come back from the dead to call the minyan. You have his voice. Speak, son. Why have you done this?</em></p>
+  <p><em>I had nobody to stand for me, sir.</em></p>
+  <p><em>You have nobody? You have me.</em></p>
+  <p><em>Then I&rsquo;d be glad of it, sir, if you&rsquo;d stand for me.</em></p>
+  <p><em>I will. How much is it?</em></p>
+  <p>David told him the sum his father had written on the inside of the lid.</p>
+  <p><em>What shall I send for it?</em></p>
+  <p><em>Drays, sir.</em></p>
+  <p>The old man sent for drays, and they went down to Elliott Street in a line and backed up to the hole in the wall behind the fig tree, and the porters, the same two, dug out the kitchen hearth under the eyes of the beadle and half the congregation, and found there was not one pot but three, one under the other, as Moses Valverde had never told anybody. They loaded them on the drays in their crust of earth and drove them up to Tradd Street and set them down in the courtyard of the Lobo house, and the beadle opened them, and the gold lay in the April sun in front of everyone.</p>
+  <p>The driver of the last dray was a gray man in a leather apron, slow now in the shoulders. He had been hired out by the year, ever since the fire, by whatever lawyer had charge of the estate of Moses Valverde, deceased. He stood by his horse&rsquo;s head while they unloaded, and when it was done David went over to him.</p>
+  <p><em>Scipio.</em></p>
+  <p><em>Mister David.</em></p>
+  <p><em>You knew me.</em></p>
+  <p><em>First morning you came calling down Church Street. You got your daddy&rsquo;s voice.</em></p>
+  <p><em>Why didn&rsquo;t you say anything?</em></p>
+  <p>Scipio looked at him a while. <em>Wasn&rsquo;t mine to say.</em></p>
+  <p>David stood there with his hands open. Every man in that courtyard knew without being told that the gray man holding the horse was part of what had just come out of the ground, and belonged to the woodsman now, the same as the gold. Neither of them said it. David asked him what he wanted. Scipio told him: his own paper, and his wife&rsquo;s, who belonged to a widow on Queen Street, and a price for her that he named to the shilling, because he had known it for years. David said yes to all of it, there in the courtyard, in front of the beadle, and had the beadle write it down.</p>
+  <p>Then Mordecai Lobo had the congregation called together in his courtyard, and stood up among the pots with his hand on the beadle&rsquo;s shoulder.</p>
+  <p><em>Is there anybody in this congregation,</em> he said, <em>who has as much as this?</em></p>
+  <p><em>Nobody, Senhor.</em></p>
+  <p><em>Then what should be done for him?</em></p>
+  <p><em>Honor him.</em></p>
+  <p>So they honored him. They gave him the seat on the east bench beside the parnas&rsquo;s own and put his name among the elders. And in the week after Shavuot, Mordecai Lobo stood under the wedding canopy in the long room as father of the bride and gave Rebecca Carvajal to David Valverde properly, with a contract written out fair by the hazzan and a dowry from his own purse, as if she were his own daughter, and the whole congregation came, and Esther in her garnets wept louder than anybody.</p>
+</section>
+
+<section>
+  <h2>VII. The Hakham</h2>
+  <p class="dateline">Tradd Street &middot; June</p>
+  <p>That spring there was a guest lodging in the Lobo house, a rabbi from Hebron in the Land of Israel. His name was Hakham Eliezer Gabay, and he had been two years on the road, through Leghorn and Amsterdam and London and the islands, collecting for the poor of his city, the way such men had always come round to the scattered congregations, with a letter of credentials and a box. He was a small man with a gray beard who ate very little and said less. He had come up from Jamaica in the spring and would go on to Savannah when the weather turned.</p>
+  <p>The old man took David to him by the hand, the way you take a boy.</p>
+  <p><em>Hakham, look at this one. I never saw such a man. He has a fortune in the ground and it never once went to his head. He put on rags and worked for rice in the yard and swept the floor and called us to prayer every morning in the dark, and nobody knew. I found him out by his voice. I made him own to it, I had it carried up to my house, I put him on the east bench, I gave him a wife. I never in my life saw anyone so wise.</em></p>
+  <p>The hakham looked at David for some time.</p>
+  <p><em>Who called the minyan this morning?</em></p>
+  <p><em>I did, Hakham.</em></p>
+  <p><em>And tomorrow?</em></p>
+  <p>David had not thought about it. He thought about it now. <em>I will.</em></p>
+  <p>The hakham nodded, as if that were the whole of it. He said that a man who lives like this lives rightly, rich or poor, and that a man who has nothing and works for his bread lives rightly too. The ones who take what isn&rsquo;t theirs, he said, find no peace in it in this world, and none after. Then he said to Mordecai Lobo, quietly, a verse of Solomon&rsquo;s, the one the old men say when a boy has done his work well.</p>
+  <div class="verse">
+    <p>Seest thou a man diligent in his business? he shall stand before kings; he shall not stand before mean men.</p>
+    <p>&mdash; Proverbs 22:29</p>
+  </div>
+  <p>David heard it, and something in him that had been braced since he was fourteen years old let go. He had stood in front of the old man in the armchair a week before with his heart going like a rabbit&rsquo;s and called it ruin. Standing before him now with the same heart he could see it had been nothing of the kind. The gold had never been the thing. It had been in the ground twelve years and nothing in him had been the worse for it. What he had was the call in the dark, and the ten men coming down the stairs buttoning their coats, and the doing of a thing because it was his to do. He saw it plainly, all at once, and he would never be able to unsee it, and he did not want to.</p>
+  <p>The hakham went on to Savannah in July with a good deal more in his box for Hebron than he had come with, and no one in the congregation ever learned exactly how much of it had come from whom.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Old Jacob Nathan&rsquo;s knees did not improve, and the elders said the congregation would hire a new man now, of course, and David Valverde would hear nothing of it.</p>
+  <p>So for years after that, the men of the congregation woke before light to the same voice under their windows, calling up to them that it was nearly time, that in a quarter of an hour they would be able to tell the blue from the white. Some mornings his wife walked beside him and carried the lantern. On Tradd Street an old man who could no longer see lay awake for it, and when it came he turned over on his pillow, satisfied, and said the same thing every time to the dark room, and nobody ever argued with him.</p>
+  <p>On Fridays the charity still sent round a peck of rice to the room over the woodshed. David never turned it away. He carried it across the yard to Mrs. Nathan, who had nine in two rooms, and set it down inside her door.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">If an earnest person has roused himself, if he is not forgetful, if his deeds are pure, if he acts with consideration, if he restrains himself, and lives according to law,--then his glory will increase.<cite>Dhammapada 24, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, plague strikes the house of the richest man in R&#257;jagaha. The dying parents tell their son to break through the wall and flee, and tell him where their fortune is buried. He comes back twelve years later, unrecognized, finds the treasure untouched, and leaves it in the ground, afraid he will be taken for a thief. He hires himself out to the servants to wake the workers every morning. King Bimbis&#257;ra, who can tell anyone by their voice, hears him and says it is the voice of a rich man. A palace servant woman takes her daughter and moves into his hut, wins him with good cooking, cuts the cords of his bed until it collapses, and marries him to the girl. Then she has the king order compulsory holidays, so the young man has to dig up coins, which she sends to the king. Dragged before the king, he admits his wealth; the king has it carted to the palace, honors him, and gives him his daughter. The Buddha says that such a man's glory increases. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-02.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Bimbisara">King Bimbis&#257;ra</a>.</p>
+    <h3>Charles Town, 1760&ndash;1772</h3>
+    <p>In January 1760 smallpox swept Charles Town, brought in, it is believed, by soldiers returning from the campaign against the Cherokee in the northwest of the province. <a href="https://schistory.org/january-1760-a-smallpox-epidemic-sweeps-the-lowcountry/">According to the South Carolina Historical Society</a>, more than half the town's residents were infected and some nine hundred died, while the physician Alexander Garden inoculated more than two thousand people in two weeks. The <a href="https://en.wikipedia.org/wiki/Anglo-Cherokee_War">Anglo-Cherokee War</a> ended with the Treaty of Charlestown in December 1761, and the deerskin trade that had made merchants like the fictional Moses Valverde rich resumed. The town's new <a href="https://en.wikipedia.org/wiki/Exchange_and_Provost">Exchange</a> was built between 1767 and 1771.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Kahal_Kadosh_Beth_Elohim">Kahal Kadosh Beth Elohim</a> was founded in 1749 as an Orthodox Sephardic congregation, mostly by Jews who had come from London. <a href="https://www.scencyclopedia.org/sce/entries/beth-elohim/">Its members worshipped in houses converted to synagogues</a> until they dedicated a building on Hasell Street in 1794, and in 1764 they acquired the burial ground on Coming Street. Congregations like it across the Atlantic world were visited by <a href="https://en.wikipedia.org/wiki/Meshulach">emissaries from the Land of Israel</a>, rabbis who traveled for years collecting for the poor of Jerusalem, Hebron, Safed and Tiberias, and who preached and taught wherever they stopped. One of them, Raphael Haim Isaac Carigal of Hebron, was sent to the West Indies and the North American colonies in the early 1770s. Hakham Gabay, the parnas Mordecai Lobo and the Valverde family are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Kumbhaghosaka from the Dhammapada commentary (verse 24). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-02.htm">The original</a>. Scripture from the Jewish Publication Society Tanakh (1917). Written by Claude Opus 5.5.
+  <div class="pager"><a href="castile-roses.html">&larr; Castile Roses</a><a href="index.html">All stories</a><a href="little-wayland.html">Little Wayland &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A lantern moves slowly along the dark street; its call spreads outward in faint rings.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, rings = [], t = 0, lx = 0, dir = 1, next = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    if (!lx) lx = W * 0.18;
+  }
+  function ly() { return H * 0.86 + Math.sin(lx * 0.004) * H * 0.03; }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var x = lx, y = ly();
+    var g = ctx.createRadialGradient(x, y, 0, x, y, 120);
+    g.addColorStop(0, 'rgba(242,212,138,0.22)');
+    g.addColorStop(0.2, 'rgba(214,174,90,0.08)');
+    g.addColorStop(1, 'rgba(214,174,90,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 120, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(250,228,170,0.55)';
+    ctx.beginPath(); ctx.arc(x, y, 2.2, 0, Math.PI * 2); ctx.fill();
+    for (var i = rings.length - 1; i >= 0; i--) {
+      var r = rings[i];
+      var p = r.age / r.max;
+      var a = 0.2 * (1 - p) * Math.min(1, r.age / 20);
+      if (a <= 0.003) { rings.splice(i, 1); continue; }
+      ctx.strokeStyle = 'rgba(214,174,90,' + a + ')';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(r.x, r.y, 8 + p * r.reach, Math.PI * 1.02, Math.PI * 1.98); ctx.stroke();
+      if (!reduce) r.age++;
+    }
+  }
+  function loop() {
+    t++;
+    lx += 0.18 * dir;
+    if (lx > W * 0.88) dir = -1;
+    if (lx < W * 0.12) dir = 1;
+    if (t >= next) {
+      rings.push({ x: lx, y: ly(), age: 0, max: 520, reach: Math.max(W, H) * 0.55 });
+      if (Math.random() < 0.5) next = t + 40; else next = t + 260 + Math.random() * 200;
+    }
+    draw();
+    requestAnimationFrame(loop);
+  }
+  function still() {
+    rings = [];
+    var x = lx, y = ly(), reach = Math.max(W, H) * 0.55;
+    [60, 180, 330].forEach(function (age) { rings.push({ x: x, y: y, age: age, max: 520, reach: reach }); });
+    draw();
+  }
+  size();
+  if (reduce) still(); else loop();
+  window.addEventListener('resize', function () { size(); if (reduce) still(); });
+})();
+</script>
+</body>
+</html>

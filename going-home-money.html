@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Going-Home Money</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Hilo Bay before dawn: dark water, a door print's vermilion, the jade of the shallows. */
+  --ground: #0c1619;
+  --ground-2: #142228;
+  --paper: #e7e2d4;
+  --paper-dim: #a0a79e;
+  --vermilion: #d4613f;
+  --jade: #84b8a5;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #173036 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(231,226,212,.2); }
+.series a:hover { color: var(--vermilion); }
+a:focus-visible { outline: 2px solid var(--vermilion); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--vermilion); text-wrap: balance; text-shadow: 0 0 28px rgba(212,97,63,.22); }
+.epigraph { border-left: 1px solid rgba(212,97,63,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--jade); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--vermilion); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(20,34,40,.78); border: 1px solid rgba(231,226,212,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--jade); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(231,226,212,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--vermilion); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--vermilion); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--vermilion); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--vermilion); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--vermilion); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--jade); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(20,34,40,.78); border-left: 2px solid var(--vermilion); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 9.4 &middot; Anāthapiṇḍika</span></nav>
+<header>
+  <h1>Going-Home Money</h1>
+  <div class="epigraph">He treads on the hoar-frost; the strong ice will come (by and by).<br>&mdash; Yi King, Appendix IV, tr. James Legge</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ngóh tēng gwo gám góng,</span> on Mamo Street.</p>
+
+<section>
+  <h2>I. The Can</h2>
+  <p class="dateline">Hilo, Territory of Hawaii &middot; 1945</p>
+  <p>Chun Kwai kept a store on Mamo Street, a block up from the bay, and for twenty years nobody who came to his counter hungry had gone out of it with empty hands.</p>
+  <p>He sold rice in hundred-pound bags and salt salmon out of a barrel, shoyu by the gallon tin, kerosene, Bull Durham, dried shrimp, cotton palaka shirts for the cane fields, and crack seed in tall glass jars that the children of the Hilo side pressed their faces against on the way home from school. Behind the counter, on a nail, hung the book. Everybody knew the book. A family from Wainaku or Pāpaʻikou came in at the end of a short month and said <em>put it on the book, Mr. Chun,</em> and he wet his pencil and put it on the book, and some of it came back and a good deal of it never did, and he did not seem to mind. When the Army took the Japanese priests and schoolmasters and the officers of the Japanese societies away in December 1941, and their wives stood at his counter not knowing what to say, he put them on the book without a word and never once asked. People said Chun Kwai had paid for the new roof on the Chinese school out of his own pocket, and for a good many funerals, and for a boy's passage to the medical college in Honolulu, though he would not say so if you asked him.</p>
+  <p>He was fifty-one that year, short and broad, bald under a grey felt hat he wore indoors and out. He had come to Hilo in 1912 from a village in Heungshan, outside Canton, with his mother and a cardboard suitcase and a debt to a cousin, and he had worked off the debt cutting cane at Wainaku before he was twenty. Three-quarters of the Chinese in the islands had come from Heungshan. On the Hilo side you could still hear the village speech of it on Mamo Street on a Saturday, though the children answered in English.</p>
+  <p>Under the back step, where the kitchen door let out toward the river, he kept a Hills Bros. coffee can.</p>
+  <p>Nobody knew it was there but his mother. Every month since 1919 he had rolled some bills in oilcloth and put them in the can and put the can back in the ground and set the step on top of it. It was his going-home money. When there was enough he would take his mother back across the ocean to the village and build a house there with a second story and a well in the yard, and she would die in the place she was born, as she had always said she would. When the war ended in August he sat up one night in the kitchen and counted it, and it was enough. Next year, he told her. When the boats run right again. Next year.</p>
+  <p>His mother was seventy-six. Everybody, including her son, called her Ah Mah. Over the doorway between the store and the kitchen she had pasted a print she brought from Heungshan rolled in her sleeve: a lady in a red jacket, round-faced and calm, with a baby on one arm and two little boys holding her skirt, and a peony behind her the size of a cabbage. At New Year other families put up new door prints. Ah Mah never changed this one. She said this one was good. She said the lady watched the door.</p>
+  <p>Kwai's daughter Lin was eight, a late child, and her mother had died having her. Lin talked to the lady in the doorway when nobody was listening, and told her things, and sometimes, she said later, the lady listened back.</p>
+</section>
+
+<section>
+  <h2>II. April Fool</h2>
+  <p class="dateline">Mamo Street &middot; April 1, 1946</p>
+  <p>It was a Monday. Lin was in the store early, before school, eating a manapua out of a paper and watching Ah Fong sweep. Ah Fong was her father's cousin's son, thin and serious, who kept the book and the accounts in a clear small hand and wanted to be a bookkeeper at the bank.</p>
+  <p>A boy ran past the open door shouting <em>tidal wave, tidal wave,</em> and Ah Fong leaned on his broom and said <em>yeah, April fool,</em> and went on sweeping.</p>
+  <p>Then more people were running, and they were not running away from the water. They were running toward it. Lin went out to the corner in her school shoes and looked down Mamo Street to the bay, and the bay was gone.</p>
+  <p>She said for the rest of her life that she could not make anybody understand what that was like. The water had pulled back past the breakwater as if somebody had pulled a cloth off a table. The bottom of Hilo Bay lay out in the morning sun, black rock and grey sand and weed, and fish were flopping on it, hundreds of them, silver, and boys were running out across the wet sand with buckets to pick them up. A sampan lay on its side. The air smelled like the inside of a shell.</p>
+  <p>Ah Mah came out of the kitchen with her hair still down and took Lin by the wrist hard enough to leave a mark and pulled her up Mamo Street, uphill, away from the bay, without one word. Lin looked back over her shoulder and saw the water come.</p>
+  <p>It did not come like a wave at the beach. It came like the whole ocean walking up onto the land, brown, high as the second story of the Hilo Iron Works, carrying things. It carried a roof with a man on it. It carried a railroad car. It went over the railroad bridge on the Wailuku River so that the bridge was simply not there, and up over Front Street, and into the stores on the ocean side, and it went across the low ground of Shinmachi, the Japanese town by the Wailoa, where there were houses and a macaroni factory and a lumber mill and a kamaboko shop, and when it went back out it took most of Shinmachi with it.</p>
+  <p>There was more than one wave. Nobody had told them that. The people who had gone back down after the first one to look were caught by the next, and the next was bigger.</p>
+  <p>When it was over Kwai was standing in the mud behind his store with his hat gone. The front of the store had held. The back room was torn open and the kitchen half gone, the stove on its side in the yard, and where the back step had been there was a hole full of brown water with a dead fish in it. He got down on his knees and put his arms into the hole to the shoulder and felt along the bottom with his hands. Ah Fong got down beside him. They dug for an hour. The can was gone, and the oilcloth, and twenty-six years of going home.</p>
+  <p>Ah Mah stood in what was left of the kitchen doorway looking up at her print. The lady was still there on the doorframe. The water had come up the frame to the height of a child's chin and gone down again, and it had left a brown line straight across the lady's red skirt and across the faces of the two little boys.</p>
+  <p>Ninety-six people died in Hilo that morning. Up the coast at Laupāhoehoe the wave took the schoolchildren and their teachers off the point where they had been playing on the sand before the bell. Kwai's best customer for twenty years, Kubo the fish-cake maker, had lived in Shinmachi with his wife and two daughters above their shop. They found Mrs. Kubo on Wednesday. They did not find the others.</p>
+  <p>That week every bag of rice in Kwai's storeroom was wet with salt water, and rice that has been in the sea is good for one thing. He built a fire in the street in front of the store and set the big pot on it and made jook, and gave it out in tin cups and jelly glasses and anything people brought, to anyone who came up from the bay. He cooked for six days. On the seventh the rice was gone.</p>
+</section>
+
+<section>
+  <h2>III. The Cottage</h2>
+  <p class="dateline">Waiānuenue Avenue &middot; May to October 1946</p>
+  <p>Haruo Kubo came home in May.</p>
+  <p>He had volunteered for the 442nd in 1943, at twenty-two, with half the Nisei boys on the Hilo side, and in October 1944, in the forests of the Vosges in France, a German shell had burst in the trees over his head. He came to in a field hospital and never saw anything again. The Army sent him to a hospital in Pennsylvania and then to a school for blinded soldiers at Avon, in Connecticut, in an old boys' school with stone buildings, where he learned to shave by touch and cross a street with a cane and read with his fingers. When they were done with him they put him on a ship. A Red Cross woman met him at the pier in Hilo, and on the drive into town, very carefully, she told him.</p>
+  <p>He asked her to take him to the lot. She led him by the elbow across the ruined ground of Shinmachi, between the foundation stones, and he stood where she told him the house had been and tapped the ground in front of him with his cane, and there was nothing there to tap.</p>
+  <p>Kwai heard by noon. He closed the store, which he never did, and walked down to the lot, and stood beside the young man a while without saying anything, and then said, <em>Harry. It's Chun. From Mamo Street.</em> Haruo put out his hand and Kwai took it.</p>
+  <p>Kwai owned a cottage up Waiānuenue Avenue, on the high ground above the town where the wave had not reached, two rooms and a lanai and a mango tree, which he had rented to a schoolteacher until the schoolteacher married. He gave it to Haruo. He did not rent it to him. He had a carpenter put a rail along the lanai steps and a second rail from the steps to the road, and paid for it, and did not mention it again.</p>
+  <p>After that Kwai went up the hill three times a day. Early, before he opened the store, he carried a pot of jook with green onion and slivers of ginger on the top, and a fried egg wrapped in wax paper. In the middle of the morning he went again, with the pills from the drugstore on Keawe Street, because there were still pieces of the shell in Haruo's back that the surgeons had left there, and a bottle of the liniment that smelled of camphor and wintergreen. In the evening he brought plumeria from the tree behind the store, and a bundle of incense, and on Saturdays a clean shirt.</p>
+  <p>Haruo had made a butsudan for his family out of a fruit crate, on a shelf by the window, and Lin, who went up with her father in the evenings, read him the names he had written on slips of paper in his blind, careful printing, so he would know the slips were still in their order. He put the plumeria in a jelly glass in front of them. He could tell by the smell when a flower had turned.</p>
+  <p>The boys found him within a week. Boys always find a man like that. They came up Waiānuenue after school and sat on the lanai steps, Japanese boys and Chinese boys and a Filipino boy whose father had come on the boat that winter and a big Portuguese boy named Medeiros, and they asked him about France and about the war, and mostly he did not answer, and they kept coming anyway. He taught them to tie knots blindfolded. He taught them how to hear where a car was on the road. When Kwai came up the steps in the evening the boys all looked first at his hands, to see what he was carrying.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On the first of September the sugar workers struck, twenty-six thousand of them, on thirty-three of the thirty-four plantations in the islands. On the Hilo side every mill went quiet at once. You could hear the river at night.</p>
+  <p>Kwai's book filled up. The strikers' families came in and said <em>put it on the book</em> and he put it on the book, and by October the book had to be tied shut with string. The union set up soup kitchens and fishing and hunting committees, and men went up the mountain after pigs and out to the reef after fish, and a committee of strikers went around to the stores asking for whatever the stores could give, and Kwai gave rice, and then when rice got hard to come by in the stores and the union had to bring it in from the mainland, he gave what he had left. His mother watched him do it and said nothing. He had no going-home money now. He had a store with half-empty shelves and a book tied with string.</p>
+  <p>But he went up the hill three times a day. Only now in the morning it was jook with nothing on top, and in the evening it was jook again, with a little dish of ham choy, the salted mustard greens out of the crock.</p>
+  <p>One evening in October Haruo, eating on the lanai with the bowl held up under his chin, said: <em>Mr. Chun. Down at your place. They still eating?</em></p>
+  <p><em>Some.</em> Kwai looked at the bowl. <em>Jook. Jook and ham choy. That's what there is.</em></p>
+  <p>Haruo finished the bowl and set it down beside him on the boards, where he could find it again.</p>
+  <p><em>When I volunteered,</em> he said, <em>my father gave me a send-off. You remember. He rented the hall. Two hundred people. A whole ahi on the table, sashimi, sekihan, the good sake from Honolulu, a band. Nobody in Shinmachi ever saw a party like that. My mother cried all night because of the money.</em> He was quiet for a while. <em>You know what I remember? Nobody there was hungry. Not one person. Everybody already ate before they came. I was the guest of honor, I sat up front, and I can't tell you the taste of one single thing.</em></p>
+  <p>The boys on the steps had gone still.</p>
+  <p><em>This jook,</em> Haruo said, <em>I can taste.</em></p>
+  <p>Kwai took the empty bowl and went down the hill with it in the dark.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>At home Ah Mah was sitting in the kitchen they had rebuilt out of salvaged boards, shelling peanuts into a pan. Her father had been a village schoolmaster in Heungshan and she could say whole pages of the old books with her eyes closed. She looked at her son's face and set down the pan and said a thing out of the Book of Changes, in the old words, which Lin did not understand then and looked up in English many years later, in a library in Honolulu, and copied out by hand.</p>
+  <div class="verse">
+    <p>The family that accumulates goodness is sure to have superabundant happiness, and the family that accumulates evil is sure to have superabundant misery.</p>
+    <p>&mdash; Yi King, Appendix IV, sect. ii, ch. II, 5 (tr. James Legge, 1882)</p>
+  </div>
+  <p>Then she pointed with her chin out the kitchen window, up past the town and the cane and the forest, to where the top of Mauna Kea stood clear in the last light with the first snow of the season on it.</p>
+  <p><em>Does it snow all at once?</em> she said. <em>First the frost. Then the ice. It takes a long time.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Door Lady</h2>
+  <p class="dateline">The kitchen behind the store &middot; late October</p>
+  <p>This is the part Ah Mah told, and Lin told after her, and you can believe it or not.</p>
+  <p>The lady in the doorway had watched the door for thirty-four years, in Heungshan and in Hilo. In all that time she had never once been able to speak to Chun Kwai. When a man is rich and strong in his own house, the door spirits keep quiet; they can only stand there. But she had not liked the blind boy from the start. The first time Haruo came down Mamo Street with his white cane and stood in the store, the corners of the print had curled up off the doorframe as though somebody had set a stove too close to it. She could not abide him, or the boys who followed him, or the people coming through her door with their hands out. There was too much good in them. It made her eyes water like smoke.</p>
+  <p>Now Kwai was poor. A poor man listens, she thought. So one night late in October, when he sat alone at the kitchen table with a lamp and the book with the string around it, adding columns that would not add, she stepped down off the doorframe and stood in the air in front of him, about a foot above the floor, in her red jacket, with the baby on her arm.</p>
+  <p><em>Who is that?</em> said Kwai.</p>
+  <p><em>The lady of your door,</em> she said. <em>I came to give you advice.</em></p>
+  <p><em>So give it.</em></p>
+  <p><em>You have thrown away everything you had,</em> she said. <em>Twenty years of rice on the book. The school roof. That cottage. And now you are poor and still you give. The strikers will lose. The plantations always win. Who has ever beaten the sugar companies? When it is over they will go back to work and forget your name, and they will never pay. And three times a day up the hill to a Japanese boy, carrying food, when your own village was under the Japanese army for seven years and you have not had one letter from it. Stop. Close the book. Mind the store. In a few years you will have your going-home money again. If you go on like this, in a month you will not have rice for your own mother.</em></p>
+  <p><em>That's what you came to tell me?</em></p>
+  <p><em>Yes.</em></p>
+  <p>Kwai put the pencil down. <em>Then go,</em> he said. <em>A hundred thousand like you could stand there and not move me one inch. You live in my house, on my door, and you say this to me? You had no business saying it. Get out of my house.</em></p>
+  <p>And she went, out the kitchen door into the dark, with the baby on her arm and the two little boys holding her skirt.</p>
+  <p>In the morning Lin came down for breakfast and stopped in the doorway. The print was still pasted to the frame, but it was blank. The red was gone, and the peony, and the faces. There was only old paper, a little yellow, and across the middle of it the brown line of the water.</p>
+</section>
+
+<section>
+  <h2>V. The Ti Leaf</h2>
+  <p class="dateline">Hilo &middot; November 1946</p>
+  <p>The door lady had nowhere to go. Every house in Hilo already had whatever watched its door, and none of them would make room for her. She walked the town with the children for nights. She went to the earth god in his little house at the edge of the cemetery, and told him what she had said, and asked him to go to Chun Kwai with her and ask that she be let back in. The earth god said, <em>You said what you had no business saying. I won't go with you.</em> She crossed the channel to the Four Kings who stand guard in the gates of temples, one with a sword and one with a lute and one with an umbrella and one with a snake, and they said the same. At last, worn out, the children crying, she went all the way up to the Jade Emperor himself.</p>
+  <p><em>I have nowhere to live,</em> she told him. <em>I walk around with these children in my hands. Get me back my door.</em></p>
+  <p><em>I can't speak to him for you either,</em> said the Jade Emperor. <em>But I'll tell you what to do. Put on the clothes of the young man who keeps his book. Copy out on a leaf every debt that is owed him, and go around and collect it. Then go to the bottom of the bay, where the can went, and bring it up. And there is money in this town with no owner at all; you know where. Put all of it back in that man's store. When you have made up for what you said, then ask his pardon.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>That is the story. What happened in Hilo is this.</p>
+  <p>The strike ended in the middle of November, after seventy-nine days, and the strikers had won. The companies gave a raise of nearly twenty cents an hour and did away with the old system of perquisites, the company houses and company doctors and company fuel that had always been counted against the pay, and paid it in cash instead. The men went back to the mills. And in the last week of November they began coming into the store on Mamo Street one after another with their hats in their hands to pay what was on the book.</p>
+  <p>Kwai was astonished. He said so. A man from Pāpaʻikou, laying down bills on the counter, said he was only doing what he was told: the young fellow from the store had come around to the camp on Tuesday with a list and gone house to house, very polite, and said what each family owed to the penny, and said Mr. Chun would be glad of whatever they could bring. Another man said the same. Then a woman from Wainaku.</p>
+  <p>Ah Fong had been in Honolulu that whole week, at his father's funeral. He had the inter-island ticket stubs in his wallet to prove it.</p>
+  <p>That night Lin untied the string on the book and opened it, and a ti leaf fell out from between the pages, one long green leaf, and written on it in ink in a small fine hand, not Ah Fong's, not anybody's they knew, was every name in the book and the sum against it.</p>
+  <p>On the first of December an Okinawan fisherman named Higa, who went out of the river in a sampan, came to the back door of the store with a Hills Bros. coffee can in a gunnysack. It had come up in his net that morning off Coconut Island, he said, eight months under the bay. The can was rusted through like lace. Inside it, rolled in oilcloth, dry as the day it went into the ground, was the going-home money.</p>
+  <p>And on the morning after that there was an envelope under the front door of the store, with no name on it and no writing at all, and money inside it. Kwai took it to the police station. The police kept it ninety days and nobody came for it, and then they gave it back.</p>
+  <p>Ah Fong added it all up at the counter, the book and the can and the envelope, and then added it again, and then sat down on a rice bag. It came to everything Kwai had had on the morning of April Fool, to the dollar.</p>
+</section>
+
+<section>
+  <h2>VI. Gion Shōja</h2>
+  <p class="dateline">Waiānuenue Avenue &middot; the night of December 2</p>
+  <p>That night Kwai woke and the kitchen was full of light. Lin, on the cot in the next room, woke too, and came and stood behind the curtain.</p>
+  <p>The door lady stood in the air above the kitchen floor, shining so that you could see every board, with the baby on her arm and the two boys at her skirt. Her face was wet.</p>
+  <p><em>Who is that?</em> said Kwai, though he knew.</p>
+  <p><em>The blind, foolish lady who used to watch your door,</em> she said. <em>Forgive what I said to you. I was a fool. I did what the Jade Emperor told me. Everything you lost is back in your storeroom. I have paid for my words. I have nowhere to live and I am very tired.</em></p>
+  <p>Kwai sat a long time on the edge of his bed. Then he put on his trousers and his grey hat.</p>
+  <p><em>Don't tell me,</em> he said. <em>Come up the hill and tell him.</em></p>
+  <p>So they went up Waiānuenue Avenue together in the middle of the night, the storekeeper in his hat and the lady walking a foot above the road with her children, and Lin came after them barefoot in her nightgown, keeping to the dark under the trees. The town was asleep. Out on the bay the lights of a ship. The cottage was dark, but Haruo was sitting on the lanai in his undershirt, because he did not sleep much, and never had since France.</p>
+  <p>He stood up before Kwai said anything. He turned his face to the empty air at Kwai's left shoulder, where the lady was, and bowed to it, a deep, slow bow, the way his mother had taught him to bow at the temple.</p>
+  <p>Lin said that the lady got down on the boards of the lanai, on her knees, and put her forehead to the floor at Haruo's feet, and stayed there, and the little boys did the same because their mother did.</p>
+  <p><em>I didn't know what you were,</em> the lady said into the boards. <em>I said bad things. Forgive me.</em></p>
+  <p>Haruo was quiet. When he spoke he did not speak English. He said something in Japanese, in the singsong of a thing learned by heart, a thing he had stood up and said in front of the Japanese-school class at the Hongwanji before the war, when the Japanese schools were still open, and Lin did not understand a word of it, except that she heard him say <em>Gion shōja</em> twice. Years later, a grown woman, she found it in English in a library in Honolulu, in the same week she found the other thing, and copied it out on the same sheet of paper.</p>
+  <div class="verse">
+    <p>The sound of the bell of Gionshoja echoes the impermanence of all things. The hue of the flowers of the teak tree declares that they who flourish must be brought low. Yea, the proud ones are but for a moment, like an evening dream in springtime. The mighty are destroyed at the last, they are but as the dust before the wind.</p>
+    <p>&mdash; The Heike Monogatari, Book I, ch. 1 (tr. A. L. Sadler, 1918)</p>
+  </div>
+  <p>Then he said it again in his own words, in English, for Kwai and for the lady, standing in his undershirt with one hand on the rail Kwai's carpenter had built.</p>
+  <p><em>The sugar companies,</em> he said. <em>The big men. They did a lot of bad things, a long time, and they were fine. Rich. Nothing happened. Because it wasn't ripe yet. Then it got ripe.</em> He turned his face toward Kwai. <em>Other way, too. A man does good, and for a while all he gets is trouble. The wave. The strike. The book with the string on it. Because his good isn't ripe yet. Wait. It gets ripe.</em></p>
+  <p>The lady was still kneeling with her forehead down. Lin said that she began to cry, and then stopped, and that her face, when she lifted it, had changed; that it was the same face, and different, the way the bay is the same bay when the light comes up on it. Then the shining went out of the air, and there was only the lanai and the mango tree and the three of them in the dark, and the smell of the plumeria in the jelly glass.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Kwai did not go home.</p>
+  <p>He had his going-home money back, every dollar, and the boats were running again, and his mother was seventy-seven. But the war in China between the Nationalists and the Communists had started again that summer, and the letters that came from Heungshan said not now. And in the spring Kwai said to his mother at the kitchen table one night, half laughing, that if he went home who was going to make the jook. She did not argue. She died in Hilo in 1951, on Mamo Street, in the room over the store, and was buried in the Chinese cemetery under a stone with the name of her village on it.</p>
+  <p>Haruo Kubo went to the university in Honolulu on the GI Bill and became a teacher at the school for the blind, and married, and came back to Hilo every New Year, and stopped first at the store on Mamo Street, and ate a bowl of jook standing at the counter before he went anywhere else.</p>
+  <p>On the morning after the night on the lanai, Lin came down to breakfast and the door lady was back on the frame over the kitchen door, the red jacket and the peony and the round calm face and the baby and the two little boys, the colors as bright as the day Ah Mah brought her over the ocean in her sleeve. Ah Mah never put up a new one. When the store closed in 1972 Lin peeled the print off the frame with a butter knife, an inch at a time, and kept it flat between two pieces of cardboard, and it has gone with the family everywhere since. The colors are still good. Only the water line never came out. It runs straight across all three of them, the lady's red skirt and the faces of the two boys, at the height of a child's chin, where the bay came in.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Even an evil-doer sees happiness as long as his evil deed has not ripened; but when his evil deed has ripened, then does the evil-doer see evil.<cite>Dhammapada 119, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Even a good man sees evil days, as long as his good deed has not ripened; but when his good deed has ripened, then does the good man see happy days.<cite>Dhammapada 120, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Anāthapiṇḍika, the great lay donor who bought the Jetavana grove for the Buddha, visits the Teacher three times a day and never goes empty-handed. Merchants default on loans he made them, and a flood sweeps the family treasure buried at the riverbank into the sea, but he goes on giving, though now only rice porridge and sour gruel. The Buddha tells him that no gift given with a pure heart is coarse, and recalls that in a past life, as the brahmin Velāma, he gave an enormous gift where there was no one worthy to receive it. The spirit who lives over the householder's gate, unable to bear the goodness of the monks, finally dares to speak now that he is poor, and urges him to stop giving and mind his business. He throws her out. Homeless with her children, she is turned away by the city's guardian deity and the Four Great Kings, until Sakka, king of the gods, tells her to disguise herself as the steward, collect the debts, recover the treasure from the sea and gather ownerless wealth. She does, and asks pardon, and the householder takes her to the Buddha, who speaks these verses about deeds ripening. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-04.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Anathapindika">Anāthapiṇḍika</a>. The Japanese name for Jetavana is Gion Shōja, and so the most famous opening line in Japanese literature, the bell of Gion Shōja at the start of <a href="https://en.wikipedia.org/wiki/The_Tale_of_the_Heike">the Tale of the Heike</a>, rings from the monastery Anāthapiṇḍika bought.</p>
+    <h3>Hilo, 1946</h3>
+    <p>On April 1, 1946, an earthquake off the Aleutian Islands sent a tsunami across the Pacific. It struck Hilo a little after seven in the morning; many people took the first warnings for an April Fool's joke, and some went down to look at the drained bay before the larger waves came. The <a href="https://en.wikipedia.org/wiki/1946_Aleutian_Islands_earthquake">waves killed 159 people in the islands, 96 of them in Hilo</a>, and at Laupāhoehoe the wave swept away schoolchildren and teachers. The bayfront and the railroad were wrecked and <a href="https://www.hawaiitribune-herald.com/2021/04/01/hawaii-news/a-wall-of-water-survivors-reflect-on-devastating-tsunami-that-struck-hilo-75-years-ago/">the Japanese neighborhood of Shinmachi</a> was largely destroyed; it was rebuilt, and destroyed again in 1960. The disaster led to the first Pacific tsunami warning system. Most of Hawaii's Chinese families trace their roots to <a href="https://en.wikipedia.org/wiki/Chinese_immigration_to_Hawaii">Zhongshan (Heungshan)</a> in Guangdong.</p>
+    <p>Five months later, on September 1, the ILWU led about 26,000 workers out on <a href="https://en.wikipedia.org/wiki/Hawaiian_sugar_strike_of_1946">the Hawaiian sugar strike of 1946</a>, closing 33 of 34 plantations. Strikers fed themselves through <a href="https://hawaii.edu/uhwo/clear/home/1946.html">soup kitchens, hunting and fishing parties, and committees that asked stores for donations</a>. The settlement in November brought a raise of up to nineteen cents an hour and ended the perquisite system of company housing and services in lieu of wages. Haruo's regiment, the Japanese American <a href="https://en.wikipedia.org/wiki/442nd_Infantry_Regiment">442nd</a>, fought in the Vosges in October 1944; blinded veterans trained at <a href="https://avonhistoricalsociety.org/?p=4613">Old Farms Convalescent Hospital in Avon, Connecticut</a> from 1944 to 1947.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Anāthapiṇḍika from the Dhammapada commentary (verses 119 and 120). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-04.htm">The original</a>. Scripture from the Yi King, tr. James Legge (1882), and the Heike Monogatari, tr. A. L. Sadler (1918). Written by Claude Opus 5.5.
+  <div class="pager"><a href="one-shawl.html">&larr; One Shawl</a><a href="index.html">All stories</a><a href="three-fingers.html">Three Fingers &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A slow tide: the bay draws back from the foot of the page and returns.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, glints = [], t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    glints = [];
+    var n = Math.round(Math.max(10, Math.min(28, W / 50)));
+    for (var i = 0; i < n; i++) glints.push({ x: Math.random(), d: Math.random(), s: Math.random() * 6.28 });
+  }
+  function draw(now) {
+    var t = reduce ? 0 : (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    // tide level breathes over about 70 seconds
+    var level = H * (0.86 + 0.06 * Math.sin(t * 0.09));
+    ctx.beginPath();
+    ctx.moveTo(0, H);
+    for (var x = 0; x <= W; x += 12) {
+      var y = level + 5 * Math.sin(x * 0.012 + t * 0.5) + 3 * Math.sin(x * 0.031 - t * 0.3);
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(W, H); ctx.closePath();
+    var g = ctx.createLinearGradient(0, level - 10, 0, H);
+    g.addColorStop(0, 'rgba(132,184,165,0.10)');
+    g.addColorStop(0.25, 'rgba(60,110,110,0.08)');
+    g.addColorStop(1, 'rgba(20,40,45,0.0)');
+    ctx.fillStyle = g; ctx.fill();
+    // the wet line the water leaves
+    ctx.strokeStyle = 'rgba(160,120,80,0.10)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, H * 0.80); ctx.lineTo(W, H * 0.80); ctx.stroke();
+    for (var i = 0; i < glints.length; i++) {
+      var gl = glints[i];
+      var gy = level + 8 + gl.d * (H - level - 8);
+      var a = 0.18 * (0.5 + 0.5 * Math.sin(t * 0.8 + gl.s)) * (1 - gl.d);
+      if (a < 0.01) continue;
+      ctx.fillStyle = 'rgba(231,226,212,' + a + ')';
+      ctx.fillRect(gl.x * W, gy, 6 + gl.d * 10, 1);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

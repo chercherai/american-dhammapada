@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thin Shade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on sun-bleached caliche; the feathery shadow of a mesquite sways faintly across the page. */
+  --ground: #efe6d3;
+  --ground-2: #e4d6bb;
+  --paper: #2a2119;
+  --paper-dim: #6e604f;
+  --accent: #8a3a20;
+  --glow: #56663f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f5eee0 0%, var(--ground) 55%, #e8dcc4 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(42,33,25,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(138,58,32,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(228,214,187,.75); border: 1px solid rgba(42,33,25,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,33,25,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,33,25,.12); border-bottom: 1px solid rgba(42,33,25,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(228,214,187,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.3 &middot; Vi&#7693;&#363;&#7693;abha</span></nav>
+<header>
+  <h1>Thin Shade</h1>
+  <div class="epigraph">Then two shall be in the field: one shall be taken, and one shall be left.<br>&mdash; Matthew 24:40</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; lo o&iacute; contar,</span> on the river road below Esperanza.</p>
+
+<section>
+  <h2>I. The Cane</h2>
+  <p class="dateline">San Antonio and Laredo &middot; the 1850s</p>
+  <p>Three boys met on the steps of the Brothers&rsquo; school in San Antonio the autumn it opened, and asked each other where they were from and who their people were, and by Christmas they were friends. Ambrose Rourke was from Tennessee by way of the war with Mexico, which had brought his father to Texas and killed him there. Tom&aacute;s Leal was from Laredo. Sixto Benavides was from Laredo too, from the other end of it, and could already ride anything with hair on it. They learned their Latin and their surveying and their sums together, and when they were finished they shook hands at the stage office and went home.</p>
+  <p>Ambrose Rourke went down to the river country and read law and surveyed land, and the land he surveyed had a way of becoming his, and by thirty he was the county judge at Esperanza and by forty there was nothing in that county that moved without his knowing.</p>
+  <p>Tom&aacute;s Leal opened a school for the sons of the good families of Laredo and worked over his books by lamplight until his eyes failed him. The families said they would not turn their teacher out for that, and they gave him the toll from the river ferry for his living, and he sat by the landing all the rest of his life in a cane chair, blind, teaching boys their Latin by ear and telling every wagon by the sound of its wheels.</p>
+  <p>As for Sixto Benavides, the young men of his family set him a test at the fiesta of San Agust&iacute;n. They tied river cane in bundles of sixty stalks, hung sixty bundles from a beam, and told him to cut them through with a saber from horseback at a gallop. He cut the first fifty-nine without a sound. At the sixtieth he heard a click, and pulled up, and found the iron rod they had hidden inside every bundle.</p>
+  <p>He threw the saber in the dirt and wept in front of all of them. <em>Not one of you,</em> he said, <em>not one of my own blood thought enough of me to tell me. If I&rsquo;d known, I&rsquo;d have cut them so the iron never rang.</em> He told his father he would kill every one of those cousins. His father talked him out of it over three nights. Then Sixto said, <em>Then I&rsquo;ll go to my friend,</em> and saddled his horse and rode to Esperanza, and Judge Rourke met him on the road and made him chief deputy of the county that same week.</p>
+</section>
+
+<section>
+  <h2>II. The Plate</h2>
+  <p class="dateline">Esperanza, Texas &middot; 1879</p>
+  <p>In those years Do&ntilde;a Natividad Romero lived in a jacal of mesquite pickets on the river road with her nephew Chencho, and the sick came to her from both sides of the river. She was a cousin of the Romeros of Rancho Santa Rita, who had held their land along the Rio Grande since the King of Spain&rsquo;s surveyors set their stone in 1767, and who did not let anybody forget it. She had left that house young and never gone back to live in it. She set bones, she prayed over fevers, she knew every plant in the brush, and she said very little. The women who learned from her went out every morning, two by two, to the ranches where they were wanted.</p>
+  <p>Judge Rourke watched them go by his gallery. They went to the Pe&ntilde;as, the Ram&iacute;rezes, the Garzas, never to him. He sent word that the se&ntilde;oras were welcome at his table any day of the week, and for a week they came, and he served them himself, and on the eighth day he had business at the courthouse and forgot them. Nobody else in that house would set a chair for them without being told. The next day he forgot them again, and the next, and by the end of the week the only one who still came was Chencho, who sat alone at the long table and ate what was put in front of him because his aunt had told him to.</p>
+  <p>The Judge rode out to the jacal angry. <em>I set a table for twelve, and your nephew came.</em></p>
+  <p>Do&ntilde;a Natividad did not blame her women. <em>They go where they&rsquo;re met at the gate,</em> she said. <em>Where somebody sets them a chair and gives them the good coffee and doesn&rsquo;t hide the sugar. Where somebody sits down and listens. They don&rsquo;t stay where nobody does.</em> And then she told him a story, the way she answered most things, about an old man who fell sick in a rich house and did not get well there, though the doctors came from Monterrey, and who got well in a week in a brush camp among his own people, eating wild greens without salt. <em>Because where you eat with confidence,</em> she said, <em>confidence is the best taste there is.</em></p>
+  <p>The Judge rode home thinking about it. He thought: if I want them to trust this house, I&rsquo;ll bring her people into it. And he sent to Rancho Santa Rita asking Don Mariano Romero for one of his daughters.</p>
+  <p>The Romeros sat down together in the long sala at Santa Rita. <em>The man is our enemy,</em> they said. <em>If we refuse him he&rsquo;ll have our land in the courts in five years. And he isn&rsquo;t our equal. What do we do?</em> Don Mariano said: <em>I have a daughter. Valentina. Her mother is Pilar, in the kitchen. She is the most beautiful girl on this river. We&rsquo;ll give him her.</em></p>
+  <p>Nobody at Santa Rita had ever asked who Pilar&rsquo;s people were or how she had come to the ranch as a child. It was not a thing that was asked.</p>
+  <p>The Judge was no fool. <em>Those Romeros would sell me a cook&rsquo;s child in a lace veil,</em> he told the men he sent. <em>Don&rsquo;t bring her unless you see her eat off the same plate as her father.</em> So Don Mariano had Valentina dressed in white and brought to him at the noon meal, and set one plate between them, and lifted his fork to it once and put it down, and the Judge&rsquo;s men watched it and were satisfied. They brought her to Esperanza, and the Judge married her in the church with the whole county looking on and set her at the head of his house.</p>
+</section>
+
+<section>
+  <h2>III. The Chair</h2>
+  <p class="dateline">Rancho Santa Rita &middot; 1897</p>
+  <p>She had a son the next year. When the Judge sent old Pruitt, his foreman, to ask his own mother what the boy ought to be called, the old lady said, <em>She&rsquo;d already won every heart in this county before the baby came. Now she&rsquo;ll be his darling past all reason.</em> But Pruitt had been deaf on one side since a cannon at Glorieta, and he rode back and told the Judge she said to call him Dalton. The Judge supposed it was a name on his mother&rsquo;s side. So the boy was Dalton Rourke. When he was six his father had a little tin star made for him and called him the captain of the county, and everyone laughed, and Dalton wore it on his shirt to Mass.</p>
+  <p>When he was seven he asked his mother why the other boys got ponies and saddles from their grandfathers at Christmas and nobody ever sent him anything. She told him his grandfather lived a long way off down the river and was a great man and very busy. When he was sixteen he said he was going down to Santa Rita to see his mother&rsquo;s people for himself, and she said no, what would he do there, and he asked again, and again, until she said yes.</p>
+  <p>She wrote ahead. <em>I am happy here. I beg my lords to receive my son as they would any of their own.</em></p>
+  <p>The Romeros read the letter in the sala. <em>We can&rsquo;t embrace that boy as a kinsman,</em> they said. They sent the younger cousins off to the far pastures, and when Dalton rode in with his father&rsquo;s vaqueros they received him in the sala with every courtesy, and showed him his grandfather and his uncles, and gave him the great carved chair at the head of the room to sit in. He kissed his grandfather&rsquo;s hand and his uncles&rsquo; hands. Nobody kissed his.</p>
+  <p><em>Where are my cousins?</em></p>
+  <p><em>Out with the cattle, hijo. It&rsquo;s the season.</em></p>
+  <p>He stayed three days and they could not have treated him better. On the fourth morning he rode out.</p>
+  <p>Behind him in the sala, one of the kitchen women got down on her knees with a bucket of milk and water and scrubbed the great carved chair, seat and arms and back. <em>Look at this,</em> she said to the girl helping her, <em>the chair Pilar&rsquo;s grandson sat in.</em> One of the vaqueros had left his rifle in the corner and come back for it, and he heard her. He asked a question or two in the kitchen. By noon every man riding home with Dalton knew it, and the noise they made about it on the road could be heard a mile off.</p>
+  <p>Dalton reined in and sat his horse in the road and said it out loud so they would all hear him. <em>They wash the chair I sat in with milk. When I have this county, I&rsquo;ll wash it with their blood.</em></p>
+  <p>At Esperanza the Judge heard the whole of it from his men before the dust was off them. He was ashamed in front of the county, and for a man like the Judge that was worse than being robbed. He moved Valentina and the boy out of the big house into the rooms behind the kitchen, with the help.</p>
+  <p>Do&ntilde;a Natividad came to see him a few days after. She agreed with him that the Romeros had done wrong. <em>They should have given you a daughter of their own house.</em> Then she said, <em>But Valentina was married in church as your wife. And that boy has your name. Whose name is a man known by in this county, Judge? His father&rsquo;s or his mother&rsquo;s?</em> And she told him the old story about the king who found a woman gathering firewood in the hills and married her, and how her son was king after him. The Judge sat a long time. Then he moved them back into the big house.</p>
+  <p>Dalton did not move back into it in the same way he had moved out. He was sixteen. He took off the tin star that week, and nobody saw it again.</p>
+</section>
+
+<section>
+  <h2>IV. Thirty-Two Sons</h2>
+  <p class="dateline">Laredo and Esperanza &middot; 1880&ndash;1912</p>
+  <p>Sixto Benavides&rsquo;s wife Amalia had no children for years, and in the end he told her to go back to her family in Laredo. She stopped at the jacal on her way. <em>Where are you going?</em> said Do&ntilde;a Natividad. <em>Home, because I&rsquo;ve given him no sons.</em> <em>That&rsquo;s no reason. Go back to your husband.</em> She went back, and Sixto said, <em>Why are you here?</em> and she said, <em>Do&ntilde;a Natividad sent me,</em> and he thought about it and said, <em>Then she has some reason,</em> and let it be.</p>
+  <p>Within the year Amalia was carrying, and she had a craving. In Laredo the rich families kept a bathing tank behind a wall, fed from a spring, with a wire fence over the top of the wall and a man with a shotgun at the gate, and she wanted to go down into it and swim and drink the water. So Sixto drove her to Laredo in his buggy, in by the ferry road past the cane chair where Tom&aacute;s Leal sat. The blind man heard the wheels and said to the boys around him, <em>That&rsquo;s Benavides&rsquo;s buggy. There&rsquo;ll be trouble for somebody today.</em></p>
+  <p>Sixto knocked down the man at the gate, pulled down the wire with his hands, and Amalia swam and drank, and he swam too, and they drove home.</p>
+  <p>The rich young men of Laredo came after them on horseback, fifty or a hundred of them, though the number grew every time it was told. Tom&aacute;s Leal told them from his chair: <em>Turn back when you see his wheels sink to the hubs. If you don&rsquo;t, you&rsquo;ll hear a sound like the sky splitting. Turn back then. If you don&rsquo;t, you&rsquo;ll see a hole through every saddle horn. Then you must turn back.</em> They did not turn back. And this is how it was told on the river for forty years afterward: that Sixto handed Amalia the lines and stood up in the buggy, and the wheels sank to the hubs in the road; that he fired once into the air and it split the sky; and that he fired once more, and the one bullet went through every saddle horn in that company and through every man of them at the belt buckle. They rode on, shouting at him to halt. He stopped the buggy. <em>You&rsquo;re dead men,</em> he said. <em>I don&rsquo;t fight the dead. Have the first of you unbuckle his belt.</em> The first one unbuckled it and fell off his horse. <em>Go home,</em> said Sixto, <em>settle your affairs, kiss your wives, and then take off your belts.</em> They did, and that was the end of them.</p>
+  <p>Amalia gave him twins sixteen times. Thirty-two sons, all of them riders and shots like their father, and when they came into Esperanza behind him on court day the plaza was full of their horses. One court day some men who had been robbed of their land by a crooked judgment came shouting to Sixto in the street. He walked into the courtroom, sat down, and heard the case again himself, and gave the land back to the men it belonged to, and the plaza cheered him. The Judge was pleased, and put the whole court in his hands.</p>
+  <p>The old judges lost their bribes, and they took their time. They told the Judge that Benavides wanted the county for himself. The Judge believed them. He could not kill a man the whole plaza had cheered, not in daylight. So he paid some men to make trouble at the river, and sent Sixto and his sons to put it down, and sent other men after them with other orders. The hired raiders ran as soon as they heard who was coming. Sixto made the river quiet again and started home with his boys. A few miles from Esperanza, at the Arroyo Prieto crossing, the other men were waiting in the brush.</p>
+  <p>That morning Amalia had Do&ntilde;a Natividad and her women at her table, and all their helpers, for a meal she had been planning a month. The telegram came while they were at the soup. She read it and folded it and put it in her apron pocket and went on serving. Then the girl carrying the big olla of lard from the kitchen tripped on the threshold, and the olla went to pieces on the tiles in front of everybody.</p>
+  <p>Do&ntilde;a Chole, the eldest of the women, said mildly, <em>Never mind, child. Whatever was made to break is going to break.</em></p>
+  <p>Amalia took the telegram out of her apron. <em>They brought me this an hour ago. It says my husband is dead and my thirty-two sons with him. I didn&rsquo;t take any notice of that, Do&ntilde;a Chole. I&rsquo;m not going to take any notice of a pot.</em></p>
+  <p>The women went home. Amalia called her thirty-two daughters-in-law together that night and told them: <em>Your husbands did nothing wrong. They are paying for something older than they are, that none of us can see. Don&rsquo;t grieve yourselves to death. And don&rsquo;t hate the Judge.</em> The Judge&rsquo;s men were listening at the window and carried it back to him, and he came the next morning with his hat in his hands and asked her forgiveness and offered her anything she named. She asked for nothing, until after the novena for the dead. Then she asked to be allowed to send the daughters-in-law home to their own people and go home to hers, and he let her, and she went back to Laredo and lived quietly and was never heard to speak his name.</p>
+</section>
+
+<section>
+  <h2>V. The Shade</h2>
+  <p class="dateline">The river road &middot; September 1915</p>
+  <p>The Judge made Sixto&rsquo;s nephew Lucio his chief deputy after that, and Lucio went about the county telling anyone who would listen that the Judge had killed his uncle. The Judge had no peace after Arroyo Prieto. He ate without tasting it. Running the county was no pleasure to him anymore.</p>
+  <p>In the summer of 1915 there was blood on the river again. Raiders from across the river were firing on trains and cutting the telegraph wires under a plan that said every Anglo man over sixteen in Texas should die, and the Rangers came down from Austin, and men who looked Mexican began to be found dead in the brush. The Judge was eighty years old. Do&ntilde;a Natividad was eighty years old. He drove out to the jacal to see her one evening, and left his car and his pistol and the courthouse keys and the county ledger and the seal with Lucio at the gate, and went in alone, and they sat and talked a long time like two old people.</p>
+  <p>When he came out the car was gone. Lucio had left him one horse and Cata the cook. She told him: Lucio had driven to the courthouse and handed the keys and the ledger and the seal to Dalton Rourke, and the commissioners, who knew which way the wind was blowing, had made Dalton sheriff before supper. The Judge said he would ride to Brownsville, where his sister&rsquo;s boy had a bank and a hundred friends, and come back and see about it. He rode all night and half the next day in the heat. When he got to Brownsville it was dark, and the bank was shut, and the house was shut, and nobody came to the door. He lay down in a wagon yard by the river with his coat for a pillow and died there in the night. At first light the people at the wagon yard heard Cata crying out, <em>Judge, Judge, you have nobody now,</em> and went and told his nephew, who buried him with a band.</p>
+  <p>Dalton remembered his promise. He rode out of Esperanza at the head of his deputies and a company of Rangers, south for Santa Rita.</p>
+  <p>That morning Do&ntilde;a Natividad had gone out early on her rounds the way she did, and come home, and lain down through the heat of the day on her right side on her cot, and in the late afternoon, though nobody on the road had seen her pass, she was sitting under a mesquite at the line where the Esperanza road crossed onto Romero land. A mesquite in September gives about as much shade as a fishing net. Twenty steps away, on the Esperanza side of the wire, stood a Texas ebony, black-green and dense, with shade under it like a room.</p>
+  <p>Dalton rode up and got down. He took his hat off to her. Everyone in the county did that.</p>
+  <p><em>Do&ntilde;a Natividad. What are you doing sitting in the sun? Come sit under the ebony, it&rsquo;s cool there.</em></p>
+  <p><em>Don&rsquo;t worry about me, hijo,</em> she said. <em>The shade of my people keeps me cool.</em></p>
+  <p>He stood there with his hat in his hand. He thought: she&rsquo;s come to stand in front of her kin. He put his hat on and got back on his horse and turned the company around and rode back to Esperanza.</p>
+  <p>A week later the old hate came up in him again and he rode out a second time, and she was sitting under the same mesquite, and he turned back. He rode out a third time, and she was there, and he turned back.</p>
+  <p>The fourth time she was not there. She had looked a long while down the river that morning toward Santa Rita, and at the old water tank below the big house that the Romeros never used, which every old woman on that river knew the story of. How in her own great-grandfather&rsquo;s time, when the Lipan bands still came down to water there in the dry months, the Romero men had poisoned that tank one summer, and the people who drank from it had died along its banks. It had been a long time ago. Nobody at Santa Rita spoke of it. But there are debts, she told Chencho, that the land keeps the books on, and she could not sit in the road forever.</p>
+  <p>She stayed home on her cot with her face to the wall.</p>
+</section>
+
+<section>
+  <h2>VI. Zacate y Carrizo</h2>
+  <p class="dateline">Rancho Santa Rita &middot; October 1915</p>
+  <p>The Romeros had a rule older than the ranch, that a Romero did not take a human life, and they were proud of it the way they were proud of everything. But they were the best shots on that river. When they saw the dust of the company coming they put on their cartridge belts and went out among the corrals and the mesquite and opened fire. They shot the hats off the Rangers&rsquo; heads. They shot the horns off saddles and the heels off boots. They put bullets between men&rsquo;s arms and their ribs, and through the brims of their hats, and past their ears close enough to burn.</p>
+  <p>Dalton turned in his saddle, looking around. <em>I was always told the Romeros didn&rsquo;t kill. They&rsquo;re killing my men.</em></p>
+  <p><em>Sheriff,</em> said the Ranger sergeant beside him, <em>nobody&rsquo;s dead. Count them.</em></p>
+  <p>He had them counted. Not one man was so much as scratched.</p>
+  <p>Then he gave his order. <em>Anybody who says he&rsquo;s a Romero, kill him. Anybody who&rsquo;s standing with Don Mariano, leave him alone.</em></p>
+  <p>The Romeros had run out of ways to hold the Rangers off without killing anybody, and they would not do that. And they had one rule older than the other one, which was that a Romero did not lie. So as the Rangers came through the corrals asking each man, <em>Romero? Are you a Romero?</em> some of them pulled up a stalk of grass and put it in their teeth, and when the question came they took it out and held it up and said, <em>Zacate.</em> Grass. And some of them snapped off a piece of the river cane that grew along the tank and held it in their hands, and said, <em>Carrizo.</em> Cane. The Rangers took it for their names and went on past them. To this day on that river there are families called Zacate and families called Carrizo who will tell you, if you ask them right, that their name is a stalk of grass held up in front of a gun.</p>
+  <p>Those who stood with Don Mariano in the sala lived. Everyone else at Santa Rita that day who answered to the name of Romero died, the men and the boys, and the old men, and not only the men. The Rangers left the bodies where they fell, the way some of them were doing that autumn along the river, so the brush would know.</p>
+  <p>Dalton had the great carved chair carried out of the sala into the yard. What he did with it there, the women who came afterward to wash the dead never said, and nobody ever asked them.</p>
+</section>
+
+<section>
+  <h2>VII. The River</h2>
+  <p class="dateline">The same day</p>
+  <p>He took his grandfather with him when he rode out. Don Mariano was ninety and rode straight. At noon they stopped at the river below Santa Rita and the cook got a fire going, and Dalton had a table and two chairs set up in the shade of the cane and a plate brought.</p>
+  <p><em>I&rsquo;ll eat with my grandfather,</em> he said. <em>Sit down, abuelo.</em></p>
+  <p>Don Mariano had sat at one plate with Pilar&rsquo;s daughter once, for the length of one lifted fork, and he had lived thirty-six years since then on the strength of never doing it again. He looked at the plate and at the river.</p>
+  <p><em>Grandson, I&rsquo;m filthy from the road. Let me wash first.</em></p>
+  <p><em>Go and wash, abuelo.</em></p>
+  <p>He thought: if I don&rsquo;t sit, he&rsquo;ll shoot me, and if I sit, I&rsquo;ve sat. Better to go by my own hand. So he went down to the water through the cane, and took off his boots, and tied his long white hair round his ankles with the cord from his hat, and threw himself into the river.</p>
+  <p>The vaqueros of that river will tell you what happened next, and so will their grandchildren. A water snake as long as a wagon tongue came up from the bottom of the Rio Grande where the current runs green, and took the old man up on its back, and carried him across to the Mexican side and down into the deep water under the bank, and there he lived twelve years among the river people before anybody saw him again. Some say he came out at last at Camargo, dry as a bone. Some say he never came out.</p>
+  <p>Dalton sat at the table. <em>Now my grandfather is coming,</em> he thought. <em>Now my grandfather is coming.</em> The food went cold. At last he had the cane searched, and the bank, and when it got dark he had the river searched with lanterns, and then he had his own men turn out their saddlebags and the pockets of their coats, as if an old man could hide in a coat. He could not find him anywhere. <em>He&rsquo;s gone, then,</em> he said, and they rode on.</p>
+</section>
+
+<section>
+  <h2>VIII. The Arroyo</h2>
+  <p class="dateline">Arroyo Prieto &middot; that night</p>
+  <p>They came to Arroyo Prieto after dark and made camp. It had not rained in that country in two months. The arroyo bed was a road of white sand, smooth and soft and still warm from the day, and some of the men spread their blankets down there. Others threw their saddles down on the hard ground of the banks above. Among the ones who went down into the sand were the few who had held back at Santa Rita, who had kept their rifles on their saddles and said nothing and been cursed for it. Most of the ones who had not held back lay on the banks.</p>
+  <p>Then the red ants came up out of the ground. Big red harvesters, the kind whose bite feels like a coal, boiling up out of their beds wherever a man had lain down, on the banks and in the sand alike. Men leaped up all over the camp in the dark, cursing and slapping. <em>Ants! Ants, God damn it!</em> And they changed places. The ones in the sand climbed up onto the banks, and the ones on the banks went down into the sand, Dalton with them, and spread their blankets again, and slept.</p>
+  <p>Far up the country to the north, where nobody in that camp could see it, a storm that had come in off the Gulf was standing over the hills and raining as if it would never stop.</p>
+  <p>The water came down Arroyo Prieto a little after two in the morning. The men on the banks said afterward that they heard it before they saw it, a sound like a freight train in a cut, and then a wall of brown water as high as a man on horseback with whole mesquite trees turning in it. It filled the arroyo from bank to bank in less time than it takes to tell it. It took the men in the sand and their blankets and their horses and their rifles and Dalton Rourke and carried them down into the Rio Grande, and the Rio Grande carried them down to the Gulf of Mexico, and they were food for the fish and the turtles. A few saddles turned up on sandbars below Brownsville, weeks later. Nothing else.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>All that winter on the river people talked about it in low voices. It wasn&rsquo;t right, some said, what was done to the Romeros, no matter what. And the women said the Romeros had their own old debts, and the land keeps the books. And the men said that Dalton had got just what he had coming, and had not lived to enjoy one day of what he had wanted all his life.</p>
+  <p>Do&ntilde;a Natividad heard them talking on her gallery one evening, the women who came to learn from her, and asked them what it was. They told her. She sat a while with her hands in her lap. Then she said it to them, the Gospel they had heard read at Mass all their lives, and they heard it as if for the first time.</p>
+  <div class="verse">
+    <p>For as in the days before the flood, they were eating and drinking, marrying and giving in marriage, even till that day in which Noe entered into the ark, And they knew not till the flood came, and took them all away; so also shall the coming of the Son of man be.</p>
+    <p>&mdash; Matthew 24:38&ndash;39</p>
+  </div>
+  <p><em>He wanted it so badly,</em> she said. <em>He was so busy wanting it. They all were.</em></p>
+  <p>She sent Chencho out the next morning to cut cane by the river. When he came back she sat on the gallery and split it and wove it, the way she had as a girl at Santa Rita, into a new seat for an old chair whose seat had rotted through, and when it was done she set the chair out under the mesquite by the road, in the thin shade, where anybody who was tired could sit down.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">Death carries off a man who is gathering flowers and whose mind is distracted, as a flood carries off a sleeping village.<cite>Dhammapada 47, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary tells how King Pasenadi of Kosala, wanting the trust of the Buddha&rsquo;s monks, asks the Buddha&rsquo;s own clan, the proud S&#257;kyans, for a bride. They send him the daughter of a S&#257;kyan noble and a slave woman, and the noble pretends to eat from one dish with her. Her son Vi&#7693;&#363;&#7693;abha, visiting his mother&rsquo;s kin at sixteen, learns the truth when a slave washes the seat he sat on with milk and water, and vows to wash it in their blood. Woven through are the stories of Pasenadi&rsquo;s schoolfriends, the blind teacher Mah&#257;li and the general Bandhula, whom Pasenadi has murdered with his thirty-two sons, and of Bandhula&rsquo;s widow Mallik&#257;, who goes on serving the monks after reading the news. When Pasenadi is deposed and dies outside a shut city gate, Vi&#7693;&#363;&#7693;abha marches on the S&#257;kyans. Three times the Buddha sits in his path in the thin shade of a tree; the fourth time he does not, knowing the S&#257;kyans once poisoned a river. The S&#257;kyans, who will neither kill nor lie, are massacred, except some who hold up grass or reeds, and the S&#257;kyan Mah&#257;n&#257;ma, who drowns himself rather than eat with his grandson and is carried off by a serpent king. That night ants drive the army down into a dry riverbed, and a flood carries them all to the sea. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Vi%E1%B8%8D%C5%AB%E1%B8%8Dabha">Vi&#7693;&#363;&#7693;abha</a> and <a href="https://en.wikipedia.org/wiki/Pasenadi">Pasenadi</a>.</p>
+    <h3>The Rio Grande border, 1915</h3>
+    <p>In January 1915 a manifesto called the <a href="https://en.wikipedia.org/wiki/Plan_of_San_Diego">Plan of San Diego</a> called for an uprising in South Texas and the killing of white men over sixteen. Raids began that summer and peaked in August and September, with attacks on ranches and trains and telegraph lines, and about twenty-one Americans were killed. The reprisals were far worse. Texas Rangers, local lawmen and vigilantes killed Mexican Americans and Mexicans across the border country, sometimes leaving the bodies where they fell as a warning. Estimates of the dead in the decade run from three hundred to five thousand. Mexicans called the Rangers <i>los diablos tejanos</i>, and the years are remembered as <a href="https://en.wikipedia.org/wiki/La_Matanza_(1910%E2%80%931920)">La Matanza</a>, the massacre; in 1919 State Representative Jos&eacute; Tom&aacute;s Canales brought about a legislative investigation of the Rangers.</p>
+    <p>Many Tejano families on the river traced their land to the <a href="https://atlas.thc.texas.gov/Details/5507017720">porciones</a> that a Spanish royal commission began surveying in 1767 at Laredo, Mier, Camargo, Revilla and Reynosa. Healers like Do&ntilde;a Natividad were part of daily life in the region; the most famous, <a href="https://en.wikipedia.org/wiki/Pedro_Jaramillo">Don Pedrito Jaramillo</a>, &ldquo;the healer of Los Olmos Creek,&rdquo; treated thousands until his death in 1907 (see <a href="https://en.wikipedia.org/wiki/Curanderismo">curanderismo</a>). Esperanza, Rancho Santa Rita, Arroyo Prieto and every character here are invented, and so are the massacre at Santa Rita and the flood; no Ranger company was ever lost that way. The violence they stand for was real.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Vi&#7693;&#363;&#7693;abha from the Dhammapada commentary (verse 47). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-03.htm">The original</a>. Scripture from the Douay-Rheims Bible. Written by Claude Opus 5.5.
+  <div class="pager"><a href="notional-water.html">&larr; Notional Water</a><a href="index.html">All stories</a><a href="since-morning.html">Since Morning &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // The feathery shadow of mesquite branches, swaying faintly over sunlit ground.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, fronds = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    fronds = [];
+    var n = Math.round(Math.max(7, Math.min(16, W / 70)));
+    for (var i = 0; i < n; i++) {
+      var side = i % 3; // 0 top, 1 left, 2 right
+      var f = { len: 140 + Math.random() * 160, pairs: 12 + Math.floor(Math.random() * 8), seed: Math.random() * 100,
+                sway: 0.025 + Math.random() * 0.03, speed: 0.004 + Math.random() * 0.004 };
+      if (side === 0) { f.x = Math.random() * W; f.y = -10; f.ang = Math.PI / 2 + (Math.random() - 0.5) * 1.1; }
+      else if (side === 1) { f.x = -10; f.y = Math.random() * H * 0.7; f.ang = (Math.random() - 0.3) * 0.9; }
+      else { f.x = W + 10; f.y = Math.random() * H * 0.7; f.ang = Math.PI + (Math.random() - 0.7) * 0.9; }
+      f.curve = (Math.random() - 0.5) * 0.004;
+      fronds.push(f);
+    }
+  }
+  function frond(f) {
+    var a = f.ang + Math.sin(t * f.speed + f.seed) * f.sway;
+    var x = f.x, y = f.y, step = f.len / f.pairs;
+    ctx.beginPath();
+    for (var i = 0; i < f.pairs; i++) {
+      a += f.curve * step;
+      var nx = x + Math.cos(a) * step, ny = y + Math.sin(a) * step;
+      var leaf = 9 + 7 * Math.sin(Math.PI * (i + 1) / (f.pairs + 1));
+      var flut = Math.sin(t * f.speed * 3 + f.seed + i) * 0.08;
+      for (var s = -1; s <= 1; s += 2) {
+        var la = a + s * (1.05 + flut);
+        var cx = nx + Math.cos(la) * leaf * 0.55, cy = ny + Math.sin(la) * leaf * 0.55;
+        ctx.moveTo(cx + Math.cos(la) * leaf * 0.5, cy + Math.sin(la) * leaf * 0.5);
+        ctx.ellipse(cx, cy, leaf * 0.5, 2.6, la, 0, Math.PI * 2);
+      }
+      x = nx; y = ny;
+    }
+    ctx.fill();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(70,58,38,0.055)';
+    if ('filter' in ctx) ctx.filter = 'blur(1.5px)';
+    for (var i = 0; i < fronds.length; i++) frond(fronds[i]);
+    if ('filter' in ctx) ctx.filter = 'none';
+  }
+  function loop() { t++; draw(); requestAnimationFrame(loop); }
+  size(); make();
+  if (reduce) draw(); else loop();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

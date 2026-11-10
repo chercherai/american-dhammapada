@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notional Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on dry-lake clay; low on the page a sheet of mirage water shimmers under a far town. */
+  --ground: #ece3d0;
+  --ground-2: #e1d5bb;
+  --paper: #2b2620;
+  --paper-dim: #6b6252;
+  --lake: #276a78;
+  --heat: #b9682a;
+  --line: rgba(43,38,32,.16);
+  --panel: rgba(225,213,187,.72);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #e9eadf 0%, var(--ground) 38%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--lake); }
+a:focus-visible { outline: 2px solid var(--lake); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--lake); text-wrap: balance; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+.epigraph { border-left: 1px solid var(--lake); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--lake); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--lake); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--heat); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--lake); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--lake); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--lake); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--lake); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--lake); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--lake); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--lake); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.2 &middot; Mar&#299;cikamma&#7789;&#7789;h&#257;nika</span></nav>
+<header>
+  <h1>Notional Water</h1>
+  <div class="epigraph">The thirsty one supposeth it to be water till he cometh unto it and findeth it naught, and findeth, in the place thereof, Allah Who payeth him his due<br>&mdash; Qur&rsquo;an 24:39</div>
+</header>
+
+<p class="heard"><span class="heard-lead">H&#299;ch sima&#703;it,</span> in the Box.</p>
+
+<section>
+  <h2>I. The Lane</h2>
+  <p class="dateline">Medina Nahr, Fort Irwin, California &middot; July 2008</p>
+  <p>Medina Nahr means River Town, and there has never been a river within sixty miles of it. The Army built it in the Mojave Desert out of shipping containers faced with plaster the color of dust: a police station, a clinic, a hotel with no beds, a row of shops, a mosque with a plywood minaret and a loudspeaker that worked. For two weeks out of every month it had people. They came up from San Diego and El Cajon on a contractor&rsquo;s bus, Iraqis nearly all of them, and each was handed a card with a name that was not his name, and a trade, and a tribe, and an opinion of the Americans. They slept in trailers behind the false fronts and were the town&rsquo;s butcher and its mayor and its widows until the bus took them home.</p>
+  <p>The Army had a word for all of it. The word was notional. It meant a thing that existed for the purposes of the exercise. There was notional water in the water tower and a notional sheikh in the big house, and by the end of any afternoon there were notional dead in the street, who lay where they fell until a horn blew.</p>
+  <p>Specialist Hayder Jassim was a medic in an infantry company that had come out from Kansas to be taught, in three weeks, the country where he had been born. His name tape said JASSIM. The platoon called him Doc, as platoons call every medic. He was twenty. In October the battalion was going to Diyala for a year.</p>
+  <p>Every soldier in the Box wore a harness of laser sensors over his armor and a ring of them around his helmet. When a blank round or a buried charge found him, the harness screamed, one flat tone that went on until somebody with authority shut it off. In his pocket he carried a sealed card that told him, when the time came, what his wound was. The men with authority were the observer-controllers, sergeants in soft caps who walked through the fighting untouched and wrote things down. Each had on his belt a gray plastic thing like a child&rsquo;s pistol that could kill a harness from across a street or bring it back to life. The Army had some long name for that too. Everybody in the Box, privates and colonels, called it the god gun.</p>
+  <p>On the second day in the lanes a car went up in the market. It was a propane charge and a drum of something that made black smoke, and when the smoke lifted there were six people down among the plywood fruit. Hayder&rsquo;s was a man by the tea stall whose left leg ended above the knee.</p>
+  <p>The leg did end there. The contractor hired amputees. Over the stump the man wore a sleeve of silicone with a white knob of bone in it and a tube that pumped red syrup each time he squeezed a bulb in his fist, and he was squeezing it, and he was screaming for his mother in Arabic.</p>
+  <p>Hayder knelt in the syrup and got the tourniquet out of his bag, and his hands would not do it. He had put that tourniquet on his own thigh in the dark at Fort Sam Houston in under forty seconds. Now the strap went through the buckle the wrong way, and then the right way, and he could not find the windlass with his fingers though he was looking straight at it. The syrup was warm. The scream was in the accent of his mother&rsquo;s kitchen. Sergeant First Class Dunn stood over him with a clipboard, counting under his breath, and at some number he stopped counting and pointed the god gun at the man on the ground.</p>
+  <p><em>He&rsquo;s bled out, Doc. Move to your next one.</em></p>
+  <p>Across the street an old man sat on an upturned crate under the awning of the tea stall. He had not moved when the car went up and he did not move now. The card around his neck said HAJJI SABAH, TEA SELLER, 70, NEUTRAL. He was watching Hayder&rsquo;s hands the way a teacher watches a boy at the blackboard.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>When the lane was over the horn blew and the dead got up. The man with one leg unstrapped his wound, hung it on the fruit stall, and lit a cigarette. Somebody ran a garden hose over the gravel. Hayder sat on the curb with his aid bag between his boots, and after a while a small glass of tea came down in front of his face, real tea, black, with cardamom in it.</p>
+  <p><em>Whose son are you?</em> the old man said, in the Arabic of the south.</p>
+  <p><em>Jassim Abd al-Zahra&rsquo;s. From Nasiriyah.</em></p>
+  <p><em>And where did Jassim&rsquo;s son learn to sit on a curb like a refugee?</em></p>
+  <p><em>Rafha.</em></p>
+  <p>The old man lowered himself onto the curb beside him, which took some time. His name off the card was Kadhim. He had been a schoolmaster at Suq al-Shuyukh for thirty-one years, and in March of 1991, when the rising in the south was put down, he had walked across the border with what he had on. He had spent six years behind the wire at Rafha, in the Saudi desert, with thirty thousand others. He had kept a school there in a tent, with a square of canvas painted black for a board.</p>
+  <p><em>Then perhaps I had you,</em> he said. <em>I had four hundred of you. They shaved all your heads for the lice and I never could tell one from another.</em></p>
+  <p>Hayder had come out of Rafha at seven, to Lincoln, Nebraska, where it snowed. He remembered a black square with white letters on it and a stick that pointed.</p>
+  <p>He had not meant to say anything. He said it into the tea glass. That his hands had been good until today. That in October it would be the real one. That his father had stopped praying somewhere over the Atlantic and he himself had only his mother&rsquo;s prayers, by ear, like a song in a language he half knew. That he did not know what a man was supposed to do with this much fear and nobody in his chain of command seemed to think it was a medical question.</p>
+  <p><em>Ustadh. Give me something to do.</em></p>
+  <p>The old man looked at him for a long time. Then he took from the pocket of his vest a string of clay beads, a hundred of them, small and gray-brown, the clay of Karbala, worn dark and smooth as apple seeds.</p>
+  <p><em>You know the night prayer? Your mother&rsquo;s will do. After it, go where nobody is. One bead, one breath. On the breath out,</em> l&#257; il&#257;ha. <em>On the breath in,</em> ill&#257; All&#257;h. <em>Nothing else goes with it. When you have it, come and tell me.</em></p>
+</section>
+
+<section>
+  <h2>II. Twelve Nights</h2>
+  <p class="dateline">The Central Corridor</p>
+  <p>The company went out into the desert the next morning and did not see a building for twelve days. The Box is a thousand square miles of gravel and creosote bush with brown mountains standing up out of it like the backs of animals, and a regiment lives there whose only work is to be the enemy. They came at dawn out of the sun and at dusk out of the dust. By the fourth day half the battalion had been killed twice and brought back by the god gun so it could be killed again.</p>
+  <p>At night, when the aid station was quiet, Hayder walked out past the last vehicle to where nobody was. He found a flat stone. He stood and faced a little east of north, because from California the shortest way to Mecca goes up over the top of the world, and he said the night prayer as his mother said it, with his forehead on the stone, since he had no tablet of clay to put it on. Then he sat down on his heels and took out the beads.</p>
+  <p>He did it the way he did everything the Army had taught him, which was hard. The first night he went around the string once and his mind went around the Box eleven times. The second night he went around five times. By the sixth night he was doing three thousand breaths between midnight and stand-to, with his thumbnail white on the clay. Nothing else goes with it, the old man had said, and everything went with it. The man by the tea stall went with it, screaming, and the strap going through the buckle the wrong way. His mother went with it, standing at the sink in Lincoln. His father went with it, who had driven a truck for the rising in Nasiriyah for nine days in 1991 and had not said one sentence about it since, and who boxed parts on the night shift and slept through the day with a towel over the window. October went with it. He would get to forty beads and find he had been counting days.</p>
+  <p>He tried holding the breath at the top. He tried sitting until his feet went dead. One night he fell asleep upright and dreamed the beads were teeth and woke with his jaw clenched.</p>
+  <p>On the twelfth night he went around the string once, slowly, and put it in his pocket.</p>
+  <p>He did not think the old man had given him a bad thing. He thought it was a good thing made for somebody else, the way a boot can be a good boot and not your size. <em>I&rsquo;ll go back,</em> he thought. <em>I&rsquo;ll tell him I couldn&rsquo;t, and ask him for one that fits.</em> He felt easier than he had in twelve days, having decided that, and slept three hours on the gravel with his helmet for a pillow.</p>
+</section>
+
+<section>
+  <h2>III. The Lake</h2>
+  <p class="dateline">The dry lake &middot; the thirteenth day, 1300 hours</p>
+  <p>The order came at breakfast. The last fight of the rotation would be for Medina Nahr, and the company would go in on foot, nine kilometers across the dry lake, because the vehicles had been notionally destroyed the day before and nobody had the authority to bring a vehicle back.</p>
+  <p>A dry lake is the flattest thing there is. The water that made it has been gone some thousands of years, and it left a floor of pale clay cracked into plates the size of dinner trays, level to the horizon, without a stone on it. They stepped off at noon. It was a hundred and nine degrees. Each man had six quarts of water on him and drank on the hour whether he wanted to or not.</p>
+  <p>Around one o&rsquo;clock the lake filled.</p>
+  <p>It came in from the west, quietly, a long bright sheet of it, blue and then silver, with a clean shore. Medina Nahr rose out of the far side. The minaret stood up white, and under it a second minaret hung down into the water, and the hotel with no beds floated a little off the ground with daylight under it. There were palm trees. There are no palm trees at Medina Nahr.</p>
+  <p><em>Well, look at that,</em> somebody said behind him. <em>River Town got its river.</em></p>
+  <p>They all knew what it was. They walked toward it anyway, since that was the direction, and it kept its distance. Every step they took, the shore drew back one step. Where the water had been a minute ago there was clay, and their boots, and the white dust their boots put up.</p>
+  <p>Hayder had seen this lake before. At Rafha it had come every afternoon in the hot months, outside the wire to the north, and the small boys had run to the fence to see if it was any closer today. His mother told him it was the Euphrates. She said the river had not forgotten them and was showing itself so they would know. He had believed her until he was six, and after that he had gone on running to the fence.</p>
+  <p>He watched it now as he had been told to watch his breath, and for the first time in thirteen days nothing else went with it.</p>
+  <p>From far off it had a shore and a color and a town standing in it. A man could swear to it in court. Close up there was no place where it stopped being water and started being ground. It simply was never where you were. He thought of the town itself, the real one over there under the false one, which from here was a town and from inside was forty steel boxes and a horn. He thought of the leg by the tea stall. He thought of Nasiriyah, which he had carried for thirteen years in Nebraska as a place with streets and a river and a house in it, and which in October he would walk up to with his boots on.</p>
+  <p>Then he thought of the one who was doing the thinking. Doc. Jassim&rsquo;s son. The one with the hands. He had been carrying that one a long time too, and it had looked solid enough from wherever he was standing. It had been born in a certain room and it was older now than it had been at the last halt. He tried to walk up to it. He could not find the place where it began.</p>
+  <p>He went the next four kilometers like that, looking. Some way back his thumb had stopped moving on the beads in his pocket, and he had not noticed.</p>
+</section>
+
+<section>
+  <h2>IV. The Wash</h2>
+  <p class="dateline">East of Medina Nahr &middot; 1540 hours</p>
+  <p>In July the clouds build over those mountains every afternoon, and most afternoons that is all they do. This time they went black on the bottom, and a gray curtain came down on the high ground to the south and stood there for twenty minutes. No rain fell on the company. They smelled it, wet dust and creosote, which is the best smell in that country.</p>
+  <p>Past the edge of the lake bed there was a wash to cross, a gully of sand and round stones ten meters wide that had been dry since anybody&rsquo;s map was drawn. They heard it before they got there. It was running bank to bank, brown as cocoa and louder than a truck, with whole bushes going by in it.</p>
+  <p>The captain looked at it. The controllers looked at it and got on their radios, and the word came down the line that the war was paused for safety, that the water was real, and that anybody who went in it would answer to the sergeant major. The company sat down along the bank in its harnesses and waited for the desert to finish.</p>
+  <p>Hayder went down to the edge. A little upstream a shelf of rock ran across the wash, and the flood came over it and fell about the height of a man&rsquo;s knee. He took off his gloves and his helmet. He washed his face in the brown water, and his arms to the elbow, and wiped his wet hand over his head and over the tops of his boots, since the boots were not coming off. It was cold. It had been in the sky a half hour ago.</p>
+  <p>Then he sat on his heels on the wet sand and looked at the place below the shelf.</p>
+  <p>Where the water struck, it made foam. The foam stood in a heap at the foot of the rock, tan and white, as big as a footlocker, shaking a little. He would have said it was a thing. He looked closer and it was bubbles, some the size of a pea and some the size of his fist, and one that swelled up as big as a helmet. Each of them had the whole sky in it, bent, and a very small soldier squatting on a bank. Each one rode out from the rock a hand&rsquo;s breadth, or an arm&rsquo;s length, and was gone, and the place where it had been closed over. The heap stayed. Not one bubble in it was the same as when he sat down.</p>
+  <p><em>It&rsquo;s made like this,</em> he thought. <em>And it breaks like this.</em></p>
+  <p>He looked up the bank at the company. A hundred and twenty men sat in the sun with their helmets off, each with a sealed card in his pocket. He looked at his own hands, which were wet and perfectly still. He looked for a long while at the foam, at the swelling and the riding out and the closing over, and he stopped looking for anything in it that would stay long enough to be afraid for.</p>
+</section>
+
+<section>
+  <h2>V. The Tea Stall</h2>
+  <p class="dateline">Medina Nahr &middot; the same hour</p>
+  <p>Four kilometers west the town was being set for its last battle. Men from the contractor were burying charges in the market. The mayor was going over his lines. A young woman from El Cajon named Nadia, who played a widow and had done it for nine rotations, was pinning her scarf in the side mirror of a notional taxi beside the tea stall, and she told the rest of this afterward to anybody who asked and several who did not.</p>
+  <p>The stall was a plywood counter and an awning. The old man kept a kettle on a propane ring there and a jar of cardamom pods with the lid off, and you could smell it the length of the street. He was sitting on his crate with his hands on his knees. Nadia said he lifted his head and looked east over the roofs, toward where the sky was dark, the way you look across a road at somebody you know. Then he spoke, loudly, in the voice he must have used on four hundred boys.</p>
+  <p><em>Hajji,</em> she said, <em>who are you talking to?</em></p>
+  <p><em>A student,</em> he said. He poured a glass of tea, set it on the counter, and left it there.</p>
+  <p>At the wash Hayder heard it at his right shoulder. It was plain and close over the noise of the water, and it was in the Arabic of Suq al-Shuyukh.</p>
+  <p><em>Yes, my son. That is it. Like the foam and like the</em> sar&#257;b. <em>That is exactly how it is made, and that is exactly how it goes.</em></p>
+  <p>And then the voice recited, as a schoolmaster recites, so that it can be taken down.</p>
+  <div class="verse">
+    <p>As for those who disbelieve, their deeds are as a mirage in a desert. The thirsty one supposeth it to be water till he cometh unto it and findeth it naught, and findeth, in the place thereof, Allah Who payeth him his due; and Allah is swift at reckoning.</p>
+    <p>&mdash; Qur&rsquo;an 24:39</p>
+  </div>
+  <div class="verse">
+    <p>He sendeth down water from the sky, so that valleys flow according to their measure, and the flood beareth (on its surface) swelling foam - from that which they smelt in the fire in order to make ornaments and tools riseth a foam like unto it - thus Allah coineth (the similitude of) the true and the false. Then, as for the foam, it passeth away as scum upon the banks, while, as for that which is of use to mankind, it remaineth in the earth. Thus Allah coineth the similitudes.</p>
+    <p>&mdash; Qur&rsquo;an 13:17</p>
+  </div>
+  <p>Hayder did not turn around. He knew there was nobody at his shoulder. He stayed on his heels by the water and felt for the fear, the way a man pats his pocket for his wallet, and it was not in that pocket or any other. He felt for the one who had been afraid. There was the wash, and the shelf of rock, and the foam being made and going.</p>
+  <p>Something was finished. He knew it the way you know a tooth is out. Whatever a man is sent into the desert to do, he had done it at the edge of a ditch in the time it takes a company to smoke.</p>
+  <p>The flood dropped as fast as it had come. In forty minutes it was to the ankle. The controllers gave the war back, and the company went across on wet stones, and behind them the foam lay stranded along both banks in dirty lines, ticking.</p>
+</section>
+
+<section>
+  <h2>VI. Endex</h2>
+  <p class="dateline">Medina Nahr &middot; dusk</p>
+  <p>They came into the town at sundown, and it went the way those things go. There were mortar simulators and a machine gun on the hotel roof, and a second car in the market, bigger than the first. Every harness in second platoon began to scream at once.</p>
+  <p>Hayder&rsquo;s did not. He noticed this and put it aside, because the man with one leg was down by the fruit stall again in the same place, pumping syrup and calling for his mother.</p>
+  <p>The tourniquet went on in the time it takes to say so. Hayder&rsquo;s hands did it and he watched them do it. He told the man in Arabic that he had him, and then, since the man was from Lakeside and had lost the leg on a motorcycle, he told him again in English, and the man stopped screaming for a second and looked up at him with interest. Hayder marked the time on the man&rsquo;s forehead with a grease pencil and went on to the next one, and the one after. He was not calm the way you are calm when you are holding something down. There was nothing to hold down. He knelt in the syrup among the screaming harnesses and it was a street and some people and what his hands knew.</p>
+  <p>Sergeant First Class Dunn came through with his clipboard and stopped. He looked at Hayder&rsquo;s harness, which had a small green light on it and was silent. He looked at the crater, which was three meters away.</p>
+  <p><em>You&rsquo;re dead, Doc.</em></p>
+  <p><em>It didn&rsquo;t go off, Sergeant.</em></p>
+  <p>Dunn unhooked the god gun from his belt and pointed it at the middle of Hayder&rsquo;s chest and squeezed. Nothing. He took one step closer and squeezed again. He checked something on the side of the gun, pointed it at a private sitting against the wall, whose harness went off like a smoke alarm, turned that one off, and pointed it at Hayder a third time.</p>
+  <p>The green light stayed green. Dunn had been a controller for three years and had killed colonels with that gun.</p>
+  <p><em>Well,</em> he said finally. <em>I can&rsquo;t find you. Carry on.</em> And he wrote something on the clipboard, and looked at it, and crossed it out.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The horn blew at full dark. End of exercise. All down the street the dead sat up and felt for their cigarettes, and somebody turned on the hose.</p>
+  <p>The glass of tea was still on the counter of the stall. It was cold and had a skin of dust on it. Hayder drank it standing. Then he took the old man&rsquo;s right hand in both of his and kissed it and touched it to his forehead, which he had seen his father do once, to an uncle, in a tent.</p>
+  <p>He held out the beads.</p>
+  <p><em>Keep them,</em> the old man said. <em>Did you ever get to a hundred?</em></p>
+  <p><em>No, Ustadh. I never did.</em></p>
+  <p><em>No,</em> the old man said. He seemed pleased. He looked up the street, where the widows were laughing and a boy was rolling up the hose, and he said the rest quietly, to no one in particular.</p>
+  <div class="verse">
+    <p>Everyone that is thereon will pass away;<br>There remaineth but the Countenance of thy Lord of Might and Glory.</p>
+    <p>&mdash; Qur&rsquo;an 55:26&ndash;27</p>
+  </div>
+  <p>The buses came for the townspeople at noon the next day. The company rode out an hour behind them in the backs of trucks, along the edge of the dry lake, with their harnesses in a pile on the floor.</p>
+  <p>The lake was back. It lay out blue to the foot of the mountains, with a clean shore. Medina Nahr stood in it up to its doorsills with nobody inside, and the minaret hung down under itself, and the trucks went along beside the water for an hour and never got a tire wet.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He who knows that this body is like froth, and has learnt that it is as unsubstantial as a mirage, will break the flower-pointed arrow of Mara, and never see the king of death.<cite>Dhammapada 46, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is one of the shortest in the collection. A monk takes a meditation subject from the Buddha and goes into the forest, strives hard, and gets nowhere. He sets out to ask for a subject that suits him better. On the road he sees a mirage and takes that as his subject; then, tired, he bathes in the river Aciravat&#299; and sits by a waterfall watching bubbles of foam form and burst, and takes that. The Buddha, seated far away in his Perfumed Chamber, sees him and says, &ldquo;It is even so,&rdquo; and speaks the verse, and the monk is freed where he sits. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-02.htm">the full commentary story</a>. The same pair of images, foam and <a href="https://en.wikipedia.org/wiki/Mirage">mirage</a>, stands side by side in the Qur&rsquo;an, in the two verses the schoolmaster recites.</p>
+    <h3>Fort Irwin, 2008</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Fort_Irwin_National_Training_Center">National Training Center at Fort Irwin</a> covers about a thousand square miles of the Mojave Desert north of Barstow, California. Visiting brigades fight a resident opposing force there, and laser sensors (the <a href="https://en.wikipedia.org/wiki/Multiple_Integrated_Laser_Engagement_System">MILES</a> system) register who has been hit. During the Iraq war the Army built a dozen or so mock Iraqi towns in &ldquo;the Box,&rdquo; first from garden sheds, then from shipping containers, later from masonry; the Army&rsquo;s own account of <a href="https://www.army.mil/article/8222/iraqi_village_on_irwin">one such village</a> dates from 2008. Contractors bused in Iraqi Americans, many from the San Diego area, to live in the towns during each rotation and play mayors, police, shopkeepers and mourners, alongside amputee actors fitted with simulated wounds. The 2008 documentary <a href="https://en.wikipedia.org/wiki/Full_Battle_Rattle"><em>Full Battle Rattle</em></a> was filmed in the best known of these towns, Medina Wasl. Medina Nahr and everyone in it are invented. &ldquo;Notional&rdquo; is the Army&rsquo;s ordinary word for anything simulated in an exercise, and the observer-controllers&rsquo; handheld device for killing and resetting a soldier&rsquo;s sensor harness really is called the god gun.</p>
+    <p>After the 1991 Gulf War, Shia in southern Iraq rose against Saddam Hussein&rsquo;s government; the <a href="https://en.wikipedia.org/wiki/1991_Iraqi_uprisings">uprisings</a> were crushed within weeks, and tens of thousands fled across the Saudi border. Saudi Arabia held them in a closed desert camp near Rafha, under guard and curfew, for more than a decade. Roughly half of those who were resettled abroad from Rafha went to the United States before the American program ended in 1997, according to the <a href="https://www.refworld.org/node/63427">U.S. Committee for Refugees</a>; communities grew in Dearborn, San Diego, Lincoln, Nebraska, and elsewhere. Twelver Shia commonly pray with the forehead resting on earth or a small tablet of clay from Karbala, and count remembrance on clay beads. From California the direction of Mecca is northeast, over the Arctic.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder who meditated on a mirage, from the Dhammapada commentary (verse 46). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-02.htm">The original</a>. Scripture from <em>The Meaning of the Glorious Koran</em>, tr. Marmaduke Pickthall (1930). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-midwifes-driver.html">&larr; The Midwife&#x27;s Driver</a><a href="index.html">All stories</a><a href="thin-shade.html">Thin Shade &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 400;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function town(y0, flip, a) {
+    // a few low blocks and one thin tower, far off to the right; flip draws the hanging reflection
+    var x0 = W * 0.68, s = Math.max(0.7, Math.min(1.2, W / 1100));
+    var b = [[0,26,9],[30,18,13],[52,30,8],[88,14,11],[106,24,7]];
+    ctx.fillStyle = 'rgba(70,84,88,' + a + ')';
+    for (var i = 0; i < b.length; i++) {
+      var w = b[i][1] * s, h = b[i][2] * s, x = x0 + b[i][0] * s;
+      var wob = flip ? Math.sin(t * 0.021 + i * 1.7) * 2.2 : 0;
+      ctx.fillRect(x + wob, flip ? y0 + 3 : y0 - h, w, flip ? h * 1.25 : h);
+    }
+    var tw = flip ? Math.sin(t * 0.017) * 2.6 : 0;
+    ctx.fillRect(x0 + 74 * s + tw, flip ? y0 + 3 : y0 - 30 * s, 3 * s, flip ? 34 * s : 30 * s);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var y0 = H * 0.74;
+    town(y0, false, 0.10);
+    town(y0, true, 0.06);
+    for (var i = 0; i < 24; i++) {
+      var y = y0 + 2 + i * 2.2 + i * i * 0.3;
+      var amp = 0.8 + i * 0.22;
+      var a = 0.13 * (1 - i / 24);
+      ctx.beginPath();
+      for (var x = -10; x <= W + 10; x += 14) {
+        var yy = y + Math.sin(x * 0.011 + t * 0.016 * (1 + i * 0.05) + i) * amp
+                   + Math.sin(x * 0.029 - t * 0.011 + i * 2.1) * amp * 0.5;
+        if (x === -10) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+      }
+      ctx.strokeStyle = 'rgba(52,118,134,' + a + ')';
+      ctx.lineWidth = 1 + i * 0.07;
+      ctx.stroke();
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

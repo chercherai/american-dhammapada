@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Brother</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on cream paper before sunrise, light theme; low on the page lie rows of flat white gravestones, all alike, and the first light crosses them slowly from the east, warming one and then the next; datelined sections. */
+  --ground: #f2ede2;
+  --ground-2: #e9e2d2;
+  --paper: #2c2a25;
+  --paper-dim: #6d675a;
+  --brick: #96402f;
+  --dawn: #c8962e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #fbf1d6 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(44,42,37,.2); }
+.series a:hover { color: var(--brick); }
+a:focus-visible { outline: 2px solid var(--brick); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--brick); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(150,64,47,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--brick); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--brick); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,253,246,.72); border: 1px solid rgba(44,42,37,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--dawn); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(44,42,37,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--brick); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--brick); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(44,42,37,.16); border-bottom: 1px solid rgba(44,42,37,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--brick); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--brick); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--brick); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--brick); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,253,246,.72); border-left: 2px solid var(--brick); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 1.13 &middot; Suman&#257;</span></nav>
+<header>
+  <h1>Little Brother</h1>
+  <div class="epigraph">They are happy now, and we<br>Soon their happiness shall see.<br>&mdash; John Cennick, &ldquo;Children of the Heavenly King&rdquo; (1742)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So ist mir&rsquo;s erz&auml;hlt worden,</span> on the square at Salem.</p>
+
+<section>
+  <h2>I. The Guest Table</h2>
+  <p class="dateline">Salem, Wachovia, North Carolina &middot; 1800 to 1815</p>
+  <p>Brother Heinrich Rothe kept the tavern at the lower end of Main Street, where the Brethren had put it on purpose, a good walk from the square, so that the wagoners and drovers and lawyers who stopped there would trouble the town as little as possible. He fed them all. In a week when the wagons were moving he fed sixty at a sitting. But that was the congregation&rsquo;s business, done for the congregation&rsquo;s account, and it was not what people meant when they spoke of Brother Rothe&rsquo;s table.</p>
+  <p>They meant the table in the back room. Any brother or sister on the road for the Saviour ate there, and the Elders had put it in his charge. Missionaries going out to the Cherokee at Springplace ate there, and ministers on the five-week road from Bethlehem, and the country preachers in from Friedberg and Hope with mud to the knee. Nobody at that table paid. In sixteen years it was hardly empty for a week together.</p>
+  <p>He had a gift for it, and the gift was known. In all of Wachovia nobody held a lovefeast without asking Brother Rothe first. He knew how many buns Bethania would eat and how many it would carry home in its pockets. He knew that Friedberg wanted the coffee sweet and Bethabara wanted it strong, and that the mugs must go down the benches oldest first, and what a room full of people can hear while they are chewing. A congregation could spend twenty dollars on a lovefeast, and if it had not asked him the people went home saying, <em>What kind of a lovefeast was that?</em> So they asked, and he went. He rode to Bethania and Friedland and out to Hope, and he stood in other people&rsquo;s kitchens counting other people&rsquo;s buns. Sister Krause, the baker&rsquo;s widow, was sent for in the same way, and for the same reason. She had long since put her granddaughter at her own ovens.</p>
+  <p>And so it came about that the one table in Wachovia where Brother Rothe did not serve was his own.</p>
+  <p>His wife had gone home to the Saviour in 1799. He had three daughters. He put the eldest, Anna Rosina, in charge of the back room when she was sixteen, to lay the cloth and carry in the dishes and stand by the wall with the coffee pot while the guests talked. Sarah, the cook, sent the dishes out to her. Sarah belonged to the congregation, which had bought her in 1788 and hired her to the tavern, and she had been a communicant sister nearly as long as Anna Rosina had been alive. For some years now, by a rule of the Elders, she had sat for worship on the last bench.</p>
+  <p>The guests at that table talked of one thing. A girl who stood by that wall for three years heard more of the Saviour than most people hear in a lifetime of sermons, and heard it from tired people with their boots off, who had nothing to gain by it. In her second year Anna Rosina came to her father one evening with a white face and said that something had happened to her at the wall, that she had seen her own heart and it was settled, and she could not say more. He understood her. The same thing had happened to him, late, at forty, on a Good Friday, in the middle of the reading. It was the best thing he owned.</p>
+</section>
+
+<section>
+  <h2>II. The Lot</h2>
+  <p class="dateline">Salem &middot; 1806 to 1815</p>
+  <p>In Salem in those years nobody married without the Lot. A brother who wished to marry said so to the Elders, or the Elders thought of it for him, and a sister&rsquo;s name was proposed. Then they laid it before the Saviour. There was a bowl with three slips of paper rolled in it, one that said Yes, one that said No, and one blank, which meant the question should not have been asked. An Elder drew. If the slip said Yes the sister was asked, and might still refuse. If it said No, that was the end of it, and nobody spoke of it again, or was supposed to.</p>
+  <p>In 1806 the name of Anna Rosina Rothe was proposed for a brother called to the Cherokee mission, and the Lot said Yes, and so did she. She went out to Springplace on a wagon in October with a feather bed and a box of slates. Her father put the second daughter, Maria Elisabeth, at the wall in the back room.</p>
+  <p>Maria Elisabeth stood there four years. The same thing happened to her that had happened to her sister, in her own time and her own way, over a dish of stewed apples, while a deaf old preacher from Hope was telling how he had been found. In 1810 the Lot said Yes for her and a miller at Bethania, and she went to live at the mill.</p>
+  <p>That left Benigna. She was fifteen and the smallest of the three, with a way of laughing through her nose that her father had tried to correct and then given up on. She took the coffee pot from her sister and stood at the wall.</p>
+  <p>A Virginia wagoner had once settled his reckoning at the tavern with a peacock, having nothing else, and the bird lived on in the stable yard for years and screamed at every team that came in. Benigna fed it from her apron. She gathered the tail feathers when it dropped them and stood them in a brown jug on the sill of the back room, where the guests could look at them, and the Elders, who did not care for finery, let it pass, since nobody had made them.</p>
+  <p>She stood there six years. Whatever had come to her sisters at that table came to her as well, and early, in her first winter. It did not stop there. The guests noticed it before her father did. Missionaries who had buried children in Surinam fell into the way of turning in their chairs and asking the girl with the coffee pot what she thought, and listening to the answer. An old bishop from Bethlehem, on his way through, said to Brother Rothe on the stairs, <em>That one has been further along the road than I have. Do you know it?</em> Brother Rothe took it as a courtesy to the house.</p>
+  <p>One autumn a missionary&rsquo;s wife came through from the Danish islands. She had buried her third child at St. Thomas and had not slept a night through since. She sat on at the table after the others had gone up. Benigna set down the pot and sat with her, which was against the order of the house, and said very little, and stayed until the candle was out. In the morning the woman told Sarah in the kitchen that she had slept, and asked the girl&rsquo;s name, so as to put it in her prayers. <em>You would do better to ask to be put in hers,</em> Sarah said.</p>
+  <p>Twice the Elders proposed her name. The first time it was for a brother in the joinery, in 1813. The Lot said No. The second time, in the autumn of 1815, it was for a widowed schoolmaster at Lititz, in Pennsylvania, a good man with two small children, and Benigna, who was not supposed to know, knew. The Lot said No.</p>
+  <p>She went on carrying the dishes through November. She laughed as before. But she ate less, and then little, and by Christmas she was sending her plate back to Sarah as it had come. The town said it was the Lot. A girl twice refused by the Saviour, they said, and her sisters both settled. The town had nothing else to say it was. Sarah, who saw the plates, said only that the child was not grieving, whatever she was doing, and nobody had asked her.</p>
+  <p>In February Benigna went to bed in the room over the kitchen, where it was warm.</p>
+</section>
+
+<section>
+  <h2>III. Over the Kitchen</h2>
+  <p class="dateline">The tavern &middot; the second week of March 1816</p>
+  <p>Brother Rothe was at Friedland that day, eleven miles out, in the kitchen of the meeting house, with two hundred buns on boards and a married sister weeping because the coffee had boiled. A boy came on the tavern&rsquo;s mare. <em>Sister Benigna asks for her father.</em></p>
+  <p>He left the buns and rode. It was eleven miles, and the whole way he thought of things he had meant to say to her at some time when the house was quieter. He tried to remember when he had last sat down in the back room, and could not. He came up the back stairs with his hat still on.</p>
+  <p>She lay propped on the bolster, with her hair tied back. She had got very thin. Her eyes were clear, and she was looking at the door when he came through it, as if she had known to the minute how long the mare would take. Sarah was sitting by the bed with a basin and got up to give him the chair.</p>
+  <p><em>What is it, my dear daughter? What is it, Benigna?</em></p>
+  <p><em>What are you saying, little brother?</em></p>
+  <p>He took off his hat. He looked at Sarah, who looked at the basin.</p>
+  <p><em>You are wandering, child.</em></p>
+  <p><em>I am not wandering, little brother.</em></p>
+  <p>She said it kindly and without hurry, as she might have told him his coat was buttoned wrong. He sat down and took her hand, which weighed nothing.</p>
+  <p><em>Are you afraid, my daughter?</em></p>
+  <p><em>I am not afraid, little brother.</em></p>
+  <p>She said nothing else. She looked at him a moment longer with great good humor, and then she was not looking at him, and Sarah leaned across and closed her eyes.</p>
+  <p>Within the hour the trombones played from the church. That was how Salem learned of every death, before any word went round. Four brethren with their horns played three tunes. The first told the town that someone had gone home. The second was the tune of the departed one&rsquo;s choir, so that every person in the street, stopping with a bucket or a plane in hand, would know at least what kind of soul it was, a child or a widow or a married brother. The third was the first again. That afternoon the second tune was the Single Sisters&rsquo;. People counted over in their minds which of the single sisters had been ill, and came to her quickly.</p>
+  <p>Brother Rothe heard it in the room over the kitchen. He knew every tune the trombones had. He sat with his hat on his knee and listened to them say that a single sister had gone home, and thought, they have it wrong. It was my daughter.</p>
+</section>
+
+<section>
+  <h2>IV. The Single Sisters&rsquo; Row</h2>
+  <p class="dateline">God&rsquo;s Acre &middot; three days later</p>
+  <p>They read her life in the church before they carried her up the hill. Every brother and sister wrote one, or had it written, an account of the road they had come, and it was read over them at the end. Benigna&rsquo;s was a page and a half in her own round hand. It said she was born in the tavern in 1795 and had been a happy child. It said that in her sixteenth year, at her father&rsquo;s table, the Saviour had come so near that she had not since been able to find the place where she left off and His kindness began, and that she had tried to deserve the back room. It did not mention the Lot. The last lines, on her illness and her going, were added in another hand, as was the custom.</p>
+  <p>The burying ground at Salem lay along the ridge above the town, behind a row of cedars, and it was laid out by choirs. The married brethren lay in one square and the married sisters in another, the single brethren and the single sisters each in their own, and the little boys and the little girls. Within each square they lay in the order they had come, one after the next. Every stone was the same, a flat white square, set level in the grass, with the name and the two dates. No one in that ground lay beside a husband, or under a father&rsquo;s name. There was nothing on the hill to show that any of them had been related to one another at all.</p>
+  <p>He had buried his wife there seventeen years before and had thought it right and beautiful. He thought so now. He stood with the married brethren, as was the order, and watched his daughter go into the ground at the end of the single sisters&rsquo; row, next to a seamstress of eighty-one she had hardly known, and he wept, and could not stop. People were surprised at it. He was a brother of long standing. He had stood at a great many gravesides with a dry and cheerful face and afterward seen to the coffee.</p>
+  <p>There was a lovefeast after the burial, as there generally was, and for once somebody else had counted the buns. They were eight short. He noticed it through his tears, and was ashamed of noticing.</p>
+  <p>He wept through that day and the next. On the third day he let the dinner go out to the back room without looking at it, and went up the street to the Single Sisters&rsquo; House, and asked at the door for Sister Dorel.</p>
+</section>
+
+<section>
+  <h2>V. Sister Dorel</h2>
+  <p class="dateline">The Single Sisters&rsquo; House &middot; the same day</p>
+  <p>Anna Dorothea Schumann had charge of the single sisters&rsquo; souls. That was her office, and it had a name, Pflegerin, the one who tends. She was forty-four, a short, quick woman from Lititz who had come down the Wagon Road at twenty with her loom in pieces, and she was thirteen years younger than the man who stood in her doorway holding his hat. Once in four weeks, before each Communion, every sister in the choir came to her alone and told her how it stood with her heart. Sister Dorel had heard Benigna Rothe in that way some eighty times. She had written none of it down. For the last three years she had come away from those quarter hours with the feeling that it was she who had been heard.</p>
+  <p>She did not get up from the tape loom. She pointed him to the other stool.</p>
+  <p><em>Brother Rothe. You have been weeping, and you are weeping now. What is it?</em></p>
+  <p><em>Sister, my Benigna is dead.</em></p>
+  <p><em>Well, and why do you weep? Is there anyone in Salem who is not going home?</em></p>
+  <p><em>I know that. I have known it all my life. But she was such a modest girl, Sister, and so careful in everything. What I cannot bear is that she did not have her right mind at the end. She went out of the world talking nonsense.</em></p>
+  <p><em>What did she say to you?</em></p>
+  <p>He told her. He gave it word for word, his part and hers. <em>I called her my dear daughter, and she said, What are you saying, little brother? I said, You are wandering, child, and she said, I am not wandering, little brother. I asked her was she afraid. She said, I am not afraid, little brother. And then she was gone.</em></p>
+  <p>Sister Dorel beat the weft down and let the shuttle lie.</p>
+  <p><em>Your daughter was not wandering.</em></p>
+  <p><em>Then why would she say such a thing?</em></p>
+  <p><em>Because you are her little brother. That is all. You came to the Saviour one Good Friday when you were forty, and you have stayed where He set you down, and it is a good place. I have nothing against it. Your daughter went on from there. She went on a long way. In the things that matter in this house she was older than you, Brother Rothe, by a great deal, and she knew it, and at the end she called you what you were to her.</em></p>
+  <p><em>Was that the reason?</em></p>
+  <p><em>That was the reason.</em></p>
+  <p>He sat a while with his hat. Outside a wagon went down toward the tavern.</p>
+  <p><em>Where is she now, Sister?</em></p>
+  <p><em>At home. Where it is glad.</em></p>
+  <p><em>She was glad here,</em> he said slowly. <em>All the time she was among us, at the wall with that coffee pot, she went about glad. And now she has gone from here and come to where it is glad again.</em></p>
+  <p><em>Yes. That is how it is with the ones who stay awake, Brother. In a choir house or in a tavern, it makes no difference. They are glad here and they are glad there. They look back on what they have done and are glad of it, and then they go where it is better and are gladder still.</em> She found the place in her memory. It was one of the English hymns the boarding school girls sang, by an Englishman who had joined the Brethren. Benigna had liked to sing it over the dishpan.</p>
+  <div class="verse">
+    <p>Children of the heavenly King,<br>As we journey, sweetly sing;<br>Sing your Saviour&rsquo;s worthy praise,<br>Glorious in his works and ways.</p>
+    <p>We are traveling home to God,<br>In the way the Fathers trod;<br>They are happy now, and we<br>Soon their happiness shall see.</p>
+    <p>&mdash; John Cennick, 1742</p>
+  </div>
+  <p>Then she took up the shuttle. <em>Go and see to your table, little brother,</em> she said. He was down the steps and into the street before he heard what she had called him.</p>
+</section>
+
+<section>
+  <h2>VI. Easter Morning</h2>
+  <p class="dateline">God&rsquo;s Acre &middot; April 14, 1816</p>
+  <p>On the Saturday before Easter the people of Salem went up the hill with buckets and brushes and scrubbed every stone in the burying ground, and laid flowers on each, on all of them alike. It was a cold spring and there was not much, some daffodils, the first redbud, green box. Benigna had no stone yet. Her father laid his on the raw clay.</p>
+  <p>Before light on Easter morning the trombones went through the streets to wake the town. The congregation gathered in front of the church in the dark and heard it said that the Lord was risen, and answered, and then walked up the cedar avenue two and two behind the horns, some hundreds of people, into the burying ground, and stood among the stones in their choirs, facing east. It had been done so in Salem every year since the town was a clearing. The thing was timed, and the Brethren were good at timing. The sun was meant to come up over the ridge while they prayed for the ones who had gone that year.</p>
+  <p>Brother Rothe stood with the married brethren. Sarah stood at the edge, by the cedars, with the other Black sisters and brethren. Three years before, the Elders had ruled that the hill was closed to her. When her time came she would lie in the strangers&rsquo; ground, at the far end of the street. He had thought nothing of the rule when it was made. He looked across at her now. He counted the years she had been in the Saviour&rsquo;s keeping, and then he counted his own.</p>
+  <p>The minister read the litany. It was long, and all of it known by heart. It was the whole of what they believed, said in the open air among the dead. Toward the end, as the edge of the sky went from gray to yellow, he came to the place.</p>
+  <div class="verse">
+    <p>And keep us in everlasting fellowship with our brethren, and with our sisters, who have entered into the joy of their Lord;</p>
+    <p>Also with the servants and handmaids of our Church, whom thou hast called home in the past year, and with the whole Church triumphant; and let us rest together in thy presence from our labors.</p>
+    <p>&mdash; Easter Morning Litany of the Moravian Church</p>
+  </div>
+  <p>The people answered, and sang, with the horns under them.</p>
+  <div class="verse">
+    <p>They are at rest in lasting bliss,<br>Beholding Christ our Saviour:<br>Our humble expectation is<br>To live with him forever.</p>
+    <p>&mdash; Easter Morning Litany of the Moravian Church</p>
+  </div>
+  <p>The sun came over the ridge. It came along the ground, as it does there, low and yellow through the cedars, and it lit the stones one row after another, the married sisters and then the little girls, and came last to the end of the single sisters&rsquo; row, where the daffodils lay on the clay. Heinrich Rothe sang with the rest. His face was wet and he let it be. He was not weeping as he had wept in March.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>There was a lovefeast at Bethania on Easter Monday, and they had sent to ask him. He sent back his paper of quantities, and word that the Bethania sisters could count buns as well as he could.</p>
+  <p>Two missionaries were in the back room that noon, a brother and his wife from the Cherokee country, gray with the road. Sarah had the dishes ready in the kitchen. He took them from her himself. He laid the cloth and carried in the soup, and set a bun at each place, and poured for the sister first because she was the elder. The jug of feathers stood on the sill. Then he stepped back against the wall with the coffee pot in both hands, where the plaster was worn smooth at the height of a girl&rsquo;s shoulder, and listened to them talk.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The virtuous man is happy in this world, and he is happy in the next; he is happy in both. He is happy when he thinks of the good he has done; he is still more happy when going on the good path.<cite>Dhammapada 18, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the great lay supporter An&#257;thapi&#7751;&#7693;ika feeds two thousand monks a day in his house at S&#257;vatth&#299;, but he is so much in demand to advise other donors that he cannot serve the monks himself. He appoints his eldest daughter, who reaches the first stage of awakening, marries and leaves, and then the second, who does the same. The youngest, Suman&#257;, reaches the second stage, does not marry, stops eating and sends for him. On her deathbed she calls him &ldquo;younger brother&rdquo; and dies. He goes weeping to the Buddha, sure that she died out of her mind, and is told that she spoke exactly: he had reached only the first stage, and she was his elder on the path. She has been reborn in the Tusita heaven. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-13.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Anathapindika">An&#257;thapi&#7751;&#7693;ika</a>.</p>
+    <h3>Salem, 1816</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Moravian_Church">Moravians</a>, or Unity of the Brethren, bought the Wachovia tract in the North Carolina piedmont in 1753 and founded Salem in 1766 as a congregation town, in which the church owned the land and regulated trades, residence and marriage. Members were grouped by age, sex and marital state into &ldquo;choirs,&rdquo; each with its own spiritual helper, and were buried by choir in <a href="https://en.wikipedia.org/wiki/God%27s_Acre">God&rsquo;s Acre</a> under identical flat stones. Each member left a memoir, or <em>Lebenslauf</em>, to be read at the funeral, and regularly &ldquo;spoke&rdquo; with the choir helper before Communion (see the Moravian Archives&rsquo; <a href="https://moravianarchives.org/using-the-archives/user-resources/glossary-of-moravian-terms/">glossary</a>). Deaths were announced by a trombone choir, with a chorale that identified the choir of the departed. Marriages were submitted to the Lot, slips drawn by the Elders after prayer, which the Brethren took as the Saviour&rsquo;s own answer; the requirement was dropped for most American members in 1818. The <a href="https://en.wikipedia.org/wiki/Lovefeast">lovefeast</a>, a simple shared meal of buns and coffee served during a service of song, and the Easter sunrise service in the graveyard, held at Salem since 1772, are still kept. The <a href="https://en.wikipedia.org/wiki/Salem_Tavern">tavern</a>, rebuilt in brick in 1784, was set at the edge of town to keep outsiders apart; the Rothe family and the guest table are invented. Salem is preserved today as <a href="https://en.wikipedia.org/wiki/Old_Salem">Old Salem</a> in Winston-Salem.</p>
+    <p>The Moravians of Wachovia held people in slavery, most of them owned by the church itself and hired out, including to the tavern. Black Moravians were baptized and received as brothers and sisters, and at first worshipped and were buried alongside white members. The Elders began seating them separately in 1789, closed God&rsquo;s Acre to them in 1813, and in the 1820s set up a separate congregation, later <a href="https://en.wikipedia.org/wiki/St._Philips_Moravian_Church">St. Philips</a>. Salem Academy and College has published an <a href="https://www.salemacademyandcollege.org/sites/salemac/files/2021-09/Anna%20Maria%20Samuel%20and%20Her%20Family.pdf">account of one enslaved Moravian family</a>. John Cennick (1718&ndash;1755), who wrote the hymn, was an English evangelist who joined the Moravians in 1745. The Easter Morning Litany dates from 1749; the English text is the one printed in Philip Schaff&rsquo;s <a href="https://ccel.org/ccel/schaff/creeds3.v.v.html"><em>Creeds of Christendom</em></a> (1877).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Suman&#257; from the Dhammapada commentary (verse 18). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-13.htm">The original</a>. Scripture from the Easter Morning Litany of the Moravian Church (1749) and a hymn by John Cennick (1742). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-izote.html">&larr; The Izote</a><a href="index.html">All stories</a><a href="castile-roses.html">Castile Roses &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, stones = [], t0 = null, PERIOD = 70000;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    make();
+  }
+  function make() {
+    // rows of identical flat stones seen low across the grass, nearer rows larger
+    stones = [];
+    var rows = 6, top = H * 0.6;
+    for (var r = 0; r < rows; r++) {
+      var k = r / (rows - 1), y = top + (H * 0.97 - top) * k * k;
+      var w = 16 + 30 * k, gap = w * 2.1, off = (r % 2) * gap * 0.5;
+      for (var x = -gap + off; x < W + gap; x += gap) stones.push({ x: x, y: y, w: w, h: w * 0.34, k: k });
+    }
+  }
+  function rr(x, y, w, h, q) {
+    ctx.beginPath(); ctx.moveTo(x + q, y); ctx.lineTo(x + w - q, y); ctx.quadraticCurveTo(x + w, y, x + w, y + q);
+    ctx.lineTo(x + w, y + h - q); ctx.quadraticCurveTo(x + w, y + h, x + w - q, y + h);
+    ctx.lineTo(x + q, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - q); ctx.lineTo(x, y + q); ctx.quadraticCurveTo(x, y, x + q, y); ctx.closePath();
+  }
+  function frame(now) {
+    if (t0 === null) t0 = now;
+    var p = reduce ? 0.55 : ((now - t0) % PERIOD) / PERIOD;
+    ctx.clearRect(0, 0, W, H);
+    // the front of light travels from the right (east) to the left, far rows first
+    for (var i = 0; i < stones.length; i++) {
+      var s = stones[i];
+      var front = 1.25 - p * 1.9 + s.k * 0.35;            // position of the light edge, in page widths
+      var d = s.x / W - front;                             // > 0: already lit
+      var lit = Math.max(0, Math.min(1, d * 5 + 0.5));
+      var fade = reduce ? 1 : Math.min(1, p * 10) * Math.min(1, (1 - p) * 6);
+      lit *= fade;
+      ctx.fillStyle = 'rgba(44,42,37,' + (0.05 + 0.03 * s.k) + ')';
+      rr(s.x + 1.5, s.y + 2, s.w, s.h, 2); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,252,' + (0.5 + 0.25 * s.k) + ')';
+      rr(s.x, s.y, s.w, s.h, 2); ctx.fill();
+      if (lit > 0.01) {
+        ctx.fillStyle = 'rgba(232,186,92,' + (0.42 * lit) + ')';
+        rr(s.x, s.y, s.w, s.h, 2); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size();
+  if (reduce) frame(0); else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); if (reduce) frame(0); });
+})();
+</script>
+</body>
+</html>

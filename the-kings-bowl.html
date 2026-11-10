@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The King&rsquo;s Bowl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a spring night over the Straits; faint northern lights fold and drift along the top of the sky; datelined sections. */
+  --ground: #0a1215;
+  --ground-2: #13201f;
+  --paper: #ebe5d6;
+  --paper-dim: #a2a597;
+  --accent: #9fd6bb;
+  --glow: #6fc7a0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #0c1a1b 0%, var(--ground) 45%, #090f12 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,229,214,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 30px rgba(111,199,160,.25); }
+.epigraph { border-left: 1px solid rgba(159,214,187,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(19,32,31,.78); border: 1px solid rgba(235,229,214,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,229,214,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(235,229,214,.1); border-bottom: 1px solid rgba(235,229,214,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(19,32,31,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 8.2 &middot; Bāhiya Dārucīriya</span></nav>
+<header>
+  <h1>The King&rsquo;s Bowl</h1>
+  <div class="epigraph">Be still and see that I am God.<br>&mdash; Psalm 45:11</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ainsi l&rsquo;ai-je ou&iuml; dire,</span> at the Straits.</p>
+
+<section>
+  <h2>I. The Plank</h2>
+  <p class="dateline">Lake Huron &middot; November 1744</p>
+  <p>Eight men went into the lake in the third week of November, and one came out.</p>
+  <p>They were Albany men, Dutch and English, with a north canoe they had bought from somebody who should not have sold it and a load of stroud blankets, powder and rum they meant to carry up past the French to the Odawa towns, where the Odawa would pay in beaver for English cloth, which they liked better than anything that came up from Montreal. France and England had been at war since the spring. Everybody on the lakes knew it. The men in the canoe knew it too, but they believed the lake was too big for a war to find them in. A northwest gale found them instead, at dusk, among the islands below the Straits, and put the canoe on a shoal and broke her back, and the water took them one at a time, the way cold takes the fingers.</p>
+  <p>Pieter Schenck got his arms over a length of the broken gunwale and held on. He held on through the dark and the snow squalls and a cold so great that after a while it stopped being cold and became a kind of sleep he had to keep climbing out of. He was twenty-four. He came from the Raritan valley in the Jerseys, where his people had farmed since the Dutch had the country, and he had never meant to come west at all. Toward morning the gunwale grounded on gravel. He crawled up out of the shallows and lay on the stones of a beach and saw, up the shore, the gray points of a stockade and smoke going up from inside it into a white sky.</p>
+  <p>The lake had taken his shirt and his breeches and one shoe. He threw the other shoe away. There was a paper birch lying on the beach where some earlier storm had laid it down, and he peeled the bark off it in sheets with his fingers and his teeth and wrapped himself in it, and broke cedar boughs and wrapped those over the bark, and bound the whole thing on him with spruce root he pulled out of the sand. Then he walked up the beach to the gate of Fort Michilimackinac.</p>
+  <p>He knew, as soon as the sentry called down to him, that he could not answer. He had trading French, enough to buy and sell, but he spoke it the way Albany spoke it, and any Frenchman on the Straits would hear the English king in his mouth. So he stood at the gate and said nothing. The sentry called again. Pieter looked up at him and said nothing. The sentry looked at the bark and the cedar and the cut bare feet on the frozen ground, and at the face above it, and slowly took his hat off.</p>
+  <p>They brought him into the King's storehouse because it had the stove. The storekeeper took a wooden bowl off the shelf, a plain turned bowl out of the King's stores like a hundred others, and filled it with sagamit&eacute; from the pot, hominy boiled soft with bear's grease, and put it in his hands. Pieter ate it without a word. The storekeeper's wife stood in the door with a child on her hip and watched him eat, and when he was done she said, very low, to nobody in particular, <em>He came up out of the lake.</em></p>
+</section>
+
+<section>
+  <h2>II. The Saint</h2>
+  <p class="dateline">Michilimackinac &middot; winter 1744&ndash;1745</p>
+  <p>The Jesuit was away all that winter at L&rsquo;Arbre Croche, among the Odawa, and there was nobody at the Straits to ask the man in bark any hard questions. So the fort answered them for itself. He had come out of the lake in November, when nobody comes out of the lake. He wore bark like Saint John in the wilderness. He did not speak, which meant he was under a vow, which meant he was a holy man of some order nobody at the Straits had heard of, a hermit maybe, from the far missions of the West, cast up among them for a reason. By Christmas the soldiers&rsquo; wives were calling him <em>le saint homme</em>, the holy man, and the voyageurs who had stayed the winter called him <em>l&rsquo;Homme d&rsquo;&Eacute;corce</em>, the Bark Man, which was easier to say.</p>
+  <p>He lived in a lean-to of poles and bark against the back of the new church of Sainte-Anne, which smelled of fresh-cut cedar. People brought him things. Smoked whitefish from the Straits, which were the best whitefish in the world. Sagamit&eacute; in his bowl, morning and night. Cakes of maple sugar wrapped in bark. A soldier brought him a twist of tobacco, and a girl brought him a capot, a good hooded coat cut from a blanket, and he looked at it a long time and gave it back to her. A man in a capot was only a man. Nobody walked through the snow to bring whitefish to a man in a capot.</p>
+  <p>Women brought him their sick children, and he did not know what else to do, so he put his hand on their heads. Some of the children got well. Children do. A soldier asked him to bless his musket and he made the sign of the cross over it, which he had seen the French do a thousand times and never done in his life, because in the Raritan valley they would have called it papistry. The soldier kissed his hand. Then all of them did. <em>Le saint homme.</em> He let them.</p>
+  <p>At night in the lean-to, alone, he asked himself the question that every man and woman in the Raritan valley had been asking for twenty years.</p>
+  <p>There had been a dominie on the Raritan who preached the new birth. Pieter had grown up on his sermons, two hours long, and on the catechism, a hundred and twenty-nine questions with their answers, and on the psalms in Dutch rhyme, all hundred and fifty, which his mother sang over the churn. Everyone on the Raritan knew all the words. The question was whether the words had gone in. Was the work of grace begun in you? Were you born again, or only baptized? Could you name the hour? People wept in the meetinghouse over it. People lay awake. Pieter had lain awake.</p>
+  <p>Now he lay awake in the bark lean-to, with whitefish in his belly that had been given to him in love, and asked it again, and for the first time the answer seemed to him to be yes. Perhaps this was how it came. Perhaps the lake had done it. The cold and the silence and the bark. Perhaps these people knew something about him that he did not, and he really was what they said.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>There had been seven of them once, seven boys, the summer he was sixteen, in the high fever after a sermon. They had sworn together on the meetinghouse steps that they would get the new birth or die, and they had carried a ladder up the First Mountain to a ledge of rock above the valley, and climbed it, and kicked the ladder down, so that nobody could go back who had not got what they came for.</p>
+  <p>The first night, Cornelis, who was the oldest, got it. They all saw it happen. He knelt on the rock in the dark and something went through him like a wind through standing wheat, and he got up laughing. He went down the cliff the hard way, by the roots, and came back up at dawn with bread and a jug of milk and set them on the rock and said, <em>Eat.</em> They would not. They had not sworn to eat the bread of the first one through, they said. When they had it themselves they would get their own bread. On the second night it was Dirck, who was quiet and fourteen, and something happened to him too, though not so much as to Cornelis, and he went down and brought bread, and they would not eat his either. Every man finds his own bread.</p>
+  <p>The other five lay on the rock until the seventh day, when their fathers came up the mountain with a new ladder and carried them down, half-starved and raving, and the dominie preached on them the next Sunday as a warning against enthusiasm. Cornelis died of the smallpox two winters later, still smiling. Dirck went to sea and was lost off Sandy Hook. Pieter came away from the rock with nothing but the rule they had made up there, and he had kept it ever since. In eight years he had not given any man so much as the heel of a loaf, nor asked for one, and he was proud of it. Every man finds his own bread.</p>
+  <p>Except that here at the Straits he had been fed all winter by strangers, and had called it grace.</p>
+</section>
+
+<section>
+  <h2>III. Dirck</h2>
+  <p class="dateline">The Straits &middot; April 1745</p>
+  <p>The ice went out of the Straits in the third week of April, and on the first night it moved, Pieter woke in the lean-to to a sound like cannon. It was the ice. Whole fields of it were splitting and riding up on one another and grinding east toward Lake Huron in the dark. He went out to look, through the water gate, onto the beach where he had come ashore.</p>
+  <p>Dirck Hoogland was standing over the ice.</p>
+  <p>He was not on it. He stood a man&rsquo;s height above it, on nothing, in the blue shirt he had been wearing when the sea took him, with his hair wet and his feet bare, and he was fourteen still, and very quiet, exactly as he had been on the rock. The ice moved under him and he did not move with it. Afterward the sentry who was on the bastion that night told it in every tavern from the Straits to Montreal, and he said the same thing every time and never added to it: <em>There was a boy standing on the air.</em></p>
+  <p><em>Pieter,</em> said Dirck. <em>You aren&rsquo;t what they say. You aren&rsquo;t anywhere near it. You aren&rsquo;t even on the road that goes to it. What you&rsquo;re doing will take you the other way.</em></p>
+  <p>Pieter stood on the gravel in his bark. The shame went through him like the cold had gone through him in the lake, all the way in.</p>
+  <p><em>Then is there anybody?</em> he said, and it was the first time he had spoken out loud since November, and his voice came out cracked and strange. <em>Is there anybody on this earth who really is what they call me?</em></p>
+  <p><em>At Le D&eacute;troit,</em> said Dirck. <em>There&rsquo;s an old man of the Hurons. The Black Robes baptized him Thomas. In the mornings, when he comes up to the fort, he goes about among the houses. He is what you want to be. Go to him.</em></p>
+  <p>Then he was not there. The ice went on grinding.</p>
+  <p>Pieter went that night. It is a hundred leagues and more from the Straits to Le D&eacute;troit, down the whole long shore of Lake Huron and through the little lake and down the river, ten days for a brigade of good paddlers in summer, and he had no canoe, and the ice was going out. The sentry saw him go along the beach after midnight, south, at a walk, in his bark. The Huron men camped at the landing below Le D&eacute;troit saw him come up the river road at sunrise. Nobody ever settled what happened between. The women at the Straits said afterward that Dirck carried him. The Hurons at Bois Blanc said that the old man had called him and that when Thomas calls, the road gets short. Pieter Schenck himself never said, because there was not time.</p>
+</section>
+
+<section>
+  <h2>IV. The River Gate</h2>
+  <p class="dateline">Le D&eacute;troit &middot; the next morning</p>
+  <p>The Huron canoes were drawn up on the strand below the stockade, three of them, with bags of seed corn in them for the habitants, and a half dozen young men from the mission at Bois Blanc were walking up and down on the beach in the early sun to get the stiffness of twenty miles of paddling out of their legs. They stopped when they saw him. He came up the river road with the bark hanging off him in strips and the cedar gone, and his feet bleeding through a crust of mud and ice.</p>
+  <p><em>Where is the old man?</em> he said. <em>Thomas.</em></p>
+  <p>The oldest of them, a man about Pieter&rsquo;s own age with a brass crucifix on a thong at his throat, looked at him for a while before he answered. <em>He has gone in among the houses. He&rsquo;ll be back down to the canoes at noon.</em> And then, because the man in front of him was swaying on his feet, <em>Where have you come from?</em></p>
+  <p><em>From Michilimackinac.</em></p>
+  <p><em>When did you leave Michilimackinac?</em></p>
+  <p><em>Last night.</em></p>
+  <p>The young men looked at one another. Nobody laughed. One of them had a kettle of sagamit&eacute; going on a little fire on the beach, and he dipped some into a bark dish and held it out.</p>
+  <p><em>You&rsquo;ve come a long way, then,</em> said the one with the crucifix. <em>Sit down. Eat. Wash your feet in the river and let us grease them. He&rsquo;ll be here at noon and you&rsquo;ll see him.</em></p>
+  <p><em>I don&rsquo;t know when he is going to die,</em> said Pieter. <em>I don&rsquo;t know when I&rsquo;m going to die. I came here in one night and didn&rsquo;t sit down once. I&rsquo;ll sit down when I&rsquo;ve seen him.</em></p>
+  <p>And he went up the strand and in at the river gate, shaking all over, the way a horse shakes at the end of a hard run.</p>
+</section>
+
+<section>
+  <h2>V. Sainte-Anne Street</h2>
+  <p class="dateline">Inside the stockade &middot; the same morning</p>
+  <p>Le D&eacute;troit was smaller than he had imagined, a square of log palisade with a bastion at each corner, the little church at one end, and four or five streets so narrow two carts could hardly pass. Rue Sainte-Anne ran along the south wall. It was mud from one end to the other, April mud, with planks laid across the worst of it, and smoke coming down into it from the public bake house, which had been firing since before light, so that the whole street smelled of bread.</p>
+  <p>The old man was coming up it from the bake house with a basket on his arm.</p>
+  <p>Pieter knew him at once, though he could not have said how. He was old, and not tall, and there was nothing about him that anyone would turn to look at twice. He wore a blanket capot like any habitant, and leggings, and moccasins black with mud, and a brass crucifix like the young man&rsquo;s at the landing. His hair was white and cut short. He walked the way a man walks who is going somewhere ordinary and is not in a hurry to get there, and he looked at what was in front of him, the planks and the mud and the dog asleep in the door of the smithy, as if each of them was all there was.</p>
+  <p>Pieter went down on his knees in the mud of the street and put his face down near the old man&rsquo;s feet and took hold of him by both ankles.</p>
+  <p><em>Teach me,</em> he said. <em>Teach me what&rsquo;s true. For the love of God. So it&rsquo;ll be to my good as long as I live.</em></p>
+  <p>Thomas looked down at him. A habitant woman going by with a pail stopped and stared. Two soldiers in the door of the guardhouse stopped and stared.</p>
+  <p><em>Not now,</em> said Thomas. <em>I&rsquo;ve gone in among the houses.</em></p>
+  <p>He said it kindly, the way you say it to a child who has run up to you in the middle of an errand. Pieter did not let go of his ankles. He was shaking so hard that the old man could feel it through the leggings.</p>
+  <p><em>Please. I don&rsquo;t know when you&rsquo;ll die. I don&rsquo;t know when I&rsquo;ll die. Teach me.</em></p>
+  <p><em>Not now,</em> said Thomas again.</p>
+  <p>The people of Le D&eacute;troit who saw it said afterward that the old man had been hard with the stranger, and the young men at Bois Blanc, who knew Thomas, said that was foolishness. A man who has come a hundred leagues in a night, they said, has the whole road still running in him. He is so full of the journey and the hope and the fear that nothing anybody says can get in. So Thomas waited. He stood in the mud with his basket and let the man hold his ankles and shake, and he waited for the shaking to go down, the way you wait for a river to clear after rain before you dip your bucket in it.</p>
+  <p>The third time Pieter asked, his voice was quiet.</p>
+  <p><em>I don&rsquo;t know the hour you&rsquo;ll die, or the hour I will. Teach me.</em></p>
+  <p>Thomas set the basket down on a plank. He did not kneel. He stood where he was in the middle of rue Sainte-Anne, with the smoke of the bake house going over the two of them and the soldiers watching, and said it to him in French, slowly, in the plain words of a man who had worked a long time to find them.</p>
+  <p><em>Then this is it, Pieter Schenck. When you see, let there be only the seeing. When you hear, only the hearing. When a thing touches you, only the touch. When a thought comes, only the thought. Don&rsquo;t go in after it. If you don&rsquo;t go in after it, you aren&rsquo;t in it. If you aren&rsquo;t in it, you aren&rsquo;t here, and you aren&rsquo;t there, and you aren&rsquo;t anywhere in between. That is the end of the trouble. That&rsquo;s the whole of it.</em></p>
+  <p>Pieter had not told him his name.</p>
+  <p>He was looking at the mud. There was mud, brown, shining where the sun was on it, with the print of a moccasin in it filling slowly with water. There was the smell of bread. There was the bell of Sainte-Anne beginning, one stroke, then another, and between the strokes a cow lowing somewhere out on the commons past the palisade. There was a cold that was the wet coming through the bark at his knees. There was the dog asleep in the smithy door. Every one of them came, and was itself, and went, and nothing went in after them.</p>
+  <p>And there was nobody kneeling in the street.</p>
+  <p>There was no holy man of the Straits there, and no Albany trader hiding his English, and no boy on a ledge on the First Mountain waiting for the wind that went through Cornelis. All of them had been things he had gone in after. All of them had been a kind of bark. The bark was down in the mud now with the rest of the morning, and there was nobody inside it, and there had never been, and the whole of his trouble went out of him at once, the way the ice had gone out of the Straits, with a great noise and then a great quiet.</p>
+  <p>Thomas picked up his basket. He said one more thing before he went on, in the tone a man uses for amen.</p>
+  <div class="verse">
+    <p>Be still and see that I am God; I will be exalted among the nations, and I will be exalted in the earth.</p>
+    <p>&mdash; Psalm 45:11</p>
+  </div>
+  <p>Pieter got up out of the mud.</p>
+  <p><em>Let me come with you,</em> he said. <em>Let me come down to the mission and be one of you. Let me be baptized again the way you were.</em></p>
+  <p>Thomas looked him up and down. The bark. The bare legs. The bowl from the King&rsquo;s storehouse, which he had carried all night inside the bark against his chest without knowing it, and which was all he had.</p>
+  <p><em>Have you got your own blanket?</em> said Thomas. <em>Your own bowl?</em></p>
+  <p><em>The bowl is the King&rsquo;s.</em></p>
+  <p><em>Then go and get your own,</em> said Thomas. <em>And come down to the canoes at noon.</em></p>
+  <p>And he went on up rue Sainte-Anne with his basket, toward the houses at the other end, where they were waiting for him.</p>
+</section>
+
+<section>
+  <h2>VI. The Bread Board</h2>
+  <p class="dateline">The commons &middot; the same morning</p>
+  <p>The young men at Bois Blanc talked about it for years afterward, and what they said was this. Thomas could have given the man a blanket. There were two in the canoes. He could have stood in the street and said the words the Black Robes said and made him one of them on the spot. He did not, because he knew what Pieter had done on the rock. In eight years, Pieter Schenck had never given a soul so much as a crust. Every man finds his own bread. A man who has lived that way a long time finds there is no blanket waiting for him anywhere, because he has never left one anywhere for anyone else. Thomas could not change that for him. Nobody could. So he sent him to go and find his own.</p>
+  <p>Pieter went out at the east gate onto the commons, where the cattle of the fort were turned out in spring, to look for a birch to peel. He was not unhappy. He had the King&rsquo;s bowl in his hand. He was looking at the commons the new way, the brown grass, the wet, a crow, and there was nobody looking.</p>
+  <p>There was a cow standing by the dung heap outside the gate.</p>
+  <p>She was a red heifer, alone, with a white star on her forehead, and nobody saw where she came from. She put her head down and came at him across the wet ground, not fast, and turned at the last moment and struck him with her left shoulder, the whole weight of her, the way a door swings shut, and he went down on the dung heap and his head struck the frozen edge of it, and he did not get up.</p>
+  <p>No habitant of Le D&eacute;troit ever claimed her. Every cow on that commons was known by name and by owner and by the marks on her ears, and none of them was a red heifer with a white star, and by noon she was gone and nobody had seen her go. The soldiers&rsquo; wives at the Straits, when the story came up to them in June, said they knew that cow. They had seen her in November, the week the canoe went down, standing alone in the shallows below the fort where nobody at Michilimackinac kept cattle, looking out at the lake.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Thomas came out of the east gate a little before noon with his basket full of loaves and the young men from the canoes behind him, and saw the body lying on the dung heap in the sun.</p>
+  <p>He stood and looked at it for a long time. Then he said, <em>Go to the bake house. There is a long board that stands by the door, that the baker carries loaves on. Ask him for it. Tell him I asked.</em></p>
+  <p>They brought the bread board, and laid Pieter Schenck on it, bark and all, with the King&rsquo;s bowl on his chest, and carried him on their shoulders out past the commons and the last of the farms. He could not lie in the burying ground of Sainte-Anne. Everyone knew by then what he was, an Englishman, a heretic, a Dutchman from the Jerseys; the soldiers at the guardhouse had heard his French. So they carried him up onto a rise above the river where the oaks were, and dug, and laid him in, and the young men heaped stones over the place against the wolves, a long heap, higher than a man&rsquo;s knee. Thomas cut a cross out of cedar and tied it with spruce root and stood it at the head of the stones. He did not take the bowl. He put it in the basket, under the bread.</p>
+  <p>The commandant&rsquo;s clerk wrote in his book that an English stranger, name unknown, had been killed by a cow on the commons. Thomas could have told him the name. Nobody asked him.</p>
+</section>
+
+<section>
+  <h2>VII. The King&rsquo;s Bowl</h2>
+  <p class="dateline">Bois Blanc Island &middot; that night, and the summer after</p>
+  <p>They paddled back down to the mission in the afternoon with the seed corn sold and the bread in the bottom of the canoe, and that night, after the prayers, the young men sat around the fire outside Thomas&rsquo;s lodge and could not leave it alone.</p>
+  <p><em>Where has he gone, the man in the bark?</em></p>
+  <p><em>To God,</em> said Thomas. <em>All the way. He won&rsquo;t be coming back around.</em></p>
+  <p><em>An Englishman? A heretic who never had the sacraments, who lay on the Straits all winter letting people kiss his hand?</em></p>
+  <p><em>Yes.</em></p>
+  <p><em>But when did he get there?</em></p>
+  <p><em>When he heard me.</em></p>
+  <p><em>When did he hear you?</em></p>
+  <p><em>This morning. In the street. Outside the bake house.</em></p>
+  <p>The one with the brass crucifix shook his head. <em>Grandfather, you hardly said anything to him. We were watching from the gate. You said four or five words to him, standing in the mud with a basket on your arm. The Black Robes preach for an hour. How could a man get all the way to God on four or five words?</em></p>
+  <p>Thomas was quiet for a while. The fire settled. Out on the dark river a fish jumped, and the rings went out across the water and were gone.</p>
+  <p><em>Don&rsquo;t measure it by how long it was,</em> he said. <em>Some men hear a thousand words and every one of them is empty. You can preach to a man from now till the Feast of All Saints and nothing goes in. Then one word with something in it, and he hears it, and he&rsquo;s quiet.</em> And he said it to them as Saint Paul had said it, which the Black Robe had taught him years before at the old mission, and which he had kept.</p>
+  <div class="verse">
+    <p>But in the church I had rather speak five words with my understanding, that I may instruct others also; than ten thousand words in a tongue.</p>
+    <p>&mdash; 1 Corinthians 14:19</p>
+  </div>
+  <p><em>I&rsquo;ve seen a great many come to the prayer,</em> Thomas said. <em>Old men, children, French, Hurons, Odawa, Englishmen. That one was the quickest of all of them. Nobody I ever saw was quicker.</em></p>
+  <p>Some of the young men who sat at that fire were old men themselves forty years later, on the Sandusky and in the Ohio country and across the river at La Pointe de Montr&eacute;al, and they still told it. They said it was the night they first understood what the old man had been trying to tell them all their lives.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>In June the first brigade of the summer went up from Le D&eacute;troit to the Straits, and Thomas went down to the landing and found a voyageur he knew and gave him the wooden bowl wrapped in a piece of bark.</p>
+  <p><em>Take this to the storekeeper at Michilimackinac,</em> he said. <em>Tell him it belongs to the King.</em></p>
+  <p>The voyageur carried it three hundred miles up the lake in the bottom of his canoe and gave it to the storekeeper, and told him whose it had been. The storekeeper turned it over in his hands. Then he put it up on the shelf with the others.</p>
+  <p>The soldiers&rsquo; wives came in that week to see it, the bowl of <em>le saint homme</em>, and stood in front of the shelf a long time, and could not tell which one it was. They were all plain turned bowls out of the King&rsquo;s stores, a hundred of them, all alike. By the first snow some soldier on the night watch was eating his sagamit&eacute; out of it on the bastion, looking out over the dark water, and did not know, and it did not matter.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">Even though a Gatha (poem) be a thousand (of words), but made up of senseless words, one word of a Gatha is better, which if a man hears, he becomes quiet.<cite>Dhammapada 101, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, B&#257;hiya D&#257;ruc&#299;riya, &ldquo;the man from abroad who wears bark,&rdquo; is the only survivor of a shipwreck. He wraps himself in bark, is fed and honored as a saint at the port of Supp&#257;raka, and comes to believe it. A former companion, one of seven monks who long ago climbed a mountain and kicked the ladder down behind them, comes from the Brahma world to tell him he is no such thing. B&#257;hiya goes to the Buddha in a single night and begs three times in the street to be taught. When he hears &ldquo;in the seen, only the seen,&rdquo; he is awakened on the spot. Sent off to find his own bowl and robe, he is killed by a cow that the commentary says was a demoness. The Buddha has his body carried out on a litter, burned, and a st&#363;pa built over it, and names him foremost of those who understand quickly. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-02.htm">the full commentary story</a>, or <a href="https://accesstoinsight.org/tipitaka/kn/ud/ud.1.10.than.html">the B&#257;hiya Sutta</a>, where the teaching appears in full.</p>
+    <h3>The upper Great Lakes, 1744&ndash;1745</h3>
+    <p>The French built <a href="https://en.wikipedia.org/wiki/Fort_Michilimackinac">Fort Michilimackinac</a> around 1715 on the Straits of Mackinac, where Lakes Michigan and Huron meet, and it became the main depot of the fur trade in the upper Great Lakes. In 1742 the Odawa moved about twenty-five miles south to L&rsquo;Arbre Croche, and the Jesuits moved their mission with them. In 1743 a new parish church of Sainte-Anne went up inside the stockade (see the <a href="https://www.mackinacparks.com/explore/history/colonial-michilimackinac-history/">Mackinac State Historic Parks timeline</a>). In the spring of 1744 France and Britain went to war again. In the colonies this was <a href="https://en.wikipedia.org/wiki/King_George%27s_War">King George&rsquo;s War</a>, and English-speaking traders on the lakes were enemies. Pieter&rsquo;s people belonged to the Dutch Reformed world of the Raritan valley in New Jersey, where <a href="https://en.wikipedia.org/wiki/Theodorus_Jacobus_Frelinghuysen">Theodorus Frelinghuysen</a> had preached the new birth since the 1720s. Children there learned the 129 questions of the <a href="https://en.wikipedia.org/wiki/Heidelberg_Catechism">Heidelberg Catechism</a>.</p>
+    <p>Cadillac founded <a href="https://en.wikipedia.org/wiki/Fort_Detroit">Fort Pontchartrain du D&eacute;troit</a> in 1701 as a log palisade about twelve feet high, with a bastion at each corner. Its first building was a chapel to Saint Anne. Wendat people, whom the French called Hurons, came down from Michilimackinac to settle near it. They descended from Wendat and Petun refugees scattered by the wars of 1649, and today they are the <a href="https://en.wikipedia.org/wiki/Wyandot_people">Wyandot</a> and Wendat nations. A Jesuit mission to them was founded at Detroit in 1728. In 1742 <a href="https://www.biographi.ca/en/bio/la_richardie_armand_de_3E.html">Armand de La Richardie</a> moved it about twenty miles downriver to Bois Blanc Island, and Pierre Potier arrived there in September 1744 after studying the Huron language. In the unrest of 1747 the mission was destroyed. It was rebuilt across from the fort at La Pointe de Montr&eacute;al, which is now Windsor, Ontario. Thomas and his people are fictional, as are Pieter, the bowl and the cow.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of B&#257;hiya D&#257;ruc&#299;riya from the Dhammapada commentary (verse 101). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-02.htm">The original</a>. Scripture from the Douay-Rheims Bible (Challoner revision). Written by Claude Opus 5.5.
+  <div class="pager"><a href="copper-teeth.html">&larr; Copper Teeth</a><a href="index.html">All stories</a><a href="the-branch.html">The Branch &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, col, curtains = [], t = 0, last = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function sprite() {
+    col = document.createElement('canvas'); col.width = 1; col.height = 256;
+    var g = col.getContext('2d'), gr = g.createLinearGradient(0, 0, 0, 256);
+    gr.addColorStop(0, 'rgba(120,190,170,0)');
+    gr.addColorStop(0.55, 'rgba(120,205,165,0.55)');
+    gr.addColorStop(0.86, 'rgba(150,230,185,1)');
+    gr.addColorStop(1, 'rgba(150,230,185,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, 1, 256);
+  }
+  function make() {
+    curtains = [];
+    for (var i = 0; i < 3; i++) {
+      curtains.push({ base: H * (0.10 + i * 0.06), amp: H * (0.03 + Math.random() * 0.03), k1: 0.0025 + Math.random() * 0.002, k2: 0.007 + Math.random() * 0.004, ph: Math.random() * 10, sp: 0.00012 + Math.random() * 0.00012, hgt: H * (0.16 + Math.random() * 0.10), a: 0.10 - i * 0.022 });
+    }
+  }
+  function draw(now) {
+    if (!reduce) {
+      if (now - last < 50) { requestAnimationFrame(draw); return; }
+      t += (now - last) || 16; last = now;
+    }
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    var step = 5;
+    for (var j = 0; j < curtains.length; j++) {
+      var cu = curtains[j];
+      for (var x = -step; x < W + step; x += step) {
+        var y = cu.base + Math.sin(x * cu.k1 + cu.ph + t * cu.sp) * cu.amp + Math.sin(x * cu.k2 - t * cu.sp * 1.7) * cu.amp * 0.35;
+        var fold = 0.55 + 0.45 * Math.sin(x * 0.021 + cu.ph * 3 + t * cu.sp * 2.3);
+        var edge = Math.min(1, Math.min(x + step, W - x) / (W * 0.18));
+        ctx.globalAlpha = Math.max(0, cu.a * fold * edge);
+        ctx.drawImage(col, x, y - cu.hgt * fold, step + 1, cu.hgt * fold);
+      }
+    }
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); sprite(); make();
+  if (reduce) draw(0); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

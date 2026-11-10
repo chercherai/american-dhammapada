@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Locust Year</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on Prayer Book paper, with faint peat smoke from the burning swamp rising and thinning behind it; datelined sections. */
+  --prayerbook: #efe6d2;
+  --prayerbook-2: #e2d5ba;
+  --iron-gall: #2a2219;
+  --iron-gall-dim: #6c604f;
+  --red-rag: #983a25;
+  --ember: #b5602e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, var(--prayerbook-2) 0%, var(--prayerbook) 62%) fixed, var(--prayerbook);
+  color: var(--iron-gall);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--iron-gall-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--iron-gall-dim); text-decoration: none; border-bottom: 1px solid rgba(42,34,25,.22); }
+.series a:hover { color: var(--red-rag); }
+a:focus-visible { outline: 2px solid var(--red-rag); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--red-rag); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(152,58,37,.45); padding-left: 1rem; font-style: italic; color: var(--iron-gall-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--red-rag); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--red-rag); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(226,213,186,.72); border: 1px solid rgba(42,34,25,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--ember); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,34,25,.16); color: var(--iron-gall-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--red-rag); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--iron-gall-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--red-rag); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,34,25,.16); border-bottom: 1px solid rgba(42,34,25,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--red-rag); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--red-rag); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--red-rag); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--red-rag); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(226,213,186,.72); border-left: 2px solid var(--red-rag); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--iron-gall-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 1.1 &middot; Cakkhupāla</span></nav>
+<header>
+  <h1>Locust Year</h1>
+  <div class="epigraph">I will not suffer mine eyes to sleep, nor mine eye-lids to slumber: neither the temples of my head to take any rest.<br>&mdash; Psalm 132:4 (Book of Common Prayer)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So I have heard it told,</span> on the Choptank.</p>
+
+<section>
+  <h2>I. The Oak</h2>
+  <p class="dateline">Talbot County, Maryland &middot; 1739&ndash;1777</p>
+  <p>Thomas Haddaway had eleven hundred acres on the Choptank, a brick house laid in Flemish bond with the glazed headers making a checkerboard down the gable end, a landing where the sloops took his tobacco down the bay to the London ships, and fifty-three people in the quarters who did the work. He had been married nine years and had no child.</p>
+  <p>One evening in August he was riding home from swimming his horses in the river and saw at the head of Island Creek a white oak so wide that he got down and walked around it, counting his steps. Twenty-two. It stood alone in a field gone to briars, full of birds. He was not a praying man. But he stood a while in the shade of it and thought that a tree like that must have somebody in it.</p>
+  <p>The next week he had the briars grubbed out and the oak fenced with split rails, and strips of red cloth tied on the low limbs. Then he stood inside the fence with his hat in his hand and said out loud, so that the men who had done the grubbing heard it and told it afterward in the quarters, <em>If I get a child of my own I will do you honor all my life.</em></p>
+  <p>His wife was brought to bed of a son the next spring, and they named him Levin. Three years later came another boy, smaller, and they named him Littleton. The neighbors said, laughing, that the oak was their true father. The old people in the quarters did not laugh about it, and kept the red rags tied on fresh, and Thomas Haddaway let them.</p>
+  <p>The parents died within a year of each other, in the sixties, and left everything to the two sons. Levin was the older and the quicker. He had read physic one winter in Philadelphia and come home with a case of lancets and a book of receipts, and he doctored the neighborhood, mostly for nothing and sometimes for money when he could get it. That summer, the summer of 1766, the seventeen-year locusts came up out of the ground all over the Eastern Shore, and for a month nobody could hear himself think. Levin married, and his wife died of a fever in 1770, and there were no children. Littleton married and had four. The brothers kept the place together and did well by it, and when the war came they did not go to it.</p>
+  <p>In the spring of 1777 Levin was riding home from Easton on a Sunday and passed a great many people on the road, white and black, walking in their good clothes with their dinners in baskets and their shoes in their hands to save the leather. He reined in and asked a man where they were all going.</p>
+  <p><em>To hear the Methodist.</em></p>
+  <p><em>I'll go too,</em> said Levin, and turned his horse around.</p>
+  <p>The preaching was in a tobacco barn on the Bay Side road. Levin stood at the back with his hat on. The preacher was a young man from Sussex County named Eli Truitt, twenty-four years old, thin as a rail, with a cough he did not trouble to hide. He did not shout. He talked about giving, and about plain living, and about heaven, and about what the world does to a man who loves it, one thing after the other, in order, as if he were laying out tools on a bench. At the end he talked about the men who had left everything to ride for nothing, and he did not make it sound easy.</p>
+  <p>Levin found his hat in his hands and did not remember taking it off. He thought: when a man goes out of the world he takes nothing. Not his wheat, not his land, not his people. Not even his own body goes with him. What am I keeping house for?</p>
+  <p>Afterward he waited until the barn was nearly empty and went up and asked to be taken on as a preacher.</p>
+  <p>Truitt looked at him a long time. <em>Is there anybody you ought to ask first?</em></p>
+  <p><em>I have a brother.</em></p>
+  <p><em>Then ask him.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>He found Littleton in the counting room going over the mill accounts and sat down across the table from him.</p>
+  <p><em>Brother, everything in this house and on this place, the land and the landing and the stock and the people, I am giving into your hands. Take it.</em></p>
+  <p><em>And you?</em></p>
+  <p><em>I am going with the Methodists.</em></p>
+  <p>Littleton put the pen down. <em>What are you saying to me? When Mother died, you were my mother. When Father died, you were my father. There is more money in this house than either of us knows what to do with. You can do all the good in the world from right here. Don't do this.</em></p>
+  <p><em>I heard him, Littleton. I can't go back to the mill accounts now.</em></p>
+  <p><em>Then wait. You're young yet. Wait till you're old, and go then.</em></p>
+  <p><em>When a man is old his own hands and feet won't mind him,</em> said Levin. <em>How much less his kin. I'm thirty-seven. I'm going now.</em></p>
+  <p>Littleton wept, and followed him out to the yard, and wept there. Levin rode to Easton the next week and signed it all over before a justice. The land, the house, the landing, the mill, and the people in the quarters. On paper he walked out of Talbot County owning a horse, a Bible, and two shirts. He had given the people in the quarters to his brother along with the plows. It took him some years to see that this was a different thing from letting them go.</p>
+</section>
+
+<section>
+  <h2>II. The Swamp</h2>
+  <p class="dateline">The Peninsula &middot; 1777&ndash;1782</p>
+  <p>He rode five years. He rode the Dorset circuit and the Kent and the Sussex, preaching every day and twice on Sundays in barns and kitchens and under trees, and slept in lofts with the hired men. They were dangerous years for a Methodist on the Peninsula. Many of the preachers would not take the state oath, and the patriots took them for Tories. Levin saw a preacher locked in the Easton jail who went on preaching through the grate to the people in the street, until the town said that if they did not let him out he would convert the whole county. Levin himself spent one night in the Cambridge jail with his saddlebags for a pillow.</p>
+  <p>In 1780 the Conference in Baltimore resolved that slavery was contrary to the law of God, man, and nature, and required every traveling preacher who held slaves to promise to set them free. Levin held none. He had given them to his brother. Nothing was required of him.</p>
+  <p>In May of 1782, at the Conference in Baltimore, he found Eli Truitt sitting on a bench in the yard of the preaching house with a handkerchief to his mouth, and sat down beside him.</p>
+  <p><em>Brother Truitt. How many duties are there in this work?</em></p>
+  <p><em>Two. The books and the closet. The books is the Bible and Mr. Wesley's sermons, and the Greek if you can get it, five hours a day. The closet is going in, and shutting the door, and staying until you are made perfect in love.</em></p>
+  <p><em>I came to it too old for the Greek,</em> Levin said. <em>I'll never be a scholar. But I can do the other. Give me something to go in with.</em></p>
+  <p><em>Seek to be made perfect in love. Not when you are dying. Now. This year.</em></p>
+  <p>Levin took eleven young men with him, preachers on trial and exhorters, all of them younger than he was, and rode south sixty miles to the edge of the Great Cypress Swamp, where Maryland and Delaware come together in the black water and nobody living there was much troubled about which was which. The settlement at Burnt Branch was a dozen cabins of shingle-getters. They dug cypress logs out of the peat and rived them into shingles for the Snow Hill market, and in dry summers they burned the peat off to come at the logs, so that the whole swamp smelled of smoke and the fire sometimes got loose and went under the ground and burned there for months.</p>
+  <p>The shingle-getters fed the preachers fried fish and hominy, and watched them keep their rules, and asked where they were going.</p>
+  <p><em>Somewhere to winter.</em></p>
+  <p><em>Winter here,</em> said the shingle-getters. <em>If you'll stay till spring, we'll keep your rules too.</em></p>
+  <p>In two weeks they had raised a log preaching house with a chimney of mud and sticks, and a cabin for the preachers behind it with twelve bunks of riven cypress. A doctor named Hudson who rode the country between Snow Hill and the swamp came out to see what the excitement was, and stayed for preaching, and afterward shook Levin's hand.</p>
+  <p><em>Where a dozen men sleep together, somebody's going to take sick. Send for me. I won't charge preachers.</em></p>
+  <p>On the first night of their winter, in the new cabin, by the fire, Levin asked the eleven how they meant to keep the season.</p>
+  <p><em>Sitting, standing, walking, and lying down,</em> said the youngest, and they laughed. <em>Same as anybody.</em></p>
+  <p><em>Is that right?</em> said Levin. <em>We came out here from the Conference with a charge. You don't get perfect love by halves. Let every man be careful.</em></p>
+  <p><em>And you, Brother Haddaway?</em></p>
+  <p><em>I'll sit and stand and walk,</em> he said. <em>I'll not lie down this winter.</em> And he opened the Prayer Book that he still carried from the old days and read them the Psalm.</p>
+  <div class="verse">
+    <p>Lord, remember David: and all his trouble; How he sware unto the Lord: and vowed a vow unto the Almighty God of Jacob; I will not come within the tabernacle of mine house: nor climb up into my bed; I will not suffer mine eyes to sleep, nor mine eye-lids to slumber: neither the temples of my head to take any rest; Until I find out a place for the temple of the Lord: an habitation for the mighty God of Jacob.</p>
+    <p>&mdash; Psalm 132:1&ndash;5 (Book of Common Prayer)</p>
+  </div>
+  <p>The bunk with his name cut in it stayed empty. He sat the nights on a three-legged stool by the fire, and when he felt himself going he stood, and when his knees went he walked, up and down the dirt floor, nine steps and nine back, until he had worn a path in it.</p>
+</section>
+
+<section>
+  <h2>III. Tutty</h2>
+  <p class="dateline">Burnt Branch &middot; winter, 1782&ndash;83</p>
+  <p>By the first of December his eyes had begun to run. The water came out of them all day and all night, the way it comes out of a cracked jar, and they were red to the lids and swollen, and every morning they were gummed shut and he had to wet them open with his fingers. The peat was still smoldering in the swamp from the summer, and the cabin chimney drew badly, and there was smoke in everything.</p>
+  <p>The young men saw his face and asked what was the matter.</p>
+  <p><em>The wind cuts my eyes, brothers.</em></p>
+  <p><em>Dr. Hudson said to send for him.</em></p>
+  <p><em>Send, then.</em></p>
+  <p>Hudson sent back a little pot of ointment of tutty, the grey kind that comes in a white jar, and said to lay it along the lids at night. Levin laid it on, sitting on his stool. A week later Hudson met him on the Snow Hill road.</p>
+  <p><em>I hear the wind is at your eyes, Mr. Haddaway.</em></p>
+  <p><em>That's so.</em></p>
+  <p><em>Did you use the tutty?</em></p>
+  <p><em>I did.</em></p>
+  <p><em>And how are they?</em></p>
+  <p><em>The same.</em></p>
+  <p>Hudson frowned. One pot of tutty had never failed him. <em>When you put it on, were you sitting up, or lying down?</em></p>
+  <p>Levin said nothing. Hudson asked again, and a third time, and Levin sat his horse and did not say a word, and that afternoon Hudson rode out to Burnt Branch himself. The preachers were out. He went into the cabin and saw the twelve bunks and the one bunk bare, and the stool by the fire, and the path in the dirt, nine steps and nine back, worn down an inch below the rest of the floor.</p>
+  <p>He was waiting when Levin came in at dark.</p>
+  <p><em>Mr. Haddaway, I'll ask you once more. Were you lying down?</em></p>
+  <p>Silence.</p>
+  <p><em>Sir, you can't do God's work without a body to do it in. Lie down at night and you'll keep your eyes. Sit up like this and you'll lose them. I've seen it.</em></p>
+  <p><em>Go your way, friend,</em> Levin said. <em>I'll take counsel and decide it myself.</em></p>
+  <p>He had nobody there to take counsel with. So when Hudson had gone he sat down on his stool and took counsel with himself, out loud.</p>
+  <p><em>Now, Levin Haddaway. Tell me which you'll keep. Your eyes, or what you came out here for? Every man that ever lived has lost his eyes in the end, if not before the grave then in it. And how many men in all that time ever got a winter like this one, with nothing to do but this? You said you'd not lie down. Let the eyes go, then. Keep the other.</em></p>
+  <p>And a little later, rocking on the stool, he said it again another way. <em>Your eyes are going, and your ears, and the whole of you is going. All of it that hangs on a body is going. Why are you careless, Levin?</em></p>
+  <p>He laid on the tutty, sitting. In the morning he rode out. Hudson met him on the road.</p>
+  <p><em>Did you use it?</em></p>
+  <p><em>I did.</em></p>
+  <p><em>And?</em></p>
+  <p><em>The same.</em></p>
+  <p><em>Sitting, or lying?</em></p>
+  <p>Silence.</p>
+  <p><em>Then you are no good to yourself, and no good to me,</em> Hudson said. <em>From now on don't tell people Hudson treated you, and I won't tell them I did.</em> And he did not come back.</p>
+  <p>Levin went home to the cabin and sat down. <em>Given up by the doctor,</em> he said to himself. <em>Bound for the grave anyhow. Why be careless now?</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>It was a night toward the end of January, past the middle of the night, in the cold that comes before the birds. The fire had burned down to a red eye. The eleven were asleep. Levin sat on his stool with his elbows on his knees and his face in his hands, and he was singing under his breath, the way he had sung it a thousand times on a thousand roads, not thinking about it any more than a man thinks about his own feet.</p>
+  <div class="verse">
+    <p>Long my imprison'd Spirit lay,<br>Fast bound in Sin and Nature's Night:<br>Thine Eye diffus'd a quick'ning Ray;<br>I woke; the Dungeon flam'd with Light;<br>My Chains fell off, my Heart was free,<br>I rose, went forth, and follow'd Thee.</p>
+    <p>&mdash; Charles Wesley, &ldquo;Free Grace&rdquo; (1739)</p>
+  </div>
+  <p>Somewhere in the fourth line his eyes went out. And the other thing happened, in the same moment, so that he was never afterward able to tell anybody which had come first, or whether they were two things at all. He said only that the cabin went dark and he was full of light, and that there was nothing left in him that wanted anything, and that he had sat there on the stool until morning without once thinking of lying down, because there was no longer anyone in him who was tired.</p>
+  <p>When the young men woke, he was sitting where he always sat.</p>
+  <p><em>Brother Haddaway. It's time to ride.</em></p>
+  <p><em>Is it time?</em></p>
+  <p><em>It's light out.</em></p>
+  <p><em>Then go on, brothers.</em></p>
+  <p><em>And you?</em></p>
+  <p><em>My sight's gone.</em></p>
+  <p>They came and looked into his eyes and their own eyes filled. <em>Don't worry, brother. We'll see to you.</em> They rode the round without him, and at every cabin people asked where Mr. Haddaway was, and when they heard, they sent mush and buttermilk back that same morning. In the afternoon the women came in a body and knelt on the dirt floor around his stool and wept, and some of them shouted, and then they wiped their faces and said, <em>We'll see to you, Mr. Haddaway,</em> and from that day there was mush on the preaching house step every morning before light.</p>
+  <p>He talked to the eleven that winter more than he ever had, and they did what he said, and before the frost was out of the ground every one of them had found the same.</p>
+</section>
+
+<section>
+  <h2>IV. The Coat</h2>
+  <p class="dateline">Burnt Branch and Talbot County &middot; April and May, 1783</p>
+  <p>The peace came in April. A shingle wagon brought the news back from Snow Hill, and the shingle-getters fired off every gun in the settlement, and that week the young men came to Levin together.</p>
+  <p><em>Brother, the Conference sits in Baltimore at the end of May. We want to go up and see Brother Truitt.</em></p>
+  <p>He had thought about it already. Between the swamp and the Choptank there were sixty miles of bad road, and thickets a man could lose himself in for a week, and men in the woods who had gone there in the war and had not come out. If he went with them they would have to lead him every step and go hungry for it.</p>
+  <p><em>You go on ahead.</em></p>
+  <p><em>And you?</em></p>
+  <p><em>I'm weak, and you'd only be slow on my account. Go on. When you get to my brother, tell him I've lost my eyes, and he'll send somebody down for me. Give my love to Brother Truitt, and to all of them.</em></p>
+  <p>They argued, and he would not hear it, and at last they asked his pardon for arguing and went. The people of Burnt Branch walked with them out to the end of the causeway, crying, and stood there until they were out of sight.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>They came up the Choptank road in the second week of May, and Littleton Haddaway knew them by their coats before they were through the gate.</p>
+  <p><em>Where is my brother?</em></p>
+  <p>They told him. He went down on the brick walk with his face against it and wept, and the eleven young men stood around him not knowing where to look.</p>
+  <p>When he could he sat up. <em>What do I do?</em></p>
+  <p><em>He wants somebody sent down to lead him home.</em></p>
+  <p><em>My sister's boy is here. Kemp. Kemp Dawson. Send him.</em></p>
+  <p>Kemp was nineteen and big and had been reading law in Chestertown without much result. The young preachers looked him over.</p>
+  <p><em>Sixty miles through that country is no road for a boy alone,</em> they said. <em>But a Methodist preacher goes anywhere on the Peninsula. Every door that has one of ours behind it opens to him, and every man on the road knows there is nothing in his saddlebags worth the stealing. Let him take the Rules, and put on the coat, and go down that way.</em></p>
+  <p>So for two weeks they taught Kemp Dawson the General Rules of the United Societies, and how to give out a hymn two lines at a time, and on the fifteenth day they put him into a plain black coat with no buttons on the cuffs and pointed him south.</p>
+  <p>He walked it in four days. At the edge of the swamp an old man sitting on a shingle bolt with a pipe asked who he was, and when Kemp said, <em>The blind preacher's sister's son,</em> knocked out the pipe and took him in. Kemp stayed two weeks. He cut the wood and drew the water and led his uncle up and down the path in the dirt, and the people at Burnt Branch said what a fine young preacher, and he did not tell them otherwise.</p>
+  <p>At the end of the two weeks he said, <em>Uncle Littleton wants you home. Let's go.</em></p>
+  <p>Levin stood up and held out his staff, a peeled hickory sapling the shingle-getters had cut for him.</p>
+  <p><em>Take hold of the end of it, then.</em></p>
+  <p>The whole of Burnt Branch walked a mile beside them into the trees, and then stopped, and he heard them crying behind him for a long way.</p>
+</section>
+
+<section>
+  <h2>V. The Lightwood Song</h2>
+  <p class="dateline">The Cypress Swamp &middot; June, 1783</p>
+  <p>They had come most of the way through the swamp by the old shingle road when they passed the camp at Bald Cypress, where Levin had preached the first autumn. Beyond the camp, off in the trees, a woman was singing as she gathered lightwood for her fire. Levin could hear the dry sticks snapping and the voice going on over them, not loud, a long sad song about a young man dying of love and a hard-hearted girl, Barbara Allen, the one everybody knows. Her voice went into the woods and came back.</p>
+  <p>There is no sound on earth that goes into a young man like a woman's voice. Kemp heard it and stopped walking, and stood there, and Levin felt the end of the staff go loose in his hand.</p>
+  <p><em>Wait here a minute, Uncle. I have some business.</em></p>
+  <p>He went off through the trees. Levin stood in the road. The singing went on a little longer. Then it stopped, all at once, in the middle of a line, and did not start again.</p>
+  <p>Levin stood with the staff and thought: I heard somebody singing just now, and it was a woman. And the boy is a long time about his business. And he knew.</p>
+  <p>After a while Kemp came back through the leaves.</p>
+  <p><em>All right, Uncle, let's be off.</em></p>
+  <p><em>Kemp. Have you done wrong?</em></p>
+  <p>Kemp said nothing. Levin asked him three times, and three times Kemp stood in the road and did not answer, and Levin could hear him breathing.</p>
+  <p><em>Then a man like you will never take hold of the end of my staff.</em></p>
+  <p>Kemp stood a while. Then Levin heard the black coat come off, and heard it drop in the road.</p>
+  <p><em>I was never a preacher, Uncle. I only put the coat on to get down here safe. I'm what I always was. Come on now, take my arm.</em></p>
+  <p><em>A sinner is a sinner,</em> Levin said, <em>in a black coat or a brown one. You couldn't keep the Rules two weeks in a preacher's coat. Will you be a better man for taking it off? You will never hold the end of my staff.</em></p>
+  <p><em>Uncle, there's men in these woods that would kill you for your shoes. And you're blind. How will you live out here?</em></p>
+  <p><em>Don't trouble about that. Whether I lie down right here and die, or wander around in these woods till I fall in the water, I will not go with you.</em> And he said, quietly, to nobody, <em>I am blind, and I have come through a swamp to get here. I'll lie down here and go no farther. I won't keep company with a fool.</em></p>
+  <p>Kemp heard it. He made a sound Levin would remember, a sound like something tearing. <em>God forgive me. What have I done.</em> And he went off into the swamp, running, crashing through the gallberry, crying out, and Levin heard him for a long time, and then he did not hear him.</p>
+  <p>The black coat lay in the road. Levin stood beside it with the staff.</p>
+</section>
+
+<section>
+  <h2>VI. The Short Way</h2>
+  <p class="dateline">The same day</p>
+  <p>He stood long enough for the birds to come back. Then somebody was near him in the road, shuffling his feet in the leaves the way a man does who doesn't want to come on you by surprise.</p>
+  <p><em>Who is it?</em></p>
+  <p><em>A traveler, sir, going up to Talbot. Where are you bound?</em></p>
+  <p><em>To Talbot too.</em></p>
+  <p><em>Then let's go together.</em></p>
+  <p><em>I'm slow. I'll keep you back.</em></p>
+  <p><em>I'm in no hurry,</em> the man said. <em>And it's a good work to help a preacher on his way. Let's go together.</em></p>
+  <p>He had a voice like anybody's. Levin thought, this is some good Methodist from up the road. <em>All right. Take hold of the end of the staff.</em></p>
+  <p>The man took it, and they walked.</p>
+  <p>Levin knew the roads by their feel. Sand and black muck and the logs of the causeway, then the long sand ridges, then the clay. It seemed to him the ground changed under his feet faster than ground should. It was evening when he heard a gun, far off, and then drums, and church bells under the drums, and he stopped in the road.</p>
+  <p><em>Where is that?</em></p>
+  <p><em>That's Easton, sir. They're still firing for the peace.</em></p>
+  <p><em>Easton.</em> Levin stood very still. <em>Friend, when I came down that road last fall it took us the better part of three days.</em></p>
+  <p><em>I know a short way.</em></p>
+  <p>And Levin knew then that whoever had the end of his staff was no man.</p>
+  <p>The traveler took him up the Choptank road in the dusk and turned in at the head of Island Creek, where the old oak stood, and brought him to a little cabin of logs and cedar shakes just outside the oak's fence. Littleton had built it in March, when the first word came that his eyes were going, and nobody had slept in it yet. The traveler sat him on the bed and went out.</p>
+  <p>Then he went up to the big house as Jacob Kerr, who had the next place up the river and had been Littleton's friend since they were boys, and stood at the foot of the porch steps in the dark and called up. <em>Littleton! Did you know your brother's home? He's sitting in the cabin you built him.</em></p>
+  <p>And he went away. The next Sunday Littleton went over to thank Jacob Kerr, and Kerr, who was a truthful man, said he had been laid up that whole week with the gout in both feet and had not been off his own place since Easter, and his wife said so too. The people in the quarters were not surprised. They said the old oak had sent somebody to bring its boy home, and that it was about time.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Littleton ran the whole way down from the house in the dark and went into the cabin and fell down on the floor at his brother's feet, and wrapped his arms around his brother's knees, and cried until he couldn't.</p>
+  <p><em>I knew,</em> he said. <em>I knew this would happen. That's why I wouldn't give you my leave. I knew it.</em></p>
+  <p>Levin put his hand on his brother's head.</p>
+  <p>A week later Littleton rode into Easton with Isaac and Daniel from the quarters and two witnesses, and before a justice of the peace he signed two deeds under his hand and seal, as the law required, setting them free. Both men were under fifty years of age and able to work and gain a sufficient living, as the law also required. Isaac had been leading the black class at the Bay Side meeting for three years, and Daniel sang in it. Littleton asked them, riding home, if they would see to his brother, and said he would pay wages and give them the ground around the cabin.</p>
+  <p>Isaac rode a long way without answering.</p>
+  <p><em>We'll see to him,</em> he said at last. <em>I knew him before you did, near about. I was ten years old when he went to Philadelphia.</em> Then he said, <em>And the others?</em></p>
+  <p>Littleton did not have an answer, and rode the rest of the way home without one, and Isaac let him.</p>
+</section>
+
+<section>
+  <h2>VII. The Brood</h2>
+  <p class="dateline">Island Creek &middot; June, 1783</p>
+  <p>The Conference rose in Baltimore at the end of May, and three of the young preachers coming down the Peninsula turned in at the Haddaway landing because they had heard there was a blind preacher there who had been made perfect in a swamp. They came up the creek road at evening, and a storm came up off the bay with them, and they turned back to the big house and said they would go down to the cabin in the morning. It rained hard until midnight. Then it stopped.</p>
+  <p>Levin had always been a walker. In the last hours of the night he came out and walked the brick path Littleton had laid for him, from the cabin door to the fence of the oak, forty steps and forty back, until the birds started.</p>
+  <p>That night, all over Talbot County, the ground opened. It had been seventeen years. The rain had softened the earth and the warm night had come after it, and out of every inch of ground under every tree the locusts came up, brown and blind and wet, by the thousands, and crawled up whatever was nearest to split their backs and come out of themselves. They came up through the cracks between the bricks of the path. They crawled across it toward the oak. Levin walked up and down on them in the dark and did not know they were there. Nobody had swept the path. Isaac was asleep.</p>
+  <p>In the morning the three young preachers came down from the house and found the brick walk covered from end to end with them, crushed, and the oak above it so thick with the living ones that the bark seemed to crawl.</p>
+  <p><em>Who walked here?</em></p>
+  <p>Isaac was in the doorway. <em>Mr. Levin. He walks every night.</em></p>
+  <p>The oldest of them was twenty-two. <em>Look what the perfect man has done,</em> he said. <em>When he had his eyes he sat up all night and harmed nothing. Now he's lost them he goes walking up and down in the dark killing God's creatures by the hundred. Perfect, they say.</em></p>
+  <p>Eli Truitt came up the creek road that noon on his way to Dorset. He had charge of all that country now, and he was thinner than ever, and he got down from his horse slowly, and the three young men met him at the gate and told him.</p>
+  <p><em>Did you see him kill them?</em> Truitt said.</p>
+  <p><em>No.</em></p>
+  <p><em>No more did he see them.</em> Truitt walked past them to the path and stood looking at it. <em>Mr. Wesley says that nothing is sin, strictly speaking, but a voluntary transgression of a known law of God. He didn't know they were there. Go and look at your own feet, brothers, if you want somebody to try.</em></p>
+  <p>The oldest one said, <em>Then tell us this. If he's been made perfect, why did God take his eyes?</em></p>
+  <p>Truitt looked toward the cabin door. Levin was sitting just inside it, in his chair, and he had heard everything, and after a moment he nodded once.</p>
+  <p><em>I'll tell you,</em> Truitt said. <em>He told it himself at his first love feast, standing up in front of four hundred people.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p><em>The year he came home from Philadelphia with his lancets, a free woman of color in Easton named Hester Copper came to him because her eyes were failing. She washed for people, and she couldn't see to wash. He asked what she would pay. She had nothing. She said if he made her eyes well she would bind herself to him for seven years, herself and her children with her. He said that would do.</em></p>
+  <p><em>He laid tutty on her eyes, the same as Hudson sent him in the swamp, and in a week they were well.</em></p>
+  <p><em>Then she thought about it. She had seen free people bound out in Talbot County before. She had seen their time run on past seven years, and their papers lost, and their children carried off and sold for somebody's debts. She was not going to put her children's names on any paper. So when he came by to see how she did, she told him her eyes were worse than before.</em></p>
+  <p><em>He knew she was lying. He didn't want her seven years. He wanted her to pay. So he went home and mixed oil of vitriol into a pot of salve and carried it back to her and told her to lay it on her eyes that night, and she did, and they went out like a candle.</em></p>
+  <p><em>That was the summer of 1766,</em> Truitt said. <em>The last time these came up out of the ground.</em></p>
+  <p>The young men stood on the path. The noise in the oak had come up while he talked and was everywhere now, like a saw blade, like the whole county humming.</p>
+  <p><em>A wheel follows the ox that draws it,</em> Truitt said. <em>It follows him all the way down the road. He's not sorry about his eyes. He'll tell you so himself.</em> And he said the Psalm to them the way all of them had learned it as children, out of the Prayer Book, before there were any Methodists.</p>
+  <div class="verse">
+    <p>The heathen are sunk down in the pit that they made: in the same net which they hid privily, is their foot taken. The Lord is known to execute judgment: the ungodly is trapped in the work of his own hands.</p>
+    <p>&mdash; Psalm 9:15&ndash;16 (Book of Common Prayer)</p>
+  </div>
+</section>
+
+<section>
+  <h2>VIII. The Husks</h2>
+  <p class="dateline">Island Creek &middot; the same evening</p>
+  <p>When the preachers had ridden on, Levin asked Isaac to take him out to the oak.</p>
+  <p>Isaac took the end of the staff and led him in through the gate of the old fence, where the red rags still hung on the low limbs, faded to pink, and sat him down with his back against the trunk. Levin put his hands out on the bark on either side of him. It was covered with the husks. They were dry already, and light as paper, each one hooked into the bark by its little feet and split straight down the back where the thing inside had climbed out of it and gone on up into the leaves, and the leaves overhead were roaring with them.</p>
+  <p>He sat a long time feeling them. Then he asked Isaac whether Hester Copper was living.</p>
+  <p><em>She's living. She stays with her daughter, in Easton, back of the courthouse.</em></p>
+  <p><em>Will you take me there tomorrow?</em></p>
+  <p>Isaac did not answer right away. He looked at the man sitting against the oak with his white eyes and his hands full of empty shells.</p>
+  <p><em>I'll take you,</em> he said. <em>What she does about it is up to her.</em></p>
+  <p>In the morning Isaac took the tip of the staff, and they went up the Easton road together, slowly, with the noise in every tree on both sides of them, and the dry husks coming loose from the bark as they passed and falling in the road, and crackling under their feet.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">All that we are is the result of what we have thought: it is founded on our thoughts, it is made up of our thoughts. If a man speaks or acts with an evil thought, pain follows him, as the wheel follows the foot of the ox that draws the carriage.<cite>Dhammapada 1, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Mahā Pāla is the elder son of a rich man of Sāvatthī who got his children by a vow to the spirit of a great tree. He hears the Buddha teach, gives his whole estate to his younger brother, and becomes a monk. Spending the rains in a border village with sixty companions, he vows not to lie down for three months. His eyes fail, a physician's ointment does nothing, and one night his sight and his defilements go out together, and he wakes an arahant, blind. On the road home his nephew, newly ordained to make the journey safe, leaves him in the forest for a woman he hears singing as she gathers firewood, and Sakka, king of the gods, takes the end of his staff and brings him to Sāvatthī by a short way. When visiting monks find insects crushed on his walking path after rain, the Buddha says that he did not see them and meant no killing, and that his blindness came from a former life in which, as a physician, he blinded a woman who had cheated him of his fee. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-01.htm">the full commentary story</a>, or <a href="https://www.tipitaka.net/tipitaka/dhp/verseload.php?verse=001">a shorter telling of the story of Thera Cakkhupāla</a>.</p>
+    <h3>The Eastern Shore of Maryland, 1777&ndash;1783</h3>
+    <p>Methodism grew quickly during the Revolution on the Delmarva Peninsula, between the Chesapeake and the Delaware. Many of its preachers would not swear the state oaths, and patriots suspected them of loyalism. <a href="https://en.wikipedia.org/wiki/Francis_Asbury">Francis Asbury</a> spent most of a year sheltered in Delaware, Joseph Hartley was jailed in Talbot County and preached to the townspeople through the bars, and <a href="https://en.wikipedia.org/wiki/Freeborn_Garrettson">Freeborn Garrettson</a> was jailed at Cambridge in 1780, sleeping on the floor with his saddlebags for a pillow. That same year the preachers' conference declared slavery &ldquo;contrary to the law of God, man, and nature&rdquo; and required traveling preachers who held slaves to promise to free them. By 1783 the movement had eighty-two traveling preachers. The early conference minutes are reprinted in <a href="https://www.ccel.org/ccel/bangs/history1.ii.iii.ii.html">Nathan Bangs's history of the Methodist Episcopal Church</a>. Mr. Wesley's definition of sin, &ldquo;a voluntary transgression of a known law of God,&rdquo; comes from <a href="https://corpus.historyofmethodism.com/passage/jw-letter-1772-38-to-mrs-bennis-000">a 1772 letter to Elizabeth Bennis</a>.</p>
+    <p>Under a Maryland act of 1752, a master could free an enslaved person only by a deed under hand and seal, witnessed by two people, acknowledged before a justice and recorded within six months, and only if the person freed was <a href="https://enduringconnections.salisbury.edu/r/laws_legislation_slavery_delmarva_16421860/17">no older than fifty and able to earn a living</a>. The seventeen-year cicadas of <a href="https://en.wikipedia.org/wiki/Brood_X">Brood X</a>, which colonists called locusts, came up across Maryland and Delaware in 1766 and again in 1783; Benjamin Banneker remembered both emergences. The <a href="https://en.wikipedia.org/wiki/Great_Cypress_Swamp">Great Cypress Swamp</a> on the Maryland&ndash;Delaware line, now the largest forest on the Peninsula, was cut for shingle timber and drained for farming, and one peat fire burned there so long that people called it the Burnt Swamp. Ointment of tutty, a crude zinc oxide salve, was <a href="https://collections.vam.ac.uk/item/O21549/drug-jar-unknown/">mainly used for sore eyes</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Cakkhupāla from the Dhammapada commentary (verse 1). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-01.htm">The original</a>. Scripture from the Book of Common Prayer (1662), with a hymn by Charles Wesley (1739). Written by Claude Opus 5.5.
+  <div class="pager"><span></span><a href="index.html">All stories</a><a href="uncle-no.html">Uncle No &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Peat smoke from the burning swamp: soft grey wisps that rise slowly from the foot of the page,
+  // swell, drift with a faint wind, and thin away. Kept very faint behind the text.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, puffs = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(p, anywhere) {
+    p.x = Math.random() * W;
+    p.y = anywhere ? Math.random() * H : H + 40 + Math.random() * 80;
+    p.r = 40 + Math.random() * 70;
+    p.vy = 0.12 + Math.random() * 0.18;
+    p.vx = (Math.random() - 0.3) * 0.12;
+    p.grow = 0.04 + Math.random() * 0.06;
+    p.a = 0.035 + Math.random() * 0.045;
+    p.seed = Math.random() * 1000;
+    p.warm = Math.random() < 0.18;
+    return p;
+  }
+  function make() {
+    var n = Math.round(Math.max(10, Math.min(26, W / 55)));
+    puffs = [];
+    for (var i = 0; i < n; i++) puffs.push(spawn({}, true));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += 1;
+    for (var i = 0; i < puffs.length; i++) {
+      var p = puffs[i];
+      if (!reduce) {
+        p.y -= p.vy;
+        p.x += p.vx + Math.sin((t + p.seed) * 0.004) * 0.15;
+        p.r += p.grow;
+        if (p.y + p.r < -20 || p.x < -p.r * 2 || p.x > W + p.r * 2) spawn(p, false);
+      }
+      // fade in from the bottom, thin out toward the top
+      var h = Math.max(0, Math.min(1, p.y / H));
+      var a = p.a * Math.min(1, (1 - h) * 6 + 0.15) * (0.35 + 0.65 * h);
+      if (a < 0.003) continue;
+      var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      var col = p.warm ? '120,86,60' : '88,82,74';
+      g.addColorStop(0, 'rgba(' + col + ',' + a + ')');
+      g.addColorStop(0.55, 'rgba(' + col + ',' + (a * 0.45) + ')');
+      g.addColorStop(1, 'rgba(' + col + ',0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

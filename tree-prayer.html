@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tree Prayer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a winter night ridge; dark pine trunks stand at the edges, and now and then a soft lamp-colored light comes up between them and fades; datelined sections. */
+  --ground: #0d1210;
+  --ground-2: #16201b;
+  --paper: #e6e2d5;
+  --paper-dim: #a1a596;
+  --accent: #e2c27d;
+  --accent-2: #c48a3a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1d2a22 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,226,213,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(226,194,125,.22); }
+.epigraph { border-left: 1px solid rgba(226,194,125,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(22,32,27,.75); border: 1px solid rgba(230,226,213,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,226,213,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(22,32,27,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 8.14 &middot; Bahuputtik&#257;</span></nav>
+<header>
+  <h1>Tree Prayer</h1>
+  <div class="epigraph">I had heard of thee by the hearing of the ear; But now mine eye seeth thee.<br>&mdash; Job 42:5</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ireoke deureosseoyo,</span> on Pleasant Hill Road.</p>
+
+<section>
+  <h2>I. The Store</h2>
+  <p class="dateline">Candler Road, DeKalb County &middot; 2013</p>
+  <p>For thirty-four years Shin Jeong-ok pressed other people's clothes. She ran Sunrise Cleaners on Candler Road with her husband, Lee Man-sik, in a strip of stores between a check-cashing place and a barbershop, and she could look at a stain on a blouse and tell you whether it was coffee or red clay or blood, and how old it was, and whether it would come out. Man-sik worked the register and the boiler and the long conveyor of plastic bags that went round the ceiling and came back down when you pushed the button. She worked the steam press and the Singer in the back. She let out the waists of church pants and took up the hems of prom dresses, and fixed zippers for a dollar, and pinned a paper ticket to every collar with a safety pin, and she was nearly never wrong about anything that came across the counter.</p>
+  <p>The women called her Miss Shin, or Mama Shin, or just Mama. Some of them had been coming since they were girls, holding their mothers' hands. Miss Loretta Pugh, who was on the usher board at Greater Mount Calvary, had brought in the same white usher's dress every Monday morning since 1986, and every Monday Jeong-ok had it back on the rack by Wednesday with the collar starched the way Loretta liked it, and Loretta's ticket pinned on the left side, where the heart is, because Loretta had asked her to once and she had never forgotten.</p>
+  <p>She had seven children. Four sons and three daughters, five born in Seoul and two at Grady Hospital, and every one of them had done homework on an upturned milk crate in the back of the store under a calendar from the Korean bank on Buford Highway. Every one of them had gone to college. Every one of them was married now, to a Korean or near enough, and lived in a house in Gwinnett or north Fulton with a basement and a two-car garage and a mailbox at the end of the drive, and on Sundays most of them sat in the same Full Gospel church in Duluth where their parents had sat since the church met in a rented Baptist fellowship hall.</p>
+  <p>Man-sik died in March, at four in the morning, in the car in the church parking lot, waiting for dawn prayer to start. He had the engine running for the heat. The deacon who found him said he looked like a man who had come early and dozed off, which was true.</p>
+  <p>The funeral took three days. The children took turns at the guest book and at the door. On the fourth day Jeong-ok put on her black cardigan and drove to Candler Road and lifted the steel gate and opened the store, because it was a Monday and there would be dresses.</p>
+  <p>Loretta Pugh came in at nine with the white dress over her arm and stood at the counter a long time. Then she came around the end of it, which no customer did, and held Jeong-ok against her chest without saying anything, and Jeong-ok let herself be held, and smelled Loretta's perfume, which was the same perfume she had worn since 1986 too.</p>
+</section>
+
+<section>
+  <h2>II. Seven Envelopes</h2>
+  <p class="dateline">Duluth &middot; summer and fall, 2013</p>
+  <p>The sons brought it up at the kitchen table in the house on the cul-de-sac in Duluth, one Sunday in June after church, while the daughters and the daughters-in-law washed the dishes and pretended not to listen.</p>
+  <p>Daniel, the eldest, said it. He was a pharmacist and he said things in the order a pharmacist says them, gently and in a row. <em>Umma. Abba is gone now. What do you need the store for? You're seventy-three. You stand all day on that concrete. There's no one to watch the door. We can take care of you. Isn't that what we're for?</em></p>
+  <p>She listened, and said nothing, and got up and brought the fruit.</p>
+  <p>They said it again on Chuseok in September, and again at Samuel's daughter's first birthday, and again on the phone, one son and then another, so that she could tell they had talked about it among themselves. She said nothing each time. But at night in the house on the cul-de-sac, which was too large now and made sounds she did not remember it making, she thought about her husband in the car with the engine running, and about her own knees, and about her four sons, who were good boys, who had been good boys always, who had done their homework on a milk crate.</p>
+  <p><em>My sons will look after me,</em> she thought. <em>Why should I hold onto anything for myself?</em></p>
+  <p>She sold the store in October to Tonya Gaines, who had worked the counter beside her for eleven years and knew every customer's name and every customer's starch, and who got a loan from a small business program and a smaller one from her church. Jeong-ok sold it to her for less than the machines were worth and left her the Singer. She sold the house in Duluth in November to a young couple from Busan with a baby. In December she sat at the kitchen table of an apartment she had rented by the month, with a lawyer from church across from her, and signed what he put in front of her, and the lawyer handed her seven envelopes, and she wrote a name on each one in her careful hand, in Korean and in English, eldest to youngest.</p>
+  <p>She kept one suitcase of clothes, her Bible, her husband's reading glasses, and the earthenware crock she had carried from Seoul in 1977 with her own soybean paste in it, which she had kept going ever since, adding the new year's paste to the old every spring, for thirty-six years.</p>
+</section>
+
+<section>
+  <h2>III. The Guest Rooms</h2>
+  <p class="dateline">Suwanee, Johns Creek, Lawrenceville &middot; 2014</p>
+  <p>Daniel's house was in a subdivision in Suwanee called Ashford Glen, with a pool and tennis courts and a stone sign at the entrance with water running down it. Jeong-ok had the guest room over the garage. Her daughter-in-law Jenny had put fresh towels on the bed in a fan shape, and a bottle of water on the nightstand, as if for a hotel.</p>
+  <p>The first week was good. Jeong-ok cooked. She made doenjang stew with the paste from her crock, and fried anchovies with sesame and honey, and sat with her granddaughters while they did their homework and did not understand a word of it. The second week Jenny began to open the kitchen windows when Jeong-ok cooked, and to turn on the vent fan, and once, after the fish, to walk through the downstairs with a can of air freshener that smelled like an apple that had never grown on any tree. The third week the crock went out to the garage, beside the second refrigerator and the girls' bicycles, because of the smell.</p>
+  <p>On a Thursday at the end of the month Jeong-ok came down the back stairs to the laundry room for a dish towel and stopped, because Jenny was in there on the phone with her sister in Marietta, in English, folding sheets.</p>
+  <p><em>Apparently ours is the only house in Georgia she knows how to find,</em> Jenny said. <em>You'd think she gave the whole store to Daniel. He got one envelope. Same as everybody.</em></p>
+  <p>Jeong-ok went back up the stairs without the towel. She had run a cleaners on Candler Road for thirty-four years. She had argued with the chemical suppliers in English, and with the alarm company, and with a man from the county about the sign. She had stood behind that counter through two robberies and a tornado warning and the morning a man came in to tell her, in English, at length, to go back where she came from. She understood English very well. Her children had always forgotten that, and spoken in front of her in it as if it were a room she could not get into.</p>
+  <p>In March she moved to Samuel's in Johns Creek. Samuel's wife Hannah was kind and very busy and set her up in the room where the treadmill was. In May, Hannah said it too, to Samuel, in their bedroom with the door not quite closed. <em>Is this the only house she can go to? You'd think the store went to the second son.</em> In July Jeong-ok went to Joseph's in Lawrenceville, where the guest room was the baby's room and the baby slept with his parents while she was there, and cried, and the crying came through the wall, and on the fourth night Joseph's wife Michelle asked her, very politely, whether she could pray more quietly in the mornings. Jeong-ok had prayed aloud at five o'clock every morning of her life since she was twelve years old, the way her mother had and her grandmother in Pyongyang before her. She prayed in a whisper after that. She found she did not know how. In August Michelle said it. In September Peter's wife said it, in the car, to Peter, while Jeong-ok sat in the back seat with the grandson's car seat between them.</p>
+  <p>Then the daughters. Grace in Alpharetta, the eldest daughter, who had been a girl at the milk crate and was now a woman with a nice kitchen and a cleaning lady on Tuesdays. <em>Umma, you're always here. Don't the boys have rooms?</em> Esther, who lived nearest, in Peachtree Corners, and was the gentlest of them all. <em>Umma, I love you, but Kevin's mother is coming in November, and you know how Kevin's mother is.</em> And Ruth, the youngest, the one born at Grady, who had once wept at the sight of an injured squirrel, and who said it on the phone without knowing her mother had already said goodbye to her husband and was standing behind her at the door with the suitcase.</p>
+  <p>Seven houses. Seven guest rooms. Fresh towels in seven fan shapes, and a bottle of water on each nightstand. Jeong-ok sat on the edge of the bed in Ruth's guest room in October with her hands in her lap and looked at the bottle of water for a long time.</p>
+  <p>Then she thought: <em>Why should I keep living like this? I will go up the mountain.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Mountain</h2>
+  <p class="dateline">Gilmer County, in the north Georgia mountains &middot; autumn 2014</p>
+  <p>The prayer mountain was an old Baptist youth camp the church had bought in 1988, two hours north of the city, past the apple orchards and the roadside stands selling fried pies, up a gravel road with a cable across it and a hand-lettered sign in two languages. There was a chapel with a tin roof and a long porch on cedar posts. There was a dining hall and two dormitories and a bathhouse. Up the ridge behind the chapel, through the white pines, there were thirty little prayer rooms the size of a closet, each one with a door and a window and a cushion and a Bible and a box of tissues, and at the very top of the ridge there was a white cross twenty feet tall that had a ring of electric bulbs on it and could be seen at night from the state highway.</p>
+  <p>Jeong-ok had come up on Friday nights for twenty years in the church van with the other women, to pray all night in the chapel and walk the ridge in the dark and come down at dawn with their voices gone. She had never come up alone. She had never come on a Tuesday.</p>
+  <p>Choi Moksa-nim, who had founded the place and had been its pastor for twenty-six years, was eighty-four. He lived in a two-room house at the bottom of the hill, by the gate, with a woodstove and a cat. He was small and bald and wore the same grey cardigan in all weather, and in all those Friday nights Jeong-ok had never heard him preach for more than ten minutes, or raise his voice once. He did not ask her about her children. He did not ask her about the store, or the money, or why she had come up the mountain on a Tuesday afternoon in October in a taxi from Ellijay with one suitcase and a crock.</p>
+  <p>He looked at her for a while on the porch of his house, the way she used to look at a woman holding up a picture out of a magazine.</p>
+  <p><em>There's a bed in the women's dormitory,</em> he said. <em>Deaconess Bae will show you the kitchen.</em></p>
+  <p>Three women lived on the mountain the year round. Deaconess Bae, who had never married and ran the kitchen like a ship. Mrs. Kwon, a widow from Chicago, who had come up for one weekend in 2009 and not gone back. And now Jeong-ok. They cooked for the retreats on weekends, rice for two hundred in the big steel pots. They cleaned the prayer rooms on Mondays, emptied the wastebaskets of tissues and shook out the cushions. They swept pine needles off the chapel porch that came back the next morning. They prayed at five in the chapel with Pastor Choi, and at noon, and in the evening, and whenever else they liked, and nobody on the mountain had ever asked anybody else to pray more quietly.</p>
+  <p>The first week, Jeong-ok drove down to Ellijay with Mrs. Kwon and went into a salon off the square and had her hair cut short, very short, close to the head like an old man's. For thirty-four years she had worn it long and pinned up out of the steam. She watched it fall onto the cape and onto the floor, grey and black, and the girl with the scissors asked if she was sure, and she said she was sure, and gave her a ten-dollar tip.</p>
+  <p>She turned off her phone and put it in her suitcase. Her daughters had sent her sermons on KakaoTalk, links to pastors in Seoul and Dallas and Los Angeles who preached for an hour on prosperity and on the end of the world. She did not watch them anymore. On the mountain she took what Pastor Choi gave. He gave out one verse on Sunday, written on a card in his small square hand, and she carried that one verse all week in her apron pocket and took it out and looked at it in the dish water and on the ridge and in the dark, and turned it over, and did not ask for another.</p>
+</section>
+
+<section>
+  <h2>V. The Posts and the Trees</h2>
+  <p class="dateline">The ridge &middot; winter</p>
+  <p><em>I came late,</em> she thought. <em>I came to this at seventy-four years old, when the others came at forty. I can't afford to sleep.</em></p>
+  <p>So she began to pray through the nights. She would help Deaconess Bae with the supper dishes and put on her coat and her husband's wool hat and go out to the chapel porch while the others went to bed. She prayed on the porch first. The light over the chapel door had burned out in November and nobody had gotten up on the ladder, and her eyes were not good anymore in the dark, cataracts in both, which the doctor in Duluth had wanted to fix and which she had put off for the store and then for the funeral and then for everything else. So she walked the length of the porch with her hand on the cedar posts. Post to post. Twelve posts down and twelve posts back, her palm on each one as she came to it, praying under her breath, turning the verse in her apron pocket over in her mind the way you turn a stone over in your fingers.</p>
+  <p>When the porch was not enough she went up the ridge.</p>
+  <p>There were no lights on the ridge path. There had never been. Pastor Choi had refused them for twenty-six years, against every committee and building fund in the church. People could come up a mountain in the dark, he said. People had done it for a very long time. The only light was the ring of bulbs on the cross at the top, which was far away and showed you where you were going without showing you anything at all about how to get there.</p>
+  <p>The first week she struck her head on a low pine bough and had a bruise above her eye that went from purple to green to yellow, and Deaconess Bae looked at it at breakfast and said nothing and put an extra egg on her rice.</p>
+  <p>After that she went up the ridge the way she had walked the porch. She put her hand out in the dark and found a tree, and held it, and stood there and prayed, and then let it go and put her hand out for the next one. Tree to tree. White pines mostly, and a few hemlocks, and one big oak at the switchback that she came to know by the feel of it, as rough as a cinderblock wall. Her palms got sticky with pitch. Her husband's hat caught on twigs. She went up in the dark tree by tree and came down in the dark tree by tree, and somewhere around three in the morning she would sit in one of the little prayer rooms with the door open and the cold coming in, and the stars over the ridge so many and so near that she could make no sense of them, and then she would go up again.</p>
+  <p>She had done this once before in her life. She had not thought of it in fifty years. In December of 1950, when she was ten, her family had walked south out of Pyongyang with everything they could carry, ahead of the Chinese armies, on frozen roads, with thousands upon thousands of other families, mostly at night. She had walked the whole way holding the hem of her mother's coat in her fist so as not to lose her in the dark. When her mother stopped, she stopped. When her mother went on, she went on. She had not let go once in eleven nights. She remembered now, on the ridge, the exact feel of that wool in her hand.</p>
+  <p>The tips of her fingers went black with pitch and stayed that way. She did not try to wash it off. It did not hurt anything.</p>
+</section>
+
+<section>
+  <h2>VI. The Light</h2>
+  <p class="dateline">The bench below the cross &middot; January 2015</p>
+  <p>In the second week of January Pastor Choi had pneumonia, and Deaconess Bae drove him down the mountain to the hospital in Jasper, and stayed with him there. That left Mrs. Kwon and Jeong-ok alone on the mountain. It snowed a little on the Thursday and froze on the Friday, and nobody came up from the city for the all-night prayer, because the gravel road was ice.</p>
+  <p>Jeong-ok went up the ridge on Friday night anyway, tree to tree, with frozen pine needles cracking under her shoes. It was very cold. Her breath went out ahead of her and she could not see it go. Near the top, below the cross, there was a wooden bench where people sat to catch their breath, and a white pine beside it, and she had her hand on that pine and her forehead against the back of her hand when she saw the light coming up the path behind her.</p>
+  <p>She thought at first that it was Mrs. Kwon with a flashlight. Then she thought it was a car, because it was too wide and too soft for a flashlight, and she wondered how anybody could have gotten a car up the ridge. Then it was on the bench beside her, and it was Pastor Choi.</p>
+  <p>He was sitting on the bench in his grey cardigan with no coat and no hat, with his hands on his knees, the way he sat in the chapel on Friday nights before he got up to speak his ten minutes. He was not shivering. The light was coming off him, or was all around him, or both. It was the color of the light in a kitchen very early in the morning when somebody else is already up. She could see the bark of the pine under her own hand in it, every ridge, and the black pitch on her fingers, and her breath. She could see his face very clearly, close to hers, nearer than she had ever been to it, as close as a person you are talking with across a small table.</p>
+  <p>She was not afraid. She would say afterward that she had expected to be and had not been, and that she did not know why.</p>
+  <p><em>Shin Kwonsa,</em> he said. <em>You have been walking a long way to see something.</em></p>
+  <p><em>Yes, Moksa-nim.</em></p>
+  <p><em>People live eighty years, ninety years. A hundred. They raise children and the children raise children and they buy the house and sell the house, and they never once look up and see. One day seeing is better than that. One hour. Do you understand me?</em></p>
+  <p>She said she was trying to.</p>
+  <p>He said it to her then from the book of the Preacher, which she had read a hundred times and had never once read, quietly, the way you would tell somebody where you had put their glasses.</p>
+  <div class="verse">
+    <p>If a man beget a hundred children, and live many years, so that the days of his years are many, but his soul be not filled with good, and moreover he have no burial; I say, that an untimely birth is better than he.</p>
+    <p>Yea, though he live a thousand years twice told, and yet enjoy no good, do not all go to one place?</p>
+    <p>&mdash; Ecclesiastes 6:3, 6</p>
+  </div>
+  <p>Then she saw.</p>
+  <p>She would never be able to say it better than that, though Mrs. Kwon asked her, and later her daughters asked her, and once a young pastor from Atlanta with a notebook. It was as if she had been walking all her life with her hand out in the dark, from tree to tree and post to post and coat hem to coat hem, from Pyongyang to Seoul to Candler Road to the seven guest rooms, holding on to the next thing so as not to strike her head, and for one moment somebody had turned on the light, and she saw that the path had been there all along, and the trees, and the cross, and the whole ridge, and that she had been on it the whole time. Her husband in the car with the engine running. Loretta Pugh at the counter. Jenny folding sheets. Her mother's coat. Her own hand on the pine. None of it was in the dark. None of it ever had been. She looked at all of it at once and nothing was missing.</p>
+  <p>She heard herself say it aloud, in the old way, the way she had prayed every morning of her life until Lawrenceville.</p>
+  <div class="verse">
+    <p>I had heard of thee by the hearing of the ear; But now mine eye seeth thee.</p>
+    <p>&mdash; Job 42:5</p>
+  </div>
+  <p>Then the bench was empty, and it was dark, and the ring of bulbs hummed on the cross above her in the cold.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Mrs. Kwon had seen the light from the dormitory window, at a quarter past two. She said it was too high on the ridge to be a car and too wide to be a flashlight and too yellow to be the cross, and that it stayed for about as long as it takes to say the Lord's Prayer twice, slowly, and that she had said it twice to find out.</p>
+  <p>Deaconess Bae called from the hospital in Jasper at seven in the morning to say the fever had broken in the night. The nurse on the floor told her that the old man had slept the whole night through with the oxygen on, and that around two he had talked a little in his sleep, in Korean, very calmly, the way a person talks across a table. When Deaconess Bae asked him about it later, he said he did not remember dreaming, and asked whether the women had remembered to put salt down on the chapel steps.</p>
+</section>
+
+<section>
+  <h2>VII. The Bark</h2>
+  <p class="dateline">Chuseok &middot; September 2015</p>
+  <p>They came up the mountain on the holiday in four cars, all seven of them, with their husbands and their wives and their children, because Esther had called the dining hall and Deaconess Bae had told her that her mother was well, and had told her nothing else, and Esther had not been able to sleep. They brought half-moon rice cakes in plastic trays from the Korean bakery on Pleasant Hill Road, and a box of Asian pears, and a bottle of the good sesame oil.</p>
+  <p>They found their mother on the chapel porch with a broom, sweeping off the pine needles that would be back by morning. Her hair was short and white. Her fingertips were black. She looked at them coming up the gravel from the cars, all of them at once, and set down the broom, and the children said afterward, each in his own way and her own way, that they had never been looked at like that by anyone. Grace started to cry before she reached the steps and could not have said why.</p>
+  <p>Jeong-ok fed them. She went into the dining hall kitchen with Deaconess Bae and came out with rice and soup and nine kinds of side dishes, and the soup was made from the paste in the crock she had brought from Seoul in 1977. Jenny ate two bowls of it and asked for the recipe. Jeong-ok told her, and Jenny wrote it down on her phone.</p>
+  <p>After dinner the grown children sat on the porch with Pastor Choi and talked in low voices, about what should be done, about whether their mother should come home, and to whose home. Jeong-ok did the dishes. Nobody asked her to pray more quietly, and she did not.</p>
+  <p>Ruth's daughter Abigail was eight. She was bored with the grown-ups, and she went up the ridge path by herself in the last of the evening light to see the big cross. Halfway up, she stopped and looked at a pine tree beside the path. There was a dark, smooth place on the bark at the height of her own forehead, about the size of a hand, worn and polished and black with pitch, as if somebody had touched it in the same spot every night for a year. She looked at the next tree up the path. It had one too. So did the next, and the next, and the big oak at the switchback, all the way up the ridge to the bench below the cross, one dark hand-shaped place on every tree, at the height of an old woman's shoulder.</p>
+  <p>Abigail reached up and put her own small hand flat on the first one. It was warm from the day. When she took it away her palm was sticky, and it smelled like the inside of the woods, and she did not wipe it on her dress.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">And he who lives a hundred years, not seeing the highest law, a life of one day is better if a man sees the highest law.<cite>Dhammapada 115, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a devout widow of S&#257;vatth&#299; with seven sons and seven daughters keeps her husband's estate until her children ask why she needs it when they could support her. She divides it among them, and soon every daughter-in-law and every daughter complains that hers is the only house the old woman visits. She leaves them and is ordained as a nun, and because she has come to the life so late she resolves to meditate all night, guiding herself in the dark with a hand on the pillars and then on the trees so as not to strike her head. The Buddha, seated in his own chamber at Jetavana, sends a radiant image of himself to sit face to face with her and speaks the verse, and she is awakened. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-14.htm">the full commentary story</a>.</p>
+    <h3>Korean Atlanta, 2013&ndash;2015</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Immigration_and_Nationality_Act_of_1965">Immigration and Nationality Act of 1965</a> ended the national-origins quotas that had shut out most Asian immigrants, and Korean families began arriving in large numbers in the following decades. Between 1990 and 2000 Georgia had the fastest-growing Korean community in the country. In metro Atlanta, Korean grocers, restaurants and shops first clustered along <a href="https://en.wikipedia.org/wiki/Buford_Highway">Buford Highway</a> in Doraville in the 1980s, then <a href="https://www.ajc.com/news/business/atlantas-koreatown-has-been-shifting-north-heres-why/I3WBZPNLPZEFNN4V3EYPECUQZE">moved north</a> into Gwinnett County, where <a href="https://en.wikipedia.org/wiki/Duluth,_Georgia">Duluth</a> now has the largest Koreatown in the Southeast.</p>
+    <p>Between 60 and 65 percent of <a href="https://en.wikipedia.org/wiki/Korean_Americans">Korean Americans</a> identify as Christian, and there are some four thousand Korean churches in the United States. Many of those families trace their faith to the north of the peninsula, where Korean Christianity was strongest before the war; <a href="https://en.wikipedia.org/wiki/Religion_in_North_Korea">many northern Christians fled south</a> in 1950 and after. Korean churches carried over a tradition of fervent prayer: daily prayer meetings before dawn, Friday all-night vigils, and the prayer mountain, or <i>kidowon</i>, a retreat where believers pray outdoors through the night, sometimes <a href="https://www.christianitytoday.com/2024/12/shamanism-south-korea-exhuma-church-prayer-healing/">holding onto trees</a> as a sign of their devotion.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Bahuputtik&#257; from the Dhammapada commentary (verse 115). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-14.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-mustard-seed.html">&larr; The Mustard Seed</a><a href="index.html">All stories</a><a href="one-shawl.html">One Shawl &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, trunks = [], glow = null, t = 0, wait = 240;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function make() {
+    trunks = [];
+    var n = Math.round(Math.max(8, Math.min(18, W / 80)));
+    for (var i = 0; i < n; i++) {
+      var side = i % 2 ? 1 : 0;
+      var x = side ? W - rnd(0, W * 0.24) : rnd(0, W * 0.24);
+      if (W > 900 && Math.random() < 0.3) x = rnd(0, W);
+      trunks.push({ x: x, w: rnd(6, 22), lean: rnd(-0.015, 0.015), shade: rnd(0.35, 1), bough: rnd(0.15, 0.6) });
+    }
+    trunks.sort(function (a, b) { return a.shade - b.shade; });
+  }
+  function newGlow() {
+    var x = rnd(W * 0.15, W * 0.85);
+    return { x: x, y: rnd(H * 0.55, H * 0.9), life: 0, max: rnd(900, 1500), drift: rnd(-0.06, 0.06), rise: rnd(0.05, 0.12) };
+  }
+  function drawGlow(g, a) {
+    var r = Math.max(W, H) * 0.32;
+    var gr = ctx.createRadialGradient(g.x, g.y, 0, g.x, g.y, r);
+    gr.addColorStop(0, 'rgba(244,214,150,' + (0.16 * a) + ')');
+    gr.addColorStop(0.25, 'rgba(226,194,125,' + (0.07 * a) + ')');
+    gr.addColorStop(1, 'rgba(226,194,125,0)');
+    ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+  }
+  function drawTrunks(lightX, lightY, a) {
+    for (var i = 0; i < trunks.length; i++) {
+      var k = trunks[i];
+      var near = 0;
+      if (a > 0) { var dx = Math.abs(k.x - lightX); near = Math.max(0, 1 - dx / (W * 0.35)) * a; }
+      var base = 10 + 14 * k.shade;
+      var col = 'rgba(' + Math.round(base + near * 40) + ',' + Math.round(base + 6 + near * 34) + ',' + Math.round(base + 2 + near * 18) + ',' + (0.55 + 0.35 * k.shade) + ')';
+      ctx.fillStyle = col;
+      ctx.beginPath();
+      ctx.moveTo(k.x - k.w / 2, H);
+      ctx.lineTo(k.x - k.w * 0.3 + k.lean * H, -10);
+      ctx.lineTo(k.x + k.w * 0.3 + k.lean * H, -10);
+      ctx.lineTo(k.x + k.w / 2, H);
+      ctx.closePath(); ctx.fill();
+      // one worn, faintly lit patch at shoulder height
+      var py = H * 0.62, px = k.x + k.lean * (H - py);
+      ctx.fillStyle = 'rgba(196,138,58,' + (0.05 + 0.18 * near) + ')';
+      ctx.beginPath(); ctx.ellipse(px, py, k.w * 0.26, k.w * 0.38, 0, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    var a = 0, gx = W / 2, gy = H * 0.8;
+    if (glow) {
+      var p = glow.life / glow.max;
+      a = Math.sin(Math.PI * p); a = a * a;
+      gx = glow.x + glow.drift * glow.life; gy = glow.y - glow.rise * glow.life;
+      drawGlow({ x: gx, y: gy }, a);
+    }
+    drawTrunks(gx, gy, a);
+    if (reduce) return;
+    t++;
+    if (glow) { glow.life++; if (glow.life > glow.max) { glow = null; wait = rnd(300, 700); } }
+    else if (--wait <= 0) glow = newGlow();
+    requestAnimationFrame(frame);
+  }
+  size(); make();
+  if (reduce) { glow = newGlow(); glow.life = glow.max / 2; }
+  frame();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) frame(); });
+})();
+</script>
+</body>
+</html>

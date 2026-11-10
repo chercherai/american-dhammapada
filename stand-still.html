@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stand Still</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose under a moon that clouds cross and uncover; datelined sections. */
+  --sky: #0a0f17;
+  --sky-2: #121a26;
+  --moon: #e3e8ee;
+  --moon-dim: #95a1b0;
+  --silver: #b9c9db;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #111a28 0%, var(--sky) 55%) fixed, var(--sky);
+  color: var(--moon);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--moon-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--moon-dim); text-decoration: none; border-bottom: 1px solid rgba(227,232,238,.2); }
+.series a:hover { color: var(--silver); }
+a:focus-visible { outline: 2px solid var(--silver); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--silver); text-wrap: balance; text-shadow: 0 0 30px rgba(185,201,219,.25); }
+.epigraph { border-left: 1px solid rgba(185,201,219,.4); padding-left: 1rem; font-style: italic; color: var(--moon-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--silver); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--silver); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(18,26,38,.8); border: 1px solid rgba(227,232,238,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--silver); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .45; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(227,232,238,.1); color: var(--moon-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--silver); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--moon-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--silver); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--silver); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--silver); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--silver); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--silver); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(18,26,38,.8); border-left: 2px solid var(--silver); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--moon-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 13.6 &middot; Aṅgulimāla</span></nav>
+<header>
+  <h1>Stand Still</h1>
+  <div class="epigraph">Fear ye not, stand still, and see the salvation of the LORD.<br>&mdash; Exodus 14:13</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So hab ich&rsquo;s geh&ouml;rt,</span> on Big Creek.</p>
+
+<section>
+  <h2>I. The Burnt District</h2>
+  <p class="dateline">Cass County, Missouri &middot; autumn 1864</p>
+  <p>After Order Number Eleven there was nobody left in the border counties but chimneys. The army had emptied Jackson and Cass and Bates in the summer of 1863, every family not able to swear its loyalty before a provost marshal, and then the Kansas men and the Missouri men took turns burning what was left. What stood afterward were the chimneys, stone and brick, one to a farm, rising out of the ash and the ragweed like gravestones for houses. People called them Jennison's monuments, after the Kansas colonel who had started it. You could ride a whole day and see nothing taller than a man except chimneys.</p>
+  <p>Gabriel Mantooth rode alone through that country in the fall of 1864, because by then even the bushwhackers would not ride with him.</p>
+  <p>He was twenty years old. He had been the best scholar at the academy in Lone Jack, could do sums in his head faster than the master could do them on the slate, could recite whole books of Milton. He had been at Lawrence with Quantrill, at nineteen, and come home with something gone out of his face. After Lawrence the others took scalps and tied them to their bridles. Gabriel took a finger. One from every man, the right forefinger, the trigger finger, and he dried them in salt and smoke and strung them on a rawhide thong he wore around his neck, under his coat, where they clicked against each other when he rode like dry pods on a locust tree.</p>
+  <p>Nobody knew why fingers. Some said he was counting toward a number. Some said a number had been put in his head by somebody, and he was only paying it off. The people in the Burnt District called the thong his rosary, which was a joke, because there were not three Catholics in Cass County. They called him Beads. Mothers said it to children at night. <em>You go to sleep, or Beads will come.</em></p>
+  <p>He had burned out more families than anybody could count, Union families and some Southern ones too when it suited him, and he had killed more men than there was room for on one thong. He had started a second.</p>
+</section>
+
+<section>
+  <h2>II. The Road</h2>
+  <p class="dateline">The Harrisonville road &middot; October 1864</p>
+  <p>Elder Jacob Ebersole of the German Baptist Brethren walked west on the Harrisonville road in the middle of a clear afternoon with nothing in his hands. He was sixty-three years old. He wore the plain coat with the standing collar and the broad black hat, and his beard went down his chest with no mustache above it, the way the Brethren wore them, because a mustache was a soldier's vanity and the Brethren did not go to war. They did not go to law and did not take oaths. They washed one another's feet at the love feast and dunked their converts three times forward in running water, which is why the world called them Dunkards, and they did not lift a hand against any living thing. Both armies thought they were cowards. Both armies had shot some of them for it.</p>
+  <p>A boy herding three cows in a burnt field ran to the fence and said, <em>Mister, don't go that way. Beads is on that road.</em> The Elder nodded to him and walked on.</p>
+  <p>A widow at a well by a chimney said, <em>He was by here two days ago. Mister, he'll kill you for your hat.</em> The Elder thanked her for the water and walked on.</p>
+  <p>A farmer leading a mule stopped dead in the road in front of him and took hold of his sleeve. <em>Old man. Old man. You don't know what's out there.</em> The Elder put his hand over the farmer's hand for a moment, and then gently took it off his sleeve, and walked on.</p>
+  <p>He did not say anything to any of them.</p>
+</section>
+
+<section>
+  <h2>III. Stand Still</h2>
+  <p class="dateline">The same afternoon</p>
+  <p>Gabriel saw him from the bluff above Big Creek. One man, walking alone, in a black hat, on the open road through the burnt country, as if it were Sunday and the road went to church. Something about it made Gabriel angrier than he had been in a long time. He checked the loads in both Navy Colts and came down off the bluff at a gallop.</p>
+  <p>The old man was perhaps three hundred yards ahead.</p>
+  <p>Gabriel rode hard. The bay was the best horse in western Missouri and he had stolen it from a colonel. He leaned over its neck and gave it the spurs and the road went by under them like water, and the old man was walking, not hurrying, not looking back, an old man's walk, and he was three hundred yards ahead.</p>
+  <p>Gabriel rode until the bay was lathered white at the chest and blowing blood. The old man was three hundred yards ahead.</p>
+  <p>He got down and ran. He ran with the carbine in one hand until his lungs tore and his mouth tasted of iron and the thong of fingers rattled against his breastbone like something trying to get out. The old man was walking. He was three hundred yards ahead.</p>
+  <p>Gabriel stopped in the middle of the road with his hands on his knees and screamed it at him.</p>
+  <p><em>Stand still, old man! Stand still!</em></p>
+  <p>The Elder did not turn around. His voice came back down the road as easy as if he were standing right there, at Gabriel's elbow.</p>
+  <p><em>I am standing still, Gabriel Mantooth. You stand still.</em></p>
+  <p><em>You're walking. I can see you walking. What kind of a damned lie is that?</em></p>
+  <p>Then the Elder did stop, and turned, and he was not three hundred yards away at all. He was right there in the road, an arm's length off, an old man with dust on his boots and grey eyes.</p>
+  <p><em>I put it down,</em> he said. <em>A long time ago. The gun and the stick and the fist, toward every living thing. Toward the Kansas men and the Missouri men and the mule and the cow and the dog and you. That's standing still. You haven't put it down toward anything. You've been running since Lawrence, son, and you can't catch anybody, because there's nobody out here to catch. It's just you.</em></p>
+  <div class="verse">
+    <p>And they shall beat their swords into plowshares, and their spears into pruninghooks: nation shall not lift up sword against nation, neither shall they learn war any more.</p>
+    <p>&mdash; Isaiah 2:4</p>
+  </div>
+  <p>There was a sinkhole by the road, one of those places in that country where the ground has simply fallen in on itself, thirty feet deep, ferns at the bottom, cold air coming up. Gabriel walked to the edge of it and threw in the carbine. Then one Colt. Then the other. Then the knife. Then, after a long time standing there, he pulled the rawhide thong over his head and threw that in too.</p>
+  <p>The Elder came and stood next to him and looked down into the hole.</p>
+  <p><em>Not that,</em> he said. <em>Those were men. Go down and get them.</em></p>
+  <p>So Gabriel climbed down into the sinkhole and found the thong among the ferns in the cold, and climbed back up with it, and they walked to the Brethren meetinghouse on Big Creek together, and that night by lantern light under the cedar behind it, they buried what was on the thong. The Elder asked if he knew any of the names. Gabriel knew some. He said them, the ones he knew, one at a time, standing at the edge of the hole with his hat in his hands, and when he ran out of names he said <em>and a man by the ford on the Little Blue,</em> and <em>and a boy at Lawrence by the livery,</em> and <em>and,</em> and <em>and,</em> until the Elder put a hand on his back.</p>
+  <p>Three weeks later they took him down to Big Creek where it ran fast over the gravel and the Elder dunked him three times forward, in the name of the Father and of the Son and of the Holy Ghost, and he came up out of the cold water the third time with his mouth open like a newborn, and the Elder said, <em>Come, brother.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Colonel</h2>
+  <p class="dateline">Big Creek meetinghouse &middot; April 1865</p>
+  <p>Colonel Abner Pryce of the Missouri State Militia came in the spring with forty men and a rope. There were petitions from three counties. There were widows who had walked to Kansas City to see him. He rode into the meetinghouse yard with his pistol already out and found an old man in a plain coat sitting on a bench in the sun, mending a harness.</p>
+  <p><em>Colonel,</em> said the Elder, <em>is it Shelby again? Is it the guerrillas troubling you?</em></p>
+  <p><em>It's one guerrilla. It's Beads. I'm told you're hiding him.</em></p>
+  <p><em>I'm not hiding anybody,</em> said the Elder, and pointed with his awl. <em>That's him there, splitting kindling.</em></p>
+  <p>Colonel Pryce had been at Westport and Lone Jack and had never in his life been as frightened as he was looking at the young man by the woodpile in shirtsleeves, with his hair cut short and his beard coming in with no mustache. The pistol shook in his hand. Forty men behind him sat their horses and did not breathe.</p>
+  <p><em>You can put that up,</em> the Elder said. <em>There's no need.</em></p>
+  <p>The Colonel did not put it up. But after a while he asked, because it was the only thing he could think to ask, <em>Who are your people?</em></p>
+  <p>Gabriel set down the hatchet. <em>George Mantooth and Mary Mantooth. Of Lone Jack.</em></p>
+  <p>The Colonel was quiet for a moment. <em>I knew your father,</em> he said. <em>He sold me a horse in fifty-five and told me everything that was wrong with it before he told me the price.</em> He put the pistol back in its holster. <em>Do you want for anything? I could see you get a coat, provisions. I could see about a paper.</em></p>
+  <p><em>I've got a coat,</em> said Gabriel. <em>And a shirt, and another shirt. That's enough.</em></p>
+  <p>The Colonel turned his horse. At the gate of the yard he stopped and looked back at the old man on the bench.</p>
+  <p><em>I brought forty men,</em> he said, <em>and I don't believe I could have taken him. You took him with nothing in your hands.</em></p>
+</section>
+
+<section>
+  <h2>V. Born Again</h2>
+  <p class="dateline">Near Pleasant Hill &middot; summer 1866</p>
+  <p>Gabriel walked to Pleasant Hill twice a week for meal and salt for the brethren. On the road back one evening in July he heard a woman screaming in a cabin built up against a standing chimney, a lean-to of new boards against old brick, and he knew without asking that she had been at it a long time. A girl of ten was sitting on the step with her hands over her ears.</p>
+  <p>He stood in the road a long time. <em>Lord,</em> he thought, <em>how every living thing suffers.</em> Then he went back to the meetinghouse at a run and found the Elder.</p>
+  <p><em>Go back to her,</em> said the Elder. <em>Stand at the door and say: since the day I was born, I have never knowingly taken a life. By that truth, may you be well, and your child.</em></p>
+  <p>Gabriel stared at him. <em>That's a lie. You know it's a lie. You were there under the cedar.</em></p>
+  <p><em>Then say it right,</em> said the Elder. <em>Since the day you were born again.</em></p>
+  <div class="verse">
+    <p>Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God.</p>
+    <p>&mdash; John 3:3</p>
+  </div>
+  <p>So he went back. The midwife from Pleasant Hill met him at the door with blood to her elbows, and maybe she knew his face and maybe she didn't, but nothing else had worked and she stood aside. He did not go in. He stood in the doorway with his hat in his hands and said it into the dark of the room.</p>
+  <p><em>Ma'am. Since the day I was born again, I have not knowingly taken any life. By that truth, may you be well, and your child.</em></p>
+  <p>The child came within the hour, a boy, and lived, and the woman lived. He heard about it two days later. Her husband had been killed in the summer of 1863, on the Lone Jack road, by men nobody ever named. Gabriel did not ask which men. He thought he knew. He went over the next week and put a proper roof on the lean-to and did not tell her who he was, and she did not ask, though she watched him the whole time from the step with the baby in her arms.</p>
+</section>
+
+<section>
+  <h2>VI. Stones</h2>
+  <p class="dateline">Harrisonville &middot; court day, 1867</p>
+  <p>It was a boy who knew him first, in the square on court day, a boy of fourteen or so, who shouted it. Then a man. Then the square. They threw clods first, and then sticks, and then a man picked up a cobble from the edge of the street and threw that, and then everybody did.</p>
+  <p>Gabriel did not run. He did not lift his arms. He walked out of Harrisonville in the middle of the road with the meal sack torn open and spilling behind him like a trail, and his scalp opened over the left ear, and blood running down into his collar, and they followed him to the edge of town throwing.</p>
+  <p>He walked the eleven miles back to Big Creek. The Elder washed the cut at the pump and sewed it with a harness needle and Gabriel did not make a sound.</p>
+  <p><em>Bear it, Gabriel,</em> the Elder said. <em>Bear it. You're paying a little now on a debt you'd have been a long, long time paying otherwise.</em></p>
+  <p><em>I know it,</em> said Gabriel. <em>I know it.</em></p>
+  <div class="verse">
+    <p>Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap.</p>
+    <p>&mdash; Galatians 6:7</p>
+  </div>
+</section>
+
+<section>
+  <h2>VII. The Moon</h2>
+  <p class="dateline">Big Creek &middot; 1867&ndash;1870</p>
+  <p>He lived alone after that, in a cabin on the creek, and he went out working. He did not go to the people who had not been hurt. He went to the chimneys.</p>
+  <p>Families were coming back to the Burnt District by then, a few at a time, after the war. They came home to a chimney in the ragweed and nothing else, and somewhere around the second week, a young man with no mustache and a scar over his left ear would come walking up the road with an axe and a froe and a crosscut saw on his back, and start cutting logs, and not leave until there was a house around the chimney again. Some of them knew who he was. Some of them ran him off. Some of them ran him off and he came back the next morning and started again, and eventually they let him. He built eleven houses in three years around eleven chimneys. On some of them he did not let himself sleep under the roof he had made, but walked home to the creek in the dark.</p>
+  <p>He died in the winter of 1870 of a fever that went through the county, in his own bed, with the Elder sitting beside him. He was twenty-six. The last thing he said was something nobody could make out, a name, or the beginning of one.</p>
+  <p>At the love feast that spring the brethren talked about it after the feetwashing, quietly, over the bread and the beef and the cup. Where had he gone? They had all forgiven him; that was the easy part, that was what they were for. But where had he gone? A man like that. All those men under the cedar.</p>
+  <p>The Elder had been listening. He set down the cup.</p>
+  <p><em>My son has gone home,</em> he said.</p>
+  <p>Someone said, gently, <em>Elder. Beads?</em></p>
+  <p><em>He had nobody to tell him,</em> said the Elder. <em>For twenty years nobody told him anything that was true. Then he had somebody, and he listened, and he never once stopped listening. That's all. That's the whole of it.</em></p>
+  <div class="verse">
+    <p>And above all things have fervent charity among yourselves: for charity shall cover the multitude of sins.</p>
+    <p>&mdash; 1 Peter 4:8</p>
+  </div>
+  <p>That night the sky over the Burnt District was full of low cloud running east, the kind that comes before a change in the weather. The Elder walked home along Big Creek in the dark, past the cabin, and stopped on the rise where you could see the country to the west. There were lights in it now. Not many. Eleven of them, maybe, if you knew where to look, each one a window in a house built up around an old chimney, each chimney with smoke going up out of it into the dark.</p>
+  <p>Then the cloud tore open, and the moon came out from behind it, full and white, and lit the whole country, every field and every road and every chimney, all the way to Kansas, as if there had never been a cloud at all.</p>
+  <div class="verse">
+    <p>Come now, and let us reason together, saith the LORD: though your sins be as scarlet, they shall be as white as snow; though they be red like crimson, they shall be as wool.</p>
+    <p>&mdash; Isaiah 1:18</p>
+  </div>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He whose evil deeds are covered by good deeds, brightens up this world, like the moon when freed from clouds.<cite>Dhammapada 173, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>Aṅgulimāla ("finger-garland") was a robber who killed travelers and wore their fingers around his neck. When he chased the Buddha, running as hard as he could, he could not catch a man who was only walking. "I have stopped, Aṅgulimāla," the Buddha told him. "You stop." He threw his weapons into a pit, became a monk, healed a woman in childbirth by an act of truth, and endured being stoned in the streets. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-06.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Angulimala">Aṅgulimāla</a>.</p>
+    <h3>The Missouri border, 1863&ndash;1870</h3>
+    <p>The Kansas-Missouri border had been at war with itself since the 1850s. During the Civil War, pro-Confederate <a href="https://en.wikipedia.org/wiki/Bushwhacker">bushwhackers</a> fought Union troops and Kansas &ldquo;jayhawkers&rdquo; in a guerrilla war of ambush, house-burning and murder. Some of the guerrillas, notably <a href="https://en.wikipedia.org/wiki/William_T._Anderson">Bloody Bill Anderson</a>'s men, took scalps. On August 21, 1863, William Quantrill's raiders sacked <a href="https://en.wikipedia.org/wiki/Lawrence_massacre">Lawrence, Kansas</a>, and killed more than 150 men and boys. Four days later, General Thomas Ewing issued <a href="https://en.wikipedia.org/wiki/General_Order_No._11_(1863)">General Order No. 11</a>, expelling most rural residents of Jackson, Cass and Bates counties and part of Vernon. The emptied country was burned, and for years it was called the Burnt District. The chimneys left standing were known as &ldquo;Jennison's monuments,&rdquo; after the jayhawker Charles Jennison.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Schwarzenau_Brethren">German Baptist Brethren</a>, called Dunkers or Dunkards, began in Germany in 1708 and came to Pennsylvania in the 1720s. They baptized by immersing believers three times forward, held a love feast with feetwashing, refused oaths, and practiced nonresistance. In the Civil War they would not bear arms for either side, which made them suspect to both.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Aṅgulimāla from the Dhammapada commentary (verse 173). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-06.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="mataji.html">&larr; Mataji</a><a href="index.html">All stories</a><a href="the-quills.html">The Quills &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, mx, my, mr, clouds = [], stars = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    mr = Math.max(26, Math.min(W, H) * 0.06);
+    mx = W > 900 ? W * 0.84 : W * 0.8; my = H * 0.15;
+  }
+  function make() {
+    clouds = []; stars = [];
+    for (var i = 0; i < 70; i++) stars.push({ x: Math.random() * W, y: Math.random() * H * 0.6, a: Math.random() * 0.5 + 0.1 });
+    for (var j = 0; j < 7; j++) {
+      clouds.push({ x: Math.random() * W * 1.4 - W * 0.2, y: my + (Math.random() - 0.5) * mr * 5, w: mr * (3 + Math.random() * 4), h: mr * (0.7 + Math.random() * 0.8), v: 0.08 + Math.random() * 0.12 });
+    }
+  }
+  function cloud(cl) {
+    ctx.save();
+    ctx.translate(cl.x, cl.y);
+    for (var k = 0; k < 5; k++) {
+      var ox = (k - 2) * cl.w * 0.22, oy = Math.sin(k * 1.7) * cl.h * 0.25;
+      var g = ctx.createRadialGradient(ox, oy, 0, ox, oy, cl.w * 0.45);
+      g.addColorStop(0, 'rgba(28,38,54,0.92)');
+      g.addColorStop(0.6, 'rgba(24,33,48,0.55)');
+      g.addColorStop(1, 'rgba(20,28,40,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.ellipse(ox, oy, cl.w * 0.45, cl.h, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < stars.length; i++) { var s = stars[i]; ctx.fillStyle = 'rgba(220,228,238,' + s.a + ')'; ctx.fillRect(s.x, s.y, 1.2, 1.2); }
+    var halo = ctx.createRadialGradient(mx, my, mr * 0.8, mx, my, mr * 5);
+    halo.addColorStop(0, 'rgba(210,222,236,0.22)');
+    halo.addColorStop(1, 'rgba(210,222,236,0)');
+    ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(mx, my, mr * 5, 0, Math.PI * 2); ctx.fill();
+    var disc = ctx.createRadialGradient(mx - mr * 0.3, my - mr * 0.3, mr * 0.1, mx, my, mr);
+    disc.addColorStop(0, '#f4f6f8'); disc.addColorStop(1, '#c9d3de');
+    ctx.fillStyle = disc; ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2); ctx.fill();
+    for (var j = 0; j < clouds.length; j++) {
+      var cl = clouds[j];
+      if (!reduce) { cl.x += cl.v; if (cl.x - cl.w > W + 40) { cl.x = -cl.w - 40; cl.y = my + (Math.random() - 0.5) * mr * 5; } }
+      cloud(cl);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
