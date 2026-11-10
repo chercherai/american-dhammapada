@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sawn Ivory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a log kitchen toward morning, dark theme; low in one corner the red line of a stove door glows, and behind it a gray mist gathers, swells up the side of the page, and thins away to nothing; datelined sections. */
+  --ground: #14110f;
+  --ground-2: #1e1a16;
+  --paper: #e6dfd2;
+  --paper-dim: #a59c8d;
+  --mustard: #dccfa4;
+  --flame: #c8452a;
+  --rule: rgba(230,223,210,.13);
+  --panel: rgba(30,26,22,.78);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 12% 115%, #2a1a14 0%, #14110f 55%) fixed, #14110f;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--mustard); }
+a:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--mustard); text-wrap: balance; text-shadow: 0 0 26px rgba(220,207,164,.18); }
+.epigraph { border-left: 1px solid var(--mustard); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mustard); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--mustard); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--flame); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--mustard); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mustard); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--mustard); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mustard); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--mustard); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--mustard); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 24.8 &middot; M&#257;ra</span></nav>
+<header>
+  <h1>Sawn Ivory</h1>
+  <div class="epigraph">Such dreams as pass through the portals of sawn ivory are deceitful, and bear tidings that are unfulfilled.<br>&mdash; Odyssey 19.564&ndash;565</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So hat man mir&rsquo;s erz&auml;hlt,</span> in the Shiloh Valley.</p>
+
+<section>
+  <h2>I. The Lexicon</h2>
+  <p class="dateline">Shiloh Valley, St. Clair County, Illinois &middot; October 1838</p>
+  <p>The Americans up at Shiloh called them the Latin farmers. They had come over in &rsquo;thirty-three and &rsquo;thirty-four, after the business at Frankfurt, doctors of law and of philosophy, a forester, two apothecaries, and they had bought prairie east of Belleville at a dollar and a quarter the acre and learned to plow it out of a book. It was said of them that they could curse an ox in Greek and that the ox was not improved by it.</p>
+  <p>Heinrich Lohr had taught Greek to the two upper forms of a Gymnasium in Hesse for eleven years. Here he had eighty acres, a log house with a loft, a yoke of oxen named for the sons of Atreus, and a boy. His wife had died in their second August, of the fever the Americans called the ague and dosed with Sappington&rsquo;s pills. The boy was called Rudolf and was eight years old.</p>
+  <p>Lohr did not know how to teach a child anything except the way he had taught the upper forms, so that was how the boy had it. At eight Rudolf had his German letters and his Latin ones and his Greek, and he knew the order of each, which stood before and which after. He could go into the big Passow, a lexicon that weighed as much as a churn, and come out with any word in the time it took a grown man to find his spectacles. When the old gentlemen of the valley fell out over a reading they did not send for Lohr. They sent for the boy and the book.</p>
+  <p>He was a quiet child, and nothing much seemed to pull at him. At the store in Belleville he looked at the barley sugar with interest and did not ask for any. He went down to the spring after dark without a brand. The Methodists at the Shiloh meeting house, who were sorry for a child growing up with no church at all, said he was old for his years. His father said only that the boy slept well.</p>
+</section>
+
+<section>
+  <h2>II. The Guests</h2>
+  <p class="dateline">A Thursday, toward midnight</p>
+  <p>Four of the old Giessen men were coming over from the Missouri side for the meeting of the Library Society, which the valley had founded two years before, and they were looked for on the Thursday by daylight. The ferry at St. Louis was held for wind. They came at midnight in a farm wagon, four gentlemen and one lantern, the oldest of them a former Hofrat who now raised hogs on the Femme Osage.</p>
+  <p>They had to be fed, and when they had been fed they had to sing, since they had not all been in one room in four years. They sang <em>Integer vitae</em> in four parts as they had sung it as students, Horace&rsquo;s ode to the man of clean life who needs no javelins. Then the Hofrat, who had the voice for it, read from the First Part of <em>Faust</em>, the scene in the study. The doctor has brought a black poodle home from his walk. He sits down to put the Gospel of John into German and cannot get past the first line, because he cannot decide what to do with the one word <em>logos</em>, and behind the stove the dog begins to grow.</p>
+  <div class="verse">
+    <p>Behind the stove still banned,<br>See it, an elephant, expand!<br>It fills the space entire,<br>Mist-like melting, ever faster.</p>
+    <p>&mdash; Goethe, Faust, Part I (the Study)</p>
+  </div>
+  <p><em>Schwillt es wie ein Elefant,</em> the Hofrat said again, and looked over the book at Lohr&rsquo;s own stove, a ten-plate stove hauled out from St. Louis and the only one in the valley, and the gentlemen laughed. Then, because the word had come up, he turned to the boy, who was still awake on the bench.</p>
+  <p><em>Elephas, young man. What is it?</em></p>
+  <p><em>Ivory, Herr Hofrat. In Homer it is only ever the tooth. They had the tooth a long time before they saw the animal.</em></p>
+  <p><em>And where in Homer?</em></p>
+  <p>The boy told him. Penelope, to the stranger, about the two gates.</p>
+  <div class="verse">
+    <p>Twain are the gates of shadowy dreams, the one is fashioned of horn and one of ivory. Such dreams as pass through the portals of sawn ivory are deceitful, and bear tidings that are unfulfilled. But the dreams that come forth through the gates of polished horn bring a true issue, whosoever of mortals beholds them.</p>
+    <p>&mdash; Odyssey 19.562&ndash;567</p>
+  </div>
+  <p>He said it in the Greek. Then, since his father had taught him never to leave a word standing by itself, he said what the poet was doing with it. <em>Elephas,</em> the ivory. <em>Elephairontai,</em> they cheat. <em>Keras,</em> the horn. <em>Krainousi,</em> they bring to pass. The cheat was already in the name of the thing it came through. He said it as he might have told a visitor which ox was the near one.</p>
+  <p><em>Lohr,</em> said the Hofrat, <em>you have made a Gymnasium with one bench.</em> Lohr said it was past the boy&rsquo;s bedtime.</p>
+  <p>Then there was the matter of beds. The house had the one room with the stove, the loft over it where the boy slept, and a lean-to on the north side where Lohr kept his books and his own cot. The four gentlemen were given the loft and the boy&rsquo;s bed with it. Nobody told the boy. He had carried his blanket down the ladder before the Hofrat had his boots off. He looked about him, saw that every other place in the room was taken by a saddlebag or a doctor of philosophy, and lay down on the floor across the sill of his father&rsquo;s door, and went to sleep.</p>
+</section>
+
+<section>
+  <h2>III. Behind the Stove</h2>
+  <p class="dateline">Toward morning</p>
+  <p>The Americans tell this part with the Devil in it. The Germans, who had left the Devil in Hesse with the Grand Duke&rsquo;s police, tell it with the thing out of the Hofrat&rsquo;s book. They agree on what it did.</p>
+  <p>It is said to have looked at the boy lying across the sill, and at the shut door behind him, and to have reasoned this way. The father is in there among his books. The son is out here, like a sore finger held away from the hand. Pinch the finger and the whole man will feel it.</p>
+  <p>The stove had burned down to a red line at the door. Behind it something that was not smoke began to gather. It swelled as it had been made to swell in the reading, gray, with a hide like a wet road, until its back was among the rafters and the loft boards lifted and creaked. It had a head the size of the meal chest. From the head a long gray arm came down, feeling, and went once around the boy&rsquo;s head where he lay, the way a man laps a rope around a post. Then it screamed. None of the four gentlemen in the loft had ever heard an elephant. They said afterward it was the cry the cranes make going over in November, if every crane in Illinois had been in the room.</p>
+  <p>The boy opened his eyes. He looked at what had hold of him for about as long as he would have looked at a word, and he did not put up his hands.</p>
+  <p>Lohr did not open his door. He spoke through it, in his schoolroom voice, which carried.</p>
+  <p><em>I know you. You are out of a book, and I have the book. If a hundred thousand of you stood in my kitchen you could not frighten my son. He is afraid of nothing, he wants nothing, he does a day&rsquo;s work, and he knows what he knows.</em></p>
+  <p>Then, as he might have given out lines for the form to construe, he gave two stanzas of what they had sung at midnight.</p>
+  <div class="verse">
+    <p>No need of Moorish archer&rsquo;s craft<br>To guard the pure and stainless liver;<br>He wants not, Fuscus, poison&rsquo;d shaft<br>To store his quiver,</p>
+    <p>A wolf, while roaming trouble-free<br>In Sabine wood, as fancy led me,<br>Unarm&rsquo;d I sang my Lalage,<br>Beheld, and fled me.</p>
+    <p>&mdash; Horace, Odes I.22, lines 1&ndash;4 and 9&ndash;12</p>
+  </div>
+  <p><em>The rest I will say in German, so that you cannot mistake it,</em> said Lohr. <em>He wants nothing and he holds on to nothing. He knows words and what is inside them. He knows his letters, which stand before and which after. A person like that has come to the end of being frightened, and it is no small thing to be, at any age.</em></p>
+  <p>It is told that the thing said, <em>The schoolmaster knows me,</em> in a voice like a flue. With that it had no more size than the smoke it had begun as. It thinned, and went out at the chinking, and the red line at the stove door was where it had been.</p>
+  <p>In the loft four old men who had argued God out of the universe at Giessen thirty years before lay on their backs and did not argue. The Hofrat said later that what he understood that night had nothing to do with devils.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>In the morning the boy was asleep on the sill with the blanket over his ear. At breakfast the Hofrat asked him, as lightly as he could manage, whether he had been frightened in the night.</p>
+  <p><em>No, Herr Hofrat,</em> said Rudolf. <em>It came through the ivory.</em></p>
+  <p>He went and got the Passow down, as he did whenever the old gentlemen wanted a thing settled, and opened it on the table among the coffee cups and ran his finger down the column. There was <em>elephairomai,</em> I cheat. A little farther down stood <em>elephas.</em> He kept his finger there until the Hofrat had found his spectacles and seen which came first.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">He who has reached the consummation, who does not tremble, who is without thirst and without sin, he has broken all the thorns of life: this will be his last body.<cite>Dhammapada 351, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He who is without thirst and without affection, who understands the words and their interpretation, who knows the order of letters (those which are before and which are after), he has received his last body, he is called the great sage, the great man.<cite>Dhammapada 352, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary several senior monks reach the Jetavana monastery late at night and are given the room of R&#257;hula, the Buddha&rsquo;s son, a novice who is said to be eight years old and already fully awakened. Seeing no other place, he lies down outside the door of the Buddha&rsquo;s own chamber. M&#257;ra, the tempter, reasons that the son lies there &ldquo;as though his finger hurt him,&rdquo; and that to pinch the son is to pinch the father. He takes the form of a huge elephant, winds his trunk around the boy&rsquo;s head and trumpets. From inside, the Buddha tells him that a hundred thousand like him could not frighten his son, and speaks these verses. M&#257;ra says, &ldquo;The ascetic Gotama knows me,&rdquo; and vanishes. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/R%C4%81hula">R&#257;hula</a>.</p>
+    <h3>The Latin farmers, 1838</h3>
+    <p>After students and young professionals failed to seize the Frankfurt guardhouse in April 1833 (the <a href="https://en.wikipedia.org/wiki/Frankfurter_Wachensturm">Frankfurter Wachensturm</a>), a number of university-trained Germans left for America. One cluster bought farms in the Shiloh Valley east of <a href="https://en.wikipedia.org/wiki/Belleville,_Illinois">Belleville, Illinois</a>, where their neighbors named them the &ldquo;Latin farmers&rdquo; and the place the <a href="https://en.wikipedia.org/wiki/Latin_Settlement">Latin Settlement</a>. Many were freethinkers. In 1836 they began a German library society that grew into the Belleville Public Library, the oldest in the state. Others, the <a href="https://en.wikipedia.org/wiki/Gie%C3%9Fener_Auswanderungsgesellschaft">Giessen Emigration Society</a> of 1834, settled across the Mississippi in Missouri. <a href="https://en.wikipedia.org/wiki/Shiloh,_Illinois">Shiloh</a> itself takes its name from a Methodist meeting house raised after an 1807 camp meeting. The Lohrs and their guests are invented.</p>
+    <p>Their books are real. In the study scene of <a href="https://en.wikipedia.org/wiki/Faust,_Part_One">Goethe&rsquo;s <em>Faust</em>, Part One</a> (1808), Faust struggles to translate the Greek <em>logos</em> in the first line of John while the poodle he has brought home swells behind the stove &ldquo;wie ein Elefant&rdquo; and turns out to be <a href="https://en.wikipedia.org/wiki/Mephistopheles">Mephistopheles</a>; the English here is Bayard Taylor&rsquo;s (1871). Penelope&rsquo;s speech on the <a href="https://en.wikipedia.org/wiki/Gates_of_horn_and_ivory">gates of horn and ivory</a> turns on a play between <em>elephas</em>, ivory, and <em>elephairomai</em>, to cheat, and between <em>keras</em>, horn, and <em>kraino</em>, to fulfil; the English is Butcher and Lang&rsquo;s (1879). In Homer <em>elephas</em> means only ivory; the animal comes into Greek later. Horace&rsquo;s ode <a href="https://en.wikipedia.org/wiki/Odes_(Horace)"><em>Integer vitae</em></a> was sung by German students everywhere in F. F. Flemming&rsquo;s four-part setting of 1811; the English is John Conington&rsquo;s (1863). <a href="https://en.wikipedia.org/wiki/Franz_Passow">Franz Passow&rsquo;s</a> Greek and German lexicon was the standard one of the 1830s.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of M&#257;ra and the elder R&#257;hula from the Dhammapada commentary (verses 351&ndash;352). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-08.htm">The original</a>. Scripture from Horace&rsquo;s Odes, translated by John Conington (1863), the Odyssey, translated by S. H. Butcher and A. Lang (1879), and Goethe&rsquo;s Faust, translated by Bayard Taylor (1871). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-near-bank.html">&larr; The Near Bank</a><a href="index.html">All stories</a><a href="laurel-hell.html">Laurel Hell &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = null, PERIOD = 75, puffs = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    puffs = [];
+    for (var i = 0; i < 11; i++) {
+      puffs.push({ ax: (Math.random() - 0.35) * 1.0, ay: -Math.random() * 1.0, r: 0.45 + Math.random() * 0.5, ph: Math.random() * 6.28 });
+    }
+  }
+  function ease(v) { v = Math.max(0, Math.min(1, v)); return v * v * (3 - 2 * v); }
+  function draw(now) {
+    if (t0 === null) t0 = now;
+    var sec = (now - t0) / 1000;
+    var T = reduce ? 0.12 : (sec % PERIOD) / PERIOD;
+    ctx.clearRect(0, 0, W, H);
+    var sx = Math.max(60, W * 0.09), sy = H * 0.93;
+    /* the red line at the stove door */
+    var breath = reduce ? 1 : 0.8 + 0.2 * Math.sin(sec * 0.7);
+    var lw = Math.max(46, Math.min(90, W * 0.07));
+    var lg = ctx.createLinearGradient(sx - lw, 0, sx + lw, 0);
+    lg.addColorStop(0, 'rgba(200,69,42,0)');
+    lg.addColorStop(0.5, 'rgba(226,96,52,' + (0.75 * breath) + ')');
+    lg.addColorStop(1, 'rgba(200,69,42,0)');
+    ctx.fillStyle = lg; ctx.fillRect(sx - lw, sy, lw * 2, 2);
+    var gl = ctx.createRadialGradient(sx, sy, 0, sx, sy, lw * 1.6);
+    gl.addColorStop(0, 'rgba(200,69,42,' + (0.16 * breath) + ')');
+    gl.addColorStop(1, 'rgba(200,69,42,0)');
+    ctx.fillStyle = gl; ctx.beginPath(); ctx.arc(sx, sy, lw * 1.6, 0, Math.PI * 2); ctx.fill();
+    /* something that is not smoke gathers behind it, swells, and thins away */
+    var grow = ease(T / 0.55);
+    var fade = T < 0.55 ? 1 : T < 0.80 ? 1 - ease((T - 0.55) / 0.25) : 0;
+    var up = T < 0.06 ? ease(T / 0.06) : 1;
+    var a0 = 0.06 * fade * up;
+    if (a0 > 0.002) {
+      var S = Math.min(W, H) * (0.10 + 0.62 * grow);
+      for (var i = 0; i < puffs.length; i++) {
+        var p = puffs[i];
+        var wob = reduce ? 0 : Math.sin(sec * 0.25 + p.ph) * 0.05;
+        var x = sx + (p.ax + wob) * S * 0.9, y = sy - 20 + p.ay * S * 1.15, r = p.r * S * 0.75;
+        var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, 'rgba(176,172,164,' + a0 + ')');
+        g.addColorStop(0.6, 'rgba(160,156,150,' + (a0 * 0.5) + ')');
+        g.addColorStop(1, 'rgba(160,156,150,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>
