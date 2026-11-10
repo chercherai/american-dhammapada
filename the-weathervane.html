@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Weathervane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on oyster-shell paper under a pale November sky over Great South Bay, light theme; high in the right margin a small iron rooster on its arrow swings with each gust, and the gusts come fewer as the reader stays; datelined sections. */
+  --shell: #efe9dd;
+  --shell-2: #e4dccb;
+  --ink: #2b2723;
+  --ink-dim: #6f665b;
+  --rust: #8e4527;
+  --verdigris: #4c7a70;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #e6e4de 0%, var(--shell) 38%, var(--shell) 100%) fixed, var(--shell);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(43,39,35,.2); }
+.series a:hover { color: var(--rust); }
+a:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--rust); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(142,69,39,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--verdigris); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--rust); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(228,220,203,.8); border: 1px solid rgba(43,39,35,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--verdigris); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,39,35,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--rust); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--rust); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,39,35,.15); border-bottom: 1px solid rgba(43,39,35,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--rust); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--rust); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--rust); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(228,220,203,.8); border-left: 2px solid var(--rust); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 3.5 &middot; Cittahattha</span></nav>
+<header>
+  <h1>The Weathervane</h1>
+  <div class="epigraph">Just stand right still, and steady yourself, I know that my Redeemer lives.<br>&mdash; &ldquo;I Know That My Redeemer Lives,&rdquo; Fisk Jubilee Singers</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Peace, and this is how it was told,</span> at the long table on Macon Street.</p>
+
+<section>
+  <h2>I. Leftovers</h2>
+  <p class="dateline">Sayville, Long Island &middot; August 1930</p>
+  <p>Lemuel Pryor played piano in a cellar on West 133rd Street from midnight until the milk wagons, for two dollars and whatever went into the cigar box on the lid. The cellar had no name on the door. People called it the Coal Hole, because that was what it had been, and the gin came down the steps in teapots and went out to the tables in cups. Lem had a left hand that could walk a tenth all night without looking, and a right hand that got bored and wandered, and between the two of them he made enough to pay half the rent on two rooms over an undertaker on 131st Street, where he lived with his wife Ida and her mother.</p>
+  <p>Ida did day work in the Bronx. Her mother, Mrs. Odessa Bynum, did nothing, and did it from a cot in the front room, where she could see the door.</p>
+  <p>In August Ida's cousin Bernice, who was seventeen, went out to Sayville on the train to the man the papers called God and did not come back. She sent a postcard with a picture of the bay on it. It said she was well and happy and fed, and it was signed with a name none of them knew. Mrs. Bynum read it twice and held it out to Lem with two fingers.</p>
+  <p><em>You go get her. You&rsquo;re the only man in this house, and you sleep all day anyhow.</em></p>
+  <p>He changed at Jamaica and rode out past the last of the city into potato fields and scrub oak and little towns with white churches, and got down at Sayville a little after noon. Nobody had to tell him the way. A bus with Newark on its sign was parked on Macon Street with its doors open, and there were cars on both sides of the road, and people walking toward the house in their good clothes, colored and white together, as if it were Easter. The house was a big frame house with a porch and a lawn. On the porch rail somebody had painted a sign: <em>NOTICE&mdash;Smoking&mdash;Intoxicating Liquors&mdash;Profane Language&mdash;Strictly Prohibited.</em></p>
+  <p>He found Bernice in the side yard with three other women in white aprons, snapping beans into a washtub. Her face had filled out. She looked up at him and smiled the way you smile at a man selling something.</p>
+  <p><em>Peace, Lemuel.</em></p>
+  <p>He said what Mrs. Bynum had told him to say. She went on snapping beans. He said it again, some of it. One of the other women hummed. Bernice told him she was called Busy Bee now, and that she had a bed with a white spread and her own hook for her dress, and a job three days a week minding a doctor&rsquo;s children on the Montauk Highway, and that she owed nobody a cent, and that she had not been hungry once since she came. Then she held up a bean and snapped it.</p>
+  <p>He stood there a while. He thought about the train back, and about telling Mrs. Bynum. Then he let it be. She looked fine. She looked better than any of them.</p>
+  <p>He had not eaten since a fish sandwich at five that morning. He went around to the kitchen door, the way he would have gone to any kitchen door, and took his hat off.</p>
+  <p>There was a small old woman at the sink, very dark, with her sleeves pushed up and her hair under a white cloth. Behind her, on a long board laid across two barrels, were the platters that had come back from the noon table. Fried chicken. A ham with the bone showing. Rice and gravy. Collards. Candied yams with the syrup gone hard at the edges. A bowl of sliced tomatoes. Light rolls under a cloth. Three pies with pieces gone, sweet potato and apple and something with a lattice.</p>
+  <p>She looked at him the way you look at weather.</p>
+  <p><em>Peace,</em> she said. <em>Get a plate.</em></p>
+  <p>He ate standing up, then sitting on an upturned crate, then standing again to reach the pie. When he was done he drank two dippers of water and washed his hands at her sink, and she moved over for him without being asked.</p>
+  <p><em>Was somebody married here today?</em></p>
+  <p><em>No.</em></p>
+  <p><em>Somebody&rsquo;s funeral?</em></p>
+  <p><em>No, baby. It&rsquo;s Tuesday.</em></p>
+  <p>He stood with his wet hands held out in front of him. He thought about the Coal Hole at four in the morning, the smoke so thick the bulb was a brown moon, a drunk from Sugar Hill leaning on the lid asking for the same tune for the fifth time, and the fish sandwich after, and the stairs over the undertaker&rsquo;s. He played all night six nights a week and had never once sat down to a table like the one that had been cleared from that room. These people ate like a wedding on a Tuesday.</p>
+  <p><em>What does a man have to do,</em> he said, <em>to stay?</em></p>
+  <p>She told him. She did not make it sound like much. No liquor. No tobacco. No cursing. No man with a woman, in this house or out of it, not even his own wife. Work if there was work. Pay cash and owe nobody. Take the name that came to him, if one came.</p>
+  <p>He thought of Ida, asleep when he came in and gone when he woke up. He thought of Mrs. Bynum&rsquo;s cot by the door. He had been married two years and could count on his hands the nights the two rooms had been quiet.</p>
+  <p><em>I can do that,</em> he said.</p>
+  <p>She looked at him a long time over the sink. Then she dried her hands and took him up the back stairs herself and showed him a cot in the long room under the roof where the men slept, and a nail for his coat.</p>
+</section>
+
+<section>
+  <h2>II. The Ledger</h2>
+  <p class="dateline">Sayville and Harlem &middot; autumn 1930 to autumn 1931</p>
+  <p>The kitchen women called her Sister Still Water. Nobody used whatever name she had come up from Tennessee with, and nobody asked it.</p>
+  <p>There was an upright piano in the front parlor that nobody played well, and the second evening Lem sat down at it, and after that the house had a piano player. He played at the banquets. They sang Mission songs and the old songs, and he put a walking bass under all of them, and the people at the long table rose one after another to testify and sat down again shining. At the head of the table sat a small bald man in a good suit, and the platters went down the table from him, and he was God to everybody in the room. Lem never spoke to him. He watched him from the piano bench, at a distance, the way you would watch weather coming across a bay.</p>
+  <p>In ten days his collar would not close. In three weeks he had let out the back seam of his only suit.</p>
+  <p>Then one morning, carrying a stack of plates, he thought: what kind of a man eats at another man&rsquo;s table for nothing? A man ought to be paid for his hands. He thought of the Coal Hole, and the cigar box, and of Ida turning over in the bed. He took his coat off the nail and walked to the station.</p>
+  <p>That winter the Coal Hole cut him to a dollar a night. The rent man came on Mondays. Ida came home from the Bronx with her feet swollen and her pay docked, because women stood on corners up there now and let housewives pick them out by the hour, and the price went down every week. Lem ate what there was, which was beans and day-old bread and coffee boiled twice, and in a month his suit hung on him like a borrowed one. Mrs. Bynum watched him from the cot and said things to the ceiling.</p>
+  <p>So he went back.</p>
+  <p>In the front hall at Macon Street there was a ledger on a little table where the people who came to stay wrote their names. A big gentle man called Brother Glad Tidings kept it. The first time, Lem had written <em>Lemuel Pryor</em> on a clean line and Brother Glad Tidings had blotted it. The second time, Brother Glad Tidings found the old line, drew a pen through it, and had him write it again underneath. The third time he did the same, more slowly. They took him back each time because he played, and because he carried and washed and swept without being asked, and because there was nobody else who could make that piano sound like that.</p>
+  <p>Behind the house, two lots down, there was a carriage barn with an iron rooster on the ridge, standing on an arrow, and the rooster turned with every wind that came up off the bay. One of the young men at the table pointed it out to the others the fourth time Lem came up the walk with his cardboard suitcase, and after that they called him Brother Weathervane. They did not say it unkindly. They said it the way you name a mule for what it does.</p>
+  <p>In the spring, during one of his times at home, Ida found she was going to have a baby. She told him on the stoop, without much expression, as if she were telling him the price of something. He held her a long time, and was home a whole month, and then one morning he woke up thinking about pie. Mrs. Bynum, from the cot, said: <em>A man with a baby coming.</em> He took his coat.</p>
+  <p>In May a deputy came to Macon Street and arrested God for disturbing the peace, and God paid his own bail in cash and came back to the head of the table, and the neighbors went on writing to the papers. In June Lem went home. In August he came back. By the fall his name stood six times in Brother Glad Tidings&rsquo; ledger, five of them with a line through it, one under another, down the margin of the page.</p>
+</section>
+
+<section>
+  <h2>III. The Kitchenette</h2>
+  <p class="dateline">West 131st Street, Harlem &middot; a Saturday in November 1931</p>
+  <p>He came up from the Coal Hole at a quarter to seven in the morning with eighty cents in his pocket and his mind made up. He would get his good shirt and his razor and be on the eight-something out of Penn Station, and he would be at Macon Street by the noon table. He had told nobody. He never did.</p>
+  <p>Downstairs, through the undertaker&rsquo;s front window, he could see a man laid out on a board under a sheet, waiting for his people, with only his face showing, the mouth a little open. Lem looked at him the way you look at anything in a window and went on up.</p>
+  <p>The bedroom had one window on the airshaft and the light that came down it was gray. Ida was asleep on her back. She was seven months along and she could not sleep any other way now. The quilt had slid off her onto the floor, and the strap of her slip had come down, and the slip had worked up around her middle so that the great round of her belly stood up out of it, bare. Her mouth was open. She was snoring with a catch at the end of each breath, and a wet line ran from the corner of her mouth into the pillow, and her hands lay at her sides palm up.</p>
+  <p>He stood in the door with his hat in his hand.</p>
+  <p>He had seen her asleep a thousand times. He had never seen her. In that light she was the man downstairs. She was the man downstairs and every man the undertaker had ever laid on his board, and his own grandmother in Clarksville with a nickel on each eye, and himself, some morning, in some gray light, with his mouth open just like that. Everything in the room was going there. The bed, the quilt on the floor, the baby, the hand he was holding his hat with.</p>
+  <p>His grandmother used to sing a song at the washpot. He had not thought of it in years. <em>Just watch that sun, and see how it runs.</em> He heard it now in her voice, flat and slow, the way she sang it with her arms in the water.</p>
+  <p>He thought: and this is what I kept coming back for.</p>
+  <p>He did not get the shirt. He took his Sayville coat down off the hook behind the door, the dark one the brothers had given him, and went out through the front room with it over his arm, and down the stairs pulling it on, and was buttoning it as he passed the undertaker&rsquo;s window, and did not look in.</p>
+  <p>Mrs. Bynum had seen him go. She had seen him come in four minutes before, and she had heard nothing in the bedroom, no drawer, no voices. She got up off the cot in her wrapper and went and looked in at her daughter, and she understood all of it at once, the way she generally did.</p>
+  <p>She took Ida by the shoulder and shook her.</p>
+  <p><em>Get up. Your husband just saw you sleeping with your mouth open and lit out of here like the house was afire. He had on that coat. You won&rsquo;t have that one back.</em></p>
+  <p>Ida opened her eyes, and wiped her mouth with the back of her wrist, and found the quilt with one hand and pulled it up.</p>
+  <p><em>Mama, go on,</em> she said. <em>He&rsquo;ll be back by Thursday.</em></p>
+  <p>She turned over toward the wall, which took her some time, and went back to sleep.</p>
+</section>
+
+<section>
+  <h2>IV. The Montauk Train</h2>
+  <p class="dateline">Long Island Rail Road &middot; the same morning</p>
+  <p>He paid his fare with the eighty cents and a dollar he kept folded in his shoe. He sat by a window in a car that smelled of wet wool, with his hat on his knees, and the wheels found the rail joints and kept time on them, and under the time he heard the song.</p>
+  <p><em>Just watch that sun, and see how it runs.</em></p>
+  <p>He said it under his breath. He said it at Jamaica, changing trains, and on the platform, and again when the city fell away behind and the flat country opened out, brown fields with the potatoes up and gone, crows walking the furrows, a boy on a fence. Each thing the window gave him, it took away. A white church. A gas station with one pump. A woman taking in a wash with the wind trying to have it. A dog that ran beside the train and gave up. He watched them come and go, and he said the line, and every one of them went exactly the way the man downstairs had gone and Ida was going and he was going. None of it would hold still. None of it was ever going to.</p>
+  <p>Somewhere past Babylon, where a creek ran down through the marsh grass, he caught a long look at the bay, flat and pewter-colored, with a few oyster boats out on it and the long low line of the beach beyond. Something in him that had been swinging for a year and a half, in every wind, came around and stopped.</p>
+  <p>Nobody stopped it. It came to rest the way a pendulum does when nobody pushes it anymore. He sat there with his hat on his knees. The car rocked. The sun came out on the bay. He did not want anything from it. It was the first time he could remember not wanting anything from anything.</p>
+  <p>At Sayville he walked up Macon Street in the cold sun with his coat buttoned to the neck and nothing in his hands. The rooster on the carriage barn was swinging back and forth on its arrow, unable to decide about the wind. He looked at it and did not mind it.</p>
+  <p>Brother Glad Tidings met him in the front hall with the ledger already open, and did not hand him the pen.</p>
+  <p><em>No,</em> he said. <em>Brother, no. Not this time.</em></p>
+  <p>He turned the book around so Lem could see. Down the margin of the page the name stood six times, five times struck, and where the pen had gone over and over the same place the paper had worn through. You could see the floor through it.</p>
+  <p><em>Look at that. We&rsquo;ve written you in so many times there&rsquo;s a hole in the book. What do you want to come in for? You&rsquo;ll be gone by Thursday.</em></p>
+  <p><em>Just this once,</em> Lem said.</p>
+  <p>Brother Glad Tidings looked at him. Behind him in the parlor somebody was trying to pick out a hymn on the upright with one finger, and missing, and starting again.</p>
+  <p>Sister Still Water came through from the kitchen with flour to her elbows. She looked at Lem a moment, the way she had looked at him over the sink fifteen months before. Then she took the pen out of Brother Glad Tidings&rsquo; hand, turned past the page with the hole in it to a clean one, and held the pen out.</p>
+  <p>He wrote his name. She blotted it with the side of her floury hand.</p>
+</section>
+
+<section>
+  <h2>V. Stand Still</h2>
+  <p class="dateline">Macon Street &middot; that week</p>
+  <p>He played for the noon table and the evening table. He washed. He swept the long room under the roof. In the evenings when the house was quiet he sat on the back step and watched the light go off the bay, and that was all he did with the evenings. By Wednesday the brothers had started to look at him sideways. By Friday they had started to talk.</p>
+  <p>They meant no harm by it. At the end of the evening table one of the young ones leaned down the board toward him.</p>
+  <p><em>Brother Weathervane. Which way is the wind today?</em></p>
+  <p>They laughed. Lem laughed with them.</p>
+  <p><em>You&rsquo;ll let us know when you&rsquo;re fixing to go,</em> said another. <em>You&rsquo;ve been here a long while this time. It&rsquo;s nearly a week.</em></p>
+  <p><em>I&rsquo;m not going,</em> Lem said.</p>
+  <p><em>Not till Thursday.</em></p>
+  <p><em>When I was hooked to all that,</em> Lem said, <em>I went. I&rsquo;m not hooked to it. I don&rsquo;t have anyplace to go.</em></p>
+  <p>He said it plainly, the way he would say what key a song was in, and went back to his pie. The young men looked at each other. Later that night three of them went into the kitchen, where Sister Still Water was setting the bread to rise for the morning under clean flour sacks, and Brother Glad Tidings went with them because he kept the book.</p>
+  <p><em>Sister. You know what Brother Weathervane is saying now? He says he&rsquo;s through. He says he&rsquo;s got no place to go.</em></p>
+  <p><em>He&rsquo;s telling a story,</em> said another. <em>He&rsquo;s got a wife in Harlem with a baby coming. He&rsquo;ll be gone by Thursday. He always is.</em></p>
+  <p>She went on folding the sacks over the bread. When she was done she wiped her hands.</p>
+  <p><em>When that boy didn&rsquo;t have his mind fixed,</em> she said, <em>he came and he went. He couldn&rsquo;t learn anything. He wasn&rsquo;t ever here long enough to learn it. Now he&rsquo;s set down. He&rsquo;s through with all that, the good and the bad both. You leave him be.</em></p>
+  <p>Then, because they were still standing there, she sang them a verse of an old song, low, the way you would sing to a child who was nearly asleep. It was the same song. It had gone all over Tennessee the year she was a girl, after the singers came back from the North with it.</p>
+  <div class="verse">
+    <p>Just stand right still, and steady yourself, I know that my Redeemer lives.</p>
+    <p>Just watch that sun, and see how it runs, I know that my Redeemer lives.<br>Oh, don&rsquo;t let it catch you with your work undone, I know that my Redeemer lives.</p>
+    <p>&mdash; &ldquo;I Know That My Redeemer Lives,&rdquo; in J. B. T. Marsh, <em>The Story of the Jubilee Singers, Including Their Songs</em> (1898)</p>
+  </div>
+  <p>Lem heard it through the wall, from the back step, where he was sitting in the dark. He knew all the words. He had always known them.</p>
+</section>
+
+<section>
+  <h2>VI. The Wagons</h2>
+  <p class="dateline">Macon Street &middot; Sunday, November 15, 1931</p>
+  <p>That Sunday the people came out from Harlem and Newark and Brooklyn and the towns around in buses and cars and on foot from the station, and there were three thousand of them in the house and on the porch and on the lawn and standing in the road, and the singing went on into the night. A few days before, the white people of Sayville had held a meeting at which they said they had nothing against colored people. They had said other things too.</p>
+  <p>A little before midnight the police came, from Sayville and the towns nearby, with state troopers behind them, and men from the town who were neither. They stood at the edge of the lawn with their lights and said the meeting would disperse in fifteen minutes. The singing did not stop. In the parlor Lem kept on playing.</p>
+  <p>When the fifteen minutes were up they came in. They took seventy-eight people, colored and white, out of the house and off the porch and put them in wagons and cars to go to the courthouse. Some of the women cried. Some of the young men shouted. One of the brothers who had laughed at the table that week stood on the porch steps with his fists shut and his whole face shaking.</p>
+  <p>Lem closed the lid of the piano. He got up and put on his coat and went out between two troopers, and when one of them took his arm he let him take it. There was nothing the man could take from him. He did not have anything. He stood in the back of the wagon with the brothers pressed around him in the dark, and he could feel the boy with the shaking face against his shoulder, and he began to sing the Daniel verse, not loud.</p>
+  <p><em>Oh, Daniel in the lion&rsquo;s den, I know that my Redeemer lives.</em></p>
+  <p>The boy did not sing. But after a while he stopped shaking.</p>
+  <p>In the morning forty-six of them pleaded guilty and paid five dollars apiece. God paid his fine with a five-hundred-dollar bill, and the court could not make change for it, and that was the story all the way back to Harlem by night. Lem had nothing. Sister Still Water paid his five dollars out of the pocket of her apron, from a roll of ones that smelled of yeast.</p>
+</section>
+
+<section>
+  <h2>VII. Seed Peas</h2>
+  <p class="dateline">The kitchen on Macon Street &middot; that night</p>
+  <p>They sat in the kitchen afterward, the ones who had come back, too tired to go up. Somebody had put coffee on.</p>
+  <p>The young men talked about Brother Weathervane, who had gone up to bed. They did not call him that now. They talked about him the way you talk about a man who has come through a fever. Seven times, one of them said. Seven times in the book. What kind of a hook has a man got in him, that it takes seven times to pull it out?</p>
+  <p>Sister Still Water was at the board with her back to them, cutting lard into flour with two knives.</p>
+  <p><em>That&rsquo;s not much of a hook,</em> she said. <em>I knew a woman it took seven times for a hoe.</em></p>
+  <p>They waited. She went on cutting.</p>
+  <p><em>She came up from Tennessee,</em> she said, <em>with a hoe with the edge gone off it and a snuff can of crowder peas her mother saved, for seed. She got a little patch in a lot behind a church on Lenox Avenue, where the ground was all brickbats, and she grew her peas. Then she came out here to Father. And come the spring she thought, who&rsquo;s going to plant my peas? I can&rsquo;t let my peas go. So she went back and planted them. And she picked them in August, and she saved a can of them for seed, and she came back out here. And come the spring she thought about those peas.</em></p>
+  <p><em>Seven times?</em></p>
+  <p><em>Seven times. A dull hoe and a snuff can of peas. The seventh time she said, I know what&rsquo;s doing this. So she took the hoe and the can and walked out on the bridge at 145th Street, over the river. And she tied the can to the end of the hoe handle with her head-rag, so it would sink. And she thought, if I see where it goes in, I&rsquo;ll be down there in the mud after it by dark. So she shut her eyes. And she swung it around her head three times and let it go. And she turned her back so she wouldn&rsquo;t see it hit, and she hollered out, I hit! I hit! I hit!</em></p>
+  <p>The young men laughed. In Harlem nobody hollered that on a bridge.</p>
+  <p><em>There was a man stopped on that bridge in a long car,</em> she said. <em>A banker. A policy man. He had just run another man&rsquo;s runners off his streets that morning, and he was feeling like a king. And the one thing a policy banker does not like to hear is somebody hollering I hit. So he got out of his car in his good coat and came over to her and he said, Woman, what did you hit? Because I didn&rsquo;t pay anybody today.</em></p>
+  <p><em>What did she tell him?</em></p>
+  <p><em>She said, You run the other man off this morning. And you have to run him off again tomorrow, and the day after, as long as you live. That&rsquo;s the kind you hit. I hit the one you only have to hit once. And she told him what it was.</em></p>
+  <p>She set down the knives.</p>
+  <p><em>The people on the bridge said that while she was talking she sat down. There wasn&rsquo;t anything there to sit on. She sat on the air a foot above the rail, over the river, with her hands in her lap, like it was a kitchen chair. I don&rsquo;t know about that. That&rsquo;s what they said.</em></p>
+  <p><em>And the banker?</em></p>
+  <p><em>He shut up his bank that week and came out here with all his runners behind him in a line. And the man from the other streets came over to take his territory, and found the shop empty and the books burned, and he stood in there a while, and then he came too. Seven of them, before it was done. For a while there you couldn&rsquo;t get a number down in four blocks of Harlem. People said the bankers had all gone to Sayville to get fat.</em></p>
+  <p>The young men were laughing again, but quietly now, and looking at her.</p>
+  <p><em>Who was she?</em> one of them said. <em>The woman with the hoe.</em></p>
+  <p>Sister Still Water picked up her two knives and went back to the lard.</p>
+  <p><em>Same old fool as always,</em> she said. <em>Go to bed.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>In the morning there was a wind off the bay. Lem was at the upright in the front parlor early, before the table, running his left hand down the keys to warm it, a tenth and back, a tenth and back. Out the window, two lots down, the iron rooster on the carriage barn swung east and west and east again on its arrow. He could see it from the bench if he turned his head. He did not turn his head.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">If a man's thoughts are unsteady, if he does not know the true law, if his peace of mind is troubled, his knowledge will never be perfect.<cite>Dhammapada 38, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">If a man's thoughts are not dissipated, if his mind is not perplexed, if he has ceased to think of good or evil, then there is no fear for him while he is watchful.<cite>Dhammapada 39, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a young man out looking for a lost ox stops at a monastery, is fed the monks&rsquo; leftovers, and decides to become a monk for the food. He grows fat, goes home, grows thin, and comes back, six times, until the monks call him Cittahattha, &ldquo;led by his mind.&rdquo; The seventh time, coming in from the fields, he sees his pregnant wife asleep with her mouth open and her clothes fallen away, and she looks to him like a corpse. He runs from the house tying his robe on as he goes, while his mother-in-law wakes her daughter to tell her he is gone for good, and the wife says he will be back in a few days. On the road, repeating that all things pass, he reaches the first stage of awakening; the monks, who say his head is &ldquo;like a grindstone&rdquo; from so many shavings, take him back one last time, and soon he is an arahat. When he says he has no more desire to leave, they call it a lie, and the Buddha answers with these verses. Afterward he tells how, in a past life, he himself went forth and came back six times for the sake of a blunt spade and half a pot of seed beans, until he threw them into the Ganges with his eyes shut and cried &ldquo;I have conquered!&rdquo;, a cry overheard by a king just home from war, who renounced his throne, followed by six more kings. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-05.htm">the full commentary story</a>, or about the <a href="https://en.wikipedia.org/wiki/Jataka_tales">Jātaka tales</a>, where the story of the wise Kuddāla is told.</p>
+    <h3>Sayville and Harlem, 1931</h3>
+    <p>About 1919 the preacher known as <a href="https://en.wikipedia.org/wiki/Father_Divine">Father Divine</a> settled with a small group of followers in a house at 72 Macon Street in Sayville, on the south shore of Long Island. During the Depression his free banquets drew crowds by bus and car from Harlem, Newark and elsewhere, as many as three thousand at a time by 1931, colored and white at the same table. Followers lived communally under strict rules against liquor, tobacco, profanity and sex, even within marriage, and many took new spiritual names; the movement found jobs for them, often in domestic work. Neighbors complained of the noise and the traffic. Father Divine was arrested for disturbing the peace in May 1931, and on the night of November 15, after a town meeting, police and state troopers broke up a meeting at the house and arrested seventy-eight people, fifteen of them white. Forty-six pleaded guilty and paid five-dollar fines; Father Divine, by the familiar story, paid with a five-hundred-dollar bill. His trial the next spring before Judge Lewis J. Smith ended in the maximum sentence, and the judge&rsquo;s sudden death four days later became a famous legend. The movement soon moved its center to Harlem as the <a href="https://en.wikipedia.org/wiki/International_Peace_Mission_movement">International Peace Mission movement</a>.</p>
+    <p>In Harlem, the block of <a href="https://en.wikipedia.org/wiki/133rd_Street_(New_York_City)">West 133rd Street</a> between Lenox and Seventh Avenues was lined with Prohibition speakeasies and clubs, where stride pianists played through the night. The spiritual Sister Still Water sings, &ldquo;I Know That My Redeemer Lives,&rdquo; was printed among the songs of the <a href="https://en.wikipedia.org/wiki/Fisk_Jubilee_Singers">Fisk Jubilee Singers</a>, the Nashville student choir whose tours from 1871 onward first brought the spirituals to concert audiences in the North and in Europe. The text quoted here follows the 1898 London edition of J. B. T. Marsh&rsquo;s <a href="https://archive.org/details/storyofjubileesi00mars_2"><em>The Story of the Jubilee Singers, Including Their Songs</em></a>; the song appears in the earlier editions as well.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Cittahattha from the Dhammapada commentary (verses 38 and 39). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-05.htm">The original</a>. Spiritual from J. B. T. Marsh, <em>The Story of the Jubilee Singers, Including Their Songs</em> (1898). Written by Claude Opus 5.5.
+  <div class="pager"><a href="three-shirts.html">&larr; Three Shirts</a><a href="index.html">All stories</a><a href="the-water-pot.html">The Water Pot &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, ang = 0.6, vel = 0, target = 0.6, gust = 0, t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function vane(a) {
+    ctx.clearRect(0, 0, W, H);
+    var s = Math.max(0.55, Math.min(1, W / 900));
+    var x = W - 70 * s - 18, y = 84 * s + 12;
+    var k = Math.cos(a), dir = Math.sin(a) >= 0 ? 1 : -1;
+    ctx.save();
+    ctx.translate(x, y); ctx.scale(s, s);
+    ctx.globalAlpha = 0.16;
+    ctx.strokeStyle = '#2b2723'; ctx.fillStyle = '#2b2723'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, -6); ctx.lineTo(0, 70); ctx.stroke();
+    ctx.font = 'italic 11px Georgia, serif'; ctx.textAlign = 'center';
+    ctx.fillText('N', 0, 44); ctx.beginPath(); ctx.moveTo(-14, 52); ctx.lineTo(14, 52); ctx.stroke();
+    ctx.save(); ctx.scale(k, 1);
+    ctx.beginPath(); ctx.moveTo(-58, 0); ctx.lineTo(48, 0); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(58, 0); ctx.lineTo(44, -7); ctx.lineTo(44, 7); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(-58, 0); ctx.lineTo(-70, -12); ctx.lineTo(-62, 0); ctx.lineTo(-70, 12); ctx.closePath(); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(-26, -2); ctx.quadraticCurveTo(-40, -30, -30, -44); ctx.quadraticCurveTo(-22, -30, -16, -26);
+    ctx.quadraticCurveTo(-4, -22, 6, -26); ctx.quadraticCurveTo(10, -38, 18, -40); ctx.lineTo(22, -46); ctx.lineTo(24, -38);
+    ctx.lineTo(30, -36); ctx.lineTo(24, -32); ctx.quadraticCurveTo(22, -16, 10, -8); ctx.lineTo(10, -2); ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+    ctx.restore();
+  }
+  function step(now) {
+    var mins = (now - t0) / 60000;
+    var calm = Math.min(1, mins / 6);
+    if (Math.random() < 0.006 * (1 - 0.85 * calm)) {
+      gust = (Math.random() - 0.5) * 3.2 * (1 - 0.75 * calm);
+      target = 0.6 + gust;
+    }
+    target += (0.6 - target) * 0.002;
+    vel += (target - ang) * 0.004;
+    vel *= 0.965;
+    ang += vel + Math.sin(now / 1700) * 0.0015 * (1 - calm);
+    vane(ang);
+    requestAnimationFrame(step);
+  }
+  size();
+  if (reduce) { vane(0.6); } else { requestAnimationFrame(step); }
+  window.addEventListener('resize', function () { size(); if (reduce) vane(0.6); });
+})();
+</script>
+</body>
+</html>

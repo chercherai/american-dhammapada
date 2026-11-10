@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ash Glaze</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a kiln-shed night in October, dark theme; low on the page the round mouth of a spy hole glows, brightening as the kiln draws and going red and dim each time it is stoked, while a little smoke lifts off it and thins; datelined sections. */
+  --ground: #15110e;
+  --ground-2: #221a14;
+  --paper: #e9e0d3;
+  --paper-dim: #a99d8e;
+  --accent: #b2c07c;
+  --glow: #ec8b45;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #3a2416 0%, var(--ground-2) 38%, var(--ground) 70%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,224,211,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(178,192,124,.22); }
+.epigraph { border-left: 1px solid rgba(178,192,124,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(34,26,20,.78); border: 1px solid rgba(233,224,211,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,224,211,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(233,224,211,.14); border-bottom: 1px solid rgba(233,224,211,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(34,26,20,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 21.4 &middot; Lakuṇṭaka Bhaddiya</span></nav>
+<header>
+  <h1>Ash Glaze</h1>
+  <div class="epigraph">Over a mass of reddish flesh there sits a true man who has no title.<br>&mdash; Rinzai, in D. T. Suzuki, <i>Essays in Zen Buddhism</i> (1927)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Nyoze gamon,</span> at the head of Laurel Branch.</p>
+
+<section>
+  <h2>I. The Kiln</h2>
+  <p class="dateline">Laurel Branch, Yancey County, North Carolina · October 2004</p>
+  <p>Morio Hata had come to the mountains in the summer of 1972 to teach a three-week workshop at the craft school over at Penland, and at the end of the three weeks he did not go back to Kyoto. He was the third son of a kiln family in Shigaraki, which meant there was no kiln for him at home, and he had been a Soto priest since he was nineteen, which meant he could sit anywhere. In 1975 he bought forty acres at the head of Laurel Branch from a widow named Edney who was glad to be done with them: a frame house, a springhouse, a quarter-acre burley allotment he rented back to her nephew, and a tobacco barn on the slope that he swept out and put a floor in and made into a zendo. The cracks between the boards were left as they were. In winter you sat in your coat and the wind came through in stripes.</p>
+  <p>In 1983, with the help of eleven students and a mason from Spruce Pine, he dug a kiln into the hill behind the barn. It was twenty-six feet long and shaped like a loaf of bread, with a firebox at the low end and a chimney at the high one, and it lay along the slope the way a dog lies on a step. By the autumn of 2004 it had been fired forty-one times. People came from all over the country to put pots in it.</p>
+  <p>That October four came up from Atlanta, from a sitting group that met on Tuesday nights in the parlor of a Methodist church in Decatur. Marcy Feld was a public defender. Daniel Oh was writing a dissertation at Emory on Japanese temple economies. Tom Ricketts had flown for Delta for thirty-one years and had retired in July. Celeste Ware was a hospice nurse who had arranged her shifts so she could have the week. They drove up on a Thursday with their pots wrapped in towels in the back of Tom's Suburban, and on Friday they met Ben.</p>
+  <p>Ben Gatti was four feet and two inches tall. He had come to Laurel Branch in 1990, at thirty, from Barre, Vermont, where his mother's people had been stonecutters, and he had stayed. There was a lily in Hope Cemetery in Barre, cut into the granite by a man no taller than Ben, that his mother had taken him to see when he was nine, and he still had the rubbing they made of it. He did the books and the garden and the morning chant. The anagama door was thirty inches wide and the kiln was not much higher than that inside, and a full-sized man loading the back of it had to lie on his side on the sand floor and pass the pots ahead of his face. Ben could kneel in there. For fourteen years he had loaded the back.</p>
+  <p>They watched him go in on Friday morning with a headlamp and a bucket of wadding, the little wads of kaolin and alumina that keep a pot from welding itself to the shelf, and they listened to him working his way up the slope in the dark, and then they heard him start to sing. He had a light, clear voice, a tenor that seemed to have nothing pushing it from behind. It came out of the door and up through the chimney at the same time. It was the Heart Sutra in Japanese, the way he led it every morning in the barn, and then it was something in Italian, and then it was a Patsy Cline song, all in the same voice and with no break between.</p>
+  <p><em>Who is that?</em> said Celeste.</p>
+  <p>Hata Sensei was sitting on an upturned bucket beside the firebox, sorting cones.</p>
+  <p><em>That's Ben,</em> he said.</p>
+  <p>The loading took two days. The front of the kiln was what everybody wanted. Near the firebox the flame was hottest and the ash fell thickest, and a pot that sat there for six days came out with a green glaze running down its shoulder like water down a rock, or with its whole face crusted and pitted where the coals had buried it. In the back, at the top of the slope, a pot might come out with nothing on it but a blush of orange where the flame had touched it going by. Marcy had brought a tall jar she had thrown in a class in Little Five Points and had worked on for a month, and she wanted it near the front, and so did everybody. There was a certain amount of talk about it, polite and Southern and not quite joking. Ben set the four of them a shelf in the second row and took his own pots, which were small, cups and little lidded jars, up into the back with him.</p>
+  <p><em>Doesn't he want them up front?</em> said Tom.</p>
+  <p><em>Ask him,</em> said Hata Sensei. Nobody did.</p>
+  <p>On Saturday afternoon Hata Sensei bricked up the door, leaving the firebox mouth and a row of spy holes, and set the cone packs where he could see them through the holes, and lit a small fire of kindling in the mouth of the kiln, and sat down on his bucket beside it. He was seventy-five. He would sit there, on and off, for six days.</p>
+</section>
+
+<section>
+  <h2>II. Father and Mother</h2>
+  <p class="dateline">The firebox · Wednesday afternoon</p>
+  <p>By the fifth day the kiln had a voice of its own. It drew air in at the firebox with a long low sound like somebody breathing through a cold, and each time you stoked it, a split of pine laid in through the mouth, it went quiet, and black smoke rolled out the top of the chimney, and then the smoke cleared and the roar came back a little higher. The front cones had gone over in the night. The spy holes were too bright to look into without welding glasses, and when you did look, the pots inside had lost their shapes and become places where the light was a little thicker.</p>
+  <p>The four from Atlanta had their shift from noon to six. They stoked when Hata Sensei raised a finger. In between they sat with him on a row of buckets and cinder blocks out of the heat and ate the rice balls Ben brought up from the house at two. The pine came from a sawmill on the Cane River, slab wood with the bark still on it, and their hands were black with pitch to the wrist. Across the branch the Edney nephew's barn was hung to the rafters with burley, turned the color of saddle leather, the last crop on the allotment. Congress had passed the buyout, and everybody on the creek was waiting for the President to sign it. On the radio hung on a nail in the kiln shed, when there was no news about it, there was baseball.</p>
+  <p>At about half past two Ben came up the path from the barn with an armload of slab across his chest that reached nearly to his chin. He was singing under his breath. He nodded to them and went by to the woodpile on the far side of the shed and began to stack.</p>
+  <p>Hata Sensei watched him go by. Then he looked at the four of them on their buckets.</p>
+  <p><em>Look,</em> he said. <em>That one killed his mother and his father. And look how he goes. Nothing on him.</em></p>
+  <p>Nobody said anything. The kiln breathed in. Marcy Feld had sat beside three clients charged with killing a parent in nine years of practice, and she found she had turned around on her bucket to look at the little man stacking pine, and was looking at his hands. Daniel Oh was thinking it must be a koan and was ashamed that he did not know which one. Tom thought the old man's English had slipped, as it sometimes did when he was tired, and was waiting for him to correct it. Celeste had been with a great many people while they died and had heard them say all kinds of things at the end about their mothers and fathers. They looked at each other, and each of them saw that the others had heard the same thing, and that did not help.</p>
+  <p><em>Sensei,</em> Tom said finally. <em>What do you mean?</em></p>
+  <p>Hata Sensei raised a finger. Tom got up and laid a split into the firebox mouth, and the roar dropped, and the smoke went up black and then thinned, and Tom sat down again.</p>
+  <p><em>Mother is wanting,</em> said Hata Sensei. <em>Everything is born from her. This pot, that pot. I want the front. Father is I. I am the one who made it. My jar. He killed both of them.</em></p>
+  <p>He turned a cone over in his fingers.</p>
+  <p><em>Then two kings. One king says, You will go on forever. Your name, your pots, everything. The other king says, When you die, nothing. Nothing matters. Both kings, he killed. And the kingdom and all the people in it. Eyes, ears, nose, tongue, body, mind. All the people who work for them, and all the people they bring in, all day. He killed the whole country.</em></p>
+  <p><em>And now he goes like that.</em></p>
+  <p>They looked over at Ben, who was laying slab crosswise on the stack so it would dry, two this way and two that way, and singing.</p>
+  <p>Hata Sensei said that in China there had been a teacher named Rinzai who was very rough with his students, and who once got up in front of them and said a thing that nobody in the hall could answer. He said it in English, the way he had first read it, in a book of Suzuki's he had bought secondhand in Kyoto as a student:</p>
+  <div class="verse">
+    <p>Over a mass of reddish flesh there sits a true man who has no title; he is all the time coming in and out from your sense-organs. If you have not yet testified to the fact, Look! Look!</p>
+    <p>&mdash; Rinzai, in D. T. Suzuki, Essays in Zen Buddhism (1927)</p>
+  </div>
+  <p><em>No title,</em> he said. <em>No king.</em></p>
+  <p>Then he raised a finger and Celeste got up to stoke, and that was all he said about it.</p>
+  <p>They sat there until six. When the next shift came up from the house and they went down, nobody on the path said anything about the jar. It was in the second row. It was going to come out the way it came out. Marcy said later, in Decatur, that it was as if somebody had been standing on her foot for her whole life and had just stepped off it, and she had not known until then that there was a foot. She did not quit the public defender's office. She kept the jar, when it came out, on the floor of her office beside the chair where her clients sat, and it was the first thing they looked at and the last.</p>
+</section>
+
+<section>
+  <h2>III. The Painter</h2>
+  <p class="dateline">The firebox · Thursday, after midnight</p>
+  <p>The Ray boys from the sawmill came up the branch in their father's truck on the last night with a final load of slab. Cody was nineteen and Dwayne was seventeen, and their father had put in for the buyout on his quota and was talking about selling the mill too and going to work at the hospital in Spruce Pine, and Cody had a cousin in Charlotte who said he could get him on with a drywall crew, and nobody in the family could decide anything. They unloaded the slab, and then because the kiln was the only light on Laurel Branch at that hour and there was a roar coming out of it like a jet, they stayed.</p>
+  <p>Hata Sensei was on his bucket. He had been up most of two nights. Flame was coming out of the top of the chimney now, three feet of it, the color of the inside of a peach, and in its light the boys could see the burley hanging in the Edney barn across the branch, and the moths.</p>
+  <p>Ben came out of the dark with the side-stoking rods and went along the kiln wall, pulling a brick from each port, feeding a handful of thin pine in and putting the brick back. The heat off the ports made the air above him swim. He did it the way he did everything, without hurry and without stopping.</p>
+  <p>Hata Sensei looked at him, and then at the two Ray boys.</p>
+  <p><em>That one killed his mother and his father,</em> he said. <em>Two kings. And a tiger, five. And he goes like that.</em></p>
+  <p>Dwayne laughed, because he thought it was a joke, and then stopped, because the old man was not laughing. Cody, who was the one who could not decide about Charlotte, said, <em>We don't have tigers up here.</em></p>
+  <p><em>What do you have?</em></p>
+  <p><em>Painters. Used to. My granddaddy said he heard one scream on the Bald Mountains.</em></p>
+  <p><em>Painter, then,</em> said Hata Sensei. He told them about the mother and the father and the two kings, the way he had told it on Wednesday, and then about the painter. <em>There are five things that sit beside the path and wait for you,</em> he said. <em>Wanting the thing. Hating the thing. Sleepy. Worried. And the fifth one is the painter. The fifth one is doubt. Should I go, should I stay. Is this the right one, is that one. It never jumps. It waits beside the path and you never go by.</em></p>
+  <p><em>He killed that one too,</em> he said, and nodded at Ben, who had come to the end of the ports and was standing at the high end of the kiln in the heat of the chimney with the rods in his hand, looking up at the flame.</p>
+  <p>Cody Ray did not say anything then. In March he went to Charlotte, and he came home most weekends, and in 2009 he came home for good and put up drywall from Burnsville to Bakersville, and he never said that one choice had been better than the other. He told the story about the painter to his own boys, but he told it as a story about a painter.</p>
+  <p>They clammed the kiln up at four in the morning on Friday. Ben and the Ray boys bricked the firebox mouth and the ports and daubed every seam with wet clay, and the roar stopped as if a door had shut on it somewhere, and the kiln ticked and sighed in the dark. Then for six days it cooled, and nobody could do anything about anything in it.</p>
+</section>
+
+<section>
+  <h2>IV. The Back</h2>
+  <p class="dateline">Laurel Branch · the next Thursday</p>
+  <p>On the morning they unbricked the door it was cold enough that the heat coming out of the kiln stood up in a column in the air, and the Edney nephew came across the branch to watch, and so did the Rays. By then the President had signed the buyout. The Red Sox had won the World Series the night before for the first time since 1918, and Ben, who had been raised in Barre on Red Sox radio, had gone to bed at nine as usual and found out at breakfast, and said, <em>Well, good.</em></p>
+  <p>The front of the kiln came out first. Some of it was very fine. A bottle near the firebox came out with a green ash glaze running in long beads down one side and a black glossy shoulder where the coals had lain, and the woman from Asheville who had made it held it in both hands and could not say anything. Some of it was ruined. A bowl had slumped. Two pots had fallen against each other and fused into one thing, which Hata Sensei looked at a long time and then set aside for himself.</p>
+  <p>Marcy's jar came out of the second row with a gray-green crust on its shoulder like lichen on a fencepost and a long scar on its foot where the wad had torn away, and she looked at it, and then she put it down on the board with the others and went back to the door to take the next thing Ben handed out.</p>
+  <p>Ben went into the back last, on his knees, with the headlamp. He handed his cups out one at a time. They were the color of toast, mostly, with an orange blush on the side where the flame had gone by them on its way up the chimney. They had almost no ash on them. On one there was a single green bead, the size of a lentil, that had fallen from somewhere above and melted where it landed.</p>
+  <p>Hata Sensei took that one. Ben came out of the kiln backward and sat on the sand at the door to take off his kneepads.</p>
+  <p>There was green tea in a thermos. Hata Sensei poured it into the cup with the green bead and drank it standing in the cold, with the burley hanging behind him in the barn across the branch, and then he poured it again and handed it to Ben, and Ben turned the cup in his hands until the green bead was under his lip, and drank.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">A true Brahmana goes scatheless, though he have killed father and mother, and two valiant kings, though he has destroyed a kingdom with all its subjects.<cite>Dhammapada 294, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">A true Brahmana goes scatheless, though he have killed father and mother, and two holy kings, and an eminent man besides.<cite>Dhammapada 295, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is a few lines long. The Buddha is sitting in his day-quarters at Jetavana with some visiting monks when the elder Lakuṇṭaka Bhaddiya, &ldquo;Bhaddiya the Dwarf,&rdquo; walks past. The Buddha says that there goes a monk who has killed his mother and father and goes on free of pain. The visitors look at one another in doubt and ask what he means, and he answers with the verse. The commentary reads it as a riddle: mother and father are craving and conceit, the two kings are the views that the self lasts forever and that it is annihilated at death, and the kingdom with its followers is the passion for the twelve spheres of sense. The second verse, told the same way, puts a tiger fifth, which the commentary takes as the five hindrances, the fifth of them doubt. The visitors become arahats. Elsewhere the canon names Lakuṇṭaka, small and mocked for it, as foremost among monks with a sweet voice. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-04.htm">the full commentary story</a>, or about <a href="https://palikanon.com/english/pali_names/l/lakuntaka_th.htm">Lakuṇṭaka Bhaddiya</a> and the <a href="https://en.wikipedia.org/wiki/Five_hindrances">five hindrances</a>. Hata Sensei&rsquo;s lines are a saying of the Chinese master <a href="https://en.wikipedia.org/wiki/Linji_Yixuan">Linji</a> (Rinzai in Japanese), from <a href="https://www.gutenberg.org/ebooks/71157">the first series of D. T. Suzuki&rsquo;s <i>Essays in Zen Buddhism</i></a>.</p>
+    <h3>The Toe River Valley, 2004</h3>
+    <p>In 1923 Lucy Morgan, a teacher at the Appalachian School in the Mitchell County village of Penland, began teaching weaving to local women, and by 1929 the work had become the <a href="https://en.wikipedia.org/wiki/Penland_School_of_Craft">Penland School of Handicrafts</a>, with classes in pottery among the first. After 1962 its second director, Bill Brown, turned it toward working artists with a resident program and longer courses, and studio potters, glassblowers and other craftspeople settled in the surrounding counties of Mitchell and Yancey. Many of the potters fire with wood. An <a href="https://en.wikipedia.org/wiki/Anagama_kiln">anagama</a> is a single sloping tunnel with the firebox at its low end and the chimney at its high one; it is stoked around the clock for days, and the wood ash that settles on the pots melts into glaze, heaviest near the fire and lightest at the back. Its line runs to medieval Japan, to kiln towns such as <a href="https://en.wikipedia.org/wiki/Shigaraki_ware">Shigaraki</a>.</p>
+    <p>The same mountain counties grew <a href="https://en.wikipedia.org/wiki/Burley_tobacco">burley tobacco</a> on thousands of small allotments, cut whole in the field and air-cured for one to two months in open barns. Federal quotas had governed the crop since 1938. On October 22, 2004, the <a href="https://en.wikipedia.org/wiki/Fair_and_Equitable_Tobacco_Reform_Act">Fair and Equitable Tobacco Reform Act</a> became law, ending the quotas and paying their holders a buyout; about $4 billion of it went to North Carolina, and <a href="https://dh.wcu.edu/index.php/2010/08/30/burley-tobacco">most small burley growers in the mountains took it and quit</a>. Five days later the Boston Red Sox finished a four-game sweep of St. Louis to win the <a href="https://en.wikipedia.org/wiki/2004_World_Series">2004 World Series</a>, their first championship since 1918.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder Lakuṇṭaka Bhaddiya from the Dhammapada commentary (verses 294&ndash;295). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-04.htm">The original</a>. The words of Rinzai from D. T. Suzuki, <i>Essays in Zen Buddhism, First Series</i> (1927). Written by Claude Opus 5.5.
+  <div class="pager"><a href="fifty-one-percent.html">&larr; Fifty-One Percent</a><a href="index.html">All stories</a><a href="the-brass-tray.html">The Brass Tray &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, puffs = [], t0 = performance.now(), PERIOD = 26000, lastStoke = -1;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function hole() { return { x: W * 0.5, y: H + Math.min(W, H) * 0.02, r: Math.max(90, Math.min(W, H) * 0.16) }; }
+  function stoke() {
+    var h = hole();
+    for (var i = 0; i < 7; i++) puffs.push({ x: h.x + (Math.random() - 0.5) * h.r * 0.9, y: h.y - h.r * 0.4, r: h.r * (0.3 + Math.random() * 0.3), vy: 0.12 + Math.random() * 0.12, vx: (Math.random() - 0.5) * 0.08, life: 0, max: 520 + Math.random() * 360 });
+  }
+  function heat(p) {
+    if (p < 0.08) return 1 - p / 0.08 * 0.55;
+    if (p < 0.4) return 0.45 + (p - 0.08) / 0.32 * 0.55;
+    return 1;
+  }
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    var h = hole();
+    var p = reduce ? 0.6 : ((now - t0) % PERIOD) / PERIOD;
+    var cyc = Math.floor((now - t0) / PERIOD);
+    if (!reduce && cyc !== lastStoke) { lastStoke = cyc; stoke(); }
+    var k = heat(p);
+    var flick = reduce ? 1 : 0.94 + 0.06 * Math.sin(now / 410) * Math.sin(now / 157);
+    var a = 0.2 * k * flick;
+    var R = h.r * (2.4 + 0.5 * k);
+    var g = ctx.createRadialGradient(h.x, h.y, 0, h.x, h.y, R);
+    var gr = Math.round(150 + 90 * k), gg = Math.round(70 + 120 * k * k), gb = Math.round(40 + 60 * k * k);
+    g.addColorStop(0, 'rgba(' + gr + ',' + gg + ',' + gb + ',' + (a * 1.6) + ')');
+    g.addColorStop(0.2, 'rgba(236,139,69,' + (a * 0.8) + ')');
+    g.addColorStop(0.55, 'rgba(150,60,25,' + (a * 0.25) + ')');
+    g.addColorStop(1, 'rgba(150,60,25,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(h.x, h.y, R, 0, Math.PI * 2); ctx.fill();
+    for (var i = puffs.length - 1; i >= 0; i--) {
+      var s = puffs[i];
+      s.life++; s.y -= s.vy; s.x += s.vx; s.r += 0.12;
+      var q = s.life / s.max, sa = 0.16 * Math.min(1, q * 6) * (1 - q);
+      if (q >= 1) { puffs.splice(i, 1); continue; }
+      var sg = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r);
+      sg.addColorStop(0, 'rgba(10,8,7,' + sa + ')'); sg.addColorStop(1, 'rgba(10,8,7,0)');
+      ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>
