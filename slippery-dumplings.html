@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slippery Dumplings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on white enamel with a blue rim, light theme; thin gold threads of scent rise from below the page, curl, and keep rising past the top; datelined sections. */
+  --ground: #f4f2ed;
+  --ground-2: #e9e6de;
+  --paper: #22262c;
+  --paper-dim: #5f6670;
+  --accent: #2f4f7a;
+  --accent-2: #b8862a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #efe6d2 0%, #f4f2ed 55%) fixed, #f4f2ed;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(34,38,44,.13); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(47,79,122,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,255,255,.7); border: 1px solid rgba(34,38,44,.13); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(34,38,44,.13); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(34,38,44,.13); border-bottom: 1px solid rgba(34,38,44,.13); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,255,255,.7); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.10 &middot; Mahā Kassapa</span></nav>
+<header>
+  <h1>Slippery Dumplings</h1>
+  <div class="epigraph">A good name is better than precious ointments: and the day of death than the day of one&rsquo;s birth.<br>&mdash; Ecclesiastes 7:2, Douay-Rheims</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how they tell it,</span> on the East Side.</p>
+
+<section>
+  <h2>I. The Rag Bin</h2>
+  <p class="dateline">Wilmington, Delaware &middot; 1968&ndash;2019</p>
+  <p>Walt Hollingsworth came down out of Chateau Country in the summer of 1968, while the National Guard was still parked on the East Side with bayonets on their rifles, and walked into St. Martin de Porres House on a Tuesday morning in a suit his mother had bought him at Wanamaker&rsquo;s. He was twenty-eight. His great-grandfather had made black powder on the Brandywine, and his grandfather had made money out of everything that came after the powder, and Walt had an office on the ninth floor downtown with his name on the door. He had come to drop off a check. A tall Black man in a white apron took the check, folded it, put it in the apron pocket, and handed him a ladle.</p>
+  <p>That was Doc. Dr. Clement Pinder had grown up six blocks from the house, been baptized at St. Joseph&rsquo;s on French Street, and gone from Howard High School to Lincoln University and a doctorate in chemistry. Since 1962 he had worked in a stone laboratory at the DuPont Experimental Station on the Brandywine, one of a handful of Black chemists in the place. He came to the house every morning at five to make the coffee before he drove to work. He could tell you what was burning three blocks away and what it had been painted with. He did not say much. Walt stood next to him at the soup pot for the rest of that summer, and in the fall he did not go back to the ninth floor.</p>
+  <p>Fifty years later he was still there. He slept on a cot in the basement by the boiler. He had never bought a piece of clothing since 1968. He wore what came out of the rag bin, the bag of donations too far gone to give away that went once a month to a man who bought rags by the pound, and he wore it until it fell off him. He had gone to federal prison three times for walking onto the grounds of weapons plants and praying there. He ate once a day, standing up, after the line was fed. Every Lent he went alone for seven days to a cabin in the woods behind a Trappist abbey in the Virginia hills and spoke to no one. He came back thinner and said nothing about it.</p>
+  <p>The volunteers loved him the way people love a thing they would not want to be. The students from the Catholic girls&rsquo; schools who came for their service hours, the church ladies from Greenville and Centreville with their trays of baked ziti, the young Workers who came for a year and stayed for two: all of them wanted, more than anything, to feed Walt. He would not let them. He let the guests feed him. If a man in the line broke a pack of crackers in half and held out the half, Walt took it, thanked him, and ate it right there. That was what the guests knew about Walt, and why some of them would have walked into the river for him.</p>
+  <p>Doc said Walt had a nose for poor people the way a dog has a nose for a rabbit, and that it was the only thing he had ever taught him that took.</p>
+</section>
+
+<section>
+  <h2>II. Five Hundred Plates</h2>
+  <p class="dateline">The second Saturday of Lent &middot; March 2019</p>
+  <p>That spring the company his grandfather had worked for was being cut in three. Two years before, it had married Dow Chemical; now the lawyers were taking the marriage apart into three new companies with three new names, and the newspaper was full of who would go where. Walt did not read the newspaper. He came back from Virginia on a Friday night on the Amtrak with his seven days behind him, and on Saturday morning he put on a rag-bin coat with one toggle left and walked out the door of the house with his bowl.</p>
+  <p>The bowl was white enamel with a blue rim, chipped black in three places, and it was the one thing he owned that he had chosen. He meant to go out on the East Side, street by street, the way he did the first morning after every retreat, and take whatever the poorest door he came to would give him.</p>
+  <p>He did not get to the corner. It was a Saturday in Lent, and the volunteers were arriving: the girls from the Catholic schools in their plaid skirts and pink running shoes, the ladies from Greenville, two vans of college students from Newark. Word had gone around that Walt was back from his seven days, and every one of them had brought him something. They came at him down the sidewalk with foil pans and Tupperware and paper plates under plastic wrap, banana bread, a pot of chili, an egg-salad sandwich cut in triangles with the crusts off. There seemed to be hundreds of them.</p>
+  <p><em>Walt, eat something. Please. Do us the favor.</em></p>
+  <p><em>Go on in,</em> Walt said. <em>The line&rsquo;s coming. I&rsquo;m going to eat with the poor today.</em></p>
+  <p><em>Walt, don&rsquo;t do this to us. Just a bite.</em></p>
+  <p>He knew them. He knew what they wanted, and it was not a bad thing to want, and it was not his to give. He told them no again. They kept coming, with the plates held out in front of them like offerings, and he stopped in the middle of the sidewalk.</p>
+  <p><em>You don&rsquo;t know your place,</em> he said. <em>Go in.</em></p>
+  <p>And he snapped his fingers, once, the way you would at a dog in the kitchen.</p>
+  <p>The girls in the pink shoes say they did not decide to go. They were simply inside, all of them, with their pans, standing in the dining room with their hearts going, and none of them could say afterward how they had got through the door. Out on the sidewalk Walt tucked the enamel bowl under his arm and went on toward the corner.</p>
+</section>
+
+<section>
+  <h2>III. Chairs Caned</h2>
+  <p class="dateline">The East Side &middot; the same morning</p>
+  <p>Out the Kennett Pike, in a stone house with nineteen rooms, Hollis Cosgrove had been listening. He had people at the house who told him things. He had known Walt since they were eight years old and sat two desks apart at a school in the hills where boys wore ties to breakfast. Cos was eighty. His grandfather&rsquo;s name was on a wing of the hospital and a gallery at the art museum, and he was by any measure the richest man Walt had ever refused.</p>
+  <p>He heard the volunteers had been sent in with their plates, and he laughed out loud at his breakfast table, and his wife Sue looked at him over her glasses.</p>
+  <p><em>Plates,</em> Cos said. <em>Those children can&rsquo;t feed Walt. Nobody can feed Walt.</em> He sat a while. <em>I can.</em></p>
+  <p>Walt went down the East Side looking for the poorest door. He had walked those blocks every morning for fifty years. He knew which windows had plywood in them and which had curtains, who was in the hospital and who was in jail and whose daughter was sending money home from Georgia. Halfway down a block of brick rowhouses below the hill, between two that had been boarded since the eighties, he came to a narrow storefront he did not remember. The window had been washed. A sign in the window, lettered by hand in house paint, said CHAIRS CANED &middot; RUSH &middot; SPLINT.</p>
+  <p>Through the glass he could see an old man bent nearly double over a chair frame turned upside down on a table, weaving cane through the holes of the seat rail strand by strand, and an old woman beside him with her hands in a washtub, soaking the next strands soft and drawing them out one by one and laying them in his palm. The man&rsquo;s hands were knotted like roots. The woman was missing teeth. Neither of them looked up.</p>
+  <p>Walt stood on the sidewalk and looked at them for a long time. Two people that old, working with their hands on a Saturday morning in March for the price of a chair seat. He did not think there could be anybody in Wilmington poorer than that. If they give me a spoonful of anything, he thought, I&rsquo;ll take it, and it will be theirs to have given.</p>
+  <p>He went and stood at the door.</p>
+  <p>Inside, the old man said low, without lifting his head, <em>Sue. He&rsquo;s here. Don&rsquo;t look up. Keep working. Let him stand a minute.</em></p>
+  <p>They let him stand. The cane went in and out of the holes. The water dripped from the old woman&rsquo;s hands. After a while the old man said, louder, <em>I believe there&rsquo;s somebody at the door. Go see.</em></p>
+  <p><em>You go see,</em> she said.</p>
+  <p>So the old man got up from the table by stages, one hand on the chair frame, and came out onto the step, and got down on his knees on the sidewalk in front of Walt with his forehead nearly to the concrete. Then he took hold of Walt&rsquo;s knees with both hands and wept. Then he sat back on his heels and squinted up.</p>
+  <p><em>Which one are you?</em> He shaded his eyes. <em>My eyes are gone, I can&rsquo;t see a thing.</em> He looked a while longer and put his hand flat on his forehead. <em>Lord. It&rsquo;s Walt. It&rsquo;s been a long time since Walt came by this door.</em> He turned his head toward the shop. <em>Is there anything in the house?</em></p>
+  <p>The old woman stood in the doorway wiping her hands on her apron, looking embarrassed, as if she had been caught with nothing on the stove. <em>There is,</em> she said.</p>
+  <p><em>Don&rsquo;t mind whether it&rsquo;s good or bad,</em> the old man said, holding out his hands for the bowl. <em>Just do us the kindness.</em></p>
+  <p>Walt gave him the enamel bowl. It made no difference to him whether it was a spoonful of rice or a heel of bread or the water off a pot of beans. He would take it and thank them.</p>
+</section>
+
+<section>
+  <h2>IV. Slippery Dumplings</h2>
+  <p class="dateline">The same morning</p>
+  <p>The old man took the bowl inside to a hot plate at the back of the shop where a dented pot sat on the coil. He lifted the lid and ladled, then came back out and put the bowl in Walt&rsquo;s two hands.</p>
+  <p>It was chicken and slippery dumplings, the way they make it downstate, the broth gold with fat and black with pepper, the dumplings rolled thin and cut in diamonds and gone soft and slick in the pot, and the chicken pulled off the bone in long pieces.</p>
+  <p>The smell went up off the bowl and out along the block. It went in at the boarded windows and the curtained ones. It went down to the train station, where people waiting for the 10:40 to Philadelphia lifted their heads from their phones, and up the hill to the courthouse, and across to the old DuPont Building, where the security guard at the desk put down his coffee. In the kitchen of the hotel on Rodney Square a cook stopped with a sauté pan in the air. At St. Martin de Porres House the line for lunch, which had been forming since eleven, went silent along its whole length, and the girls in the pink shoes came out onto the step to see what it was. On the Brandywine, people walking their dogs said afterward that the dogs had all sat down at once and pointed their noses south.</p>
+  <p>Walt stood on the sidewalk with the bowl warm between his hands and thought: this man is weak, and old, and has nothing, and this is not a poor man&rsquo;s dinner. This is the dinner of somebody who can have anything in the world brought to him. Who is this?</p>
+  <p>He looked at the old man, really looked, and the old man looked back. Under the knotted hands and the gone teeth Walt saw a boy two desks away in a school in the hills, with a necktie and a cowlick.</p>
+  <p><em>Cos,</em> he said.</p>
+  <p>Hollis Cosgrove did not try to deny it.</p>
+  <p><em>You&rsquo;ve done a hard thing,</em> Walt said. <em>Do you know what you took? Mrs. Gaines on the next block would have given me a spoon of her lima beans this morning. Or Junior under the bridge, half his crackers. And then that would be theirs. It would be the thing they did today, that nobody could take off them. They could have stood up in front of God with it. You took that off them.</em></p>
+  <p><em>Walt,</em> Cos said, still on his knees on the sidewalk. <em>Is there anybody in this city poorer than me?</em></p>
+  <p><em>You have nineteen rooms,</em> Walt said. <em>You have a hospital with your name on it.</em></p>
+  <p><em>Had. Let me tell you.</em> Cos got up slowly, by stages, and the knots in his hands were real. <em>I did what I did, all my life, and before you were born my grandfather did it. And then in the last few years three men came to this town. Three. A credit-card man, a pharmaceutical man and a man with a fund. They came up fast and they came up together, and they are younger than my son. When those three walk into a room at the Hotel du Pont and say let&rsquo;s have a party, I get my coat and go home. My name came off the theater last year; theirs went up on the new wing. Their light comes over mine, Walt. Mine doesn&rsquo;t come over theirs. I have nineteen rooms and nobody in them. Who&rsquo;s poorer than that?</em></p>
+  <p>Walt looked at him a long time.</p>
+  <p><em>If that&rsquo;s so,</em> he said, <em>then don&rsquo;t trick me again.</em></p>
+  <p><em>But did it count?</em> Cos said. <em>What I did just now. Lying to you. Did it count for anything?</em></p>
+  <p><em>It counted, Cos.</em></p>
+  <p><em>Then I&rsquo;d better keep at it, hadn&rsquo;t I,</em> Cos said. <em>It&rsquo;s my job now.</em></p>
+  <p>He and Sue bowed to Walt on the sidewalk, and then they walked once all the way around him, slowly, keeping him on their right, the way you would walk around something in a church. And then they went up.</p>
+  <p>That is the part people on the block argue about. There are four of them who will swear to it, and one of them is Mrs. Gaines, who was at her window: the two old people rose off the sidewalk like the air had decided to carry them, up past the boarded windows and the gutters and the roofline, and went off over the rooftops toward the Brandywine, getting smaller and younger as they went. And from up there Cos shouted, three times, so loud that it came down on the whole city like weather:</p>
+  <p><em>Oh, the giving! The best gift there is, and it&rsquo;s set down safe in Walt&rsquo;s bowl!</em></p>
+  <p>When Walt looked back at the storefront there was nothing there but a lot full of last year&rsquo;s weeds and, in the middle of it, a chair frame with half a seat of cane.</p>
+</section>
+
+<section>
+  <h2>V. The Good Odour</h2>
+  <p class="dateline">St. Martin de Porres House &middot; noon</p>
+  <p>Doc was eighty-eight and still came at five to make the coffee, though now one of the young Workers drove him. At noon he was sitting on a stool by the urns with his cane between his knees, and he lifted his head and turned it toward the window before the smell had reached the room.</p>
+  <p><em>Listen,</em> he said. <em>That&rsquo;s Hollis Cosgrove. Up over the Brandywine, hollering.</em></p>
+  <p>Nobody else in the kitchen heard a thing. A girl in pink running shoes, the one who had brought the egg-salad sandwich with the crusts cut off, came and stood by his stool.</p>
+  <p><em>What&rsquo;s he hollering about?</em></p>
+  <p><em>He fed Walt,</em> Doc said. <em>He tricked him into it, and now he&rsquo;s flying around the sky bragging.</em></p>
+  <p><em>How did he know to feed Walt?</em> she said. She was close to tears. <em>We all tried.</em></p>
+  <p>Doc laughed, a dry small laugh. <em>Everybody wants to feed a man who eats like Walt eats. Lives on what he&rsquo;s handed. Keeps nobody but himself. Quiet. Watching every minute. Honey, the angels would trade places with that man if they could. A rich man would put on rags to feed him. One just did.</em></p>
+  <p>Then the smell came in through the window. The kitchen went still, and everybody turned toward it, the cooks and the girls and the men in the line, the way people turn toward music.</p>
+  <p>Doc closed his eyes and took a long breath of it, all the way down.</p>
+  <p><em>Thirty-four years I smelled things for that company,</em> he said. <em>There&rsquo;s nothing you can put in a bottle I can&rsquo;t tell you what&rsquo;s in it. Sandalwood. Musk. Rose. The ones they make in the lab and the ones they dig out of a tree. I can tell you what&rsquo;s in that bowl down the street, too. Chicken, celery, black pepper, lard in the dumplings.</em> He opened his eyes. <em>None of it gets higher than the ceiling. There&rsquo;s only one smell I know of that goes up all the way, and it&rsquo;s not in that bowl. It&rsquo;s on Walt.</em></p>
+  <p>He tapped his cane twice on the floor, the way he did when he was going to say something from St. Joseph&rsquo;s, from the years when the priest still read it to them in that old English.</p>
+  <div class="verse">
+    <p>Now thanks be to God, who always maketh us to triumph in Christ Jesus and manifesteth the odour of his knowledge by us in every place. For we are the good odour of Christ unto God, in them that are saved and in them that perish.</p>
+    <p>&mdash; 2 Corinthians 2:14&ndash;15, Douay-Rheims</p>
+  </div>
+  <p>Down the street Walt sat on the curb in front of the empty lot and ate the dumplings, every one, slowly, because they had been given. Then he went back to the house and stood at the end of the line until it was fed.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The next morning he went out again with the bowl washed. He went to Mrs. Gaines&rsquo;s door on the next block. She looked at him a while through the screen as if she were deciding something, then went back into her kitchen and came out with the pot she had cooked the night before.</p>
+  <p>She gave him four lima beans and a spoon of their juice. He ate them standing on her step, in the cold, with his coat open, and thanked her, and she watched him to the last bean.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">Mean is the scent that comes from Tagara and sandal-wood;--the perfume of those who possess virtue rises up to the gods as the highest.<cite>Dhammapada 56, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Elder Mahā Kassapa, foremost of the Buddha&rsquo;s disciples in ascetic practice, rises from seven days of meditative absorption and goes on his alms round in Rājagaha, meaning to accept food only from the poor, so that they may gain the merit of giving. Five hundred celestial nymphs wait on the road with alms; he refuses them, and when they persist he snaps his fingers and they flee. Sakka, king of the gods, then disguises himself and his wife Sujā as a decrepit old weaver and his wife spinning thread in a poor lane, and when the elder stops at their door Sakka fills his bowl with food whose fragrance fills the whole city. The elder recognizes him and rebukes him for robbing the poor of their chance. Sakka answers that no one is poorer than he, because three newly arisen gods outshine him, and asks whether his deceitful gift still earned merit. Told that it did, he circles the elder, rises into the air, and cries out three times in praise of the gift. The Buddha hears him and says that gods and humans alike love one who lives as Kassapa does. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-10.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mahakassapa">Mahā Kassapa</a> and <a href="https://en.wikipedia.org/wiki/%C5%9Aakra_(Buddhism)">Sakka</a>.</p>
+    <h3>Wilmington, Delaware, 1968&ndash;2019</h3>
+    <p>Wilmington grew up around the du Pont family&rsquo;s black-powder mills on the Brandywine, founded in 1802 and now the <a href="https://en.wikipedia.org/wiki/Hagley_Museum_and_Library">Hagley Museum</a>. The company built its research laboratory, the <a href="https://en.wikipedia.org/wiki/DuPont_Experimental_Station">Experimental Station</a>, on the same creek; nylon, Kevlar and Tyvek came out of it. In August 2017 <a href="https://en.wikipedia.org/wiki/DuPont">DuPont</a> merged with Dow Chemical as DowDuPont, and in 2019 the combined company was split into three: Dow, Corteva and a new DuPont. After the assassination of Martin Luther King Jr. in April 1968, the <a href="https://en.wikipedia.org/wiki/Wilmington_riot_of_1968">Wilmington riot</a> was followed by a National Guard occupation that lasted the rest of the year, reportedly the longest military occupation of an American city since the Civil War. The city&rsquo;s historic Black Catholic parish is <a href="https://en.wikipedia.org/wiki/St._Joseph%27s_Catholic_Church_(Wilmington,_Delaware)">St. Joseph&rsquo;s</a> on French Street. St. Martin de Porres House, the Cosgroves, Walt, Doc and Mrs. Gaines are invented.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Catholic_Worker_Movement">Catholic Worker movement</a>, founded by Dorothy Day and Peter Maurin in New York in 1933, runs houses of hospitality and farms where volunteers live in voluntary poverty among the people they serve; its paper, <a href="https://en.wikipedia.org/wiki/The_Catholic_Worker">The Catholic Worker</a>, was first sold for a penny in Union Square. Many Workers have gone to prison for nonviolent protest at weapons sites. <a href="https://www.tastingtable.com/1700949/delaware-slippery-dumplings-food">Chicken and slippery dumplings</a>, flat rolled dumplings cut in diamonds and cooked in the broth, is a staple of Delaware kitchens, from the poultry country downstate to church suppers in the city. Doc&rsquo;s scripture is the Douay-Rheims Bible in Bishop Challoner&rsquo;s revision, the English Bible of American Catholics for most of two centuries.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the alms given to the Elder Mahā Kassapa from the Dhammapada commentary (verse 56). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-10.htm">The original</a>. Scripture from the Douay-Rheims Bible (Challoner revision). Written by Claude Opus 5.5.
+  <div class="pager"><a href="yesterdays-bread.html">&larr; Yesterday’s Bread</a><a href="index.html">All stories</a><a href="pond-lilies.html">Pond Lilies &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, threads = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(th, initial) {
+    var side = Math.random() < 0.5 ? Math.random() * 0.22 : 0.78 + Math.random() * 0.22;
+    th.x = W * side; th.y = H + 20 + (initial ? -Math.random() * H * 1.2 : 0);
+    th.v = 0.22 + Math.random() * 0.25; th.amp = 14 + Math.random() * 26;
+    th.k = 0.006 + Math.random() * 0.006; th.ph = Math.random() * 6.28;
+    th.len = 120 + Math.random() * 160; th.a = 0.10 + Math.random() * 0.10;
+    return th;
+  }
+  function make() {
+    var n = Math.max(5, Math.min(12, Math.round(W / 120)));
+    threads = []; for (var i = 0; i < n; i++) threads.push(spawn({}, true));
+  }
+  function draw(time) {
+    ctx.clearRect(0, 0, W, H);
+    var t = time / 1000;
+    for (var i = 0; i < threads.length; i++) {
+      var th = threads[i];
+      if (!reduce) { th.y -= th.v; if (th.y + th.len < -40) spawn(th, false); }
+      ctx.beginPath();
+      for (var s = 0; s <= th.len; s += 4) {
+        var y = th.y + s;
+        var x = th.x + Math.sin(y * th.k + th.ph + t * 0.6) * th.amp * (0.4 + s / th.len);
+        if (s === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      var g = ctx.createLinearGradient(0, th.y, 0, th.y + th.len);
+      g.addColorStop(0, 'rgba(184,134,42,0)');
+      g.addColorStop(0.35, 'rgba(184,134,42,' + th.a + ')');
+      g.addColorStop(1, 'rgba(184,134,42,0)');
+      ctx.strokeStyle = g; ctx.lineWidth = 1.2; ctx.lineCap = 'round'; ctx.stroke();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>

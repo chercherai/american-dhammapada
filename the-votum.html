@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Votum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on drought-pale paper, light theme; in the side margins small cottonwood leaves hang still, and now and then a wave runs through them and they turn their pale undersides and settle; datelined sections. */
+  --ground: #ede6d3;
+  --ground-2: #e2d9c1;
+  --ink: #2c2a22;
+  --ink-dim: #6c6656;
+  --leaf: #5f6b2e;
+  --silver: #b9b48f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, #f4efe0 0%, var(--ground) 65%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(44,42,34,.2); }
+.series a:hover { color: var(--leaf); }
+a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--leaf); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(95,107,46,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--leaf); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--leaf); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(226,217,193,.8); border: 1px solid rgba(44,42,34,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--leaf); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(44,42,34,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--leaf); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--leaf); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(44,42,34,.15); border-bottom: 1px solid rgba(44,42,34,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--leaf); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--leaf); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--leaf); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(226,217,193,.8); border-left: 2px solid var(--leaf); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 19.3 &middot; Ekud&#257;na</span></nav>
+<header>
+  <h1>The Votum</h1>
+  <div class="epigraph">Und der Friede Gottes, welcher h&ouml;her ist denn alle Vernunft, bewahre eure Herzen und Sinne in Christo Jesu!<br>&mdash; Philipper 4:7</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how they tell it,</span> out at Neudorf.</p>
+
+<section>
+  <h2>I. The Grove</h2>
+  <p class="dateline">Neudorf, Allen County, Indiana &middot; summer 1988</p>
+  <p>Ewald Kruse was eighty-one the summer it did not rain. He had farmed the ground on the creek east of Fort Wayne since 1931, and since Lorraine died he had lived alone in the farmhouse while his son Norbert farmed it, and at the back of the farm, where the creek bent, stood the grove. It was oaks on the high side and cottonwoods along the water, with eleven rows of plank benches set on cinder blocks under the oaks and a wooden pulpit at the front that Ewald&rsquo;s father had built in 1912. Every September for seventy-six years St. Paul&rsquo;s Lutheran had held its Missionfest there: preaching in the morning and preaching in the afternoon, a guest pastor for each, and in between a dinner on long tables with the pop stand run by the youth.</p>
+  <p>Three years before, Ewald had a stroke in the machine shed. When he came home from the hospital he could walk with a cane and use his right hand a little, and he could not talk. Julie Bleeke, the speech therapist from the hospital in Fort Wayne, came out twice a week for three years with her flash cards and her picture books. She got him to <em>ja</em> and <em>nein</em>, which came back in German, and to the name of his granddaughter, Kristin. That was nearly all.</p>
+  <p>The one whole sentence he had left was the votum, the words Pastor Wehrmeyer had said from the pulpit at St. Paul&rsquo;s at the end of every sermon of Ewald&rsquo;s boyhood, when the services were still in German, before he said the Amen. Ewald had heard it, first in German and later in English, on some four thousand Sundays. It came out of him whole, in his old voice, every word in place, in the German of 1915. Julie said that happened sometimes. The things a person had said or sung ten thousand times lived in some other part of the brain, and the stroke had not found them.</p>
+  <p>On Sunday evenings, from the time the ground thawed until the corn was in, Ewald walked out to the grove alone with his cane. There was an old school bell on a post by the pulpit, from the parish school that closed in 1962, and he rang it himself, three times. Then he went up and sat in the pulpit chair and said his one sentence to the empty benches.</p>
+  <p>And the grove answered him. People on the Neudorf road heard it from their cars. Every leaf of the cottonwoods along the creek went at once, with no wind, a roar like the gym at the end of a sectional final, like the whole county on its feet, and it went on about as long as it takes to say the Lord&rsquo;s Prayer, and stopped. High school boys came out to hear it on dares and sat in their pickups on the road with the windows down and did not dare each other again. Norbert had heard it a hundred times. He said it was the trees. Pastor Albers at St. Paul&rsquo;s said it was not a thing he would preach about but he did not doubt it. Ewald, who could not say what he thought, said nothing.</p>
+</section>
+
+<section>
+  <h2>II. The Two Preachers</h2>
+  <p class="dateline">Missionfest &middot; the second Sunday in September</p>
+  <p>That year the Missionfest committee aimed high, and both guests said yes.</p>
+  <p>For the morning there was Dr. Harold Brandt from the seminary in Fort Wayne, who taught Old Testament and read Hebrew the way other men read the <em>News-Sentinel</em>, and who had written a commentary on Isaiah that pastors kept on the shelf behind their desks. He brought most of his seminarians in a borrowed school bus. For the afternoon there was Pastor Gene Rademacher of Trinity on the south side of the city, the biggest Lutheran congregation in Fort Wayne, whose sermons went out on the radio every Sunday morning, a big warm man with a voice you could hear at the back of a barn. Two charter buses of his people came out behind him, and a line of cars. Between the two preachers there were more people in the grove than anybody at St. Paul&rsquo;s could remember, eight or nine hundred, in folding chairs set out behind the benches and on lawn chairs they had brought from home.</p>
+  <p>It was ninety-four degrees by ten in the morning. The corn on both sides of the road stood up white and burned, half of it not worth the combine, and the creek was down to a string of pools. There was no wind. In the grove the cottonwood leaves hung straight down on their stems, dry, and some of them had already gone yellow and dropped in August. The funeral home in New Haven had sent out cardboard fans on sticks for every bench, with the Good Shepherd printed on one side and the funeral home on the other.</p>
+  <p>Ewald was in the grove at seven, in his brown suit, waiting. When Dr. Brandt came walking down from the road with Norbert he went to meet him on his cane as fast as he could go, and took the professor&rsquo;s hand in both of his, and would not let it go. His whole face worked. He could not say <em>welcome</em>. He could not say <em>I have waited all year for this</em>. He took Dr. Brandt by the elbow and led him to the pulpit and laid the professor&rsquo;s hand on the rail of it, and patted the hand, and stood back.</p>
+  <p>Pastor Rademacher, who had come early to see the place, looked around at the eleven rows of empty planks.</p>
+  <p><em>So who comes out here on an ordinary Sunday night to hear him?</em> he asked Norbert, kindly.</p>
+  <p><em>Dad would tell you the grove does,</em> Norbert said. <em>If he could tell you. You&rsquo;ll hear it today. When the preaching&rsquo;s done, these trees clap. You&rsquo;ll see.</em></p>
+  <p>Rademacher laughed, and then looked at Norbert&rsquo;s face and stopped laughing.</p>
+</section>
+
+<section>
+  <h2>III. The Fan</h2>
+  <p class="dateline">The grove &middot; the same day</p>
+  <p>Dr. Brandt preached for fifty minutes in the morning on Isaiah 55, <em>as the rain cometh down</em>, which in that summer made people look up. He went through it in the Hebrew, a word at a time, and opened it the way you open a seed catalog, and the seminarians wrote in their notebooks on their knees. It was a very good sermon. At the end of it he lifted his hand and said, <em>And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus,</em> and said <em>Amen</em>.</p>
+  <p>The grove was silent. Eight hundred people sat with their cardboard fans going. The cottonwood leaves hung on their stems.</p>
+  <p>At dinner there was fried chicken and noodles and sliced tomatoes, all that the gardens had made in a dry year, and nine kinds of Jell-O salad on a separate table, and sugar cream pie. In the afternoon Pastor Rademacher preached on the Great Commission for forty-five minutes. He told about a mission school in New Guinea, and a woman in Papua who had walked four days to be baptized, and by the end people at the back of the grove were wiping their eyes. It was a very good sermon too. He lifted his hand and said the votum, in the same English, and the Amen.</p>
+  <p>Nothing. A sparrow on the oak above the pulpit. Somebody&rsquo;s baby. A car going by on the road.</p>
+  <p>Rademacher came down from the pulpit smiling and stopped by Norbert on the front bench. <em>Well,</em> he said, quietly, <em>where&rsquo;s my applause?</em> He meant it as a joke, mostly.</p>
+  <p><em>I don&rsquo;t know,</em> Norbert said. He was red in the face. <em>Every other Sunday there&rsquo;s been a noise like you never heard. I don&rsquo;t know what&rsquo;s the matter today.</em></p>
+  <p>Dr. Brandt had been watching the old man. <em>Let him say it,</em> he said.</p>
+  <p>So Norbert got his father up out of the front bench, and Ewald went up the two steps to the pulpit chair on his cane and sat down in it, facing all those people. He was in no hurry. He took up one of the cardboard fans from the rail and fanned himself twice with the Good Shepherd, slowly, because it was hot, and laid it across his knees. Then he said it, in the voice he had had at fifteen, every word in its place:</p>
+  <p><em>Und der Friede Gottes, welcher h&ouml;her ist denn alle Vernunft, bewahre eure Herzen und Sinne in Christo Jesu.</em></p>
+  <p>The cottonwoods went.</p>
+  <p>Everybody who was there tells it the same. There was no wind; the paper plates on the dinner tables did not lift, and the fans did not stir in people&rsquo;s laps. Every leaf on every cottonwood along the creek turned at once, and the sound came down over the grove like the floor of the world had split open under the benches. People took hold of the planks with both hands. Rademacher&rsquo;s pocket hymnal slid off his knee. A seminarian stood straight up and did not know he had stood. It went on about as long as it takes to say the Lord&rsquo;s Prayer. Then it stopped. The leaves hung still on their stems again, and a few yellow ones came down slowly through the air into the aisle.</p>
+  <p>Ewald fanned himself once more and got up and went back to his bench.</p>
+</section>
+
+<section>
+  <h2>IV. The Pie Table</h2>
+  <p class="dateline">The grove &middot; late afternoon</p>
+  <p>Afterward, at the tables, Trinity&rsquo;s people did not know what to make of it, and some of them were sore. Their pastor had preached his heart out. The professor had preached for fifty minutes out of the Hebrew. And an old farmer said one sentence, in German, that every one of them had heard their own pastor say ten thousand times, and the trees went off like the sectional. One man from the radio committee said those trees played favorites. Another said, laughing a little, that they were Missouri Synod trees and only understood German. People laughed at that, though not all of them.</p>
+  <p>Dr. Brandt did not laugh. He went looking for somebody who could tell him, and Norbert said to ask Julie, who knew his father better than any of them now; she had come out to the house twice a week for three years, and she had come today on her own time. Julie Bleeke was thirty-four and had grown up on a hog farm near Hoagland and still kept her hair the way she had at her confirmation. She was standing at the pie table cutting sugar cream pie into eighths with a cake server.</p>
+  <p><em>I understand he can&rsquo;t say anything else,</em> the professor said.</p>
+  <p><em>Hardly a thing,</em> she said. <em>Ja and nein. His granddaughter&rsquo;s name. That&rsquo;s three years&rsquo; work.</em> She lifted a piece onto a paper plate. <em>And that.</em></p>
+  <p>He waited.</p>
+  <p><em>Dr. Brandt, you know a great deal more Bible than I do,</em> she said. <em>Everybody here knows that. You know it in Hebrew. All Ewald has got left is one verse, and half the time he can&rsquo;t find the words for his own coffee. But every Sunday night of his life he&rsquo;s gone out there and said it like it was so. He keeps it. He doesn&rsquo;t have anything else to keep, so he keeps that, and I&rsquo;ve watched him, and I believe he lives in it, the peace. I think he knows what it means better than anybody here. I think the grove knows he does.</em> She handed him the plate. <em>Isn&rsquo;t there something in Matthew about that? We had it for memory work.</em></p>
+  <p>The professor knew which verse she meant. Julie had it in the King James, the way the children at St. Paul&rsquo;s had all learned their memory work then, and she said it for him while he held the plate:</p>
+  <div class="verse">
+    <p>But when ye pray, use not vain repetitions, as the heathen do: for they think that they shall be heard for their much speaking.</p>
+    <p>&mdash; Matthew 6:7</p>
+  </div>
+  <p>Dr. Brandt stood there a while. Then he said it himself in Luther&rsquo;s German, half under his breath, the way he had learned it from his own grandmother in Seymour sixty years before: <em>sollt ihr nicht viel plappern wie die Heiden.</em> You shall not babble much. He said he had never once in his life noticed that it said that.</p>
+  <p>He ate the pie standing up.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The buses left at five, and the cars after them. The seminarians stacked the folding chairs on the hay wagon. By seven the grove was empty and the light came in long and low and yellow under the oaks, through the dust that was over everything that year.</p>
+  <p>Dr. Brandt had driven a mile toward Fort Wayne and turned his car around. He parked on the Neudorf road and walked back in across the stubble, and stood at the edge of the oaks where he would not be seen.</p>
+  <p>Ewald was alone in the grove, going down the rows of benches with his cane in one hand and a feed sack in the other, picking up paper plates and the cardboard fans. He worked his way along the front row to the pulpit chair. There was one fan still lying on the seat where he had left it, with the Good Shepherd on it, and a yellow cottonwood leaf on the Good Shepherd. He stood looking at it for a while. Then he picked up the leaf and turned it over in his fingers, the dark side and the pale side, and put it in his suit pocket, and put the fan in the sack.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">A man is not a supporter of the law because he talks much; even if a man has learnt little, but sees the law bodily, he is a supporter of the law, a man who never neglects the law.<cite>Dhammapada 259, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Elder Ekud&#257;na lives alone in a forest grove and knows only one verse, an &ldquo;exalted utterance&rdquo; about the heedful sage who has no grief. On Observance Days he sounds the call to hear the Dhamma himself and recites it, and the deities of the grove shout their applause with a noise like the earth splitting open. Two learned monks who know the whole canon come with five hundred followers each; he welcomes them gladly and asks them to teach. One recites and one expounds, and the grove stays silent. Then the old elder takes the fan, sits in the preacher&rsquo;s seat, and says his one verse, and the deities roar. The offended monks complain to the Buddha that the deities play favorites, and the Buddha answers that one is a bearer of the Dhamma by seeing it, not by saying much. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-03.htm">the full commentary story</a>.</p>
+    <h3>Allen County, Indiana, 1988</h3>
+    <p>German Lutheran immigrants filled the country around Fort Wayne in the nineteenth century. A Fort Wayne pastor began training men for their ministry in the 1840s, and the seminary formally organized there in 1846 was handed over to the new Missouri Synod soon after its founding in 1847; <a href="https://en.wikipedia.org/wiki/Concordia_Theological_Seminary">Concordia Theological Seminary</a> moved to St. Louis in 1861 and later to Springfield, Illinois, and came back to Fort Wayne in 1976. Rural Lutheran congregations across the Midwest kept up annual <a href="https://mnprairieroots.com/tag/mission-festival/">mission festivals</a>, outdoor services in a farmer&rsquo;s grove with plank benches, a guest preacher, a potluck and a pop stand. Many Lutheran pastors still end the sermon with Philippians 4:7, a blessing <a href="https://blog.nph.net/march-23-the-promise-of-peace/">called the votum</a>. A stroke that takes away most speech can leave behind words a person has said or sung thousands of times; the <a href="https://www.mpg.de/4431866/aphasia_singing">Max Planck Society</a> notes that people with aphasia can often still produce song lyrics and formulaic phrases.</p>
+    <p>The summer of 1988 brought drought and heat across the Corn Belt. In Indiana, according to the <a href="https://www.usgs.gov/publications/description-and-effects-1988-drought-ground-water-levels-streamflow-and-reservoir">U.S. Geological Survey</a>, statewide rainfall was nearly eight inches below normal by the end of September, groundwater fell to record lows in many wells, and crop yields ran from half to about four-fifths of the year before.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Ekud&#257;na from the Dhammapada commentary (verse 259). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-03.htm">The original</a>. Scripture from the Luther Bible (1912 revision) and the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="neats-tongue.html">&larr; Neat’s Tongue</a><a href="index.html">All stories</a><a href="seven-oclock.html">Seven O&#x27;Clock &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, leaves = [], wave = -1, nextWave = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    leaves = [];
+    var col = 576, side = Math.max(0, (W - col) / 2);
+    var narrow = side < 60;
+    var n = Math.round(Math.max(24, Math.min(90, H / 9)));
+    for (var i = 0; i < n; i++) {
+      var left = i % 2 === 0, x;
+      if (narrow) x = left ? Math.random() * 26 : W - Math.random() * 26;
+      else x = left ? Math.random() * (side - 20) : W - Math.random() * (side - 20);
+      leaves.push({ x: x, y: Math.random() * H, s: 7 + Math.random() * 7, rot: -0.4 + Math.random() * 0.8, flip: 0, ph: Math.random() * 6.28 });
+    }
+  }
+  function leaf(l) {
+    var turn = Math.cos(l.flip * Math.PI);
+    var w = l.s * 0.9 * Math.abs(turn) + 0.6, h = l.s;
+    var pale = l.flip > 0.5 ? 1 : 0;
+    ctx.save(); ctx.translate(l.x, l.y); ctx.rotate(l.rot);
+    ctx.fillStyle = pale ? 'rgba(185,180,143,0.55)' : 'rgba(95,107,46,0.28)';
+    ctx.beginPath();
+    ctx.moveTo(0, -h); ctx.quadraticCurveTo(w, -h * 0.2, 0, h * 0.7); ctx.quadraticCurveTo(-w, -h * 0.2, 0, -h);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(80,74,52,0.25)'; ctx.lineWidth = 0.7;
+    ctx.beginPath(); ctx.moveTo(0, -h - 5); ctx.lineTo(0, -h); ctx.stroke();
+    ctx.restore();
+  }
+  function draw(now) {
+    now = now || 0;
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      if (wave < 0 && now > nextWave) wave = 0;
+      if (wave >= 0) { wave += 1.2; if (wave > H + 200) { wave = -1; nextWave = now + 9000 + Math.random() * 9000; } }
+    }
+    for (var i = 0; i < leaves.length; i++) {
+      var l = leaves[i];
+      var target = 0;
+      if (wave >= 0) { var d = wave - l.y; if (d > 0 && d < 160) target = Math.sin(d / 160 * Math.PI); }
+      l.flip += (target - l.flip) * 0.12;
+      if (!reduce) l.rot += Math.sin(now * 0.0004 + l.ph) * 0.0004;
+      leaf(l);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); nextWave = 3000; draw(0);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>
