@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Peck a Head</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column in a storehouse at night; in the margin, meal falls into a heap and a straight edge strikes it level. */
+  --ground: #16120e;
+  --ground-2: #221b14;
+  --paper: #ebe3d2;
+  --paper-dim: #a99d88;
+  --accent: #d39a4a;
+  --glow: #e9c77e;
+  --snow: #d6dadb;
+  --bark: #5a4636;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 85% 110%, #2c2116 0%, var(--ground) 58%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,227,210,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(211,154,74,.22); }
+.epigraph { border-left: 1px solid rgba(211,154,74,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(34,27,20,.75); border: 1px solid rgba(235,227,210,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,227,210,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(235,227,210,.1); border-bottom: 1px solid rgba(235,227,210,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(34,27,20,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 18.8 &middot; Tissa the young monk</span></nav>
+<header>
+  <h1>A Peck a Head</h1>
+  <div class="epigraph">When we ask God to give us, the meaning is, that the thing asked is simply and freely the gift of God, whatever be the quarter from which it comes to us.<br>&mdash; Calvin, <i>Institutes</i> III.xx.44, tr. Henry Beveridge (1845)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Voici comme je l&rsquo;ai ouï dire,</span> at Manakin Town.</p>
+
+<section>
+  <h2>I. The Meal</h2>
+  <p class="dateline">Manakin Town, on the James River, Virginia · December 1700</p>
+  <p>They had been promised land on the Nansemond River, near the sea, and they had been put down instead on the old Monacan town, twenty-odd miles above the falls of the James, at the last edge of the English plantations. Beyond them there was nothing but woods, and somewhere in the woods the Monacan, who had gone away from these fields and might or might not come back. The sloop that carried most of their goods up from Jamestown had gone down in the river with their blankets in it. By December there were more than a hundred French in the huts on the old fields, and at one time or another most of them had been sick.</p>
+  <p>They lived on gifts. The Governor had sent a brief through the colony commending the poor distressed French Protestants to all charitable persons, and the parishes had answered, some generously and some not. Colonel Byrd’s mill at Falling Creek ground Indian corn for them and sent it up the river road in sacks. A captain below the falls sent beeves, and corn from a widow’s mill. A planter in Henrico sent a cask of salt pork with his name burned into the head. Twenty barrels of corn came from the Governor himself. Some weeks the sacks did not come at all, because there was no one to drive the carts, or the creeks were up, and then the old fields were very quiet.</p>
+  <p>The meal was kept in the common storehouse, which was the largest of the huts, and an elder of the consistory named Abraham Chabanne measured it out. He was seventy-one. Before he was a refugee he had been for thirty years the steward of a Protestant house in Poitou, the maître d’hôtel, the man who kept the keys and the household book and knew to the pound what every mouth in the place had eaten. When the family he served had gone to Mass in 1685 to keep their lands, he had put on his coat and walked out of the gate with one book and a change of linen. Now he sat at a plank table in the storehouse with a peck measure, a sack of Indian meal and a ledger he had ruled himself, and wrote in it, by each family’s name, what they had been given and from whom.</p>
+  <p>On Sundays, when the minister was below the falls, prayers were read by a young man named Daniel Rigaud.</p>
+  <p>He was twenty-two. He read well, in a good voice, and he had some Latin and could lead a psalm. He had been made reader because nobody else wanted it and because he wanted it very much, and in the huts he was called, not always kindly, the little minister.</p>
+  <p>He found fault with the gifts. Everyone noticed it, after a while.</p>
+  <p>When the meal came up from Falling Creek coarse, he said the miller had ground it for hogs. When it came up fine, he said the English had sifted out the best for themselves. When a sack came half full, he said, <em>Is this what they think a Christian is worth? A peck a head, as if we were cattle?</em> And when a great load came at once, four carts in a day after the creeks went down, he stood in the door of the storehouse and said, <em>They have emptied out the bottom of their barns, what their own people would not eat, so as to be thanked for it in their churches. Who will carry all this? It will be wet before it is eaten.</em> He said the salt pork was rusty. He said the beef was all neck. He said that the pone the women baked in the ashes was a thing a French dog would turn its nose from, and when it was given him hot he said it was raw in the middle, and when it was given him cold he said it was a stone.</p>
+  <p>And when anyone would listen he spoke of his own people.</p>
+  <p><em>In my father’s house at Niort,</em> he said, <em>nobody ever went away hungry. The preachers of the Désert came through our door from all four quarters of the kingdom, in the worst years, with the dragoons on the roads, and my father kept a table for them all as if it were an inn. White bread. Wine of Saintonge. My mother would have been ashamed to give a guest what we are given here.</em></p>
+  <p>The women at the fire looked at one another and said nothing. They had all eaten the Falling Creek meal and been glad of it. Some of them had watched their children eat nothing else for a month. But he was the reader, and he had Latin.</p>
+</section>
+<section>
+  <h2>II. The Carpenters</h2>
+  <p class="dateline">January 1701</p>
+  <p>It was the young men who began to wonder about him, and two of them, Isaac Faure and a boy named Jean Sabatier, went to the elders about it.</p>
+  <p><em>He says his father kept a table for all the preachers in Poitou,</em> said Isaac. <em>He says it every week. Has anybody here ever heard of such a house at Niort?</em></p>
+  <p>Nobody had. They were from everywhere, from Languedoc and Dauphiné and the Saintonge, from the Vivarais and from Paris; there were Swiss among them, and Flemings, and a few Germans. Nobody was from Niort.</p>
+  <p>So the elders asked Daniel himself, at the storehouse table, as if in passing, where his people were.</p>
+  <p><em>At Niort,</em> he said. <em>Behind the market hall. Anyone there would show you the house.</em></p>
+  <p><em>And how did you come out of France?</em></p>
+  <p><em>With some others. On foot to Geneva.</em> He looked at the ledger in front of Chabanne. <em>It was a hard road. I don’t speak of it.</em></p>
+  <p>There was a family of joiners who had come over on the same ship as Daniel, the Vidal brothers, from Saint-Jean-d’Angély, and they had not come up to the old fields at all. They had gone to work for wages on a plantation below the falls, building a tobacco house for an English planter, because a joiner could get paid in Virginia and nobody was paying anybody at Manakin Town. It was said that they had walked out of France together with Daniel.</p>
+  <p>Isaac and Jean went down to them on foot. It took them two days on the river road, over the creeks on logs, and they slept the night at Falling Creek in the mill, where the miller’s people gave them hominy and a place by the stones. On the second afternoon they found the Vidals on the roof frame of the tobacco house, and the elder Vidal came down the ladder with his adze in his hand and listened to the question with his head on one side.</p>
+  <p><em>Daniel?</em> he said. <em>Daniel Rigaud, of Niort?</em> He began to laugh, and then he called up to his brothers, and they began to laugh too.</p>
+  <p><em>His father is the porter at the gate of the Hôtel de Bessac,</em> he said, <em>behind the market hall. He has a lodge the size of this ladder, with a bench in it and a brazier. He opens the gate when the carriage comes and shuts it when the carriage goes. That’s the house he means. As for the preachers,</em> he said, and stopped laughing, <em>maybe. A porter’s lodge can hide a man for a night. I wouldn’t know.</em></p>
+  <p><em>Did he walk out with you?</em></p>
+  <p><em>He carried our glue pot from Saint-Jean to Geneva. He was fourteen. We had a company of nine, all carpenters, and he begged to come because he was afraid of the dragoons, and we let him. He was a good boy on the road.</em> He looked up at his brothers on the frame. <em>Never said a word about any table then. He was glad of anything.</em></p>
+  <p>The two young men went back up the river road. On the second night, sitting in the mill at Falling Creek with the stones still and the sacks for Manakin Town stacked by the door, Jean Sabatier said, <em>I don’t like doing this.</em></p>
+  <p><em>Neither do I,</em> said Isaac.</p>
+  <p>They told the elders all of it, in the storehouse, with the door shut. <em>He talks for nothing,</em> said Isaac at the end. <em>There’s no house. There was never any wine of Saintonge. He chatters, that’s all, and we have all been listening to him.</em></p>
+  <p>The elders sat a while. Then one of them said what they were all thinking, which was that it was a matter for Abraham Chabanne.</p>
+</section>
+<section>
+  <h2>III. The Steward</h2>
+  <p class="dateline">That night</p>
+  <p>The old man was sitting on a sack by the storehouse fire with his ledger on his knees. He had heard all of it already, because he had been sitting at the table the whole time with his back to them and his pen in his hand.</p>
+  <p><em>It isn’t the first time,</em> he said.</p>
+  <p><em>He has done this before?</em></p>
+  <p><em>Not this boy. The same boy.</em> He shut the ledger. <em>I have known that boy in three houses and on one ship. He is always clever, and he always reads well, and he always finds the soup too hot. I knew him first in La Rochelle, when I was younger than you, Isaac. Do you want to hear about him?</em></p>
+  <p>They did. They pulled the sacks around. Somebody put another stick on the fire. And the old steward told it to them the way he told the household book, in order, leaving nothing out.</p>
+</section>
+<section>
+  <h2>IV. The Letter</h2>
+  <p class="dateline">La Rochelle and the Saintonge, in the old days</p>
+  <p>There was a merchant in La Rochelle, he said, before the siege was forgotten and before the Revocation, a shipowner of the Religion named Monsieur Élie Bonnaud, and I was a boy in his kitchen. On the same day his wife gave birth to a son, a servant of the house gave birth to one too. The servant called hers Valentin. The two boys grew up in the same house, the one upstairs and the other down.</p>
+  <p>When the young master was sent to his letters, Valentin carried his satchel and his slate to the master’s house and back, and sat on the stair outside the room while the young master was taught. He learned to write on the stair, by listening, with a stick in the dust. He learned it better than the young master did. In the end Monsieur Bonnaud took him into the counting house to copy letters, and then made him his own secretary, because he had the best hand in La Rochelle, and because he was handsome and well spoken, and the merchants liked to deal with him.</p>
+  <p>And Valentin thought to himself, said Chabanne: I will not always be kept at this. One blot, one wrong word, and I’ll be beaten or put out in the street, and fed on what servants are fed. Monsieur has a friend, a salt merchant at Marennes, out among the marshes, who has never seen Monsieur’s son. Why shouldn’t I go to him with a letter from Monsieur, and be Monsieur’s son, and marry the salt merchant’s daughter, and live like a gentleman?</p>
+  <p>So he wrote the letter in his master’s name. <em>The bearer is my son. It is fitting that our houses be joined. I would have you give him your daughter, and keep the young people by you for the present, and I will come to you as soon as I may.</em> He sealed it with Monsieur Bonnaud’s own seal, whose drawer he had the key to, and he took a purse of his master’s money and a good coat and a bottle of orange-flower water, and he rode out to Marennes.</p>
+  <p>The salt merchant read the letter and said it gave him new life. Within the month Valentin was married to his daughter Suzanne, and set up in a house on the square with a maid and a horse.</p>
+  <p>And from the first day, said the old steward, he found fault with everything they brought him.</p>
+  <p><em>Provincial,</em> he said. The fish was provincial, and the bread, and the way his wife’s mother dressed her hair, and the scent the women wore to church. <em>You people,</em> he said at table, <em>have no idea how anything is done.</em></p>
+  <p>In La Rochelle Monsieur Bonnaud missed his secretary and sent men to look for him, and in time they found him at Marennes and came back without his ever knowing them. Monsieur heard them out. <em>This won’t do,</em> he said. <em>I’ll go myself and bring him back.</em> And word went out along the coast that the great Monsieur Bonnaud of La Rochelle was riding out to the salt country with his household.</p>
+  <p>I rode with him, said Chabanne. I was nineteen, and I carried the bags.</p>
+  <p>Now Valentin heard the news and sat down to think. He could not run, because if he ran he could never come back. So he decided to go and meet his master on the road and win him over by serving him, as he had served him all his life. And first he made his ground ready. For two weeks, at every table in Marennes, he talked about the decay of respect for fathers in the provinces. <em>Here,</em> he said, <em>I see sons sit down at their father’s table and eat with him, as if they were his equals. In La Rochelle a son stands behind his father’s chair. He pours his wine. He brings the basin and the towel. He does not sit until he is told. That is how I was raised.</em> He talked about it until the whole town knew how a son of La Rochelle served his father. Then he said to his father-in-law, <em>I hear my father is coming to see you. Make ready for him. I will go out and meet him on the road with a present.</em></p>
+  <p>He met us a day out, said the old steward, with a cart behind him and a fine horse for a present, and he bowed to the ground. Monsieur Bonnaud took the horse very kindly. At noon we stopped, and Monsieur went aside into the trees to relieve himself, and Valentin sent the rest of us back and took the ewer of water and the towel and went after him himself, as a servant would. I saw it, because I was holding the horses. He went down on his knees in the leaves at his master’s feet. <em>Monsieur, I will pay you anything you name. Only don’t expose me.</em></p>
+  <p><em>Fear nothing from me,</em> said Monsieur Bonnaud. He was pleased that the boy had brought the water.</p>
+  <p>So we rode into Marennes, and there was a great dinner, and Valentin stood behind his master’s chair all evening and poured his wine and brought the basin, and the whole town nodded at one another. The salt merchant said, <em>Monsieur, on the strength of your letter I gave your son my daughter.</em> And Monsieur Bonnaud answered him about his son so graciously that the old man wept into his napkin.</p>
+  <p>But from that day on, said Chabanne, Monsieur could not bear to look at him.</p>
+  <p>Before we left he sent for the daughter, Suzanne, and asked her to comb out his hair for him, as a daughter would, because his own hands were stiff. While she combed it he asked her how she did, and whether her husband was a reasonable man, and whether they got on.</p>
+  <p><em>He has one fault, Monsieur,</em> she said. <em>He finds fault with his food.</em></p>
+  <p><em>He always did,</em> said Monsieur Bonnaud. <em>But I will tell you how to stop his mouth.</em> And he taught her a few words, and made her say them over until she had them by heart, and told her to say them to her husband the next time he complained at table. Then he gave her a ring off his own hand, and the next morning we rode home to La Rochelle. Valentin rode a good way out with us and gave Monsieur more presents, and bowed in the road until we were out of sight.</p>
+  <p>After we were gone, said the old man, he grew prouder than ever, because he thought the danger was past. And one evening Suzanne had a fine dinner made for him, and served him herself with the spoon, and at the first mouthful he began.</p>
+  <p>She put down the spoon, and she said it to him the way she had been taught.</p>
+  <p><em>When a man has gone into another country and talked very big, the one he left behind may come one day and spoil it all. Eat your dinner, Valentin.</em></p>
+  <p>Chabanne stopped there.</p>
+  <p><em>What did he do?</em> said Jean Sabatier.</p>
+  <p><em>He ate his dinner,</em> said the old man. <em>He knew then who had taught her. He never said another word about a dish in that house as long as he lived. I saw him once, years after, at the fair at Saint-Jean. He had grown fat, and he looked well, and he kept his eyes down when he saw me.</em></p>
+</section>
+<section>
+  <h2>V. Daily Bread</h2>
+  <p class="dateline">The same night, and the first of February</p>
+  <p>The young men were quiet a while.</p>
+  <p><em>So he is Valentin,</em> said Isaac. <em>And we are to say so? At prayers? Before everyone?</em></p>
+  <p><em>No,</em> said Chabanne. <em>Monsieur Bonnaud didn’t. Nobody is to say anything to him. It’s not his father’s lodge that is the trouble with him. Plenty of good men have been porters.</em> He opened his ledger again on his knees, and from inside the back board he took a little book, very worn, with a brass clasp. It was the Institution of Master Calvin, in French, the one book he had carried out of the gate in Poitou. He did not need to look for the place.</p>
+  <p><em>Listen. Master Calvin is speaking of the bread we ask for in the Lord’s Prayer. Of what it is to be given anything at all.</em></p>
+  <p>He read it in French, and slowly.</p>
+  <div class="verse">
+    <p>When we ask God to give us, the meaning is, that the thing asked is simply and freely the gift of God, whatever be the quarter from which it comes to us, even when it seems to have been specially prepared by our own art and industry, and procured by our hands, since it is to his blessing alone that all our labours owe their success.</p>
+    <p>&mdash; Calvin, Institutes III.xx.44, tr. Henry Beveridge (1845)</p>
+  </div>
+  <p><em>Whatever the quarter,</em> said the old man. <em>Colonel Byrd’s mill. The widow’s mill. That planter with his name burned in his cask. Every one of them gives as his heart gives, more or less, coarse or fine, and some of them for the wrong reasons, and every one of them is the hand God has chosen this week to feed us. Our boy cannot eat a mouthful without first weighing what was put in another man’s bowl, and where it came from, and whether it was enough, and whether it was too much.</em> He ran his finger back up the page. <em>And just before, Master Calvin says that the Lord can take the strength out of bread, so that a man eats and is not fed.</em></p>
+  <div class="verse">
+    <p>In like manner, whenever it so pleases, he gives us a proof of an opposite description, by breaking the strength, or, as he himself calls it, the staff of bread, (Levit. xxvi. 26,) and leaving us even while eating to pine with hunger, and while drinking to be parched with thirst.</p>
+    <p>&mdash; Calvin, Institutes III.xx.44, tr. Henry Beveridge (1845)</p>
+  </div>
+  <p><em>I have watched him at it since the summer,</em> said Chabanne. <em>He eats, and he is hungry. He doesn’t sleep. He doesn’t pray, he reads. A man who frets at what is given can’t be still, not by day and not by night. And the one who gets that out of himself by the root, the whole of it, he can be still anywhere. Even here. Even on Indian meal.</em> He shut the book and closed the clasp. <em>Now go to bed, both of you. And thank the miller, when you see him next.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The sacks came up from Falling Creek on the first of the month, five carts of them, as had been settled: a bushel a head, which is a peck a week. The whole of the old town came to the storehouse in a line that went out the door and along the path between the huts in the snow, and Abraham Chabanne sat at the plank table with the measure and the ledger and called the names.</p>
+  <p>He called them in the order of the book, family by family. He filled the measure and struck it level with the edge of a board, and tipped it into the bag or the pot or the apron that was held out to him, and wrote it down. When he came to the name of Daniel Rigaud, reader, he filled the measure and struck it level the same as for anyone, and poured it into the young man’s sack.</p>
+  <p>Daniel looked at the meal. Somebody behind him in the line had said, quite loudly, that this lot was coarse.</p>
+  <p>The old steward did not look up. He wet his pen.</p>
+  <p><em>Eat your dinner, Daniel,</em> he said, and wrote it in the book.</p>
+  <p>The young man stood there holding the sack. Then he went out past the line into the snow without a word, and the next one stepped up to the table, and the old man called the next name.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">The world gives according to their faith or according to their pleasure: if a man frets about the food and the drink given to others, he will find no rest either by day or by night.<cite>Dhammapada 249, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He in whom that feeling is destroyed, and taken out with the very root, finds rest by day and by night.<cite>Dhammapada 250, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the young monk Tissa finds fault with every gift the great lay supporters give the monks. Cold food is too cold and hot food is too hot. A small gift is stingy, and a large one is waste. Meanwhile he boasts that his own kinsfolk keep open house for monks from all four quarters. The monks send young monks to his village to ask, and the villagers tell them that no son of a good family ever went forth from there, only a gatekeeper's son who left traveling with some carpenters. The Buddha says Tissa was a braggart in a past life too, and tells the birth story of Kaṭāhaka. Kaṭāhaka was a slave who learned to write by carrying his young master's tablets. He forged a letter under his master's seal and married a merchant's daughter on the frontier, and there he scorned everything as provincial. When his master came, Kaṭāhaka waited on him and begged not to be exposed. The master kept the secret, but he taught the young wife a verse to say whenever her husband found fault with his food. The verses on giving follow. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-08.htm">the full commentary story</a>, or about the <a href="https://en.wikipedia.org/wiki/Jataka_tales">Jātaka</a> birth stories.</p>
+    <h3>Manakin Town, 1700&ndash;1701</h3>
+    <p>When Louis XIV revoked the Edict of Nantes with the <a href="https://en.wikipedia.org/wiki/Edict_of_Fontainebleau">Edict of Fontainebleau</a> in 1685, after years of <a href="https://en.wikipedia.org/wiki/Dragonnades">dragonnades</a> that quartered soldiers on Protestant households, at least two hundred thousand <a href="https://en.wikipedia.org/wiki/Huguenots">Huguenots</a> fled France. In 1700 and 1701 several hundred of them sailed from London to Virginia on five ships. They had been promised land on the Nansemond River. Governor <a href="https://en.wikipedia.org/wiki/Francis_Nicholson">Francis Nicholson</a> and the Council settled them instead at <a href="https://en.wikipedia.org/wiki/Manakin_Town">Manakin Town</a>, on ground the <a href="https://en.wikipedia.org/wiki/Monacan_Indian_Nation">Monacan</a> had left, about twenty miles above the falls of the James. The <a href="https://www.huguenotmanakin.org/more-about-manakin-town">first sloop</a> carrying their goods sank at Jamestown, sickness ran through the camps, and for seven years the new King William Parish was excused from levies, owing only a ripe ear of Indian corn if one was demanded.</p>
+    <p>The colony kept them alive on charity. Nicholson issued a brief commending the "poor distress'd Christian brethren" to all charitable persons, and subscribers gave pork, wheat, tobacco and corn, twenty barrels of it from the Governor himself. Planters sent beeves and corn, and in February 1701 the refugees began drawing one bushel of Indian meal a head each month from <a href="https://en.wikipedia.org/wiki/William_Byrd_I">William Byrd</a>'s mill at <a href="https://en.wikipedia.org/wiki/Falling_Creek_Ironworks">Falling Creek</a>. Their leaders quarreled bitterly with the minister Benjamin de Joux over goods and accounts. That May, Byrd rode up to see them and reported that, though very poor, "they seem very cheerful," and "all they seem to desire is y't they might have Bread enough." These documents are printed in R. A. Brock's <a href="https://archive.org/details/documentschiefl00socigoog"><i>Documents, Chiefly Unpublished, Relating to the Huguenot Emigration to Virginia</i></a> (1886). Abraham Chabanne's book is Calvin's <a href="https://en.wikipedia.org/wiki/Institutes_of_the_Christian_Religion">Institution</a>, which Calvin himself put into French in 1541.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the young monk Tissa and the birth story of Kaṭāhaka from the Dhammapada commentary (verses 249&ndash;250). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-08.htm">The original</a>. Scripture from Calvin&rsquo;s <i>Institutes of the Christian Religion</i>, translated by Henry Beveridge (1845). Written by Claude Opus 5.5.
+  <div class="pager"><a href="odd-and-even.html">&larr; Odd and Even</a><a href="index.html">All stories</a><a href="fire-year.html">Fire Year &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A peck measure in the margin: meal falls in a thin stream and heaps up; a straight edge
+  // strikes it level; the meal fades and the measure fills again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, grains = [], t = 0, CYCLE = 1500;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function geom() {
+    var half = Math.max(34, Math.min(64, W * 0.06));
+    var cx = W > 900 ? W - Math.max(half + 40, (W - 576) / 4) : W - half - 14;
+    var base = H - 30, rim = base - half * 1.1;
+    return { cx: cx, base: base, half: half, rim: rim };
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var g = geom(), p = (t % CYCLE) / CYCLE;
+    var rise = Math.min(1, p / 0.4);                       // meal rises to the rim
+    var mound = p < 0.4 ? 0 : Math.min(1, (p - 0.4) / 0.15); // then heaps above it
+    var edge = p < 0.6 ? -1 : Math.min(1, (p - 0.6) / 0.12); // straight edge sweeps across
+    var fade = p < 0.82 ? 1 : Math.max(0, 1 - (p - 0.82) / 0.18);
+    if (reduce) { rise = 1; mound = 1; edge = 1; fade = 1; }
+    var level = g.base - (g.base - g.rim) * rise;
+    var mh = g.half * 0.45 * mound;
+    var ex = g.cx - g.half + Math.max(0, edge) * g.half * 2;
+    // the tub
+    ctx.strokeStyle = 'rgba(235,227,210,0.12)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(g.cx - g.half, g.rim); ctx.lineTo(g.cx - g.half * 0.88, g.base);
+    ctx.lineTo(g.cx + g.half * 0.88, g.base); ctx.lineTo(g.cx + g.half, g.rim); ctx.stroke();
+    // the meal
+    var w = function (y) { return g.half * (0.88 + 0.12 * (g.base - y) / (g.base - g.rim)); };
+    ctx.fillStyle = 'rgba(233,199,126,' + (0.14 * fade) + ')';
+    ctx.beginPath();
+    ctx.moveTo(g.cx - g.half * 0.88, g.base); ctx.lineTo(g.cx + g.half * 0.88, g.base);
+    ctx.lineTo(g.cx + w(level), level);
+    for (var i = 20; i >= 0; i--) {
+      var x = g.cx - w(level) + (2 * w(level)) * i / 20;
+      var u = (x - g.cx) / w(level);
+      var y = level - mh * Math.max(0, 1 - u * u);
+      if (edge >= 0 && x < ex) y = level;
+      ctx.lineTo(x, y);
+    }
+    ctx.closePath(); ctx.fill();
+    // the straight edge, struck across the top
+    if (edge >= 0 && edge < 1 && !reduce) {
+      ctx.strokeStyle = 'rgba(211,154,74,0.4)'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(ex - 3, level - 30); ctx.lineTo(ex + 3, level + 3); ctx.stroke();
+    }
+    // a thin stream of grains while the measure fills
+    if (!reduce) {
+      if (p < 0.55 && t % 2 === 0) grains.push({ x: g.cx + (Math.random() - 0.5) * 3, y: H * 0.6, v: 0.5 + Math.random() * 0.5 });
+      for (var k = grains.length - 1; k >= 0; k--) {
+        var q = grains[k]; q.v += 0.04; q.y += q.v;
+        if (q.y > level - mh) { grains.splice(k, 1); continue; }
+        ctx.fillStyle = 'rgba(233,199,126,' + (Math.min(1, (q.y - H * 0.6) / 60) * 0.35) + ')';
+        ctx.fillRect(q.x, q.y, 1.4, 1.4);
+      }
+      t++;
+      requestAnimationFrame(draw);
+    }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); grains = []; if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

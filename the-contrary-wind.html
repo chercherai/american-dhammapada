@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Contrary Wind</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on sun-bleached sailcloth, light theme; a steady easterly crosses the page as faint short streaks, all going one way, and low on the page a single cinnamon-colored mote travels slowly the other way, into them; datelined sections. */
+  --ground: #efe8d7;
+  --ground-2: #e6dec9;
+  --ink: #2a2822;
+  --ink-dim: #6d675a;
+  --bark: #9a4a22;
+  --sea: #2f6f68;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f3eddf 0%, var(--ground) 55%, #e9e1cd 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(42,40,34,.25); }
+.series a:hover { color: var(--bark); }
+a:focus-visible { outline: 2px solid var(--bark); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--bark); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(47,111,104,.5); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--sea); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--bark); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,252,243,.72); border: 1px solid rgba(42,40,34,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--sea); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,40,34,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--bark); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--bark); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,40,34,.18); border-bottom: 1px solid rgba(42,40,34,.18); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--bark); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--bark); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--bark); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--bark); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,252,243,.72); border-left: 2px solid var(--bark); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.9 &middot; &#256;nandattherapa&ntilde;ha</span></nav>
+<header>
+  <h1>The Contrary Wind</h1>
+  <div class="epigraph">The name, that dwells on every tongue,<br>No minstrel needs.<br>&mdash; Jorge Manrique, <em>Coplas</em>, tr. H. W. Longfellow</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ans&iacute; lo o&iacute; dezir,</span> on the river at Palos.</p>
+
+<section>
+  <h2>I. The Glass</h2>
+  <p class="dateline">The Ocean Sea, west of the Canaries &middot; September 1492</p>
+  <p>They had been sent for spices. It was written so in the Admiral's papers from the King and Queen, along with pearls and gold and silver, a tenth of all of it to be his if he found the way. So the ship carried, besides her biscuit and salt meat and wine and forty men, a small locked box of the things they were looking for, to hold up in front of whoever lived at the other end. The box was in the keeping of the steward, an old man named Benito whom everybody aboard called Ucl&eacute;s, after the town he came from. He had the stores, the water casks, the lamp oil and the firebox. He had the ship's boys too, whenever nobody else was giving them orders.</p>
+  <p>Ant&oacute;n was one of the boys, fourteen years old, from Moguer. On his watch he kept the glass. When the sand ran out he turned it and sang the verse the boys sang at every turn, that the glass going was good and the glass coming better, and the helmsman answered him from below. Eight glasses made a watch. Between glasses he fetched for Ucl&eacute;s.</p>
+  <p>From the day they lost sight of Hierro the wind stood behind them. It blew out of the east, a little north of east, day and night, and the ship ran before it as if she were being led. The men should have been glad of that, and each day they were quieter. Ant&oacute;n heard them in the waist. They had sailed to Guinea and to Flanders and to Chios, and not one of them had seen a wind sit in one quarter for two weeks together. How does a ship come home against that? they said. In this sea there is no wind for Spain.</p>
+  <p>The wind did a thing to the nose as well. The firebox stood forward, and with the wind aft the smoke and the smell of the pot went away over the bow and were gone. Back by the glass, Ant&oacute;n never once smelled his own dinner cooking. The men on the forecastle smelled the whole ship, the pitch and the bilge and the Admiral's lamp. Everything aboard went one way. He thought about it while the sand ran, having little else to think about.</p>
+  <p>On the twenty-second of September the wind came round ahead for one day. The ship labored, and the men cheered up like men let out of a cellar. The Admiral was heard to say that he had needed that contrary wind, because his people had come to believe that in these seas none ever blew toward Spain. Within a few days it was back in the east, and it stayed there.</p>
+</section>
+
+<section>
+  <h2>II. The Box</h2>
+  <p class="dateline">At anchor off the Cabo Hermoso &middot; the evening of 19 October</p>
+  <p>They had found islands a week before, and people on them, and no spice that anyone could put a name to. At each landing the Admiral had Ucl&eacute;s bring out the box, and Ant&oacute;n carried it. Inside, in small linen bags, were sticks of cinnamon bark, a hand of ginger root, a measure of cloves and a measure of pepper. The island people smelled each bag with great courtesy and pointed south.</p>
+  <p>On the nineteenth they anchored off a cape so green that the Admiral named it the Beautiful Cape and could not decide which part of it to look at first. At sundown the wind fell. Then it came back off the land, the way it will at evening, and it brought the land out with it, a smell of flowers and trees so sweet that the men stopped talking. They said the <em>Salve</em> in their fashion, which was no two of them together. Afterward Ant&oacute;n sat down with the box, which he was to air before it was locked up for the night, and opened the bags one at a time.</p>
+  <p>Bark, he thought, and root, and flower, since a clove is a flower that has not opened. These are the three best smells in the world. The King and Queen have sent three ships after them. And every one of them goes down the wind and no other way. I have sat to windward of this box for six weeks and never known what was in it until the lid was up. Those flowers on the cape reach us because the wind is off the land. In the morning it will turn, and the land can smell us, God help it, and we will smell nothing. Is there anything in the world that goes the other way?</p>
+  <p>He turned it over until he saw that he was not going to settle it by himself. Then he did the sensible thing and took it to Ucl&eacute;s, who was counting biscuit.</p>
+  <p><em>Maese Benito. The cinnamon goes down the wind. So do the ginger and the clove, and so do those flowers. Is there anything whose smell goes to windward?</em></p>
+  <p>The old man finished the cask he was on.</p>
+  <p><em>Yes,</em> he said.</p>
+  <p><em>What?</em></p>
+  <p>Ucl&eacute;s took the bags from him and tied their necks. He had been a man-at-arms once, in the household of the Master of Santiago, and he had by ear the long poem the Master's son made when the old man died, as half of Castile had it. He said a piece of it now, shutting the lid.</p>
+  <div class="verse">
+    <p>Where are the high-born dames, and where<br>Their gay attire, and jewelled hair,<br>And odors sweet?</p>
+    <p>&mdash; Jorge Manrique, <em>Coplas</em>, tr. H. W. Longfellow</p>
+  </div>
+  <p><em>I saw ladies of that kind when I was a page,</em> he said. <em>You could smell them the length of a hall, if you stood on the right side of the door. They are dead, and so is their rosewater.</em></p>
+  <p>He turned the key.</p>
+  <p><em>Now. Say there is a man in some town, I don't care which town. Or a woman. This one kills nothing he has no need to kill. He takes nothing that has not been given him. He keeps out of other men's beds. He doesn't lie to you, and he doesn't drink himself stupid. And his hand is open. You ask him for a thing and he is already reaching for it, and glad you asked. I tell you the name of that one goes out from that town to every quarter of the compass, up the wind and down it. Friars carry it. Muleteers carry it. When I was a boy in Ucl&eacute;s, forty leagues from any salt water, I knew the name of a ferryman on the Mi&ntilde;o whom I never laid eyes on.</em></p>
+  <p>And he said the rest.</p>
+  <div class="verse">
+    <p>His signal deeds and prowess high<br>Demand no pompous eulogy.<br>Ye saw his deeds!<br>Why should their praise in verse be sung?<br>The name, that dwells on every tongue,<br>No minstrel needs.</p>
+    <p>&mdash; Jorge Manrique, <em>Coplas</em>, tr. H. W. Longfellow</p>
+  </div>
+  <p><em>That was made about the Master. I don't say the Master was the man I am telling you of. He killed more people than I could count. But the verse is right about how such a name travels, whoever has it.</em></p>
+  <p><em>I never smelled one,</em> Ant&oacute;n said.</p>
+  <p><em>You will know it when you do.</em></p>
+  <p>The men who had been near enough to hear went on sitting where they were for some time. The smell of the cape came and went over the rail until the watch was changed.</p>
+</section>
+
+<section>
+  <h2>III. The Reef</h2>
+  <p class="dateline">Off the north coast of the island they named Espa&ntilde;ola &middot; Christmas night</p>
+  <p>On the night before Christmas the sea lay like water in a bowl. The Admiral had not slept in two days, and at eleven he went below. The sailor at the tiller wanted his sleep as well. The Admiral had forbidden it the whole voyage, calm or blow, but the man gave the tiller to a boy and lay down. The boy was Ant&oacute;n.</p>
+  <p>At midnight the current set the ship onto a bank, so gently that nobody aboard felt it. Ant&oacute;n felt the rudder take the ground and heard the water rushing, and he cried out. It was too late then. The master and his men took the boat and rowed for the caravel that lay half a league off. The mast was cut away to lighten her. She fell over on her side all the same, and her seams opened.</p>
+  <p>By the middle of the morning Ant&oacute;n was sitting on the sand by himself. Nobody had beaten him yet. He supposed that was coming, or a rope, and he sat apart because no man in the company would sit by him.</p>
+  <p>The king of that coast had his town a league and a half away. When he was told, he wept, and he sent every person he had and every large canoe. They went out to the wreck and came back, and went out, and in a few hours they had landed everything between her decks: the casks, the biscuit, the iron shot, the trade beads, the box. The king and his brothers worked among them. Each thing as it came ashore was carried to a place by the houses and set down there, and nothing went into the trees. The lace-point off a seaman's sleeve dropped into a canoe, and the man in the stern picked it up and brought it over the sand and put it into the seaman's hand. The Admiral said afterward that there was not so much as a needle missing, and that no such watch could have been kept in any part of Castile.</p>
+  <p>Now and again the king sent one of his kinsmen, weeping, to tell the Admiral not to grieve, for he would give him all he had. One of these, an old man, on his way back along the beach, stopped where the boy sat. He set down beside him a cake of their bread and a gourd of water, and went on to the canoes.</p>
+  <p>Ucl&eacute;s came and sat down by Ant&oacute;n on the other side. All night there had been a light air off the land. With the sun it had gone round, and it was blowing in from the sea by then, straight onto the beach and into their faces, with nothing on it but salt. The canoes were still going out through it and coming back.</p>
+  <p><em>You asked me,</em> Ucl&eacute;s said.</p>
+</section>
+
+<section>
+  <h2>IV. The Name</h2>
+  <p class="dateline">Palos and Moguer &middot; 1493 and after</p>
+  <p>Thirty-nine men were left on that shore, in a fort built out of the ship's timbers, with bread for a year. Ucl&eacute;s asked to be one of them. His knees would not carry him over another ocean, he said, and stores want a steward. Before the caravel sailed he untied the cinnamon bag and gave Ant&oacute;n one stick of the bark.</p>
+  <p>There was a wind for Spain after all. It lay far to the north and had to be gone up and looked for, and it nearly drowned them in February. On the way the Admiral wrote a letter. By April the letter was printed at Barcelona. By May it had been put into Latin at Rome, and before the year was out it was printed again at Basel and Paris and Antwerp, and a man in Italy had turned it into verse. In every one of those tongues it carried a sentence that Ant&oacute;n could have told them himself.</p>
+  <p><em>Of anything they have, if it be asked for, they never say no, but do rather invite the person to accept it, and show as much lovingness as though they would give their hearts.</em></p>
+  <p>So the name of that king's people went up every wind in Christendom, to towns that had never smelled a clove. The letter said another thing a little farther down, which was how few armed men it would take to master the whole of that land. That traveled on the same sheet.</p>
+  <p>In September seventeen ships went down the east wind from C&aacute;diz. They found the fort burned to the ground and the thirty-nine dead, and they heard what some of the thirty-nine had done among the women of that country before they died. Eleven bodies were shown to them with the grass already grown over. Nobody could tell Ant&oacute;n afterward whether the steward was one of the eleven. As for the people who had emptied the ship and lost not a needle, the seventeen ships were the beginning of what was done to them, and before Ant&oacute;n was an old man there was hardly a town of theirs left on the island. A friar who had been a boy in Seville the week the Admiral passed through wrote about them for fifty years, and said what the letter had said.</p>
+  <p>Ant&oacute;n did not go west again. He kept the stick of cinnamon in the lining of his cap. By the time he was thirty it had no more smell than kindling, and he kept it there all the same.</p>
+  <p>In his age he sat most afternoons on the river wall at Moguer, when the wind comes in over the bar from the west. He would turn his face into it. People took him to be watching for a sail. He told them there was nothing on that wind a man could smell, and he sat in it until the light went.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">The scent of flowers does not travel against the wind, nor (that of) sandal-wood, or of Tagara and Mallika flowers; but the odour of good people travels even against the wind; a good man pervades every place.<cite>Dhammapada 54, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Sandal-wood or Tagara, a lotus-flower, or a Vassiki, among these sorts of perfumes, the perfume of virtue is unsurpassed.<cite>Dhammapada 55, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the elder &#256;nanda, the Buddha's attendant, sits one evening thinking about the three finest perfumes, those of sandalwood, of roots and of flowers. Each of them travels only with the wind. He wonders whether any scent goes against it, decides not to settle the question alone, and asks the Teacher. The Buddha answers that there is one: where a man or woman takes refuge, refrains from killing, stealing, sexual wrongdoing, lying and drink, and is open-handed, glad to give and attentive to those who ask, that person's praise is spoken in every direction by ascetics, brahmins and gods. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-09.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C4%80nanda">&#256;nanda</a>.</p>
+    <h3>The first voyage, 1492&ndash;93</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus">voyage of 1492</a> was a commercial venture. The agreement signed that April promised Columbus a tenth of the pearls, precious stones, gold, silver and spices he might find, and his journal records him showing the islanders &ldquo;specimens of cinnamon and pepper he had brought from Castile.&rdquo; The steady northeast trade wind that carried the three ships west frightened their crews. The entry for 22 September reads: &ldquo;This contrary wind was very necessary for me, because my people were much excited at the thought that in these seas no wind ever blew in the direction of Spain.&rdquo; On 19 October, anchored off the cape he named Cabo Hermoso, Columbus wrote that he &ldquo;found the smell of the trees and flowers so delicious that it seemed the pleasantest thing in the world.&rdquo; The sailors' evening <em>Salve</em>, sung &ldquo;in their way,&rdquo; is in the journal too. The half-hour glass turned by the ship's boys, with a verse sung at each turn, is known from later Spanish accounts. Ant&oacute;n, Ucl&eacute;s and the box are invented.</p>
+    <p>On Christmas night the <a href="https://en.wikipedia.org/wiki/Santa_Mar%C3%ADa_(ship)"><em>Santa Mar&iacute;a</em></a> grounded off the north coast of Hispaniola with the tiller in the hands of a ship's boy. The Ta&iacute;no cacique <a href="https://en.wikipedia.org/wiki/Guacanagar%C3%ADx">Guacanagar&iacute;</a> sent his people in canoes to unload her, and Columbus wrote that &ldquo;there was not even a needle missing&rdquo; and that &ldquo;they are a loving people, without covetousness.&rdquo; Thirty-nine men stayed behind at <a href="https://en.wikipedia.org/wiki/La_Navidad">La Navidad</a>. The sentence about people who &ldquo;never say no&rdquo; is from <a href="https://en.wikipedia.org/wiki/Columbus%27s_letter_on_the_first_voyage">Columbus's letter</a> of February 1493, printed at Barcelona in April and, in Latin, at Rome, Basel, Paris and Antwerp within the year; the same letter boasts that the men left at the fort &ldquo;are alone sufficient to destroy all that land.&rdquo; The second fleet of seventeen ships found the fort burned and the garrison dead; its physician, Dr. Chanca, saw eleven bodies and heard that the Spaniards had taken women. Within two generations the <a href="https://en.wikipedia.org/wiki/Ta%C3%ADno">Ta&iacute;no</a> of Hispaniola had been reduced to a remnant, though their descendants live in the Caribbean still. The friar is Bartolom&eacute; de las Casas. Jorge Manrique wrote his <a href="https://en.wikipedia.org/wiki/Coplas_por_la_muerte_de_su_padre"><em>Coplas</em></a> on the death of his father Rodrigo, Master of the Order of Santiago, in 1476; Longfellow's English version appeared in 1833. Quotations from the journal and letter follow the translations in <em>The Northmen, Columbus and Cabot</em> (1906).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder &#256;nanda's question from the Dhammapada commentary (verses 54 and 55). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-09.htm">The original</a>. Verses from the <em>Coplas</em> of Jorge Manrique in the translation of Henry Wadsworth Longfellow (1833). Written by Claude Fable 5.2.
+  <div class="pager"><a href="yesterdays-bread.html">&larr; Yesterday’s Bread</a><a href="index.html">All stories</a><a href="slippery-dumplings.html">Slippery Dumplings &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, streaks = [], mote = { x: 0, y: 0, t: 0 };
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.max(18, Math.min(46, W * H / 26000)));
+    streaks = [];
+    for (var i = 0; i < n; i++) {
+      streaks.push({ x: Math.random() * W, y: Math.random() * H, len: 14 + Math.random() * 34, v: 0.35 + Math.random() * 0.55, a: 0.05 + Math.random() * 0.08 });
+    }
+    mote.x = W * 0.12; mote.y = H * 0.84; mote.t = 0;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1;
+    for (var i = 0; i < streaks.length; i++) {
+      var s = streaks[i];
+      if (!reduce) { s.x -= s.v; if (s.x + s.len < 0) { s.x = W + Math.random() * 60; s.y = Math.random() * H; } }
+      ctx.strokeStyle = 'rgba(47,111,104,' + s.a + ')';
+      ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(s.x + s.len, s.y - s.len * 0.04); ctx.stroke();
+    }
+    /* the one thing going to windward */
+    if (!reduce) { mote.t += 1; mote.x += 0.11; if (mote.x > W + 12) { mote.x = -12; mote.y = H * (0.72 + Math.random() * 0.2); } }
+    var my = mote.y + Math.sin(mote.t * 0.012) * 5;
+    var g = ctx.createRadialGradient(mote.x, my, 0, mote.x, my, 11);
+    g.addColorStop(0, 'rgba(154,74,34,0.55)');
+    g.addColorStop(0.35, 'rgba(154,74,34,0.18)');
+    g.addColorStop(1, 'rgba(154,74,34,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(mote.x, my, 11, 0, Math.PI * 2); ctx.fill();
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

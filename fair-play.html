@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fair Play</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column in the shade of a live oak; coins of March sun drift across the ground. */
+  --ground: #171d15;
+  --ground-2: #222a1e;
+  --paper: #ebe5d2;
+  --paper-dim: #a9a58f;
+  --gold: #d7ae4a;
+  --purple: #8b6aa8;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, #26301f 0%, var(--ground) 65%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,229,210,.2); }
+.series a:hover { color: var(--gold); }
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--gold); text-wrap: balance; text-shadow: 0 0 26px rgba(215,174,74,.2); }
+.epigraph { border-left: 1px solid rgba(139,106,168,.6); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--gold); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--gold); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(28,35,25,.82); border: 1px solid rgba(235,229,210,.08); border-left: 2px solid rgba(139,106,168,.7); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--purple); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,229,210,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--gold); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--gold); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--gold); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--gold); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--gold); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(28,35,25,.82); border-left: 2px solid var(--gold); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 16.7 &middot; Pañcasatadāraka</span></nav>
+<header>
+  <h1>Fair Play</h1>
+  <div class="epigraph">And children coming home from school<br>Look in at the open door.<br>&mdash; Longfellow, &ldquo;The Village Blacksmith&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how I heard it,</span> on North Claiborne Avenue.</p>
+
+<section>
+  <h2>I. The Back of the Band</h2>
+  <p class="dateline">The Tremé, New Orleans &middot; Mardi Gras morning, 1965</p>
+  <p>The Fair Play Social Aid and Pleasure Club came out of its hall on St. Philip Street at nine o&rsquo;clock on Mardi Gras morning, the second of March, forty men in lavender suits and straw hats with gold bands, and the Silver Leaf Brass Band behind them, and the grand marshal out in front of everybody.</p>
+  <p>The grand marshal was Mr. Alc&eacute;e Gaudet, who had led the Fair Play since 1951 and the rest of the year taught fifth grade at the public school on Columbus Street. He had taught half the children between Esplanade and St. Bernard to do long division and the other half to sit still while the first half did it. On parade days he wore a gold sash over one shoulder with FAIR PLAY sewn on it in purple felt, and carried a gold fan, and he did not say much, in the street or in the classroom. When he lifted the fan, the band began. When he brought it down, the band stopped.</p>
+  <p>The Silver Leaf was eleven men in white shirts and black pants and black caps with the band&rsquo;s name across the front: three trumpets, two trombones, a clarinet, a tenor saxophone, a tuba, a snare drum and a bass drum. Behind the bass drum, by himself, walked Mr. Casimir Joseph.</p>
+  <p>Mr. Cass was eighty-one. He had played second trumpet in the brass bands of New Orleans since before the first war, under the lead, holding the harmony, and in fifty-some years he had never once played the melody or asked to. Three different bands had asked him to lead them, and he had said no all three times. He walked at the back now because he could not keep the pace up front. When he had the breath he played. When he didn&rsquo;t, he carried the horn under his arm like a loaf of bread and kept walking.</p>
+  <p>He lived in one room over a shoe repair on Marais Street. He went to the six-thirty Mass at St. Augustine every morning, and ate one meal a day, at noon, and shined his own shoes, and would not let a boy carry his horn for him. His band cap had been mended so many times that the gold letters had all been stitched back on by hand, a little crooked. People on Marais Street said Cass Joseph had never told a lie in his life, and the reason was that he had never said enough to tell one. In 1927, when a family on Ursulines could not pay for the band at their boy&rsquo;s funeral, he had put his envelope back into the mother&rsquo;s hand at the gate of the cemetery, and walked home, and never mentioned it, and the band found out from the mother.</p>
+</section>
+
+<section>
+  <h2>II. The Cakes</h2>
+  <p class="dateline">Claiborne Avenue &middot; late morning</p>
+  <p>They turned onto Claiborne under the oaks. In 1965 the neutral ground down the middle of North Claiborne Avenue was a long green mile of grass under live oaks whose limbs met over it, and on Mardi Gras the whole Seventh Ward and the Tremé came out and claimed it: ladders for the children to sit on, kitchen chairs, washtubs of ice and beer, chicken in roasting pans, men cooking on halves of oil drums. Somewhere up toward Orleans Avenue the Indians were coming out in their feathers, and you could hear the tambourines before you could see anything.</p>
+  <p>From the other direction, down the sidewalk, came the children.</p>
+  <p>It was the Sunday school of the Greater St. Matthew Baptist Church on Galvez Street, and two other churches with it, on their way to the place under the biggest oak where the churches had their spot every year. There were five hundred of them, people said afterward, though people say a great many things on Mardi Gras. They were carrying the cakes. Pound cakes in dishpans. Tea cakes in shoeboxes. Pralines wrapped in wax paper, in a bushel basket. A king cake from McKenzie&rsquo;s on a board. The big girls carried the dishpans on their heads and the big boys carried the baskets on their shoulders, and the little ones carried one tea cake apiece in both hands as if it were an egg.</p>
+  <p>When they saw Mr. Gaudet, every one of them said, <em>Good morning, Mr. Gaudet,</em> the way they said it in his room on Columbus Street, all together and a little behind each other, and went right on by. They said good morning to Mr. Duplessis, the president of the Fair Play, who was in the funeral business and liked to be greeted, and to the forty men in lavender, and they passed along the band, and not one child said, <em>Have some cake.</em></p>
+  <p>Mr. Gaudet brought down the fan, and the band stopped.</p>
+  <p><em>Anybody here want some cake?</em> he said.</p>
+  <p><em>What cake?</em> said the lead trumpet, a young man named Dwight.</p>
+  <p><em>You didn&rsquo;t see all those children go by with all that cake?</em></p>
+  <p><em>Mr. Gaudet, those children don&rsquo;t give nobody nothing. They walked right past you, and you taught them.</em></p>
+  <p><em>They didn&rsquo;t offer it to me and they didn&rsquo;t offer it to you,</em> said Mr. Gaudet. <em>But the man those cakes belong to is walking at the back. We&rsquo;re going to eat some cake before we go on.</em></p>
+  <p>He said it with no bother in his voice. He was not a man who kept accounts against children. He crossed over to the neutral ground and sat down on a root of the big oak, and the Fair Play and the Silver Leaf came after him and sat down on the grass in their good clothes, and the tuba player laid his horn down in the clover like a sleeping dog.</p>
+  <p>The children were still going along the sidewalk past the end of the band. They came to the bass drum, and passed it, and came to Mr. Cass, walking by himself with his trumpet under his arm and his crooked cap on, and they stopped.</p>
+  <p>All of them stopped. The ones in front stopped and the ones behind ran into them. Nobody who was there could ever say why. A grown woman who had been one of the little ones told it forty years later and said it was like when you come into a warm kitchen out of the cold, and that was as close as she could get. The girls took the dishpans down off their heads. The boys set the baskets on the sidewalk. The littlest ones went and put their arms around his legs, and the big boys took off their caps, and a tall girl named Bernadette Pichon held up the king cake on its board with both arms, as high as she could reach.</p>
+  <p><em>Have some cake, Mr. Cass.</em></p>
+  <p>Mr. Cass looked at all of them for a while, as if he were counting.</p>
+  <p><em>Mr. Gaudet and the band are sitting under that tree,</em> he said. <em>Carry it over there and share it out.</em></p>
+  <p><em>Yes, sir.</em></p>
+  <p>So they picked it all up again, and turned the whole Sunday school around, and went back with him, five hundred children walking slow around one old man so as not to get ahead of him, across Claiborne to the oak. They gave him the first piece of everything. They stood around him in a ring and watched him eat it, a bite of pound cake, a tea cake, a corner of the king cake, the way you watch a person open a present. When he had finished, a boy named Earl went off and came back with a paper cup of water from somebody&rsquo;s jug and held it out with both hands. Then they passed the cakes around to the Silver Leaf and the Fair Play, and to the families on the next ladders over, and to anybody.</p>
+</section>
+
+<section>
+  <h2>III. Fair Play</h2>
+  <p class="dateline">Under the oak</p>
+  <p>Mr. Duplessis took his piece of pound cake. He ate it. Then he said, so that the men around him could hear, that he did not call that fair play.</p>
+  <p><em>Walked right past the grand marshal of this club. Walked past the president of this club and forty members in good standing. Walked past the whole band. Gave it all to Cass.</em></p>
+  <p><em>That&rsquo;s favoritism,</em> said one of the trombones.</p>
+  <p><em>That&rsquo;s what it is,</em> said Mr. Duplessis.</p>
+  <p>Mr. Gaudet was sitting on his root with his fan across his knees and a tea cake in his hand. He finished the tea cake.</p>
+  <p><em>Hilton,</em> he said. <em>A man like Cass Joseph, the Lord loves him. And everybody on this avenue with any sense loves him too. That&rsquo;s who the children bring the cake to. That&rsquo;s all it is.</em> He looked over at the ring of children, who had gone quiet, the way a class goes quiet when it knows what&rsquo;s coming. <em>Every one of you stood up in my room and said it. Who remembers?</em></p>
+  <p>Bernadette Pichon remembered, and then they all did, the way they had said it in fifth grade, all together and a little behind each other, under the oak on Claiborne Avenue with the tambourines coming down from Orleans:</p>
+  <div class="verse">
+    <p>His brow is wet with honest sweat,<br>He earns whate&rsquo;er he can,<br>And looks the whole world in the face,<br>For he owes not any man.</p>
+    <p>And children coming home from school<br>Look in at the open door;<br>They love to see the flaming forge,<br>And hear the bellows roar,<br>And catch the burning sparks that fly<br>Like chaff from a threshing-floor.</p>
+    <p>Toiling,&mdash;rejoicing,&mdash;sorrowing,<br>Onward through life he goes;<br>Each morning sees some task begin,<br>Each evening sees it close;<br>Something attempted, something done,<br>Has earned a night&rsquo;s repose.</p>
+    <p>&mdash; Henry Wadsworth Longfellow, &ldquo;The Village Blacksmith&rdquo; (1840)</p>
+  </div>
+  <p>Mr. Cass sat on the grass with his horn across his lap and the paper cup in his hand, and did not look as if any of it had anything to do with him.</p>
+  <p>Mr. Duplessis said, after a while, that he supposed that was so.</p>
+  <p>The children did not go on to their spot. They stayed with the Silver Leaf the rest of the day, all the way up Claiborne and back, carrying what was left of the cakes, and when the band played, the ones who had been in Mr. Gaudet&rsquo;s room walked closest to Mr. Cass, and when he had no breath to play they walked beside him and kept time. Whatever it was that happened to them under the oak, the people who were children there will tell you it took. Bernadette Pichon taught school for thirty-six years. Earl Lavigne, the boy with the cup, took up the trumpet that summer and played second in the Silver Leaf until the band broke up, under the lead, holding the harmony, and never once asked for the melody.</p>
+</section>
+
+<section>
+  <h2>IV. The Columns</h2>
+  <p class="dateline">North Claiborne Avenue &middot; 1966&ndash;1968</p>
+  <p>The next year the state came with saws and began taking down the oaks for the expressway. People stood on the neutral ground and watched it, and some of them cried, and it made no difference. Mr. Cass died in the spring of 1967, and the Silver Leaf played him to St. Louis Number Two with the dirge going so slow that the bass drum seemed to stop between every beat, and Mr. Gaudet walked in front in his sash with the fan held down, and five hundred people came behind who had been children, or said they had.</p>
+  <p>The big oak came down in 1968. Where it stood there is a concrete column now, holding up the interstate. On Mardi Gras the families still bring their ladders and their chairs and set them up on the neutral ground between the columns, in the shade of the highway, and the trucks go over all day like weather. And somebody always brings a cake, and cuts the first piece, and stands at the edge of the sidewalk holding it out for whoever is walking last.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He who possesses virtue and intelligence, who is just, speaks the truth, and does what is his own business, him the world will hold dear.<cite>Dhammapada 217, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, on a festival day, the Buddha enters Rājagaha for alms with the eighty great elders and five hundred monks, and meets five hundred youths carrying baskets of cakes out to a pleasure garden. They greet him and go on without offering a single monk a cake. The Buddha says the owner of the cakes is walking at the rear, and they will eat before they go on, and he sits down with the monks under a tree. At the sight of the elder Mahā Kassapa, walking last, the youths are filled with joy; they set down their baskets, bow to him and offer him everything. He sends them back to share it with the Buddha and the Saṅgha. They serve him, watch him eat, and give him water. The monks complain of favoritism, and the Buddha answers that a monk like Kassapa is dear to gods and humans alike, and speaks the verse; the youths are established in the first fruit of the path. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/16-07.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mahakasyapa">Mahā Kassapa</a>, the austere elder who later led the First Council.</p>
+    <h3>North Claiborne Avenue, 1965</h3>
+    <p>New Orleans&rsquo;s Black benevolent societies, first organized by free Creoles of color in the early 1800s and multiplied after the Civil War, paid members&rsquo; medical and burial costs and hired brass bands for funerals and parades; their successors, the <a href="https://acloserwalknola.com/historical-context/benevolent-societies-and-social-aid-and-pleasure-clubs/">social aid and pleasure clubs</a>, still parade their neighborhoods with a brass band and the &ldquo;second line&rdquo; of followers behind it (<a href="https://64parishes.org/entry/brass-bands-of-new-orleans">64 Parishes</a>). A traditional brass band of the period was typically trumpets, trombones, a clarinet or saxophone, tuba, snare and bass drum, as in the <a href="https://en.wikipedia.org/wiki/Eureka_Brass_Band">Eureka Brass Band</a>. Mr. Cass goes to Mass at <a href="https://en.wikipedia.org/wiki/St._Augustine_Church_(New_Orleans)">St. Augustine Church</a> in the Tremé, founded by free people of color in 1841 and said to be the oldest Black Catholic parish in the United States.</p>
+    <p>The wide neutral ground of <a href="https://en.wikipedia.org/wiki/Claiborne_Avenue">North Claiborne Avenue</a>, shaded by live oaks, was the promenade and picnic ground of Black New Orleans and the heart of its Carnival, where clubs, Mardi Gras Indians and Baby Dolls paraded. In 1966 officials decided, over residents&rsquo; protests, to uproot the oaks and run the elevated Interstate 10 expressway down the avenue; the trees came out in the late 1960s, and concrete columns stand where they grew (<a href="https://acloserwalknola.com/historical-context/north-claiborne-avenue/">A Closer Walk</a>; <a href="https://www.smithsonianmag.com/smart-news/documenting-history-iconic-new-orleans-street-and-looking-its-future-180977854/">Smithsonian</a>). Longfellow&rsquo;s &ldquo;The Village Blacksmith,&rdquo; first published in 1840, was a schoolroom recitation piece for a century; the text here follows <em>Poems That Every Child Should Know</em> (1904).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the five hundred youths and the elder Mahā Kassapa from the Dhammapada commentary (verse 217). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/16-07.htm">The original</a>. Verse from Henry Wadsworth Longfellow&rsquo;s &ldquo;The Village Blacksmith&rdquo; (1840), as printed in <em>Poems That Every Child Should Know</em> (1904). Written by Claude Opus 5.5.
+  <div class="pager"><a href="low-ground.html">&larr; Low Ground</a><a href="index.html">All stories</a><a href="white-river.html">White River &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* Shade of a live oak: soft coins of sun drift and swell slowly on the dark ground, as leaves move overhead. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, coins = [], t0 = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.max(14, Math.min(34, (W * H) / 38000)));
+    coins = [];
+    for (var i = 0; i < n; i++) {
+      coins.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: 10 + Math.random() * 30,
+        sx: 0.6 + Math.random() * 0.6,
+        ph: Math.random() * Math.PI * 2,
+        f: 0.00018 + Math.random() * 0.00022,
+        dx: 6 + Math.random() * 14, dy: 4 + Math.random() * 10,
+        warm: Math.random() < 0.85
+      });
+    }
+  }
+  function draw(t) {
+    t = t || 0;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < coins.length; i++) {
+      var k = coins[i];
+      var s = reduce ? 0 : t;
+      var wob = Math.sin(s * k.f + k.ph);
+      var gust = 0.5 + 0.5 * Math.sin(s * 0.00011 + k.ph * 0.7);
+      var x = k.x + Math.sin(s * k.f * 1.3 + k.ph) * k.dx * gust;
+      var y = k.y + Math.cos(s * k.f + k.ph * 1.7) * k.dy * gust;
+      var a = 0.05 + 0.06 * (0.5 + 0.5 * wob);
+      var R = k.r * (0.85 + 0.25 * (0.5 + 0.5 * wob));
+      ctx.save();
+      ctx.translate(x, y); ctx.scale(k.sx + 0.4, 1);
+      var g = ctx.createRadialGradient(0, 0, 0, 0, 0, R);
+      var col = k.warm ? '232,196,110' : '178,150,205';
+      g.addColorStop(0, 'rgba(' + col + ',' + a + ')');
+      g.addColorStop(0.6, 'rgba(' + col + ',' + (a * 0.55) + ')');
+      g.addColorStop(1, 'rgba(' + col + ',0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, R, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make();
+  if (reduce) draw(0); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

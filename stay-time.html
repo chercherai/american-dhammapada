@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stay Time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over sagebrush desert at one in the morning, dark theme; along the foot of the page four buried tanks stand in faint outline, and in each a single bright grain goes slowly down the wall, along the bottom and up the middle, flares for a breath at the top, and goes under again; datelined sections. */
+  --ground: #0f1213;
+  --ground-2: #171b1c;
+  --paper: #e4dfd2;
+  --paper-dim: #9f9d8f;
+  --clay: #cc6b4c;
+  --lily: #9db4e0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #1d2526 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,223,210,.2); }
+.series a:hover { color: var(--clay); }
+a:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--clay); text-wrap: balance; text-shadow: 0 0 28px rgba(204,107,76,.22); }
+.epigraph { border-left: 1px solid rgba(157,180,224,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--lily); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--clay); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(23,27,28,.82); border: 1px solid rgba(228,223,210,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--lily); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,223,210,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--clay); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--clay); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--clay); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--clay); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--clay); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(23,27,28,.82); border-left: 2px solid var(--clay); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 5.1 &middot; A&ntilde;&ntilde;atarapurisa</span></nav>
+<header>
+  <h1>Stay Time</h1>
+  <div class="epigraph">All motions may be accelerated and retarded, but the True, or equable progress, of Absolute time is liable to no change.<br>&mdash; Isaac Newton, <em>Principia</em>, tr. Andrew Motte (1729)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it was told on the graveyard bus,</span> out of Richland.</p>
+
+<section>
+  <h2>I. The White Car</h2>
+  <p class="dateline">Richland, Washington &middot; August 1955</p>
+  <p>Nobody in Richland owned his house that year. The government owned the houses and the lawns and the shade trees it had planted on them, and General Electric ran the town for the government the same as it ran the plant. A man's rank on the project settled which letter of house he was let to rent. An operator got half of an A house. A chief supervisor got a D or a G. If a light bulb burned out you filled in a requisition and a man came with a bulb. The house went with the job, and the job went with the clearance, and the people who could take away all three with one telephone call were the managers. That was what it was to be a manager in that town. Russell Sennett was manager of Separations, which meant both of the 200 Areas, East and West, and every tank that was buried in them.</p>
+  <p>On the Saturday of Atomic Frontier Days the parade came down George Washington Way the way it did every August: the high school band, who were called the Bombers, and the sheriff's posse, and the queen and her court, and floats with <em>WE'RE HERE TO STAY</em> lettered down their sides. Behind the General Electric float came a white Buick convertible lent by a dealer in Pasco. Sennett stood up in the back of it in a white hat, and his wife sat by his knees under a white umbrella, because the sun on that street in August would raise a blister on paint. The Patrol walked the curbs with their arms out to keep the people back. People stood on car hoods and on one another's shoulders to see.</p>
+  <p>The Desert Inn fronted the street. As the white car came abreast of it, a maid on the upper floor ran up a window to shake out a dust cloth, looked down at the man standing in the car, drew her head in and shut the window. That was all. To Sennett it was as if the moon had come out full and gone straight into a cloud. He turned to keep the window in sight, and the car went on, and his feet went with the car and the rest of him did not. He would have gone over the side if his wife had not put up one hand and taken hold of his belt. People laughed. He laughed too, and waved his hat.</p>
+  <p>That evening he spoke to Hal Brisco, who was his assistant and went where he was sent.</p>
+  <p><em>The hotel. Upstairs, the end window on the street side. Did you see it?</em></p>
+  <p><em>I saw it.</em></p>
+  <p><em>Did you see a woman?</em></p>
+  <p><em>I saw her.</em></p>
+  <p><em>Find out if she's married.</em></p>
+  <p>Brisco found out before the fireworks. <em>Married. The name is Minton. The husband is a pipefitter on construction, and they live in the trailer camp at North Richland.</em></p>
+  <p><em>Have him in my office Monday morning.</em></p>
+  <p>Arlo Minton was from Yell County, Arkansas, and had followed construction to the project in 1948 with a wife and a house trailer. When word came that the manager of Separations wanted him by name, he thought: this is about Neva, and I am in trouble on account of her. He had seen men look at her before. But you did not stay home when a manager sent for you. He washed and went.</p>
+  <p><em>From this morning you work for me,</em> Sennett said. <em>Driver.</em></p>
+  <p><em>Mr. Sennett, I'm a fitter. I'd as soon stay with my tools and pay my own way.</em></p>
+  <p><em>I don't want your way paid. You're on my staff as of now.</em></p>
+  <p>The men who drove for managers were carried on the books of the Patrol, so they gave Arlo Minton a badge and a .38 revolver and took his name off the union's rolls. A fitter with a wrenched back could lay off a shift, and the steward would speak for him. A manager's driver could not have a back. He went where he was told, when he was told, and there was nobody to speak for him at all.</p>
+  <p>What Sennett had in mind, they said afterward, was simple. Find the man at fault in something, break him for it, and then see about the wife. Arlo knew it as well as if it had been read out to him. For three weeks he drove the manager's car like a man carrying a full cup. He was early. The car shone. He spoke when he was spoken to and kept his eyes off the mirror. Sennett watched him three weeks for a fault and found none, and the wanting got no smaller for the wait. So he made up his mind to supply one.</p>
+</section>
+
+<section>
+  <h2>II. Six White, Six Blue</h2>
+  <p class="dateline">The river above town &middot; the last Saturday in August</p>
+  <p>He called Arlo to the back step a little before three, in the worst of a day that went to a hundred and two.</p>
+  <p><em>Go up the river to the old pump house. It's a good three miles. There's a bank of red clay there and a backwater with water lilies in it. I want a pail of the clay and a dozen lilies, six white and six blue, on this step at six o'clock when I come up from my swim. Leave the car. I may want it. If you are not here at six you can turn in your badge.</em></p>
+  <p>Arlo stood there. There was no red clay on that river. He had driven the length of the project, and the ground in that country was gray sand and gray cobble and sagebrush, and upriver the bluffs stood as white as flour. The Columbia came down past Richland cold and fast over stones, and nothing rooted in it. He had seen white lilies on the oxbow lakes at home. A blue one he had never seen anywhere.</p>
+  <p>But the order was given, and a man on staff went. He went by the trailer first, close to running.</p>
+  <p><em>Neva, is dinner cooked?</em></p>
+  <p><em>It's on. The beans want another hour.</em></p>
+  <p><em>I haven't got an hour.</em></p>
+  <p>He had her ladle them out of the pot into a lard pail, wet as they were, with the salt pork on top and a pone of cornbread on top of that. He pushed the lid down and took a jar of water and went up the river road half running, the pail knocking against his leg. By the time he reached the pump house the beans were done. The pail and the sun had finished them between them.</p>
+  <p>He sat down under the willows, because a man who is going to be ruined at six may as well eat at four. He set the best of it to one side first, on the lid: the piece of pork and the brown top of the cornbread. He had not taken three bites of the rest when a man came along the bank with a bedroll on his shoulder, a Black man of fifty or so, gray with dust to the knees. He had been walking since daylight and meant to be through Kennewick and over the bridge into East Pasco before dark, because a man of his color did not let the sun go down on him in Kennewick. From Pasco he was going to ride a freight to the hop harvest up the Yakima.</p>
+  <p><em>Mister,</em> Arlo said, <em>I set the best of this to one side before I started. Sit down and eat it.</em></p>
+  <p>The man sat down and ate it, and thanked him, and went on down the bank.</p>
+  <p>When Arlo had finished he shook the last handful of beans out of the pail into the river, where the suckers came up and took them. He rinsed his mouth. Then he stood up on the bank and said it out loud, having nobody else to say it to.</p>
+  <p><em>Whoever lives in this river, hear me. Mr. Sennett is looking for cause to finish me, and he has sent me for red clay and water lilies, white ones and blue ones. I fed a traveling man the best I had. That ought to count for something. I fed your fish. That ought to count a little. Whatever the two of them are worth, I sign it over to you. Bring me red clay and water lilies, white and blue.</em></p>
+  <p>He said it three times, loud, and felt like a fool each time.</p>
+  <p>An old man came up out of the willows below him. He wore a canvas coat buttoned to the neck in that heat, and he was wet to the hips, though there had been no splash. His eyes were small and set far apart, and they looked as if they had been open a long time.</p>
+  <p><em>What's that you're saying?</em></p>
+  <p>Arlo said it again.</p>
+  <p><em>Sign it over to me,</em> the old man said.</p>
+  <p><em>It's yours.</em></p>
+  <p><em>Sign it over to me.</em></p>
+  <p><em>I do. It's yours.</em></p>
+  <p><em>Sign it over.</em></p>
+  <p><em>It's yours, mister. All of it.</em></p>
+  <p>The old man picked up the empty lard pail and went down through the willows. He was gone about as long as it takes to roll a cigarette. He came back with the pail full to the bail of clay as red as a new brick, and cold, and over his arm twelve water lilies, six white and six blue, each with a yard of stem and the river still running out of it. He put them into Arlo's hands and went back the way he had come. Arlo did not hear him go into the water that time either.</p>
+  <p>Then there were the three miles back. It was past five. The pail weighed better than fifteen pounds and the wire bail cut into his fingers, one hand and then the other, and he had the lilies rolled in his wet shirt against the sun. He had walked three miles more times than he could count and had never known there was so much in them. Every hundred yards he looked for the first roofs of town, and they were where they had been. He did not stop, because he did not think he would start again.</p>
+</section>
+
+<section>
+  <h2>III. The Gate</h2>
+  <p class="dateline">The river houses &middot; ten minutes to six</p>
+  <p>Sennett had been thinking too. A man in a corner will turn up anything, he thought. If he comes back with it, I am no further on than I was. So at five he had the yardman chain the gate. The Sennetts' was the one house on that street with a fence; the government had put it up for some manager before him. He took the key off the yardman's ring himself and carried it upstairs and laid it on his dresser.</p>
+  <p>Arlo came down the street at ten minutes to six by the watch on his wrist, and the gate was chained.</p>
+  <p><em>Open it, Orrin.</em></p>
+  <p><em>I can't. He had me lock up at five, and he's got the key upstairs.</em></p>
+  <p><em>I'm his driver. He sent me. Open the gate.</em></p>
+  <p><em>I know who you are, Arlo. I can't.</em></p>
+  <p>Arlo stood a minute with the pail in his hand. Then he tipped the red clay out on the walk in front of the gate, all of it in one heap, and hung the lilies on the pickets, six white and six blue. It was the hour when Richland watered. Up and down the street people were out on the government grass moving their sprinklers. He turned around to them and called out, and his voice carried.</p>
+  <p><em>All you people on this street, I want you for witnesses. It is not six o'clock. I have done what Mr. Sennett sent me to do. There is his clay and there are his lilies. He is looking for cause to finish me, and I have not given him any.</em></p>
+  <p>Three times he called it. People stood holding their hoses. Nobody answered him, but they had heard.</p>
+  <p>Then he thought: where do I go? The trailer was the first place they would come. And he thought of Miss Whitlow.</p>
+  <p>In good times there were people in the trailer camp who did not think of Lenora Whitlow from one month to the next. She was a woman past fifty who lived by herself at the end of a row, in a trailer with a canvas awning and a cot under the awning, and what was known about her was that she had never turned anybody off her step. People remembered where she lived when they were in trouble.</p>
+  <p>She was a radiation monitor on the tank farms in 200 West. She had taught physics in the high school at Walla Walla and hired on in forty-four, when the project paid three times what a school board did, and she had stayed. Her work was to go down onto a job ahead of the crew with the meter the men called a cutie pie, and read it, and come back and tell each man how long he had. Four minutes. Ninety seconds. Eleven minutes, and not twelve. She held the watch, and when she said out, they came out, fitters and millwrights and foremen alike. They called it a man's stay time, or just his time. Operators who would not take an engineer's word took hers.</p>
+  <p>She looked at Arlo Minton standing in her gravel with his shirt in his hand and the marks of the bail across his fingers, and she did not ask him anything.</p>
+  <p><em>There's the cot,</em> she said. <em>There's water in the jug.</em></p>
+  <p>She sent a child down the rows to tell Neva where he was. He lay down, and he was asleep before the light went.</p>
+</section>
+
+<section>
+  <h2>IV. Four Sounds</h2>
+  <p class="dateline">That night, and Sunday</p>
+  <p>Sennett ate a steak that night and could not have said afterward what it was. He went to bed and did not sleep. He lay with the fan going and looked at the ceiling and thought about a window in the Desert Inn. In the morning, he thought, I will have his badge for leaving his post, and Decker can find the rest. A man from Arkansas has a cousin somewhere who signed something once. He will be off the project by Wednesday and out of the camp by Friday, and she will be in that trailer by herself with the lot rent due. Under that he thought about how wide the reservation was at night and how few roads crossed it, and he did not let himself finish the thought.</p>
+  <p>He heard the clock downstairs strike twelve, and then one. A little after one he heard something else.</p>
+  <p>It came from the north, from the direction of the areas, across thirty miles of sagebrush, and it came in at his window as plain as the clock. Four sounds, one after another, low. <em>Duh. Suh. Nuh. So.</em> Each one was a man's voice starting to say something, and each was cut off before the second word, as if the man had been pulled under.</p>
+  <p>Sennett sat up with the sweat gone cold on him. Is it me? he thought. Is it Jess? Is it the plant? He did not lie down again. He sat on the edge of the bed until the window went gray, and nobody had ever told him a night could have that much in it.</p>
+  <p>On Sunday morning he sent for Decker. Decker was head of Security for Separations. He had been eleven years with the Bureau before he came to the project, and it was understood that he knew how things were read in Washington.</p>
+  <p><em>I heard something last night,</em> Sennett said. <em>After one o'clock. From out toward the areas.</em></p>
+  <p><em>What did you hear?</em></p>
+  <p><em>Duh. Suh. Nuh. So. Like that. Four of them.</em></p>
+  <p>Decker had no more idea what it meant than the chair he sat in. But a security man who says he does not know is a security man the project can do without, and he knew that much.</p>
+  <p><em>That's serious,</em> he said.</p>
+  <p><em>How serious?</em></p>
+  <p><em>It means you're through. Somebody is signaling somebody, on your ground, on your watch. When that gets back East they will want a name, and the name on Separations is yours.</em></p>
+  <p>Sennett's fear doubled. <em>Is there any way around it?</em></p>
+  <p><em>There is. Don't worry. I know how they read these things. You get out ahead of it. You give them a housecleaning before they ask for one.</em></p>
+  <p><em>What do you need?</em></p>
+  <p><em>Names. Ten from every shop. Ten operators, ten fitters, ten electricians, ten millwrights, ten riggers, ten truck drivers, ten bus drivers, ten patrolmen, ten out of the laundry, ten girls from the counting rooms, ten out of the dormitories. Clearances pulled, pending review.</em></p>
+  <p>He was thinking as he said it: if I hand him nothing but craft, they will say Security is going after the unions. So he added, <em>And ten engineers. And a chemist or two.</em></p>
+  <p><em>Do it,</em> Sennett said. He was thinking: I will keep what I have, whatever it costs.</p>
+  <p>Decker's men worked through Sunday in the files and came in with more names than they had been asked for. On Monday morning a hundred and forty people were put off the buses at the barricades and their badges taken. By Monday noon a man from Housing was walking the streets of Richland with a pad of notices, because the house went with the job. He tacked them to the doors. Women stood on the porches of A houses and B houses and prefabs with the paper in their hands. Children were called in from the yards. By the middle of the afternoon the sound in that town was like the sound of ground giving way.</p>
+</section>
+
+<section>
+  <h2>V. Both Areas</h2>
+  <p class="dateline">The river houses &middot; Monday</p>
+  <p>Jessamine Sennett had found the lilies on Saturday evening, hung on her own gate, six white and six blue, and the red clay heaped on the walk. She asked the yardman, and the yardman, who was more afraid of her than of her husband, told her. She said nothing about it then. She carried the lilies in and floated them in the big glass bowl on the dining table, and she left the clay where it lay.</p>
+  <p>On Monday the wives came to her back door, two and three at a time, with the notices. She heard them out. Then she went upstairs, where her husband sat on the side of the bed in his undershirt with the blinds down.</p>
+  <p><em>Russell, what ails you? You look like something that's been dug up.</em></p>
+  <p><em>Don't you know, Jess? A snake has got in at my ear.</em> He told her about the four sounds, and Decker, and the lists. <em>Decker says I'm through unless I clean house. I mean to keep what I've got.</em></p>
+  <p><em>You are a fool,</em> she said. <em>You eat a steak and three eggs every morning of your life, and you have both the areas under you, East and West, and you have not got the sense God gave a goose. Where did you ever hear of one man saving himself by finishing another? And a hundred and forty of them? Because a man who had no idea what you heard was afraid to say so? There is a woman on your own tank farms who knows every sound that ground makes. Your operators won't go down on a tank till she has told them how long. Go and ask her what you heard, and then do what she tells you.</em></p>
+</section>
+
+<section>
+  <h2>VI. The Watch</h2>
+  <p class="dateline">The trailer camp, North Richland &middot; Monday evening</p>
+  <p>They went in her car, the little Nash, and she drove. The trailer camp had been laid out for better than two thousand trailers and was more than half empty by then, lot after lot of bare gravel, each with its board sunshade standing over nothing. Miss Whitlow's was the last lot of the last row. She was sitting on her step in what was left of the light. Under the awning, on the cot, sat Arlo Minton, who had been there since Saturday night.</p>
+  <p>Sennett got out of the car and stood in the gravel. He had not slept in two nights, and he was so afraid of what he was going to be told that he could not get a word out. He took off his hat and stood to one side, holding it.</p>
+  <p>It was Miss Whitlow who spoke. <em>You've come late in the day, Mr. Sennett.</em></p>
+  <p>He said nothing. Jessamine told it for him: the sounds after one o'clock on Saturday night, and what Decker had made of them, and the lists, and the paper on the doors. <em>That is why I've brought him to you,</em> she said.</p>
+  <p><em>Is that so, Mr. Sennett?</em></p>
+  <p><em>Yes, ma'am.</em></p>
+  <p><em>What did you hear?</em></p>
+  <p>He told her, as near as he could make the sounds. <em>Duh. Suh. Nuh. So.</em></p>
+  <p>Miss Whitlow sat a moment without saying anything. Then she said, <em>You needn't be afraid. It doesn't mean you're through. Those are men in a bad place, saying how it is with them.</em></p>
+  <p><em>What did they do?</em> Sennett said.</p>
+  <p><em>That was before your time on the project,</em> she said. <em>In forty-four there were better than forty thousand people on construction, living in the camp at Hanford, and among them were four pipefitters from four different states who were as thick as thieves. They were drawing more money in a week than their fathers saw in a season, and there was nothing out there to spend it on. That July the whole camp gave a day's pay, every man and woman in it, and bought the Army a bomber, and they named the airplane Day's Pay. Those four talked it over in the beer hall, whether to put in. They talked over whether to send any home. Not one of them was for it. One said, let's eat steak and drink whiskey as long as it lasts. One said cards. One said there were houses in Pasco. And the fourth one said, boys, there is not a woman in the trailer camp who won't listen to a man with money in his hand. Let's spend it on other men's wives. That suited all four. It is what they did, to the end of the job and a good while after, as long as the money held.</em></p>
+  <p><em>They are dead now, all four. I could tell you how, and it would not signify. The operators say they are out in the farms. I can't tell you where men go, Mr. Sennett. I can tell you what I have read off a meter. The new tanks are self-boiling. What is in them makes its own heat. Nobody lit a fire under them and nobody can put one out. The liquor turns over like beans in a pot: down the wall, along the bottom, up the middle. And there are four tanks, S-101, S-104, SX-101 and SX-104, those four and no others, where every so often the bottom gets ahead of the top and the whole tank heaves. We call it a bump. Engineering cannot tell me why those four. The operators say it is a man who has been all the way down and all the way back up, and has his head out for one breath, and has something he wants to say, and gets one sound of it out before the tank rolls him under.</em></p>
+  <p><em>What was the first one you heard?</em></p>
+  <p><em>Duh,</em> said Sennett.</p>
+  <p><em>I have stood over those tanks eleven years with a watch,</em> she said. <em>I know how they go on.</em> And she finished it for the man who could not.</p>
+  <p><em>Done wrong, the whole of it, the way we lived. We had it in both hands and gave none. Out of all that money we never made ourselves one island to stand on.</em></p>
+  <p><em>And the next?</em></p>
+  <p><em>Suh.</em></p>
+  <p><em>Sunk sixty thousand years, all told, down and back. When does it end?</em></p>
+  <p><em>Nuh.</em></p>
+  <p><em>None. No end. Where would an end come from? Nobody can see one. We cooked this ourselves, friend, you and I.</em></p>
+  <p><em>So.</em></p>
+  <p><em>So when I get out of here, and get a man's life again, I will give with both hands, and keep straight, and do a world of good.</em></p>
+  <p><em>That is what you heard,</em> she said. <em>Four men, one word apiece. And they are in there yet.</em></p>
+  <p><em>Sixty thousand years,</em> Sennett said.</p>
+  <p><em>I don't know how the operators came by the figure. I know how I would. The heat in those tanks is short-lived. Three hundred years will see to most of it. But there is plutonium in the sludge that the plant did not get, and half of it will still be there in twenty-four thousand years. In sixty thousand there will be better than a sixth of it yet.</em></p>
+  <p>Sennett stood in the gravel with his hat in his hands. He was thinking: those four went after other men's wives, and that is where it has put them, and it is not over. I set my heart on one man's wife and got one night out of it, awake. I am done with that. He said the only part of it he could say.</p>
+  <p><em>Miss Whitlow, I found out Saturday how long a night is.</em></p>
+  <p>Arlo Minton spoke from the cot. Nobody had asked him. <em>Mr. Sennett found out Saturday night how long a night is. Saturday afternoon I found out how long three miles is.</em></p>
+  <p>Miss Whitlow got up and went into the trailer and came out with a book, an old tall one in a calf binding that had been her father's. She held it to the light from the door and read to them.</p>
+  <div class="verse">
+    <p>Absolute, True, and Mathematical Time, of it self, and from its own nature, flows equably without relation to anything external, and by another name is called Duration: Relative, Apparent, and Common Time, is some sensible and external (whether accurate or unequable) measure of Duration by the means of motion, which is commonly used instead of True time; such as an Hour, a Day, a Month, a Year.</p>
+    <p>All motions may be accelerated and retarded, but the True, or equable progress, of Absolute time is liable to no change. The duration or perseverance of the existence of things remains the same, whether the motions are swift or slow, or none at all.</p>
+    <p>&mdash; Isaac Newton, <em>Principia</em>, Scholium to the Definitions, tr. Andrew Motte (1729)</p>
+  </div>
+  <p><em>Common time,</em> she said. <em>The hour, the day. A mile is the same kind of thing. Saturday night was the same eight hours on that cot as it was in your bed, Mr. Sennett. He slept through his. The road to the pump house is three miles for anybody. I have seen him drive it in five minutes. None of that stretches. On the farms I tell a man he has four minutes, and for one man it is nothing, and the next will swear it was the longest four minutes he ever spent on the end of a wrench. It is the same four minutes. I am the one holding the watch.</em></p>
+  <p><em>What was long was you.</em> She moved her head toward the north. <em>And what is long out there is long for people who make a thing and never learn the law it goes by. It will take its own time. It will not hurry for a manager.</em></p>
+  <p><em>What do I do?</em> Sennett said.</p>
+  <p><em>Go and let those people go.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>He drove to the 700 Area himself that night and had Decker out of bed, and the lists were torn up in front of him. On Tuesday morning the badges were waiting at the barricades with the names called off, and the man from Housing went back down the same streets and took his notices off the doors. The women washed their hair and went back into their houses. At the clotheslines that week, and on the buses for years, the name that was said was Jessamine Sennett's.</p>
+  <p>Arlo Minton asked for his tools back and got them. They said afterward that something had settled in him on that cot. He was a man who could not be frightened after that by Sennett or by anyone, and it lasted him the rest of his life. Neva went on making beds at the Desert Inn and shook her dust cloths out of the back windows. Sennett did not look up at the front ones again.</p>
+  <p>On the buses they said it was not Mrs. Sennett's first time. At Old Hickory in 1918, when she was nineteen and three weeks married to the youngest foreman on the powder line, a new superintendent had sworn that the day he got the plant he would discharge every foreman who had stood in his way. He got the plant. He had ninety-nine letters signed and sent for the hundredth man, and she came in her husband's place and stood in front of the desk laughing and crying at once. He asked her if she had lost her mind. She said that the month before, when company came and the store had no meat, she had cut the throat of a ewe that was lying behind the house. One ewe. She had dreamed every night since that the throat was her own, and she expected to go on dreaming it a night for every hair that ewe had on her. <em>That is what I'm crying about,</em> she said. <em>I'm laughing because I only did the one, and here you sit about to do a hundred.</em> He burned the letters in his wastebasket. Some of the people who told it had it from people who were in the building.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The blue lilies stood in the glass bowl on the Sennetts' table into October, long after the white ones had gone brown. Nobody in that country had seen one before, and nobody has seen one since. The government sold Richland to the people who lived in it a few years later. The clay is still on the walk in front of that gate. The people who bought the house have scrubbed at it and painted over it, and in a wet spring it comes up through the paint, a red place the size of a washtub.</p>
+  <p>The tanks are still in the ground too. In the fall of 2025 the plant they built on the plateau poured its first glass. It has been seventy-one years since the night Sennett sat up in his bed, and by the operators' count the four of them have all but sixty thousand still to go. Nobody has yet heard one of them get to the end of his sentence.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Long is the night to him who is awake; long is a mile to him who is tired; long is life to the foolish who do not know the true law.<cite>Dhammapada 60, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, King Pasenadi of Kosala, riding his white elephant around the city on a festival day, sees a poor man's wife at an upper window and wants her. He makes the husband his servant, finds no fault in him, and sends him a league to fetch red earth and white and blue water lilies that grow only in the country of the n&#257;gas. The man shares his half-cooked rice with a traveler and the fish, makes over the merit to whoever lives in the pool, and a n&#257;ga king in the form of an old man brings him what he needs. The king has shut the gate early; the man hangs the flowers on it, calls the city to witness and goes to sleep at the monastery. That night the sleepless king hears four syllables, <em>du, sa, na, so</em>, cried by four adulterers in the Iron Caldron hell, each of whom rises to the rim once in sixty thousand years and can get out only the first sound of a verse. His chaplain reads them as an omen of the king's death and prescribes a great sacrifice of living creatures; Queen Mallik&#257; calls him a fool and takes him to the Buddha, who finishes the four verses. The king says he has learned how long a night is, the servant how long a league is, and the Buddha joins their words. The sacrifice is called off. A story of the past tells how Mallik&#257;, as Queen Dinn&#257;, once saved a hundred kings by weeping and laughing over a ewe she had killed. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-01.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Pasenadi">Pasenadi</a>.</p>
+    <h3>Richland and the Hanford tank farms, 1955</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Richland,_Washington">Richland</a> was rebuilt by the Army in 1943 as the operators' town for the <a href="https://en.wikipedia.org/wiki/Hanford_Site">Hanford</a> plutonium works. Until the houses were sold to their tenants in 1957&ndash;58, all of it was government property managed by the contractor, which after 1946 was General Electric. Rank decided which of the lettered <a href="https://www.nps.gov/articles/000/richland-s-alphabet-houses.htm">&ldquo;alphabet houses&rdquo;</a> a family could rent, and a burned-out bulb was replaced on requisition. Construction workers lived apart, first in the wartime camp at Hanford, whose people gave a day's wages in 1944 to buy the B-17 <em>Day's Pay</em>, and later in the trailer camp at North Richland. Atomic Frontier Days, with its parade and floats reading &ldquo;We're Here to Stay,&rdquo; ran from 1948. Black workers recruited for the wartime construction were kept out of Richland and out of Kennewick, a <a href="https://www.nps.gov/places/green-bridge-historical-marker.htm">sundown town</a>, and lived in East Pasco. Sennett, his household, Decker's purge and Miss Whitlow are invented; no such mass suspension took place.</p>
+    <p>The chemical plants in the 200 Areas dissolved irradiated fuel and sent the leftover liquor to underground steel-lined tanks. Waste from the REDOX plant, which started in 1952, was hot enough to boil on its own decay heat, and the S and SX tank farms in 200 West were built to take it. Engineers called the sudden steam surges in these tanks &ldquo;bumping.&rdquo; A <a href="https://www.osti.gov/servlets/purl/1035201">later engineering review</a> records that before May 1955 it had been seen only in tanks S-101, S-104 and SX-101, and afterward in SX-104: four tanks. Radiation monitors with hand-held ion chambers nicknamed &ldquo;cutie pies&rdquo; set the time a worker could spend on a job. <a href="https://en.wikipedia.org/wiki/Plutonium-239">Plutonium-239</a> has a half-life of about 24,100 years, so roughly eighteen percent of any quantity remains after sixty thousand. Hanford still holds about 56 million gallons of waste in 177 tanks; <a href="https://ecology.wa.gov/about-us/who-we-are/news/2025/hanford-site-waste-vitrification-begins">the first of it was turned to glass</a> in October 2025. Newton's distinction between absolute and common time is in the Scholium that follows the Definitions of the <a href="https://en.wikisource.org/wiki/The_Mathematical_Principles_of_Natural_Philosophy_(1729)/Definitions"><em>Principia</em></a>, here in Andrew Motte's English of 1729.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a certain man from the Dhammapada commentary (verse 60). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-01.htm">The original</a>. The passage on time is from Isaac Newton's <em>Principia</em> in the translation of Andrew Motte (1729). Written by Claude Fable 5.2.
+  <div class="pager"><a href="pond-lilies.html">&larr; Pond Lilies</a><a href="index.html">All stories</a><a href="swallow-mud.html">Swallow Mud &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, tanks = [], t0 = Date.now();
+  var PH = [0.21, 0.52, 0.74, 0.93], PER = [67, 89, 73, 101];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    var span = Math.min(W * 0.94, 920), left = (W - span) / 2;
+    var r = Math.max(26, Math.min(span / 4 * 0.36, 78));
+    tanks = [];
+    for (var i = 0; i < 4; i++) {
+      tanks.push({ cx: left + span * (i + 0.5) / 4, top: H - r * 1.25 - 14, r: r, side: i % 2 ? 1 : -1 });
+    }
+  }
+  /* position of the grain on its loop: up the middle, out along the top, down the wall, back along the bottom */
+  function loop(k, p) {
+    var r = k.r, top = k.top + r * 0.34, bot = k.top + r * 1.12, wall = k.cx + k.side * r * 0.82, q;
+    if (p < 0.28) { q = p / 0.28; return [k.cx, bot + (top - bot) * q]; }
+    if (p < 0.42) { q = (p - 0.28) / 0.14; return [k.cx + (wall - k.cx) * q, top]; }
+    if (p < 0.78) { q = (p - 0.42) / 0.36; return [wall, top + (bot - top) * q]; }
+    q = (p - 0.78) / 0.22; return [wall + (k.cx - wall) * q, bot];
+  }
+  function draw() {
+    var t = reduce ? 0 : (Date.now() - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < tanks.length; i++) {
+      var k = tanks[i], r = k.r;
+      ctx.strokeStyle = 'rgba(228,223,210,0.085)'; ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(k.cx - r, k.top + r * 1.2);
+      ctx.lineTo(k.cx - r, k.top + r * 0.3);
+      ctx.quadraticCurveTo(k.cx, k.top - r * 0.22, k.cx + r, k.top + r * 0.3);
+      ctx.lineTo(k.cx + r, k.top + r * 1.2);
+      ctx.closePath(); ctx.stroke();
+      /* a riser to the surface */
+      ctx.beginPath(); ctx.moveTo(k.cx, k.top + r * 0.04); ctx.lineTo(k.cx, k.top - r * 0.3); ctx.stroke();
+      var p = ((t / PER[i]) + PH[i]) % 1;
+      var pos = loop(k, p);
+      /* nearness to the top of the rise, where the grain has its head out */
+      var d = Math.abs(p - 0.28); var flare = Math.max(0, 1 - d / 0.035);
+      var a = 0.22 + 0.5 * flare;
+      var R = 3 + 7 * flare;
+      var g = ctx.createRadialGradient(pos[0], pos[1], 0, pos[0], pos[1], R * 4);
+      g.addColorStop(0, 'rgba(236,224,160,' + a + ')');
+      g.addColorStop(0.3, 'rgba(204,107,76,' + (a * 0.35) + ')');
+      g.addColorStop(1, 'rgba(204,107,76,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(pos[0], pos[1], R * 4, 0, Math.PI * 2); ctx.fill();
+      if (flare > 0) {
+        ctx.strokeStyle = 'rgba(157,180,224,' + (0.16 * flare) + ')';
+        ctx.beginPath(); ctx.arc(k.cx, k.top + r * 0.34, r * 0.25 + r * 0.5 * (1 - flare), Math.PI, 0); ctx.stroke();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Fanner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in the indigo dark before day on a Sea Island street, dark theme; low on the page a wide shallow basket throws rice up to the wind every so often, the gold grains come back down into it, and the pale chaff drifts off to one side and is gone; datelined sections. */
+  --ground: #0f1620;
+  --ground-2: #18222e;
+  --paper: #e9e3d3;
+  --paper-dim: #a39f90;
+  --accent: #d8ab3c;
+  --glow: #f0cf7a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #23303b 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,227,211,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(216,171,60,.2); }
+.epigraph { border-left: 1px solid rgba(216,171,60,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,34,46,.8); border: 1px solid rgba(233,227,211,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,227,211,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,34,46,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 9.3 &middot; L&#257;j&#257;</span></nav>
+<header>
+  <h1>The Fanner</h1>
+  <div class="epigraph">I have a heaven to maintain.<br>&mdash; &ldquo;Not Weary Yet,&rdquo; <span style="font-style:normal">Slave Songs of the United States</span> (1867)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is the way the praise house had it,</span> on St. Helena Island.</p>
+
+<section>
+  <h2>I. The Pond</h2>
+  <p class="dateline">Long Pond plantation, St. Helena Island &middot; September 1862</p>
+  <p>The white people left Long Pond on the day of the Gun Shoot. That was the seventh of November, when the Yankee ships beat down the forts at Bay Point and Hilton Head, and the sound came across the water all morning like somebody dragging furniture over a floor upstairs. The master&rsquo;s family went off toward the main in the flats with what they could carry. They called on the people to come with them, and the people went into the woods and stayed there until the boats were gone.</p>
+  <p>That winter the cotton agents came, and in the spring the superintendents, young men from Massachusetts with pay books. Now the people worked the cotton for the Government at so much a task, and the pay came late, or came as paper to spend at the agent&rsquo;s store. In May soldiers walked down the road and took the able men off to Hilton Head without a day&rsquo;s warning. In July the transports brought the Edisto people, whose island the Government had given up, and set them ashore on St. Helena with their fowls and pigs, and Long Pond took in its share. After that came the fever months.</p>
+  <p>Brother March was leader of the praise house at Long Pond. He was a lean man past sixty who had been the plantation carpenter, which meant he had made its coffins, and he had made nine since the first of August. He wore the same osnaburg he had worn on the day of the Gun Shoot. When the people went up to the big house that November and came away with looking-glasses and feather beds, he stayed on the street. He ate from a white bowl with a blue rim, chipped in three places, that the big-house cook had thrown out years before, and he would not sit at any table where there was plenty. If he took his dinner from anyone it was from a widow with five children, or from the lame. He said the ones with the least had the hardest time finding anybody to give to.</p>
+  <p>When the ninth coffin was in the ground he went into the wilderness. Everyone on the islands knew what that was. A young person who began to seek was sent out to a place in the woods to pray alone until something was shown them, and Brother March had sent out forty or more in his time. Now he went himself, an old man, carrying only the bowl, and he was gone seven days.</p>
+  <p>On the seventh morning he got up from the foot of his tree. His head was light and his knees were bad. He stood and went over in his mind the doors where he might ask. There was the big-house kitchen, where Mr. Kimball the superintendent had Government bacon and would have sat him down gladly. There was the driver&rsquo;s wife, who had flour. He passed them by. Then he saw the Edisto girl who minded the birds, as plainly as if he stood at the pond himself.</p>
+  <p><em>Is there faith in her?</em> he asked, and knew there was. <em>Can she do this for me?</em> He knew that too. <em>She will do it, and more will come back to her for it than she has any way to guess.</em></p>
+  <p>He picked up the bowl and walked out of the woods.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The long pond was the low ground behind the quarters that had given the place its name. It would not grow cotton. The people had always planted it in rice for themselves, in the evenings after task, and this year the rice was theirs and nobody&rsquo;s to weigh. By September it stood in the milk, and the ricebirds came down on it out of the north in clouds. So the street had put the girl there to keep them off.</p>
+  <p>Her name was Affy and she was about sixteen. She had come off Edisto in July on the deck of a transport, alone. Her mother was in the ground on Edisto. Her father had been carried up to the main by his master in the week of the Gun Shoot, and nobody could tell her where. She slept in the corn house and owned one frock. For minding the pond she was to have rice when the rice came in. Until then she had what people brought her, which some days was a potato and some days was nothing.</p>
+  <p>She had two shingles to clap and her voice, and she walked the bank from first light. Along the south side the earliest heads had begun to turn, and she was allowed a double handful. When the old man came out of the trees she was crouched over a lightwood fire with half a broken skillet, parching them. Green rice will not pound. Shake it in hot iron, though, and the hull dries and splits, and you can rub it off between your palms and blow the trash away, and what is left is hot and sweet and tastes of smoke. It was all she would have that day.</p>
+  <p>He did not come to her. He stopped a good way off, where the path met the pond bank, and stood with the bowl in both hands, looking at the ground.</p>
+  <p>She knew who he was. She had seen him on the bench in the praise house, and she had not supposed he knew there was such a person as herself. When she saw him standing there her whole heart went out to him, and gladness came up through her from the soles of her feet, so that her hands shook.</p>
+  <p><em>Wait, sir,</em> she said. <em>Wait one minute.</em></p>
+  <p>She rubbed off the hulls fast, and blew, and came along the bank with the skillet and tipped all of it into his bowl, every grain. Then she got down on her knees in the path.</p>
+  <p><em>Whatever you found out there,</em> she said, <em>let me have a share in it.</em></p>
+  <p><em>Let it be so, daughter,</em> said Brother March. He said a short blessing over her head and turned back toward the street, eating slowly as he went, the way a man eats after seven days.</p>
+  <p>Affy stayed on her knees until he was out of sight. Then she got up and started back along the bank to her fire. She was not thinking about the birds. She was thinking about the rice going out of the skillet into the bowl, the sound it made, and that he had taken it. She had not been so happy since Edisto.</p>
+  <p>There was a hole in the bank where the old drain log went through, and a rattlesnake lay in the mouth of it. The old man had passed it twice. He wore a pair of soldier&rsquo;s brogans somebody had given him and a coat that came below his knees, and the snake had found nothing there to strike. The girl was barefoot. It took her above the ankle, and she went down in the path where she stood.</p>
+  <p>They say she died still thinking about the bowl.</p>
+</section>
+
+<section>
+  <h2>II. The House</h2>
+  <p class="dateline">The same day</p>
+  <p>She woke the way you wake after sleeping in the daytime, not sure where the door is.</p>
+  <p>She was in a house. This is how it was told on St. Helena, and nobody who told it ever made it smaller. The house was gold all through, and it was thirty miles from the front door to the back, and no hammer or nail had gone into it. She herself had grown in it as tall as a pine. She had on a new frock that had never been on anyone else, and another over that. A thousand women stood in the hall, and every one of them knew her name.</p>
+  <p>Over the door, where a person coming up the steps could not miss it, hung a fanner. It was the same wide shallow basket they fanned rice in on every street in the islands, sewn round and round from the middle. This one was gold, and it was full of rice, hulled and clean, and the rice was gold too. It hung there so that whoever came would know how she had got her house.</p>
+  <p>She stood in the doorway and looked at all of it. <em>What did I ever do to come by this?</em> she asked herself, and knew at once. It was the skillet of rice.</p>
+  <p>Then she thought: <em>If that little brought all this, I cannot sit down now. I have this to keep. I will go and do for him, the big things and the small, and make it sure.</em></p>
+  <p>Before day she took a gold broom, and a gold pan to carry off the sweepings, and went down to Long Pond.</p>
+</section>
+
+<section>
+  <h2>III. The Latch-Hole</h2>
+  <p class="dateline">Three mornings</p>
+  <p>Brother March&rsquo;s house was the last on the street. He had lived in its two rooms alone since his wife died. On the first morning, when he came in from his prayers, the floor was swept. It was swept into the corners, and the sand before the door was swept too, in the long curved marks a broom leaves. His water gourd was full and stood on the shelf where he could reach it.</p>
+  <p>He stood and looked. <em>One of the boys,</em> he thought. Three young ones were seeking under him that fall, and one of them, a boy called Scipio, was forever underfoot wanting to be of use.</p>
+  <p>The second morning it was the same, floor and yard and water. He thought the same thing, and meant to speak to the boy about pride.</p>
+  <p>The third morning he had not yet gone out. He was on his knees by the bed in the dark, and he heard the broom. It was going over the floor of the front room in slow strokes. He got up and put his eye to the hole in the door where the latchstring ran through.</p>
+  <p>The room was full of light that was neither fire nor day. In the middle of it a shape taller than the room should have held was bending and sweeping.</p>
+  <p><em>Who is that sweeping?</em></p>
+  <p><em>It is me, sir. Affy. Your child Affy.</em></p>
+  <p><em>I have no child by that name.</em></p>
+  <p>He did not. The street had buried the Edisto girl by torchlight on the night he came out of the woods, and had laid the broken skillet on the grave with her gourd, as the last things she used. He had slept through it. Nobody thought to tell him she was the one who had fed him, because nobody knew she had.</p>
+  <p><em>Sir, I was the girl minding birds at the pond. I gave you the parched rice. Going back along the bank a snake struck me, and I died glad, and woke in a house in heaven. It came to me through you. So I said, I will do for him, the big things and the small, and make it sure. That is why I came.</em></p>
+  <p><em>It was you swept here yesterday? And the day before? You filled the gourd?</em></p>
+  <p><em>Yes, sir.</em></p>
+  <p>He was quiet a while on his side of the door.</p>
+  <p><em>Go on from here, daughter. What you have done is done, and never mind about it. But do not come to this house again.</em></p>
+  <p><em>Sir, do not ruin me. Let me do for you. Let me make it sure.</em></p>
+  <p><em>Go on. Some day the exhorters will be sitting up on the bench with their palmetto fans, and I will not give them this to say: I heard tell a spirit came to Brother March and swept his house and drew his water. Do not come here any more. Turn your feet some other way.</em></p>
+  <p>A leader who had that said of him was no better than a root man with a haunt to fetch for him. His praise house was finished, and every seeker he had ever sent out was in doubt.</p>
+  <p><em>Do not ruin me, sir,</em> she said, and said it again, and a third time.</p>
+  <p><em>She is not hearing me,</em> the old man thought. He opened the door. <em>You do not know your own measure,</em> he said, and he snapped his fingers at her, as you would at a hen that had got into the house.</p>
+  <p>She could not stay after that. She went up through the roof as smoke does and stood in the air over the street in the gray before day, as high as the tops of the live oaks, with her hands pressed together.</p>
+  <p><em>Do not take from me what I have got,</em> she called down. <em>Let me make it sure.</em></p>
+  <p>Then she wept. She stood in the air over the quarters at Long Pond and cried aloud like a child shut out of a house.</p>
+</section>
+
+<section>
+  <h2>IV. The Fanner</h2>
+  <p class="dateline">The first house on the street</p>
+  <p>The first house on the street was Maum Binah&rsquo;s. It was the praise house, since the praise house was always the house of the oldest person on the place, and nobody at Long Pond could say how old Maum Binah was. She had fanned the street&rsquo;s rice since before the driver was born. When the rice was cut and pounded they brought it to her door in the mortar, and she sat on her stool with the wide fanner on her knees and threw the rice up to the wind and caught it, and threw it up again, until there was no trash left in it. Half the street had come into the world through her two hands. Forty years back, when a carpenter&rsquo;s boy called March first went out into the wilderness to seek, she was the one he came to in the mornings to tell what he had seen, and she was the one who told him when it was enough.</p>
+  <p>Everybody on the street heard something that morning and took it for wind, or a marsh hen. Maum Binah knew what it was.</p>
+  <p>She did not get up from her stool. People saw her on it at sunrise through her open door, with the fanner in her lap. Others, just as truthful, looked up and saw her sitting in the air above the last house on the street, face to face with the tall girl, as near as two women shelling peas on a step. Light came off her the way it comes off the creek at noon.</p>
+  <p><em>Daughter,</em> she said. <em>Hush now.</em></p>
+  <p>The girl hushed.</p>
+  <p><em>It was for my son March to hold himself back. That is his work, and he did right by it. But one who has found out what it is to do good says, This one thing is all I have to do, and cannot see around it. She is not wrong either. Nothing else makes anybody glad for long, here or yonder.</em></p>
+  <p>Then she raised a song in her old cracked voice, as she raised it in the praise house on Sunday nights. The girl knew it, and could not help coming in under her.</p>
+  <div class="verse">
+    <p>O me no weary yet, O me no weary yet. I have a witness in my heart, O me no weary yet.</p>
+    <p>I have a heaven to maintain.</p>
+    <p>&mdash; &ldquo;Not Weary Yet,&rdquo; <span style="font-style:normal">Slave Songs of the United States</span> (1867)</p>
+  </div>
+  <p><em>It was never him,</em> Maum Binah said. <em>He had the bowl in his hands that day, that is all. Somebody is holding out a bowl every day God sends. You did it once, and you see what it was. Do it again. Then do it again. Set your whole mind there and let it be sweet to you. It heaps up.</em></p>
+  <p>She tipped the fanner on her knees a little, to show her.</p>
+  <p>They say that when the girl heard this she stood up taller in the air than she had been, taller than the pines, taller than anything on St. Helena, and that she had stopped crying. She had come into something on her own account, and nobody could send her out of it.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>After that September it began to be told from one plantation to the next. A woman on the Seaside road, down with fever and her man gone for a soldier, woke before day to find her floor swept into the corners, the sand at her door swept in long curves, and her gourd full. So did an old man at the far end of the island who was too stiff to draw his own water. So did a girl lying in with her first baby. It was never the same house two mornings running, and so nobody could have it to say that a spirit kept house for them. People did not talk about it much. But the children had a thing they sang when they found a yard swept that nobody had swept. The men took it with them into the regiment that winter, and one of the Yankee officers wrote it down.</p>
+  <div class="verse">
+    <p>Massa Jesus give me a little broom<br>For to sweep my heart clean,<br>And I will try, by de grace of God,<br>To win my way home.</p>
+    <p>&mdash; &ldquo;Fare Ye Well,&rdquo; as sung in the First South Carolina Volunteers (T. W. Higginson, <span style="font-style:normal">Army Life in a Black Regiment</span>, 1870)</p>
+  </div>
+  <p>Brother March led the praise house at Long Pond eleven years more, and he never spoke of the three mornings. But every September, when the first heads turned along the south side of the pond, he cut a double handful and parched it himself over a lightwood fire. He carried it up the street in the blue-rimmed bowl to the first house. Maum Binah, and after her whoever was oldest, poured it into the fanner and threw it up to the wind. What was light blew off across the yard. What was rice came down. Then she threw it up again.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If a man does what is good, let him do it again; let him delight in it: happiness is the outcome of good.<cite>Dhammapada 118, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the elder Mah&#257; Kassapa comes out of seven days of meditation and looks for someone poor to receive his first meal from. He chooses a young woman who is guarding a rice field and parching rice she has gathered. She pours it into his bowl with joy and asks for a share in the truth he has seen. On her way back a snake bites her, and she dies and is reborn as a goddess in a golden mansion, with a golden vessel of golden rice hung at its door to show how she came there. Wanting to make her good fortune sure, she goes each dawn to sweep the elder&rsquo;s cell and set out his water. On the third morning he sees her radiance through the keyhole and sends her away, so that no preacher may one day say a goddess waited on Kassapa. She stands weeping in the air. The Buddha hears, appears before her, says that Kassapa was right to restrain himself and that she is right to want to do good, and speaks the verse. Her name afterward is L&#257;j&#257;, Parched Rice. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mah%C4%81k%C4%81%C5%9Byapa">Mah&#257; Kassapa</a>, the most austere of the Buddha&rsquo;s great disciples, who made a practice of taking alms from the poor.</p>
+    <h3>St. Helena Island, 1862</h3>
+    <p>On November 7, 1861, a Union fleet took the two forts guarding <a href="https://en.wikipedia.org/wiki/Battle_of_Port_Royal">Port Royal Sound</a>. The planters of the South Carolina Sea Islands fled inland, and about ten thousand enslaved people stayed where they were. The islanders called that day the Gun Shoot. What followed is known as the <a href="https://en.wikipedia.org/wiki/Port_Royal_Experiment">Port Royal Experiment</a>: Treasury cotton agents, then Northern superintendents and teachers, with the people working the abandoned plantations for wages that often came late or in store credit. In May 1862 General Hunter&rsquo;s soldiers took the able-bodied men off the plantations for a regiment without warning, and in July the Army gave up Edisto Island and carried its people to St. Helena. By that winter Sea Island men were enlisting in the <a href="https://en.wikipedia.org/wiki/1st_South_Carolina_Colored_Infantry_Regiment">First South Carolina Volunteers</a>. The <a href="https://www.nps.gov/articles/000/the-legacy-of-the-port-royal-experiment.htm">National Park Service</a> tells the larger story. Long Pond and everyone on it are invented.</p>
+    <p>Each plantation had its <a href="https://en.wikipedia.org/wiki/Praise_house">praise house</a>. The Philadelphia teacher Laura Towne, who came to St. Helena in April 1862, wrote that it was &ldquo;always the cabin of the oldest person in the little village,&rdquo; and in 1864 she visited an old African-born woman known as a great &ldquo;spiritual mother&rdquo; with &ldquo;tremendous influence over her spiritual children&rdquo; (<a href="https://archive.org/details/lettersdiaryofla00town">Letters and Diary of Laura M. Towne</a>). Young people who were &ldquo;seeking&rdquo; went out alone to pray in the woods under the guidance of such an elder. Towne also noted the small ponds of the island planted in rice, which was pounded in a mortar and winnowed in a wide coiled basket called a fanner; in the old rice country people were set to keep the <a href="https://en.wikipedia.org/wiki/Bobolink">ricebirds</a> off the ripening grain. Objects last used by the dead <a href="https://southwritlarge.com/articles/african-american-funeral-and-mourning-customs-in-south-carolina/">were laid on their graves</a>. The two songs come from this place and these years. &ldquo;Not Weary Yet&rdquo; was taken down in the Port Royal islands by Charles P. Ware, a superintendent on St. Helena, and printed in <a href="https://archive.org/details/slavesongsofunit00alle">Slave Songs of the United States</a> (1867); &ldquo;Fare Ye Well&rdquo; was sung by the Sea Island soldiers of Thomas Wentworth Higginson&rsquo;s regiment and printed in his <a href="https://www.gutenberg.org/ebooks/6764">Army Life in a Black Regiment</a> (1870). Both are quoted as those books give them, and the spelling is the collectors&rsquo;.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the goddess L&#257;j&#257; from the Dhammapada commentary (verse 118). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-03.htm">The original</a>. Songs from <span style="font-style:normal">Slave Songs of the United States</span> (1867) and T. W. Higginson, <span style="font-style:normal">Army Life in a Black Regiment</span> (1870). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-recall-card.html">&larr; The Recall Card</a><a href="index.html">All stories</a><a href="going-home-money.html">Going-Home Money &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, grains = [], chaff = [], t = 0, bx, by, bw;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    bw = Math.min(190, W * 0.42);
+    bx = W > 900 ? W * 0.5 + 360 : W - bw * 0.62 - 10;
+    if (bx + bw / 2 > W - 6) bx = W - bw / 2 - 6;
+    by = H - 26;
+  }
+  function toss() {
+    grains = []; chaff = [];
+    var n = 46, i;
+    for (i = 0; i < n; i++) {
+      var gx = (Math.random() - 0.5) * bw * 0.7;
+      grains.push({ x: bx + gx, y: by - 3, vx: (Math.random() - 0.5) * 0.5, vy: -(2.2 + Math.random() * 1.6), r: 1.1 + Math.random() * 0.8, rest: false });
+    }
+    for (i = 0; i < 30; i++) {
+      chaff.push({ x: bx + (Math.random() - 0.5) * bw * 0.7, y: by - 3, vx: -(0.25 + Math.random() * 0.5), vy: -(1.8 + Math.random() * 1.6), a: 0.5, w: 2 + Math.random() * 3 });
+    }
+  }
+  function basket() {
+    ctx.strokeStyle = 'rgba(216,171,60,0.3)'; ctx.lineWidth = 1.4;
+    for (var k = 0; k < 3; k++) {
+      ctx.beginPath(); ctx.ellipse(bx, by + k * 3, bw / 2 - k * 7, 7 - k * 1.5, 0, 0, Math.PI); ctx.stroke();
+    }
+    ctx.beginPath(); ctx.moveTo(bx - bw / 2, by); ctx.lineTo(bx + bw / 2, by); ctx.stroke();
+  }
+  function step(move) {
+    var i, g, f;
+    for (i = 0; i < grains.length; i++) {
+      g = grains[i];
+      if (move && !g.rest) {
+        g.vy += 0.045; g.x += g.vx; g.y += g.vy;
+        if (g.vy > 0 && g.y >= by - 2) { g.y = by - 2 - Math.random() * 3; g.rest = true; }
+      }
+      ctx.fillStyle = 'rgba(240,207,122,' + (g.rest ? 0.42 : 0.6) + ')';
+      ctx.beginPath(); ctx.ellipse(g.x, g.y, g.r * 1.5, g.r * 0.8, 0.5, 0, 6.283); ctx.fill();
+    }
+    for (i = 0; i < chaff.length; i++) {
+      f = chaff[i];
+      if (move) { f.vy += 0.016; f.vx -= 0.004; f.x += f.vx; f.y += f.vy * 0.8; f.a -= 0.0016; }
+      if (f.a <= 0) continue;
+      ctx.strokeStyle = 'rgba(233,227,211,' + (f.a * 0.5) + ')'; ctx.lineWidth = 0.8;
+      ctx.beginPath(); ctx.moveTo(f.x, f.y); ctx.lineTo(f.x + f.w, f.y + f.w * 0.35); ctx.stroke();
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    basket();
+    if (reduce) { step(false); return; }
+    if (t % 720 === 0) toss();
+    step(true);
+    t++; requestAnimationFrame(draw);
+  }
+  function still() {
+    toss();
+    for (var k = 0; k < 60; k++) {
+      for (var i = 0; i < grains.length; i++) { var g = grains[i]; g.vy += 0.045; g.x += g.vx; g.y += g.vy; }
+      for (var j = 0; j < chaff.length; j++) { var f = chaff[j]; f.vy += 0.016; f.vx -= 0.004; f.x += f.vx; f.y += f.vy * 0.8; f.a -= 0.0016; }
+    }
+  }
+  size();
+  if (reduce) still();
+  draw();
+  window.addEventListener('resize', function () { size(); if (reduce) { still(); draw(); } });
+})();
+</script>
+</body>
+</html>

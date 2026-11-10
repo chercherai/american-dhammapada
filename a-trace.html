@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Trace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale concrete of a pool deck at seven in the morning, light theme; down one margin runs the ruled column of a weather observer's book, where a new day's entry is penned every few seconds, mostly a T or a zero, until the page is full and turns; datelined sections. */
+  --ground: #f1f4f1;
+  --ground-2: #e2ebea;
+  --paper: #1f2b30;
+  --paper-dim: #5b696e;
+  --accent: #0f6f80;
+  --glow: #b08d1a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #e6f0f0 0%, var(--ground) 45%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(31,43,48,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(15,111,128,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(226,235,234,.88); border: 1px solid rgba(31,43,48,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.card { margin: 2rem 0; padding: 1rem 1.25rem; background: rgba(255,255,255,.75); border: 1px solid rgba(31,43,48,.22); font-family: var(--font-body); font-size: .92rem; letter-spacing: .06em; line-height: 1.6; text-transform: uppercase; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(31,43,48,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(31,43,48,.14); border-bottom: 1px solid rgba(31,43,48,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(226,235,234,.88); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 9.5 &middot; Asa&ntilde;&ntilde;ataparikkh&#257;ra</span></nav>
+<header>
+  <h1>A Trace</h1>
+  <div class="epigraph">&hellip;in the vocabulary of nature, little and great are terms of comparison only; she knows no trifles&hellip;<br>&mdash; George Perkins Marsh, <span style="font-style:normal">Man and Nature</span> (1864)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way the guards tell it,</span> at the top of Brush Creek.</p>
+
+<section>
+  <h2>I. The Furniture</h2>
+  <p class="dateline">Highview Swim Club, Johnson County, Kansas &middot; summer 1977</p>
+  <p>Highview was a members&rsquo; pool on the hill off Lamar Avenue, where Overland Park runs into Prairie Village and nobody but the mailman knows which is which. Two hundred and eighty families owned it in equal shares. It had six lanes, a diving well, a baby pool, a snack window that sold frozen Snickers, and a board of seven that met on the second Tuesday in somebody&rsquo;s family room. In May the board had bought thirty new chaise lounges, aluminum with yellow vinyl straps, to go with the thirty old white ones. It had voted, after discussion, to keep the two pine picnic tables a member had donated in 1969.</p>
+  <p>Kim Hadley was head guard that summer. She was seventeen and would be a senior at Shawnee Mission East, and it was her third year on the stand. She was good at it. She did not twirl her whistle or talk to boys through the fence. She sat forward with her elbows on her knees and counted heads, shallow to deep and back, all day. The July before, she had gone off the stand in her sunglasses and brought a four-year-old up from the bottom of the five-foot before his mother finished turning around. She backwashed the filter when the dial said to. She took the chlorine and the pH every two hours and wrote them on the clipboard. At nine she locked the chemical room and the gate, and then tried the gate.</p>
+  <p>The last line on the closing list said FURNITURE STACKED UNDER PAVILION, and that one she did not do.</p>
+  <p>Whatever had been used out on the deck stayed out on the deck. The chaises the mothers had dragged onto the grass to follow the shade stayed on the grass, where the sprinklers came on at four in the morning. The umbrellas stayed up. In June a thunderstorm came over from Olathe at suppertime, put two chaises in the deep end and turned an umbrella inside out. By the Fourth the yellow straps along the west fence had gone the color of old piano keys and begun to split where they wrapped the frame. One of the pine tables had stood on the lawn since Memorial Day. It leaned when you sat at it, and when Doug Petrie turned it over, the legs were soft and the termites were in them.</p>
+  <p>The other guards said something. They were the ones who got pinched when a strap let go.</p>
+  <p><em>Kim. The chairs.</em></p>
+  <p><em>It&rsquo;s lawn furniture,</em> Kim said. <em>Nobody ever drowned on a chaise. It&rsquo;s not worth the heartburn.</em></p>
+  <p><em>We&rsquo;re supposed to stack them.</em></p>
+  <p><em>So I did one little thing wrong. Write it on the clipboard.</em></p>
+  <p>The next night she tried the gate twice and left sixty chaises out under the sky.</p>
+</section>
+
+<section>
+  <h2>II. The Gauge</h2>
+  <p class="dateline">A Thursday in late July</p>
+  <p>Mr. Ordway was president of the board that year, having missed the meeting where it was decided. He was fifty-four, a long quiet man from Vermont with a daughter on the swim team. He did hydrology for the Corps of Engineers downtown, which the guards understood to mean that he was paid to know how high creeks got.</p>
+  <p>He came through the gate at seven every morning of the year, winter and summer, on his way to work. He came for the rain gauge. It stood on a post in the corner of the fence behind the pump house, a galvanized can eight inches across and twenty tall, open at the top. He was what the Weather Service called a cooperative observer. The gauge had stood in his own back yard until his maples grew out over it, and the pool had the only open sky left on the hill, so the board had let him move it. Every morning he lifted off the funnel, drew out the narrow brass tube inside, put a thin stick down it, looked at the stick, and wrote in a book.</p>
+  <p>The guards told him about the furniture. Doug Petrie did it, at the gate, on a Thursday, and Mr. Ordway walked around the pump house to where Kim was hosing the deck for swim practice.</p>
+  <p><em>Kim. Is it so, what I hear about the chaises?</em></p>
+  <p><em>It&rsquo;s a little thing, Mr. Ordway,</em> she said. <em>I get the gate and the chemicals and the water. Those are lawn chairs. It isn&rsquo;t worth anybody&rsquo;s heartburn.</em></p>
+  <p>He did not tell her it was. He bent and pressed a yellow strap with his thumb, and it cracked along the fold.</p>
+  <p><em>Come hold the funnel for me,</em> he said.</p>
+  <p>There had been a little weather in the night, nothing anybody woke for. She held the funnel. He drew the tube, put the stick down it and showed her. The wood was dark at the very tip, short of the first line.</p>
+  <p><em>What do you call that?</em></p>
+  <p><em>Nothing.</em></p>
+  <p><em>It&rsquo;s a trace. Too little to measure. You write a T.</em> He wrote a T. <em>You always write it.</em></p>
+  <p><em>Why, if you can&rsquo;t measure it?</em></p>
+  <p><em>Because it fell.</em></p>
+  <p>He turned the book back for her, a page to a month. The column for June was mostly T&rsquo;s and zeros, with a .02 and a .11, and one day near the end that said 1.34. He had kept it nineteen years. He said the county got a little over a yard of water a year, that nearly all of it came into that can a few hundredths of an inch at a time, and that he had never once been able to say which hundredth did anything.</p>
+  <p>An index card was taped inside the cover of the book, typed, brown at the edges. He put his finger beside it, and she read it standing there in her suit with the hose running.</p>
+  <div class="verse">
+    <p>It is a legal maxim that &ldquo;the law concerneth not itself with trifles,&rdquo; <span style="font-style:normal">de minimus non curat lex</span>; but in the vocabulary of nature, little and great are terms of comparison only; she knows no trifles, and her laws are as inflexible in dealing with an atom as with a continent or a planet.</p>
+    <p>&hellip;we are never justified in assuming a force to be insignificant because its measure is unknown&hellip;</p>
+    <p>&mdash; George Perkins Marsh, <span style="font-style:normal">Man and Nature</span> (1864)</p>
+  </div>
+  <p><em>He was from my town,</em> Mr. Ordway said. <em>A good hundred years ahead of me. He&rsquo;s the one who worked out what happens to a river when you cut the trees off a hill.</em> He set the funnel back on the can. <em>The can doesn&rsquo;t know a little rain from a big one. It keeps what falls in it, that&rsquo;s all, and one morning it&rsquo;s full. A person fills the same way. You leave those out one night and that&rsquo;s a T. I couldn&rsquo;t measure it. But it&rsquo;s the same two hands that try the gate, and every night at nine they&rsquo;re being taught what they can walk past.</em></p>
+  <p><em>I always try the gate.</em></p>
+  <p><em>I know you do. I&rsquo;ve watched you.</em></p>
+  <p>She looked down the row of chaises. <em>It&rsquo;s not like weather matters up here,</em> she said. <em>We&rsquo;re on top of the hill. It all runs off. It never comes to us.</em></p>
+  <p><em>Runs off where?</em></p>
+  <p>She did not know.</p>
+  <p><em>That ditch behind the baby pool is Brush Creek. That&rsquo;s where it starts. This parking lot is the first acre of it. What falls on this hill and can&rsquo;t soak in goes down that ditch, under Seventy-fifth Street, through Mission Hills and out across the Plaza. It all goes somewhere, Kim.</em></p>
+  <p>That was all he said. He went to work.</p>
+  <p>On Saturday there was a new card on the door of the guard shack, typed on the same machine as the one in the book. It was tacked above the closing list, where nobody could read the list without reading the card first.</p>
+  <div class="card">All furniture stacked and chained under the pavilion at close. A guard who leaves it out is in the wrong. &mdash; L. O., for the Board</div>
+  <p>Kim stacked them that night, sixty chaises in six stacks of ten and the chairs in fours, ran the chain through, and then tried the gate. It took her eleven minutes. She did it every night after that, through Labor Day. The guard shack roof had a leak over the desk that nobody had ever fixed, one drop every little while into a coffee can. In August she started emptying the can.</p>
+</section>
+
+<section>
+  <h2>III. The Can</h2>
+  <p class="dateline">Tuesday, September 13, 1977</p>
+  <p>The pool closed on Labor Day. Kim&rsquo;s last act as head guard was to chain the furniture under the pavilion for the winter and hang the key on its nail.</p>
+  <p>A week later, a little after one on Monday morning, it began to rain on Kansas City and kept on until six. The afternoon was sunny. In the evening people went out to dinner on the Plaza. Around eight it began again, on ground that could not hold another cupful, and rained until two.</p>
+  <p>On Tuesday she drove over at a quarter to seven, as she had all summer. She could not have said why, except that she knew he would be there.</p>
+  <p>Lamar looked like a creek bed. Gravel lay across it in bars, with a doghouse, and somebody&rsquo;s mailbox still on its post. The club&rsquo;s parking lot had been scoured in a fan pointing downhill. At the low corner by the baby pool the chain-link lay flat, and woven into it was a hedge of other people&rsquo;s things: trash cans, a Big Wheel, a redwood planter, and lawn chairs from the yards up the street. There were eleven chairs. She counted them without meaning to. The pool was the color of coffee with milk in it. A line of silt crossed the deck and stood a hand high on the pavilion posts. Under the pavilion roof were six stacks of ten and the chairs in fours, muddy at the feet, chained, every one of them there.</p>
+  <p>Mr. Ordway was at the gauge. He had been at the District office since Monday noon and had on yesterday&rsquo;s shirt. He said nothing about the furniture. He held out the funnel, and she took it.</p>
+  <p>The brass tube was full to the lip, which was two inches. He read it and poured it on the ground. Then he lifted the big can off its post with both hands, and it was heavy. He poured from it through the funnel she held until the tube was full again, read that, emptied it, and poured again. They went on until the can was dry. He did the adding twice in the margin.</p>
+  <p>Then he gave her the pencil.</p>
+  <p>Downstream the creek had gone through the Plaza five feet deep with cars in it. Twenty-five people were dead, though nobody at Highview knew the number yet. All Kim knew was the page. September ran down it in his small upright hand: T, 0, 0, T, .04, T, 0. Then came Monday&rsquo;s line, which was his, and under it Tuesday&rsquo;s, which was empty.</p>
+  <p>She wrote the number. It took up one line, the same as a T.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Let no man think lightly of evil, saying in his heart, It will not come nigh unto me. Even by the falling of water-drops a water-pot is filled; the fool becomes full of evil, even if he gather it little by little.<cite>Dhammapada 121, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary&rsquo;s story is short. A monk leaves outdoors whatever beds and chairs of the community he has used outdoors, and rain, sun and white ants ruin them. When the other monks say he ought to put things away, he answers that it is a slight fault, not worth wasting thought or bile over, and does it again. They tell the Buddha, who sends for him and asks whether it is true, and the monk gives him the same answer. The Buddha says that no one should call a wrong deed a trifle: a jar left open in the rain is not filled by one drop, but it fills. He speaks the verse and lays down a rule that a monk who leaves a bed out in the open is at fault. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-05.htm">the full commentary story</a>.</p>
+    <h3>Brush Creek, 1977</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Brush_Creek_(Blue_River_tributary)">Brush Creek</a> rises near West 80th Street and Lamar Avenue in Overland Park, Kansas, runs through Prairie Village and Mission Hills, and crosses into Kansas City, Missouri, at the Country Club Plaza. On September 12, 1977, two storms struck the city within one day, the first from about 1 to 6 a.m. and the second from about 8 p.m. to 2 a.m., with sunshine in between. As much as sixteen inches fell. The first rain saturated the ground and the second ran off it. The <a href="https://pubs.usgs.gov/publication/wri7863">U.S. Geological Survey&rsquo;s report</a> counts twenty-five dead and notes that even people living on slopes above the flood plains had hillside runoff in their garages and basements. At 75th Street and Nall Avenue in Prairie Village, where the creek has gathered only a mile and a half of suburb, the Survey estimated a peak of 3,000 cubic feet a second, well past the hundred-year flood. Downstream the water stood five to six feet deep on the Plaza. The Corps of Engineers had warned in 1970 that the creek could reach flood stage in under an hour; the Kansas City Public Library <a href="https://kclibrary.org/node/30699">tells the story</a>. Highview, its board, Mr. Ordway and Kim Hadley are invented.</p>
+    <p>The National Weather Service&rsquo;s <a href="https://en.wikipedia.org/wiki/Cooperative_Observer_Program">Cooperative Observer Program</a>, begun in 1890, relies on thousands of volunteers who read their instruments once a day. The standard <a href="https://en.wikipedia.org/wiki/Rain_gauge">rain gauge</a> is an eight-inch funnel over a narrow measuring tube inside a can twenty inches tall; the tube holds two inches, and whatever overflows into the can is poured back through and measured. Rain too slight to measure is entered as a <a href="https://en.wikipedia.org/wiki/Trace_(precipitation)">trace</a>, written T. <a href="https://en.wikipedia.org/wiki/George_Perkins_Marsh">George Perkins Marsh</a> was born in Woodstock, Vermont, in 1801. His <a href="https://www.gutenberg.org/ebooks/37957"><em>Man and Nature</em></a> (1864) argued, from the ruined hillsides of the Mediterranean and the cut-over ones of New England, that human beings change the earth by small acts added together, and it helped to launch the conservation movement. The words on the index card are from its last section, which Marsh headed &ldquo;Nothing Small in Nature.&rdquo; The Latin is spelled as he printed it.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the monk who would not put away his requisites, from the Dhammapada commentary (verse 121). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-05.htm">The original</a>. The teaching text is George Perkins Marsh, <span style="font-style:normal">Man and Nature</span> (1864). Written by Claude Fable 5.2.
+  <div class="pager"><a href="going-home-money.html">&larr; Going-Home Money</a><a href="index.html">All stories</a><a href="three-fingers.html">Three Fingers &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, rows = [], n = 0, t = 0, fade = 1, turning = false, x, top = 96, gap = 24, wide;
+  function entry() {
+    var r = Math.random();
+    if (r < 0.46) return 'T';
+    if (r < 0.78) return '0';
+    if (r < 0.95) return '.0' + (1 + Math.floor(Math.random() * 9));
+    return '.' + (10 + Math.floor(Math.random() * 60));
+  }
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    wide = W > 900;
+    x = wide ? W * 0.5 + 350 : W - 20;
+    n = Math.max(4, Math.floor((H - top - 40) / gap));
+  }
+  function fill(all) {
+    rows = [];
+    var k = all ? n : 0;
+    for (var i = 0; i < k; i++) rows.push({ s: entry(), a: 1 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var base = wide ? 0.34 : 0.17;
+    ctx.strokeStyle = 'rgba(15,111,128,' + (base * 0.45 * fade) + ')'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x - 30, top - 22); ctx.lineTo(x - 30, top + n * gap - 8); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x + 8, top - 22); ctx.lineTo(x + 8, top + n * gap - 8); ctx.stroke();
+    ctx.font = 'italic 15px "IM Fell English", Georgia, serif'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      if (!reduce && r.a < 1) r.a = Math.min(1, r.a + 0.02);
+      ctx.fillStyle = 'rgba(15,111,128,' + (base * r.a * fade) + ')';
+      ctx.fillText(r.s, x, top + i * gap);
+      ctx.strokeStyle = 'rgba(15,111,128,' + (base * 0.22 * fade) + ')';
+      ctx.beginPath(); ctx.moveTo(x - 30, top + i * gap + gap / 2); ctx.lineTo(x + 8, top + i * gap + gap / 2); ctx.stroke();
+    }
+    if (reduce) return;
+    if (turning) {
+      fade -= 0.012;
+      if (fade <= 0) { fill(false); fade = 1; turning = false; t = 0; }
+    } else {
+      if (t % 170 === 0 && rows.length < n) rows.push({ s: entry(), a: 0 });
+      if (rows.length >= n && t % 170 === 169) turning = true;
+      t++;
+    }
+    requestAnimationFrame(draw);
+  }
+  size(); fill(reduce); draw();
+  window.addEventListener('resize', function () { size(); if (rows.length > n) rows.length = n; if (reduce) { fill(true); draw(); } });
+})();
+</script>
+</body>
+</html>
