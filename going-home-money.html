@@ -224,50 +224,60 @@ details.bg summary:focus-visible { outline: 2px solid var(--vermilion); outline-
 
 <script>
 (function () {
-  // A slow tide: the bay draws back from the foot of the page and returns.
+  // Hoar-frost: fine crystals grow in from the lower corners, a little at a time, then thaw and begin again.
   var c = document.getElementById('fx'), ctx = c.getContext('2d');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var W, H, glints = [], t0 = performance.now();
+  var W, H, tips, segs, MAX, fade, frame;
   function size() {
     var d = Math.min(window.devicePixelRatio || 1, 2);
     W = window.innerWidth; H = window.innerHeight;
     c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
-    glints = [];
-    var n = Math.round(Math.max(10, Math.min(28, W / 50)));
-    for (var i = 0; i < n; i++) glints.push({ x: Math.random(), d: Math.random(), s: Math.random() * 6.28 });
+    reset();
   }
-  function draw(now) {
-    var t = reduce ? 0 : (now - t0) / 1000;
+  function seed(x, y, ang) { return { x: x, y: y, a: ang, life: 40 + Math.random() * 60 }; }
+  function reset() {
+    tips = []; segs = 0; fade = 0; frame = 0;
+    MAX = Math.round(Math.max(500, Math.min(1400, W * 1.1)));
+    for (var i = 0; i < 4; i++) {
+      tips.push(seed(Math.random() * W * 0.08, H - Math.random() * H * 0.08, -Math.PI / 2 + Math.random() * 1.2));
+      tips.push(seed(W - Math.random() * W * 0.08, H - Math.random() * H * 0.08, -Math.PI / 2 - Math.random() * 1.2));
+    }
     ctx.clearRect(0, 0, W, H);
-    // tide level breathes over about 70 seconds
-    var level = H * (0.86 + 0.06 * Math.sin(t * 0.09));
-    ctx.beginPath();
-    ctx.moveTo(0, H);
-    for (var x = 0; x <= W; x += 12) {
-      var y = level + 5 * Math.sin(x * 0.012 + t * 0.5) + 3 * Math.sin(x * 0.031 - t * 0.3);
-      ctx.lineTo(x, y);
-    }
-    ctx.lineTo(W, H); ctx.closePath();
-    var g = ctx.createLinearGradient(0, level - 10, 0, H);
-    g.addColorStop(0, 'rgba(132,184,165,0.10)');
-    g.addColorStop(0.25, 'rgba(60,110,110,0.08)');
-    g.addColorStop(1, 'rgba(20,40,45,0.0)');
-    ctx.fillStyle = g; ctx.fill();
-    // the wet line the water leaves
-    ctx.strokeStyle = 'rgba(160,120,80,0.10)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(0, H * 0.80); ctx.lineTo(W, H * 0.80); ctx.stroke();
-    for (var i = 0; i < glints.length; i++) {
-      var gl = glints[i];
-      var gy = level + 8 + gl.d * (H - level - 8);
-      var a = 0.18 * (0.5 + 0.5 * Math.sin(t * 0.8 + gl.s)) * (1 - gl.d);
-      if (a < 0.01) continue;
-      ctx.fillStyle = 'rgba(231,226,212,' + a + ')';
-      ctx.fillRect(gl.x * W, gy, 6 + gl.d * 10, 1);
-    }
-    if (!reduce) requestAnimationFrame(draw);
   }
-  size(); requestAnimationFrame(draw);
-  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+  function grow() {
+    var next = [];
+    for (var i = 0; i < tips.length; i++) {
+      var t = tips[i];
+      var len = 3 + Math.random() * 4;
+      var nx = t.x + Math.cos(t.a) * len, ny = t.y + Math.sin(t.a) * len;
+      ctx.strokeStyle = 'rgba(214,232,226,' + (0.10 + Math.random() * 0.08) + ')';
+      ctx.lineWidth = 0.7;
+      ctx.beginPath(); ctx.moveTo(t.x, t.y); ctx.lineTo(nx, ny); ctx.stroke();
+      segs++;
+      t.x = nx; t.y = ny; t.life--;
+      t.a += (Math.random() - 0.5) * 0.25;
+      if (t.life > 0 && nx > -10 && nx < W + 10 && ny > H * 0.45) next.push(t);
+      if (Math.random() < 0.06 && next.length < 60) next.push(seed(nx, ny, t.a + (Math.random() < 0.5 ? 1 : -1) * (0.6 + Math.random() * 0.5)));
+    }
+    if (next.length === 0) for (var k = 0; k < 2; k++) next.push(seed(Math.random() < 0.5 ? Math.random() * W * 0.1 : W - Math.random() * W * 0.1, H, -Math.PI / 2 + (Math.random() - 0.5) * 2));
+    tips = next;
+  }
+  function tick() {
+    frame++;
+    if (fade > 0) {
+      ctx.save(); ctx.globalCompositeOperation = 'destination-out';
+      ctx.fillStyle = 'rgba(0,0,0,0.02)'; ctx.fillRect(0, 0, W, H); ctx.restore();
+      fade--; if (fade === 0) reset();
+    } else if (frame % 6 === 0) {
+      grow();
+      if (segs > MAX) fade = 240;
+    }
+    requestAnimationFrame(tick);
+  }
+  size();
+  if (reduce) { while (segs < MAX * 0.7) grow(); }
+  else requestAnimationFrame(tick);
+  window.addEventListener('resize', function () { size(); if (reduce) { while (segs < MAX * 0.7) grow(); } });
 })();
 </script>
 </body>

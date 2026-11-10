@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Madder Red</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on rain-washed birch-bark paper, light theme; across the top of the page a slack clothesline carries a few faint madder-red shirts that sway and drip; datelined sections. */
+  --ground: #ece8df;
+  --ground-2: #e0dbcf;
+  --paper: #2b2622;
+  --paper-dim: #6f675c;
+  --accent: #9c3327;
+  --glow: #b5523f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #e4e3dc 0%, var(--ground) 45%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,38,34,.16); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(224,219,207,.8); border: 1px solid rgba(43,38,34,.16); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,38,34,.16); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,38,34,.16); border-bottom: 1px solid rgba(43,38,34,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(224,219,207,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 20.10 &middot; Mah&#257; Dhana</span></nav>
+<header>
+  <h1>Madder Red</h1>
+  <div class="epigraph">To-morrow?&mdash;Why, To-morrow I may be<br>Myself with Yesterday&rsquo;s Sev&rsquo;n Thousand Years.<br>&mdash; Rub&aacute;iy&aacute;t of Omar Khayy&aacute;m XX</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Word came up the trail,</span> at Kid Village.</p>
+
+<section>
+  <h2>I. The Culvert</h2>
+  <p class="dateline">Bog Dam Road, White Mountain National Forest, New Hampshire &middot; June 26, 2023</p>
+  <p>Big Rich had five hundred shirts in the van, counted, in eleven totes. He dyed nothing but red. He did it in a forty-gallon kettle behind his house outside Athens, Ohio, with madder root and alum, and he tied every shirt in the same tight spiral, so that on any Shakedown Street in the country people could say, <em>Those are Big Rich's reds,</em> from forty feet. He had sold on the lot since the spring tour of 1990. He was sixty-one years old, six foot four, and he had never in his life missed a show to go camping.</p>
+  <p>That summer Dead &amp; Company were out on what they called the Final Tour. Rich had worked both nights at Fenway, and the lot had been fat. The plan was to drive west and be set up in Boulder by the first of July, then the Gorge, then the last three nights in San Francisco, where he meant to sell every shirt he had and think about what came after. But a kid buying a shirt at Fenway told him the Rainbow Gathering was in New Hampshire this year, three hours north, the first one ever in the White Mountains. Rich thought he could sell a hundred shirts to hippies in the parking area in two days and still make Colorado.</p>
+  <p>He drove through the night and came up Bog Dam Road at first light on Monday in a steady rain. A woman in a poncho leaned in his window and said, <em>Welcome home.</em> He pulled the van onto a spur, across a little brook that was not on his map, and slept.</p>
+  <p>When he woke the brook had taken the culvert out behind him. There was a trench across the spur four feet deep with brown water going through it, and his van was on the wrong side.</p>
+  <p>It rained that day and the six days after. It was a wet year in New Hampshire, and the Forest Service had larger holes to fill than his. And the Family was keeping its holiday. People walked in past his van all week under tarps and trash bags, carrying drums, kettles, babies. Every one of them said <em>welcome home</em>, and not one of them bought a shirt. He had known there was no money inside a Gathering. He had not understood that they meant it. <em>Take them to trade circle, brother,</em> they told him. At trade circle a thirty-five-dollar shirt would get him a jar of honey or a piece of quartz. He had a storage unit in Ohio that did not take quartz.</p>
+  <p>In seven days he traded two shirts. He hung the wet ones on a line between two birches, and they did not dry.</p>
+</section>
+
+<section>
+  <h2>II. The Bucket</h2>
+  <p class="dateline">The spur &middot; Sunday, July 2</p>
+  <p>On Sunday morning a Forest Service crew came with a backhoe and a length of plastic pipe and filled the trench in an hour. Rich stood at his bumper and looked at the open road. It was twenty-nine hours to Boulder, and the shows there had started the night before.</p>
+  <p>He talked to himself when he was alone. Most people do who drive for a living.</p>
+  <p><em>Well, I've come a long way,</em> he said. <em>If I turn around now I'm just late for everything. So I'll stay right here. I'll stay through the rain and work cleanup with these people till August, and they'll know me by then. I'll winter where they winter, in Florida, at Ocala. Next summer I'll come in early with my own kitchen, wherever they go, and sell in the towns along the way. A year. I'll move it all in a year.</em></p>
+  <p>He liked it better the more of it he said. He began taking shirts off the line and wringing them out.</p>
+  <p>Two boys were coming down the spur toward the brook with a bucket. The big one was about nineteen, in a wool hat. The small one was seven and was called Early. He had been born at the Gathering in Vermont in 2016, in a tent at Kid Village, three weeks before anybody was ready. People in the Family held that a child born on the land was a little different. They said Early had told a woman from Tea Time that her dog would walk back in on Thursday, and it had.</p>
+  <p>Early looked at the tall man talking to his shirts, and he smiled.</p>
+  <p><em>What?</em> said the big one, whose name was Nando. He was Early's half brother and had looked after him at every Gathering since he could carry him.</p>
+  <p><em>You see that man?</em></p>
+  <p><em>The red shirt guy. Sure.</em></p>
+  <p><em>He's saying where he's going to live all year,</em> Early said. <em>He's got it all figured out. He's got a week.</em></p>
+  <p>Nando stopped walking. <em>A week till what?</em></p>
+  <p><em>Till he dies.</em> Early said it in the voice he used for telling you your shoe was untied.</p>
+  <p><em>You sure?</em></p>
+  <p><em>Yeah. Saturday.</em></p>
+  <p>Nando looked at the man for a while. <em>Somebody ought to tell him.</em></p>
+  <p><em>You go,</em> said Early. <em>I'll get the water.</em></p>
+</section>
+
+<section>
+  <h2>III. Seven Days</h2>
+  <p class="dateline">Kid Village &middot; July 2 to July 8</p>
+  <p>Rich had a camp stove going on his tailgate. He saw a wet kid with an empty cup and did what lot people do. He filled the cup with coffee and made him a peanut butter sandwich and did not ask what he wanted.</p>
+  <p><em>How long are you staying?</em> Nando said, when he had eaten half.</p>
+  <p>Rich told him the whole plan. He told it well.</p>
+  <p><em>That's a good plan,</em> Nando said. <em>Listen. It's hard to see it coming, for anybody. You should keep an eye out.</em></p>
+  <p><em>For what?</em></p>
+  <p><em>My brother says you've got a week.</em></p>
+  <p><em>Who's your brother?</em></p>
+  <p>Nando pointed with the sandwich. Down at the brook a very small boy was holding a bucket in the current with both hands, leaning back against the pull of it.</p>
+  <p>Rich laughed. Then he stopped. He looked at the boy and the bucket for some time. He had been on the road thirty-three years and had heard every kind of talk, and he knew when a thing was not talk. He sat down on the tailgate.</p>
+  <p><em>A week,</em> he said.</p>
+  <p><em>Saturday,</em> said Nando. <em>I'm sorry, man.</em></p>
+  <p>Rich sat there until the coffee was cold. Then he got up and asked where the children ate.</p>
+  <p>He drove out over the new culvert that afternoon, down to the Walmart in Gorham, and spent the Fenway money. It was twenty-three hundred dollars in a bank bag. He bought oats, rice, lentils, peanut butter by the case, oranges, bananas, cooking oil, coffee and two hundred pounds of potatoes. He brought it back up Bog Dam Road and carried it in to Kid Village a tote at a time, half a mile on a mud trail. The kitchen there was run by a woman called Mama Jo, who had said in 1989 that she would go home when the last kid was fed, and there had always been one more kid. She looked at the potatoes and handed him a peeler.</p>
+  <p>For seven days he cooked. He was up before light to start the oats. He hauled water, he fed the fire, and he scrubbed pots with ash and sand. At evening he helped carry the kettles down to Main Circle. There the whole Gathering stood in a ring in the meadow holding hands until the food came around, and afterward the Magic Hat went around for the next day's rice. He gave the shirts away. He gave them first to the children, and then to anyone who was cold, and that week it was nearly everyone.</p>
+  <p>On the Fourth the meadow was silent from sunrise. Fifteen or seventeen hundred people stood or sat in the wet grass without a word, under a sky as low as a tarp. At noon a sound started in the circle, one low note. Then the children came out of the trees from Kid Village in a line, banging pot lids and singing. Every one of them was in a red spiral that hung to the knees. Early was near the front, with his sleeves rolled into doughnuts at his wrists. Rich stood at the edge of the meadow with a ladle in his hand. He had sold shirts for thirty-three years and had not once seen what they were for.</p>
+  <p>At night he lay in the van and listened to the rain on the roof and the drums a long way off. Water beaded on the empty clothesline outside his window, and each bead had a campfire in it.</p>
+</section>
+
+<section>
+  <h2>IV. The Bowl</h2>
+  <p class="dateline">Kid Village &middot; Saturday, July 8</p>
+  <p>The Gathering ends on the seventh, and on the eighth people walk out. That Saturday the rain held off. Early's mother had a shift in Brattleboro on Monday, and their packs were by the trail.</p>
+  <p>After breakfast Rich took Early's bowl from him and washed it. He did it carefully and dried it on his own shirt and gave it back. Then he sat down on a log, because he found he wanted to hear whatever there was.</p>
+  <p>Early stood in front of him holding the bowl. <em>You said you'd live here when it rains and when it snows and when it's hot.</em></p>
+  <p><em>I did say that.</em></p>
+  <p><em>Don't say that. You don't get to pick that. You can say, I'm here.</em></p>
+  <p><em>I'm here,</em> said Rich.</p>
+  <p><em>Yeah,</em> said Early.</p>
+  <p>Kid Village kept a milk crate of books under the kitchen tarp, swollen with damp. Early could not read much yet. He went to the crate and took out a small one with no cover, opened it, and gave it to his brother with his thumb on the page. He had done this before. Nando had stopped being surprised at where the thumb was.</p>
+  <p>Nando read it out, standing, the way he would have read the directions on a box.</p>
+  <div class="verse">
+    <p>Think, in this batter&rsquo;d Caravanserai<br>Whose Doorways are alternate Night and Day,<br>How Sultan after Sultan with his Pomp<br>Abode his Hour or two, and went his way.</p>
+    <p>Ah! my Beloved, fill the Cup that clears<br>TO-DAY of past Regrets and future Fears&mdash;<br>To-morrow?&mdash;Why, To-morrow I may be<br>Myself with Yesterday&rsquo;s Sev&rsquo;n Thousand Years.</p>
+    <p>&mdash; Rub&aacute;iy&aacute;t of Omar Khayy&aacute;m XVI, XX</p>
+  </div>
+  <p>Rich listened with his big hands hanging between his knees. He had made the plan on the spur six days before. He had wanted a place where they knew him, with a kitchen in it, and somebody to hand a peeler to. He had had exactly that since Sunday. None of it was owed to him next winter, and he found he was not asking for next winter.</p>
+  <p><em>Okay,</em> he said. <em>Okay, little man.</em></p>
+  <p>Mama Jo said afterward that he looked like a man who had set down two full totes.</p>
+</section>
+
+<section>
+  <h2>V. The Trail Out</h2>
+  <p class="dateline">Kilkenny &middot; the same day</p>
+  <p>He carried Early's pack for him up the trail as far as the first bend, where somebody had nailed a board to a spruce that said <em>WE LOVE YOU</em>. There he gave the pack back. Early put his arms through the straps and went on after his mother and Nando. He did not make anything of it.</p>
+  <p>Rich walked back down. At the kitchen he told Mama Jo he had something going on in his head, a kind of pressure, and that he thought he would lie down a while. He went out to the spur and lay down in the back of the van on the empty totes with the doors open. The medics from CALM found him there before dark. He had his boots off and set side by side on the bumper.</p>
+  <p>The cleanup crew stayed three weeks, as it always does, filling latrines and breaking up fire rings and raking the trails back into the woods. They took his line down last.</p>
+  <p>The next July the Family gathered in California. At Kid Village there were red spirals all over the meadow, on children from thirty states, and the shirts were a year closer to fitting.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">&lsquo;Here I shall dwell in the rain, here in winter and summer,&rsquo; thus the fool meditates, and does not think of his death.<cite>Dhammapada 286, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the merchant Mah&#257; Dhana ("Great Wealth") brings five hundred carts of safflower-red cloth to S&#257;vatth&#299; and is stopped at the river by seven days of flood, while the city keeps holiday and nobody buys. He decides to stay the whole year, through rains, winter and summer, until his cloth is sold. The Buddha, passing on his alms round, smiles, and tells &#256;nanda that the man has seven days to live. &#256;nanda goes to the carts and tells him. The merchant feeds the Buddha and the monks for seven days, hears the verse, walks a little way with the Teacher, turns back with a pain in his head, lies down and dies. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-10.htm">the full commentary story</a>. The two verses &#256;nanda hears before he goes, on making an effort today because no one knows whether death comes tomorrow, are from the <a href="https://www.accesstoinsight.org/tipitaka/mn/mn.131.than.html">Bhaddekaratta Sutta</a>.</p>
+    <h3>Kilkenny, New Hampshire, 2023</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Rainbow_Gathering">Rainbow Family of Living Light</a> has met on National Forest land every July 1 to 7 since 1972. It has no leaders and no fees. Inside a Gathering almost no money changes hands: kitchens feed everyone, a "Magic Hat" is passed for supplies bought in town, and luxuries are bartered at a trade circle. Kid Village is the camp for families, CALM is the volunteer medical camp, and the outside world is called Babylon. On the morning of the Fourth the Gathering keeps silence and prays for peace; around noon the silence ends in a long Om, and a parade of children comes in from Kid Village. The 2023 Gathering was the first in the <a href="https://en.wikipedia.org/wiki/White_Mountain_National_Forest">White Mountain National Forest</a>, at the south end of the Kilkenny loop off Bog Dam Road, near Berlin and Gorham. It was a rainy summer, and attendance, at something over 1,700, was smaller than usual. The washed-out culvert, the people and the kitchen cook here are invented; Tea Time is a real Rainbow kitchen. The 2024 Gathering was held in northern California.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Dead_%26_Company_Summer_Tour_2023">Dead &amp; Company's Final Tour</a> played Fenway Park on June 24 and 25, 2023, Boulder on July 1 to 3, the Gorge on July 7 and 8, and closed in San Francisco on July 14 to 16. The parking-lot market that follows the band is called Shakedown Street, after the Grateful Dead song. <a href="https://en.wikipedia.org/wiki/Rose_madder">Madder</a> root, fixed with alum, has dyed cloth red since antiquity. The quatrains are from Edward FitzGerald's first edition of the <a href="https://en.wikipedia.org/wiki/Rubaiyat_of_Omar_Khayyam">Rub&aacute;iy&aacute;t of Omar Khayy&aacute;m</a> (1859).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the merchant Mah&#257; Dhana from the Dhammapada commentary (verse 286). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-10.htm">The original</a>. Verses from the Rub&aacute;iy&aacute;t of Omar Khayy&aacute;m, translated by Edward FitzGerald (first edition, 1859). Written by Claude Fable 5.2.
+  <div class="pager"><a href="gold-leaf.html">&larr; Gold Leaf</a><a href="index.html">All stories</a><a href="dry-mustard.html">Dry Mustard &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, shirts = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    shirts = []; var n = Math.max(4, Math.min(9, Math.round(W / 150)));
+    for (var i = 0; i < n; i++) shirts.push({ u: (i + 0.6 + (Math.sin(i * 7.3) * 0.25)) / (n + 0.4), ph: i * 1.7, s: 0.8 + ((i * 37) % 10) / 25 });
+  }
+  function lineY(u) { return H * 0.045 + Math.sin(u * Math.PI) * H * 0.035; }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.beginPath();
+    for (var i = 0; i <= 40; i++) { var u = i / 40; if (i) ctx.lineTo(u * W, lineY(u)); else ctx.moveTo(0, lineY(0)); }
+    ctx.strokeStyle = 'rgba(70,60,50,0.22)'; ctx.lineWidth = 1; ctx.stroke();
+    for (var k = 0; k < shirts.length; k++) {
+      var s = shirts[k], x = s.u * W, y = lineY(s.u);
+      var sway = reduce ? 0 : Math.sin(t * 0.008 + s.ph) * 0.09 + Math.sin(t * 0.021 + s.ph * 2) * 0.03;
+      var w = 26 * s.s, h = 30 * s.s;
+      ctx.save(); ctx.translate(x, y); ctx.rotate(sway);
+      ctx.fillStyle = 'rgba(160,52,40,0.16)';
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.9, 0); ctx.lineTo(-w * 0.3, 0); ctx.quadraticCurveTo(0, h * 0.18, w * 0.3, 0); ctx.lineTo(w * 0.9, 0);
+      ctx.lineTo(w * 0.9, h * 0.36); ctx.lineTo(w * 0.5, h * 0.36); ctx.lineTo(w * 0.5, h); ctx.lineTo(-w * 0.5, h); ctx.lineTo(-w * 0.5, h * 0.36); ctx.lineTo(-w * 0.9, h * 0.36);
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = 'rgba(160,52,40,0.13)'; ctx.lineWidth = 1; ctx.beginPath();
+      for (var a = 0; a < 9; a += 0.3) { var r = a * w * 0.045, px = Math.cos(a) * r, py = h * 0.55 + Math.sin(a) * r; if (a) ctx.lineTo(px, py); else ctx.moveTo(px, py); }
+      ctx.stroke();
+      // a drop gathers at the hem and falls
+      if (!reduce) { var p = ((t * 0.004 + s.ph) % 1); var dy = p < 0.7 ? 0 : (p - 0.7) / 0.3; ctx.fillStyle = 'rgba(90,110,120,' + (0.28 * (1 - dy)) + ')'; ctx.beginPath(); ctx.arc(w * 0.2, h + 2 + dy * dy * 90, 1.4, 0, Math.PI * 2); ctx.fill(); }
+      ctx.restore();
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

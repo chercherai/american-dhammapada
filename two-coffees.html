@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Coffees</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a darkened worship hall, dark theme; two or three soft stage beams sweep slowly through haze high behind the text and cross; datelined sections. */
+  --ground: #0f0e14;
+  --ground-2: #1a1822;
+  --paper: #e8e4dc;
+  --paper-dim: #a29d98;
+  --brass: #cfa65a;
+  --beam: #b9c2e0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -20%, #22202e 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(232,228,220,.2); }
+.series a:hover { color: var(--brass); }
+a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--brass); text-wrap: balance; text-shadow: 0 0 28px rgba(207,166,90,.22); }
+.epigraph { border-left: 1px solid rgba(207,166,90,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--brass); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--brass); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(26,24,34,.8); border: 1px solid rgba(232,228,220,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--brass); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(232,228,220,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--brass); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--brass); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--brass); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--brass); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--brass); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(26,24,34,.8); border-left: 2px solid var(--brass); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 10.4 &middot; Ku&#7751;&#7693;adh&#257;na</span></nav>
+<header>
+  <h1>Two Coffees</h1>
+  <div class="epigraph">For lack of wood the fire goeth out; And where there is no whisperer, contention ceaseth.<br>&mdash; Proverbs 26:20</div>
+</header>
+
+<p class="heard"><span class="heard-lead">I heard it testified,</span> out at the old Walmart on the bypass.</p>
+
+<section>
+  <h2>I. Two Coffees</h2>
+  <p class="dateline">Anderson County, South Carolina &middot; spring 2015</p>
+  <p>Open Field Church bought the Walmart on the bypass in 2009, a year after the store moved two miles up the road to a Supercenter, and by 2015 three thousand people came there on a Sunday. They kept the polished concrete floor and the long fluorescent bays and the loading dock. They put the sanctuary where the groceries had been, the children&rsquo;s wing in Lawn and Garden, and a coffee bar called the Grounds in the corner where the Subway used to be. Out front, above the doors, you could still see where the old letters had come down: a paler place on the block wall, in the shape of the name, that no paint quite covered. The new sign hung under it.</p>
+  <p>Caleb Pruitt was hired as youth pastor in January. He was twenty-seven and had grown up nine miles away in Cane Creek, an old mill village whose mill had shut when he was in the fourth grade. He had wanted to be a youth pastor since he was fourteen, and he was good at it in the quiet way, the kind who remembered the name of your dog and drove you home from Wednesday night when your mama&rsquo;s car broke down. He still wore the silver ring he had been given at thirteen, the night he signed a pledge card on the altar of Cane Creek First Baptist. He was not married. He did not date. He said he was waiting on the Lord about it, and nobody laughed at him, because of the way he said it.</p>
+  <p>From the week he was hired, there was a girl with him.</p>
+  <p>He never saw her. Everybody else did. She was seventeen or so, slight, with long light-brown hair she kept tucking behind one ear, and a white tank top with a little gold cross on a chain, and she was always a step behind him and a little to the left, the way a girl walks behind a boy she is with in a crowd. When he stood at the front of the youth room on Wednesday nights she stood by the wall. When he took the kids bowling she was there in the lane behind him, fixing the strap of her top. In the pictures the kids posted from youth camp at Lake Hartwell, there she was on the dock beside him in every one, and when they showed him the pictures on their phones, he looked and looked and saw the dock, and himself, and the water.</p>
+  <p><em>Who&rsquo;s she?</em> the kids asked him, the first few times.</p>
+  <p><em>Who?</em></p>
+  <p>After a while they stopped asking. Kids get used to things. The parents took longer, and some of them never did, but at first, that spring, people were mostly kind about it, the way a town is kind about a thing it cannot explain. Destiny Bowen, who was nineteen and worked the counter at the Grounds on Sunday mornings, would pour his black coffee and then pour a second one with cream and sugar and set them both up on the counter.</p>
+  <p><em>One for you,</em> she said, <em>and one for your friend.</em></p>
+  <p>The first time he laughed and said he didn&rsquo;t have a friend. After that he carried both cups back to his office and set the second one on the corner of his desk, where it went cold, and poured it out in the bathroom sink at noon. The waitress at the Waffle House on Clemson Boulevard set out two waters. The ladies who did the Wednesday supper put an extra roll on his plate. <em>For your girl,</em> they said, as if he had a girl, and he said thank you.</p>
+</section>
+
+<section>
+  <h2>II. Kayleigh</h2>
+  <p class="dateline">Cane Creek &middot; 2006</p>
+  <p>He knew who she was. He had known from the first week. He had not told anyone, because there was no way to say it that a person would believe.</p>
+  <p>The summer he was eighteen, the two boys he loved most in the world were Josh Clary and Tanner Black. They had been in the same Sunday school class at Cane Creek First Baptist since they were four, and the two of them had signed their pledge cards the same night he did, and they were so close that the youth pastor called them the Twins, though they did not look alike at all. They prayed together before ball games. They went to See You at the Pole together every September and stood at the flagpole at the high school holding hands with their eyes shut. Every first Sunday they walked down the aisle side by side when the communion was passed, and everybody in Cane Creek knew it. Caleb was always the third one, a step behind them.</p>
+  <p>That spring he made a MySpace page for a girl named Kayleigh.</p>
+  <p>He never could say afterward exactly why. He would sit in his car and try to say it to himself, and it always came out sounding like something smaller than what it had been. He wanted to see if the thing between them would break. He took the pictures off the page of a girl in Knoxville he did not know, a girl with long light-brown hair and a little gold cross who had posted them for her own friends, and he made Kayleigh seventeen, from Greenville, saved, and lonely. Kayleigh wrote to Josh. Josh, who had never had a girl write to him in his life, wrote back. In July, the week after church camp at Lake Hartwell, Kayleigh posted a picture of herself in a white tank top fixing the strap, and under it, on Josh&rsquo;s page, where anybody could see it, she wrote: <em>last night at the lake was everything. dont tell T.</em></p>
+  <p>Tanner saw it. Josh swore up and down he had never met any girl at the lake. He swore it on the Bible in Tanner&rsquo;s truck. He cried. <em>Don&rsquo;t do me like this, man. I never did anything.</em> And Tanner said what he had seen he had seen. On the first Sunday in August, when the communion came, Tanner got up out of the pew and walked down the side aisle by himself, and when he had taken it he did not go back to the pew where Josh was sitting. Everybody in Cane Creek saw that, too.</p>
+  <p>Caleb had sat three rows behind them and watched the back of Josh Clary&rsquo;s neck go red. He went home and lay on his bed until it was dark. Then he got up and logged in as Kayleigh one last time and wrote to Tanner. <em>Josh never did anything. I&rsquo;m not real. I made this up to see if you would stand by him. Please go back.</em> He deleted the page that night. He never told them who Kayleigh had been.</p>
+  <p>The Twins made it up. They stood at the pole that September. But Tanner was never easy with Josh again the way he had been, and when Josh&rsquo;s mother called the sheriff&rsquo;s office about the fake page, there was not anything the deputy could do.</p>
+  <p>After that there were five years Caleb did not talk about. He went to Clemson for a year and left. He drove a forklift at a warehouse in Greenville and took the pills a man at the warehouse sold him for his back, and then took them for other reasons, and then for no reason at all. He lived in a lot of places that were not good places, and he was in a kind of hell for those years, and he knew it was a hell, and he knew, the way you know where a sound is coming from in the dark, that he had made it. Then he was not in it anymore. He went home to his grandmother in Cane Creek and got clean on her couch and went back to church. He went to a Bible college in Greenville. He told Pastor Ruth Ann Dobbins all of it, Kayleigh too, the morning she interviewed him for the job at Open Field, sitting in her office in what had been the Walmart&rsquo;s manager&rsquo;s office, with the one-way window looking out over the sanctuary floor. She hired him anyway.</p>
+  <p>The girl behind him had long light-brown hair and a little gold cross. When people described her to him he did not have to ask what she looked like.</p>
+</section>
+
+<section>
+  <h2>III. The Givers</h2>
+  <p class="dateline">Open Field Church &middot; June</p>
+  <p>The trouble came from inside the staff.</p>
+  <p>There were nine pastors on staff at Open Field, and by June the others had stopped being kind. Trent Gaines, who led worship, said the girl had been seen getting into Caleb&rsquo;s car at the Waffle House. Missy Hollifield, who ran the children&rsquo;s wing, said a mother had pulled her daughter out of the youth group because of the pictures from camp. Bradley Moon, the executive pastor, who had come from a big church in Atlanta and knew how these things went, said what all of them were thinking. There was a pastor in Greenville who had been in the papers. There were pastors all over the country in the papers. If it came out that the youth pastor at Open Field went around with a teenage girl in a tank top, it would not matter what anybody said afterward. It would be all of them. It would be the church.</p>
+  <p>They went first to Don Rampey, who owned the Ford dealership on Clemson Boulevard and had given the money to buy the building. They sat in his office at the dealership with the shades down.</p>
+  <p><em>Get him off the property, Don. For all our sakes.</em></p>
+  <p>Mr. Rampey heard them out. Then he said, <em>Is Ruth Ann not at the church?</em></p>
+  <p><em>She&rsquo;s there.</em></p>
+  <p><em>Well, then. She&rsquo;ll know.</em></p>
+  <p>They went to Miss Bev Crenshaw, who had owned a uniform company in Belton for forty years and had paid for the whole Lawn and Garden wing out of her own pocket, and who was the one person at Open Field that Pastor Ruth Ann sometimes asked for advice. Miss Bev gave them iced tea on her porch and listened, and at the end of it she said the same thing Don had.</p>
+  <p><em>Have y&rsquo;all asked Ruth Ann?</em></p>
+  <p>They had not. They did not want to. Ruth Ann had hired him herself, and she had a way of looking at you when you brought her something about somebody else that made you wish you had not brought it.</p>
+  <p>So they went to the police.</p>
+</section>
+
+<section>
+  <h2>IV. The Porch Light</h2>
+  <p class="dateline">Cane Creek &middot; a night in July</p>
+  <p>Lamar Gentry had been chief of police in Cane Creek for nineteen years, which meant he had three officers and a Crown Victoria and knew everybody in town and what their granddaddies had done in the mill. Caleb lived in Cane Creek, in the right-hand half of a brick duplex on Mill Street, so it was Lamar the three pastors came to, with their phones full of pictures, and laid them out on his desk one at a time.</p>
+  <p><em>We don&rsquo;t know how old she is,</em> Bradley Moon said. <em>That&rsquo;s the thing. We think she could be a minor.</em></p>
+  <p>The chief looked at the pictures a long time. He knew Caleb Pruitt. He had known his grandmother since before the mill shut. He had also been a policeman long enough to know that you never did know.</p>
+  <p><em>Y&rsquo;all go on home,</em> he said. <em>I&rsquo;ll see about it.</em></p>
+  <p>He went that night after dark, with two of his officers. He put one at the back of the duplex by the clotheslines and one at the corner of Mill Street, and he stood himself in the front yard, on the grass, facing the door, and knocked on the porch post with his flashlight.</p>
+  <p>Caleb came out under the porch light in his socks. He stood on the top step, facing the chief, and the chief saw her plain as day: a girl in a white top, standing in the doorway right behind him, with one hand up tucking her hair behind her ear. The chief saw the little gold cross catch the light.</p>
+  <p><em>Evening, Chief.</em></p>
+  <p>Caleb saw it was Lamar Gentry, and saw the officer at the corner, and he went back inside and sat down on his couch the way you sit down when something you have expected for a long time has come. The chief came in behind him without being asked. There was nobody in the front room but Caleb. The chief went through the kitchen. He opened the bathroom door and pulled back the shower curtain. He looked in the bedroom closet and got down on one knee with his flashlight and looked under the bed. He came back out.</p>
+  <p><em>Son, where&rsquo;s the girl?</em></p>
+  <p><em>I don&rsquo;t see any girl, Chief.</em></p>
+  <p><em>I just now saw her. She was standing right behind you.</em></p>
+  <p><em>I don&rsquo;t see her.</em></p>
+  <p>The chief stood a minute in the middle of the room with his hat in his hand. <em>Step back out on the porch for me a second.</em></p>
+  <p>Caleb went out and stood on the top step facing the yard. The chief went down the steps and turned around on the grass, and there she was again, in the doorway at Caleb&rsquo;s shoulder, fixing her strap. The chief went back up the steps fast and into the house past him, and Caleb came in and sat on the couch, and the room was empty. The chief looked in the closets again. He looked behind the shower curtain again. He looked in the kitchen pantry, which was too small to hold a cat.</p>
+  <p><em>Son, I am asking you. Where is she.</em></p>
+  <p><em>Chief,</em> Caleb said, <em>that&rsquo;s what everybody says. Everybody says there&rsquo;s a girl with me everywhere I go. I have never once seen her.</em></p>
+  <p>Lamar Gentry&rsquo;s grandmother had lived in a mill house two streets over until she was ninety-four, and she had told him once about a woman in a blue dress who sat on the end of her bed every night the winter after her husband died, and that you did not speak to such things and they did not mean you any harm, mostly. He had not thought about it in forty years.</p>
+  <p><em>Do me one more favor. Go out there one more time.</em></p>
+  <p>Caleb went out. The chief went down and turned in the grass. The girl was in the doorway behind Caleb with her hand at her hair, under the yellow porch light, with the moths going around it. She did not look at the chief. She was looking at the back of Caleb&rsquo;s neck. And when the chief went up the steps this time he went slowly, watching her the whole way, and at the top step he could not have said the moment she was not there. There was the doorframe and the porch light and the moths, and Caleb going past him into the house.</p>
+  <p>The chief stood in the front room and put his hat back on.</p>
+  <p><em>Well,</em> he said. <em>That&rsquo;s not anybody I can arrest.</em></p>
+  <p>He was quiet a while. Then he said, <em>Son, you know with that thing following you around, nobody in this county is going to have you to Sunday dinner. Not after people start talking. So you&rsquo;ll eat at my house. Sundays after church, and any other day you want. Mary Lynn won&rsquo;t mind. She cooks for six anyhow.</em></p>
+  <p>He told the officers to go home, and got in the Crown Victoria and went home himself.</p>
+</section>
+
+<section>
+  <h2>V. The Chief&rsquo;s Boy</h2>
+  <p class="dateline">Open Field Church &middot; August</p>
+  <p>It got around, because things do. By the first of August the whole staff knew that Lamar Gentry had gone out to Mill Street to run Caleb Pruitt off and had come home and set a place for him at his own table, and that Caleb ate there every Sunday now, pot roast and rice and gravy, and that Mary Lynn Gentry set two places for him and did not say a word about it.</p>
+  <p>The staff took it hard. They had gone to the law and the law had gone over to him.</p>
+  <p>Trent Gaines said it first, at the coffee machine in the staff break room, which had been the Walmart&rsquo;s employee break room and still had the safety poster on the wall. <em>How&rsquo;s the chief&rsquo;s boy this morning?</em> In the staff meeting Bradley Moon made a joke about whose son Caleb really was, and what his mama had been up to, and two of them laughed. Missy Hollifield did not laugh, but she did not say anything either. It went on for a week. They said it in the hallway behind the stage and in the group text he was on. <em>Chief&rsquo;s bastard.</em> They said he had a girl in his house and a cop in his pocket.</p>
+  <p>Nobody at Open Field had ever heard Caleb Pruitt raise his voice. In the staff meeting on the second Tuesday of August, when Bradley Moon said something about the chief&rsquo;s boy getting his own reserved parking, Caleb stood up.</p>
+  <p>He told them they were frauds. He said every one of them was sleeping with somebody, or wanted to, or had, and he named names, people in the church, people they had been seen with, a woman at the Atlanta church Bradley had come from. He said it all in a level voice and he did not stop. He did not know where any of it came from. He had never seen any of it with his own eyes. It came up out of him from somewhere a long way down, as if it had been there waiting, and it was the most he had said in a staff meeting in seven months.</p>
+  <p>Then he sat down. Nobody said anything for a while.</p>
+  <p>That afternoon the three of them went up the stairs to Pastor Ruth Ann&rsquo;s office.</p>
+</section>
+
+<section>
+  <h2>VI. The Cymbal</h2>
+  <p class="dateline">The manager&rsquo;s office &middot; the same day</p>
+  <p>Ruth Ann Dobbins was fifty-eight. She had started Open Field with her husband Wade in 1996 in a storefront in Belton with forty folding chairs, and when Wade died of a heart attack on the riding mower in 2010 she had kept on. She was raised Free Will Baptist in Honea Path, in a white church with a piano and no drums where the women did not preach, and her grandmother, who had been a schoolteacher, had read to her out of an American Standard Bible with a cracked black cover that she still kept on her desk. When she was nineteen, with a baby and no husband, she had danced six years at a club off I-85 near the Georgia line to keep the lights on, and she had told that from the pulpit exactly once, on the first Sunday the church met, and never again, and never needed to. She preached short. Most Sundays she let Wade&rsquo;s younger brother preach and sat on the front row. What she mostly did was pray with people in this office, one at a time, for as long as it took.</p>
+  <p>She heard the three of them out. Then she picked up the phone and asked Caleb to come up.</p>
+  <p>He came and stood just inside the door. Destiny had brought up two coffees for him at the staff meeting, and he still had the second one in his hand, cold, because he had not known where to put it down.</p>
+  <p><em>Caleb, they say you said these things to them this morning. Is that so?</em></p>
+  <p><em>Yes ma&rsquo;am. All of it.</em></p>
+  <p><em>Why did you?</em></p>
+  <p><em>Because of what they&rsquo;ve been saying to me.</em></p>
+  <p>She turned to the others. <em>And why have y&rsquo;all been saying it to him?</em></p>
+  <p><em>Because of the girl,</em> Bradley said. <em>Ruth Ann, we&rsquo;ve all seen her. You&rsquo;ve seen her.</em></p>
+  <p>She was quiet a while. Then she said to Caleb, very gently, as if they were the only two in the room:</p>
+  <p><em>They said what they said because of what they saw with their eyes. You know what they saw. I&rsquo;ve seen it too.</em> She let that sit. <em>What did you see, son, when you said what you said to them?</em></p>
+  <p>He did not answer.</p>
+  <p><em>You sat in that chair a year ago in January and told me something about a girl named Kayleigh. You remember that.</em></p>
+  <p><em>Yes ma&rsquo;am.</em></p>
+  <p><em>That girl behind you is what that has come to. I don&rsquo;t know how it works and I don&rsquo;t need to. You know it better than I do. You made something up about a boy you loved and said it where everybody could hear it, and it never did go back in.</em> She looked at him over her glasses. <em>And now you have done it again. You stood up in that room and said a pile of things you never saw. You want to make another one?</em></p>
+  <p>The three pastors by the window did not know what she was talking about, and she did not tell them. She told them they could go. When they had gone she got up and went to the bookshelf behind her desk.</p>
+  <p>On the bottom shelf was a crash cymbal. It had come off the drum kit in the sanctuary after Easter, when the drummer hit it wrong in the last chorus and it split, a crack an inch and a half long running in from the rim. The drummer had put it in the dumpster behind the loading dock, and Ruth Ann had gone out and taken it back out of the dumpster in her church shoes, and nobody knew why. She set it on the desk between them. She took off her wedding ring and tapped the cymbal with it, near the edge. Where there should have been a long bright ring that filled the room, there was a little dead click, like somebody setting down a fork.</p>
+  <p><em>That&rsquo;s you from now on,</em> she said. <em>They say something to you, you be this. Don&rsquo;t you answer them back one word. Not in the meeting, not in the text, not in your own head on the drive home. A word said hard gets a word back, and the word back gets a hand, and it does not stop. If you can be this, it stops with you.</em></p>
+  <p>She opened her grandmother&rsquo;s Bible and read it to him, the way her grandmother had read it to her, slow:</p>
+  <div class="verse">
+    <p>A soft answer turneth away wrath; But a grievous word stirreth up anger.</p>
+    <p>&mdash; Proverbs 15:1</p>
+    <p>For lack of wood the fire goeth out; And where there is no whisperer, contention ceaseth.</p>
+    <p>&mdash; Proverbs 26:20</p>
+  </div>
+  <p>Caleb set the cold coffee down on the corner of her desk, beside the cymbal. Then he sat down in the chair across from her, the same chair, and put his face in his hands. Ruth Ann did not say anything else. She sat with him, the way she sat with everybody.</p>
+</section>
+
+<section>
+  <h2>VII. Number One</h2>
+  <p class="dateline">Wednesday nights &middot; that fall</p>
+  <p>He did what she told him.</p>
+  <p>It was harder than the pills. Trent Gaines said <em>chief&rsquo;s boy</em> at the coffee machine the next morning, out of habit, and Caleb felt the whole sentence come up in him, ready, the way a dog comes up off a porch, and he let it lie down again. He did it the next day and the day after that. In the group text he did not answer. In his car on the way home, when the old talk started up in his head, he let that lie down too. He thought of the little dead click of the cymbal. There was a verse in the Psalms he found on his own that month in the old American Standard, and he wrote it on an index card and kept it on the dash of his car, and read it at red lights:</p>
+  <div class="verse">
+    <p>I said, I will take heed to my ways, That I sin not with my tongue: I will keep my mouth with a bridle, While the wicked is before me. I was dumb with silence, I held my peace, even from good; And my sorrow was stirred.</p>
+    <p>&mdash; Psalm 39:1&ndash;2</p>
+  </div>
+  <p>And something happened, though he never would claim it. It happened slowly through September, and all at once one morning in October, at the light by the Ford dealership, with the rain coming down. He noticed there was nothing in him waiting to answer anybody. He looked for it, the way you feel with your tongue for a tooth that has been aching, and it was gone. There was a quiet in him like the quiet in the big building on a Monday, when the floor has been mopped and the chairs are stacked and the long lights hum. He sat through two greens with people honking behind him.</p>
+  <p>The staff got tired of saying things to someone who did not say anything back. By Thanksgiving they had mostly stopped. Bradley Moon took a job at a church in Nashville in the spring.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Wednesday nights at Open Field there was a family supper in the old garden center before the youth service: five dollars a plate, two dollars for kids, free for anybody who said they could not pay and no questions asked. Miss Bev Crenshaw sat at a card table by the doors with a cash box and a roll of pink tickets, the kind they sell at a county fair, and tore you one off the roll, and you gave it to the ladies at the steam table for your plate.</p>
+  <p>On the second Wednesday in November, the kids who were out in the parking lot before supper say they saw Caleb Pruitt standing in the air.</p>
+  <p>They tell it plain, the ones who were there. It was getting dark. He was not on a ladder and he was not on the roof. He was standing up in the air over the front doors, about as high as the place on the wall where the old Walmart letters had been, with his hands in his jacket pockets, as if he were reading them. A girl named Hannah Tate dropped her phone on the asphalt and cracked the screen. Nobody thought to take a picture. Then he came down, the way you come down a flight of stairs, and went in through the automatic doors, and he was the first one at Miss Bev&rsquo;s card table, before the families, before the kids came running in from the lot.</p>
+  <p>Miss Bev tore him off ticket number one.</p>
+  <p>After that, whoever had the cash box on Wednesday nights saved him the first ticket on the roll, and nobody remembers who started it. If he was late they kept it for him under the edge of the cash box. He never asked for it. He always paid his five dollars.</p>
+  <p>People still saw the girl, after that, a step behind him and a little to the left. They said she looked different, though nobody could say how. She did not fix her strap anymore, or tuck her hair. She stood there.</p>
+  <p>Destiny Bowen still poured two coffees on Sunday mornings, his black, the other with cream and sugar. He still carried them both back to his office. He set the second one on the corner of the desk, where the cymbal used to be before Ruth Ann gave it to him to keep, and around noon, when it was cold, he took it down the hall to the bathroom and poured it out in the sink, and rinsed the cup, and set it upside down on a paper towel to dry.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Do not speak harshly to anybody; those who are spoken to will answer thee in the same way. Angry speech is painful, blows for blows will touch thee.<cite>Dhammapada 133, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">If, like a shattered metal plate (gong), thou utter not, then thou hast reached Nirvana; contention is not known to thee.<cite>Dhammapada 134, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, from the day the monk Ku&#7751;&#7693;adh&#257;na is ordained, the form of a woman follows him everywhere. Everyone sees her except him, and villagers on his alms round give one portion &ldquo;for you&rdquo; and another &ldquo;for our female friend.&rdquo; In a former life, in the time of an earlier Buddha, he had been a deity who took a woman&rsquo;s form to make one of two inseparable monks look unchaste, so that the other refused to keep the Observance Day with him; the deity confessed, the monks were reconciled but never as close, and the deity went to hell. Now the monks ask the great lay supporters An&#257;thapi&#7751;&#7693;ika and Vis&#257;kh&#257; to expel Ku&#7751;&#7693;adh&#257;na; both say the Teacher will know. The monks go to King Pasenadi, who surrounds the monk&rsquo;s cell, sees the woman only when the monk stands outside, searches the room three times, decides she is an apparition, and invites the monk to eat at the palace. The jealous monks call Ku&#7751;&#7693;adh&#257;na the king&rsquo;s bastard; he, who has never answered anyone, calls them corrupt and unchaste. The Buddha asks both sides why they spoke: the monks spoke from what they saw, but what had he seen? He tells the old deed and bids him be silent as a gong broken at the rim. Ku&#7751;&#7693;adh&#257;na becomes an arahant, flies up into the air, and takes the first meal ticket, and he is later named foremost among those who receive meal tickets. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-04.htm">the full commentary story</a>.</p>
+    <h3>Upstate South Carolina, 2015</h3>
+    <p>By the 2000s large evangelical congregations were outgrowing their buildings and moving into vacant commercial property, strip malls and empty big-box stores among it, as the <em>Wall Street Journal</em> <a href="https://planetizen.com/node/19499">reported in 2006</a>. Many were nondenominational <a href="https://en.wikipedia.org/wiki/Megachurch">megachurches</a>, usually defined as Protestant churches with two thousand or more people in weekly attendance. <a href="https://en.wikipedia.org/wiki/Anderson,_South_Carolina">Anderson</a>, on I-85 about halfway between Atlanta and Charlotte, was called the Electric City after a hydroelectric plant on the Rocky River began sending power there in 1895, and cotton mills grew up from the 1870s in Anderson, Pelzer, Belton, Honea Path and Williamston. By 1920 <a href="https://www.scencyclopedia.org/sce/entries/anderson-county/">Anderson County</a> had nineteen textile mills; by the 1990s foreign competition had closed many of them, leaving the mill villages behind.</p>
+    <p>Caleb&rsquo;s ring belongs to the evangelical purity movement of the 1990s. The Southern Baptist campaign True Love Waits asked teenagers to sign cards pledging abstinence until marriage; on July 29, 1994, an estimated 200,000 signed cards were staked into the lawn of the National Mall, according to <a href="https://www.npr.org/2024/07/31/nx-s1-5051722/sex-education-abstinence-only-30-year-impact">NPR</a>. Many pledgers wore a ring as a sign of the promise. By 2006, when Kayleigh&rsquo;s page went up, <a href="https://en.wikipedia.org/wiki/Myspace">MySpace</a> was the most visited website in the United States.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Ku&#7751;&#7693;adh&#257;na from the Dhammapada commentary (verses 133&ndash;134). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-04.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Opus 5.5.
+  <div class="pager"><a href="bull-snake.html">&larr; Bull Snake</a><a href="index.html">All stories</a><a href="piedra-negra.html">Piedra Negra &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, beams = [], motes = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    beams = [
+      { x: 0.18, base: 0.30, sw: 0.32, sp: 0.00021, ph: 0.0, w: 0.09, a: 0.055 },
+      { x: 0.82, base: -0.28, sw: 0.30, sp: 0.00017, ph: 2.1, w: 0.08, a: 0.05 },
+      { x: 0.5, base: 0.0, sw: 0.22, sp: 0.00013, ph: 4.0, w: 0.07, a: 0.035 }
+    ];
+    motes = [];
+    var n = Math.round(Math.max(30, Math.min(80, W / 18)));
+    for (var i = 0; i < n; i++) motes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .08, vy: (Math.random() - .5) * .05, r: .6 + Math.random() * 1.2 });
+  }
+  function beamPoly(b, ang) {
+    var sx = b.x * W, sy = -20, len = H * 1.4;
+    var half = b.w;
+    var a1 = Math.PI / 2 + ang - half, a2 = Math.PI / 2 + ang + half;
+    return [sx, sy, sx + Math.cos(a1) * len, sy + Math.sin(a1) * len, sx + Math.cos(a2) * len, sy + Math.sin(a2) * len];
+  }
+  function draw(now) {
+    if (!reduce) t = now || 0;
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    var polys = [];
+    for (var i = 0; i < beams.length; i++) {
+      var b = beams[i];
+      var ang = b.base + Math.sin(t * b.sp + b.ph) * b.sw;
+      var p = beamPoly(b, ang); polys.push(p);
+      var g = ctx.createLinearGradient(p[0], p[1], (p[2] + p[4]) / 2, (p[3] + p[5]) / 2);
+      g.addColorStop(0, 'rgba(200,208,235,' + (b.a * 1.6) + ')');
+      g.addColorStop(0.5, 'rgba(185,194,224,' + b.a + ')');
+      g.addColorStop(1, 'rgba(185,194,224,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(p[2], p[3]); ctx.lineTo(p[4], p[5]); ctx.closePath(); ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    for (var j = 0; j < motes.length; j++) {
+      var m = motes[j];
+      if (!reduce) { m.x += m.vx; m.y += m.vy; if (m.x < 0) m.x += W; if (m.x > W) m.x -= W; if (m.y < 0) m.y += H; if (m.y > H) m.y -= H; }
+      var lit = 0;
+      for (var k = 0; k < polys.length; k++) if (inTri(m.x, m.y, polys[k])) lit += 1;
+      if (!lit) continue;
+      ctx.fillStyle = 'rgba(232,228,220,' + Math.min(0.35, 0.16 * lit) + ')';
+      ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  function inTri(x, y, p) {
+    function s(ax, ay, bx, by, cx, cy) { return (ax - cx) * (by - cy) - (bx - cx) * (ay - cy); }
+    var d1 = s(x, y, p[0], p[1], p[2], p[3]), d2 = s(x, y, p[2], p[3], p[4], p[5]), d3 = s(x, y, p[4], p[5], p[0], p[1]);
+    var neg = d1 < 0 || d2 < 0 || d3 < 0, pos = d1 > 0 || d2 > 0 || d3 > 0;
+    return !(neg && pos);
+  }
+  size(); make(); draw(0);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

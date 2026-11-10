@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cistern Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* A washed morning after the storm: pale limestone light, genip green, bush-tea gold. */
+  --ground: #eeefe6;
+  --ground-2: #e2e5d6;
+  --paper: #1d2420;
+  --paper-dim: #636a5f;
+  --mustard: #3d6e36;
+  --flame: #b8862b;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -20%, #fbfbf4 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(29,36,32,.2); }
+.series a:hover { color: var(--mustard); }
+a:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--mustard); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(61,110,54,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mustard); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--mustard); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(251,251,245,.85); border: 1px solid rgba(29,36,32,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--flame); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(29,36,32,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--mustard); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mustard); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(29,36,32,.15); border-bottom: 1px solid rgba(29,36,32,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--mustard); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mustard); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--mustard); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(251,251,245,.85); border-left: 2px solid var(--mustard); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 13.1 &middot; Aññataradaharabhikkhu</span></nav>
+<header>
+  <h1>Cistern Water</h1>
+  <div class="epigraph">Blessed is the man that walketh not in the counsel of the ungodly, nor standeth in the way of sinners, nor sitteth in the seat of the scornful.<br>&mdash; Psalm 1:1</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Is so I hear it,</span> in Frederiksted.</p>
+
+<section>
+  <h2>I. After Hugo</h2>
+  <p class="dateline">La Grange, outside Frederiksted, St. Croix &middot; October 1989</p>
+  <p>A month after the storm the island still looked like something had lain down on it and rolled. Hugo had come over the island on the night of the seventeenth of September, and in the morning there were hardly any roofs. The galvanize was in the cane grass, in the mangroves, wrapped around the light poles like paper around a stick. The mahogany trees along Centerline Road stood with every leaf stripped off them and their bark peeled white on the windward side, and the flamboyants were down across the road with their roots in the air. Three days after, the troops had come, the first time soldiers had been sent into an American place for looting since anybody could remember, and now there were Humvees parked in front of the fort in Frederiksted and soldiers from somewhere cold sweating in the shade of the market.</p>
+  <p>There was no power and there would be none until Christmas, people said, or Easter, or never. There was no telephone. There was what was in the cistern.</p>
+  <p>Every house on St. Croix had one, a concrete tank under the floor or beside the house, filled from the gutters off the roof. In most yards now the roofs were gone and the gutters were gone and the rain that had come with the storm had come down full of leaves and roof tar and dead lizards and grit, and so in every yard on the island someone was dipping a bucket on a rope down into the dark and pouring what came up through a cloth.</p>
+  <p>In Mama Cinth&rsquo;s yard it was her granddaughter.</p>
+  <p>Hyacinth Christian was sixty-eight and had been born in that house, and her mother before her, and she had lost her husband to the sea in 1971 and found the livity a year after, and nobody on the west end had stopped talking about it for ten years. A Crucian woman, a Moravian, a widow with a pension, gone and put her hair up in a wrap and turned Rasta. Now she was simply Mama Cinth, and her kitchen was where the brethren ate.</p>
+  <p>It had always been so. Before the storm and after it, in the morning there was porridge on her coal pot, cornmeal or peanut, and a stack of johnnycake, and bush tea, and whoever came up the hill was fed. She had cooked on the coal pot under the genip tree for twenty years because she liked it better than the stove. Hugo had taken her roof, her porch, her fowl coop and the whole top of the genip tree, and had left the coal pot sitting in the yard as if nothing had happened, and so the only thing that had changed in Mama Cinth&rsquo;s kitchen was that more people came. On the wall inside, under a blue tarp that slapped all night in the wind, she still had the fan of peacock feathers her husband had brought her from a ship, twelve of them in a jar, and they had come through without one eye missing. People came to look at them.</p>
+  <p>Keisha was fourteen. Her father was Mama Cinth&rsquo;s son Lloyd, a sergeant in the Virgin Islands Police, and since the storm he had been working shifts that ran into each other, beside the Guard and the soldiers, and her mother was a nurse at the hospital and slept there more nights than not. So Keisha was at her grandmother&rsquo;s. She had pressed her hair the Saturday before the storm, for a party that never happened. A month later, with no current for the iron and the air wet as a sponge, it stood up off her head in a way she would not look at.</p>
+</section>
+
+<section>
+  <h2>II. The Calabash</h2>
+  <p class="dateline">The yard &middot; a Tuesday morning</p>
+  <p>Brother Isaac came up the hill at seven with the youth. Isaac was a carpenter, a quiet big man with grey in his beard and locks to the backs of his knees bound up in a red, gold and green crown, and since the storm he had been on one roof after another from sunup, nailing down tarp the government brought in and galvanize people found in the bush. The youth was called Dervon. He was seventeen and had come to the elders in the spring, and his locks were six months grown, little tight knots all over his head that you could see the scalp between. A nubbie, they called it. That was the word for one just starting. He was proud of every one of them.</p>
+  <p>Isaac ate a bowl of porridge standing up. Then he said there was a widow down the road with the rain coming in on her bed, and he put a stool under the genip tree for the youth and told him to sit and eat and wait, and went on down the hill with his hammer through his belt.</p>
+  <p>Mama Cinth was in the cookhouse. Keisha brought the water.</p>
+  <p>She did it the way her grandmother had shown her, the bucket let down on the rope into the cistern and hauled up hand over hand and set on the step, and a square of old sheet tied over the mouth of a calabash bowl, and the water poured through slow so the cloth could catch what it caught. The cloth had been white once. When she took it off, the water in the calabash was dark and still, and there was her face in it, looking up at her, with her hair standing out all round it like a dandelion gone to seed.</p>
+  <p>She laughed. She could not help it.</p>
+  <p>Dervon leaned over to see what she was laughing at, and saw, and laughed too.</p>
+  <p>That was all. If either of them had been a year older or a year younger it would have stopped there. But she heard him laughing at her hair, and she stood up with the calabash in her two hands and said, loud, for the yard to hear, <em>Look the nubbie laughing.</em></p>
+  <p>His face shut like a door.</p>
+  <p><em>You a baldhead,</em> he said. <em>And your mother is a baldhead. And your father is a baldhead too, and a Babylon besides.</em></p>
+  <p>It was the worst thing he knew how to say, and it was true, every word of it, which made it worse. She put the calabash down on the step so hard the water jumped, and ran into the cookhouse crying.</p>
+  <p><em>Grannie.</em></p>
+  <p><em>What happen, baby?</em></p>
+  <p>She told it. Mama Cinth wiped her hands on her skirt and came out to the genip tree.</p>
+</section>
+
+<section>
+  <h2>III. Nubbie</h2>
+  <p class="dateline">Under the genip tree</p>
+  <p><em>Youth,</em> she said. <em>Don&rsquo;t vex. Sit down. She don&rsquo;t mean you no harm. Nubbie is no bad word. Nubbie is the youth whose locks just start to grow for the Most High. It mean you take the vow. Is the Nazarite word, Numbers six.</em> And she said it to him, standing in the yard with her wrap on her head, because she had said it so many times by now to people who asked her why.</p>
+  <div class="verse">
+    <p>All the days of the vow of his separation there shall no razor come upon his head: until the days be fulfilled, in the which he separateth himself unto the LORD, he shall be holy, and shall let the locks of the hair of his head grow.</p>
+    <p>&mdash; Numbers 6:5</p>
+  </div>
+  <p><em>Mama, I know what nubbie mean,</em> said Dervon. <em>I know the vow. I know is a holy thing to be. But is right for she to laugh after me and call me so?</em></p>
+  <p>Mama Cinth looked at him and looked back at the cookhouse, where her granddaughter was crying on a crate with her face in her arms, and she could not make either one of them right. She went back and forth between them twice. She brought him another johnnycake. She brought Keisha a cup of the bush tea. Neither one would take it.</p>
+  <p>Then Brother Isaac came back up the hill for his level, which he had left, and stopped in the gate.</p>
+  <p><em>What going on, Mama?</em></p>
+  <p>She told him. Isaac set down his hammer and looked at the youth.</p>
+  <p><em>Dervon. Hush. That is no insult. That is what you are. A nubbie is a man who take the vow and his locks is small yet. Hold your peace.</em></p>
+  <p><em>Brother, I know that. But why you rebuke me? Why you don&rsquo;t rebuke she? Is right to laugh after a man&rsquo;s locks?</em></p>
+  <p>Isaac opened his mouth and closed it again. In the cookhouse Keisha had stopped crying to listen.</p>
+</section>
+
+<section>
+  <h2>IV. The Seat of the Scornful</h2>
+  <p class="dateline">The same morning</p>
+  <p>Elder Absalom came up the hill a little after eight. He was past seventy and walked with a stick of guava wood, and he had come up from Jamaica in the last years of the cane to cut it, and stayed when the cane was gone, and grown his locks white. He did not come to the yard every day. When he came, the yard went quiet, the way a yard goes quiet when the wind drops. He had his own breakfast in a pan wrapped in a cloth, a piece of roast breadfruit and a little saltfish, and he set it on the step.</p>
+  <p><em>Greetings, Mama. What happen here?</em></p>
+  <p>Mama Cinth told it from the beginning. The bucket, the cloth, the calabash, the face, the laugh, the word, the other word, the crying, and Isaac. The elder listened all the way through with both hands on top of his stick and looked at the youth on the stool for a long time while she talked. He saw a boy who wanted very badly for somebody to be on his side, and he saw what was behind that, and he decided.</p>
+  <p><em>Sister,</em> he said to Mama Cinth, quite stern. <em>Is right for your granddaughter to laugh after my youths, because their locks small yet? Because they take the vow and it don&rsquo;t show plenty? Call them nubbie for a joke in the yard?</em></p>
+  <p>Dervon was on his feet before the elder finished. He put his two hands together in front of him like a man in church.</p>
+  <p><em>Elder. You alone overstand it. Not Brother Isaac. Not Mama. You alone.</em></p>
+  <p>The elder nodded slowly, as if agreeing. Then he looked at the youth&rsquo;s two hands held together and did not let him sit back down.</p>
+  <p><em>Now hear me, youth. Two of you laughed over a face in the water. Her face, her hair, how it look. Then she laugh over your hair and you laugh over her mother and father. All of that is the one same thing. To laugh after the flesh, how it look, how it grow, who it belong to. That is a low road. A man who take the vow don&rsquo;t walk that road at all. Not to give, not to take back. And don&rsquo;t sit down with carelessness. Carelessness is a easy seat. Plenty people sitting there.</em></p>
+  <p>Then he said the psalm. He did not take out a Bible. He had it the way the old people have a psalm, all the way down, and he said the first three verses of it in the yard with the stripped genip tree over his head and the tarp slapping on the house behind him, and Isaac said it along with him under his breath, and so after a while did Mama Cinth.</p>
+  <div class="verse">
+    <p>Blessed is the man that walketh not in the counsel of the ungodly, nor standeth in the way of sinners, nor sitteth in the seat of the scornful. But his delight is in the law of the LORD; and in his law doth he meditate day and night. And he shall be like a tree planted by the rivers of water, that bringeth forth his fruit in his season; his leaf also shall not wither; and whatsoever he doeth shall prosper.</p>
+    <p>&mdash; Psalm 1:1&ndash;3</p>
+  </div>
+  <p>Dervon stood with his hands still together. Something went across his face that the people in the yard remembered afterward and could not describe, the way you cannot describe the moment a cistern bucket stops swinging on its rope and hangs straight. The elder saw it. He sat down on the step and unwrapped his breadfruit.</p>
+  <p>The youth went over to the calabash where Keisha had put it down. The water had settled. He looked into it a long time and saw his own face, and the little knots of his locks all round it with the light between, and he did not laugh, and he did not stop looking, either. Then he carried the calabash to the cookhouse door and held it out to her with both hands.</p>
+  <p><em>Sister. I thank you for the water.</em></p>
+  <p>She took it from him and did not know what to do with it, and drank some, and gave it back.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Before he left, Elder Absalom pointed with his stick at the genip tree. The storm had stripped it to the wood a month before, every leaf, and everyone had said it was dead. Along the broken limbs, if you stood close, there were new leaves coming out, small and folded and a green so pale it was nearly yellow, hundreds of them, all the way up.</p>
+  <p>Keisha strained the next bucket at noon. She tied the square of sheet over the calabash and poured slow, and the water came through clear, and when she untied the cloth it was brown in the middle with what it had caught, leaves and grit and a little roof tar. She rinsed it as well as she could and pegged it on the line between the genip tree and the house to dry for the next time, and it hung there grey all afternoon in the wind, under the new leaves.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Do not follow the evil law! Do not live on in thoughtlessness! Do not follow false doctrine! Be not a friend of the world.<cite>Dhammapada 167, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, an elder brings a young monk to breakfast at the house of Vis&#257;kh&#257;, the Buddha&rsquo;s great lay patron, where cakes and rice gruel are always being given out, and goes on to another house. Vis&#257;kh&#257;&rsquo;s granddaughter, straining water for the young monk, sees her face in the water-pot and laughs; he laughs too. She calls him a &ldquo;cut-head,&rdquo; and he answers that she is a cut-head and so are her mother and father. She runs crying to her grandmother. Vis&#257;kh&#257; tells him the word is a mark of respect for a monk whose hair and nails and robe are cut short, but he will not be calmed, and when his elder returns and rebukes him he asks why the girl is not rebuked instead. Then the Buddha arrives, hears the story, and, seeing the young monk is ready, first asks Vis&#257;kh&#257; whether it is proper for her granddaughter to call his monks cut-heads. The young monk springs up and says only the Buddha understands. The Buddha then tells him that ridicule over the pleasures of the senses is a low thing, not to be taken up, and that one should not live with heedlessness, and speaks the verse; the young monk enters the stream. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-01.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Visakha">Vis&#257;kh&#257;</a>.</p>
+    <h3>St. Croix, 1989</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Hurricane_Hugo">Hurricane Hugo</a> struck St. Croix on September 17&ndash;18, 1989, with gusts measured at up to 168 miles an hour. More than 90 percent of the island&rsquo;s buildings were damaged and power and water service failed. Looting spread in the days after, and at the governor&rsquo;s request federal troops, FBI agents and U.S. marshals were sent to the island, the first deployment of American troops in response to civil disorder since 1968. Fresh water is scarce in the Virgin Islands, and most houses and businesses on <a href="https://en.wikipedia.org/wiki/Saint_Croix,_U.S._Virgin_Islands">St. Croix</a> collect rainwater from their roofs in built-in cisterns.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Rastafari">Rastafari</a> arose in Jamaica in the 1930s and spread through the Caribbean and its diaspora. Rastas call their way of life &ldquo;livity&rdquo;; it includes the Ital diet and wearing the hair in dreadlocks, which Rastas trace to the Book of Numbers and to the hair of Samson, and see as a mark of their covenant with Jah. Rastas often call non-Rastas &ldquo;baldheads,&rdquo; and someone who has only just begun to grow locks is a &ldquo;nubbie.&rdquo; In July 2025 the government of the Virgin Islands proclaimed a Rastafari Day and issued a formal apology for decades of ridicule, profiling and persecution (<a href="https://stcroixsource.com/2025/07/17/v-i-government-proclaims-july-23-2025-as-rastafari-day-issues-official-apology-for-past-persecution/">St. Croix Source</a>).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a certain young monk from the Dhammapada commentary (verse 167). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-01.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="windmill-water.html">&larr; Windmill Water</a><a href="index.html">All stories</a><a href="stand-still.html">Stand Still &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A storm-stripped genip tree in the corner of the page: bare limbs, and along them new leaves
+  // coming out one by one, small and folded and nearly yellow, until the tree is green again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, limbs = [], leaves = [], t = 0, cycle = 5400;
+  var seed = 7;
+  function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    grow();
+  }
+  function branch(x, y, ang, len, w, depth) {
+    var x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
+    limbs.push([x, y, x2, y2, w]);
+    var n = Math.floor(len / 14);
+    for (var i = 1; i <= n; i++) {
+      var u = i / (n + 1);
+      leaves.push({ x: x + (x2 - x) * u, y: y + (y2 - y) * u, a: ang + (i % 2 ? 1 : -1) * (0.9 + rnd() * 0.5),
+        born: rnd() * cycle * 0.7, s: 3 + rnd() * 3 });
+    }
+    if (depth > 0) {
+      branch(x2, y2, ang - 0.35 - rnd() * 0.35, len * (0.62 + rnd() * 0.15), w * 0.65, depth - 1);
+      branch(x2, y2, ang + 0.25 + rnd() * 0.35, len * (0.55 + rnd() * 0.15), w * 0.6, depth - 1);
+    }
+  }
+  function grow() {
+    seed = 7; limbs = []; leaves = [];
+    var base = Math.min(W, H);
+    branch(W * 0.97, H + 10, -Math.PI / 2 - 0.45, base * 0.28, 9, 4);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineCap = 'round';
+    for (var i = 0; i < limbs.length; i++) {
+      var l = limbs[i];
+      ctx.strokeStyle = 'rgba(110,98,84,0.16)'; ctx.lineWidth = l[4];
+      ctx.beginPath(); ctx.moveTo(l[0], l[1]); ctx.lineTo(l[2], l[3]); ctx.stroke();
+    }
+    var ph = t % cycle, fade = ph > cycle * 0.9 ? 1 - (ph - cycle * 0.9) / (cycle * 0.1) : 1;
+    for (var j = 0; j < leaves.length; j++) {
+      var f = leaves[j], g;
+      if (reduce) g = 1; else g = Math.max(0, Math.min(1, (ph - f.born) / 240)) * fade;
+      if (g <= 0.01) continue;
+      var s = f.s * (0.4 + 0.6 * g);
+      var green = Math.round(150 + 40 * (1 - g));
+      ctx.save(); ctx.translate(f.x, f.y); ctx.rotate(f.a);
+      ctx.fillStyle = 'rgba(' + (120 + Math.round(60 * (1 - g))) + ',' + green + ',70,' + (0.32 * g) + ')';
+      ctx.beginPath(); ctx.ellipse(s, 0, s, s * 0.45, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

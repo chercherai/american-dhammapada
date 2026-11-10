@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Watch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on pale December sound-water paper, light theme; far down on the horizon a screwpile light stands on its iron legs with its lamp burning steady and its reflection trembling, and on a low shoal at the other side a scatter of terns now and then lifts and settles; datelined sections. */
+  --ground: #eef0ea;
+  --ground-2: #e1e5dc;
+  --paper: #22282a;
+  --paper-dim: #5c6562;
+  --lamp: #a85a26;
+  --juniper: #6f8673;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #dfe4dc 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: auto;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(34,40,42,.2); }
+.series a:hover { color: var(--lamp); }
+a:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--lamp); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(168,90,38,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--lamp); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--lamp); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(225,229,220,.82); border: 1px solid rgba(34,40,42,.10); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--juniper); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(34,40,42,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--lamp); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--lamp); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(34,40,42,.14); border-bottom: 1px solid rgba(34,40,42,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--lamp); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--lamp); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--lamp); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(225,229,220,.82); border-left: 2px solid var(--lamp); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 12.1 &middot; Bodhi R&#257;jakum&#257;ra</span></nav>
+<header>
+  <h1>One Watch</h1>
+  <div class="epigraph">Except the LORD build the house, they labour in vain that build it: except the LORD keep the city, the watchman waketh but in vain.<br>&mdash; Psalm 127:1</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is the way it was told to me,</span> on the Currituck Banks.</p>
+
+<section>
+  <h2>I. Redhead</h2>
+  <p class="dateline">The Currituck Banks, North Carolina · summer 1902</p>
+  <p>Ellis Tillett built his house on the marsh where nobody had ever thought to build anything, on the sound side of the Banks north of the Narrows, and when it was done it looked as if it were floating.</p>
+  <p>He had it set on juniper pilings driven twenty feet into the mud, so the whole of it stood a man's height clear of the marsh grass, and at high water with the wind out of the south the sound came in under it and there was nothing beneath the house but light on water. It had three stories and a cupola. It had copper gutters, cypress shingles, a porch that went all the way around, and a dining room paneled in curled juniper that Asa Quidley had planed by hand until it shone like the inside of a shell. Ellis named it Redhead, for the duck, the one the Northern men paid the most to shoot after the canvasback. Over the front door, because his mother had wanted it there, Asa had cut a line of Scripture into a juniper board and gilded the letters: EXCEPT THE LORD BUILD THE HOUSE, THEY LABOUR IN VAIN THAT BUILD IT.</p>
+  <p>The Northern clubs were all up and down the sound by then, the Currituck Shooting Club, the Lighthouse Club, the Swan Island Club, a dozen more, long low houses where bankers from New York and steel men from Pittsburgh came down by private car to Norfolk every November and shot ducks until March. Their guides were Banks men who paddled them out to the blinds before light and set out the decoys and picked up the birds. Ellis had been one of those guides. At twelve he had poled a skiff for a broker named Mr. Whitlock who tipped him a silver dollar a day, and at fifteen Mr. Whitlock had taken him north on the steamer to be an office boy in Wall Street, and by thirty-two he had a seat on the Exchange, a house on Washington Square, a wife from one of the old Knickerbocker families, and something over three million dollars, most of it made in a single week in May of 1901, when the Northern Pacific corner broke half the Street.</p>
+  <p>He had come home to build something the club men would row past and look at.</p>
+  <p>They did. That summer the whole sound rowed past and looked at it. The Northern men's wives came over from the Lighthouse Club in their launches with field glasses. And Ellis Tillett walked through his empty rooms in the evening with his hands in his pockets, and his heels rang on the juniper, and he thought: there is not another house like this one on God's earth.</p>
+  <p>Then he thought: there could be.</p>
+  <p>He sent for Asa.</p>
+  <p>Asa Quidley was forty-four, a long quiet man with sawdust in the creases of his neck, the best carpenter between Norfolk and Hatteras and the best maker of decoys. In the winter, when there was no building, he carved canvasbacks and redheads out of juniper and painted them so true that the live birds came down to them from a mile up. He had built Redhead from Ellis's drawings and his own head, and most of it was his own head.</p>
+  <p><em>Asa, have you ever built a house like this before?</em></p>
+  <p><em>No, sir. Not anything like it.</em></p>
+  <p><em>Could you build another?</em></p>
+  <p>Asa thought about it honestly, which was his way.</p>
+  <p><em>I expect I could build a better one, now I know how.</em></p>
+</section>
+
+<section>
+  <h2>II. Seasoned Juniper</h2>
+  <p class="dateline">Redhead · September to November 1902</p>
+  <p>Edith Tillett's brother Teddy came down for September. He was twenty-two and had just finished at Yale and did not know what to do with himself, and he was the only one of Edith's people who liked Ellis, and the only one Ellis liked. He spent his days in the skiff with Asa, fishing and learning the sound, and his evenings on the porch with Ellis and the brandy.</p>
+  <p>One night late, with Edith gone up to bed, Ellis told him what was in his mind.</p>
+  <p>He said it quietly and reasonably, the way he talked about money. Asa could build another house. Some Pittsburgh man would see Redhead and want one, and Asa would build it, better. Then there would be two, and nothing special about either. Ellis did not intend to let that happen. A carpenter needed his hands and his eyes. There were men in Norfolk who would see to it for a hundred dollars, a fall in the boathouse, a splash of lime. Or there was the sound. Men drowned in the sound every winter and nobody asked.</p>
+  <p>Teddy laughed, waiting for the joke to finish. It did not finish. Ellis poured more brandy and talked about the price of juniper.</p>
+  <p>Teddy did not sleep. In the morning before light he walked down the boardwalk to the boathouse, where Asa was already at his bench, and stood in the door.</p>
+  <p><em>Asa, is the house finished?</em></p>
+  <p><em>All but the trim in the cupola.</em></p>
+  <p><em>Then listen to me.</em> He told him. He was shaking. <em>He means it. I don't know what he means exactly but he means it.</em></p>
+  <p>Asa set down his plane. He looked at the boy a while.</p>
+  <p><em>That's a kindness, Mr. Teddy,</em> he said. <em>I won't forget it. Now I know what to do.</em></p>
+  <p>When Ellis came down to the boathouse that afternoon to ask after the cupola, Asa said it was not near finished. There was a good deal still to do.</p>
+  <p><em>What?</em></p>
+  <p><em>I'll show you when it's done. I need wood.</em></p>
+  <p><em>What wood?</em></p>
+  <p><em>Juniper. Seasoned. Three years dry at the least. There's a mill up at the Dismal Swamp that has it. Green wood won't do for what I've got in mind.</em></p>
+  <p><em>Order it.</em></p>
+  <p><em>And I'd as soon nobody came in the loft while I work,</em> Asa said. <em>It's fine work. I can't have people talking at me. Mattie can bring my dinner.</em></p>
+  <p>Ellis ordered the wood. It came down from the Swamp on a schooner, a whole deckload of white cedar, dry as a bone and light as cork, and Asa carried it up into the boathouse loft and shut the door. Ellis was pleased. He had a feeling the cupola would be something. To be sure of the rest of it, he brought two men down from Norfolk and gave them a room over the boathouse and told them nobody went in or out but Asa and his wife, and Asa did not leave the property.</p>
+  <p>All October, Mattie Quidley came along the boardwalk at noon with a covered dish. The guards lifted the cloth and looked at the fish and the cornbread and let her by. She went home through the village every evening and sold something each time: the cow, the second skiff, the pump organ, the house itself at last to her sister's husband. She took the money in gold, ten-dollar eagles, and sewed them into the hem of her good skirt.</p>
+  <p>That was the autumn the two brothers from Dayton were down at Kill Devil Hills again with their glider. Everybody on the Banks had seen it by then, the big white double wing riding the wind off the dunes with a man lying flat in the middle of it, setting down light as a gull on the sand a long way off. The Bankers had views about it. Most of them held that if the Lord had meant men to fly He would have given them feathers. Before the cold came the brothers went home to Ohio and left the glider shut up in their shed on the sand, and the Banks went back to fishing.</p>
+  <p>On the twelfth of November, a still grey morning, Mattie came along the boardwalk at seven with the children, Ben who was ten and Zilphy who was seven, in their Sunday clothes, and told the guards that Asa had sent for them to see the work before it was done. The guards let them up. They were not told to keep out children.</p>
+  <p>A quarter of an hour later the big loft door at the sound end of the boathouse swung open from inside, and the bird came out.</p>
+  <p>The guards saw it from below. Ellis saw it from the porch with his coffee. Half the village saw it from the shore. It was a swan, a whistling swan such as came down onto Currituck by the thousands every winter, carved out of the white juniper and longer than a skiff, every feather cut, its long neck out straight and its black bill pointed west. It dropped off the sill of the loft and fell a little toward the water, and then it caught the air, the way the Ohio men's glider caught it off the dunes, and its wings went down once with a sound like a sail filling, and it rose. Mattie's face was at a window in its side. Zilphy's hand was waving.</p>
+  <p>One of the guards shouted, <em>Mr. Tillett, he's gone, the carpenter's gone!</em> and fired his pistol into the air, which did nothing at all. The swan went off over the sound toward the mainland, low and steady, getting small, and then it was a white speck over the trees beyond Coinjock, and then it was not anything.</p>
+  <p>They never found Asa Quidley. A peddler who came through the next summer said there was a man in the mountains past Asheville, on a high bald a long way from any road, who had built himself a whole little town of white wood with his own hands, church and mill and all, and the mountain people called him the Wooden King, and whether that was Asa nobody could say. There was a good deal of juniper shavings in the loft. Ellis had them swept up and burned.</p>
+</section>
+
+<section>
+  <h2>III. The Carpets</h2>
+  <p class="dateline">Redhead · December 18, 1902</p>
+  <p>The cupola was never finished, but Ellis gave his party anyway.</p>
+  <p>He brought the Northern men over from the clubs in his launch, with their wives. Edith's people came down from New York in a private car. He asked the Methodist preacher from Kitty Hawk, and hired a cook from Norfolk and an orchestra of four. There was canvasback roasted twelve minutes, and diamondback terrapin, and Lynnhaven oysters by the barrel, and champagne. But the guest Ellis wanted was Mrs. Tamsey Twiford, keeper of the Narrows light.</p>
+  <p>The Narrows light stood on iron legs in four feet of water a mile out in the sound, a square white cottage with a lantern on its roof, and Tamsey Twiford had kept it eleven years, since her husband Joel went through the ice coming back from Coinjock with the mail. She was fifty. The Lighthouse Board had made her keeper because there was nobody who knew the light better and because the inspector, after watching her clean the lens in her linen apron, had not been able to think of a reason not to. She had two assistants, her nephew Lige Gallop, who was nineteen, and old Mr. Baum, who was deaf, and the three of them divided every night into three watches, sunset to ten, ten to two, two to sunrise, and took them in turn, and one of them was always awake in the lantern room with the light.</p>
+  <p>Ellis Tillett had been hers since before he was born. That was how he put it. His mother had been caught out on the sound in an open boat in the gale of '69, eight months gone with him, and had made the Narrows light in the dark, and Tamsey, who was then a girl of seventeen and the keeper's daughter, had pulled her up the ladder and sat with her all night. At eight years old he had fallen through the ice off the Narrows and Tamsey had come out on her belly with a boathook. At fourteen, when Mr. Whitlock offered to take him north, it was Tamsey he went out to the light to ask, and Tamsey who said, <em>Go.</em> He said she was the only person on the Banks he had never once lied to.</p>
+  <p>He had a notion about her, and he had told it to nobody but Edith.</p>
+  <p>They had been married six years and there was no child. There had been two that did not come to term. Edith had been to doctors in New York and Philadelphia and a spa in Germany, and Ellis had paid for all of it and none of it had done any good. He was a Banks boy under the Wall Street clothes, and the Banks were full of signs, and the Bible he had been raised on was full of them too. Gideon had put out a fleece, and the Lord had wet it or kept it dry, as Gideon asked.</p>
+  <p>So Ellis laid out a fleece.</p>
+  <p>He had Turkey carpets, red and blue, the best in the house, laid end to end from the bottom of the landing stairs at the dock, all the way up the boardwalk and the steps and in through the front door under the gilded Psalm, to the head of the dining room table. He said to Edith, <em>If she walks in on them, we'll have a child. If she won't, we won't.</em></p>
+  <p>Edith said he was being a Banker.</p>
+  <p><em>I am a Banker,</em> said Ellis.</p>
+  <p>The light's skiff came in to the dock at noon, Lige rowing and Tamsey in the stern in her black dress and her black straw hat, and Ellis went down the carpets himself to meet her and took her hand and helped her up onto the landing.</p>
+  <p><em>Come in, Aunt Tamsey.</em></p>
+  <p>She looked at the carpets going away up the boardwalk, red and blue in the white December sun, and she did not move.</p>
+  <p><em>Come in. They're all waiting.</em></p>
+  <p>She did not move.</p>
+  <p><em>Aunt Tamsey. Please. Come on in the house.</em></p>
+  <p>She stood on the bare boards of the landing at the end of the first carpet, with her hands folded in front of her, and she looked at Lige.</p>
+  <p>Lige was tying up the skiff. He had known her all his life and stood watches with her for three years, and he knew what the look meant the way he knew what the light meant when the flame went yellow. He finished his knot and came up onto the landing.</p>
+  <p><em>Ellis,</em> he said, <em>you'd best have them roll those up. She won't walk on them.</em> He said it kindly. <em>She's thinking about what comes after.</em></p>
+  <p>So the Norfolk men who had been the guards rolled up the carpets, all the way to the dining room, while the guests watched from the porch, and Tamsey Twiford walked up the bare boardwalk on the grey juniper planks with her nephew behind her and went in under the gilded Psalm.</p>
+</section>
+
+<section>
+  <h2>IV. Gull Shoal</h2>
+  <p class="dateline">The dining room</p>
+  <p>She ate what was given her, a little of the canvasback and a piece of bread, and drank water. When the orchestra stopped for its supper and the guests went out on the porch to look at the sound, Ellis sat down by her at the end of the table.</p>
+  <p><em>Aunt Tamsey. I've been yours three times over. Since before I was born. You know it. Why wouldn't you walk on my carpets?</em></p>
+  <p><em>What did you put them down for, Ellis?</em></p>
+  <p>He told her. Gideon and the fleece.</p>
+  <p><em>That's why,</em> she said.</p>
+  <p>He looked at her. She had small hard brown hands and grey eyes, and she was the only person on the Banks he had never lied to.</p>
+  <p><em>Then there won't be any.</em></p>
+  <p><em>No.</em></p>
+  <p><em>Not ever.</em></p>
+  <p><em>No.</em></p>
+  <p><em>Why? What did I do?</em></p>
+  <p>She did not answer that at once. She looked out the window at the sound, at the low grey line of the marsh islands to the south, and she said, as if it were a different subject:</p>
+  <p><em>You know Gull Shoal.</em></p>
+  <p>He knew it. A low island of sand and grass in the sound, a couple of miles below the Narrows, where the terns and the black skimmers nested in May so thick you could not walk without stepping on eggs. He had gone egging there with his father every spring when he was a boy, with a basket on each arm. Later the plume buyers had come down from New York, and he and his father had gone over with guns.</p>
+  <p><em>There was a man and a woman came ashore there off a wreck,</em> Tamsey said. <em>Before my time. Before my mother's time. A schooner broke up off the beach in a norther and everybody on her drowned but those two, and they came through the inlet on a hatch cover and fetched up on Gull Shoal. And there wasn't anything there to eat but birds' eggs. So they ate the eggs. They made a fire of wreck wood and cooked them in the coals, and that was all right, you've got to live. But the eggs gave out. So then they ate the young ones. The little speckled ones that can't fly yet, that you can pick up in your hand. And then the old birds. And then the eggs again next spring, and the young ones.</em></p>
+  <p><em>Somebody would have come for them.</em></p>
+  <p><em>Somebody came. Boats came by. They hid. They liked it there. They had all they could eat and nobody to tell them anything. They stayed on Gull Shoal and ate the birds when they were young, and when they were grown, and when they were old and grey. And not once in all that time, Ellis, not once in their whole lives, did either one of them keep a watch. Not one night. Not one hour of one night. They never set a lantern. They never once looked up from the fire to see what was coming, or who was out there on the water, or what they were doing to the island. Neither one of them. Not once.</em></p>
+  <p><em>What happened to them?</em></p>
+  <p><em>They died there. No children. Nothing came after them.</em> She turned back from the window and looked at him. <em>If they'd kept one watch. If either one of them had, the man or the woman, one, in all those years, young or grown or old, it'd have been a different story.</em></p>
+  <p><em>Who were they?</em></p>
+  <p><em>You know who they were.</em></p>
+  <p>He sat there in the juniper room he had built and looked at his own hands on the white tablecloth. They were Banks hands still, broad, with old scars across the knuckles from shucking and from the oarlocks. He thought about the baskets of eggs. He thought about the skimmers lying in rows on the sand with their wings spread, and his father cutting out the plumes, and the plumes going north to be put on hats, and about the hats, and about Edith's hats. He thought about Asa Quidley's eyes, and the lime, and the price he had named for it, as if it had been the price of juniper.</p>
+  <p><em>We stand three watches out at the light,</em> Tamsey said. <em>Lige and old Baum and me. A night's too long for one. But anybody can keep one.</em></p>
+  <p>Then she took a little book out of her bag. It was an old hymnbook with the back broken, printed in New York before her mother was born, that had come down to her from her mother's mother, a Methodist from the time when there was only one kind. She did not need to open it. She knew it. She said it to him the way she said everything, low and plain, as if she were reading off the time of high water.</p>
+  <div class="verse">
+    <p>We will not close our wakeful eyes,<br>We will not let our eyelids sleep;<br>But humbly lift them to the skies,<br>And all a solemn vigil keep;<br>So many nights on sin bestow'd,<br>Can we not watch one hour for God?</p>
+    <p>&mdash; Hymn 164, &ldquo;Watch Night,&rdquo; A Collection of Hymns for the Use of the Methodist Episcopal Church (1838)</p>
+  </div>
+  <p>Out on the porch the Northern men were laughing at something. The orchestra came back from its supper and began to tune.</p>
+  <p>Ellis Tillett sat for a while with his head down. When he lifted it, there was something in his face that Edith, coming in from the porch, did not recognize. She said afterward that it was the face of a boy she had never met, a boy of about eight who has just been pulled out through the ice, lying flat on the boards of a lighthouse landing, looking up.</p>
+</section>
+
+<section>
+  <h2>V. One Watch</h2>
+  <p class="dateline">Gull Shoal · May 1903</p>
+  <p>The legislature at Raleigh passed a law that spring putting the gulls and terns and herons of North Carolina under the protection of the new Audubon Society, with wardens to enforce it, and the plume buyers stopped coming to the Banks, or came at night. Ellis Tillett bought Gull Shoal from the county outright, all forty acres of sand and grass, and paid a warden's wages out of his own pocket to Lige Gallop, who took them, and the Bankers said Ellis had got religion, or got old, or both.</p>
+  <p>He went over himself in May when the terns came in. He went the first night, and the second, and most of the nights of that nesting season, in a skiff, alone, with a lantern and a blanket and a jug of water, and sat on a box at the high end of the island from ten o'clock until two. He did not sleep. He kept the lantern turned low and shaded on the water side, so the birds would not mind it and so that anybody coming in a boat from the south would see it a long way off and think better of what he was coming for.</p>
+  <p>Around him in the dark the island was alive. The terns sat their eggs in the open sand by the thousand, a pale shifting sheet of them going away into the night, and every so often one would stand and shake herself and settle again, and the whole colony would mutter and go quiet. Toward midnight the black skimmers went out over the sound in a long line, low, cutting the still water with their lower bills, and came back. The tide turned. A mile north, the Narrows light burned steady on its iron legs, and he knew which watch it was by the hour, and who was up there in the lantern room with the light, in her linen apron, awake.</p>
+  <p>At two o'clock he trimmed the wick and stood up stiffly from the box and rowed home across the sound in the dark. Behind him, on the sand where his feet had been, a tern walked over to the warm place and sat down in it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If a man hold himself dear, let him watch himself carefully; during one at least out of the three watches a wise man should be watchful.<cite>Dhammapada 157, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Prince Bodhi has a palace built so fine it seems to float in the air, and then, so that no one else will ever own one like it, plans to kill or blind the master builder. His friend Sa&ntilde;jik&#257;putta warns the builder, who says the work is not done, asks for seasoned timber and privacy, and secretly carves a great wooden bird; his wife sells everything for gold, and one morning after breakfast the family flies out the window past the prince's guards, to found a city in the Him&#257;laya where the builder is known as King Wooden Vehicle. The childless prince invites the Buddha to the palace festival and lays cloths from the threshold, thinking that if the Buddha steps on them he will have a child. The Buddha refuses three times and looks at &#256;nanda, who has the cloths rolled up. Asked why, the Buddha tells of a husband and wife shipwrecked on an island who lived all their lives on the eggs and young of its birds and were never heedful in youth, middle age or old age; if either had kept watch in even one of those three periods, the prince would have had a child. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-01.htm">the full commentary story</a>, or the Buddha's visit to Prince Bodhi in the <a href="https://suttacentral.net/mn85">Bodhir&#257;jakum&#257;ra Sutta</a> (Majjhima Nik&#257;ya 85).</p>
+    <h3>The Currituck Banks, 1902</h3>
+    <p>From the 1850s, when the <a href="https://en.wikipedia.org/wiki/Currituck_Shooting_Club">Currituck Shooting Club</a> was formed, wealthy Northern sportsmen built clubs and lodges along Currituck Sound and hired local Bankers as guides, while market hunters shipped barrels of canvasback, redhead and other ducks north by the week. In Kitty Hawk at the 1900 census most men fished, fifteen were surfmen in the Life-Saving Service, and a few listed themselves as hunters of wild fowl. The Wright brothers flew their <a href="https://en.wikipedia.org/wiki/Wright_Glider">1902 glider</a> again and again from the Kill Devil Hills that autumn and left it in their camp over the winter; they returned to fly the powered Flyer in December 1903. Ellis Tillett's fortune comes from the Northern Pacific corner and the <a href="https://en.wikipedia.org/wiki/Panic_of_1901">Panic of 1901</a>.</p>
+    <p>The Narrows light and Gull Shoal are invented, but the <a href="https://en.wikipedia.org/wiki/United_States_Lighthouse_Board">Lighthouse Board</a> did appoint women keepers on the North Carolina coast and sounds, most of them wives or daughters of keepers, who stood their share of the night watches, kept the log and wore linen aprons to clean the lens (<a href="https://coastalreview.org/2015/07/the-lady-keeper-of-the-light/">Coastal Review</a>). By the turn of the century the plume trade had stripped the state's gull, tern and heron colonies; in March 1903 the legislature passed the Audubon Act, drafted by T. Gilbert Pearson, which gave the new <a href="https://www.ncpedia.org/audubon-society-north-carolina">Audubon Society of North Carolina</a> wardens and the power to enforce bird and game laws. Mrs. Twiford's hymnbook is <a href="https://archive.org/details/epismed00meth">A Collection of Hymns for the Use of the Methodist Episcopal Church</a> (New York, 1838), printed before the church divided North and South in 1844; hymn 164 is "Watch Night."</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Prince Bodhi from the Dhammapada commentary (verse 157). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-01.htm">The original</a>. Scripture from the King James Version and a Methodist Episcopal hymnal of 1838. Written by Claude Opus 5.5.
+  <div class="pager"><a href="sixteen-oxen.html">&larr; Sixteen Oxen</a><a href="index.html">All stories</a><a href="the-middle-portion.html">The Middle Portion &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, hz, birds = [], lift = null, nextLift = 8000;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    hz = H - Math.max(46, H * 0.07);
+  }
+  function make() {
+    birds = [];
+    var n = W < 760 ? 14 : 26, x0 = W * 0.04, w = Math.min(W * 0.2, 220);
+    for (var i = 0; i < n; i++) birds.push({ hx: x0 + Math.random() * w, hy: hz - 2 + Math.random() * 6, x: 0, y: 0, ph: Math.random() * 6.28 });
+    birds.forEach(function (b) { b.x = b.hx; b.y = b.hy; });
+  }
+  function light(now, faint) {
+    var lx = W * 0.9, base = hz;
+    ctx.strokeStyle = 'rgba(34,40,42,' + (0.22 * faint) + ')'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(lx - 9, base); ctx.lineTo(lx - 5, base - 14);
+    ctx.moveTo(lx + 9, base); ctx.lineTo(lx + 5, base - 14);
+    ctx.moveTo(lx, base); ctx.lineTo(lx, base - 14);
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(34,40,42,' + (0.2 * faint) + ')';
+    ctx.fillRect(lx - 9, base - 24, 18, 10);
+    ctx.beginPath(); ctx.moveTo(lx - 11, base - 24); ctx.lineTo(lx, base - 30); ctx.lineTo(lx + 11, base - 24); ctx.fill();
+    ctx.fillRect(lx - 2.5, base - 35, 5, 5);
+    var flick = reduce ? 1 : 0.9 + 0.1 * Math.sin(now / 900);
+    var g = ctx.createRadialGradient(lx, base - 32, 0, lx, base - 32, 26);
+    g.addColorStop(0, 'rgba(214,140,60,' + (0.55 * flick * faint) + ')');
+    g.addColorStop(1, 'rgba(214,140,60,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(lx, base - 32, 26, 0, 6.29); ctx.fill();
+    for (var k = 0; k < 7; k++) {
+      var yy = base + 4 + k * 4, wob = reduce ? 0 : Math.sin(now / 600 + k * 1.7) * (2 + k);
+      ctx.fillStyle = 'rgba(214,140,60,' + (0.22 * faint * (1 - k / 7)) + ')';
+      ctx.fillRect(lx - 3 - k * 0.6 + wob, yy, 6 + k * 1.2, 1.4);
+    }
+  }
+  function draw(now) {
+    now = now || 0;
+    ctx.clearRect(0, 0, W, H);
+    var faint = W < 760 ? 0.5 : 1;
+    ctx.fillStyle = 'rgba(111,134,115,' + (0.18 * faint) + ')';
+    ctx.fillRect(0, hz, W, 1);
+    light(now, faint);
+    if (!reduce && !lift && now > nextLift) { lift = { t0: now }; }
+    var e = lift ? (now - lift.t0) / 1000 : 0;
+    if (lift && e > 9) { lift = null; nextLift = now + 14000 + Math.random() * 12000; e = 0; }
+    for (var i = 0; i < birds.length; i++) {
+      var b = birds[i], up = 0;
+      if (lift) { var u = Math.max(0, Math.min(1, (e - i * 0.04) / 1.5)), d = Math.max(0, Math.min(1, (e - 5.5 - i * 0.05) / 2.5)); up = u * (1 - d); }
+      var fx = b.hx + up * (Math.sin(e * 1.3 + b.ph) * 26);
+      var fy = b.hy - up * (30 + 22 * Math.sin(b.ph + e * 0.9));
+      ctx.strokeStyle = 'rgba(34,40,42,' + ((0.22 + 0.18 * up) * faint) + ')'; ctx.lineWidth = 1;
+      ctx.beginPath();
+      if (up > 0.15) {
+        var f = Math.sin(now / 90 + b.ph) * 2.2;
+        ctx.moveTo(fx - 4, fy - f); ctx.lineTo(fx, fy); ctx.lineTo(fx + 4, fy - f);
+      } else {
+        ctx.moveTo(fx - 2, fy); ctx.lineTo(fx + 2, fy);
+      }
+      ctx.stroke();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw(0);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fifty-One Percent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Morning infield at Boca Chica: chalk-white light, red clay, club navy. */
+  --ground: #f3ede2;
+  --ground-2: #e9e0cf;
+  --paper: #1e2838;
+  --paper-dim: #6b6a63;
+  --mustard: #a8452a;
+  --flame: #23406e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #e6c9a8 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(30,40,56,.2); }
+.series a:hover { color: var(--mustard); }
+a:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--mustard); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(168,69,42,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mustard); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--mustard); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,252,246,.82); border: 1px solid rgba(30,40,56,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse .en { color: var(--paper-dim); }
+.brk { text-align: center; color: var(--flame); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(30,40,56,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--mustard); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mustard); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(30,40,56,.15); border-bottom: 1px solid rgba(30,40,56,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--mustard); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mustard); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--mustard); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,252,246,.82); border-left: 2px solid var(--mustard); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 21.3 &middot; Bhaddiyabhikkh&#363;</span></nav>
+<header>
+  <h1>Fifty-One Percent</h1>
+  <div class="epigraph">Martha, Martha, thou art careful and troubled about many things: But one thing is needful.<br>&mdash; Luke 10:41&ndash;42</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; lo o&iacute; yo,</span> behind the third field at Boca Chica.</p>
+
+<section>
+  <h2>I. Paint</h2>
+  <p class="dateline">The Twins academy, Boca Chica, Dominican Republic &middot; June 2018</p>
+  <p>The academy sat on forty-five acres of flat ground a few kilometers in from the sea, behind a wall with the two clubs&rsquo; names on the gate, the Twins on one side of the compound and the Phillies on the other. Each club had three fields, covered cages, a weight room, a video room, three classrooms with whiteboards, and a dormitory where seventy-some boys slept two and three to a room under air conditioning that most of them had never had at home. The youngest were sixteen. They had signed the summer before, on the second of July, when the international signing period opened, and some of them had received more money on that one day than their fathers had earned in their lives, and most of it was already gone, to a house for the mother, a motorbike for the brother, a debt in the colmado, and the cut that went to the buscón who had trained them since they were twelve and fed them and owned a piece of them still.</p>
+  <p>It began with Yandel Ozuna&rsquo;s cleats.</p>
+  <p>Yandel was a shortstop from Ban&iacute;, seventeen, with hands so quiet the coaches stopped talking when he took ground balls. He came back from a Sunday at home with a pair of game spikes that a man in Bayona had painted for him with leather paint out of little jars. On the outside heel of the left one there was a Dominican flag. On the right, a palm tree against a sunset, and his mother&rsquo;s name, <em>Altagracia</em>, in gold script along the side, and on both toes the interlocked T and C of the club, outlined in glitter. It had cost him two thousand pesos and taken the man a week.</p>
+  <p>By the end of June there were eleven pairs. Cristian Mej&iacute;a, a center fielder from Hato Mayor, had flames. Wilmer from Barquisimeto, one of the four Venezuelans, had the yellow, blue and red of his own flag and eight white stars, and he had painted them himself, at night, with a brush he bought in Boca Chica, and the whole wing smelled of acetone. &Aacute;ngel Luis had a pair of slides woven out of yarey palm from a stall on the highway, the way they make the hats, which he wore to breakfast and to the classroom and in the shower until they came apart. Somebody had Crocs so studded with charms you could not see the plastic: little Dominican flags, a gold crown, a Jordan, a slice of pizza, a baseball, Bad Bunny&rsquo;s face. Somebody had chancletas with plastic hibiscus glued across the straps. Somebody&rsquo;s cousin in Santo Domingo sold a pair of white turf shoes with green artificial grass glued on the sides like a lawn, and they passed from foot to foot down the hall for a week as a joke, and then nobody was joking about them anymore, and three boys wanted their own.</p>
+  <p>At night it was Fortnite. They had two consoles in the lounge and phones in every bunk, and they played until two and three in the morning, and what they spent their money on there was skins. A skin did nothing. A boy dressed as a dinosaur ran no faster and shot no straighter than a boy dressed as a soldier. They bought them anyway, with real pesos turned into V-Bucks, and they bought the little dances, and when one of them dropped into the game in something new the others would scream down the hall.</p>
+  <p>They were late to the early work. They sat in the back of the English class with their heads down on the desks. The video room, where the coaches could show a boy his own swing frame by frame until he saw what they saw, was empty in the afternoons. They did the drills, because the coaches were standing there, but their eyes were on each other&rsquo;s feet.</p>
+</section>
+
+<section>
+  <h2>II. The Older Ones</h2>
+  <p class="dateline">The dormitory &middot; early July</p>
+  <p>Not everyone thought it was funny. Rainier Coss was a catcher from Maracay, nineteen, in his third summer at the academy, which meant he was running out of summers, and he had a pair of black spikes with the club logo worn off the toes from dragging them in the dirt. Junior Peralta was a pitcher from Monte Plata who had come back from elbow surgery and spent a year doing nothing but bands and towel drills in front of a mirror, and the scar on the inside of his arm was still pink.</p>
+  <p>They did not say anything at first. Then one night in the lounge somebody held up Rainier&rsquo;s cleats by the laces and asked who had died, and everybody laughed, and Rainier took them back and went out and sat on the steps in the dark.</p>
+  <p>In the morning he and Junior went to Don Teo.</p>
+</section>
+
+<section>
+  <h2>III. The Rule</h2>
+  <p class="dateline">The agility field &middot; the next morning, before six</p>
+  <p>Teodoro Peguero was fifty-eight and had been the academy&rsquo;s field coordinator for nine years. He was a small, dark man with a gray mustache and a belly, and he walked with his feet a little turned out, the way infielders do who have spent their lives getting ready to go either way. He did not shout. He did not use the whistle around his neck. In nine years most of the boys had heard him say perhaps a hundred words, and the ones who later reached Rochester or Minneapolis could repeat most of them.</p>
+  <p>He had been born on a sugar batey outside San Pedro de Macor&iacute;s, where the cane cutters lived in barracks between the fields and the company owned the water. He had learned to play barefoot, on a lot of packed red dirt beside the rail line where the cane carts ran, with a glove cut and folded out of a milk carton and a ball made of a sock wound with tape. He did not own a pair of shoes until the club that signed him in 1977 gave him a pair of spikes, and he said later that he had not liked them, because he could no longer feel where he was.</p>
+  <p>He had played eleven years in the minor leagues, in towns whose names he could still recite in order. In September of 1987 he was called up to the Twins for nineteen days. He played in nine games in the Metrodome, under the white roof, and had two hits, one of them a ground ball through the right side that he said he still felt in his hands. He was sent down before the playoffs. He watched the seventh game of the World Series in a colmado in San Pedro with half the batey crowded in the door, and on the television the whole Metrodome was waving little white handkerchiefs, fifty thousand of them, so many that it looked like snow coming up instead of down, and when the Twins won he was the only man in San Pedro who had been in that building, and he did not say so.</p>
+  <p>Now he sent word that the boys from the painted wing were to be on the agility field at a quarter to six, in whatever they had on their feet.</p>
+  <p>They came. It was barely light. The ground was wet and the air smelled of cut grass and the sea. They stood in a ragged line in the flames and the flags and the palm trees and the glitter, and &Aacute;ngel Luis in what was left of his yarey slides, and Don Teo walked down the line slowly, looking at their feet and not at their faces, the way you look at horses.</p>
+  <p>Then he took a folded paper out of his back pocket. It was a page printed off the internet, and he read it to them in Spanish and then in English, because English was one of the things they were here for.</p>
+  <p><em>At least 51% of the exterior of each Player&rsquo;s shoes must be the Club&rsquo;s designated primary shoe color.</em></p>
+  <p>He folded it again.</p>
+  <p><em>That&rsquo;s the big leagues,</em> he said. <em>In May they warned a man in Chicago who has two rings, about black shoes. Black. You think they won&rsquo;t send one to you?</em></p>
+  <p>Nobody answered.</p>
+  <p><em>So here is the rule here. On the field, plain spikes, the club&rsquo;s color. One pair of plain chancletas for the dormitory. The rest goes in a box. You can have it back when you leave, whichever way you leave.</em></p>
+  <p>Yandel said, very quietly, <em>Don Teo, it&rsquo;s only paint.</em></p>
+  <p>Don Teo looked at him for a while.</p>
+  <p><em>You came here for one thing,</em> he said. <em>And you are doing another.</em></p>
+  <p>That was all of the rebuke. He did not raise his voice and he did not say anything about the English class or the empty video room or the games at two in the morning, and every one of them understood that he knew all of it. He took a small black Bible from the pocket of his windbreaker, the old Reina-Valera with the cover gone soft, and turned to a place he did not need to look for.</p>
+  <div class="verse">
+    <p>Marta, Marta, cuidadosa est&aacute;s, y con las muchas cosas est&aacute;s turbada: Empero una cosa es necesaria.</p>
+    <p class="en">Martha, Martha, thou art careful and troubled about many things: But one thing is needful.</p>
+    <p>&mdash; Lucas 10:41&ndash;42 (Reina-Valera 1909); Luke 10:41&ndash;42 (KJV)</p>
+  </div>
+  <p><em>One,</em> he said, and held up a finger, the way the coaches hold up a finger for one out.</p>
+</section>
+
+<section>
+  <h2>IV. Barefoot</h2>
+  <p class="dateline">The agility field &middot; sunrise</p>
+  <p>Then he sat down on the wet grass and unlaced his own shoes, a pair of old gray running shoes with the heels broken down, and took off his socks and stuffed them in the shoes, and stood up barefoot. His feet were wide and pale on the bottom and the toes were crooked from fifty years of being stepped on.</p>
+  <p><em>Take them off.</em></p>
+  <p>They looked at each other. Then they sat down in a row in the grass and took them off, the flags and the flames and the palm tree and Altagracia in gold, and the Crocs with the charms, and set them side by side behind them, and stood up. The grass was cold. Someone laughed, once, and stopped.</p>
+  <p>Don Teo walked them out to the skin of the infield, where the dirt had been dragged smooth the evening before and not yet touched. He set himself at shortstop, knees bent, weight on the balls of his feet.</p>
+  <p><em>Right foot. Left foot. Feel the ground take you. Now the ball is here.</em> He showed them, without a ball. A small step with the right foot to the side, the left coming through, the glove hand down and out in front, the throwing hand closing over it, the right foot crossing behind to set, and the throw, which went nowhere, which went to first base in the air. Then again, very slowly. Then again. <em>Where is your right foot? Don&rsquo;t look. Where is it?</em></p>
+  <p>They did it with him. At first they did it badly, looking down, bumping into each other, a line of teenage boys in gym shorts doing a slow dance in the dirt. He made them do it slower. He made them do it with their eyes closed. He made them tell him, every time, without looking, where the right foot was and where the left foot was and which way the weight was going. <em>The feet know before you do,</em> he said. <em>That is the only thing I know. If you know where your feet are, always, you will not need anybody to paint anything on them.</em></p>
+  <p>The sun came up over the wall behind the third field and the dirt began to warm under them. They did it fifty times. They did it a hundred. No one had told them to count and they counted anyway, under their breath. Somewhere past a hundred the counting stopped. So did the bumping into each other. The boys who were there say that something happened on that infield they have never been able to describe to anyone who was not.</p>
+  <p>Yandel said once, years later, that it was like the first time he had ever been on a field at all. That he could feel the dirt through the soles of his feet, every pebble, and the boy on his left breathing, and the boy on his right, and the place where the ball would be before it was there, and that for a while there was nothing he wanted. Not the paint. Not the skins. Not even, for that morning, the big leagues. Only the next step, and he was already taking it.</p>
+  <p>Don Teo stopped them when the grounds crew came out with the drag. He stood with his hands on his knees, breathing hard, an old man with dirt to his ankles. Then he said the other verse, without taking the Bible out, and they listened with their feet in the warm dirt.</p>
+  <div class="verse">
+    <p>Antes hiero mi cuerpo, y lo pongo en servidumbre; no sea que, habiendo predicado &aacute; otros, yo mismo venga &aacute; ser reprobado.</p>
+    <p class="en">But I keep under my body, and bring it into subjection: lest that by any means, when I have preached to others, I myself should be a castaway.</p>
+    <p>&mdash; 1 Corintios 9:27 (Reina-Valera 1909); 1 Corinthians 9:27 (KJV)</p>
+  </div>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The painted spikes went into a cardboard box that had held batting gloves, and the box went on a shelf in the equipment room under the bucket of rosin bags, and over the years more pairs went in on top of them. Nobody took theirs back. When Yandel left for Fort Myers the next spring he forgot to ask for his, and when he remembered he did not write.</p>
+  <p>That evening the grounds crew came out to drag the infield, as they did every evening, and when they got to the shortstop&rsquo;s side they stopped and called each other over. The dirt there had been dragged that afternoon after the game, and swept, and watered down. But in the wet skin of it, in a long curved line from the hole toward second base, there were footprints, bare, all the same size, right foot, left foot, the right crossing behind, set and throw, over and over, as if one person had made them a hundred times and stepped every time exactly where he had stepped before.</p>
+  <p>They raked them out. In the morning they were there again.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">What ought to be done is neglected, what ought not to be done is done; the desires of unruly, thoughtless people are always increasing.<cite>Dhammapada 292, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">But they whose whole watchfulness is always directed to their body, who do not follow what ought not to be done, and who steadfastly do what ought to be done, the desires of such watchful and wise people will come to an end.<cite>Dhammapada 293, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is one of the shortest in the collection. The monks of Bhaddiya took to ornamenting their footwear, making or having made sandals of grass, of thatch, of reeds, of palm leaves, of bulrush and of wool, and neglected their instruction, their questions and their training in conduct, meditation and wisdom. Other monks were offended and told the Buddha, who laid down rules about sandals and rebuked them: &ldquo;You came here for one purpose, but have devoted yourselves to another.&rdquo; He spoke the two verses, the second about mindfulness of the body, and the monks of Bhaddiya reached the end of the path as he finished. The story quotes the Vinaya&rsquo;s chapter on footwear (Mah&#257;vagga 5). Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-03.htm">the full commentary story</a>.</p>
+    <h3>Boca Chica, 2018, and the Metrodome, 1987</h3>
+    <p>Major League clubs sign Latin American teenagers as young as sixteen and house them at academies in the Dominican Republic, where they train, take English and other classes, and play in the <a href="https://en.wikipedia.org/wiki/Dominican_Summer_League">Dominican Summer League</a>. The Twins and Phillies opened a shared $18 million academy at Boca Chica in January 2017, with three fields, batting cages, classrooms and dormitory space for each club (<a href="https://www.mlb.com/news/twins-open-dominican-republic-baseball-academy/c-213683558">MLB.com</a>). Many players have come from <a href="https://en.wikipedia.org/wiki/San_Pedro_de_Macor%C3%ADs">San Pedro de Macor&iacute;s</a> and the sugar <a href="https://en.wikipedia.org/wiki/Batey_(sugar_workers%27_town)">bateyes</a> around it. Until the end of 2018, Major League uniform rules required that at least 51 percent of each shoe&rsquo;s exterior be the club&rsquo;s designated color; after a spring of warnings to players over their cleats, the league and the players&rsquo; union loosened the rule for 2019 (<a href="https://www.mlb.com/news/mlb-to-allow-colorful-cleats-in-2019-c300780722">MLB.com</a>). That same year the free-to-play <a href="https://en.wikipedia.org/wiki/Fortnite_Battle_Royale">Fortnite Battle Royale</a>, which makes its money selling purely cosmetic outfits and dances, was at the height of its first craze.</p>
+    <p>The Twins won their first World Series in Minnesota in 1987, beating the St. Louis Cardinals in seven games. It was the first Series with games played indoors, and the home team won every game; Game 7 was played on October 25 before 55,376 people in the <a href="https://en.wikipedia.org/wiki/Hubert_H._Humphrey_Metrodome">Metrodome</a> (<a href="https://en.wikipedia.org/wiki/1987_World_Series">1987 World Series</a>). That fall the <em>Star Tribune</em> handed out the first <a href="https://en.wikipedia.org/wiki/Homer_Hanky">Homer Hankies</a>, and the crowds waved them by the tens of thousands.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the monks of Bhaddiya from the Dhammapada commentary (verses 292&ndash;293). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-03.htm">The original</a>. Scripture from the Reina-Valera 1909 and the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-childrens-house.html">&larr; The Children&#x27;s House</a><a href="index.html">All stories</a><a href="the-brass-tray.html">The Brass Tray &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Bare footprints in raked infield dirt: right, left, cross behind, set. One at a time they press in
+  // along a curve from the hole toward second, then fade, and the pattern begins again in the same places.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, steps = [], t = 0, period = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    make();
+  }
+  function make() {
+    steps = [];
+    var n = Math.max(8, Math.min(16, Math.round(W / 80)));
+    for (var i = 0; i < n; i++) {
+      var u = i / (n - 1);
+      var x = W * (0.08 + 0.84 * u);
+      var y = H * (0.9 - 0.12 * Math.sin(u * Math.PI));
+      var right = i % 2 === 0;
+      var ang = -0.35 * Math.cos(u * Math.PI) + (right ? 0.12 : -0.12);
+      steps.push({ x: x, y: y + (right ? 9 : -9), a: ang, right: right });
+    }
+    period = steps.length * 70 + 600;
+  }
+  function foot(s, alpha) {
+    ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(s.a + Math.PI / 2);
+    if (!s.right) ctx.scale(-1, 1);
+    ctx.fillStyle = 'rgba(122,62,38,' + alpha + ')';
+    ctx.beginPath(); ctx.ellipse(0, 4, 5.2, 9, 0.08, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(0.8, 14, 4, 4.6, 0, 0, Math.PI * 2); ctx.fill();
+    var toes = [[-4.2, -6.8, 2.2], [-1.4, -8.4, 1.8], [1.2, -8.6, 1.6], [3.4, -7.8, 1.4], [5.0, -6.4, 1.2]];
+    for (var k = 0; k < toes.length; k++) { ctx.beginPath(); ctx.arc(toes[k][0], toes[k][1], toes[k][2], 0, Math.PI * 2); ctx.fill(); }
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // drag lines in the dirt
+    ctx.strokeStyle = 'rgba(160,96,64,0.05)'; ctx.lineWidth = 1;
+    for (var y = H * 0.74; y < H; y += 5) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y + 6); ctx.stroke(); }
+    var ph = reduce ? period * 0.85 : t % period;
+    for (var i = 0; i < steps.length; i++) {
+      var born = i * 70, age = ph - born, a = 0;
+      if (age > 0) a = Math.min(1, age / 40) * Math.max(0, 1 - Math.max(0, age - 500) / 300);
+      if (reduce) a = 0.8;
+      if (a > 0.01) foot(steps[i], 0.16 * a);
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

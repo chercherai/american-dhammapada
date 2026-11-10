@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Dog&rsquo;s Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a spruce wood at dusk, dark theme; a few trunks recede along one margin, and the white paint blaze on each lights in turn from the nearest to the farthest, then dims behind; datelined sections. */
+  --ground: #101714;
+  --ground-2: #18221d;
+  --paper: #e4e6da;
+  --paper-dim: #98a294;
+  --accent: #d9c27a;
+  --glow: #eceee4;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #16211c 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,230,218,.12); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(217,194,122,.18); }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,34,29,.8); border: 1px solid rgba(228,230,218,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,230,218,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(228,230,218,.12); border-bottom: 1px solid rgba(228,230,218,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,34,29,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.33 &middot; Ja&#7789;ila</span></nav>
+<header>
+  <h1>The Dog&rsquo;s Book</h1>
+  <div class="epigraph">Strong and content I travel the open road.<br>&mdash; Walt Whitman, Song of the Open Road</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it&rsquo;s written in the registers,</span> on the Swift River.</p>
+
+<section>
+  <h2>I. The Cooler</h2>
+  <p class="dateline">South Fork of the Shenandoah, Virginia &middot; July 1979</p>
+  <p>There was a hotel upriver, seven stories, and the man who owned it kept his daughter on the top floor with one maid to watch her. That was the summer people had started jumping off ridges under nylon kites. One evening a man came in at her window. The maid said afterward that he had no kite. He flew, she said, the way you would walk across a room.</p>
+  <p>In July the daughter had a boy. She sent the maid out for a new Coleman cooler, the green steel kind. She laid the baby in it on a folded towel, propped the lid with a wooden spoon, and put daisies and black-eyed Susans on top. <em>Carry this down and set it in the river,</em> she said. <em>If anybody asks, it's a picnic I'm sending to the church.</em></p>
+  <p>The maid did as she was told. Nobody asked.</p>
+  <p>Six miles down, below a low-water bridge, two women were bathing. One was Opal Shifflett, who was sixty. The other was Dreama Good, who was not much younger. They saw a new cooler coming down the current with flowers on it.</p>
+  <p><em>That cooler's mine!</em> Dreama called.</p>
+  <p><em>Then whatever's in it is mine,</em> said Opal.</p>
+  <p>They waded out and brought it in to the gravel and lifted the lid. For a minute neither of them said a word. Then they both spoke at once, and they kept at it for six weeks. Dreama held that a cooler and what it held were one article. Opal held that she had spoken plainly. The magistrate would not touch it. It went up to old Judge Rudacille at the courthouse, who heard them both out with his glasses pushed up on his forehead.</p>
+  <p><em>Mrs. Good, you called the cooler, and you take the cooler,</em> he said. <em>Miss Shifflett, you take the child.</em></p>
+  <p>Dreama used that cooler for thirty years and said it was the best she ever owned.</p>
+  <p>When Opal first washed the boy, his hair came up out of the basin in mats that no comb would go through. She named him Matthew and called him Matt.</p>
+  <p>Opal lived at a gap where the Appalachian Trail came down out of the park and crossed the road. She had fed hikers on her porch since there were hikers. There was one she fed every June, a lean schoolteacher with a gray beard who answered any short question at such length that the trail had named him Footnote. He had gone north every year since 1970, and he walked behind a dog.</p>
+  <p>She was a yellow dog of middle size with no collar. On her chest she had a white mark two inches wide and six inches long, the size and shape of the paint blazes on the trees. She belonged to nobody. Every town on the trail had tried to keep her at one time or another and had found her gone in the morning, and so she was called Gone. She walked north from Georgia each spring. People fell in behind her and found that they wanted less by the week. Those were Gone's people, and Opal thought more of them than she did of most churches.</p>
+  <p><em>I'm raising this one for the trail,</em> she told Footnote. <em>When he can walk it, you take him.</em></p>
+  <p>Two summers later the boy could walk, and Opal's heart was bad and she knew it. <em>Take him now,</em> she said.</p>
+  <p>Footnote squatted down and looked at the child for some time. Gone came up and smelled the boy's hands. She did not lie down by him.</p>
+  <p><em>Not yet, Opal,</em> Footnote said. <em>He's got a house in him. He's got a whole hill in him, and he'll have to have it before he can leave it. But I know a man in Maine.</em></p>
+  <p>So the boy went north. It is in the registers that he rode most of Pennsylvania on top of Footnote's pack.</p>
+</section>
+
+<section>
+  <h2>II. The Store</h2>
+  <p class="dateline">Starbird Falls, Maine &middot; 1981 to 2001</p>
+  <p>Starbird Falls is eleven miles down the road from where the trail crosses, in Oxford County, on the Swift River. People there have panned gold out of the Swift for a hundred and fifty years, a few flakes to the pan, and have always wondered where it washed down from.</p>
+  <p>Orrin Thurlow kept the store by the bridge. He let hikers sleep in his barn and held their mail, and he had known Footnote for ten years. <em>He'll walk, later on,</em> Footnote told him. <em>Right now he's two. Keep him a while.</em> Orrin was a widower with a daughter, Lila, who lived winters with his sister in Rumford. He gave the boy the room over the store and brought him up as his own.</p>
+  <p>Orrin was a good man and a poor storekeeper. He bought whatever a salesman showed him and sold perhaps half. He had taken over the place in 1986, and by the end of 1997 he had twelve years of goods on the shelves, in the back room and in the cellar. There were lamp chimneys and wicks. There were kerosene cans, stovepipe elbows, candles by the gross, rock salt and wool socks. He had flashlight batteries in sizes nobody used. He had a carton of cumin that no one in Oxford County had ever asked for.</p>
+  <p>On the seventh of January, 1998, a Wednesday, Orrin had to go down to Rumford. He sat Matt on the stool behind the register and went through the stock with him. <em>This is worth so much and that is worth so much. If you can get it, sell it.</em> Matt was eighteen. He wrote it all down.</p>
+  <p>The freezing rain started that night. By Thursday every wire in the county was on the ground under two inches of ice. The power was out from the mountains to the coast, and it stayed out for two weeks in some places. Nobody could get to Rumford or to anywhere else.</p>
+  <p>Whatever it is that looks after towns sent every soul in that valley to Thurlow's. They came on foot with sleds. They wanted wicks and chimneys, kerosene, stovepipe, candles, salt, socks, and batteries in every size. A woman cooking for eleven on a camp stove bought the pepper. A man from away, iced in at his camp, bought the cumin. Matt sold by flashlight from first light until after dark, at Orrin's prices to the cent, and wrote down every sale.</p>
+  <p>Orrin got home Friday behind a plow. He stood in the door and looked at the bare shelves.</p>
+  <p><em>Matt,</em> he said, <em>have you lost me my whole stock?</em></p>
+  <p><em>I haven't lost anything. Here's for the wicks. Here's for the stovepipe. Here's for the cumin.</em> It was all in a cigar box, with the list.</p>
+  <p>Orrin counted it twice. <em>Here's one who could make a living on a bare ledge,</em> he said, and he said it around town until people were tired of it.</p>
+  <p>Lila came home that spring for good. She and Matt were married in June of 2000, and Orrin had a house built for them on the rise behind the store. It was done in September of 2001. Matt carried the last box up himself.</p>
+  <p>He set one foot on the threshold, and the ground behind the house opened. A hill of gold came up out of it, a hundred and twenty feet high. It stood above the spruce. It was the same pale gold as the flakes in the Swift, and on a clear afternoon you could see it from the fire tower.</p>
+  <p>The state sent a geologist, who measured it and went home. Then a man came up from the bank in Portland in a dark suit, carrying papers and a large green umbrella with the bank's name on it. He left the umbrella. That was how the town knew for certain. After that he was Mr. Shifflett at the bank, and at the store he was still Matt.</p>
+</section>
+
+<section>
+  <h2>III. The Brick, the Whip and the Cord</h2>
+  <p class="dateline">Starbird Falls and points west &middot; 2024</p>
+  <p>They had three boys, Wade, Curtis and Ben. Matt ran the store after Orrin. He paid for the school roof, the new plow truck and three parts in four of the town budget. He took what he needed from the hill with a spade and did not think about it much. Every September Gone came down the road with her people. He fed them in the yard and stood a while afterward watching them go back up toward the crossing.</p>
+  <p>Lila died in the winter of 2021. By the next fall the boys were men, or near it, and he knew what he wanted. But he had got it into his head that a man could not walk off from the biggest pile there was. The biggest pile had duties. If there were another like it somewhere, the town would let him go.</p>
+  <p>So he made a brick, a buggy whip and a length of cord, all three of gold. He gave them to Dunc Coolidge and Leroy Poulin, who clerked for him. <em>Drive around the country,</em> he said. <em>Act like you're after nothing in particular. See if anybody has what we have.</em></p>
+  <p>They drove a long way. In the Texas Panhandle a rancher named Ramsey found them leaning on his fence.</p>
+  <p><em>What are you boys after?</em></p>
+  <p><em>Nothing in particular,</em> said Dunc.</p>
+  <p>Ramsey looked at the whip. <em>Nobody carries a gold buggy whip after nothing in particular. Go on around back and take a look.</em></p>
+  <p>Behind the house were eight acres of fenced caliche. In it were rams made of gold, as big as horses, going at each other back to back and tearing up the ground. Dunc and Leroy walked around among them for a while. Then they came out.</p>
+  <p><em>Find what you were after?</em> said Ramsey.</p>
+  <p><em>Yes sir.</em></p>
+  <p><em>Then go home.</em></p>
+  <p>They told it to Matt in the store. <em>What have you got?</em> Leroy said. <em>This Ramsey has that much in livestock.</em></p>
+  <p>Matt was more pleased than they had seen him since Lila. <em>That's one,</em> he said. <em>See if there's another.</em> This time he gave them a blanket of vicu&ntilde;a wool, with a paper saying it was worth a hundred thousand dollars.</p>
+  <p>They took it to Lake Tahoe, to the public beach under the wall of a man named Bright. They piled up driftwood and lit it.</p>
+  <p><em>What are you doing?</em> said a man at the gate.</p>
+  <p><em>We've got a blanket here worth a hundred thousand dollars,</em> said Dunc. <em>We can't find a buyer, and we're afraid to carry it for fear of robbers. So we'll burn it and go home.</em></p>
+  <p>Bright heard and sent for them. He counted out a hundred thousand dollars and gave the blanket straight back. <em>Take that to the woman who sweeps the gatehouse.</em></p>
+  <p>The woman who swept the gatehouse felt of it and began to cry. She went to Bright. <em>If I've done wrong, tell me what. Why would you send me a scratchy thing like this? I can't wear it and I can't sleep under it.</em></p>
+  <p><em>It isn't for that,</em> Bright said. <em>Roll it up at the foot of your bed. It's to dry your feet on when you've had your bath. Can you use it for that?</em></p>
+  <p><em>I can do that,</em> she said, and took it away.</p>
+  <p>They heard other things there. There was not a lamp in that house, and the family ate and read by the light of stones. The cook had one pot of rice, which she had never yet got to the bottom of. They did not stay to see.</p>
+  <p><em>What have you got, Matt?</em> said Dunc, when they were home.</p>
+  <p><em>Not much, it sounds like,</em> said Matt. <em>Good. Now they'll let me go.</em></p>
+</section>
+
+<section>
+  <h2>IV. Article 31</h2>
+  <p class="dateline">Town meeting, the Grange hall &middot; March 2025</p>
+  <p>Town meeting is the first Saturday in March. The warrant that year had thirty-three articles. They voted the plow contract and the salt shed and argued forty minutes over a culvert. Then Mrs. Arsenault, the moderator, read the next one in the same voice.</p>
+  <p><em>Article 31. To see if the Town will give Matthew Shifflett leave to go.</em></p>
+  <p>It was quiet enough to hear the furnace.</p>
+  <p><em>Go where?</em> said the first selectman.</p>
+  <p><em>Up the trail,</em> Matt said. He stood, with his cap in his hands. <em>Behind the dog. For good.</em></p>
+  <p><em>And who pays for the school?</em></p>
+  <p><em>The hill stays where it is. My boys stay with it. I can't carry it and I'm not asking to.</em> He told them about Ramsey's eight acres and about the woman at the gatehouse drying her feet. <em>I thought we had the only one. There's more of it around than I knew. I thought you ought to hear that before you voted.</em></p>
+  <p>An old man in the back said he had known Matt since he came up the road on a hiker's pack, and he had always figured somebody would come back for him. A woman said her mother had bought the pepper.</p>
+  <p>They voted by show of hands. Mrs. Arsenault did not need to count.</p>
+  <p><em>The ayes have it,</em> she said. <em>Go where you're inclined, Matt. Article 32.</em></p>
+</section>
+
+<section>
+  <h2>V. The Spade</h2>
+  <p class="dateline">Behind the house &middot; the next morning</p>
+  <p>He took the three of them up behind the house after breakfast. He had a spade with him that he had made years before from the hill itself.</p>
+  <p><em>Wade. Cut me a piece out of it.</em></p>
+  <p>Wade was twenty-three and strong. He set his boot on the spade and drove it. It rang as if he had hit ledge, and the shock went up both his arms. There was no mark on the hill.</p>
+  <p>Matt took the spade and gave it to Curtis. Curtis picked a different place and swung with his whole back. It rang the same.</p>
+  <p>Then he gave it to Ben, who was nineteen. Ben pushed it in with one foot. It went in to the step, as it would go into a potato hill in June, and he turned up a spadeful of gold as loose as loam.</p>
+  <p><em>That'll do, Ben.</em></p>
+  <p>Wade and Curtis stood looking at the place.</p>
+  <p><em>This didn't come up for you two,</em> Matt said. He said it gently. <em>It came up for me and for Ben. You'll have to go shares with him. He'll do right by you.</em></p>
+  <p>Wade started to ask why, and then he remembered why. Curtis had remembered already.</p>
+</section>
+
+<section>
+  <h2>VI. The North Wall</h2>
+  <p class="dateline">Starbird Falls &middot; September 2014</p>
+  <p>Footnote had died in 2012, on the trail, in his sleep, at eighty-one. Two years later Gone's people were building a lean-to in his name on the brook above the crossing. They had the floor laid, the roof on and three walls up. Then the money ran out, and the north side stood open to the weather.</p>
+  <p>One of them was a carpenter called Plumb. He came down to Starbird Falls to go door to door. <em>The north wall's open on Footnote's lean-to,</em> he told people. <em>We're short for the logs.</em> People gave him what they had. Then he climbed the rise to the house in front of the hill, reasoning as anybody would have.</p>
+  <p>Matt and Lila were in the middle of a fight. It was about nothing, the kind you have in a house with too much in it. Matt came to the door with his face still hot.</p>
+  <p><em>The north wall's open on the lean-to,</em> Plumb said. <em>I figured you of all people would want to know.</em></p>
+  <p><em>Go throw your dog in the river,</em> Matt said.</p>
+  <p>Plumb stood where he was. Behind Matt, Lila had stopped with a dish towel in her hand.</p>
+  <p><em>Matt Shifflett. If you're that mad at me, say it to me. Holler at me if you want. What did that dog ever do? She was walking before you were born. She'll be walking when every one of us is gone.</em></p>
+  <p>It went out of him at once. He stepped down off the threshold. <em>I'm sorry,</em> he said to Plumb. <em>I had no call.</em></p>
+  <p><em>It wasn't me you said it about,</em> said Plumb. <em>Ask her.</em></p>
+  <p><em>How do I do that?</em></p>
+  <p><em>Make three jars of flowers out of that stuff behind your house. We'll set them under the north sill. Then get yourself wet, clothes and hair, and ask.</em></p>
+  <p>Matt went to the shop and lit the torch. He called Wade, who was twelve. <em>I spoke ugly about the dog. I'm making these to set it right, and then I'm going to ask her pardon. I want you with me.</em></p>
+  <p><em>I didn't make you say it,</em> said Wade. <em>Go by yourself.</em></p>
+  <p>He called Curtis, who was ten, and Curtis said the same.</p>
+  <p>He called Ben. Ben was eight. <em>If there's a thing to do, I guess I do it,</em> Ben said. He held the tongs. All that afternoon the two of them cut petals out of sheet gold and hammered them over a dowel. By dark they had three quart canning jars full of black-eyed Susans, each a hand across.</p>
+  <p>In the morning they carried the jars up to the brook. Plumb bedded them in the stones under the north sill and laid the log over them. Gone was sitting on the bank of the Swift below the bridge when Matt came down. He walked into the river in his boots and his wool shirt until it closed over his head. September water in that river will stop your breath. He came out with his hair streaming and stood in front of her and said what he had to say. Ben stood beside him.</p>
+  <p>She looked at him a while. Then she went down and drank.</p>
+  <p>People who knew how he had come into the world said the river had only been collecting early.</p>
+</section>
+
+<section>
+  <h2>VII. The Barn</h2>
+  <p class="dateline">Starbird Falls &middot; September 2025</p>
+  <p>He left in April with a pack Ben had weighed at twenty-two pounds. He rode a bus to Georgia and found her on Springer Mountain with eleven others. She smelled his hands. It is in the registers that whatever was left in him went out of him somewhere in the first week, on a wet day, going up Blood Mountain. By Virginia his hair had matted the way it had in the basin, and the trail called him Mats.</p>
+  <p>They went around the Smokies by the road, since dogs are not let through the park. They crossed the Shenandoah on a highway bridge in June. He looked down at the water once and went on.</p>
+  <p>In September they came down the road into Starbird Falls. The registers say five hundred. It was nearer sixty at any one time, with more arriving behind. They stopped at the door of the house under the hill. Wade came out, then Curtis, then Ben.</p>
+  <p>For half a month the three of them fed Gone's people. They set planks on sawhorses in the yard. There were baked beans, biscuits, corn, chowder and blueberry pie. Wade ran the grill and Curtis drove to Rumford for more of everything. Their father ate at the planks with the rest. He slept in Orrin's old barn with the rest too, and Ben brought him his plate the same as anyone's and did not call him anything but Mats where others could hear.</p>
+  <p>Above them the whole time stood the hill, a hundred and twenty feet of it, and in the evening it turned the color of the inside of a peach.</p>
+  <p>Hikers talk at night. On the tenth evening, in the barn, a young one called Receipt said what several had been thinking.</p>
+  <p><em>Mats. No offense. You sat all day under that thing. Your own three boys were carrying you pie. Tell the truth. You didn't want it back, even for a minute? You weren't a little bit proud?</em></p>
+  <p><em>No,</em> Mats said. <em>I looked, to see. There wasn't either one.</em></p>
+  <p><em>Come on.</em></p>
+  <p><em>Nobody's that clean,</em> said another. <em>He's telling us what he wishes was so.</em></p>
+  <p>There was a man in the company called Howdy. He said the same thing to every hiker he met, in either direction, <em>You're going to make it,</em> and he had been cursed for it on some bad climbs. He did not say it now. Everyone was looking at the dog.</p>
+  <p>It was known on the whole trail, from Georgia up, that Gone would not lie down beside anybody who was carrying. She would walk in front of you for a thousand miles. She would sit near you. But if you were holding on to a thing you had left, or a thing you meant to get, she kept on her feet.</p>
+  <p>She had been by the door. She got up and stretched. She crossed the barn floor through all of them and let herself down against Mats's legs, and laid her chin on his boot.</p>
+  <p>Nobody said anything for a time.</p>
+  <p>There was a book that traveled with her. It had been Footnote's, a paperback <em>Leaves of Grass</em> with every page cut away for weight but one poem, and since his time whoever walked nearest her had carried it in a bread bag. They called it the Dog's book. When she lay down by someone, the one who had it read. Howdy had it that month. He took it out and held it to the lantern.</p>
+  <div class="verse">
+    <p>Henceforth I ask not good-fortune, I myself am good-fortune,<br>Henceforth I whimper no more, postpone no more, need nothing,<br>Done with indoor complaints, libraries, querulous criticisms,<br>Strong and content I travel the open road.</p>
+    <p>You shall not heap up what is call&rsquo;d riches,<br>You shall scatter with lavish hand all that you earn or achieve,</p>
+    <p>&mdash; Walt Whitman, Song of the Open Road 1, 11</p>
+  </div>
+  <p><em>Well,</em> said Receipt, after a while. <em>All right.</em> He lay back on his pad and looked up into the rafters. Several of them said later that it was the night something of their own came loose.</p>
+</section>
+
+<section>
+  <h2>VIII. The Line</h2>
+  <p class="dateline">Abol Bridge, Maine &middot; October 2025</p>
+  <p>They went north in the morning. The three sons stood at the door. Ben lifted one hand, and his father lifted one, and that was all of it.</p>
+  <p>It is eighteen days from there to Abol Bridge, across the Kennebec in the ferryman's canoe and through the Hundred-Mile Wilderness. Past the bridge the trail goes into Baxter State Park and up Katahdin to the end, and at the park line there is a sign. No dogs.</p>
+  <p>She did what she had done every October since anyone had kept count. She sat down at the sign. The company went by her one at a time. Some put a hand on her head and some could not look at her. Howdy went by last and told her she was going to make it. Then they were all in the trees, climbing toward the thing they had walked two thousand miles for.</p>
+  <p>Mats had the book now, in its bread bag. He took off his pack and sat down next to her at the line. They stayed there until the last voice was gone up the mountain.</p>
+  <p>Then she stood and shook herself and turned around. There would be late ones south of them, still coming, with the snow not far off.</p>
+  <p>He followed her. The white mark on her chest was turned away from him now, but there was one on every tree.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who, leaving all longings, travels about without a home, and in whom all covetousness is extinct.<cite>Dhammapada 416, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary's story of Ja&#7789;ila ("Matted Hair") is one of its longest. A rich man's daughter, kept at the top of a seven-story palace, bears a son to a sorcerer who flies in at her window, and sets the baby adrift on the Ganges in a new pot. Two women bathing claim the pot and its contents, and the king divides them. The woman who gets the child means him for the Elder Mah&#257; Kacc&#257;na, who sees that the boy must first be rich and leaves him with a merchant in distant Takkasil&#257;. The boy sells twelve years of unsold stock in one day, marries the merchant's daughter, and steps into his new house as a mountain of gold eighty cubits high breaks out of the ground behind it. Years later, wanting to go forth, he sends men out with a gold brick, whip and cord to learn whether anyone is as rich; they find Me&#7751;&#7693;aka with his golden rams and Jotika, whose gate-sweeper is given a priceless blanket to wipe her feet. He tests his three sons with a spade at the mountain, and only the youngest can dig. The reason lies in a former life, when he told a monk collecting for a shrine to "throw your Teacher into the water," repented, and made three jars of golden flowers with only his youngest son to help. He becomes a monk; his sons feed the Buddha and the monks for half a month; the monks doubt that he feels no longing for the gold or his sons, and the Buddha answers them. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-33.htm">the full commentary story</a>. The long past-life histories of Jotika, which the commentary tells along the way, are kept here only as rumors heard at his gate, and the former-life quarrel is moved into Matt's own married years. On the elder who places the boy, see <a href="https://en.wikipedia.org/wiki/K%C4%81ty%C4%81yana_(Buddhist)">Mah&#257; Kacc&#257;na</a>.</p>
+    <h3>The trail and a Maine town, 1979 to 2025</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Appalachian_Trail">Appalachian Trail</a> runs almost 2,200 miles from Springer Mountain in Georgia to Katahdin in Maine, marked the whole way by white paint blazes two inches wide and six inches tall. Each year a few thousand people set out to walk all of it. They take trail names, write in the notebooks ("registers") kept at the shelters, which in Maine are called lean-tos, and are fed along the way by strangers. Dogs may walk nearly all of the trail, but <a href="https://www.nps.gov/appa/planyourvisit/pets.htm">they are barred</a> from Great Smoky Mountains National Park and from <a href="https://en.wikipedia.org/wiki/Baxter_State_Park">Baxter State Park</a>, where the trail ends; the park boundary is just north of Abol Bridge, at the far side of the Hundred-Mile Wilderness. Hikers cross the Kennebec River by a canoe ferry.</p>
+    <p>Starbird Falls and its people are invented. The <a href="https://en.wikipedia.org/wiki/Swift_River_(Maine)">Swift River</a> in Oxford County is real, and people do pan placer gold from it at Coos Canyon in <a href="https://en.wikipedia.org/wiki/Byron,_Maine">Byron</a>. The <a href="https://en.wikipedia.org/wiki/January_1998_North_American_ice_storm">ice storm of January 1998</a> coated much of Maine, Oxford County included, in freezing rain in the second week of the month, and left more than half a million people in the state without power, some for two weeks or longer; stores sold out of kerosene heaters, lightbulbs and generators. Maine towns still govern themselves by annual <a href="https://en.wikipedia.org/wiki/Town_meeting">town meeting</a>, usually in March, voting one by one on the numbered articles of a warrant, each of which begins "To see if the Town will."</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Ja&#7789;ila from the Dhammapada commentary (verse 416). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-33.htm">The original</a>. Verses from Walt Whitman, &ldquo;Song of the Open Road,&rdquo; in <em>Leaves of Grass</em> (1891&ndash;92 edition). Written by Claude Fable 5.2.
+  <div class="pager"><a href="seven-winters.html">&larr; Seven Winters</a><a href="index.html">All stories</a><a href="the-sway-pole.html">The Sway Pole &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, trees = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    // a path of trunks receding up one margin and across: near ones large and low, far ones small and high
+    trees = []; var n = 7, side = W > 700 ? 1 : 0;
+    for (var i = 0; i < n; i++) {
+      var k = i / (n - 1), sc = 1 - k * 0.72;
+      var x = side ? (W * 0.93 - k * W * 0.22 + Math.sin(i * 2.1) * 14) : (W * 0.9 - k * W * 0.5 + Math.sin(i * 2.1) * 10);
+      trees.push({ x: x, y: H * (0.78 - k * 0.5), sc: sc, k: k });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var CY = 1500, p = reduce ? 0.35 : (t % CY) / CY, lead = p * (trees.length + 2);
+    for (var i = 0; i < trees.length; i++) {
+      var tr = trees[i], w = 16 * tr.sc, bh = 24 * tr.sc;
+      ctx.fillStyle = 'rgba(8,14,11,' + (0.55 - tr.k * 0.3) + ')';
+      ctx.fillRect(tr.x - w / 2, tr.y - H * 0.5 * tr.sc, w, H * tr.sc);
+      // the blaze: each lights as the walker comes to it, the nearest first, then dims behind
+      var dlt = lead - i, a = reduce ? 0.5 * (1 - tr.k * 0.6) : (dlt < 0 ? 0.06 : Math.max(0.06, Math.min(1, dlt) * Math.max(0, 1 - (dlt - 1) / 2.5)) * 0.62);
+      ctx.fillStyle = 'rgba(236,238,228,' + a + ')';
+      ctx.fillRect(tr.x - w * 0.19, tr.y - bh / 2, w * 0.38, bh);
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

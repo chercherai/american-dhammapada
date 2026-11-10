@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loaf Mass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on oat-straw paper, light theme; low on the page a ring mown in a hayfield, with four lanterns at the quarters that are lit one after another, burn a while, and go out. */
+  --ground: #f0e7d2;
+  --ground-2: #e6dbc0;
+  --paper: #2a2317;
+  --paper-dim: #6d6149;
+  --accent: #8a4f17;
+  --glow: #b9801f;
+  --line: rgba(42,35,23,.16);
+  --panel: rgba(230,219,192,.7);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #e2d3ac 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance;  }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 15.5 &middot; A&ntilde;&ntilde;atara Up&#257;saka</span></nav>
+<header>
+  <h1>Loaf Mass</h1>
+  <div class="epigraph">I conjure thee, O Meal!<br>Who art indeed our body, since without thee<br>We could not live<br>&mdash; Aradia, or the Gospel of the Witches</div>
+</header>
+
+<p class="heard"><span class="heard-lead">C&rsquo;est comme &ccedil;a qu&rsquo;on me l&rsquo;a cont&eacute;,</span> on the Hartwell road.</p>
+
+<section>
+  <h2>I. The Gate</h2>
+  <p class="dateline">Hartwell, Oxford County, Maine &middot; Saturday, August 2, 1986</p>
+  <p>Armand Gagnon was fifty-four and owned one ox. He had been born in Little Canada in Lewiston and had gone into the mill at sixteen, and when the mill let his shift go he came up to his uncle&rsquo;s place in Hartwell, forty acres of ledge and popple, and stayed. He lived in a trailer set on the old cellar. For money he twitched wood. A man with a skidder will not come out for six cords on a back lot, and will tear up the lot if he does, so the summer people and the widows hired Armand, who brought the logs out to the road one at a time on a chain behind the ox and left the ground looking as if nobody had been there. He was paid by the cord, when he was paid. He also witched wells with a forked apple stick, which cost nothing, because his mother had told him it would leave him if he took money for it.</p>
+  <p>The ox was a red Durham steer named Lion, said the French way, eight years old and a little over a ton, with a white star on his forehead. Armand&rsquo;s m&eacute;m&egrave;re had kept a story about a red cow with a star that you did not turn your back on. Lion had never stepped on so much as a chicken.</p>
+  <p>The people at the old Estes farm had come from Massachusetts in 1973. Their name was Lund. Armand found their water for them the next spring, sixty feet down behind the barn where the stick said, and Meg Lund gave him a loaf of bread for it and told him, since he had asked about the sickle moon cut into the barn door, what they were. He was not troubled. He had been raised by nuns and had seen stranger. Twice he had gone up when they had their people in, and stood at the back of the field with his cap in his hand. Nobody had asked him to confess anything or sign anything, and afterward they had fed him.</p>
+  <p>That summer Meg told him a woman was coming up from Providence for the first of August, the loaf-mass, the day they kept for the first grain. She was a priestess of the old kind, Meg said, the kind that is trained and trains others, and she was bringing her own people in a van and three cars. When Meg had telephoned in June to ask her, the woman had said, <em>Yes. There is a man up there I have to see,</em> and had not said who.</p>
+  <p><em>You come hear her, Armand,</em> Meg said. <em>Two o&rsquo;clock.</em></p>
+  <p>He meant to. He had his other shirt washed and on the line.</p>
+  <p>On Saturday morning he walked down at first light to Hackett&rsquo;s pasture, where Lion ran with the heifers for the price of fixing fence, and the gate chain was on the ground and the ox was gone.</p>
+  <p>He stood there with the goad stick in his hand. In the trailer there was coffee and nothing else. The cheese the government gave out at the Grange hall, the five-pound orange brick, had been finished Thursday, and the next giveaway was Tuesday. A woman in Paris Hill owed him for eleven cords and was in Connecticut until Labor Day. He had thought he would eat at the Lunds&rsquo;.</p>
+  <p>He thought: <em>Do I look for the ox, or do I go hear the woman?</em> Without the ox there was no wood, and without the wood there was nothing. <em>The ox first,</em> he thought. <em>Then the woman.</em></p>
+  <p>The tracks went up the tote road, and he went after them.</p>
+</section>
+
+<section>
+  <h2>II. The Field</h2>
+  <p class="dateline">The Lund farm &middot; two o&rsquo;clock</p>
+  <p>There were about sixty of them that year, from Portland and Norway and as far as Bangor, and the twenty-two from Providence. The Maine people ate at noon on the grass, sandwiches and switchel, and offered the same to the Providence people, most of whom said no thank you. The feast was for after. It was laid out on planks under the maples with cheesecloth over it against the wasps. Brown bread steamed in coffee cans, corn waiting in its husks, three blueberry cakes. The loaf for the altar was baked in the shape of a sheaf, as long as a child. Down by the garden was the bean hole, where Tobias Lund had buried an iron kettle of yellow-eyes on a bed of coals the night before and shoveled the dirt back over it.</p>
+  <p>The woman from Providence was called Doris Almeida six days of the week. She was forty-nine and kept the books at a plant in Olneyville that made clasps and earring backs. In circle her people called her the Lady, and they were a little afraid of her. On a day when there was work to do she took water from sunrise and nothing else, and she expected the same of them. She had once sent a man home from his own initiation over a roll of Life Savers. In twelve years nobody had heard her ask what was for supper.</p>
+  <p>At two o&rsquo;clock they came down to the hayfield, where a ring had been mown and four lanterns stood unlit at the quarters. The Lady walked to the edge of the ring in her black robe and stopped there.</p>
+  <p><em>The man I came up here for has gone into the woods after his ox,</em> she said. <em>We will wait for him.</em></p>
+  <p>She sat down on the stone wall. That was all she said.</p>
+  <p>By three the children had been let go to the pond. By four a man from Portland had looked at his watch a number of times and driven home. Her own people stood about in the heat with their robes hitched up, and Ronnie Paiva, who had worked the rites beside her for nine years, went over once and bent down and said something, and came back with his ears red. Meg Lund counted heads and thought about the town. Since that television program the year before last the town had opinions about the Lunds, and sixty cars along the road until dark would not improve them. But it was the Lady&rsquo;s rite to begin. Nobody else could cast, and she sat on the wall with her hands in her lap and looked at the gap in the trees where the tote road came down.</p>
+</section>
+
+<section>
+  <h2>III. The Bean Hole</h2>
+  <p class="dateline">The same day &middot; toward evening</p>
+  <p>He found Lion at four o&rsquo;clock, two miles back, at a cellar hole on the old Whitcomb place where a Yellow Transparent still stood and dropped its apples in August. The ox was lying in the fern with his belly out like a barrel, chewing. Armand sat down beside him until his legs stopped shaking. He had been up the tote road and across the power line and around the beaver flowage twice, calling, and he had had nothing since the coffee. He ate four of the apples. They were mealy and they made it worse.</p>
+  <p>He got the ox up and walked him home by voice, and turned him in with Hackett&rsquo;s heifers and wired the gate chain shut with a double twist. By then it was past six. The trailer was a mile one way and the Lunds&rsquo; a mile the other. <em>It will be over,</em> he thought. <em>But I can go and tell her I am sorry. I can do that much.</em> He did not go home. He went down the road as he was, with spruce pitch on his hands and burdock up one leg.</p>
+  <p>They were all still there. He saw the ring in the hayfield and the four lanterns dark, and the people sitting in the stubble, and he did not understand it. He took off his cap and stood at the edge.</p>
+  <p><em>Madame,</em> he said to the woman on the wall, <em>I am sorry to be late. I had to find my ox.</em></p>
+  <p>She looked at him. She looked for some time, at his face and then at his hands, which he could not keep still. Then she turned to Meg Lund.</p>
+  <p><em>Is there anything to eat?</em></p>
+  <p>Meg thought she had misheard. <em>The feast is for after, Lady. Nobody has touched it. The beans are still in the ground.</em></p>
+  <p><em>Then dig them up,</em> the Lady said, <em>and give this man his supper.</em></p>
+  <p>She pointed to where he should sit, at the head of the planks under the maples. Tobias went for the shovel. They opened the bean hole in front of everyone, the dirt and then the grey ash and then the flat stone, and lifted the kettle out on a hook, and when the lid came off the smell of molasses and salt pork went across the field and sixty hungry people stood and breathed it. Meg filled a plate. She cut the brown bread. Somebody stripped an ear of corn and ran with it to the house to boil. And the Lady went to the altar stone herself and picked up the sheaf loaf, which was to have been blessed and broken at the height of the rite, and broke it with her hands, and brought him the first piece.</p>
+  <p>He ate. Nobody else did. He ate two plates of beans and the bread and the corn when it came, and a square of the cake, with sixty people watching, and it did not occur to him to be ashamed, because none of them looked as if he should be. When he was done he went to the pump and rinsed his mouth and washed his face and his hands and came back with his hair wet.</p>
+  <p>Something in him had gone quiet. He had not known it was making noise.</p>
+  <p>Then she lit the lanterns. She cast the ring with salt and water and the knife, and called the quarters, and Armand stood inside it between a schoolteacher from Norway and a boy with a braid. She took what was left of the loaf and held it up in the last of the sun, and she taught. He followed it better than he had expected. She went in order, the way a person explains a job. The seed goes into the ground. It comes up and stands and is beautiful. It is cut. It is beaten and ground and put through the fire, and then it is this, and then it is you. Nothing that feeds anyone gets to stay what it was. A body is a thing put together out of what it ate, and it is coming apart the whole time, and it will be cut too. There is a way to look straight at that, she said, without flinching and without making a speech about it, and a person who has looked at it that way is not afraid of the knife or the fire and has nothing left to want.</p>
+  <p>Over the bread she said the old words.</p>
+  <div class="verse">
+    <p>I conjure thee, O Meal!<br>Who art indeed our body, since without thee<br>We could not live, thou who (at first as seed)<br>Before becoming flower went in the earth,<br>Where all deep secrets hide,</p>
+    <p>&mdash; Aradia, or the Gospel of the Witches, ch. II</p>
+  </div>
+  <p>Armand Gagnon stood in a hayfield with his stomach full and saw it. It was a plain thing. It had the same shape as the eleven cords and the orange cheese and the mill, and Lion on his side in the fern. Something that had been walking back and forth in him since Lewiston lay down. He could not have told it to anyone in either of his languages. The schoolteacher beside him saw his face and looked away, to leave him alone with it.</p>
+</section>
+
+<section>
+  <h2>IV. The Road</h2>
+  <p class="dateline">Hartwell &middot; dusk</p>
+  <p>They ate the rest of the feast by lantern. Afterward the Maine people walked the Providence people down the road to where the cars were, as far as the plank bridge, and said good night there and turned back.</p>
+  <p>Her own people came on behind her in the dusk, and they were sore. Ronnie Paiva said it, not very low.</p>
+  <p><em>Twelve years. Twelve years it&rsquo;s been water from sunup and not a crumb till the circle&rsquo;s open. I never once heard her ask what there was to eat. And today she holds sixty people in a field for four hours and then asks after supper, for a stranger, and feeds him off the altar before the ring is cast.</em></p>
+  <p>The Lady stopped in the road and turned around.</p>
+  <p><em>What are you saying back there?</em></p>
+  <p>They told her.</p>
+  <p><em>Yes,</em> she said. <em>That is what I did. I drove six hours for that man. I saw in June that he was ready, and nobody else up here was. He got up before light with nothing in the house, and he spent the whole day in the woods on that nothing, hunting the one animal that keeps him alive. If I had cast at two without him, I&rsquo;d have come for nothing. If I had started in on him at half past six the way he stood there, he would have heard his own stomach and not one word of mine. So I did what I did.</em></p>
+  <p>Nobody answered her.</p>
+  <p><em>There is no sickness like hunger. Any other one, you can treat a person who has something in him. And there is no hurt like being a thing put together, that has to be fed and comes apart anyway. Somebody who knows those two things the way they are, and not the way he&rsquo;d like them, has the best there is to have. He has it tonight. The ones who made the hymn to the grain mother knew what it was worth.</em></p>
+  <div class="verse">
+    <p>Happy is he among men upon earth who has seen these mysteries;</p>
+    <p>&mdash; Homeric Hymn to Demeter</p>
+  </div>
+  <p>Then she got into the van, and Ronnie Paiva drove.</p>
+  <p>Armand went home the other way. Meg had wrapped the heel of the sheaf loaf in a square of the cheesecloth and put it in his shirt pocket. At Hackett&rsquo;s gate he stopped and tried the chain. The heifers were lying down. Lion got up out of the dark and came over to the fence and put his wet nose through the wire, and Armand took out the heel of the loaf and broke it. He gave the ox the bigger half, since it was the ox who had found the apple tree.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Hunger is the worst of diseases, the body the greatest of pains; if one knows this truly, that is Nirvana, the highest happiness.<cite>Dhammapada 203, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary the Buddha sees at dawn that a certain poor man of &#256;&#7735;av&#299; is ready to understand, and walks thirty leagues with his monks to teach him. The man means to come and listen, but that morning his ox strays, and he decides to find the ox first. The townspeople feed the monks and wait for the sermon; the Buddha says he will not speak until the man he came for returns, and sits silent. The man finds his ox late in the day, drives it back to the herd, and comes straight to the Buddha without going home to eat. The Buddha asks the steward whether any food is left and has the man seated and fed before he teaches him. The commentary notes that this is the only time on record that the Buddha asked about food. When the monks grumble about it on the road, he turns around, explains that a hungry man cannot take in the teaching, and speaks the verse. Where M&uuml;ller has &ldquo;the body,&rdquo; the P&#257;li word is <em>sa&#7749;kh&#257;r&#257;</em>, all things that are put together. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-05.htm">the full commentary story</a>.</p>
+    <h3>Oxford County, Maine, 1986</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Wicca">Wicca</a> reached the United States from England in the 1960s and spread through covens whose priestesses trained their successors. Its eight seasonal festivals include <a href="https://en.wikipedia.org/wiki/Lammas">Lammas</a>, the &ldquo;loaf-mass&rdquo; of the first grain on the first of August. In most covens the shared food comes after the rite, and many fast beforehand. Charles Godfrey Leland&rsquo;s <a href="https://en.wikipedia.org/wiki/Aradia,_or_the_Gospel_of_the_Witches"><em>Aradia, or the Gospel of the Witches</em></a> (1899), with its conjuration of the meal for the witches&rsquo; supper, was one of the texts the early Wiccans drew on; the ancient <a href="https://en.wikipedia.org/wiki/Homeric_Hymns">Homeric Hymn to Demeter</a> is quoted here in H. G. Evelyn-White&rsquo;s translation of 1914. The middle 1980s were the years of the <a href="https://en.wikipedia.org/wiki/Satanic_panic">Satanic panic</a>, when television specials taught rural neighbors to be afraid of people like the Lunds. In 1986 a federal appeals court held, in <a href="https://en.wikipedia.org/wiki/Dettmer_v._Landon"><em>Dettmer v. Landon</em></a>, that Wicca is a religion under the First Amendment.</p>
+    <p>The textile and shoe mills of Lewiston were worked for a century by <a href="https://en.wikipedia.org/wiki/Franco-Americans">French Canadians</a> who settled the tenement district called Little Canada, and who were laid off in their thousands as the mills closed after the 1950s. In the Maine woods the diesel <a href="https://en.wikipedia.org/wiki/Skidder">skidder</a> replaced horses and <a href="https://en.wikipedia.org/wiki/Ox">oxen</a> in the 1960s, though a few teamsters went on working small lots where a machine would do damage. From 1981 the Department of Agriculture gave away its surplus dairy stocks to the poor in five-pound blocks, the <a href="https://en.wikipedia.org/wiki/Government_cheese">&ldquo;government cheese&rdquo;</a> handed out at Grange halls and firehouses. Beans baked overnight in an iron kettle buried on coals are an old Maine supper. Hartwell and its people are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a certain lay disciple from the Dhammapada commentary (verse 203). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-05.htm">The original</a>. Sacred texts from Charles Godfrey Leland&rsquo;s <em>Aradia, or the Gospel of the Witches</em> (1899) and the Homeric Hymn to Demeter, tr. H. G. Evelyn-White (1914). Written by Claude Fable 5.2.
+  <div class="pager"><a href="bean-bread.html">&larr; Bean Bread</a><a href="index.html">All stories</a><a href="the-last-course.html">The Last Course &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var cx = W * 0.5, cy = H - 70, rx = Math.min(W * 0.42, 420), ry = 34;
+    ctx.strokeStyle = 'rgba(122,96,44,0.16)'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); ctx.stroke();
+    ctx.strokeStyle = 'rgba(122,96,44,0.07)';
+    ctx.beginPath(); ctx.ellipse(cx, cy, rx * 0.985, ry * 0.9, 0, 0, Math.PI * 2); ctx.stroke();
+    var q = [[cx + rx, cy], [cx, cy + ry], [cx - rx, cy], [cx, cy - ry]];
+    var cycle = 2400, ph = (t % cycle) / cycle;
+    for (var i = 0; i < 4; i++) {
+      var on = reduce ? 1 : Math.max(0, Math.min(1, (ph - 0.12 - i * 0.1) * 12)) * Math.max(0, Math.min(1, (0.94 - ph) * 14));
+      var fl = reduce ? 1 : 0.88 + 0.12 * Math.sin(t * 0.07 + i * 2.1);
+      var x = q[i][0], y = q[i][1];
+      ctx.fillStyle = 'rgba(90,70,36,0.28)'; ctx.fillRect(x - 2, y - 7, 4, 7);
+      var a = 0.42 * on * fl;
+      if (a > 0.01) {
+        var g = ctx.createRadialGradient(x, y - 6, 0, x, y - 6, 46);
+        g.addColorStop(0, 'rgba(214,150,40,' + a + ')');
+        g.addColorStop(0.3, 'rgba(214,150,40,' + (a * 0.35) + ')');
+        g.addColorStop(1, 'rgba(214,150,40,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y - 6, 46, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

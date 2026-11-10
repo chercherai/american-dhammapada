@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Shot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over Highland Avenue at night, dark theme; low along the foot of the page three cars sitting low cruise slowly past, taillights first, and now and then one lifts its nose. */
+  --ground: #0e1415;
+  --ground-2: #162022;
+  --paper: #e8e2d6;
+  --paper-dim: #98a39f;
+  --accent: #3fb7a8;
+  --glow: #c4344a;
+  --line: rgba(232,226,214,.12);
+  --panel: rgba(22,32,34,.78);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #1b2a2b 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(63,183,168,.22); }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 11.6 &middot; Mallik&#257;dev&#299;</span></nav>
+<header>
+  <h1>One Shot</h1>
+  <div class="epigraph">Every work that is corruptible shall fail in the end: and the worker thereof shall go with it.<br>&mdash; Ecclesiasticus 14:20</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; me lo contaron,</span> on Highland Avenue.</p>
+
+<section>
+  <h2>I. The Wash Bay</h2>
+  <p class="dateline">National City, California &middot; May 2023</p>
+  <p>Rey Pacheco had the tire and alignment shop on Highland Avenue that his father had before him, two bays and a rack, with the house behind it up a flight of outside stairs and the long garage behind that. He was sixty-one and had been president of the Monarcas Car Club for nineteen years. People in National City called him el Rey, and his name was only part of the reason. When a kid from the club got married, the cars lined up at his curb. When somebody&rsquo;s mother died, the envelope went around at his shop.</p>
+  <p>That was the spring the city took the NO CRUISING signs down. They had been up since 1992. For thirty-one years a man could be written up for passing the same corner of Highland twice in an evening with his car sitting low, and now the council had voted, every one of them, and a city truck came with a ladder. Rey stood on the sidewalk with half the club and watched a man in a vest unbolt the sign in front of the shop. He asked if he could have it. The man said he couldn&rsquo;t do that, and then looked at the faces, and left it leaning against the pole when he drove off.</p>
+  <p>Behind the second bay there was a wash bay, a concrete room with a floor drain and a hose reel, where the club cars got rinsed before a show. Rey had put a camera up in the corner of it the winter before, after somebody came over the fence and took four wire wheels off a customer&rsquo;s Regal. It was a forty-dollar camera. It sent its picture to a screen in the office upstairs and to his phone.</p>
+  <p>On a Thursday in May, a little after closing, he was upstairs doing the deposit. His wife was down in the wash bay. Her name was Jazm&iacute;n and everybody called her Mina. She had been hosing out floor mats for the Saturday show and had soaked herself to the knee, and she had washed her face at the spigot and was bent over rinsing the grit off her legs. Rey looked up at the screen for no reason at all.</p>
+  <p>The kid they called Perro came into the picture. He was twenty-four, a detailer, good with a buffer, at the shop since Christmas. He came up behind her and put his hands on her. She did not straighten up and she did not turn around. That was the part Rey would see afterward with his eyes shut. She let him. The counter in the corner of the screen ran eleven seconds before she moved, and then Perro was out of the picture and she was coiling the hose.</p>
+  <p>Rey sat a while. Then he went down the outside stairs. She was coming across the lot, drying her hands on her shirt.</p>
+  <p><em>&iquest;Qu&eacute; hiciste?</em> he said. <em>What did you do?</em></p>
+  <p><em>What did I do?</em></p>
+  <p><em>In the wash bay. With Perro. Don&rsquo;t, Mina. I saw it.</em></p>
+  <p><em>You saw what?</em></p>
+  <p><em>I saw it on the camera. I&rsquo;m not going to believe anything you say to me. I saw it with my own eyes.</em></p>
+  <p>She looked at him for a moment. Then she laughed, one short breath.</p>
+  <p><em>That camera,</em> she said. <em>Rey. That camera puts two where there&rsquo;s one. Everybody who walks into that bay comes out double on it. Monday it sent me a picture that said Person Detected and it was the mop bucket. It showed me two of the cat. It&rsquo;s got the AI in it, it makes things up. I was in there by myself.</em></p>
+  <p><em>Don&rsquo;t lie to me.</em></p>
+  <p><em>Then go stand in there. Go on. I&rsquo;ll go up and watch the screen, and afterward you tell me what you were doing.</em></p>
+  <p>He was a man who believed people. It had made him a good president and a poor businessman. He walked into the wash bay and stood on the drain with his arms hanging, feeling like a fool, and looked up at the little black eye in the corner. Upstairs she stood in front of the screen. Then her voice came down through the office window, loud enough for the alley.</p>
+  <p><em>Reynaldo! Who is that? Who&rsquo;s that in there with you? I see la Chiva hanging on your neck!</em></p>
+  <p>La Chiva was Silvia Robles, a widow, who parked her taco truck at the cruise nights and had never in her life given anybody cause.</p>
+  <p><em>There&rsquo;s nobody! Mina, I&rsquo;m standing here by myself!</em></p>
+  <p><em>I&rsquo;m looking right at it. I see it with my own eyes. Don&rsquo;t tell me.</em></p>
+  <p>He came out into the lot and looked back at the empty room, and then up at the window.</p>
+  <p><em>Then it&rsquo;s true,</em> he said. <em>About the camera.</em></p>
+  <p><em>I told you.</em></p>
+  <p>He got the stepladder that same evening and took the camera off its bracket and dropped it in the scrap barrel. That night in bed he said he was sorry. She said it was nothing, go to sleep.</p>
+</section>
+
+<section>
+  <h2>II. Ma&ntilde;ana</h2>
+  <p class="dateline">Highland Avenue &middot; that night, and the year after</p>
+  <p>Mina Pacheco did not sleep. She was fifty-eight and had been married to him since she was twenty, and she lay on her side of the bed and went over it.</p>
+  <p><em>He believed me because of the way he is,</em> she thought. <em>I used that. I did a low thing in the wash bay and then a lower one on the stairs. And I put Silvia in it, who never did anything to me but save me a plate. The first one was eleven seconds and I hardly knew I was in it. The second one I thought up.</em></p>
+  <p>Then she thought about la Maestra, and that was worse.</p>
+  <p>Consuelo Ybarra had a paint shop on Newton Avenue in Barrio Logan, in sight of the bridge. She had been striping cars for forty years. She laid her lines with a squirrel-hair brush no wider than a shoelace and a can of lettering enamel, freehand, and there was not a club from San Ysidro to Oceanside that did not have her hand on a trunk lid somewhere. She was also one of the painters who went up on the lifts under the Coronado Bridge every few years to bring the murals on the pillars back, when the sun off the bay had taken them down to chalk. She did not talk much. People said she could look at a fender and tell you who had done the bodywork under the paint and what kind of a week he&rsquo;d been having. People said other things. She painted the dead, a portrait on a hood, a name on a quarter panel with wings, and it was known that she would sometimes tell a family <em>not yet</em> and would not say why, and a month or a year later call them up and say, bring the car.</p>
+  <p><em>She will know,</em> Mina thought. <em>She&rsquo;ll look at me once over those glasses and know both things.</em></p>
+  <p>By the end of the week Mina had paid Perro two weeks and he had gone to a shop in El Cajon. Nobody at the shop asked.</p>
+  <p>It had been Mina, with Rey beside her, who did the thing the clubs still talked about. Two summers back, for la Maestra&rsquo;s forty years, she had run a show at Kimball Park out of a spiral notebook: eleven clubs, a hundred and forty cars, carne asada plates at twelve dollars. The money paid off the note on the building on Newton Avenue. Nothing like it had been done for anybody. And with what was left over Mina bought four things she had picked out herself. A white umbrella nine feet across on a rolling base, so that a hood could be striped outdoors without the sun cooking the enamel under the brush. A daybed for the back of the shop, because la Maestra&rsquo;s spine was going and she needed to lie flat between jobs. A steel stand that would hold a trunk lid at any angle. A low stool on casters for doing rocker panels.</p>
+  <p>After that Thursday she gave more. It was the only thing that quieted her. A box fan. Reading glasses in three strengths. A case of mineral spirits, tamales at Christmas, a new tarp for the lift. <em>Ma&ntilde;ana le llevo esto a la Maestra,</em> she would say, with the thing already in her hands, tomorrow I&rsquo;ll take this to la Maestra, and the next day she would drive it down to Logan and leave it with the boy at the front counter. In all that year she did not once walk back to the booth where the woman could look at her.</p>
+</section>
+
+<section>
+  <h2>III. The Corner of the Ceiling</h2>
+  <p class="dateline">National City &middot; winter 2024</p>
+  <p>On the first of January cruising was legal again in every city in California. The Monarcas went up Highland that night forty cars long behind the old Impala, slow, with the hazards going, and Mina sat in the passenger seat and waved at the sidewalks like the queen of something.</p>
+  <p>On a Tuesday in February she put her hand to the side of her head in the kitchen and said <em>Rey,</em> and sat down on the floor.</p>
+  <p>She was two days in the hospital on Fourth Street and woke once. Rey was there. He told her everybody was asking. He told her la Maestra had sent a candle. Then, because he did not know what else a person says, he started at the beginning and told her the good she had done, the way you would read someone her own record. The bikes at Christmas, six hundred in one year. The envelopes. The quincea&ntilde;era dresses. The show at Kimball Park, the building note, the white umbrella.</p>
+  <p>It is told that she heard none of it. Her eyes had gone past him to the corner of the room where the wall met the ceiling tiles. There was a small dark dome up there, a sensor of some kind, and her eyes stayed on it.</p>
+  <p><em>La c&aacute;mara,</em> she said.</p>
+  <p><em>What camera, mi vida? There&rsquo;s no camera.</em></p>
+  <p>She did not look away from it. She died that night with the wash bay in her mind and the stairs and Silvia&rsquo;s name in her own mouth, and none of the rest, not one bicycle, not the umbrella.</p>
+  <p>The people on Highland Avenue who tell this say that she went where a person goes who dies holding on to a lie, and that she was there seven days. They say it plainly. Seven days she was in the fire for it.</p>
+  <p>He buried her on a Saturday. Thirty-some cars took her to La Vista at ten miles an hour, which nobody could ticket now. That evening his sister-in-law set a bowl in front of him and he ate what was in it and could not have told you afterward what it was. He sat in the kitchen with the light off.</p>
+  <p><em>I&rsquo;ll go and ask la Maestra,</em> he thought. <em>They say she knows where they are. I&rsquo;ll ask her where Mina is.</em></p>
+</section>
+
+<section>
+  <h2>IV. Seven Days</h2>
+  <p class="dateline">Newton Avenue, Barrio Logan</p>
+  <p>He drove down on the Sunday. She was in the booth laying out a roof for a pattern job, and before he had his mouth open she put a roll of eighth-inch tape in his hand.</p>
+  <p><em>Hold that end.</em></p>
+  <p>He held it. She walked the tape down the length of the roof and came back and gave him another. While she worked she talked, which she hardly ever did. She talked about his father, who had come to her teacher&rsquo;s shop in 1979 wanting scrollwork on the Impala and had argued for an hour about the color of the line. Rey had not known that. He laughed. He was back on Highland with tape gum on his fingers before he remembered what he had gone for.</p>
+  <p><em>Tomorrow,</em> he said to the kitchen.</p>
+  <p>On Monday she was laying gold leaf on a dash, the thin kind that lifts if you breathe on it, and he stood a yard off and took small breaths for an hour and watched her press it down with a ball of cotton. On Tuesday she took him under the bridge and had him steady a bucket on the lift while she went over the blue in a pillar forty feet up. She told him the one she was touching had been repainted in 2012, over the paint of 1978, over bare state concrete. <em>Ten or twelve years, facing the water,</em> she said. <em>Then you come back up.</em> On Wednesday she put a sanding block in his hand. On Thursday she said nothing at all, and he sat down on the daybed Mina had bought and slept the afternoon through, the first real sleep since the kitchen floor. Friday there was a Riviera to mask. Saturday she showed him how she put her brushes away, each one drawn through oil and shaped to an edge with two fingers and laid flat in the box.</p>
+  <p>Every evening it came back to him at his own gate.</p>
+  <p>They say she did it on purpose. For those seven days Mina was where she was, and la Maestra knew it, and knew the man. She did not tell people things that were not so. If he had got his question out on the Sunday he would have had his answer, and he would have stood in that booth and thought: <em>Mina? Who gave the way she gave? Then what is any of it for.</em> He would have closed his hand. There would have been no more pot of menudo on Sunday mornings for whoever walked up the alley, no more envelopes, no bikes. A man who shuts his hand out of bitterness has a road in front of him too, and she could see down it.</p>
+  <p>So there was tape, and leaf, and the bridge, and sleep.</p>
+</section>
+
+<section>
+  <h2>V. The Garage</h2>
+  <p class="dateline">Highland Avenue &middot; the eighth day</p>
+  <p>On the eighth day she came to him. She came alone and on foot, up from the trolley at Eighth Street, a little before noon, with her striping kit on a strap over her shoulder. Rey saw her from the bay. He wiped his hands and went out and took the box from her, as you would, and started for the outside stairs to bring her up to the house, where the good chairs were. She did not follow. She had stopped at the open door of the long garage.</p>
+  <p><em>Aqu&iacute; est&aacute; bien,</em> she said.</p>
+  <p>So he unfolded a chair for her there among the cars, and brought down what there was in the house: a bowl of caldo, tortillas he heated himself, and two conchas from the panader&iacute;a. She ate all of it without hurry. He stood until she set the bowl down. Then he turned a bucket over and sat in front of her.</p>
+  <p><em>Maestra. Every day I came to you I had one thing to ask, and every day I got home with it still in my pocket. I want to know where Mina is. They say you know. Tell me.</em></p>
+  <p><em>Con Dios,</em> she said. <em>She is with God, Rey.</em></p>
+  <p>He nodded hard, several times.</p>
+  <p><em>Where else. If she isn&rsquo;t, who is? There wasn&rsquo;t another one like her. Sitting down, standing up, in the car, in the middle of the night, it was the same thing out of her mouth. Tomorrow I&rsquo;ll take this to la Maestra, tomorrow I&rsquo;ll do that for la Maestra. I used to tell her, Mina, the woman has four fans.</em> He rubbed his face with both hands. <em>Since she went I&rsquo;m not here. This</em> (he hit his chest with the flat of his hand) <em>is parked. There&rsquo;s nobody in it.</em></p>
+  <p><em>Don&rsquo;t grieve like that. This is how it goes with everything that&rsquo;s alive. It&rsquo;s the one rule that doesn&rsquo;t skip anybody.</em></p>
+  <p>From the chair she could see across the lot into the wash bay, as far as the corner where a steel bracket stuck out of the block wall with two empty screw holes in it. Rey saw where she was looking.</p>
+  <p><em>She said something about a camera, at the end. I had one there. It was no good, it showed double. I threw it out.</em></p>
+  <p>La Maestra looked at the bracket for about as long as it takes to pull a line down the side of a car. She did not say anything about it. Then she lifted her chin toward the far end of the garage.</p>
+  <p><em>Whose car is that?</em></p>
+  <p><em>My grandfather&rsquo;s. Thirty-nine Chevy, the Master Deluxe. He bought it in forty-six with cannery money.</em></p>
+  <p>It sat on four flat tires. The lacquer had gone to chalk and checked all over like the floor of a dry lake, and the rust had come through the rockers from the inside.</p>
+  <p><em>And that one?</em></p>
+  <p><em>My father&rsquo;s. The sixty-four. He bought it new on the Mile of Cars.</em></p>
+  <p>It had been shot in candy brandywine by her own teacher. On the hood and the roof, where forty summers had got at it, the candy had gone the brown-pink of a healed burn, and the old man&rsquo;s stripes were ghosts you could find only with the light behind you. It still ran.</p>
+  <p><em>And this?</em></p>
+  <p><em>Mine.</em> The seventy-six Caprice, teal over silver, three years old in the paint and deep enough to put your arm into.</p>
+  <p><em>Your father&rsquo;s has outlasted your grandfather&rsquo;s,</em> la Maestra said, <em>and yours has outlasted your father&rsquo;s. Look at them in a row. I have been putting paint on cars for forty years and I can tell you what I know about paint. The candy goes first. The prettier it is, the quicker the sun takes it. Then the clear. Then the steel.</em> She held out her right hand, the brush hand, with its big knuckles. <em>Then this. This goes quicker than the cars do, Rey. A car you can leave in a garage.</em></p>
+  <p>She said the next part in English, flat, the way the sisters at the school in Logan had read it out of the black Bible when she was nine years old.</p>
+  <div class="verse">
+    <p>All flesh shall fade as grass, and as the leaf that springeth out on a green tree. Some grow, and some fall off: so is the generation of flesh and blood, one cometh to an end, and another is born. Every work that is corruptible shall fail in the end: and the worker thereof shall go with it.</p>
+    <p>&mdash; Ecclesiasticus 14:18&ndash;20</p>
+  </div>
+  <p><em>That&rsquo;s the cars, and it&rsquo;s you and me. There is one line the sisters kept next to it.</em></p>
+  <div class="verse">
+    <p>For justice is perpetual and immortal.</p>
+    <p>&mdash; Wisdom 1:15</p>
+  </div>
+  <p><em>That part doesn&rsquo;t check and it doesn&rsquo;t fade. What a good person did right, the rightness of it. You can&rsquo;t park that anywhere and you don&rsquo;t need to. All you can do with it is hand it to the next one.</em></p>
+  <div class="verse">
+    <p>And the things which thou hast heard of me by many witnesses, the same commend to faithful men who shall be fit to teach others also.</p>
+    <p>&mdash; 2 Timothy 2:2</p>
+  </div>
+  <p>She opened the box. The brushes lay in it in their oil, and beside them the small cans. Rey&rsquo;s granddaughter had been sitting on the stairs the whole time with her chin on her knees. She was eleven, and she was Jazm&iacute;n too, and they called her Jazzy.</p>
+  <p><em>Ven,</em> said la Maestra.</p>
+  <p>She tore a page out of a magazine for a palette and put a thumbnail of white on it, and worked the brush in it until it was loaded to the heel. Then she bent to the dead grey fender of the thirty-nine and pulled one line, a long slow S the length of her arm, without lifting, breathing out the whole way.</p>
+  <p><em>The man who showed me that was Tavo Ruelas. The one who showed him was a sign painter in Tijuana whose name I never got. You load it full. You look at where you&rsquo;re going and never at the brush. You pull it once and you don&rsquo;t go back over it. One shot. It says so on the can.</em></p>
+  <p>She put the brush in the girl&rsquo;s hand and stood behind her and did not touch her arm. The girl&rsquo;s line started fat and went thin and wandered off la Maestra&rsquo;s by the width of a finger at the end. La Maestra did not fix it. She pressed the lid back on the can with her thumb.</p>
+  <p>Rey walked her to the gate. When he came back the two lines were drying side by side on the old Chevy. They were white, the white Mina had picked for the umbrella, and on that fender they would be gone in a few summers. He left the garage door up so the afternoon could get at them.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The brilliant chariots of kings are destroyed, the body also approaches destruction, but the virtue of good people never approaches destruction,&mdash;thus do the good say to the good.<cite>Dhammapada 151, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, King Pasenadi looks down from an upper window and sees Queen Mallik&#257; in the bath-house misbehaving with her pet dog. She tells him that the window shows everyone in the bath-house double, sends him in to prove it, and calls down that she sees him with a she-goat; he believes her. She is the greatest giver in the kingdom, the one who arranged the Gifts beyond Compare and gave the Buddha a white parasol, a couch, a stand and a footstool, but she dies remembering only the lie and is reborn in hell for seven days. Each of those days the grieving king goes to ask the Buddha where she has been reborn, and each day the Buddha makes him forget the question, so that he will not lose heart and stop giving. On the eighth day the Buddha comes alone to the palace, sits in the chariot hall, and tells him she is in the Tusita heaven. Then he asks whose the three chariots are, the grandfather&rsquo;s, the father&rsquo;s and the king&rsquo;s own, and speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/11-06.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Pasenadi">King Pasenadi</a>. The retelling turns the dog and the she-goat into two people with those nicknames and the window into a cheap camera; the king, as in the original, never learns the truth.</p>
+    <h3>National City and Barrio Logan, 2023&ndash;2024</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Lowrider">Lowriding</a> grew up among Mexican Americans in the Southwest after the Second World War: cars lowered, repainted in deep translucent &ldquo;candy&rdquo; colors over metallic bases, striped by hand, and driven slowly. Cars from before the fifties are called bombs. <a href="https://en.wikipedia.org/wiki/Pinstriping">Pinstripers</a> pull their lines freehand with a long-haired &ldquo;sword&rdquo; brush and lettering enamel, and the craft passes from one hand to the next. Cities answered the cruising scene with bans. <a href="https://en.wikipedia.org/wiki/National_City,_California">National City</a>, just south of San Diego, passed its ordinance in 1992, and its Highland Avenue was posted with No Cruising signs for three decades. After a campaign by the United Lowrider Coalition the city council <a href="https://www.kpbs.org/news/local/2023/04/05/national-city-permanently-repeals-ban-on-lowrider-cruising">voted unanimously to repeal the ban</a> in April 2023. That October the governor signed Assembly Bill 436, which <a href="https://www.kpbs.org/news/racial-justice-social-equity/2023/10/20/lowriders-can-soon-legally-cruise-california-thanks-to-a-san-diego-movement">ended local cruising bans across California</a> and the state rule against lowered cars, from January 1, 2024.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Chicano_Park">Chicano Park</a> lies under the approach ramps of the San Diego&ndash;Coronado Bridge in Barrio Logan, a neighborhood cut in two by Interstate 5 in 1963 and by the bridge in 1969. Residents occupied the ground on April 22, 1970, to stop a Highway Patrol station from being built there. Painting of the bridge pillars began in 1973; some ten thousand square feet went up in a &ldquo;mural marathon&rdquo; in April 1978; and twenty-three murals were restored in a project that started in 2012. The park became a National Historic Landmark in 2016, and lowrider clubs show their cars there every Chicano Park Day. The Monarcas, the shops, and everyone in this story are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Queen Mallik&#257; from the Dhammapada commentary (verse 151). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/11-06.htm">The original</a>. Scripture from the Douay-Rheims Bible (Challoner revision). Written by Claude Fable 5.2.
+  <div class="pager"><a href="outward-adorning.html">&larr; Outward Adorning</a><a href="index.html">All stories</a><a href="sixteen-oxen.html">Sixteen Oxen &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, cars = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    cars = [];
+    var n = W < 700 ? 2 : 3, gap = Math.max(260, W / n);
+    for (var i = 0; i < n; i++) cars.push({ x: W * 0.15 + i * gap, len: 92 + i * 9, hop: 400 + i * 700, tone: i });
+  }
+  function glow(x, y, r, rgb, a) {
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, 'rgba(' + rgb + ',' + a + ')'); g.addColorStop(1, 'rgba(' + rgb + ',0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var base = H - 34, span = W + 400;
+    for (var i = 0; i < cars.length; i++) {
+      var k = cars[i];
+      if (!reduce) { k.x -= 0.16; if (k.x < -200) k.x += span; }
+      var ph = ((t + k.hop) % 2600) / 2600, lift = 0;
+      if (!reduce && ph < 0.06) lift = Math.sin(ph / 0.06 * Math.PI) * 5;
+      var x = k.x, L = k.len;
+      ctx.save(); ctx.translate(x, base); ctx.rotate(lift * 0.004);
+      ctx.strokeStyle = 'rgba(214,222,220,0.16)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, -lift); ctx.lineTo(L, 0); ctx.stroke();
+      ctx.strokeStyle = 'rgba(63,183,168,0.13)';
+      ctx.beginPath(); ctx.moveTo(L * 0.28, -lift * 0.7); ctx.quadraticCurveTo(L * 0.5, -15 - lift * 0.5, L * 0.74, -1); ctx.stroke();
+      glow(L + 2, -2, 16, '196,52,74', 0.34);
+      glow(-2, -2 - lift, 22, '236,226,200', 0.12);
+      ctx.restore();
+    }
+    ctx.fillStyle = 'rgba(214,222,220,0.05)'; ctx.fillRect(0, base + 7, W, 1);
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

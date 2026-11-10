@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Bread Truck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in the green dusk after sunset under a mountain, dark theme; low in one corner the two reels of a cassette turn slowly, one filling as the other empties, and then the tape is turned over. */
+  --ground: #131722;
+  --ground-2: #1b2130;
+  --paper: #ece6dc;
+  --paper-dim: #a09fb0;
+  --accent: #e3b96b;
+  --glow: #c98aa6;
+  --line: rgba(236,230,220,.12);
+  --panel: rgba(27,33,48,.78);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 118%, #1f3038 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(227,185,107,.2); }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 21.7 &middot; Citta Gahapati</span></nav>
+<header>
+  <h1>The Bread Truck</h1>
+  <div class="epigraph">For him all doors are flung wide; him all tongues greet, all honors crown, all eyes follow with desire.<br>&mdash; Emerson, &ldquo;Self-Reliance&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how it was shared with me,</span> on Old State Road 37.</p>
+
+<section>
+  <h2>I. Side One</h2>
+  <p class="dateline">Bloomington, Indiana &middot; 1977 to 1987</p>
+  <p>Hart Householder had the natural foods store on the west side of Bloomington, in the long tin building that had been his father&rsquo;s feed mill. He had started with one barrel of brown rice in 1971 and by the middle eighties he was selling bulk grain and beans to six counties, with a room of books on one side and a bulletin board by the door that people drove in from Nashville and Spencer to read. He was fifty-two. He gave credit and did not write it down. If a commune out past Needmore had a bad winter, a truck came up their lane, and nobody had to ask whose it was. People who had never been inside the store knew his name.</p>
+  <p>In the fall of 1977 a thin man came in off the highway with a pack. He did not ask for anything. He stood by the peanut grinder with his eyes down and waited to be in nobody&rsquo;s way, and there was something in how he stood that Hart liked. Hart took him in back and gave him lunch. Before he left, the man set a cassette on the table. It had a white label, typed: SITTING, NO. 1. MOUNT SHASTA, CALIF. No name was on it.</p>
+  <p>Hart played it that night on the machine in the office. It was a woman, not young, with a dry little cough she had not bothered to cut out. Behind her a kitchen clock ticked, and once a dog shook itself.</p>
+  <p><em>Sit down,</em> she said. <em>You don&rsquo;t need to bring anything. Let the breath go out, and see whether anything is missing.</em></p>
+  <p>That was nearly all of it, for thirty minutes. At the end she said, <em>Now turn the tape over,</em> and the other side was the same thing done again, a little slower.</p>
+  <p>He wrote to the box number. The tapes were four dollars and there were, in the end, thirty-one of them. There was no catalog and no photograph, and the only name he ever had was on the back of his cancelled checks: E. Varnum, in a schoolgirl hand. He kept the tapes in a shoebox by the register and sold them for what he paid. By 1985 half the people who sat still on purpose anywhere south of Indianapolis had started on No. 1 out of that box.</p>
+  <p>That year two of her old students came through on their way east, a nurse and a carpenter, and Hart went out to the edge of town to meet their car. The carpenter was the thin man with the pack, eight years older. They were tired. They talked for an hour in the book room anyway, to forty people on folding chairs, and what they said was plain enough that he could not afterward repeat it. But something in him that had always leaned a little toward the next place, the next thing, sat back on its heels that night and did not get up again.</p>
+</section>
+
+<section>
+  <h2>II. The Patch</h2>
+  <p class="dateline">Bloomington &middot; June 10, 1987</p>
+  <p>Behind the feed mill four acres ran down to a creek, and the bottom of it was pawpaws, a whole grove, growing in their own shade the way they do. People had been going down there to sit for years. In June of 1987 Hart had a lawyer draw a paper giving the four acres to a little board, to be kept open to anybody from any direction who wanted to sit down and be quiet, with a shed for rain.</p>
+  <p>He signed it on a card table in the patch on a Wednesday evening, with the board standing around him and the lawyer swatting mosquitoes.</p>
+  <p><em>Well,</em> Hart said, capping the pen, <em>that&rsquo;s planted.</em></p>
+  <p>The ground shook. The card table walked a foot to the left. Every leaf in the grove shivered with no wind, and up in the store a row of honey jars went off the shelf one after another. It was twelve minutes before seven. Radios said afterward that it was an earthquake under Olney, Illinois, the biggest in those parts in nineteen years, and that it was felt in seventeen states. The people who had been standing in the pawpaw patch heard that and nodded and kept their own opinion.</p>
+  <p>That night Hart sat in the office with the shoebox.</p>
+  <p><em>I learned the first thing from her and never saw her,</em> he thought. <em>I learned the second thing from her people and never saw her. I ought to see her.</em></p>
+  <p>In the morning there was a card on the bulletin board. GOING TO MOUNT SHASTA TO SEE MRS. VARNUM. LEAVING AUGUST 1. ANYBODY WHO WANTS TO COME, COME. YOU WON&rsquo;T NEED MONEY. H.H.</p>
+  <p>Everyone who read it said the same thing: he was going for the Convergence. All that summer the newspapers were full of it, the sixteenth and seventeenth of August, when a hundred and forty-four thousand people were supposed to stand on the high places of the earth at sunrise and hum a new age in, and Mount Shasta was one of the places. Hart had read about it too.</p>
+  <p><em>That as well, I guess,</em> he said.</p>
+</section>
+
+<section>
+  <h2>III. The Bread Truck</h2>
+  <p class="dateline">Indiana to California &middot; August 1 to 15</p>
+  <p>He owned a step van that had delivered bread around Monroe County through the sixties. You could still read the bakery&rsquo;s name under the white paint when the sun was low. He loaded it himself. Twenty sacks of short-grain brown rice at fifty pounds, sesame seed and tahini in tins, ghee by the case, raw sugar. He put in drawstring trousers in all sizes and thirty quilts from the Tuesday women. It was for her, and for whoever was around her.</p>
+  <p>Forty-three people went. There was a church bus bought at auction and five cars behind the bread truck. There were Unity ladies in sun hats, and two graduate students in religion, and a man who had laid track for the Monon, and a massage therapist with twin boys. There was a quiet veteran who drove the bus. Hart had laid in food for all of them for the whole road, in coolers, in the bus.</p>
+  <p>They never opened a cooler.</p>
+  <p>Outside St. Louis, at the first rest area, a family was standing by a picnic table with supper for fifty already set out, and said they had just had a feeling. At Unity Village the cafeteria would not take a dollar. In Kansas a Mennonite couple flagged the bus down from the shoulder with their trunk open. It went on like that. Boulder, Laramie, Rock Springs, a caf&eacute; in Wendover where the owner came out wiping his hands and said it was on him. A day&rsquo;s drive apart, about, there was somebody waiting. Nobody had called ahead. There was no one to call. The graduate students tried for a while to work out how it was being done and then stopped and ate.</p>
+  <p>People along the way gave them things besides: melons, a box of candles, a spare tire that fit the bus. Hart gave all of it away again at the next stop. The bread truck stayed shut with its hasp down for two thousand three hundred miles.</p>
+</section>
+
+<section>
+  <h2>IV. Alder Street</h2>
+  <p class="dateline">Mount Shasta, California &middot; Saturday, August 15</p>
+  <p>Esther Varnum was seventy-four. Her mother had taken her into the I AM classes in Los Angeles in the thirties, when half the city seemed to be in them. She had come north with the believers and walked in the first pageants. Somewhere in the fifties she stopped going, without a quarrel, and stayed on in a small house on Alder Street with a clock in the kitchen. She had never told anyone to buy a tape. A young man named Andy copied them for her in the garage and took the mail to the box.</p>
+  <p>On the Thursday she said to him, <em>Andy. Saturday, about when the shadows get long, the man from Indiana will pull in here with a bread truck.</em></p>
+  <p><em>Will anything happen?</em> He had been with her four years and had learned to ask.</p>
+  <p><em>Something will.</em></p>
+  <p><em>What?</em></p>
+  <p><em>Flowers. A good many. You may want to move your car.</em></p>
+  <p>Andy told one person. The town that week was full to the gutters with people who had come for the mountain, sleeping in vans and on the school lawn, and by Saturday afternoon a few hundred of them had found Alder Street and stood along both sides of it with their arms full of things they had brought in case. The television crews were all up the mountain road, waiting for Sunday&rsquo;s sunrise.</p>
+  <p>The bread truck came around the corner at ten to seven with the bus behind it. Hart got down. He asked the Unity ladies, who were the oldest, to come along at the back where they would not be jostled, and he went up the street on foot with the rest behind him. The ones who were there say the fence pickets hummed as he passed them, and that a porch swing three houses down started going by itself.</p>
+  <p>She was on her own porch in a housedress and a grey cardigan. He had thought for fifteen days about what he would say. He took off his cap and went down on one knee on the step, like a man tying a shoe, and put his two hands on her two feet in their canvas sneakers. He did not say anything.</p>
+  <p>The flowers came down then. There was no wind, and the sky was the clear green it goes over the mountain after sunset. They fell straight and thick like the first heavy snow. There were Shasta lilies and blue lupine and red paintbrush, and white phlox, and the little purple pennyroyal from the high meadows, all of them fresh. They fell for a quarter of an hour, from the railroad tracks to the grade school and nowhere else, and when they stopped they were over a grown person&rsquo;s knees. The twins waded in them. Several hundred people shouted, and then nobody could think what to shout next.</p>
+  <p><em>Come in, Mr. Householder,</em> she said. He knew the cough. <em>Mind the step.</em></p>
+</section>
+
+<section>
+  <h2>V. The Garage</h2>
+  <p class="dateline">Alder Street &middot; August and September</p>
+  <p>On Sunday the forty-three went up the mountain in the dark with everybody else and stood in a meadow and hummed the sun up. Mrs. Varnum did not go. <em>It comes down this street too,</em> she said, and sat at her kitchen table with the door open.</p>
+  <p>Hart stayed a month. He had meant to cook for her. He had meant to set up his pots in her yard and feed her out of his own sacks, with her neighbors and anyone who came by. But each morning there was food on the porch before he was up. There were plums and squash and bread still warm, eggs in a bowl with a cloth over them, a salmon once. It came from the people in the vans and from the mill families, and from the pageant ladies in their pale dresses, who had not spoken to her in thirty years. More came to him than to her. Strangers put things into his hands in the street. He cooked every day for sixty and seventy, and he never had to break the seal on a sack of his own.</p>
+  <p>On the fourteenth of September he stood in her kitchen with his cap in his hands.</p>
+  <p><em>Mrs. Varnum. I loaded that truck in Indiana to give you something. I was two weeks getting here, and I have been here a month, and I have not been able to give you one grain of it. Everything I&rsquo;ve handed you, somebody handed me. If I stayed a year it would be the same. I&rsquo;d like to empty the truck and go home. Tell me where I can put it.</em></p>
+  <p><em>Andy,</em> she said, <em>clear him a place.</em></p>
+  <p>Andy pushed the duplicating machine into a corner of the garage and swept. They carried in the rice and stacked it, and the tins and the ghee and the sugar, and the quilts on top with the trousers. It filled the garage to the rafters and left a path to the light switch.</p>
+  <p>He pulled out the next morning with the truck empty. He had got as far as the boulevard when people came out into the road. <em>Sir. You can&rsquo;t drive all that way with nothing in it.</em> They filled the bread truck where it stood. There were stones, mostly, since that was what that town had. Quartz points were wrapped in newspaper. There was amethyst and rose quartz, and black obsidian from Glass Mountain. There was jade from the Klamath, turquoise, and a coffee can of river garnets. They added jars of blackberries and a rocking chair. The springs sat down on the axle.</p>
+  <p>All the way back, the forty-three ate from what had been given, and at every stop there was more.</p>
+</section>
+
+<section>
+  <h2>VI. Terre Haute</h2>
+  <p class="dateline">Mount Shasta, and Bloomington &middot; the end of September</p>
+  <p>Andy was sweeping petals out of the gutter. There were still petals. He came in and stood by the kitchen table.</p>
+  <p><em>Can I ask you something? He was two weeks coming and they fed him the whole way. He was a month here and couldn&rsquo;t spend a dime. He left empty and they filled him up in the street. Was that because he was coming to see you? I mean with the mountain, and the weekend it was. Would any of it have happened if he had been going somewhere else?</em></p>
+  <p><em>He has a sister in Terre Haute,</em> Mrs. Varnum said. <em>If he had driven that truck to see her it would have gone just the same. It has nothing to do with me, and less than nothing to do with that weekend. A person who has kept faith for fifty years, and kept his word, and has something to give and is known for it, will be met like that wherever he sets his foot down. Hand me that.</em></p>
+  <p>It was the one book she had brought with her out of her mother&rsquo;s house, from before the classes. She did not have to hunt for the place.</p>
+  <div class="verse">
+    <p>Welcome evermore to gods and men is the self-helping man. For him all doors are flung wide; him all tongues greet, all honors crown, all eyes follow with desire. Our love goes out to him and embraces him because he did not need it.</p>
+    <p>&mdash; Emerson, &ldquo;Self-Reliance&rdquo;</p>
+  </div>
+  <p><em>Because he did not need it,</em> she said again. <em>You saw his face when he couldn&rsquo;t get that truck open.</em></p>
+  <p><em>But why flowers?</em> Andy said. <em>What did he ever do, to get flowers?</em></p>
+  <p>She looked at the clock for a while.</p>
+  <p><em>I&rsquo;ll tell you one, and you can decide what it is. A long time back there was a hunter out in the rain. He saw a man sitting under a rock ledge with his coat pulled over his head, perfectly still. The hunter thought, that one is doing something, and he&rsquo;ll be hungry when he&rsquo;s done. So he went home and cooked yesterday&rsquo;s meat on one fire and rice on another. Some travelers came by his door while it cooked, and he fed them too. Then he carried a basket back through the wet, and on the way he picked whatever was blooming. He gave the man the food and laid the flowers down in front of him. And he said, I never was so glad of anything as I am of this. Wherever I come to after this, let me be as glad to be given things as I am now to give them. And let it rain flowers on my head.</em></p>
+  <p><em>Was that him?</em></p>
+  <p><em>It was somebody,</em> said Mrs. Varnum. <em>Turn the tape over, Andy, it&rsquo;s run out.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The bread truck came down Old 37 on the twenty-ninth of September. The stones went into bushel baskets by the store door with a sign that said TAKE ONE, and were gone by Thanksgiving.</p>
+  <p>Down in the patch the pawpaws were ripe. A pawpaw is not picked. It lets go when it is ready and comes down through the big leaves by its own weight. All that week there were people sitting in the grove with their eyes shut, and the fruit came down around them, one and then another. Nobody had to shake a tree.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Whatever place a faithful, virtuous, celebrated, and wealthy man chooses, there he is respected.<cite>Dhammapada 303, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>Citta was a rich householder of Macchik&#257;sa&#7751;&#7693;a. He fed a monk whose bearing pleased him, listened to him, and understood; he gave his own wild-mango grove to the monks, and the earth shook when he did. Later the two chief disciples came to see him, and from a short talk given by S&#257;riputta, who was tired from the road, he reached the third stage of awakening. Having come so far without ever seeing the Buddha, he loaded five hundred carts with sesame, rice, ghee, sugar and cloth and invited anyone who wished to come along at his expense. For the month of the journey the gods fed the whole company at every league. When he bowed at the Buddha&rsquo;s feet, flowers rained knee-deep. For a month more he could give away only what others kept bringing him, and at last he asked for a place to unload his carts and started home with them empty, whereupon people filled them with jewels. &#256;nanda asked whether all this honor came because Citta had been visiting the Buddha. The Buddha said it would have been the same wherever he went, spoke the verse, and told of Citta&rsquo;s past life as a hunter who fed a meditating monk in the rain. The commentary gives the story in full <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-14.htm">at verses 73&ndash;74</a>, with Citta&rsquo;s quarrel with the monk Sudhamma, and repeats its ending at <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-07.htm">the full commentary story</a> for this verse. More about <a href="https://en.wikipedia.org/wiki/Citta_(disciple)">Citta</a>.</p>
+    <h3>Indiana and Mount Shasta, 1987</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Harmonic_Convergence">Harmonic Convergence</a> of August 16 and 17, 1987, was a worldwide synchronized meditation, and the newspapers covered it for weeks. Its organizers, reading a turning point into the Mesoamerican calendars, asked for 144,000 people to gather at &ldquo;power centers&rdquo; at sunrise, and <a href="https://en.wikipedia.org/wiki/Mount_Shasta">Mount Shasta</a> in northern California was among the chief of them. The mountain had been holy ground to American seekers for a long time. Guy Ballard said he met the master Saint Germain on its slopes, and the <a href="https://en.wikipedia.org/wiki/%22I_AM%22_Activity">&ldquo;I AM&rdquo; Activity</a> he founded with his wife claimed up to a million followers by 1938; its pageant has been held at Mount Shasta every August since 1950. Much New Age teaching in the 1970s and 1980s traveled by mail-order cassette and through the bulletin boards of natural-foods stores. Behind it stood the older current of New Thought, for which Emerson&rsquo;s essay <a href="https://en.wikipedia.org/wiki/Self-Reliance">&ldquo;Self-Reliance&rdquo;</a> (1841) was close to scripture.</p>
+    <p>On the evening of June 10, 1987, an earthquake of magnitude 5.1 <a href="https://www.usgs.gov/publications/olney-illinois-earthquake-10-june-1987-a-preliminary-report">centered near Olney, Illinois</a>, was felt in some seventeen states, the largest in that region since 1968. The <a href="https://en.wikipedia.org/wiki/Asimina_triloba">pawpaw</a> is the largest fruit native to North America, a relative of the tropical custard apples that tastes something like mango and banana; it grows in shady patches along creek bottoms across southern Indiana and ripens at the end of September. <a href="https://en.wikipedia.org/wiki/Bloomington,_Indiana">Bloomington</a> had communes in the hills around it and a food co-op from the 1970s. Hart Householder, his store, Mrs. Varnum and Alder Street are invented, and no one reported flowers.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the householder Citta from the Dhammapada commentary (verse 303). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-07.htm">The original</a>. Quotation from Ralph Waldo Emerson, &ldquo;Self-Reliance&rdquo; (<em>Essays: First Series</em>, 1841). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-brass-tray.html">&larr; The Brass Tray</a><a href="index.html">All stories</a><a href="eight-handfuls.html">Eight Handfuls &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, side = 0, SIDE = 5400;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function reel(x, y, pack, ang) {
+    ctx.strokeStyle = 'rgba(227,185,107,0.10)'; ctx.lineWidth = 1;
+    ctx.fillStyle = 'rgba(227,185,107,0.045)';
+    ctx.beginPath(); ctx.arc(x, y, pack, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = 'rgba(236,230,220,0.20)';
+    ctx.beginPath(); ctx.arc(x, y, 11, 0, Math.PI * 2); ctx.stroke();
+    for (var i = 0; i < 6; i++) {
+      var a = ang + i * Math.PI / 3;
+      ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * 6, y + Math.sin(a) * 6);
+      ctx.lineTo(x + Math.cos(a) * 11, y + Math.sin(a) * 11); ctx.stroke();
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var p = reduce ? 0.35 : (t % SIDE) / SIDE;
+    if (side) p = 1 - p;
+    var cy = H - 62, gap = 78, cx = W - 150;
+    if (W < 520) cx = W * 0.5 - gap / 2;
+    var r1 = 14 + 22 * (1 - p), r2 = 14 + 22 * p;
+    var a = reduce ? 0.4 : t * 0.012;
+    reel(cx, cy, r1, a * (36 / r1));
+    reel(cx + gap, cy, r2, a * (36 / r2) + 0.5);
+    ctx.strokeStyle = 'rgba(236,230,220,0.10)';
+    ctx.beginPath(); ctx.moveTo(cx - r1 * 0.2, cy + r1); ctx.lineTo(cx + gap + r2 * 0.2, cy + r2); ctx.stroke();
+    ctx.strokeStyle = 'rgba(236,230,220,0.07)';
+    ctx.strokeRect(cx - 46, cy - 44, gap + 92, 92);
+    t++;
+    if (!reduce && t % SIDE === 0) side = 1 - side;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

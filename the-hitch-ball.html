@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hitch Ball</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a dim machine shed in October; low in the left margin an iron ball sits on an anvil, heats to orange and cools slowly back to gray; datelined sections. */
+  --ground: #14161a;
+  --ground-2: #1d2026;
+  --paper: #e4e1d8;
+  --paper-dim: #9c9a92;
+  --accent: #e08a3c;
+  --glow: #f2b25c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #262019 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,225,216,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(224,138,60,.22); }
+.epigraph { border-left: 1px solid rgba(224,138,60,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(29,32,38,.75); border: 1px solid rgba(228,225,216,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,225,216,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(228,225,216,.1); border-bottom: 1px solid rgba(228,225,216,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(29,32,38,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 22.3 &middot; Vaggumud&#257;t&#299;riyabhikkh&#363;</span></nav>
+<header>
+  <h1>The Hitch Ball</h1>
+  <div class="epigraph">Bread of falsehood is sweet to a man; But afterwards his mouth shall be filled with gravel.<br>&mdash; Proverbs 20:17</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Well, the way I heard it,</span> at the Cenex in Vang.</p>
+
+<section>
+  <h2>I. The Placement</h2>
+  <p class="dateline">Swift County, Minnesota &middot; June 1987</p>
+  <p>The corn was good that year, and it did not matter. It was knee-high well before the Fourth and the color of a pool table, and a bushel of it was worth about a dollar and a half. Land that had brought eleven hundred dollars an acre five years before brought seven hundred if it brought anything. There were men in the county with ten thousand bushels in the bin and a wife who drove to the food shelf in Benson on Thursdays, in the next town over's car if she could borrow it, so the neighbors would not know the plates.</p>
+  <p>Reuben Lindquist had cried farm sales in six counties for forty years. Everybody called him Colonel, as they called every auctioneer. In the spring of 1984 he sold out the son of a man he had sold out in 1934, put his cane and his hat in the closet, and never took a sale bill again. He was seventy-six now, a widower with eighty acres rented out, and what he did was run the Harvest Workers.</p>
+  <p>It was a small thing and it was his own. Winters, twenty or so young people sat in the old creamery at Vang and he took them through the Bible a book at a time. Summers he put them out in twos and fours with country congregations that had lost their pastor or could not pay one, from the first of June until the corn was in. They taught the children's Bible school, held a meeting Sunday night, and slept where they were given a bed. He paid them nothing. He told them each year the one thing he told them. <em>You eat what they eat.</em></p>
+  <p>For a man who had talked two hundred words a minute for a living, he did not say much. People who had heard him on the block found it hard to credit.</p>
+  <p>That June he put four of them at the Skog church, eleven miles north of Vang, in the township that had seen the most sales. Todd Engen and Curt Maas were twenty-two, Lori Pauling was twenty, and Peg Rasmussen was nineteen. They had been friends since their first winter in the creamery. He drove them up himself, and on the way he pointed out the yards without being asked, here and here and that one, and they understood that he was showing them where he had stood.</p>
+</section>
+
+<section>
+  <h2>II. Three Ways</h2>
+  <p class="dateline">The Skog parsonage &middot; the second week</p>
+  <p>The parsonage had been empty two years. The congregation stocked its kitchen the first Sunday, and what they stocked it with told the four of them everything: a sack of macaroni, a block of the government cheese, two jars of beans, a dozen eggs, and a note saying somebody would bring milk.</p>
+  <p>By the second week it was gone, and they sat down at the kitchen table to talk about the summer the way you would talk about a long drive on a quarter tank.</p>
+  <p><em>We could work for them,</em> Curt said. <em>Walk beans. Chop silage in September. A man feeds his help.</em></p>
+  <p><em>You don't have to break your back,</em> said Lori. <em>Half these places the woman's working nights at the turkey plant and the old folks can't drive. We run their errands. Take Grandma to the clinic, carry word between the places. They'd keep us for that.</em></p>
+  <p>Todd let them both finish. He was the one who could talk.</p>
+  <p><em>There's no call for either. Think what they're hungry for out here. All we have to do is speak well of each other.</em></p>
+  <p>He laid it out. When Curt was out of the room, the rest would let it be known that Curt had the gift of healing, that there was a woman in Montevideo with her goiter gone. Lori got a word of knowledge; she knew what was wrong in a house before she was through the porch. Peg had seen the Lord in a hayfield near Hancock as plain as you see that stove. And Todd, they would say when Todd was not by, had fasted forty days the winter before and had not been the same since.</p>
+  <p>None of it was so. Peg said that, and then said nothing else. Nobody at the table decided anything aloud, and by Sunday they were doing it.</p>
+</section>
+
+<section>
+  <h2>III. The Tables</h2>
+  <p class="dateline">Skog township &middot; July to October</p>
+  <p>It went through the township in ten days. People had watched the television preachers come apart that spring, the one in Carolina with his secretary and the one in Tulsa who said God would call him home if the money did not come in. Here were four clean young people who asked for nothing, each one too modest to speak of his own gift, so that you had to hear of it from the others. Nothing so good had come to Skog before, people said, and they said it to one another in the church basement with real gladness.</p>
+  <p>And they fed them. Marlys Thorson took the last white package marked ROAST out of the chest freezer, from the steer they had butchered in 1985, and set it in the sink to thaw. Her own three ate buttered noodles at the counter that week and were told to go outside while company was at the table. Old Arne Dahl opened his wife's pears, with 1983 on the lid in her hand, which he had not been able to open since the funeral. The Schmiesings had Curt pray over a boy's ears and sent him home with a pie, a quart of pickled beets and four dollars in an envelope. Nobody's hired man got a second plate that summer, and nobody's mother in the nursing home got her Sunday chicken brought in. It went to the parsonage.</p>
+  <p>Todd let his belt out a hole in August. Lori's face cleared. They all had a good color, slept well, and got along together better than they ever had in the creamery. Peg ate what was put in front of her and looked at the plate.</p>
+  <p>October came in dry, and the combines ran until midnight. On the seventeenth the Twins opened the World Series in the Metrodome, and for a week you could not go into a milk house or a grain truck in Swift County without hearing WCCO. Women who owed the Land Bank more than the place was worth waved a white Homer Hanky at a twelve-inch television. The Twins won two at home and lost three in St. Louis. The corn was in by the twenty-second.</p>
+</section>
+
+<section>
+  <h2>IV. Game Six</h2>
+  <p class="dateline">The Lindquist place, south of Vang &middot; Saturday, October 24</p>
+  <p>The Workers came in to the Colonel's yard that Saturday, as they did every fall, by ones and twos in borrowed cars. Most of them looked like the country they had come out of. The pair from Appleton had walked beans in July and forked silage in September, and the cords stood out in their necks. A girl who had been alone at Louriston had gone a whole size down in her dress, and her hands were split at the knuckles. They had eaten what their houses ate.</p>
+  <p>The four from Skog got out of Todd's Citation sleek as seals.</p>
+  <p>The Colonel was in the machine shed with the big door open and the barn radio turned up across the yard so he could hear it. The game had started at three, the only one of the Series played in the afternoon. He was selling his old pickup and wanted the hitch ball off it first, and the nut had rusted solid to the shank. So he had the drawbar in the vise and the torch on it. He greeted each of them as they came in without turning the flame aside.</p>
+  <p><em>You kept well? You got by up there? Got fed without trouble?</em></p>
+  <p><em>We kept well,</em> Todd said. <em>We got by fine. We had no trouble at all.</em></p>
+  <p>He had known since August. He had stood in every one of those yards and he still drank coffee in most of the kitchens. He asked anyway, because it was time to.</p>
+  <p><em>How was that managed?</em></p>
+  <p>They told him. Todd began it and could not make it sound like anything, and Peg finished. The others in the shed had stopped moving.</p>
+  <p><em>Was any of it so? The goiter. The hayfield.</em></p>
+  <p><em>No,</em> Peg said.</p>
+  <p><em>For your bellies, then.</em></p>
+  <p>He shut off the torch. In the quiet they could hear the radio and the crowd under it. The Twins had just gone ahead.</p>
+  <p><em>I know what is in those freezers,</em> he said. <em>I know it to the package. I sold half of those freezers once and I may sell the rest. You sat down and ate Marlys Thorson's children's meat, and you told her a lie to get it.</em></p>
+  <p>Then he said the two places, the second as slowly as the first.</p>
+  <div class="verse">
+    <p>Bread of falsehood is sweet to a man; But afterwards his mouth shall be filled with gravel.</p>
+    <p>&mdash; Proverbs 20:17</p>
+    <p>Woe unto the shepherds of Israel that do feed themselves! should not the shepherds feed the sheep? Ye eat the fat, and ye clothe you with the wool, ye kill the fatlings; but ye feed not the sheep.</p>
+    <p>&mdash; Ezekiel 34:2&ndash;3</p>
+  </div>
+  <p>The nut had come loose with the heat. He spun it off with the tongs and knocked the ball out of the drawbar onto the anvil, where it sat and glowed, a two-inch ball of iron gone the orange of a yard light.</p>
+  <p><em>You would have done better to swallow that,</em> he said, <em>than one more plate up there.</em></p>
+  <p>Nobody answered him. Across the yard the radio went up in a roar that did not stop, a hundred and twenty miles off, fifty-five thousand people on their feet for a ball gone over a fence with the bases full. Not one person in the shed turned toward it. They stood and watched the ball on the anvil go from orange to red, and from red to a blue-gray scale. It was a long time before anyone could have picked it up.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Better it would be to swallow a heated iron ball, like flaring fire, than that a bad unrestrained fellow should live on the charity of the land.<cite>Dhammapada 308, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, which takes the story from the monastic rule, a group of monks who are friends spend the rainy season on the banks of the Vaggumud&#257; river in a year of famine, when the crops have turned to straw. They talk over how to get fed. Some propose working for the householders, others carrying their messages. They settle on praising one another to the householders as men of high spiritual attainment. The people, delighted, give them food they do not eat themselves or give to their own parents, children and workers. When the rains end and the monks of the region gather before the Buddha, the rest are gaunt and these are sleek. He asks how they fared, though he knows; they tell him; he asks whether the claims were true, rebukes them, and speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-03.htm">the full commentary story</a>.</p>
+    <h3>Western Minnesota, 1987</h3>
+    <p>The <a href="https://www.mnhs.org/mnopedia/search/index/event/farm-crisis-1979-1987">farm crisis</a> of the 1980s was the worst time on the land since the Depression. The average value of an acre of Minnesota farmland fell from $1,165 in 1982 to $700 in 1987, while the debts taken on against the higher figure stayed. The state began a Farm Advocate program in 1984 and required lenders to offer mediation before foreclosure in 1986; more than 600 Minnesota farmers still filed for bankruptcy in 1987. Corn that fall brought well under two dollars a bushel. It was also the year the television ministries of Jim Bakker and Oral Roberts were in the news for months. The Harvest Workers, Vang and the Skog church are invented; Swift County and Benson are real.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/1987_World_Series">1987 World Series</a> ran from October 17 to October 25, and the home team won every game. Game Six, on Saturday the twenty-fourth, started at three in the afternoon Central time, the last Series game played by day. The Twins trailed 5&ndash;2, and Kent Hrbek's grand slam in the sixth inning put it away, 11&ndash;5. They won the seventh game the next night. Herb Carneal and John Gordon called the games on WCCO radio, which reaches most of the Upper Midwest, and the <a href="https://en.wikipedia.org/wiki/Homer_Hanky">Homer Hanky</a> was new that October.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the bhikkhus who lived on the banks of the Vaggumud&#257; from the Dhammapada commentary (verse 308). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-03.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-deed-reading.html">&larr; The Deed Reading</a><a href="index.html">All stories</a><a href="two-ribbons.html">Two Ribbons &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0;
+  // one iron ball low in the margin: heats to orange, then cools through red to gray scale
+  var stops = [[0, [58, 60, 66]], [0.12, [255, 170, 70]], [0.3, [236, 120, 40]], [0.55, [170, 52, 30]], [0.8, [84, 74, 84]], [1, [58, 60, 66]]];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function col(p) {
+    for (var i = 1; i < stops.length; i++) {
+      if (p <= stops[i][0]) {
+        var a = stops[i - 1], b = stops[i], k = (p - a[0]) / (b[0] - a[0]);
+        return [a[1][0] + (b[1][0] - a[1][0]) * k, a[1][1] + (b[1][1] - a[1][1]) * k, a[1][2] + (b[1][2] - a[1][2]) * k];
+      }
+    }
+    return stops[0][1];
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var period = 2400;
+    var p = reduce ? 0.2 : (t % period) / period;
+    if (!reduce) t++;
+    var x = Math.max(46, (W - 620) / 4), y = H - 70, r = 15;
+    var k = col(p), heat = Math.max(0, 1 - Math.abs(p - 0.14) / 0.5);
+    // anvil face
+    ctx.fillStyle = 'rgba(40,42,48,0.55)';
+    ctx.fillRect(x - 60, y + r - 1, 120, 7);
+    if (heat > 0.02) {
+      var g = ctx.createRadialGradient(x, y, r * 0.6, x, y, r * 7);
+      g.addColorStop(0, 'rgba(' + (k[0] | 0) + ',' + (k[1] | 0) + ',' + (k[2] | 0) + ',' + (0.22 * heat) + ')');
+      g.addColorStop(1, 'rgba(' + (k[0] | 0) + ',' + (k[1] | 0) + ',' + (k[2] | 0) + ',0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * 7, 0, Math.PI * 2); ctx.fill();
+    }
+    var b = ctx.createRadialGradient(x - 4, y - 5, 1, x, y, r);
+    b.addColorStop(0, 'rgba(' + Math.min(255, k[0] + 40 | 0) + ',' + Math.min(255, k[1] + 40 | 0) + ',' + Math.min(255, k[2] + 30 | 0) + ',0.9)');
+    b.addColorStop(1, 'rgba(' + (k[0] * 0.7 | 0) + ',' + (k[1] * 0.7 | 0) + ',' + (k[2] * 0.7 | 0) + ',0.9)');
+    ctx.fillStyle = b; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

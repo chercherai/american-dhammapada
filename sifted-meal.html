@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sifted Meal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a dark cabin on a winter night, dark theme; along the foot of the page lies a pale skim of sifted meal, and now and then a cat's prints press into it one after another, come near, turn, and slowly fill; datelined sections. */
+  --ground: #12140f;
+  --ground-2: #1b1e16;
+  --paper: #e6e1d0;
+  --paper-dim: #9a9783;
+  --accent: #d9b86a;
+  --glow: #b5623c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 118%, #2a2415 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,225,208,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(217,184,106,.22); }
+.epigraph { border-left: 1px solid rgba(217,184,106,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(27,30,22,.82); border: 1px solid rgba(230,225,208,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,225,208,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(230,225,208,.12); border-bottom: 1px solid rgba(230,225,208,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(27,30,22,.82); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 25.9 &middot; Santakāya</span></nav>
+<header>
+  <h1>Sifted Meal</h1>
+  <div class="epigraph">Silent am I now and still,<br>Dare not in thy presence move.<br>&mdash; Charles Wesley, &ldquo;Open, Lord, my inward ear&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is the way it was told,</span> at the north end of Salt Spring Island.</p>
+<section>
+  <h2>I. The Winter</h2>
+  <p class="dateline">Above Vesuvius Bay, Salt Spring Island &middot; January 1862</p>
+  <p>Keziah Tolliver was sifting the last of the meal when the panther came into the house.</p>
+  <p>It was the winter the cold killed the stock. Ice stood in the passage between the island and Vancouver's Island, the boat from Victoria had not called at Vesuvius Bay in three weeks, and her husband was on the other side of that ice with the money for flour. She had a boy of six named Eli and a baby girl. The cow had died standing. They had a calf left in the lean-to, and in the dusk she heard the calf scream once, and then heard nothing at all.</p>
+  <p>The door was a split-cedar door on leather hinges. It came in slowly, the way a door does when a dog noses it, and the thing that put its head around the edge was the color of a dead fern and as long as she was.</p>
+  <p>She let the sieve go. It rang on the puncheons, and the meal went out across the floor in a pale skim. She sat down in it where she stood, with the baby in her lap and her back against the hearth stones, and she pulled the boy down against her side.</p>
+  <p><em>Eli. Don't you move a finger. Don't move a foot. We are not people who run.</em></p>
+  <p>The panther walked the room. It ate the venison off the table. It came across the floor and stood over them long enough that she could count its breaths, and she did count them, to have something to do that was not moving. Then it lay down between them and the door with its tail around its feet, the way a cat lies down in a house where it lives.</p>
+  <p>The fire burned to coals and went grey. The baby slept, which Keziah afterward called the one mercy she had asked for by name. The boy did not sleep. She could feel him against her ribs, awake, held as still as a rabbit in grass, and some time in the night she felt the holding go out of him and something else come in, which was only stillness, with nothing behind it pushing.</p>
+  <p>When there was light enough to see the window, the panther stood, stretched itself fore and aft, looked once around the four walls, and went out the way it had come.</p>
+  <p>Mr. Pryor, who taught the school, came by an hour later on his way down to Central and found the door standing open. He looked at the floor before he looked at her. The cat's prints were in the meal, round and deep, four toes and no claws. They went to within a hand of her skirt, went around her, and went back. There was no other mark in it anywhere. The meal lay drifted against her hem and against the boy's bare heel just as it had fallen, like snow against a stump.</p>
+  <p><em>Mrs. Tolliver,</em> he said. <em>You may get up now.</em></p>
+  <p>She found that she could not, right away, and he waited.</p>
+</section>
+
+<section>
+  <h2>II. What They Said</h2>
+  <p class="dateline">The north end &middot; 1862 to 1873</p>
+  <p>After that winter the island said that Keziah Tolliver was a panther.</p>
+  <p>They did not say it unkindly. A panther had walked up to a woman with a baby in her lap, they said, and seen its own cousin, and lain down. Old Kimo at the south end, a Kanaka who had packed for the Company for thirty years and fished now off Isabella Point, said he had known it the first time he saw her walk. And everybody on the island knew how it was with the she-panthers of the Divide, or said so.</p>
+  <p>When one of them has made her kill, they said, she goes up into a cave under the high rocks, and the floor of that cave is laid a hand deep with the red dust of rotted cedar and the yellow dust of old maple leaves. She lies down on it and she lies seven days. On the seventh day she gets up and looks at her bed. If a twitch of her tail or her ear has scattered that dust, or a forefoot or a hind foot has, she tells herself, <em>That does not suit what you were born,</em> and she lies down again and goes hungry seven days more. If the dust is as she left it, she tells herself, <em>That suits what you were born.</em> She comes out of the cave, yawns, stretches, looks to the north and the east and the south and the west, screams three times, and goes hunting.</p>
+  <p>It was out of a mother like that, people said, that Eli Tolliver had come.</p>
+  <p>Some of what they said was true. Keziah had been born in Clay County, Missouri, the property of a man who raised hemp. When she was nine her mother was sold off the courthouse steps at Liberty. Her mother had stood up there with her hands at her sides and her eyes on the top of a sycamore across the square, and had not moved a hand or a foot or her face while they bid, and had said one thing to Keziah the night before. <em>Don't give them anything. Don't give them one finger of you.</em> Keziah had walked to California at nineteen beside another man's wagon. She was free there, and stayed seven years, until the laws turned. In 1858 she came north on the steamer from San Francisco with a husband and a boy of two, one of some hundreds who went that year, because a governor at Victoria had sent word that they might own land and vote.</p>
+  <p>So on winter evenings she took the sieve and shook a skim of meal over the bench by the hearth, and Eli sat on it while his father read the chapter. When the chapter was done she looked. If the meal was scattered she said, <em>That is not what you come from,</em> and he sat again the next night with no bread first. If it lay as she had sifted it, she said, <em>That is what you come from,</em> and brushed it back into the bowl. By the time he was nine she had stopped looking, and at ten he was sifting the meal for his sisters.</p>
+</section>
+
+<section>
+  <h2>III. The Bench</h2>
+  <p class="dateline">The log schoolhouse at Central &middot; spring 1873</p>
+  <p>At seventeen Eli Tolliver was a long, spare young man who cleared land with his father and kept forty sheep. Nobody on the island had seen him do a needless thing with his hands. He did not drum on a table or pick at a cuff. On the school bench he sat with his palms on his knees and his feet side by side through a two-hour sermon, whenever a preacher rowed over from Nanaimo, and through the meetings afterward, where the men talked about roads and wharves and who would sit on the new council. He did not yawn. He did not put his legs out in front of him. He spoke when he was asked something, said the amount that answered it, and stopped.</p>
+  <p>They were not easy years to sit still in. Three men of the settlement had been killed in their own cabins in '67 and '68, one of them the man who taught the Sunday school in that same room, and not everyone on the north end believed the right man had hanged for it. Families had sold out and gone to Victoria. The boys Eli's age had gone to the Nanaimo pits for wages. In the schoolhouse of an evening, when a limb came down outside, every head went around except one.</p>
+  <p>That spring a panther began taking sheep along the lake. The men made up a purse of twenty dollars, and since it was agreed that only one person on the island could outwait a cat, they brought the purse to Eli and offered him a dead ewe to sit over.</p>
+  <p><em>I won't sit over a bait,</em> he said. He said it pleasantly and gave no reason. He took his blanket down to the fold instead and sat there nights with no gun, and no sheep was taken from any fold he sat by, and he would not take the twenty dollars for that either. People said the cat knew a relation.</p>
+  <p>On a Sunday in May, after meeting, some of the young people stayed behind where Mr. Pryor was stacking the slates. He had kept school on the island fourteen years, the first ten of them for no pay but what families carried to his door, and he was not a man who talked for pleasure.</p>
+  <p><em>Sir, we never saw anybody like Eli Tolliver. When he sits down he doesn't move his hands. He doesn't move his feet. He doesn't yawn or stretch himself out. Not ever.</em></p>
+  <p>Eli was at the door with his hat in his hand, waiting on his sisters, and heard it. He did not turn around.</p>
+  <p>Mr. Pryor set the slates down.</p>
+  <p><em>Anyone who means to follow his Lord ought to be like Eli Tolliver. Quiet in what he does, and in what he says, and in what he thinks.</em></p>
+  <p>He had a way of lining out a hymn, two lines at a time, for a room where not everyone could read. He lined one out then, to nobody in particular, with the slates at his elbow.</p>
+  <div class="verse">
+    <p>From the world of sin, and noise,<br>And hurry, I withdraw;<br>For the small and inward voice<br>I wait with humble awe;<br>Silent am I now and still,<br>Dare not in thy presence move;<br>To my waiting soul reveal<br>The secret of thy love.</p>
+    <p>&mdash; Charles Wesley, &ldquo;Open, Lord, my inward ear&rdquo; (1742)</p>
+  </div>
+  <p><em>He turned down twenty dollars last month,</em> Mr. Pryor said. <em>You might think about that, too.</em> And he went back to the slates.</p>
+</section>
+
+<section>
+  <h2>IV. The Door</h2>
+  <p class="dateline">The Tolliver place &middot; that evening</p>
+  <p>Eli walked home behind his sisters without saying anything, which was usual.</p>
+  <p>He had sat still eleven years because of where he came from. He had known that the way he knew his name. But standing in the schoolhouse door with his back to the room, hearing the hymn come two lines at a time, he had looked for the thing in him that did the keeping still, the hand on the scruff, and it was gone. He could not have said when it went. The stillness was there with nobody holding it. It was like the meal on the floor that morning when he was six, lying as it fell.</p>
+  <p>His mother had supper on. She was past forty and still walked like something that had come down off the Divide. She looked at him once across the table and then looked again, longer, the way Mr. Pryor had once looked at her floor.</p>
+  <p>Afterward he went and stood in the doorway. The light was going. He yawned, which his sisters had never seen and talked about for a week. He put both arms over his head and stretched until his knuckles touched the lintel. He looked north toward the bay, and east over the lake, and south to the Divide, and west where the sun was going down behind Vancouver's Island.</p>
+  <p>Then he called the sheep, three times, the long call, and went down to the fold.</p>
+  <p>Keziah got up and went to the bench by the hearth. The little girls had sifted it for their brother that evening as a joke, since he was too old for it, and he had sat there through the chapter anyway. The meal lay on the board as fine and even as frost. She stood looking at it with the bowl in her hand, and then she set the bowl down and left it for the morning.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">The Bhikshu whose body and tongue and mind are quieted, who is collected, and has rejected the baits of the world, he is called quiet.<cite>Dhammapada 378, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Elder Santak&#257;ya (&ldquo;Calm in Body&rdquo;) never makes an improper movement of hand or foot, never yawns and never stretches. It was said that he had been born of a lioness, and that a lioness who has found prey lies seven days in a cave on a bed of red and yellow mineral powder. If she finds on the seventh day that a movement of her tail, ears or feet has scattered the powder, she tells herself, &ldquo;This does not become your birth or lineage,&rdquo; and lies fasting seven days more. If the powder is undisturbed she comes out, yawns, stretches, surveys the four quarters, roars three times and goes hunting. The monks report the elder's composure to the Buddha, who says a monk should be like him, composed in action, speech and thought, and at the end of the verse the elder becomes an arahant. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-09.htm">the full commentary story</a>.</p>
+    <h3>Salt Spring Island, 1858&ndash;1873</h3>
+    <p>In 1858, after California passed a series of laws against its Black residents, several hundred of them accepted an invitation from Governor James Douglas and sailed from San Francisco to Victoria. Beginning in 1859 a number of these families took up land on the north end of <a href="https://en.wikipedia.org/wiki/Salt_Spring_Island">Salt Spring Island</a>, the first place in the colony where settlers could pre-empt unsurveyed land. Many had been born enslaved; the best known of them, <a href="https://en.wikipedia.org/wiki/Sylvia_Stark">Sylvia Stark</a>, was born in Clay County, Missouri, crossed the plains to California as a girl, and lived on the island until 1944. The Tollivers and Mr. Pryor are invented, but the island's first teacher was a Black graduate of Oberlin College, <a href="https://saltspringarchives.com/Early_Schools/first-teacher_john-craven-jones.html">John Craven Jones</a>, who taught for years without pay in a log schoolhouse at Central, built in 1861, that also served as the church. The <a href="https://bcblackhistory.ca/timeline/salt-spring-island-settlers-beginning-in-the-summer-1859/">BC Black History Awareness Society</a> and the <a href="https://saltspringarchives.com/multicultural/blacks/map.htm">Salt Spring Island Archives</a> have mapped the homesteads.</p>
+    <p>The winter of 1861&ndash;62 was cold enough to kill livestock across the island. Settlers' accounts are full of cougars, which they called panthers; the archives note that the teacher held school in two places so that children would not have to walk far through cougar country. Between 1867 and 1868 three Black settlers were killed near Vesuvius Bay, among them the Sunday school teacher <a href="https://canadianmysteries.ca/sites/robinson/murder/castofcharacters/1714en.html">William Robinson</a>. An Indigenous man, Tshuanahusset, was hanged for Robinson's death on evidence that historians now doubt, and a number of families left the island afterward. Hawaiians who had worked for the Hudson's Bay Company, known as Kanakas, settled around the island's south end in the same decades. Charles Wesley's hymn was first published in 1742 and stood in Methodist hymnbooks throughout the nineteenth century.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Santak&#257;ya from the Dhammapada commentary (verse 378). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-09.htm">The original</a>. Hymn by Charles Wesley (1742), from John Wesley's <em>Collection of Hymns for the Use of the People Called Methodists</em>. Written by Claude Fable 5.2.
+  <div class="pager"><a href="thirteen-kettles.html">&larr; Thirteen Kettles</a><a href="index.html">All stories</a><a href="the-scythe.html">The Scythe &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, grains = [], prints = [], t0 = performance.now(), cycle = 46000;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    make();
+  }
+  function make() {
+    grains = [];
+    var n = Math.round(Math.min(1400, W * 1.1));
+    for (var i = 0; i < n; i++) {
+      var u = Math.random();
+      grains.push({ x: Math.random() * W, y: H - 6 - u * u * 86, a: 0.10 + Math.random() * 0.22, r: 0.5 + Math.random() * 0.7 });
+    }
+    // a walk in from the right, a turn, and back out
+    prints = [];
+    var steps = 9, x0 = W + 20, x1 = W * 0.58, yb = H - 34;
+    for (var k = 0; k < steps; k++) {
+      var f = k / (steps - 1);
+      prints.push({ x: x0 + (x1 - x0) * f, y: yb - 14 * Math.sin(f * Math.PI * 0.5) + (k % 2 ? 7 : -7), t: k });
+    }
+    for (var j = 1; j < steps; j++) {
+      var g = j / (steps - 1);
+      prints.push({ x: x1 + (x0 - x1) * g, y: yb - 30 + 16 * g + (j % 2 ? 7 : -7), t: steps + j });
+    }
+  }
+  function paw(x, y, a) {
+    ctx.fillStyle = 'rgba(18,20,15,' + a.toFixed(3) + ')';
+    ctx.beginPath(); ctx.ellipse(x, y + 2, 6.5, 5.2, 0, 0, Math.PI * 2); ctx.fill();
+    for (var i = 0; i < 4; i++) {
+      var ang = -2.25 + i * 0.47;
+      ctx.beginPath(); ctx.ellipse(x + Math.cos(ang) * 8.5, y + 2 + Math.sin(ang) * 8.5, 2.5, 3, ang + Math.PI / 2, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < grains.length; i++) {
+      var g = grains[i];
+      ctx.fillStyle = 'rgba(226,206,150,' + g.a + ')';
+      ctx.fillRect(g.x, g.y, g.r, g.r);
+    }
+    var T = reduce ? 21000 : (now - t0) % cycle;
+    for (var k = 0; k < prints.length; k++) {
+      var p = prints[k], born = 3000 + p.t * 1100, age = T - born;
+      if (age < 0) continue;
+      var a = Math.min(1, age / 900) * Math.max(0, 1 - Math.max(0, age - 14000) / 12000);
+      if (a > 0.01) paw(p.x, p.y, a * 0.62);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Windmill Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale sky of a Panhandle daybreak, light theme; fine flecks of soot drift down across the page, and low in the right margin a steel windmill stands over its tank, the wheel turning slowly and the tail swinging a little with the wind; datelined sections. */
+  --ground: #ece6da;
+  --ground-2: #e2dacb;
+  --paper: #26231f;
+  --paper-dim: #6b655b;
+  --accent: #8a4a22;
+  --glow: #3e6f86;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #e3e2de 0%, #ece6da 45%, #efdcc4 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(38,35,31,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(138,74,34,.10); }
+.epigraph { border-left: 1px solid rgba(138,74,34,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(226,218,203,.8); border: 1px solid rgba(38,35,31,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(38,35,31,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(38,35,31,.12); border-bottom: 1px solid rgba(38,35,31,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(226,218,203,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 12.9 &middot; Culla Kāḷa</span></nav>
+<header>
+  <h1>Windmill Water</h1>
+  <div class="epigraph">According to the cleanness of my hands hath he recompensed me.<br>&mdash; Psalm 18:20</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Now the way I got it,</span> on the south road out of Borger.</p>
+<section>
+  <h2>I. The Tent</h2>
+  <p class="dateline">Borger, Hutchinson County, Texas &middot; a Saturday night in September 1926</p>
+  <p>The town was six months old and had forty-five thousand people in it. Most of them lived in tents and tar-paper shacks along a Main Street three miles long, and the water came from somewhere else, in tank wagons, and was sold off the tailgate.</p>
+  <p>Calvin Odom was twenty-four, off a cotton farm in Wise County, and he worked in the hot houses at the carbon plant south of town. The plant burned gas against iron in long sheet-metal sheds and scraped off what the flame left. What it left was the blackest stuff there is, finer than flour. It went into automobile tires, and into Calvin. He came off shift black to the roots of his hair and coughed black in the mornings. There had been two Odoms at the plant when he hired on, no kin to each other, so the bigger man was Big Black and Calvin was Little Black. Then in July a crew looking for a stolen truck had caught Big Black on the south road at night, alone, and by the time anyone learned he'd had no part in it he was dead.</p>
+  <p>Little Black had gone forward at the Salvation Army's open-air on Main Street in June. He could not have said why that night. A woman of fifty in a blue bonnet had been playing a concertina in front of a domino hall with her eyes shut, and he had been walking past with his pay in his shoe.</p>
+  <p>She was Ensign Cora Beale. She had worked the oil towns since Ranger, and she had come up from Amarillo with a lieutenant, a drum, and a brown tent that she pitched on a lot behind the lumber yard. Calvin was not sworn in yet. He was what the Army called a recruit. He washed as well as a man could wash in two quarts of bought water and sat on the second bench.</p>
+  <p>That Saturday the Ensign held an All Night of Prayer, nine o'clock to daylight. About twenty people stayed for it. There was singing, then testimony, then singing again. Twice in the night she stood up and talked for most of an hour, plainly and quietly, about what a man does and what is done to him and which of the two he will have to carry. Calvin heard all of it. He did not once leave the bench. People remembered that afterward because the bench was short and they had to climb over him.</p>
+</section>
+
+<section>
+  <h2>II. The Road</h2>
+  <p class="dateline">The south road &middot; Sunday, first light</p>
+  <p>He came out of the tent when the east was the color of dishwater and started for the plant camp.</p>
+  <p>A quarter mile past the last shacks the road ran by a ranch windmill. It had been there before the town, an Aermotor on a thirty-foot steel tower with a round stock tank at its foot, and the rancher had not got around to fencing it off from forty-five thousand strangers. Calvin had the windmill in sight when a Ford touring car came up the road behind him with its lamps off. It went by close enough to fan his trouser legs. Something came out of the back seat, hit the caliche in front of him and slid.</p>
+  <p>It was a canvas bank sack, tied at the neck. The Ford was already over the rise.</p>
+  <p>He was standing over the sack, working out whose it might be, when the truck came. There were five men on it, a drilling crew, and their driller was a man named Hoyt Larrabee whose payroll had walked out of a contractor's shack at gunpoint an hour before. They saw a man alone on the south road at daybreak, black to the eyes, with their sack between his feet.</p>
+  <p><em>There he is,</em> Larrabee said. <em>Sat in the Army tent all night so he'd have it to tell, and went hijacking by morning.</em></p>
+  <p>Calvin said he had been at prayer. It was the wrong thing to say, because it was what Larrabee had just said he would say. They took him off his feet. They used their fists and their boots, and one of them used a doubled length of sash cord across his back and neck. He got his arms over his head and kept them there. He did not hit anybody. Between blows he could hear the windmill, which needed grease, and through it one of the men saying they ought to do the thing right this time. He heard that man walk back to the truck and take a coil of rope from under the seat.</p>
+  <p>He understood that this was how it had gone for Big Black.</p>
+</section>
+
+<section>
+  <h2>III. The Tank</h2>
+  <p class="dateline">The windmill &middot; sunup</p>
+  <p>Five women were coming out along the road from town.</p>
+  <p>They were from Dixon Street. Anybody would have known it, at that hour, by the kimonos under their coats. Each had a towel over her shoulder and one carried a cake of soap in a saucer. The windmill tank was the only water in Borger that nobody charged for, and daybreak on a Sunday was the only hour of the week when there were neither cattle at it nor men. They came out every Sunday. They had passed the brown tent on the way, as they had passed it going the other direction at midnight.</p>
+  <p>The one in front was Opal Sykes. She was thirty-five and had been in Ranger and Burkburnett, the same as the Ensign, in a different line of work. She paid the city eighteen dollars every week for the privilege, which was more than could be said for Hoyt Larrabee.</p>
+  <p><em>You boys go on about your business,</em> she said. <em>This man didn't do any such thing.</em></p>
+  <p>Larrabee kept his knee where it was. <em>What would you know about it?</em></p>
+  <p><em>I know that tent's been singing since nine last night. I went by it at twelve and I went by it at three with a sick headache, and he was on the second bench both times with his mouth open. I know that Ford. I know who was in it. He paid Jimmie out of a roll at two o'clock and told her where the next roll was coming from, and it was your shack, Hoyt. And I know every one of you by your Christian name and what you owe.</em></p>
+  <p>Nobody on the truck found anything to say to that. The man with the rope looked at it and put it back under the seat. Larrabee stood up. He picked the sack off the road, hefted it, and found it was all there. He got on the truck with his crew and they went back toward town a good deal slower than they had come.</p>
+  <p>Calvin sat up in the road. His nose was broken. One eye was shutting.</p>
+  <p>The women helped him as far as the tank and sat him on the rim. The youngest, the one called Jimmie, wet a corner of her towel and reached for his face. Opal took her wrist.</p>
+  <p><em>Let him. He has two hands.</em> She set the saucer on the rim beside him. <em>Wash your own face, Little Black. Then go on, so we can have our bath.</em></p>
+  <p>He washed. The blood came off, and under the blood some of the black, and the water he had dirtied went out over the lip of the tank into the mud. The wheel turned overhead and brought up more through the lead pipe, a pulse at a time, clear.</p>
+</section>
+
+<section>
+  <h2>IV. The Bench</h2>
+  <p class="dateline">The tent &middot; Sunday morning</p>
+  <p>He walked back the way he had come. The soldiers were setting the benches straight for knee-drill, and they stopped when they saw him.</p>
+  <p><em>Some men about killed me on the south road,</em> he said. <em>They took me for a hijacker. Some women from Dixon Street got me off. I'd be dead, only for them.</em></p>
+  <p>They sat him down and went for the Ensign, and told it to her as he had told it. One of them, a carpenter named Tuttle who had been saved eleven years, said it was a hard thing for a praying man to owe his life to that kind of woman, and a harder thing for the Army to have it said.</p>
+  <p>Ensign Beale looked at Calvin's face a while. She had her Bible, and she did not need to open it.</p>
+  <p><em>Brother Odom is alive this morning because those women spoke up, and because he hadn't done it. It took both. They could not have talked him free if he had been guilty, and he could not have talked himself free at all.</em></p>
+  <div class="verse">
+    <p>The soul that sinneth, it shall die. The son shall not bear the iniquity of the father, neither shall the father bear the iniquity of the son: the righteousness of the righteous shall be upon him, and the wickedness of the wicked shall be upon him.</p>
+    <p>&mdash; Ezekiel 18:20</p>
+  </div>
+  <p><em>What a man does is on him,</em> she said. <em>What he leaves undone is on him too, and it comes off the same way. I have been twenty years in the Army, Brother Tuttle. I never yet washed anybody. I never saw it done.</em></p>
+  <p>Then she sent the lieutenant for iodine.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>That evening the Army held its open-air on Dixon Street, as it did every Sunday, with the drum and the concertina. Opal Sykes sat on her step in a clean shirtwaist with her hair still damp and did not come forward. Nobody had expected she would.</p>
+  <p>Calvin Odom was not in the ring. He had walked out the south road in the afternoon with two buckets and walked back in with them full, a mile and a quarter, with one eye shut. When the singing started he crossed the street and set one bucket on her step. On the rim of it he had balanced her saucer, with a new cake of soap.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">By oneself the evil is done, by oneself one suffers; by oneself evil is left undone, by oneself one is purified. Purity and impurity belong to oneself, no one can purify another.<cite>Dhammapada 165, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the lay disciple Culla K&#257;&#7735;a (&ldquo;Little Black&rdquo;) spends a whole night at the monastery listening to the teaching. As he walks home at dawn, thieves running from the people they have robbed throw their loot down in front of him. The pursuers seize him, say he played the thief by night and only pretended to be listening to the Dhamma, and beat him. Some courtesans on their way to the river bathing place tell the men he did nothing of the sort and get him released. When the monks report it, the Buddha says he was saved both by the women's intercession and by his own innocence, and speaks the verse. The story opens by pointing back to an earlier one, in which a layman named Mah&#257; K&#257;&#7735;a (&ldquo;Big Black&rdquo;), caught the same way, was beaten to death. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-09.htm">the full commentary story</a>.</p>
+    <h3>Borger, 1926</h3>
+    <p><a href="https://www.tshaonline.org/handbook/entries/borger-tx">Borger</a> was laid out in March 1926 after oil was struck in the Texas Panhandle, and within ninety days some 45,000 people had come to it. The Handbook of Texas records a Main Street three miles long, drinking water delivered in tank wagons until wells were drilled, and a town government run by a crime syndicate. Dixon Street was the vice district; by one <a href="https://www.legendsofamerica.com/tx-borger/">account</a> its women each paid the city marshals a weekly &ldquo;fine&rdquo; of eighteen dollars. Armed robbers were called hijackers. Federal agents and Texas Rangers raided the town in October 1926, the Rangers returned in force the next spring, and in 1929 the governor put Borger under martial law. Thomas Hart Benton painted it as <a href="https://en.wikipedia.org/wiki/Borger,_Texas"><em>Boomtown</em></a>.</p>
+    <p>The first <a href="https://www.tshaonline.org/handbook/entries/carbon-black-industry">carbon black</a> plant in the Panhandle was authorized in Hutchinson County in March 1926. The channel process burned natural gas against iron and collected the soot for tire rubber, and within a decade the plants around Borger were darkening the town's dust storms. The Salvation Army's members are soldiers and its clergy hold military ranks; ensign was one of them in the 1920s. Its all-night prayer meetings, outdoor services with drum and concertina, and early Sunday &ldquo;knee-drill&rdquo; all date from its first decades. The Army's tent in Borger is invented, as are Calvin Odom, Ensign Beale, Opal Sykes and the rest, and the killing of the man called Big Black.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the lay disciple Culla K&#257;&#7735;a from the Dhammapada commentary (verse 165). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-09.htm">The original</a>. Scripture from the King James Version. Written by Claude Fable 5.2.
+  <div class="pager"><a href="mataji.html">&larr; Mataji</a><a href="index.html">All stories</a><a href="cistern-water.html">Cistern Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, soot = [], t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    soot = [];
+    var n = Math.round(Math.max(24, Math.min(70, W / 16)));
+    for (var i = 0; i < n; i++) soot.push({ x: Math.random() * W, y: Math.random() * H, r: 0.5 + Math.random() * 1.1, v: 0.06 + Math.random() * 0.14, s: Math.random() * 6.28, a: 0.10 + Math.random() * 0.16 });
+  }
+  function mill(now) {
+    var s = Math.max(0.7, Math.min(1.1, W / 1100));
+    var bx = W - 56 * s - 10, by = H - 12, top = by - 150 * s, ink = 'rgba(38,35,31,0.20)';
+    ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = 1.2;
+    // tower
+    ctx.beginPath();
+    ctx.moveTo(bx - 22 * s, by); ctx.lineTo(bx - 3 * s, top); ctx.moveTo(bx + 22 * s, by); ctx.lineTo(bx + 3 * s, top);
+    for (var k = 1; k < 5; k++) { var yy = by - k * 30 * s, w = 22 * s * (1 - k * 30 / 150) + 3 * s * (k * 30 / 150); ctx.moveTo(bx - w, yy); ctx.lineTo(bx + w, yy); }
+    ctx.stroke();
+    // tank
+    ctx.fillRect(bx - 62 * s, by - 12 * s, 36 * s, 12 * s);
+    ctx.fillStyle = 'rgba(62,111,134,0.30)'; ctx.fillRect(bx - 62 * s, by - 12 * s, 36 * s, 2);
+    // wheel and tail
+    var ang = reduce ? 0.4 : (now - t0) / 5200, sway = reduce ? 0 : 0.10 * Math.sin((now - t0) / 4100);
+    var R = 26 * s;
+    ctx.save(); ctx.translate(bx, top);
+    ctx.save(); ctx.rotate(sway); ctx.fillStyle = ink;
+    ctx.beginPath(); ctx.moveTo(0, -1); ctx.lineTo(36 * s, -7 * s); ctx.lineTo(44 * s, 0); ctx.lineTo(36 * s, 7 * s); ctx.lineTo(0, 1); ctx.fill(); ctx.restore();
+    ctx.rotate(ang);
+    for (var i = 0; i < 16; i++) {
+      ctx.rotate(Math.PI / 8);
+      ctx.beginPath(); ctx.moveTo(4 * s, -1); ctx.lineTo(R, -3.6 * s); ctx.lineTo(R, 3.6 * s); ctx.lineTo(4 * s, 1); ctx.fill();
+    }
+    ctx.restore();
+  }
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < soot.length; i++) {
+      var p = soot[i];
+      if (!reduce) { p.y += p.v; p.x += 0.12 * Math.sin((now - t0) / 3000 + p.s) + 0.05; if (p.y > H + 4) { p.y = -4; p.x = Math.random() * W; } if (p.x > W + 4) p.x = -4; }
+      ctx.fillStyle = 'rgba(20,18,16,' + p.a + ')';
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+    mill(now);
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>
