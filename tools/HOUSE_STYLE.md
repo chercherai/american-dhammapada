@@ -41,6 +41,8 @@ Don't be afraid of ordinary people either. The series leans toward communities a
 
 Mahayana echoes are welcome too. The bodhisattvas are innumerable: a figure who could leave and stays to help, a vow to come back for everyone, Guanyin or Jizo or Kannon in a Chinese, Japanese or Vietnamese household, an unexpected helper who might be a bodhisattva in disguise. Use them as quiet callbacks, never as lectures.
 
+**Broaden the sources.** The King James is in about fifty stories and Bibles of all kinds in roughly two-thirds. From now on the KJV is a last resort, used only when the community would truly have nothing else, and the Douay-Rheims and other Bibles likewise. Reach first for what the series hasn't used: spirituals and other pre-1929 folk songs, Franklin's *Poor Richard*, Frederick Douglass, Sojourner Truth, Lincoln (but not "Chief Seattle's speech", whose text is a later invention), Rumi or Hafiz in pre-1929 translations, the Talmud, Hasidic tales, the Zohar in old translations, John Muir, Darwin, Emily Dickinson, Melville, Hawthorne, Black press writing, union songs (Joe Hill), almanac proverbs, children's primers (McGuffey, the New England Primer), letters and diaries, sutras and Zen texts beyond those already used. Check the master list's scripture column, and don't reuse a text another story already quotes unless you're continuing that story.
+
 **When a community has no book,** use what it actually holds sacred or wise, in public domain if quoted (Thoreau, Whitman, Emerson, Ingersoll, the Declaration, a pre-1929 hymn or folk song, a Mahayana sutra in an old translation), or let the teacher's own words carry the verse. Never invent text and pass it off as a real quotation.
 
 ## Decades

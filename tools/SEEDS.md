@@ -34,11 +34,11 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - **990, Pacific islands and Antarctica:** Guam, Saipan, American Samoa, Bikini Atoll, a McMurdo winter-over. [11.3]
 
 ## Editor's themes (Nov 10, evening): each wants at least one story built on it
-- Sikhs, beyond The Branch (8.3): Yuba City peach growers, the 1912 Stockton gurdwara, Sikh cab drivers, a post-9/11 story [25.6 Punjabi-Mexican Imperial Valley]
-- Musicians as the heart of a story: a polka band, a mariachi, a Nashville session player, a jazz sideman, a church organist, a garage band [11.9]
+- Sikhs, beyond The Branch (8.3): Yuba City peach growers, the 1912 Stockton gurdwara, Sikh cab drivers, a post-9/11 story [25.6 Punjabi-Mexican Imperial Valley] [24.4]
+- Musicians as the heart of a story: a polka band, a mariachi, a Nashville session player, a jazz sideman, a church organist, a garage band [11.9] [26.32]
 - Ghosts: the commentary's peta (hungry-ghost) stories are made for this: 5.12 Snake Peta, 10.6 Python Peta, 20.6 Pig Peta
 - Hunters: a muskrat trapper, a duck-blind guide, a buffalo hunter, a subsistence hunter, a bowhunter [13.8]
-- Teenagers as the protagonist, not the side character [26.26]
+- Teenagers as the protagonist, not the side character [26.26] [17.8]
 - Fires: Peshtigo 1871, Chicago 1871, the Triangle factory, Hinckley 1894, Paradise 2018, Lahaina 2023 [16.2 Peshtigo fire, Door County]
 - Buddhists. Six stories so far (Vietnamese, Kalmyk, Cambodian, Lao, Japanese Pure Land, Cantonese Chan). Still missing: Hawaii plantation Hongwanji temples, Soka Gakkai (Black and Latino members), Beat and San Francisco Zen (1950s–60s), insight meditation (Barre 1975), Shambhala in Boulder, Tibetan exiles, Thai, Burmese, Sri Lankan and Korean temples, a prison Buddhist chaplain, Dharmapala at the 1893 Parliament of Religions [25.7 Thai] [19.8 Beat and San Francisco Zen] [22.9 Soka Gakkai] [26.2 Tibetan exiles] [26.37 Shambhala in Boulder] [7.4 Burmese] [20.2 prison Buddhist chaplain, Sri Lankan]
 - Buddhist and contemplative America, specific (the editor's picks; each one-use; real founders appear only at a distance, with no invented dialogue):
@@ -57,3 +57,4 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - A cartoonist (a newspaper strip artist, a Disney inker, a 1950s comic-book artist before the Comics Code, an underground comix artist, a webcomic)
 - A ceramicist (Pueblo potters at San Ildefonso, a Black Mountain College potter, a production potter in North Carolina's Seagrove, a community studio)
 - A vegan (a 1840s Grahamite boardinghouse, a Seventh-day Adventist kitchen, a 1970s co-op, a 2010s Instagram vegan, an animal sanctuary)
+- Unused wisdom sources (see HOUSE_STYLE "Broaden the sources"): spirituals, Poor Richard, Douglass, Sojourner Truth, Lincoln, Rumi/Hafiz, Talmud, Hasidic tales, Muir, Darwin, Dickinson, Melville, Joe Hill, McGuffey, the New England Primer

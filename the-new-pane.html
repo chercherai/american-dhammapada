@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The New Pane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on winter-pale ground behind a faint leaded lattice of diamond panes; now and then one pane takes the light. */
+  --ground: #e8edee;
+  --ground-2: #d9e1e2;
+  --paper: #1e282d;
+  --paper-dim: #5d6b70;
+  --glass: #2c5f68;
+  --brass: #b9792a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f1f4f4 0%, var(--ground) 50%, #dce4e5 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(30,40,45,.2); }
+.series a:hover { color: var(--glass); }
+a:focus-visible { outline: 2px solid var(--glass); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--glass); text-wrap: balance; text-shadow: 0 0 28px rgba(44,95,104,.22); }
+.epigraph { border-left: 1px solid rgba(44,95,104,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--glass); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--glass); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(217,225,226,.72); border: 1px solid rgba(30,40,45,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--brass); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(30,40,45,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--glass); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--glass); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(30,40,45,.1); border-bottom: 1px solid rgba(30,40,45,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--glass); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--glass); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--glass); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--glass); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(217,225,226,.72); border-left: 2px solid var(--glass); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 17.8 &middot; Chabbaggiya</span></nav>
+<header>
+  <h1>The New Pane</h1>
+  <div class="epigraph">That neither in thoughts, nor words, nor gestures, much less in deeds&hellip;<br>&mdash; Heidelberg Catechism, Lord&rsquo;s Day 40</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Aldus is het mij verhaald,</span> in the Jonkerstraat.</p>
+<section>
+  <h2>I. The Six</h2>
+  <p class="dateline">Beverwijck, New Netherland &middot; Sunday, the seventh of December 1659</p>
+  <p>There were six of them, and the village had stopped using their names. Wouter the baker&rsquo;s son was fifteen and the tallest. Teunis was fifteen too, and Claes and Jochem were fourteen, and Gerrit, and Dirck, who was thirteen and did what the others did. If a sleigh was found on a roof, or a hog with a brewer&rsquo;s hat tied on, people said <em>the six</em> and went on with their work.</p>
+  <p>The river had been shut for two weeks. The last yacht had gone down to the Manhatans, the traders&rsquo; rooms were empty of beaver, and there was nothing to do until spring but cut wood and go to church. That Sunday afternoon the domine was preaching the catechism sermon in the blockhouse church where the two streets crossed. The six were not at it. They had their klompen on, with straw in them, and each one had his kolf in his two hands, a stick of ash as long as his leg with a lead-weighted foot, and they were going up and down the Jonkerstraat after a ball.</p>
+  <p>The street had frozen in its ruts as hard as a hearthstone. Twelve wooden shoes on it made a noise like a mill.</p>
+  <p>Meester Harmen the glazier sat at his bench by the front window with his hands in his lap. He was past seventy and came from Holstein, and he was a Lutheran, so the sermon up the street was not for him and no other was allowed. He had set most of the glass in Beverwijck. He heard the clatter go down the street and come back.</p>
+  <p><em>Pieter,</em> he said to his apprentice, <em>what is that noise?</em></p>
+  <p>Pieter looked out. <em>It is the six, Meester. They have wooden shoes on their feet and sticks in both hands and they are walking up and down on the hard ground. That is the clatter you hear.</em></p>
+  <p>The old man nodded and listened.</p>
+</section>
+
+<section>
+  <h2>II. Three Sounds</h2>
+  <p class="dateline">The Jonkerstraat &middot; the same hour</p>
+  <p>The game was to drive the ball from the church to the bridge over the kill in the fewest strokes. Wouter had it. He was a stroke up on Teunis and had been all afternoon, and he swung for the bridge, and Teunis stepped across him and took the ball off the toe of his stick.</p>
+  <p>Wouter did not think. The kolf was already in his hands. He brought it round low and laid the weighted foot of it across Teunis&rsquo;s shin, above the shoe, and it made a sound like an axe going into green wood.</p>
+  <p>Teunis went down on one knee on the ice. Then he said it, loud enough for the Jonkerstraat. He called Wouter a thief, and a thief&rsquo;s son, whose father sold loaves two ounces light and had been before the court for it. That last part was true, and everyone on the street knew it.</p>
+  <p>Wouter did not answer him. He stood over the ball with his face gone white and still, and looked at Teunis, and went on looking. Then he hit the ball as hard as he had ever hit anything. He did not look where.</p>
+  <p>It went through the glazier&rsquo;s front casement, two feet from the old man&rsquo;s head.</p>
+  <p>The six stood where they were. Running was no use; there was nowhere in Beverwijck to run to. The door opened and Meester Harmen came out in his leather apron with the ball in one hand. In the other he had a piece of the pane the size of a playing card, green as pond water, with the lead still hanging from one edge.</p>
+  <p>He did not shout. He looked at Teunis&rsquo;s leg, which was bleeding into the stocking, and at Wouter&rsquo;s face.</p>
+  <p><em>You are the domine&rsquo;s boys, not mine,</em> he said. <em>You have a book. Which of you has the fortieth Lord&rsquo;s Day?</em></p>
+  <p>Nobody spoke. Then Dirck, who was thirteen and had been made to get it by heart that same autumn, said it to the frozen street with his cap in his hand, question and answer, in the school singsong.</p>
+  <div class="verse">
+    <p>What does God require in the sixth commandment?</p>
+    <p>That neither in thoughts, nor words, nor gestures, much less in deeds, I dishonour, hate, wound, or kill my neighbour, by myself or by another: but that I lay aside all desire of revenge: also, that I hurt not myself, nor wilfully expose myself to any danger. Wherefore also the magistrate is armed with the sword, to prevent murder.</p>
+    <p>&mdash; Heidelberg Catechism, Q. 105</p>
+  </div>
+  <p><em>Thoughts, words, deeds,</em> said the glazier. <em>That is the order it is written in. Where I sat, I heard it come the other way. First a stick. Then a mouth.</em> He looked at Wouter. <em>The third one made no sound at all, and it is the one that broke my window. It is not finished, either. I can see it from here.</em></p>
+  <p>Wouter looked at the ground.</p>
+  <p><em>Keep the hand, then. Keep the tongue. Keep the thing behind the tongue. A boy who has hold of all three can carry a kolf anywhere he likes.</em> He held up the piece of glass. <em>This came from Amsterdam in a crate of straw. I cannot grow another. Go home.</em></p>
+</section>
+
+<section>
+  <h2>III. Twenty-Five Guilders</h2>
+  <p class="dateline">Fort Orange &middot; Wednesday, the tenth of December</p>
+  <p>On Wednesday the court sat in the fort. The burghers had been complaining for a month, and the glazier&rsquo;s casement was only the last of it. The commissary and the magistrates had it written into the book and read out in the street: that the playing of kolf along the streets did great damage to the windows of the houses and put people in danger of being hurt, and that it was forbidden to all persons from that day, under penalty of twenty-five guilders for each one found doing it.</p>
+  <p>Twenty-five guilders was more than six kolven and twelve klompen would fetch, with the six boys thrown in. That was how it always went with the six. Each thing they did turned into a rule for everybody.</p>
+  <p>The court could do nothing about the rest of it. The magistrates had no ordinance for a boy&rsquo;s face.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Wouter came to the glazier&rsquo;s door on Thursday morning by himself, without his stick. He did not say why he had come, and Meester Harmen did not ask him. The casement lay flat on the bench with the broken diamond cut out of it. The old man had a new one ready, scored and snapped from the last sheet in the crate.</p>
+  <p><em>Wash your hands. Hold it there, by the edges. Do not press, and do not let go.</em></p>
+  <p>Wouter held it. The glazier bent the soft lead around the pane with his thumbs and ran the hot iron along each joint, a hand&rsquo;s width from the boy&rsquo;s fingers. It took a quarter of an hour. Outside, Teunis went by toward the bridge with a load of firewood on his shoulder, limping. He looked in at the window as he passed. Wouter saw him, and his hands stayed where they were.</p>
+  <p>When the frame was hung again the new pane was easy to find. The old ones were green and full of small bubbles. This one was nearly white, and the street showed through it plain.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verses</h3>
+    <blockquote class="pd">Beware of bodily anger, and control thy body! Leave the sins of the body, and with thy body practise virtue!<cite>Dhammapada 231, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Beware of the anger of the tongue, and control thy tongue! Leave the sins of the tongue, and practise virtue with thy tongue!<cite>Dhammapada 232, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Beware of the anger of the mind, and control thy mind! Leave the sins of the mind, and practise virtue with thy mind!<cite>Dhammapada 233, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The wise who control their body, who control their tongue, the wise who control their mind, are indeed well controlled.<cite>Dhammapada 234, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is a few lines long. The monks of the Group of Six, whose misbehaviour is the occasion for a great many of the monastic rules, put on wooden shoes, take a staff in each hand and tramp up and down on a flat rock. The Buddha hears the clatter and asks &#256;nanda what it is; told, he lays down that a monk should control his deeds, his words and his thoughts, and speaks the four verses. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-08.htm">the full commentary story</a>.</p>
+    <h3>Beverwijck, 1659</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Beverwijck">Beverwijck</a>, the fur-trading village beside <a href="https://en.wikipedia.org/wiki/Fort_Orange_(New_Netherland)">Fort Orange</a> on the upper Hudson, is now Albany, New York. On December 10, 1659, its court, &ldquo;having heard diverse complaints from the burghers of this place against the practice of playing golf along the streets, which causes great damage to the windows of the houses and also exposes people to the danger of being injured,&rdquo; forbade the game in the streets under a penalty of twenty-five guilders a person (Fort Orange Court Minutes, tr. Charles Gehring). The game was <a href="https://en.wikipedia.org/wiki/Kolf">kolf</a>, played with a weighted stick and a ball; the ordinance is often cited as the first mention of golf in America. The six boys, the glazier and his window are invented.</p>
+    <p>The Reformed church was the only public worship the colony allowed, and Lutherans, of whom the upper Hudson had a good many, were refused a preacher of their own through the 1650s. Reformed children learned the <a href="https://en.wikipedia.org/wiki/Heidelberg_Catechism">Heidelberg Catechism</a> (1563) by heart, and its fifty-two Lord&rsquo;s Days were preached through at the Sunday afternoon service. The answer quoted is from the old English version long used by the Reformed Church in America.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Group of Six from the Dhammapada commentary (verses 231&ndash;234). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-08.htm">The original</a>. Scripture from the Heidelberg Catechism in its traditional English version. Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-touchstone.html">&larr; The Touchstone</a><a href="index.html">All stories</a><a href="neats-tongue.html">Neat’s Tongue &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, S = 64, glints = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(g) {
+    g.cx = Math.round(Math.random() * W / S) * S; g.cy = Math.round(Math.random() * H / (S * 1.5)) * S * 1.5;
+    if (Math.random() < 0.5) { g.cx += S / 2; g.cy += S * 0.75; }
+    g.life = 0; g.max = 500 + Math.random() * 800; return g;
+  }
+  function make() {
+    glints = [];
+    var n = Math.max(3, Math.min(8, Math.round(W / 220)));
+    for (var i = 0; i < n; i++) { var g = spawn({}); g.life = Math.random() * g.max; glints.push(g); }
+  }
+  function diamond(x, y) {
+    ctx.beginPath(); ctx.moveTo(x, y - S * 0.75); ctx.lineTo(x + S / 2, y); ctx.lineTo(x, y + S * 0.75); ctx.lineTo(x - S / 2, y); ctx.closePath();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(30,40,45,0.045)'; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    var k = 1.5, span = W + H / k;
+    for (var x = -span; x < span; x += S) {
+      ctx.moveTo(x, 0); ctx.lineTo(x + H / k, H);
+      ctx.moveTo(x + H / k, 0); ctx.lineTo(x, H);
+    }
+    ctx.stroke();
+    for (var i = 0; i < glints.length; i++) {
+      var g = glints[i];
+      if (!reduce) { g.life++; if (g.life > g.max) spawn(g); }
+      var p = g.life / g.max, a = Math.min(1, p * 4) * Math.min(1, (1 - p) * 4) * 0.5;
+      if (a < 0.01) continue;
+      diamond(g.cx, g.cy);
+      ctx.fillStyle = 'rgba(255,255,255,' + a + ')'; ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
