@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Whole Hand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over cedar water, the brown-black of a Pine Barrens stream in November, dark theme; pitch-pine needles in bundles of three come down slowly, turning, and lie a while on the surface before they go under; datelined sections. */
+  --ground: #16110c;
+  --ground-2: #221a12;
+  --paper: #e8dcc6;
+  --paper-dim: #a8987c;
+  --accent: #c8553d;
+  --glow: #c99a4a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #2a1f13 0%, var(--ground) 65%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(232,220,198,.25); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(201,154,74,.22); }
+.epigraph { border-left: 1px solid rgba(200,85,61,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(34,26,18,.8); border: 1px solid rgba(232,220,198,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(232,220,198,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(232,220,198,.16); border-bottom: 1px solid rgba(232,220,198,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(34,26,18,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 9.8 &middot; Kukku&#7789;amitta</span></nav>
+<header>
+  <h1>A Whole Hand</h1>
+  <div class="epigraph">Evil into the mind of God or Man<br>May come and go, so unapprov&rsquo;d, and leave<br>No spot or blame behind<br>&mdash; Milton, <em>Paradise Lost</em> V.117&ndash;119</div>
+</header>
+
+<p class="heard"><span class="heard-lead">They tell it this way</span> in the Jersey Market.</p>
+<section>
+  <h2>I. The Window</h2>
+  <p class="dateline">High Street, Philadelphia &middot; December 1821</p>
+  <p>Thomas Ashmead shipped flour to the West Indies and brought back sugar, and he had built his house on High Street above Front, four stories of brick with the counting room on the ground floor. He put his daughter at the top of it. Susanna was sixteen that winter. Her room looked down on the long roof of the Jersey Market, which ran up the middle of the street from Front to Second, and a serving woman named Hannah Schofield slept across her door.</p>
+  <p>Hannah was from Salford in Lancashire. She had come over in 1817 with the people who followed Mr. Metcalfe, the ones the city called Bible Christians, who signed a paper promising to eat no flesh and drink no spirits and who met on Sundays in Mr. Metcalfe&rsquo;s hired schoolroom behind North Front Street. The Ashmeads were Christ Church people and did not ask what Hannah did with her Sunday afternoons, or notice that for four years she had taken the child with her. Susanna had signed the paper herself at twelve. An old weaver named Abel Horrocks, whom the children of that meeting called Father Abel, had ruled the line for her name because she could not yet write straight. At her father&rsquo;s table she passed the joint along and ate the bread and the greens, and her mother put it down to a girl&rsquo;s stomach.</p>
+  <p>On a Friday toward evening, with the lamps not yet lit, a Jersey wagon came off the ferry and up to the market. It was heaped with deer. There were nine or ten of them, frozen stiff with their legs every which way, and strings of partridge hung down the sides. The man driving sat forward on the tongue between his two horses with the lines loose in one hand. He was young and long in the leg, and he had on a coat made out of a blanket. He looked at nothing in the street. He seemed to be listening to the horses.</p>
+  <p>Susanna stood at the window until he had backed the wagon in under the shed. She said afterward that it was like seeing somebody from home. She had no other way to say it, and she had never lived anywhere but that house.</p>
+  <p>She gave Hannah a levy and sent her down for a brace of partridge for the kitchen, and told her to ask the man when he went back. Hannah thought it an odd errand for that particular girl. She went, because she was sent. The hunter took the coin and gave her the birds.</p>
+  <p><em>I will sell out tomorrow,</em> he said, <em>and go down to the first boat Sunday morning. Who wants to know?</em></p>
+  <p><em>The house,</em> said Hannah, and carried it upstairs with the partridge.</p>
+</section>
+
+<section>
+  <h2>II. The Ferry</h2>
+  <p class="dateline">The Market Street slip &middot; Sunday, before light</p>
+  <p>Susanna laid out what she meant to take, and it was not much: two shifts, a pair of stockings, a garnet ring that had come to her from her grandmother, the pledge card. She tied them flat under an old brown gown of Hannah&rsquo;s that was waiting for the rag bag. Before anyone was up she went down the back stair with the kitchen pitcher in her hand, like a girl sent to the Jersey boats for buttermilk.</p>
+  <p>She stood on the slip in the cold. The wagon came down empty with the two horses blowing steam. When it went onto the boat she went on behind it, and when it came off on the Jersey side and took the road east she walked in the track of its wheels.</p>
+  <p>He let it go on for a mile before he stopped the horses.</p>
+  <p><em>I do not know you,</em> he said. <em>You are nobody&rsquo;s girl that I ever traded with. Leave off following me.</em></p>
+  <p><em>You did not call me,</em> said Susanna. <em>I came on my own feet. Mind your team.</em></p>
+  <p>He drove on. He stopped twice more and told her to go back, and she stood in the road each time and waited for him to finish. The third time she looked at him directly.</p>
+  <p><em>When good fortune walks up behind a man, he has no call to send it home.</em></p>
+  <p>His name was Micah Cox. His grandfather had been a Hessian named Hahn who walked away from his regiment in 1778 and into the pines. Micah looked at the girl standing in the sand in a servant&rsquo;s gown with no bonnet. Then he got down and put his hands together for her foot and helped her up over the wheel.</p>
+  <p>Hannah found the pitcher on the slip that afternoon. The watermen dragged below the ferry for three days. In January the Ashmeads put up a stone in Christ Church ground that said <em>Susanna, drowned</em>, with the year, and gave the mourning rings, and Thomas Ashmead had the top room shut.</p>
+</section>
+
+<section>
+  <h2>III. The Brush Fence</h2>
+  <p class="dateline">The Pines, on a branch of the Wading River &middot; November 1849</p>
+  <p>In twenty-eight years she bore him seven sons, the last two together. They grew up tall and quiet like him. She got them all married before they were twenty-one, to girls from the furnace villages and the cedar swamps, and all seven couples lived within a shout of the old house. The Coxes were the best hunters in that country. They kept better than four hundred snares on six miles of brush fence for the partridge and the rabbits, and they drove the deer with hounds to where eight guns stood waiting. Every other week from frost to March a wagon went to Philadelphia.</p>
+  <p>Susanna ran the bullets. She did it at the kitchen fire with a ladle and a brass mould, and trimmed them with a knife, and counted them into the pouches. In the morning she handed down the long gun from its pegs, and the horn and the pouch after it, because he was her husband and he put his hand out. She salted and hung what was not sold. She had never once eaten of it. The girls her sons married thought that was strange for about a month, and then it was only how Mother Cox was.</p>
+  <p>Abel Horrocks was eighty-four that fall and still weaving check on a hand loom in Kensington. He woke one morning in the dark with fifteen people in his mind whom he had never seen. They were as plain to him as fifteen ends drawn through the reed. He lay still and asked himself what would come of it, and it seemed to him that all fifteen were ready. He got up and put on his clogs and took the ferry.</p>
+  <p>Nobody has explained how a man of that age came forty miles of sand road by the next daybreak. He walked the whole length of the Cox fence in the first gray light. There was a gap in the brush every few yards and a horsehair noose hung in every gap, and that morning not one noose had anything in it. At the last gap he stepped over. He left the print of one clog in the wet sand squarely under the snare, the wooden sole with its iron rim like a small horseshoe. Then he went and sat down under a holly bush forty yards off, in the lee of the wind.</p>
+</section>
+
+<section>
+  <h2>IV. Eight Guns</h2>
+  <p class="dateline">The same morning</p>
+  <p>Micah came along the fence at sunup with the long gun on his arm and found four hundred snares hanging empty. In twenty-eight years that had never happened. At the last gap he found the print.</p>
+  <p><em>Somebody is walking my fence and letting out what I catch,</em> he said.</p>
+  <p>He looked up and saw an old man sitting under the holly with his hands on his knees. Micah thumbed back the hammer and brought the gun to his shoulder. He meant to shoot. The old man let him get that far and no farther. Micah&rsquo;s finger would not close and his arms would not come down. He stood with the long gun leveled and could neither fire it nor lower it. The barrel began to shake. The spit ran out of the corner of his mouth, and it felt to him as if every one of his ribs had been stove in.</p>
+  <p>At the house the sons said, <em>Father is a long time on the fence.</em> Their mother sent them to look. They came through the pines with their guns and saw him standing fixed, and saw what he was aiming at. They took the old man for some enemy of their father&rsquo;s. All seven threw up their guns, and all seven stayed just as they were. There were eight men in a row among the trees with eight guns leveled, and no sound but their breathing.</p>
+  <p>Then Susanna came with the seven young wives behind her. She saw the row of backs first, and she wondered who in that country they could all be aiming at. Then she looked past the muzzles. It had been twenty-eight years, and he had been old then.</p>
+  <p><em>Do not shoot!</em> she cried, and ran in front of the guns with her arms out. <em>That is my father! Do not kill my father!</em></p>
+  <p>Micah heard it. <em>Her father,</em> he thought. <em>Then that is my wife&rsquo;s father, that I never once saw, and I had a ball ready for him.</em> The sons thought, <em>Grandfather.</em> Something went out of all eight of them at the same moment, and the old man under the holly saw it go.</p>
+  <p><em>Put them down,</em> said Susanna. <em>Put them on the ground and ask his pardon.</em></p>
+  <p>He let them. The guns came down. One of the twins sat down in the sand like a child. They went over one by one with their hats off and said what she had told them to say, and then they sat in the pine needles in front of him, the eight men and the eight women, because nobody could think what else to do.</p>
+  <p>Abel Horrocks did not preach long. He had never been easy on his feet in front of people, and he stayed sitting. He said he had walked their fence. He said it was well made. He said a partridge puts her neck in the noose because she wants to go through the gap and get to the other side. <em>That is all she wants. It is all you wanted when you put the gun up. It is all anybody wants.</em> He said that was where a person began. Then he went on from there in order, one thing after the next, the way he would have threaded a loom. When he was done the fifteen who had never heard any of it before had got hold of something they did not afterward let go.</p>
+  <p>The sons drew the charges that same day. The long gun went back on its pegs and stayed there. By Christmas the noose had been cut out of every gap in six miles of fence, and the brush was left standing for the birds to go through.</p>
+</section>
+
+<section>
+  <h2>V. Ratsbane</h2>
+  <p class="dateline">The Bible Christian chapel, North Third Street, Kensington &middot; the Sunday after</p>
+  <p>He was back at his loom by the middle of the week. On Sunday, at the tea the congregation took together after meeting, Brother Royle asked where he had been.</p>
+  <p><em>In the Jerseys. With a hunter named Cox.</em></p>
+  <p><em>And have you got him to leave off killing?</em></p>
+  <p><em>Him and his seven sons and their seven wives. They are settled in it. I do not think they will be moved.</em></p>
+  <p><em>Has the man no wife of his own?</em></p>
+  <p><em>He has,</em> said Abel. <em>She signed our paper in the Front Street room when she was twelve years old. I ruled the line for her.</em></p>
+  <p>It went around the table then who she was, and that she was not drowned. Some of the older women wept. After that the other thing began to go around. A young man put it into words.</p>
+  <p><em>Then she kept her pledge and ran his bullets. For twenty-eight years. She handed him the gun every morning and salted down what he brought home, and sat on the wagon and sold it. Can one of ours do that?</em></p>
+  <p><em>Not one of ours ever took a life,</em> Abel said, <em>and she did not. Her husband put out his hand and she put into it what he asked for. I asked her. In all that time she never once wished a deer dead. The wish was his.</em></p>
+  <p>He held up his own hand, which was calloused across the fingers from the shuttle.</p>
+  <p><em>A man with a whole skin may carry ratsbane home from the druggist in his bare palm, and wash, and eat his bread. It is the cut that lets it in. Find me the cut in her.</em></p>
+  <p>Like many of the Lancashire weavers he had most of Milton by heart from saying it over at the loom, and he said three lines of it.</p>
+  <div class="verse">
+    <p>Evil into the mind of God or Man<br>May come and go, so unapprov&rsquo;d, and leave<br>No spot or blame behind</p>
+    <p>&mdash; Milton, <em>Paradise Lost</em> V.117&ndash;119</p>
+  </div>
+  <p>The young man said nothing more, and somebody poured the tea.</p>
+</section>
+
+<section>
+  <h2>VI. The Meeting House</h2>
+  <p class="dateline">Kensington, and the Jersey Market &middot; that winter</p>
+  <p>Another Sunday they asked him how it could be that fifteen rough people in the pines, who had never opened a book, were so ready. He told them what Susanna had shown him on the walk out to the stage road.</p>
+  <p>There was a board meeting house at a fork of two sand roads, he said. It had no preacher and had not had one in years. Its roof was sound, though, and its floor was swept, and the graves beside it were kept clear of brush. When it was built, in the grandfather&rsquo;s time, there had been a question of whose name should go first on the paper as the chief man of the work. The ironmaster who owned the furnace, a Philadelphia man, put down ten dollars. Old Hahn, who burned charcoal, put down twenty. They went up against each other by tens until the ironmaster said eighty. Hahn had ninety dollars in the world. He could see that if he said ninety the ironmaster would say a hundred and never feel it.</p>
+  <p><em>So he said, I will give the ninety, and I will give myself, and my wife, and my seven sons and their wives, to keep this house as long as we live. The neighbors said a man can always get money, but this one has given his own back. They put his name first. Afterward they told him he was free of it, and he would not be freed. The Coxes have swept that house ever since, every Saturday, and nobody has asked them to.</em></p>
+  <p>He said he thought that people who had kept one house so long would know another when they came to it.</p>
+  <div class="brk">&middot; &middot; &middot;</div>
+  <p>The Cox wagon came over on the ferry that December the same as always. The market men looked into it for deer and found barrels. The family had raked the wild cranberry bogs in the last week before the hard frost, the sixteen of them working in a line, and there were cedar shingles stacked behind the barrels and a few sacks of charcoal.</p>
+  <p>Susanna sat forward on the wagon tongue in the Jersey Market, across the street from a house with its top windows shuttered, and measured out berries by the quart. She did not use a scoop. By noon her hands were red to the wrist, and when she rinsed them at the pump they came up clean, with no mark on them anywhere.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">He who has no wound on his hand, may touch poison with his hand; poison does not affect one who has no wound; nor is there evil for one who does not commit evil.<cite>Dhammapada 124, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a rich man&rsquo;s daughter of R&#257;jagaha, already a stream-enterer as a girl, looks down from the top floor of her father&rsquo;s house and sees the deer hunter Kukku&#7789;amitta drive his cart of venison into the city. She slips out in soiled clothes with a waterpot, follows his cart and marries him, and her parents hold her funeral. She bears him seven sons. One dawn the Buddha walks to the hunter&rsquo;s empty nets, leaves a footprint and sits under a bush. The hunter draws his bow and is fixed there, unable to shoot or lower it; so are his seven sons; the wife arrives and cries, &ldquo;Do not kill my father,&rdquo; and their hearts soften. All fifteen give up killing. The monks then ask how a stream-enterer could have handed her husband his bow and arrows for so many years, and the Buddha answers with the verse of the unwounded hand. A story of the past explains their readiness: a country rich man, outbid by a city rich man for the honor of leading the building of a shrine, gave himself, his wife, his seven sons and their wives to serve it. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-08.htm">the full commentary story</a>.</p>
+    <h3>Philadelphia and the Pines, 1821&ndash;1849</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Bible_Christian_Church_(vegetarian)">Bible Christian Church</a> began in Salford, Lancashire, where members signed a pledge to eat no meat and drink no alcohol. In 1817 the Rev. <a href="https://en.wikipedia.org/wiki/William_Metcalfe">William Metcalfe</a> brought a party of them to Philadelphia. Their church in Kensington was the first vegetarian congregation in the United States, a generation before Sylvester Graham, and Metcalfe helped found the American Vegetarian Society in 1850. He appears here only by name; The congregation first met in the schoolroom Metcalfe rented behind No. 10 North Front Street and from 1823 had its own chapel on North Third Street above Girard Avenue, as the church&rsquo;s <a href="https://archive.org/details/historyofphilade00phil">centennial history</a> records. Abel Horrocks, Hannah Schofield and Brother Royle are invented, as are the Ashmeads and the Coxes.</p>
+    <p>Market sheds ran down the middle of High Street, now <a href="https://en.wikipedia.org/wiki/Market_Street_(Philadelphia)">Market Street</a>, until 1859. The shed between Front and Second, nearest the ferry, was the Jersey Market, where New Jersey people sold what they brought across the river; an ordinance of 1822 had it rebuilt. Game, venison included, was <a href="https://philadelphiaencyclopedia.org/essays/public-markets/">sold in the city&rsquo;s markets</a> through the century. The <a href="https://en.wikipedia.org/wiki/Pine_Barrens_(New_Jersey)">Pine Barrens</a> of southern New Jersey supported bog-iron furnaces, charcoal burning, cedar cutting and, from the 1830s, cranberry growing. Local tradition has long held that some Piney families descend from Hessian soldiers who deserted during the Revolution. A &ldquo;levy&rdquo; was the Philadelphia name for the Spanish real, worth twelve and a half cents.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the hunter Kukku&#7789;amitta from the Dhammapada commentary (verse 124). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-08.htm">The original</a>. Verse from John Milton, <em>Paradise Lost</em> (1667). Written by Claude Fable 5.2.
+  <div class="pager"><a href="grindstone-ford.html">&larr; Grindstone Ford</a><a href="index.html">All stories</a><a href="the-mantle.html">The Mantle &rarr;</a></div>
+</footer>
+</main>
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, ns = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(n, anywhere) {
+    n.x = Math.random() * W;
+    n.y = anywhere ? Math.random() * H : -30;
+    n.rest = H * (0.25 + Math.random() * 0.7);
+    n.vy = 0.12 + Math.random() * 0.16;
+    n.rot = Math.random() * 6.28; n.vr = (Math.random() - 0.5) * 0.006;
+    n.len = 26 + Math.random() * 22; n.spread = 0.10 + Math.random() * 0.10;
+    n.ph = Math.random() * 6.28; n.sink = 0; n.a = 0.16 + Math.random() * 0.14;
+    return n;
+  }
+  function make() {
+    ns = []; var k = Math.round(Math.max(8, Math.min(20, W / 70)));
+    for (var i = 0; i < k; i++) ns.push(spawn({}, true));
+  }
+  function draw(ms) {
+    var t = (ms || 0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineCap = 'round';
+    for (var i = 0; i < ns.length; i++) {
+      var n = ns[i], a = n.a;
+      if (!reduce) {
+        if (n.y < n.rest) { n.y += n.vy; n.x += Math.sin(t * 0.4 + n.ph) * 0.12; n.rot += n.vr; }
+        else { n.sink += 0.0016; n.x += 0.03; a = n.a * Math.max(0, 1 - n.sink); if (n.sink >= 1) spawn(n, false); }
+      }
+      if (a <= 0.005) continue;
+      ctx.save(); ctx.translate(n.x, n.y); ctx.rotate(n.rot);
+      ctx.strokeStyle = 'rgba(190,170,110,' + a + ')'; ctx.lineWidth = 1;
+      for (var j = -1; j <= 1; j++) {
+        ctx.beginPath(); ctx.moveTo(0, 0);
+        ctx.lineTo(Math.sin(j * n.spread) * n.len, Math.cos(j * n.spread) * n.len); ctx.stroke();
+      }
+      ctx.fillStyle = 'rgba(120,80,50,' + (a * 1.2) + ')';
+      ctx.beginPath(); ctx.arc(0, 0, 1.6, 0, 6.28); ctx.fill();
+      ctx.restore();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw(0);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>
