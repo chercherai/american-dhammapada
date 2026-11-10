@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Watch Chain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a clear April night over the Wissahickon hills, dark theme; along the foot of the page a wooded ridge with an old log house whose roof lantern burns faintly, and above it the stars turn very slowly around the pole, the watch nobody keeps any more. */
+  --ground: #0e110f;
+  --ground-2: #181d19;
+  --paper: #e9e3d2;
+  --paper-dim: #9f9a8e;
+  --gold: #d6a94e;
+  --lamp: #f0c35a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #1b211c 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(231,226,215,.2); }
+.series a:hover { color: var(--gold); }
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--gold); text-wrap: balance; text-shadow: 0 0 28px rgba(214,169,78,.18); }
+.epigraph { border-left: 1px solid rgba(214,169,78,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--gold); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--gold); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,29,25,.8); border: 1px solid rgba(231,226,215,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--lamp); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(231,226,215,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--gold); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--gold); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--gold); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--gold); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--gold); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,29,25,.8); border-left: 2px solid var(--gold); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 24.3 &middot; The Runaway Bhikkhu</span></nav>
+<header>
+  <h1>The Watch Chain</h1>
+  <div class="epigraph">Stand fast therefore in the liberty wherewith Christ hath made us free, and be not entangled again with the yoke of bondage.<br>&mdash; Galatians 5:1</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Wie ich es gehört habe,</span> on the Wissahickon.</p>
+
+<section>
+  <h2>I. The Watch</h2>
+  <p class="dateline">The Ridge above the Wissahickon &middot; 1717&ndash;1723</p>
+  <p>Christoph Bender came up the river in the fall of 1717 at thirteen years old, alone, off a ship from Rotterdam on which his father and mother and a sister had died between the Downs and the Delaware Capes. The ship's master sold the other orphans' time to farmers on the wharf. Nobody would buy Christoph's, because he had the flux, and an old man in a brown coat who had come down to the river to sell bark and roots paid his passage money out of a cloth bag and walked him to Germantown, six miles, holding him up by the back of his collar.</p>
+  <p>The old man was Brother Wendel. He was one of the last of the learned men who had come over with the Magister in 1694 to wait in the forest for the end of the world. There had been forty of them then, and a log house on the ridge above the creek, forty feet square and set true to the compass, with a little room on the roof where one of them sat every night of the year with a brass telescope, watching the sky so that if the Bridegroom came at midnight their lamps would be found trimmed. The Magister had been dead nine years. Most of the forty had gone back into the world, to marry and to keep school and to plead in the courts and buy land, and the watch on the roof had not been kept for a long time. The log house leaned. A few old men still lived in caves and huts along the creek below it, each by himself, and Brother Wendel was one. He was a physician. He gathered bark and roots up and down the Wissahickon and carried them to the market in Philadelphia, and with the money he bought books and orphans.</p>
+  <p>He kept the boy in his hut through the winter and cured him with a decoction of blackberry root, and in the spring he began to teach him to pray. It was not prayer as Christoph had learned it in the Palatinate. There were no words in it to speak. Brother Wendel sat on the floor of the hut with his back against the log wall and his hands open on his knees, and he told the boy to sit the same way, and to bring his heart to God the way you bring a coal to the hearth, and then to stop. The old man had a little book of the Magister's in his own hand, the method of inward prayer, and he would read from it in the evening, one sentence and then nothing for an hour.</p>
+  <div class="verse">
+    <p>Thus it is necessary in the Beginning to kindle the Fire by Working; but afterwards, when once it is kindled, to let it burn. When this is done, then the Soul has no more to do the whole Time of prayer but to remain in peace and Silence; endeavouring to continue in this loving Remembrance of God, who is so truly present in her, as He is in Heaven.</p>
+    <p>&mdash; Johannes Kelpius, <em>A Method of Prayer</em> (English translation, 1761)</p>
+  </div>
+  <p>Christoph had a gift for it that the old man had not seen in thirty years. By sixteen he could sit from Compline until the stars over the creek had turned a quarter of the sky, so still that a wood mouse came in and went over his foot and out again. Brother Wendel told him that he had kindled the fire, and that now it was burning by itself, and that he should be careful of nothing in the world except letting it go out. The boy believed him. There were four rooms in that silence, one behind another, each quieter than the one before, and by the time he was eighteen he could go into the fourth and stay.</p>
+  <p>Across the ridge, in a hut of chestnut bark near the spring, lived a widow named Anna Margaretha Ott, who had left the Palatinate in the great emigration of 1709 and come over by way of London and the Hudson, and walked down into Pennsylvania alone after her husband died at the tar camps. She was older than Brother Wendel and nobody could say how much. She grew sage and comfrey and hyssop by her door and kept a goat. The brothers called her the Woman in the Wilderness, which was the name of the Magister's whole company, out of the twelfth chapter of the Revelation, and they had meant it as a joke the first year and had stopped meaning it as one. Brother Wendel had learned his prayer from the Magister, but he went across the ridge to her when he could not settle, and sat in her doorway while she shelled beans, and came back settled. She did not say much. Christoph went with him sometimes. She looked at the boy once, a long look, the year he was seventeen, and said only, <em>Dein Feuer brennt.</em> Your fire is burning.</p>
+</section>
+
+<section>
+  <h2>II. Front Street</h2>
+  <p class="dateline">Philadelphia &middot; 1723&ndash;1725</p>
+  <p>His mother's brother was a goldsmith in Philadelphia. Christoph had not known it until a German from Front Street bought dried snakeroot from Brother Wendel at the market and asked whose boy that was, and heard the name Bender, and said Jacob Kayser had a sister who married a Bender in Kreuznach. In the summer of 1723 Brother Wendel sent Christoph into the town with a parcel of medicines for the goldsmith's wife, who had an ague, and told him to come back the same night.</p>
+  <p>Jacob Kayser's shop was on Front Street above the High Street, in a brick house that faced the river, with a glass window of small square panes and a counter of walnut. Christoph stood at the counter with the parcel and waited, and while he waited he looked into the case.</p>
+  <p>He had never seen gold close. There were shoe buckles in the case and knee buckles, and a pair of sleeve buttons with a lion stamped in each, and a row of mourning rings with a little skull enameled black on the bezel and a name and a date inside, ordered by the dozen for a funeral, and a gold chain for a watch laid out in a long curve on green baize. The afternoon sun came in off the river through the small panes and lay across the case, and the gold took it up and held it, and gave it back warmer than it had come in. Christoph stood and looked at the chain. He found that he had stopped hearing anything at all.</p>
+  <p>He did not go back that night. He told himself in the morning that he would go back after one more day, to help his uncle, and his uncle, who had no sons and liked the look of him, gave him a bed in the garret and a place at the end of the bench in the back room. Brother Wendel came into the town on market day a week later and stood in the street in front of the window in his brown coat and looked in, and Christoph saw him from the bench and did not go out, and the old man went away.</p>
+  <p>He was no good at the bench. Jacob Kayser set him to raising a cup, and he would not keep at it; set him to polishing, and he would polish a single buckle for an hour and sit and look at it. He liked the gold and he did not like work, and he had never in his life learned to work, only to sit. He slept late in the garret. He took a shilling from the drawer, and then four. In the spring of 1724 his uncle found two of the mourning rings missing, and put him out of the house with his bundle in the rain, and said in front of the apprentices that his sister's son was a drone and a thief and could starve.</p>
+  <p>He did not starve. There were men in the taverns along Dock Creek who had need of a quiet boy with clever hands who could stand still in a doorway without being noticed, and he could stand stiller than anyone they had ever seen. That summer he was taken with a silver spoon in his shirt and whipped through the town at the cart's tail, ten lashes at the Court House and ten at every corner of the High Street down to the river, and he did not cry out once, and the men from Dock Creek were pleased with him. In February of 1725 he and two others went in through the cellar of a shop in Second Street at night and came out with plate and a bag of coin. The other two were never caught. Christoph was caught the next morning with the coin in his coat and a gold watch chain around his neck under his shirt, laid against his skin, where he could feel it.</p>
+  <p>The law of the province had been mild once. In Penn's time a burglar paid back what he took, and more. But Penn had been dead seven years, and the Assembly had given Pennsylvania the law of England, and in England a man was hanged for breaking a house in the night. The court sat in April. The jury was out a quarter of an hour.</p>
+</section>
+
+<section>
+  <h2>III. The Cart</h2>
+  <p class="dateline">The High Street &middot; April 1725</p>
+  <p>They brought him out of the jail on a market Wednesday, so that the most people would see. His arms were bound behind him at the elbows with a cord. He rode in a cart sitting on his own coffin, which was plain pine, with the rope already around his neck and its end coiled in his lap, and the cart went up the High Street at a walk between the market stalls, with the sheriff riding before it and the sheriff's men walking on either side with halberds and muskets. The town came out to see. People stood on the steps of the Court House and on the market benches and on the roofs of the stalls, and at every corner where the cart stopped they called things out to him, in English and German and Dutch, and boys threw what boys throw. A woman held up her child to see a thief who would be dead by noon.</p>
+  <p>Christoph sat on the coffin and shook. He could not stop it. It went through him in waves from the knees up, and his teeth went with it, and the crowd saw it and laughed, and he thought he would be sick on his own coffin before they ever got him to the gallows.</p>
+  <p>Brother Wendel was at the market with his roots.</p>
+  <p>He was seventy-four years old that spring, and his eyes were not good, but he knew the back of that head going by above the crowd. He left his basket on the bench. He went out into the High Street and through the people to the side of the cart, and walked beside it, an old man in a brown coat with his hand on the rail, and when one of the sheriff's men put a halberd across his chest he looked at the man and the man took it away again.</p>
+  <p><em>Loosen his arms,</em> Brother Wendel said to the sheriff. <em>He will not run. He is done running.</em></p>
+  <p>The sheriff looked down from his horse at the old hermit, whom half the town had bought physic from, and after a moment he nodded, and a constable climbed up and slacked the cord at the boy's elbows, so that his hands came round in front of him and lay in his lap on the coiled rope.</p>
+  <p>Then Brother Wendel spoke to him in German, under the noise of the crowd, the way he used to speak in the hut, one sentence.</p>
+  <p><em>Christoph. Kindle it, and let it burn.</em></p>
+  <p>The boy turned his hands over on his knees, palms up, the way he had sat on the floor of the hut. He did not decide to. His hands remembered it before he did. He took one breath and then he took the next, and he brought his heart to it the way you bring a coal to a hearth, and then he stopped. The shaking went out of his knees. It went out of his teeth and his hands. He went into the first room of the silence, and found the door to the second standing open as if somebody had only stepped out, and went through, and through the third, and into the fourth, and stayed.</p>
+  <p>The cart came out past the last houses to the gallows. The hangman stood up in the cart and threw the rope over the beam and made it fast, and drew it up until it lifted the boy's chin, and got down. The sheriff's men made a ring around the cart with their halberds and their muskets, thirty of them, and around them the crowd stood thick to the edge of the common, two or three thousand people, the whole town. The sheriff read out the sentence in English. A minister offered to pray, and Christoph thanked him and said he was praying, and the minister looked at his face and got down.</p>
+  <p>He sat on his coffin with the rope drawn up under his jaw and his hands open on his knees, and he did not move. He did not shake and he did not weep and he did not look for anyone in the crowd. He looked straight ahead of him at nothing, and his face was quiet the way a pond is quiet in the early morning before anything has touched it, and the whole common, two thousand people who had come out to see a thief die, went still to look at him.</p>
+  <p>It was the sheriff's men who broke first. A Welshman at the near wheel said it out loud. <em>Look at him. Will you look at him.</em> And then the others, and then the crowd, all of it, shouting, the way a crowd shouts at a fire, not angry, only unable to keep still in front of a thing like that. <em>Look at the man. There are thirty muskets on him and he does not so much as blink.</em> Somebody shouted for the Governor. More took it up. The sheriff sat his horse a long minute looking at the boy, and then he turned it and rode back into the town through the crowd at a canter, and the hangman, who did not know what to do, sat down on the tail of the cart and waited, and the crowd waited, and the boy sat.</p>
+  <p>The sheriff was gone an hour. When he came back he had a paper in his hand with a seal on it, and he read it out from the saddle, and what it said under all the words was that the Governor had heard the case and pardoned Christoph Bender of his life.</p>
+  <p><em>Let him down,</em> the sheriff said.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The hangman climbed up to cast off the rope. Before he could reach it, before the constables had got through the crowd to the cart, the people near the wheels saw the boy lift his eyes from where they had been all that hour and look at something a little above the crowd, over toward the northwest, toward the Wissahickon hills.</p>
+  <p>Afterward the people on the common said many things about it. Most of them said they saw nothing. Some of them said they saw a light standing in the air above the heads of the people, a little above the height of the gallows beam, the light of the sun at noon gathered into the shape of a woman, an old woman in a countrywoman's cap with her sleeves rolled up, and the light came off her as it comes off water. A German woman from Germantown said it was the widow Ott from the Ridge, whom she knew by her cap, and that it could not have been, because the widow Ott had been seen at her spring that morning drawing water and had not been into the town in sixteen years. The boy said afterward only that she had spoken to him, in German, as it stands in Luther's Bible, and the English Bible has it so.</p>
+  <div class="verse">
+    <p>Stand fast therefore in the liberty wherewith Christ hath made us free, and be not entangled again with the yoke of bondage.</p>
+    <p>&mdash; Galatians 5:1</p>
+  </div>
+  <p>Christoph Bender sat on his coffin under the gallows with the rope still drawn up under his chin and looked at the light, and he saw the case in the goldsmith's window, the buckles and the black-enameled rings and the chain laid out in a curve on green baize, and the sun lying across it off the river. He saw the gold take up the light and hold it and give it back. He saw that it had never held anything of its own. It had all come in through the window. He saw the chain around his own neck, under his shirt, and the rope around it, outside his shirt, and saw that they were one rope, and had been since the afternoon he stood at the counter with Brother Wendel's parcel in his hands, and that he had walked out of the forest into it with his eyes open. And while he saw it, something in him that had been tied a long time came loose of itself, the way a knot does that someone has finally pulled from the right end.</p>
+  <p>Then he stood up on the coffin, and the rope slid off his neck and over his head as if it had never been made fast, and he went up.</p>
+  <p>He went up off the cart the way a heron goes up off a creek, slow at first and then not slow, over the heads of the sheriff's men and the muskets and the hangman with his mouth open, and over the crowd, and he went away northwest over the roofs at the edge of the town and over the fields toward the Wissahickon hills, until the people on the common could not see him against the sky. The hangman stood in the cart holding the empty rope. Under it, on the lid of the coffin, lay a gold watch chain, in a loose curve, where it had fallen.</p>
+</section>
+
+<section>
+  <h2>IV. The Bean Basket</h2>
+  <p class="dateline">The Ridge &middot; the next morning</p>
+  <p>The sheriff rode out to the Ridge the next morning with the Governor's paper in his coat. He could have sent a constable. He said afterward that he wanted to see. Brother Wendel walked beside his horse from the Germantown road. They found the boy where the woman in the market had said they would, across the ridge from the old leaning log house, at the chestnut-bark hut by the spring.</p>
+  <p>He was sitting on the ground in the doorway with his back against the post and his hands open on his knees. Anna Margaretha Ott was sitting on the bench beside him with a basket of last year's beans in her lap, shelling them into her apron, and the goat was eating the comfrey. Two or three of the old recluses had come over from their huts along the creek and were standing a little way off under the trees in their coats, not saying anything, as men stand at the back of a meeting.</p>
+  <p>The sheriff got down. He took out the paper and held it out, and Christoph looked up at him, and took it, and thanked him, and laid it on the ground beside him without unfolding it. Then he looked back at whatever he had been looking at before they came, which seemed to be nothing, the spring and the trees and the morning on the hill.</p>
+  <p>They stood there a long time, the sheriff and the old men, and nobody spoke. The sheriff said later that he had meant to say something to the boy about the mercy of the Governor and the amendment of his life, and found when he was standing there that he did not want to say anything to anybody, and did not for the rest of the morning, and rode back to the town without having said it. Brother Wendel sat down on the ground at the end of the bench.</p>
+  <p>Somewhere in that hour, the old men said afterward, the boy went into the fourth room and out the other side of it, where there was no room, and did not come back, though he was sitting there in front of them with his eyes open the whole time, and when the widow had finished her beans she got up and gave him the basket of empty pods to carry to the goat, and he got up and carried it.</p>
+</section>
+
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He who having got rid of the forest (of lust) (i.e. after having reached Nirvana) gives himself over to forest-life (i.e. to lust), and who, when removed from the forest (i.e. from lust), runs to the forest (i.e. to lust), look at that man! though free, he runs into bondage.<cite>Dhammapada 344, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a monk who lives with the great ascetic Mahā Kassapa and has mastered the four meditative absorptions visits his uncle, a goldsmith, is taken with the gold ornaments in the house, and leaves the order. Too lazy to work, he is put out of the house, falls in with thieves and is caught. As he is led bound to the place of execution, beaten at every crossroads, Kassapa sees him, has his bonds loosened and tells him to take up his old meditation subject again. He regains the fourth absorption and sits among the raised weapons without fear, until the executioners, astonished, report him to the king, who sets him free. The Buddha then sends a radiant image of himself and speaks the verse, which plays on <em>vana</em>, both "forest" and "desire"; the man reaches the first stage of awakening where he sits, rises through the air to the Buddha, and becomes an arahant before the assembly. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mahakasyapa">Mahā Kassapa</a>.</p>
+    <h3>The Wissahickon and Philadelphia, 1725</h3>
+    <p>In 1694 the mystic <a href="https://en.wikipedia.org/wiki/Johannes_Kelpius">Johannes Kelpius</a> brought a company of learned German Pietists to the Wissahickon Creek near Germantown to await the end of the world, a community remembered as the Society of the Woman in the Wilderness, after the twelfth chapter of Revelation. According to Julius Sachse's <a href="https://archive.org/details/germanpietistsof00sach"><em>German Pietists of Provincial Pennsylvania</em></a> (1895), their log tabernacle was forty feet square, set to the points of the compass, with a roof lantern where members watched the sky by night so that their lamps would be trimmed if the Bridegroom came. After Kelpius died in 1708 most of the brothers returned to the world, the watch was abandoned, and a few lived on as recluses along the creek. His <a href="https://archive.org/details/kelpius-1763-method"><em>Method of Prayer</em></a> on inward, silent prayer was translated into English in 1761 and reprinted at Germantown in 1763. Brother Wendel, the widow Ott, Christoph Bender and the Kayser shop are invented. Germans had been coming since the <a href="https://en.wikipedia.org/wiki/Palatines">Palatine emigration of 1709</a>, and in greater numbers from 1717.</p>
+    <p>Under <a href="https://en.wikipedia.org/wiki/William_Penn">William Penn</a>, Pennsylvania had <a href="https://www.earlyamericancrime.com/crimes/burglary-1">the mildest criminal code in the colonies</a>: property crimes were punished with restitution, and only murder carried death. That law <a href="https://www.celebrateboston.com/history/pa/william-keith.htm">expired with Penn in 1718</a>, and under Governor William Keith the Assembly made a large number of offenses capital, as in England. Pardons still came: in 1725 a woman convicted of burglary in Pennsylvania was <a href="https://www.earlyamericancrime.com/crimes/burglary-2">pardoned on condition that she leave the colony</a>.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the runaway bhikkhu from the Dhammapada commentary (verse 344). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-03.htm">The original</a>. Scripture from the King James Version and the English translation of Johannes Kelpius&rsquo;s <em>A Method of Prayer</em> (1761). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-gilt.html">&larr; The Gilt</a><a href="index.html">All stories</a><a href="correhuela.html">Correhuela &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, stars = [], ang = 0, pole = { x: 0, y: 0 };
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function ridge(x) {
+    return H * 0.86 - 22 * Math.sin(x / 260 + 0.8) - 10 * Math.sin(x / 90 + 2.1) - 4 * Math.sin(x / 31);
+  }
+  function make() {
+    pole.x = W * 0.78; pole.y = H * 0.16;
+    stars = [];
+    var R = Math.hypot(W, H);
+    var n = Math.round(Math.min(260, W * H / 6000));
+    for (var i = 0; i < n; i++) {
+      stars.push({ r: Math.sqrt(Math.random()) * R, a: Math.random() * Math.PI * 2, s: 0.4 + Math.random() * 1.0, b: 0.15 + Math.random() * 0.45 });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < stars.length; i++) {
+      var st = stars[i], a = st.a + ang;
+      var x = pole.x + Math.cos(a) * st.r, y = pole.y + Math.sin(a) * st.r;
+      if (x < -2 || x > W + 2 || y < -2 || y > ridge(x)) continue;
+      ctx.fillStyle = 'rgba(233,227,210,' + st.b * 0.6 + ')';
+      ctx.beginPath(); ctx.arc(x, y, st.s, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.fillStyle = 'rgba(233,227,210,0.55)';
+    ctx.beginPath(); ctx.arc(pole.x, pole.y, 1.3, 0, Math.PI * 2); ctx.fill();
+    // ridge
+    ctx.beginPath(); ctx.moveTo(0, H);
+    for (var x2 = 0; x2 <= W; x2 += 4) ctx.lineTo(x2, ridge(x2));
+    ctx.lineTo(W, H); ctx.closePath(); ctx.fillStyle = 'rgba(6,8,6,0.88)'; ctx.fill();
+    // the leaning log house with its roof lantern
+    var hx = W * 0.22, hy = ridge(hx);
+    ctx.save(); ctx.translate(hx, hy + 2); ctx.rotate(-0.035);
+    ctx.fillStyle = 'rgba(4,5,4,0.95)';
+    ctx.fillRect(-22, -20, 44, 20);
+    ctx.beginPath(); ctx.moveTo(-25, -20); ctx.lineTo(0, -33); ctx.lineTo(25, -20); ctx.closePath(); ctx.fill();
+    ctx.fillRect(-4, -41, 8, 9);
+    var g = ctx.createRadialGradient(0, -37, 0, 0, -37, 16);
+    g.addColorStop(0, 'rgba(240,195,90,0.32)'); g.addColorStop(1, 'rgba(240,195,90,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, -37, 16, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(240,195,90,0.55)'; ctx.fillRect(-2, -39, 4, 4);
+    ctx.restore();
+    if (!reduce) { ang += 0.00006; requestAnimationFrame(draw); }
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

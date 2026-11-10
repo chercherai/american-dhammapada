@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correhuela</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on alkali-pale ground; thin bindweed vines climb slowly from the foot of the page. */
+  --ground: #efe7d4;
+  --ground-2: #e4d9bf;
+  --paper: #2a241b;
+  --paper-dim: #75684f;
+  --vine: #3f5f2c;
+  --bloom: #b8607a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f3ecdb 0%, var(--ground) 55%, #e6dcc3 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(42,36,27,.2); }
+.series a:hover { color: var(--vine); }
+a:focus-visible { outline: 2px solid var(--vine); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--vine); text-wrap: balance; text-shadow: 0 0 28px rgba(63,95,44,.22); }
+.epigraph { border-left: 1px solid rgba(63,95,44,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--vine); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--vine); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(228,217,191,.7); border: 1px solid rgba(42,36,27,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--bloom); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,36,27,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--vine); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--vine); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,36,27,.1); border-bottom: 1px solid rgba(42,36,27,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--vine); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--vine); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--vine); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--vine); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(228,217,191,.7); border-left: 2px solid var(--vine); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 24.4 &middot; Bandhanāgāra</span></nav>
+<header>
+  <h1>Correhuela</h1>
+  <div class="epigraph">Strength is thine; thy fetters are loosed; thou hast every resource.<br>&mdash; Slok LIV of the ninth Guru&rsquo;s sloks</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; me lo contaron,</span> in the Imperial Valley.</p>
+<section>
+  <h2>I. Thirty Hats</h2>
+  <p class="dateline">El Centro, California &middot; a Saturday in November 1948</p>
+  <p>Thirty of them came in for the Guru&rsquo;s birthday. They came from Niland and Calipatria and the ditch camps east of Holtville, and four came the whole way from Casa Grande in a Ford truck with a cracked block, and they parked along the side street by the hall the Japanese families had built for their Buddha. The Japanese families had been sent to the camps in the war and had been made to sell it. The Punjabi farmers of the valley had bought it, and for one year now it had been their own temple, the only one south of Stockton.</p>
+  <p>They were old men, most of them. They had come to California before the first war, when a man from the Doaba could still get in, to pick and then to lease and then to grow cotton on land that the law said they could not own. So the land had gone into the names of bankers and lawyers, and later into the names of their own children as fast as the children were born. The law had also left them no way to bring a wife. The ones who married had married Mexican women from the cotton camps, and their sons were called Singh and served Mass.</p>
+  <p>They had come for the birthday, and they had come to see Do&ntilde;a Cuca.</p>
+  <p>Refugio Singh was fifty. She had crossed at Ju&aacute;rez in 1916 with her mother and three sisters, running from the fighting, and at twenty she had married Mota Singh, who had eighty acres of cotton in a lawyer&rsquo;s name. All three sisters had married his partners. Half the men in the hall that night had been married in her kitchen. When two partners fell out over a lease they came to her table before they went to a judge, because she knew what each of them owed and to whom, and she was not afraid of any of them. Mota had been dead four years. She had made the county let her burn him, the way he wanted, and she still farmed the eighty acres, in lettuce now, and thinned it herself with the short hoe.</p>
+  <p>She fed them. Chicken with the yellow spice, and roti that she had always called tortillas and made no differently. She said little. When Inder Singh, whom the whole valley called Andr&eacute;s, sat turning his plate and not eating, she looked at him and let him be.</p>
+  <p>Andr&eacute;s was fifty-eight. He had left a wife four months gone with child in a village under the hills in 1913, for three years, to earn the price of some land. He had never seen the boy. The boy was thirty-five. Last year the new law had made Andr&eacute;s a citizen, and in the spring he had put forty acres in his own name, the first dirt he had owned in his life. Now he could send for them or go home to them, whichever he chose. He had been choosing since April. There had been no letter since the summer the country was cut in two.</p>
+</section>
+
+<section>
+  <h2>II. The Chain</h2>
+  <p class="dateline">Main Street &middot; Sunday morning</p>
+  <p>In the morning the thirty walked uptown for tobacco and razor blades, in their good hats, and on Main Street outside the county jail they had to stop, because the sidewalk was shut off.</p>
+  <p>A gray bus stood at the curb with the state&rsquo;s name on it. Two deputies were bringing men out to it, eleven men on one long chain. Each had irons on his wrists, and a short chain between his ankles so that he walked like a man in a deep furrow, and the long chain ran through a ring at every belt. They were Mexicans mostly, and two Okie boys, and a Filipino. The ninth man was Kehar Singh of Calipatria.</p>
+  <p>All of them knew him. He had farmed lettuce on a lease in a white man&rsquo;s name with a partner from his own village, and in March, when the check came, the two of them had quarreled at the headgate over whose the crop was, with nothing on paper to say, and Kehar had killed him with an irrigating shovel. He had got twenty years. He was a small, neat man. Someone had cut his hair for him in the jail.</p>
+  <p>He saw the hats. He could not stop walking, because of the chain, but he turned his face to them as he went, and he said across the sidewalk in the language of home what the ninth Guru had sent out of the prison in Delhi to his son.</p>
+  <div class="verse">
+    <p>My strength is exhausted, I am in chains, and have no resource.</p>
+    <p>Saith Nanak, God is now my refuge; He will succour me as He did the elephant.</p>
+    <p>&mdash; Slok LIII</p>
+  </div>
+  <p>Every one of the thirty knew what came after that. It had been read at the end of every prayer they had ever held, in packing sheds and front rooms, for thirty-five years. Not one of them said it. A deputy put his hand on Kehar&rsquo;s shoulder and turned him to the step. He went up it one foot and then the same foot again, and the door folded shut, and the bus went north up the highway with its windows the color of the sky.</p>
+  <p>Nobody bought tobacco.</p>
+</section>
+
+<section>
+  <h2>III. Two Fingers</h2>
+  <p class="dateline">The temple kitchen &middot; that evening</p>
+  <p>They told her in the kitchen, after the meal, standing along the wall with their hats in their hands. Andr&eacute;s was the one who asked it.</p>
+  <p><em>Do&ntilde;a Cuca, eleven men could not have broken that chain. A mule could not. Is there anything in the world that holds a man harder than that?</em></p>
+  <p>She was drying the big kettle. She set it down and went out the back door in the dark and came in again with something trailing from her fist. It was a piece of correhuela, the wild morning glory, a green string as long as her arm with a few arrow leaves on it. It grew along the fence there as it grew along every fence in the valley.</p>
+  <p><em>Give me your hand.</em></p>
+  <p>She wound it four times around his wrist and tucked the end under.</p>
+  <p><em>Break it.</em></p>
+  <p>He turned his wrist and it parted. Some of the men laughed.</p>
+  <p><em>Two fingers,</em> she said. <em>A child can do it. Now come out to my lettuce and get it out of the ground. Mota chopped it for twenty-six years and I have chopped it four. I have dug down for the root as deep as my shoulder and it was still going. It doesn&rsquo;t fight you. It gives every time you pull, and that is how it holds. It climbs what you planted and lies down on top of it and takes it to the dirt, and you can stand there and watch and never see it move.</em></p>
+  <p>She picked up the kettle again.</p>
+  <p><em>That iron they put on Kehar this morning, they have a key for. They will take it off him tonight when he gets where he is going. Ask what he was wearing in March, at the headgate. Ask what any of you has on.</em> She did not look at Andr&eacute;s. <em>Forty acres. A son you can&rsquo;t picture. Did a deputy put that on you? Bishan, say the one Mota used to sing on the ditch. The one that asks who has a mother.</em></p>
+  <p>Old Bishan Singh, who read for them, said it standing where he was.</p>
+  <div class="verse">
+    <p>Who hath a mother, father, son, or wife? who hath a brother?</p>
+    <p>Of all the wealth, land, and property which thou deemest thine own,</p>
+    <p>Nothing shall depart with thee when thou diest; why art thou wrapped up in them?</p>
+    <p>&mdash; Hymn of Guru Teg Bahadur, Sarang I</p>
+  </div>
+  <p><em>Wrapped up,</em> she said. <em>He knew the plant.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Then she told them Mota&rsquo;s story. He had told it irrigating, at night, when a man sits four hours by the water with nothing to do but stay awake. It was about a man from under the hills, in his grandfather&rsquo;s grandfather&rsquo;s time, and Mota never gave him a name.</p>
+  <p>The man was poor. His father was dead, and he worked other men&rsquo;s fields for wages and kept his mother. All he wanted was to go up into the mountains where the holy men live under the snow and own nothing. His mother would not hear of it. She brought him a wife he had not asked for, a good girl from decent people, and then his mother died.</p>
+  <p>So he said to his wife, <em>You are strong. You can work for wages as I do. I am going up.</em> She said, <em>I am carrying. Wait until it is born and you have seen its face, and then go.</em> He said he would. It was a boy. He said, <em>You have come through it safe. Now I am going.</em> She said, <em>Wait only until he is off the breast.</em> While he was waiting for that, she was carrying again.</p>
+  <p>Then the man thought, <em>If I wait until she says go, I will die in this house.</em> He did not say one word to her. He got up in the night and went. At the edge of the town the watch took hold of him, a man on the road at that hour with no bundle. He said, <em>Masters, I have a mother to keep. Let me go.</em> They let him go.</p>
+  <p>He stopped a while in a certain place, and then he went up, and he lived the way he had wanted to. They say that one day, sitting up there with nobody by, he said it out loud. <em>That was a hard one to break. Wife and son. I broke it.</em></p>
+  <p><em>The first year we were married Mota told me that,</em> Do&ntilde;a Cuca said, <em>and I said, so the wife is the chain. He said no. She only asked him to wait. He was the one who waited.</em></p>
+  <p>She hung the kettle on its nail.</p>
+  <p><em>Mota never went up any mountain. He had me and seven children and the cotton. He said that man did it with his feet, and there is another way, sitting where you are, and it&rsquo;s harder. He said the Guru was sitting in an iron cage when he did it. And then the boy wrote back to him. Somebody should have called that across the street this morning. Kehar was asking for it. It was never about the iron.</em></p>
+  <p>Nobody moved. Then Bishan Singh said it, not loudly, to the kitchen wall.</p>
+  <div class="verse">
+    <p>Strength is thine; thy fetters are loosed; thou hast every resource;</p>
+    <p>Nanak, everything is in thy power; it is only thou who canst assist thyself.</p>
+    <p>&mdash; Slok LIV</p>
+  </div>
+</section>
+
+<section>
+  <h2>IV. The Row</h2>
+  <p class="dateline">Do&ntilde;a Cuca&rsquo;s eighty acres &middot; Monday, first light</p>
+  <p>Andr&eacute;s did not sleep in the hall with the others. Some time before morning he drove out the Holtville road, and when the sky went gray he was standing at the end of her lettuce, and she was already in it, bent double over the short hoe, a quarter of the way down the first row.</p>
+  <p>He did not have a hoe. He got down on his knees in the next row over.</p>
+  <p>The lettuce was up four inches. Every few feet a string of correhuela had come out of the ground beside a plant and gone up it, around and around, always the same way, and laid its own leaves over the top. He took hold of the first one to pull.</p>
+  <p><em>Don&rsquo;t yank,</em> she said, without straightening. <em>You&rsquo;ll bring the lettuce.</em></p>
+  <p>So he found the end of it with his thick fingers and turned it back off the plant, one turn and then the next, the way it had come. It took a long time. When it was free the lettuce stood up by itself, a little crooked. He held the vine. It had one flower on it, white with a pink stripe, just coming open because the sun was on it now.</p>
+  <p>He looked down the row. It ran a quarter of a mile to the ditch.</p>
+  <p><em>Now the next one,</em> said Do&ntilde;a Cuca.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verses</h3>
+    <blockquote class="pd">Wise people do not call that a strong fetter which is made of iron, wood, or hemp; far stronger is the care for precious stones and rings, for sons and a wife.<cite>Dhammapada 345, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">That fetter wise people call strong which drags down, yields, but is difficult to undo; after having cut this at last, people leave the world, free from cares, and leaving desires and pleasures behind.<cite>Dhammapada 346, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, thirty monks from the country come to see the Buddha, and the next morning, walking for alms, pass the king&rsquo;s prison and see robbers and murderers bound in fetters, ropes and chains. That evening they ask whether any bond is stronger. These are nothing, the Buddha says, beside the longing for wealth, crops, sons and wives; and he tells of a poor man of long ago whose wife asked him to wait for one child and then another, until he rose in the night and left, talked his way past the city guards, and went up into the Himalaya. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-04.htm">the full commentary story</a>.</p>
+    <h3>The Imperial Valley, 1948</h3>
+    <p>Punjabi men, most of them Sikhs from the Doaba, were farming cotton in the Imperial Valley by the 1910s. California&rsquo;s <a href="https://en.wikipedia.org/wiki/California_Alien_Land_Law_of_1913">Alien Land Law</a> barred them from owning farmland, so they held it through bankers, lawyers and, later, their American-born children; partners with nothing on paper sometimes ended in court or worse. Immigration law kept their wives in India, and several hundred married women of Mexican descent, founding the <a href="https://en.wikipedia.org/wiki/Punjabi_Mexican_Americans">Punjabi-Mexican families</a> of California. The <a href="https://en.wikipedia.org/wiki/Luce%E2%80%93Celler_Act">Luce&ndash;Celler Act</a> of 1946 at last let them become citizens, own land in their own names and send for relatives, a year before the <a href="https://en.wikipedia.org/wiki/Partition_of_India">Partition</a> divided Punjab. The El Centro gurdwara opened in 1947 in a building that the town&rsquo;s Japanese American Buddhists <a href="https://asianamericanedu.org/sikhs-in-borderlands.html">had been forced to sell</a> after their wartime removal.</p>
+    <p>The two sloks are numbers 53 and 54 of the fifty-seven attributed to <a href="https://en.wikipedia.org/wiki/Guru_Tegh_Bahadur">Guru Tegh Bahadur</a>, which close every complete reading of the Guru Granth Sahib. Tradition holds that he sent the first from his imprisonment in Delhi in 1675, and Macauliffe, whose 1909 translation is used here, follows the account that his young son Gobind Rai wrote the second in reply. Correhuela is <a href="https://en.wikipedia.org/wiki/Convolvulus_arvensis">field bindweed</a>, whose roots run several yards down and which regrows from any piece left in the ground. Kehar Singh, his partner and everyone else in the story are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Prison House from the Dhammapada commentary (verses 345&ndash;346). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-04.htm">The original</a>. Scripture from M. A. Macauliffe, <em>The Sikh Religion</em>, vol. IV (1909). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-watch-chain.html">&larr; The Watch Chain</a><a href="index.html">All stories</a><a href="cloud-of-witnesses.html">Cloud of Witnesses &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, vines = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    vines = [];
+    var n = Math.max(4, Math.min(9, Math.round(W / 170)));
+    for (var i = 0; i < n; i++) {
+      vines.push({ x: (i + 0.2 + Math.random() * 0.6) * W / n, h: H * (0.25 + Math.random() * 0.4),
+        amp: 7 + Math.random() * 9, wl: 34 + Math.random() * 26, ph: Math.random() * 6.28,
+        grow: reduce ? 1 : Math.random() * 0.5, sp: 0.0004 + Math.random() * 0.0005 });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.006;
+    for (var i = 0; i < vines.length; i++) {
+      var v = vines[i];
+      if (!reduce && v.grow < 1) v.grow = Math.min(1, v.grow + v.sp);
+      var top = v.h * v.grow, sway = reduce ? 0 : Math.sin(t + v.ph) * 5;
+      ctx.beginPath();
+      var px = v.x, py = H;
+      for (var y = 0; y <= top; y += 4) {
+        var k = y / v.h;
+        px = v.x + Math.sin(y / v.wl * 6.28 + v.ph) * v.amp * (0.4 + k) + sway * k;
+        py = H - y;
+        if (y === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = 'rgba(63,95,44,0.16)'; ctx.lineWidth = 1.2; ctx.stroke();
+      if (v.grow > 0.6) {
+        var a = Math.min(1, (v.grow - 0.6) / 0.3) * 0.3;
+        var g = ctx.createRadialGradient(px, py, 0, px, py, 9);
+        g.addColorStop(0, 'rgba(255,255,255,' + a + ')');
+        g.addColorStop(0.55, 'rgba(214,150,170,' + (a * 0.7) + ')');
+        g.addColorStop(1, 'rgba(214,150,170,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(px, py, 9, 0, 6.28); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

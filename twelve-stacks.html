@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twelve Stacks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a mill-town night, dark theme; low along the foot of the page stand twelve brick stacks with nothing coming out of them, and under them the ground keeps a slow orange warmth that rises and falls like a long breath; datelined sections. */
+  --ground: #121315;
+  --ground-2: #1c1d20;
+  --paper: #e4e1db;
+  --paper-dim: #9b968e;
+  --ingot: #d9773a;
+  --soak: #f2a35c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #2a1a12 0%, var(--ground) 58%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,225,219,.2); }
+.series a:hover { color: var(--ingot); }
+a:focus-visible { outline: 2px solid var(--ingot); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--ingot); text-wrap: balance; text-shadow: 0 0 28px rgba(217,119,58,.22); }
+.epigraph { border-left: 1px solid rgba(217,119,58,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--ingot); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--ingot); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(28,29,32,.78); border: 1px solid rgba(228,225,219,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--soak); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,225,219,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--ingot); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--ingot); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--ingot); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--ingot); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--ingot); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--ingot); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(28,29,32,.78); border-left: 2px solid var(--ingot); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 20.3 &middot; Dukkhalakkhaṇa</span></nav>
+<header>
+  <h1>Twelve Stacks</h1>
+  <div class="epigraph">Union with the unpleasant is painful, painful is separation from the pleasant.<br>&mdash; Dhammacakkappavattana Sutta 5, tr. T. W. Rhys Davids (1881)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it,</span> down on Eighth Avenue.</p>
+
+<section>
+  <h2>I. The Ad</h2>
+  <p class="dateline">Munhall, Pennsylvania &middot; February 2007</p>
+  <p>Dottie found it in the Sunday paper between the obituaries and a coupon for Lenten fish sticks, and she read it to him across the kitchen table the way she read him the obituaries, slowly, in case he knew somebody. <em>Do you have pain in your low back nearly every day? Are you sixty-five or older? Researchers at the university are looking for volunteers for a study of an eight-week program.</em> There was a number. There was a little drawing of a man holding the small of his back, and Joe Pavlik said the man in the drawing looked like he had never lifted anything heavier than a briefcase in his life.</p>
+  <p><em>It's free,</em> Dottie said. <em>They give you a gift card.</em></p>
+  <p>Joe had run a soaking-pit crane at the Homestead Works for twenty-three years. The ingots came over from the open hearth still dark on the outside and molten in the middle, and they stood in the pits under the lids until the heat had gone all the way through them evenly, and then Joe's crane came over and the tongs went down into the glare and lifted them out, white, one at a time, and laid them on the buggy for the forty-five-inch mill. His back went in 1979 when a tong slipped and the whole cab bucked under him like a truck hitting a curb. He worked on it seven more years, until there was nothing left to work at, and in 1986 the mill shut, and after that his back was the only part of the job he still had.</p>
+  <p>Now there was a shopping center where the mill had been, with a Loews and a Target and a Bed Bath &amp; Beyond, and at the far end of the theater parking lot the developers had left twelve brick smokestacks standing in a row for history. They had been the stacks over the soaking pits. Three nights a week Joe drove a security cart around that parking lot in a blue jacket with a patch on it, and sometimes at two in the morning he parked under the stacks and looked up at them for a while, the way you'd look at a team photograph.</p>
+  <p>He called the number on Monday. The girl who answered said they had gotten more than five hundred calls. She asked him a great many questions, among them what year it was and who the president was, and whether he could count backward from a hundred by sevens, which he could, faster than she could check it. Two weeks later a computer flipped a coin for him. He got the class.</p>
+  <p>Earl Mosley, who had worked the labor gang at the forty-five-inch mill and who sat two tables over from the Pavliks at the Slovak church's fish fry every Friday in Lent because the fish was better there than at his own church, called the same number and got the waiting list. <em>Story of my life,</em> Earl said. <em>I been on a waiting list since 1986.</em></p>
+</section>
+
+<section>
+  <h2>II. The Raisin</h2>
+  <p class="dateline">Upstairs at the Carnegie library &middot; the first Tuesday in March</p>
+  <p>The class met in a room upstairs at the Carnegie library on the hill, which Mr. Carnegie had built for the workingmen of Homestead six years after his company brought the Pinkertons up the river against them. The room smelled faintly of chlorine from the pool. There were eighteen of them on folding chairs in a circle, and a stack of blue foam mats against the wall that most of them looked at with suspicion.</p>
+  <p>The teacher was a short woman with gray hair cut like a boy's and a man's steel watch, and Joe knew her before she said her name. Rose Kuhar. She had hired into the mill in the fall of 1977, one of the women the company had started taking on, and they had put her on the labor gang in the forty-five-inch mill shoveling scale out from under the rolls. The men had given her the business for a year and a half. Joe had not been one of the worst of them. He had not been one of the ones who stopped it, either.</p>
+  <p>She went around the circle and had them each say their name and where it hurt. A retired schoolteacher from West Homestead named Helen Sabol. Gary Rusnak, who had a piece of a Chinese mortar round still in his hip from 1968 and had driven a beer truck for thirty years on top of it. A Westinghouse engineer from Turtle Creek who wanted to know how the data would be analyzed. A woman who had raised seven children in a three-room half of a double house in Rankin and said only that it was everything, honey, it was the whole thing. Joe said his name and his low back. Rose looked at him a second longer than she looked at the others.</p>
+  <p><em>Number four crane,</em> she said.</p>
+  <p><em>That's right.</em></p>
+  <p>Then she went around with a box of Sun-Maid raisins and a spoon and put one raisin in each of their palms, and asked them to look at it as if they had never seen a raisin before, as if they had just come down from another planet and this was the first one. Gary Rusnak said, <em>It's a raisin, Rose.</em> She said, <em>Look anyhow.</em></p>
+  <p>Joe looked. It was wrinkled and dark and a little sticky and it had a pale scar on one end where it had been pulled off its stem. Turned in the light from the window, it was a deep red brown, like the skin of an ingot coming out of the pit before the air hit it and the scale came up. He had not expected that. He smelled it, as she told them to, and held it on his tongue, and bit it, and the taste was much larger than the raisin. Helen Sabol was writing in a notebook. The engineer had eaten his before she told them to and was looking around for another one.</p>
+  <p>At the end she handed out compact discs with BODY SCAN written on them in marker. Forty-five minutes. Every day, six days out of seven. <em>You don't have to like it,</em> she said. <em>You just have to do it.</em></p>
+</section>
+
+<section>
+  <h2>III. The Calendars</h2>
+  <p class="dateline">Munhall &middot; March and April</p>
+  <p>So Joe did it. He lay on the den carpet every morning after the coffee, with a bed pillow under his knees, and Rose's voice came out of Dottie's kitchen boom box and took him on a tour of himself. The toes of the left foot. The sole of the foot. The heel where it touched the floor. She went so slowly up the left leg that by the time she got to his knee he had planned out the whole week's errands, and some mornings he fell asleep somewhere around the pelvis and woke to her saying, kindly, that the scan was coming to an end now. Dottie stepped over him on her way to the sewing machine. When Rose got to the low back, he would breathe into it the way she said to, and wait for it to let go.</p>
+  <p>It did not let go. Nobody had said it would. Rose had said, the first night, that they were not trying to get anywhere. But a man does not lie on his floor forty-five minutes a day for nothing, and Joe, who had never once in twenty-three years left a pit lid open or set an ingot down crooked, did it every morning, six out of seven, and checked the box on the sheet.</p>
+  <p>The second week Rose gave them a calendar, a sheet with seven rows for one pleasant thing each day. What was the event. Were you aware of it while it was happening. What did your body feel. What were you thinking. What do you feel now, writing it down. Joe wrote: <em>Fish fry. Pierogies. Earl told the one about the priest and the crane.</em> Body: <em>Warm. Full.</em> Thinking: <em>Wish it was Friday every day.</em> He wrote: <em>Danny called from Charlotte, put the baby on.</em> Body: <em>Tight in the chest. Throat.</em> Thinking: <em>Don't hang up yet.</em></p>
+  <p>The third week she gave them a second calendar for the unpleasant things, and Joe filled that one in faster. <em>Back. Ice in the theater lot. Back. Gas, $2.59. Back. Danny didn't call.</em></p>
+  <p>The weeks went by. They learned to sit in their chairs and follow the breath in and out of the nose. They walked very slowly in a line around the room upstairs at the library, lifting, moving, placing, the engineer counting under his breath, and people coming out of the pool downstairs in their bathing caps looked up the staircase at them and kept going. Helen Sabol did the body scan twice a day and color-coded her calendars. Gary Rusnak bought a second CD player for the truck. The woman from Rankin fell asleep at every single body scan and snored, softly, and nobody had the heart to wake her.</p>
+  <p>At the start of each class Rose asked how it was going, and they told her. Joe's back was a six. It had been a six in February, on the girl's form, and it was a six on Easter Sunday, kneeling, and a six on the Tuesday after.</p>
+</section>
+
+<section>
+  <h2>IV. Number Four Crane</h2>
+  <p class="dateline">Upstairs at the Carnegie library &middot; the last Tuesday in April</p>
+  <p>The eighth class was the last one. The girl from the university, whose name was Megan and who was writing a dissertation, was coming at eight o'clock with the forms. Before she came Gary Rusnak cleared his throat and said what all of them had been saying in the parking lot.</p>
+  <p><em>Rose, with respect. I been lying on that floor eight weeks. I did every one. My hip's the same as when I walked in here. Helen's the same. We're all the same.</em> He looked around the circle and they nodded. <em>We gave it a fair shake. Maybe this thing works for those people up in Massachusetts. Is there something else? Something more for people like us?</em></p>
+  <p>Rose did not answer him right away. She looked around the circle at them one at a time, the way she had looked at Joe the first night, and later every one of them said the same thing, that she seemed to be looking at something a long way behind them. The engineer said it was like being looked at by somebody reading an old drawing.</p>
+  <p>Then she asked each of them what they had done for work. They told her. Thirty-four years at the Westinghouse in East Pittsburgh. Twenty-nine years of nights on a ward at Braddock General, lifting people. A coal patch in Fayette County, then the Duquesne Works, then a parking garage downtown. Seven kids. A beer truck. Number four crane.</p>
+  <p><em>Add it up,</em> she said to the engineer.</p>
+  <p>He added it on the back of a sign-in sheet. Between the eighteen of them it came to something over five hundred years of work, and he checked it twice, and then, because he could not help it, he figured it in days, which was most of two hundred thousand.</p>
+  <p><em>You people have been practicing a lot longer than me,</em> Rose said. <em>I gave you the wrong thing. I gave you the beginner thing. Take out your calendars.</em></p>
+  <p>They had them in their folders. She had them lay the pleasant one and the unpleasant one side by side on their knees and read down the column where it said <em>body</em>.</p>
+  <p>Joe read his. On the pleasant side: <em>Warm. Full. Tight in the chest. Throat.</em> On the other side: <em>Tight. Tight. Jaw. Tight.</em> He read the column that said <em>thinking</em>. <em>Wish it was Friday every day. Don't hang up yet.</em> And on the other side: <em>Wish it would quit. Wish he'd call.</em></p>
+  <p>Around the circle people went quiet as they read. Helen Sabol had written, under lilacs by the garage: <em>Wanted them to last.</em> The woman from Rankin had written for her pleasant thing that her great-grandson had fallen asleep on her, and under body: <em>my arm went dead and I didn't want to move it.</em></p>
+  <p><em>It's all under load,</em> Rose said. <em>A crane is under load carrying an ingot. Sitting still, it's under load holding itself up. You've been lying on the floor waiting for the load to come off. You thought the good days were the ones with no load on. Look at your sheet.</em></p>
+  <p>Nobody said anything. Then she took a card out of her wallet, an index card gone soft at the corners, and said she had copied this out of an old book on a retreat years ago, and she read it to them.</p>
+  <div class="verse">
+    <p>Now this, O Bhikkhus, is the noble truth concerning suffering. Birth is attended with pain, decay is painful, disease is painful, death is painful. Union with the unpleasant is painful, painful is separation from the pleasant; and any craving that is unsatisfied, that too is painful.</p>
+    <p>&mdash; Dhammacakkappavattana Sutta 5, tr. T. W. Rhys Davids (1881)</p>
+  </div>
+  <p><em>Who wrote that?</em> said Gary Rusnak.</p>
+  <p><em>A fella in India,</em> said Rose. <em>Lie down.</em></p>
+  <p>They got down on the blue mats, those who could, and those who could not leaned back in their folding chairs, and she did not put on the disc. She talked them through it herself, faster than the recording, and stopped longer at the parts that hurt. Joe lay on the floor and felt his back. It was a six. It was the same six. He felt the wanting it to be a five come up beside it, which he had never noticed, the way you never notice the hum of a motor until it stops, and he felt that the wanting was its own weight, a second ingot hung on the same tongs. He thought of Danny's baby on the phone. Tight in the chest. That was the same load too. It had all been the same load, the good days and the bad ones, the pierogies and the ice, and he had been carrying it with both hands for twenty-eight years and checking a box.</p>
+  <p>Something in him got tired of it. It felt like the end of a shift, when you have done everything you can do and the next man is climbing the ladder to the cab, and your hands come off the levers by themselves.</p>
+  <p>He laughed out loud on the floor. He could not help it. Across the room Helen Sabol was crying without any noise, and Gary Rusnak was breathing like a man who had just set down a keg, and the woman from Rankin was, for the first time in eight weeks, entirely awake. People who were there say that all eighteen of them got up off that floor different. Some of them say it in church and some of them say it at the Eat'n Park, and none of them has ever been able to say it very well.</p>
+  <p>Megan from the university was standing in the doorway with her clipboard against her chest. She had been there since the card. She was twenty-six, and her dissertation was due in fourteen months, and she had not slept through the night since Christmas. She stood with the forms against her and let her shoulders come down from around her ears, and did not know until later that she had done it.</p>
+  <p>Then she handed out the forms. Joe circled six for his back. Megan looked at it and at him.</p>
+  <p><em>Same as before?</em></p>
+  <p><em>Same,</em> Joe said, and laughed again, and she wrote something in the margin.</p>
+</section>
+
+<section>
+  <h2>V. The Lot</h2>
+  <p class="dateline">The Waterfront, Homestead &middot; July</p>
+  <p>In June the computer's other half got its turn. Earl Mosley went every Tuesday night to the room upstairs at the library and came out complaining about the raisin. Joe drove him, because Earl's eyes were bad after dark, and sat in the car with the window down and listened to the swimmers.</p>
+  <p>The study came out the next year. On the whole the class had done somewhat better than the waiting list, the paper said, at managing their days, though the pain itself did not change much on either side. Dottie read it to him from the paper across the kitchen table, slowly, in case he knew somebody.</p>
+  <p>On a night in July Joe parked the security cart at the far end of the theater lot under the twelve stacks. The last show had let out. The sodium lights hummed. Up the hill the library was dark, and down past the stacks the Monongahela went by with a single string of barges on it, pushed by a towboat with one lit window. His back was a six. He sat with it the way you would sit beside a man you had worked with a long time, who did not need to be talked to.</p>
+  <p>Then he got down out of the cart, slowly, and put his palm flat on the asphalt over the place where the pits had been. It was midnight and the asphalt was still warm from the day, warm all the way through, the way an ingot is warm when it has soaked long enough and is ready to be lifted.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">`All created things are grief and pain,' he who knows and sees this becomes passive in pain; this is the way that leads to purity.<cite>Dhammapada 278, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is very short, and it is the middle one of three alike. Five hundred monks receive a meditation subject from the Buddha, strive in the forest with all their strength, and do not reach awakening, so they come back to ask for a subject better suited to them. The Buddha sees that in the time of an earlier Buddha, Kassapa, these same monks spent twenty thousand years contemplating suffering, so he gives them a single verse on that characteristic: everything conditioned, because it is oppressed, is suffering. At the end of it all five hundred are awakened, and everyone else who has gathered there benefits too. The ancient-buddhist-texts page for this story currently repeats the text of its twin, 20.2, word for word except for the verse; read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Dukkha">dukkha</a>, the characteristic of suffering.</p>
+    <h3>Homestead and the stress clinic, 2007</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Homestead_Steel_Works">Homestead Steel Works</a> on the Monongahela, site of the 1892 lockout and battle with Pinkerton agents, employed some 15,000 people at its peak during the Second World War and closed in 1986. A shopping center, <a href="https://en.wikipedia.org/wiki/The_Waterfront">the Waterfront</a>, opened on part of the site in 1999. Twelve brick smokestacks from the soaking pits of the 45-inch mill were left standing there, about 130 feet tall, at the edge of a movie-theater parking lot. Up the hill in Munhall, the <a href="https://en.wikipedia.org/wiki/Carnegie_Library_of_Homestead">Carnegie Library of Homestead</a>, opened in 1898, still has its music hall and an athletic club with an indoor pool.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Mindfulness-based_stress_reduction">Mindfulness-based stress reduction</a> began in 1979 at the University of Massachusetts Medical Center as an eight-week class for patients sent by their doctors for chronic pain and stress: guided body scans, sitting and walking meditation, gentle yoga, a first-night exercise with a single raisin, and calendars of pleasant and unpleasant events. In the 2000s it became the subject of many randomized trials, often with a wait-list control group that received the course afterward. The study in this story is invented, but its shape follows real ones, among them a University of Pittsburgh pilot trial begun in 2004 that taught an eight-week program in weekly 90-minute sessions to 37 adults aged 65 and older with chronic low back pain, recruited partly through newspaper ads (<a href="https://webarchive.library.unt.edu/eot2008/20080916023946/http://clinicaltrials.gov/ct2/show/NCT00594243">trial record</a>; <a href="https://www.chronicle.pitt.edu/story/aching-back-put-your-mind-it">University Times report</a>).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the characteristic of suffering from the Dhammapada commentary (verse 278). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-03.htm">The original</a>. Scripture from the Dhammacakkappavattana Sutta, tr. T. W. Rhys Davids, in <i>Buddhist Suttas</i> (Sacred Books of the East, vol. 11, 1881). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-stringer.html">&larr; The Stringer</a><a href="index.html">All stories</a><a href="the-tin-horn.html">The Tin Horn &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw(now) {
+    var t = reduce ? 0 : (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var base = H;
+    var stackH = Math.min(H * 0.26, 220);
+    var span = Math.min(W * 0.9, 900);
+    var x0 = (W - span) / 2, gap = span / 12;
+    var sw = Math.max(5, gap * 0.28);
+    // the ground warmth: a slow breath, about fourteen seconds in and out
+    var breath = reduce ? 0.6 : 0.5 + 0.5 * Math.sin(t * 2 * Math.PI / 14);
+    for (var i = 0; i < 12; i++) {
+      var cx = x0 + gap * (i + 0.5);
+      var a = 0.05 + 0.07 * breath * (0.85 + 0.15 * Math.sin(i * 1.7 + t * 0.3));
+      var g = ctx.createRadialGradient(cx, base, 0, cx, base, gap * 1.4);
+      g.addColorStop(0, 'rgba(242,163,92,' + a + ')');
+      g.addColorStop(0.5, 'rgba(217,119,58,' + (a * 0.45) + ')');
+      g.addColorStop(1, 'rgba(217,119,58,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(cx - gap * 1.4, base - gap * 1.4, gap * 2.8, gap * 1.4);
+    }
+    // the stacks: dark brick, slightly tapered, nothing coming out of them
+    for (var j = 0; j < 12; j++) {
+      var sx = x0 + gap * (j + 0.5);
+      var h = stackH * (0.94 + 0.06 * Math.sin(j * 2.3));
+      ctx.fillStyle = 'rgba(8,8,9,0.62)';
+      ctx.beginPath();
+      ctx.moveTo(sx - sw / 2, base);
+      ctx.lineTo(sx - sw * 0.38, base - h);
+      ctx.lineTo(sx + sw * 0.38, base - h);
+      ctx.lineTo(sx + sw / 2, base);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = 'rgba(217,119,58,' + (0.05 + 0.05 * breath) + ')';
+      ctx.fillRect(sx - sw / 2, base - h * 0.18, sw, 1);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Firefinder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale sky of a September afternoon seen from a lookout, light theme; ridge behind ridge lies blue along the foot of the page, and a fine sighting hair swings slowly across them, rests on one far point that warms for a moment, and moves on; datelined sections. */
+  --ground: #eef0ec;
+  --ground-2: #e1e6e3;
+  --paper: #24292a;
+  --paper-dim: #5b6566;
+  --accent: #8a3d1e;
+  --glow: #c27531;
+  --rule: rgba(36,41,42,.15);
+  --panel: rgba(225,230,227,.8);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f3f4f0 0%, var(--ground) 50%, #dfe6e8 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 23.7 &middot; A Company of Bhikkhus</span></nav>
+<header>
+  <h1>The Firefinder</h1>
+  <div class="epigraph">In solitude, be company for thyself.<br>&mdash; Montaigne, &ldquo;Of Solitude&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is the way I heard it,</span> in the packers' bunkhouse at Ninemile.</p>
+
+<section>
+  <h2>I. The Seminar Room</h2>
+  <p class="dateline">The State University, Missoula &middot; spring 1938</p>
+  <p>The trouble in the English department began with a saucer of pipe ash. Mr. Dace, who lectured on the modern poets and filled every room he lectured in, smoked through a seminar in the library's Seminar Room, under a card that said NO SMOKING BY ORDER OF THE LIBRARIAN, and left the saucer on the table when he went. Dr. Pell, who taught Old English and the history of the language and knew every rule of the library by heart, found it there in the morning. He asked Mr. Dace whether he had seen the card. Mr. Dace said he had not. Then it is nothing, said Dr. Pell, and Mr. Dace thought no more about it. But that week Dr. Pell said to his graduate students, as a joke, that the modern poets did not read. By March the department had two seminars where it had had one, the student paper had printed eleven letters, and the faculty wives sat at separate tables at the Faculty Club.</p>
+  <p>Edmund Coyle had been chairman for twenty-one years. He had built the department out of three men and a borrowed classroom, and both of the quarrelers had been hired by him. He was the son of a smelterman from Butte. As a young man he had worked a fire guard's summer in the Coeur d'Alenes and come out of the Big Burn of 1910 with his eyebrows gone. He asked the two of them three times to make it up. The third time he went to the Seminar Room himself, where a meeting of Mr. Dace's side was going on, and said what he had to say, and a graduate student named Harlan Voss stood up at the back.</p>
+  <p><em>Professor Coyle, with respect, this is between the two of them, and you're not in it. Please let us be.</em></p>
+  <p>Coyle looked at him a while. Then he went back to his office and wrote out his resignation as chairman, and in June, when the term was over, he took the job the Forest Service had offered him every year since he was thirty: a summer on a lookout. It paid less than a teaching assistant. He drove out to Ninemile with a duffel bag and a box of books and asked for the highest one they had.</p>
+</section>
+
+<section>
+  <h2>II. Sadie</h2>
+  <p class="dateline">Blue Point Lookout, Lolo National Forest &middot; July to September</p>
+  <p>Blue Point was a fourteen-foot square of windows on top of a rock, an L-4 cab with a shingle roof and heavy shutters that propped out like awnings, built at Columbia Falls and carried up the mountain in pieces on mules. In the middle of the floor stood the Osborne firefinder, a round table two feet across with a map of the whole country under its glass and the 360 degrees cut into its rim, and a sighting ring that turned on it, so that a man who saw smoke could lay the hair of the sight across it and read the bearing to the ranger station down the telephone wire. Against the walls were a bed, a table, a wood stove and a stool with glass insulators on its four legs, for standing on in lightning.</p>
+  <p>What happened up there was told afterward by Ole Brekke, a Ninemile packer who had never read a book in his life and did not care who knew it, and by a forestry student on the next lookout to the west, who watched Blue Point every day through his glasses and wrote it down in his log.</p>
+  <p>Ole brought the first string up on the second of July: six mules with groceries, kerosene, the canvas water bags and the professor's books. Among them was a big brown molly named Sadie who had been at Ninemile since the depot opened and had never been anything but trouble on the line. The young mules crowded her on the trail and kicked at her in the corral and ate her hay. When Ole went to lead the string down again, Sadie set her feet at the edge of the rocks below the lookout and would not go. He pulled. He swore at her in two languages. In the end he tied the others nose to tail and went down without her, and told the ranger she could stay up there and starve.</p>
+  <p>She did not starve. She kept house. The student on the next peak saw it, and Ole saw it himself when he came up with the second string. The spring was six hundred feet below the lookout, down a goat trail. Every morning Sadie went down to it with the two canvas water bags slung on her, and Coyle went with her and filled them, and she carried them back up, and after the first week, Ole swore, she went down by herself, and came up with the bags full, though nobody could say who had filled them. She dragged down deadfall to the woodpile by the stairs. When a bear came up through the beargrass in August she went at it with her ears flat back and her teeth showing and ran it off the mountain. On nights with lightning she stood under the stairs, close against the timbers, and did not move until it had passed.</p>
+  <p>Coyle sat in the windows and watched the country. He reported four smokes in July and nine in August. When there was nothing to report he read, and the book he read most was the old Cotton translation of Montaigne that he had bought secondhand in Butte when he was sixteen. Montaigne had been thirty-eight when he gave up his office and his city and climbed his own tower to sit among his books. Coyle was fifty-eight and had only the one book, and a mule.</p>
+  <div class="verse">
+    <p>Wives, children, and goods must be had, and especially health, by him that can get it; but we are not so to set our hearts upon them that our happiness must have its dependence upon them; we must reserve a backshop, wholly our own and entirely free, wherein to settle our true liberty, our principal solitude and retreat.</p>
+    <p>&mdash; Montaigne, &ldquo;Of Solitude&rdquo;</p>
+  </div>
+</section>
+
+<section>
+  <h2>III. Miss Varner</h2>
+  <p class="dateline">The Blue Point trail &middot; the last week of September</p>
+  <p>By the time the fall rains came and the fire season ended, the whole university had heard that the chairman of English was living on top of a mountain with a mule. The president wanted him back for the fall quarter. Mr. Lyle Danner, the lumberman, who had paid for the new wing of the library, wrote to say the same, and so did Mrs. Hattie Burke of the Board of Education, who had sent seven sons through the university and was the most formidable woman in western Montana. And the students came back in September from their summers in the mines at Butte and the harvest in the Palouse and the sawmills and the fire crews, and went to the department office, and asked Miss Varner to take them up. They had not heard him lecture since spring.</p>
+  <p>Edna Varner had been secretary of the English department for sixteen years. She typed his letters and his examinations and knew which drawer he kept his pipe cleaners in. She drove forty of them out to the trailhead on a Saturday in a borrowed school bus, and they climbed all morning, and at the saddle below the last pitch, where they could see the lookout, she stopped them.</p>
+  <p><em>Let me see him first,</em> she said. <em>Three months of nobody, and then forty of you over the rocks at once. Wait here.</em></p>
+  <p>She went on alone. Sadie saw her first. The mule came down the last of the trail at a run, with her ears pinned flat and her head low, and Edna Varner put one hand on the nearest rock and shut her eyes.</p>
+  <p><em>Sadie,</em> said a voice from the catwalk. <em>Come back. Let her by. She keeps my office.</em></p>
+  <p>The mule stopped. She came and stood in front of Miss Varner and put her nose against the rucksack on her back and took one of the straps in her teeth, as if she wanted to carry it. Miss Varner did not let her. She climbed the stairs with the rucksack on and went into the lookout. The firefinder stood in the middle of the floor with its glass shining, and his papers were on the table and his book was on the bed, and there was no other place to set anything down. She did not put the rucksack on the firefinder. She put it on the floor. Through the window the mule watched her do it.</p>
+  <p>She sat down on the insulator stool. He was brown, and thinner, and his beard had come in grey.</p>
+  <p><em>You came alone?</em></p>
+  <p><em>There are forty of them at the saddle. I didn't know whether you'd want them.</em></p>
+  <p><em>Tell them to come up.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Catwalk</h2>
+  <p class="dateline">Blue Point &middot; the same afternoon</p>
+  <p>They came up and stood around the catwalk in their boots and their summer sunburns, looking at the mule, who looked at them. There was not room for all of them inside. A girl from Great Falls said what most of them were thinking.</p>
+  <p><em>Professor, you must have had an awful summer. All alone up here, at your age. No one to cook. Nobody to talk to. Hauling your own water up that hill.</em></p>
+  <p><em>Sadie hauled my water,</em> Coyle said. <em>Sadie did everything.</em></p>
+  <p>He came out onto the catwalk and stood with his hands on the rail. Below them the whole country lay open, ridge behind ridge to the Bitterroots, blue and then bluer, with the first snow on the high ones and no smoke anywhere.</p>
+  <p><em>Montaigne had one friend in his life,</em> he said. <em>When the man died he said the only reason he could ever give for loving him was, because it was he, because it was I. If you find a friend like that, keep him your whole life and be glad of him. If you don't, go by yourselves. You can do worse than by yourselves. Bias said the greatest part is the worse part, and he was a wise man, and he had sat on committees.</em></p>
+  <p>Some of them laughed. Then he took the book out of his coat pocket and read them the place he had read most that summer.</p>
+  <div class="verse">
+    <p>&lsquo;Tis not that a wise man may not live everywhere content, and be alone in the very crowd of a palace; but if it be left to his own choice, the schoolman will tell you that he should fly the very sight of the crowd: he will endure it if need be; but if it be referred to him, he will choose to be alone.</p>
+    <p>&mdash; Montaigne, &ldquo;Of Solitude&rdquo;</p>
+  </div>
+  <p>Then he took them into the lookout two and three at a time and showed them the firefinder. He turned the sighting ring for each of them and had them put an eye to the slot and look along the hair of the sight across the glass, at one ridge, sixty miles off, and then at a single tree on the ridge, and then he read them the bearing off the rim. Harlan Voss was one of them. He looked through the sight a long time.</p>
+  <p>Harlan Voss tried to say, years later, when he was chairman of an English department himself, in Oregon, what happened to the forty of them on the catwalk that afternoon. It was like the sight on the firefinder, he said. You stood in a glass room with the whole country around you, so much of it you could not look at it, and then somebody put your eye to a slot and a hair, and there was one tree, sixty miles away, as plain as your hand. And you knew exactly where you were standing, to the degree.</p>
+  <p>Then Miss Varner gave him the message. The president says come down. Mr. Danner says come down. Mrs. Burke says come down. The whole university wants you home.</p>
+  <p>Coyle looked out at the ridges a while longer. <em>All right,</em> he said. <em>Somebody will have to carry the books.</em></p>
+</section>
+
+<section>
+  <h2>V. The Hood</h2>
+  <p class="dateline">Blue Point &middot; the first of October</p>
+  <p>Ole Brekke came up a week later with the string to close the lookout. He hauled down the stove and the bedding and nailed the shutters closed. Last of all he put the canvas hood over the firefinder, the way the manual said, and tied it, so the glass would not crack in the cold. When he came out the snow had started. Sadie was standing at the head of the trail by herself, already headed down, waiting for the others to fall in behind her.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">If a man find a prudent companion who walks with him, is wise, and lives soberly, he may walk with him, overcoming all dangers, happy, but considerate.<cite>Dhammapada 328, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">If a man find no prudent companion who walks with him, is wise, and lives soberly, let him walk alone, like a king who has left his conquered country behind,&mdash;like an elephant in the forest.<cite>Dhammapada 329, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">It is better to live alone, there is no companionship with a fool; let a man walk alone, let him commit no sin, with few wishes, like an elephant in the forest.<cite>Dhammapada 330, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>This commentary story continues the quarrel of the monks of Kosamb&#299; (told in this series as <a href="the-washing-cup.html">The Washing Cup</a>). Having failed to reconcile them, the Buddha spends the rains alone in the Protected Forest, where a noble elephant, P&#257;rileyyaka, serves him. Afterward the great lay followers An&#257;thapi&#7751;&#7693;ika and Vis&#257;kh&#257;, and five hundred monks who have been living elsewhere, ask &#256;nanda to bring them to the Teacher. &#256;nanda leaves the monks outside and goes in alone; the elephant charges him with a stick until the Buddha calls it off, then offers to carry his bowl and robe. &#256;nanda declines, and he does not set his things on the stone slab where the Teacher sits. When the monks come in, they pity the Buddha for having had no one to serve him. He answers that the elephant did everything, speaks the three verses, and the five hundred become arahats. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-07.htm">the full commentary story</a>. The words standing in for the verses are from <a href="https://en.wikipedia.org/wiki/Michel_de_Montaigne">Montaigne</a>'s essays "Of Solitude" and "Of Friendship," in Charles Cotton's translation as edited by W. C. Hazlitt. By 1571 Montaigne had withdrawn from public life to the tower of his ch&acirc;teau, and he began the <em>Essays</em> there.</p>
+    <h3>Western Montana, 1938</h3>
+    <p>After the <a href="https://en.wikipedia.org/wiki/Great_Fire_of_1910">Great Fire of 1910</a> burned about three million acres of Idaho and Montana, the Forest Service built fire lookouts on summits across the Northwest. The most common design, the <a href="https://www.historylink.org/file/23254">L-4</a>, was a gabled cab with heavy shutters, and more than a thousand were put up across the western states. The ones of the 1930s were <a href="https://buildings.fortmissoulamuseum.org/sliderock-lookout">made in Columbia Falls, Montana</a>, and shipped in pieces small enough to pack in on animals. Inside stood the lookout's chief tool, the <a href="https://en.wikipedia.org/wiki/Osborne_Fire_Finder">Osborne Fire Finder</a>: a round, glass-topped table with a map under the glass and the 360 degrees etched in its rim. For lightning there was a stool standing on glass insulators.</p>
+    <p>In 1930 the Forest Service bought a ranch in the Ninemile valley northwest of Missoula and opened the <a href="https://www.fs.usda.gov/r01/lolo/recreation/ninemile-remount-depot-and-historic-ranger-station">Ninemile Remount Depot</a>. For thirty-two years it bred mules to pack supplies to fire crews and backcountry lookouts, and at its height it kept over 1,500 animals and thirty-five packers. Pack strings still winter there.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a company of bhikkhus from the Dhammapada commentary (verses 328&ndash;330). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-07.htm">The original</a>. Quotations from Montaigne's <em>Essays</em>, translated by Charles Cotton, edited by William Carew Hazlitt (1877). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-old-bull.html">&larr; The Old Bull</a><a href="index.html">All stories</a><a href="the-yellow-cod.html">The Yellow Cod &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // From a lookout's windows: ridge behind ridge, bluer as they go back, along the foot of the page.
+  // A sighting hair swings slowly across them like the ring of a firefinder, rests on one far point,
+  // which brightens a moment, then moves on.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, ridges = [], ang = -0.5, target = 0.3, rest = 0, mark = null;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    build();
+  }
+  function build() {
+    ridges = [];
+    var n = 5;
+    for (var i = 0; i < n; i++) {
+      var pts = [], base = H * (0.80 + i * 0.045), amp = 26 - i * 3, seed = Math.random() * 1000;
+      for (var x = -20; x <= W + 20; x += 16) {
+        var y = base - amp * (0.55 * Math.sin((x + seed) / (170 - i * 18)) + 0.3 * Math.sin((x + seed * 2) / (63 - i * 5)) + 0.15 * Math.sin((x + seed * 3) / 29));
+        pts.push([x, y]);
+      }
+      ridges.push(pts);
+    }
+  }
+  var cols = ['rgba(150,170,190,.10)', 'rgba(120,145,170,.10)', 'rgba(95,122,150,.10)', 'rgba(72,98,124,.10)', 'rgba(55,78,98,.11)'];
+  function ridgeY(i, x) {
+    var pts = ridges[i], k = Math.max(0, Math.min(pts.length - 2, Math.floor((x + 20) / 16)));
+    var a = pts[k], b = pts[k + 1], f = (x - a[0]) / 16;
+    return a[1] + (b[1] - a[1]) * f;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < ridges.length; i++) {
+      ctx.fillStyle = cols[i];
+      ctx.beginPath(); ctx.moveTo(-20, H);
+      var pts = ridges[i];
+      for (var j = 0; j < pts.length; j++) ctx.lineTo(pts[j][0], pts[j][1]);
+      ctx.lineTo(W + 20, H); ctx.closePath(); ctx.fill();
+    }
+    // the sight: a hairline from a pivot below the page, swinging across the far ridge
+    var px = W / 2, py = H + 40;
+    var len = H * 0.30;
+    var hx = px + Math.sin(ang) * len, hy = py - Math.cos(ang) * len;
+    ctx.strokeStyle = 'rgba(40,36,30,.16)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(hx, hy); ctx.stroke();
+    if (mark) {
+      var a = mark.a;
+      var g = ctx.createRadialGradient(mark.x, mark.y, 0, mark.x, mark.y, 14);
+      g.addColorStop(0, 'rgba(214,130,52,' + (0.55 * a) + ')');
+      g.addColorStop(1, 'rgba(214,130,52,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(mark.x, mark.y, 14, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  function step() {
+    if (rest > 0) {
+      rest--;
+      if (mark) mark.a = Math.min(1, mark.a + 0.02) * (rest < 60 ? rest / 60 : 1);
+    } else {
+      var d = target - ang;
+      ang += Math.sign(d) * Math.min(Math.abs(d), 0.0012);
+      if (Math.abs(d) < 0.0005) {
+        rest = 420;
+        var px = W / 2, py = H + 40;
+        // where the hair crosses the farthest ridge
+        for (var t = 0.1; t < 0.6; t += 0.002) {
+          var x = px + Math.sin(ang) * H * t, y = py - Math.cos(ang) * H * t;
+          if (x > -20 && x < W + 20 && y <= ridgeY(0, x)) { mark = { x: x, y: ridgeY(0, x), a: 0 }; break; }
+        }
+        target = (Math.random() - 0.5) * 1.1;
+      }
+    }
+    draw();
+    requestAnimationFrame(step);
+  }
+  size();
+  if (reduce) { ang = 0.18; draw(); }
+  else requestAnimationFrame(step);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

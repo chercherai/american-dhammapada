@@ -8,14 +8,14 @@ Images, places and worlds the editor wants in the series. Before you choose a se
 - The Minnesota Twins (the 1987 or 1991 Series, the Metrodome, a radio in a barn) [22.3]
 - Salt Spring Island, British Columbia (back-to-the-landers, draft dodgers, the Black settlers of the 1850s, Hawaiian Kanaka families) [25.9]
 - A windmill (a Plains water pump, a Dutch mill in Michigan, a wind farm in Texas or Iowa) [12.9]
-- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5] [19.5] [9.10] [26.36]
+- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5] [19.5] [9.10] [26.36] [17.5] [10.2] [12.10, 23.7]
 
 ## Twenty random Dewey numbers (drawn Nov 10, 2026)
 Use one as a story's hidden subject: a job, an object, a book someone is reading, a shelf in the library where something happens.
 - **178, Ethics of consumption:** temperance, the WCTU, Prohibition, a man who quits drinking or buying. [9.2]
-- **184, Platonic philosophy:** a cave, shadows on a wall, a night-school Plato class, a drive-in screen. [19.1] [15.7]
-- **234, Salvation and grace:** an altar call, a revival tent, a 12-step "higher power," a deathbed. [24.2]
-- **306, Culture and institutions:** a sociologist doing fieldwork, a Middletown study, a Rotary club.
+- **184, Platonic philosophy:** a cave, shadows on a wall, a night-school Plato class, a drive-in screen. [19.1] [15.7] [14.6]
+- **234, Salvation and grace:** an altar call, a revival tent, a 12-step "higher power," a deathbed. [24.2] [26.30] [12.10]
+- **306, Culture and institutions:** a sociologist doing fieldwork, a Middletown study, a Rotary club. [17.5]
 - **326, Slavery and emancipation:** Juneteenth, a manumission paper, an abolitionist parlor. [13.8]
 - **335, Socialism:** a utopian colony (Oneida, New Harmony, Llano del Rio), Milwaukee's sewer socialists, a Debs rally. [6.6]
 - **382, International commerce:** a longshoreman, a container port, a customs broker, NAFTA trucks at Laredo.
@@ -39,7 +39,7 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - Ghosts: the commentary's peta (hungry-ghost) stories are made for this: 5.12 Snake Peta, 10.6 Python Peta, 20.6 Pig Peta
 - Hunters: a muskrat trapper, a duck-blind guide, a buffalo hunter, a subsistence hunter, a bowhunter [13.8]
 - Teenagers as the protagonist, not the side character [26.26]
-- Fires: Peshtigo 1871, Chicago 1871, the Triangle factory, Hinckley 1894, Paradise 2018, Lahaina 2023
+- Fires: Peshtigo 1871, Chicago 1871, the Triangle factory, Hinckley 1894, Paradise 2018, Lahaina 2023 [16.2 Peshtigo fire, Door County]
 - Buddhists. Six stories so far (Vietnamese, Kalmyk, Cambodian, Lao, Japanese Pure Land, Cantonese Chan). Still missing: Hawaii plantation Hongwanji temples, Soka Gakkai (Black and Latino members), Beat and San Francisco Zen (1950s–60s), insight meditation (Barre 1975), Shambhala in Boulder, Tibetan exiles, Thai, Burmese, Sri Lankan and Korean temples, a prison Buddhist chaplain, Dharmapala at the 1893 Parliament of Religions [25.7 Thai] [19.8 Beat and San Francisco Zen] [22.9 Soka Gakkai] [26.2 Tibetan exiles]
 - Buddhist and contemplative America, specific (the editor's picks; each one-use; real founders appear only at a distance, with no invented dialogue):
   - Chögyam Trungpa's world: Naropa and Boulder in 1974, the Vajradhatu seminaries, Shambhala households. Honest about the drinking and the controversies, without sneering.
@@ -51,3 +51,9 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - An astronaut (the Mercury Seven's wives, a Gemini capsule, Skylab, a shuttle mission specialist, the ISS, a NASA computer at Langley, a Houston flight controller)
 - A submarine (the Hunley in 1864, a WWII fleet boat, a Cold War missile boat on deterrent patrol, the Thresher, the boomer wives of Groton or Kings Bay)
 - Pirates (Blackbeard at Ocracoke, Anne Bonny and Mary Read, the Lafitte brothers at Barataria, Gasparilla legend, a privateer out of Salem or Baltimore, Caribbean buccaneers, a modern Somali-piracy hostage)
+- Jazz (a Kansas City jam session in the '30s, a Harlem after-hours club, a bebop sideman, a New Orleans brass funeral, a high-school jazz band)
+- Rap (the Bronx in the late '70s, a Southern trap studio, a Bay Area mixtape hustler, a battle-rap league, a church kid who raps)
+- EDM (a Detroit techno basement in the '80s, a Chicago house party, a desert festival, a warehouse rave, a DJ who plays sunrise sets)
+- A cartoonist (a newspaper strip artist, a Disney inker, a 1950s comic-book artist before the Comics Code, an underground comix artist, a webcomic)
+- A ceramicist (Pueblo potters at San Ildefonso, a Black Mountain College potter, a production potter in North Carolina's Seagrove, a community studio)
+- A vegan (a 1840s Grahamite boardinghouse, a Seventh-day Adventist kitchen, a 1970s co-op, a 2010s Instagram vegan, an animal sanctuary)
