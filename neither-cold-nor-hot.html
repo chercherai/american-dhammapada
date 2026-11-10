@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neither Cold Nor Hot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the faded cream of a diazo blueline print, light theme; behind it a faint drafting grid, where a straight blue line is now and then ruled slowly across the margin, holds, and fades as the print does; datelined sections. */
+  --ground: #efebdc;
+  --bg-image: linear-gradient(180deg, #f4f1e4 0%, #efebdc 60%, #e6e0cb 100%) fixed;
+  --paper: #22293a;
+  --paper-dim: #5f6676;
+  --accent: #2c5a98;
+  --glow: #c08a2a;
+  --panel: rgba(250,248,240,.7);
+  --rule: rgba(34,41,58,.14);
+  --accent-line: rgba(44,90,152,.4);
+  --title-shadow: 0 0 24px rgba(44,90,152,.14);
+  --body-weight: 400;
+  color-scheme: light;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg-image), var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: var(--title-shadow); }
+.epigraph { border-left: 1px solid var(--accent-line); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 2.6 &middot; Two Friends</span></nav>
+<header>
+  <h1>Neither Cold Nor Hot</h1>
+  <div class="epigraph">Full of all diseases as he is, he fancies himself in perfect health.<br>&mdash; Charles Wesley, &ldquo;Awake, Thou That Sleepest&rdquo; (1742)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it,</span> on Larkspur Court.</p>
+
+<section>
+  <h2>I. The Parlor</h2>
+  <p class="dateline">Worthington, Ohio &middot; the first Sunday of 1977</p>
+  <p>The Thursday prayer group met in the church parlor, under a framed print of John Wesley preaching from his father&rsquo;s tombstone, and on the first Sunday of the new year Miss Ruth Bevington stayed after the late service to tell it goodbye until Easter. She was going to her sister&rsquo;s in Bradenton, as she did every winter. She was seventy-four. She had taught arithmetic and English for thirty-eight years at the Methodist girls&rsquo; school in Lucknow, and when she came home in 1962 the church had given her a dinner and an engraved silver tray and then had not quite known what to do with her, so she had made the Thursday group herself, out of four widows and a percolator.</p>
+  <p>Jerry Kessler and Walt Mohr waited by the coat rack until the widows had their boots on. They were both in their forties and both in sport coats, and they lived across the court from each other in a subdivision off Morning Street, and they worked at the same engineering firm out on the east side, and they had come to her together because it had been Jerry&rsquo;s idea and Walt had not said no.</p>
+  <p>She had given the talk at the men&rsquo;s Advent breakfast. She had not said much. She had said that in Lucknow she used to get up before the bells and sit on the roof in the dark, and that it had taken her about eleven years to learn to do it, and that the men in this room had more time on their hands than they thought. Jerry had been moved. He had gone home and told Barb that the old girl was the real thing.</p>
+  <p><em>Miss Bevington,</em> he said now, <em>Walt and I would like to learn to pray. The way you said. Really learn it.</em></p>
+  <p>She buttoned her coat to the top, which took some time, and looked at the two of them.</p>
+  <p><em>Get up before your house does,</em> she said. <em>Sit in a straight chair. Don&rsquo;t read anything, not even the Bible. Watch.</em></p>
+  <p><em>Watch what?</em> said Jerry.</p>
+  <p><em>You&rsquo;ll find out. Come and tell me at Easter.</em></p>
+  <p>Jerry wrote it on the back of the bulletin in the parking lot, against the roof of the Pontiac, while the wind came across the Green: <em>Early. Chair. No reading. Watch.</em> Walt didn&rsquo;t write anything. He stood with his hands in his coat pockets and looked at the white steeple and the sky behind it, which was the color of an old nickel.</p>
+</section>
+
+<section>
+  <h2>II. Sixty-Five</h2>
+  <p class="dateline">Pruitt &amp; Hale, Consulting Engineers &middot; January and February</p>
+  <p>That was the coldest January anybody in Ohio could remember. The pipelines could not carry gas north fast as the state was burning it, and Columbia Gas cut back the factories, and then the schools, and then asked everybody else please. Ohio State called off a whole day of classes to save fuel. In Dayton the General Motors plants sent twenty-six thousand men home. In Worthington the school board talked about running Saturdays in June. The landlord at the office park put a locked plastic box over every thermostat in the building and set them all at sixty-five.</p>
+  <p>Jerry had been the office manager at Pruitt &amp; Hale for nine years. It said <em>Administration</em> on his door, which meant the keys, the payroll, the postage meter, the Bunn coffee maker, the softball team, the bowling league, and the big cardboard United Way thermometer in the lobby, which he colored in with a red marker every Friday. The building was one story of brown brick and smoked glass in a row of others just like it, set down in what had been a soybean field, with a retention pond out front that froze solid that winter and had three ducks standing on it most mornings like they had been told to wait.</p>
+  <p>He did get up before his house. He set the alarm for a quarter past five and turned it off before it could wake Barb and went down and sat in a chair from the dinette set, as he had been told, with the house at fifty-five degrees and the refrigerator humming. He sat there a few minutes. Then he thought of the pipes in the drafting room, which ran along the north wall and had frozen the year before, and of the coffee, and of the young men who would come in at half past seven to a cold building, and he got up and got his coat.</p>
+  <p>He was at the office every day by a quarter after six. He started both pots. He plugged in the space heater he had brought from his own basement, which was against the landlord&rsquo;s rules, and stood it in the middle of the drafting room where the boys could get at it, and by the time they came in stamping their feet he had the coffee poured. They stood around the heater with their hands out, Denny and Kurt and the Riegel boy and Patty, who did the lettering on the small sheets, and Jerry talked to them about Woody Hayes and the Orange Bowl and whether the Reds could do it three years running, and about the energy crisis, and about their mothers, and they liked him. Everybody liked Jerry. He knew what everybody&rsquo;s kids were named.</p>
+  <p>And all the time, pouring coffee, carrying the heater, scraping the ice off the inside of the windows with a putty knife, he said it to himself. <em>Watch.</em> He was watching. He was watching everything, the thermostat and the pond and the kids and the pipes. He figured he was a man who prayed on the go, the way his father had been. He figured the Lord could hear him over a coffee maker.</p>
+  <p>Walt came in at five minutes to eight. He hung his coat on the same hook he had used for eleven years and went to his board by the north windows, the biggest board in the room, with the parallel bar he had brought from his last job and a coffee can of pencils sharpened with a knife. He was the chief draftsman. He lettered every title block in the place by hand, slowly, turning the pencil a little between his fingers as he drew so the line stayed the same width from end to end, and the young men said you could set a ruler against a Walt Mohr letter. He did not stand around the heater. He wore a gray sweater his wife had knitted. Down the hall the blueline machine ran all day, and the whole back of the building smelled faintly of ammonia, and he did not seem to notice that either.</p>
+  <p>At half past four he went home. In the evenings, after supper, he put on his old Navy peacoat and walked. He walked the court and out to Morning Street and around by the elementary school and back, slowly, in the dark and the cold, with his hands at his sides, for about an hour. At ten his house went dark.</p>
+  <p>One morning toward the end of January he stopped in the coffee room on his way to the board. Jerry was refilling the sugar.</p>
+  <p><em>Jer,</em> he said. <em>That isn&rsquo;t it.</em></p>
+  <p><em>What isn&rsquo;t what?</em></p>
+  <p><em>She said sit.</em></p>
+  <p><em>I sit. I sit plenty.</em> Jerry laughed. <em>Walt, I pray all day long. I just do it on the go. I figure the Lord isn&rsquo;t particular about chairs.</em></p>
+  <p><em>You can&rsquo;t do it on the side,</em> Walt said. <em>It&rsquo;s not something you do on the side of something else.</em></p>
+  <p><em>Now you sound like my mother.</em></p>
+  <p>Walt looked at him a while longer. Then he took his coffee and went back down the hall, and Patty, who was coming the other way, heard him say to nobody, <em>He doesn&rsquo;t want to be told,</em> and then he sat down at the north windows and went on lettering a title block, and that was all he said about it.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On the second of February the new president came on television in a tan cardigan sweater, sitting by a fire, and asked everybody to keep their thermostats at sixty-five in the daytime and fifty-five at night. Jerry already had. He told everyone at the office he already had.</p>
+  <p>The bowling league met Friday nights at the lanes on Route 23. Pruitt &amp; Hale had two teams, and Jerry was captain of one and kept the books for both. Walt bowled on the other. That Friday Walt bowled his two games and put his ball back in its bag at nine o&rsquo;clock and got his coat.</p>
+  <p><em>Going home to bed?</em> Jerry said, loud enough for the alley. <em>She gave you a job of work, Walt. Shouldn&rsquo;t you be up nights praying?</em></p>
+  <p>The men laughed, and Walt smiled and went out to his car. Jerry bowled a two-twelve in the third game, his best since October, and stayed until they closed, and drove home at half past twelve under a sky so clear and cold it made the streetlights ring, and fell into bed beside Barb and slept like a stone until a quarter past five.</p>
+</section>
+
+<section>
+  <h2>III. Four-Thirty</h2>
+  <p class="dateline">Larkspur Court &middot; February into March</p>
+  <p>Walt got up at half past four. He did not set an alarm. He had been a Navy man and he woke when he decided to. He went down in his socks so as not to wake Lois and took the straight chair from the end of the kitchen table and turned it toward the window over the sink, and sat.</p>
+  <p>For the first weeks it was nothing but trouble. He fell asleep sitting up and woke with his chin on his chest. He planned drawings. He lettered in his head, a whole sheet of a sewage plant for the city of Marion, and when he caught himself his right hand was moving on his knee. He argued with Jerry. He argued with Jerry a good deal. He thought about his daughter in Toledo, and his knee, and money. Every time he found himself gone he came back, the way you bring a pencil back to the edge of the bar when it has wandered, without making a fuss about it, and was gone again inside a minute.</p>
+  <p>The house was fifty-five degrees. He could see his breath, almost. The furnace came on under the floor with a thump and a tick and ran a while and went off. The refrigerator hummed and quit. Far off, on 161, a truck went west, and he could follow the sound of it a long way. He did not try to make anything happen. Miss Bevington had not told him to make anything happen. She had told him to watch, and he had decided early that he would take her at her word, which was how he took a set of specifications.</p>
+  <p>He did not tell anybody. He did not tell Lois, who thought he had taken up getting up early the way some men take up golf.</p>
+  <p>It came in the middle of March, on a morning when the thaw had started and the gutter over the back step was dripping. He did not know afterward when it had begun. He was listening to the gutter, the drops coming off it one at a time onto the concrete, and at some point the listening had nobody in it. There was the drop, and the dark, and the hum, and a pair of hands lying open on two knees that were his. There was the next drop. It went on. When the paper hit the storm door at twenty to six it was still going on, and he got up and filled the percolator and put it on the burner, and it went on while he did that, and while he shaved, and while he drove to work behind a salt truck on Morning Street with the window cracked to keep the windshield clear.</p>
+  <p>It was still there at the board. He lettered the title block of a bridge deck for Delaware County, and he saw every letter all the way through, from the first touch of the lead to the lift, and each one was the only letter there had ever been.</p>
+  <p>Patty noticed he was humming. She told Denny, and Denny said Walt Mohr didn&rsquo;t hum, and went to listen, and came back and said he&rsquo;d be darned.</p>
+</section>
+
+<section>
+  <h2>IV. The Rail</h2>
+  <p class="dateline">Miss Bevington&rsquo;s front room, Old Worthington &middot; Easter afternoon, April 10</p>
+  <p>She lived in four rooms of a white frame house two blocks off the Green, with a brass bowl from Lucknow on the radiator and a photograph on the wall of a woman in a dark dress standing with about forty girls in white in front of a long porch. She had come home brown from Florida. They brought her an Easter lily in foil from the church, and she put it on the radiator next to the bowl and sat down across from them with her hands in her lap.</p>
+  <p><em>Well,</em> she said. <em>Did you watch?</em></p>
+  <p>Jerry answered first. He had been thinking about how to say it all the way over.</p>
+  <p><em>Miss Bevington, I&rsquo;ll be honest with you, because I know Walt won&rsquo;t mind. I&rsquo;m a little worried about him. He&rsquo;s in bed by ten every night. I can see his house from my front window. Lights out, ten o&rsquo;clock, like a farmer. He bowls two games and goes home.</em> He smiled at Walt to show there were no hard feelings. Walt was looking at the lily.</p>
+  <p><em>And you, Jerry?</em></p>
+  <p><em>I was up at five-fifteen every morning. I don&rsquo;t believe I missed three days all winter. I had the coffee on at the office by half past six in the coldest January in the history of the state of Ohio. I said that word to myself, I bet you, a hundred times a day. I don&rsquo;t believe I slept in once.</em></p>
+  <p>She looked at him for a long time, the way she had looked at forty girls on a porch.</p>
+  <p><em>Jerry,</em> she said. <em>You were warm all winter.</em></p>
+  <p>He started to answer and did not. She turned a little in her chair toward the window, where the afternoon was coming down yellow across the wet lawns.</p>
+  <p><em>My father kept trotters and pacers at the fairgrounds, when the fair was still down at Powell,</em> she said. <em>He had one good pacer at a time, when he could afford one. And he had an old mare named Dolly who pulled the milk wagon, and every morning he put her on the track beside the pacer to keep him company, because a racehorse is lonesome. And Dolly went round and round on the inside rail, sweating, very busy, blowing like a steam engine. She worked harder than any horse on that track. And the pacer went by her like she was a fence post.</em></p>
+  <p>She looked back at Jerry.</p>
+  <p><em>You took your busy for watching. That&rsquo;s all. It&rsquo;s the commonest thing there is. I did it for eleven years.</em></p>
+  <p>Then she got up and went to the bookcase, slowly, holding the backs of chairs, and came back with a black book whose spine had been mended with adhesive tape, and opened it where a strip of newspaper marked the place. She read it to him the way she must once have read arithmetic problems to girls who were afraid of them, slowly and without any particular expression, as if it were just information.</p>
+  <div class="verse">
+    <p>If this sleeper be not outwardly vicious, his sleep is usually the deepest of all: whether he be of the Laodicean spirit, &ldquo;neither cold nor hot,&rdquo; but a quiet, rational, inoffensive, good-natured professor of the religion of his fathers&hellip;</p>
+    <p>&mdash; Charles Wesley, &ldquo;Awake, Thou That Sleepest,&rdquo; sermon before the University of Oxford, April 4, 1742</p>
+  </div>
+  <p>Jerry&rsquo;s face had gone red to the ears. He sat with the bulletin from the first Sunday of the year still folded in his inside pocket, where he had carried it for three months, and he could feel the corner of it against his chest.</p>
+  <p><em>Walter?</em> she said.</p>
+  <p><em>I got up,</em> Walt said.</p>
+  <p>She looked at him, and nodded, and did not ask him anything else. The three of them sat a while in the front room with the lily. Then she said she was tired from the trip, and they got their coats.</p>
+</section>
+
+<section>
+  <h2>V. The Window</h2>
+  <p class="dateline">Larkspur Court &middot; the next morning</p>
+  <p>Jerry woke in the dark without the alarm. The clock said four thirty-one. He lay a while listening to Barb breathe and then got up and went down the stairs in his robe and stood at the front window.</p>
+  <p>The court was dark. Eleven houses in a horseshoe, their porch lights off, their station wagons nosed up to their garage doors, the wet lawns gray in the light from the one streetlamp at the mouth of the court. Every window black but one. Across the way, at the side of the Mohrs&rsquo; house, the kitchen light was on, and it lay out on the driveway in a long yellow square.</p>
+  <p>He could not see Walt. He could only see the light.</p>
+  <p>He thought about going over. He thought he could take the percolator, and stand at the back door, and they could have a cup. He stood with his hand on the cold glass and did not go. After a while he went into his own kitchen without turning on the light and pulled a chair out from the dinette set, and the legs scraped on the linoleum and he winced and waited to hear if Barb had woken, and she had not. He sat down facing the window over the sink. He did not know what he was supposed to be watching. He could see, past the corner of the garage, a piece of the yellow square on the Mohrs&rsquo; driveway, and he watched that.</p>
+  <p>The furnace came on under the floor and ran and went off. A truck went west on 161. The paper hit the Mohrs&rsquo; storm door at twenty to six, and then his own, and he was still sitting there.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Earnest among the thoughtless, awake among the sleepers, the wise man advances like a racer, leaving behind the hack.<cite>Dhammapada 29, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, two monks receive a meditation subject from the Buddha and go off together to a forest hermitage for the rains. One spends his evenings bringing firewood, tending the charcoal brazier and chatting with the young monks, and goes to bed when his friend comes in from walking meditation. The other warns him once (&ldquo;the favor of the Buddhas may not be won by double-dealing&rdquo;), gives up when he will not be told, walks in the first watch of the night, rests in the second, rises in the third, and soon reaches arahatship. When they return, the busy one tells the Buddha that his friend did nothing but sleep, and that he himself never did. The Buddha answers that he has mistaken heedlessness for heedfulness, and compares him to a worn-out hack beside a racehorse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-06.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Appamada">appamāda</a>, the heedfulness the second chapter of the Dhammapada is named for.</p>
+    <h3>Central Ohio, 1977</h3>
+    <p>The winter of 1976&ndash;77 was one of the coldest on record in the eastern United States, and interstate pipelines could not deliver natural gas as fast as the cold burned it. Across Ohio, gas companies curtailed industrial customers and schools; the Federal Reserve Bank of Cleveland <a href="https://www.minneapolisfed.org/beige-book-reports/1977/1977-02-cl">reported in February</a> that schools in its district had closed widely, that General Motors had laid off nearly 26,000 workers in the Dayton area for several days, and that some 110,000 manufacturing workers had been idled. Ohio State <a href="https://library.osu.edu/site/archives/2014/01/10/schools-out/">cancelled classes on January 18</a> at the request of Columbia Gas and the electric company to save fuel. On February 2, two weeks after his inauguration, President Carter gave his first fireside chat, wearing a cardigan, and asked Americans to keep <a href="https://www.presidency.ucsb.edu/documents/report-the-american-people-remarks-from-the-white-house-library">their thermostats at 65 degrees in the daytime and 55 at night</a>.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Worthington,_Ohio">Worthington</a> was founded in 1803 by the Scioto Company, a band of settlers from Granby, Connecticut, led by James Kilbourne, who laid it out around a New England village green; by the 1970s it was a prosperous suburb on the north edge of Columbus. Drafting offices of the period still drew by hand and reproduced their sheets on the <a href="https://en.wikipedia.org/wiki/Whiteprint">diazo or &ldquo;blueline&rdquo; process</a>, developed in ammonia fumes. Miss Bevington&rsquo;s school stands in for the Methodist women&rsquo;s mission in Lucknow that grew into <a href="https://en.wikipedia.org/wiki/Isabella_Thoburn_College">Isabella Thoburn College</a>, founded in 1870 by the first woman missionary the Methodist Episcopal Church sent to India. Her father&rsquo;s fair ran at Powell until 1937, when it moved to Delaware, where the <a href="https://en.wikipedia.org/wiki/Little_Brown_Jug_(horse_race)">Little Brown Jug</a> for three-year-old pacers has been run since 1946. Charles Wesley, the hymn writer, preached &ldquo;Awake, Thou That Sleepest&rdquo; before the University of Oxford in 1742; it became the third of the <a href="https://www.ccel.org/ccel/wesley/sermons.v.iii.html">standard sermons</a> of Methodism.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the two friends, one heedful and one heedless, from the Dhammapada commentary (verse 29). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-06.htm">The original</a>. Scripture from Charles Wesley&rsquo;s sermon &ldquo;Awake, Thou That Sleepest&rdquo; (1742), in the 1872 edition of the Wesleys&rsquo; sermons. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-counting-tower.html">&larr; The Counting Tower</a><a href="index.html">All stories</a><a href="salt-tea.html">Salt Tea &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, lines = [], grid = 28;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function margin() {
+    var col = Math.min(W, 576), left = (W - col) / 2;
+    return left > 60 ? { a: 8, b: left - 16, c: W - left + 16, d: W - 8 } : null;
+  }
+  function spawn(l, warm) {
+    var m = margin();
+    var horiz = Math.random() < 0.7;
+    if (m) {
+      var side = Math.random() < 0.5;
+      var x0 = side ? m.a : m.c, x1 = side ? m.b : m.d;
+      if (horiz) {
+        l.x0 = x0 + Math.random() * (x1 - x0) * 0.3; l.x1 = x1 - Math.random() * (x1 - x0) * 0.2;
+        l.y0 = l.y1 = Math.round((40 + Math.random() * (H - 80)) / grid) * grid + 0.5;
+      } else {
+        l.x0 = l.x1 = Math.round((x0 + Math.random() * (x1 - x0)) / grid) * grid + 0.5;
+        l.y0 = 40 + Math.random() * H * 0.4; l.y1 = l.y0 + 80 + Math.random() * H * 0.4;
+      }
+    } else {
+      l.x0 = 8; l.x1 = W - 8;
+      l.y0 = l.y1 = (Math.random() < 0.5 ? 24 + Math.random() * 60 : H - 24 - Math.random() * 60);
+    }
+    l.t = warm ? Math.random() * 1600 : 0;
+    l.draw = 240 + Math.random() * 200; l.hold = 500 + Math.random() * 700; l.fade = 500;
+    return l;
+  }
+  function make() {
+    lines = [];
+    var n = margin() ? 7 : 2;
+    for (var i = 0; i < n; i++) lines.push(spawn({}, true));
+  }
+  function drawGrid() {
+    ctx.strokeStyle = 'rgba(44,90,152,0.045)'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (var x = 0.5; x < W; x += grid) { ctx.moveTo(x, 0); ctx.lineTo(x, H); }
+    for (var y = 0.5; y < H; y += grid) { ctx.moveTo(0, y); ctx.lineTo(W, y); }
+    ctx.stroke();
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    drawGrid();
+    for (var i = 0; i < lines.length; i++) {
+      var l = lines[i];
+      if (!reduce) { l.t++; if (l.t > l.draw + l.hold + l.fade) spawn(l, false); }
+      var p = reduce ? 1 : Math.min(1, l.t / l.draw);
+      var e = p * p * (3 - 2 * p);
+      var a = 0.32;
+      if (!reduce && l.t > l.draw + l.hold) a *= 1 - (l.t - l.draw - l.hold) / l.fade;
+      if (a <= 0.005) continue;
+      var x = l.x0 + (l.x1 - l.x0) * e, y = l.y0 + (l.y1 - l.y0) * e;
+      ctx.strokeStyle = 'rgba(44,90,152,' + a + ')'; ctx.lineWidth = 1.1;
+      ctx.beginPath(); ctx.moveTo(l.x0, l.y0); ctx.lineTo(x, y); ctx.stroke();
+      if (!reduce && p < 1) {
+        ctx.fillStyle = 'rgba(44,90,152,' + (a * 1.4) + ')';
+        ctx.beginPath(); ctx.arc(x, y, 1.6, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size(); make(); frame();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) frame(); });
+})();
+</script>
+</body>
+</html>
