@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Hand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the blue-grey paper of a primer's cover, light theme; down the left margin a single thread of sand falls as in an hourglass and heaps at the foot, and when the heap is full it is gone and begins again; datelined sections. */
+  --ground: #dfe3e2;
+  --ground-2: #cdd4d4;
+  --paper: #23272b;
+  --paper-dim: #5b6268;
+  --accent: #2f4f6f;
+  --glow: #8a6a3a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #e6e9e7 0%, #d6dcdc 100%) fixed, #dfe3e2;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(0,0,0,.12); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,255,255,.55); border: 1px solid rgba(0,0,0,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(0,0,0,.12); border-bottom: 1px solid rgba(0,0,0,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,255,255,.55); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 7.7 &middot; Kosambiv&#257;s&#299; Tissa&rsquo;s Novice</span></nav>
+<header>
+  <h1>One Hand</h1>
+  <div class="epigraph">As runs the Glass,<br>Our Life doth pass.<br>&mdash; The New-England Primer Improved (1777)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is the way it was handed down,</span> on the north side of the Island.</p>
+
+<section>
+  <h2>I. The Shears</h2>
+  <p class="dateline">South of Huntington, Long Island &middot; March 1779</p>
+  <p>Nathan Conklin was a minister's son from the east end who had left college in the second year of the war, and in the third winter of the King's troops on Long Island he kept a school of eleven children in the back kitchen of Deacon Jesse Ketcham's farm, and boarded there. That was all the garrison at Huntington knew of him. He also carried letters. There were lines across the Island in those years, like the one Major Tallmadge's friends kept at Setauket, by which what was seen in New York on a Monday could be in Connecticut by the week's end, and the deacon's kitchen was a station on one of them.</p>
+  <p>When the school broke up for planting, the deacon set the winter's pay on the table: four yards of tow cloth, a crock of butter, a cheese, and two shillings in hard money.</p>
+  <p><em>I thank you, and I cannot take it,</em> said Conklin.</p>
+  <p><em>It is what the schoolmaster has always had in this house.</em></p>
+  <p><em>I have forty miles to walk and nobody to carry so much as my shoes. A man alone on the road with a pack is stopped at every post. I have no boy.</em></p>
+  <p>The deacon thought about it for the space of a breath. <em>Then you shall have mine,</em> he said, and called his son Eli in from the yard. Eli was seven years old.</p>
+  <p>Conklin said a boy on the road wanted a short head, for the lice in the barns. He sat the child on a stool by the door, wet his hair from the basin, and took the sheep shears to it. To keep him still he gave him the primer open at the pictures and had him say the rhymes over.</p>
+  <div class="verse">
+    <p>As runs the Glass,<br>Our Life doth pass.</p>
+    <p>Xerxes did die,<br>And so must I.</p>
+    <p>While youth do chear<br>Death may be near.</p>
+    <p>&mdash; <span style="font-style:normal">The New-England Primer Improved</span> (1777)</p>
+  </div>
+  <p>Every child in the school had said those lines a hundred times and gone out to slide on the pond. The Ketchams held ever after that Eli, with his hair falling on the floor, heard them. They said that between one closing of the shears and the next he took the whole of what the little book has to tell, and was finished with it, and that when he got down from the stool he was quiet in a way he had not been when he got up on it. His mother saw it and did not know what to call it. Conklin, who was twenty-two and had a great deal on his mind, saw a well-behaved child.</p>
+  <p>The letters were sewn that night into the boards of the primer, under the blue paper. Nobody searches a child's primer. For two weeks more Conklin stayed at the farm, and then the two of them set out east.</p>
+</section>
+
+<section>
+  <h2>II. The Third Night</h2>
+  <p class="dateline">Smithtown Branch &middot; April 1779</p>
+  <p>The first night they slept in a barn in the Dix Hills, and the second in a weaver's loft at Comac. On the third evening they came to a tavern at the Branch, and a foraging party of dragoons was in it. There were eleven troopers and a sergeant, their horses filling the stable and the shed and their saddles heaped in the public room.</p>
+  <p>The woman of the house had one garret left, with one bed. She would let the schoolmaster have it if his boy would do the morning work, since her own girl had run off when the horses came. Eli carried up the master's pack and the primer. He beat the bed and turned it, found a candle end, brought water, and went down to learn where the broom was kept and where the back-house stood. By the time he had done all that it was full dark, and he had found no corner for himself. The stable was horses to the door. The public room was troopers.</p>
+  <p>When he came up to see whether anything more was wanted, Conklin asked, <em>Where do you lie tonight?</em></p>
+  <p><em>I have not had time to look, sir.</em></p>
+  <p><em>Then stay here. I'll not have you on the stairs among them.</em></p>
+  <p>Now the line had a rule, and Conklin had given his word to it. He knew it as he knew his own name. <em>Where the letters are, one wakes.</em> Two of the line might share a roof if they must, but they did not both sleep. He meant to take the watch himself. He lay down in his clothes to rest his back for a quarter of an hour, and he was asleep before the candle end was out, for he was a tired young man who had not yet learned how to carry what he carried.</p>
+  <p>Eli stood by the bed and considered it. If he lay down on the floor and slept, then both had slept, and the master had broken his word, though he would never know. So the boy sat down on the boards between the bed and the door with his legs crossed and his back straight and the primer in his lap, and sat there awake until morning. Below him the dragoons sang for a while and then left off.</p>
+  <p>Conklin woke in the grey before sunrise with the rule in his mouth. He had slept the night through. The boy must be up and out and at the yard work before the troopers were stirring, and seen to be nothing but a tavern's chore boy. He supposed the child was curled asleep on the floor at the bed's foot. He reached down for his walking stick, a hazel with a knob to it, and rapped the boards with the tip where he took the boy's feet to be, and then tossed the stick away from him toward the corner by the door.</p>
+  <p><em>Up, Eli. Go out.</em></p>
+  <p>The boy was not at the bed's foot. He was sitting upright by the door, and the knob of the stick took him in the left eye and put it out.</p>
+  <p>He made no sound at all. After a moment he said, <em>What was it you said, sir?</em></p>
+  <p><em>I said get up and go out.</em></p>
+  <p>Eli got up. He put his left hand over the eye and went out and down the stairs.</p>
+</section>
+
+<section>
+  <h2>III. The Basin</h2>
+  <p class="dateline">The same morning</p>
+  <p>He did not sit down in the yard, and he did not go and say to anyone that his eye was put out. There was the morning work, which he had promised. He kept his left palm pressed where it was and did the work with his right. He carried down the pot. He swept out the back-house and the wash bench with the birch broom. He drew a bucket at the well, one-handed, a pull and a turn round the post and another pull.</p>
+  <p>The sergeant of dragoons came out to the trough in his shirt and watched this.</p>
+  <p><em>What have you there under your arm, boy?</em></p>
+  <p><em>My letters, sir,</em> said Eli, and held the primer out to him.</p>
+  <p>The sergeant did not take it. <em>Can you read them?</em></p>
+  <p>Eli opened the book against his chest with his one hand and read out, <em>Whales in the Sea, GOD's Voice obey,</em> in the voice he would have used in the deacon's kitchen. The sergeant laughed, and asked what he had done to his face, and Eli said a stick had caught it, which was true. The sergeant said he should mind where he ran, and put his own head in the trough.</p>
+  <p>Then Eli swept the garret stairs and the garret, around the master's feet, and filled the basin from the bucket and brought it for the master to wash. He brought it in his right hand, held against his hip, and some of it slopped on the boards.</p>
+  <p>Conklin had been sitting on the bed's edge angry with himself for sleeping, and it came out sideways. <em>Is that how a basin is brought, in the deacon's house? In one hand, like a pot-boy? You were taught better.</em></p>
+  <p><em>I know how it should be brought, sir. One of my hands is not free.</em></p>
+  <p><em>What is the matter with it?</em></p>
+  <p>So the boy told him, from the beginning: the rule, and the sitting up, and where he had been sitting, and the stick. He took his palm away for as long as it needed and then put it back.</p>
+  <p>Conklin looked. Then that young man of family, who had read Greek at New Haven and had the lives of a dozen people sewn in a primer, got down on the garret floor on both knees before a child of seven, and put up his two hands together.</p>
+  <p><em>Eli. Forgive me. I did not know. Be my help in this, for I have none.</em></p>
+  <p><em>I did not tell you for that, sir,</em> said Eli. <em>I told you because you asked about the basin. I kept it back so you should not be grieved. It is no fault of yours, and it is none of mine. It is only the glass running. We are in the world, and things fall out so in it, and there is no one to lay it on.</em></p>
+  <p>He tried a while longer to comfort the man, as well as he could with the dragoons saddling under the window. Conklin would not be comforted. When they left the tavern he took the boy's bundle on his own back with his pack, and the primer inside his shirt, and they went on along the North Country Road, and where the sand was deep he carried the boy too.</p>
+</section>
+
+<section>
+  <h2>IV. Old Mans</h2>
+  <p class="dateline">The harbor called Old Mans &middot; evening</p>
+  <p>The woman they were going to lived behind the beach at Old Mans, in a round house of poles and mats beside a patch of beans. She was one of the Montauk people. As a girl she had gone to school at Montauk to Mr. Occom, the Mohegan minister, in the years he taught there, and had her reading from him. Her name in the towns was Dorcas. She made scrub brushes of white oak splint, and splint baskets, and brooms, and walked the north side of the Island selling them at kitchen doors, and no sentry had ever asked an old Indian woman what was in a broom. Whaleboat men from the Connecticut shore bought of her too, when they came over in the dark. Her own grandson was in a whaler out of Sag Harbor, the war permitting. She meant to go up to the Oneida country with Mr. Occom's people when the roads were open, and plant there.</p>
+  <p>She saw them from a long way down the beach, the man bent under two bundles and a child. When they came up she looked first at the boy's face and moved his hand and looked under it, and put the hand back. She did not say the eye would mend. Then she asked the schoolmaster, as anyone asks a traveler, whether he was well and had come without much hardship.</p>
+  <p><em>I am well. I have had no hardship,</em> said Conklin. <em>But this boy. I have never seen the like of him.</em></p>
+  <p><em>What has he done?</em></p>
+  <p>He told her all of it, not sparing himself the sleep or the stick or the words about the basin. <em>And when I begged his pardon on my knees he said it was no fault of mine nor of his, only the glass running, and I was not to grieve. He set himself to comfort me. There is no anger in him. I looked for it. I have never in my life seen such a child.</em></p>
+  <p>Dorcas went on splitting a splint with her thumbnail until it was split.</p>
+  <p><em>One who has let the burning go out of him holds no anger against anybody,</em> she said. <em>You were looking in an empty house. He is quiet in what he thinks. He is quiet in what he says and quiet in what he does. He knows how things are, and so he is loose from them. A person like that is at rest.</em></p>
+  <p>She had the primer from him then, and slit the blue paper with the same thumbnail. It is told that Nathan Conklin, sitting on the sand with her words in his ears and the boy asleep at last against the wall of the house, came to rest himself that evening, and that he carried letters for four years more and was never once afraid, nor once careless.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Eli Ketcham kept school at Huntington South for fifty-one years, a one-eyed man who taught the grandchildren of his first scholars out of the same primer with its boards twice mended. He had a way of waiting for a child to finish that people remembered. There was a broom behind his door, and in fifty-one years there was never a stick in the room.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">His thought is quiet, quiet are his word and deed, when he has obtained freedom by true knowledge, when he has thus become a quiet man.<cite>Dhammapada 96, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the elder Tissa of Kosamb&#299; declines his patron's gifts because he has no novice to attend him, and the patron gives him his seven-year-old son. The boy becomes an arahat the instant the razor touches his hair, while the elder gives him the first meditation on the body. On the road, the two share a lodging for a third night, which the rule forbids if the novice lies down; so the novice sits up until morning. At dawn the elder, meaning to send him out, tosses a fan whose handle puts out the boy's eye. The boy says nothing, covers the eye, does his duties with one hand, and is scolded for offering the toothstick one-handed. When the elder learns the truth and begs pardon, the novice says that neither of them is to blame, only the round of existence. The elder tells the Buddha, who speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-07.htm">the full commentary story</a>.</p>
+    <h3>Long Island, 1779</h3>
+    <p>British and Loyalist troops held Long Island from August 1776 until 1783, with garrisons at Huntington, Oyster Bay, Setauket and elsewhere, and foraging parties took hay, cattle and lodging from the farms. Intelligence about the army in New York crossed the Island and then Long Island Sound to Connecticut by several routes. The best known is the <a href="https://en.wikipedia.org/wiki/Culper_Ring">Culper Ring</a>, organized in 1778 by Major Benjamin Tallmadge around Setauket, whose couriers rode the fifty-odd miles from the city and whose whaleboats crossed the Sound at night. Conklin, the Ketchams, the tavern and their line are invented, as is the line's rule. The rhymed alphabet is quoted from the 1777 Boston edition of <a href="https://en.wikipedia.org/wiki/The_New_England_Primer">The New-England Primer</a>, the small schoolbook from which most children in the northern colonies learned to read for more than a century; Old Mans is the old name of the harbor at <a href="https://en.wikipedia.org/wiki/Mount_Sinai,_New_York">Mount Sinai</a>.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Montaukett">Montaukett</a> are the people of the east end of Long Island. By the 1770s, crowded onto a fraction of their land at Montauk, many worked as whalers, farm laborers and servants across the Island, and Montaukett and Shinnecock women were known for the baskets, brooms and oak-splint scrub brushes they made and sold from door to door. <a href="https://en.wikipedia.org/wiki/Samson_Occom">Samson Occom</a>, a Mohegan and an ordained Presbyterian minister, lived at Montauk from 1749 to 1761 as schoolmaster and preacher and married Mary Fowler, a Montaukett woman. In the 1770s he and his brother-in-law David Fowler led the plan to move Christian families of several coastal nations to Oneida land in upper New York; the war interrupted it, and the settlement, <a href="https://en.wikipedia.org/wiki/Brothertown_Indians">Brothertown</a>, was founded in 1785. Dorcas is invented, and her words are her own.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Kosambiv&#257;s&#299; Tissa&rsquo;s novice from the Dhammapada commentary (verse 96). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-07.htm">The original</a>. Rhymes from <span style="font-style:normal">The New-England Primer Improved</span> (Boston, 1777). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-doorsill.html">&larr; The Doorsill</a><a href="index.html">All stories</a><a href="una-de-gato.html">Uña de Gato &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, grains = [], t = 0, heap = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function gx() { return Math.max(26, (W - Math.min(W, 576)) / 2 * 0.5); }
+  function make() {
+    grains = [];
+    for (var i = 0; i < 26; i++) grains.push({ y: Math.random(), v: 0.0016 + Math.random() * 0.0012, dx: (Math.random() - 0.5) * 2.4, a: 0.18 + Math.random() * 0.3 });
+    heap = reduce ? 0.5 : 0;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var x = gx(), top = H * 0.18, bot = H * 0.93;
+    // one thread of sand, as in a glass, running down the left margin
+    for (var i = 0; i < grains.length; i++) {
+      var g = grains[i];
+      if (!reduce) { g.y += g.v; if (g.y > 1) { g.y = 0; heap = Math.min(1, heap + 0.0025); } }
+      var y = top + (bot - top) * g.y;
+      ctx.fillStyle = 'rgba(92,74,48,' + g.a + ')';
+      ctx.fillRect(x + g.dx, y, 1.3, 1.3);
+    }
+    // the heap it makes, which is turned over when full
+    var hh = 5 + heap * 16, hw = 10 + heap * 16;
+    ctx.fillStyle = 'rgba(92,74,48,.22)';
+    ctx.beginPath(); ctx.moveTo(x - hw, bot + 2); ctx.quadraticCurveTo(x, bot - hh * 1.6, x + hw, bot + 2); ctx.closePath(); ctx.fill();
+    if (!reduce) { if (heap >= 1) { t++; if (t > 240) { heap = 0; t = 0; } } requestAnimationFrame(draw); }
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

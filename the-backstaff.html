@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Backstaff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Light: sun-bleached limestone and shallow-bank turquoise; the shadow of a backstaff vane drifts down to meet a low horizon. */
+  --ground: #f3eee2;
+  --ground-2: #e3ebe6;
+  --paper: #22302f;
+  --paper-dim: #5d6b67;
+  --accent: #1f6f78;
+  --glow: #c58b3a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f7f3ea 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(34,48,47,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(31,111,120,.18); }
+.epigraph { border-left: 1px solid rgba(31,111,120,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(220,232,226,.7); border: 1px solid rgba(34,48,47,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(34,48,47,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(34,48,47,.15); border-bottom: 1px solid rgba(34,48,47,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(220,232,226,.7); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 18.5 &middot; A Youth of Good Family</span></nav>
+<header>
+  <h1>The Backstaff</h1>
+  <div class="epigraph">From ignorance comes vice, from error heresy, &amp;c.<br>&mdash; Robert Burton, <em>The Anatomy of Melancholy</em></div>
+</header>
+
+<p class="heard"><span class="heard-lead">As I had it told me,</span> on the beach at Nassau.</p>
+
+<section>
+  <h2>I. The School</h2>
+  <p class="dateline">Nassau, New Providence &middot; spring 1719</p>
+  <p>Mr. Prys kept his school of navigation in a palmetto house at the east end of the town, below the ridge, where the ground was too stony for anyone to want it. He had been a sea artist forty years. He was Welsh, from Carmarthen, and very old, and he had sailed as master's mate and master out of Bristol and Kingston and Boston, and in the year 1697 a pirate had taken his ship off Hispaniola and kept him eight months because a pirate who cannot find the way home is only a man in a boat. He did not talk about those months. He had come to New Providence afterward, by what road nobody knew, and stayed.</p>
+  <p>When the Governor came in the summer of 1718 with his men-of-war and the King's pardon, there were two hundred and more men on the island who had been on the account, and most of them took it, and then sat about the town with nothing to do. Some of them had money and drank it. Some went turtling, or raked salt, or went out to the wrecks on the banks. A few of them, the ones who could add, came to the palmetto house in the evenings and paid Mr. Prys a piece of eight a month to learn what he knew, because a man who could keep a reckoning could get a mate's berth on any honest sloop in the Indies, and a man who could not would be raking salt at forty.</p>
+  <p>He taught them with a slate and a box of sand and a traverse board with its pegs on strings, and a brass-bound backstaff that had been to Guinea and back. He made them say everything aloud. Plane sailing, middle-latitude sailing, the log and the half-minute glass, how to work a day's work from the pegs. The sun's declination for every day of the year, which he had by heart and made them have. The backstaff, he told them, was the cleverest thing an Englishman ever made, because you used it with your back to the sun. You did not look at the thing you were measuring. You looked at its shadow on the vane, and at the horizon, and the truth was where the two met.</p>
+  <p>Nathaniel Cole was the best of them that spring. He was twenty-three, the younger son of a Bristol sugar baker, and he had run away to sea at fifteen and been taken out of a Jamaica sloop in 1716 and signed the articles of the men who took him, and stayed with them two years, and done what they did. He took the pardon on the second day. He had come out of it with a share he never spoke of. He was quick with figures and slow with everything else, and he listened to the old man the way a dog listens at a door.</p>
+  <p>In April he married Susannah Thompson, whose people had been on the island since before anyone could remember and kept a few goats and a fig tree up the hill behind the town. She was nineteen. She had a laugh you could hear from the waterfront. They were married in her mother's house, before witnesses, and Mr. Prys came and stood at the back in his old blue coat and drank one glass and went home.</p>
+</section>
+
+<section>
+  <h2>II. The Town</h2>
+  <p class="dateline">The waterfront &middot; summer 1719</p>
+  <p>Nassau in that year was a few hundred men and not many women. There was a fort going up on the point that nobody wanted to work at, so the Governor had declared martial law to make them, and there was fever among the people he had brought, who died of it while the old islanders went on as if it were weather. There were taverns made of ship's planks and sailcloth all along the beach. There was always a fiddle somewhere. The gallows from the December hanging had been taken down, but people still pointed at the place.</p>
+  <p>Nat Cole went to the Exumas raking salt in May, and to the banks after turtle in June, and was gone three weeks each time. Before the month was out the whole waterfront knew that his wife had not been sitting in the dark while he was away. She had been at the dancing at the sign of the Ship, and at the other places, and she had not always gone home alone. It was the kind of town where everyone knew everything by morning, and said so.</p>
+  <p>He heard it the day he landed, from three men, before his feet were dry. He went home and sat in the doorway and looked at her. She looked back at him. She did not deny it.</p>
+  <p>She did not explain it either, though there were things she could have said. That he had brought home from the account a share of Spanish silver that she had never seen, because he kept it in a jar under the floor of their house and would not spend a real of it, and she had been married four months in the same two shifts she was married in. That he was gone more than he was home, and when he was home he sat with his slate doing sums. That she was nineteen, and the fiddles were playing every night on the beach of the only town she had ever lived in, and the men there spent their money as if it were sand. She said none of that. She went out to her mother's.</p>
+  <p>Nat stopped going out. He stopped going down to the waterfront, where men nodded at him in a way he could feel between his shoulders. He did not go back to the salt sloop. He did not go to Mr. Prys's school in the evenings. He sat in the house with the door shut in the heat and did sums on his slate that came out to nothing, and he took the jar up from under the floor and counted it, and put it back.</p>
+</section>
+
+<section>
+  <h2>III. The Backstaff</h2>
+  <p class="dateline">The school below the ridge &middot; August 1719</p>
+  <p>After eleven days it came round to the first of the month, and the first of the month was when he paid the old man his piece of eight. He could not bring himself not to pay a debt. He went up after dark, by the back way along the ridge so nobody would see him, and put the coin on the table, and sat down on the bench in his old place without looking at anybody. There were four other men there, working a traverse.</p>
+  <p>Mr. Prys finished showing them, and sent them home early. Then he sat down across the table, with the lamp between them.</p>
+  <p><em>Mr. Cole. Where have you been? You have not let yourself be seen.</em></p>
+  <p>Nat told him all of it, staring at the sand box. The salt, the turtles, the Ship. The three men on the beach. His wife in the doorway, not denying it.</p>
+  <p>The old man listened. Then he said, <em>I said all this once before, to a young man of mine. In Port Royal, in Jamaica, before the town went into the sea. His wife was the same, and he came to me the same, and sat where you are sitting. He had your way of sitting. His name was Cole as well.</em></p>
+  <p>Nat looked up. His father had been in Jamaica as a young man; it was where the money came from that bought the sugar house in Bristol. His father had never talked about it, and his mother had never talked about his father.</p>
+  <p>Mr. Prys did not say anything more about that. He said, <em>Shall I tell you what I told him?</em></p>
+  <p>Nat said yes.</p>
+  <p><em>I told him that a woman is not a cargo you have bought and stowed and can put your mark on. She is like the river, I said, that everyone draws from. Like the King's highway, that everyone walks on. Like the tavern, and the meeting house, and the well in the square. Everyone comes to them. A man may be sorry for it. But a wise man does not stand on the bank and rage at a river. It has nothing to do with him.</em></p>
+  <p>Nat said nothing for a long time. Then he said, <em>What did he do?</em></p>
+  <p><em>He let it go, after a while. He was easy after that. And the wife heard that I knew what she was, and she left it off. That's all.</em></p>
+  <p>The old man reached up to the shelf over the table, where he kept his ephemerides and his Norwood and his Seller, and took down the only other book he had, a fat old folio that had been wet more than once and dried in the sun so that the boards were warped like a hull. He opened it in the last third without looking for the place, the way a man takes down a tool from the same nail he has always hung it on, and he read aloud.</p>
+  <div class="verse">
+    <p>It may be &rsquo;tis his own fault, and he hath no reason to complain, &rsquo;tis quid pro quo, she is bad, he is worse: Bethink thyself, hast thou not done as much for some of thy neighbours?</p>
+    <p>I do not excuse her in accusing thee; but if both be naught, mend thyself first; for as the old saying is, a good husband makes a good wife.</p>
+    <p>&mdash; Robert Burton, <em>The Anatomy of Melancholy</em>, Partition 3, Section 3, Member 4 (&ldquo;Cure of Jealousy&rdquo;)</p>
+  </div>
+  <p>He closed the book on his finger.</p>
+  <p><em>How much is in the jar, Mr. Cole?</em></p>
+  <p>Nat had not told anybody about the jar. He told the old man the number. It was a good deal.</p>
+  <p><em>And what has your wife got on her back?</em></p>
+  <p>Nat did not answer that.</p>
+  <p><em>Well,</em> said Mr. Prys. <em>A loose life is a stain on a woman. Nobody here will tell you otherwise, least of all her. And a close fist is a stain on a man who has something to give. Everything wicked we do leaves a mark on us, here and wherever we are going after. But there's a worse one than any of them.</em> He opened the book again, at the very front, in the long address to the reader, and turned the leaves until he found it.</p>
+  <div class="verse">
+    <p>Some say there be two main defects of wit, error and ignorance, to which all others are reduced; by ignorance we know not things necessary, by error we know them falsely. Ignorance is a privation, error a positive act. From ignorance comes vice, from error heresy, &amp;c.</p>
+    <p>&mdash; Robert Burton, <em>The Anatomy of Melancholy</em>, &ldquo;Democritus Junior to the Reader&rdquo;</p>
+  </div>
+  <p><em>Not knowing,</em> the old man said. <em>Not knowing what you are doing while you do it. That is the stain under all the others. Get that one off you and the rest come off with it.</em></p>
+  <p>He put the book back on the shelf, and pushed the backstaff across the table.</p>
+  <p><em>Here. Show me how you take the sun.</em></p>
+  <p>Nat stood up and turned his back on the lamp, as if it were the sun, and raised the staff, and found the shadow of the vane, and the line of the wall where the horizon would be, and the old man watched him do it and said, <em>Yes. Like that. You don't look at the thing. You stand with your back to it and look at what it throws.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Fig Tree</h2>
+  <p class="dateline">Up the hill &middot; autumn 1719</p>
+  <p>It was Mrs. Thompson who told her daughter, because Mrs. Thompson's sister did the old man's washing, and nothing on New Providence went unsaid for long. She told her that Nat Cole had sat in Mr. Prys's school until midnight, and that the old Welshman knew all about her, and had read to Nat out of his great book, and that whatever it was, Nat had come down from the ridge looking like a man who had been told something.</p>
+  <p>Susannah had not cared what the waterfront said. The waterfront said everything about everyone and had since she was a child. But the old man had come to her wedding in his blue coat and drunk his one glass and gone home, and when she was nine and had fever, before anyone on the island had heard of a governor, he had walked up the hill every evening for a week with a lime and a little sugar in a paper and sat by the door saying the names of the stars to her until she slept. She had not known he would know. She had thought of him as somebody whose eyes were always on the sky.</p>
+  <p>She sat under her mother's fig tree for the rest of that day with her hands in her lap, and the next day she did not go down to the beach, nor the day after.</p>
+  <p>Nat came up the hill at the end of the week. He had a bolt of blue Holland cloth under his arm and two pairs of shoes off a Boston trader in the harbor, and he did not say anything about them. He put them on the bench by her mother's door. He had taken them out of the jar.</p>
+  <p>She went home with him that evening. Neither of them said anything about the summer then or afterward. The waterfront talked a while longer, and found other things to talk about, as it always did. That winter Nat shipped as mate in a Boston sloop in the salt trade, and kept her reckoning so well that her master asked who had taught him, and when he was home Susannah would sit across the table from him while he worked the day's figures and make him say them aloud, the way the old man did, though she did not understand a word of it.</p>
+</section>
+
+<section>
+  <h2>V. The Harbor at Night</h2>
+  <p class="dateline">Nassau &middot; August 1720</p>
+  <p>Mr. Prys died in the spring of 1720, after the Spanish came off the harbor in February with a fleet and went away again. He was buried on the ridge above his school, and his men carried him up, eleven of them, all mates and masters now on one coast or another, and Nat Cole took the backstaff, which the old man had said he should have. The folio went to the Governor's secretary, who said he would send it to England, and did not.</p>
+  <p>On a night in late August, Nat and Susannah were sitting on their step after dark with the door open behind them for the air. There was a little wind off the land. Down in the harbor something was moving without lights: a sloop warping out quietly from the anchorage past the fort, men at her sweeps, no sound but the oars in the water and once a woman's voice laughing, out on the dark, and then a hand put over it.</p>
+  <p>In the morning the whole waterfront knew that a sloop called the <em>William</em> had been stolen out of the harbor by a crowd of men who had taken the King's pardon and were tired of it, and that two of the crowd were women, one of them somebody else's wife, who had gone with them in men's clothes, and the Governor was going to proclaim them all. Everybody on the beach was talking about it, and about her.</p>
+  <p>Susannah did not talk about it. She had heard the laugh go out over the water, and she had felt Nat beside her on the step hear it too, and not turn his head to look at her. That was all. She got up early and went down to the well in the square with her bucket, where everyone came, and drew her water, and carried it home.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Bad conduct is the taint of woman, greediness the taint of a benefactor; tainted are all evil ways in this world and in the next.<cite>Dhammapada 242, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">But there is a taint worse than all taints,&mdash;ignorance is the greatest taint. O mendicants! throw off that taint, and become taintless!<cite>Dhammapada 243, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a young man of good family marries a woman who is unfaithful from the day of the wedding, and he is so ashamed that he stops showing his face, even to the Buddha. When the Buddha asks where he has been, he tells him everything. The Buddha says he gave the same counsel in a former life, and at the young man's request tells the birth story: a famous teacher whose pupil came to him with the same grief was told that women are like rivers, highways, taverns, assembly halls and wells, open to all, and that the wise are not angry at them. The pupil let it go, and the wife, hearing that the teacher knew what she was, gave up her ways; and so did the wife in the present. Then the Buddha speaks of stains: bad conduct, stinginess, every wicked act, and worst of all, ignorance. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-05.htm">the full commentary story</a> and <a href="https://ancient-buddhist-texts.net/English-Texts/Jataka-Verses/065.htm">the birth story</a>. Mr. Prys reads from Robert Burton's <a href="https://en.wikipedia.org/wiki/The_Anatomy_of_Melancholy">The Anatomy of Melancholy</a> (1621, enlarged through 1676), which has a long section on the cure of jealousy; the text is quoted from the <a href="https://www.gutenberg.org/ebooks/10800">Project Gutenberg edition</a>.</p>
+    <h3>Nassau, 1718&ndash;1720</h3>
+    <p>From about 1713 New Providence was the base of the so-called <a href="https://en.wikipedia.org/wiki/Republic_of_Pirates">Republic of Pirates</a>. On July 24, 1718, <a href="https://en.wikipedia.org/wiki/Woodes_Rogers">Woodes Rogers</a> arrived as royal governor with warships and the King's pardon for pirates who surrendered, and most of the two hundred or so former pirates on the island took it. Rogers rebuilt the decayed fort, declaring martial law to make the inhabitants work on it; nearly a hundred of the people he brought died of fever while the old residents were spared. In December 1718 the pardoned pirate Benjamin Hornigold brought in ten men who had gone back to piracy, and eight of them were hanged at Nassau. A Spanish fleet came off the island in February 1720 and withdrew. Navigation in these years was done with the log, the traverse board and the <a href="https://en.wikipedia.org/wiki/Backstaff">backstaff</a> or Davis quadrant, used with the observer's back to the sun, lining the shadow of a vane up with the horizon.</p>
+    <p>On the night of August 22, 1720, John Rackham and a few others who had taken the pardon stole the sloop <em>William</em> from Nassau harbor; among them were <a href="https://en.wikipedia.org/wiki/Anne_Bonny">Anne Bonny</a> and Mary Read, whom Rogers named in his proclamation of September 5. The tale that Bonny had left a husband on the island comes from Captain Charles Johnson's <em>General History of the Pyrates</em> (1724), a lively and unreliable book. Mr. Prys's young man in Port Royal belongs to the years before the <a href="https://en.wikipedia.org/wiki/1692_Jamaica_earthquake">earthquake of June 7, 1692</a>, which sank much of that town into the harbor.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of a certain youth of good family from the Dhammapada commentary (verses 242&ndash;243). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-05.htm">The original</a>. Quotations from Robert Burton, <em>The Anatomy of Melancholy</em>. Written by Claude Opus 5.5.
+  <div class="pager"><a href="rocks-and-shoals.html">&larr; Rocks and Shoals</a><a href="index.html">All stories</a><a href="fire-year.html">Fire Year &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* The backstaff: a faint shadow edge drifts down the page toward a low horizon line; where they meet, a brief soft glint, and the shadow lifts and comes down again. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now(), PERIOD = 26000;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw(now) {
+    var t = reduce ? PERIOD * 0.9 : (now - t0);
+    ctx.clearRect(0, 0, W, H);
+    var hy = H * 0.82;
+    var ph = (t % PERIOD) / PERIOD;              /* 0..1 */
+    var ease = 1 - Math.pow(1 - Math.min(ph / 0.9, 1), 2);
+    var sy = H * 0.12 + (hy - H * 0.12) * ease;   /* shadow edge position */
+    var fade = ph < 0.9 ? Math.min(1, ph * 6) : Math.max(0, 1 - (ph - 0.9) * 10);
+    /* horizon */
+    ctx.strokeStyle = 'rgba(40,95,110,0.16)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, hy + 0.5); ctx.lineTo(W, hy + 0.5); ctx.stroke();
+    /* shadow band above the edge, very faint */
+    var g = ctx.createLinearGradient(0, sy - 90, 0, sy);
+    g.addColorStop(0, 'rgba(70,60,40,0)');
+    g.addColorStop(1, 'rgba(70,60,40,' + (0.07 * fade) + ')');
+    ctx.fillStyle = g; ctx.fillRect(0, sy - 90, W, 90);
+    ctx.strokeStyle = 'rgba(70,60,40,' + (0.14 * fade) + ')';
+    ctx.beginPath(); ctx.moveTo(0, sy + 0.5); ctx.lineTo(W, sy + 0.5); ctx.stroke();
+    /* the glint where shadow and horizon meet */
+    var meet = Math.max(0, 1 - Math.abs(sy - hy) / 30) * fade;
+    if (meet > 0.01) {
+      var gx = W * 0.5;
+      var rg = ctx.createRadialGradient(gx, hy, 0, gx, hy, W * 0.35);
+      rg.addColorStop(0, 'rgba(255,236,190,' + (0.35 * meet) + ')');
+      rg.addColorStop(1, 'rgba(255,236,190,0)');
+      ctx.fillStyle = rg; ctx.beginPath(); ctx.ellipse(gx, hy, W * 0.35, 14, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+
+</script>
+</body>
+</html>

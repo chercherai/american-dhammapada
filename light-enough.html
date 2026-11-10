@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Light Enough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over the James at a midsummer dusk, dark theme; low on the left a red sun sinks behind the far bank while a pale moon climbs on the right, and between them, under the river line, one small lantern-colored light stays exactly as it is. */
+  --ground: #171a24;
+  --ground-2: #1f2331;
+  --paper: #e6e1d3;
+  --paper-dim: #a19b8b;
+  --accent: #e2b869;
+  --glow: #c9624a;
+  --rule: rgba(230,225,211,.13);
+  --panel: rgba(31,35,49,.8);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #1b1f2c 0%, var(--ground) 60%, #1e1b22 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.5 &middot; Ānanda</span></nav>
+<header>
+  <h1>Light Enough</h1>
+  <div class="epigraph">Lighten our darkness, we beseech thee, O Lord.<br>&mdash; The Book of Common Prayer, Evening Prayer</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As I heard it reported,</span> at James Fort.</p>
+
+<section>
+  <h2>I. The Winter</h2>
+  <p class="dateline">James Fort, Virginia &middot; 1609&ndash;10</p>
+  <p>Five hundred English were in the fort when the leaves came down, and sixty in May. The ground was Paspahegh ground and nobody had asked the Paspahegh for it. By November the great king Powhatan&rsquo;s men had shut the English up inside their own palisade, and whoever went out past the blockhouse after roots, or after a shot at a deer, did not come in again. They ate the horses. They ate the dogs and the cats and then the rats, and the starch meant for ruffs, boiled to a paste, and the leather of their shoes. They ate worse than that, and it is set down in other places. They were afraid of the woods, so for firewood they pulled down the houses of the dead, and then the gates, and then the palisade itself, a post at a time.</p>
+  <p>There was no minister. Master Hunt was two years in the ground and the man sent to follow him was cast away on the Bermudas and thought drowned. So the widow Alse Reeve did what there was to do. She had come in the August ships with a husband, a joiner, who died of the flux before the first frost. She was fifty or near it, a Wiltshire woman who could read, and she owned a Prayer Book that had lost its back board. When word came that someone in a cabin would not see morning she went there and sat down on the floor. At dark she said the evening collects, as if a bell had rung for them. Then she stayed. People died slowly that winter and mostly at night, and she did not like any of them to do it alone.</p>
+  <p>A ship&rsquo;s boy off the <em>Unity</em> named Kit Dawe, twelve years old, fastened himself to her the way a boy will. He drew her water from the well in the fort and came to find her at whatever house she was in. The rest of this is from Kit.</p>
+  <p>He held to it all his life that in those cabins there was no fire, because the only wood left was the wall that kept the wind out, and no candle, and no rush or pine splinter, and that he never once had to feel his way to her. In any room where she sat there was light enough to see a dying man&rsquo;s face by. It was not much. It was about what a horn lantern gives with the shutter half across. The men of the night watch knew it, and would say to each other that the widow was at Cope&rsquo;s tonight, or at the cooper&rsquo;s, having seen it under a door. Nobody spoke of it to her. It was of use, and that winter no one had the strength to wonder at a thing that was of use.</p>
+</section>
+
+<section>
+  <h2>II. Midsummer Day</h2>
+  <p class="dateline">Sunday, 24 June 1610</p>
+  <p>Then in three weeks everything was altered. Sir Thomas Gates came up the river in two pinnaces built of Bermuda cedar, with near seven score castaways who had lived ten months on wild hogs and turtles and sea birds and were as fat and brown as farmers. They looked at the sixty and the sixty looked at them. Gates gave the place up and put everyone aboard, and they were a day down the river when my Lord De La Warr&rsquo;s longboat met them, with three ships behind it and a year&rsquo;s victual, and turned them round.</p>
+  <p>His lordship had the fort scoured and the church mended. There were two bells again, and prayers at ten and at four, and on a Sunday he went to the sermon with the Council and the captains and fifty halberdiers in red cloaks, and sat in the quire in a chair of green velvet.</p>
+  <p>Midsummer Day fell on his third Sunday. At evening, before the watch was set, he walked the round of the new bulwarks with his guard behind him. The widow was sitting on the well curb picking over ship&rsquo;s pease in her apron, and Kit sat by her, because that was where he sat.</p>
+  <p>He was a boy who looked at things. He looked up the river, where the sun was going down red into the trees of the far bank and the whole breadth of the James had taken fire from it. He looked the other way, over the marsh, where the moon, a day or two short of the full, had got up white before the sun was done. He looked at my lord coming along the palisade in the midst of his red cloaks, with the last of the sun on fifty halberd heads and on the gilt of his sword hangers. He looked at the church door. One of the Bermuda men knelt there still, an hour after the bell. He was a shipwright called Nicholas who had worked on the two pinnaces, island cedar and the gear of a wreck. His eyes were shut and his face and forearms were burnt the color of a new penny, and he was so easy on his knees in the dust that the red cloaks parted and went round him as water goes round a post.</p>
+  <p>And he looked at the widow. She was as grey as the rest of the sixty. Her hair had come out in the hungry months and she wore the gown she had landed in. His eyes stayed on her, because they were at rest there.</p>
+  <p><em>Mother Reeve,</em> he said. <em>I have looked at the sun and the moon, and at my lord, and at that Bermuda man, and they are all very fine. But I had rather look at you. There is more light on you than on any of them. There was all winter.</em></p>
+  <p>She went on with the pease.</p>
+  <p><em>The sun has the day, Kit. The moon has the night. My lord shines when he is dressed and has his guard about him, and God knows we had need of him. That man at the door shines while he is on his knees, and I hope he may be let stay there. Each has its hour.</em></p>
+  <p><em>And yours?</em></p>
+  <p><em>It was never mine. There was no minister, so I asked. The same words every night. They were all I knew to ask.</em></p>
+  <div class="verse">
+    <p>Lighten our darkness, we beseech thee, O Lord; and by thy great mercy defend us from all perils and dangers of this night; for the love of thy only Son, our Saviour Jesus Christ. Amen.</p>
+    <p>&mdash; The Book of Common Prayer, the Third Collect at Evening Prayer</p>
+  </div>
+  <p><em>And it was not kept back,</em> she said. <em>That is all the difference. What is given that way keeps no hours. It does not go in when the sun comes out, and it does not want dressing.</em> She tipped the bad pease out of her palm onto the ground. <em>Anyone may ask. Only you must be sitting there in the dark to do it, and most would sooner be abed.</em></p>
+</section>
+
+<section>
+  <h2>III. The Flux</h2>
+  <p class="dateline">July</p>
+  <p>The summer sickness came up with the heat, as it does on that river, and it went hardest with the new-come. The widow went back to sitting on floors. There were ministers now, and candles out of the store for the dying, and she said the collect all the same.</p>
+  <p>On a night when she was at the far end of the fort, the shipwright Nicholas lay in his cabin with the flux and nobody by him. He told it afterward. He woke in the black of the night wanting water, and a cup was put to his mouth. When he had drunk he saw who held it. It was the ship&rsquo;s boy who went about after the widow, sitting on the floor with his back to the bed frame, his lips moving over something he had by rote. The candle allowed for the cabin had burned out before midnight. Nicholas could see the boy&rsquo;s face well enough, and the cup, and the grain of the wall post behind him.</p>
+  <p>He was a man who had been looked at all his life for his own stillness, and he knew what he was seeing. He said nothing and shut his eyes.</p>
+  <p>In the morning the boy was asleep where he sat, with the cup in his lap, and the light in the room was the ordinary kind, coming in under the door.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The sun is bright by day, the moon shines by night, the warrior is bright in his armour, the Brahmana is bright in his meditation; but Buddha, the Awakened, is bright with splendour day and night.<cite>Dhammapada 387, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary it is the evening of the great festival that closes the rains. King Pasenadi comes to the monastery in all his ornaments, the elder Kāḷudāyī sits at the edge of the assembly deep in meditation, his body the color of gold, and the sun is setting as the moon rises. The Buddha&rsquo;s attendant Ānanda looks at each radiance in turn and tells his teacher that his alone satisfies. The Buddha answers that the sun shines by day, the moon by night, the king when he is adorned and the saint when he is absorbed, but that Buddhas shine by night and by day alike. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-05.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C4%80nanda">Ānanda</a>.</p>
+    <h3>Jamestown, 1610</h3>
+    <p>About five hundred colonists were at Jamestown in the autumn of 1609, and about sixty were alive the next spring. The winter is remembered as the <a href="https://en.wikipedia.org/wiki/Starving_Time">Starving Time</a>. The Powhatan chiefdom, on whose land the fort stood, kept the English penned inside it; they ate horses, dogs, rats and laundry starch, burned their own houses for firewood, and in at least one case ate the dead. On May 23, 1610, the survivors of the wrecked flagship <a href="https://en.wikipedia.org/wiki/Sea_Venture"><em>Sea Venture</em></a> arrived from Bermuda in two small ships they had built there. On June 7 the colony was abandoned, and within days it was turned back in the river by the arrival of <a href="https://en.wikipedia.org/wiki/Thomas_West,_3rd_Baron_De_La_Warr">Lord De La Warr</a> with three ships. Alse Reeve, Kit Dawe and the shipwright Nicholas are invented.</p>
+    <p>The governor&rsquo;s state is from William Strachey&rsquo;s letter known as the <a href="https://en.wikipedia.org/wiki/True_Reportory"><em>True Reportory</em></a>: the repaired church with its two bells, prayers at ten and four, the fifty halberdiers in &ldquo;fair red cloaks,&rdquo; the green velvet chair. Midsummer Day of 1610 did fall on a Sunday by the old calendar, with the moon close to full. The collect is the one the Prayer Book appoints for every evening of the year. What followed the relief was not gentle. That August De La Warr sent soldiers against the <a href="https://en.wikipedia.org/wiki/Paspahegh">Paspahegh</a>, whose town was burned and whose people, the children of their chief among them, were killed; by the next year the Paspahegh no longer appear in the record as a nation on their own ground.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Ānanda from the Dhammapada commentary (verse 387). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-05.htm">The original</a>. The collect from the Book of Common Prayer. Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-widows-priests.html">&larr; The Widow&#x27;s Priests</a><a href="index.html">All stories</a><a href="hombre-sincero.html">Hombre Sincero &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, LOOP = 7200;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function disc(x, y, r, rgb, a, halo) {
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r * halo);
+    g.addColorStop(0, 'rgba(' + rgb + ',' + a.toFixed(3) + ')');
+    g.addColorStop(1 / halo, 'rgba(' + rgb + ',' + (a * 0.55).toFixed(3) + ')');
+    g.addColorStop(1, 'rgba(' + rgb + ',0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * halo, 0, 6.2832); ctx.fill();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var hz = H - 40;                       // the river line
+    var p = reduce ? 0.5 : (t % LOOP) / LOOP; // one slow evening, over and over
+    var ease = 0.5 - 0.5 * Math.cos(p * 6.2832);
+    // sun going down on the left, moon coming up on the right
+    var sx = Math.max(46, W * 0.08), sy = hz - 70 + ease * 96;
+    var mx = W - Math.max(46, W * 0.08), my = hz + 30 - ease * 110;
+    var sa = 0.30 * (1 - ease * 0.85), ma = 0.07 + 0.2 * ease;
+    disc(sx, sy, 20, '214,92,58', sa, 4.5);
+    disc(mx, my, 15, '226,226,214', ma, 3.2);
+    // the far bank covers whatever is below the river line
+    ctx.fillStyle = '#12151d';
+    ctx.fillRect(0, hz, W, H - hz);
+    ctx.strokeStyle = 'rgba(230,225,211,0.10)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, hz + 0.5); ctx.lineTo(W, hz + 0.5); ctx.stroke();
+    // one small light low in the middle that keeps no hours
+    disc(W * 0.5, hz + 18, 3, '236,196,120', 0.5, 7);
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>
