@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Hems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a cold November night over a graveled yard, dark theme; high in one corner a full moon slowly takes on the copper-red of lac as the earth's shadow crosses it, holds, and clears. */
+  --ground: #120e0d;
+  --ground-2: #1f1715;
+  --paper: #eee4d1;
+  --paper-dim: #a69a87;
+  --osage: #d9a53b;
+  --lac: #a6382c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #261b16 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(238,228,209,.2); }
+.series a:hover { color: var(--osage); }
+a:focus-visible { outline: 2px solid var(--osage); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--osage); text-wrap: balance; text-shadow: 0 0 28px rgba(217,165,59,.2); }
+.epigraph { border-left: 1px solid rgba(217,165,59,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--osage); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--osage); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(31,23,21,.78); border: 1px solid rgba(238,228,209,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--lac); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(238,228,209,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--osage); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--osage); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--osage); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--osage); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--osage); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--osage); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(31,23,21,.78); border-left: 2px solid var(--osage); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 7.4 &middot; Anuruddha</span></nav>
+<header>
+  <h1>Three Hems</h1>
+  <div class="epigraph">The religious life has the robe made of rags taken from a dust heap for its resource.<br>&mdash; Mah&#257;vagga 1:30.4</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Eva&#7747; me suta&#7747;,</span> in the house off Paulding Road.</p>
+
+<section>
+  <h2>I. Trash Day</h2>
+  <p class="dateline">Southeast Fort Wayne, Indiana &middot; October 2003</p>
+  <p>On Tuesdays, which was trash day on the south side, Thida Win got up at a quarter to six and walked the alleys with U Wimala before the trucks came. Her grandmother had arranged it the spring before, after a woman on Oxford Street called the police about a man in a bedsheet going through her garbage cans, and two officers had stood in the alley for twenty minutes trying to get a seventy-year-old Burmese monk to explain himself in English. Thida was sixteen and a junior at South Side, and her English was better than anyone&rsquo;s at the monastery. That was the whole reason. She hated it.</p>
+  <p>U Wimala did not ask for food on Tuesdays. The food came to the monastery anyway, every morning, in foil pans and Tupperware, from the eleven families who took turns. On Tuesdays he asked for cloth. He did not ask anybody. He walked down the alleys between Paulding and Pettit with a canvas bag from the public library over his shoulder, and when there was a garbage bag by a fence with something soft showing through a tear, he stopped and looked at it, and if it was cloth that somebody had thrown away he took it. Old sheets. A tablecloth with a burn in the middle. A man&rsquo;s white shirt with one sleeve gone. The bins behind the Goodwill outlet, after the sorting, were good. His eyes were going, and he went through a bag more with his fingers than his eyes, the way you would read in the dark.</p>
+  <p>At the monastery he washed what he found in a tub in the back yard and boiled it with chips of Osage orange wood, which he cut himself from the hedgerows out past the airport with a hacksaw. In Sagaing, where he had first been a monk, they had boiled jackfruit heartwood to dye the robes, and he had found out from a library book that the hedge apple tree was a cousin of the jackfruit and gave nearly the same yellow. Then he cut the pieces into panels and sewed them together by hand, sitting on the floor of the garage that was the monastery&rsquo;s hall, and wore them.</p>
+  <p>The committee had a box of new robes from a supplier in Maryland, factory-made, the right color, in plastic bags. He thanked the committee every year and gave them to the younger monks.</p>
+  <p><em>Why can&rsquo;t you wear the new ones?</em> Thida said, the first morning, a little loudly, because a car had slowed down to look at them.</p>
+  <p>He was untying a knot in a garbage bag with his fingers. He was in no hurry with it. He said that when he was ordained, at fifty-two, the year after his wife died, the preceptor had told him four things, as every monk is told on the day he is ordained, and the second of them was about robes. He said it in Pali, and then in Burmese, and when he saw she was not getting the Burmese he said it once in English, out of a book he had read in the camp in Thailand, word for word, the way he had learned it.</p>
+  <div class="verse">
+    <p>The religious life has the robe made of rags taken from a dust heap for its resource. Thus you must endeavour to live all your life. Linen, cotton, silk, woollen garments, coarse cloth, hempen cloth are extra allowances.</p>
+    <p>&mdash; Mah&#257;vagga 1:30.4</p>
+  </div>
+  <p><em>Extra allowances,</em> he said. <em>So the new ones are allowed. But the dust heap is the resource. If you can live on the resource, you live on the resource.</em></p>
+  <p><em>This is an alley,</em> said Thida.</p>
+  <p><em>This is a dust heap,</em> said U Wimala, and got the knot open.</p>
+  <p>By October of that year his upper robe had been mended so many times that it was more thread than cloth. You could read a newspaper through it. Thida&rsquo;s grandmother, Daw Mya Mya, said at the monastery kitchen sink that if he wore it through the winter he would die of it, and the other women agreed, and nobody said it to him.</p>
+</section>
+
+<section>
+  <h2>II. The Hems</h2>
+  <p class="dateline">Behind Anthony Boulevard &middot; the last Tuesday in October</p>
+  <p>The fabric store on Anthony Boulevard had closed in the summer, and its dumpster was still behind it in the alley, with a second dumpster from the shoe repair beyond it. It was barely light. There was frost on the lids.</p>
+  <p>A woman was standing by the first dumpster as if she were waiting for a bus. She was Burmese, and old-fashioned about it, in a dark silk longyi to her ankles and a short white jacket, with a string of jasmine flowers in her hair, which Thida had not seen on anyone since she was a child in Mae Sot, and which nobody could have bought in Indiana in October. Thida thought she must be somebody&rsquo;s aunt from Chicago. The woman looked at U Wimala, and then at Thida, and smiled at Thida as if they knew each other, and Thida, embarrassed, looked down at her own sneakers. When she looked up the woman was not there. The alley was long and straight in both directions, and there was nobody in it.</p>
+  <p>U Wimala had not seen her. He was at the second dumpster. He had lifted the lid and was looking at something inside, near the top, on a bed of cardboard.</p>
+  <p>It was three hems. Three edges of cloth, one above another, folded back so neatly that nothing showed but the hems, each a finger wide, stitched with a stitch so small Thida could not see it until she put her face close. He took hold of the first and pulled. It kept coming. It came out over the edge of the dumpster and down into his arms and onto the frozen gravel, a single length of fine cotton the color of new rice, without a seam or a label or a stain, and when the end came out and they spread it on the hood of a parked car it was longer than the car, nearly twenty feet, and six feet wide. The second was the same. The third was the same.</p>
+  <p>U Wimala stood with the third one over his arm and looked into the dumpster at the cardboard, and then at Thida.</p>
+  <p><em>This is a very remarkable dust heap,</em> he said.</p>
+  <p>He folded them himself, carefully, on the hood of the car, and they went into the library bag, all three, which should not have been possible either.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Thida told her grandmother about the woman that evening, mostly to complain. Daw Mya Mya was cutting onions. She wanted to know about the jacket, what kind of buttons. She wanted to know whether the woman&rsquo;s feet had been on the ground. Thida said she hadn&rsquo;t looked at the woman&rsquo;s feet.</p>
+  <p><em>That was his wife,</em> said Daw Mya Mya.</p>
+  <p><em>His wife died in Mandalay in 1980, Grandma.</em></p>
+  <p><em>Not that one. Before. Three lives back.</em> She went on cutting onions. <em>She is with the devas now. In T&#257;vati&#7747;sa. Since he was a boy she has been looking after him. You think it is an accident he has never in his life had to say there isn&rsquo;t any? Ask him. Ask him if one day in his life his bowl came back empty.</em></p>
+  <p>Thida did not ask him. But on the next Tuesday she looked at the feet of everyone in the alleys.</p>
+</section>
+
+<section>
+  <h2>III. The Sewing</h2>
+  <p class="dateline">The garage hall &middot; Saturday, November 8, 2003</p>
+  <p>The Sayadaw decided it in one sentence at the meal on Sunday. The cloth would be the kathina robe for that year, and it would go to U Wimala, whose robe was worn out, and it would be sewn the way the kathina robe must be sewn, from cutting to dyeing inside a single day, on the Saturday.</p>
+  <p>The Sayadaw was seventy-eight. He had been eight years in Insein prison after 1988, and he did not talk about it, except that once, when one of the boys in the Sunday school could not get a thread through a needle, the Sayadaw took it from him and threaded it in one try without his glasses and said that in Insein you learned to do it by the light from under a door. He came out to the garage on the Saturday before it was light and sat on a cushion at the side, with a cardboard box of needles and a tin of thread, and for the whole of that day every needle in the room came through his hands.</p>
+  <p>Monks came from two other temples in town, and one from Indianapolis, nineteen monks in all, more than the garage had ever held. U Thuzana, who was older than anyone and kept the rules so strictly that the younger monks were afraid to hand him a cup with the wrong hand, sat at the foot of the cloth. U Pyinnya, who had taught Abhidhamma in Rangoon and could recite the Patth&#257;na for an hour without a book, sat in the middle. At the head sat U Ottama, who was twenty-six and remembered everything anybody had ever said to him, and he laid out the panels.</p>
+  <p>Thida, who had been sent with a yardstick and a box of chalk, watched him do it. He marked the cloth into long strips and short ones, with seams running down and seams running across, and narrow bands between, so that the robe when it was done would look from above like a patchwork of fields. She said it looked like the soybean stubble out past New Haven when you drove east, all the fields cut up by the fencerows. U Ottama said it was supposed to. He said the Buddha had once stood on a hill and looked down, and he told it to her in English the way he had learned it, as everybody at that monastery seemed to have learned something, out of an old book.</p>
+  <div class="verse">
+    <p>&lsquo;Dost thou perceive, Ananda, how the Magadha rice fields are divided into short pieces, and in rows, and by outside boundaries, and by cross boundaries?&rsquo;</p>
+    <p>&lsquo;Even so, Lord.&rsquo;</p>
+    <p>&lsquo;Could you, Ananda, provide robes of a like kind for the Bhikkhus?&rsquo;</p>
+    <p>&mdash; Mah&#257;vagga 8:12.1</p>
+  </div>
+  <p>The women of the monastery sat along the wall on folding chairs and wound thread from the big cones onto small spools for the monks, and passed the spools down, and when a spool came back empty they wound another. U Kovida, who drove the monastery van and was always going somewhere, went back and forth all day for what was needed: more thread from the Walmart, a second kerosene heater from somebody&rsquo;s basement, pins, coffee, extension cords. Thida went with him on most of the trips because somebody had to go into the stores.</p>
+  <p>U Wimala sat with the others and sewed his own robe. He said nothing all day about whose it was.</p>
+</section>
+
+<section>
+  <h2>IV. The Telephone</h2>
+  <p class="dateline">All over the south side</p>
+  <p>Nobody on the committee had called anybody. Everybody agreed about that afterward.</p>
+  <p>But starting at about seven that morning, the telephone rang in every Burmese house in Fort Wayne, and there were a great many of those houses by then, and a woman&rsquo;s voice with an old Mandalay accent said: <em>They are sewing a robe for my U Wimala. The Sayadaw is there, and all the monks from the other temples. Take mohinga. Take rice. Go before eleven.</em> And hung up. Daw Mya Mya got the call. Thida&rsquo;s English teacher&rsquo;s neighbors got the call, and they were Karen and Baptist. The man who ran the Asian grocery on Calhoun got it twice.</p>
+  <p>By half past ten there were cars on both sides of the street from Paulding Road to the corner, and on the gravel the city had made the monastery put down over its front lawn, and on the grass of the house next door, whose owner came out in his bathrobe, looked at it, and went back in and came out again with a crockpot of chili. The folding tables went the length of the driveway. Pots of mohinga with the fish broth still steaming, coconut noodles, biryani in hotel pans, tea-leaf salad in mixing bowls, fried gourd fritters in paper towels, sago with coconut milk, three sheet cakes from the Kroger, and rice, rice, rice, in electric cookers on extension cords that ran into the house through the kitchen window.</p>
+  <p>U Kovida came back from his eleventh errand at a quarter to eleven with a cardboard box on the passenger seat. In it were rose apples, the pink bell-shaped kind that grew over every monastery wall in upper Burma, each one as big as a softball and cold from the night. Nobody knew where he had got them. The Asian grocery on Calhoun said it had never had them in its life. U Kovida, asked, said he had been <em>a little farther than usual</em>. They were set out for the monks, one to a monk, and the nineteen monks of three temples and Indianapolis could not finish nineteen rose apples between them, and gave up laughing.</p>
+  <p>The monks ate before noon, as monks must, and after them the laypeople ate, and the neighbors, and the two police officers who had come about the parking and stayed, and the mailman, and when everybody had eaten there was more food on the tables than there had been when they began.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The robe was finished in the late afternoon. They boiled it with Osage orange in the biggest rice pot, which took two men to lift, and it came out of the water the color of a yolk and went darker as it cooled. They hung it over a line across the garage between the two heaters to dry.</p>
+  <p>That evening the moon came up full over the houses along Paulding Road with a dark bite already out of one side, and all evening the bite grew. The children saw it first and shouted, and everyone went out onto the gravel in their coats. A little after eight it was all gone into the shadow, and it did not go out. It went copper, then the red of lac, the old red dye, a deep dull red like an ember, and hung there over the monastery yard, and the whole yard under it, the gravel and the folding tables and the frost on the cars and the faces looking up, was dyed the same red from the street to the back fence. It was very quiet. Even the children stopped.</p>
+  <p>The old women said afterward, and kept saying for years, that Thagyamin, the king of the devas, had come down that night and drawn a line around the yard. They said you could see where it ran in the frost in the morning. Thida went out at six to look, and there was a line, or there was the place where the gravel stopped and the neighbor&rsquo;s lawn began, and she could not have said which.</p>
+</section>
+
+<section>
+  <h2>V. Too Much</h2>
+  <p class="dateline">The garage hall &middot; that night</p>
+  <p>The visiting monks were offered juice and tea in the garage after the eclipse, which monks may take in the evening, and sat on the floor under the drying robe. Thida was pouring. Two of them were talking in low voices, and she heard it, and so did the Sayadaw.</p>
+  <p><em>It is too much. Nineteen monks, and food for three hundred. Look at the tables. Nobody brings this much for a robe.</em></p>
+  <p><em>He has family in Silver Spring. He telephoned them, or they telephoned the whole town. They wanted everybody to see.</em></p>
+  <p><em>Old men like to show how many people they have.</em></p>
+  <p>The Sayadaw did not raise his voice. <em>What are you talking about?</em></p>
+  <p>They told him. They were not ashamed of it; they were older monks and had been at many robe offerings. The Sayadaw asked whether they really thought U Wimala had sent for all this.</p>
+  <p><em>Yes, Sayadaw. We think so.</em></p>
+  <p><em>My son Wimala does not talk like that,</em> said the Sayadaw. <em>A monk who is finished does not spend his breath on robes and rice. He has not asked anybody for anything since I have known him. Not even in the alley.</em> He looked up at the robe hanging over them, the color of a yolk, not quite dry. <em>This was not ordered. A devi brought this. You were all here. You ate it.</em></p>
+  <p>Nobody said anything. U Wimala, at the end of the row, had his eyes closed. Thida could not tell whether he had heard any of it.</p>
+</section>
+
+<section>
+  <h2>VI. Up</h2>
+  <p class="dateline">Paulding Road &middot; Sunday, November 9</p>
+  <p>They offered the robe in the morning. The laypeople passed it from hand to hand down the length of the garage, everyone touching it, and the monks gave it to U Wimala in the old formula, and he put it on. It fit as if it had grown on him. His old upper robe, the one you could read a newspaper through, he folded and gave to Thida&rsquo;s grandmother, who cut it into squares that winter and put one in the wallet of every grandchild.</p>
+  <p>There was still food on the tables. U Kovida and Thida drove it in the van all afternoon, foil pan after foil pan, to the Rescue Mission downtown and to the apartment complexes off Hessen Cassel Road where the newest families lived, and to the house on Oxford Street whose owner had called the police on U Wimala, who stood in her doorway holding a pan of biryani and did not know what to say.</p>
+  <p>When they got back the Sayadaw was standing in the gravel with his hands behind his back, looking up. Thida heard it before she saw it, a far, rolling, rattling sound like wooden wheels on a bridge, and then she found them, very high, a long loose line of big gray birds going south over Paulding Road, hundreds, calling the whole way.</p>
+  <p><em>Cranes,</em> said U Kovida.</p>
+  <p>The Sayadaw watched them go. Then he said, to nobody in particular, or to Thida, since she was the one beside him: <em>Now show me where they went.</em></p>
+  <p>She looked. They were over the airport, and then they were over the hedgerows, and then they were a thread, and then there was the sky over Paulding Road, the whole cold blue of it, with nothing in it anywhere to say which way they had gone.</p>
+  <p>U Wimala was already in the alley with the library bag. It was not Tuesday. He did not seem to be looking for anything. She watched him to the corner in the new robe, the color of the hedge-apple trees in October, and then she watched the corner.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He whose appetites are stilled, who is not absorbed in enjoyment, who has perceived void and unconditioned freedom (Nirvana), his path is difficult to understand, like that of birds in the air.<cite>Dhammapada 93, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Elder Anuruddha, whose robes are worn out, goes looking for cast-off cloth on refuse heaps. A goddess named J&#257;lin&#299;, who had been his wife three lives before, lays three heavenly cloths on a heap ahead of him so that only the hems show, and he pulls them out, remarking what a remarkable refuse heap it is. On the sewing day the Buddha and the great disciples all take part: Mah&#257; Kassapa sits at the foot, S&#257;riputta in the middle, &#256;nanda at the head, the monks spin thread, the Buddha threads the needle, and Mah&#257; Moggall&#257;na fetches what is needed and brings great rose-apples. The goddess goes through the village urging everyone to bring food; Sakka draws a circle round the place and the ground turns red as lac; and far more food is left over than the monks can eat. Some monks grumble that Anuruddha must have sent for his relatives to show how many supporters he has, and the Buddha answers that one whose defilements are gone does not talk about requisites, and that a deity brought the food. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-04.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Anuruddha">Anuruddha</a>.</p>
+    <h3>Fort Wayne, 2003</h3>
+    <p>Burmese settlement in Fort Wayne, Indiana, began with a small group of student exiles from the <a href="https://en.wikipedia.org/wiki/8888_Uprising">1988 democracy uprising</a>, sponsored by local churches; hundreds more followed, and for years the city was among the most common <a href="https://www.vice.com/en/article/nation-of-immigrants-fleeing-burma-for-fort-wayne-indiana">resettlement destinations</a> for refugees from Burma. By 2007 a local paper counted between 2,000 and 3,000 Burmese and more than 500 Mon in the city, and <a href="https://pluralism.org/news/buddhism-thriving-northern-indiana-temples">six Buddhist temples</a> had opened in a dozen years, several of them in ordinary houses on the south side, where neighbors complained about <a href="https://pluralism.org/news/friction-surprises-buddhist-leaders">cars parked on the lawns</a> and the city required a house temple to gravel its yard.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Kathina">Kathina</a> ceremony, held in the month after the rains retreat, is the offering of robe cloth to the monastic community; in Burma the season coincides with the <a href="https://en.wikipedia.org/wiki/Tazaungdaing_festival">Tazaungdaing festival</a>, when weavers compete through the night to finish robes by dawn. Monks&rsquo; robes in Burma were once dyed with <a href="https://asiantextilestudies.com/yellow.html">jackfruit heartwood</a>; the Osage orange of Midwestern hedgerows is a relative in the same genus of dye trees and gives a similar yellow. On the night of November 8, 2003, a <a href="https://www.universetoday.com/8967/total-lunar-eclipse-november-8-9-2003">total lunar eclipse</a> was visible across the Americas in the evening, the moon turning a deep red.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Anuruddha from the Dhammapada commentary (verse 93). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-04.htm">The original</a>. Scripture from the Mah&#257;vagga in <em>Vinaya Texts</em>, tr. T. W. Rhys Davids and Hermann Oldenberg, Sacred Books of the East 13 and 17 (1881&ndash;82). Written by Claude Opus 5.5.
+  <div class="pager"><a href="sukhari.html">&larr; Sukhari</a><a href="index.html">All stories</a><a href="the-doorsill.html">The Doorsill &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, CYCLE = 5400; // frames in one eclipse: shadow crosses, holds, clears
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function mix(a, b, k) { return Math.round(a + (b - a) * k); }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var R = Math.max(22, Math.min(46, W * 0.04));
+    var x = W < 700 ? W - R * 1.9 : W - Math.max(R * 3, (W - 620) / 4);
+    var y = R * 3.2;
+    // k: 0 = full white moon, 1 = deep lac red at totality
+    var p = reduce ? 0.5 : (t % CYCLE) / CYCLE, k;
+    if (p < 0.3) k = p / 0.3; else if (p < 0.55) k = 1; else if (p < 0.85) k = 1 - (p - 0.55) / 0.3; else k = 0;
+    k = k * k * (3 - 2 * k);
+    var r = mix(232, 150, k), g = mix(226, 58, k), b = mix(206, 40, k);
+    var bright = 0.30 - 0.12 * k;
+    var halo = ctx.createRadialGradient(x, y, R * 0.6, x, y, R * 4.5);
+    halo.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (bright * 0.35) + ')');
+    halo.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
+    ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(x, y, R * 4.5, 0, Math.PI * 2); ctx.fill();
+    var disc = ctx.createRadialGradient(x - R * 0.3, y - R * 0.3, R * 0.1, x, y, R);
+    disc.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + bright + ')');
+    disc.addColorStop(1, 'rgba(' + mix(r, 40, 0.4) + ',' + mix(g, 20, 0.4) + ',' + mix(b, 15, 0.4) + ',' + (bright * 0.8) + ')');
+    ctx.fillStyle = disc; ctx.beginPath(); ctx.arc(x, y, R, 0, Math.PI * 2); ctx.fill();
+    // the earth's shadow edge, sliding across while the moon reddens
+    if (!reduce && k > 0.02 && k < 0.98) {
+      var sx = x + R * 2.2 * (1 - 2 * Math.min(1, p < 0.5 ? p / 0.3 : (p - 0.55) / 0.3));
+      ctx.save(); ctx.beginPath(); ctx.arc(x, y, R, 0, Math.PI * 2); ctx.clip();
+      ctx.fillStyle = 'rgba(18,14,13,' + (0.22 * (1 - Math.abs(k - 0.5) * 2)) + ')';
+      ctx.beginPath(); ctx.arc(sx, y, R * 1.6, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -54,12 +54,12 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - Jazz (a Kansas City jam session in the '30s, a Harlem after-hours club, a bebop sideman, a New Orleans brass funeral, a high-school jazz band) [3.5 Harlem after-hours pianist, Peace Mission]
 - Rap (the Bronx in the late '70s, a Southern trap studio, a Bay Area mixtape hustler, a battle-rap league, a church kid who raps) [19.2 Bronx 1979]
 - EDM (a Detroit techno basement in the '80s, a Chicago house party, a desert festival, a warehouse rave, a DJ who plays sunrise sets) [19.4 Detroit techno]
-- A cartoonist (a newspaper strip artist, a Disney inker, a 1950s comic-book artist before the Comics Code, an underground comix artist, a webcomic)
-- A ceramicist (Pueblo potters at San Ildefonso, a Black Mountain College potter, a production potter in North Carolina's Seagrove, a community studio)
-- A vegan (a 1840s Grahamite boardinghouse, a Seventh-day Adventist kitchen, a 1970s co-op, a 2010s Instagram vegan, an animal sanctuary)
+- A cartoonist (a newspaper strip artist, a Disney inker, a 1950s comic-book artist before the Comics Code, an underground comix artist, a webcomic) [22.2 editorial cartoonist]
+- A ceramicist (Pueblo potters at San Ildefonso, a Black Mountain College potter, a production potter in North Carolina's Seagrove, a community studio) [21.4 wood-fire potter, Zen]
+- A vegan (a 1840s Grahamite boardinghouse, a Seventh-day Adventist kitchen, a 1970s co-op, a 2010s Instagram vegan, an animal sanctuary) [21.6 animal sanctuary]
 - Unused wisdom sources (see HOUSE_STYLE "Broaden the sources"): spirituals, Poor Richard, Douglass, Sojourner Truth, Lincoln, Rumi/Hafiz, Talmud, Hasidic tales, Muir, Darwin, Dickinson, Melville, Joe Hill, McGuffey, the New England Primer
-- Christian mystics, as text and as people: Julian of Norwich, The Cloud of Unknowing, Meister Eckhart, Jakob Böhme, Teresa of Ávila, John of the Cross, Brother Lawrence, Madame Guyon, Thomas Merton's Gethsemani (Merton at a distance) — all in pre-1929 translations if quoted
+- Christian mystics, as text and as people: Julian of Norwich, The Cloud of Unknowing, Meister Eckhart, Jakob Böhme, Teresa of Ávila, John of the Cross, Brother Lawrence, Madame Guyon, Thomas Merton's Gethsemani (Merton at a distance) — all in pre-1929 translations if quoted [16.1 Theologia Germanica among the Maryland Labadists]
 - Orthodox Christians, beyond those already written (Russian Kodiak, Greek railroad and diner, Syrian, Coptic, Palestinian): Carpatho-Rusyn steel towns, Serbian Jackson, California, Romanian Ohio, Ukrainian Prairie churches, Alaska Native Orthodox, Ethiopian Orthodox in D.C.
-- Freemasons (a Prince Hall lodge, a Scottish Rite cathedral, the Morgan affair of 1826, a Shriners' hospital, the Order of the Eastern Star)
+- Freemasons (a Prince Hall lodge, a Scottish Rite cathedral, the Morgan affair of 1826, a Shriners' hospital, the Order of the Eastern Star) [15.3 Anti-Masonic Genesee County 1829]
 - The railroad (Chinese crews on the Central Pacific, Pullman porters, a section foreman, a station agent's telegraph, hoboes, a roundhouse, Amtrak's Empire Builder)
 - Science (a Harvard computer counting stars, a lighthouse-keeper naturalist, a Bell Labs engineer, the Manhattan Project's wives, a fossil hunter in the Badlands, a county agent with soil tests, a field biologist)

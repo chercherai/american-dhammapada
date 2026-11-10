@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Banked Fire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a field of coals banked under grey ash; datelined sections. */
+  --ground: #141110;
+  --ground-2: #2a1a13;
+  --paper: #e6ddd2;
+  --paper-dim: #a39789;
+  --accent: #d9673a;
+  --glow: #f2a65a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #2a1a13 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,221,210,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(217,103,58,.22); }
+.epigraph { border-left: 1px solid rgba(217,103,58,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(36,27,23,.75); border: 1px solid rgba(230,221,210,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,221,210,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(230,221,210,.1); border-bottom: 1px solid rgba(230,221,210,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(36,27,23,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 5.12 &middot; Ahipeta</span></nav>
+<header>
+  <h1>Banked Fire</h1>
+  <div class="epigraph">Everyone is the son of his works.<br>&mdash; Cervantes, <i>Don Quixote</i>, Part I, ch. 4</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; me lo contaron,</span> on the boat beach below San Juan.</p>
+
+<section>
+  <h2>I. The Glacis</h2>
+  <p class="dateline">San Juan, Puerto Rico &middot; November 3, 1625</p>
+  <p>The Dutch fleet stood out past the Morro on the second of November with every ship but one, and the next morning the governor sent a corporal and eleven men down into the town to see what was left of it.</p>
+  <p>Lucas Bermejo was one of the eleven. He was eighteen and came from Triana, across the river from Seville, where his father caulked boats. He had landed in Puerto Rico in August with the new governor, Don Juan de Haro, and five weeks later he was inside the Morro with three hundred and thirty men, and the Dutch were in the town, and he had spent his first autumn in the Indies eating cassava bread that came across the bay at night in canoes and listening to cannon. The Dutchman had sent a drum to the gate twice. The second time the message was that if the fort did not surrender he would burn the town. The governor had sent back word that they had courage enough, and wood and stone enough, to build it again. The whole garrison knew the words by evening. The next day the smoke began.</p>
+  <p>Now it was over. The twelve went out through the gate and down across the glacis, stepping over the Dutch trenches. Lucas had heard about Gaspar Ortiz since his first week. Gaspar was born in San Germ&aacute;n and had been a soldier of the presidio for thirty-one years. He knew where the rocks were under the water at the harbor mouth, and which of the women in the town sold bad wine, and he saw things. The men said he had once talked with a crow on the Morro at sunrise, and that the crow had answered him.</p>
+  <p>From the top of the slope the whole town lay open to them. More than a hundred houses had burned, the thatched ones to nothing, the stone ones to their walls. The bishop's house was a shell. The bishop had owned more books than anyone in the island, it was said, and had written some of them, and it was all one grey heap now inside four walls. Smoke still rose here and there from under the ash, thin and blue. Where the wind passed over a heap it showed red underneath for a moment and then went grey again. Beyond the town, on the road from the San Antonio bridge, people were coming back already with mattresses on their heads.</p>
+  <p>Gaspar stopped at the edge of the glacis. Lucas, behind him, saw his head lift and turn slowly, from the Morro down the whole length of the town to the bridge, the way a man looks along a beam to see if it is true. He stood so for four or five breaths. Then he smiled.</p>
+  <p>Lucas had buried two men on the Morro that month. He felt the smile like a slap.</p>
+  <p><em>What is it?</em></p>
+  <p><em>Not here,</em> said Gaspar. <em>Ask me tonight at the boats, in front of Ant&oacute;n.</em> And he went on down into the ash.</p>
+</section>
+
+<section>
+  <h2>II. The Boats</h2>
+  <p class="dateline">The beach below the town &middot; that evening</p>
+  <p>Ant&oacute;n's canoe lay on the sand where the town came down to the bay. It was a long dugout of ceiba with a little mast, and it had crossed the bay every night of the siege with cassava and plantains and once a pig, from the Bayam&oacute;n shore to the rocks under the fort, after Captain Botello's men took back the river. Ant&oacute;n was past seventy. He had come from Luanda as a boy in a Portuguese ship, and he had been free for thirteen years. He kept a clay pot in the bow of the canoe with coals in it under a lid of ash, so that he could light his pipe anywhere on the water, and he was sitting by it now with his back to a beached boat. Two fishermen were mending a net. A woman was beating ash out of a blanket against a post.</p>
+  <p>Gaspar sat down. Lucas stood.</p>
+  <p><em>This morning,</em> Lucas said, <em>on the glacis. You told me to ask you here.</em></p>
+  <p>Gaspar took some time with it.</p>
+  <p><em>There was a man lying along the town,</em> he said. <em>His head was on the rocks under the Morro and his body went down the whole length of the town and past the bridge, I could not see how far. The head was a man's head, with a man's beard. The rest of him was a snake. And he was burning. Not the town. Him. The fire started at his head and ran down him to the tail, and then it started at the tail and ran back up to the head, and fire came out of his sides and fell back on him like rain. The town was smoking, and he was lying in it on fire, and his eyes were open.</em></p>
+  <p>One of the fishermen stopped his needle.</p>
+  <p><em>I smiled because I am fifty-four,</em> Gaspar said, <em>and I have heard all my life that there are such beings, and that morning I saw one.</em></p>
+  <p><em>Like the crow,</em> said the other fisherman.</p>
+  <p><em>Like the crow,</em> Gaspar said. He told it for Lucas, since Lucas was new. Some years before, coming off watch on the Morro at sunrise, he had seen one of the big island crows sitting on the parapet over the sea, the kind with the red eyes that talk to each other in the forest like old women. This one was as big as the sentry box. Its tongue hung out of its beak and down the cliff into the surf. Gaspar had asked it what it had done, and it had answered him in a voice like a parrot's, very clearly.</p>
+  <p><em>Three mouthfuls,</em> the crow said. <em>On the feast of San Juan, when the friars fed the poor in their cloister, the women carried home what was left over in their baskets. I was on the convent roof. I took three mouthfuls out of a basket going by. That is all I did.</em></p>
+  <p>Ant&oacute;n had not looked up through any of this. He lifted the lid off his clay pot, took a coal out in the tongs of two sticks, and lit his pipe from it.</p>
+  <p><em>I have seen him,</em> he said.</p>
+  <p>The woman with the blanket stopped beating it.</p>
+  <p><em>I saw him the first morning I crossed this bay as a free man. That is thirteen years. I see him most nights when I am out late. He lies the length of the south shore in the dark, from the Bayam&oacute;n mouth west to Toa, and he burns the way the sergeant says. I never told it.</em> He drew on the pipe. <em>Who will get into the boat of a man who sees burning men in the water? And the ones who would laugh at it. It goes badly with people who laugh at the dead. I kept quiet for their sake. Now there are two of us who have seen him, so I can say who he is.</em></p>
+</section>
+
+<section>
+  <h2>III. The Cross at the River</h2>
+  <p class="dateline">The Bayam&oacute;n shore &middot; 1607&ndash;1611</p>
+  <p>In the time when Ant&oacute;n still belonged to a widow on the Calle de la Fortaleza, a man called Hermano Crist&oacute;bal put up a cross of two mangrove poles at the mouth of the Bayam&oacute;n River, on the far side of the bay, and built a hut of palm thatch beside it.</p>
+  <p>He was a lay hermit in a habit of grey sacking, with the bishop's leave. People said he had been a sugar master on Hispaniola, the man who stands over the boiling coppers and says when the syrup is ready, and that one morning in the middle of the grinding he had put down his ladle and walked out of the boiling house and kept walking. He did not preach. In four years nobody heard him say more than a few words together. He lived on what he was given, and every morning he crossed to the town in Ant&oacute;n's canoe and stood in doorways with a gourd until it had something in it, and at noon Ant&oacute;n carried him back.</p>
+  <p>Ant&oacute;n's widow hired him out to work the canoe and took four reales a day from him, and whatever he earned over the four reales was his. In the first year after the hermit came, the crossings doubled. In the second they doubled again. Every morning and every evening the canoes went over full. Women went with jasmine and roses from their patios, and with little bottles of orange-flower water, and with candles wrapped in a cloth. Soldiers went, and masons, and a mulata who sold sweets by the cathedral, and once the treasurer's wife in a chair carried by two men who had to wade. They knelt or sat by the cross in the sand for an hour, and the hermit sat by his hut, and nobody spoke much. Then they came home. Ant&oacute;n would say only that they came home quieter than they went. He charged them a quarter real each way, and he put it in a jar.</p>
+  <p>Between the landing and the cross lay the ground of Bartolom&eacute; P&eacute;rez, an islander from La Palma in the Canaries, who grew cassava and ginger there with his wife and his two sons. Ginger was money in those years. The fleet took it to Seville, and the Dutch and English ships that were not supposed to be on the coast took it too, and paid better. Bartolom&eacute; had cleared that ground himself and he had put every real he had into the ginger.</p>
+  <p>The path went through it. At first the people kept to the path. Then there were too many for the path, and they walked the rows. Ginger is a cane no higher than a man's knee, with a soft stalk, and a foot breaks it. Bartolom&eacute; put up a fence of stakes, and people climbed over it carrying their candles. He stood at the landing in the evenings and asked them, with his hat in his hand, not to walk on his ginger. They said yes, of course, and walked on it. He asked the hermit, and the hermit looked at him a long while and said nothing, as he said nothing to anyone. He went to the alcalde, and the alcalde said it was a matter of devotion and the bishop's affair. He went to the bishop's secretary, who said it was a matter of land and the alcalde's.</p>
+  <p>In the spring of 1611, at the time of the morning crossings, he stood at the edge of his field and watched them come up out of the canoes, sixty or seventy people, and go through the ginger to the cross. He thought, if that hut were not there they would not come.</p>
+  <p>That morning Ant&oacute;n carried the hermit over to the town as usual. When they had gone, Bartolom&eacute; went to the hut. He broke the clay water jar and the two gourd bowls, and he set fire to the thatch.</p>
+  <p>At noon Ant&oacute;n brought the hermit back. They saw the smoke from halfway across. When the canoe touched, the hermit stepped out and walked up to the place where his hut had been and looked at the ashes. Then he turned around and gave Ant&oacute;n the gourd from the morning, which had a piece of cassava bread in it and some salt fish, and he went up the river path into the woods toward the hills. Ant&oacute;n called after him. He raised one hand without looking back.</p>
+</section>
+
+<section>
+  <h2>IV. The Ginger</h2>
+  <p class="dateline">The same evening</p>
+  <p>At sundown the canoes crossed full, Ant&oacute;n's and five others. People got out with their flowers and their candles and went up through the ginger, and stopped. The cross was black. The hut was a ring of ash with the shards of the water jar in it.</p>
+  <p><em>Where has the brother gone?</em> they said. <em>Who did this?</em></p>
+  <p>Bartolom&eacute; had come down to watch them find it. He was standing among them. He said it plainly, the way a man says his name to the notary.</p>
+  <p><em>I burned it. Now you can stop walking on my ginger.</em></p>
+  <p>Somebody said, <em>Take him.</em> Somebody else said, <em>Because of him we have lost the brother.</em> And they took him. They had in their hands what people have in their hands at a landing at evening. Paddles, and the stakes of his own fence, and stones from the river mouth. Women who had come with roses. Ant&oacute;n would not say how long it was. He said only that he had a paddle in his hand, and that he would say no more about his paddle, and that he had been sorry for it every day since. They left Bartolom&eacute; on the sand between his ginger and the water. His wife found him there by lantern. He died before morning.</p>
+  <p>The alcalde wrote that a farmer had been killed at night by persons in a crowd, and no person was named. The widow sold the ground that summer to a man from Toa and went back to the Canaries with her sons. Nobody farmed it. Nobody crossed in the evenings any more, either. Ant&oacute;n's jar stopped filling.</p>
+  <p>But there was enough in it. In the spring of 1612 he took it to his widow, and she named a price, and he paid it, and the notary wrote out the paper. The next morning he put the paper inside his shirt and pushed off to cross the bay for the first time as his own man, and halfway over, in the grey before sunrise, he saw Bartolom&eacute; lying along the south shore.</p>
+  <p><em>His head was on the sand where we left him,</em> Ant&oacute;n said. <em>Every morning since. Every night.</em></p>
+</section>
+
+<section>
+  <h2>V. Under the Ash</h2>
+  <p class="dateline">The boat beach &middot; that night, 1625</p>
+  <p>It was dark by then. Up the slope the town was dark too, except where the ash heaps breathed.</p>
+  <p><em>Fourteen years he has been dead,</em> said Lucas. <em>He did one thing.</em></p>
+  <p>Ant&oacute;n knocked his pipe out on the side of the canoe.</p>
+  <p><em>Milk,</em> he said. <em>You draw it from the goat in the morning and it is sweet. At noon it is sweet. You would swear by it. Then in the evening it has turned, all at once, and you never saw it turn.</em> He put the lid of ash back over his coals with two fingers. <em>And this. Look up there. The Dutchman lit that town twelve days ago. A child could walk across it in the daytime. It is all grey. Put your hand in it.</em></p>
+  <p>Nobody spoke for a while. The fishermen had given up their net. Then Lucas, who could not read, said a thing he had heard read aloud the winter before in a wineshop in Triana, out of the book about the mad gentleman of La Mancha that everybody was laughing at. A rich farmer was flogging his shepherd boy, and the madman rode up and stopped it, and the farmer said the knight had no business with him, and the madman answered him.</p>
+  <div class="verse">
+    <p>&ldquo;That matters little,&rdquo; replied Don Quixote; &ldquo;there may be Haldudos knights; moreover, everyone is the son of his works.&rdquo;</p>
+    <p>&mdash; Cervantes, <i>Don Quixote</i>, Part I, ch. 4</p>
+  </div>
+  <p><em>And what happened to the boy?</em> said the woman with the blanket.</p>
+  <p><em>The madman rode away,</em> said Lucas, <em>and the farmer tied the boy back up to the tree and flogged him twice as hard.</em></p>
+  <p>Ant&oacute;n laughed for the first time that night. <em>There,</em> he said. <em>You see. Later.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Before light Lucas went across with him for cassava, because the fort was still hungry and the governor wanted bread before stone. Ant&oacute;n lifted the ash off his clay pot in the bow, and under it the coals were red, as they had been all night, and he blew on one until it brightened and lit his pipe from it. Lucas looked along the south shore and saw nothing there but the shore.</p>
+  <p>They came in at the Bayam&oacute;n mouth. Nobody had planted the ground behind the landing in fourteen years, and the sea grape and the bush had taken most of it. But all through the bush, in rows that were no longer quite rows, there were ginger canes standing knee high, green, the way ginger comes back from any piece of root left in the ground. Lucas stepped on one getting out of the canoe and smelled it, hot and sharp, on his heel all the way up to the farms.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">An evil deed, like newly-drawn milk, does not turn (suddenly); smouldering, like fire covered by ashes, it follows the fool.<cite>Dhammapada 71, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the elder Mah&#257; Moggall&#257;na, coming down from Vulture&rsquo;s Peak with the elder Lakkha&#7751;a, smiles, and will say why only in front of the Buddha: he has seen a peta, a suffering ghost, with a man&rsquo;s head and a snake&rsquo;s body many leagues long, burning from head to tail and from tail to head. On another day he sees a crow-ghost whose tongue is five leagues long, and it tells him its whole offense was three mouthfuls of food carried home from a meal given to monks. The Buddha confirms the snake-ghost, saying he saw it himself on the day of his awakening and kept silent out of compassion for those who would not have believed him. Then he tells its past: a farmer near Benares, whose field was trampled by the crowds going morning and evening with perfumes and garlands to a solitary awakened one in a leaf hut by the river, broke the hermit&rsquo;s bowls and burned his hut while he was away on his alms round; the hermit simply went elsewhere; and when the crowd came and found the ashes, the farmer said aloud that he had done it, and they beat him to death with sticks and stones. A bad deed, the Buddha says, is like milk, which does not turn the moment it is drawn. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-12.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Maudgalyayana">Moggall&#257;na</a>.</p>
+    <h3>San Juan, 1625</h3>
+    <p>On September 24, 1625, a Dutch fleet of seventeen ships under Boudewijn Hendricksz sailed into San Juan Bay. The townspeople fled inland over the San Antonio bridge while Governor Juan de Haro, who had held office less than a month, shut himself into the <a href="https://en.wikipedia.org/wiki/Castillo_San_Felipe_del_Morro">Castillo San Felipe del Morro</a> with about 330 men. The Dutch occupied the empty town and besieged the fort for weeks; Captain Andr&eacute;s Botello&rsquo;s militia retook the Bayam&oacute;n River and supplies reached the Morro again. When Hendricksz threatened to burn the town, de Haro answered that they had courage enough and wood and stone enough to build again. From October 22 the Dutch burned more than a hundred houses, including the palace and library of the poet-bishop <a href="https://en.wikipedia.org/wiki/Bernardo_de_Balbuena">Bernardo de Balbuena</a>, then were driven back to their ships and sailed on November 2, leaving one ship behind. See <a href="https://en.wikipedia.org/wiki/Battle_of_San_Juan_(1625)">Battle of San Juan (1625)</a>.</p>
+    <p>In the late sixteenth and early seventeenth centuries ginger flourished on Puerto Rico and Hispaniola, and it found a better market in England and the Low Countries than in Castile, so that much of it went to English and Dutch traders outside the Spanish fleet system (see Bethany Aram, <a href="https://rio.upo.es/entities/publication/2e4feef5-6ea4-4854-84af-339b53e96098">&ldquo;Caribbean ginger and Atlantic trade, 1570&ndash;1648&rdquo;</a>). The <a href="https://en.wikipedia.org/wiki/White-necked_crow">white-necked crow</a>, a big red-eyed forest crow whose voice is more like a parrot&rsquo;s babble than a crow&rsquo;s caw, lived on Puerto Rico until it was hunted out early in the twentieth century. Cervantes published the first part of <i>Don Quixote</i> in 1605, and copies went to the Indies with the fleet that same spring; the line Lucas remembers is quoted from <a href="https://www.gutenberg.org/ebooks/996">John Ormsby&rsquo;s 1885 translation</a>. Gaspar, Lucas, Ant&oacute;n, Hermano Crist&oacute;bal, Bartolom&eacute; P&eacute;rez and the cross at the river are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the snake peta from the Dhammapada commentary (verse 71). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-12.htm">The original</a>. Quotation from Cervantes, <i>Don Quixote</i>, tr. John Ormsby (1885). Written by Claude Opus 5.5.
+  <div class="pager"><a href="honey-on-the-knife.html">&larr; Honey on the Knife</a><a href="index.html">All stories</a><a href="a-thousand-stamps.html">A Thousand Stamps &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+// Banked fire: coals lie under grey ash across the foot of the page. Now and then a slow
+// breath of wind crosses from one side, and the coals it passes over show red and go grey again.
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, coals = [], flakes = [], gust = null, t = 0, next = 240;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    coals = [];
+    var n = Math.round(Math.max(40, Math.min(140, W / 9)));
+    for (var i = 0; i < n; i++) {
+      var y = H * (0.68 + Math.pow(Math.random(), 0.7) * 0.31);
+      coals.push({ x: Math.random() * W, y: y, r: 1 + Math.random() * 2.6, heat: 0, base: 0.05 + Math.random() * 0.1, ph: Math.random() * 6.3 });
+    }
+    flakes = [];
+    for (var k = 0; k < Math.round(W / 90); k++) flakes.push({ x: Math.random() * W, y: Math.random() * H, s: 0.6 + Math.random() * 1.4, v: 0.08 + Math.random() * 0.18, ph: Math.random() * 6.3 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      t++;
+      if (!gust && t > next) { gust = { x: -W * 0.25, dir: 1, v: 0.9 + Math.random() * 0.8, w: W * (0.18 + Math.random() * 0.12) }; if (Math.random() < 0.5) { gust.dir = -1; gust.x = W * 1.25; } }
+      if (gust) { gust.x += gust.v * gust.dir; if (gust.x < -W * 0.4 || gust.x > W * 1.4) { gust = null; next = t + 420 + Math.random() * 600; } }
+    }
+    for (var i = 0; i < coals.length; i++) {
+      var o = coals[i];
+      if (gust) { var dx = Math.abs(o.x - gust.x); if (dx < gust.w) o.heat = Math.max(o.heat, 1 - dx / gust.w); }
+      o.heat *= reduce ? 1 : 0.992;
+      var breathe = reduce ? 0.6 : 0.6 + 0.4 * Math.sin(t * 0.012 + o.ph);
+      var a = o.base * breathe + o.heat * 0.55;
+      var R = o.r * (1 + o.heat * 1.5);
+      var g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, R * 5);
+      g.addColorStop(0, 'rgba(255,160,90,' + a + ')');
+      g.addColorStop(0.25, 'rgba(217,103,58,' + (a * 0.55) + ')');
+      g.addColorStop(1, 'rgba(120,40,20,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(o.x, o.y, R * 5, 0, Math.PI * 2); ctx.fill();
+      // the ash skin over each coal
+      ctx.fillStyle = 'rgba(150,140,130,' + (0.10 * (1 - o.heat)) + ')';
+      ctx.beginPath(); ctx.arc(o.x, o.y, o.r * 1.3, 0, Math.PI * 2); ctx.fill();
+    }
+    for (var k = 0; k < flakes.length; k++) {
+      var f = flakes[k];
+      if (!reduce) { f.y -= f.v; f.x += Math.sin(t * 0.01 + f.ph) * 0.2; if (f.y < -5) { f.y = H + 5; f.x = Math.random() * W; } }
+      ctx.fillStyle = 'rgba(190,182,172,0.10)';
+      ctx.fillRect(f.x, f.y, f.s, f.s);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Potato Ground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on burned-over ground, charcoal and ash; green potato tops come up along the bottom edge. */
+  --ground: #17181a;
+  --ground-2: #1f2123;
+  --paper: #dedbd3;
+  --paper-dim: #9c9a92;
+  --accent: #8fb26c;
+  --glow: #c9c2d6;
+  --rule: rgba(222,219,211,.12);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #1b1c1e 0%, #141516 70%, #1a1c17 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--ground-2); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.verse .cite { font-style: normal; font-size: .9rem; color: var(--paper-dim); }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--ground-2); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 16.2 &middot; A&ntilde;&ntilde;atarakuṭumbika</span></nav>
+<header>
+  <h1>The Potato Ground</h1>
+  <div class="epigraph">For he alone loses none dear to him, to whom all are dear in Him who cannot be lost.<br>&mdash; Augustine, Confessions IV</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Voil&agrave; comme on me l&rsquo;a cont&eacute;,</span> in the Belgian settlement.</p>
+
+<section>
+  <h2>I. The Ground</h2>
+  <p class="dateline">Door County, Wisconsin &middot; October and November 1871</p>
+  <p>All that summer everybody burned. There had been next to no snow in the winter and next to no rain since, and a man with forty acres of maple and hemlock standing between himself and a crop did what he did every year. He rolled the logs into heaps of twenty and thirty, set them alight, and let them go for days. The railroad gangs burned their slash and the mills burned their edgings. By September the smoke lay so thick on Green Bay that the boats steered by compass at noon, and ash came down on the washing, and nobody stopped, because wheat does not grow under trees.</p>
+  <p>Lambert Colignon burned his heaps with the rest. He had come out from the commune of Grez in Brabant in 1856 with a wife and a boy in arms, had paid a dollar and a quarter an acre, and in fifteen years had got eleven acres clear, a hewn-log house, and a yoke of oxen. The boy in arms was Jules, seventeen now. In the spring Lambert had sent him four miles north to Williamson's shingle mill, because the mill paid in money and the farm did not.</p>
+  <p>On Sunday night the eighth of October the wind got up out of the southwest, and all the little fires became one fire. It came through the Belgian settlement faster than a horse can run. Lambert and his wife Octavie lay in the mud of the cattle hole with a wet ox blanket over them. When they stood up there was no house and no barn, and one ox.</p>
+  <p>At the mill there had been seventy-seven people. When the fire came, a good half of them ran for the potato patch, which was the only open ground, and lay down between the rows on their faces, thinking fire cannot cross dirt. It did not cross. It went over. Thirty-five died there in the rows. Others died elsewhere about the place. Seven men went down the well and five came up. When it was all counted, seventeen were living out of seventy-seven, and Jules Colignon was not one of them, and nobody could tell Lambert which of those in the patch had been his.</p>
+  <p>So he went to the ground. Every morning he walked the four miles north through standing black poles without a leaf on them, in ash to the ankle, and after the rains in a gray mud. He stood at the edge of the potato patch, where the rows still showed, baked hard as brick, and he wept there, and at dusk he walked back. He did it through October and into November.</p>
+  <p>He did not eat what Octavie set in front of him. He had not cut one log toward a roof, and the snow was coming. They slept under charred boards leaned against the root-cellar bank. Relief was coming down the bay on tugs to Dyckesville, flour and pork and blankets and axes, sent from Milwaukee and from places nobody in the settlement had heard of. It was Octavie who walked there for their order and carried the flour home. It was Octavie who took the axe to where the neighbors were raising one another's shanties, a day at each place, and gave their day. She came back at night and said nothing to him. There was nothing to say to his back.</p>
+</section>
+
+<section>
+  <h2>II. The Reader</h2>
+  <p class="dateline">The Colignon clearing &middot; a morning of wet snow</p>
+  <p>In the years when a priest reached the settlement four times in twelve months, the people chose one of their own to read the prayers of the Mass and the Gospel of the Sunday aloud in somebody's house. The one they chose was Hubert Bodart, because he had had two years at the little seminary at Floreffe before his father died and the farm called him home. He was near seventy now and a shingle shaver, with the callus of the drawknife across both palms. He also wrote what needed writing. He had written the settlement's letters home for twenty years, and now he was writing its lists for the relief, house by house: what was burned, and who.</p>
+  <p>His own house was gone like everybody's. He had carried two books out of it inside his shirt and had lain on them in a plowed field.</p>
+  <p>He came up the Colignon track before Lambert had set out. Lambert saw him and thought, <em>He wants the boy's name and age for his paper. And he will say what one says.</em> He turned the washtub over for the old man, since it was the one seat they had, and stood.</p>
+  <p>Hubert sat down. He did not take out his paper.</p>
+  <p><em>Lambert. Why are you sad?</em></p>
+  <p>Lambert looked at him. The country was black from Sturgeon Bay to the Red River road. It was a question for a simpleton.</p>
+  <p><em>My son is dead. That is why I am sad.</em></p>
+  <p><em>Yes,</em> Hubert said. <em>And D&eacute;sir&eacute; Gaspard's two girls. And the Williamsons, nearly to the last one. And at Rosi&egrave;re, and across the water at Peshtigo more than anybody has been able to count. I have the lists here in my coat, Lambert. There is not a clearing between the Bay Settlement and Little Sturgeon where the table is not short. It did not come to your door and pass the others. What could die has died. What could burn has burned.</em></p>
+  <p><em>That is a thing to say to a man.</em></p>
+  <p><em>It is what my grandmother's people said. They did not go on as you are doing.</em></p>
+  <p><em>What people? When was this?</em></p>
+  <p><em>Sit down on the ground and I will tell you.</em></p>
+</section>
+
+<section>
+  <h2>III. The Essart</h2>
+  <p class="dateline">The hills above the Meuse &middot; in the old time</p>
+  <p>Above the Meuse, toward the Ardenne, the soil on the hilltops is thin and sour, and the people there worked it this way. Every eighteen or twenty years they cut the broom and scrub oak off a piece of the hill, let it dry where it fell, burned it on the spot and sowed rye in the warm ash. A piece of hill so burned they called an essart. It gave one crop of rye and then went back to broom.</p>
+  <p>There was a man there named Bastin, who had a wife, a son, a daughter, the son's young wife and a servant girl, so that they were six at table. Bastin had one saying, and the five had heard it since they could hear. <em>Everything lent is called for.</em> He said it over the soup and at sowing. <em>You are lent, I am lent, the cow is lent. Be good to what is lent and do not be astonished when it is called for.</em> He made them say it back to him. They came to think of it every day of their lives, the way people think of the weather.</p>
+  <p>One spring Bastin and his son went up to burn their essart. The son raked the dry broom into rows and fired it. At the edge of the piece was a heap of field stones with an adder in it, and the smoke got into her eyes. She came out in a fury and struck the first thing she met, which was the boy's ankle. He took four steps and sat down and died.</p>
+  <p>Bastin set down his fork and came and saw what it was. He carried his son into the shade of a thorn tree, laid him straight, and covered his face with his own smock. <em>What was lent has been called for,</em> he said. Then he went back to the fire, because a burn that is left alone takes the hill.</p>
+  <p>A neighbor came along the path below. <em>Are you going down?</em> Bastin called. <em>Then stop at my door and tell my wife this. Today she is to send dinner for one and not for two. And the girl is not to bring it alone. Let all four come, in clean linen, and bring the sprigs of box from behind the crucifix.</em></p>
+  <p>The neighbor said it at the door just so. <em>Who gave you this message?</em> the wife asked. <em>Bastin.</em> Then she knew. She did not cry out. She said to the other three, <em>What was lent has been called for. Wash your hands.</em> They went up the hill in white caps with dinner for one and the blessed box. Bastin sat down by the thorn tree and ate, because the afternoon's work was still in front of him. Then they dug, the five of them, at the edge of the essart, and laid the box sprigs on him, and filled it in. Not one of them wept.</p>
+  <p>Now in those days the Good God went about on the roads more than He does at present, looking like anybody. An old man with a stick stopped at the edge of the burn.</p>
+  <p><em>What are you putting in the ground there? A dog?</em></p>
+  <p><em>A man,</em> said Bastin.</p>
+  <p><em>Some enemy of yours, then, that you bury him so dry.</em></p>
+  <p><em>Our own son.</em></p>
+  <p><em>Then he was no great loss.</em></p>
+  <p><em>He was the best we had.</em></p>
+  <p><em>Then why does nobody weep?</em></p>
+  <p>Bastin said, <em>An adder leaves her old skin on the heath and goes on her way. What is under this thorn is the skin. It does not feel the spade and it does not hear crying. He has gone where he was going.</em></p>
+  <p>The mother said, <em>He came to me without my sending for him, and he has left without asking my leave. He went as he came. What is there for me to say about it?</em></p>
+  <p>The sister said, <em>If I cried I would grow thin and ugly, and whom would that help? My mother would have two sorrows to look at.</em></p>
+  <p>The young wife said, <em>A child cries for the moon in the pond. I am not a child.</em></p>
+  <p>The servant girl said, <em>When a crock is broken you do not sit down beside the pieces.</em></p>
+  <p>The old man said, <em>You have answered well. Go home.</em> And he went on up the hill. In the morning the essart was green. Rye that no hand had sown stood four fingers high in ash that was still warm, in every corner of the burn except a place the size of a door under the thorn tree.</p>
+</section>
+
+<section>
+  <h2>IV. The Book</h2>
+  <p class="dateline">The Colignon clearing &middot; the same morning</p>
+  <p><em>They were made of wood,</em> Lambert said.</p>
+  <p><em>I said the same to my grandmother. She hit me with the spoon.</em></p>
+  <p><em>And you, Hubert? In the sickness year you buried Ferdinande and two of the children in one week. I helped carry. You howled like a dog on the road.</em></p>
+  <p><em>I did. I am not Bastin. I did not walk up here to tell you I am Bastin.</em> The old man looked at the lean-to, the cold ashes, the axe with rust starting on it. <em>But see what you do. You have put down your work. You do not eat. Your wife raises other men's walls alone and sleeps under burnt boards. And every day you go and stand in that field as if he were kept there. He is not kept there, Lambert. Bastin at least knew where his son was not.</em></p>
+  <p>He took out the smaller of his two books.</p>
+  <p><em>This is a bishop in Africa, fourteen hundred years ago. When he was young the friend of his heart died of a fever, and he went about just as you do. He hated every place because the friend was not in it. He wondered that other people had the face to go on living. Afterward he worked out what had happened to him.</em></p>
+  <p>He read it out slowly, putting it into Walloon as he went.</p>
+  <div class="verse">
+    <p>For whence had that former grief so easily reached my very inmost soul, but that I had poured out my soul upon the dust, in loving one that must die, as if he would never die?</p>
+    <p>Blessed whoso loveth Thee, and his friend in Thee, and his enemy for Thee. For he alone loses none dear to him, to whom all are dear in Him who cannot be lost.</p>
+    <p class="cite">&mdash; Augustine, Confessions IV</p>
+  </div>
+  <p><em>Was I not to love him, then?</em></p>
+  <p><em>He does not say that. He says you loved him as if he could not die. You held him the way a man holds water in his fist, and the grief is the size of the fist. The fear was too. You had that long before any fire. Every time the boy was late on the road, you had it. Is it so?</em></p>
+  <p>Lambert did not answer, and that was an answer.</p>
+  <p><em>Love him where he cannot be lost. That is all the man says. I have read it thirty years and I can do it perhaps one day in ten.</em> Hubert put the book back in his shirt and took out the paper and a pencil. <em>Now give me his name.</em></p>
+  <p><em>Jules-Joseph Colignon. Seventeen years. Shingle packer at Williamson's.</em></p>
+  <p>Hubert wrote it at the foot of the sheet. Lambert watched him write, and saw how far down the sheet the pencil had to go to find a place, and that there was a second sheet under it, and a third.</p>
+  <p>When the old man had gone down the track, Lambert ate what was in the pot, standing up, all of it. Then he took the axe and went to find Octavie.</p>
+</section>
+
+<section>
+  <h2>V. June</h2>
+  <p class="dateline">Door County &middot; 1872</p>
+  <p>They had a roof by Christmas, of relief boards. In the spring there was nothing to clear. The fire had done in one night what Lambert would have done in thirty years, and he put the one ox beside a borrowed one and sowed wheat in the ash between the black stumps, on more ground than he had ever had open. Everybody in the settlement did the same. Nobody called it a gift.</p>
+  <p>In June he walked north once more, the first time since the snow. Nothing had been built at Williamson's and nothing would be. The potato patch had come up. Not all of it. But here and there along the baked ridges, where a tuber had lain deep enough when the fire went over, dark green tops stood out of the ground, and a few were in flower. Nobody had planted them and nobody was going to dig them.</p>
+  <p>He stood at the edge for a time. He did not weep, which surprised him, and then did not surprise him. He said the boy's name once, aloud.</p>
+  <p>Then, having no hoe with him, he went down the nearest row on his knees and drew the earth up around each plant with his hands, the way they are hilled. When he had done the one row he got up and went home to his own.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">From pleasure comes grief, from pleasure comes fear; he who is free from pleasure knows neither grief nor fear.<cite>Dhammapada 212, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>M&uuml;ller's "pleasure" renders the P&#257;li <em>piya</em>, what is dear or beloved. In the commentary, a householder who has lost his son goes every day to the burning ground and weeps. The Buddha comes to his house and asks why he is sad, tells him that death is not confined to one place or one person, and relates the Uraga J&#257;taka: a farmer whose son is killed by a snake while burning rubbish in the field sends home for dinner for one instead of two, and the whole family burns the body without a tear. Sakka, king of the gods, comes down to ask each of them why they do not weep, hears their answers (the cast-off snakeskin, the guest who came unbidden, the child crying for the moon, the broken pot) and fills their house with treasure. The Buddha then tells the father that grief and fear arise only from what is dear. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/16-02.htm">the full commentary story</a>.</p>
+    <h3>The Belgian settlement, 1871</h3>
+    <p>From 1853 several thousand Walloon-speaking <a href="https://en.wikipedia.org/wiki/Belgian_Americans">Belgians</a>, many from around Grez-Doiceau in Brabant, took up government land at $1.25 an acre in Brown, Kewaunee and Door counties, Wisconsin. They cleared it by rolling logs into heaps and burning them, shaved shingles by hand for cash, and, with priests scarce, chose one of their own number to read the Mass prayers and the Sunday Gospel. After a rainless summer, the fires of land-clearing, logging and railroad building ran together on the night of October 8, 1871. The <a href="https://en.wikipedia.org/wiki/Peshtigo_fire">Peshtigo fire</a> west of Green Bay killed well over a thousand people, more than any other fire in American history; a separate firestorm the same night burned a strip some sixty miles long through the Belgian settlements east of the bay. At the shingle-mill hamlet of <a href="https://en.wikipedia.org/wiki/Williamsonville,_Wisconsin">Williamsonville</a>, about sixty of seventy-seven residents died, thirty-five of them in the potato patch where they had taken refuge; five of seven men who went down the well survived. The place was never rebuilt and is now Tornado Memorial County Park.</p>
+    <p>Relief was landed from tugs at Dyckesville and carried inland, and it kept coming for eighteen months. The burned timberland became farmland, and the peninsula turned from lumber to wheat and dairying. To the south, near Green Bay, people who had sheltered through the night at Adele Brise's chapel at Robinsonville found its grounds untouched; it is now the <a href="https://en.wikipedia.org/wiki/National_Shrine_of_Our_Lady_of_Champion">National Shrine of Our Lady of Champion</a>. Essartage, the cutting and burning of broom and coppice to sow rye in the ash, was practiced in the Belgian Ardennes into the nineteenth century. The Colignons and Hubert Bodart are invented. The <a href="https://en.wikipedia.org/wiki/Confessions_(Augustine)">Confessions</a> are quoted in E. B. Pusey's English of 1838.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a certain head of a family from the Dhammapada commentary (verse 212). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/16-02.htm">The original</a>. Scripture from the Confessions of St. Augustine, translated by E. B. Pusey (1838). Written by Claude Fable 5.2.
+  <div class="pager"><a href="empty-handed.html">&larr; Empty-Handed</a><a href="index.html">All stories</a><a href="new-clothes.html">New Clothes &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Potato tops coming up through ash: a few green shoots along the bottom edge that rise slowly, stand, and fade.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, shoots = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(s) {
+    s.x = Math.random() * W; s.h = 26 + Math.random() * 46;
+    s.life = 0; s.max = 1500 + Math.random() * 2200; s.lean = (Math.random() - 0.5) * 14;
+    s.fl = Math.random() < 0.3;
+    return s;
+  }
+  function make() {
+    var n = Math.round(Math.max(5, Math.min(12, W / 110)));
+    shoots = [];
+    for (var i = 0; i < n; i++) { var s = spawn({}); s.life = Math.random() * s.max; shoots.push(s); }
+  }
+  function leaf(x, y, dx, dy, a) {
+    ctx.beginPath(); ctx.moveTo(x, y);
+    ctx.quadraticCurveTo(x + dx * 0.5, y + dy - 5, x + dx, y + dy);
+    ctx.quadraticCurveTo(x + dx * 0.5, y + dy + 4, x, y);
+    ctx.fillStyle = 'rgba(110,150,84,' + a + ')'; ctx.fill();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < shoots.length; i++) {
+      var s = shoots[i];
+      if (!reduce) { s.life++; if (s.life > s.max) spawn(s); }
+      var p = reduce ? 0.5 : s.life / s.max;
+      var grow = Math.min(1, p * 3.2), fade = Math.min(1, (1 - p) * 5);
+      var a = 0.34 * fade, h = s.h * grow, tx = s.x + s.lean * grow, ty = H - h;
+      ctx.strokeStyle = 'rgba(110,150,84,' + a + ')'; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(s.x, H); ctx.quadraticCurveTo(s.x, H - h * 0.5, tx, ty); ctx.stroke();
+      if (grow > 0.45) { leaf(s.x + s.lean * 0.4, H - h * 0.55, 11 * grow, -5, a); leaf(s.x + s.lean * 0.4, H - h * 0.55, -10 * grow, -4, a); }
+      if (grow > 0.8) { leaf(tx, ty, 9, -4, a); leaf(tx, ty, -9, -3, a); }
+      if (s.fl && grow >= 1) { ctx.fillStyle = 'rgba(226,220,236,' + a * 1.3 + ')'; ctx.beginPath(); ctx.arc(tx, ty - 3, 2.4, 0, Math.PI * 2); ctx.fill(); }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
