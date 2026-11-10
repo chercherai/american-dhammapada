@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fire Year</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a December night in the Ojai Valley; along the bottom a black ridge, where a thin line of fire creeps slowly along the crest and dims behind itself, and a little ash comes down; datelined sections. */
+  --ground: #120e0c;
+  --ground-2: #1d1613;
+  --paper: #e8dfd4;
+  --paper-dim: #a3968a;
+  --accent: #e2763c;
+  --accent-2: #d4919c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #3a1d12 0%, #1a1210 45%, #120e0c 75%) fixed, #120e0c;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(232,223,212,.12); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 30px rgba(226,118,60,.25); }
+.epigraph { border-left: 1px solid rgba(226,118,60,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(29,22,19,.82); border: 1px solid rgba(232,223,212,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(232,223,212,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(232,223,212,.12); border-bottom: 1px solid rgba(232,223,212,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(29,22,19,.82); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 18.9 &middot; Five Lay Disciples</span></nav>
+<header>
+  <h1>Fire Year</h1>
+  <div class="epigraph">Before the Soul can hear, the image (man) has to become as deaf to roarings as to whispers, to cries of bellowing elephants as to the silvery buzzing of the golden fire-fly.<br>&mdash; H. P. Blavatsky, <em>The Voice of the Silence</em> (1889)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; me lo contaron,</span> on the East End.</p>
+
+<section>
+  <h2>I. The Gate</h2>
+  <p class="dateline">The East End of the Ojai Valley &middot; Wednesday, December 6, 2017</p>
+  <p>The whole valley was under evacuation orders by Wednesday afternoon, and five men were standing at the bottom of a ranch road off Highway 150 to watch the fire come.</p>
+  <p>It had started Monday night north of Santa Paula, a few miles over the hill, and the Santa Ana wind had taken it twelve miles to the sea in a few hours and burned the hillsides above Ventura. Now it had turned and come up the valley behind Black Mountain, and the mountains around Ojai that the town loved for going pink at sunset were black along the ridges and orange in the folds. The sun was a red coin. Ash came down like a slow gray snow on the windshields and the tangerine leaves. The hydrants in town had gone dry the day before when the fire got into the pumps.</p>
+  <p>Captain Maricela Ochoa pulled her engine off the highway at the ranch gate because she had seen the five of them standing there and she knew every one of them by name.</p>
+  <p>She was fifty-one. She had grown up in Santa Paula, where her father had picked lemons for forty years, and she had been in the fire service for twenty-six of hers. She spread the map on the warm hood of the engine. Her probationary firefighter, a boy from Camarillo named Noah, stood beside her and waved his clipboard back and forth over the map to keep the ash off it.</p>
+  <p>Then she told them.</p>
+  <p>She told them where the fire was and where it would be at dark. She told them what the wind would do when it came over the ridge after midnight, what the embers would do a mile ahead of it, and that there was no water in the hydrants and no engine coming to their road, because there were not enough engines in the state. She told them what happens to a house with a wood shake roof and what happens to a man in a house when the air outside it is a thousand degrees. She did not raise her voice. She talked to them the way she would have talked to her own brothers, and Noah, who had heard her give a dozen briefings, said afterward that it went through you like cold water, that the hair stood up on his arms. It was the plainest talk he ever heard and he could have stood in the ash and listened to it all night.</p>
+  <p>The five men stood around the hood.</p>
+  <p>Lionel Strand, who had written music for the movies for thirty years and had a house up the canyon with a view of the whole valley, sat down in the canvas camp chair he had brought, and before she was done he was asleep, his chin on his chest, in the red light.</p>
+  <p>Gil Haskins, who grew organic Pixie tangerines on twenty acres and raised his own compost worms in long beds under the trees, squatted at the edge of the road while she talked and worked one finger into the dry ground, and then another, down to the second knuckle, feeling for the damp that was not there.</p>
+  <p>Brent Kessler, who had surfed for money once and now sold houses to people from Los Angeles, stood with one hand around the trunk of a young live oak by the gate, and shook it. He did not know he was doing it. The leaves rattled the whole time.</p>
+  <p>Teo Lindqvist, who kept an astrology practice upstairs on Ojai Avenue, stood with his head back and watched the smoke column over Sulphur Mountain build itself into a white tower and flatten at the top, a cloud the fire was making for itself. Saturn would go into Capricorn in two weeks. He had been telling his clients for a year that December would be a reckoning, and now he watched the sky to see how.</p>
+  <p>And Arthur Penrose, who was eighty-six and lived in a little French-style cottage beside the Theosophists&rsquo; grounds on the west side of town, and who had come out to the East End that morning to help a friend load her horses and stayed because no one had told him to go home, stood with his hands folded in front of him and listened. He listened as if he were taking it down. For forty years he had been a court reporter in Los Angeles, and before that, for as long as he could remember, he had been a student of one small book, which he could say from beginning to end. He did not take his eyes off her face.</p>
+  <p>When she was done she folded the map. <em>That&rsquo;s it,</em> she said. <em>Go now.</em></p>
+  <p>Mr. Penrose said <em>Thank you, Captain,</em> and walked to his car. The other four did not move.</p>
+</section>
+
+<section>
+  <h2>II. Five Hundred Times</h2>
+  <p class="dateline">Highway 150 &middot; the same afternoon</p>
+  <p>Noah waited until they were back on the highway.</p>
+  <p><em>Cap. That was the best one I&rsquo;ve heard you do. It was like a thunderstorm. And they stood there. One of them was asleep. One of them was playing in the dirt.</em></p>
+  <p><em>You don&rsquo;t know those men?</em></p>
+  <p><em>No, ma&rsquo;am.</em></p>
+  <p>She drove for a while. The ash came down on the windshield and the wipers smeared it.</p>
+  <p><em>I&rsquo;ve been up Lionel Strand&rsquo;s road four times since 1990,</em> she said. <em>Two fires and two times his smoke alarm went off. Every time, he was asleep. He paid a woman on Ojai Avenue a hundred and fifty dollars to read his past lives, and she told him he&rsquo;d been a snake five hundred times in a row, curled up on a warm rock, asleep. He tells it at parties. He thinks it&rsquo;s funny.</em> She looked at Noah. <em>I think she earned her money.</em></p>
+  <p><em>Gil Haskins,</em> she said, <em>has been digging in that dirt since he was born. Ask him what he was before, he&rsquo;ll tell you. A worm. Five hundred times. He says it like it&rsquo;s a compliment, and maybe it is. But he can&rsquo;t hear you with his hands in the ground.</em></p>
+  <p><em>Kessler. You saw him with the tree. That one never stands still. Teo did his chart for him, and Teo told him he&rsquo;d been a monkey for five hundred lives. Kessler had it printed on a T-shirt.</em></p>
+  <p><em>And Teo?</em></p>
+  <p><em>Teo did his own. He was an astrologer. Five hundred lives. Looking up.</em> She almost smiled. <em>He&rsquo;s still looking up. There&rsquo;s a fire coming down the hill at him and he&rsquo;s reading it like a horoscope.</em></p>
+  <p><em>The old man listened.</em></p>
+  <p><em>Mr. Penrose says he was a priest in India for five hundred lives, and all he did in every one of them was chant the same holy book. Over and over, to get every word right. I believe him. He&rsquo;s the only one of them that heard me. He listens like he&rsquo;s writing down a scripture.</em></p>
+  <p>Noah was quiet. Then he said, <em>But it goes right through you. The way you say it. How can somebody stand there and not hear that?</em></p>
+  <p><em>You think it&rsquo;s easy to hear?</em></p>
+  <p><em>Isn&rsquo;t it?</em></p>
+  <p><em>No,</em> she said. <em>It&rsquo;s the hardest thing there is.</em></p>
+  <p><em>Why?</em></p>
+  <p>She did not answer right away. They passed a horse trailer with its doors open in a field and nobody near it. A whole orchard on the slope to their left was burning in a quiet line, tree by tree, like candles being lit down a row.</p>
+  <p><em>Because they&rsquo;ve been listening to something else their whole lives,</em> she said. <em>Their whole lives and, if you believe them, five hundred before that. The radio in the truck. The parties. The music. Their own selves talking. You come along and say one true thing and it&rsquo;s one more noise.</em></p>
+  <p><em>But why?</em> he said. <em>What&rsquo;s the noise?</em></p>
+  <p>She pointed up the hill with her chin.</p>
+  <p><em>When I started, fire season ended with the first rain. Halloween, Thanksgiving. Now it&rsquo;s December and look at it. Now the old guys say there&rsquo;s no fire season, there&rsquo;s a fire year. But even this one goes out. This one needs the Santa Anas and months without rain. The rain comes, January, February, and it goes out. There&rsquo;s another fire that doesn&rsquo;t need any of that. It burns in every one of those men every day of the year, and it doesn&rsquo;t leave ashes. There&rsquo;s no fire like wanting. There&rsquo;s nothing that grabs hold of a man like hating somebody. There&rsquo;s no trap like not seeing what&rsquo;s right in front of you. And no flood like always wanting more.</em></p>
+  <p>Noah looked at the hill.</p>
+  <p><em>You wait,</em> she said. <em>After this fire comes the mud.</em></p>
+</section>
+
+<section>
+  <h2>III. The Night</h2>
+  <p class="dateline">The East End &middot; December 6&ndash;7</p>
+  <p>The wind came over the ridge after midnight, the way she had said.</p>
+  <p>Lionel Strand went back up his canyon and sat down in his living room in front of the big window to watch the fire, and fell asleep. At three in the morning Captain Ochoa&rsquo;s crew, going up the canyon road against orders with the cab full of smoke, found him in his chair with the window glowing orange in front of him and carried him out to the engine, still mostly asleep. The house burned an hour later. He said afterward that he had dreamed of a warm rock.</p>
+  <p>Gil Haskins stayed in his orchard all night with a shovel, digging a firebreak around his trees in ground too hard to dig. The embers went over him and the break and into the windbreak of eucalyptus. He lost eleven of his twenty acres. In the morning he was still digging.</p>
+  <p>Brent Kessler drove back and forth on Highway 150 until four in the morning, from one roadblock to the other, unable to stay anywhere, calling everyone he knew. His listings burned. His own house did not.</p>
+  <p>Teo Lindqvist stood on the roof of his building on Ojai Avenue and watched the column over the mountains until it collapsed in on itself before dawn and threw a wind down the valley that rattled every window on the avenue. He said later that he had seen a face in it. He would not say whose.</p>
+</section>
+
+<section>
+  <h2>IV. The Mineral Building</h2>
+  <p class="dateline">Ventura County Fairgrounds &middot; December 7</p>
+  <p>Arthur Penrose spent the night on a Red Cross cot in the Mineral Building at the fairgrounds in Ventura, between a family from Casitas Springs with three children and a man who had brought only his cat. The ocean was a block away. You could hear it under the sound of the generators.</p>
+  <p>He did not sleep. He sat on the edge of the cot in his good overcoat with his hands folded, and he said the book over to himself, the way he had said it every night since 1952, when a woman at a lecture in Pasadena had given him a copy and told him to learn it by heart. He knew every word of it. He had always known every word of it. He had taken down eight million words in courtrooms and he had never once misheard one.</p>
+  <p>Somewhere around the second fragment, at a passage he had said perhaps twenty thousand times, he heard it.</p>
+  <div class="verse">
+    <p>If thou would&rsquo;st cross the first Hall safely, let not thy mind mistake the fires of lust that burn therein for the Sunlight of life.</p>
+    <p>&mdash; H. P. Blavatsky, <em>The Voice of the Silence</em> (1889), Fragment I</p>
+  </div>
+  <p>He heard it in a woman&rsquo;s voice, flat and plain, the voice of somebody leaning on the hood of a fire engine with ash coming down on her shoulders. It was not a book. It was a report of what was on the hill. It had always been a report of what was on the hill, and he had been reciting it the way you recite the weather in another country. He sat on the cot and said the next lines, slowly, and they were true too.</p>
+  <div class="verse">
+    <p>This light shines from the jewel of the Great Ensnarer, (Mara). The senses it bewitches, blinds the mind, and leaves the unwary an abandoned wreck.</p>
+    <p>The moth attracted to the dazzling flame of thy night-lamp is doomed to perish in the viscid oil.</p>
+    <p>&mdash; <em>The Voice of the Silence</em>, Fragment I</p>
+  </div>
+  <p>The man with the cat asked if he was all right. He said yes. He said he had just understood something he had known for sixty-five years, and the man nodded, as if that happened all the time in the Mineral Building, and maybe it did.</p>
+  <p>Toward morning the wind turned and blew in off the water, and the smoke lifted for an hour. Mr. Penrose went out and stood in the parking lot, an old man in an overcoat among the horse trailers, and looked north at the burning hills. It seemed to him that he was seeing them for the first time without anything in between: the fire, the hill, the people on the cots behind him, his own two hands. Whatever starts, ends. He had said that to himself all his life too.</p>
+</section>
+
+<section>
+  <h2>V. The Mud</h2>
+  <p class="dateline">Highway 150 &middot; January 9, 2018</p>
+  <p>The first real rain of the season came on the eighth of January, and it fell all night on the black hills. Captain Ochoa was on Highway 150 before dawn on the ninth with a pickup and a shovel, watching the culverts below the burn, because she had said she would.</p>
+  <p>Over the mountain in Montecito the hills came down in the dark onto houses where people were asleep, and twenty-one of them died. On the East End the creeks ran thick as wet cement for two days, carrying burned oak limbs, boulders the size of cars, somebody&rsquo;s mailbox. They filled the culverts to the brim.</p>
+  <p>Mr. Penrose came out on the second day in his overcoat with an umbrella, and stood beside her on the shoulder of the highway, and they watched the creek go by. He did not say anything about the book. He asked about her father. She told him about the lemons.</p>
+  <p>Below them in the rain a black orchard stood in rows, eleven acres of it, every tree burned to the trunk. At the far end Gil Haskins was already out with his shovel in the mud, turning over the wet ground under the first dead tree, looking for worms.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">There is no fire like passion, there is no shark like hatred, there is no snare like folly, there is no torrent like greed.<cite>Dhammapada 251, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, five lay followers sit down to hear the Buddha teach. One falls asleep, one digs at the ground with his finger, one shakes a tree, and one gazes at the sky; only one listens. When Ānanda asks why, the Buddha tells him that for five hundred lives the first was a snake that slept in its coils, the second an earthworm, the third a monkey, the fourth an astrologer, and the fifth a brahmin who recited the Vedas, so each still does what he has always done. The Dhamma is hard to hear, he says, because of passion, hatred and delusion. The fire at the end of an age burns only in its season, but there is no season when the fire of passion does not burn. The listener enters the stream. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-09.htm">the full commentary story</a>.</p>
+    <h3>The Ojai Valley, 2017&ndash;2018</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Thomas_Fire">Thomas Fire</a> started on the evening of December 4, 2017, north of Santa Paula, and under unusually strong and long-lasting Santa Ana winds it ran twelve miles to Ventura in a few hours. It reached Black Mountain above <a href="https://en.wikipedia.org/wiki/Ojai,_California">Ojai</a>, the whole valley was put under evacuation orders, and the town&rsquo;s water system stopped working for a time when the fire damaged its pumps. By the time it was contained on January 12, 2018, it had burned 281,893 acres, then the largest wildfire in modern California history, and its column had made its own weather. The first measurable rain fell on January 8; the next morning <a href="https://en.wikipedia.org/wiki/2018_Southern_California_mudflows">debris flows</a> came down out of the burn scar onto Montecito and killed at least 21 people. Evacuees from Ventura and the Ojai Valley sheltered in the Mineral Building at the Ventura County Fairgrounds. Captain Ochoa, the five men and their houses are invented.</p>
+    <p>Ojai has drawn seekers for a century. The Theosophical colony of <a href="https://en.wikipedia.org/wiki/Krotona">Krotona</a> moved there from Hollywood in 1926, and theosophists later built the Taormina cottages beside it as a retirement community. <a href="https://en.wikipedia.org/wiki/Jiddu_Krishnamurti">Jiddu Krishnamurti</a> settled in the valley in 1922 and died there in 1986. The town is known for its organic citrus, especially the small <a href="https://kqed.org/news/11919000/ojais-famous-pixie-tangerine-struggles-to-survive-wildfires-and-a-hot-real-estate-market">Ojai Pixie tangerine</a>, and for the &ldquo;pink moment&rdquo; when the setting sun lights the Topatopa Mountains. Mr. Penrose&rsquo;s book is <a href="https://en.wikipedia.org/wiki/The_Voice_of_the_Silence">The Voice of the Silence</a>, which Helena Blavatsky published in 1889 as a translation of verses she said she had learned by heart. Its first fragment describes three Halls the disciple must cross, and warns against the fires of lust and the light of Mara, the Ensnarer.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the five lay disciples from the Dhammapada commentary (verse 251). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-09.htm">The original</a>. Scripture from H. P. Blavatsky, <em>The Voice of the Silence</em> (1889). Written by Claude Opus 5.5.
+  <div class="pager"><a href="neats-tongue.html">&larr; Neat’s Tongue</a><a href="index.html">All stories</a><a href="the-votum.html">The Votum &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, ridge = [], ash = [], heads = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    ridge = []; var y = 0.9, n = Math.ceil(W / 6) + 1;
+    for (var i = 0; i < n; i++) {
+      y += (Math.random() - 0.5) * 0.012 + (0.9 - y) * 0.03;
+      ridge.push(H * (y - 0.05 * Math.sin(i / n * Math.PI * 1.3 + 0.4)));
+    }
+    ash = []; for (var k = 0; k < Math.round(W / 70); k++) ash.push({ x: Math.random() * W, y: Math.random() * H, v: 0.15 + Math.random() * 0.3, s: 0.8 + Math.random() * 1.6, ph: Math.random() * 6 });
+    heads = [{ i: Math.floor(Math.random() * n * 0.3), v: 0.05 + Math.random() * 0.04 }, { i: Math.floor(n * 0.55 + Math.random() * n * 0.3), v: 0.04 + Math.random() * 0.04 }];
+  }
+  function draw(time) {
+    ctx.clearRect(0, 0, W, H);
+    var n = ridge.length, i;
+    ctx.fillStyle = 'rgba(6,4,3,0.92)';
+    ctx.beginPath(); ctx.moveTo(0, H);
+    for (i = 0; i < n; i++) ctx.lineTo(i * 6, ridge[i]);
+    ctx.lineTo(W, H); ctx.closePath(); ctx.fill();
+    for (var h = 0; h < heads.length; h++) {
+      var hd = heads[h];
+      if (!reduce) { hd.i += hd.v; if (hd.i > n + 60) hd.i = -40; }
+      for (var b = 0; b < 60; b++) {
+        var j = Math.floor(hd.i) - b; if (j < 0 || j >= n) continue;
+        var f = 1 - b / 60, fl = reduce ? 1 : 0.75 + 0.25 * Math.sin(time / 130 + j * 1.7);
+        var a = f * f * 0.55 * fl;
+        ctx.strokeStyle = 'rgba(240,' + Math.round(110 + 60 * f) + ',50,' + a + ')';
+        ctx.lineWidth = 1.2 + 1.6 * f;
+        ctx.beginPath(); ctx.moveTo(j * 6, ridge[j]); ctx.lineTo((j + 1) * 6, ridge[Math.min(j + 1, n - 1)]); ctx.stroke();
+        if (b === 0) {
+          var g = ctx.createRadialGradient(j * 6, ridge[j], 0, j * 6, ridge[j], 40);
+          g.addColorStop(0, 'rgba(240,130,60,' + 0.18 * fl + ')'); g.addColorStop(1, 'rgba(240,130,60,0)');
+          ctx.fillStyle = g; ctx.beginPath(); ctx.arc(j * 6, ridge[j], 40, 0, 6.3); ctx.fill();
+        }
+      }
+    }
+    for (i = 0; i < ash.length; i++) {
+      var p = ash[i];
+      if (!reduce) { p.y += p.v; p.x += Math.sin(time / 1800 + p.ph) * 0.2; if (p.y > H) { p.y = -5; p.x = Math.random() * W; } }
+      ctx.fillStyle = 'rgba(200,190,180,0.16)';
+      ctx.beginPath(); ctx.ellipse(p.x, p.y, p.s, p.s * 0.6, p.ph, 0, 6.3); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>
