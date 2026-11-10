@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Egg Chamber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a dark beach with every window shaded, dark theme; a dim red lamp glows below the foot of the page, and now and then a flipper's throw of sand arcs up from one lower corner, falls, and lies where it lands; datelined sections. */
+  --ground: #0c1016;
+  --ground-2: #131a22;
+  --paper: #e6ddc9;
+  --paper-dim: #9c9584;
+  --accent: #d8c9a8;
+  --glow: #c8473a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #0a0d12 0%, var(--ground) 55%, #151419 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,221,201,.12); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 30px rgba(200,71,58,.22); }
+.epigraph { border-left: 1px solid rgba(200,71,58,.5); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(19,26,34,.8); border: 1px solid rgba(230,221,201,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,221,201,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(230,221,201,.12); border-bottom: 1px solid rgba(230,221,201,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(19,26,34,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 21.2 &middot; Kukku&#7789;a-A&#7751;&#7693;akh&#257;dik&#257;</span></nav>
+<header>
+  <h1>The Egg Chamber</h1>
+  <div class="epigraph">But if ye bite and devour one another, take heed that ye be not consumed one of another.<br>&mdash; Galatians 5:15</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how it gets told,</span> on the river side of the island.</p>
+
+<section>
+  <h2>I. One Egg</h2>
+  <p class="dateline">Indian River, Florida &middot; summer 1896</p>
+  <p>Josiah Yates fished mullet out of the Landing, on the river side of the barrier island below Melbourne Beach, where the land is so narrow that a man standing in his boat on the Indian River can hear the surf behind him. In June the loggerheads came up the ocean beach every night. Anybody who wanted eggs had only to walk the tide line at daybreak until he crossed a track as wide as a wagon&rsquo;s coming up out of the sea, follow it to the dune, and push a stick into the sand until it went in easy. One morning that June Josiah dug a lard bucket full, a hundred and some. His wife was at Titusville with her sister, so he carried the bucket next door to the Corbetts, and Mrs. Corbett boiled them for him.</p>
+  <p>A turtle egg is round and has a skin like wet kid leather. It dents under the thumb and stays dented, and however long it boils the white will not set. You tear a corner with your teeth, shake in salt and pepper, and squeeze. Josiah ate two dozen at the Corbett table. He gave one to the Corbett girl, Lottie, who was six and had been standing at his elbow the whole time.</p>
+  <p>After that one egg she would eat nothing else. She let grits go cold. She would not touch fish, and she held cornbread in her mouth until it fell out. She cried for turtle egg, and in August the turtles quit coming. Her mother, at the end of her rope, went out one morning to the palmettos along the fence, where Mrs. Yates&rsquo;s dominicker hen had stolen a nest, and took one egg, still warm, and coddled it soft. The child ate it.</p>
+  <p>Mrs. Corbett meant to say something over the fence and did not. The next morning Lottie went to the palmettos herself, and every morning after that. She came to know when the hen had laid almost before the hen did. She took every egg of that clutch and the next, pricking the end with a thorn and sucking it where she stood.</p>
+  <p>The hen knew. Both families tell that part the same. She moved her nest three times. She would stand off under the guava tree with her feathers down flat and watch the child come. By November she had quit laying, and at Christmas she was dead under the house. Mrs. Yates, who had by then found out where a summer of her eggs had gone, said across the fence that the hen had died of it, and that she hoped the Corbetts would someday be robbed of a thing they were counting on.</p>
+  <p>The loggerhead that had laid the first hundred was by then somewhere off the Carolinas. Nobody at the Landing gave her a thought, then or for ninety-five years.</p>
+</section>
+
+<section>
+  <h2>II. Turn About</h2>
+  <p class="dateline">The Landing &middot; 1897&ndash;1986</p>
+  <p>The Corbetts tell the next part and the Yateses tell the part after it, and a person has to sit on both porches to get the whole.</p>
+  <p>The Corbetts say that the week the dominicker died, a gray kitten turned up under the Yates house that nobody had given them. It grew into a rangy cat with a flat head. The year Mrs. Corbett finally got a flock of her own, that cat came through the fence and cleaned out her best hen&rsquo;s nest three times, and the fourth time it took the hen. They say you could look in that cat&rsquo;s face and tell who she was.</p>
+  <p>The Yateses say that is foolishness. Then they say that around the year of the Armistice a Yates boy raised a doe fawn on a bottle, and she grew up and went wild only as far as the back fence, and dropped a fawn of her own in the wax myrtles. A panther swam the river from the Malabar scrub, the last one anybody saw on the island, and killed the doe and the fawn in one night and was gone by morning. A panther does not swim a mile of salt water for no reason, the Yateses say, and the Corbetts always did have a way of getting what they wanted done by something else.</p>
+  <p>That is what gets told. What happened is plainer and runs the same direction. In 1926 somebody walked the revenue men to a still in the mangroves, and Dell Corbett, who was nineteen, did two years at Raiford. In 1943 a Corbett sat on the draft board, and both Yates boys went in the first call from the south beaches, and one came home. In 1958 a Yates sat on the school board, and a Corbett boy was put out of the tenth grade for a thing two other boys had also done. In 1974 a skiff burned at the dock with a Yates boy&rsquo;s whole first season of crab traps stacked in it.</p>
+  <p>It was the children every time. Nobody had ever sat down and decided that. Each side kept count only of its own.</p>
+</section>
+
+<section>
+  <h2>III. The Bait Store Phone</h2>
+  <p class="dateline">The Landing &middot; 1987&ndash;1991</p>
+  <p>Renee Yates and Jolene Corbett were the first of the two names to be friends since their great-great-grandmothers borrowed sugar. Jolene was four years older, and she had driven Renee to the high school in Melbourne every day for two years in her daddy&rsquo;s truck. People at the Landing took it for a sign that the thing had finally worn out.</p>
+  <p>Renee married Travis Hamm in 1986 and they set a single-wide on the Yates lot. The first boy came the next fall. Jolene was over the day they brought him home.</p>
+  <p><em>Where&rsquo;s Renee at?</em></p>
+  <p><em>Back bedroom,</em> Travis&rsquo;s mother said. <em>They just got in with the baby.</em></p>
+  <p><em>Boy or girl? Let me see him.</em></p>
+  <p>She held him a good while. She looked at him, and she looked at the space heater, and at Travis&rsquo;s cans on the counter, and at a place on Renee&rsquo;s arm. Then she kissed Renee and drove to her daddy&rsquo;s bait store. She picked up the pay phone by the ice machine, dialed the eight-hundred number that hung on a poster in every clinic in Florida, and told the state abuse line a number of things about the Hamm trailer. Some of them were so. Travis did drink. A woman from HRS came out with a deputy on the nineteenth day and carried the boy to a foster home in Cocoa. A year later a judge ended it, and he went to people in another county under another name.</p>
+  <p>Jolene sat with Renee through all of that. She drove her to the hearings.</p>
+  <p>The second boy was born in 1989 at the hospital in Melbourne. The call was made before Renee was out of the bed, and with a file already open the state did not wait nineteen days.</p>
+  <p>It was the bait store that told on her. Renee&rsquo;s cousin Dwayne ran crab traps and bought his ice there, and twice he had seen Jolene at that phone with her back to the lot, on two days he later had cause to remember. In the winter of 1990 he said so. Renee did not go across the road. She did not say one word to Jolene, then or after. She had been told a story on the porch all her life about a hen and a cat, and she had taken it for a story.</p>
+  <p>That fall she was carrying again.</p>
+  <p><em>Travis, somebody on this island has got two of my babies took, and I know who. This one I&rsquo;m having at Mama&rsquo;s.</em></p>
+  <p>Her mother lived at Fellsmere, twenty-five miles inland on the far side of the citrus. Travis had been eleven months without a drink. He said all right.</p>
+  <p>It happened that Jolene was gone. She cooked on a rock shrimp boat out of Port Canaveral, twelve and fourteen days to a trip, and that spring it was her turn and the boat stayed out. Renee went to her mother&rsquo;s in May and had the baby on the eleventh of June, a boy, and kept him.</p>
+  <p>Jolene came in off the boat on the twenty-eighth and drove to the Landing with the salt still on her.</p>
+  <p><em>Where&rsquo;s Renee?</em></p>
+  <p>Travis&rsquo;s mother stood in the trailer door. <em>Where you won&rsquo;t see her. Somebody keeps getting her babies took out of this house, and she&rsquo;s gone to her mama&rsquo;s to have this one.</em></p>
+  <p><em>She can go where she likes,</em> Jolene said. <em>She won&rsquo;t get shut of me.</em></p>
+</section>
+
+<section>
+  <h2>IV. Five Rules</h2>
+  <p class="dateline">State Road A1A &middot; Sunday, June 30, 1991</p>
+  <p>Verna Platt was seventy-one. She had taught fifth grade for thirty-four years, with a Yates or a Corbett in the room most of them, and she had learned early not to seat them together. Four nights a week in June and July she led the turtle society&rsquo;s walk, by state permit, from the county dune crossover north of the inlet. She took twenty people at a time. Mostly they were retired couples from Indialantic and Satellite Beach, and that night there was also a family from Ohio. She gave them her five rules in the parking lot at dusk, as she had once given out the rules for the lunch line.</p>
+  <p><em>No flashlights. No flash on your cameras. No noise. Nobody touches her. And nobody takes one thing off this beach, not a shell.</em></p>
+  <p>The county had been making the oceanfront houses darken their windows in summer since the middle eighties. That year the government had begun buying up the dunes for a refuge, to be named for the turtle man at Gainesville. Roy Sumlin, who kept the lot for the county, stood at the head of the crossover on walk nights and saw that nobody followed the group up the beach. A college boy named Curtis scouted ahead with a red-lensed light. A little before nine he came back up the sand, held up one finger, and they all went down.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The baby had been dedicated that morning at the Baptist church in Fellsmere and named out loud before the congregation, Caleb. After the evening service Renee said they were going home. She said she was not going to hide at her mama&rsquo;s until he was grown. They came over the Wabasso causeway and up the beach road in the dark with the windows down. It was still eighty-two degrees. At the county crossover she told Travis to pull in.</p>
+  <p>Roy Sumlin was at the head of the steps, and he knew Travis from the fish house. <em>Turtle&rsquo;s up, north of here,</em> he said. <em>You all keep south and keep it down.</em></p>
+  <p>She gave him the baby and walked into the surf in her church dress and went under. When she came out, Travis went in. She sat on the bottom step of the crossover with her hair dripping and nursed the baby, and for a few minutes nothing in the world was wrong.</p>
+  <p>Headlights swung across the lot above her and went out. She knew the sound of the door.</p>
+  <p><em>Travis! Travis, come quick! It&rsquo;s her!</em></p>
+  <p>She did not wait for him. She ran north up the beach with the baby. There was no moon yet and no lit window anywhere. Ahead of her on the sand was a dim red light, low down, with people kneeling around it, and she ran at that.</p>
+</section>
+
+<section>
+  <h2>V. The Egg Chamber</h2>
+  <p class="dateline">The beach &middot; the same night</p>
+  <p>The turtle had come out of the water at ten to nine and hauled herself to the foot of the dune. With her front flippers she had thrown out a pit as long as she was. Then she had dug the chamber with the hind ones alone, one cupped flipper and then the other, a foot and a half straight down into the damp sand, a hole she would never see. The twenty knelt in a half ring behind her, where she could not see them either. Verna lay on her stomach and held the red light down into it.</p>
+  <p>Then nothing happened. The turtle laid her chin on the sand and breathed. Ten minutes went by, and twenty. Verna had watched better than four hundred loggerheads on that beach, and she had never seen one finish her chamber and then lie over it empty. The people who were there say she was waiting.</p>
+  <p>Renee came into the red light at a dead run. She dropped on her knees and laid the baby down on the sand, between Verna Platt and the turtle&rsquo;s shoulder.</p>
+  <p><em>Take him. I&rsquo;m giving him to you. Don&rsquo;t let her get him.</em></p>
+  <p>Nobody could say afterward who she had said it to. Verna thought it was to her. The woman from Ohio was sure it was to the turtle.</p>
+  <p>Back at the crossover Roy Sumlin saw a woman coming at him across the lot. Something in the way she came made him set his back against one rail and his arm across to the other.</p>
+  <p><em>Beach is closed, ma&rsquo;am. There&rsquo;s a turtle up.</em></p>
+  <p>Verna looked at the baby on the sand. She looked at Renee Yates, whom she had taught long division. She listened down the beach to a voice she also knew.</p>
+  <p><em>Curtis. Go tell Roy I said let that woman by, and bring her up here. Walk her. Don&rsquo;t run.</em></p>
+  <p><em>Here she comes,</em> Renee said, without turning her head.</p>
+  <p><em>Let her come,</em> said Verna. <em>No noise.</em></p>
+  <p>Jolene came up the beach behind the boy and stopped at the edge of the red light. She saw twenty strangers on their knees, and Renee in a wet dress, and the baby on his back with his fists up. She saw three hundred pounds of loggerhead with barnacles on her shell and water running out of her eyes. They cry the whole time they are on land. The turtle people will tell you it is only salt.</p>
+  <p><em>Jolene Corbett,</em> Verna said. <em>Get down here. This side.</em></p>
+  <p>She got down. The turtle began to lay.</p>
+  <p>The eggs came two and three at a time, white and wet and round as ping-pong balls, each landing soft on the ones before. Verna held the light so that both women could see down the hole. Every Yates and every Corbett had heard about a lard bucket of these since before they could sit up, and neither of the two had ever looked at one. The hind flippers curled and let go with each drop. The pile rose. Nobody spoke for twenty minutes. The baby slept, a yard from her face.</p>
+  <p>When the last had fallen Verna spoke, low, the way she said everything on the beach.</p>
+  <p><em>You both know whose eggs it was to begin with.</em> She waited. <em>She never did come looking for anybody. It was the hen that took it up. You all have been the hen and the cat ever since, turn about, and every time it lands on a child. Coons will be in this nest by August or they won&rsquo;t. She is not coming back to see.</em></p>
+  <div class="verse">
+    <p>But if ye bite and devour one another, take heed that ye be not consumed one of another.</p>
+    <p>&mdash; Galatians 5:15</p>
+  </div>
+  <p>The turtle filled the hole. She drew the sand in with her hind flippers and kneaded it down, and then she threw it back with the front ones in sheets, to hide the place. It came down on all of them. It fell in Jolene&rsquo;s hair and on Renee&rsquo;s wet dress and across the baby&rsquo;s blanket. He sneezed and did not cry. Nobody moved, because of the fourth rule. The turtle turned in her own length toward the sound of the water and went down the beach between the two women, a heave and a rest at a time. As the left front flipper went by, Verna put the red light on the metal tag and read it off to Curtis, who wrote it on the back of his hand. K 4417.</p>
+  <p>Jolene stayed on her knees with sand in her hair.</p>
+  <p><em>It was me that called,</em> she said. <em>Both times. From Daddy&rsquo;s phone.</em></p>
+  <p><em>I know it,</em> Renee said.</p>
+  <p><em>I told them things that wasn&rsquo;t so.</em></p>
+  <p>Renee picked the baby up off the sand and shook out his blanket. Travis had come up behind the ring by then in his wet jeans and stood there with his hands open. A little before eleven the moon came up out of the ocean, three days past full. By its light they could all see the crawl she had left, from the dune down to the water, like the track of a tractor with one tire.</p>
+</section>
+
+<section>
+  <h2>VI. The Tag</h2>
+  <p class="dateline">After</p>
+  <p>On Monday Jolene drove to the HRS office and asked for the file by the name on it. She sat four hours with a caseworker and went down it line by line, saying which of the things she had told them were so and which she had made. It took nine months and two hearings. The second boy came home in the spring of 1992, three years old, to people he did not know. The first had been adopted, and the judge would not open it. Renee carried that the rest of her life. So did Jolene.</p>
+  <p>The two of them were not friends again. They were something else, which neither family had a word for, and Caleb grew up in and out of both houses. Jolene took Verna Platt&rsquo;s five rules as though they had been said to her in particular. People at the Landing will tell you she kept them on the road and in the store the same as on the sand. She walked the dawn nest count for the society for twenty-two summers with a clipboard and a bundle of stakes.</p>
+  <p>The nest by the crossover hatched at the end of August on a night when nobody was watching. Jolene found it in the morning. There was a dent in the sand the size of a dinner plate, and from it the tracks of a hundred-odd hatchlings, each no wider than two fingers, fanned down to the water.</p>
+  <p>K 4417 came back in 1993 and again in 1996. Each time she nested inside half a mile of the crossover, four and five times in a season. Each time she covered what she had laid, threw sand over the place, and was in the water before it was light. Verna kept her card in the society&rsquo;s file box. It showed three seasons and thirteen nests, something like fifteen hundred eggs, and by the tracks the coons had been into four of the nests.</p>
+  <p><em>She never saw a one of them,</em> Verna said, and put the card back behind the K.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He who, by causing pain to others, wishes to obtain pleasure for himself, he, entangled in the bonds of hatred, will never be free from hatred.<cite>Dhammapada 291, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a fisherman finds turtle eggs on a riverbank, has them cooked at a house, and gives one to a girl there, who afterward will eat nothing else. Her mother takes an egg from a hen&rsquo;s nest for her, and then the girl takes them herself. The hen conceives a grudge. The two are reborn as a cat and a hen, then as a leopardess and a doe, and in five hundred lives each devours the other&rsquo;s young. At last one is an ogress (<em>yakkhin&#299;</em>) who, in the guise of a dear friend, twice eats a young wife&rsquo;s newborn. The third time the wife bears her child at her parents&rsquo; house while the ogress is away on her turn at drawing water. On the way home the couple bathe in the monastery pool; the wife sees the ogress coming, runs into the monastery, and lays the child at the Buddha&rsquo;s feet. A spirit at the gate holds the ogress back until the Buddha sends &#256;nanda to bring her in, saying, &ldquo;Let her come; make no noise.&rdquo; He tells them that hatred is never ended by hatred, and the feud is over. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-02.htm">the full commentary story</a>. The second half is also told, with a different beginning, as the story of the ogress K&#257;&#7735;&#299;, which this series retells in <a href="dinner-on-the-ground.html">Dinner on the Ground</a>. On <a href="https://en.wikipedia.org/wiki/Yaksha">yakkhas and yakkhin&#299;s</a>.</p>
+    <h3>The south Brevard beaches, 1991</h3>
+    <p>The twenty miles of barrier island between Melbourne Beach and Wabasso are the most important nesting ground of the <a href="https://en.wikipedia.org/wiki/Loggerhead_sea_turtle">loggerhead sea turtle</a> in the Western Hemisphere, and the <a href="https://en.wikipedia.org/wiki/Archie_Carr_National_Wildlife_Refuge">Archie Carr National Wildlife Refuge</a> was established there in 1991, named for the University of Florida zoologist who had died four years earlier. A female comes ashore several times in a season, about two weeks apart, digs an egg chamber with her hind flippers, lays around a hundred eggs, covers them, and leaves; she then stays away for two or three years. Raccoons are the chief robbers of nests on that coast. The tears are real: glands behind the eyes shed the salt she takes in with seawater. Beginning with Brevard County in the mid-1980s, Florida&rsquo;s coastal governments required beachfront lights to be shaded or put out during nesting season, since lights turn hatchlings away from the sea. Guided night walks run under state permit in June and July, about twenty people at a time, with red lights only.</p>
+    <p>Settlers along the Indian River dug turtle eggs every summer; a state law of 1907 protected nesting turtles on the beach, and later law protected the eggs. The railroad reached Melbourne in 1893. HRS was Florida&rsquo;s Department of Health and Rehabilitative Services, which ran the state&rsquo;s child-abuse hotline and its foster care until it was broken up in the late 1990s. The Landing, the Yates and Corbett families, Verna Platt and turtle K 4417 are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the woman who ate chicken eggs from the Dhammapada commentary (verse 291). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-02.htm">The original</a>. Scripture from the King James Version. Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-childrens-house.html">&larr; The Children&#x27;s House</a><a href="index.html">All stories</a><a href="fifty-one-percent.html">Fifty-One Percent &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, G = [], rest = [], wait = 240;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function seed() {
+    rest = [];
+    var n = Math.round(W / 9);
+    for (var i = 0; i < n; i++) rest.push({ x: Math.random() * W, y: H - 2 - Math.random() * 16, a: 0.10 + Math.random() * 0.16, r: 0.6 + Math.random() * 0.8 });
+  }
+  function fling() {
+    var left = Math.random() < 0.5, x0 = left ? W * (0.02 + Math.random() * 0.1) : W * (0.88 + Math.random() * 0.1);
+    var n = 50 + Math.floor(Math.random() * 40), dir = left ? 1 : -1;
+    for (var i = 0; i < n; i++) {
+      var sp = 2.2 + Math.random() * 3.4, an = (0.35 + Math.random() * 0.75);
+      G.push({ x: x0, y: H - 6, vx: dir * Math.cos(an) * sp, vy: -Math.sin(an) * sp * 1.5, r: 0.6 + Math.random() * 0.9, a: 0.25 + Math.random() * 0.3, d: Math.floor(Math.random() * 14) });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var g = ctx.createRadialGradient(W * 0.5, H + 30, 0, W * 0.5, H + 30, Math.max(120, W * 0.28));
+    g.addColorStop(0, 'rgba(170,40,30,.13)'); g.addColorStop(1, 'rgba(170,40,30,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, H - 220, W, 220);
+    ctx.fillStyle = '#d8c9a8';
+    var i, p;
+    for (i = 0; i < rest.length; i++) { p = rest[i]; ctx.globalAlpha = p.a; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill(); }
+    if (!reduce) {
+      if (--wait <= 0) { fling(); wait = 520 + Math.random() * 700; }
+      for (i = G.length - 1; i >= 0; i--) {
+        p = G[i];
+        if (p.d > 0) { p.d--; continue; }
+        p.vy += 0.045; p.vx *= 0.995; p.x += p.vx; p.y += p.vy;
+        if (p.y >= H - 3 - Math.random() * 12) {
+          rest.push({ x: p.x, y: p.y, a: 0.10 + Math.random() * 0.16, r: p.r });
+          if (rest.length > 700) rest.shift();
+          G.splice(i, 1); continue;
+        }
+        ctx.globalAlpha = p.a; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    ctx.globalAlpha = 1;
+  }
+  size(); seed(); draw();
+  window.addEventListener('resize', function () { size(); seed(); G = []; if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

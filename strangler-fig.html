@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strangler Fig</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on sun-bleached shell paper, light theme; from the top of the side margins pale fig roots let down slowly, branch, find one another and fuse, then fade and begin again; datelined sections. */
+  --shell: #efeadf;
+  --shell-2: #e2dccd;
+  --ink: #26261f;
+  --ink-dim: #6b6a5d;
+  --mangrove: #34452f;
+  --limbo: #a9523a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, #f7f4ec 0%, var(--shell) 50%, var(--shell-2) 100%) fixed, var(--shell);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(38,38,31,.2); }
+.series a:hover { color: var(--limbo); }
+a:focus-visible { outline: 2px solid var(--limbo); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--mangrove); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(169,82,58,.5); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mangrove); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--limbo); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(250,248,242,.75); border: 1px solid rgba(38,38,31,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--mangrove); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(38,38,31,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--limbo); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mangrove); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(38,38,31,.15); border-bottom: 1px solid rgba(38,38,31,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--limbo); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--limbo); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mangrove); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--limbo); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(250,248,242,.75); border-left: 2px solid var(--limbo); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 12.6 &middot; Devadatta</span></nav>
+<header>
+  <h1>Strangler Fig</h1>
+  <div class="epigraph">Whoso diggeth a pit shall fall therein: and he that rolleth a stone, it will return upon him.<br>&mdash; Proverbs 26:27</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how they tell it,</span> on Halfmoon Key.</p>
+
+<section>
+  <h2>I. The Splinter</h2>
+  <p class="dateline">Halfmoon Key, Ten Thousand Islands, Florida &middot; April 1910</p>
+  <p>Halfmoon Key was an old shell heap the Indians had left, nobody knew how long ago, the highest ground for ten miles in any direction, which is to say about the height of a man on a man's shoulders. Six families lived on it in houses up on cypress blocks. They fished mullet and crabbed and cut buttonwood for charcoal and grew a little cane and tomatoes on the top of the mound, and on the north side, where the landing was, an old gumbo limbo leaned out over the water with its red bark peeling like a sunburn and a strangler fig wrapped around it from the crown to the roots.</p>
+  <p>Retta Sweeting had her husband's foot in her lap on the porch with a lamp on the floor and a darning needle she had held in the flame. The men sat along the porch rail, Lige Daniels and the two Whidden boys and old Cyrus Kirk, who could not hear but liked to be where talk was. The children were supposed to be asleep and were under the house.</p>
+  <p>The splinter was cypress, from the gunwale of Ez's skiff, and it had gone in under the arch of his foot an inch and a half. The bullet that sent it there had come out of the mangroves at the mouth of Plover Creek that morning while he was poling through on the falling tide, and had hit the gunwale a hand's width from his knee. He had poled the eleven miles home with the splinter in his foot, and then he had gone back down to the landing to bail, because the skiff had taken water, and Retta had told the men to sit down and wait for him, and they had.</p>
+  <p><em>It was Duke,</em> Lige said.</p>
+  <p>Nobody said it was not.</p>
+</section>
+
+<section>
+  <h2>II. The Talk on the Porch</h2>
+  <p class="dateline">The same night</p>
+  <p>They had been talking about Duke Sweeting for most of a year, and they talked about him again now, the whole of it from the beginning, the way people will go back over a thing that has hurt them.</p>
+  <p>Duke and Ez were first cousins, raised in the same house on Pine Island after Duke's mother died, and Ez had married Duke's sister. When they were boys they had shot plumes together, every spring, in the rookeries up Lostmans River and back in the Big Cypress, when the white birds were nesting and the long feathers grew down their backs. A good day's shooting then could bring more money than a man made in a season of fishing. The buyers paid by the ounce, and in the best years the ounce of plumes was worth more than the ounce of gold.</p>
+  <p>Then one spring Ez had gone back into a rookery a week after they had shot it out, by himself, nobody ever knew what for. He came out and did not talk for two days. Lige was with him in the boat afterward and said all Ez ever told him was that the young ones were still in the nests, hollering, and there was nobody to feed them, and some of them were hanging over the edge. Ez never fired another shot at a bird. When the Audubon people were hiring wardens after the new law, he went up to Fort Myers and signed on for thirty-five dollars a month, and Duke laughed at him for it, and then quit laughing.</p>
+  <p>Duke could do anything. He could shoot the eye out of a crane at sixty yards, and dance, and talk a buyer up two dollars an ounce, and the young men followed him around the islands. People liked Duke, and Duke could not stand that people liked Ez better.</p>
+  <p>The store on Halfmoon belonged to old Captain Lucius Roberts, and he had bought plumes thirty years. He weighed them on a brass postal scale on the counter and paid cash out of a cigar box. In 1906, the year after the warden at Flamingo was shot dead for trying to stop a man and his sons at a rookery, the Captain had sat a long evening on this same porch with Ez, and nobody knew what was said. In the morning he put up a sign in the store that he did not buy plumes anymore. After that he kept the warden's skiff in tar and canvas out of his own pocket and gave Ez a can of coffee every month, and said he was too old to be ashamed of anything but what he had already done.</p>
+  <p>His son Cal was a grown man and wanted the store, and wanted it the way it had been. Duke got hold of Cal. It was Duke who said the old man was not right in his head anymore, giving away goods, talking to a game warden all night, and it was Duke who rode up with Cal to Fort Myers to see the doctors and the judge. In the spring of 1909 they took Captain Roberts away to the state asylum at Chattahoochee, in a clean shirt, with his hat on his knee in the boat. He did not want to go and he did not fight. He died there before Christmas. They said he would not eat.</p>
+  <p>Now the cigar box was back on the counter, and the brass scale, and Cal paid thirty dollars an ounce, and Duke brought in more plumes than anybody. And Duke had told it in the store that this country was too small for a man to make a living in with a warden in it.</p>
+  <p>The first time, in January, he had paid two men from up the coast a hundred dollars to wait for Ez at the mouth of Oyster Bend. They waited two days, and when Ez came poling down on the third morning they stood up out of the mangroves with their rifles and could not do it. He put in to the bank and made coffee for the three of them, and they drank it, and went home, and told everybody.</p>
+  <p>The second time was this morning, and Duke had not hired anybody.</p>
+  <p><em>He'll try it again,</em> said the older Whidden boy.</p>
+  <p><em>He will,</em> said Lige. <em>Duke never quit a thing in his life once he started it.</em></p>
+  <p>Retta had the splinter. She held it up to the lamp, a black wet spear of cypress as long as her finger joint, and laid it on the porch boards.</p>
+  <p>Ez came up the steps from the landing in his wet trousers with one shoe on, carrying the other.</p>
+  <p><em>What you all talking about?</em></p>
+  <p>They told him.</p>
+</section>
+
+<section>
+  <h2>III. The Snare</h2>
+  <p class="dateline">The porch &middot; later</p>
+  <p>Ez sat down on the top step and put his foot back in Retta's lap so she could wrap it, and looked out at the water a while.</p>
+  <p><em>That's not the first time,</em> he said. <em>That's not the first time Duke's tried to kill me.</em></p>
+  <p>The Whidden boys looked at each other, because they had not heard of any other time.</p>
+  <p><em>There was a buck deer,</em> Ez said, <em>lived back in the pines, toward the Big Cypress, by a pond. And there was a Lord God bird in a dead cypress by the same pond, one of them big woodpeckers with the white on the wings, with her young ones. And there was an old snapping turtle that lived in the pond. They were friends, the three of them, the way things are that use the same water.</em></p>
+  <p><em>A man came hunting through there and saw the buck's track at the drinking place, and he set a snare in it. Rawhide, plaited, strong as a trace chain. And that night the buck stepped in it and it took him by the leg and he hollered.</em></p>
+  <p><em>The Lord God bird came down, and the snapper came up out of the water. And the bird said, You've got the jaws. You chew that rope. I'll see to the man.</em></p>
+  <p><em>So the snapper went to chewing, and the bird flew off to the man's house and sat in a tree by the front door. And at daylight the man come out the front door with his knife, and that bird hit him in the face. Just hit him, wings and all. And he said, That's bad luck, and he went back in and lay down a while.</em></p>
+  <p><em>Then he thought, I'll go out the back. And the bird thought, He'll go out the back. And she went round and sat by the back door, and when he come out she hit him in the face again. So he went back in and lay down till the sun was all the way up, and then he went anyhow.</em></p>
+  <p><em>The bird flew back and hollered that he was coming. The snapper had chewed through all of it but one strand, and his mouth was all over blood, and his jaws were about give out. And the buck saw the man coming through the pines, and he gave one jump and broke that last strand and went off in the palmettos. The bird went up to the top of her tree. But the snapper was so wore out he couldn't get back to the water. He just lay there. And the man picked him up and put him in a croker sack and hung it on a limb.</em></p>
+  <p><em>The buck saw that from the palmettos. And he come out where the man could see him, limping, like the snare had hurt his leg. And the man thought, I'll have him yet, and took after him. And the buck kept just out of reach, limping, way off into the scrub, a mile, two miles. Then he quit limping and went round another way fast as he could go, back to the pond, and he got that sack down with his horns and tore it open and turned the snapper out.</em></p>
+  <p><em>And he said to them, You saved my life. Now that man is coming back, and he'll take it out on you. You go in the water, he said to the snapper. And you take your young ones and go off somewhere else, he said to the bird. And they did. And the buck went back in the woods.</em></p>
+  <p><em>And the man come back, and there wasn't nothing at that pond but a torn sack. He picked it up and went home with it.</em></p>
+  <p>Retta had tied off the wrapping on his foot. Nobody said anything. Down under the house one of the children asked another one something in a whisper, and was hushed.</p>
+  <p><em>Who was the man?</em> said the younger Whidden boy.</p>
+  <p><em>Same one as always,</em> Ez said.</p>
+  <p>Lige laughed out loud, all at once, and then looked at Retta to see if he ought to have.</p>
+  <p><em>Then who's the snapper?</em></p>
+  <p><em>Well,</em> said Ez, and looked at Lige, who had poled out to Chatham Bend after him in January with a shotgun across his knees, and had sat in the mangroves all night on the second night without telling anybody he was going, and had his hands still cut up from the oyster bars. And then he looked at Retta, who had walked in the dark to the store the night they took the Captain away and told Cal Roberts to his face what he was, with Duke standing right there, and had come home and gone to bed without saying one word about it.</p>
+  <p><em>I couldn't tell you,</em> he said.</p>
+</section>
+
+<section>
+  <h2>IV. The Fig</h2>
+  <p class="dateline">The landing &middot; the next morning</p>
+  <p>In the morning he limped down to the landing to look at the skiff, and Lige and the older Whidden boy came down after him, because they had not got all they wanted out of the night before.</p>
+  <p><em>What are you going to do about him?</em></p>
+  <p>Ez did not answer that. He was standing under the gumbo limbo. He put his hand flat on the fig roots where they came down over the red bark, grey and smooth and thick as a man's arm, grown into each other at every place they crossed so that you could not tell where one let go and the next took hold. You could see the red of the limbo only in the gaps now, in little windows here and there, and the top of the old tree was mostly bare.</p>
+  <p><em>A bird eats a fig somewheres,</em> he said, <em>and sits up in the top of a tree, and the seed comes out of him. And it sprouts up there in the crotch, in a little dirt, like nothing at all. And it lets a root down. Just a string. And the tree don't pay it any mind. Then it lets down another one, and another one, and they hit the ground, and they get thick, and they start in to holding hands.</em></p>
+  <p>He knocked on one of the roots with his knuckle.</p>
+  <p><em>That limbo's been standing here since before the Indians quit this mound. In about five more years the fig'll have it choked to death, and it'll rot out inside, and there won't be anything there but the fig, standing up hollow where the tree used to be. You'll be able to see clear through it.</em></p>
+  <p>Lige said, <em>And that's you. And the fig is Duke.</em></p>
+  <p><em>No,</em> Ez said. <em>That limbo's Duke.</em></p>
+  <p>He took his hand off the roots.</p>
+  <p><em>The fig is the thing in him,</em> he said. <em>He let it down once, a long time ago, a little string of a thing, when we were boys. And he's been feeding it ever since. He thinks he's doing it to me.</em></p>
+  <p>Then he said the verse, which his mother had said to him and Duke both, at the same table on Pine Island, when they were small and one of them had tried to get the other one in trouble.</p>
+  <div class="verse">
+    <p>Whoso diggeth a pit shall fall therein: and he that rolleth a stone, it will return upon him.</p>
+    <p>&mdash; Proverbs 26:27</p>
+  </div>
+  <p>And he went to bail the skiff.</p>
+</section>
+
+<section>
+  <h2>V. The Trunk</h2>
+  <p class="dateline">Halfmoon Key &middot; 1910 to 1916</p>
+  <p>That spring the State of New York passed a law against the plume trade, and New York was where the hats were made. Other states began to follow. By the fall the buyer in Key West would not answer Cal Roberts's letters. Cal took the cigar box off the counter, and after a while the brass scale. He came out to the warden's house one evening in 1911 and stood at the foot of the steps a long time without coming up, and then he set the scale on the bottom step and went home. Retta kept it, and weighed baking powder on it.</p>
+  <p>Duke had shot that whole spring, the spring of the splinter, harder than he had ever shot, and kept back the best of it to wait for the price. Nobody would trade with him on Halfmoon after the business at Plover Creek, and the young men who used to follow him found other things to do. He lived by himself after that on a key toward Lostmans, and fished a little, and came to the store less and less, and when he came he did not talk. He was forty-four years old and looked sixty. Ez sent him a mess of mullet by Lige every week or so, and every week or so Lige came back and said Duke had thrown it in the water.</p>
+  <p>When Duke died, in the winter of 1916, they found the trunk in his house, a sea chest with brass corners. It was full to the lid with plumes, six springs of them, packed in paper. The paper had gone brown and the plumes had gone the color of old teeth, and the mice had been in them, and they came apart when you lifted them. There was nobody left in the country to buy a single one. Ez and Lige carried the chest out of the house between them and stood a while, and then they burned it on the shell beach below the house, plumes and all, because there was nothing else to do with them. The stink of it hung over the beach all afternoon.</p>
+  <p>By then the gumbo limbo at the landing had been dead three years. The children of Halfmoon used to play inside the fig. You could climb in at the bottom where two roots had not quite joined, and stand up in the hollow where the old tree had been, and look out through the windows in the lattice at the water and the boats and the mangroves, all around you, every way at once.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He whose wickedness is very great brings himself down to that state where his enemy wishes him to be, as a creeper does with the tree which it surrounds.<cite>Dhammapada 162, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the monks at Veḷuvana are talking about Devadatta, the Buddha's cousin and brother-in-law, who won the favor of Prince Ajātasattu, urged him to kill his father, King Bimbisāra (the Buddha's patron), and then plotted with him to kill the Buddha. The Buddha comes in and says this is not the first time, and tells the birth story of the antelope (Jātaka 206), in which the Bodhisatta is an antelope caught in a hunter's snare and saved by his friends the woodpecker and the tortoise; the hunter is Devadatta. He compares runaway wickedness to a māluvā creeper that wraps a sāla tree and crushes it. In other episodes of the same story, a splinter from a boulder Devadatta rolled down a hill wounded the Buddha's foot, and archers sent to kill him could not do it. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-06.htm">the full commentary story</a>, <a href="https://ancient-buddhist-texts.net/English-Texts/Jataka/206.htm">the antelope birth story</a>, or about <a href="https://en.wikipedia.org/wiki/Devadatta">Devadatta</a>.</p>
+    <h3>The Ten Thousand Islands, 1910</h3>
+    <p>For thirty years, Florida's wading-bird rookeries were shot out for the millinery trade. Hunters killed egrets and herons at the nest in spring, when the breeding plumes were longest, and left the young to starve. Around 1904, according to the ornithologist Frank Chapman, plumes sold for $32 an ounce, more than the price of gold. Florida outlawed the killing of plume birds in 1901, and the American Ornithologists' Union, at the Florida Audubon Society's request, hired wardens to enforce it at $35 a month. In July 1905 the warden <a href="https://en.wikipedia.org/wiki/Guy_Bradley">Guy Bradley</a> was shot and killed near Flamingo while trying to stop a plume hunter, and in 1908 DeSoto County warden Columbus McLeod disappeared near Charlotte Harbor; his sunken boat was found but his body never was. In 1910 New York, the center of the hat trade, passed the Audubon Plumage Act, other states followed, and Congress soon banned the import of plumes. More on <a href="https://en.wikipedia.org/wiki/Plume_hunting">plume hunting</a>.</p>
+    <p>Halfmoon Key and its people are invented. The <a href="https://en.wikipedia.org/wiki/Ten_Thousand_Islands">Ten Thousand Islands</a> are a maze of mangrove keys on Florida's southwest coast, and some of the higher ones are shell works raised by the region&#39;s Native peoples, where hammock trees like gumbo limbo grow. The <a href="https://en.wikipedia.org/wiki/Ficus_aurea">Florida strangler fig</a> usually sprouts from a bird-dropped seed in the crown of a host tree, sends roots down to the ground, and as the roots fuse around the trunk it usually kills the host and stands on its own. The state asylum at Chattahoochee, the <a href="https://en.wikipedia.org/wiki/Florida_State_Hospital">Florida State Hospital for the Insane</a>, opened in 1876.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Devadatta from the Dhammapada commentary (verse 162). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-06.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="mataji.html">&larr; Mataji</a><a href="index.html">All stories</a><a href="windmill-water.html">Windmill Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, roots = [], age = 0, CYCLE = 5200;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function lanes() {
+    var col = Math.min(W, 640), l = (W - col) / 2, r = (W + col) / 2;
+    if (W < 700) return [W * 0.04, W * 0.96];
+    return [l * 0.35, l * 0.7, r + (W - r) * 0.3, r + (W - r) * 0.65];
+  }
+  function make() {
+    // A few roots per margin, let down from the top; each wanders a little and leans toward its neighbor.
+    roots = [];
+    var ls = lanes();
+    for (var i = 0; i < ls.length; i++) {
+      for (var k = 0; k < 3; k++) {
+        var x0 = ls[i] + (k - 1) * Math.min(26, W * 0.02);
+        roots.push({ x0: x0, lane: ls[i], seed: Math.random() * 100, speed: 0.55 + Math.random() * 0.35, delay: Math.random() * 900 + k * 220, w: 1.1 + Math.random() * 1.4 });
+      }
+    }
+  }
+  function pathX(r, y) {
+    var pull = Math.min(1, y / (H * 0.9));
+    return r.x0 + Math.sin(y * 0.011 + r.seed) * 9 + Math.sin(y * 0.003 + r.seed * 2) * 14 + (r.lane - r.x0) * pull * 0.85;
+  }
+  function draw(tt) {
+    ctx.clearRect(0, 0, W, H);
+    var fade = tt > CYCLE * 0.82 ? Math.max(0, 1 - (tt - CYCLE * 0.82) / (CYCLE * 0.18)) : 1;
+    for (var i = 0; i < roots.length; i++) {
+      var r = roots[i];
+      var len = Math.max(0, (tt - r.delay) * r.speed * 0.25);
+      if (len <= 0) continue;
+      var yEnd = Math.min(H + 10, len);
+      ctx.beginPath();
+      for (var y = -5; y <= yEnd; y += 6) {
+        var x = pathX(r, y);
+        if (y === -5) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = 'rgba(122,108,90,' + (0.2 * fade) + ')';
+      ctx.lineWidth = r.w + Math.min(2.2, len / 500);
+      ctx.lineCap = 'round';
+      ctx.stroke();
+      // a pale growing tip
+      if (yEnd < H && fade > 0.5) {
+        ctx.fillStyle = 'rgba(169,82,58,' + (0.16 * fade) + ')';
+        ctx.beginPath(); ctx.arc(pathX(r, yEnd), yEnd, 1.6, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  }
+  function loop() {
+    age += 1;
+    if (age > CYCLE) { age = 0; make(); }
+    draw(age);
+    requestAnimationFrame(loop);
+  }
+  size(); make();
+  if (reduce) draw(CYCLE * 0.6); else loop();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(CYCLE * 0.6); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Silk-Cotton Trees</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a dark tropical river at night, dark theme; slow water moves along the foot of the page, and now and then a drop of red falls into it, spreads, and is carried downstream until it thins away into the water; datelined sections. */
+  --ground: #0e1418;
+  --ground-2: #16211f;
+  --paper: #e6e0d2;
+  --paper-dim: #a39d8d;
+  --accent: #dcc893;
+  --glow: #b5463a;
+  --rule: rgba(230,224,210,.12);
+  --panel: rgba(22,33,31,.78);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #17302f 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 5.6 &middot; The Thirty from Pāṭheyya</span></nav>
+<header>
+  <h1>The Silk-Cotton Trees</h1>
+  <div class="epigraph">O taste, and see that the Lord is sweet: blessed is the man that hopeth in him.<br>&mdash; Psalm 33:9</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As&iacute; lo o&iacute; contar,</span> on the east bank of the Ozama.</p>
+
+<section>
+  <h2>I. Martinmas</h2>
+  <p class="dateline">The Ozama River, Hispaniola &middot; the eleventh of November, 1510</p>
+  <p>There were thirty of them, from Trujillo and C&aacute;ceres and the villages between, sons of houses that had more name than land. They had come out in the spring fleet with their swords and their fathers' debts. In the summer the governor's men had given each of them a share of Indians, so many heads written down beside each name, and they had sent those Indians up to the streams of the Cibao to wash gold. In the autumn the gold came down to the smelting house at Concepci&oacute;n. When the King's fifth had been taken out, what was left went into one leather purse, because they had come out together and meant to stay together. Diego de Hinojosa wore it around his neck under his shirt.</p>
+  <p>On Saint Martin's day they crossed the river from the stone city to the east bank and held a matanza under the ceibas, the way their fathers did at home. In Extremadura every house killed its pig at Martinmas. Here nobody needed to keep a pig. The pigs the Admiral had let loose on the island seventeen years before had gone wild in the forest by the thousand, and that morning the dogs had run one down in the cane brakes and held it by the ears until Alonso Golf&iacute;n came up with the knife. Now it hung from a low limb of the biggest ceiba, opened and smoking, and the Indians the young men had brought down from the mines to serve them were turning the meat over a fire of guava wood. There was cassava bread, and fish from the river, and two jars of wine from Seville that had cost more than a horse.</p>
+  <p>The ceibas stood along the bank like the pillars of a church, grey and smooth, with roots that came out of the ground higher than a man's waist and ran off in walls among the grass. The Indians would not cut them. In the dry season, they said, the pods split and the cotton came down like snow, and the young men from C&aacute;ceres, who had never seen the cotton, said they would believe it when they saw it.</p>
+  <p>Gonzalo de Chaves was the only one who had brought a woman. She was one of the Indians written down beside his name, and he called her Catalina. Her own name nobody had asked. She sat a little way off from him on a root of the ceiba and did not eat.</p>
+  <p>By the middle of the afternoon the wine was gone and the thirty were asleep in the shade with their mouths open, and the Indians had gone down to the water. When Diego de Hinojosa woke up, his shirt was open and the purse was gone, and so was she.</p>
+  <p>They went after her the way they went after anything on that island, with the dogs. There were two alanos, brindled, with heads like anvils. The dogs took the trail up the river through the cane, the thirty running behind them with their swords out and the wine still in their legs, shouting the name Gonzalo had given her, as if she would answer to it. The trail went a long way up the bank and then into a grove of ceibas older than the ones they had left, and there it stopped.</p>
+  <p>A man was sitting there on a root, in the white habit and black cape of the friars who had come to the city in September, the ones who lived in a house of straw and ate nothing anybody could see. He had a basket of palm leaves on his knees and he was mending it. The two dogs ran up to him and lay down.</p>
+  <p><em>Brother,</em> said Gonzalo, out of breath. <em>Did a woman come by here? An Indian. She has something of ours.</em></p>
+  <p>The friar looked up. He was old, with big red hands and a face like a field after harvest, and when he spoke it was in the Spanish of their own country, the Spanish of the pig fairs at Trujillo.</p>
+  <p><em>Sons,</em> he said, <em>what do you think? Which would be better for you, to go looking for a woman, or to go looking for yourselves?</em></p>
+  <p>Nobody answered him. One of them laughed and stopped.</p>
+  <p><em>Ourselves,</em> said Diego de Hinojosa at last, because somebody had to say something.</p>
+  <p><em>Then sit down,</em> said the friar, <em>and I will tell you what I know.</em></p>
+</section>
+
+<section>
+  <h2>II. The Straw House</h2>
+  <p class="dateline">Santo Domingo and the Pearl Coast &middot; 1510&ndash;1515</p>
+  <p>His name was Fray Gil. He was not a priest. He was a lay brother, which meant he cooked for the others and swept and begged in the streets of the city with a basket, and before that, he told them, he had kept pigs for the Count's people on the oak plains outside Trujillo until he was twenty-six, and then he had gone to the war at Granada, and then to the friars at Salamanca. He sat with them under the ceibas until it was dark. What he said they could not afterward agree on. Some of them said he talked about the purse, and some about their mothers, and some about the Indians in the mines, and some about nothing at all. All thirty agreed that it had been very simple, and that it had not taken long, and that at the end of it he had put the basket down and said, <em>Come,</em> and they had come.</p>
+  <p>They left the dogs at the ford. In the morning, in the friars' straw house at the edge of the city, there were thirty white habits lying folded on the dirt floor, of good Castilian wool, though the friars had brought nothing from Spain but what they wore, and no ship had come in since August. Nobody in the house would say where they had come from. The thirty put them on.</p>
+  <p>They sent their papers back to the governor's house and gave up their Indians. The city laughed at them for a month and then forgot them. They lived the way the friars lived, in wool in that heat, on cassava and boiled greens, with no meat in the house, because the Rule of the Order forbade it there. Thirty young men raised on pork. They slept on boards. They begged the city with baskets. In their second Advent they stood at the back of the church when Fray Antonio de Montesinos preached the sermon that set the whole island against the friars, and they were not surprised by anything in it. Then they went out. They walked to the mining camps and the Indian towns along the Cibao and lived on what was given them, which was not much. Some of them went over the water to the Pearl Coast and lived in a hut of palm thatch among people whose language they had to learn, and all of them came back, thinner, with fever in their bones.</p>
+  <p>It was five years before all of them were in the city again at the same time.</p>
+</section>
+
+<section>
+  <h2>III. Martinmas Again</h2>
+  <p class="dateline">The east bank of the Ozama &middot; the eleventh of November, 1515</p>
+  <p>The year before, the King's men had counted the Indians of the island again so that they could divide them again, and found hardly more than half the number of the count seven years before. In the city they were saying the island would have to be filled with Indians from somewhere else, or with Africans, or the mines would stop.</p>
+  <p>On Saint Martin's day Fray Gil took the thirty across the river to the old ceibas and sat them down among the roots, in their habits, brown now and patched with every color of cloth the island had. Across the water the city was killing its pigs. They could hear it from where they sat. They could smell the singeing.</p>
+  <p>He let them listen a while. Then he asked them a question, the way he had the first time.</p>
+  <p><em>Sons. Which is more, the water in the sea between here and Sanl&uacute;car, or the blood that has run out on the ground since the first Martinmas?</em></p>
+  <p>Some of them had crossed that sea three times now. Nobody answered for a while. Then Diego de Hinojosa said, <em>The blood, Brother.</em></p>
+  <p><em>Yes,</em> said Fray Gil. <em>Count. Every house in Castile, every November, one pig, since before the Moors. Every ox and every sheep and every hen. Every man at Granada, ours and theirs. Count this island, since the Admiral. Count what you washed out of the Cibao, Diego, and what it cost. You cannot find where it starts. Nobody can. Look as far back as you like, there is somebody holding the rope and somebody at the end of it, and before that the same, and before that the same.</em></p>
+  <p>Across the river a pig screamed and stopped.</p>
+  <div class="verse">
+    <p>Idcirco unus interitus est hominis et jumentorum, et aequa utriusque conditio.</p>
+    <p>Therefore the death of man, and of beasts is one, and the condition of them both is equal: as man dieth, so they also die: all things breathe alike, and man hath nothing more than beast: all things are subject to vanity.</p>
+    <p>&mdash; Ecclesiastes 3:19</p>
+  </div>
+  <p>And he gave them the other one, which every friar in the straw house knew by heart that year, because it was the verse that had turned the cleric Bartolom&eacute; de las Casas out of his own Indians in Cuba the year before.</p>
+  <div class="verse">
+    <p>The bread of the needy, is the life of the poor: he that defraudeth them thereof, is a man of blood. He that taketh away the bread gotten by sweat, is like him that killeth his neighbour. He that sheddeth blood, and he that defraudeth the labourer of his hire, are brothers.</p>
+    <p>&mdash; Ecclesiasticus 34:25&ndash;27</p>
+  </div>
+  <p>Then he took a cake of cassava out of his sleeve and broke it in pieces, and took a twist of salt out of the other sleeve and salted every piece, and gave each of them one.</p>
+  <p><em>O taste, and see,</em> he said.</p>
+  <p>They ate. And something happened to the thirty under the ceibas then that they did not talk about, except that Alonso Golf&iacute;n said once, when he was old, that it was like the salt. You do not have to be told about salt. You do not have to think about it, or be taught it by a master at Salamanca. It is on your tongue and you know it, all of it, at once, and you could not afterward not know it if you tried. Before they got up off the roots of the ceiba, every one of them had tasted it.</p>
+</section>
+
+<section>
+  <h2>IV. Every Pig</h2>
+  <p class="dateline">The straw house &middot; that winter</p>
+  <p>Afterward the friars talked about it in the house. They said it had taken Fray Gil one afternoon to give those thirty what most men did not get in fifty years of prayer, and a young friar from Burgos said that it was not just, and that it did not seem to him to follow the order of grace as he had been taught it.</p>
+  <p>Fray Gil was peeling yuca at the table. He said it was not one afternoon.</p>
+  <p>Then he told them a story his grandmother had told him on the oak plains, which had happened, she said, in her grandmother's time, in a village outside Trujillo. An old widow there had found two piglets in a ditch where their mother had left them, and raised them in her house like children, and called the big one Snout and the little one Little Snout. When they were fat, men came every autumn to buy them, and every autumn she said, <em>Would you sell your own children to be eaten?</em> One Martinmas thirty young men of the village, drunk since morning, came to her door with money and ropes. She would not sell. So they gave her wine until she would, and she said, <em>Not the big one. Take the little one.</em> And she filled the trough by the door and called him, which she had never done before, because she always called the big one first.</p>
+  <p>Little Snout looked out and saw the full trough and the old woman standing by it and thirty men with ropes in their hands, and he went back into the house shaking. And Snout, the big one, the one she always called first, said to him: <em>Brother, this is what she fed us for. Eat. Do not be afraid.</em> And then he began to preach to them all, the pig did, the old woman said, in a voice that carried to every house in the village, about what it is to die well and what it is to be clean. The thirty young men dropped their ropes. They stood in the mud with their hats off until he had finished, and went and made their confessions that same night, and kept the commandments all their lives, and not one of them ever again could eat pork at Martinmas without remembering.</p>
+  <p><em>Every pig has its Martinmas,</em> said Fray Gil. <em>My grandmother always said that at the end. That is all the story there is.</em> He put down the knife. <em>I always thought those thirty were the same as these.</em></p>
+  <p>The young friar from Burgos said that was not a doctrine. Fray Gil said no, it was a pig.</p>
+</section>
+
+<section>
+  <h2>V. The Cotton</h2>
+  <p class="dateline">The Ozama &middot; March 1516</p>
+  <p>The purse was never found, and neither was she. Gonzalo de Chaves asked about her among the Indians for a long time, in the language he had learned on the Pearl Coast, and once a fisherman told him that there was a woman in the mountains of the Bahoruco, where the King's men did not go, who had come out of the east a long time before with a purse of gold, and had walked into a river with it and come out without it. Gonzalo did not know if that was her. He went on asking.</p>
+  <p>In March, in the dry season, he crossed the Ozama alone to the east bank, and the old ceibas were bare, as the Indians had said they would be, and the pods had split. The cotton was coming down out of them over the river, slowly, in no wind at all, and settling on the brown water, and riding down it toward the sea.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If an intelligent man be associated for one minute only with a wise man, he will soon perceive the truth, as the tongue perceives the taste of soup.<cite>Dhammapada 65, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the thirty young men from P&#257;&#7789;heyya are among the Buddha's first followers. In the older Vinaya account they are picnicking in a grove with their wives; the one without a wife has brought a courtesan, who steals their things while they are distracted and runs. Searching for her, they meet the Buddha, who asks whether it would be better for them to seek a woman or to seek themselves. They become monks on the spot, receiving bowls and robes by miracle, and take up the thirteen ascetic practices. Long afterward they return, hear him teach on the round of rebirth that has no discoverable beginning (in the Sa&#7747;yutta, the blood they have shed as slaughtered cattle, goats and pigs is more than the water of the four great oceans), and all become arahats before they rise from their seats. When the monks marvel at how quickly they understood, the Buddha tells the Tu&#7751;&#7693;ila birth story: thirty drunken men came with nooses to buy an old woman's pig for a feast, the pig preached to them, and they took the precepts. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-06.htm">the full commentary story</a> and <a href="https://ancient-buddhist-texts.net/English-Texts/Jataka/388.htm">the birth story of the two pigs</a>.</p>
+    <h3>Hispaniola, 1510&ndash;1516</h3>
+    <p>The first band of <a href="https://en.wikipedia.org/wiki/Pedro_de_C%C3%B3rdoba">Dominican friars</a> reached Hispaniola in September 1510 under Pedro de C&oacute;rdoba. They lived poorly from the start, in rough clothing and constant fasts, in a <a href="https://www2.dominicos.org/kit_upload/file/especial-montesino/biografia-ampliada-pedro-cordoba.pdf">convent built of straw</a> in Santo Domingo. On December 21, 1511, <a href="https://en.wikipedia.org/wiki/Antonio_de_Montesinos">Antonio de Montesinos</a> preached the Advent sermon that first publicly denounced the enslavement of the island's Ta&iacute;no under the <a href="https://en.wikipedia.org/wiki/Encomienda">encomienda</a>, the grant of Indigenous people's labor to colonists. The <a href="https://en.wikipedia.org/wiki/Ta%C3%ADno_genocide">Ta&iacute;no population</a> of Hispaniola had fallen to about 60,000 by 1507 and was reported at about 32,000 in 1514. That year the cleric <a href="https://en.wikipedia.org/wiki/Bartolom%C3%A9_de_las_Casas">Bartolom&eacute; de las Casas</a>, reading Ecclesiasticus 34 for a Pentecost sermon in Cuba, gave up his own encomienda.</p>
+    <p>On his second voyage, Columbus deliberately released <a href="https://en.wikipedia.org/wiki/Feral_pig">domestic pigs</a> in the West Indies so later expeditions would find food, and they went wild. In Spain the fattened household pig is killed in the winter matanza. In Galicia <a href="https://en.wikipedia.org/wiki/Martinmas">Saint Martin's day</a>, November 11, is the traditional day for it, which gave Spanish the saying that every pig gets its Saint Martin. Cervantes has Don Quixote use it in 1615, in Ormsby's translation: "its Martinmas will come to it as it does to every pig." The <a href="https://en.wikipedia.org/wiki/Ceiba_pentandra">ceiba</a>, or silk-cotton tree, is native to the Caribbean. Its seed pods are full of the cottony fiber called kapok, and the commentary's Kapp&#257;sika grove is, in P&#257;li, a "cotton grove." The Bahoruco mountains, where the Ta&iacute;no leader <a href="https://en.wikipedia.org/wiki/Enriquillo">Enriquillo</a> held out against the Spanish from 1519, are in the island's southwest.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the thirty bhikkhus from P&#257;&#7789;heyya from the Dhammapada commentary (verse 65). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-06.htm">The original</a>. Scripture from the Douay-Rheims Bible, with the Latin Vulgate. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-iron-ladle.html">&larr; The Iron Ladle</a><a href="index.html">All stories</a><a href="the-blue-cup.html">The Blue Cup &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Dark river water low on the page; now and then a drop of red falls in, spreads,
+  // and is carried off downstream, thinning until it is only water again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, blooms = [], next = 0, t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(age) {
+    return { x: Math.random() * W * 0.8, y: H * (0.7 + Math.random() * 0.26), r: 2, age: age || 0,
+             life: 900 + Math.random() * 700, vx: 0.18 + Math.random() * 0.22, stretch: 1 + Math.random() * 0.6 };
+  }
+  function water() {
+    var g = ctx.createLinearGradient(0, H * 0.6, 0, H);
+    g.addColorStop(0, 'rgba(14,26,34,0)');
+    g.addColorStop(1, 'rgba(18,40,52,.55)');
+    ctx.fillStyle = g; ctx.fillRect(0, H * 0.6, W, H * 0.4);
+    ctx.strokeStyle = 'rgba(150,180,190,.05)'; ctx.lineWidth = 1;
+    for (var i = 0; i < 7; i++) {
+      var y = H * (0.72 + i * 0.04);
+      ctx.beginPath();
+      for (var x = 0; x <= W; x += 24) {
+        var yy = y + Math.sin((x + t * (0.4 + i * 0.05)) / (90 + i * 13)) * 2.2;
+        if (x === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+      }
+      ctx.stroke();
+    }
+  }
+  function drawBloom(b) {
+    var p = b.age / b.life;
+    var a = Math.min(1, p * 10) * Math.pow(1 - p, 1.6) * 0.46;
+    if (a <= 0.003) return;
+    var R = 4 + Math.sqrt(b.age) * 3.2;
+    ctx.save();
+    ctx.translate(b.x, b.y); ctx.scale(b.stretch + p * 1.8, 0.55);
+    var g = ctx.createRadialGradient(0, 0, 0, 0, 0, R);
+    g.addColorStop(0, 'rgba(150,32,28,' + a + ')');
+    g.addColorStop(0.5, 'rgba(120,30,32,' + (a * 0.45) + ')');
+    g.addColorStop(1, 'rgba(60,40,60,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, R, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+    if (b.age < 22) {
+      ctx.fillStyle = 'rgba(170,40,34,' + (0.5 * (1 - b.age / 22)) + ')';
+      ctx.beginPath(); ctx.arc(b.x, b.y - (22 - b.age) * 6, 2.2, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    water();
+    for (var i = blooms.length - 1; i >= 0; i--) {
+      var b = blooms[i];
+      if (!reduce) { b.age++; b.x += b.vx; }
+      drawBloom(b);
+      if (b.age > b.life) blooms.splice(i, 1);
+    }
+    if (!reduce) {
+      t++;
+      if (t >= next) { blooms.push(spawn(0)); next = t + 260 + Math.random() * 420; }
+      requestAnimationFrame(frame);
+    }
+  }
+  size();
+  if (reduce) { blooms = [spawn(140), spawn(420)]; frame(); }
+  else { blooms = [spawn(300)]; next = 120; requestAnimationFrame(frame); }
+  window.addEventListener('resize', function () { size(); if (reduce) frame(); });
+})();
+</script>
+</body>
+</html>

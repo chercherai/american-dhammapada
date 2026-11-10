@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Push Broom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the whitewash of a meetinghouse wall in winter light, light theme; in the margins a few orange lady beetles walk slowly up the plaster, stop for a long while, and go on; datelined sections. */
+  --ground: #f1ede2;
+  --ground-2: #e6e0d1;
+  --paper: #2e2a24;
+  --paper-dim: #6f675a;
+  --accent: #a64f1c;
+  --glow: #c2622a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f5f2e9 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(46,42,36,.16); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance;  }
+.epigraph { border-left: 1px solid rgba(166,79,28,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,253,246,.72); border: 1px solid rgba(46,42,36,.16); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(46,42,36,.16); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(46,42,36,.16); border-bottom: 1px solid rgba(46,42,36,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,253,246,.72); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 13.5 &middot; Sammu&ntilde;jani</span></nav>
+<header>
+  <h1>The Push Broom</h1>
+  <div class="epigraph">Give over thine own willing, give over thy own running.<br>&mdash; Isaac Penington, 1661</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As it was given to me,</span> at Plum Run Meeting.</p>
+
+<section>
+  <h2>I. Seven O&rsquo;Clock</h2>
+  <p class="dateline">Cedar County, Iowa &middot; Ninth Month 1998</p>
+  <p>Gene Aldinger mowed the meetinghouse lawn at seven on Seventh Day morning, and in a wet week he mowed it again on Fourth Day. He had taught industrial arts at the consolidated high school for thirty-one years and retired in the spring of 1994 with every one of his boys&rsquo; fingers accounted for and nine and a half of his own. The half he had left in a jointer in 1971 with twenty-two sophomores watching. He had wrapped the hand in a shop towel, held it up so they could all see what a jointer does, and finished the period.</p>
+  <p>He was not a Friend. Marjorie was, birthright, Plum Run on both sides, and for forty years he had driven her out the gravel on First Day and sat beside her on the third bench with his hands on his knees, a Methodist waiting for somebody to start. When she died in the spring of 1996 the meeting buried her behind the old horse sheds under a stone no higher than a boot, and Gene kept coming. He did not know where else a man would go at ten o&rsquo;clock on that day of the week.</p>
+  <p>What he did there was work. The meetinghouse was white frame, built in 1867, with two front doors from the time when the men went in by one and the women by the other, and there was by now no part of it he had not scraped, primed, caulked, rehung or replaced. He swept the meeting room in the morning and he swept it in the afternoon. He swept the porch, the cloakroom, the basement stairs and the walk out to the mailbox. He had a twenty-four-inch push broom for which he had turned a new ash handle, and a corn broom for the corners. People going by on the blacktop at noon saw the green pickup in the lot, and going home at dusk they saw it again, and after a while nobody remarked on it.</p>
+  <p>On First Day he came at eight to turn up the furnace, and he was still in the basement when worship began. Friends sitting in the silence could hear him underneath them. A faucet ran. A stepladder opened. The push broom went the length of the dining room and came back. Nobody spoke to him about it. He was not a member, and the gutters had never been so clean.</p>
+</section>
+
+<section>
+  <h2>II. The Facing Bench</h2>
+  <p class="dateline">A Fourth Day afternoon &middot; Tenth Month</p>
+  <p>Lowell Mott was eighty-four and lived in the three-room cottage across the lot, which the meeting had built for a caretaker in 1951 and which had held no caretaker since Lowell&rsquo;s knees went. The meeting paid his light bill. The women of the meeting left covered dishes on his step, turn and turn about. Most days after his dinner he crossed the gravel on two canes, let himself in by the east door, sat down on the facing bench under the clock, and stayed there until the windows went gray.</p>
+  <p>Gene came into the meeting room that afternoon with the push broom, and there he was as usual, hat beside him, eyes down.</p>
+  <p>Gene stood in the doorway. He thought: That man eats the meeting&rsquo;s casseroles and burns the meeting&rsquo;s lights, and then he comes over here and sits. He has two hands. Would it kill him to run a dust rag down one bench?</p>
+  <p>Lowell did not lift his head.</p>
+  <p><em>Gene. Come here.</em></p>
+  <p><em>What is it?</em></p>
+  <p><em>Go down and wash up. Then come back and sit by me.</em></p>
+  <p>Gene had used that voice on other people for thirty-one years, and he found that he obeyed it. He leaned the broom in the corner, went down to the basement sink and scrubbed to the elbows with the Lava, the way he had made twenty boys an hour do it, and came back up and sat down on the facing bench. He had never sat there. The room looked different from that end. He could see every place the varnish was going.</p>
+  <p><em>A man ought not to go about sweeping all the time,</em> Lowell said. <em>Sweep first thing in the morning. Then go home and get thy breakfast. Then come back here, or stay home in thy chair, it is the same, and sit down, and look at thy hands a while. Thee has good hands. Consider what they are made of and how long they are good for. Toward evening get up and sweep again. But not the whole day, Gene. Leave thyself some room.</em></p>
+  <p><em>The work doesn&rsquo;t do itself.</em></p>
+  <p><em>No,</em> Lowell said, and seemed to give that its due. Then he said something Gene took for Bible, though it was not.</p>
+  <div class="verse">
+    <p>Give over thine own willing, give over thy own running, give over thine own desiring to know or to be any thing, and sink down to the Seed which God sows in the heart, and let that grow in thee, and be in thee.</p>
+    <p>&mdash; Isaac Penington, <span style="font-style:normal">Some Directions to the Panting Soul</span> (1661)</p>
+  </div>
+  <p><em>Who&rsquo;s that?</em></p>
+  <p><em>Isaac Penington. They had him in jail six times. I have wondered if that was what it took to get him to sit down.</em></p>
+</section>
+
+<section>
+  <h2>III. Bill of Materials</h2>
+  <p class="dateline">Eleventh Month to Second Month</p>
+  <p>He did it the way he did everything, which was to the letter. He swept at seven. He went home and ate two eggs. At nine he came back and sat down on the third bench by the south window, where Marjorie had sat, and he stayed there until four with a half hour out for the sandwich in the truck. At four he swept again and went home.</p>
+  <p>The first week he looked at his hands and saw only what wanted doing with them. The storm windows were not up. A stair tread was working loose. He sat on the hands, literally, until they went to sleep.</p>
+  <p>Then he did what he knew how to do, and wrote up a bill of materials. He wrote it in his head, as for any project. Hair of the head. Hair of the body. Nails, teeth, skin. Meat, cords, bone, and what is inside the bone. Kidneys, heart, liver. He went down the list and back up it the way he had made boys check their stock against a cut list before they were let near a switch, and it came to thirty-two items when he had it grouped right, though he never wrote it down.</p>
+  <p>None of it was rated for anything. For thirty-one years he had read out to boys what a blade guard was rated for, and a chain, and a pair of safety glasses. Nobody had stamped a number on Marjorie&rsquo;s liver. He looked at the short finger, at the pad of skin the doctor in Iowa City had folded over the end and stitched down. It had been numb since 1971. That piece of him had already gone on ahead, and he had held it up in front of twenty-two sophomores to show them, and then had not looked at it again for twenty-seven years.</p>
+  <p>It was a Third Day in Second Month, a little after two. The furnace had cycled off. A boxelder bug was walking along the back of the bench in front of him, and he was partway down the list, at the lungs.</p>
+  <p>Something that had been running in him stopped.</p>
+  <p>He had not known it was running. It had run when he was a boy picking up cobs behind his father&rsquo;s wagon. It had run through thirty-one years of bells and through Marjorie&rsquo;s last winter. It had pushed a broom up and down the dining room under twenty people sitting in silence. It quit the way a compressor quits at the end of the day, and he heard how quiet the room was, and understood that the room had been that quiet the whole time.</p>
+  <p>He sat until four. At four he did not get up. Lowell, on the facing bench, raised his head and looked down the length of the room at him, and lowered it again.</p>
+</section>
+
+<section>
+  <h2>IV. The Sills</h2>
+  <p class="dateline">Fifth Month 1999</p>
+  <p>By spring the meetinghouse was a sight. The orange lady beetles that had come into the state a few years before had wintered in the south wall and died on the windowsills in drifts. Boxelder bugs lay among them. The mud that came in on boots during the thaw had dried in the grain of the floor, a web ran from the clock to the stovepipe hole, and somebody found mouse sign in the cloakroom. Outside, the grass stood to the shin, and the dandelions bloomed and went to seed, which had not happened on that lot since 1994.</p>
+  <p>Gene was there every day. The truck pulled in at nine. He sat on the third bench by the south window with dead beetles along the sill at his elbow, and he looked like a man with nowhere else he needed to be.</p>
+  <p>Friends are slow to speak to another person&rsquo;s condition, and slower when that person has been doing their work for them. It was well into Fifth Month before Arlene Stanley and two others of the property committee, which had not met in five years, stopped him on the porch.</p>
+  <p><em>Gene, the house is full of dirt. There are bugs on every sill. Why doesn&rsquo;t thee sweep it?</em></p>
+  <p><em>I used to,</em> he said. <em>That was back when I wasn&rsquo;t paying attention. I&rsquo;m paying attention now.</em></p>
+  <p>He held the door for them, and went in and sat down.</p>
+</section>
+
+<section>
+  <h2>V. The Minute</h2>
+  <p class="dateline">Monthly meeting for business &middot; Sixth Month</p>
+  <p>Arlene brought it to the meeting as a concern. She stood by her bench with her hand on the back of the one in front. She said that for three years this man had not sat down among them one First Day, and the meeting had let him, to its shame, because it liked the paint. Now he sat all day in a dirty house and told Friends he was paying attention. <em>He says one thing and does another,</em> she said, and sat.</p>
+  <p>Dale Hockett was clerk that year. He was fifty-three and sold crop insurance out of an office in Tipton, hail and multi-peril, and he had spent the past winter at kitchen tables with men whose hogs had brought under ten cents a pound. He had learned at those tables to let a thing be said all the way out before he put a hand to it. He let this one lie for some minutes. Gene sat on the third bench. Lowell sat on the facing bench with his eyes down. A beetle that had lived through the winter walked up the window glass behind them.</p>
+  <p><em>Friends,</em> Dale said, <em>I believe Gene has told us the plain truth. When he was not paying attention he swept all day. I heard him under this floor every First Day for three years, and so did all of you. He is where he ought to be now, and so he doesn&rsquo;t.</em></p>
+  <p>He waited again.</p>
+  <p><em>I was given a verse this morning on the road. I thought it was for me.</em></p>
+  <div class="verse">
+    <p>For ye were sometimes darkness, but now are ye light in the Lord: walk as children of light.</p>
+    <p>&mdash; Ephesians 5:8</p>
+  </div>
+  <p>Nobody spoke after it. When enough time had gone by, the recording clerk read back what she had written. Friends were in unity that Gene Aldinger had spoken truly. The property committee was asked to meet, and to find where the broom was kept. Friends approved the minute, and Arlene Stanley approved it first.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The committee found the broom on its nail in the furnace room, with a web from the ash handle to the wall. They found that the mower had been Gene&rsquo;s own, and that the meeting did not have one.</p>
+  <p>He drove home to Tipton that afternoon to the house on Meridian Street, where he had not cut the grass since Fourth Month and where the neighbors, who for five summers had been waked at seven, now had a different complaint. It had been overcast for three days. About ten that night the cloud came apart over the grain elevator, and the moon stood clear of it. Gene was on the back step in his sock feet. Every dandelion on the lot had gone to seed, and they stood up out of the long grass by the hundred, each one round and white, lit.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He who formerly was reckless and afterwards became sober, brightens up this world, like the moon when freed from clouds.<cite>Dhammapada 172, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a monk called Sammu&ntilde;jani, &ldquo;Broom,&rdquo; sweeps the monastery morning and afternoon without regard for the hour. Finding the elder Revata sitting in his cell, he thinks him a great idler who lives on the gifts of the faithful and will not sweep so much as one room. Revata sends him to bathe, sits him down, and tells him to sweep early, go for alms, sit and contemplate the thirty-two parts of the body and its perishing, and sweep again at evening, leaving himself some leisure. The monk keeps to this exactly and soon becomes an arahant. Then the rooms fill with rubbish. Asked why he no longer sweeps, he says he did that when he was heedless and is heedful now. The monks report that he says one thing and does another, and the Buddha answers that he has spoken the truth. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-05.htm">the full commentary story</a>; the body contemplation Revata assigns is described under <a href="https://en.wikipedia.org/wiki/Patikulamanasikara">Pa&#7789;ik&#363;lamanasik&#257;ra</a>.</p>
+    <h3>Conservative Friends in Iowa, 1998</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Conservative_Friends">Conservative Friends</a> are the small branch of American Quakers who kept the old unprogrammed worship: no pastor, no hymns, a room of benches where people sit in silence until someone is moved to speak. Iowa Yearly Meeting (Conservative) has a handful of rural and college-town meetings and owns <a href="https://en.wikipedia.org/wiki/Scattergood_Friends_School">Scattergood Friends School</a>, founded in 1890 in Cedar County near <a href="https://en.wikipedia.org/wiki/West_Branch,_Iowa">West Branch</a>, a town first settled by Quakers. Older Conservative Friends still said &ldquo;thee&rdquo; to one another in the 1990s and numbered the days and months instead of naming them. Business is done in a meeting for worship in which nobody votes; the <a href="https://en.wikipedia.org/wiki/Clerk_(Quaker)">clerk</a> listens for the sense of the meeting and it is written down as a minute. Plum Run Meeting and its people are invented. <a href="https://en.wikipedia.org/wiki/Isaac_Penington_(Quaker)">Isaac Penington</a> (1616&ndash;1679) was imprisoned six times beginning in 1661, the year he published the letter Lowell quotes.</p>
+    <p>The multicolored Asian lady beetle, <a href="https://en.wikipedia.org/wiki/Harmonia_axyridis"><em>Harmonia axyridis</em></a>, was first found in Iowa in 1994 and within a few years was coming into buildings each fall to spend the winter in the walls. In December 1998 the price of hogs collapsed, and Iowa farmers were paid less than ten cents a pound for live animals, less in real terms than their grandfathers had been paid in the Depression.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Sammu&ntilde;jani from the Dhammapada commentary (verse 172). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-05.htm">The original</a>. Scripture from Isaac Penington&rsquo;s <span style="font-style:normal">Some Directions to the Panting Soul</span> (1661) and the King James Version. Written by Claude Fable 5.2.
+  <div class="pager"><a href="cistern-water.html">&larr; Cistern Water</a><a href="index.html">All stories</a><a href="stand-still.html">Stand Still &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, bugs = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function lane() {
+    var col = Math.min(W - 40, 36 * 16), m = Math.max(14, (W - col) / 2);
+    var side = Math.random() < 0.5 ? 0 : 1, inset = 8 + Math.random() * Math.max(6, m - 30);
+    return side ? W - inset : inset;
+  }
+  function spawn(b, anywhere) {
+    b.x = lane(); b.y = anywhere ? Math.random() * H : H + 12;
+    b.a = -Math.PI / 2; b.v = 0.12 + Math.random() * 0.1;
+    b.rest = anywhere ? Math.random() * 500 : 0; b.walk = 200 + Math.random() * 500;
+    b.s = 3.2 + Math.random() * 1.2; b.t = Math.random() * 100;
+    return b;
+  }
+  function make() {
+    var n = W < 560 ? 3 : 6; bugs = [];
+    for (var i = 0; i < n; i++) bugs.push(spawn({}, true));
+  }
+  function beetle(b) {
+    ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.a + Math.PI / 2);
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle = '#3a2a1c';
+    ctx.beginPath(); ctx.ellipse(0, -b.s * 0.95, b.s * 0.5, b.s * 0.4, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#c2622a';
+    ctx.beginPath(); ctx.ellipse(0, 0, b.s * 0.82, b.s, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(58,42,28,.7)'; ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(0, -b.s); ctx.lineTo(0, b.s); ctx.stroke();
+    ctx.fillStyle = '#3a2a1c';
+    var dots = [[-0.4, -0.3], [0.4, -0.3], [-0.42, 0.35], [0.42, 0.35]];
+    for (var i = 0; i < dots.length; i++) { ctx.beginPath(); ctx.arc(dots[i][0] * b.s, dots[i][1] * b.s, b.s * 0.13, 0, Math.PI * 2); ctx.fill(); }
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < bugs.length; i++) {
+      var b = bugs[i];
+      if (!reduce) {
+        if (b.rest > 0) { b.rest--; }
+        else {
+          b.t += 0.02; b.a = -Math.PI / 2 + Math.sin(b.t * 1.7) * 0.35;
+          b.x += Math.cos(b.a) * b.v; b.y += Math.sin(b.a) * b.v;
+          if (--b.walk <= 0) { b.rest = 300 + Math.random() * 900; b.walk = 200 + Math.random() * 500; }
+          if (b.y < -12) spawn(b, false);
+        }
+      }
+      beetle(b);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zio Nino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a granite shed on a January noon, dark gray theme; pale stone dust hangs and drifts sideways, and now and then a gust drives it hard across the page past a rough block in the lower corner that does not move; datelined sections. */
+  --ground: #1c1f22;
+  --ground-2: #26292d;
+  --paper: #e4e3de;
+  --paper-dim: #9a9d9f;
+  --accent: #b9c4cc;
+  --glow: #d9c9a0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #23272b 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,227,222,.12); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 26px rgba(185,196,204,.16); }
+.epigraph { border-left: 1px solid rgba(185,196,204,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(38,41,45,.8); border: 1px solid rgba(228,227,222,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,227,222,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(228,227,222,.12); border-bottom: 1px solid rgba(228,227,222,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(38,41,45,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 6.6 &middot; Laku&#7751;&#7789;aka Bhaddiya</span></nav>
+<header>
+  <h1>Zio Nino</h1>
+  <div class="epigraph">Sta come torre ferma, che non crolla<br>gi&agrave; mai la cima per soffiar di venti.<br>&mdash; Dante, Purgatorio V, 14&ndash;15</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Me l&rsquo;hanno contata cos&igrave;,</span> in the North End.</p>
+
+<section>
+  <h2>I. The Banker</h2>
+  <p class="dateline">Barre, Vermont &middot; January 1910</p>
+  <p>Nino Vanelli stood four feet high in his boots, and he had cut stone for forty-four of his fifty-eight years. He was from Torano, above Carrara, where a boy went up to the marble as soon as he could carry water. He had left in the winter of 1894, when the soldiers came into the Lunigiana and a man who was known to hold the Idea did well to be on a ship. In Barre he carved what the big-handed men could not get their chisels into: the inside of a lily, the eyelids of an angel, the ivy that goes around a name. He worked at his banker standing on a plank laid across two soap boxes, and when the plank was not there he did not work, so the first thing the apprentices learned in Alexander Rennie&rsquo;s shed was where to hide it.</p>
+  <p>They learned the rest quickly. At the noon whistle there was half an hour, and bread and cheese do not take a boy of seventeen half an hour. So two of them would lift him off his box by the bib of his apron and stand him on a rough die block too high to get down from. One would take him by the forelock and tip his face up to the skylight. One would pinch his nose shut with a thumb and finger gray with dust and hold it until he had to open his mouth. They flicked his ears. They were not cruel boys. They did it as they would have done it to a little brother or a cat, and the men at the other bankers mostly watched and chewed.</p>
+  <p>Then came the question, which was the point of it, and which even the Aberdeen boys had learned to say in Italian.</p>
+  <p><em>Zio. Zio Nino. Aren&rsquo;t you tired of the Idea yet? You still like it?</em></p>
+  <p>That winter they had a reason to ask. The sheds had been shut for three months the year before, four thousand men locked out, over the surfacing machine they called the bumper and the dust that it threw. The men had gone back on a promise that the bumper would be used less while the owners thought about ventilation. Aldo Bossi, who was from Viggi&ugrave; and seventeen and the quickest of them with his hands, had eaten polenta for ninety days and was willing to say what he thought it had bought. And still on Saturday at noon the little man went from banker to banker with the <i>Cronaca</i> under his arm, five cents, and on the nights there was a speaker he sat in the front row at the Labor Hall on Granite Street with his feet a hand above the floor.</p>
+  <p><em>You still like it, Zio?</em></p>
+  <p>He never answered and he never pulled away. He stood on the block with his nose in a boy&rsquo;s fingers and waited, as a man at a crossing waits for the cars to go by. When they were done he said <em>The plank,</em> and one of them fetched it, and he got down backward as from a ladder, and found his place in the lily.</p>
+</section>
+
+<section>
+  <h2>II. The Table</h2>
+  <p class="dateline">The Sora Argia&rsquo;s kitchen, North End &middot; that night</p>
+  <p>Eleven men boarded with Argia Tonelli, and Nino had been one of them for fifteen years. She was Carrarese herself, from the town. Her husband had carved for the Rennies until the spring of 1905, when he died of the stonecutters&rsquo; consumption in the back bedroom at forty-one. Since then she had kept the house, three meals and a bed and a nail for your coat. She also sold red wine by the glass at the kitchen table, a thing that the city of Barre both knew and did not know.</p>
+  <p>Nino ate early and went up. The others sat on over the wine, and that night they got to talking about him.</p>
+  <p><em>Did you see them today? The Bossi kid had him by the nose a full minute. I counted.</em></p>
+  <p><em>And nothing. He doesn&rsquo;t so much as go red.</em></p>
+  <p><em>He&rsquo;s used to it. Fifty years of being that size, you get used to it.</em></p>
+  <p><em>Nobody gets used to it. I&rsquo;d have put a point through that boy&rsquo;s hand.</em></p>
+  <p><em>Then he&rsquo;s simple.</em></p>
+  <p><em>You carve one of his lilies and tell me he&rsquo;s simple.</em></p>
+  <p>Somebody brought up the other thing, which they understood no better. Two summers back a man had come up from Albany to see the monument for his wife. He had stood in front of the finished angel with his hat off, called Nino <em>maestro</em> before the whole shed, and laid a five-dollar gold piece on the stone by his mallet. Rennie had raised him a quarter a day on the spot. And Nino had looked at the gold piece and at the Albany man with the face he had worn that noon on the die block, and said <em>The plank,</em> because in making room somebody had moved it.</p>
+  <p>The Sora Argia came in from the stove with the pot against her hip.</p>
+  <p><em>What are you all talking about?</em></p>
+  <p>They told her. She set the pot down and filled the nearest bowl before she said anything.</p>
+  <p><em>Yes,</em> she said. <em>That is how it is with him. You can pull his ears, he has ears. But what those boys are feeling around for, the thing you take hold of in a man to make him come along, he hasn&rsquo;t got that anymore. He put it down somewhere. The Albany gentleman couldn&rsquo;t find it either.</em></p>
+  <p>She wiped her hands on her apron and looked around the table at eleven stonecutters.</p>
+  <p><em>You cut into that hill every day of your lives and you have to ask me? When the wind blows, what does the hill do?</em></p>
+  <p>Then she said the lines. She had them from her father, who could not read, and who had said them going up to the quarry in the dark with a coil of rope on his shoulder.</p>
+  <div class="verse">
+    <p>Vien dietro a me, e lascia dir le genti:<br>sta come torre ferma, che non crolla<br>gi&agrave; mai la cima per soffiar di venti.</p>
+    <p>Come after me, and to their babblings leave<br>The crowd. Be as a tower, that, firmly set,<br>Shakes not its top for any blast that blows!</p>
+    <p>&mdash; Dante, <span style="font-style:normal">Purgatorio</span> V, 13&ndash;15; tr. H. F. Cary (1814)</p>
+  </div>
+  <p><em>Praise is wind too,</em> she said. <em>Eat.</em></p>
+  <p>One of the men said, low, what the whole house had said for years and nobody had ever said to her. Every cutter in Barre coughed gray into his handkerchief by the time he was forty. Nino&rsquo;s handkerchief, when she boiled the wash on Monday, came out of his pocket as white as it went in.</p>
+  <p>She did not say it was so and she did not say it was not. She went back to the stove.</p>
+</section>
+
+<section>
+  <h2>III. The Doors</h2>
+  <p class="dateline">Rennie&rsquo;s shed &middot; the next noon</p>
+  <p>It was four below zero at the whistle, with the wind coming down off Millstone Hill. Aldo Bossi and the other boy had Nino up on the die block. Aldo had his thumb and finger on the old man&rsquo;s nose and was asking him whether he still liked it, when the yard gang rolled back the big doors at the end of the shed to bring in a block on the flatcar.</p>
+  <p>The wind came through the shed from one end to the other. It took the dust off every ledge and beam and banker, sixteen years of it, and for the length of a breath no man in the place could see the man beside him. Caps went. The drawings went off the wall. Aldo let go to cover his own face.</p>
+  <p>When the doors were shut and it had settled, the block sat on its car where the engine had left it, eighteen tons, gray, with frost on the upper face. Nino Vanelli stood on the die block with his hands at his sides and dust in his eyebrows. He had not put a hand up.</p>
+  <p><em>The plank,</em> he said.</p>
+  <p>Aldo got it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">As a solid rock is not shaken by the wind, wise people falter not amidst blame and praise.<cite>Dhammapada 81, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is only a few lines long. The elder Laku&#7751;&#7789;aka Bhaddiya was a dwarf, and novices and unawakened monks used to pull his hair and tweak his ears and nose, asking, &ldquo;Uncle, you tire not of the Dispensation? You take delight in it?&rdquo; He showed no resentment. The monks talked it over in the hall; the Buddha came in, asked what they were discussing, and said that those who have rid themselves of the pollutants are unmoved, like solid rock. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-06.htm">the full commentary story</a>, or the short discourse on <a href="https://www.accesstoinsight.org/tipitaka/kn/ud/ud.7.05.than.html">Laku&#7751;&#7789;aka Bhaddiya</a> in the Ud&#257;na. The Sora Argia&rsquo;s lines are Virgil&rsquo;s, spoken to Dante when he slows on the mountain to hear what the shades are whispering about him.</p>
+    <h3>Barre, 1910</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Barre_(city),_Vermont">Barre</a> grew from about two thousand people in 1880 to more than ten thousand in 1910 on gray granite, most of it cut into cemetery monuments. The carvers were largely northern Italians, many of them from the marble towns around <a href="https://en.wikipedia.org/wiki/Carrara">Carrara</a>, the cradle of Italian anarchism, which was put under a state of siege after the <a href="https://en.wikipedia.org/wiki/Lunigiana_revolt">Lunigiana revolt</a> of January 1894. In Barre they built the <a href="https://en.wikipedia.org/wiki/Socialist_Labor_Party_Hall">Labor Hall</a> on Granite Street in 1900, and from 1903 to 1912 the anarchist weekly <a href="https://en.wikipedia.org/wiki/Cronaca_Sovversiva"><em>Cronaca Sovversiva</em></a> was published in the town. Boardinghouses were commonly kept by carvers&rsquo; widows, who gave a bed, a chair and three meals and often sold wine or grappa at the table.</p>
+    <p>Pneumatic tools came into the sheds in the 1890s, and the dust they raised from Barre granite, which is rich in silica, killed the men who breathed it. They called the disease stonecutters&rsquo; tuberculosis; it was <a href="https://en.wikipedia.org/wiki/Silicosis">silicosis</a>. In 1909 a dispute over a heavy surfacing tool called the bumper led the manufacturers to lock out about four thousand men for three months, and the men went back on an agreement to limit the bumper while ventilation was designed; the owners then looked for a lighter bumper instead. Dust-removal equipment did not become standard until the late 1930s. Many carvers cut their own stones, and they stand in <a href="https://en.wikipedia.org/wiki/Hope_Cemetery">Hope Cemetery</a>. Nino Vanelli, the Sora Argia and the Rennie shed are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Laku&#7751;&#7789;aka Bhaddiya from the Dhammapada commentary (verse 81). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-06.htm">The original</a>. Scripture from Dante&rsquo;s <span style="font-style:normal">Purgatorio</span>, in Italian and in the translation of H. F. Cary (1814). Written by Claude Fable 5.2.
+  <div class="pager"><a href="four-redfish.html">&larr; Four Redfish</a><a href="index.html">All stories</a><a href="kaneezs-mother.html">Kaneez’s Mother &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, P = [], gust = 0, gt = 0, frame = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.min(110, W * H / 14000)); P = [];
+    for (var i = 0; i < n; i++) P.push({ x: Math.random() * W, y: Math.random() * H, z: 0.3 + Math.random() * 0.7, w: Math.random() * 6.28 });
+  }
+  function block() {
+    var bw = Math.min(150, W * 0.2), bh = bw * 0.62, x = W - bw - Math.max(10, W * 0.03), y = H - bh - 8;
+    ctx.fillStyle = 'rgba(128,134,140,.20)';
+    ctx.beginPath(); ctx.moveTo(x, y + 4); ctx.lineTo(x + bw * 0.08, y); ctx.lineTo(x + bw * 0.97, y + 2); ctx.lineTo(x + bw, y + bh); ctx.lineTo(x - 2, y + bh); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = 'rgba(214,220,224,.16)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x, y + 4); ctx.lineTo(x + bw * 0.08, y); ctx.lineTo(x + bw * 0.97, y + 2); ctx.stroke();
+    return { x: x, y: y, w: bw, h: bh };
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    frame++;
+    if (!reduce) {
+      if (gt <= 0 && Math.random() < 0.002) gt = 260;
+      if (gt > 0) { gt--; gust += ((gt > 80 ? 1 : 0) - gust) * 0.03; } else gust *= 0.985;
+    }
+    var b = block();
+    ctx.strokeStyle = 'rgba(222,226,228,.5)'; ctx.lineCap = 'round';
+    for (var i = 0; i < P.length; i++) {
+      var p = P[i], v = (0.25 + gust * 5.5) * p.z;
+      if (!reduce) {
+        p.w += 0.01; p.x += v; p.y += 0.12 * p.z + Math.sin(p.w) * 0.12;
+        if (p.x > b.x - 2 && p.x < b.x + b.w && p.y > b.y && p.y < b.y + b.h) p.y = b.y - 1;
+        if (p.x > W + 10) { p.x = -10; p.y = Math.random() * H; }
+        if (p.y > H + 4) p.y = -4;
+      }
+      ctx.globalAlpha = 0.10 + 0.22 * p.z;
+      ctx.lineWidth = 0.6 + p.z * 0.7;
+      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - (1 + v * 2.2), p.y - 0.2); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
