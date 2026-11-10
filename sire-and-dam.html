@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sire and Dam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on ledger paper; pedigree brackets draw themselves faintly in the margins. */
+  --ground: #ece3cf;
+  --ground-2: #e3d8bf;
+  --ink: #2a2018;
+  --ink-dim: #6c5c48;
+  --roan: #8f3a2a;
+  --rule: #4f6f8c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f1e9d7 0%, var(--ground) 40%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(42,32,24,.25); }
+.series a:hover { color: var(--roan); }
+a:focus-visible { outline: 2px solid var(--roan); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--roan); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(143,58,42,.5); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--roan); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--roan); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(250,245,232,.8); border: 1px solid rgba(79,111,140,.28); border-left: 2px solid rgba(143,58,42,.55); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.entry { margin: 1.5rem 0; padding: .9rem 1.25rem; border-top: 1px solid rgba(79,111,140,.35); border-bottom: 1px solid rgba(79,111,140,.35); font-style: italic; line-height: 1.65; color: var(--ink); }
+.brk { text-align: center; color: var(--roan); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,32,24,.18); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--roan); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--roan); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,32,24,.2); border-bottom: 1px solid rgba(42,32,24,.2); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--roan); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--roan); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--roan); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--roan); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(250,245,232,.8); border-left: 2px solid var(--roan); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 14.7 &middot; Ānanda&rsquo;s Question</span></nav>
+<header>
+  <h1>Sire and Dam</h1>
+  <div class="epigraph">Man scans with scrupulous care the character and pedigree of his horses, cattle, and dogs before he matches them; but when he comes to his own marriage he rarely, or never, takes any such care.<br>&mdash; Charles Darwin, <span style="font-style:normal">The Descent of Man</span>, ch. XXI</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it was given me,</span> at Fenwick.</p>
+
+<section>
+  <h2>I. The Private Book</h2>
+  <p class="dateline">Elm Lawn, east of Fenwick, Iowa &middot; April 1896</p>
+  <p>The heifer came a little before four, in the box stall at the south end of the cow barn, and by the time there was light to see her color she was on her feet and had found the bag. Felix rubbed her off with a grain sack and stood back. She was roan, a deep strawberry roan like her dam, level along the top, with a white switch to her tail. He watched her suck until he was sure of her. Then he went up to the house, washed to the elbows at the kitchen pump, and sat down in the office off the kitchen to write her in the book.</p>
+  <p>Mrs. Rusk kept two. One was the American Herd Book, some forty volumes along the top shelf, which belonged to the Association in Chicago and told the world what her cattle were. The other was a canvas-backed ledger as thick as a pulpit Bible, and she called it the private book. Every animal calved at Elm Lawn since 1867 had a page in it. At the top of the page went the sire and the dam. Under them was a ruled space headed <em>Remarks</em>, and into it, over the years, went whatever the animal did: its weights, its calves, the price it fetched, and what she had seen with her own eyes. <em>Slack back of the shoulder. Milks like a Jersey. Sold to Gaddis; I would not have kept her.</em></p>
+  <p>He wrote:</p>
+  <div class="entry">Roan heifer, calved April 16, 1896. Sire, Scottish Baron, bred at Elm Lawn, by Craigie, imported. Dam, Elm Lawn Lavender 6th, by Craigie; second dam, Lavender 4th. Both tracing to Champion of England, bred by A. Cruickshank, Sittyton, Aberdeenshire.</div>
+  <p>He did not have to look any of it up. He had kept the book four years, and he had the herd by heart to the sixth dam, the way other young men around Fenwick had the batting averages of the Chicago nine.</p>
+  <p>He had more than the herd. Mrs. Rusk talked while she worked, and what she talked was blood. From her he knew that the big gray drafters came out of the Perche, a district of France you could lose in three Iowa counties, and that the best of them on this side of the water went back to a black horse called Brilliant that Mr. Dunham had stood at Oaklawn, in Illinois. He knew that every trotter worth a second look came down from one bay stallion, Hambletonian, foaled in Orange County, New York. He knew that the Poland-China hog had been made in two counties of Ohio, Butler and Warren, between the Miami rivers, and that Mrs. Rusk had been made in Butler County herself, a fact she brought up about as often as she brought up the hog. And he knew that the thick red and roan cattle in her own pasture, low to the ground and quick to finish, came from a single rented farm in Aberdeenshire, where a man named Cruickshank had bred them for fifty years by looking at the cattle and letting the paper look after itself.</p>
+  <p>She had her reasons for telling it that way. Tobias Rusk had bought paper. In 1873 a cow of the Duchess family was knocked down at New York Mills for forty thousand six hundred dollars, and half the Shorthorn men in the country lost their heads, Tobias with them. He put a mortgage on the east quarter for two heifers of the fashionable blood. One was a shy breeder and the other never dropped a living calf. When he died in 1884 the bank held paper on the land and the cattle both. His widow sold the fashionable ones by the pound. She kept the plainest, thickest cows on the place, among them two of the old Kentucky sort that the fancy called Seventeens and would not have in a sale ring, because their line ran back to an importation of 1817 and stopped there with no page behind it. Over them she put a Scotch bull out of a herd in Kansas, bought with the last of the insurance.</p>
+  <p><em>I quit buying names,</em> she said, when anybody asked how she had held on.</p>
+  <p>Felix had no page. He had come into Fenwick on the cars in October of 1884, eight years old or near it, one of a company of twenty from the Children&rsquo;s Aid Society in New York, with a card pinned to his jacket that gave a number and the one word <em>Felix</em>. He had sat on the stage of the opera house with the others. A farmer named Gault from the north end of the county took him, and got eight years of chores out of him, and gave him about two winters of school. One September, at sixteen, Felix walked south until dark and went to sleep in the first shed that had straw in it. Mrs. Rusk found him there in the morning among her weanling calves. She looked at him for some time. Then she asked him whether he could write a plain hand.</p>
+  <p>He blotted the heifer&rsquo;s line. The space under <em>Remarks</em> was empty, as it was on every new page.</p>
+  <p>Out in the kitchen she was pinning on her town hat. A handbill lay on the table, the same one that had been in the post office window for two weeks. Another company was coming on the noon train, eleven boys and three girls. Mr. Hallam of the Society would speak at the opera house at half past two, and persons wishing a child were to give their names to the committee. The committee was the Methodist minister, Dr. Vance, the cashier of the bank, the editor of the <em>Reporter</em>, and Mrs. Rusk. They had put her on, the first woman they ever had, because there was not a man in the county who would argue with her eye.</p>
+  <p><em>Hitch the grays,</em> she said. <em>You may as well see it from the other side.</em></p>
+</section>
+
+<section>
+  <h2>II. The Opera House</h2>
+  <p class="dateline">Fenwick &middot; that afternoon</p>
+  <p>The chairs had been borrowed from the Odd Fellows and set in a row across the stage, in front of a painted drop of a lake nobody in Fenwick had ever seen. The children sat with their hands in their laps. They had been washed at the hotel and their hair was still wet. Mr. Hallam, a spare man with a carrying voice, stood at the footlights and gave the terms as he had given them in two hundred towns. Boys under twelve were to stay until eighteen and be treated in schooling, clothing and training as the family&rsquo;s own. Boys of twelve to fifteen were to have board and clothes until seventeen, and school a part of every year. The Society paid the fare, and could take a child back for cause.</p>
+  <p>Then the people came up the side steps, and Felix, standing at the back by the stove, saw what he remembered.</p>
+  <p>A man took a boy&rsquo;s upper arm between his thumb and two fingers and worked down it to the wrist. Another said <em>Open</em> and looked at a boy&rsquo;s teeth, tipping the chin toward the window. A woman turned a girl around by the shoulders, looked at her from behind, and turned her back. They were not hard people. Most of them he knew. A woman from out by the creamery got down on her knees in her good dress to button a child&rsquo;s shoe, and stayed down there talking to him. But it was the way they went round the pens on sale day, and nobody in the hall, on the stage or off it, seemed to know another way to go about it.</p>
+  <p>Lute Achenbach came across the stage with his hat in his hand. He farmed four hundred acres and had bought his herd bull from Elm Lawn as a calf.</p>
+  <p><em>Adelia. You picked that bull for me at nine days old and I never had a better. Pick me a boy.</em></p>
+  <p><em>I can&rsquo;t do it, Lute.</em></p>
+  <p><em>You can tell me which is sound.</em></p>
+  <p><em>I can tell you which one has had the rickets and which two have been hungry lately, and so can Mr. Hallam. You&rsquo;re asking me the other thing. Which one will turn out.</em></p>
+  <p><em>With a calf you know.</em></p>
+  <p><em>With a calf I have the sire and the dam and three crosses behind them written down, and I have my eyes, and I am wrong one time in three.</em> She looked along the row of chairs. <em>These have no paper at all. If they had it I would not know how to read it.</em></p>
+  <p>Achenbach laughed, because he thought she was being modest, and went back along the row by himself.</p>
+  <p>At the far end a boy of ten or so was standing. He had given his chair to a smaller girl who had none, and when a man reached for his arm he said, loud enough for the hall, <em>That&rsquo;s my sister. We go the both of us or we don&rsquo;t go.</em> The man went on to the next chair. By four o&rsquo;clock the two of them were the only ones left on the stage. The hall was emptying and Mr. Hallam had his watch out. They went, at the last, with the Lindahls, who had put their name down for one girl to help in the house, and who stood a long time whispering before Mrs. Lindahl nodded.</p>
+  <p>Felix brought the team around. He sat on the wagon seat with the lines slack in his hands, waiting for the committee to finish its papers, and it came to him as plainly as if somebody had asked it aloud. She had told him where every well-bred thing came from. The gray horses out of the Perche, the trotters from Hambletonian, the hogs from between the Miamis, the cattle from Sittyton. In four years she had never once said where the good men came from.</p>
+</section>
+
+<section>
+  <h2>III. The Lamp</h2>
+  <p class="dateline">Elm Lawn &middot; that night</p>
+  <p>He asked her after supper, in the office, when she had the lamp lit and the private book open at the new page to see what he had put.</p>
+  <p><em>Mrs. Rusk. The well-bred men. Where do they come from?</em></p>
+  <p>She did not look up. <em>Butler County, Ohio.</em></p>
+  <p>He waited.</p>
+  <p><em>The Miami Valley. It runs about a hundred miles, top to bottom. My father held that all the good people in the United States came out of it, and he was from there.</em> She turned a page back and forward again. <em>And not out of every house in it, either. I knew most of the houses. One. Two, if you count my aunt.</em></p>
+  <p>Then she got up and took a brown book down from beside the herd books. It was Mr. Darwin&rsquo;s <em>Descent of Man</em>, the New York printing. Tobias had bought it the winter before he died, she said, to find out how to breed a better steer. He had underlined one sentence near the end, about how a man will scan the pedigree of his horses and cattle and dogs with scrupulous care before he matches them, and take no such care over his own marriage. She did not read him that. She found a place in the middle with no mark on it, and read it under the lamp in the voice she used for sale catalogues.</p>
+  <div class="verse">
+    <p>He who was ready to sacrifice his life, as many a savage has been, rather than betray his comrades, would often leave no offspring to inherit his noble nature. The bravest men, who were always willing to come to the front in war, and who freely risked their lives for others, would on an average perish in larger numbers than other men.</p>
+    <p>&mdash; Charles Darwin, The Descent of Man, ch. V</p>
+  </div>
+  <p><em>So there is no line of them,</em> she said. <em>He looked as hard as a man can look. You cannot get one by matching, and when you have one you can&rsquo;t count on him to leave you another. They are scarce, Felix. One is dropped here and one there, in a house nobody would have picked, and the next may be four counties off and forty years on.</em></p>
+  <p>She turned back a few leaves.</p>
+  <div class="verse">
+    <p>Now, if some one man in a tribe, more sagacious than the others, invented a new snare or weapon, or other means of attack or defence, the plainest self-interest, without the assistance of much reasoning power, would prompt the other members to imitate him; and all would thus profit.</p>
+    <p>&mdash; Charles Darwin, The Descent of Man, ch. V</p>
+  </div>
+  <p><em>That is the only way I know to tell,</em> she said. <em>Afterward, and by the house. You know a bull by his get. You know that kind by everybody who lived under the same roof with him, kin or no kin, down to the hired girl and the stock. They all do better than they had any right to, and most of them never work out why.</em></p>
+  <p>She put Mr. Darwin back on the shelf. Then she drew the private book to her and turned to the very back, to the pages he had never had any call to look at, where she cast up the place once a year. She ran her finger down a column. She turned the book around on the desk so that it faced him, took the hand lamp, and went up to bed.</p>
+  <p>It was all in her own figures. For 1885 and 1886 and 1887, and on down through 1891, the year&rsquo;s balance was written in red ink. At 1892 the line said <em>Even</em>. The three years after it were in black, each larger than the one before. In the margin against 1892, small, in pencil, she had written <em>F. came, Sept.</em></p>
+  <p>He sat a while with the big lamp. Then he turned the book back to the front, to the roan heifer. Sire and dam stood at the top of her page in his own plain hand, six crosses deep. Under <em>Remarks</em> there was nothing yet, and he left the pen where it lay.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">A supernatural person (a Buddha) is not easily found, he is not born everywhere. Wherever such a sage is born, that race prospers.<cite>Dhammapada 193, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is a few lines long. The elder Ānanda, sitting alone in the afternoon, reflects that the Buddha has told the monks where well-bred elephants, horses and bullocks come from, each from a named stock or country, and has never said where well-bred people come from. He goes and asks. The Buddha answers that such people are not born everywhere, only in the Middle Country (his own homeland), and there only in a household here and there, and he gives the verse: the noble one is hard to find, and the family he is born into thrives. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-07.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C4%80nanda">Ānanda</a>.</p>
+    <h3>Iowa, 1896</h3>
+    <p>Between 1854 and 1929 the <a href="https://en.wikipedia.org/wiki/Children%27s_Aid">Children&rsquo;s Aid Society</a> of New York and other charities sent some 200,000 city children west by rail to be placed in farm homes, a movement later called the <a href="https://en.wikipedia.org/wiki/Orphan_Train">orphan trains</a>. A company would be advertised by handbill, a committee of local citizens took the names of applicants, and the children were shown on the stage of an opera house, church or skating rink. The terms Mr. Hallam recites are those printed in an Iowa newspaper notice of 1890, <a href="https://iagenweb.org/iaorphans/counties/hamilton/26Sept1890.htm">&ldquo;Boys Wanting Homes&rdquo;</a>. Riders remembered being handled like stock, and brothers and sisters were often parted. Fenwick and its people are invented.</p>
+    <p>The cattle history is real. The <a href="https://en.wikipedia.org/wiki/Shorthorn">Shorthorn</a> was the first breed of cattle to have a herd book, and in the 1870s American breeders bid pedigrees of the Duchess family up to a peak of $40,600 for one cow at New York Mills in 1873; the boom ended in ruin, and the plain, thick &ldquo;Scotch&rdquo; cattle of Amos Cruickshank&rsquo;s Sittyton herd took over the breed. Cattle descended from the Kentucky importation of 1817, the &ldquo;Seventeens,&rdquo; were long slighted for want of a long pedigree, as Alvin Sanders tells in <a href="https://archive.org/details/shorthorncattl00sand"><em>Short-Horn Cattle</em></a> (1900). The Percheron sire <a href="https://en.wikipedia.org/wiki/Brillant_755">Brilliant</a> and the <a href="https://en.wikipedia.org/wiki/Poland_China">Poland China</a> hog of the Miami Valley are as Felix has them. Darwin drew on breeders throughout his work; the passages Mrs. Rusk reads are from chapter V of <a href="https://en.wikipedia.org/wiki/The_Descent_of_Man,_and_Selection_in_Relation_to_Sex"><em>The Descent of Man</em></a> (second edition, 1874), where he doubts that the noblest human qualities could ever have been multiplied by selection.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Ānanda&rsquo;s question from the Dhammapada commentary (verse 193). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-07.htm">The original</a>. Scripture from Charles Darwin, The Descent of Man (second edition, 1874). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-sand-pile.html">&larr; The Sand Pile</a><a href="index.html">All stories</a><a href="mic-check.html">Mic Check &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Pedigree brackets: small sire-and-dam trees rule themselves in, hold, and fade.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, trees = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(t, i, n) {
+    var col = (W - Math.min(W, 620)) / 2;
+    var left = (i % 2 === 0);
+    t.depth = 3 + Math.floor(Math.random() * 2);
+    t.step = Math.max(26, Math.min(54, (col > 120 ? col : W * 0.5) / (t.depth + 1.4)));
+    t.span = 90 + Math.random() * 120;
+    if (col > 120) {
+      t.x = left ? 14 + Math.random() * 10 : W - col + 18 + Math.random() * 10;
+    } else {
+      t.x = 10 + Math.random() * (W * 0.45);
+    }
+    t.y = H * (0.12 + 0.76 * ((i + Math.random() * 0.8) / n));
+    t.life = 0; t.max = 1500 + Math.random() * 1500;
+    return t;
+  }
+  function make() {
+    var n = W < 700 ? 3 : 6;
+    trees = [];
+    for (var i = 0; i < n; i++) { var t = spawn({}, i, n); t.life = reduce ? t.max * 0.5 : Math.random() * t.max; trees.push(t); }
+  }
+  function seg(x1, y1, x2, y2, p) {
+    if (p <= 0) return;
+    if (p > 1) p = 1;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x1 + (x2 - x1) * p, y1 + (y2 - y1) * p); ctx.stroke();
+  }
+  function branch(t, x, y, span, d, grow) {
+    // one generation: a rule out to the right, then a bracket up to the sire and down to the dam
+    var g = grow - d;
+    seg(x, y, x + t.step * 0.55, y, g * 2);
+    if (d >= t.depth) {
+      if (g > 0.6) { ctx.beginPath(); ctx.arc(x + t.step * 0.55 + 2.5, y, 1.4, 0, Math.PI * 2); ctx.fill(); }
+      return;
+    }
+    var bx = x + t.step * 0.55;
+    seg(bx, y, bx, y - span / 2, g * 2 - 1);
+    seg(bx, y, bx, y + span / 2, g * 2 - 1);
+    if (g > 1) {
+      branch(t, bx, y - span / 2, span / 2, d + 1, grow);
+      branch(t, bx, y + span / 2, span / 2, d + 1, grow);
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < trees.length; i++) {
+      var t = trees[i];
+      if (!reduce) { t.life++; if (t.life > t.max) spawn(t, i, trees.length); }
+      var p = t.life / t.max;
+      var env = Math.min(1, p * 12) * Math.min(1, (1 - p) * 5);
+      var grow = reduce ? t.depth + 2 : p * 3.2 * (t.depth + 2);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(79,111,140,' + (0.2 * env) + ')';
+      ctx.fillStyle = 'rgba(143,58,42,' + (0.34 * env) + ')';
+      branch(t, t.x, t.y, t.span, 0, grow);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

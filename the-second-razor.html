@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Second Razor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a sleeping-car night over the Great Salt Lake, dark theme; low on the page telegraph poles slide past the window and their wires dip and rise between them, while a small moon stands once in the sky and once, broken, in the water; datelined sections. */
+  --ground: #0a111c;
+  --ground-2: #121c2c;
+  --paper: #e6e3d8;
+  --paper-dim: #98a2ae;
+  --accent: #b8cbe2;
+  --glow: #d8c48e;
+  --line: rgba(230,227,216,.12);
+  --panel: rgba(18,28,44,.80);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #0a111c 0%, #0d1726 70%, #132034 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 26px rgba(184,203,226,.18); }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 8.11 &middot; Sappad&#257;sa</span></nav>
+<header>
+  <h1>The Second Razor</h1>
+  <div class="epigraph">We live in deeds, not years; in thoughts, not breaths;<br>In feelings, not in figures on a dial.<br>&mdash; Philip James Bailey, Festus (1839)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it came down the line,</span> on the Overland.</p>
+
+<section>
+  <h2>I. George</h2>
+  <p class="dateline">The Overland Limited, eastbound &middot; May 1907</p>
+  <p>Julian Coates had the barber's chair in the buffet car of the Overland Limited, and there was not a colored man in the service between Chicago and Oakland Pier who would not have changed places with him. The car rode at the head of the train. It had a baggage room, then a closet with a tin bathtub, then his own cubicle with the chair and the glass and the shelf of bottles, then the library with its leather seats, where he served whiskey and seltzer to gentlemen who were three days crossing the country. A shave was a quarter. Most of them left another quarter on the shelf.</p>
+  <p>His father had been a barber too, in Xenia, Ohio, with three chairs and a white trade, and was called Mr. Coates on Detroit Street by men who called no other colored man mister. He had put Julian two years into Wilberforce to make a teacher of him. Then he died. A German took the trade, and the chairs were sold. Julian heard a Pullman man speak at the church one Sunday on seeing the whole of the country from a moving window, and he believed it, and at twenty he went on the cars with his father's razors in a roll of green baize.</p>
+  <p>That was seven years back. He had seen the whole of the country three hundred times since, and in all of it he was George. Every porter on every car was George, after Mr. Pullman, so that no passenger need learn a name. There was a book of rules as thick as a hymnal. There were men the Company sent to ride as passengers and write down what the help did. He stood eighteen hours of the twenty-four, and slept sitting up, and answered.</p>
+  <p>He could not go home. His mother told it every Sunday that her son was with the Pullman Company on the Overland Limited, and it was the proudest thing in that congregation. A man with two years of Wilberforce does not go back to Xenia to black the boots of the men his father shaved. And he had come to think he would sooner be dead than be George for one more year. He held those two things together and there was no door between them. From about Christmas on he went through his work looking at the couplings, and the bridge at Omaha, and the wheels of the freights that went by on the next track, considering.</p>
+</section>
+
+<section>
+  <h2>II. The Crock</h2>
+  <p class="dateline">Nevada &middot; morning</p>
+  <p>They took coal for the kitchen range at Winnemucca before daylight. When the fourth cook went to the coal box to make up the fire for breakfast, something in it sang at him like a kettle. It took three of them to get it out. The second cook pinned it with the poker, and it struck the iron twice, and a waiter got it by the tail with a dish towel and dropped it into a two-gallon butter crock, and they put the lid on and tied the lid down.</p>
+  <p>Julian came through from the buffet car after he had eaten, and met them in the passage carrying the crock between two men.</p>
+  <p><em>What have you got?</em></p>
+  <p><em>Snake. Rattler, as long as your arm.</em></p>
+  <p><em>What do you mean to do with it?</em></p>
+  <p><em>Pitch it off.</em></p>
+  <p>He stood there a moment. <em>Give it here,</em> he said. <em>I'll pitch it. I've got the baggage door.</em></p>
+  <p>They were glad enough to hand it to him. He carried it forward through his own car, past the chair, and into the baggage room, and shut the door behind him, and ran the side door open a foot so that the sagebrush went by in a grey strip. He sat down on a drummer's trunk with the crock between his shoes and untied the towel and lifted the lid.</p>
+  <p>It lay in the bottom in a coil. He put his hand in. He laid it on the snake's back, and the snake let it lie there. He stirred his hand around in the crock, this way and that, as you would stir a pan of wash water to find the soap. He took the head between his thumb and two fingers, and opened the mouth, and put his first finger inside it and held it there while the train ran a mile.</p>
+  <p>Then he took his finger out and looked at it. <em>You're no rattler,</em> he said. <em>You're a gopher snake,</em> and he tipped the crock out through the door into the sage.</p>
+  <p>In the kitchen they asked him had he got rid of it.</p>
+  <p><em>That was no rattlesnake. It was nothing but a gopher snake.</em></p>
+  <p><em>Gopher snake!</em> the second cook said. <em>It had nine buttons on its tail and it rang every one. It hit that poker twice. You saw the three of us sweating over it. What makes you say such a thing?</em></p>
+  <p><em>I tried to get it to bite me. I had my finger in its mouth, and it wouldn't close on it.</em></p>
+  <p>Nobody in the kitchen said anything to that. The fourth cook went back to his potatoes.</p>
+</section>
+
+<section>
+  <h2>III. The Headrest</h2>
+  <p class="dateline">The Lucin Cutoff, Great Salt Lake &middot; that night</p>
+  <p>A freight was on the ground at Carlin, and they sat behind it six hours. So it was past midnight, and not the middle of the afternoon, when the Overland came down out of the desert onto the lake.</p>
+  <p>Late at night, with the gentlemen in their berths, Julian cut the crew's hair. The rule book did not allow for it, and old Mr. Tolbert, who had the rear sleeper and thirty-five years on the cars, did. They came forward one at a time, porters and waiters, and sat in the chair with a towel round the neck. He worked with two razors. One he used, and the other lay open on the shelf under the glass to be taken up when the first lost its edge. That night the first held. When the last man had gone back through the train he wiped it and closed it, and reached to close the second, and stood with it in his hand.</p>
+  <p>He sat down in his own chair. He let his neck back onto the headrest, where four thousand white men had laid theirs, and set the blade under his jaw at the windpipe, and looked up into the glass.</p>
+  <p>The car had come out onto the trestle. There are twelve miles of it, on piles, with the lake flat on both sides and no shore to be seen, and the moon was straight overhead, so that it stood in his window once in the sky and once in the water.</p>
+  <p>He meant to do it on a count of ten. Instead of counting he found that he was going back along the seven years, the way a porter walks back through his car at the end of a run to see what has been left in the berths. He was looking for the thing he ought to be ashamed of.</p>
+  <p>He had never kept a dime that was not handed to him. There had been watches under pillows, and a diamond pin in a washbowl at Reno, and a lady's purse with four hundred dollars in it, and every one had gone to the conductor with a slip. He had never had a drink on the car, or sat down to the dice in the quarters at Oakland. He had never told a Company man one word about another porter. He had sent his mother eighteen dollars on the first of every month. He had been called out of his name ten times a day for seven years, and worse than George, and had not once said the thing back. He had held this same edge to the throats of men who had called him those things an hour before, and had not nicked one.</p>
+  <p>He went down the whole length of it, berth by berth, and there was nothing left lying in it. It was clean. It was as clean as the moon out there on the water, as the row of glass bottles on his shelf with the lamp behind them.</p>
+  <p>All that time he had supposed he was keeping the Company's rule. He saw whose it was.</p>
+  <p>A gladness came up through him then from the soles of his feet, so strong that his hand shook, and the edge moved on his skin. He held still under it. He looked at the gladness the way he would look at a lather to see if it was right. He looked at the neck, and the blade, and the man in the glass they called George, and at Julian Coates of Xenia, and at the one who had wanted to be dead since Christmas. They came and went in the glass like stations. There was none of them he was obliged to carry.</p>
+  <p>He took the razor down from his throat, since there was no one left in the chair that needed killing, and closed it, and went back through the train.</p>
+</section>
+
+<section>
+  <h2>IV. The Step-Box</h2>
+  <p class="dateline">Promontory Point to Ogden &middot; toward morning</p>
+  <p>The dining-car crew were at their own supper, with two or three of the Pullman men.</p>
+  <p><em>Where did you get to, Coates?</em></p>
+  <p><em>I was in my chair with this on my neck.</em> He had the razor in his hand yet. <em>I went in there to cut my throat.</em></p>
+  <p><em>Then how is it you're standing up?</em></p>
+  <p><em>I couldn't do it now. I couldn't do harm with an edge to anything living. I went to cut my windpipe, and I cut the other thing instead, the thing that wanted it done.</em></p>
+  <p>They looked at one another. <em>First it's a rattlesnake that won't bite him,</em> the second cook said, <em>and now this. The man is telling tales.</em> And since there was one place on that train where such a matter was taken, they got up from the table and took it there.</p>
+  <p>Mr. Tolbert sat up nights in the smoking room of the rear sleeper, under the call board, with a soap box of books beside him that passengers had left in berths since 1872. He heard the cook and then he heard Julian, and he looked at Julian for some time.</p>
+  <p><em>He's telling you the truth,</em> he said. <em>A man who has come clear the way he says can't take his own life. There is nobody in him to lift the hand.</em></p>
+  <p><em>You call Coates clear? Mr. Tolbert, he has been the lowest man on this train since Christmas. If he had that in him, what was he so low about? And what kept that snake off him?</em></p>
+  <p><em>The snake is the least of it. Where I was raised, the old people would have told you that snake had worked for him once, three lifetimes back, and still knew better than to raise its head to him. I don't ask you to believe them. I only say it never bit him.</em></p>
+  <p><em>For the lowness, some of you remember Sim Purdy, who had the next car to his. Coates was low once before, his first year out, and it was Sim who talked him round. Told him what there was for a colored man off the cars, till he was content to stay on them. Then one day Coates was honing his daddy's razors, and he said, Sim, when I was fixing to quit I had it in mind to leave you these. After that Sim sang another tune. What does a man want with this life, he says. Can't sit down in the car he sweeps. Sees his wife four days in the month. He sang it every trip, till Coates was as low as before and lower. It took the boy a year to ask himself why the tune had changed, and then he saw it. Sim wanted the razors, and the chair along with them. But a thing like that gets in a man and stays. That is where the lowness came from.</em></p>
+  <p><em>And the other came from seven years of keeping straight when he had no joy in it and nobody watching. That is money in the bank whether a man knows he has an account or not.</em></p>
+  <p><em>Mr. Tolbert,</em> said the waiter who had held the snake's tail, <em>a man can't get all that done in the time it takes to hold a razor to his neck.</em></p>
+  <p><em>He can get it done between the step-box and the platform. He can lift his foot off the one, and be through before it comes down on the other.</em></p>
+  <p>He took his watch out and opened it. <em>By this we are six hours and ten minutes late. That is all it knows.</em> Then he reached into the soap box for a green book with the back gone, which a schoolteacher had left in Lower 6 somewhere west of Laramie in 1881, and read to them out of it.</p>
+  <div class="verse">
+    <p>One generous feeling &mdash; one great thought &mdash; one deed<br>
+    Of good, ere night, would make life longer seem<br>
+    Than if each year might number a thousand days, &mdash;<br>
+    Spent as is this by nations of mankind.<br>
+    We live in deeds, not years; in thoughts, not breaths;<br>
+    In feelings, not in figures on a dial.<br>
+    We should count time by heart-throbs. He most lives<br>
+    Who thinks most &mdash; feels the noblest &mdash; acts the best.</p>
+    <p>&mdash; Philip James Bailey, Festus (1839)</p>
+  </div>
+  <p><em>A man can lie in his berth a hundred years,</em> Mr. Tolbert said, <em>and not have lived as much as this one did tonight between Lakeside and Midlake. Go on to bed.</em></p>
+</section>
+
+<section>
+  <h2>V. Snake</h2>
+  <p class="dateline">Ogden, Utah &middot; daylight</p>
+  <p>The dining-car crew went off at Ogden and told it in the yard, and it reached Omaha ahead of the train. From that trip on he was Snake Coates on every road that carried a Pullman car. He stayed forty years in the service and answered to that, and to George, and to his own name when it was offered, and it was all one to him which.</p>
+  <p>They lay an hour at Ogden for the Union Pacific engine. The sun was coming up behind the Wasatch when Mr. Tolbert walked the length of the train to the buffet car and sat down in the chair and put his neck back on the headrest.</p>
+  <p><em>I'll have a shave, Mr. Coates,</em> he said.</p>
+  <p>Julian took the second razor off the shelf and tried it on his thumb and laid it under the old man's jaw.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">And he who lives a hundred years, idle and weak, a life of one day is better if a man has attained firm strength.<cite>Dhammapada 112, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a young man of good family becomes a monk, grows discontented, and decides that going back to lay life would be beneath him and that death would be better than staying. When the monks catch a snake in the hall where the fire is kept and carry it out in a jar, he offers to throw it away, and tries to make it bite him, even putting his finger in its mouth. It will not, and he tells the others it was only a house snake. He is also the monastery's barber. One day he takes his second razor to a tree, leans his neck on a branch and sets the blade to his windpipe. There he reviews his conduct since his ordination, finds it as spotless as the moon's disk, is filled with joy, and attains the goal. The monks think he is lying. The Buddha tells them that one who is freed cannot take his own life, that the snake had been the man's slave three lives earlier, and that his discontent went back to a former life in which a fellow monk who coveted his bowl and robes talked him out of his vocation. Asked whether so much can happen in so short a time, he answers that it can happen between lifting a foot and setting it down. The monk was afterward called Sappad&#257;sa, "he whose slave was a snake." Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-11.htm">the full commentary story</a>.</p>
+    <h3>The Overland Limited, 1907</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Overland_Limited_(UP_train)">Overland Limited</a> ran between Chicago and San Francisco Bay over the North Western, the Union Pacific and the Southern Pacific. Its advertisements in 1902 promised "Buffet-Library Cars (with Barber and Bath)," an electric reading lamp in every berth, and dining cars for all meals. From 1904 the train crossed the Great Salt Lake on the Southern Pacific's <a href="https://en.wikipedia.org/wiki/Lucin_Cutoff">Lucin Cutoff</a>, 102 miles from Lucin to Ogden, nearly twelve of them on a wooden trestle with a station called Midlake in the middle of the water.</p>
+    <p>The Pullman Company staffed its cars with Black men, and passengers called every one of them George, after George Pullman. <a href="https://en.wikipedia.org/wiki/Pullman_porter">Pullman porters</a> were paid too little to live on without tips, worked something like four hundred hours a month, and could be suspended on the word of a Company inspector; they did not win a union contract until 1937. The job was nonetheless among the best open to Black men, and many who held it had some college. Julian's father belongs to an older elite, the Black barbers who served white customers in Northern towns and who were losing that trade to European immigrants around 1900. <a href="https://en.wikipedia.org/wiki/Wilberforce_University">Wilberforce</a>, near Xenia, Ohio, is the oldest of the African Methodist Episcopal colleges. Philip James Bailey's <em>Festus</em> (1839) went through many American printings, and its line about deeds and years was copied into autograph albums for half a century; the passage is given here from <a href="https://archive.org/details/f00estuspoembailrich">a New York edition of 1872</a>. Julian Coates, Mr. Tolbert and the wreck at Carlin are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder Sappad&#257;sa from the Dhammapada commentary (verse 112). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-11.htm">The original</a>. Verse from Philip James Bailey's Festus (1839; New York edition of 1872). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-window-dummy.html">&larr; The Window Dummy</a><a href="index.html">All stories</a><a href="spilt-water.html">Spilt Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // From a moving car at night: telegraph poles slide past and the wires dip and rise between them,
+  // over a still lake that holds the moon a second time.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = null;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw(ts) {
+    if (t0 === null) t0 = ts || 0;
+    var t = reduce ? 0 : ((ts || 0) - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var hz = H * 0.90;
+    // the moon, once in the sky and once in the water
+    var mx = W * 0.86, my = H * 0.16, mr = Math.max(9, Math.min(15, W * 0.012));
+    var g = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 6);
+    g.addColorStop(0, 'rgba(214,226,240,0.16)'); g.addColorStop(1, 'rgba(214,226,240,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(mx, my, mr * 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(226,234,244,0.30)'; ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2); ctx.fill();
+    var ry = hz + 10;
+    for (var k = 0; k < 5; k++) {
+      var wob = reduce ? 0 : Math.sin(t * 0.7 + k * 1.7) * 2.5;
+      ctx.fillStyle = 'rgba(226,234,244,' + (0.16 - k * 0.025) + ')';
+      ctx.beginPath(); ctx.ellipse(mx + wob, ry + k * 6, mr * (1 + k * 0.28), 1.6, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    // the far edge of the water
+    ctx.strokeStyle = 'rgba(160,180,205,0.10)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, hz); ctx.lineTo(W, hz); ctx.stroke();
+    // poles and wires
+    var sp = Math.max(190, Math.min(300, W * 0.24)), speed = 46;
+    var off = (t * speed) % sp;
+    var top = H * 0.78, base = H * 0.99, sag = 16;
+    ctx.lineCap = 'round';
+    for (var x = -sp - off; x < W + sp; x += sp) {
+      ctx.strokeStyle = 'rgba(150,168,190,0.17)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x, top - 8); ctx.lineTo(x, base); ctx.stroke();
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(x - 11, top); ctx.lineTo(x + 11, top); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x - 8, top + 12); ctx.lineTo(x + 8, top + 12); ctx.stroke();
+      ctx.strokeStyle = 'rgba(170,188,210,0.13)'; ctx.lineWidth = 1;
+      var ends = [[-10, 0], [10, 0], [-7, 12], [7, 12]];
+      for (var w = 0; w < ends.length; w++) {
+        var x0 = x + ends[w][0], y0 = top + ends[w][1];
+        ctx.beginPath(); ctx.moveTo(x0, y0); ctx.quadraticCurveTo(x0 + sp / 2, y0 + sag * 2, x0 + sp, y0); ctx.stroke();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(0);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>
