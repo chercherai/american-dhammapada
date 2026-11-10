@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sand Pile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a clear, freezing midnight on a mountain ridge, dark theme; far below, three scattered fields of valley lights burn steady, and now and then a pour of pale creek sand runs down onto a low pile in one corner. */
+  --ground: #101318;
+  --ground-2: #1a1f26;
+  --paper: #e7e2d7;
+  --paper-dim: #9f9a8e;
+  --sand: #d9c296;
+  --lamp: #f1c76c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 125%, #1f2229 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(231,226,215,.2); }
+.series a:hover { color: var(--sand); }
+a:focus-visible { outline: 2px solid var(--sand); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--sand); text-wrap: balance; text-shadow: 0 0 28px rgba(217,194,150,.18); }
+.epigraph { border-left: 1px solid rgba(217,194,150,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--sand); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--sand); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(26,31,38,.8); border: 1px solid rgba(231,226,215,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--lamp); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(231,226,215,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--sand); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--sand); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--sand); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--sand); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--sand); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--sand); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(26,31,38,.8); border-left: 2px solid var(--sand); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 14.6 &middot; Aggidatta</span></nav>
+<header>
+  <h1>The Sand Pile</h1>
+  <div class="epigraph">Truly in vain is salvation hoped for from the hills, and from the multitude of mountains: truly in the LORD our God is the salvation of Israel.<br>&mdash; Jeremiah 3:23</div>
+</header>
+
+<p class="heard"><span class="heard-lead">I heard it told like this,</span> under the Pinnacle.</p>
+
+<section>
+  <h2>I. The Chair</h2>
+  <p class="dateline">Middlesboro, Kentucky &middot; 1991&ndash;1997</p>
+  <p>Brother Harlan Brand had preached thirty-one years at the big Baptist church on Cumberland Avenue, and for twenty-six of them he had also been the preacher of Shelburne Coal &amp; Land. Old Lafe Shelburne had hired him to pray. He prayed at the opening of every new mine and at the funeral of every man killed in one, and on the first Monday of every month he sat in on the board and opened it, and when the old man died in 1991 it was Brother Brand who buried him.</p>
+  <p>The son kept him on. Coleman Shelburne was forty-four that year, a quiet man who had been to Vanderbilt and ate his dinner at the board table without seeming to taste it, and he did a thing his father had never done. When Brother Brand came in on the first Monday, Coleman got up from behind the desk and came around it to the door to meet him, and walked him back, and pulled out a chair for him on his own side of the desk, the same chair as his, and said, <em>Preacher, sit here by me.</em> He did it every month for six years.</p>
+  <p>Middlesboro sits in a hole in the mountains three miles across that something made when it fell out of the sky, a long time before there was anybody to see it. Brother Brand had read that in the paper the year they found it out, and he had never forgotten it. He thought of it on the first Monday in March 1997, sitting in the chair on the right side of Coleman Shelburne's desk with the window behind him full of the town. He was seventy-one. The company had laid off four hundred men in two years. Coleman was cordial to him, and Coleman would be cordial to him until the day he was not, the way the old man had been cordial to the men he had prayed over. There was no keeping in with rich men for good and all. A chair at a man's side suited a man his own age, and Brother Brand was old.</p>
+  <p>He resigned the church at Easter and the company the same week. Then he took out a half page in the <em>Daily News</em>, and the half page said that everything Harlan Brand owned was in the yard of his house on the west end of town and would be there for seven days, free, to anyone who came and carried it off. His wife had been dead nine years. People came from three states. They took the bedroom suite and the Buick and the riding mower and his books, and the last day a family from Harrogate backed a pickup to the porch and took the porch swing off its chains, and he helped them. Then he sold the house and gave the money to the widows' fund at the company, and went up the mountain.</p>
+  <p>Some of the church went with him. More came after.</p>
+</section>
+
+<section>
+  <h2>II. The Sand Pile</h2>
+  <p class="dateline">A hollow on the Virginia side, east of the Gap &middot; 1998&ndash;1999</p>
+  <p>A man named Elmer Collingsworth, who had been a deacon under him, owned a hundred and sixty acres of steep woods in a hollow on the Virginia side of Cumberland Mountain, east of the Gap, and from the head of the hollow you could see the knob where Kentucky and Virginia and Tennessee come to a point at a marker in the rocks. He gave it to Brother Brand by deed. There was a creek in the bottom with a bar of clean sand on every bend, and a big rock house up the slope, a shelf of sandstone overhanging a floor as dry as a church, where people had taken shelter, Brother Brand said, since there were people.</p>
+  <p>The first summer there were thirty of them in tents and campers. Then the papers and the television began to say what would happen when the clocks turned over to the year 2000, how the computers that ran the power plants and the banks and the water would read the two zeros as 1900 and stop, and the people who came up the gravel road the second year came with generators in their pickup beds and their children's school records in a shoebox. Men who had been laid off by Shelburne came. Women whose husbands had left came. A boy named Tyler Ely came who had done a semester at Lincoln Memorial and could not afford the second one. By the fall of 1999 there were more than three hundred people in the hollow, in campers and trailers and plywood cabins along the creek, and Brother Brand had stopped preaching from the whole Bible and preached from one verse.</p>
+  <p><em>I will lift up mine eyes unto the hills,</em> he would say, <em>from whence cometh my help.</em> And he would lift his eyes, and they would lift theirs, to the ridge. <em>Get to the mountain. Get up under the rock. Get back in the big woods, under the poplars. Whoever takes to the mountain will come through it. Whoever takes to the rock will come through it.</em></p>
+  <p>They met at night in the rock house, all of them, with a fire in the middle of the floor and the shelves of canned goods along the back. The fire threw their shadows up on the back wall of the rock, big and slow, a hundred heads and shoulders moving when anyone moved, and if you sat by the fire you watched the shadows more than you watched the people. Tyler Ely said once that it was like a thing in Plato he had read at Lincoln Memorial, people in a cave watching shadows on a wall and taking them for the world. Brother Brand said Plato was a heathen, kindly, and Tyler did not bring it up again. But he watched the wall.</p>
+  <p>Brother Brand gave them one rule besides the verse. Whenever one of them was troubled in his mind, after a woman who was not his, or after liquor, or after a fight with a man, or whatever it was, he was to take a five-gallon bucket down to the creek and fill it with sand and carry it up the slope and empty it on the pile at the mouth of the rock house. Brother Brand meant the pile to go over the top of the bunker they had dug for the food, to cover it, and he meant the carrying to settle a man down, and both of these happened. Men carried at night. Women carried. A man named Darnell Cox carried eleven buckets in one evening and would not say why.</p>
+  <p>By the fall of 1999 the pile was higher than a house, and the bunker was long since covered, and it kept growing. You could stand in the hollow and see how troubled three hundred people had been for two years. It was all there, in clean creek sand.</p>
+  <p>In October a timber rattler took it. It was as long as a man was tall and as big around as a man's wrist, black down the back and yellow along the sides, and it went into the top of the pile one cold evening and stayed for the winter as if the pile had been built for it. The sand on top never froze after that, and snow would not lie on it. The people called it the Old Man. Nobody carried on that side of the pile again.</p>
+  <p>And people came from all three states to see them. On the first Saturday of every month cars and pickups came up the gravel road from Middlesboro and Harrogate and Ewing and Jonesville and as far as Pineville, people who did not live in the hollow and would not have, but wanted to have done something, and they brought canned goods and lamp oil and powdered milk and gallon jugs of water and boxes of shotgun shells and laid them down around the foot of the sand pile, on the near side, away from the Old Man. Then they stood a while and looked up at the ridge, and drove home.</p>
+</section>
+
+<section>
+  <h2>III. The Lineman</h2>
+  <p class="dateline">Thursday, December 30, 1999</p>
+  <p>It came on to rain at dark, a cold heavy rain out of the southwest, in drops so big they rang on the trailer roofs, and the meeting in the rock house broke up early and everybody ran for their own door. Brother Brand had a single-wide at the head of the hollow, the only thing he owned. He was sitting in it with the lamp lit, because the generator was saved now for the end, when somebody knocked and called through the door.</p>
+  <p><em>Harlan.</em></p>
+  <p>Nobody had called him Harlan since Ruth died. The board had called him Brother Brand, and Coleman Shelburne had called him Preacher, and the three hundred people in the hollow called him Brother. He did not get up.</p>
+  <p><em>Who is that?</em></p>
+  <p><em>It's me.</em></p>
+  <p><em>What do you want?</em></p>
+  <p><em>A place to lay down tonight, out of this.</em></p>
+  <p>He opened the door. There was a big man on the step in a yellow rain slicker with the hood down and the rain running off his face, a man in his forties with a lineman's forearms and a lineman's ruined hands, and nothing in them. Behind him in the dark the creek was coming up.</p>
+  <p><em>There's no room,</em> said Brother Brand. <em>There's a family in every camper on this creek.</em></p>
+  <p><em>Harlan, miners bunk with miners,</em> the man said, <em>and church folks put up church folks. You're a preacher. I'm a preacher. Give me a place.</em></p>
+  <p><em>You're a preacher?</em></p>
+  <p><em>Old Regular. Lick Fork church, under Elder Sizemore. I've been called nine years.</em></p>
+  <p>Brother Brand knew of the Old Regulars. Everybody in that country did. They had no seminary and no pay and no piano, and their preachers worked in the mines and drove trucks and climbed poles all week and stood up on Sunday and preached with no notes until the Spirit let them go.</p>
+  <p><em>You came up here,</em> he said, <em>two days before the end of the world, with nothing. Where's your Bible? Where's your gear? Where's your water?</em></p>
+  <p><em>I don't carry it. Whatever I need, I'll get inside.</em></p>
+  <p><em>You'll get it inside,</em> said Brother Brand, and he heard his own voice go up the way it had not gone up in years. <em>From us. You'll eat out of our stores.</em></p>
+  <p><em>Harlan,</em> said the big man, <em>don't get mad. Just give me a place.</em></p>
+  <p><em>There's no place.</em></p>
+  <p>The man turned his head and looked down the hollow, in the rain, at the sand pile, which you could make out from there in the dark because there was no snow on it and no shine of water. The rain went into it without a sound.</p>
+  <p><em>Who stays up there?</em></p>
+  <p><em>A snake.</em></p>
+  <p><em>Let me have the sand pile.</em></p>
+  <p><em>I can't let you have it. The people set store by that snake. It would be an insult to them.</em></p>
+  <p><em>Never mind that. Let me have it.</em></p>
+  <p>Brother Brand looked at him a long time with the rain blowing in on his feet.</p>
+  <p><em>Suit yourself,</em> he said. <em>You seem to know.</em></p>
+  <p>The man walked down the hollow in the rain and climbed the pile on the far side, the Old Man's side, where nobody had gone since October, digging the toes of his boots into the wet sand.</p>
+  <p>Everybody who was awake in the hollow saw what happened next, and afterward all of them told it the same way. The Old Man came up out of the top of the pile to meet him, more of him than anyone had known there was, and smoke came off it, gray smoke, out of its mouth and off the length of it in the rain, as if the snake were a stick of green wood on a fire. And the lineman stood on the top of the pile and smoke came off him too, the same gray smoke, out of his mouth and off his slicker and his hands, and the two smokes went up together into the rain and the rain did not touch them, and went up past the ridge into the clouds. Then the snake caught fire. It burned blue at first along the edges, and then yellow, all the length of it, so that you could see the whole sand pile lit up and the rain coming down slantwise through the light. And the man caught fire too. He lit up from the boots up the way a man lights up when a line he is working arcs, white and then yellow, until he was standing on the top of the pile like a torch, and the fire went up off him into the clouds and lit the bottoms of them, and people on the Tennessee side said afterward they had seen the clouds over the ridge go orange for a while that night and thought it was a barn.</p>
+  <p>The people in the hollow watched from their doors. <em>That snake's killed him,</em> they said to each other. <em>He wouldn't listen. Brother told him.</em> Then the light went down, and it was dark and raining again on the sand, and nobody went to look. Tyler Ely stood a long time in his cabin door after the others had gone in, watching the place on the pile where the fire had been, and saw nothing more.</p>
+</section>
+
+<section>
+  <h2>IV. The Elder</h2>
+  <p class="dateline">Friday, December 31, 1999</p>
+  <p>It cleared in the night and froze. In the morning the people came out to the sand pile in their coats to see whether he was dead, and he was sitting on top of it.</p>
+  <p>He was dry. The slicker was folded under him. Behind him the Old Man lay coiled in a ring on the top of the pile, all the length of him, and the snake had raised his head and the front of his body up over the man and bent it forward, and held it there, broad and still, so that it made a roof over the man's head like the roof of a porch. And around the foot of the pile, all the way around, not only on the near side, the canned goods and the jugs of water and the lamp oil and the powdered milk had been set out in rows, neat, the labels all turned out, the way a woman sets a table for a reunion.</p>
+  <p>The people stood in a ring.</p>
+  <p><em>Lord, mister,</em> said Darnell Cox. <em>He must have give you a terrible night.</em></p>
+  <p><em>Don't you see him?</em> said the lineman. <em>He's right here.</em></p>
+  <p><em>How did a man do that,</em> people said to one another. <em>How did a man do that to that snake.</em> Nobody went home. They stood around the pile all morning in the cold, and somebody brought him coffee, and he drank it. His name, he told them, was Kenny Moberly, and he worked for the electric co-op, and he was supposed to be on call that night with every lineman in three states, and was not.</p>
+  <p>A little after noon an old man came walking up the gravel road from where the county road ended. He was eighty-two and moved slow, in a black suit and an overcoat, with a white shirt buttoned to the neck and no tie, the way the old men at Lick Fork dressed for meeting, and a cane he did not lean on much. When Kenny Moberly saw him he came down off the sand pile and went down the road to meet him, and took his hand, and walked him up.</p>
+  <p><em>Is he bigger than you?</em> somebody asked Kenny.</p>
+  <p><em>This is Elder Burl Sizemore,</em> said Kenny. <em>He's my elder. I'm a member under him.</em></p>
+  <p>The Elder looked at the sand pile a while, and at the snake. Then he went up it, slowly, one foot and then the cane, with Kenny behind him, and sat down on the very top in his overcoat with his hands on the head of the cane, and the Old Man moved over to give him the room and laid his head down on the sand.</p>
+  <p>The people looked at each other. <em>If the young one can do what he did,</em> they said, <em>what can that old man do?</em> Some of the women put their hands together under their chins, and a few of the men took off their caps.</p>
+  <p>Brother Brand had come down from his trailer. He stood at the foot of the pile with the rest.</p>
+  <p><em>Harlan,</em> said the Elder. <em>What is it you tell these people?</em></p>
+  <p><em>I tell them get to the mountain,</em> said Brother Brand. His voice was steady and it carried, as it always had. <em>The hundred and twenty-first Psalm. I will lift up mine eyes unto the hills, from whence cometh my help. I tell them get up under the rock. Get back in the big woods. Whoever takes to the mountain will come through.</em></p>
+  <p><em>No,</em> said the Elder. <em>They won't, Harlan.</em></p>
+  <p>He did not raise his voice. He was a man who had preached sixty years with no notes and no pay and no piano, and had loaded coal for forty of them at Kettle Island, and he did not seem to need to raise it. He said the verse Brother Brand had said, and then the one after it, which Brother Brand had stopped saying, and then he said the others, in the long chanting way the Old Regulars have, where a man takes a breath and the words come out on it.</p>
+  <div class="verse">
+    <p>I will lift up mine eyes unto the hills, from whence cometh my help. My help cometh from the LORD, which made heaven and earth.</p>
+    <p>&mdash; Psalm 121:1&ndash;2</p>
+    <p>Truly in vain is salvation hoped for from the hills, and from the multitude of mountains: truly in the LORD our God is the salvation of Israel.</p>
+    <p>&mdash; Jeremiah 3:23</p>
+    <p>God is our refuge and strength, a very present help in trouble. Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea; though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof.</p>
+    <p>&mdash; Psalm 46:1&ndash;3</p>
+  </div>
+  <p><em>He made the hills,</em> said the Elder. <em>They're not where it comes from. They'll go when he's done with them, same as us.</em> He looked down at the people standing around the pile in their coats. <em>There's trouble in this world. You all know there is. And you know where it comes from in you, you've carried it up this hill in buckets for two years, I can see it from here. It can be laid down. And there's a way to walk that lays it down. That's all I know to tell you. It's the only place I ever found to stand.</em></p>
+  <p>Then he said, <em>Come on down from here,</em> and he did not seem to mean only the sand pile.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Nobody went into the rock house that night. At eleven o'clock they all went up the path behind the hollow to the open place on the ridge, three hundred people with flashlights and children on their shoulders, and stood in the cold. The Elder rode up on a four-wheeler with Kenny driving. He sat on a rock, and when it was near the time he lined out a hymn, one line at a time in his old cracked voice, and the people sang each line back after him, slow, the way it is done at Lick Fork, though most of them had never been.</p>
+  <p>From the ridge you could see three states. Down to the west was Middlesboro in its crater, all lit, a bowl of lights. Off to the south were the lights of Cumberland Gap and Harrogate, and east down the long valley of the Powell were Ewing and Rose Hill and the yard lights of farms all the way to Jonesville. Somebody had a watch that beeped. At midnight there were some fireworks over Middlesboro, small from up there, and a few gunshots in the valley, and church bells from somewhere you could not tell.</p>
+  <p>The lights stayed where they were. Every one.</p>
+  <p>Tyler Ely turned around once and looked back down the hollow at the mouth of the rock house, where there was no fire tonight and nothing moving on the wall.</p>
+  <p>Nobody said anything for a long time. Then Kenny Moberly's pager went off on his belt, loud in the quiet, and he looked at it and laughed out loud. A man in Ewing had come home from a party at ten after twelve and put his truck into a pole on the Wilderness Road, and there were eleven houses dark. It was the only outage the co-op had that night. Kenny shook the Elder's hand and went down the mountain in the dark to fix it.</p>
+</section>
+
+<section>
+  <h2>V. Seven Times</h2>
+  <p class="dateline">Saturday, January 1, 2000</p>
+  <p>In the morning the people of the hollow came out of their campers and trailers and plywood cabins dressed for church. Every one of them. Men who had not had a tie on in two years had a tie on, and women who had come up the mountain with one suitcase came out in their good dresses and stockings, and children were in their Easter clothes with their hair wet down. Nobody remembered packing any of it. Afterward nobody could say where it had come from. They stood around the sand pile in the frost, quiet and settled, three hundred of them, like people who had been members of a church sixty years and had their own pews, and the Elder sat on the top of the pile in his overcoat in the sun.</p>
+  <p>It was the first Saturday of the month.</p>
+  <p>About ten o'clock the cars began to come up the gravel road from three states with their offerings, the pickups from Harrogate and the station wagons from Pineville, people who had stayed home in their lit houses the night before and woke up feeling a little foolish, and had come anyway. They got out with their sacks of canned goods and their jugs of water and stopped. They saw the people of the hollow all dressed for church. They saw an old man none of them knew sitting on top of the sand pile with the rattler laid out in the sun beside him like a dog, and Brother Brand standing at the bottom.</p>
+  <p><em>Which one of them is it,</em> they said to each other. <em>Is it Brother Brand, or is it that old man?</em> And because the old man had only just come, and they had been driving up that road for two years, they said, <em>It's Brother Brand.</em></p>
+  <p>The Elder looked down at Brother Brand.</p>
+  <p><em>Harlan,</em> he said. <em>Settle it for them.</em></p>
+  <p><em>That's what I want more than anything in this world,</em> said Brother Brand.</p>
+  <p>Then he went up into the air.</p>
+  <p>He went straight up off the sand at the foot of the pile in his overcoat, slowly, the way a man goes up a pole on his hooks, until he was as high as the top of the big poplars and the people from three states could see the soles of his shoes. Then he came down and knelt in the sand at the Elder's feet with his forehead to the sand. He did it seven times. He went up and came down and knelt, seven times, in front of everybody, and the people who had brought the offerings stood in the road with their sacks in their arms and counted. The seventh time he stayed on his knees.</p>
+  <p><em>He's my elder,</em> said Harlan Brand, loud enough for all of them, with sand on his forehead. <em>I'm a member under him.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Kenny Moberly came back up the hollow at noon in the co-op truck, with the man in Ewing's pole set and the eleven houses lit, and backed up to the sand pile. He took the hot stick down off the rack on the truck, the long yellow fiberglass pole linemen use to handle a live wire without touching it, and walked up the pile with it.</p>
+  <p>The Old Man let himself be lifted. He hung over the end of the hot stick in two long loops, black and yellow, with his head up and his tongue going, and Kenny carried him down the far side of the pile and up the slope past the rock house, the stick held out level in front of him, slow, to the ledges under the ridge where the rattlers in that country have always gone in for the winter. He laid the end of the stick down on the rock by a crack. The snake poured off it into the crack, all of him, the way creek water goes down into sand, until there was only the tail, and then not that.</p>
+</section>
+
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Men, driven by fear, go to many a refuge, to mountains and forests, to groves and sacred trees.<cite>Dhammapada 188, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">But that is not a safe refuge, that is not the best refuge; a man is not delivered from all pains after having gone to that refuge.<cite>Dhammapada 189, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He who takes refuge with Buddha, the Law, and the Church; he who, with clear understanding, sees the four holy truths:&mdash;<cite>Dhammapada 190, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Viz. pain, the origin of pain, the destruction of pain, and the eightfold holy way that leads to the quieting of pain;&mdash;<cite>Dhammapada 191, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">That is the safe refuge, that is the best refuge; having gone to that refuge, a man is delivered from all pain.<cite>Dhammapada 192, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the brahmin Aggidatta is chaplain to King Mahā Kosala and then to his son Pasenadi, who seats him as an equal. Knowing that the favor of kings does not last, the old man gives away his wealth in a week and goes forth, and ten thousand follow him to a place on the frontier of three countries. There he teaches that refuge in a mountain, a forest, a grove or a tree frees a person from all suffering, and has his followers carry a jar of river sand to one spot whenever a sensual thought troubles them. The heap grows great, a nāga king takes it for his own, and the people of the three countries bring offerings every month. The Buddha sends Mahā Moggallāna ahead. In a storm he asks Aggidatta for lodging, is refused, asks for the sand heap instead, and overcomes the nāga in a contest of smoke and fire; in the morning he sits on the heap under the serpent's hood. The Buddha arrives, sits on the summit, and answers Aggidatta's teaching with the verses. The followers go forth, and when the people arrive with offerings and wonder which teacher is greater, Aggidatta rises seven times into the air and declares himself the Buddha's disciple. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-06.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Maudgalyayana">Moggallāna</a>.</p>
+    <h3>Cumberland Gap, 1999</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Year_2000_problem">Year 2000 problem</a> was the fear that computers storing years in two digits would read 2000 as 1900 and fail. Some people stocked food, water and guns, bought generators and drew out cash; interest in survivalism peaked in 1999, and some preachers tied the date to the end times. The United States spent an estimated $134 billion on preparation, and when the clocks turned over the failures were few and minor. January 1, 2000, fell on a Saturday.</p>
+    <p>Kentucky, Virginia and Tennessee meet at <a href="https://en.wikipedia.org/wiki/Tri-State_Peak">Tri-State Peak</a>, inside <a href="https://en.wikipedia.org/wiki/Cumberland_Gap_National_Historical_Park">Cumberland Gap National Historical Park</a>. Just to the west, <a href="https://en.wikipedia.org/wiki/Middlesboro,_Kentucky">Middlesboro</a> was founded in 1886 inside the <a href="https://en.wikipedia.org/wiki/Middlesboro_crater">Middlesboro crater</a>, a meteorite impact basin about three miles wide that geologists identified in the 1960s. The <a href="https://en.wikipedia.org/wiki/Old_Regular_Baptists">Old Regular Baptists</a>, most numerous along the Kentucky&ndash;Virginia border, have preachers who are called rather than trained and serve without pay, sing their hymns lined out and unaccompanied, and baptize in running water. Brother Brand, Shelburne Coal &amp; Land, the hollow, Lick Fork church and all the people are invented.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the brahmin Aggidatta from the Dhammapada commentary (verses 188&ndash;192). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-06.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="a-hundred-eggs.html">&larr; A Hundred Eggs</a><a href="index.html">All stories</a><a href="mic-check.html">Mic Check &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, lights = [], grains = [], pile = { x: 0, base: 0, w: 0, h: 0 }, timer = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    lights = [];
+    // three valleys: three loose clusters of lights low on the page
+    var centers = [[0.18, 0.86], [0.52, 0.93], [0.82, 0.88]];
+    for (var k = 0; k < 3; k++) {
+      var n = Math.round(30 + Math.random() * 25);
+      for (var i = 0; i < n; i++) {
+        var r = Math.pow(Math.random(), 1.6);
+        var a = Math.random() * Math.PI * 2;
+        lights.push({
+          x: W * centers[k][0] + Math.cos(a) * r * W * 0.14,
+          y: H * centers[k][1] + Math.sin(a) * r * H * 0.05,
+          s: 0.6 + Math.random() * 1.1,
+          b: 0.25 + Math.random() * 0.4,
+          t: Math.random() * 100
+        });
+      }
+    }
+    pile.x = W * (W < 700 ? 0.86 : 0.9); pile.base = H + 2; pile.w = Math.min(120, W * 0.16); pile.h = pile.w * 0.42;
+    grains = [];
+  }
+  function pour() {
+    var n = 70;
+    for (var i = 0; i < n; i++) grains.push({ x: pile.x + (Math.random() - 0.5) * 6, y: H * 0.58 - i * 2.2 - Math.random() * 3, v: 0.6 + Math.random() * 0.3, dx: (Math.random() - 0.5) * 0.12 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < lights.length; i++) {
+      var L = lights[i];
+      var tw = reduce ? 1 : 0.92 + 0.08 * Math.sin(L.t + timer * 0.01);
+      ctx.fillStyle = 'rgba(241,199,108,' + (L.b * tw * 0.55) + ')';
+      ctx.beginPath(); ctx.arc(L.x, L.y, L.s, 0, Math.PI * 2); ctx.fill();
+    }
+    // the pile
+    var g = ctx.createLinearGradient(0, pile.base - pile.h, 0, pile.base);
+    g.addColorStop(0, 'rgba(217,194,150,0.20)'); g.addColorStop(1, 'rgba(217,194,150,0.06)');
+    ctx.fillStyle = g; ctx.beginPath();
+    ctx.moveTo(pile.x - pile.w, pile.base);
+    ctx.quadraticCurveTo(pile.x - pile.w * 0.35, pile.base - pile.h * 0.9, pile.x, pile.base - pile.h);
+    ctx.quadraticCurveTo(pile.x + pile.w * 0.35, pile.base - pile.h * 0.9, pile.x + pile.w, pile.base);
+    ctx.closePath(); ctx.fill();
+    if (!reduce) {
+      timer++;
+      if (timer % 900 === 200) pour();
+      var top = pile.base - pile.h;
+      for (var j = grains.length - 1; j >= 0; j--) {
+        var p = grains[j];
+        p.v += 0.035; p.y += p.v; p.x += p.dx;
+        if (p.y >= top + Math.abs(p.x - pile.x) * 0.5) { grains.splice(j, 1); continue; }
+        if (p.y > 0) { ctx.fillStyle = 'rgba(217,194,150,0.32)'; ctx.fillRect(p.x, p.y, 1.4, 1.4); }
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

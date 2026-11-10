@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sinners Welcome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on sun-faded tent canvas, light theme; long slow breaths of canyon wind belly the canvas between its seams, so soft shadows swell and pass across the page; datelined sections. */
+  --ground: #e6dbc4;
+  --paper: #33291f;
+  --paper-dim: #74644f;
+  --accent: #9c3f2c;
+  --accent-2: #c29a2e;
+  --panel: rgba(244,237,222,.78);
+  --rule: rgba(51,41,31,.16);
+  --accent-soft: rgba(156,63,44,.45);
+  --glow-soft: rgba(194,154,46,.18);
+  color-scheme: light;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f1e8d4 0%, var(--ground) 55%, #d9ccb1 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px var(--glow-soft); }
+.epigraph { border-left: 1px solid var(--accent-soft); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.25 &middot; Pilindavaccha</span></nav>
+<header>
+  <h1>Sinners Welcome</h1>
+  <div class="epigraph">Angry words! O let them never<br>From the tongue unbridled slip.<br>&mdash; H. R. Palmer, &ldquo;Angry Words&rdquo; (1867)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it told,</span> along Highway 33.</p>
+
+<section>
+  <h2>I. Sinner</h2>
+  <p class="dateline">Oak View, California &middot; March 2019</p>
+  <p>Walt Combs called everybody sinner. <em>Morning, sinner,</em> to the crew coming up the drive at seven with their coffee. <em>Hand me that flat bar, sinner. Watch your feet there, sinner, that’s a nail.</em> He said it to the driver from the lumberyard in Ventura and to the county inspector who came out to sign off on a set of steps. He said it to the young pastor. He said it to the pastor’s wife when she brought sandwiches up at noon in a cardboard flat: <em>Thank you, sinner, these look good.</em> He said it to his blue heeler, Buck, who rode to every job on the passenger side of the truck, and to his worm-drive saw when it bound in wet wood. He was eighty-four years old. He had been a finish carpenter in Ventura County since 1958, a good deal of the staircase between Ventura and Ojai was his, and you could not get a thumbnail into a single joint of it.</p>
+  <p>The Tuesday crew had been going out from the little Presbyterian church off Highway 33 every week since the Thomas Fire. There were six of them that spring, all retired. They did the jobs too small for a contractor to drive out for and too odd for the insurance to pay for: a ramp, steps up to a trailer door, a fence to keep a neighbor’s horses off a lot where a house used to be, a shed with a lock on it so a woman living in an RV on her own slab had somewhere to keep her tools. The fire had destroyed more than a thousand buildings a year and a half before, and most of the lots up the canyons still had nothing on them but a chimney, a foundation and a trailer with an extension cord running to a power pole.</p>
+  <p>Joan Ekdahl ran the crew. She was seventy-one. She had been a building inspector for the county for thirty-one years, and there was hardly a contractor in the west county who had not stood beside her at some point while she looked at something of his for a long time with a flashlight and said nothing. She still carried the flashlight, in daylight, in her shirt pocket. Phil Brandt had been a chief in the Seabees at Port Hueneme and said <em>Can do</em> to anything you asked him. Linda Haskell had taught third grade in Oak View for thirty years and could hang a door so it swung shut by itself from wherever you let go of it. Ray Ocampo had carried the mail in the Ojai Valley until 2011 and knew every road in it, including the ones that were not on the map. Gary Ostrander was a retired orthodontist from Camarillo who had joined in January with a tool belt so new it creaked.</p>
+  <p>It was Gary who started counting.</p>
+  <p>Walt did not mean anything by it. Everybody on the crew who had known him more than a month knew that, and said so, and Gary heard them say it and kept counting anyway. He had come to the crew from a big church in Camarillo where nobody had been called a sinner to his face in twenty years, and he did not like it, and he wrote the number down in a little notebook he kept in his tool belt. Forty-one on the first Tuesday in February. Sixty-three on the second.</p>
+  <p>In January the first big storm since the mud had come in off the ocean. The river went over its banks down at the mouth and flooded an RV park by the freeway, and up in the canyons every creek that had been a line of dry rocks for two years was suddenly brown and loud. The crew was finishing a set of steps that day for a woman named Dana Whitcomb, in a canyon off 33 above Meiners Oaks, and by three o’clock the creek at the bottom of her road was over the low crossing and still coming up.</p>
+  <p>Phil told it afterward at the hardware store in Oak View, the same way every time. The water was brown and fast and you could hear rocks knocking along under it. Walt had to get the generator back across to the truck before dark. He stood at the edge with it in both hands and said <em>Hold up there, sinner,</em> the way he’d say it to Buck, and walked across. The water on the uphill side of him stood up against nothing, Phil said, the way it stands against a board you hold down in a ditch, for as long as it took an old man to walk forty feet carrying a generator. Then it came on again behind him and took out the far end of the crossing.</p>
+  <p>Linda said Phil had been a Seabee and had seen water do a great many things, and maybe he had seen it do that one too. Nobody asked Walt. Walt had already said all he had to say about it, which was <em>Thank you, sinner,</em> to the creek.</p>
+</section>
+
+<section>
+  <h2>II. The Ramp</h2>
+  <p class="dateline">Ojai &middot; March 2019</p>
+  <p>The second week of March they built a ramp for Mr. Penrose.</p>
+  <p>He lived in one of the little French-looking cottages at Taormina, beside the Theosophists’ grounds on the west side of town, where the roofs flared out at the eaves and there were gas lamps on posts along the lanes. He was eighty-eight. He had fallen in the autumn and come home from the hospital with a walker, and there were three brick steps up to his door that he could no longer manage. The cottage had not burned. He had spent the worst of the fire on a cot at the fairgrounds in Ventura, he told Linda, and come home before Christmas to find it standing, with ash on the windowsills and a dead hummingbird in the birdbath. He had wiped the windowsills and buried the hummingbird and gone on.</p>
+  <p>Walt called him sinner from the first minute. <em>Morning, sinner,</em> when Mr. Penrose opened the door in a cardigan buttoned to the throat. <em>Mind the cord, sinner. You want the rail on this side or that side, sinner?</em></p>
+  <p><em>Good morning, Mr. Combs,</em> said Mr. Penrose. <em>That side, please.</em></p>
+  <p>Gary winced every time. It took two Tuesdays to frame the ramp and deck it and set the rails, and Mr. Penrose sat in a chair in his doorway the whole time and watched them. Every hour or so he went in on his walker and came out with something, a plate of shortbread, a pitcher of water with a lemon in it. Gary watched him, and watched Walt, and wrote in his notebook. At the end of the second Tuesday, while Walt was loading the truck, Gary went over to the doorway.</p>
+  <p><em>I want to apologize for him,</em> Gary said. <em>He’s from another generation. I hope you know he doesn’t mean you personally.</em></p>
+  <p>Mr. Penrose looked up at him.</p>
+  <p><em>A hundred and twelve times,</em> he said. <em>I’m afraid I can’t help counting. I was a court reporter in Los Angeles for forty years. I took down every word anybody said in a room, and I never learned to stop. A hundred and twelve, and once to the dog.</em></p>
+  <p><em>Then you heard it.</em></p>
+  <p><em>I heard it.</em> Mr. Penrose folded his hands on the bar of the walker. <em>On a transcript it would read very badly. I’ve seen men go to prison on transcripts that read better. But you aren’t asking me what’s on the transcript.</em></p>
+  <p><em>I don’t follow you.</em></p>
+  <p><em>In the room it was a different word,</em> said Mr. Penrose. <em>A transcript can’t take that down. It’s the one thing I never could get onto the paper, in forty years.</em> He looked across at the truck, where Walt was lifting Buck up onto the seat with both arms, because the dog was eleven and his hips were going. <em>In the room it sounded like good morning.</em></p>
+  <p>Gary thanked him for the shortbread and went and sat in his car.</p>
+</section>
+
+<section>
+  <h2>III. The Complaint</h2>
+  <p class="dateline">The fellowship hall &middot; April 2019</p>
+  <p>Dana Whitcomb’s letter came to the church office on a Monday in April. The young pastor printed it out and gave it to Joan, and Joan read it and put it in her shirt pocket behind the flashlight.</p>
+  <p>Dana’s house had burned the first night the fire came over into the canyons, in December of 2017. She had been at work, managing a dental office in Ventura, and by the time she got to the roadblock on 33 they would not let her through, and by morning there was nothing up the canyon to go through to. She had lived in a trailer on the slab for sixteen months. Her insurance company had paid her for the contents and was still arguing with her about the house. Her husband had moved to Bakersfield in the fall. The crew had built her steps and a deck for the trailer and a shed and part of a fence, seven Tuesdays in all, and Walt had called her sinner on every one of them.</p>
+  <p><em>I am grateful,</em> she wrote. <em>I want to be clear about that. I am not a member of your church and you came anyway, and I’ll never forget it. But I have been called a lot of things since the fire, by the insurance company and the county and people who think I should have taken the check and moved to Bakersfield too. I have tried to be a decent person my whole life. I did not lose my house because I was a sinner, and I do not want to be called one on my own land by somebody I didn’t ask to come.</em></p>
+  <p>Gary had his notebook. Linda, it turned out, had had a call at home from a woman in Meiners Oaks whose fence they had fixed in the fall. Phil said nothing. Phil had served under chiefs who called everybody a great deal worse.</p>
+  <p>They met on Tuesday after work in the fellowship hall, at one of the long folding tables, with the coffee urn ticking on the counter. Joan read the letter out loud. Then Gary read his numbers. Then Joan looked down the table to the counter, where Walt was filling a styrofoam cup.</p>
+  <p><em>Walt.</em></p>
+  <p>He turned around with the cup.</p>
+  <p><em>Is it true? You call people sinners?</em></p>
+  <p><em>Yes, ma’am,</em> said Walt. <em>It’s true.</em></p>
+  <p>He did not say anything else. He did not say he was sorry and he did not say he wasn’t. He stood there holding the cup to see whether she wanted anything more, and when she didn’t, he came and sat down at the end of the table with his hat on his knee.</p>
+  <p>Joan was quiet for a while. Then she told them about 1958.</p>
+  <p>She had been nine years old. Her grandmother, who was Swedish Covenant and did not hold with any of it, had taken her one Saturday night to a tent revival on a vacant lot on the Avenue in Ventura, down among the oil derricks, because a person ought to see one once. It was a brown canvas tent with the sides rolled up for the heat, sawdust on the ground, folding chairs, a string of bulbs run off a generator that a tall young man in a white shirt kept going all night from outside. The preacher was a roughneck from the Avenue field named Ancel Combs, who worked the rigs all week and preached all weekend, and before the meeting he stood at the tent flap and took every person who came in by the hand. The men from the rigs, and their wives. A drunk. A banker’s wife from up on the hill, in a hat. Her grandmother. Her.</p>
+  <p><em>Come on in, sinner,</em> he said to every one. <em>Come on in, sinner. Glad you came.</em></p>
+  <p><em>His daddy said it,</em> Joan said. <em>His granddaddy said it in Oklahoma when it was still the Territory. His granddaddy’s granddaddy said it at Cane Ridge, Kentucky, in 1801, under the trees, to ten thousand people. I looked it up once. That word has been in that family’s mouth for two hundred years. It was in Walt’s ear before he had teeth. It isn’t something he thinks. It’s just where his mouth goes.</em></p>
+  <p>Gary said that didn’t make it right.</p>
+  <p><em>No,</em> said Joan. <em>I’m not saying it does. I’m telling you what it is.</em></p>
+  <p>She took the flashlight out of her pocket and set it on the table.</p>
+  <p><em>I inspected Walt’s work for thirty-one years,</em> she said. <em>I went in behind his walls more times than I can count. I’ve opened up stairs he built and looked at the stringers. I’ve seen his work with the drywall off, and I’ve seen him with his dog, and I’ve seen him with a man who stiffed him out of four thousand dollars in 1986, and I’ll tell you what I never found. I never found anything in there. A man who’s got something mean in him, it comes out somewhere, in the work or the way he talks to the help. I’ve looked. There’s nothing behind that word. A man who’s right inside doesn’t say things to cut you. He can’t. Walt can’t. It only sounds like he does.</em></p>
+  <p>Nobody said anything. The urn ticked.</p>
+  <p><em>It hurt Dana,</em> Gary said at last.</p>
+  <p><em>I know it did,</em> said Joan. <em>I’ll go up and see her.</em></p>
+  <p>Then Linda, who had taught third grade for thirty years and knew when a room needed somebody to say something else, asked Walt whether his daddy had ever preached on anything besides sinners.</p>
+  <p>Walt thought about it.</p>
+  <p><em>He had one he wrote inside the cover of his Bible,</em> he said. <em>Said he never could live up to it, so he put it where he’d see it every time he opened the book.</em> And he said it to them from the end of the table, plain, without looking at anything, the way you would read somebody a measurement.</p>
+  <div class="verse">
+    <p>Let no corrupt communication proceed out of your mouth, but that which is good to the use of edifying, that it may minister grace unto the hearers.</p>
+    <p>&mdash; Ephesians 4:29</p>
+  </div>
+  <p><em>That’s the one,</em> Walt said, and drank his coffee.</p>
+  <p>Gary sat looking at the notebook on the table in front of him. Then he closed it and put it back in the pocket of his tool belt, and as far as anybody knows he never wrote in it again. Linda said later that something happened in the fellowship hall that afternoon that she could not have explained to a parent at conference time. It was like hearing a word you had used all your life spoken in another language, she said, and finding out for the first time what it meant. Phil said he had known it all along. Ray Ocampo, who had not said a word the whole meeting, got up and went to the urn and brought Walt’s cup back full without asking, and on his way past he put his hand on the old man’s shoulder.</p>
+</section>
+
+<section>
+  <h2>IV. Sinners Welcome</h2>
+  <p class="dateline">The canyon above Meiners Oaks &middot; May 2019</p>
+  <p>Joan drove up to Dana’s on a Thursday by herself and sat on the new steps and told her. It did not take long. Dana listened with her arms folded and said she didn’t know. She said she would think about it. She said she had been raised Catholic in Oxnard and nobody had said the word sinner to her face since her First Confession, and she hadn’t liked it then either.</p>
+  <p>The hills had come back green over the winter, as green as anybody could remember, and in April the wild mustard came up yellow across the whole burn, so thick on the slope behind Dana’s slab that you could not see the black on the oaks unless you went right up to them. The oaks were putting out leaves straight from their trunks, in tufts. By the middle of May the sun on the slab was something you had to get out of before noon.</p>
+  <p>The crew came up the last Tuesday of the month to finish the fence, and Walt brought a shade.</p>
+  <p>He had a barn on a lot behind his house in Oak View where he kept things, and in the barn, folded on a pallet under a tarp, was the last of his daddy’s tent. The rest of it had gone over lumber piles on job sites for sixty years and worn out a piece at a time. This was the last piece, about twenty feet by twelve, brown canvas gone the color of a paper sack, with grommets down one side. He and Phil set four posts around Dana’s picnic table at the edge of the slab and tied it off at the corners. It bellied once in the wind coming up the canyon and pulled tight.</p>
+  <p>Along one edge, where it had hung as the valance over the door of the tent, there were letters in red barn paint, faded nearly to pink. Dana came out of the trailer when it was up, and stood under it, and read them.</p>
+  <p>SINNERS WELCOME.</p>
+  <p><em>That was Daddy’s,</em> said Walt. <em>Don’t mind the writing, sinner. It’s good canvas.</em></p>
+  <p>Dana looked at him for a long time. Then she sat down at the picnic table in the shade.</p>
+  <p>They had the fence finished by two. When the others began loading the trucks she was still sitting there, with the mustard moving on the slope behind her and the light coming brown and soft through the old canvas onto her hands and onto the slab where her kitchen had been. Buck had gone in under the table and lain down across her feet. Walt came over to get him, and stood at the edge of the shade a minute, and then pulled out the bench on the other side and sat down across from her and let the dog sleep.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who utters true speech, instructive and free from harshness, so that he offend no one.<cite>Dhammapada 408, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the elder Pilindavaccha greets everyone he meets, monks and laypeople alike, with <em>vasala</em>, the word for an outcaste: &ldquo;Come, outcaste! Go, outcaste!&rdquo; The monks complain to the Buddha, who calls him in and asks whether it is true. &ldquo;Yes, venerable sir, it is true.&rdquo; The Buddha tells the monks not to take offense. Vaccha has no hatred in him; he was born a brahmin in five hundred lives running, and the word is only the habit of all those lives. One who has rid himself of the defilements never uses words meant to wound. Then he speaks the verse, and many who hear it enter the stream. Other sources call Pilindavaccha the disciple most dear to the gods. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-25.htm">the full commentary story</a>, the same episode in the <a href="https://accesstoinsight.org/tipitaka/kn/ud/ud.3.06.than.html">Ud&#257;na (3.6)</a>, or the entry on <a href="https://aimwell.org/DPPN/pilindavaccha.html">Pilindavaccha</a> in the <em>Dictionary of P&#257;li Proper Names</em>.</p>
+    <h3>The Ojai Valley, 2019</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Thomas_Fire">Thomas Fire</a> of December 2017 destroyed more than a thousand structures in Ventura and Santa Barbara counties, among them homes in the canyons along Highway 33 above Ojai. A year and more later, many owners were still living in trailers on their lots while they fought their insurers for the money to rebuild. On January 17, 2019, a winter storm pushed the <a href="https://en.wikipedia.org/wiki/Ventura_River">Ventura River</a>, which is dry most of the year, <a href="https://www.kclu.org/local-news/2019-01-17/ventura-rv-park-flooded-by-storm-50-evacuated">over its banks near its mouth</a> and flooded an RV park beside the freeway. The Tuesday crew, its church, Dana Whitcomb and the Combs family are invented. Mr. Penrose comes from <a href="fire-year.html">Fire Year</a>; his cottage is in the <a href="https://ojai.ca.gov/315/Taormina-Historic-District">Taormina</a> community, built as a retirement colony for Theosophists beside <a href="https://en.wikipedia.org/wiki/Krotona">Krotona</a>, with French Norman cottages and gas lamps along its lanes. The Seabees&rsquo; home base was the <a href="https://en.wikipedia.org/wiki/Naval_Construction_Battalion_Center_Port_Hueneme">Naval Construction Battalion Center at Port Hueneme</a>.</p>
+    <p>Walt&rsquo;s word comes a long way. The great revival at <a href="https://en.wikipedia.org/wiki/Cane_Ridge_Meeting_House">Cane Ridge</a>, Kentucky, in 1801, which drew close to ten thousand people, made the outdoor revival a fixture of American Protestant life, and the <a href="https://en.wikipedia.org/wiki/Tent_revival">tent revival</a> carried it into the twentieth century. In the 1930s the Dust Bowl and the Depression brought more than a million <a href="https://en.wikipedia.org/wiki/Okie">&ldquo;Okie&rdquo;</a> migrants to California, most of them Baptist, with Methodist and Pentecostal minorities. Some found work in the oil fields; the <a href="https://en.wikipedia.org/wiki/Ventura_Oil_Field">Ventura Avenue field</a>, in the hills along the river north of Ventura, was among the most productive in the country by the 1950s. Horatio Palmer&rsquo;s Sunday-school hymn <a href="https://hymnary.org/text/angry_words_o_let_them_never">&ldquo;Angry Words&rdquo;</a> appeared in 1867 and went into more than a hundred hymnals.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder Pilindavaccha from the Dhammapada commentary (verse 408). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-25.htm">The original</a>. Scripture from the King James Version, with a hymn by H. R. Palmer (1867). Written by Claude Opus 5.5.
+  <div class="pager"><a href="no-guile.html">&larr; No Guile</a><a href="index.html">All stories</a><a href="seven-winters.html">Seven Winters &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, seams = [], gusts = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    seams = []; var step = Math.max(150, W / 6);
+    for (var x = -step * 0.4; x < W + step; x += step) seams.push(x + (Math.random() - 0.5) * 20);
+    gusts = [];
+    for (var i = 0; i < 3; i++) gusts.push({ x: Math.random() * W, v: 0.08 + Math.random() * 0.1, w: 220 + Math.random() * 260, ph: Math.random() * 6 });
+  }
+  function belly(x, t) {
+    var b = 0;
+    for (var i = 0; i < gusts.length; i++) {
+      var g = gusts[i], dx = (x - g.x) / g.w;
+      b += Math.exp(-dx * dx) * (0.6 + 0.4 * Math.sin(t / 2600 + g.ph));
+    }
+    return b;
+  }
+  function draw(t) {
+    t = t || 0;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < gusts.length; i++) {
+      var g = gusts[i];
+      if (!reduce) { g.x += g.v; if (g.x - g.w > W) { g.x = -g.w; g.v = 0.08 + Math.random() * 0.1; } }
+    }
+    // panels between seams: a soft shadow on the lee side of each belly
+    for (var s = 0; s < seams.length - 1; s++) {
+      var x0 = seams[s], x1 = seams[s + 1], mid = (x0 + x1) / 2;
+      var b = belly(mid, t);
+      var a = Math.min(0.11, 0.025 + b * 0.05);
+      var grd = ctx.createLinearGradient(x0, 0, x1, 0);
+      grd.addColorStop(0, 'rgba(90,66,40,' + a + ')');
+      grd.addColorStop(0.35, 'rgba(255,248,232,' + (a * 0.9) + ')');
+      grd.addColorStop(0.75, 'rgba(90,66,40,' + (a * 0.35) + ')');
+      grd.addColorStop(1, 'rgba(90,66,40,' + a + ')');
+      ctx.fillStyle = grd;
+      ctx.fillRect(x0, 0, x1 - x0, H);
+    }
+    // the seams themselves, bowing a little with the wind
+    ctx.lineWidth = 1;
+    for (var k = 0; k < seams.length; k++) {
+      var sx = seams[k], bow = belly(sx, t) * 10;
+      ctx.strokeStyle = 'rgba(80,58,36,0.07)';
+      ctx.beginPath(); ctx.moveTo(sx, -10);
+      ctx.quadraticCurveTo(sx + bow, H / 2, sx, H + 10); ctx.stroke();
+      ctx.strokeStyle = 'rgba(80,58,36,0.035)';
+      ctx.beginPath(); ctx.moveTo(sx + 4, -10);
+      ctx.quadraticCurveTo(sx + 4 + bow, H / 2, sx + 4, H + 10); ctx.stroke();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>

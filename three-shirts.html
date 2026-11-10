@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Shirts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a drive-in lot on a September night, dark theme; a faint projector beam rises from below the page with dust and moths turning in it, and now and then two small cue dots flash in the upper right corner, seven seconds apart; datelined sections. */
+  --ground: #0d1015;
+  --ground-2: #171b22;
+  --paper: #e4dfd3;
+  --paper-dim: #9b978d;
+  --beam: #d8c48c;
+  --screen: #cfd6dc;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1f2229 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,223,211,.2); }
+.series a:hover { color: var(--beam); }
+a:focus-visible { outline: 2px solid var(--beam); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--beam); text-wrap: balance; text-shadow: 0 0 28px rgba(216,196,140,.2); }
+.epigraph { border-left: 1px solid rgba(216,196,140,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--beam); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--beam); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(23,27,34,.8); border: 1px solid rgba(228,223,211,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--screen); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .45; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,223,211,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--beam); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--beam); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--beam); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--beam); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--beam); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--beam); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(23,27,34,.8); border-left: 2px solid var(--beam); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 3.4 &middot; Bh&#257;gineyya Sa&#7749;gharakkhita</span></nav>
+<header>
+  <h1>Three Shirts</h1>
+  <div class="epigraph">Thou understandest my thought afar off.<br>&mdash; Psalm 139:2 (ASV)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So this is how I heard it, then,</span> out at the Starview on old 41.</p>
+
+<section>
+  <h2>I. The Starview</h2>
+  <p class="dateline">Outagamie County, Wisconsin &middot; 1948</p>
+  <p>Walt Kuehl came home from the Pacific in the fall of 1945 with the red arrow of the Thirty-second Division on his shoulder and a habit of sitting with his back to a wall. For three years he worked the wet end of a paper machine at the mill in Kaukauna and drank most of what they paid him. He was not mean about it. He was quiet, and then he was gone for a day or two, and then he was back at the machine.</p>
+  <p>In the summer of 1948 Harold and Irene Voss opened a drive-in on forty acres of Harold&rsquo;s father&rsquo;s hayfield east of the highway. It had a screen tower of fir planks painted white, two hundred and forty speaker posts in curved rows, and a cinder-block building in the middle of the field that was a snack bar downstairs and a projection booth up. They called it the Starview. Harold ran the projectors. Irene sat in the box office at the gate and took the money.</p>
+  <p>One night in August, after the second feature, when the last cars had pulled out onto the highway and Harold had shut down the arcs, Irene walked the rows with a flashlight to pick up the speakers people had dropped in the gravel. In the back row she found one car still parked with its speaker hanging in the window and a man sitting in it.</p>
+  <p>What she said to him nobody ever learned. Walt said later that it was about nine words, and that was all he would say about it.</p>
+  <p>The next evening he came back sober and asked Harold if he could use somebody in the booth. Within the week the men at the mill said he had gone strange, and his mother said he had gone quiet, and inside a month he was the man he would be for the rest of his life. He moved into the room behind the booth, with a cot and a chair and a hot plate. He gave his Plymouth to his brother-in-law and walked wherever he needed to go. He owned three shirts, one on him and one on the line and one in the drawer, and when one wore through he bought another one like it. Nobody saw him take a drink again, or raise his voice, or want anything, and though people watched him for years, nobody could say he had lost anything by it either. Dogs came up the long drive from the highway to lie in the shade under the booth stairs.</p>
+  <p>His youngest sister, Marlene, had married Don Pagel from Combined Locks that spring. When her boy came the next June she named him Walter, after her brother, because she said he was the steadiest thing she knew. So there were two Walts at the Starview, and people called the boy Marlene&rsquo;s Walt, or Little Walt, long after he stood taller than his uncle.</p>
+  <p>Harold Voss died in the winter of 1961, shoveling snow off the snack bar roof. Irene kept the place. She sat in the box office the way she always had, under a lamp, with a cash drawer and a roll of tickets, and she did not say much. When she told a lot boy <em>That&rsquo;ll do,</em> it did.</p>
+  <p>Little Walt started in the booth at fifteen. His uncle taught him the two machines and the carbons, which burned down like pencils in the arc lamp and had to be fed and trimmed, and the threading path, and the loop, and the dots. A reel ran twenty minutes. Near the end of every reel a small pale circle flashed in the upper right corner of the screen, there and gone, too quick to see unless you were waiting for it. That was the motor cue, and you started the second machine. Seven seconds later came the second dot, and you threw the changeover, and the picture went on from one machine to the other without a seam, and two hundred cars never knew anything had happened.</p>
+  <p><em>You have to be there for it,</em> his uncle said. That was about all he said. In twenty years the Starview&rsquo;s screen had never once gone white.</p>
+</section>
+
+<section>
+  <h2>II. Two Shirts</h2>
+  <p class="dateline">Sister Bay, Door County &middot; Labor Day 1968</p>
+  <p>That May the man who ran the booth at the Peninsula Outdoor, north of Sister Bay, got his notice from the draft board, and Irene&rsquo;s cousin Ruth Bergstrom called long distance to ask if she could borrow the boy. So Little Walt spent the summer he turned nineteen on the Door, sleeping in a cabin behind a cherry orchard and running the show for people up from Chicago and Milwaukee, who honked at everything. He picked cherries in July for the money. He swam off the town dock on his nights off. He did not miss a changeover all summer, and he thought about that more than he meant to, and wished his uncle could know it without his having to say it.</p>
+  <p>On Labor Day night, after the last show of the season, Mrs. Bergstrom met him at the foot of the booth stairs with a paper sack from the store in Sturgeon Bay. In it were two wool shirts, red and black check, the heavy kind, one a medium and one a large.</p>
+  <p><em>One for you and one for your uncle,</em> she said. <em>You tell him thank you for the loan of you.</em></p>
+  <p>He drove home the next morning down 57 in his brother&rsquo;s old Chevrolet with the sack on the seat beside him. Somewhere before Green Bay he decided that the large one was for his uncle. It was the better shirt. It was cut fuller, with longer tails, and the buttons were sewn on tighter. His uncle had worn the same three gray shirts for as long as Little Walt could remember, gone white at the elbows and soft as flannel, and it seemed to him that a man who had stood in a hot booth for twenty years ought to have one good thing that somebody gave him. That was what he told himself. He did not tell himself the other part, which was that he wanted to see his uncle put it on.</p>
+</section>
+
+<section>
+  <h2>III. The Booth</h2>
+  <p class="dateline">The Starview &middot; the Saturday after Labor Day</p>
+  <p>After Labor Day the Starview ran Fridays and Saturdays only, until the frost. Little Walt got out there a little after three. Irene&rsquo;s Buick was gone from beside the box office, which meant she had driven his uncle into Appleton to the Greyhound depot to pick up the film.</p>
+  <p>He climbed the outside stairs to the booth. It was close and hot under the tar roof and smelled the way it always smelled, of carbon ash and machine oil and old popcorn coming up through the floor. He swept the ash and the film trimmings into the dustpan. He emptied the coffee can of carbon stubs. He washed the two port glasses with newspaper and vinegar until the white screen at the far end of the field stood in each of them clean as a sheet of paper. He set his uncle&rsquo;s chair by the rewind bench. He went down to the snack bar and filled a dishpan with water from the cold tap and carried it up without spilling and stirred in a handful of Epsom salts from the box on his uncle&rsquo;s shelf, because his uncle stood all night and his feet were bad. He put the paper sack with the shirt in it on the shelf above the rewind bench, where he could reach it. Then he stood at the port and watched the drive.</p>
+  <p>A few blackbirds walked the rows between the speaker posts. The screen stood white at the end of the field with nothing on it. Toward five the Buick pulled off the highway and stopped at the foot of the drive, and his uncle got out with the film case on his shoulder and the lunch pail in his other hand, and the Buick went on toward town, and his uncle started walking up the quarter mile of gravel in the sun.</p>
+  <p>Little Walt went down the stairs two at a time and met him halfway. He took the film case, which weighed forty pounds, and the lunch pail, and walked beside him. His uncle looked at him and smiled.</p>
+  <p><em>Look at you,</em> he said. <em>Brown as a nut.</em></p>
+  <p>In the booth Little Walt sat him in the chair and knelt and unlaced his shoes. His uncle let him. He pulled off the socks, which were darned at the heels, and his uncle put his feet in the pan and let out his breath. Little Walt brought him water in the jelly glass from the jug on the sill. Then he folded that day&rsquo;s <em>Post-Crescent</em> in thirds and stood beside the chair and fanned him.</p>
+  <p><em>How was the Peninsula?</em></p>
+  <p><em>Good. I didn&rsquo;t miss one all summer.</em></p>
+  <p><em>No,</em> his uncle said, as if he had known that already. <em>You wouldn&rsquo;t have.</em></p>
+  <p>He meant to give him the shirt right then. He did not. He wanted it to come at the right time, though he could not have said what the right time was, and so the sack stayed on the shelf while they ate their sandwiches on the stairs and the sun went down behind the screen tower and the first cars began to come up the drive with their headlights on and stop at Irene&rsquo;s window.</p>
+</section>
+
+<section>
+  <h2>IV. Mink</h2>
+  <p class="dateline">The same night &middot; the first feature</p>
+  <p>By nine the lot was full. The picture was <em>Yours, Mine and Ours,</em> which had been playing all summer, a widow with eight children marrying a widower with ten, and the laughter came up out of the field in waves through two hundred little speakers, a fraction behind the picture. The arc lamps hissed in their housings. The heat of them filled the booth until the air above the machines shook. Moths came to the ports and beat at the glass, and some of them got in through the vent and went into the beam, and showed on the screen as soft gray birds the size of cows that crossed Lucille Ball&rsquo;s kitchen and were gone.</p>
+  <p>His uncle sat between changeovers with his feet back in his shoes and his hands on his knees, the way he sat, and Little Walt stood beside him and fanned him with the <em>Post-Crescent</em>. After the third reel he reached down the sack and took out the large shirt and laid it across his uncle&rsquo;s knees.</p>
+  <p><em>Mrs. Bergstrom sent this. It&rsquo;s for you. I picked you the big one.</em></p>
+  <p>His uncle unfolded it and held it up into the light from the port, and rubbed the wool between his thumb and finger.</p>
+  <p><em>That&rsquo;s a good shirt,</em> he said. <em>I&rsquo;ve got my three. You wear it.</em></p>
+  <p><em>I got it for you. I was thinking of you the whole way down.</em></p>
+  <p><em>I know you were. I&rsquo;ve got three shirts, Walt. You wear it.</em></p>
+  <p><em>Please. It would mean something to me if you wore it.</em></p>
+  <p><em>It&rsquo;s a real good shirt,</em> his uncle said, and folded it along its creases and laid it on the bench beside him, and that was all.</p>
+  <p>Little Walt went on fanning. Out in the field the eighteen children were all talking at once, and a horn honked at it, and somebody laughed. He had been his uncle&rsquo;s nephew for nineteen years and his helper in this booth for four. He had carried his film and swept his ash and filled his dishpan, and the man would not take a shirt off him. Well, then. If that was how it was, he did not see what he was doing up here. He could quit. Plenty of people quit. He could go on at the mill.</p>
+  <p>He did not want to go on at the mill. A person had to live on something, though.</p>
+  <p>He would sell the big shirt. Duane at the snack bar had been wanting a shirt like that; Duane would give him eight dollars for it. He would put the eight with the forty-one in the coffee can in his closet and buy a pair of breeder mink off the man out past Hortonville, a male and a female. Mink are bred in March. They have five kits, six. He would keep the females and pelt the males, and in three years he would have forty, and in five a shed, and then two, the long low sheds you see out by Medford with the wire pens up on legs and the feed truck coming every morning. Then he would ask Carol Gloudemans from the snack bar, who had a space between her front teeth and laughed at everything, and she would say yes. They would have a boy, and they would name him Walter.</p>
+  <p>And one summer night he would put Carol and the boy in the Ford and drive out here to show the boy to his uncle. He would park in the back row. And walking up between the posts in the dark, with the picture going, he would say, <em>Give him here, I&rsquo;ll carry him.</em> And she would say, <em>You take the thermos. I&rsquo;ve got him.</em> And he would say, <em>Give him here,</em> and she would say, <em>I&rsquo;ve got him,</em> and go ahead of him with the boy up on her shoulder. And her heel would catch in a speaker cord. And she would go down on the gravel, and the boy would roll out of her arms in front of a car that was coming slow down the row on its parking lights.</p>
+  <p>He saw the boy. He saw the tire. He saw Carol on her knees with her hands out. He heard himself say it to her: <em>You wouldn&rsquo;t let me carry my own son. You couldn&rsquo;t carry him and you wouldn&rsquo;t let me.</em> And he brought his hand down on her as hard as he could.</p>
+  <p>And Little Walt, standing in the booth with the newspaper folded in his fist, brought it down hard on the top of his uncle&rsquo;s head.</p>
+  <p>The sound was small. His uncle did not move for a moment. Then he put his hand up to his hair, and took it down, and looked at it, and looked at his nephew.</p>
+  <p><em>You never did get her, Walt,</em> he said, quietly. <em>What did an old man do to you?</em></p>
+  <p>Little Walt stood there. The whole of it came up in him at once, the mink and the sheds and the space between Carol&rsquo;s teeth and the parking lights and the tire, and he understood that his uncle had seen it, every bit, as plainly as if it had gone out through the port and onto the screen over two hundred cars. He dropped the newspaper. He went out the booth door and down the stairs, and he ran.</p>
+</section>
+
+<section>
+  <h2>V. The Box Office</h2>
+  <p class="dateline">The Starview &middot; the same night</p>
+  <p>He ran across the lot between the rows with the picture enormous above him. Faces turned in windshields. A woman in a Rambler said <em>Hey!</em> He tripped on a cord and kept his feet and went on toward the back fence and the cornfield, where it was dark.</p>
+  <p>The Hoffmann brothers, who worked the lot with flashlights, saw him go, and so did Duane, coming out of the snack bar with a tray of coffee, and the two Gloudemans girls behind the counter. Duane put the tray down on a car hood. They caught him at the fence. He was not hard to catch; he had stopped there with his hands on the top wire, not knowing what came next. They walked him back between the cars, one at each elbow, Carol Gloudemans behind with Duane&rsquo;s flashlight, and nobody said anything, and they brought him to the box office.</p>
+  <p>Irene Voss sat under the lamp with the cash drawer open, counting the night&rsquo;s dollar bills into piles of twenty. She looked up at the four of them in her window.</p>
+  <p><em>What&rsquo;s this.</em></p>
+  <p><em>He ran out of the booth, Mrs. Voss,</em> said the older Hoffmann. <em>In the middle of the reel. He was going over the fence.</em></p>
+  <p><em>Walt. Is that so?</em></p>
+  <p><em>Yes, ma&rsquo;am.</em></p>
+  <p>She opened the door of the box office, which nobody but Harold had ever come in by, and said, <em>Come in here. You boys go on back to work.</em> He went in. There was a stool and a cooler, and she pointed at the cooler and he sat on it.</p>
+  <p><em>Now. Why would you do a thing like that?</em></p>
+  <p><em>I don&rsquo;t want to do it anymore.</em></p>
+  <p><em>Do what.</em></p>
+  <p><em>Any of it. I hit him. I hit my uncle.</em></p>
+  <p>She waited. So he told her. He told her about the Peninsula and the two shirts, and the big one and the little one, and the three times his uncle would not take it, and Duane and the eight dollars, and the coffee can, and the mink and the sheds and Carol, and the boy, and the speaker cord, and the parking lights, and his hand, and the <em>Post-Crescent.</em> He told it to the end. When he got to the end he could not look at her, so he looked out her little window at the field.</p>
+  <p>Irene squared a pile of bills and set it in the drawer.</p>
+  <p><em>Well,</em> she said. <em>Don&rsquo;t be so upset. You&rsquo;re not the first.</em> She nodded at the window. <em>Look out there. Two hundred cars. You think they&rsquo;re all watching that picture? Half of them are in Green Bay. Some of them are in Saigon. Some of them are in Florida with money they don&rsquo;t have. A mind goes off a long ways by itself, Walt. It goes alone. It doesn&rsquo;t take the body along, it doesn&rsquo;t need it. It gets in there behind your eyes where nobody can see it and it does what it wants. You don&rsquo;t stop it going. You go and fetch it back. Every time, you go and fetch it back.</em></p>
+  <p>She was quiet a minute. Up on the screen the big family went on talking all at once, without a sound.</p>
+  <p><em>My mother used to say this,</em> she said, and she said it plainly, the way she would read off the price of a carload.</p>
+  <div class="verse">
+    <p>Whither shall I go from thy Spirit? Or whither shall I flee from thy presence? &hellip; If I say, Surely the darkness shall overwhelm me, And the light about me shall be night; Even the darkness hideth not from thee, But the night shineth as the day: The darkness and the light are both alike to thee.</p>
+    <p>&mdash; Psalm 139:7, 11&ndash;12 (ASV)</p>
+  </div>
+  <p><em>You ran off in the dark,</em> she said, <em>and here you are in my box office with the light on.</em> She took a twenty out of the drawer and put it back. <em>Go on up. He&rsquo;s on the second machine by himself, and it&rsquo;s coming up on the end of the reel.</em></p>
+</section>
+
+<section>
+  <h2>VI. Changeover</h2>
+  <p class="dateline">The booth &middot; the second feature</p>
+  <p>His uncle was standing at the port of the first machine when he came in. He did not turn around. He tipped his head toward the second machine, which was threaded and waiting with its douser down, and Little Walt went and stood at it with his hand on the switch and his eye to the port.</p>
+  <p>The newspaper was on the floor where he had dropped it. The shirt lay folded on the rewind bench.</p>
+  <p>He watched the upper right corner of the screen. He thought about the mink, and the thought went out a long way, to the sheds out by Medford, and he went after it and brought it back. He thought about the space between Carol Gloudemans&rsquo;s teeth, and fetched that back too. He thought about the tire, and his hand, and it was a long way to go for that one, and he went and got it. Out in the field two hundred people sat in the dark in their cars and went wherever they went. A moth crossed the beam. The corner of the screen was gray and still.</p>
+  <p>Then the first dot came, a small pale circle, there and gone, and he was there for it. He started the motor and counted. At seven the second dot came, and he threw the changeover, and the picture went on from the one machine to the other, and nobody out in the field knew that anything at all had happened.</p>
+  <p>His uncle shut down the first arc and lifted the empty reel off. Then he took the folded shirt off the bench and held it out.</p>
+  <p><em>You wear it,</em> he said.</p>
+  <p>It was the big one. Little Walt put it on over his T-shirt, and the sleeves came down past his knuckles, and he turned the cuffs back twice and stood at the port, and the beam went out over his shoulder across the field to the screen, full of dust and moths, all of it lit and none of it caught.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Those who bridle their mind which travels far, moves about alone, is without a body, and hides in the chamber (of the heart), will be free from the bonds of Mara (the tempter).<cite>Dhammapada 37, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, an elder named Sa&#7749;gharakkhita is ordained after hearing the Buddha and becomes an arahant within days. His youngest sister names her son after him, and the boy is ordained under his uncle. After a rains retreat the nephew is given two robes, one seven cubits long and one eight, and sets his heart on giving the longer one to his uncle. He sweeps the elder&rsquo;s quarters, sets out water for his feet, and fans him, but the elder refuses the robe because he already has a full set. Still fanning, the nephew drifts into a daydream: he will leave the order, sell the robe, buy a she-goat, grow rich on her kids, marry, and take his wife and son in a cart to visit his uncle, and on the road his wife will drop the child under the wheels and he will strike her with his stick. His fan comes down on the elder&rsquo;s head. The elder, who has seen the whole daydream, says, &ldquo;You did not succeed in hitting the woman; what has an old elder done to deserve a beating?&rdquo; The nephew flees, is caught by the young monks, and is brought to the Buddha, who tells him not to be troubled, because the mind travels far. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-04.htm">the full commentary story</a>. The daydream belongs to a family of tales that includes the milkmaid and her pail; see <a href="https://en.wikipedia.org/wiki/The_Milkmaid_and_Her_Pail">The Milkmaid and Her Pail</a>.</p>
+    <h3>A Wisconsin drive-in, 1968</h3>
+    <p>The first patented <a href="https://en.wikipedia.org/wiki/Drive-in_theater">drive-in theater</a> opened in Camden, New Jersey, in 1933, and the form boomed after the Second World War, when thousands were built on the edges of towns across the country; Wisconsin had about eighty at its height. Most ran only in the warm months, nightly through Labor Day and on weekends after it until the cold. Until xenon bulbs replaced them, projectors used <a href="https://en.wikipedia.org/wiki/Arc_lamp">carbon arc lamps</a>, which burned two carbon rods down in a bright, hot arc and had to be tended by hand. A feature came on reels of about twenty minutes each, run on two projectors in turn; the projectionist watched for the small <a href="https://en.wikipedia.org/wiki/Cue_mark">cue marks</a> in the upper right corner of the frame, the first to start the second machine and the second, about seven seconds later, to switch to it.</p>
+    <p>The Fox River valley around Appleton and Kaukauna was paper country, its mills lined along the river&rsquo;s fall to Green Bay, and Wisconsin had led the country in <a href="https://www.wisconsinhistory.org/Records/Article/CS4409">fur farming</a> since before the war, as it still leads in mink. Walt Kuehl&rsquo;s division, the <a href="https://en.wikipedia.org/wiki/32nd_Infantry_Division_(United_States)">32nd Infantry Division</a>, the &ldquo;Red Arrow,&rdquo; was formed from Wisconsin and Michigan National Guard units and fought at Buna in New Guinea and on Leyte and Luzon; it logged more days in combat than any other American division in the war. <em>Yours, Mine and Ours,</em> with Lucille Ball and Henry Fonda, opened in April 1968 and was one of the year&rsquo;s biggest hits.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Nephew Sa&#7749;gharakkhita from the Dhammapada commentary (verse 37). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-04.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Opus 5.5.
+  <div class="pager"><a href="clear-hands.html">&larr; Clear Hands</a><a href="index.html">All stories</a><a href="hot-water.html">Hot Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, motes = [], t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  // beam: apex below the bottom edge, opening upward
+  function apex() { return { x: W * 0.5, y: H * 1.12 }; }
+  function halfAt(y) { var a = apex(); return Math.max(0, (a.y - y)) * 0.32; }
+  function make() {
+    motes = [];
+    var n = Math.round(Math.max(40, Math.min(110, W * H / 12000)));
+    for (var i = 0; i < n; i++) {
+      var moth = i < 3;
+      motes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .15, vy: -(.05 + Math.random() * .18),
+        r: moth ? 1.8 + Math.random() : .5 + Math.random() * 1.1, moth: moth, ph: Math.random() * 6.28 });
+    }
+  }
+  function inBeam(m) { var h = halfAt(m.y); return Math.max(0, 1 - Math.abs(m.x - W * 0.5) / (h + 1)); }
+  function draw(now) {
+    var t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var a = apex(), top = -20, hw = halfAt(top);
+    var flick = reduce ? 1 : 0.92 + 0.05 * Math.sin(t * 9.1) + 0.03 * Math.sin(t * 23.7);
+    var g = ctx.createLinearGradient(0, a.y, 0, top);
+    g.addColorStop(0, 'rgba(216,196,140,' + (0.10 * flick) + ')');
+    g.addColorStop(0.5, 'rgba(216,196,140,' + (0.045 * flick) + ')');
+    g.addColorStop(1, 'rgba(207,214,220,' + (0.02 * flick) + ')');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(a.x - hw, top); ctx.lineTo(a.x + hw, top); ctx.closePath(); ctx.fill();
+    for (var i = 0; i < motes.length; i++) {
+      var m = motes[i];
+      if (!reduce) {
+        if (m.moth) { m.ph += .05; m.x += Math.cos(m.ph * 1.3) * .9 + m.vx; m.y += Math.sin(m.ph) * .7 + m.vy; }
+        else { m.x += m.vx + Math.sin(t * .3 + m.ph) * .05; m.y += m.vy; }
+        if (m.y < -10) { m.y = H + 10; m.x = Math.random() * W; }
+        if (m.x < -10) m.x = W + 10; if (m.x > W + 10) m.x = -10;
+      }
+      var lit = inBeam(m);
+      var al = (m.moth ? 0.05 + 0.4 * lit : 0.03 + 0.5 * lit) * flick;
+      if (al < 0.02) continue;
+      ctx.fillStyle = 'rgba(236,226,196,' + al + ')';
+      ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, 6.283); ctx.fill();
+    }
+    if (!reduce) {
+      var cyc = t % 34;
+      if ((cyc > 20 && cyc < 20.17) || (cyc > 27 && cyc < 27.17)) {
+        var cx = W - Math.max(28, W * 0.05), cy = Math.max(28, H * 0.06);
+        ctx.fillStyle = 'rgba(232,236,238,0.55)';
+        ctx.beginPath(); ctx.arc(cx, cy, 6, 0, 6.283); ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+  size(); make(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>

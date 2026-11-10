@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Strokes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale grey-green of a fairway at seven in the morning, light theme; dew glints faintly across the page, and now and then a ball rolls through it low on the page, leaving a dark curving line that holds a while and dries away; datelined sections. */
+  --ground: #eef0e5;
+  --ground-2: #e1e6d5;
+  --ink: #25271f;
+  --ink-dim: #646855;
+  --fairway: #3e5a33;
+  --flag: #b0402e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f7f8f1 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(37,39,31,.2); }
+.series a:hover { color: var(--fairway); }
+a:focus-visible { outline: 2px solid var(--flag); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--fairway); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(176,64,46,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--fairway); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--flag); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,255,255,.55); border: 1px solid rgba(37,39,31,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--flag); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(37,39,31,.12); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--fairway); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--fairway); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(37,39,31,.14); border-bottom: 1px solid rgba(37,39,31,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--flag); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--flag); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--fairway); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--fairway); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,255,255,.55); border-left: 2px solid var(--flag); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 22.5 &middot; A Stubborn Bhikkhu</span></nav>
+<header>
+  <h1>Two Strokes</h1>
+  <div class="epigraph">He that is faithful in that which is least is faithful also in much.<br>&mdash; Luke 16:10</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So I&rsquo;m told,</span> on the cart paths in Peachtree City.</p>
+
+<section>
+  <h2>I. The Seventh Hole</h2>
+  <p class="dateline">Peachtree City, Georgia &middot; September 2006</p>
+  <p>Monday was the day off, and on Mondays the two associate pastors of Aberdeen Presbyterian Church played eighteen at Line Creek, the public course on the south side of town, with a 7:10 tee time that Brad Tolleson had held every week for six years and would not give up for funerals. They drove over on the cart path from their houses, past the Kroger and the middle school and the long fingers of Lake Peachtree, in Brad&rsquo;s cart, which had a church parking sticker on the windshield and a cup holder he had installed himself that would hold a Chick-fil-A sweet tea in the large size. Gene Wofford and Ron Kiser, both elders, made up the foursome. Gene had been a mechanic for Delta for thirty-one years and still looked up at every plane.</p>
+  <p>Scott Lindahl was the associate for pastoral care. He was thirty-nine and kind and nearly always somewhere else in his head, usually a hospital room. Brad was the associate for discipleship, which meant the youth and the men&rsquo;s breakfast and the mission trip to Honduras. He was forty-six and had sold corporate travel accounts for Delta before seminary and could still close anything. People in the congregation said that Scott was the one you wanted when your mother was dying and Brad was the one you wanted when you were sixteen, and both of these were true.</p>
+  <p>That June the General Assembly had met in Birmingham and voted, two hundred ninety-eight to two hundred twenty-one, that a candidate for ordination could declare a scruple, a point of conscience on which he could not in good faith go along with the church&rsquo;s standards, and the presbytery examining him would decide whether the departure touched anything essential. Half the presbytery thought the church had finally found a way to keep its people together, and half thought it had found a way to let anything through. Scott and Brad had agreed in July not to talk about it on Mondays. They talked about it anyway, every Monday, somewhere around the sixth hole.</p>
+  <p>The seventh at Line Creek is a short par four that doglegs left around a pond, and the developer had ringed the pond in the eighties with pampas grass, great fountains of it taller than a man, with silver plumes in the fall that the women of the town cut for their front halls. Scott pulled his drive into the rough short of the pampas. He walked to his ball with a seven iron, still thinking about the man at the hospice in Fayetteville he had to see at two, whose daughters were not speaking to each other across the bed. He stood over the ball. Without noticing he did it, he reached down and pulled a blade of grass from just behind it, a long stiff blade standing up in the Bermuda, and put the end of it in his mouth.</p>
+  <p>Then he noticed. He stood still with the grass in his teeth.</p>
+  <p><em>Brad. What happens to a guy who breaks off a blade of grass behind his ball?</em></p>
+  <p>Brad laughed out loud. He was standing by the cart with his glove off, eating peanuts out of the pack.</p>
+  <p><em>You&rsquo;re asking if it&rsquo;s a penalty.</em></p>
+  <p><em>Is it?</em></p>
+  <p><em>Technically. Improving the lie. Two strokes.</em> He tipped the last of the peanuts into his mouth. <em>Scotty. Nobody saw it but me and God, and God&rsquo;s got bigger fish. You want to feel better, call it on yourself, write down two more, and you&rsquo;re clean as a whistle. That&rsquo;s the beauty of this game. It&rsquo;s the only one where you confess. Confession and absolution, brother. Most Presbyterian game there is.</em></p>
+  <p><em>I just wasn&rsquo;t paying attention,</em> Scott said.</p>
+  <p><em>That&rsquo;s what I&rsquo;m telling you. It doesn&rsquo;t matter. Watch.</em></p>
+  <p>He walked over to the edge of the pond, to the nearest clump of pampas grass, where the long leaves arched out and down over the water like the tail of a horse, and took a big double handful of them, one fist above the other, the way you take hold of a rope.</p>
+  <p><em>Grace abounds,</em> Brad said, and pulled.</p>
+  <p>The clump did not come up. The leaves came through his fists instead, fast, all of them, and the edges of pampas grass are lined with teeth too small to see. He let go and looked down at his hands. For a moment there was nothing on them but a pattern of fine white lines, crossing, as though somebody had drawn on his palms with a pin. Then the lines filled in red, all at once, and began to run.</p>
+  <p>Gene Wofford was out of his cart before anybody else had moved. He wrapped Brad&rsquo;s hands in two of the white towels off the bag rack, tight, and held them up above his head for him, and Ron drove. Scott took the grass out of his mouth, looked at it, and followed them in.</p>
+</section>
+
+<section>
+  <h2>II. The Grill Room</h2>
+  <p class="dateline">Line Creek clubhouse &middot; the same morning</p>
+  <p>The Monday ladies&rsquo; nine had finished early and were in the grill room at the round table by the window, under the television, eating chicken salad. Dot Huckaby was at the end of the table. She was seventy-six. She had been an operating-room nurse at Piedmont Hospital in Atlanta for forty-one years, scrub and then circulating and then in charge of the whole floor, and when she retired to Peachtree City she had joined Aberdeen Presbyterian and become a ruling elder, and then the chair of the personnel committee, which was the committee to which both associate pastors answered. She drove a green cart with a Braves magnet on the back. She kept a first-aid kit under the seat of it that would have done credit to a small hospital.</p>
+  <p>Gene came in ahead of the others and went straight to her.</p>
+  <p><em>Dot, you&rsquo;re not going to believe what your preachers just did.</em></p>
+  <p>She did not ask. She went out to her cart and came back with the kit and a bottle of water, and sat Brad down on a chair at the next table, and unwrapped the towels, and looked at his hands for a long time without saying anything, turning them over in hers. Then she washed them, one at a time, with the water, over a stack of paper napkins, while Gene told it and Ron filled in and Scott stood behind them with his hands in his pockets.</p>
+  <p>She did not say anything while they told it. When they were finished she took a pair of tweezers out of the kit and began picking the little hairs of the plant out of the cuts.</p>
+  <p><em>Scott,</em> she said, without looking up. <em>Where were you?</em></p>
+  <p><em>Ma&rsquo;am?</em></p>
+  <p><em>When you pulled that grass. Where were you?</em></p>
+  <p>Scott thought about it. <em>At the hospice. With Mr. Pittman.</em></p>
+  <p><em>That&rsquo;s right. You weren&rsquo;t at your ball. You were standing over it and you were in Fayetteville, and your hand went down and pulled something up and put it in your mouth, and you didn&rsquo;t know it till it was done.</em> She held one of Brad&rsquo;s fingers still and worked at the cut. <em>Forty-one years I counted sponges. Every one that ever got left inside a person got left by somebody standing at the table thinking about something else. Nobody leaves a sponge on purpose. That&rsquo;s the whole trouble with it.</em></p>
+  <div class="verse">
+    <p>He that is faithful in that which is least is faithful also in much: and he that is unjust in the least is unjust also in much.</p>
+    <p>&mdash; Luke 16:10</p>
+  </div>
+  <p><em>Yes, ma&rsquo;am,</em> said Scott.</p>
+  <p>She tore open a packet of the paper adhesive strips she used for closing cuts and began laying them across Brad&rsquo;s left palm, one after another, very straight.</p>
+  <p><em>And you,</em> she said. <em>What was it you told him? Call it on yourself and you&rsquo;re clean?</em></p>
+  <p>Brad started to smile and then didn&rsquo;t.</p>
+  <p><em>Let me tell you about clean,</em> Dot said. <em>In my room, when you break scrub, you say so. Out loud. I&rsquo;ve touched. My glove&rsquo;s gone. Nobody thinks any less of you for saying it. A first-year resident says it, the chief of surgery says it, you say it. That part&rsquo;s easy. Then you step back from the table, and you go out to the sink, and you scrub again, from the elbows down, five minutes by the clock, every finger, under every nail, and you come back in and somebody gowns you and gloves you all over again from the beginning. Saying it isn&rsquo;t the clean. Saying it is so you&rsquo;ll go get clean.</em></p>
+  <p>She laid another strip.</p>
+  <p><em>I had a surgeon once, a good one, who said it and kept his hands in the patient. I&rsquo;ve touched, so what, let&rsquo;s close. I watched what that did, over a couple of years, to every young doctor who stood across the table from him. They learned it from him. They didn&rsquo;t learn it from the textbook. They learned it from a man they looked up to who said the words and didn&rsquo;t mean them.</em> She looked up at Brad for the first time. <em>Who is going to stand across from you on Wednesday night, Brad?</em></p>
+  <p>Brad did not answer. There were sixty kids in the youth group. He knew every one of their names.</p>
+  <p><em>You took the sweetest thing we&rsquo;ve got,</em> Dot said, <em>that you can tell the truth about yourself and be forgiven, and you used it to make fun of a man for caring about a blade of grass. Then you grabbed a whole bush to show him how little it all mattered. And look what it did to you.</em></p>
+  <div class="verse">
+    <p>As a thorn goeth up into the hand of a drunkard, so is a parable in the mouths of fools.</p>
+    <p>&mdash; Proverbs 26:9</p>
+  </div>
+  <p>The grill room had gone quiet. The ladies of the Monday nine were all watching, with their forks down, and the boy behind the counter had turned off the blender. On the television the Braves were losing a replay from the night before with the sound off.</p>
+  <p>Dot finished the right hand. She wrapped each palm in gauze and taped it, neatly, the way she had done ten thousand times, and then she held both of his hands in both of hers, palms up, for a moment, as if she were weighing them.</p>
+  <p><em>You&rsquo;ll want two stitches in the right one. I&rsquo;m not doing it in a grill room. Ron, take him to the urgent care on 54. Scott, go see Mr. Pittman.</em> She let go of the hands. <em>And both of you. Whatever it is you&rsquo;re going to do, do it. Either be a preacher or go back to selling airplane seats. Don&rsquo;t do it halfway. Halfway is what gets on everybody.</em></p>
+  <div class="verse">
+    <p>Whatsoever thy hand findeth to do, do it with thy might.</p>
+    <p>&mdash; Ecclesiastes 9:10</p>
+  </div>
+  <p>She snapped the kit shut and went back to her chicken salad.</p>
+</section>
+
+<section>
+  <h2>III. Monday</h2>
+  <p class="dateline">Line Creek &middot; October 2006</p>
+  <p>Brad did not play for three Mondays. He preached on the second Sunday of October with both hands taped, and held them up at the start of the sermon and told the congregation exactly how it had happened, every word he had said on the seventh hole, and then preached on something else entirely, and the youth group talked about it for a month.</p>
+  <p>Something changed in him after that, though nobody at Aberdeen Presbyterian could have said exactly when. He started returning phone calls the same day. He stopped telling the story about the mission trip to Honduras in which he was the hero. The youth noticed that when he said he would be somewhere, he was there, early. When the personnel committee did his review in the spring, Dot Huckaby wrote one line in the comments box, in her square nurse&rsquo;s hand, and nobody else on the committee ever saw what it said.</p>
+  <p>On the fourth Monday of October he was back on the first tee at 7:10, with new pink lines across both palms where the cuts had closed, and a rule book in his back pocket, the little USGA one that nobody ever carries. The dew was still on the fairways. Every ball that rolled through it left a dark line behind it, curving where the ground curved, and the lines lay there behind them all the way up the first hole and only began to dry when the sun got over the pines.</p>
+  <p>On the seventh, Brad pulled his drive. It went left and short and kicked into the pampas grass on the bank above the pond, outside the stakes, and stayed there, down in the middle of a clump, among the stems.</p>
+  <p>He walked over and looked at it for a long time with his hands at his sides. Gene and Ron and Scott waited in the carts. Nobody said anything. Then he took out the rule book and found the page, and declared the ball unplayable, and took his penalty stroke, and dropped within two club lengths, no nearer the hole, and played on.</p>
+  <p>On the card, in the box for the seventh hole, he wrote a six, and next to it, small, a one with a circle around it, so that anybody who looked would know where it had come from.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">As a grass-blade, if badly grasped, cuts the arm, badly-practised asceticism leads to hell.<cite>Dhammapada 311, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">An act carelessly performed, a broken vow, and hesitating obedience to discipline, all this brings no great reward.<cite>Dhammapada 312, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">If anything is to be done, let a man do it, let him attack it vigorously! A careless pilgrim only scatters the dust of his passions more widely.<cite>Dhammapada 313, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a monk thoughtlessly breaks off a single blade of grass, and, troubled in conscience, asks another monk what happens to a monk who does that. The other tells him nothing happens; he has only to confess it and he is free; and to show him, he seizes a clump of grass with both hands and pulls it up. The monks report it to the Buddha, who rebukes him soundly and speaks the three verses on grass wrongly grasped, the lax deed and the careless wanderer. The stubborn monk afterward becomes steady in restraint and reaches awakening. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-05.htm">the full commentary story</a>, or about the <a href="https://en.wikipedia.org/wiki/Vinaya">Vinaya</a>, the monastic discipline, whose list of rules for monks says that "the damaging of a living plant is to be confessed" (<a href="https://www.accesstoinsight.org/tipitaka/vin/sv/bhikkhu-pati.html">the Bhikkhu P&#257;&#7789;imokkha, tr. &#7788;h&#257;nissaro Bhikkhu</a>).</p>
+    <h3>Peachtree City, 2006</h3>
+    <p><a href="https://www.georgiaencyclopedia.org/articles/counties-cities-neighborhoods/peachtree-city/">Peachtree City</a>, south of Atlanta in Fayette County, was chartered in 1959 as a planned community of villages, among them Aberdeen, Braelinn, Glenloch and Kedron, each with its own shops, schools and recreation. Miles of paved paths connect the neighborhoods, churches and schools, and residents drive golf carts on them as an ordinary way of getting around. On June 20, 2006, the 217th General Assembly of the Presbyterian Church (U.S.A.), meeting in Birmingham, voted 298 to 221 to adopt an authoritative interpretation, drawn from the 1729 Adopting Act, under which a candidate for ordination may declare a "scruple" and the ordaining body decides whether it departs from essentials of the church's standards (<a href="https://archive.wfn.org/2006/06/msg00432.html">Presbyterian News Service, via Worldwide Faith News</a>). The church, the course and the people in the story are invented.</p>
+    <p>Under the Rules of Golf in force in 2006, a player who improved the lie of the ball by bending or breaking anything growing was penalized two strokes in stroke play (<a href="https://www.usga.org/etc/designs/usga/content/rule-book/rule-13.html">USGA, Rule 13</a>); golf is unusual among sports in expecting players to call penalties on themselves. A ball may be declared unplayable anywhere except in a water hazard, at a cost of one stroke. Pampas grass, an ornamental from South America planted widely in Southern yards and developments in the late twentieth century, has leaves with fine saw-toothed edges that cut skin easily (<a href="https://lawnlove.com/blog/why-is-pampas-grass-bad/">LawnLove</a>).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a stubborn bhikkhu from the Dhammapada commentary (verses 311&ndash;313). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-05.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="two-ribbons.html">&larr; Two Ribbons</a><a href="index.html">All stories</a><a href="the-ear-mark.html">The Ear-Mark &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, dew = [], rolls = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function makeDew() {
+    dew = [];
+    var n = Math.round(Math.min(220, W * H / 7000));
+    for (var i = 0; i < n; i++) dew.push({ x: Math.random() * W, y: Math.random() * H, ph: Math.random() * 6.28, sp: 0.004 + Math.random() * 0.01 });
+  }
+  // A roll: a ball crossing the lower page along a gentle curve, leaving a dark trail through the dew.
+  function makeRoll(grown) {
+    var fromLeft = Math.random() < 0.5;
+    var y0 = H * (0.72 + Math.random() * 0.22);
+    var x0 = fromLeft ? -20 : W + 20;
+    var len = W * (0.35 + Math.random() * 0.45);
+    var x1 = fromLeft ? x0 + len : x0 - len;
+    var y1 = y0 - H * (0.04 + Math.random() * 0.1);
+    var cx = (x0 + x1) / 2, cy = y0 + (Math.random() - 0.5) * H * 0.16;
+    var pts = [];
+    for (var i = 0; i <= 120; i++) {
+      var t = i / 120, u = 1 - t;
+      pts.push([u * u * x0 + 2 * u * t * cx + t * t * x1, u * u * y0 + 2 * u * t * cy + t * t * y1]);
+    }
+    return { pts: pts, t: grown ? 1 : 0, hold: grown ? 0 : 0, fade: 1, holdMax: 700 + Math.random() * 700, wait: grown ? 0 : 200 + Math.random() * 900 };
+  }
+  function make() {
+    makeDew();
+    rolls = [makeRoll(reduce)];
+    if (!reduce) { rolls[0].wait = 60; rolls.push(makeRoll(false)); }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var now = Date.now() * 0.001;
+    for (var i = 0; i < dew.length; i++) {
+      var d = dew[i];
+      var a = reduce ? 0.25 : 0.12 + 0.22 * Math.max(0, Math.sin(d.ph + now * d.sp * 60));
+      ctx.fillStyle = 'rgba(255,255,255,' + a + ')';
+      ctx.fillRect(d.x, d.y, 1.3, 1.3);
+    }
+    for (var r = 0; r < rolls.length; r++) {
+      var k = rolls[r];
+      if (!reduce) {
+        if (k.wait > 0) { k.wait--; continue; }
+        if (k.t < 1) k.t = Math.min(1, k.t + 0.0016 + (1 - k.t) * 0.004);
+        else if (k.hold < k.holdMax) k.hold++;
+        else { k.fade -= 0.0025; if (k.fade <= 0) { rolls[r] = makeRoll(false); continue; } }
+      }
+      var n = Math.floor(k.t * (k.pts.length - 1));
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.strokeStyle = 'rgba(62,90,51,' + (0.12 * k.fade) + ')';
+      ctx.lineWidth = 6;
+      ctx.beginPath(); ctx.moveTo(k.pts[0][0], k.pts[0][1]);
+      for (var j = 1; j <= n; j++) ctx.lineTo(k.pts[j][0], k.pts[j][1]);
+      ctx.stroke();
+      if (k.t < 1 && !reduce) {
+        var p = k.pts[n];
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        ctx.beginPath(); ctx.arc(p[0], p[1] - 2, 4, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = 'rgba(37,39,31,0.25)'; ctx.lineWidth = 0.8; ctx.stroke();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
