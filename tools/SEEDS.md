@@ -8,19 +8,19 @@ Images, places and worlds the editor wants in the series. Before you choose a se
 - The Minnesota Twins (the 1987 or 1991 Series, the Metrodome, a radio in a barn) [22.3]
 - Salt Spring Island, British Columbia (back-to-the-landers, draft dodgers, the Black settlers of the 1850s, Hawaiian Kanaka families) [25.9]
 - A windmill (a Plains water pump, a Dutch mill in Michigan, a wind farm in Texas or Iowa) [12.9]
-- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [2.6]
+- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [2.6] [19.1] [25.5] [18.2]
 
 ## Twenty random Dewey numbers (drawn Nov 10, 2026)
 Use one as a story's hidden subject: a job, an object, a book someone is reading, a shelf in the library where something happens.
 - **178, Ethics of consumption:** temperance, the WCTU, Prohibition, a man who quits drinking or buying.
-- **184, Platonic philosophy:** a cave, shadows on a wall, a night-school Plato class, a drive-in screen.
+- **184, Platonic philosophy:** a cave, shadows on a wall, a night-school Plato class, a drive-in screen. [19.1]
 - **234, Salvation and grace:** an altar call, a revival tent, a 12-step "higher power," a deathbed.
 - **306, Culture and institutions:** a sociologist doing fieldwork, a Middletown study, a Rotary club.
 - **326, Slavery and emancipation:** Juneteenth, a manumission paper, an abolitionist parlor.
 - **335, Socialism:** a utopian colony (Oneida, New Harmony, Llano del Rio), Milwaukee's sewer socialists, a Debs rally.
 - **382, International commerce:** a longshoreman, a container port, a customs broker, NAFTA trucks at Laredo.
 - **482, Classical Greek etymology:** a spelling-bee kid, a seminary Greek class, a Greek diner owner's sayings.
-- **544, an unassigned number:** an empty shelf in the library. Absence, a gap, something missing from the record.
+- **544, an unassigned number:** an empty shelf in the library. Absence, a gap, something missing from the record. [19.1]
 - **558, Earth sciences of South America:** a geologist back from the Andes, guano, nitrate, a Chilean miner in Butte.
 - **573, Animal physiology:** a veterinarian, a 4-H steer, a slaughterhouse inspector, a heart in a jar. [13.10]
 - **579, Microorganisms, fungi, algae:** sourdough, a mushroom forager, a lab tech, a red tide, penicillin.
@@ -28,7 +28,16 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - **677, Textiles:** a mill girl, a quilting bee, a denim factory, a Lowell loom. [18.3]
 - **735, Sculpture since 1400:** a monument carver, a Mount Rushmore driller, a cemetery angel, a Confederate statue coming down.
 - **741, Drawing (including comics):** a cartoonist, a comic-book kid, a courtroom sketch artist, a tattoo flash sheet. [25.4]
-- **744, an unassigned number** (once mechanical drawing): a draftsman's lost trade, blueprints, a T-square in a garage. [2.6]
+- **744, an unassigned number** (once mechanical drawing): a draftsman's lost trade, blueprints, a T-square in a garage. [2.6] [18.2]
 - **825, English speeches:** a eulogy, a valedictory, a stump speech, a toast, a sermon nobody heard. [13.10] [11.7] [18.9]
 - **859, Romanian literature:** a Romanian immigrant in Akron or Cleveland, a village poem said over a grave.
 - **990, Pacific islands and Antarctica:** Guam, Saipan, American Samoa, Bikini Atoll, a McMurdo winter-over.
+
+## Editor's themes (Nov 10, evening): each wants at least one story built on it
+- Sikhs, beyond The Branch (8.3): Yuba City peach growers, the 1912 Stockton gurdwara, Sikh cab drivers, a post-9/11 story
+- Musicians as the heart of a story: a polka band, a mariachi, a Nashville session player, a jazz sideman, a church organist, a garage band
+- Ghosts: the commentary's peta (hungry-ghost) stories are made for this: 5.12 Snake Peta, 10.6 Python Peta, 20.6 Pig Peta
+- Hunters: a muskrat trapper, a duck-blind guide, a buffalo hunter, a subsistence hunter, a bowhunter
+- Teenagers as the protagonist, not the side character
+- Fires: Peshtigo 1871, Chicago 1871, the Triangle factory, Hinckley 1894, Paradise 2018, Lahaina 2023
+- Buddhists. Six stories so far (Vietnamese, Kalmyk, Cambodian, Lao, Japanese Pure Land, Cantonese Chan). Still missing: Hawaii plantation Hongwanji temples, Soka Gakkai (Black and Latino members), Beat and San Francisco Zen (1950s–60s), insight meditation (Barre 1975), Shambhala in Boulder, Tibetan exiles, Thai, Burmese, Sri Lankan and Korean temples, a prison Buddhist chaplain, Dharmapala at the 1893 Parliament of Religions

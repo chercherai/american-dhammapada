@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Drop Corner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the dark of tarnished silver before daylight, dark theme; in the margins a small place is now and then rubbed bright, a stroke at a time, holds, and slowly dulls again; datelined sections. */
+  --ground: #1b1a1d;
+  --ground-2: #252327;
+  --paper: #e4e1d8;
+  --paper-dim: #a19d94;
+  --accent: #d9cfa6;
+  --glow: #f0ece0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 30% -10%, #2b292c 0%, var(--ground) 65%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,225,216,0.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 26px rgba(240,236,224,.16); }
+.epigraph { border-left: 1px solid rgba(217,207,166,0.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(37,35,39,0.8); border: 1px solid rgba(228,225,216,0.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,225,216,0.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(228,225,216,0.15); border-bottom: 1px solid rgba(228,225,216,0.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(37,35,39,0.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 18.2 &middot; A&ntilde;&ntilde;atarabr&#257;hma&#7751;a</span></nav>
+<header>
+  <h1>The Drop Corner</h1>
+  <div class="epigraph">To the many duties ever near you now be true,<br>Brighten the corner where you are.<br>&mdash; Ina Duley Ogdon, &ldquo;Brighten the Corner Where You Are&rdquo; (1913)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how it came down the route,</span> on Larkspur Road.</p>
+
+<section>
+  <h2>I. Grass</h2>
+  <p class="dateline">Cranston, Rhode Island &middot; June 1966</p>
+  <p>Norman Tefft had been a checker in the drafting room at Brown &amp; Sharpe for twenty-six of his thirty-eight years there. Other men drew the parts and he went over their sheets with a red pencil. He retired in 1964, when the company moved down to North Kingstown, and his wife died the winter after. Since then he had kept the house on the corner of Larkspur Road and Wheelock Avenue the way he had kept other men&rsquo;s drawings. The lawn was edged with a spade along a stretched string.</p>
+  <p>Beyond his lot line, in the point where the two streets met, lay a wedge of ground that belonged to the electric company. A streetlight stood on it. At five every morning a green station wagon stopped under the light and a man put out seven bundles of the <em>Providence Journal</em>, and by ten past there were seven boys kneeling around them. Mr. Tefft knew the boys by their faults. They left bundle wire. They cut across his corner. In 1965 he had telephoned the paper about them four times, and once he had stood over a boy named Dennis until every rubber band was picked up out of his pachysandra.</p>
+  <p>He had not slept past half past four since Eleanor died. One morning in the first week of June he was standing at the kitchen window with his coffee when the smallest of the boys got up from his knees. The boy was ten or eleven, and the strap of his canvas bag had been let out for somebody taller. He started toward his bicycle with thirty papers in the bag, and the bottom of it trailed through the grass. Nobody had cut the wedge that year. The timothy and chicory stood past the boy&rsquo;s knees and the dew was heavy on all of it. Mr. Tefft watched the canvas go dark a hand&rsquo;s breadth up.</p>
+  <p>He knew what that meant on the porches at the far end of the route. He had made one of his four telephone calls about a wet paper.</p>
+  <p><em>That wants cutting,</em> he said to the window.</p>
+  <p>The next morning, when the boys had gone, he took the Toro across his lot line for the first time in nineteen years. He mowed the wedge twice, the second time crosswise, raked it, and carried off what he raked. By eight o&rsquo;clock it was as flat and clean as a board with fresh paper on it.</p>
+</section>
+
+<section>
+  <h2>II. Sand</h2>
+  <p class="dateline">The morning after</p>
+  <p>With the grass off, the ground showed for what it was. Under the streetlight, where the bundles had landed every morning for years, there was no turf at all. There was a bare place the size of a dining table, gray, and fine as flour in dry weather.</p>
+  <p>He stood at the window. The boys knelt in it and folded, three folds and a tuck, and stood the folded papers on end against their knees. A bag set down sent up a little smoke of dust. The tall boy slapped at the seat of his dungarees. A front page lay face down a moment and came up with the print of the ground on it.</p>
+  <p><em>Sand,</em> said Mr. Tefft.</p>
+  <p>He had most of a yard of washed mason&rsquo;s sand behind the garage, left from the patio he had laid in 1961. He wheeled four barrows of it across before noon and spread it two inches deep with the back of a rake, and tamped it, and struck it off level with a length of two-by-four.</p>
+</section>
+
+<section>
+  <h2>III. Shade, and Then a Roof</h2>
+  <p class="dateline">July and August</p>
+  <p>In the second week of July the nights stopped cooling. At half past five one morning the sun was already over the maples across Wheelock Avenue and the thermometer on his garage stood at eighty-one. The boys had their shirts off and tied around their waists. The sweat ran down their arms as they folded, and the newsprint came off black on their forearms and went from there onto the papers.</p>
+  <p>That afternoon he set four cedar posts in the sand, eight feet on centers, and stretched over them the canvas fly from the tent he and Eleanor had taken to Maine each August until her knees gave out.</p>
+  <p>The fly served for six weeks. Then, on a morning late in August, it rained out of the northeast, the kind of rain that travels sideways. He watched seven boys crowd toward the middle of a square of dry sand that grew smaller as he looked. The bundles on the windward side took the water through their wrappers. The small one, whose name he had learned was Stevie, put his own body between the rain and his bag.</p>
+  <p>Mr. Tefft went down cellar, where his drawing board had stood under a sheet since 1964. He took off the sheet and taped down a clean piece of vellum. He drew the thing at an inch and a half to the foot: three walls and a shed roof on the four cedar posts, the open side to the south, away from the weather. He drew a bench along the back wall at twenty-eight inches and a second, lower, at twenty-two. He had never measured a boy. He had only watched where their elbows came when they folded.</p>
+  <p>He checked the sheet when it was done and found nothing to mark. He wrote to the electric company, and they answered in nine days that they had no objection to a temporary structure. It took him eleven mornings to build. He started each day after the boys had gone and had his tools put away before the afternoon <em>Bulletin</em>. The roof was green corrugated fiberglass, so there would be light under it.</p>
+</section>
+
+<section>
+  <h2>IV. The Cookout</h2>
+  <p class="dateline">The Saturday after Labor Day</p>
+  <p>When the last screw was in he thought there ought to be something to mark it. He asked the boys for Saturday noon, all seven, and he asked the man with the station wagon.</p>
+  <p>The man&rsquo;s name was Earl Aldrich. He was the district man for the <em>Journal</em> on that side of Cranston. He was fifty-eight and had put out bundles in the dark for twenty-two years, and the boys minded him without his ever raising his voice. They said that he never forgot a route or what a boy was owed, down to the penny.</p>
+  <p>Mr. Tefft cooked frankfurters on the patio and carried them across in a roasting pan. There was coffee milk in the two-gallon picnic jug, and a sheet cake from the bakery in Garden City, and Eleanor&rsquo;s potato salad made from the card in her handwriting. He sat Mr. Aldrich on the upper bench and the boys where they liked, some inside and some out on the sand. Because it was an occasion he had brought out the silver chest. He had not opened it since the funeral. Every fork in it had gone the color of a stovepipe.</p>
+  <p>When they had eaten he took Mr. Aldrich&rsquo;s paper plate from him and stood there holding it.</p>
+  <p><em>I want to tell you how this came about,</em> he said. He told it from the beginning and left nothing out, the way he would have read off the changes on a sheet. <em>I was at my window in June and saw that boy&rsquo;s bag go through the wet grass, so I cut the grass. With the grass off I saw the dirt, so I put down sand. In July I saw them sweat, so I put up the fly. Then it rained, and I drew this.</em> He stopped. <em>I ought to say the rest. I called your office about these boys four times last year.</em></p>
+  <p><em>Five,</em> Mr. Aldrich said. <em>I took the calls.</em></p>
+  <p>He had one of the black forks in his hand. He took out his handkerchief, wrapped it over his thumb, and rubbed the back of the handle, slowly, in one place. A spot the size of a dime came up white.</p>
+  <p><em>My mother worked in the case room at Gorham,</em> he said. <em>She sewed the flannel bags the silver went home in. She used to say tarnish isn&rsquo;t dirt. Nobody put it there. It comes out of the air, and the silver takes it up by itself. And she said you never do the chest. You do a piece. She did one every night after supper, and by the time she had got around to the last, the first was wanting it again.</em></p>
+  <p>He rubbed a while longer.</p>
+  <p><em>She took me to hear Billy Sunday in the tabernacle in the fall of 1918, just before the influenza shut it. I was ten years old. I don&rsquo;t recall one word the man said. I recall the whole tabernacle singing this.</em></p>
+  <p>He did not sing it. He said it over, in the voice he used for counting out bundles.</p>
+  <div class="verse">
+    <p>Do not wait until some deed of greatness you may do,<br>Do not wait to shed your light afar;<br>To the many duties ever near you now be true,<br>Brighten the corner where you are.</p>
+    <p>&mdash; Ina Duley Ogdon, &ldquo;Brighten the Corner Where You Are&rdquo; (1913)</p>
+  </div>
+  <p><em>You did your grass in June,</em> Mr. Aldrich said. <em>Then the sand, and the canvas, and now you have a roof. I would say you have been at it since June, Mr. Tefft, a piece at a time, and it wasn&rsquo;t only this corner you were doing.</em> He laid the fork down on the bench with the bright place up. <em>Dennis. Pick up those plates.</em></p>
+</section>
+
+<section>
+  <h2>V. A Piece a Night</h2>
+  <p class="dateline">That evening, and after</p>
+  <p>That night after supper Mr. Tefft spread a newspaper on the kitchen table. There were seventy-two pieces in the chest, a service for twelve in the Chantilly pattern, given in 1929 by Eleanor&rsquo;s people. He took out the fork with the white spot on its handle and did the whole of it with the pink paste and a soft rag, down between the tines. He rinsed it and dried it and laid it back in its slot among the black ones. Then he turned off the light.</p>
+  <p>He did one the next night, and one the night after that.</p>
+  <p>A few days before Thanksgiving he had been once around the chest. He lifted out the first fork to look at it, and there was a yellow cast coming in the bowl of the tines. He was not surprised. He set it on the newspaper and reached for the rag.</p>
+  <p>By then it was full dark at five. He stood at the window in his bathrobe with the night&rsquo;s piece drying on a dish towel behind him. The green wagon stopped under the streetlight. Seven bundles went onto the lower bench one after another, and the wagon pulled away. Then the boys came in on their bicycles out of four streets, and dropped the bicycles on the sand, and stood at the two benches under the roof with their elbows at the right height, folding.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Let a wise man blow off the impurities of his self, as a smith blows off the impurities of silver one by one, little by little, and from time to time.<cite>Dhammapada 239, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary a brahmin of S&#257;vatth&#299; stands each morning at the place outside the city where the bhikkhus put on their robes before going in for alms. He sees a robe drag through dewy grass, and the next day clears the grass with a mattock. He sees a robe trail in the dust, and spreads sand. On a hot morning he sees them sweat, and puts up a pavilion; on a wet one he sees their robes rained on, and builds a hall. At the feast for its completion he takes the Buddha&rsquo;s bowl and tells him the whole thing from the beginning, and the Buddha answers that a wise man removes his own stains just so, little by little and moment by moment, as a smith does with silver. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-02.htm">the full commentary story</a>.</p>
+    <h3>Cranston, 1966</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Cranston,_Rhode_Island">Cranston</a> lies just south and west of Providence, and by the 1960s much of it was streets of postwar houses. The morning <a href="https://en.wikipedia.org/wiki/The_Providence_Journal"><em>Providence Journal</em></a> and its afternoon sister, the <em>Evening Bulletin</em>, were carried house to house by boys, as papers were all over the country: a district man dropped wired bundles at a corner before dawn, and the <a href="https://en.wikipedia.org/wiki/Paperboy">carriers</a> folded them, bagged them and rode their routes before school. Mr. Tefft&rsquo;s trade was mechanical drawing by hand, and a checker was the senior draftsman who went over every sheet before it left the room. His employer, the machine-tool and measuring-instrument maker <a href="https://en.wikipedia.org/wiki/Brown_%26_Sharpe">Brown &amp; Sharpe</a>, left its old Providence works for North Kingstown in 1964. Larkspur Road, Wheelock Avenue and the people on them are invented. Coffee milk is what Rhode Island children drink.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Gorham_Manufacturing_Company">Gorham Manufacturing Company</a> made silver in Providence from 1831, and from 1890 in a great works in the Elmwood neighborhood, not far from Cranston. Its Chantilly flatware pattern dates from 1895. Women there worked in the case room, among other departments, sewing the linings of presentation cases and the flannel bags that kept silver from the air. The evangelist <a href="https://en.wikipedia.org/wiki/Billy_Sunday">Billy Sunday</a> held some seventy meetings in a wooden tabernacle in Providence in September and October 1918, until the city closed public gatherings on account of the influenza. &ldquo;<a href="https://hymnary.org/text/do_not_wait_until_some_deed_of_greatness">Brighten the Corner Where You Are</a>,&rdquo; with words by Ina Duley Ogdon and music by Charles H. Gabriel, was published in 1913 and became the theme song of his campaigns under his song leader <a href="https://en.wikipedia.org/wiki/Homer_Rodeheaver">Homer Rodeheaver</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a certain brahmin from the Dhammapada commentary (verse 239). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-02.htm">The original</a>. Verse from the hymn &ldquo;Brighten the Corner Where You Are&rdquo; by Ina Duley Ogdon (1913). Written by Claude Fable 5.2.
+  <div class="pager"><a href="neats-tongue.html">&larr; Neat’s Tongue</a><a href="index.html">All stories</a><a href="seven-days-on-the-nail.html">Seven Days on the Nail &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, spots = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spot(i, n) {
+    // a place on tarnished silver that a thumb in a handkerchief rubs bright, a stroke at a time
+    var side = Math.random() < 0.5, mx = Math.max(60, (W - 620) / 2);
+    var x = reduce ? (i + 0.5) / n * W : (W > 860 ? (side ? Math.random() * mx : W - Math.random() * mx) : Math.random() * W);
+    return { x: x, y: H * (0.12 + Math.random() * 0.8), r: 20 + Math.random() * 22, ang: -0.9 + Math.random() * 0.5,
+             n: 5 + Math.floor(Math.random() * 4), life: reduce ? 500 : 0, max: 1500 + Math.random() * 900 };
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = spots.length - 1; i >= 0; i--) {
+      var s = spots[i], rub = Math.min(1, s.life / 420), dull = s.life < 700 ? 1 : Math.max(0, 1 - (s.life - 700) / (s.max - 700));
+      var shown = Math.ceil(rub * s.n);
+      ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(s.ang);
+      var g = ctx.createRadialGradient(0, 0, 0, 0, 0, s.r * 1.5);
+      g.addColorStop(0, 'rgba(236,232,220,' + (0.10 * rub * dull) + ')'); g.addColorStop(1, 'rgba(236,232,220,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(0, 0, s.r * 1.5, s.r, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.lineCap = 'round'; ctx.lineWidth = 2.2;
+      for (var k = 0; k < shown; k++) {
+        var yy = (k - (s.n - 1) / 2) * (s.r * 1.5 / s.n), half = s.r * 1.25 * Math.sqrt(Math.max(0.1, 1 - Math.pow(yy / s.r, 2)));
+        var part = (k === shown - 1) ? (rub * s.n - k) : 1;
+        ctx.strokeStyle = 'rgba(240,236,224,' + (0.11 * dull) + ')';
+        ctx.beginPath(); ctx.moveTo(-half, yy); ctx.lineTo(-half + 2 * half * Math.min(1, part), yy); ctx.stroke();
+      }
+      ctx.restore();
+      if (!reduce) { s.life++; if (s.life > s.max) spots.splice(i, 1); }
+    }
+    if (reduce) return;
+    t++; if (t % 260 === 0 && spots.length < 5) spots.push(spot());
+    requestAnimationFrame(draw);
+  }
+  function seed() { spots = []; if (reduce) { for (var i = 0; i < 4; i++) spots.push(spot(i, 4)); } else spots.push(spot()); }
+  size(); seed(); draw();
+  window.addEventListener('resize', function () { size(); seed(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

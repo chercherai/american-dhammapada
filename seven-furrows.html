@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seven Furrows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale gold of ripe wheat at noon, light theme; low in one margin lies a ball of yarn wound of five colors, and now and then its five threads are drawn slowly out across the foot of the page, hold, and are wound back in; datelined sections. */
+  --ground: #efe4c6;
+  --ground-2: #e5d7b0;
+  --paper: #2c2416;
+  --paper-dim: #6f6048;
+  --accent: #9a3b22;
+  --glow: #c9962b;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f4ecd6 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(44,36,22,.16); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance;  }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(229,215,176,.75); border: 1px solid rgba(44,36,22,.16); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(44,36,22,.16); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(44,36,22,.16); border-bottom: 1px solid rgba(44,36,22,.16); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(229,215,176,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 18.10 &middot; Me&#7751;&#7693;aka</span></nav>
+<header>
+  <h1>Seven Furrows</h1>
+  <div class="epigraph">Why do you see the speck that is in your brother&rsquo;s eye, but don&rsquo;t consider the beam that is in your own eye?<br>&mdash; Matthew 7:3</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Now the way I got it,</span> north of the Canadian.</p>
+
+<section>
+  <h2>I. The Cutters</h2>
+  <p class="dateline">Fortune, Ochiltree County, Texas &middot; June 2025</p>
+  <p>The Ensz crew came up out of Oklahoma on a Sunday night with four combines on trailers, two grain carts, six trucks and a cook camper. They had started cutting below Vernon in May and would finish at the Canadian line in September. Nolan Ensz had bossed the outfit since he was twenty-four, the year his father died in the cab. He was thirty-one now and from Inman, Kansas. He had nine hands, and five of them were South African farm boys on summer papers.</p>
+  <p>At supper in Shattuck he had told the crew there were six people north of the Canadian River he meant to see on this trip. He named them. They were R.L. Ramsey and his wife Lily, their son Win and his wife Jessie, a granddaughter called Vi who was seven, and the hired man, Fuller. He had never met any of them.</p>
+  <p>He put the campers in the row of Chinese elms on the east side of Fortune, where cutters had always stopped. By Monday noon R.L. Ramsey knew he was there.</p>
+</section>
+
+<section>
+  <h2>II. The Rams</h2>
+  <p class="dateline">The Ramsey place &middot; the same week</p>
+  <p>Now, as to the name. It was Ramsey before there was anything behind the house, and people say the one came looking for the other.</p>
+  <p>Behind the house are eight acres of bare caliche inside a pipe fence. In it are rams made of gold. They are the size of horses, and some run to the size of a good bull. They go at each other back to back all day and all night, and they have the ground torn up like a feedlot. Two men from Maine walked around among them one summer and came out without much to say.</p>
+  <p>Each ram carries a ball of yarn in its mouth, wound of five colors. When something is wanted on the place, somebody goes out and takes the ball from the mouth of one ram. Then whatever was wanted comes out after it. It may be butter or cooking oil, honey or sorghum, work shirts or quilts, or gold in bars or in coin. It comes until there is enough for everybody from the Rio Grande to the Canadian line, and when the ball is put back it stops. Vi is not allowed in the pen. She has a peacock that follows her as far as the gate and waits.</p>
+  <p>How a family comes by a thing like that is two stories, an old one and a hard one.</p>
+</section>
+
+<section>
+  <h2>III. The Horse Shed</h2>
+  <p class="dateline">The same ground &middot; 1904</p>
+  <p>The first R.L. Ramsey came into that country as a young man. He had an uncle of the same name who was already there. In 1904 the uncle undertook to build the first meeting house on that flat. The nephew went to him and asked to go in on it.</p>
+  <p><em>I would rather not share it,</em> the uncle said. <em>I&rsquo;ll build it by myself.</em></p>
+  <p>So the nephew built across the wagon road from it. A preacher in that day came horseback forty miles, and what the nephew built was a shed for the preacher&rsquo;s horse. He hauled cedar from the breaks for the posts. He turned every post and worked every rafter, and people came from Lipscomb County to look at a horse shed. Under the roof, for the hot months, he made a preaching stand, and on the stand a chair. Under the four legs of the chair he carved four rams lying down. He put two more under the footboard and six on posts in a ring around it.</p>
+  <p>When it was done he held a meeting that ran four months. He fed everybody who came, and on the last day he gave each preacher a suit of clothes, down to the boys who led the singing.</p>
+  <p>That was the old story. The shed went in the fire of 1919, and the family kept one ram for a doorstop.</p>
+</section>
+
+<section>
+  <h2>IV. The Wheat in the Walls</h2>
+  <p class="dateline">The same ground &middot; 1931 to 1935</p>
+  <p>The hard one begins in July of 1931. That was the biggest wheat crop the plains had ever cut. It brought a quarter a bushel at the elevator in Perryton when the elevator would take it at all, and there were piles of it on the ground along the Santa Fe siding.</p>
+  <p>R.L. Ramsey, the nephew&rsquo;s son, was going in to the bank one morning. On the street he met old Krause, who kept the government rain gauge and read the sky for anybody who asked.</p>
+  <p><em>Are you studying the weather, Mr. Krause?</em></p>
+  <p><em>I am. What else have I got to do?</em></p>
+  <p><em>How is the country going to fare?</em></p>
+  <p><em>There&rsquo;s a bad time coming.</em></p>
+  <p><em>What kind?</em></p>
+  <p><em>It will quit raining, and people will go hungry.</em></p>
+  <p><em>When?</em></p>
+  <p><em>Three years.</em></p>
+  <p>R.L. went home and sowed every acre he had. He took what money he had and bought wheat with it, at a quarter and then at twenty cents, from men who thought he had lost his mind and were glad to see him coming. He built granaries of board and tin until there were a hundred and twenty-five of them on the section, in rows like a town. When they were full he filled barrels and lard cans and washtubs. When those were full he dug a pit, lined it with roofing tin, filled it and covered it over. There was wheat left even then. He had it mixed into adobe mud by the wagonload and plastered the house and the barn with it, inside and out, a hand thick.</p>
+  <p>It quit raining. The dust began in 1932. By 1934 the government was buying starved cattle at sixteen dollars a head and shooting them in the draws. R.L. fed his own place out of the granaries, and his hands, and whoever came up the road. The last granary was swept in January of 1935. He called the hands together. There were fourteen of them.</p>
+  <p><em>Go to the mountains,</em> he said. <em>Go to New Mexico or Colorado, or wherever there&rsquo;s water. When there&rsquo;s plenty here again, come back if you want to. If you&rsquo;d rather not, stay where you like.</em></p>
+  <p>They went. One stayed, and that was Fuller. With R.L., his wife Lily, their son Win and Win&rsquo;s wife Jessie, that made five on the place.</p>
+  <p>They ate the barrels and the cans and the tubs. They ate the pit down to the tin. Then they began on the walls. They knocked the plaster off with a hatchet, soaked it in the stock tank and skimmed the wheat as it came loose. They did the barn, and then the house from the outside, and then the house from the inside, a room at a time.</p>
+  <p>On the second Sunday of April, Lily broke out the last of it from behind the cookstove. She soaked it and got a coffee can of wheat. She put that through the coffee mill and had one pound of meal. There were men on the road in those months who had nothing, and she was afraid of them. She put the meal in a lard can, dug a hole in the cellar floor and buried it.</p>
+  <p>R.L. came in at noon from Perryton, where the bank had told him what it had to tell him.</p>
+  <p><em>Lily, I&rsquo;m hungry. Is there anything?</em></p>
+  <p>She did not say there was nothing. <em>There&rsquo;s a pound of meal.</em></p>
+  <p><em>Where?</em></p>
+  <p><em>In the cellar floor. I was afraid of the road.</em></p>
+  <p><em>Dig it up and cook some.</em></p>
+  <p><em>If I make mush of it, it&rsquo;s two meals. If I bake it, it&rsquo;s one. How do you want it?</em></p>
+  <p><em>We&rsquo;ll eat bread and die. Bake it.</em></p>
+  <p>She baked one pan, cut it in five and set R.L.&rsquo;s piece in front of him.</p>
+  <p>There was a man that country knew of and seldom saw. He kept to himself on a mesa out past Tucumcari. He belonged to no church and did not preach. It was said he would sit a week at a time without food or motion, and get up from it as hungry as a man pulled out of a well. He got up that Sunday. He looked the country over, the way he could, and saw a kitchen in Ochiltree County with five people in it and one pan of bread. He wondered if they had it in them. He thought they did. He took his coat and a lard pail and stood at the Ramsey door.</p>
+  <p>R.L. saw him through the screen and was glad. <em>I have come to this because I never gave when I had it,</em> he thought. <em>This piece keeps me till tomorrow. Given, it keeps me longer than I can count.</em> He brought the man in and sat him down, washed his feet in the dishpan and put a stool under them. Then he took his piece and began to break it into the pail.</p>
+  <p>When half was in, the man put his hand over the pail.</p>
+  <p><em>Sir,</em> said R.L., <em>we five had a pound of meal. This is one fifth of what it made, and it won&rsquo;t go in halves. I&rsquo;m not asking you for any good out of it now. I want you to have it all.</em> He put the rest in. Then he said what he wanted.</p>
+  <p><em>Let me never see a time like this again, here or anyplace I come to. Let me have seed wheat for this whole country. Let me not have to scratch for my living. Let me sweep my granaries and wash my head and sit down in the granary door, and when I look up let red wheat come down and fill them. And wherever I come to, let this be my wife, and this my son, and this my son&rsquo;s wife, and this my hired man.</em></p>
+  <p>Lily thought that she could not eat with her husband hungry. She gave hers. <em>Let me never see a time like this again. Let me set one quart pot in front of me and feed this whole country from it, and as long as I keep my seat let it stay full. And let these be mine, the same ones.</em></p>
+  <p>Win gave his. <em>Let me carry one purse with a thousand dollars in it, and pay out to everybody that needs it, and let it stay full. And let these be mine.</em></p>
+  <p>Jessie gave hers. <em>Let me set down one basket of seed wheat and give seed to this whole country, and let it not go down. And let these be mine.</em></p>
+  <p>Fuller gave his. <em>When I plow, let seven furrows open. Three on this side of me, three on that side and one in the middle, every one a full furrow wide.</em> It is held in that country that Fuller could have asked for the bank that day, or for the county, and had it. What he said was, <em>And let these be the people I work for.</em></p>
+  <p><em>Let it be so,</em> the man said to each of them. He said a few words of thanks over the pail. Then it came to him that they ought to have something to look at.</p>
+  <p><em>Watch me until I am home,</em> he said.</p>
+  <p>He went up off the porch to about the height of the windmill and went west. It was the clearest morning of that spring, as everyone who lived through that day remembers. The five of them stood in the yard and watched him across the whole Panhandle to a mesa that cannot be seen from Ochiltree County. They saw him sit down there among five hundred like himself and divide five pieces of bread, and they saw that it went around.</p>
+  <p>After a while Lily went in, washed the pan, laid a dish towel over it and put it up. R.L. lay down on the bed with his boots on and slept.</p>
+  <p>Toward evening the birds came over, going south, and behind them came the thing that gave that Sunday its name. It stood across the whole north, black to the top of the sky, and when it reached the house the day went out. R.L. woke in the dark.</p>
+  <p><em>Lily. I&rsquo;m hungry. Aren&rsquo;t there any burnt crusts left in that pan?</em></p>
+  <p>She knew she had washed it. She did not say there were none. <em>I&rsquo;ll look and tell you,</em> she said.</p>
+  <p>She felt her way to the shelf. The towel had lifted. The pan was full of bread to above the rim, warm, and through all the dust in that kitchen it smelled like rain.</p>
+  <p><em>Get up, R.L.,</em> she said. <em>I washed that pan and put it away. Get up and eat. It pays to do right. It pays to give.</em></p>
+  <p>She fed her husband and her son. When they were done she and Jessie sat down and ate. Then she called Fuller in. For every piece that was lifted out there was a piece in its place.</p>
+  <p>In the morning the dust lay drifted to the windowsills, and every granary on the section was full to the door. R.L. had a notice put in the Perryton paper. <em>Wheat at Ramsey&rsquo;s. Anyone in need of seed, come.</em> They came in trucks and wagons from five states.</p>
+</section>
+
+<section>
+  <h2>V. The Same Five</h2>
+  <p class="dateline">The Ramsey place &middot; 1978 and after</p>
+  <p>There has been an R.L. Ramsey on that ground ever since, with a wife called Lily, a son called Win who marries a Jessie, and a Fuller for a hired man. The family has a photograph from 1936 that visitors take for last year&rsquo;s Christmas card. Nobody in Fortune argues about it.</p>
+  <p>The rams were first seen behind the house in 1978, the week the present R.L. brought home Lily Mooney from Canadian.</p>
+  <p>Some years on he decided to find out what he had. He had the hundred and twenty-five bins swept, steel ones now. He washed his head at the yard hydrant, sat down in the door of the first bin and looked up. Red winter wheat came down out of a clear sky and filled the bin behind him. He did the same at each door.</p>
+  <p><em>Now you all try yours,</em> he said.</p>
+  <p>Lily put on her good dress. She boiled one quart of rice and sat down with it at the cattle guard in a lawn chair, with a gold spoon. <em>Anybody hungry, come on.</em> They came with bowls and buckets and ice chests. She dipped all day, and the pot was as full at dark as at sunup. People who stood close saw a moon in the palm of her right hand and a lily in the palm of her left, and when she slipped her shoes off they saw the same on her feet. The women of that family have held the pot with the left hand and dipped with the right at every church dinner since 1904, and carried the water around.</p>
+  <p>Win washed his head, took a billfold with a thousand dollars in it and stood on the co-op dock. He paid out to everyone who was behind, and when he looked there was a thousand in it. Jessie sat in the yard with a bushel basket of seed wheat and filled every sack that was held out to her.</p>
+  <p>Fuller put on a clean shirt. He hooked a one-bottom lister to the old Farmall, pressed his hand in red barn paint on each fender the way his people had marked the mules, and drove into the west quarter. Seven furrows opened behind one share. There were three on his left and three on his right and one in the middle, and each was as wide as the first.</p>
+  <p>So it was that people in that country got cooked food from that house, and seed, and money, each as much as he had need of.</p>
+</section>
+
+<section>
+  <h2>VI. The Count</h2>
+  <p class="dateline">Fortune &middot; June 2025</p>
+  <p>On Wednesday R.L. Ramsey drove in to see the Kansas boy. He stopped at the co-op first. The domino table was going in the back, as it had every morning since he could remember, and among the eight men at it there were two deacons and an elder.</p>
+  <p><em>Where are you headed, R.L.?</em></p>
+  <p><em>Out to see Ensz.</em></p>
+  <p>Nobody played for a moment.</p>
+  <p><em>You, of all people,</em> said Harlan Teel. <em>You believe a man reaps what he sows. You&rsquo;ve got a hundred and twenty-five bins out there that say so. What do you want with him? He never sowed an acre in his life. He goes up and down this country telling his hands that nobody reaps what they sow. I had it from a man in Follett. He stood in a field of another man&rsquo;s wheat and said it right out.</em></p>
+  <p><em>He&rsquo;s a boy,</em> another said. <em>He thinks because it all runs through his machine it&rsquo;s all one to him.</em></p>
+  <p>R.L. heard them out and went on.</p>
+  <p>Ensz was cutting a half section north of town. He stopped the machine and put R.L. in the buddy seat, and they made a round. Then he climbed down and walked him along the combine from front to back, as he did with every new hand. He showed him the reel and the sickle and the feeder house. He showed him the rotor, the concaves, the sieves and the fan, the clean grain going up to the tank and the straw and chaff going out behind. He did not hurry. After that they sat on the header in the shade, and he talked in the same order. He started with giving, since that was what the man knew. He went from there to keeping your hands clean and your word good, and what comes to a person for that. Then he came to what is wrong with what comes, even the best of it. Last he told him how a thing is set down. It took most of an hour. R.L. had fed that country from his porch for forty years, and he found he had been keeping a count the whole time without knowing he kept it. Somewhere in that hour it stopped. It has not started up since.</p>
+  <p>When he could talk he told Ensz what they were saying at the domino table.</p>
+  <p>Ensz thought about it. <em>I did say that. I said I&rsquo;ve cut wheat for seventeen years and never cut a field I planted. I said nobody in that cab ought to act like he grew it.</em> He got up. <em>Come here.</em></p>
+  <p>He ran the combine fifty yards into the standing wheat and shut the separator off. He took a square of stiff wire from behind the seat, a foot on a side, and went around to the back and threw it on the ground in the chaff. He got down on his knees. R.L. was seventy-one and got down beside him. Ensz parted the chaff inside the wire with two fingers and counted the kernels lying on the dirt.</p>
+  <p><em>Fourteen,</em> he said. <em>Twenty is a bushel an acre going out the back.</em> He sat on his heels.</p>
+  <p><em>From the county road, all anybody sees of a combine is the chaff. A man can sit in the co-op and tell you whose machine is throwing a dirty cloud. What a machine is losing, you only find like this, on your knees behind it. Hardly anybody does it to his own. He would rather keep running and look over the fence.</em> He turned his head. <em>Pieter. What&rsquo;s the one about the speck?</em></p>
+  <p>Pieter was twenty-two and from the Free State. He found it on his phone and read it standing in the stubble.</p>
+  <div class="verse">
+    <p>Why do you see the speck that is in your brother&rsquo;s eye, but don&rsquo;t consider the beam that is in your own eye?</p>
+    <p>You hypocrite! First remove the beam out of your own eye, and then you can see clearly to remove the speck out of your brother&rsquo;s eye.</p>
+    <p>&mdash; Matthew 7:3, 5</p>
+  </div>
+  <p><em>They&rsquo;re only winnowing me,</em> Ensz said. <em>It&rsquo;s light stuff. It blows off.</em></p>
+  <p>R.L. laughed, which he had not expected to do. <em>Harlan Teel reneged on me in 1988,</em> he said, <em>and turned the trick face down before I could see it. He&rsquo;s had his thumb on that domino for thirty-seven years.</em></p>
+  <p>Ensz started the separator. R.L. asked if he could keep the wire, and Ensz said he had another.</p>
+  <p>That evening the five of them and Vi carried supper out to the field, and Lily&rsquo;s pot fed the crew with the rest. In the morning she looked out the kitchen window and saw her husband behind the house. He was on his knees in the caliche, where the rams had been at it all night, with the wire square on the ground in front of him, and he was counting.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The fault of others is easily perceived, but that of oneself is difficult to perceive; a man winnows his neighbour&rsquo;s faults like chaff, but his own fault he hides, as a cheat hides the bad die from the gambler.<cite>Dhammapada 252, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The Buddha, traveling in the country of the A&#7749;guttaras, sees that six people in the town of Bhaddiya are ready to understand him: the rich man Me&#7751;&#7693;aka (&ldquo;Ram&rdquo;), his wife Candapadum&#257; (&ldquo;Moon-Lotus&rdquo;), their son Dhana&ntilde;jaya, his wife Suman&#257;, their small granddaughter Vis&#257;kh&#257;, and the servant Pu&#7751;&#7751;a. The commentary then stops to explain the name. Behind Me&#7751;&#7693;aka&rsquo;s house, golden rams as big as horses butt back to back, and whatever he needs comes out of a ram&rsquo;s mouth when a ball of five-colored thread is removed. Two former lives account for them. In one he was a nephew whose uncle would not let him share in building a Buddha&rsquo;s chamber, so he built an elephant stable opposite it, with a preaching seat resting on golden rams. In the other he was warned of a famine three years off and stored grain in 1,250 granaries, in pits, and even in the plaster of his walls. When all of it was gone, the five who remained on the place each gave their share of the last pound of rice to a solitary Buddha just risen from a week&rsquo;s trance, and each made a wish. His was that his swept granaries would fill when he looked up. His wife&rsquo;s was a pot that never emptied. The son asked for a purse that stayed full, and the daughter-in-law for a basket of seed. The servant asked for seven furrows from one plow, and to keep the same master. The washed pot was found full that evening. Reborn together, the five test their powers and feed the country. When Me&#7751;&#7693;aka sets out to meet the Buddha, teachers of other sects tell him that he, who believes deeds have results, is going to a man who denies it. He goes anyway, and afterward repeats what they said; the verse is the Buddha&rsquo;s reply. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-10.htm">the full commentary story</a>. The granddaughter grew up to be <a href="https://en.wikipedia.org/wiki/Visakha">Vis&#257;kh&#257;</a>, the Buddha&rsquo;s chief laywoman.</p>
+    <h3>Ochiltree County, the Dust Bowl, and the harvest run</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Ochiltree_County,_Texas">Ochiltree County</a> lies on the flat top edge of the Texas Panhandle. Stock farming gave way to wheat there after 1900, and by 1930 the county had almost 210,000 acres in it; the Santa Fe reached the new town of Perryton in 1919. The summer of 1931 brought the southern plains a record crop into a collapsed market. Wheat sold for about a quarter a bushel, less than it cost to raise, the elevators filled, and grain was piled on the ground. Then the rain stopped. In the <a href="https://en.wikipedia.org/wiki/Dust_Bowl">Dust Bowl</a> years that followed, the government bought and destroyed starving cattle, families ate cornbread and beans, and by 1940 the county&rsquo;s wheat acreage had fallen by two thirds. The worst single storm came on <a href="https://en.wikipedia.org/wiki/Black_Sunday_(storm)">Black Sunday</a>, April 14, 1935. It had been a clear day. In the afternoon a wall of dust rolled south across the Oklahoma and Texas panhandles behind flocks of fleeing birds, and turned the day to night. Fortune, the Ramseys, Mr. Krause and the man from the mesa are invented.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Custom_harvesting">Custom harvesters</a>, or cutters, own their combines and follow the ripening wheat north each year, starting in Texas in May and working through Oklahoma, Kansas and the Dakotas toward Canada, cutting for the same farms season after season. The trade grew up during the Second World War and has passed down in families since. Many of the hands now are seasonal workers from abroad, a good number of them from South Africa. Checking a combine&rsquo;s loss is real practice, taught by every state extension service: stop the machine, lay a one-foot square on the ground behind it, and count. About twenty kernels of wheat to the square foot means a bushel an acre left in the field. <a href="https://en.wikipedia.org/wiki/42_(dominoes)">Forty-two</a>, the domino game of Texas, is played with partners and tricks, and a player who fails to follow suit has reneged. The Ensz crew is invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the rich man Me&#7751;&#7693;aka from the Dhammapada commentary (verse 252). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-10.htm">The original</a>. Scripture from the World English Bible. Written by Claude Fable 5.2.
+  <div class="pager"><a href="fire-year.html">&larr; Fire Year</a><a href="index.html">All stories</a><a href="best-construction.html">Best Construction &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0;
+  var COL = ['176,58,46', '201,150,43', '63,107,74', '47,82,128', '243,236,221'];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  // low in one margin a ball of yarn wound of five colors; now and then the five threads are drawn slowly out across the foot of the page, hold, and are wound back
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var CY = 2600, p = reduce ? 0.5 : (t % CY) / CY, out;
+    if (p < 0.4) out = p / 0.4; else if (p < 0.6) out = 1; else if (p < 0.9) out = 1 - (p - 0.6) / 0.3; else out = 0;
+    out = out * out * (3 - 2 * out);
+    var bx = W > 760 ? W * 0.5 + Math.min(W * 0.38, 440) : W * 0.9, by = H * 0.86, r = W > 760 ? 17 : 12;
+    var len = (bx - W * 0.06) * out;
+    for (var i = 0; i < 5; i++) {
+      ctx.strokeStyle = 'rgba(' + COL[i] + ',' + (0.42) + ')';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      var y0 = by + (i - 2) * 1.2;
+      ctx.moveTo(bx - r * 0.6, y0);
+      var steps = 40;
+      for (var s = 1; s <= steps; s++) {
+        var u = s / steps, x = bx - r * 0.6 - len * u;
+        var sag = Math.sin(u * Math.PI) * (10 + i * 5) * out;
+        var wav = reduce ? 0 : Math.sin(u * 9 + t / 70 + i * 1.3) * 1.6 * out;
+        ctx.lineTo(x, y0 + (i - 2) * 7 * u * out + sag + wav);
+      }
+      ctx.stroke();
+    }
+    // the ball: five colored windings over a dim core
+    ctx.fillStyle = 'rgba(92,70,40,.30)';
+    ctx.beginPath(); ctx.arc(bx, by, r, 0, Math.PI * 2); ctx.fill();
+    var rot = reduce ? 0.4 : -out * 5;
+    for (var k = 0; k < 5; k++) {
+      ctx.strokeStyle = 'rgba(' + COL[k] + ',.62)';
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.ellipse(bx, by, r * 0.96, r * (0.28 + k * 0.13), rot + k * 0.63, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

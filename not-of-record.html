@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not of Record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the cream of stenotype paper, light theme; down the right margin a narrow tape climbs a line at a time, a few pale purple letters to a stroke, and now and then stops to wait; datelined sections. */
+  --ground: #f1ecdf;
+  --ground-2: #e6dfcd;
+  --paper: #2a2832;
+  --paper-dim: #6b6675;
+  --accent: #5a468c;
+  --glow: #8f7fc0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f4f0e4 0%, #efe9da 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(42,40,50,0.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(90,70,140,0.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(230,223,205,0.8); border: 1px solid rgba(42,40,50,0.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,40,50,0.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,40,50,0.15); border-bottom: 1px solid rgba(42,40,50,0.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(230,223,205,0.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 19.1 &middot; Vinicchayamah&#257;matta</span></nav>
+<header>
+  <h1>Not of Record</h1>
+  <div class="epigraph">For his duty is, not to make a present of justice, but to give judgment.<br>&mdash; Plato, <em>Apology</em>, tr. Jowett</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As it was given to me,</span> on the square at Pruett.</p>
+
+<section>
+  <h2>I. The Supper</h2>
+  <p class="dateline">Pruett, Kinney County, Illinois &middot; a Tuesday in October 1958</p>
+  <p>Harold Stites kept the books at the Farmers Grain elevator and had kept them fourteen years without an erasure the auditor could find. His wife had signed the two of them up for Great Books at the library in September. She came to the first meeting, on the Declaration of Independence, and said on the way home that she had not known people could talk for two hours about the word <em>self-evident</em>. After that Harold went alone.</p>
+  <p>The group met every other Tuesday at half past seven in the basement room of the Carnegie library, under the steam pipes. There were eleven of them, and each had the set of nine paper-covered books in a cardboard case that came down from the Foundation in Chicago. The second reading was Plato, the <em>Apology</em>. Harold had read it twice at the scale-house desk between trucks. It was bean harvest and the trucks came steadily, and he kept his place with a blank grain ticket.</p>
+  <p>The E.U.B. church on North Chestnut gave its harvest supper that same Tuesday, chicken and noodles over mashed potatoes, a dollar a plate and nothing said if you did not have the dollar. Five of the Great Books people ate there together at the end of a long table. There was Harold. There was Mrs. Rademacher, whose husband had the Buick agency, and Walt Ihnen, who adjusted hail and fire claims for the farm mutual. There was Mr. Venable, who had taught Latin at the high school until the board stopped offering it, and Donna Lutz, a senior, who came because Mr. Venable had told her it would count for something at Urbana. The church women would not let them go without pie. It was ten past seven when they started south toward the library with their books inside their coats, and the rain caught them on the square.</p>
+  <p>It came all at once, the way it will in October after a warm day, loud on the roofs of the parked cars. The library was on the far side of the square. The courthouse stood in the middle of it with its east door open and a light on in the hall, and they ran for that.</p>
+</section>
+
+<section>
+  <h2>II. The Squire&rsquo;s Room</h2>
+  <p class="dateline">The courthouse, ground floor &middot; the same evening</p>
+  <p>The voices came from the end of the east hall. The circuit court sat upstairs, in daylight, under a pressed-tin ceiling, and the county liked to say that Lincoln had tried cases on that ground when the Eighth Circuit came through. The room downstairs was one the supervisors rented for eight dollars a month to Orrin Dace, justice of the peace for Pruett Township. He had been elected three times. By day he kept a notary and collection office over the dime store. On Tuesday nights he held court, and people called him Squire.</p>
+  <p>Two benches for the public stood along the back wall with nobody on them. The five sat down to wait out the rain. Mrs. Rademacher shook her scarf. Donna Lutz opened her Plato.</p>
+  <p>The Squire sat at an oak table with his docket book and a brass inkwell he had no use for, since he wrote with a ballpoint. At a smaller table sat Vern Tolle, who worked for Burkett&rsquo;s Furniture and Appliance, with a stack of contracts and a stack of file cards. Down the side wall, on folding chairs, sat fourteen or fifteen people in work clothes and church clothes. Each of them held the paper the constable had brought to the door.</p>
+  <p><em>Burkett against Doyle Capps,</em> the Squire said.</p>
+  <p>A man stood up. Harold knew him by sight. He hauled corn to the elevator for his father-in-law in the fall, and the rest of the year he built tractors in Peoria, or had until March.</p>
+  <p>Vern Tolle read from a card. One Philco television, twenty-one inch, console. Contract price two hundred sixty-nine ninety-five. Payments missed, August and September. Balance owing, thirty-one dollars. The plaintiff asked possession of the set.</p>
+  <p><em>That right, Doyle?</em></p>
+  <p><em>I&rsquo;m behind,</em> Capps said. <em>I been laid off since March. I paid the August one, though. I paid it at the store, to the girl. I&rsquo;ve got the</em></p>
+  <p><em>You can take that up with Mr. Burkett. Judgment for the plaintiff, possession and costs.</em> The Squire wrote in the book. <em>Costs are seven-eighty. The constable will be out tonight. Burkett against Pease.</em></p>
+  <p>Harold looked at the clock over the door when Mrs. Pease stood up and again when she sat down. It had taken a minute and a half. A wringer washer, ninety dollars paid on a hundred and nineteen, a husband buried in June. She had begun to tell what the man at the store had promised her at the funeral, and she got as far as his name.</p>
+  <p>Harold was a bookkeeper and could not sit in a room where figures were read aloud without keeping them. He took the grain ticket out of his Plato and wrote on the back. By the time the rain let up he had eleven names down the left side, and beside each one what had been paid in and what was owed. Eleven cases in thirty-eight minutes. Eleven judgments for the plaintiff. Nobody had been asked a second question. Through the hall window that gave on the alley he could see Burkett&rsquo;s truck with its motor running and the constable in the cab beside the driver.</p>
+  <p>At ten minutes to eight the Squire said they would take five. Vern Tolle went up to the oak table and counted bills onto the blotter, so much a case, the filing fees. That much was the law. A justice drew no salary. He lived on his fees, and his fees came from whoever brought him the business. Then Tolle took a ten out of his shirt pocket, folded once, lifted the brass inkwell, and set it down again on top of the bill. The Squire was looking at his docket. He did not look up, and he said nothing. A moment later he squared the book on the table, and there was nothing under the inkwell.</p>
+  <p>Walt Ihnen had seen it too. Harold could tell by how still he sat.</p>
+  <p><em>I voted for that man,</em> Mrs. Rademacher said on the courthouse steps. <em>Twice. Clarence put his card in the showroom window.</em></p>
+  <p><em>I had always supposed,</em> Mr. Venable said, and left it there. Halfway across the wet street he said there was a fable, he could not think where he had it from, some man who had worked on a railroad out West, about a fox asked to divide a fish between two otters. The fox gave one the head and one the tail and kept the middle for the court.</p>
+</section>
+
+<section>
+  <h2>III. The Second Reading</h2>
+  <p class="dateline">The Carnegie library, basement room &middot; eight o&rsquo;clock</p>
+  <p>Miss Verna Coyle had started without them. She was the official reporter of the circuit court and had been for twenty-two years, under three judges. She led the Great Books the way the Foundation trained its leaders to. The leader asks questions. She does not answer them, and she does not say what she thinks. People who had known Verna Coyle since grade school said the training could not have cost her much effort.</p>
+  <p>She looked at the five wet coats and then at the clock, and asked the only question she asked that night that was not about Plato.</p>
+  <p><em>Where have you been?</em></p>
+  <p>They told her, all five at once, and then Harold alone, from his ticket. She listened the way she listened upstairs, except that her hands lay still. When he was through she asked three things.</p>
+  <p><em>How long did each one take?</em></p>
+  <p><em>A minute and a half. Two.</em></p>
+  <p><em>Did the Squire ask any of them what they had to say?</em></p>
+  <p><em>He asked was it right. Then he stopped them.</em></p>
+  <p><em>Did anybody take it down?</em></p>
+  <p>Nobody had. A justice&rsquo;s court was not a court of record. There was the docket book, with the name and the judgment and the costs, and that was all there would ever be of Doyle Capps and his August payment.</p>
+  <p>Miss Coyle opened her paper Plato. <em>Mr. Stites, will you read where Socrates has been found guilty and speaks about the time.</em></p>
+  <div class="verse">
+    <p>&hellip;the time has been too short; if there were a law at Athens, as there is in other cities, that a capital cause should not be decided in one day, then I believe that I should have convinced you. But I cannot in a moment refute great slanders&hellip;</p>
+    <p>&mdash; Plato, <em>Apology</em>, tr. Jowett</p>
+  </div>
+  <p><em>Why does he say the time was too short?</em></p>
+  <p>Nobody answered right away, which was allowed. Donna Lutz said it was because they had it settled before he opened his mouth. Walt Ihnen said you could not adjust a hail claim from the road. You had to walk out into the man&rsquo;s field, and then, if you were any good, you walked his neighbor&rsquo;s.</p>
+  <p><em>And where he speaks of what a judge is for. Mrs. Rademacher.</em></p>
+  <div class="verse">
+    <p>For his duty is, not to make a present of justice, but to give judgment; and he has sworn that he will judge according to the laws, and not according to his own good pleasure&hellip;</p>
+    <p>&mdash; Plato, <em>Apology</em>, tr. Jowett</p>
+  </div>
+  <p><em>What is a present of justice?</em> Miss Coyle asked.</p>
+  <p><em>A ten-dollar bill under an inkwell,</em> Walt said.</p>
+  <p><em>Is it only that?</em></p>
+  <p>Harold looked at his ticket. He said that as near as he could figure, the present had been made before the ten ever came out of the pocket. It was made when the man said <em>I&rsquo;ve got the</em> and did not get to say what he had.</p>
+  <p>It was the best thing he said all that year, and Miss Coyle did not tell him so. She went against her training once that night, at the end, when they were stacking the chairs. She said that for twenty-two years the county had paid her to do one thing, which was to get down what both sides said, all of it, no faster than they said it. She said she had noticed that a judge hears a case differently when he knows it is going down. Then she asked Mr. Venable to get the lights.</p>
+</section>
+
+<section>
+  <h2>IV. The Tape</h2>
+  <p class="dateline">The Squire&rsquo;s room &middot; the Tuesday following, and after</p>
+  <p>The next Tuesday was not a Great Books night. Harold went to the courthouse anyway. Walt Ihnen was on the back bench ahead of him, and Mrs. Rademacher, and Donna Lutz with her mother.</p>
+  <p>At seven Miss Coyle came down the east hall carrying her Stenotype in its case. She stood the tripod beside the radiator, where she could see the Squire&rsquo;s mouth and the folding chairs both. She fed in a fresh pack of paper and sat down with her fingers on the keys.</p>
+  <p>The Squire looked at her for some time. <em>Verna. This is not a court of record.</em></p>
+  <p><em>No,</em> she said.</p>
+  <p><em>Who is paying you?</em></p>
+  <p><em>Nobody.</em></p>
+  <p>He could not think of a statute against it, and the room was public. <em>Burkett against Emery,</em> he said. The machine made its small sound, hardly more than a knuckle on a table, and the paper moved up one line.</p>
+  <p>It moved up a line for everything. It moved when Vern Tolle read his card and when the Squire said <em>That right?</em> and when Mr. Emery said he was behind. When Mr. Emery stopped, it stopped, and the whole room could hear it waiting. The Squire heard it.</p>
+  <p><em>Go on,</em> he said. <em>If you have something to say, say it.</em></p>
+  <p>Emery said the freezer had quit in July with half a hog in it and the store never sent anybody, and that was when he quit paying. The machine took that down. The Squire asked Vern Tolle whether it was so. Vern Tolle did not have a card for it.</p>
+  <p>They got through four cases by nine o&rsquo;clock. One of them the Squire put over two weeks so a woman could bring in her receipts, and nobody in the room could remember him putting a case over for a defendant before. Burkett&rsquo;s truck stood in the alley a long while with its motor running, and then somebody shut it off.</p>
+  <p>She came every Tuesday after that. The amendment that would have done away with the squires&rsquo; courts lost that November, though nearly two of every three who marked the question marked it yes. It passed four years later, and on the first of January 1964 there were no more justices&rsquo; courts in Illinois. That made better than five years of Tuesdays. Doyle Capps never got his set back. His time to appeal ran out before anyone thought to tell him there was such a thing, and the group took up a collection, which Harold kept the account of.</p>
+  <p>Nobody ever asked for a transcript. Nobody could have read the tapes but Miss Coyle, since a reporter&rsquo;s notes are in the machine&rsquo;s shorthand with her own short forms laid over it. She folded each night&rsquo;s paper, put a rubber band around it, and wrote the date on the edge in pencil. The courthouse had no place to file the record of a court that kept none. So she carried the packs across the square, and the librarian gave her an empty shelf in the basement room.</p>
+  <p>Harold counted them once, the winter the squires&rsquo; courts ended, while he waited for the others to come down the stairs. Two hundred and fifty-one packs, each about the size of a pound of butter, each with its date. He took one down and let out a little of it. Three or four pale purple letters to a line, a line for every stroke, on down the narrow paper. He could not make out one word. He folded it back the way she had and put it in its place.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">A man is not just if he carries a matter by violence; no, he who distinguishes both right and wrong, who is learned and leads others, not by violence, but by law and equity, and who is guarded by the law and intelligent, he is called just.<cite>Dhammapada 256, 257, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is one of the shortest. Bhikkhus coming back through S&#257;vatth&#299; from their almsround are caught by rain and shelter in a hall of justice, where they watch the ministers take bribes and strip lawful owners of their property. They tell the Buddha, who answers that a man who settles a case in haste (the P&#257;li <em>sahas&#257;</em> means both rashly and by force) does not stand by the Dhamma; the one who weighs both sides and leads others without haste, by what is right, is its guardian. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-01.htm">the full commentary story</a>.</p>
+    <h3>Downstate Illinois, 1958</h3>
+    <p>Until 1964 the lowest courts in Illinois were those of <a href="https://en.wikipedia.org/wiki/Justice_of_the_peace">justices of the peace</a> and police magistrates: elected, usually not lawyers, usually holding another job, and paid by the fees of the cases brought before them. Theirs were not courts of record, so an appeal meant a whole new trial in a higher court. Critics said for decades that a judge who lives on fees leans toward the party who brings him business. A new judicial article that would have folded these courts into the circuit courts went to the voters on November 4, 1958; it drew about 64 percent of the votes cast on the question and still failed to meet the constitutional threshold. A second version passed in 1962 and took effect on January 1, 1964. The Illinois courts tell the story <a href="https://www.illinoiscourts.gov/News/473/Illinois-Supreme-Court-History-1958-Judicial-Article/news-detail/">here</a>. Pruett, Kinney County, Squire Dace and his Tuesday docket are invented; the Eighth Judicial Circuit that Lincoln rode as a lawyer in the 1840s and 1850s was real. The year is that of the <a href="https://en.wikipedia.org/wiki/Recession_of_1958">1958 recession</a>, when layoffs in the Midwest&rsquo;s factories left many families behind on installment contracts.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Great_Books_Foundation">Great Books Foundation</a> was set up in Chicago in 1947 by Robert Maynard Hutchins and Mortimer Adler, and through the 1950s its discussion groups met every other week in public libraries across the country. Lay leaders were trained to ask questions and keep their own opinions out of it. The first-year course of that decade opened with the Declaration of Independence and went on to Plato&rsquo;s <em>Apology</em> and <em>Crito</em>. The passages here are from Benjamin Jowett&rsquo;s translation. The harvest supper is at a church of the <a href="https://en.wikipedia.org/wiki/Evangelical_United_Brethren_Church">Evangelical United Brethren</a>, a denomination that existed from 1946 until it merged into the United Methodist Church in 1968. Miss Coyle&rsquo;s machine is the <a href="https://en.wikipedia.org/wiki/Stenotype">stenotype</a>, which prints a few letters per stroke on a narrow folding tape.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the ministers of justice from the Dhammapada commentary (verses 256 and 257). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-01.htm">The original</a>. Scripture from Plato&rsquo;s <em>Apology</em> in the translation of Benjamin Jowett. Written by Claude Fable 5.2.
+  <div class="pager"><a href="best-construction.html">&larr; Best Construction</a><a href="index.html">All stories</a><a href="the-votum.html">The Votum &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var KEYS = 'STKPWHRAO*EUFRPBLGTSDZ', W, H, lines = [], off = 0, wait = 0, LH = 15, TW = 74;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function stroke() {
+    // one stenotype stroke: a few keys, each printed in its own fixed column
+    var s = [], n = 1 + Math.floor(Math.random() * 4), start = Math.floor(Math.random() * 14);
+    for (var i = 0; i < KEYS.length; i++) s.push(' ');
+    for (var j = 0; j < n; j++) { var k = Math.min(KEYS.length - 1, start + j * (1 + Math.floor(Math.random() * 3))); s[k] = KEYS[k]; }
+    return s;
+  }
+  function fill() { lines = []; for (var i = 0; i < Math.ceil(H / LH) + 2; i++) lines.push(stroke()); }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var wide = W > 860, x0 = wide ? Math.min(W - TW - 28, W / 2 + 330) : W - TW - 6, a = wide ? 1 : 0.45;
+    ctx.fillStyle = 'rgba(255,253,246,' + (0.55 * a) + ')';
+    ctx.fillRect(x0, 0, TW, H);
+    ctx.fillStyle = 'rgba(60,50,90,' + (0.07 * a) + ')';
+    ctx.fillRect(x0 - 1, 0, 1, H); ctx.fillRect(x0 + TW, 0, 1, H);
+    ctx.font = '9px ui-monospace, Menlo, Consolas, monospace';
+    ctx.fillStyle = 'rgba(96,74,150,' + (0.34 * a) + ')';
+    for (var i = 0; i < lines.length; i++) {
+      var y = H - i * LH + off - 4, L = lines[i];
+      for (var k = 0; k < L.length; k++) if (L[k] !== ' ') ctx.fillText(L[k], x0 + 5 + k * 3.0, y);
+    }
+    if (reduce) return;
+    // the paper moves up one line per stroke, and waits when nobody is speaking
+    if (wait > 0) { wait--; }
+    else {
+      off -= 1.5;
+      if (off <= -LH) { off = 0; lines.unshift(stroke()); lines.pop(); wait = Math.random() < 0.12 ? 160 + Math.random() * 260 : 14 + Math.random() * 40; }
+    }
+    requestAnimationFrame(draw);
+  }
+  size(); fill(); draw();
+  window.addEventListener('resize', function () { size(); fill(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

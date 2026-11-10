@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Partition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a banquet room after the lights go down, dark theme; along the foot of the page lies the plat of a desert subdivision, and now and then one lot is marked taken in turquoise, holds, and goes back to open ground; datelined sections. */
+  --ground: #141a24;
+  --ground-2: #1c2431;
+  --paper: #e6e0d2;
+  --paper-dim: #a39c8c;
+  --accent: #d6aa6e;
+  --glow: #6ec4be;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #2a2620 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,224,210,0.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(214,170,110,.2); }
+.epigraph { border-left: 1px solid rgba(214,170,110,0.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(28,36,49,0.8); border: 1px solid rgba(230,224,210,0.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,224,210,0.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(230,224,210,0.15); border-bottom: 1px solid rgba(230,224,210,0.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(28,36,49,0.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 25.5 &middot; Vipakkhasevakabhikkhu</span></nav>
+<header>
+  <h1>The Partition</h1>
+  <div class="epigraph">A small thing that the righteous hath, * is better than great riches of the ungodly.<br>&mdash; Psalm 37:16, Book of Common Prayer (1928)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how it went around,</span> at Twelve Corners.</p>
+
+<section>
+  <h2>I. The Plaza</h2>
+  <p class="dateline">Brighton, New York &middot; Monday, January 25, 1971</p>
+  <p>Russ Hoyt ate his lunch in the car that day because he had shown the Bonesteel house at eleven and was showing it again at one, and there was no sense driving back to the office in between. He parked in the plaza lot at Twelve Corners with the heater running and unfolded the waxed paper on his knee. Liverwurst on rye, an apple, two of Jean&rsquo;s molasses cookies. He had sold houses for Thayer &amp; Son for eight years, on a draw of a hundred and twenty-five dollars a week against commission. He had closed one sale since Thanksgiving.</p>
+  <p>A bronze Toronado pulled in nose to nose with his Rambler and Gary Spangler got out of it in a camel coat.</p>
+  <p>Gary had sat at the next desk for six of the eight years. In October Don Voss had walked out of Thayer&rsquo;s and taken four of the seven salesmen with him, and Gary was one of the four. Voss had been the best producer the firm ever had. He had gone in to Mr. Thayer after Labor Day and said that Mr. Thayer was sixty-one and ought to keep the insurance side and the name on the window and let a younger man run the selling the way selling was run now. Mr. Thayer had said no. That was all anybody at the front of the office heard of it.</p>
+  <p>Gary got in on the passenger side and looked at the sandwich.</p>
+  <p><em>Where&rsquo;ve you been?</em></p>
+  <p><em>The Bonesteel house. Second time for the same people.</em></p>
+  <p><em>You getting anything to eat over there?</em></p>
+  <p>Russ held up the half he had left.</p>
+  <p><em>Come out to the Coachlight tonight,</em> Gary said. <em>Prime rib. Every night this week, and Don buys. A full table closes better than a table with a hole in it, so we want the chairs filled. You wouldn&rsquo;t sell anything. You&rsquo;d eat.</em></p>
+  <p><em>I don&rsquo;t know about what you fellows are doing, Gary.</em></p>
+  <p><em>Nobody&rsquo;s asking you to know about it. Seven o&rsquo;clock. Wear the blue suit.</em></p>
+</section>
+
+<section>
+  <h2>II. The Coachlight</h2>
+  <p class="dateline">West Henrietta Road &middot; Monday through Thursday</p>
+  <p>The land was called Ocotillo Mesa Estates and it was in New Mexico. Voss had the franchise for it from Syracuse to Buffalo. The invitations went out by mail, engraved, to lists he bought: men between forty-five and sixty with the house paid for, and above all Kodak men, because the company paid its wage dividend in March and every man in the plant had known since Christmas about what his would be.</p>
+  <p>There were twelve round tables in the banquet room of the Coachlight Inn, and at each one sat three couples and a closer. At Gary&rsquo;s table there were three couples, Gary, and Russ. A Manhattan came first. Then the prime rib, an inch thick and hanging over the plate, with a baked potato in foil and sour cream in a paper cup, and afterward a parfait in a tall glass. Russ ate all of it. He had not had beef like that since his wedding.</p>
+  <p>When the plates were cleared the lights went down for the film. It ran twenty-two minutes in color. A man in a yellow shirt drove a golf ball toward a mountain. A woman his age came up out of a swimming pool, laughing. There was a horse. Out the banquet room windows the snow was coming sideways off the lake across the parking lot, as it had been since the second week of November, and when the lights came up nobody in the room looked at the windows.</p>
+  <p>Then each closer opened a plat book on the tablecloth. A half-acre lot was two thousand nine hundred and ninety-five dollars, two ninety-five down and thirty-four fifty a month. The government made the company hand out a gray pamphlet called a property report. Gary slid one to each husband with the plat on top of it and a pen beside it. <em>That&rsquo;s a receipt Washington wants,</em> he said. <em>Sign where the X is.</em> Every few minutes Voss called out from the microphone at the front. <em>Hold lot fourteen, block nine!</em> And a minute after that, <em>Lot fourteen is gone, folks.</em></p>
+  <p><em>Russ here sells houses in Brighton,</em> Gary said to the table. <em>Russ, what does land do?</em></p>
+  <p><em>Generally it goes up,</em> Russ said.</p>
+  <p>That was true in Brighton. It was the only thing he said about land at the Coachlight, and he said it once a night for four nights.</p>
+  <p>Afterward the closers went into the bar, and Voss stood the drinks, and Russ went with them because his coat was on the same rack. He had a second Manhattan and listened. It was shop talk, and it was nearly enough his own shop that he followed all of it.</p>
+  <p><em>You never let him carry the report home,</em> a closer from Batavia said. <em>A man who reads is a man who doesn&rsquo;t buy.</em></p>
+  <p><em>Get the wife to choose the lot,</em> Gary said. <em>Once she&rsquo;s put her finger on one it&rsquo;s hers. Then if he wants to sleep on it, he&rsquo;s the one taking it away from her. You shut the book, you say that&rsquo;s fine, and you look at her like he hit her.</em></p>
+  <p>Voss put it shortest. He stood at the end of the bar with his back to the snow.</p>
+  <p><em>Don&rsquo;t feel sorry for them. Sorry is an expensive habit. Every one of those people drove out here in a paid-for car to eat my roast beef for nothing. They came to take something off me. You go take something off them first.</em></p>
+  <p>Russ laughed when the others did. On Tuesday he came back, and on Wednesday. Jean packed his lunch the same as always, and he ate that too.</p>
+  <p>On Thursday the third couple at Gary&rsquo;s table were the Kimballs, from Antlers Drive. Art Kimball had thirty-one years in at Kodak Park. Thayer&rsquo;s had written the insurance on his house since before the war. Mrs. Kimball looked across the centerpiece and knew Russ at once.</p>
+  <p><em>Why, Art, it&rsquo;s Mr. Thayer&rsquo;s young man. Then it must be all right.</em></p>
+  <p>Russ cut his meat. Kimball said he would want to sleep on it. Gary shut the plat book and said that was fine, and turned and looked at Mrs. Kimball. Kimball took out his checkbook.</p>
+</section>
+
+<section>
+  <h2>III. The Telephone</h2>
+  <p class="dateline">Thayer &amp; Son, Monroe Avenue &middot; Friday morning</p>
+  <p>Mrs. Bonesteel telephoned at half past nine. She was seventy-four and had been a widow since August. The couple who had seen the house twice had offered two thousand under what she asked, and she wanted to know from Russ whether she ought to wait for spring.</p>
+  <p>He meant to tell her what he would have told her any other week. What he said, tilted back in his chair with the cord across his chest, was that he had another party very much interested in a house on Elmwood, and that these people would not wait on her, and what did she suppose Mr. Bonesteel would have wanted her to do? There was a silence on the line. Then she said in a smaller voice that she supposed she had better sign.</p>
+  <p>He hung up pleased. A minute or so later he was less pleased, and could not have said why. There was no other party on Elmwood.</p>
+  <p>Miss Fitch sat at the front desk, eleven feet off. She had kept the books and the telephone at Thayer&rsquo;s for thirty-four years, and she heard everything said in that room whether she cared to or not. She had already taken one call that morning, from Mrs. Arthur Kimball, who wanted to ask in confidence whether Mr. Thayer had gone in with Mr. Voss on the New Mexico property, seeing that Mr. Hoyt had been at the table when Art signed. Miss Fitch finished the line she was typing. Then she went into Mr. Thayer&rsquo;s office and shut the door.</p>
+</section>
+
+<section>
+  <h2>IV. Babyface</h2>
+  <p class="dateline">Mr. Thayer&rsquo;s office &middot; five o&rsquo;clock</p>
+  <p>Lyman Thayer was the Son on the window. He was a lay reader at his church and had read the lessons there for thirty years in a voice that never rose, and people who bought houses from him sometimes said afterward that they could not remember his having sold them anything. Each day at five, when the telephones stopped, he took a Prayer Book out of the top drawer and read the psalms for the evening at his desk. The book was open in front of him when Russ came in.</p>
+  <p><em>Sit down, Russell. I am told you have been eating with Don Voss&rsquo;s people. Is that so?</em></p>
+  <p><em>Yes, sir. Four nights. Gary Spangler asked me. He&rsquo;s a friend of mine.</em> Russ had spent the afternoon getting it ready. <em>I don&rsquo;t hold with what they&rsquo;re doing out there, Mr. Thayer. I never sold a lot. I never would. I ate the dinner.</em></p>
+  <p><em>I will grant that you don&rsquo;t hold with it.</em> Mr. Thayer looked at him without any heat. <em>But you go about, Russell, as though you held with whoever you happen to be sitting beside. Mrs. Kimball took it so last night. Mrs. Bonesteel would have taken it so this morning, if she had known who it was she was talking to.</em></p>
+  <p>Russ had nothing ready for that.</p>
+  <p><em>This is the twenty-ninth,</em> Mr. Thayer said. <em>These are the psalms for the twenty-ninth evening. I had read as far as this when you knocked.</em></p>
+  <div class="verse">
+    <p>O let not mine heart be inclined to any evil thing; * let me not be occupied in ungodly works with the men that work wickedness, neither let me eat of such things as please them.</p>
+    <p>&mdash; Psalm 141:4, Book of Common Prayer (1928)</p>
+  </div>
+  <p>He let that stand a while. Then he told about Ed Mahler.</p>
+  <p><em>My father had a salesman in the twenties named Ed Mahler, whom everybody called Babyface. He was the gentlest man who ever sold a house in this county. He would walk a young couple through a place and tell them where the roof was going, and they would buy it from him anyway and send their cousins. In the fall of 1925 my father let the back room to two men up from Miami who were selling lots in Florida off a blueprint. You are too young to remember the Florida business. There was nothing between that room and ours but a beaverboard partition, and Ed&rsquo;s desk stood against it. He heard those two through the wall all day for six weeks. How you get the down payment before the man has seen the ground. How a widow is the best prospect there is, because nobody is going to read the paper for her.</em></p>
+  <p><em>Ed never sold a lot of theirs. He told my father he did not believe a word either of them said. But by Christmas he had talked a streetcar man&rsquo;s widow on Meigs Street out of her house for nine hundred dollars under its worth, to a party he had an arrangement with. When my father asked him about it, he said that was how it was done now. He was short with the girl. He was short with me, and I was sixteen and only swept the place out on Saturdays. He had turned into those two men, and he did not know he had.</em></p>
+  <p><em>What did your father do?</em></p>
+  <p><em>He put the Florida men out on the sidewalk with their blueprint. He did not let Ed go. He moved Ed&rsquo;s desk up to the front, beside Mrs. Garlock, who kept the rent ledgers. She knew every tenant we had and all their children, and who was out of work and who had the croup, and she talked about them from eight until five to anyone within hearing. By the time the lilacs were out he was Babyface again. He sold for us for thirty years more. He never could tell you what had happened to him that winter.</em></p>
+  <p>Mr. Thayer turned the pages of the Prayer Book back toward the front.</p>
+  <p><em>This one belongs to the seventh evening. I do not think it will mind.</em></p>
+  <div class="verse">
+    <p>Fret not thyself because of the ungodly; * neither be thou envious against the evil doers.</p>
+    <p>Put thou thy trust in the L<small>ORD</small>, and be doing good; * dwell in the land, and verily thou shalt be fed.</p>
+    <p>A small thing that the righteous hath, * is better than great riches of the ungodly.</p>
+    <p>&mdash; Psalm 37:1, 3, 16, Book of Common Prayer (1928)</p>
+  </div>
+  <p><em>You will see a star in the middle of every verse,</em> he said. <em>That is where the reader stops for a breath. My father used to say the whole of this business was in the star.</em> He closed the book and put it in the drawer. <em>You have a wife who packs you a lunch, and a desk here, and a hundred and twenty-five a week in the worst month of the year. It is not prime rib. I would not look down on it. Go home, Russell.</em></p>
+</section>
+
+<section>
+  <h2>V. The Front</h2>
+  <p class="dateline">Monroe Avenue &middot; Monday, February 1</p>
+  <p>On Saturday morning Russ drove to Antlers Drive with a gray pamphlet he had carried out of the Coachlight in his coat pocket, and sat in the Kimballs&rsquo; kitchen, and read them the page about water. There was no water. There was no power to the block the plat had shown them, or any date for it. Art Kimball&rsquo;s check had gone to Syracuse in Friday&rsquo;s mail. It took him until June, and a letter from Mr. Thayer&rsquo;s lawyer, to get it back.</p>
+  <p>On Monday Russ telephoned Mrs. Bonesteel before he took off his overshoes. He told her that there had not been any party on Elmwood. He told her the offer she had was a winter offer. If it were his mother&rsquo;s house he would take the sign down and put it up again the second week of May, when the lilac hedge along her drive came out and did the selling for her. She said she was glad, because she had not slept. It put his commission off until summer, if it came to him at all.</p>
+  <p>His desk had been moved over the weekend. Nobody mentioned it. It stood at the front now, at a right angle to Miss Fitch&rsquo;s, near enough that their wastebaskets touched.</p>
+  <p>At noon he unfolded the waxed paper on his blotter. Liverwurst on rye, an apple, two molasses cookies. Miss Fitch was on the telephone with a tenant on Clover Street whose pipes had frozen. She told the tenant that it was the same pipe as last year and the year before, and that the man they wanted was Lou DiNardo and not his brother, and she asked how the mother was getting on with the new hip. Without turning around she tore her slice of date-nut bread in two and put half of it on a napkin at the corner of his blotter.</p>
+  <p>There was no partition at the front. He ate his lunch and heard every word.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Let him not despise what he has received, nor ever envy others: a mendicant who envies others does not obtain peace of mind.<cite>Dhammapada 365, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">A Bhikshu who, though he receives little, does not despise what he has received, even the gods will praise him, if his life is pure, and if he is not slothful.<cite>Dhammapada 366, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary a bhikkhu coming back from his almsround meets a friend who has gone over to <a href="https://en.wikipedia.org/wiki/Devadatta">Devadatta</a>, the cousin who tried to take the Sa&#7749;gha from the Buddha and then split it. The friend asks whether he got anything to eat and says: here we receive rich offerings, stay with us a while. He stays several days. Reported and summoned, he answers that he does not share Devadatta&rsquo;s views, and the Buddha replies that even so he roves about as though he held the views of everyone he meets. The Buddha then tells the birth story of the gentle state elephant Mahil&#257;mukha, &ldquo;Damsel-Face,&rdquo; who overheard burglars talking by his stall night after night, took their talk for instruction and began killing his keepers, and who was cured when good men were set to talk of kindness within his hearing. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-05.htm">the full commentary story</a>.</p>
+    <h3>Rochester, 1971</h3>
+    <p>In the 1960s and early 1970s a handful of companies sold raw desert lots by the tens of thousands in New Mexico, Arizona and Florida to people in the Northeast and Midwest who had never seen them. The standard method was the free dinner: an invitation by mail, a meal at a hotel or restaurant, a color film of the good life in the sun, and a salesman at every table. The best known of these developments was <a href="https://en.wikipedia.org/wiki/Rio_Rancho,_New_Mexico">Rio Rancho</a>, whose developer, the <a href="https://en.wikipedia.org/wiki/Amrep_Corporation">Amrep Corporation</a>, was later convicted of fraud. Congress had answered the trade in 1968 with the <a href="https://en.wikipedia.org/wiki/Interstate_Land_Sales_Full_Disclosure_Act_of_1968">Interstate Land Sales Full Disclosure Act</a>, which required a printed property report to be given to every buyer; salesmen learned to present it as a receipt. Ocotillo Mesa Estates, the Coachlight Inn, Thayer &amp; Son and everyone in them are invented. Mr. Thayer&rsquo;s story of 1925 remembers an earlier round of the same business, the <a href="https://en.wikipedia.org/wiki/Florida_land_boom_of_the_1920s">Florida land boom</a>, when Florida lots were sold sight unseen to northerners.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Brighton,_Monroe_County,_New_York">Brighton</a> is an old suburb on the southeast edge of Rochester; Twelve Corners is its crossroads. Rochester was then a company town for <a href="https://en.wikipedia.org/wiki/Kodak">Eastman Kodak</a>, which since 1912 had paid its workers a yearly &ldquo;wage dividend,&rdquo; known locally as the Kodak bonus and paid in March. The city is also known for the lilacs of Highland Park, which bloom in the middle of May. The psalms are from the Psalter of the 1928 American <a href="https://en.wikipedia.org/wiki/Book_of_Common_Prayer_(1928,_United_States)">Book of Common Prayer</a>, which divides the hundred and fifty psalms over the mornings and evenings of a thirty-day month. Psalm 141 falls on the twenty-ninth evening and Psalm 37 on the seventh. The asterisk in each verse marks the pause for chanting.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the treacherous bhikkhu from the Dhammapada commentary (verses 365 and 366). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-05.htm">The original</a>. Scripture from the Psalter of the Book of Common Prayer (1928). Written by Claude Fable 5.2.
+  <div class="pager"><a href="a-case-of-grapefruit.html">&larr; A Case of Grapefruit</a><a href="index.html">All stories</a><a href="sifted-meal.html">Sifted Meal &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, lots = [], sold = [], t = 0, CW = 46, CH = 30, cols, rows, y0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    cols = Math.ceil(W / CW) + 1; rows = 7; y0 = H - rows * CH - 10;
+    sold = [];
+    if (reduce) for (var i = 0; i < 9; i++) sold.push({ c: (i * 7 + 3) % cols, r: (i * 3 + 1) % rows, life: 300, max: 600 });
+  }
+  function pick() { sold.push({ c: Math.floor(Math.random() * cols), r: Math.floor(Math.random() * rows), life: 0, max: 520 + Math.random() * 500 }); }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // a plat of desert lots along the foot of the page, fading upward; every third line is a road
+    for (var r = 0; r <= rows; r++) {
+      var a = 0.035 + 0.075 * (r / rows);
+      ctx.strokeStyle = 'rgba(214,170,110,' + a + ')'; ctx.lineWidth = (r % 2 === 0) ? 1.4 : 0.6;
+      ctx.beginPath(); ctx.moveTo(0, y0 + r * CH + 0.5); ctx.lineTo(W, y0 + r * CH + 0.5); ctx.stroke();
+    }
+    for (var k = 0; k <= cols; k++) {
+      var g = ctx.createLinearGradient(0, y0, 0, y0 + rows * CH);
+      g.addColorStop(0, 'rgba(214,170,110,0.02)'); g.addColorStop(1, 'rgba(214,170,110,0.10)');
+      ctx.strokeStyle = g; ctx.lineWidth = (k % 6 === 0) ? 1.4 : 0.6;
+      ctx.beginPath(); ctx.moveTo(k * CW + 0.5, y0); ctx.lineTo(k * CW + 0.5, y0 + rows * CH); ctx.stroke();
+    }
+    // now and then a lot is marked taken, holds, and fades back to open ground
+    for (var i = sold.length - 1; i >= 0; i--) {
+      var s = sold[i], p = s.life / s.max, env = Math.min(1, p * 6) * Math.min(1, (1 - p) * 3);
+      var depth = 0.35 + 0.65 * (s.r / rows);
+      ctx.fillStyle = 'rgba(110,196,190,' + (0.16 * env * depth) + ')';
+      ctx.fillRect(s.c * CW + 2, y0 + s.r * CH + 2, CW - 3, CH - 3);
+      if (!reduce) { s.life++; if (s.life > s.max) sold.splice(i, 1); }
+    }
+    if (reduce) return;
+    t++; if (t % 150 === 0 && sold.length < 9) pick();
+    requestAnimationFrame(draw);
+  }
+  size(); if (!reduce) { pick(); pick(); } draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

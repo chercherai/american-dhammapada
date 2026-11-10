@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Gilt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on whitewashed boards in early light, light theme; low in one corner a faint ring is slowly trodden around a stake, the mark going round and round and the oldest prints fading. */
+  --ground: #eee8d8;
+  --ground-2: #e2dac6;
+  --paper: #29251f;
+  --paper-dim: #6b6455;
+  --accent: #9a3d2a;
+  --glow: #b98f3a;
+  --line: rgba(41,37,31,.16);
+  --panel: rgba(255,252,242,.62);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(100deg, rgba(255,246,214,.55) 0%, rgba(255,246,214,0) 38%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 24.2 &middot; S&#363;karapotik&#257;</span></nav>
+<header>
+  <h1>The Gilt</h1>
+  <div class="epigraph">This is repeated over and over, and unless this person can experience an entire psychic change there is very little hope of his recovery.<br>&mdash; &ldquo;The Doctor&rsquo;s Opinion,&rdquo; <em>Alcoholics Anonymous</em> (1939)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it&rsquo;s told in the rooms,</span> in Freeborn County.</p>
+
+<section>
+  <h2>I. The Hog House</h2>
+  <p class="dateline">Freeborn County, Minnesota &middot; August 1965</p>
+  <p>Arnold Enger had the Watkins route in the south half of Freeborn County for thirty-one years. For the house he carried vanilla and black pepper and the red liniment. For the barn he carried stock dip and fly spray and a hog mineral, and so at every place he went to the barn as well as to the kitchen door. That summer he had a boy riding along to carry the case, a nephew of his wife&rsquo;s named Dale, who was fourteen.</p>
+  <p>On a morning in August they pulled into Tollef Sande&rsquo;s yard north of Hayward and nobody came out. The Sandes had gone to a funeral in Blue Earth. Arnold walked back to the hog house to leave a pail of mineral on account.</p>
+  <p>There was a radio going in there. Tollef kept one on a nail over the feed alley, tuned to WCCO, because he held that a gilt farrowed easier with a voice in the building. That was the summer the Twins were in first place, and no barn radio in southern Minnesota got shut off at night.</p>
+  <p>In the end pen were six Chester White gilts, bred for September, on straw that had been clean on Sunday. Five of them were up at the trough. The sixth was standing over a woman.</p>
+  <p>She was a young woman in what had been a yellow dress. She lay on her side in the wet corner where the gilts dunged, with one shoe gone and chaff in her hair. She was alive, because her hand moved. There was a Buick nose-down in the ditch a quarter mile up the road. Dale had seen it from the truck and not known what to say. She had come across a bean field in the dark toward the only light there was, which was the bulb over Tollef Sande&rsquo;s feed alley, and the only voice, which was the ball game.</p>
+  <p>The gilt stood with her front feet square and looked down at the woman. A hog&rsquo;s mouth turns up at the corners to begin with. This was not that, and Arnold Enger, who had looked at hogs all his life, said so until he died. The gilt was smiling. The sun came in low through the east door and lay along her wet snout and the row of her small teeth.</p>
+  <p><em>What are you grinning at?</em> Arnold said to the pig.</p>
+  <p>The woman opened her eyes. She saw the gilt&rsquo;s face over her, close, with the light on it, and she looked at it for some time. Then she got up on her hands and knees, climbed the gate, and walked out past the man and the boy in her one shoe, toward the road. She did not say a word to them.</p>
+  <p><em>Who&rsquo;s that?</em> said Dale.</p>
+  <p><em>That is the Hovey girl,</em> Arnold said.</p>
+</section>
+
+<section>
+  <h2>II. What the Gilt Knew</h2>
+  <p class="dateline">Hegre and Albert Lea &middot; 1938 to 1965</p>
+  <p>In the rooms they tell it that the gilt knew what Arnold knew and the rest besides. This is what there was to know.</p>
+  <p>Glenna Hovey was born in her grandfather&rsquo;s house in Hegre, a town of two hundred then, and the grandfather lost the house. Her folks rented forty acres next to Hegre Lutheran. From the time she was six the hens were her job, and the hens liked the south wall of the church, where the ground was warm. On Tuesdays and Thursdays the confirmation class recited with the windows open. She stood under the sill with a pan of oyster shell and the hens around her feet. She heard twenty voices say a thing together and then ask together, <em>What does this mean?</em> and then say what it meant. She could not have told you a word of it afterward. But the sound of it went into her, and they say it never came out.</p>
+  <p>That life ended overnight, the way it does for a hen when the hawk comes. The landlord&rsquo;s son came home from the service wanting the place, and the Hoveys were out by the first of March, which is the day tenants move in that country.</p>
+  <p>Her father got on at a creamery in Albert Lea. At eighteen she was Dairy Princess of Freeborn County. That was 1956. There was a white dress and a sash, and a rhinestone crown the dairy association kept in a hatbox from one year to the next. She rode a hay wagon in the fair parade and handed down half-pints of milk.</p>
+  <p>On the Saturday of the fair, in that dress, she went into the privy behind the cattle barn. The town had sewer, but there was still a two-holer back there for the stockmen. It was ninety degrees. She looked down, which nobody does, and the lime below was alive, white on white, turning over. Anyone else would have come out gagging. She stood where she was. They say she saw those maggots as plainly as you see your own hand, and went on seeing them, and that everything else in her went quiet. The parade marshal&rsquo;s wife found her twenty minutes later behind the barn with the crown in her hand and a look on her face like a lamp turned low.</p>
+  <p>It lasted five years. She could not explain it and did not try. She went to the teachers college at Mankato and taught the lower grades in a country school near Alden, and all that time nothing stuck to her. She did not want anything. People remembered her from those years as the calmest girl they ever knew, and some of them had found it hard to be around.</p>
+  <p>It was not hers to keep. Nothing had been done about what lay underneath it. In 1961 she married Dick Wendland, whose father had the International Harvester dealership and a house on Fountain Lake with a boathouse. There were highballs on the dock at five o&rsquo;clock. The quiet went out of her the first summer, and what came up in its place came up thirsty. She was in that house fourteen months.</p>
+  <p>After that she was in the straw. They say the gilt saw the hen yard and the crown and the five white years and the boathouse, right down to the yellow dress. She saw the road going on from there too, and that was why she smiled. There was no meanness in it. It was the smile you give a thing you know all the way through.</p>
+  <p>A gilt cannot say what she knows. If that one could have, it would have come out close to what a doctor in New York had written, the year after Glenna Hovey was born, for the front of a book.</p>
+  <div class="verse">
+    <p>After they have succumbed to the desire again, as so many do, and the phenomenon of craving develops, they pass through the well-known stages of a spree, emerging remorseful, with a firm resolution not to drink again. This is repeated over and over, and unless this person can experience an entire psychic change there is very little hope of his recovery.</p>
+    <p>&mdash; &ldquo;The Doctor&rsquo;s Opinion,&rdquo; <em>Alcoholics Anonymous</em> (1939)</p>
+  </div>
+</section>
+
+<section>
+  <h2>III. Geographics</h2>
+  <p class="dateline">Minnesota &middot; 1965 to 1978</p>
+  <p>In the rooms they call it a geographic when you move somewhere to get away from it. She did seven.</p>
+  <p>An aunt took her in at Golden Valley. There was a spare room with a gold chenille spread, and she was kept like company, and she went four months without. Then it was Rochester, where she made beds in a hotel full of people who had come from all over the world to be cured, and she lasted until Christmas.</p>
+  <p>Then Duluth. She kept house for a man who traded horses, out toward Hermantown. He set wire snares for rabbits along his fence. One morning she found a snowshoe hare alive in one. It had run all night at the end of the wire, round the stake, and beaten a ring in the snow as hard and smooth as a dinner plate. She looked at the ring longer than she looked at the hare.</p>
+  <p>Then Two Harbors, with a wheelsman off an ore boat who was gone nine months of the year and whose house was in hearing of the docks. Then St. Paul, where a retired judge on Summit Avenue had senators to dinner. She poured for them and did not spill.</p>
+  <p>Between each of these and the next she was dry a while and sure of herself. The trouble was that it ran everywhere. There was not a town on the map without a place to get it across from the grain elevator. Wherever she set her suitcase down, it had got there ahead of her.</p>
+  <p>The sixth was home. Her mother was dead, and her father had a little house in Hegre again. By the back steps was a box elder he had cut down the year she was Princess, because it dropped bugs in the cistern. It had come up from the stump every spring since. Every May he went at the shoots with a corn knife, and every May there were more of them. By then he was seventy and it was a thicket.</p>
+  <p><em>You&rsquo;d have to get the root,</em> he said each year, and cut it off at the ground.</p>
+  <p>Hegre was going. The school had gone to Alden in the consolidation, the creamery was shut, and the church held service every other Sunday. In 1976 her father gave up the house and went into the Lutheran home in Albert Lea. She took a room nearby and visited.</p>
+  <p>Bud Lindahl found her there. He was an assistant commissioner of agriculture, down from St. Paul on some errand about the county fair, and he had stopped in to see an uncle across the hall. He stood five feet four in his shoes and was the most cheerful man in the Department. He married her in June of 1978 with three hundred at the dinner, and took her to a house in Edina with a lawn that ran down to Minnehaha Creek. That was the seventh.</p>
+</section>
+
+<section>
+  <h2>IV. The Door</h2>
+  <p class="dateline">Edina &middot; May 1980</p>
+  <p>She did not drink in Edina. She did not do much of anything in Edina. There was a cupboard over the refrigerator, and she knew what was in it, and how much was left in each bottle to the half inch.</p>
+  <p>Bud&rsquo;s war was with the creeping charlie. It came up from the creek side and went through his bluegrass like something poured. Every Saturday he went after it on his knees and pulled it up by the yard, like wet string. Wherever a joint of the stem had touched ground it had taken root, and wherever he left a joint behind it started over.</p>
+  <p>On a Saturday in May the doorbell rang. An old man stood on the step in a suit coat, eighty if he was a day, with a boy behind him carrying a black sample case. She had not seen a Watkins man in ten years. He lived with a daughter in Richfield by then and still worked a few streets, because he could not stop.</p>
+  <p>He looked at her through the screen. He did not speak to her. He turned to the boy.</p>
+  <p><em>Well, now, there is a wonderful thing,</em> he said. <em>The girl out of Tollef Sande&rsquo;s hog house, and she&rsquo;s the wife of the assistant commissioner.</em></p>
+  <p>He meant it kindly. He touched his hat and asked whether she was low on vanilla.</p>
+  <p>She did not hear him. She was seeing the gilt. She had not let herself think of that face in fifteen years, and it came back whole, the front feet set square and the light on the teeth and the corners of the mouth. Behind it came everything else, in its order, which she had never once let line up. There were the hens and the window. There was the lime in the privy and five white years. There was the dock, and the straw, and the gold bedspread, and the ring in the snow, and the box elder. She saw that it was one road and that she was still on it. The house in Edina was not the end of it. She saw what came next. She knew what the pig had been smiling at.</p>
+  <p>It frightened her more than anything in her life had, and it was the first fear that was ever any use to her.</p>
+  <p>She bought a bottle of vanilla, holding to the door frame. Then she walked across the lawn to where Bud knelt with his pile of vine.</p>
+  <p><em>I have to go somewhere,</em> she said, <em>and I don&rsquo;t believe I&rsquo;m coming back to this house. Will you let me?</em></p>
+  <p>He sat back on his heels. He looked at her, and then up at the kitchen window, where the cupboard was that he had never mentioned.</p>
+  <p><em>I&rsquo;ll drive you,</em> he said.</p>
+  <p>He drove her to Center City on the Monday in the Oldsmobile and carried her bag in. She did not live in his house again. Neither of them was ever sorry about the other. He sent her a card on that date every year until he died.</p>
+</section>
+
+<section>
+  <h2>V. What Does This Mean</h2>
+  <p class="dateline">Center City, St. Paul and Hegre &middot; 1980 to 1987</p>
+  <p>At the treatment place on the lake the women read the book aloud every morning, around the room, a paragraph apiece. For two weeks she did not take in a word of it.</p>
+  <p>In the third week she was sitting by an open window. The reading came around the room toward her in one woman&rsquo;s voice and then another&rsquo;s, and all at once she was six years old with a pan of oyster shell. It was the same sound, a room full of people saying a thing and then saying what it meant. She had been hearing it through a wall her whole life. This time she was in the room. The woman next to her read.</p>
+  <div class="verse">
+    <p>Selfishness&mdash;self-centeredness! That, we think, is the root of our troubles. Driven by a hundred forms of fear, self-delusion, self-seeking, and self-pity, we step on the toes of our fellows and they retaliate.</p>
+    <p>&mdash; <em>Alcoholics Anonymous</em> (1939), chapter 5</p>
+  </div>
+  <p><em>The root,</em> Glenna said out loud.</p>
+  <p>They let it pass. People said things in that room. But she had the first piece of it, and it did not get away from her again. She thought of her father and his corn knife.</p>
+  <p>She was six years at the rest. There was a halfway house in St. Paul and a job in a school lunchroom, and a meeting every night for the first two years. In the fall of 1986, after the strike at the Hormel plant in Austin had been broken and half of that country was not speaking to the other half, she went home. Her father was dead. She bought the little house in Hegre, where there were forty people left. That October she dug out the box elder by herself with a spade and a mattock. She went down four feet for it and burned the root in the garden.</p>
+  <p>That winter she drove to a book meeting in Albert Lea on Tuesday nights. A man was reading the doctor&rsquo;s letter from the front of the book, and he came to the words <em>an entire psychic change.</em> Glenna, at the far end of the table, looked for the thing in her that had always leaned toward the cupboard. She could not find it. She had had it pushed down before, for years together, and she knew the feel of that. This was something else. There was nothing down there to push on.</p>
+  <p>She sat with her hands flat on the table. Nobody in the room noticed anything, and she did not mention it.</p>
+</section>
+
+<section>
+  <h2>VI. Thirteen</h2>
+  <p class="dateline">Hegre &middot; March 1997</p>
+  <p>She was sober almost seventeen years. She started the Thursday meeting in the basement of Hegre Lutheran, which by then had service once a month, and people drove to it from four counties. She never said much there. When a new woman came down the stairs shaking, Glenna went and sat by her, and that was about all anyone saw her do.</p>
+  <p>By March of 1997 the cancer was in her liver and she weighed ninety pounds. The women met at her house that Thursday afternoon, since she could not go out, and they asked her to tell it, all of it. She told it from her chair, beginning to end. At night she had them carry her over to the church. She sat at the front next to Morris T., who had read the opening of that meeting aloud every Thursday since it began, and the men asked her too. So she told it again.</p>
+  <p><em>I was born in my grandfather&rsquo;s house and we lost it. I was a girl with a pan of oyster shell under that window right there. I was a princess in Albert Lea. I was five years someplace so quiet I can&rsquo;t tell you where it was. I was a rich man&rsquo;s daughter-in-law on Fountain Lake for about a year. I was in the straw with a gilt. Then it was Golden Valley, and Rochester, and Duluth, and Two Harbors, and St. Paul, and my dad&rsquo;s back steps, and Edina. That&rsquo;s thirteen, up and down, and I never got anywhere on any one of them. Then an old man said a thing on my step and I was scared enough, finally, and I came in.</em></p>
+  <p>She rested a minute.</p>
+  <p><em>I&rsquo;m done now. I don&rsquo;t mean sober. I mean it&rsquo;s finished. Don&rsquo;t any of you coast. Keep at it until it&rsquo;s finished.</em></p>
+  <p>They took her home. She died a little before four in her own bed, and it is said in the rooms that there was nothing left over.</p>
+  <p>The church is closed now. The meeting still has the basement on Thursdays, and Morris&rsquo;s grandson reads the opening. The windows down there are at the level of the grass. In warm weather they are propped open with hymnbooks, and anything going by in the yard can hear every word.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">As a tree, even though it has been cut down, is firm so long as its root is safe, and grows again, thus, unless the feeders of thirst are destroyed, the pain (of life) will return again and again.<cite>Dhammapada 338, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He whose thirst running towards pleasure is exceeding strong in the thirty-six channels, the waves will carry away that misguided man, viz. his desires which are set on passion.<cite>Dhammapada 339, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The channels run everywhere, the creeper (of passion) stands sprouting; if you see the creeper springing up, cut its root by means of knowledge.<cite>Dhammapada 340, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">A creature&rsquo;s pleasures are extravagant and luxurious; sunk in lust and looking for pleasure, men undergo (again and again) birth and decay.<cite>Dhammapada 341, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Men, driven on by thirst, run about like a snared hare; held in fetters and bonds, they undergo pain for a long time, again and again.<cite>Dhammapada 342, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Men, driven on by thirst, run about like a snared hare; let therefore the mendicant drive out thirst, by striving after passionlessness for himself.<cite>Dhammapada 343, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>Walking into R&#257;jagaha for alms, the Buddha saw a young sow wallowing in filth and smiled. &#256;nanda asked why. The sow, he said, had once been a hen that lived beside a hall and listened to a monk reciting; from the mere sound she was reborn a princess, Ubbar&#299;. The princess saw a heap of maggots in a privy, held the sight in her mind, and reached the first absorption, and from that was reborn in a Brahm&#257; heaven. Then she fell, to a rich household and then to this sty. Standing in the street he spoke six verses on craving: the cut tree that grows again from its root, the streams that run everywhere, the creeper, the hare in the snare. The sow went on through seven more births, in the Golden Land, at Benares, in a horse dealer&rsquo;s house in one port and a mariner&rsquo;s in another, in a noble house in the capital of Sri Lanka, and at last as Suman&#257;, a villager&rsquo;s daughter whose village emptied out and who married the king&rsquo;s minister. A monk at her door remarked to his companions what a wonder it was that a young sow should be the minister&rsquo;s wife. She remembered everything, was shaken, got her husband&rsquo;s leave, and went forth. She won the first fruit on hearing one discourse recited and arahatship, back in her home village after the war, on hearing another; and on the day she died she told nuns and monks all thirteen of her lives and urged them to keep at the work. Here is <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-02.htm">the full commentary story</a>. In this retelling the one who sees and smiles is the sow, and the thirteen lives are one woman&rsquo;s addresses.</p>
+    <h3>Southern Minnesota, 1956 to 1997</h3>
+    <p>Minnesota has crowned a state dairy princess, <a href="https://en.wikipedia.org/wiki/Princess_Kay_of_the_Milky_Way">Princess Kay of the Milky Way</a>, since 1954, chosen from among county princesses; several early ones came from Freeborn and Mower counties. The J. R. <a href="https://en.wikipedia.org/wiki/Watkins_Incorporated">Watkins</a> company of Winona sold liniment, vanilla, pepper and farm remedies door to door, was the largest direct-sales firm in the world in the 1940s, and went through bankruptcy and a sale in 1978. The <a href="https://en.wikipedia.org/wiki/1965_Minnesota_Twins_season">Twins of 1965</a> took first place on July 1 and kept it, and their games went out over WCCO. A gilt is a young sow that has not yet farrowed, and the <a href="https://en.wikipedia.org/wiki/Chester_White">Chester White</a> is an old American white breed. Tenant farmers in the Corn Belt customarily moved on the first of March. Creeping charlie, or <a href="https://en.wikipedia.org/wiki/Glechoma_hederacea">ground ivy</a>, roots at every joint of its stem, which is why pulling it does not work.</p>
+    <p>The book is <a href="https://en.wikipedia.org/wiki/The_Big_Book_(Alcoholics_Anonymous)"><em>Alcoholics Anonymous</em></a>, first published in 1939; the main text of that first edition is in the public domain in the United States. &ldquo;The Doctor&rsquo;s Opinion&rdquo; at its front was written by William D. Silkworth, a New York physician, who described alcoholism as &ldquo;the phenomenon of craving.&rdquo; <a href="https://en.wikipedia.org/wiki/Hazelden_Foundation">Hazelden</a> opened in a farmhouse at Center City, Minnesota, in 1949, and the treatment approach that grew up there and at Willmar State Hospital spread so widely that the state was called the land of ten thousand treatment centers. &ldquo;Geographic,&rdquo; for a move made to outrun one&rsquo;s drinking, is common talk in A.A. The <a href="https://en.wikipedia.org/wiki/1985%E2%80%931986_Hormel_strike">strike at the Hormel plant</a> in Austin, one county east of Albert Lea, lasted from August 1985 to September 1986, brought out the National Guard, and ended in defeat for the local. Hegre is an invented town, and so are Glenna Hovey, the Sandes, Arnold Enger and Bud Lindahl.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the young sow from the Dhammapada commentary (verses 338&ndash;343). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-02.htm">The original</a>. Quotations from <em>Alcoholics Anonymous</em> (first edition, 1939). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-yellow-cod.html">&larr; The Yellow Cod</a><a href="index.html">All stories</a><a href="cloud-of-witnesses.html">Cloud of Witnesses &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, N = 150, PERIOD = 5200;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var R = 44, cx = W - 96, cy = H - 92;
+    if (W < 560) { cx = W * 0.5; cy = H - 70; R = 34; }
+    var head = reduce ? 1.9 : (t / PERIOD) * Math.PI * 2;
+    ctx.fillStyle = 'rgba(41,37,31,0.30)';
+    ctx.fillRect(cx - 1, cy - 5, 2, 7);
+    ctx.strokeStyle = 'rgba(41,37,31,0.07)'; ctx.lineWidth = 0.6;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(head) * R, cy + Math.sin(head) * R * 0.42); ctx.stroke();
+    for (var i = 0; i < N; i++) {
+      var a = head - i * (Math.PI * 2 / N) * 0.97;
+      var wob = Math.sin(i * 12.9898) * 1.6;
+      var x = cx + Math.cos(a) * (R + wob), y = cy + Math.sin(a) * (R + wob) * 0.42;
+      var al = 0.22 * (1 - i / N) + 0.03;
+      ctx.fillStyle = 'rgba(154,61,42,' + al.toFixed(3) + ')';
+      ctx.beginPath(); ctx.ellipse(x, y, 1.5, 0.9, a, 0, Math.PI * 2); ctx.fill();
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

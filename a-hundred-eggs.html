@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Hundred Eggs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in the dark of a basement grading room; now and then, somewhere in the margin, an egg is held up to a candling lamp and glows, its yolk a soft shadow inside the shell, then is set down; datelined sections. */
+  --ground: #16120e;
+  --ground-2: #211a13;
+  --paper: #ece3d1;
+  --paper-dim: #a99d89;
+  --yolk: #e2a63c;
+  --shell: #f2e6cd;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #2a2016 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(236,227,209,.2); }
+.series a:hover { color: var(--yolk); }
+a:focus-visible { outline: 2px solid var(--yolk); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--yolk); text-wrap: balance; text-shadow: 0 0 30px rgba(226,166,60,.22); }
+.epigraph { border-left: 1px solid rgba(226,166,60,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; color: var(--shell); }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--yolk); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--yolk); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(33,26,19,.8); border: 1px solid rgba(236,227,209,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--yolk); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(236,227,209,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--yolk); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--yolk); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--yolk); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--yolk); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--yolk); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--yolk); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(33,26,19,.8); border-left: 2px solid var(--yolk); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 14.5 &middot; A Discontented Bhikkhu</span></nav>
+<header>
+  <h1>A Hundred Eggs</h1>
+  <div class="epigraph">He that loveth silver shall not be satisfied with silver.<br>&mdash; Ecclesiastes 5:9</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Azoy dertseylt men,</span> on the county line road.</p>
+
+<section>
+  <h2>I. Yoreh De&rsquo;ah</h2>
+  <p class="dateline">Williamsburg and Farmingdale &middot; February 1963</p>
+  <p>Leib Feder had been learning in the kollel at Lakewood for three years when the mashgiach called him in after Maariv and told him to go to Brooklyn for the winter. There was a rav in Williamsburg, an old man from Hungary, who taught the laws a rabbi needs, the laws of what is kosher and what is not, salting and soaking and the lung of an ox, and he took two or three young men a season into his apartment over a fish store on Lee Avenue and drilled them until they could answer a question about a chicken in their sleep. <em>Go,</em> said the mashgiach. <em>Learn it properly. Come back in Nisan with semicha.</em></p>
+  <p>The Rosh Yeshiva had died in November. Twenty-five thousand people had stood in the streets of the Lower East Side for the funeral, and the yeshiva he had brought to the pine woods twenty years before with fifteen students had two hundred and fifty, and nobody yet knew what it would be without him. It seemed a good winter to be sent somewhere and told exactly what to do.</p>
+  <p>So Leib slept on a cot in the rav&rsquo;s front room under a window that smelled of carp, and learned the laws of the lung, and did not go home on Shabbos because the rav did not hold with young men running back and forth. Raizel stayed in Lakewood with the baby and taught first grade. Nobody had a telephone. His mother wrote on Sundays.</p>
+  <p>His father had a chicken farm in Farmingdale, five thousand White Leghorns in a long two-story coop of five hundred birds to a room, which he had bought in 1948 with a mortgage from the Jewish Agricultural Society and his whole savings from twenty years of pressing pants on Pitkin Avenue. After the war eggs had brought ninety cents a dozen. That winter they brought twenty-five. Moshe Feder carried the hundred-pound sacks of Purina up the coop stairs himself, two at a time, because he would not pay a man to do what he could do, and in the second week of February he sat down at the top of the stairs with a sack on his shoulder and did not get up.</p>
+  <p>He lived four days in the hospital in Neptune. He asked for Leib. He asked for him so often that the nurses learned the name. Mendy, who was fifteen, rode the bus to Lakewood to find him and found that he was in Brooklyn, and nobody at the yeshiva could say exactly where, and a letter was sent and went to the wrong fish store. On the fourth day the old man talked to Leib for an hour as though he were sitting beside the bed, about the farm and the price of feed and a boy who had once learned the whole of a tractate by heart before he was bar mitzvah. Then he took an envelope out from under his pillow and put it in Mendy&rsquo;s hand and closed Mendy&rsquo;s fingers on it.</p>
+  <p><em>For Leibel,</em> he said. <em>A Shas and a tallis. The best. Not from the cheap shelf.</em></p>
+  <p>He died that night.</p>
+  <p>The letter found Leib the morning of the funeral, and he came down on the bus in time to stand at the grave with his coat torn. At the shiva in the farmhouse kitchen, with the mirrors covered and the coop still clattering across the yard because the hens did not know, Mendy came in from feeding them with feathers on his sleeves and threw himself down on the linoleum at Leib&rsquo;s feet, on the low stool, and cried with his face against his brother&rsquo;s shoes.</p>
+  <p><em>He talked about you the whole time. The whole time, Leib. He gave me this.</em></p>
+  <p>On the envelope, in their father&rsquo;s Yiddish, was written <em>far Leybl, a shas un a tales</em>. Inside there were eighteen hundred-dollar bills, a hundred times chai, folded once.</p>
+  <p>Leib pushed it back into his brother&rsquo;s hand. <em>I don&rsquo;t need this. Give it to Mama.</em></p>
+  <p>His mother would not take it. It sat on the kitchen windowsill all week, under a jar of pennies, while people came in out of the cold to sit with them.</p>
+</section>
+
+<section>
+  <h2>II. Eighteen Hundred Dollars</h2>
+  <p class="dateline">Lakewood &middot; March and April 1963</p>
+  <p>He did not go back to Williamsburg. The rav sent word that he understood. Leib went back to Lakewood and to the kollel, and to the minyan three times a day to say Kaddish, and for a few weeks he learned as he always had.</p>
+  <p>Then he began to do arithmetic.</p>
+  <p>The farm would have to be sold. His mother could not run it and Mendy was a boy. The agent from the Society had come and walked through the coop with his hands behind his back and said what it would bring, and it was half of what Moshe Feder had paid. All up and down the county the farms were going that way, Toms River and Jackson and Howell, men who had come out of the camps or out of the sweatshops to have a piece of ground and something alive to tend, selling out for what they could get to men who built houses. In Lakewood the great hotels in the pines stood half empty in the winter season, and at the edge of town a sign had gone up for a village for retired people.</p>
+  <p>And Leib thought: I could keep it.</p>
+  <p>He thought it first at night. Then he thought it in the beis medrash, over the open Gemara, with his chavrusa reading aloud across the table. What was he doing here? He was twenty-four years old with a wife and a child. He lived on what the kollel gave, and the kollel lived on what the meshulachim brought back from knocking on doors in Brooklyn and Cleveland and Toronto, hat in hand, with a receipt book. Every slice of bread he ate, some Jew in Flatbush had been asked for at his own front door. What kind of life was that for a man? Whereas eighteen hundred dollars. With eighteen hundred dollars a man could keep a farm going a season. A man could stand on his own feet.</p>
+  <p>He stopped learning. He sat in his place with the Gemara open and turned the pages at about the right speed. He stopped going to the night seder. He said Kaddish in a voice like a man reading a list. He did not sleep, and he did not eat much, and by Pesach his face had gone a color that made Raizel put her hand on his forehead.</p>
+  <p>It was the younger boys who said something first, the unmarried ones at the long tables in the back of the beis medrash, who noticed everything.</p>
+  <p><em>Reb Leib, what&rsquo;s the matter? You look like a lemon.</em></p>
+  <p><em>I&rsquo;m not happy,</em> Leib said. <em>That&rsquo;s all.</em></p>
+  <p>They went and told the mashgiach, and the mashgiach called in Leib&rsquo;s chavrusa, Avrohom Wolpe, and the two of them talked for a long time. Then the mashgiach put on his hat.</p>
+  <p><em>You want to be a chicken farmer,</em> he said to Leib. <em>So we will go and ask a chicken farmer.</em></p>
+</section>
+
+<section>
+  <h2>III. The Grading Room</h2>
+  <p class="dateline">The county line road, Jackson Township &middot; May 1963</p>
+  <p>Reb Zalman Mintz had three thousand Leghorns on twelve acres of sand at the edge of the pines, where the county line road ran toward Freewood Acres, and he brought eggs to the yeshiva kitchen every Thursday in a green panel truck. That was all most of the boys knew about him. A few knew more. Before the war, it was said, he had been one of the best heads in the yeshiva at Kletzk. He had come to this country in 1949 with nobody, from where nobody asked, and bought the farm with a loan from the Society, and lived on it alone. He would not give a shiur. He would not take an honor in shul. But he learned every night in the beis medrash from ten until two, at a table by the radiator, and more than once Leib had seen the mashgiach himself go over to that table with a sefer under his arm and stand there like a boy waiting to be called on.</p>
+  <p>They found him in the basement of the farmhouse, in the grading room. It was cool and dim and smelled of lime and straw. He was sitting on a stool in front of a wooden box with a light bulb inside it and a round hole cut in the front, taking eggs one at a time out of a wire basket and holding each one up to the hole so the light came through it. The shell went the color of a lampshade, and inside it you could see the shadow of the yolk swinging, and the air cell at the blunt end, and whether there was a crack or a spot of blood. The clean ones he set in the flat on his left. The others he set aside.</p>
+  <p>He did not stop when they came in. The mashgiach explained. Reb Zalman listened with an egg held up to the light.</p>
+  <p><em>Is it true?</em> he said to Leib. <em>You&rsquo;re not happy?</em></p>
+  <p><em>It&rsquo;s true.</em></p>
+  <p><em>Why? You have something to live on?</em></p>
+  <p><em>Yes.</em></p>
+  <p><em>How much?</em></p>
+  <p><em>Eighteen hundred dollars.</em></p>
+  <p>Reb Zalman set the egg in the flat. <em>Good. Bring me a hundred eggs.</em></p>
+  <p>There was a case of ungraded eggs by the stairs, thirty dozen in pressed paper trays. Leib carried out one tray after another and counted eggs onto the long grading table, carefully, because they rolled, until there were a hundred of them lying on the boards in the light of the bulb.</p>
+  <p><em>Each one is eighteen dollars,</em> said Reb Zalman. <em>Now. Put fifty there.</em> He pointed with his chin. <em>That is a year of bread. You, your wife, the little one. Rent, shoes, the doctor. Light. That is not a lot, for a year.</em></p>
+  <p>Leib moved fifty eggs to the end of the table.</p>
+  <p><em>Twenty-four for pullets. You will need new birds; your father&rsquo;s are old, they are laying small. Twenty-four for feed. A hen eats. When goods increase, they are increased that eat them. Twenty-four for the roof of the coop, which I have seen and which leaks.</em></p>
+  <p>Leib moved twenty-four eggs, and then twenty-four more. There were two eggs left on the boards in front of him.</p>
+  <p><em>Twenty-four for a truck, because your father&rsquo;s truck is older than you are. Twenty-four for the scraper and the lime and the man to help you with the manure, because you have never done it, and I have, and I am telling you that you cannot do it alone.</em> He looked at the two eggs. <em>Nu?</em></p>
+  <p>Leib said nothing. He was looking at the two eggs.</p>
+  <p><em>And this is if eggs stay at twenty-five cents,</em> said Reb Zalman. <em>Which they will not. They will go down.</em></p>
+  <p>He took another egg out of the wire basket and held it up to the light and looked at it.</p>
+  <p><em>So little, and with this you want to fill yourself up?</em></p>
+</section>
+
+<section>
+  <h2>IV. The King</h2>
+  <p class="dateline">The grading room, the same afternoon</p>
+  <p>The mashgiach had sat down on an upturned feed bucket. Avrohom Wolpe stood by the stairs. Nobody said anything, and after a while Reb Zalman began to talk, still candling, an egg in his fingers the whole time, and set each one down where it belonged as he went.</p>
+  <p><em>There was a king,</em> he said. <em>A long time ago. He had everything a king has, and seven treasures besides, and when he shut his left hand and struck it with his right, it rained. Not water. Gold. Pearls, stones, every kind, up to the knee, like hail, over the whole country. He was a prince for a long time, and he helped his father rule for a long time, and he was king for a long time. Longer than any of us.</em></p>
+  <p><em>One day he was sad. His ministers said, Majesty, what is it? He said, Look what I can do. What is this little kingdom, to a man who can do what I can do? Where is there better? They said, Majesty, there is only up.</em></p>
+  <p><em>So he went up. To the first heaven, where there are four kings, one at each corner of the world. They came out to meet him with flowers and gave him their throne, and he sat there. A long time. And then he began to get yellow in the face, like our friend here. The four kings said, Majesty, what is it? He said, What is better than this? They said, We are only servants. Above us there is another heaven, and the King of that heaven.</em></p>
+  <p><em>So he went up again. And the King of that heaven came out to meet him with flowers, and took him in, and gave him half of his own chair. They ruled together. His eldest son, meanwhile, took the golden wheel that went before him everywhere, and went home with it, down to the earth, and was king there. The father did not even notice.</em></p>
+  <p>Reb Zalman set down an egg with a spot in it, apart from the others.</p>
+  <p><em>The King of that heaven lives a very long time. Longer than the world has been. Then he dies, and another one comes, and this one also gave our king half the chair. Then another. Thirty-six of them, one after the other. Thirty-six.</em> He paused, and the mashgiach looked at the floor, and Leib understood that the number was not an accident. <em>And still the king sat on half a chair.</em></p>
+  <p><em>And one day he thought: Why half? I will kill this one and sit on the whole of it. He could not. You cannot kill such a one. But from wanting it, he got old. In heaven nobody gets old. So he fell. He fell all the way down, out of the sky, into a garden. A garden like the Goulds&rsquo; on the lake in Lakewood, with the stone pools. The gardener found him lying on the grass and ran to the palace, and the royal family came and made him a bed under the trees.</em></p>
+  <p><em>They said to him, Majesty, what shall we tell the people? He said: Tell them that the king of kings, who ruled the four corners of the earth and all the islands of the sea, who ruled over the four kings of the first heaven, who sat on the chair of heaven while thirty-six Kings of heaven lived and died, is dead. And he died.</em></p>
+  <p>He put the egg in his hand into the flat. The flat was full. He slid it onto the stack and pulled an empty one toward him.</p>
+  <p><em>It rained gold to his knees,</em> he said, <em>and he died hungry.</em></p>
+  <p>Then, without looking up, he said it the way you say a thing you have said to yourself many times, at a table by a radiator at two in the morning.</p>
+  <div class="verse">
+    <p>He that loveth silver shall not be satisfied with silver; nor he that loveth abundance, with increase; this also is vanity.</p>
+    <p>&mdash; Ecclesiastes 5:9</p>
+  </div>
+  <p>Leib looked at the hundred eggs, the long row and the shorter rows and the two by themselves. He thought about his father at the top of the coop stairs with a sack on his shoulder. He thought about the farms on Route 9 going one by one to men who built houses, and about every one of those men, who had all wanted a piece of ground and had got it and then wanted the next ten acres and the bigger coop and the second truck. He thought about the eggs going down to twenty cents and to fifteen, and how many more eggs it would take then to make the same eighteen hundred dollars, and how a man would lie awake doing that sum.</p>
+  <p><em>And the other thing,</em> said Reb Zalman. <em>The thing you are sitting with in the beis medrash with a face like a lemon.</em> He turned the egg in his fingers against the light. <em>That one does not need eighteen hundred dollars. It does not need a farm. It does not even need heaven, with all the chairs.</em></p>
+  <div class="verse">
+    <p>Whom have I in heaven but Thee? And beside Thee I desire none upon earth.</p>
+    <p>&mdash; Psalm 73:25</p>
+  </div>
+  <p>He held out the egg to Leib. Leib took it and held it up to the hole in the box, as he had seen done, and looked. It was clear all the way through, the yolk a soft round shadow, nothing wrong in it anywhere, and the light coming through the shell made his fingers glow red at the edges.</p>
+  <p><em>Clean,</em> said Leib.</p>
+  <p><em>So put it with the clean ones,</em> said Reb Zalman, and went on with his work.</p>
+</section>
+
+<section>
+  <h2>V. The Sand Road</h2>
+  <p class="dateline">Toward Freewood Acres &middot; evening</p>
+  <p>The mashgiach rode back to Lakewood with Avrohom Wolpe in the yeshiva&rsquo;s car. Leib said he would walk. It was eight miles and nobody argued with him.</p>
+  <p>He went north first, the wrong way, up the sand road past the last of the coops, without any reason except that he did not want to arrive yet. The pines were full of the smell of the day&rsquo;s heat going out of them. At a farmhouse with a tin-roofed porch, where the road bent toward Freewood Acres and the Kalmyk people lived, a man was standing at the door.</p>
+  <p>He was a monk, Leib supposed, though he had never seen one. He was bald, in a plain cotton robe the color of dried blood, and he was holding out a wooden bowl in both hands. A woman in an apron came to the screen door with a kettle and filled the bowl with something milky and steaming, and the monk lifted it in both hands and drank it standing on the step, all of it, slowly, as though there were nothing else he needed to be doing that evening or any evening. There was a brass staple across a split in the rim of the bowl. Leib could see it shine when he tipped it up. Then the monk bowed to the woman, and she bowed back, and he came down the step and went on up the road to the next house, and the woman shut the screen and went inside.</p>
+  <p>Leib stood in the road for some time. Then he turned around and walked to Lakewood.</p>
+  <p>It was after ten when he got there. The beis medrash was half full, the lights hanging low over the long tables, the sound of it coming out the open windows into the street the way it always did, two hundred voices arguing in pairs. Reb Zalman was already at his table by the radiator with his hat pushed back. He did not look up.</p>
+  <p>Leib sat down across from Avrohom Wolpe, who had waited for him, and opened the Gemara to where they had stopped in February.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The farm was sold in July. The Shas came from a bookseller on the Lower East Side in September, after the holidays, twenty volumes in dark blue cloth stamped in gold, from the good shelf. Leib set them up on two planks over cinder blocks in the front room of the apartment on Fifth Street, where Raizel had cleared a wall, and put the tallis in the drawer under them. His father&rsquo;s envelope he kept, with the writing on it, in the first volume, at the first page, where the Mishnah asks from what hour in the evening one may say the Shema.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">There is no satisfying lusts, even by a shower of gold pieces; he who knows that lusts have a short taste and cause pain, he is wise;<cite>Dhammapada 186, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Even in heavenly pleasures he finds no satisfaction, the disciple who is fully awakened delights only in the destruction of all desires.<cite>Dhammapada 187, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a young monk is sent away by his preceptor to learn the rules of discipline. While he is gone his father falls ill, longs to see him, and dies talking about him, leaving a hundred coins with the youngest son "to buy a bowl and robe for my son." When the monk comes home his little brother throws himself at his feet in tears. The monk refuses the money, then begins to think that it would be enough to live on as a layman, and stops reciting and meditating until he looks jaundiced. The novices notice; his teachers bring him to the Buddha, who has him fetch pebbles and count out fifty for food and drink and twenty-four each for two oxen, seed, a plow, a spade and an adze, and the hundred coins run out. Then the Buddha tells the birth story of King Mandh&#257;t&#257;, a world-ruler who could make it rain jewels by clapping his hands, who rose to rule the heaven of the Four Great Kings and then shared the throne of Sakka in the Heaven of the Thirty-Three while thirty-six Sakkas came and went, until he resolved to kill Sakka, aged, fell into a park on earth, and died sending word of all he had ruled. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-05.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mandhatri">Mandh&#257;t&#257;</a>.</p>
+    <h3>Ocean County, New Jersey, 1963</h3>
+    <p>Lakewood began as a fashionable winter resort in the 1880s, with great hotels in the pines and the estate of George Jay Gould on Lake Carasaljo (now Georgian Court University). The hotel trade declined badly in the 1960s, the woods and cranberry bogs gave way to housing, and the retirement community of Leisure Village opened for sale in 1963 (<a href="https://en.wikipedia.org/wiki/Lakewood_Township,_New_Jersey">Lakewood Township</a>). In 1943 Rabbi Aharon Kotler, who had led the yeshiva of Kletzk before escaping Europe, opened <a href="https://en.wikipedia.org/wiki/Beth_Medrash_Govoha">Beth Medrash Govoha</a> in Lakewood with about fifteen students; by his death on November 29, 1962, it had some 250, and his funeral on the Lower East Side drew some 25,000 mourners (<a href="https://en.wikipedia.org/wiki/Aharon_Kotler">Aharon Kotler</a>). Its married students are counted as its kollel. The yeshiva's people in this story are invented.</p>
+    <p>Jewish poultry farms spread across central and southern New Jersey with mortgage loans and advice from the <a href="https://en.wikipedia.org/wiki/Jewish_Agricultural_Society">Jewish Agricultural Society</a>; Toms River, Lakewood and Farmingdale were early centers, and at the peak in the 1950s Jewish farmers produced about three quarters of the state's eggs (<a href="https://www.kehilalinks.jewishgen.org/NJ_Farms">JewishGen KehilaLinks</a>). In the late 1940s and early 1950s some thousands of Holocaust survivors, most with no farming experience, took up poultry, many of them around Vineland, and by the 1960s most had been driven out by falling prices and factory-scale farms (<a href="https://aish.com/speaking-yiddish-to-chickens-holocaust-survivors-on-south-jersey-poultry-farms/">Aish</a>). Then prices collapsed: one Farmingdale family remembered wholesale eggs falling from about ninety cents a dozen after the war to twenty-five cents by 1962, and selling their farm in 1966 for half what they had paid (<a href="https://njjewishndev.timesofisrael.com/egg-farmers-look-back-with-little-nostalgia/">New Jersey Jewish News</a>). A few miles north, in <a href="https://en.wikipedia.org/wiki/Freewood_Acres,_New_Jersey">Freewood Acres</a>, Kalmyk Buddhist refugees had built temples in the 1950s; their monks are the subject of an earlier story in this series, <a href="salt-tea.html">Salt Tea</a>. Eggs are still checked by <a href="https://en.wikipedia.org/wiki/Candling">candling</a>, holding them to a light to see the yolk, air cell and any flaw through the shell.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a discontented bhikkhu from the Dhammapada commentary (verses 186 and 187), with the birth story of King Mandh&#257;t&#257;. <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-05.htm">The original</a>. Scripture from the Jewish Publication Society Tanakh (1917). Written by Claude Opus 5.5.
+  <div class="pager"><a href="three-ladders.html">&larr; Three Ladders</a><a href="index.html">All stories</a><a href="mic-check.html">Mic Check &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, eggs = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  // Keep eggs out of the reading column where possible: favor the side margins.
+  function spawn(e, first) {
+    var col = Math.min(W, 640), left = (W - col) / 2;
+    var side = Math.random() < 0.5;
+    if (W > 900) e.x = side ? Math.random() * (left - 40) + 20 : left + col + 20 + Math.random() * (left - 40);
+    else e.x = Math.random() * W;
+    e.y = H * (0.12 + Math.random() * 0.8);
+    e.r = 20 + Math.random() * 10;
+    e.rot = (Math.random() - 0.5) * 0.5;
+    e.life = first ? Math.random() * 900 : 0;
+    e.max = 520 + Math.random() * 520;
+    e.wait = first ? 0 : 120 + Math.random() * 600;
+    e.swing = Math.random() * 6.28;
+    return e;
+  }
+  function make() {
+    var n = W > 900 ? 3 : 2;
+    eggs = [];
+    for (var i = 0; i < n; i++) eggs.push(spawn({}, true));
+  }
+  function drawEgg(e, a) {
+    var r = e.r;
+    ctx.save();
+    ctx.translate(e.x, e.y); ctx.rotate(e.rot);
+    var g = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 4.5);
+    g.addColorStop(0, 'rgba(255,190,90,' + (a * 0.22) + ')');
+    g.addColorStop(1, 'rgba(255,190,90,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, r * 4.5, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(0, -r * 1.3);
+    ctx.bezierCurveTo(r * 0.95, -r * 1.3, r * 1.0, r * 0.95, 0, r * 0.95);
+    ctx.bezierCurveTo(-r * 1.0, r * 0.95, -r * 0.95, -r * 1.3, 0, -r * 1.3);
+    var s = ctx.createRadialGradient(0, -r * 0.1, r * 0.1, 0, 0, r * 1.3);
+    s.addColorStop(0, 'rgba(255,228,170,' + (a * 0.55) + ')');
+    s.addColorStop(1, 'rgba(226,150,60,' + (a * 0.32) + ')');
+    ctx.fillStyle = s; ctx.fill();
+    var sw = reduce ? 0 : Math.sin(e.swing + e.life * 0.03) * r * 0.08;
+    ctx.beginPath(); ctx.ellipse(sw, r * 0.12, r * 0.42, r * 0.4, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(150,72,18,' + (a * 0.32) + ')'; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(0, -r * 1.02, r * 0.38, r * 0.16, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,240,210,' + (a * 0.18) + ')'; ctx.fill();
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < eggs.length; i++) {
+      var e = eggs[i];
+      if (!reduce) {
+        if (e.wait > 0) { e.wait--; continue; }
+        e.life++; if (e.life > e.max) { spawn(e, false); continue; }
+      }
+      var p = reduce ? 0.5 : e.life / e.max;
+      var env = Math.min(1, p * 5) * Math.min(1, (1 - p) * 5);
+      if (env > 0.01) drawEgg(e, env);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

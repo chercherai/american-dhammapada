@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Window Dummy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a blacked-out show window under the el, dark theme; along the foot of the page stand a few stripped dummies and one seated figure, and a slow gray dawn comes up behind them and warms the seated one; datelined sections. */
+  --ground: #0e1013;
+  --ground-2: #171a1f;
+  --paper: #e4e0d6;
+  --paper-dim: #9b978d;
+  --accent: #e0a45a;
+  --glow: #7f93a8;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1b2028 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,224,208,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(224,164,90,.18); }
+.epigraph { border-left: 1px solid rgba(224,164,90,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(23,26,31,.8); border: 1px solid rgba(233,224,208,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,224,208,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(233,224,208,.14); border-bottom: 1px solid rgba(233,224,208,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(23,26,31,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 8.10 &middot; Kh&#257;&#7751;u Ko&#7751;&#7693;a&ntilde;&ntilde;a</span></nav>
+<header>
+  <h1>The Window Dummy</h1>
+  <div class="epigraph">One hour's reflection is better than seventy years of pious devotion.<br>&mdash; The Book of Ighan</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it was told to me,</span> on Broadway under the el.</p>
+
+<section>
+  <h2>I. One Hour</h2>
+  <p class="dateline">Linden Street, Bushwick, and Eliot, Maine &middot; spring 1977</p>
+  <p>Conrad Mayfield had loaded trucks at the Rheingold plant on Forrest Street for four years, and in the middle of January 1976 the brewery shut for good and put him out on Broadway with everybody else. He was twenty-three then. For a year he stood under the el in front of the check-cashing place with men who had thirty years in at the same plant, and he was angry all day at nothing he could have pointed to. His mother said he came into a room like a radio somebody had left on.</p>
+  <p>Mrs. Lottie Gadsden lived on the third floor at the Bushwick Avenue end of Linden Street. She had worked thirty-one years in the laundry at Wyckoff Heights Hospital, the last twenty of them beside Conrad's grandmother, and she had been a Bah&aacute;'&iacute; since 1931, when she was a young woman doing day's work in Harlem. Her faith kept no preachers, so she was not one. What she kept was Thursday night. Eight or ten people sat in her front room over tea and a plate of something, and she called it a fireside, though the building had steam heat and it was all she could do to get that. Conrad started coming for the plate. In March he signed his card.</p>
+  <p>In April she kept him back after the others had gone down.</p>
+  <p><em>You are all noise, Conrad. I'm not talking about your mouth.</em></p>
+  <p>He waited for the rest of it.</p>
+  <p><em>Sit down one hour every day and keep still and turn it over.</em></p>
+  <p><em>Turn what over?</em></p>
+  <p><em>Whatever's there. And I mean a whole hour off the front of the day. I don't mean the one you have left.</em></p>
+  <p>She also wrote a letter. There was a Bah&aacute;'&iacute; school at Eliot, Maine, on a bluff above the Piscataqua River, that took on a grounds crew for the summer sessions, and in May he went up on the bus with a duffel bag and her name to give.</p>
+  <p>He mowed. He scraped and painted porch rails on the old inn. Every morning before work he went down to a flat ledge of rock above the river and sat his hour, and for six weeks the hour was his knees and the brewery. Then on a morning at the start of July the noise stopped. He had not stopped it. He sat in what was left, which was the tide going out and a quiet he understood had been under the noise the whole time, the way a floor is under a rug. When he looked at his watch it was past noon, and the crew had eaten without him.</p>
+  <p>He told nobody at the school. There was one person he wanted to tell. He worked out the week he owed, and on Wednesday the thirteenth he took the first bus south.</p>
+</section>
+
+<section>
+  <h2>II. Broadway</h2>
+  <p class="dateline">Wednesday, July 13 &middot; night</p>
+  <p>It was Portsmouth to Boston and Boston to the Port Authority, and then the J train over the bridge with the windows down. A heat wave had come in and it was still in the eighties after dark. He got off at Gates Avenue a little after half past nine, and he was on the el stairs with the duffel on his shoulder when the streetlights went out. The store signs went with them, and the windows over the stores, all the way down Broadway in both directions at once. Up on the structure the train he had just left sat dead with faces at the glass.</p>
+  <p>Mrs. Gadsden's building was nine blocks off. He made four of them.</p>
+  <p>By ten o'clock there were cars backed up over the curbs with chains run from their bumpers to the store gates. A gate came off a furniture store across the avenue with a noise like a piano going down a stairwell. People ran bent double under mattresses. He saw a woman he knew from his mother's church with a carton of canned milk on her hip, and boys of ten with shoeboxes stacked to their chins, and men off the Rheingold loading dock, because half the avenue had been out of work as long as he had. Toward Halsey Street something was burning, and the engines stood across Broadway with their own lights the only lights there were.</p>
+  <p>He was not exactly afraid. But his heart was going hard, and he had been up since four, and he found he did not want to climb her stairs in that state and say what he had come three hundred miles to say with no breath to say it.</p>
+  <p>Kessler's Men's Shop had been one of the first places opened, and it was already cleaned to the walls. The plate glass was gone. What was left was the show window itself, a carpeted platform knee-high off the sidewalk, with two dummies knocked flat on it and a third standing stripped to its seams. Conrad swept the glass off a patch of carpet with the side of his duffel. He climbed up and sat with his back to the panel and his legs crossed and his hands on his knees, and began his hour.</p>
+  <p>It came quicker than it ever had in Maine. The avenue went on running and breaking a yard from his face, and he could hear every bit of it. It was only that none of it was addressed to him.</p>
+</section>
+
+<section>
+  <h2>III. The Stuff</h2>
+  <p class="dateline">Kessler's window &middot; after two in the morning</p>
+  <p>Nelson Ortiz was nineteen, and he and the ones with him had come sixteen blocks down from an appliance and furniture place near Myrtle Avenue. There were eleven of them by the count of those who were there. By Friday Broadway had it at five hundred, and the number has not come down since.</p>
+  <p>Each of them carried what his back would stand. Nelson had a nineteen-inch Zenith in its carton on one shoulder. His two cousins wore a dinette chair apiece upside down on their heads. A big slow man they called Oso held a console stereo in front of him in both arms like a calf, and the smallest, somebody's brother, nine years old, had a pillowcase full of baby shoes. They had been at it since ten. Twice they had gone flat in a doorway while a patrol car rolled down the avenue with its lights off, and now there was the fire ahead at Halsey and police on foot in front of it.</p>
+  <p><em>That's far enough,</em> Nelson said. <em>Sit down in here till it clears.</em></p>
+  <p>Inside Kessler's it was as dark as the inside of a pocket. There was no moon. The floor was wet from somewhere and gritty with glass, and by feel they found that the window platform was the one clean dry place, so that was where they stacked the stuff. The Zenith went down snug against something Nelson took for a dummy. A dinette chair went against its other side. Somebody stood a carton of Pampers on its knees. The boy hung his pillowcase from its shoulder to keep the shoes off the floor, and Oso, who was the funny one, felt around until he found a hat and set it on its head.</p>
+  <p><em>Watch the stuff for us, pana.</em></p>
+  <p>Then they lay down on the carpet behind the counter. They were young and had carried a long way, and they slept.</p>
+</section>
+
+<section>
+  <h2>IV. Half Past Five</h2>
+  <p class="dateline">Thursday, July 14</p>
+  <p>The light came in gray under the el. Nelson woke first and went to the window for his television, and the dummy under the hat was breathing.</p>
+  <p>He watched the carton of Pampers rise the width of a finger and settle. He saw eyelashes. A man was sitting in the middle of their goods with a box on his knees and a pillowcase on his shoulder and a woman's hat on, and in three hours not one thing they had put on him had shifted.</p>
+  <p>Nelson made a sound he would have denied making. The others came up behind him. The boy said <em>muerto.</em> Oso said no, it was one of those, and did not say one of what, and every one of them went for the door at once.</p>
+  <p><em>Don't be scared,</em> Conrad said. He had opened his eyes. <em>I'm nobody. I'm a man who was praying.</em></p>
+  <p>They stopped where they were, in the doorway.</p>
+  <p><em>We put a TV on you,</em> Nelson said.</p>
+  <p><em>I see that.</em></p>
+  <p><em>You didn't feel it?</em></p>
+  <p>Conrad took the question seriously. <em>I heard you come in. It wasn't anything to do with me.</em></p>
+  <p><em>Mister, forgive us. We took you for a dummy.</em></p>
+  <p>Conrad lifted the hat off and looked at it and laughed. After that the avenue called him Manny, for mannequin, and he answered to it for the rest of his life.</p>
+  <p>Nelson did not laugh. He had been running since ten o'clock with thirty pounds on his shoulder. Before that he had been running since he was fourteen, and he could not remember three minutes together when he had been still on purpose. He set the television down again.</p>
+  <p><em>Show me how you do that.</em></p>
+  <p><em>Me too,</em> said Oso, and then the cousins, and the rest, and the boy said it last because he said whatever Oso said.</p>
+  <p>Conrad had known how for thirteen days. <em>All right,</em> he said. <em>Sit down.</em> He sat them in a row along the edge of the platform among the cartons, with their feet on the sidewalk, and he gave them the whole of what he had. It took under a minute to say.</p>
+  <p><em>Now walk with me. I have to go and tell somebody something.</em></p>
+</section>
+
+<section>
+  <h2>V. Pupils</h2>
+  <p class="dateline">Linden Street &middot; Thursday</p>
+  <p>They went up Linden Street at six in the morning carrying everything, since there was nowhere to leave it. Mrs. Gadsden was seventy-two. She came to her door in a housecoat and looked past Conrad at her stairs, which were full of boys and furniture down to the second landing.</p>
+  <p><em>Well, Conrad. You have got yourself some pupils.</em></p>
+  <p>He told her about the window. What he had come from Maine to tell her he never did get said, and he saw he did not need to.</p>
+  <p><em>Is that so?</em> she asked the stairs.</p>
+  <p><em>Yes, ma'am,</em> Nelson said. <em>We stacked a whole store on him and he never moved. We never saw anybody do like that. We want to know how he does it.</em></p>
+  <p>She had them in. Nothing in her refrigerator was going to keep, so they ate all of it standing up in her front room, cold chicken and potato salad and most of a pound cake, and a half gallon of butter pecan gone soft, which went around the room with one spoon. She let them finish. Then she said the only thing she said to them that morning.</p>
+  <p><em>You could go on a hundred years the way you went last night. Up and down in the dark with something on your back, looking over your shoulder. Plenty do, and I'm not talking only about you. One day like you had this morning is worth more than the whole hundred.</em></p>
+  <p>She took down a small brown book, printed in 1904, that an old believer had put in her hands in Harlem when she was new, and she found the place without hunting for it.</p>
+  <div class="verse">
+    <p>One hour's reflection is better than seventy years of pious devotion.</p>
+    <p>&mdash; The Book of Ighan, tr. Ali Kuli Khan (1904)</p>
+  </div>
+  <p><em>I have had my seventy years of the devotion,</em> Mrs. Gadsden said, <em>so you can take it from me.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The goods stood in her hall until Friday, when Nelson and Oso carried the Zenith and the stereo the sixteen blocks back up Broadway. The owner was out in front of his place with a push broom. He looked at the two of them a good while, and then he pointed with the handle to where he wanted the things put down.</p>
+  <p>But Thursday was Thursday, and that night all eleven came back up her stairs. The current was still off on Linden Street. She lit four candles and the front room sat on the floor, and she read them one more place out of the brown book, about people who had been one way and then in an instant were another.</p>
+  <div class="verse">
+    <p>&hellip;for their agitation was changed to composure, their doubt turned to assurance, and their fear transformed into courage.</p>
+    <p>&mdash; The Book of Ighan, tr. Ali Kuli Khan (1904)</p>
+  </div>
+  <p>Then she had them keep the hour, there on her floor. It was the first whole one any of them but Conrad had ever tried.</p>
+  <p>At about half past ten the current came back. The ceiling fixture came on over their heads, and the refrigerator shuddered and started up in the kitchen, and down in the street somebody cheered. Mrs. Gadsden looked around her floor. Twelve of them sat with their hands on their knees and their eyes shut, Conrad at the end by the door, and not one of them knew yet that the lights were on. She got up and blew out the candles herself, to save them.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">And he who lives a hundred years, ignorant and unrestrained, a life of one day is better if a man is wise and reflecting.<cite>Dhammapada 111, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the elder Ko&#7751;&#7693;a&ntilde;&ntilde;a is given a subject of meditation by the Buddha, goes to the forest and reaches the goal there. On his way back to tell his teacher he grows tired, leaves the road, sits down on a flat rock and enters deep absorption. That night five hundred thieves who have plundered a village come by with their loot in sacks, each sack sized to the man's strength. They stop to rest at the same rock, take the seated elder for a tree stump, set one sack on his head and pile the rest around him, and sleep. At dawn they see what he is, think him a spirit and start to run; he tells them not to be afraid. They beg his pardon, and all of them ask to go forth under him. He is called Kh&#257;&#7751;u, &ldquo;Stump,&rdquo; ever after. When he brings them to the Buddha, the Buddha asks, &ldquo;You have obtained pupils?&rdquo; and tells the former thieves that one day lived in the wisdom they have just found is better than a hundred years of last night's foolishness. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-10.htm">the full commentary story</a>.</p>
+    <h3>Bushwick, July 1977</h3>
+    <p>Lightning north of the city began knocking out transmission lines at 8:34 on the evening of July 13, 1977, and by 9:37 the whole Con Edison system was down. Power was not fully restored until late the next night. The <a href="https://en.wikipedia.org/wiki/New_York_City_blackout_of_1977">blackout</a> came in a heat wave, in the middle of the city's fiscal crisis, and thirty-one neighborhoods saw looting. <a href="https://en.wikipedia.org/wiki/Bushwick,_Brooklyn">Bushwick</a> was among the hardest hit. Along Broadway, under the elevated tracks that divide it from Bedford-Stuyvesant, 134 stores were looted and 45 of them burned, and some two dozen fires were still going in the morning; gates were pulled off storefronts with chains run to car bumpers. The neighborhood had been losing its work for years. The <a href="https://en.wikipedia.org/wiki/Rheingold_Beer">Rheingold brewery</a> on Forrest Street, one of its last big employers, closed for good in January 1976. Kessler's Men's Shop, Mrs. Gadsden and everyone else in the story are invented.</p>
+    <p>The Bah&aacute;'&iacute; Faith has no clergy. Its teaching in America has gone on largely in living rooms, at informal evenings long called firesides. <a href="https://en.wikipedia.org/wiki/Green_Acre_Bah%C3%A1%CA%BC%C3%AD_School">Green Acre</a>, on the Piscataqua River at Eliot, Maine, was founded by Sarah Farmer in 1894 as a summer conference on religion; &#699;Abdu'l-Bah&aacute; stayed there for a week in August 1912, and it has been a Bah&aacute;'&iacute; school since. The book Mrs. Gadsden reads from is Bah&aacute;'u'll&aacute;h's <a href="https://en.wikipedia.org/wiki/Kit%C3%A1b-i-%C3%8Dq%C3%A1n">Kit&aacute;b-i-&Iacute;q&aacute;n</a>, written in Baghdad in the early 1860s, in its first English translation, <a href="https://en.wikisource.org/wiki/The_Book_of_Ighan">The Book of Ighan</a>, made by Ali Kuli Khan and published in New York in 1904. The line about one hour's reflection is an old Islamic tradition that Bah&aacute;'u'll&aacute;h quotes there. Later Bah&aacute;'&iacute;s have read the book in Shoghi Effendi's translation of 1931; an American believer of Mrs. Gadsden's generation could still have owned the older one.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder Kh&#257;&#7751;u Ko&#7751;&#7693;a&ntilde;&ntilde;a from the Dhammapada commentary (verse 111). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-10.htm">The original</a>. Scripture from The Book of Ighan (the Kit&aacute;b-i-&Iacute;q&aacute;n of Bah&aacute;'u'll&aacute;h), translated by Ali Kuli Khan (1904). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-branch.html">&larr; The Branch</a><a href="index.html">All stories</a><a href="spilt-water.html">Spilt Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, figs = [], t0 = Date.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    figs = [];
+    var n = Math.max(3, Math.min(7, Math.round(W / 190)));
+    var seat = Math.floor(n * 0.62);
+    for (var i = 0; i < n; i++) {
+      figs.push({ x: W * (i + 0.5) / n + (i % 2 ? 14 : -10), s: 0.85 + ((i * 37) % 10) / 40, seated: i === seat, tilt: (i === 0 ? 1.35 : 0) });
+    }
+  }
+  function dummy(f, a) {
+    var s = f.s * Math.min(1, H / 760), base = H - 6;
+    ctx.save(); ctx.translate(f.x, base);
+    if (f.tilt) { ctx.translate(0, -8 * s); ctx.rotate(f.tilt); }
+    ctx.fillStyle = 'rgba(127,147,168,' + a + ')';
+    if (f.seated) {
+      ctx.beginPath(); ctx.moveTo(-34 * s, 0); ctx.quadraticCurveTo(0, -20 * s, 34 * s, 0); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-15 * s, -8 * s); ctx.lineTo(-17 * s, -50 * s); ctx.quadraticCurveTo(0, -60 * s, 17 * s, -50 * s); ctx.lineTo(15 * s, -8 * s); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.arc(0, -68 * s, 9 * s, 0, Math.PI * 2); ctx.fill();
+    } else {
+      ctx.fillRect(-1.5 * s, -64 * s, 3 * s, 64 * s);
+      ctx.fillRect(-12 * s, -3 * s, 24 * s, 3 * s);
+      ctx.beginPath(); ctx.moveTo(-10 * s, -60 * s); ctx.lineTo(-17 * s, -112 * s); ctx.quadraticCurveTo(0, -122 * s, 17 * s, -112 * s); ctx.lineTo(10 * s, -60 * s); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(0, -131 * s, 7.5 * s, 10 * s, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.restore();
+  }
+  function draw() {
+    var t = reduce ? 0.62 : ((Date.now() - t0) / 90000) % 1;
+    var dawn = Math.max(0, Math.sin(t * Math.PI * 2 - Math.PI / 2));
+    ctx.clearRect(0, 0, W, H);
+    var g = ctx.createLinearGradient(0, H, 0, H * 0.55);
+    g.addColorStop(0, 'rgba(127,147,168,' + (0.05 + 0.16 * dawn) + ')');
+    g.addColorStop(1, 'rgba(127,147,168,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, H * 0.55, W, H * 0.45);
+    for (var i = 0; i < figs.length; i++) {
+      var f = figs[i];
+      dummy(f, 0.10 + 0.10 * dawn);
+      if (f.seated && dawn > 0.02) {
+        var s = f.s * Math.min(1, H / 760);
+        var r = ctx.createRadialGradient(f.x, H - 46 * s, 0, f.x, H - 46 * s, 90 * s);
+        r.addColorStop(0, 'rgba(224,164,90,' + (0.16 * dawn) + ')');
+        r.addColorStop(1, 'rgba(224,164,90,0)');
+        ctx.fillStyle = r; ctx.beginPath(); ctx.arc(f.x, H - 46 * s, 90 * s, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

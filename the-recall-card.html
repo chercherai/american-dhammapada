@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Recall Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a dim bar after the ninth inning, dark theme; in one bottom corner opened pull-tab tickets drop one at a time, each with one tab torn back, and heap up slowly until the heap is carried out and begins again; datelined sections. */
+  --ground: #14181d;
+  --ground-2: #1d232a;
+  --paper: #e2ddd0;
+  --paper-dim: #9a968a;
+  --accent: #d8b25a;
+  --glow: #c8473d;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #1b2129 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(226,221,208,.13); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 26px rgba(216,178,90,.16); }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(29,35,42,.85); border: 1px solid rgba(226,221,208,.13); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(226,221,208,.13); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(226,221,208,.13); border-bottom: 1px solid rgba(226,221,208,.13); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(29,35,42,.85); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 9.2 &middot; Seyyasaka</span></nav>
+<header>
+  <h1>The Recall Card</h1>
+  <div class="epigraph">Behold, thou art made whole: sin no more, lest a worse thing befall thee.<br>&mdash; John 5:14</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So here&rsquo;s what I heard,</span> up in Coon Rapids.</p>
+
+<section>
+  <h2>I. The Booth</h2>
+  <p class="dateline">Coon Rapids, Minnesota &middot; April to September 1991</p>
+  <p>Every hockey family owed the Boosters twenty hours a season. You could work concessions at the arena, or you could sell pull-tabs. Curt Lundeen had a boy in Squirts, and he took the booth at the Tamarack Lounge on Tuesday and Thursday nights.</p>
+  <p>The booth was a plexiglass box at the end of the bar, with a stool, a cash drawer and three clear bins of tickets. A ticket cost a dollar. It was two layers of cardboard, and on the back were five perforated tabs with a row of pictures under each. Three of the right picture in a row paid something. Most rows paid nothing. A game came in a case of twenty-four hundred tickets, and the flare that came with it was taped to the glass and told you every winner in the case, two at two hundred and fifty dollars and on down. When a big one was cashed, the seller crossed it off. Anybody standing at the bar could look at a bin and at the flare and form an opinion. The man on the stool did not have to form one. He had sold the tickets and he knew the count.</p>
+  <p>That was why there was an index card inside the glass, typed, at eye level. SELLERS DO NOT PLAY. It was signed M.E.</p>
+  <p>M.E. was Marlys Engstrom. She had managed the Boosters&rsquo; gambling for ten years, since the first case of tickets. Her own boys had been out of hockey for five of those, and nobody had found a way to ask her why she still did it. She closed out every game herself, at her kitchen table, to the dollar. She sang alto at Zion Lutheran and counted the offering there the same way. By day she was the hygienist at Dr. Paulson&rsquo;s office on Hanson Boulevard, where she had cleaned the teeth of half the association. She was a Lindquist from Swift County. An uncle of hers had been an auctioneer out there, and she had his way of saying about a third of what she knew.</p>
+  <p>She cleaned Curt&rsquo;s teeth the last day of April. At the desk on his way out the girl handed him a postcard and a pen, and he wrote his own name and address on it, as he had every six months for years.</p>
+  <p>In May the outside sales job at the box plant went to Kevin Brandt, who was twenty-seven. Curt was thirty-six. He had been on the inside desk in Fridley for eleven years, quoting corrugated over the phone. He took it well at work. He took it to the Tamarack that Thursday, which was slow, and told Rollie Voss, who tended bar.</p>
+  <p>Rollie listened to all of it. He wiped down the rail.</p>
+  <p><em>You know what would take your mind off that,</em> he said. <em>What&rsquo;s left in the Double Play?</em></p>
+  <p><em>Four hundred. A little under.</em></p>
+  <p><em>Both two-fifties still up?</em></p>
+  <p>Curt looked at the flare, though he did not have to. <em>Both.</em></p>
+  <p><em>Well?</em></p>
+  <p><em>I can&rsquo;t play my own box, Rollie.</em></p>
+  <p><em>I can. Give me forty out of your pocket.</em></p>
+  <p>Rollie bought forty tickets through the slot, like any customer, and walked them around to the booth door. Curt opened them in his lap, under the counter. The nineteenth one was three gold bars in a row. Rollie cashed it for him and kept a twenty, and Curt drove home with two hundred and thirty dollars he had not left the house with. He had not thought about Kevin Brandt for an hour and a half.</p>
+  <p>That was the worst thing that could have happened to him.</p>
+  <p>He did it again the week Brandt got a company Taurus. He did it the night the furnace man said two more winters at the outside, and the night Karen&rsquo;s sister announced Disney World. He was particular for a while. He never did it on a good day, and he noticed that about himself with some approval. He opened them below the counter and dropped the dead ones in a Kemps ice cream pail under the stool, and at closing he carried the pail out to the dumpster himself. By Labor Day he was carrying it out twice a night.</p>
+  <p>The first of it had been pocket money. After that it came from an envelope behind the paint cans on his workbench. In March there had been six hundred and forty dollars in the envelope, toward a snowblower.</p>
+</section>
+
+<section>
+  <h2>II. Game Six</h2>
+  <p class="dateline">The Tamarack Lounge &middot; Saturday, October 26</p>
+  <p>Nobody in Minnesota was discontented that October except Curt Lundeen. The Twins had finished last the year before, and so had Atlanta, and now the two of them were in the Series and it was tied at three games.</p>
+  <p>Saturday was not his night. Marlys wanted the booth covered for every game, and he said he would take it. On Friday the regional manager had read Brandt&rsquo;s third-quarter numbers out loud in the sales meeting.</p>
+  <p>The Tamarack had two hundred people in it and room for a hundred and forty. They had the white hankies. Curt put a new case in the bin in the third inning, about the time Puckett went up the plexiglass in left field and took extra bases away from Ron Gant. By the eighth he had put a hundred and twenty dollars of the envelope through Rollie. The pail was full, and he had started a second pile on the floor.</p>
+  <p>It went to extra innings. In the bottom of the eleventh Puckett hit the fourth pitch from Leibrandt into the seats in left center, and the place came apart. Men who did not know each other were holding on to each other. Somebody&rsquo;s beer went over the top of the booth and ran down the glass.</p>
+  <p>Curt saw the ball go out over the shoulder of a man who was buying ten. He had six tickets open in his lap. What he felt, with two hundred people screaming, was that there were about three hundred left in the bin and one two-fifty, and that Rollie was not looking his way.</p>
+  <p>He watched Game Seven at home on Sunday, on the couch with Ryan. It went ten innings with no score, and then Larkin lifted one over the drawn-in outfield and Gladden came home, and the boy jumped on him. Curt was glad. It was like being glad through glass.</p>
+  <p>The postcard had come the Monday before, in his own handwriting. <em>Wednesday, Oct. 30, 4:30. Marlys.</em></p>
+  <p>She had not needed anyone to tell her. Since June the Tuesday and Thursday games had been closing oddly. The big winners came out late in the case, in a bunch, and the bartender cashed them. Then Donna, who sold Fridays, had mentioned the pail. Marlys did not telephone. She knew when he was due.</p>
+</section>
+
+<section>
+  <h2>III. Six Months</h2>
+  <p class="dateline">Dr. Paulson&rsquo;s office &middot; Wednesday, October 30</p>
+  <p>Tuesday had been sixty-five degrees. Wednesday never got above freezing, and the sky over Hanson Boulevard was the color of a nickel.</p>
+  <p>She put the bib on him and tipped him back. Before she picked up anything else she gave him the hand mirror, and held her own little mirror behind his lower front teeth so that he could see the backs of them.</p>
+  <p><em>See that?</em></p>
+  <p>There was a ridge along the gumline, yellow-white, like the scale in a teakettle.</p>
+  <p><em>That&rsquo;s six months,</em> she said. <em>You don&rsquo;t feel it going on. It goes on a little every day and it gets hard. Then the next goes on over it.</em></p>
+  <p>She took the mirror away and went to work. For some minutes there was the scrape of the scaler and the suction, and the radio at the front desk, which was still talking about Morris. Then she took both hands out of his mouth and sat back on her stool.</p>
+  <p><em>Curt. Is it true you&rsquo;ve been playing your own box?</em></p>
+  <p>He looked at the light. There was nothing else up there to look at.</p>
+  <p><em>Yes.</em></p>
+  <p><em>Since when?</em></p>
+  <p><em>May.</em></p>
+  <p>She did not say anything for a moment. Above the mask her eyes were the same as when she was counting.</p>
+  <p><em>Well, that was dumb,</em> she said. <em>You&rsquo;re the one person in that bar who&rsquo;s supposed to be on the other side of the glass.</em></p>
+  <p><em>I know it.</em></p>
+  <p><em>How much?</em></p>
+  <p><em>Five fifty-five.</em> He had not known he had the figure until he said it.</p>
+  <p><em>It doesn&rsquo;t stay five fifty-five. It only goes the one direction.</em> She picked the scaler up again and held it. <em>I can take off what&rsquo;s on there today. I can&rsquo;t do a thing about tomorrow. That&rsquo;s you.</em></p>
+  <p>Then she told him how it would be, in the voice she used for flossing.</p>
+  <p><em>You&rsquo;re in the booth Tuesday. I&rsquo;m not taking you out of it. You don&rsquo;t buy. Not out of your box, not through Rollie, not at the Legion on the way home, and not a scratch ticket at the SuperAmerica. And you tell Karen before I see her in church.</em></p>
+  <p><em>What about Rollie?</em></p>
+  <p><em>I&rsquo;ll talk to Rollie&rsquo;s boss about Rollie. Open.</em></p>
+  <p>She finished the lowers and polished. He rinsed and spat. At the desk the girl gave him the postcard, and he addressed it to himself again. Marlys took it from him and wrote in the date, <em>April 29, 4:30.</em> Under the date she wrote something else, small, and turned the card face down in the box with the others.</p>
+  <p><em>You&rsquo;ll get that in the spring,</em> she said.</p>
+  <p>But he had seen it. He looked it up that night at the kitchen table, after the kids were down. The only Bible he could find in the house was one Karen&rsquo;s grandmother had left, an American Standard with a zipper.</p>
+  <div class="verse">
+    <p>Afterward Jesus findeth him in the temple, and said unto him, Behold, thou art made whole: sin no more, lest a worse thing befall thee.</p>
+    <p>&mdash; John 5:14</p>
+  </div>
+  <p>He ran his tongue along the backs of his lower teeth. They were as smooth as the inside of a cup.</p>
+  <p>He did not tell Karen that night.</p>
+</section>
+
+<section>
+  <h2>IV. Twenty-Eight Inches</h2>
+  <p class="dateline">Coon Rapids &middot; Halloween and after</p>
+  <p>It started snowing Thursday before noon. By the time the kids went out there were eight inches down and more coming sideways. Ryan was a Ninja Turtle over a snowsuit. Kristin was a princess, and nothing of the princess showed but the crown, taped to her hood. They did both sides of the street and came in with their pillowcases full of snow.</p>
+  <p>He told Karen after they were asleep. He went down and got the envelope and put it on the table in front of her. There were eighty-five dollars in it.</p>
+  <p>She counted it. Then she looked for some time at the kitchen window, where it was coming down through the yard light as if somebody were emptying a sack.</p>
+  <p><em>Then I guess you&rsquo;re shoveling,</em> she said.</p>
+  <p>He shoveled Friday morning, and it was over his boots. He shoveled Friday at dark. He shoveled twice on Saturday, and when he came out Sunday the plow had been by again and laid a wall of gray chunks across the end of the driveway, hip high. The airport said twenty-eight inches when it quit. Don Carlson across the street ran his Toro out to the curb in twenty minutes each time and stood watching Curt over the top of his own bank.</p>
+  <p><em>Want me to come across with this?</em></p>
+  <p><em>No,</em> Curt said. <em>Thanks, Don.</em></p>
+  <p>He threw it one scoop at a time up on a pile by the mailbox, and by Sunday night the pile was taller than Ryan.</p>
+  <p>The roads were open Tuesday. The Tamarack had a banner over the bar and about thirty people under it. He sat down in the booth and squared the cash drawer. Around nine Rollie came down the rail with a twenty folded the long way between two fingers. He raised his eyebrows.</p>
+  <p>Curt shook his head.</p>
+  <p>Rollie shrugged and put the twenty in his shirt pocket. A man in a Twins cap came up to the slot and bought five. Curt counted them out of the bin and pushed them through. Then he reached under the stool for the ice cream pail, turned it upside down on the floor, and put his feet on it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If a man commits a sin, let him not do it again; let him not delight in sin: pain is the outcome of evil.<cite>Dhammapada 117, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary&rsquo;s story is a few lines long. The monk Seyyasaka grows discontented with the celibate life and says so to the monk he lives with, L&#257;&#7735;ud&#257;yi, who puts him up to breaking a rule of the order. It is the first of the thirteen <a href="https://en.wikipedia.org/wiki/Sanghadisesa">sa&#7749;gh&#257;disesa</a> rules, the one against masturbation, and the monastic code tells Seyyasaka&rsquo;s case as the reason the rule was made. After that, every time he feels discontent he does it again. The Buddha hears, sends for him, and asks whether the report is true. Seyyasaka says that it is. The Buddha calls him a foolish man for acting so against his state, lays the observance of the rules on him, tells him that such a course leads only to suffering, and speaks the verse, whose last line says that the heaping up of wrong is painful. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-02.htm">the full commentary story</a>. This retelling keeps the shape of the story and changes the habit. Curt&rsquo;s is another private one, taken up for relief on a friend&rsquo;s advice, forbidden to him by his place, and repeated until it is a pile.</p>
+    <h3>Pull-tabs, the Series and the snow, 1991</h3>
+    <p>Minnesota legalized bingo for nonprofit groups in 1945 and <a href="https://en.wikipedia.org/wiki/Pull-tab">pull-tabs</a> in 1981. By 1989 charitable gambling in the state <a href="https://www.house.mn.gov/hrd/pubs/gambhist.pdf">took in more than a billion dollars a year</a>, the most in the country, and most of it was paper pull-tabs sold from booths in bars for the benefit of veterans&rsquo; posts, Lions clubs, fire relief associations and youth hockey. Each organization has a licensed gambling manager who answers for the games. The law as revised in 1990 capped a ticket at two dollars and a prize at two hundred and fifty, and required a flare to be posted for every game and the big winners to be posted as they were paid. State law now bars sellers from playing at the site where they work; the card inside the glass in this story is the Boosters&rsquo; own. The Tamarack Lounge and everyone in it are invented. <a href="https://en.wikipedia.org/wiki/Coon_Rapids,_Minnesota">Coon Rapids</a> is a real suburb north of Minneapolis.</p>
+    <p>The Twins and the Atlanta Braves had both finished last in 1990, and met in the <a href="https://en.wikipedia.org/wiki/1991_World_Series">1991 World Series</a>. In Game Six, on Saturday, October 26, at the Metrodome, Kirby Puckett made a leaping catch against the plexiglass in left field in the third inning and won the game with a home run off Charlie Leibrandt in the eleventh. The next night Jack Morris pitched ten shutout innings, and Gene Larkin&rsquo;s single over a drawn-in outfield scored Dan Gladden for a 1&ndash;0 win. The Tuesday after was sixty-five degrees in the Twin Cities. Snow began on Thursday, October 31, and did not stop until Sunday. The <a href="https://www.dnr.state.mn.us/climate/journal/9110_31_halloween_blizzard.html">Halloween Blizzard</a> left 28.4 inches at the Minneapolis&ndash;St. Paul airport, still the largest single snowstorm in the cities&rsquo; records, with 8.2 inches of it on Halloween itself. Children went out in costumes over snowsuits. The hard deposit a hygienist scrapes away is <a href="https://en.wikipedia.org/wiki/Calculus_(dental)">calculus</a>, which builds up in layers when plaque is left on the teeth.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Seyyasaka from the Dhammapada commentary (verse 117). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/09-02.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Fable 5.2.
+  <div class="pager"><a href="one-shawl.html">&larr; One Shawl</a><a href="index.html">All stories</a><a href="going-home-money.html">Going-Home Money &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, falling = [], pile = [], seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    falling = []; pile = [];
+    if (reduce) { seed = 7; for (var i = 0; i < 26; i++) land(i); }
+  }
+  function cx0() { return W > 760 ? W * 0.5 + Math.min(W * 0.37, 430) : W * 0.88; }
+  // where the n-th dead ticket comes to rest: a low heap in one bottom corner
+  function land(n) {
+    var row = Math.floor(Math.sqrt(n * 0.9)), spread = (26 - row * 3);
+    pile.push({ x: cx0() + (rnd() - 0.5) * spread * 4.2, y: H - 10 - row * 5.5 - rnd() * 3, r: (rnd() - 0.5) * 1.3, tab: Math.floor(rnd() * 5) });
+  }
+  function ticket(x, y, rot, a, tab) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+    ctx.fillStyle = 'rgba(222,214,196,' + a + ')';
+    ctx.fillRect(-13, -8, 26, 16);
+    // five tabs, one of them pulled open
+    for (var k = 0; k < 5; k++) {
+      ctx.fillStyle = k === tab ? 'rgba(20,24,30,' + a + ')' : 'rgba(150,54,48,' + (a * 0.8) + ')';
+      ctx.fillRect(-11, -6.4 + k * 2.7, 22, 1.5);
+    }
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      if (t % 210 === 30 && pile.length + falling.length < 40) falling.push({ x: cx0() + (rnd() - 0.5) * 30, y: H * 0.55, r: rnd() * 3, vr: (rnd() - 0.5) * 0.05, tab: Math.floor(rnd() * 5), a: 0 });
+      for (var i = falling.length - 1; i >= 0; i--) {
+        var f = falling[i]; f.y += 0.55; f.r += f.vr; f.x += Math.sin((t + i * 40) / 37) * 0.3; f.a = Math.min(0.3, f.a + 0.004);
+        ticket(f.x, f.y, f.r, f.a, f.tab);
+        if (f.y > H - 14 - Math.floor(Math.sqrt(pile.length * 0.9)) * 5.5) { falling.splice(i, 1); land(pile.length); }
+      }
+      // when the heap is full, it is carried out and begins again
+      if (pile.length >= 40 && falling.length === 0) { if (!draw.fade) draw.fade = 1; draw.fade -= 0.004; if (draw.fade <= 0) { pile = []; draw.fade = 0; } }
+    }
+    var pa = 0.3 * (draw.fade && pile.length >= 40 ? draw.fade : 1);
+    for (var j = 0; j < pile.length; j++) ticket(pile[j].x, pile[j].y, pile[j].r, pa, pile[j].tab);
+    if (pile.length < 40) draw.fade = 0;
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>
