@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neither Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a tidal river on a moonless night, dark theme; at the foot of the page a dugout canoe crosses slowly from one cane bank toward the other and back and never lands, and a few coals glow on a log in the left corner. */
+  --ground: #0b1411;
+  --ground-2: #13201b;
+  --paper: #dfe4d8;
+  --paper-dim: #96a596;
+  --accent: #dd9248;
+  --glow: #f0b266;
+  --rule: rgba(223,228,216,.13);
+  --panel: rgba(19,32,27,.8);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #1a2a23 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.3 &middot; Māra</span></nav>
+<header>
+  <h1>Neither Bank</h1>
+  <div class="epigraph">Unto Allah belong the East and the West, and whithersoever ye turn, there is Allah&rsquo;s Countenance.<br>&mdash; Qur&rsquo;an 2:115</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how the old ones carried it,</span> on the Stono.</p>
+
+<section>
+  <h2>I. The Log</h2>
+  <p class="dateline">A landing on the Stono River, St. Paul&rsquo;s Parish, Carolina &middot; March 1719</p>
+  <p>The Englishman who owned the landing had him in the plantation book as Boatswain, one Negro man, old, a canoe maker. His name was Lamin. He had been a boy on the Gambia, where a teacher made him write the Book on a wooden board in ink of pot-black, and wash the board, and write it again, until what had been on the board was in him where no water could get at it. He was taken at about twenty. That was forty years gone, with Barbados in between, and he still had most of it.</p>
+  <p>At the landing he made canoes. A cypress came down in the back swamp, oxen dragged it to the bank, and Lamin did the rest with fire and an adze. He laid coals along the top of the log and let them eat down a hand&rsquo;s depth, scraped out the char, and laid coals again. It took most of a month to get the inside of a tree out of it. When the walls were two fingers thick he filled the hull with water and dropped hot stones in and wedged the sides apart with sticks, a little wider each day. Then it was a boat. It went into the book, and it carried tar barrels and rice down to Charles Town on the tide.</p>
+  <p>He liked to say there was no carpentry in it. <em>I don&rsquo;t make anything. I take out what isn&rsquo;t canoe.</em></p>
+  <p>Five times a day he went down to the river and washed his hands and mouth and face, his arms, his head and feet, and stood and bowed and knelt on a deerskin with his face up the creek toward where the sun rose. The overseer had long since decided there was no harm in it, since the canoes got made.</p>
+  <p>In those years there was a thing said in every quarter between the Santee and the Savannah, mostly at night and mostly low. People called it the far shore. Somewhere to the south, past more rivers than anyone had counted, the Spaniard had a stone fort and a town, and the Spanish king had sent word, before most of them were born, that any of the English king&rsquo;s slaves who reached it would be free. They poured water on your head there and gave you a saint&rsquo;s name. Some had gone and had not been brought back. The Yamasee, who had burned the next parish south four years before, lived under the Spaniard&rsquo;s wall now, and it was said there were black men among them who carried guns.</p>
+  <p>Nobody who meant to go asked Lamin where it was. They knew where it was. It was south. They asked him about the water: which creeks went through behind the islands and which ended in marsh, what the tide did at the cuts, how many could sit in a canoe of such a length and still show a hand&rsquo;s breadth of side. He told them. Then, in the dark of some moon, a canoe that had never been in any book would be gone from a place back in the swamp where he had been burning it out by night, and he would begin another.</p>
+  <p>He had sent off four that way. He was in none of them.</p>
+</section>
+
+<section>
+  <h2>II. The Asker</h2>
+  <p class="dateline">Dusk</p>
+  <p>The man came along the bank at the hour when Lamin had finished the sunset prayer and was rolling up the skin. He wore an osnaburg shirt torn at the shoulder, and he was mud to the thigh, and he said he had run from a place up Goose Creek nine days back and had eaten nothing in three.</p>
+  <p>Lamin gave him what was in the pot, hominy and a piece of mullet. The man ate some of it. He sat on the cypress chips with his back to the new hull on its blocks, and he looked at the quarter: the six houses, the smoke, the path that went back toward the swamp.</p>
+  <p><em>Father,</em> he said, <em>everywhere I go they are talking about the far shore. The far shore, the far shore. What is it they mean? Where does a man find this far shore?</em></p>
+  <p>Lamin knew him then. It is told two ways how he knew.</p>
+  <p>The plain way is that a man nine days in the marsh does not leave fish in the bowl, and he looks at a canoe before he looks at anything else on a landing, and this one had not looked at the canoe once. He was counting houses. There were men in the parish who paid for that kind of counting.</p>
+  <p>The other way it is told, the dogs had not barked when he came, and the tide mud where he had walked held no track, and Lamin called him by a name out of the Book.</p>
+  <p><em>Whisperer,</em> he said. <em>What have you to do with the far shore?</em></p>
+  <p>The man smiled. <em>The same as anyone. I want to get there.</em></p>
+  <p><em>You want to know where it is so you can stand in front of it. That is another thing.</em> Lamin put the rolled skin under his arm. <em>Nobody comes to that bank carrying what you carry. The ones who get there have put it down first.</em></p>
+  <p><em>I carry nothing, old man. Look at me.</em></p>
+  <p><em>You carry the count of these houses and what you mean to get for it. A man loaded like that sinks the boat at the landing.</em></p>
+  <p>Then he said something in the language he prayed in, the way a man says what he has had by heart since before his beard came. The people who told this afterward did not have those words. They had what he said next, in the speech of the landing, and those who know the Book say it lies close.</p>
+  <div class="verse">
+    <p>Unto Allah belong the East and the West, and whithersoever ye turn, there is Allah&rsquo;s Countenance. Lo! Allah is All-Embracing, All-Knowing.</p>
+    <p>&mdash; Qur&rsquo;an 2:115</p>
+    <p>Lo! verily the friends of Allah are (those) on whom fear (cometh) not, nor do they grieve?</p>
+    <p>&mdash; Qur&rsquo;an 10:62</p>
+  </div>
+  <p><em>Forty years I have been on this water,</em> Lamin said. <em>One bank behind me and one in front, and turn the boat and it is the other way about. I never found the bank that was more His than the other one. A man who knows that, you cannot frighten him. Where would you drive him? And you cannot tie him. What would you tie him to? He is across already, wherever you find him sitting. That is all the far shore I have to tell. Take it to whoever is paying you.</em></p>
+  <p>The man stood up. He looked once more at the swamp path, and then he looked at Lamin for some time, and it is said his face then was not the hungry face he had come with, nor any one face. He went back up the bank the way he had come. The dogs let him go.</p>
+</section>
+
+<section>
+  <h2>III. The Ebb</h2>
+  <p class="dateline">The same night</p>
+  <p>What the asker had not counted lay in the cane behind the chip pile, flat on the ground, where it had been lying since before he came. There were eight grown people and a child, from three plantations, waiting for the dark of the moon and the ebb at midnight. A woman called Phibba had come from across the river with her girl of four. There were two brothers the English had named for Angola, and a cattle hunter from the cowpen at the head of the creek, and the rest. They had heard every word.</p>
+  <p>Some of them had been sick with fear since sundown. They were afraid of the scout boats and of the open water at the sounds. They were afraid of the Spaniard and his water and his saints, and afraid most of all that the place was only a thing people said. One of the brothers had already whispered that he would go back before he was missed. All of them had carried the far shore in their minds as a bank so distant that the fear of the miles between had grown heavier than the thing they were leaving.</p>
+  <p>Phibba told it years afterward in Augustine, where she was called by another name and sold oranges at the plaza gate. She said that between one breath and the next the river stopped having a wrong side. She had no better way to say it. The fear was there and then she looked for it and it had nothing to stand on.</p>
+  <p>Nobody went back. When the dogs were quiet they went down the swamp path and found the canoe, which still smelled of its burning, and carried it to the creek and got in as he had told them, the heavy men at the ends and the child in the middle. Lamin did not push them off. He stood on the bank and the ebb took them.</p>
+  <p>He watched until the hull was only a darker piece of the dark, out in the stream, and from where he stood he could not have said which bank it was nearer to. Then he went back up through the cane to where the next cypress lay. It had been down since autumn and the bark was still on it. He felt along the top of it with his palm for the place where the coals would go.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">He for whom there is neither this nor that shore, nor both, him, the fearless and unshackled, I call indeed a Brahmana.<cite>Dhammapada 385, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary story is four sentences long. Māra, the tempter, puts on a disguise, comes to the Buddha at Jetavana and asks what this &ldquo;far shore&rdquo; is that people keep speaking of. The Buddha knows him at once and says, &ldquo;Wicked One, what have you to do with the far shore? That may be gained only by those who have freed themselves from the passions.&rdquo; He then speaks the verse, and many of those listening enter the stream. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mara_(demon)">Māra</a>.</p>
+    <h3>The Carolina lowcountry, 1719</h3>
+    <p>By 1708 enslaved Africans and their descendants were the majority of South Carolina&rsquo;s people. They raised cattle in open-range cowpens, burned tar and pitch, grew rice, and built and crewed the dugout cypress canoes that carried all of it to Charles Town; the College of Charleston&rsquo;s <a href="https://ldhi.library.cofc.edu/exhibits/show/africanpassageslowcountryadapt/sectionii_introduction/africans_in_carolina">Lowcountry Digital History Initiative</a> describes that early world. Many came from Senegambia, where Islam was old and boys learned the Qur&rsquo;an by writing it on washable boards. Lamin, the landing and everyone on it are invented. The <a href="https://en.wikipedia.org/wiki/Yamasee_War">Yamasee War</a> of 1715 was real: it left St. Bartholomew&rsquo;s Parish, the next one south of the Stono country, plundered and burned, and afterward most of the Yamasee withdrew to Spanish Florida.</p>
+    <p>The &ldquo;far shore&rdquo; was real too. In October 1687 eight men, two women and a small child reached St. Augustine from Carolina by boat, and the governor refused to give them back. In 1693 the Spanish crown ordered liberty for all such fugitives, &ldquo;the men as well as the women,&rdquo; on condition of Catholic baptism. For the next seventy years people went south by canoe through the creeks behind the Sea Islands, as the National Park Service recounts in <a href="https://www.nps.gov/casa/learn/historyculture/african-americans-in-st-augustine-1565-1821.htm">its history of Africans in St. Augustine</a>. One of them, a Mandinga man baptized <a href="https://en.wikipedia.org/wiki/Francisco_Men%C3%A9ndez_(black_soldier)">Francisco Men&eacute;ndez</a>, became captain of the free Black militia and, in 1738, of <a href="https://en.wikipedia.org/wiki/Fort_Mose">Fort Mose</a>, the first legally sanctioned free Black town in what is now the United States. Freedom there was conditional and often slow in coming. People went anyway.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Māra from the Dhammapada commentary (verse 385). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-03.htm">The original</a>. Scripture from <em>The Meaning of the Glorious Koran</em>, tr. Marmaduke Pickthall (1930). Written by Claude Fable 5.2.
+  <div class="pager"><a href="dit-and-dah.html">&larr; Dit and Dah</a><a href="index.html">All stories</a><a href="the-widows-priests.html">The Widow&#x27;s Priests &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, glints = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    glints = [];
+    var n = Math.round(Math.max(14, Math.min(40, W / 30)));
+    for (var i = 0; i < n; i++) glints.push({ x: Math.random(), y: Math.random(), w: 8 + Math.random() * 26, p: Math.random() * 6.28, s: 0.004 + Math.random() * 0.006 });
+  }
+  function bank(side) {
+    // a low dark bank of cane at one bottom corner
+    var bw = Math.min(W * 0.22, 190), top = H - 74;
+    ctx.fillStyle = 'rgba(4,9,7,0.9)';
+    ctx.beginPath();
+    if (side < 0) { ctx.moveTo(0, H); ctx.lineTo(0, top); ctx.quadraticCurveTo(bw * 0.6, top + 6, bw, H - 30); ctx.lineTo(bw + 30, H); }
+    else { ctx.moveTo(W, H); ctx.lineTo(W, top + 10); ctx.quadraticCurveTo(W - bw * 0.6, top + 14, W - bw, H - 30); ctx.lineTo(W - bw - 30, H); }
+    ctx.closePath(); ctx.fill();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var y0 = H - 64;
+    // river sheen
+    for (var i = 0; i < glints.length; i++) {
+      var g = glints[i];
+      var a = 0.05 + 0.06 * (0.5 + 0.5 * Math.sin(g.p + t * g.s * 60));
+      ctx.strokeStyle = 'rgba(190,205,190,' + a.toFixed(3) + ')';
+      ctx.lineWidth = 1;
+      var gx = g.x * W, gy = y0 + g.y * 56;
+      ctx.beginPath(); ctx.moveTo(gx, gy); ctx.lineTo(gx + g.w, gy); ctx.stroke();
+    }
+    // the canoe, crossing and recrossing, never moored
+    var span = W * 0.56, mid = W * 0.5;
+    var ph = reduce ? 0 : Math.sin(t * 0.0009);
+    var cx = mid + ph * span * 0.5, cy = y0 + 26 + Math.sin(t * 0.02) * 0.8;
+    ctx.fillStyle = 'rgba(6,12,10,0.95)';
+    ctx.beginPath();
+    ctx.moveTo(cx - 26, cy - 2); ctx.quadraticCurveTo(cx, cy + 7, cx + 26, cy - 2);
+    ctx.quadraticCurveTo(cx, cy + 2, cx - 26, cy - 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(190,205,190,0.10)';
+    ctx.beginPath(); ctx.moveTo(cx - 34, cy + 6); ctx.lineTo(cx + 34, cy + 6); ctx.stroke();
+    bank(-1); bank(1);
+    // coals on the next log, left bank
+    var ex = Math.min(W * 0.09, 70), ey = H - 58;
+    var fl = reduce ? 1 : 0.8 + 0.2 * Math.sin(t * 0.05) * Math.sin(t * 0.013);
+    var gr = ctx.createRadialGradient(ex, ey, 0, ex, ey, 34);
+    gr.addColorStop(0, 'rgba(240,160,80,' + (0.30 * fl).toFixed(3) + ')');
+    gr.addColorStop(0.4, 'rgba(200,90,30,' + (0.10 * fl).toFixed(3) + ')');
+    gr.addColorStop(1, 'rgba(200,90,30,0)');
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(ex, ey, 34, 0, 6.2832); ctx.fill();
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twenty Thousand Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on pale cut limestone in flat winter light, light theme; in the margins, pencil X's are made one at a time on the squares of a faint calendar grid, and the oldest ones fade as the new ones come. */
+  --ground: #e4dfd5;
+  --ground-2: #d8d2c6;
+  --ink: #2a2622;
+  --ink-dim: #6c655b;
+  --lake: #44606b;
+  --pencil: #8a3b2c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #efebe3 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(42,38,34,.25); }
+.series a:hover { color: var(--pencil); }
+a:focus-visible { outline: 2px solid var(--lake); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--lake); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(68,96,107,.5); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--pencil); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--lake); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(239,235,227,.82); border: 1px solid rgba(42,38,34,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--pencil); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,38,34,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--lake); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--lake); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,38,34,.15); border-bottom: 1px solid rgba(42,38,34,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--pencil); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--lake); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--lake); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--lake); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(239,235,227,.82); border-left: 2px solid var(--lake); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 20.2 &middot; Aniccalakkha&#7751;a</span></nav>
+<header>
+  <h1>Twenty Thousand Days</h1>
+  <div class="epigraph">Coming, they go; and then is best,<br>When each has ceased, and all is rest!<br>&mdash; Buddhist Suttas, Introduction</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how I heard it told,</span> on the yard at Eddyville.</p>
+
+<section>
+  <h2>I. The Castle</h2>
+  <p class="dateline">Kentucky State Penitentiary, Old Eddyville &middot; November 2000</p>
+  <p>The penitentiary stands on the bank of the Cumberland where it widens into Lake Barkley, a fortress of yellow-gray limestone with towers at the corners and battlements along the top, put up in the 1880s by Italian stonemasons out of rock quarried down the river. The men call it the Castle. When the Corps of Engineers dammed the river in the 1960s and raised the water, they moved the whole town of Eddyville up the road onto higher ground, the courthouse and the churches and the stores and every house that would go on a truck, and what would not go on a truck went under the lake. The prison stayed where it was. It was the one thing in Old Eddyville that nobody thought of moving.</p>
+  <p>On the second Saturday of every month, a Sri Lankan monk named Bhante Piyaratana drove up from Nashville to meet with the Buddhists. There were four of them that year. They met in a side room off the chapel, with a steel table pushed against the wall and plastic chairs in a circle, and a correctional officer named Darla Mize sitting by the door, as one always had to, with her radio turned down low.</p>
+  <p>Bhante was sixty-eight. He had come from a village outside Kandy in 1989 to look after a small temple in a brick house in Antioch, south of Nashville, for families who worked at the hospitals and at Vanderbilt, and he had been coming to Eddyville since 1997, when a man there wrote to the temple. That man had made parole and gone. The four who were left had all come after. He drove a 1988 Buick that a dentist&rsquo;s widow had given the temple, two hours up the interstate, in his robe and a gray cardigan and a knit cap, and he carried a book bag with a bell in it and two Styrofoam cups from the temple kitchen, and nothing else, because nothing else was allowed.</p>
+  <p>A year before, he had taught them to sit. He had given them the breath, in and out, to watch at the tip of the nose, and he had given them the wish for the good of all beings, to say over to themselves at night. They had worked at it for a year as hard as any four men ever worked at anything.</p>
+  <p>Raymond Tolbert, who was from the West End of Louisville and had been down since 1984, sat on his bunk every night from ten until the eleven o&rsquo;clock count, cross-legged, with a towel over his knees, and when the count was cleared sat again until one. Lonnie Gish, from Clover Fork in Harlan County, the oldest of them, tried every night and fell asleep every night, sitting up, and woke at the count with his chin on his chest. Curtis Wyatt, who had grown up in Lyon County within sight of the towers and used to fish below the walls with his uncle, found that when he watched his breath he got angrier than he had been in years, and he went to the hole twice that spring for things he said. The youngest, Anthony Briggs, who was twenty-three and had been there two years, quit in June and came back in August without explaining.</p>
+  <p>On the second Saturday in November, Bhante came in and set the bell on the steel table and asked how it was going, the way he always asked, and Raymond, who never said anything first, said it.</p>
+  <p><em>It ain&rsquo;t working, Bhante. We been doing it a year. We need something else.</em></p>
+</section>
+
+<section>
+  <h2>II. The Count</h2>
+  <p class="dateline">The side room off the chapel</p>
+  <p>Bhante did not answer him. He closed his eyes and sat with his hands folded in his lap, for so long that Anthony looked at Curtis and Curtis shrugged, and Officer Mize looked up from her radio. The furnace came on somewhere in the walls. It was about four minutes. Then Bhante opened his eyes and asked them a question that did not seem to have anything to do with it.</p>
+  <p><em>How long have you been here?</em></p>
+  <p>None of them had to think. That is a thing about men who are doing life. Lonnie said, <em>Ten thousand one hundred and twenty-nine days.</em> Raymond said, <em>Fifty-eight hundred and forty.</em> Curtis said, <em>Thirty-five hundred and ten.</em> Anthony said, <em>Seven hundred and twelve.</em></p>
+  <p>Bhante looked at Officer Mize. She had been at the Castle nineteen years and had never once said anything in the Buddhist meeting, and she did not intend to, and she heard herself say, <em>I don&rsquo;t count mine that way. I count what&rsquo;s left. Two thousand and forty, till I can draw my pension.</em> The men laughed. She did not mind.</p>
+  <p>Bhante took a request slip out of his book bag and the stub of a pencil and added up the four numbers, slowly, carrying with his lips moving, and turned the slip around on the table so they could see it. It said 20,191.</p>
+  <p><em>Twenty thousand days,</em> he said. <em>You have been practicing this a long time. Longer than me.</em></p>
+  <p><em>Practicing what?</em></p>
+  <p>He asked Lonnie whether he still kept the calendars. Everybody in the room knew Lonnie kept the calendars. He had kept one on the wall of every cell since February 1973, the free kind from a feed store or a funeral home, and every night before the count he put an X on that day with a pencil, and on the first of January he took the old calendar down and put it in his footlocker with the others. There were twenty-seven of them.</p>
+  <p><em>When you put the X on the day,</em> said Bhante, <em>where is the day?</em></p>
+  <p>Lonnie thought. <em>Gone.</em></p>
+  <p><em>In twenty-seven years, did one day stay?</em></p>
+  <p><em>No, sir.</em></p>
+  <p><em>Not one. Good.</em> Bhante put the pencil down on the slip. <em>This is the whole practice. You know it already better than I know it. Now do the same with the breath. It comes. X. It is gone. Do it with the sounds. Somebody shouts on the tier. X. Gone. Do it with the thoughts. Do it with anything that comes up. Every one, X. Don&rsquo;t try to make anything stay. Just watch whether one stays.</em></p>
+  <p>Then he rang the bell once, and while it was still sounding he chanted something in Pali, a short verse, three times through. Raymond asked him what it was. Bhante said it was what the monks chant at every funeral in Sri Lanka, standing at the grave, holding one end of a long white cloth while the other end lies on the coffin, and that he had chanted it over his own father and mother and over more people in Nashville than he could count. He said there was an Englishman, a civil servant in Ceylon in the old days, who had put it into English a hundred and twenty years ago in the introduction to a book of the old sermons, describing a funeral in Ceylon, and he had found it in the Vanderbilt library and copied it out, and he said it to them now in English, standing up, from memory.</p>
+  <div class="verse">
+    <p>How transient are all component things!<br>Their nature&rsquo;s to be born and die;<br>Coming, they go; and then is best,<br>When each has ceased, and all is rest!</p>
+    <p>&mdash; Buddhist Suttas, Introduction</p>
+  </div>
+  <p>Curtis said, <em>That&rsquo;s it?</em></p>
+  <p><em>That&rsquo;s it,</em> said Bhante, and picked up his book bag, because the officer was standing and it was time.</p>
+</section>
+
+<section>
+  <h2>III. Eleven O&rsquo;Clock</h2>
+  <p class="dateline">The cellhouse &middot; that night</p>
+  <p>The televisions in the dayroom had been on Florida for four days, men in suits holding ballots up to the light, a recount, and then another count of the recount. Lonnie went past without looking.</p>
+  <p>At a quarter to eleven he put the X on the eleventh of November with the pencil and sat down on the bunk with his back to the wall and his hands on his knees. He did not try to watch the breath at the tip of his nose. He watched it go. It came in, and he let it come in, and when it went out he put an X on it. It was gone. The next one came. X.</p>
+  <p>A man two cells down was shouting at somebody about a radio. X. It was gone, and another shout came, and that was gone. The pipes knocked. Gone. The officer&rsquo;s keys came down the tier for the count and passed his door and went on, and the sound of them got smaller and stopped. His knee hurt. X. It hurt again, a new hurt, and that one went too. He had been counting days for twenty-seven years without once noticing what he was looking at, and now he was looking at it, and it was everything. Nothing stayed. Not one thing in the cellhouse stayed, not the light on the ceiling, not the voices, not the smell of the floor wax, not Lonnie.</p>
+  <p>Then the bar in Evarts came up, the way it came up most nights, the way it had come up nearly every night since February 1973: the jukebox, the cue in his hand, the man&rsquo;s face, the way the man went down and did not get up. It came up whole, as it always did, and he waited for it to stay the way it always stayed, all night.</p>
+  <p>It went. He saw it go. It had come and it had gone, like the shout and the keys. It came up again, and that was a new one, and it went too. He had thought for twenty-seven years that it was one thing he carried, and it had never been one thing. It had been a thousand thousand things, each one coming up and ceasing, and he had been picking up every one of them and holding it, and he was so tired. Something in him got tired of it then, the way a hand gets tired, and opened.</p>
+  <p>He sat on the bunk until the two o&rsquo;clock count without moving, and the officer looked at him through the bars and went on.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>It went the same way with the others, though none of them ever said much about it, and none of them on the same night. Raymond on the yard on Monday morning stood by the fence in the cold and laughed out loud at nothing anybody could see, and when Curtis asked him what was funny he said, <em>It keeps going.</em> Curtis himself did not go to the hole again, the rest of the time he was at the Castle. Anthony, the youngest, said it happened to him in the shower, of all places, with the water.</p>
+  <p>Officer Mize, who had only been sitting by the door, noticed on the Monday that she had come to work without looking at the little calendar in her lunchbox where she kept her number. She did not look at it on Tuesday either. She kept it in the lunchbox until she retired, five years and some months later, and she never did put another mark in it.</p>
+</section>
+
+<section>
+  <h2>IV. Winter Pool</h2>
+  <p class="dateline">The side room, and the road home &middot; December</p>
+  <p>In December Lonnie asked Bhante if there was a thing the monks did for the dead, besides the verse. He said the man&rsquo;s name. He had not said it out loud since his trial.</p>
+  <p>Bhante took the two Styrofoam cups out of his book bag and set one on the steel table and filled the other at the water fountain in the hall, with Officer Mize&rsquo;s permission. He held the full cup over the empty one and said that at home, at the grave, they pour water from one vessel into another until it fills and runs over, for the dead, so that what is given here reaches them there. He began to pour, slowly, and chanted while he poured, and the water rose in the lower cup and reached the brim and ran over onto the table and down the steel leg to the floor tiles, and he went on pouring until the upper cup was empty. Then he said the English, which was in the same old book, just after the other.</p>
+  <div class="verse">
+    <p>As water poured on mountain tops<br>Must soon descend, and reach the plain;<br>So surely what is given here<br>Will reach and bless the spirits there!</p>
+    <p>&mdash; Buddhist Suttas, Introduction</p>
+  </div>
+  <p>Lonnie looked at the water on the floor for a while.</p>
+  <p><em>That river out there,</em> he said, <em>starts on Clover Fork. Three forks come together at Baxter, below Harlan, and that&rsquo;s the start of the Cumberland. He was from Baxter.</em> He did not say anything else. Officer Mize went and got paper towels, and she and Lonnie wiped up the floor together.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Bhante drove home the long way that afternoon, down the lake road past Kuttawa, because he liked to see the water. It was the second week of December and the Corps had let the lake down to its winter level, and in the shallow bays the old towns came up a little way out of it, the way they did every winter. Pieces of brick foundation. Rows of stumps that had been telephone poles. Where the road bent along the shore, he could see a stretch of the old highway coming up out of the gray water onto the mud, a straight piece of pavement with the center line still on it, faded almost to nothing. It ran up out of the lake for fifty yards and stopped. He pulled over in the Buick and looked at it for a while with the engine running. A man in a duck boat was going by out on the open water, and the wake came in and went over the end of the road, and drew back, and the line was still there.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">&lsquo;All created things perish,&rsquo; he who knows and sees this becomes passive in pain; this is the way to purity.<cite>Dhammapada 277, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, five hundred monks take a meditation subject from the Buddha into the forest and strive with all their might, but cannot reach arahantship, so they come back to ask for a subject better suited to them. The Buddha considers, and sees that in the time of the previous Buddha, Kassapa, these same monks had spent twenty thousand years meditating on impermanence. So he gives them a single verse on impermanence, and at the end of it they are all established in arahantship. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-02.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Impermanence">impermanence</a> in Buddhist teaching. The verse Bhante chants, <em>Anicc&#257; vata sa&#7749;kh&#257;r&#257;</em>, is said in the Mah&#257;parinibb&#257;na Sutta to have been spoken at the Buddha&rsquo;s death and is still chanted at Theravada funerals. Both English renderings in the story come from T. W. Rhys Davids&rsquo;s introduction to <a href="https://archive.org/details/buddhistsuttas00daviuoft">Buddhist Suttas</a> (Sacred Books of the East 11, 1881), where he describes a funeral in Ceylon: the white cloth held between the monks and the coffin, and water poured into a cup until it overflows.</p>
+    <h3>Eddyville, 2000</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Kentucky_State_Penitentiary">Kentucky State Penitentiary</a>, the &ldquo;Castle on the Cumberland,&rdquo; was built of limestone blocks by Italian stonemasons and opened in 1890; it is the state&rsquo;s oldest prison and its maximum-security institution. When <a href="https://en.wikipedia.org/wiki/Lake_Barkley">Lake Barkley</a> was impounded behind Barkley Dam in 1966, the towns of <a href="https://en.wikipedia.org/wiki/Eddyville,_Kentucky">Eddyville</a> and Kuttawa were moved to new sites, and what was left by the water became Old Eddyville and Old Kuttawa. Each fall the Corps of Engineers draws the lake down to winter pool, and <a href="https://www.fourriversexplorer.com/?p=626">old roads, foundations and pavement</a> come up out of the water.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Cumberland_River">Cumberland River</a> begins where its Poor, Clover and Martins forks meet at Baxter in Harlan County, flows west through Nashville, and returns to Kentucky through Lake Barkley on its way to the Ohio. In November and December 2000, while the story takes place, the presidential election hung on the <a href="https://en.wikipedia.org/wiki/2000_United_States_presidential_election_recount_in_Florida">Florida recount</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Characteristic of Impermanence from the Dhammapada commentary (verse 277). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-02.htm">The original</a>. Scripture from T. W. Rhys Davids, <em>Buddhist Suttas</em>, Sacred Books of the East 11 (1881). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-stringer.html">&larr; The Stringer</a><a href="index.html">All stories</a><a href="twelve-stacks.html">Twelve Stacks &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, cells = [], marks = [], t = 0, S;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function layout() {
+    // a faint calendar grid (seven columns) in each side margin, or along the foot on narrow screens
+    cells = []; marks = [];
+    var col = Math.min(620, W * 0.9), side = (W - col) / 2;
+    if (side > 120) {
+      S = Math.min(26, (side - 30) / 7);
+      var gw = S * 7, rows = Math.floor((H * 0.8) / S);
+      var lx = (side - gw) / 2, rx = W - side + (side - gw) / 2, y0 = H * 0.1;
+      [lx, rx].forEach(function (x0) {
+        for (var r = 0; r < rows; r++) for (var k = 0; k < 7; k++) cells.push([x0 + k * S, y0 + r * S]);
+      });
+    } else {
+      S = Math.min(18, (W - 20) / 14);
+      var x0 = (W - S * 14) / 2, yb = H - S * 3 - 8;
+      for (var r2 = 0; r2 < 3; r2++) for (var k2 = 0; k2 < 14; k2++) cells.push([x0 + k2 * S, yb + r2 * S]);
+    }
+    if (reduce) { for (var i = 0; i < cells.length; i += 3) marks.push({ i: i, age: 400 }); }
+  }
+  var next = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(42,38,34,0.05)'; ctx.lineWidth = 1;
+    for (var i = 0; i < cells.length; i++) ctx.strokeRect(cells[i][0] + 0.5, cells[i][1] + 0.5, S, S);
+    if (!reduce && t % 70 === 0 && cells.length) {
+      marks.push({ i: next % cells.length, age: 0 }); next++;
+      if (marks.length > 40) marks.shift();
+    }
+    for (var m = 0; m < marks.length; m++) {
+      var mk = marks[m], cc = cells[mk.i]; if (!cc) continue;
+      if (!reduce) mk.age++;
+      var draw1 = Math.min(1, mk.age / 30), draw2 = Math.max(0, Math.min(1, (mk.age - 30) / 30));
+      var fade = 1 - Math.min(1, (marks.length - 1 - m) / 40);
+      var a = 0.32 * fade; if (a < 0.01) continue;
+      ctx.strokeStyle = 'rgba(138,59,44,' + a + ')'; ctx.lineWidth = 1.3; ctx.lineCap = 'round';
+      var p = S * 0.22, x = cc[0], y = cc[1];
+      ctx.beginPath(); ctx.moveTo(x + p, y + p); ctx.lineTo(x + p + (S - 2 * p) * draw1, y + p + (S - 2 * p) * draw1); ctx.stroke();
+      if (draw2 > 0) { ctx.beginPath(); ctx.moveTo(x + S - p, y + p); ctx.lineTo(x + S - p - (S - 2 * p) * draw2, y + p + (S - 2 * p) * draw2); ctx.stroke(); }
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); layout(); draw();
+  window.addEventListener('resize', function () { size(); layout(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

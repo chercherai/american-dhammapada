@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beat In the Reed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose under a reed eave on a wet December night, dark theme; rain slants down the open margins on either side and none of it falls over the words; now and then a drop lets go of the eave and is gone; datelined sections. */
+  --ground: #13120e;
+  --ground-2: #1d1a13;
+  --paper: #e7dec9;
+  --paper-dim: #a59b83;
+  --accent: #c9a55a;
+  --glow: #9fb2bc;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #1d1a13 0%, #13120e 40%) fixed, #13120e;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(0,0,0,.28); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 1.9 &middot; Nanda</span></nav>
+<header>
+  <h1>Beat In the Reed</h1>
+  <div class="epigraph">The iuster ye driue it, the smoother and plaine,<br>more handsome ye make it to shut off the raine.<br>&mdash; Thomas Tusser, Fiue Hundred Pointes of Good Husbandrie (1580)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Thus it was told me,</span> on the north bank of the James.</p>
+
+<section>
+  <h2>I. The Cup</h2>
+  <p class="dateline">Chalk, by Gravesend, Kent &middot; April 1618</p>
+  <p>Ned Fenn was a reed thatcher, the son and grandson of reed thatchers, and at twenty-three he had the name of the best hand between Gravesend and the Medway. On the Tuesday after Easter three things came to him in one day. His uncle, old Mr. Lyle, who had raised him, made over to him the tools and the custom of the trade. He was to sleep that night for the first time under a roof of his own, a cottage of two rooms at the marsh end of Chalk, which he had built through the winter and thatched with reed of his own cutting. And at nine in the morning he married Joan Barrow, whom the whole parish called the Fair Maid of Kent, after the old princess, and nobody in the parish thought the name too much for her.</p>
+  <p>His cousin came to the wedding. Thomas Lyle was the old man's only son, twelve years older than Ned, and when Ned was small he had followed Thomas about the marsh the way a dog follows a cart. Thomas had gone up to Cambridge and taken orders and buried a young wife. Now he was going out as minister to a new plantation in Virginia, and his ship lay off Gravesend that same morning, waiting on the searchers and the ebb.</p>
+  <p>He came over the fields in his black coat. He ate bride-cake standing in Ned's new doorway, and looked up at the roof, and said it was a good roof. Under his arm he had a small silver communion cup in a case of boiled leather, which he would not trust to the hold of a ship. When he had wished them joy he put the case into Ned's hands, as a man does who wants both his own free, and kissed Joan on the forehead, and went out of the door and down the lane without it.</p>
+  <p>Ned stood holding the cup. It was not a thing to shout after a man about, like a hat. He said to Joan, <em>He will want it at the gate,</em> and went after him.</p>
+  <p>Thomas did not turn at the gate. He walked like a man with a tide to catch. Ned thought, <em>At the lane's end.</em> At the lane's end his cousin did not put out a hand. Ned thought, <em>At the church stile,</em> and then, <em>At the top of the town,</em> and then, <em>At the stairs.</em> He had known since he was four years old that you did not pluck Thomas Lyle by the sleeve. He was a bridegroom in his wedding hose, a mile from his bride, carrying the vessel of the Sacrament through Gravesend on a market morning, and he could not find the place to stop.</p>
+  <p>At the head of the water stairs he heard her. Somebody had run to tell her that the parson was walking off with her husband, and Joan had come the whole mile as she was, with half her hair braided up for the day and the other half down her back. She stood at the top of the stairs with one hand on the post.</p>
+  <p><em>Ned,</em> she said. <em>Come back soon.</em></p>
+  <p>It went through him like cold water. He stood on the wet steps with the cup. His cousin was already seated in the wherry and had not once looked round, and the waterman was holding the boat to the stair with one oar and looking at Ned to learn whether he was coming. Ned thought, <em>At the ship's side, then,</em> and stepped in.</p>
+  <p>At the ship's side Thomas went up the ladder, and Ned went up after him to put the cup into his hand on the deck. On the deck the anchor was coming home and the pilot was shouting, and Thomas turned to him at last and said, <em>Ned, will you come to Virginia?</em></p>
+  <p>He did not want to go to Virginia. He wanted to be in the cottage at the marsh end under his own reed. But he had never in his life said no to that face, and he found he could not begin now, on a ship's deck, with the cup in his hands.</p>
+  <p><em>Aye,</em> he said. <em>I'll come.</em></p>
+  <p><em>Then enter him,</em> said Thomas to the purser, and Edmund Fenn of Chalk was written down a tenant of the Company for seven years.</p>
+</section>
+
+<section>
+  <h2>II. The Portion</h2>
+  <p class="dateline">Gravesend stairs &middot; the same tide</p>
+  <p>Thomas Lyle had a son, Rafe, seven years old, whom the grandfather kept. The boy's nurse had dressed him that morning in his best and walked him down to the water and pointed. <em>That is your father, in the black coat. He is going over the sea, and he has not left you so much as a spoon. Go and ask him for your portion.</em></p>
+  <p>The boy went down the stairs and into the next boat as if it had been sent for him. He came up the ship's ladder behind Ned and took hold of his father's coat and said, <em>It is pleasant standing by you, sir.</em> Then he said, <em>Father, give me my portion,</em> and when Thomas walked aft he walked aft behind him, saying it. The sailors could not get him off the coat, and Thomas did not shake him off.</p>
+  <p>Thomas looked at the boy a good while. Whatever there was to leave him in England would be spent, or would spoil him. He said to the mate, <em>Let him stay. I will give him a portion that does not waste,</em> and the boy was entered too.</p>
+  <p>So old Mr. Lyle, who had walked down behind the rest with his stick, stood at the head of Gravesend stairs beside a girl with her hair half braided, and watched his son and his nephew and his grandson go down the river on one ebb. He was a man who seldom asked for anything. He wrote that night, and the letter went by the next ship, and there was one request in it: that his son would never again carry any man's child over the sea unless the father and the mother had both said yes.</p>
+  <p>Thomas wrote back that he would not, and he kept to it. In the years after, ships brought out children by the hundred, taken up off the London streets by the constables and bound to the Company, and planters stood at the landing to receive them. The minister of Mereworth Hundred would never put his name to one.</p>
+</section>
+
+<section>
+  <h2>III. New Ground</h2>
+  <p class="dateline">Mereworth Hundred, on the James &middot; 1618 and 1619</p>
+  <p>The hundred was some forty men and six women, a palisade, a storehouse, and a church that was a tobacco barn with a table in it, on the north bank a day's row above James City. Behind it the new ground ran back into the woods. It had been cleared the way the people of the country cleared theirs: the great trees ringed with a hatchet and left to die standing, the brush burned, and corn and tobacco hilled up among the black stumps.</p>
+  <p>Across the river and above were the towns of the Weyanock, who had planted that shore longer than anyone could say. There had been four years of peace. Weyanock men came into the hundred with venison to trade, and went about looking into the English houses with the plain interest of people seeing how strangers live.</p>
+  <p>In the first summer a third of the newcomers died of the fluxes and the burning fever, which the old hands called the seasoning. Ned lived. The boy Rafe lived, and carried the cup in its case behind his father to every sickbed, and was not heard to ask for his portion again.</p>
+  <p>Ned was set to roofs. There was reed in plenty along the creeks, taller and coarser than Thames reed, and he cut it and carried it, and by Christmas he had roofed the storehouse, the church and nine cabins. Every one of them leaked. It was the talk of the hundred. A man who knew the trade could have told why: the courses were laid slack, the reed was not driven home, the ridge was skimped. Ned knew the trade. He would be up the ladder with a bundle under his arm and the legget in his hand, and he would be standing at the head of Gravesend stairs. He would be counting weeks. So many out, so many home, and she had said soon. Rain came through his roofs as it comes through a hedge, and men lay in the wet and cursed the Kentish thatcher and his cousin with him.</p>
+  <p>In the spring he said it out before a dozen of them in the storehouse.</p>
+  <p><em>I am sick of it. I cannot bear another season of it. When the ship goes home I mean to go in her, term or no term, and they may do what they like with me at the other end.</em></p>
+  <p>It was no small thing to say aloud. No bound man left Virginia without the Governor's pass, and men had been whipped there for less than the wish.</p>
+  <p>The minister had it within the hour, and sent for him.</p>
+  <p><em>Is it true, Ned, what you said before them all?</em></p>
+  <p><em>It is true, sir.</em></p>
+  <p><em>Why?</em></p>
+  <p><em>When I left my house, sir, Joan stood at the head of the stairs with her hair half up, and she said, Come back soon. I hear it. I am on the ladder and I hear it. That is the whole of it.</em></p>
+  <p>Thomas took him by the arm, above the elbow, and walked him out by the land gate into the new ground.</p>
+  <p>It had been burned over that week for planting, and the ash was still warm. At the far side, on a burnt oak stump, sat a she-raccoon that the fire had caught. The people of the country called the creature aroughcun: a thing the bigness of a cat, with hands like a child's. This one's ears were burned off, and her tail, and the end of her nose. She sat on the black stump with a charred ear of last year's corn in her two hands, gnawing at it, and she would not leave it though they came within a rod of her.</p>
+  <p><em>Mark her,</em> said Thomas, and walked on.</p>
+  <p>What came next Ned told the same way all his life, and would not be argued out of it. His cousin still had him by the arm. They went in under the standing timber at the edge of the clearing, and it was a great deal farther through than it had any right to be, and then they were up. That was his word for it. He never said heaven. It was a wide court, he said, paved with stone, with a light on it like the light on the river at five of a summer morning, and at the upper end some great lord kept his state, whose face Ned did not see. Waiting on that lord were maids. Five hundred, he said, though he owned he had not counted. They went barefoot on the pavement, and their feet were pink as a dove's feet. He stood looking at them as he had stood with the cup that morning in Chalk, not knowing where to stop.</p>
+  <p><em>Ned,</em> said Thomas. <em>Which is the fairer, your Joan or these?</em></p>
+  <p>And Ned Fenn, who was an honest man, and was sorry to hear it come out of his own mouth, said, <em>Sir, as that burnt thing on the stump is to Joan, so is Joan to these. She does not come into the count. Not a part of it. Not a part of a part.</em></p>
+  <p><em>Then be easy,</em> said Thomas. <em>Do the work you were brought here to do, and I stand surety that you shall have them. The five hundred.</em></p>
+  <p><em>If you stand surety for that, sir,</em> said Ned, <em>I will stay, and gladly.</em></p>
+  <p>Then they were in the new ground again with the ash warm under their shoes, and the raccoon was still at her corn.</p>
+</section>
+
+<section>
+  <h2>IV. Wages</h2>
+  <p class="dateline">Mereworth Hundred &middot; 1619 to 1621</p>
+  <p>It could not be kept, and Ned was no man to keep it. He went about for a week with his mouth open. Before the corn was up, every soul in Mereworth knew that the thatcher was staying for wages, that the parson had gone bail for them, and what the wages were.</p>
+  <p>They did not let it lie. There were men in the hundred who had come for land, and men who had come because a justice gave them the choice, and two or three who would have said, if you pressed them, that they had come for God. Not one of them had come for five hundred barefoot maids. They called him the hireling. They called him the bought man. <em>Good morrow, Ned, and how do your wages?</em> It was said at the storehouse door and across the church. He was despised for it, and he knew that he was, and he could not say they were wrong.</p>
+  <p>He stopped talking. He went to the work, since the work was the condition; and because nobody now would hand reed up to him, he did it alone.</p>
+  <p>He began by stripping the church. He had the whole slack roof off and on the ground, and he stood and looked at it, and saw it for what it was, the work of a man who had been somewhere else.</p>
+  <p>Then he crossed the river. He had watched the Weyanock men look into the English houses, and look up, and say nothing, and he wanted to see what they looked up at when they were at home. The houses of the Weyanock town were long and round-backed. The women built them. They were covered with mats of sewn rush, or with bark taken from the tree in sheets and laid so close, each over the next, that nothing could get between. Ned stood inside one through an afternoon of rain, with the fire burning on the floor and the smoke going out at the top, and no drop came in.</p>
+  <p>A woman of that town, old enough to have been his mother, saw what he was looking at. She had no English and he had nothing of her tongue. She took up a mat she was mending and showed him with her hands how the rushes all lay one way, and how near together the stitches were set, and she had him pull at it. He thanked her as well as a man can with his cap. He went back four or five times that year, and he cut rush for her when he went.</p>
+  <p>He roofed the church again, by himself, through the autumn. He laid each course and beat it up with the legget until the butts stood as even as a planed board, and pinned it down, and went on to the next. When his mind went off to Gravesend stairs he would find that his hand had gone slack with it, and he pulled out the last armful and laid it again. Later it was not the stairs. It was the paved court and the feet. That slacked his hand the same, and he pulled that out too. In time he found there was no thought of that kind, about any woman or any place, that did not let the water in somewhere.</p>
+  <p>It took him the better part of two years to go over every roof in the hundred. By the end he could lay reed for a whole day with nothing in him but the reed. One evening in the second autumn he was on the ridge of the last cabin with the light going, and he looked in himself for the wanting, as a man feels with his tongue for a sore tooth. It was gone. He tried Joan, and the cottage, and the ship home, and the five hundred, one after another, and there was nothing to any of them. He sat on the ridge a while longer. Then he came down the ladder and put his tools away dry.</p>
+  <p>The sexton said afterward that there was a light in the church that night, and no candle that he could find, and nobody there. Thomas Lyle sat up late in his house as if he expected someone. Toward midnight Ned knocked.</p>
+  <p><em>Sir,</em> he said. <em>That surety you stood for me. I release you from it.</em></p>
+  <p><em>I knew at dusk,</em> said Thomas. <em>And I was quit of it the same hour. The moment you stopped wanting them, Ned, I was out of my bond.</em></p>
+</section>
+
+<section>
+  <h2>V. The Maids</h2>
+  <p class="dateline">Mereworth Hundred &middot; December 1621</p>
+  <p>The year before, the Company in London had sent over ninety young women to make wives for the planters, so that the men might be more settled and less ready to go home. Now it sent fifty-seven more. The first of them came in the <em>Marmaduke</em> before Christmas, chosen with extraordinary care, the Company wrote, and a man who wanted one must first win her consent and then pay the Company a hundred and fifty pounds of best leaf for her passage. Every man in Mereworth who had the leaf got ready to go down to James City by boat.</p>
+  <p>Some of them came round by the thatcher first, for the sport. Ned had tobacco hanging. He had been paid in it for two years of roofs.</p>
+  <p><em>Here are your wages come up the river at last, Ned,</em> said one, <em>and only a hundred and fifty weight the head. Will you go down with us?</em></p>
+  <p><em>No,</em> said Ned.</p>
+  <p><em>Two years back you stood in the storehouse and said, I am sick of it, I cannot bear it. Do you say so now?</em></p>
+  <p><em>No. I have no mind that way at all. Nor back to Kent either.</em></p>
+  <p>They did not believe him. A man who had stayed for five hundred would hardly turn up his nose at one. They went to the minister in a body and told him the thatcher was a liar.</p>
+  <p>Thomas heard them out. Then he walked them across to the church and stood them in front of it, and made them look at the roof they sat under every Sunday and had stopped noticing on the day it stopped wetting them.</p>
+  <p><em>You remember his first roofs,</em> he said. <em>The rain went through them where it liked. That was the man then. This is the man now. He has had the rule of it by heart since he was a boy, and so have half of you.</em></p>
+  <div class="verse">
+    <p>Where houses be reeded (as houses haue neede),<br>&nbsp;&nbsp;now pare off the mosse, and go beat in the reed.<br>The iuster ye driue it, the smoother and plaine,<br>&nbsp;&nbsp;more handsome ye make it to shut off the raine.</p>
+    <p>&mdash; Thomas Tusser, <span style="font-style:normal">Fiue Hundred Pointes of Good Husbandrie</span> (1580), Maies husbandrie</p>
+  </div>
+  <p><em>A mind is roofed the same way,</em> said Thomas. <em>Lay it slack, and wanting comes through it as rain comes through bad thatch. Drive it home, and wanting does not come through. From the day he saw those maids he has been beating in the reed, and now he has done. Let him alone.</em></p>
+  <p>That night a few of them were still turning it over by the storehouse fire. It was a strange thing in a parson, they said, to bait a man along with women.</p>
+  <p>Thomas said it was nothing new with Ned. It was the potter's ass over again.</p>
+  <p><em>There was a potter of Aylesford who took his ass to Rochester market under a load of pots. While he sold, the ass strayed along the ditch and fell in with a she-ass. Where are you from? Aylesford. On what errand? Pots. How far do you carry them? Seven miles. And at the end of the seven miles, is there anyone to rub your legs and your back? No. Then yours is a hard life, she said. Nobody has ever rubbed an ass's legs. She said it to be friendly.</em></p>
+  <p><em>When the potter came for him, the ass would not stir. The potter said, I will cut a goad with a thorn in it as long as my hand. The ass said, Do, and I will plant my forefeet and let fly with the hind ones and have your teeth out. The potter looked about him and saw the jenny. So he said, I will bring you home one like her, grey, with a white muzzle, to be your own. And the ass said, Then I will go fourteen miles a day.</em></p>
+  <p><em>A week after, the ass asked where his wife was. The potter said, I keep my word. But I feed one ass. The hay I give you may do for two or it may not; you must settle that between you. And there will be foals. Whether it does for them as well, you must settle that too. The ass thought about his manger, and lost his stomach for a wife.</em></p>
+  <p>The men who had been down to James City laughed less at this than the men who had not.</p>
+  <p><em>And which was the potter?</em> one of them asked.</p>
+  <p>Thomas said he had been a potter in his time.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>It rained that night, the cold, steady rain that country has in December, on the church and the storehouse and the nine cabins, and in the morning every floor in Mereworth was dry.</p>
+  <p>Ned sent one letter to Chalk, by the ship that carried the maids' tobacco home. He gave the cottage at the marsh end, and the tools, and her promise back again, to Joan Barrow, to keep or to part with as she pleased. He asked only that whoever had the house should go up in May and pare the moss off.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">As rain breaks through an ill-thatched house, passion will break through an unreflecting mind.<cite>Dhammapada 13, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">As rain does not break through a well-thatched house, passion will not break through a well-reflecting mind.<cite>Dhammapada 14, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Nanda is the Buddha's half-brother, the son of his mother's sister. On the day of Nanda's consecration, house-warming and wedding, the Buddha puts his alms bowl into Nanda's hands and walks away, and Nanda, too respectful to call after him, follows with it all the way to the monastery while his bride, her hair half combed, begs him to come back soon. He is ordained against his wish. The Buddha's small son R&#257;hula follows too, asking for his inheritance, and is ordained, and the grieving grandfather obtains the rule that no child be ordained without his parents' leave. Nanda pines and means to leave, so the Buddha shows him a singed monkey on a burnt stump, then five hundred dove-footed nymphs in the heaven of the Thirty-Three, and guarantees him the nymphs if he will stay. The monks call him a hireling. He practises alone, becomes an arahat, and releases the Buddha from the promise. The Buddha then tells how, in an earlier life, the same Nanda was a balky donkey won over by the promise of a mate. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-09.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Nanda_(half-brother_of_Buddha)">Nanda</a>.</p>
+    <h3>The James River, 1618 to 1621</h3>
+    <p>After 1617 the <a href="https://en.wikipedia.org/wiki/Virginia_Company">Virginia Company</a> granted large tracts along the James to private groups of investors, who settled them as "hundreds" or particular plantations, each expected to bring its own people and its own minister. Mereworth Hundred and everyone in it are invented; <a href="https://en.wikipedia.org/wiki/Berkeley_Plantation">Berkeley Hundred</a>, founded in 1619 on the same reach of the river, is a real one. Company tenants served seven years. New arrivals died in great numbers in their first summer, and the Company and the City of London shipped out poor children taken from the London streets, beginning with a hundred in 1619. The English built in wattle and thatch, and from their first years on the river also learned from their neighbors to cover houses with bark. The <a href="https://en.wikipedia.org/wiki/Weyanoke_people">Weyanock</a> were one of the peoples of the Powhatan paramount chiefdom, with towns on both banks of the James; among the Powhatan the women built the houses and made the mats. The peace that followed the marriage of Pocahontas in 1614 ended on March 22, 1622, three months after this story closes, when Opechancanough's forces struck the plantations that had spread along the river and killed about 347 colonists. The verse is by <a href="https://en.wikipedia.org/wiki/Thomas_Tusser">Thomas Tusser</a>, the East Anglian farmer-poet whose rhymed calendar of farm work went through edition after edition from 1557 and was got by heart in country households. A reed thatcher's bat, for driving the butts of the reed up even, is still called a legget.</p>
+    <p>In 1619 the Company resolved to send young women "to make wives" for the planters, hoping that men with families would stop thinking of Virginia as a place to leave. About ninety came in 1620 and fifty-seven more were sent in 1621, some of them in the <em>Marmaduke</em>; the Company claimed "extraordinary care and diligence in the choice of them," required that each be free to choose her husband, and asked 150 pounds of good leaf tobacco from the man she chose, to cover her passage and outfit. They are remembered as the <a href="https://en.wikipedia.org/wiki/Tobacco_brides">tobacco brides</a>. The National Park Service has more on <a href="https://www.nps.gov/jame/learn/historyculture/the-indispensible-role-of-women-at-jamestown.htm">women at Jamestown</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Nanda from the Dhammapada commentary (verses 13 and 14). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/01-09.htm">The original</a>. Verse from Thomas Tusser, <span style="font-style:normal">Fiue Hundred Pointes of Good Husbandrie</span> (the edition of 1580, English Dialect Society reprint, 1878). Written by Claude Fable 5.2.
+  <div class="pager"><a href="four-votes.html">&larr; Four Votes</a><a href="index.html">All stories</a><a href="the-slats.html">The Slats &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, drops = [], drips = [], reeds = [], eave = 54, colL, colR;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    var col = Math.min(W, 36 * 16);
+    colL = (W - col) / 2; colR = colL + col;
+  }
+  function make() {
+    reeds = [];
+    var n = Math.round(W / 5);
+    for (var i = 0; i < n; i++) reeds.push({ x: (i + Math.random()) * 5, l: eave * (0.72 + Math.random() * 0.3), a: 0.10 + Math.random() * 0.16, t: Math.random() });
+    drops = [];
+    var m = Math.round(Math.max(10, Math.min(46, W / 28)));
+    for (var j = 0; j < m; j++) drops.push(newDrop({}, true));
+    drips = [];
+    for (var k = 0; k < 4; k++) drips.push({ x: colL + (k + 0.5) * (colR - colL) / 4 + (Math.random() - 0.5) * 40, y: eave, v: 0, wait: Math.random() * 600 });
+  }
+  function newDrop(d, anywhere) {
+    // rain falls only in the open margins, never over the column
+    var left = Math.random() < 0.5;
+    var span = Math.max(colL, 18);
+    d.x = left ? Math.random() * span : W - Math.random() * span;
+    d.y = anywhere ? eave + Math.random() * (H - eave) : eave;
+    d.v = 5 + Math.random() * 4; d.len = 9 + Math.random() * 12; d.a = 0.07 + Math.random() * 0.1;
+    return d;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // the eave: courses of reed laid one way
+    ctx.lineWidth = 1;
+    for (var i = 0; i < reeds.length; i++) {
+      var r = reeds[i];
+      ctx.strokeStyle = 'rgba(201,165,90,' + r.a + ')';
+      ctx.beginPath(); ctx.moveTo(r.x + 6, 0); ctx.lineTo(r.x, r.l); ctx.stroke();
+    }
+    ctx.strokeStyle = 'rgba(201,165,90,.22)';
+    ctx.beginPath(); ctx.moveTo(0, eave); ctx.lineTo(W, eave); ctx.stroke();
+    // rain in the margins
+    ctx.strokeStyle = 'rgba(160,178,188,1)';
+    for (var j = 0; j < drops.length; j++) {
+      var d = drops[j];
+      if (!reduce) { d.y += d.v; d.x -= d.v * 0.08; if (d.y > H + 20) newDrop(d, false); }
+      ctx.globalAlpha = d.a;
+      ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x + d.len * 0.08, d.y - d.len); ctx.stroke();
+    }
+    // drips let go of the eave over the column and fade before they reach the words
+    for (var k = 0; k < drips.length; k++) {
+      var p = drips[k];
+      if (!reduce) {
+        if (p.wait > 0) { p.wait--; } else { p.v += 0.12; p.y += p.v; if (p.y > eave + 70) { p.y = eave; p.v = 0; p.wait = 300 + Math.random() * 900; } }
+      }
+      var fade = 1 - (p.y - eave) / 70;
+      ctx.globalAlpha = (p.wait > 0 ? 0.25 : 0.3 * fade);
+      ctx.fillStyle = 'rgba(160,178,188,1)';
+      ctx.beginPath(); ctx.arc(p.x, p.y + 2, 1.4, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

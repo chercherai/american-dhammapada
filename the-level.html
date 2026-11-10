@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Level</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale buff of an April morning in a creek-bottom town, light theme; along the foot of the page new meadow grass stands thick and a slow wind passes over it in bands, laying it over and letting it up; datelined sections. */
+  --ground: #efeadc;
+  --ground-2: #e4ddc9;
+  --paper: #2a2620;
+  --paper-dim: #6d6555;
+  --accent: #3f6b4a;
+  --glow: #8a6a2c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #e2dcc4 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(42,38,32,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid rgba(63,107,74,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(228,221,201,.8); border: 1px solid rgba(42,38,32,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,38,32,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,38,32,.15); border-bottom: 1px solid rgba(42,38,32,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(228,221,201,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 15.3 &middot; Kosalarañño Parājaya</span></nav>
+<header>
+  <h1>The Level</h1>
+  <div class="epigraph">For he who is placed on the lowest spoke of fortune&rsquo;s wheel, may be entitled to our regard.<br>&mdash; Webb, <em>The Freemason&rsquo;s Monitor</em></div>
+</header>
+
+<p class="heard"><span class="heard-lead">As it was told at the forge,</span> on Tonawanda Creek.</p>
+
+<section>
+  <h2>I. The Sister's Meadow</h2>
+  <p class="dateline">Genesee County, New York &middot; 1826</p>
+  <p>Judge Amos Thurber had been Master of Concord Lodge in Kendrick's Mills four times and first judge of the county court once, and he had built the stone house at the head of the street with money he made selling lots along the creek when the canal came through. He was sixty-one. He wore his hair in a queue still, the old way, tied with a black ribbon, and in winter he walked to the lodge room over Fenn's tavern with a lantern, though it was forty rods and he knew every board of the sidewalk.</p>
+  <p>His sister Lucy had married a Pease and been given, as her portion, the island meadow in the bend below the mill, eleven acres of the best grass on the creek. When Pease died owing, the judge bought the meadow back at the sheriff's sale to keep it in the family, and he kept it. Lucy died the next winter. Her boy Lyman, who was fourteen then, went to live with the judge in the stone house, and was sent to the academy at Batavia, and read law in an office in Rochester, and came home at twenty-three with a long chin and a short temper and a way of looking at the island meadow out the judge's front window that the judge's wife noticed and did not mention.</p>
+  <p>That was the year a man named Morgan was taken out of the jail at Canandaigua in the night and carried off in a closed carriage toward Fort Niagara and never seen again. He had been writing a book to print the secrets of the lodge. Everybody in the county knew some piece of it: who had driven the carriage, who had held the horses, which brother's barn they had changed horses in. Men who had sat in lodge with Judge Thurber for twenty years went before the grand jury and would not say what they knew, and that, more than the carriage, was what the county could not forgive.</p>
+  <p>By the next spring there were meetings in every schoolhouse, resolving not to vote for any Mason for any office whatever. The churches took it up. The Baptists in Kendrick's Mills voted to withhold fellowship from any member who would not renounce the lodge, and the judge, who had given the land their meetinghouse stood on, did not renounce it, and sat at home on the Sabbath after that with a book.</p>
+  <p>Lyman Pease spoke at every one of the schoolhouse meetings. He was good at it. He had a way of lowering his voice at the end, so that people leaned in.</p>
+</section>
+
+<section>
+  <h2>II. Three Town Meetings</h2>
+  <p class="dateline">Kendrick's Mills &middot; April 1827, 1828, 1829</p>
+  <p>The town meeting was held in the spring at Fenn's, in the long room downstairs, with the bar shut. The judge had been supervisor of the town for nine years running. In April of 1827 his nephew stood against him on the Anti-Masonic ticket, and the town voted with its hands up, and when they were counted Lyman Pease had won by thirty-one.</p>
+  <p>The judge shook his hand in front of everybody. That night he walked up to the lodge room with his lantern, and found the door locked and Zeb Crane the Tyler sitting outside it on the bench, as he always sat, with the old sword across his knees.</p>
+  <p><em>Nobody's come,</em> said Zeb.</p>
+  <p>In 1828 the judge stood again, because his friends said the fever would pass and because he could not imagine not standing, and he lost by seventy. It was the spring after a body had come up on the Lake Ontario shore and the Anti-Masonic papers had said it was Morgan's. Two of the judge's lodge brothers took their names off the roll in a notice in the Batavia paper. Concord Lodge stopped meeting. In the stores men who owed the judge money crossed the street.</p>
+  <p>In 1829 he stood a third time, against all advice, and he made a speech, which he had never done in his life. He stood at the head of the long room in his black coat with his queue tied and said that he had held the deeds to half the town and the Bible for the other half, and that he had never cheated a man, and that he did not know what had been done to William Morgan and would have hanged the men who did it with his own hands. Then Lyman Pease got up and lowered his voice at the end, and the hands went up, and the judge lost by a hundred and four.</p>
+  <p>He walked home without his lantern. He went into the front room and looked out the window at the island meadow, which was just coming green, and said to his wife, <em>I could not beat a boy I bought shoes for. What is the use of me?</em> He went up to bed in the middle of the afternoon with his boots on, and he did not come down for supper.</p>
+  <p>He did not come down the next day either, or the next. His wife took up a tray, and brought it down again, and took it up again. He lay on his back with his eyes open and his queue untied on the pillow. On the fourth day the doctor came from Batavia and said there was nothing the matter with him that he could find, and that a man of his age could die of nothing in a week if he set his mind to it.</p>
+</section>
+
+<section>
+  <h2>III. The Tyler</h2>
+  <p class="dateline">The forge below the mill &middot; the same week</p>
+  <p>Zeb Crane had been Tyler of Concord Lodge since it was chartered. He was a blacksmith and a short, thick, silent man, and for thirty years his whole office had been to sit outside the door of the lodge room with a sword and keep it. He let in who was entitled and kept out who was not, and he had never once in thirty years been inside while the lodge was at work. He heard it through the door: every degree, every lecture, every installation of officers, every charge. He knew the whole of it better than the Masters who said it, people said, because he had never had to think about anything else while he listened.</p>
+  <p>When the lodge stopped meeting he went on keeping the key. Some evenings he still went up and sat on the bench. Nobody knew why, and nobody asked him.</p>
+  <p>It was three of the old brothers who came down to the forge to tell him about the judge, Fenn the tavern keeper and two others, and stood in the door while he worked. They told it the way men tell a thing they are ashamed of: the judge would not eat, the judge would not get up, the judge had said <em>what is the use of me</em>. And it was that boy, Fenn said. Lucy's boy, who he had raised. He has gone round the county saying the Masons murdered a man and the Masons ought to be run out, and now he has run his own uncle into the bed. I hope he is satisfied. There are men in this town who would like to see him in the creek.</p>
+  <p>Zeb Crane finished the shoe he was drawing and set it on the anvil to cool, and wiped his hands, and said more than any of them had heard him say at one time.</p>
+  <p><em>He wins, and you want him in the creek. Amos loses, and he's lying in the bed with his boots on. That's all winning does, that I ever saw, and all losing does.</em> He looked at the shoe. <em>You have got to get off of that.</em></p>
+  <p>Then he went up the street to the stone house in his apron, and the judge's wife let him in, and he climbed the stairs and sat down on a straight chair at the foot of the judge's bed, the way he had sat on the bench outside the lodge door, with his hands on his knees.</p>
+  <p>The judge turned his head and looked at him a long time.</p>
+  <p><em>You've come to tell me to eat,</em> he said.</p>
+  <p><em>No,</em> said Zeb. <em>I've come to tell you something you said to me. You said it every year for thirty years and I don't believe you ever listened to it once, because you were the one saying it.</em> And he said it, slowly, in the flat voice of a man repeating what he has heard through a door, the charge the Master gives the Senior Warden on the night he puts the jewel on him, which is a level, with a little plumb line hanging in it.</p>
+  <div class="verse">
+    <p>The Level demonstrates that we are descended from the same stock, partake of the same nature, and share the same hope; and though distinctions among men are necessary to preserve subordination, yet no eminence of station should make us forget that we are Brethren; for he who is placed on the lowest spoke of fortune&rsquo;s wheel, may be entitled to our regard; because a time will come, and the wisest knows not how soon, when all distinctions, but that of goodness, shall cease; and death, the grand leveler of human greatness, reduce us to the same state.</p>
+    <p>&mdash; Thomas Smith Webb, <cite>The Freemason&rsquo;s Monitor</cite>, Charge to the Senior Warden</p>
+  </div>
+  <p>The judge lay still.</p>
+  <p><em>The lowest spoke,</em> he said finally.</p>
+  <p><em>It goes round,</em> said Zeb. <em>That's what a wheel does. Lyman is on the top of it this spring. Somebody is going to have to sit with him too, when it comes round.</em> He got up. <em>A man that's not on it at all sleeps fine. I've slept fine for thirty years on a bench.</em></p>
+  <p>That was all he said. He went down the stairs and back to the forge, and the shoe on the anvil was cool enough to handle, and he went on with his work.</p>
+</section>
+
+<section>
+  <h2>IV. The Jewel</h2>
+  <p class="dateline">Kendrick's Mills &middot; 1829 and after</p>
+  <p>The judge's wife said afterward that he lay a long while after the Tyler had gone, looking at the ceiling, and then laughed once, not unhappily, and asked what there was to eat. There was bread and there was cold mutton. He ate it sitting on the edge of the bed with his feet bare, and asked for more bread, and then he tied his queue and went down.</p>
+  <p>Of the three brothers who had stood in the door of the forge, people said, none of them ever spoke again of putting anybody in the creek. Fenn opened the long room the next April for the town meeting the same as always, and set out water for both tickets, and voted, people said, for whoever he pleased and told nobody.</p>
+  <p>The judge did not stand again. He deeded the island meadow to Lyman Pease that summer, as Lucy's portion, with nothing asked, and Lyman did not know what to make of it, and was suspicious of it for years. When the Anti-Masonic party went to pieces in the middle of the thirties, and Lyman Pease was beaten for the assembly by a man nobody had heard of, and sat for a week in his office in Batavia with the blinds down, it was the old judge who drove over in the gig and sat with him. Nobody knows what he said. Something about a wheel, Lyman's wife thought.</p>
+  <p>Zeb Crane kept the key to the lodge room until he died. In the summers, when the forge was too hot, he did his whittling on the bench outside the locked door. Concord Lodge got a new charter in 1851 and met again over Fenn's, and the Senior Warden's jewel they hung on the new man the night of the installation was the old one, a little silver level with a plumb line hung inside it on a thread. The judge's widow had kept it in a drawer. When the Master set it on the young man's chest, the plumb swung, and the room was quiet while it swung, and then it settled on the mark.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Victory breeds hatred, for the conquered is unhappy. He who has given up both victory and defeat, he, the contented, is happy.<cite>Dhammapada 201, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, King <a href="https://en.wikipedia.org/wiki/Pasenadi">Pasenadi</a> of Kosala fights his nephew <a href="https://en.wikipedia.org/wiki/Aj%C4%81tasattu">Ajātasattu</a>, king of Magadha, near the village of Kāsi and is beaten three times. (The quarrel was over that village, which had been given as a dowry to Pasenadi's sister, Ajātasattu's mother, and which Pasenadi took back after Ajātasattu killed his father.) Coming home from the third defeat, the old king says to himself, "Since I cannot beat this milk-faced boy, what is the use of my living?" and refuses food and takes to his bed. The monks tell the Buddha, who answers that the winner breeds hatred and the beaten man lies down in pain, and speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-03.htm">the full commentary story</a>.</p>
+    <p>Zeb Crane's charge is the one given to the Senior Warden, whose jewel is the level, at the installation of a lodge's officers, as printed in <a href="https://en.wikipedia.org/wiki/Thomas_Smith_Webb">Thomas Smith Webb</a>'s <em>Freemason's Monitor</em>, the standard American ritual handbook since 1797, quoted here from the <a href="https://archive.org/details/freemasonsmonito00webb">1867 Cincinnati edition</a>. The <a href="https://en.wikipedia.org/wiki/Tyler_(Freemasonry)">Tyler</a> is the officer who guards the lodge door with a sword and normally stays outside it.</p>
+    <h3>Western New York, 1826&ndash;1829</h3>
+    <p>In September 1826 <a href="https://en.wikipedia.org/wiki/William_Morgan_(anti-Mason)">William Morgan</a> of Batavia, who was preparing a book exposing Masonic ritual, was jailed at Canandaigua over a small debt, released at night into a waiting carriage, and taken to Fort Niagara, after which he vanished; he is generally believed to have been drowned in the Niagara River. A badly decomposed body that washed up on the Lake Ontario shore in October 1827 was claimed as his. The Niagara County sheriff, a Mason, was removed and served twenty-eight months for conspiracy, and several other men were convicted, but the reward for information was never claimed, and the sense that Masons were shielding Masons turned grief into a movement.</p>
+    <p>In early 1827 mass meetings across western New York resolved not to vote for Masons for any office, and evangelical churches across the <a href="https://en.wikipedia.org/wiki/Burned-over_district">Burned-over District</a>, Presbyterian, Congregational, Methodist and Baptist, condemned members and ministers who belonged to the order. Out of this came the <a href="https://en.wikipedia.org/wiki/Anti-Masonic_Party">Anti-Masonic Party</a>, the first American third party, which won fifteen seats in the New York Assembly that fall and nominated William Wirt for president in 1832, then faded almost everywhere by 1835. Kendrick's Mills, Concord Lodge, and everyone in the story are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the defeat of the King of Kosala from the Dhammapada commentary (verse 201). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/15-03.htm">The original</a>. The charge from Thomas Smith Webb, <em>The Freemason&rsquo;s Monitor</em> (Cincinnati edition, 1867). Written by Claude Opus 5.5.
+  <div class="pager"><a href="crowns-on-their-heads.html">&larr; Crowns on Their Heads</a><a href="index.html">All stories</a><a href="loaf-mass.html">Loaf Mass &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, blades = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    blades = [];
+    var n = Math.round(Math.min(420, W / 3.2));
+    for (var i = 0; i < n; i++) {
+      var depth = Math.random();
+      blades.push({ x: Math.random() * W, base: H - depth * H * 0.12, h: 14 + (1 - depth) * 34 + Math.random() * 12, d: depth, lean: (Math.random() - 0.5) * 0.25 });
+    }
+    blades.sort(function (a, b) { return b.d - a.d; });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var g = ctx.createLinearGradient(0, H * 0.82, 0, H);
+    g.addColorStop(0, 'rgba(120,150,110,0)'); g.addColorStop(1, 'rgba(120,150,110,0.10)');
+    ctx.fillStyle = g; ctx.fillRect(0, H * 0.82, W, H * 0.18);
+    ctx.lineCap = 'round';
+    for (var i = 0; i < blades.length; i++) {
+      var b = blades[i];
+      var gust = reduce ? 0 : Math.max(0, Math.sin((b.x / W) * 5 - t * 0.012)) * Math.max(0, Math.sin(t * 0.003));
+      var bend = b.lean + gust * 0.55 + (reduce ? 0 : 0.04 * Math.sin(t * 0.03 + b.x));
+      var tx = b.x + Math.sin(bend) * b.h, ty = b.base - Math.cos(bend) * b.h;
+      var a = 0.10 + (1 - b.d) * 0.16 + gust * 0.12;
+      ctx.strokeStyle = 'rgba(' + Math.round(96 + gust * 70) + ',' + Math.round(128 + gust * 60) + ',80,' + a + ')';
+      ctx.lineWidth = 1 + (1 - b.d) * 0.9;
+      ctx.beginPath(); ctx.moveTo(b.x, b.base);
+      ctx.quadraticCurveTo(b.x + Math.sin(bend) * b.h * 0.3, b.base - b.h * 0.6, tx, ty); ctx.stroke();
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

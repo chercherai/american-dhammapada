@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rocks and Shoals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Dark: gray-green of a submerged boat; a low horizon at morning twilight with a lookout's glint sweeping the sector. */
+  --ground: #141a1d;
+  --ground-2: #1d2629;
+  --paper: #dfe2dc;
+  --paper-dim: #9aa39f;
+  --accent: #c9a46a;
+  --glow: #8fb0b8;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #26343a 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(223,226,220,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(201,164,106,.18); }
+.epigraph { border-left: 1px solid rgba(201,164,106,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(29,38,41,.8); border: 1px solid rgba(223,226,220,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(223,226,220,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(223,226,220,.15); border-bottom: 1px solid rgba(223,226,220,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(29,38,41,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 18.4 &middot; Lāḷudāyi</span></nav>
+<header>
+  <h1>Rocks and Shoals</h1>
+  <div class="epigraph">Or, sleeps upon his watch;<br>&mdash; Articles for the Government of the Navy (1930), Article 4</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Now this is no shit,</span> in the after battery of a Portsmouth boat.</p>
+
+<section>
+  <h2>I. School of the Boat</h2>
+  <p class="dateline">On patrol, west of the Marianas &middot; June 1944</p>
+  <p>There were nineteen men aboard who had not qualified, and every night after the evening meal, when the tables in the crew's mess had been wiped down and the coffee made again, one of the two chiefs would sit at the end of the forward table and teach them the boat.</p>
+  <p>Chief Fessenden, the chief of the boat, took the hull systems: trim and drain, high-pressure air, the vents and the floods, the ballast and the negative tank. He drew them on the back of a mess tray with a grease pencil, wiped it with his sleeve, and drew them again, faster. Chief Mullan, the senior electrician, took the batteries and the motors and everything with a wire in it, and he did it without drawing at all, with his eyes shut, walking them through the boat in their minds from the forward torpedo room to the after one, valve by valve, so that a nineteen-year-old from Akron who had never seen the sea before March could close his eyes in his bunk afterward and go aft in the dark and put his hand on the right wheel. Nobody slept through either of them. The nonquals carried their qualification notebooks around the boat like missals. When they went up to the conning tower or back to the maneuvering room to get a signature for something they had learned, the qualified men would ask them who taught them that, and they would say Fessenden, or they would say Moon Mullan, and the qualified men would sign.</p>
+  <p>Wendell Corliss heard this for three weeks and could not stand it any longer.</p>
+  <p>He was a torpedoman second class from Clay Hill, New Hampshire, and he had been a rigger at the Portsmouth Navy Yard before the war and had watched this very boat's hull go together on the ways, and he had worn his dolphins for two patrols. He was a big, loud, friendly man who took up the whole passageway. He had qualified in eleven months, which was fast, by learning everything at once the week before his board, the way he had learned the Grange ritual at fifteen, and he had not looked at any of it since.</p>
+  <p><em>You think that's teaching,</em> he said one night, in the after battery, to a table of nonquals playing acey-deucy. <em>Fessenden draws you a picture. You ought to hear me go through trim and drain sometime. You'd never go back.</em></p>
+  <p>The nonquals looked at each other. They had not known. They thought: here is a third one, and we have been passing him in the passageway for a month. The next afternoon, very politely, a fireman named Szabo came to him with three others behind him and asked whether, after the evening meal, if he wasn't on watch, the torpedoman would give them school of the boat.</p>
+  <p>Corliss said he'd be glad to.</p>
+</section>
+
+<section>
+  <h2>II. Four Times</h2>
+  <p class="dateline">The crew's mess &middot; the same night, and the next morning</p>
+  <p>They had chicken that night out of a can, and Jell-O, and the cooks put out a fresh pot of coffee for the occasion. More men came than usually came for Fessenden, because word had gone around. They sat on the benches and stood in the doorway to the galley, and somebody gave Corliss the seat at the end of the forward table and a clean tray and the grease pencil.</p>
+  <p>It was over ninety degrees in the mess, as it always was after a day submerged, and Corliss had brought his fan. He had won it at the rest camp at the Royal Hawaiian, a palm-leaf fan painted with a hula girl and a sunset, and he fanned himself with it now, slowly, back and forth, and looked at the clean tray.</p>
+  <p>He had learned the trim system once, all of it, in the week before his board. He remembered that there was a trim pump. He remembered that there was a manifold. He remembered the feeling of knowing it, which was a good feeling, and he could not find anything else.</p>
+  <p>He fanned himself. The men waited.</p>
+  <p><em>Tell you what,</em> he said. <em>I'll draw it. Szabo, you talk it. You learn better saying it yourself.</em> And he got up from the seat and handed Szabo the pencil, and Szabo, who had had it from Fessenden two nights before, stood at the end of the table and talked it, haltingly, while Corliss leaned in the galley door and nodded as if he were checking him.</p>
+  <p>When Szabo was done, they gave Corliss the seat again, to draw it.</p>
+  <p>He sat down and picked up the pencil and looked at the tray and fanned himself. Then he said he had the midwatch and needed his rack, but that on the midwatch, when it was quiet, he'd go over the whole hydraulic system with anybody who wanted it, which was better anyway, the hydraulics. Somebody else could draw tonight. And he got up again.</p>
+  <p>Four men came to the after torpedo room at midnight. He sat on the skid between the reload torpedoes with his fan and looked at them. He said it was too hot back there to think straight, and he'd do it at morning twilight, after they dove, when it was cool and everybody was fresh, and he went on watch.</p>
+  <p>At morning twilight they dove. The boat went down to a hundred feet and settled, and the nonquals came to the crew's mess with their notebooks, and so did a good many of the others, because by now everybody had heard. Corliss sat down a fourth time at the end of the table and picked up the fan, and there was a long silence in which the only sound was the ventilation, and somebody's notebook falling off a bench, and then Moon Mullan's voice from the galley door, mild, saying, <em>Go on, Corliss. Start at the sea chest.</em></p>
+  <p>Corliss fanned himself.</p>
+  <p>The first potato came from the back, from behind the coffee urn. It hit the bulkhead over his head. The second one hit him in the chest. Then the cooks' whole morning bucket of peeled potatoes was going, and the bread rolls from the night before, and an aluminum mug, and somebody had a broom. <em>You said you could teach it better than the Chief,</em> they said. <em>You sat there four times. Say something now.</em> They were laughing, but they were not altogether laughing. They had given up their sleep for him.</p>
+  <p>Corliss went out through the after door with his fan over his head.</p>
+</section>
+
+<section>
+  <h2>III. The After Head</h2>
+  <p class="dateline">The after battery compartment</p>
+  <p>He went aft fast, through the crew's berthing, with twenty men behind him and potatoes knocking on the lockers, and he ducked into the after head and dogged the door, and sat down hard, and, because he had been holding it since the midwatch and because it was the first thing in two days that he did not have to explain, he finished his business and reached for the valve.</p>
+  <p>There was a sign hung on the valve. The motor machinist had hung it there twenty minutes earlier, when he started blowing the sanitary tank overboard with high-pressure air, the way it was done every couple of days. Corliss had helped write the sign. He knew the order of the valves on that head as well as he knew anything aboard; he had known it once. He did not read it.</p>
+  <p>The sound it made was heard as far forward as the control room.</p>
+  <p>When he came out, a while afterward, he had the hula fan in his hand still, and the men in the passageway parted and pressed themselves back against the bunks to let him by, all of them, without a word, the way water parts around a hull. He went forward to the washroom. He was in there a long time. The smell went through the whole after battery and the ventilation took it into the crew's mess and laid it on the tables like a cloth, and nobody could eat breakfast, and nobody, after that, threw anything.</p>
+</section>
+
+<section>
+  <h2>IV. The Lion and the Pig</h2>
+  <p class="dateline">The crew's mess &middot; that afternoon</p>
+  <p>The officers' steward was a Chamorro from Hagåtña named Vicente Taitano. He was forty-one. He had been in the Navy since 1923, as a mess attendant and then a steward, because that was what the Navy had let a man from Guam be, and he had a wife and three daughters on Guam whom he had not heard from since the Japanese came ashore in December of 1941. He made the coffee in the wardroom and ironed the captain's khakis and kept the wardroom silver, which nobody used, as bright as if somebody would. He spoke English carefully and not much. The captain sometimes asked him things that had nothing to do with coffee.</p>
+  <p>He came through the crew's mess in the middle of the afternoon with a tray of cups to wash and found a dozen men around the forward table going over the whole thing again. He set the tray down.</p>
+  <p><em>What are you all talking about?</em></p>
+  <p>They told him: Corliss, the seat, the four times, the potatoes, the head. They were laughing again by then. Corliss was in his rack with the curtain drawn.</p>
+  <p>Taitano nodded. <em>That's not the first time for him,</em> he said.</p>
+  <p>He sat down on the end of the bench and dried his hands on the towel over his shoulder, and told them a story the friars told in the school at Hagåtña when he was a boy, which he said they had brought from Spain, and which he thought they had got from somewhere further off.</p>
+  <p>There was a lion who lived in the mountains above a lake, he said. On the shore of the lake lived a lot of wild pigs, and at the other end lived some friars in huts. One day the lion came down to drink, and a big pig was rooting at the edge of the water. The lion thought, I'll eat him another day, and so as not to scare him off, he went quietly away up the bank. The pig saw that. He thought, the lion is afraid of me. He called after him. You have four feet, friend, and I have four feet. Come back. What are you running for?</p>
+  <p>The lion said, Not today, friend pig. A week from today, here. And went home.</p>
+  <p>The pig was so happy he ran and told all the other pigs. They were terrified. <em>You don't know what you are,</em> they told him. <em>He'll kill you and the rest of us too.</em> Then the pig was afraid. <em>What do I do?</em> And the old pigs said: Go roll in the friars' dung heap. Every day for seven days. Let it dry on you. The seventh day, wet yourself with the dew, get there first, and stand upwind. The lion is a clean animal. He won't touch you.</p>
+  <p>So that's what the pig did. On the seventh day the lion came down and smelled him from a long way off. <em>Friend pig,</em> the lion said, <em>that's a good trick. If you were clean I'd kill you today. As it is I can't bite you. I can't put my foot on you. You want to fight? You win. I give it to you.</em> And the lion went and drank somewhere else.</p>
+  <p>The pig went home and told everybody he had beaten the lion. And the other pigs were so scared the lion would come back that they packed up and moved to the other side of the island.</p>
+  <p>The men in the mess were quiet a minute. Then one of the nonquals said, <em>So the Chief's the lion.</em></p>
+  <p>Taitano picked up his tray. <em>That's right.</em></p>
+  <p><em>And Corliss is the pig.</em></p>
+  <p><em>Same pig,</em> said Taitano, <em>as always.</em> He looked down the passageway toward the after battery, where the curtain on Corliss's rack had not moved. <em>He learned a little of it one time, for his dolphins. Then he never said it again. A thing you don't say over goes bad on you. Like a house nobody fixes. You leave a house on Guam one rainy season with nobody in it, it's gone.</em></p>
+  <p>He took the cups to the galley sink.</p>
+</section>
+
+<section>
+  <h2>V. Muster</h2>
+  <p class="dateline">The first of July, and after</p>
+  <p>On the first of the month the executive officer read the Articles for the Government of the Navy to the ship's company in the crew's mess, in two sittings so the watch could hear them, as the Articles themselves required, once a month. Everybody called them Rocks and Shoals. Most of the men could have said the long part by heart, and some of them said it along with him under their breath, the way you say a prayer you have heard a hundred times in church. Corliss stood against the bulkhead at the back with his arms folded. He had been given the after head to keep for the rest of the patrol, and it was the cleanest place on the boat.</p>
+  <div class="verse">
+    <p>The punishment of death, or such other punishment as a court martial may adjudge, may be inflicted on any person in the naval service &mdash;</p>
+    <p>Or, sleeps upon his watch;</p>
+    <p>Or leaves his station before being regularly relieved;</p>
+    <p>&mdash; Articles for the Government of the Navy (1930), Article 4</p>
+  </div>
+  <p>Afterward the nonquals went back to Fessenden and Moon Mullan in the evenings, and they qualified, most of them, before the end of the year. But something else happened, which the chiefs noticed. Men who had been qualified for years began coming to school of the boat. They sat at the back with their coffee and said nothing, and when Fessenden drew the trim system, some of them moved their lips. A motor machinist who had worn his dolphins since 1938 asked Mullan, privately, to walk him through the after battery again from the beginning. Mullan did, with his eyes shut.</p>
+  <p>Corliss stood the four-to-eight lookout watch on the after periscope shears for the rest of the patrol. The officer of the deck heard him at morning twilight, with the binoculars up, sweeping his sector in the gray, saying something to himself, low and steady, over and over. It took the officer of the deck a while to make out what it was. It was the valve line-up for the trim manifold, from the sea chest aft, in order. When he got to the end he began it again.</p>
+  <p>On the twenty-first of July the radioman brought a message to the wardroom saying the Marines and the Army were ashore on Guam. The captain read it, and handed it to Taitano, who was pouring his coffee, and Taitano read it standing up with the pot in his hand. Then he set the pot down and went to his pantry and took out the wardroom silver, all of it, the forks and the spoons and the coffee service nobody had ever used, and spread a towel on the counter, and began to polish it, one piece and then the next, though it was already bright.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Wendell Corliss went home to Clay Hill in the fall of 1945, to his wife and a seven-year-old son named Lyle who did not know him. He took the hula fan with him. It hung for years on a nail in the Grange hall kitchen, where the women used it at suppers in August, and nobody but Wendell knew what it had been through, and he never told it on himself. Other men did.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The taint of prayers is non-repetition; the taint of houses, non-repair; the taint of the body is sloth; the taint of a watchman, thoughtlessness.<cite>Dhammapada 241, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the lay disciples of Sāvatthī go home from the monastery praising the elders Sāriputta and Moggallāna, and the monk Lāḷudāyi, jealous, tells them they should hear him. They invite him to teach. He sits in the preacher's seat waving a painted fan and cannot find a word; he says he will chant instead and let someone else teach, then that he will chant at night, then at dawn. Four times they seat him, and four times he gets down. At last the crowd picks up clods and sticks, and he runs and falls into a cesspool. The Buddha says it is not the first time, and tells the birth story of a boar who challenged a lion, rolled for seven days in the ascetics' dung heap, and was told by the disgusted lion, "I give you the victory." Lāḷudāyi, the Buddha says, learned a fragment of the teaching and never repeated it. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-04.htm">the full commentary story</a> and <a href="https://ancient-buddhist-texts.net/English-Texts/Jataka-Verses/153.htm">the birth story of the boar</a>.</p>
+    <h3>A fleet boat off the Marianas, 1944</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Balao-class_submarine">Balao-class</a> fleet submarines, built at the Portsmouth Navy Yard in Kittery, Maine, and at other yards, carried about ten officers and seventy enlisted men and could go to four hundred feet. Every enlisted man had to qualify in submarines, learning each system of the boat well enough to operate it and explain it, before he could wear the dolphins. Waste from the heads went to sanitary tanks that were blown overboard with compressed air; a man who opened the wrong valve while a tank was under pressure got it back. Between patrols, crews rested at Waikiki's <a href="https://en.wikipedia.org/wiki/Royal_Hawaiian_Hotel">Royal Hawaiian Hotel</a>, which the military used as a rest and recreation center for the whole war. The <a href="https://www.history.navy.mil/research/library/online-reading-room/title-list-alphabetically/a/articles-government-united-states-navy-1930.html">Articles for the Government of the Navy</a>, known as Rocks and Shoals, were by their own terms to be hung up in a public part of every ship and read to the ship's company once a month.</p>
+    <p>Japan seized Guam on December 10, 1941, days after Pearl Harbor, and held it for two and a half years, eventually moving most of the Chamorro population into camps such as Manenggon. Twelve Chamorro men serving as Navy mess attendants had died aboard the battleships at Pearl Harbor; others served through the war without word from home. After weeks of bombardment, American forces landed on July 21, 1944, still kept on Guam as <a href="https://en.wikipedia.org/wiki/Second_Battle_of_Guam">Liberation Day</a>; see also <a href="https://www.guampedia.com/chamorus-die-in-pearl-harbor-bombing/">Guampedia on the Chamorro mess attendants of 1941</a>.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the elder Lāḷudāyi from the Dhammapada commentary (verse 241). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-04.htm">The original</a>. Quotations from the Articles for the Government of the Navy (1930). Written by Claude Opus 5.5.
+  <div class="pager"><a href="seven-days-on-the-nail.html">&larr; Seven Days on the Nail</a><a href="index.html">All stories</a><a href="fire-year.html">Fire Year &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* Morning twilight from the periscope shears: a low horizon under a sky that slowly grays, and a faint glint that sweeps the sector and back. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now(), swell = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    swell = [];
+    for (var i = 0; i < 14; i++) swell.push({ y: Math.random(), x: Math.random(), w: 40 + Math.random() * 120, s: 0.2 + Math.random() * 0.6 });
+  }
+  function draw(now) {
+    var t = reduce ? 40000 : (now - t0);
+    ctx.clearRect(0, 0, W, H);
+    var hy = H * 0.86;
+    /* the sky over the horizon lightens and darkens on a long, slow breath */
+    var dawn = 0.5 + 0.5 * Math.sin(t / 26000 - 1.2);
+    var g = ctx.createLinearGradient(0, hy - H * 0.35, 0, hy);
+    g.addColorStop(0, 'rgba(120,140,160,0)');
+    g.addColorStop(1, 'rgba(150,165,175,' + (0.05 + 0.07 * dawn) + ')');
+    ctx.fillStyle = g; ctx.fillRect(0, hy - H * 0.35, W, H * 0.35);
+    /* horizon line */
+    ctx.strokeStyle = 'rgba(170,185,190,' + (0.10 + 0.08 * dawn) + ')';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, hy + 0.5); ctx.lineTo(W, hy + 0.5); ctx.stroke();
+    /* a few long low swells below the line */
+    for (var i = 0; i < swell.length; i++) {
+      var s = swell[i];
+      var y = hy + 6 + s.y * (H - hy - 8);
+      var x = ((s.x * W + t * 0.004 * s.s) % (W + s.w)) - s.w;
+      ctx.strokeStyle = 'rgba(150,165,175,' + (0.035 + 0.03 * dawn) + ')';
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + s.w, y); ctx.stroke();
+    }
+    /* the lookout's sweep: a soft glint moving slowly along the horizon, out and back */
+    var p = 0.5 - 0.5 * Math.cos(t / 9000);
+    var gx = W * (0.08 + 0.84 * p);
+    var rg = ctx.createRadialGradient(gx, hy, 0, gx, hy, 70);
+    rg.addColorStop(0, 'rgba(225,215,190,' + (0.10 + 0.08 * dawn) + ')');
+    rg.addColorStop(1, 'rgba(225,215,190,0)');
+    ctx.fillStyle = rg; ctx.beginPath(); ctx.ellipse(gx, hy, 70, 10, 0, 0, Math.PI * 2); ctx.fill();
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+
+</script>
+</body>
+</html>
