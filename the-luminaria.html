@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Luminaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* A high-school track in Nebraska after midnight: June dark, red rubber, paper bags lit from inside. */
+  --ground: #0f1220;
+  --ground-2: #181c2d;
+  --paper: #ebe5d8;
+  --paper-dim: #a39e94;
+  --lamp: #e2a54b;
+  --track: #b55a3c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #22283d 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,229,216,.2); }
+.series a:hover { color: var(--lamp); }
+a:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--lamp); text-wrap: balance; text-shadow: 0 0 28px rgba(226,165,75,.22); }
+.epigraph { border-left: 1px solid rgba(226,165,75,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--track); font-size: .95rem; margin: .25rem 0 1.75rem; filter: brightness(1.25); }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--lamp); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,28,45,.8); border: 1px solid rgba(235,229,216,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--lamp); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,229,216,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--lamp); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--lamp); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--lamp); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--lamp); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--lamp); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,28,45,.8); border-left: 2px solid var(--lamp); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 13.11 &middot; Kāla, son of Anāthapiṇḍika</span></nav>
+<header>
+  <h1>The Luminaria</h1>
+  <div class="epigraph">My richest gain I count but loss.<br>&mdash; Isaac Watts, &ldquo;When I survey the wondrous cross&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Here&rsquo;s what I heard,</span> in Papillion.</p>
+
+<section>
+  <h2>I. The Plate Lunch</h2>
+  <p class="dateline">Papillion, Nebraska &middot; spring 2019</p>
+  <p>Kawika Chun ran a plate-lunch place in a strip mall on the south side of Papillion, between a nail salon and a State Farm office, and he fed more people for nothing than anybody in Sarpy County.</p>
+  <p>He had come out of the Army in 2010 with a wife from Papillion and a six-year-old son and no plan, and the plan he made was rice, macaroni salad and two scoops of whatever, the way his grandmother had made it in Hilo. He called the place Kwai's, after her father, who had kept a store on Mamo Street before the war. The airmen from Offutt found it the first month, the ones from Hawaii and Guam and Samoa and then everybody else, and after the airmen the high-school wrestlers, and after them the Methodists. On Sundays after two he fed anybody in a uniform for nothing, and anybody who looked like they needed it, and sent them home with a foil pan of whatever was left. When the Missouri came over the levees in March of 2019 and put a third of the air base under water, he cooked for nine days straight and drove the pans out to the shelters himself, and lost money every one of those days, and did not seem to notice.</p>
+  <p>People asked him where he got it. He said he learned it at Fort Lewis, from a Samoan longshoreman on the Hilltop in Tacoma who cooked an umu every Sunday under a blue tarp for whoever came, and never asked a soldier his name, and sent him home every week with a pan. <em>Kale used to ride on my shoulders over there,</em> he would say. <em>He doesn't remember.</em></p>
+  <p>Over the pass-through between the kitchen and the counter hung a framed Chinese print, a lady in a red jacket with a baby on her arm and two little boys at her skirt. There was a brown stain straight across all three of them at the height of a child's chin. Kawika's grandmother Lin, who was eighty-one and still came in to fold wontons on Tuesdays, had brought it from Hilo. Customers asked about the stain. Lin said it was the ocean.</p>
+  <p>Kale was fifteen, then sixteen in May. He had his father's shoulders and his mother's Nebraska face and no interest in any of it.</p>
+  <p>What Kale was interested in was shoes. He had a bot that bought sneakers the second they dropped online, and an account on StockX, the site that sold them again like shares of stock with a little graph of the price, and a closet full of boxes he did not wear. He knew the asking price of every pair in the closet the way his great-great-grandfather had known the price of rice. That May the Travis Scott Jordan 1s came out, brown suede with the swoosh put on backwards, a hundred seventy-five dollars retail, and sold out in a morning, and by that afternoon people were asking more than a thousand. Kale's bot had missed them. He talked about nothing else for a month.</p>
+  <p>When the Relay team came in to eat, Kale went in the back. When his father asked him to carry pans out to a car, he was busy. He had never once worked the Sunday line. His father said <em>Kale, don't,</em> about a dozen things a week, and Kale did them anyway, not angrily, the way water goes around a rock.</p>
+  <p>One night Kawika sat at the kitchen table after close and said to his grandmother that he was scared for the boy. Not of drugs, not of anything like that. Scared he would grow up to be one of those men who know what everything costs. <em>That kind of man,</em> he said, <em>goes to hell before he dies. You can watch it happen.</em></p>
+  <p>Lin went on folding the wonton she had in her hand.</p>
+  <p><em>Everybody can be bought,</em> she said. <em>Buy him.</em></p>
+</section>
+
+<section>
+  <h2>II. The Track</h2>
+  <p class="dateline">The high-school track &middot; Saturday, June 8, all night</p>
+  <p>Every June the American Cancer Society's Relay For Life took over the track at the high school from six on Saturday evening until six on Sunday morning. Teams pitched tents on the infield and took turns walking laps all night. It ran twenty-four hours because the people it was for did not get to stop either. Kawika ran the food tent for nothing and had for eight years: teriyaki at dinner, Spam musubi at midnight, pancakes at five.</p>
+  <p>The team Kawika fed best was called Carol's Crew. It was eleven people, mostly over sixty, in purple T-shirts with a photograph of a smiling woman on the back, and it was led, if anybody led it, by a retired shop teacher named Dale Petersen.</p>
+  <p>Dale was seventy-four. He had taught industrial arts at the high school for thirty-eight years. Half the men in Papillion who could cut a dado had learned it from him. He was tall and stooped, with big scarred hands and a short grey haircut. He wore the same khaki pants and the same purple shirt every Relay. He mowed his lawn on Saturdays at seven in the morning, which some of his neighbors had complained about for forty years. His wife Carol had died of ovarian cancer in the summer of 2009. Since then Dale had walked every lap of every Relay in Papillion from the opening ceremony until dawn. He did not run them or hurry them. He walked them the way a man walks to his mailbox, and he hardly spoke, and the others on his team would fall in beside him for a lap or two and then fall off, the way people do beside a person like that.</p>
+  <p>On Friday Kawika had said to his son: <em>A hundred dollars. Cash. If you stay at the Relay all night with Carol's Crew, sundown to sunup, and come home in the morning.</em></p>
+  <p><em>A hundred? For real?</em></p>
+  <p><em>For real.</em></p>
+  <p>Kale made him say it three times. Then he said fine.</p>
+  <p>He came at six. He walked the survivors' lap behind the survivors because everybody did. At dusk, when the luminaria were lit, he stood at the back. The luminaria were white paper bags weighted with sand, a candle in each one, set all the way around the inside of the track, hundreds of them, and people had written names on them in marker and drawn hearts and crosses and Husker logos. When they were lit and the stadium lights went off, the whole oval glowed, and the names showed through the paper from inside. Kale saw Dale Petersen kneel by one bag on the far turn with a long butane lighter and light it, and stay there on one knee for a while. Then Dale got up and started walking. Kale went back to his father's truck in the parking lot, put the seat back and opened StockX on his phone. He was asleep by ten.</p>
+  <p>He woke at five to the smell of pancakes and the sky going grey over the bleachers. Dale Petersen was coming around the far turn, alone, at the same pace.</p>
+  <p>At the food tent his father had a plate ready for him: pancakes, two eggs, Portuguese sausage. <em>You did it,</em> Kawika said. <em>Eat.</em></p>
+  <p><em>Where's my hundred?</em></p>
+  <p><em>Eat first.</em></p>
+  <p><em>Not till I get it.</em></p>
+  <p>Kale stood there with his arms folded while the plate went cold on the table between them. His father had fed whole flooded neighborhoods, had fed men who could not pay and men who would not, and he could not stand to watch one person not eat in front of him, least of all his son. He took out his wallet and counted five twenties onto the plate beside the eggs. Kale put them in his pocket and ate everything, and asked for more sausage.</p>
+</section>
+
+<section>
+  <h2>III. The Garage</h2>
+  <p class="dateline">A cul-de-sac off Lincoln Street &middot; Sunday</p>
+  <p>That afternoon, after Kale had slept again, his father found him on the couch.</p>
+  <p><em>Last night at the luminaria,</em> Kawika said, <em>Mr. Petersen sang something. By himself, by his wife's bag. A hymn. I heard it from the tent.</em> He took an envelope out of his shirt pocket and set it on the coffee table. <em>That's a thousand dollars. You go to his house and learn one verse of that hymn by heart. And what it means. You say it to him and he says you've got it, it's yours.</em></p>
+  <p>Kale looked at the envelope. A thousand dollars was the Travis Scotts.</p>
+  <p><em>One verse.</em></p>
+  <p><em>One verse.</em></p>
+  <p>Dale's house was a split-level at the end of a cul-de-sac with the straightest lawn in Sarpy County. The garage door was up. Dale was inside at the workbench, in the same purple shirt, sanding a long board of white oak with a block and a sheet of paper, while a box fan pushed the dust out the door. Along the wall were the bones of a bench: legs, rails, a back slat with letters cut into it that Kale could not read from the driveway.</p>
+  <p>Kale told him what his father wanted. Dale listened, and nodded, and went on sanding. Then he said it, plain, without singing, the way you would read off a measurement.</p>
+  <p><em>When I survey the wondrous cross, on which the Prince of Glory died, my richest gain I count but loss, and pour contempt on all my pride.</em></p>
+  <p>Kale had it in two tries. He said it back. Dale nodded.</p>
+  <p><em>What's it mean,</em> Dale said.</p>
+  <p>Kale thought. <em>Richest gain I count but loss,</em> he said. <em>That's, like. You take your best flip and you book it as a loss. For taxes. So you come out ahead.</em></p>
+  <p>Dale looked at him a while over the board.</p>
+  <p><em>Could be,</em> he said, and went back to sanding.</p>
+  <p>Kale stood there. It had been too easy, and he knew it, and he could see that Dale knew it, and Dale had not said <em>you've got it.</em> He had said <em>could be.</em> Kale did not want to go back to his father with <em>could be.</em></p>
+  <p><em>Is there more of it?</em></p>
+  <p><em>Four more.</em></p>
+  <p><em>Then let me hear the next one.</em></p>
+  <p>Dale handed him a sanding block and the other end of the board.</p>
+  <p>That was how it went all afternoon. Dale gave him the next verse, about boasting and the vain things that charm me most. Kale thought he had it and said what he thought it meant. Dale said <em>could be,</em> and Kale could see it was not. So he asked for the next. Dale gave it to him between passes of the block, a line at a time, never more, and after every verse Kale's answer was a little less sure and his hands were a little steadier on the wood. When the board was done, Dale laid a steel straightedge on it edgewise and held it up to the light from the driveway, and there was a thin line of sky under the middle of it, and Dale handed it back without a word. Kale sanded it again. They did that four times. The fifth time there was no light under the edge at all, and Dale ran his thumb down the board, and Kale saw that the fourth time it had been good enough for anybody but Dale, and that Dale did not care about anybody.</p>
+  <p>The fourth verse Dale gave him was in brackets in the old book, he said, the one most churches skipped.</p>
+  <p><em>Then am I dead to all the globe, and all the globe is dead to me.</em></p>
+  <p>Kale said it back and did not say what it meant. He did not know. It was getting dark. The fireflies had come up out of the lawns all down the cul-de-sac, and the sprinklers ticked, and somebody's television was going with a ballgame. Dale turned on the light over the bench. He picked up the back slat of the bench and set it in front of Kale on the bench top, and Kale read the letters cut into it. CAROL ANN PETERSEN 1947&ndash;2009. SHE FED EVERYBODY.</p>
+  <p><em>For the park by the track,</em> Dale said. <em>So the walkers have someplace to sit.</em></p>
+  <p>Then, while Kale sanded the slat, Dale told him one thing, in about six sentences, which was more than Kale had ever heard him say. That in the summer of 2009 he had sat by her bed at the Methodist hospital in Omaha every night for eleven weeks. That before that he had been a man who knew what everything cost, the price of oak by the board foot, the price of a lawn mower, the price of the house, and had been proud of knowing it. That at the end he would have given every one of those things and the whole globe for one more Saturday of her yelling at him for mowing at seven. That nobody had offered him the trade. That he had found out, sitting there, that there was something underneath all of it that you did not buy and could not lose, and she had been standing in it the whole time, and now so was he.</p>
+  <p>He stopped. That was all of it.</p>
+  <p>Kale went on sanding the slat in the light over the bench, around the letters, carefully, into the cuts. Somewhere in that hour, with the fan going and the fireflies out on the lawns and the dust in the light, the thing Dale was talking about came up underneath him too. He could not have said what it was. It was like the board when the light finally stopped showing under the straightedge. It had been there the whole time. It was not going to stop being there. He stayed until eleven. He learned all five verses. He did not think about the shoes once, and later, when he noticed that, it scared him a little.</p>
+</section>
+
+<section>
+  <h2>IV. The Envelope</h2>
+  <p class="dateline">Kwai&rsquo;s &middot; Monday morning</p>
+  <p>Every year on the Monday after the Relay, Kawika opened early for Carol's Crew and fed them breakfast for nothing. Kale rode over with Dale in his truck, with the finished bench in the bed under a moving blanket, and walked into his father's place in the middle of eleven old people in purple shirts. Kawika looked up from the grill and saw his son come in among them, and something in his face went still.</p>
+  <p>Kale, for his part, was praying the only prayer he had. He was praying his father would not bring up the money. Not here. Not in front of Mr. Petersen, who would know then that it had been for a thousand dollars, and the afternoon in the garage with it.</p>
+  <p>But Dale knew already. Dale had known from the driveway.</p>
+  <p>Kawika fed the team first. Loco moco, two eggs over the hamburger patty and the brown gravy over all of it, and fried rice, and coffee. Then he made a plate for his son and set it down in front of him at the end of the long table, and Kale ate it without a word, all of it, every grain. Lin came out of the back in her apron and sat down beside him and patted his arm, not knowing why.</p>
+  <p>When the plates were cleared, Kawika came over and laid the envelope on the table in front of Kale, in front of Dale, in front of everybody.</p>
+  <p><em>You remember,</em> he said, <em>I said a thousand dollars if you learned the verse. Here's your thousand dollars.</em></p>
+  <p>Kale felt his whole face go hot. He looked at the envelope and did not touch it.</p>
+  <p><em>I don't want it,</em> he said.</p>
+  <p><em>Take it. You earned it.</em></p>
+  <p><em>Dad. I don't want it.</em></p>
+  <p>Kawika stood there with his hand still out. He looked at his son a long time. Then he turned to Dale Petersen, the way a man turns to someone who knows more about it than he does.</p>
+  <p><em>I like the way he is today,</em> he said. <em>I don't understand it, but I like it. Saturday he wouldn't eat his breakfast till I paid him a hundred bucks. Today I put a thousand in front of him and he won't touch it.</em></p>
+  <p>Dale turned his coffee cup a quarter turn on the table. He did not sing it. He said it the way he had said everything in the garage, like a measurement he had checked.</p>
+  <div class="verse">
+    <p>Were the whole realm of nature mine,<br>That were a present far too small;<br>Love so amazing, so divine,<br>Demands my soul, my life, my all.</p>
+    <p>&mdash; Isaac Watts, Hymns and Spiritual Songs (1707), Book III, Hymn 7</p>
+  </div>
+  <p><em>He got the verse,</em> Dale said. <em>You don't pay for that. You couldn't if you tried.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Carol's Crew carried the bench out to the park by the track that afternoon and bolted it to a concrete pad facing the far turn, where Dale had knelt with the lighter. Kale held the slat level while Dale drove the lag bolts.</p>
+  <p>The envelope stayed on the counter at Kwai's all week, under the napkin dispenser, because nobody in the family would pick it up. On Sunday at two, when the line of airmen and wrestlers and whoever else came through, Kale was behind the counter in an apron for the first time in his life, filling foil pans. His grandmother watched him from her stool by the pass-through, under the lady in the red jacket with the water line across her skirt, folding wontons. The envelope went into the cash drawer that night. Kawika gave it to the Relay. Kale never asked about it, and he never did get the Travis Scotts, and by the next spring there was a pair of Dale Petersen's old leather work gloves on the shelf in his closet where the boxes had been.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Better than sovereignty over the earth, better than going to heaven, better than lordship over all worlds, is the reward of the first step in holiness.<cite>Dhammapada 178, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Kāla, the son of the great donor Anāthapiṇḍika, cares nothing for the Buddha and will not even come out to see him when he visits the house. His father, afraid for him, decides that anyone can be won with gifts, and promises him a hundred coins to keep the observance day at the monastery. Kāla goes, sleeps the night away, and the next morning refuses to eat until he is paid. Then his father offers him a thousand coins to learn a single verse from the Buddha. Each time Kāla thinks he has the verse, the Buddha lets him misunderstand it, so he stays to learn the next, and listening that way, with his whole attention, he enters the stream. The next day he walks home among the monks and is ashamed when his father sets the thousand coins in front of him in the Buddha's presence, and refuses them; the Buddha explains with this verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-11.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Anathapindika">Anāthapiṇḍika</a>. The hymn is Isaac Watts's <a href="https://www.gutenberg.org/ebooks/13341">&ldquo;Crucifixion to the World by the Cross of Christ&rdquo; (1707)</a>, whose fourth stanza Watts printed in brackets as one that could be left out.</p>
+    <h3>Papillion, Nebraska, 2019</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Relay_For_Life">Relay For Life</a> began in May 1985 in Tacoma, Washington, when a surgeon, Gordon Klatt, walked and ran around a track for twenty-four hours to raise money for the American Cancer Society. The overnight events that grew from it have teams camping around a track, a survivors' lap, and a luminaria ceremony at sunset, with candles in decorated paper bags set around the track to honor survivors and the dead. Papillion lies just west of <a href="https://www.militarytimes.com/news/your-air-force/2019/03/18/floodwaters-overwhelm-one-third-of-offutt-nine-aircraft-evacuated/">Offutt Air Force Base, a third of which was flooded</a> when the Missouri River rose in March 2019.</p>
+    <p>By 2019 sneaker reselling had become a market of its own. <a href="https://en.wikipedia.org/wiki/StockX">StockX</a>, launched in 2016 with stock-market-style price histories for each shoe, was valued at a billion dollars that June. The Travis Scott Air Jordan 1, released on May 11, 2019 at $175, <a href="https://www.thejakartapost.com/life/2019/05/13/air-jordan-1-travis-scotts-sneaker-sells-out-in-a-morning.html">sold out in hours, and resellers were soon asking more than $1,000</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Kāla, son of Anāthapiṇḍika, from the Dhammapada commentary (verse 178). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-11.htm">The original</a>. Scripture from Isaac Watts, Hymns and Spiritual Songs (1707). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-sopas.html">&larr; The Sopas</a><a href="index.html">All stories</a><a href="one-footprint.html">One Footprint &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Laps: a single walker's light goes slowly round a dim oval at the foot of the page,
+  // and each lap a new paper bag lights somewhere along the inside of the track.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, cx, cy, rx, ry, bags = [], ang = Math.PI / 2, lastLap = 0, t = 0;
+  var LAP = 90 * 60; // frames per lap, about a minute and a half
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    cx = W / 2; cy = H * 1.02; rx = W * 0.62; ry = H * 0.16;
+  }
+  function pt(a, k) { return [cx + Math.cos(a) * rx * k, cy + Math.sin(a) * ry * k]; }
+  function addBag() {
+    var a = Math.PI + Math.random() * Math.PI; // the visible upper half of the oval
+    bags.push({ a: a, s: Math.random() * 6.28, age: 0 });
+    if (bags.length > 40) bags.shift();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(181,90,60,0.10)'; ctx.lineWidth = 1;
+    for (var k = 0; k < 3; k++) {
+      ctx.beginPath(); ctx.ellipse(cx, cy, rx * (1 + k * 0.04), ry * (1 + k * 0.04), 0, Math.PI, 2 * Math.PI); ctx.stroke();
+    }
+    for (var i = 0; i < bags.length; i++) {
+      var b = bags[i]; b.age++;
+      var p = pt(b.a, 0.93);
+      var fl = reduce ? 1 : 0.8 + 0.12 * Math.sin(t * 0.07 + b.s) + 0.08 * Math.sin(t * 0.19 + b.s * 2);
+      var a = Math.min(1, b.age / 120) * 0.32 * fl;
+      var g = ctx.createRadialGradient(p[0], p[1] - 3, 0, p[0], p[1] - 3, 16);
+      g.addColorStop(0, 'rgba(255,214,150,' + a + ')');
+      g.addColorStop(1, 'rgba(226,165,75,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p[0], p[1] - 3, 16, 0, 6.29); ctx.fill();
+      ctx.fillStyle = 'rgba(235,229,216,' + (a * 0.6) + ')';
+      ctx.fillRect(p[0] - 2.5, p[1] - 6, 5, 6);
+    }
+    if (!reduce) {
+      t++;
+      ang += (Math.PI * 2) / LAP;
+      if (t - lastLap >= LAP) { lastLap = t; addBag(); }
+      var w = pt(ang, 1.02);
+      if (Math.sin(ang) < 0.2) {
+        var gw = ctx.createRadialGradient(w[0], w[1], 0, w[0], w[1], 10);
+        gw.addColorStop(0, 'rgba(235,229,216,0.35)'); gw.addColorStop(1, 'rgba(235,229,216,0)');
+        ctx.fillStyle = gw; ctx.beginPath(); ctx.arc(w[0], w[1], 10, 0, 6.29); ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+  size();
+  for (var n = 0; n < 9; n++) { addBag(); bags[n].age = 999; }
+  draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
