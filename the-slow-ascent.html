@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Slow Ascent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  /* Layout: one narrow column of prose in the green dusk of Gulf water ten fathoms down, dark theme; down the right margin a diver's lifeline hangs from the light, knotted at every fathom, and a dull brass helmet climbs it very slowly, stopping at each knot to breathe before it goes on; datelined sections. */
+  --ground: #0b221f;
+  --ground-2: #12312c;
+  --ink: #e5ebe3;
+  --ink-dim: #9db3aa;
+  --rock: #cfa65c;
+  --cedar: #6fa59a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #17403a 0%, var(--ground-2) 30%, var(--ground) 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(229,235,227,.2); }
+.series a:hover { color: var(--rock); }
+a:focus-visible { outline: 2px solid var(--rock); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--rock); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(207,166,92,.4); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--rock); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--rock); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(15,44,39,.82); border: 1px solid rgba(229,235,227,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--rock); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(229,235,227,.1); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--rock); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--rock); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(229,235,227,.1); border-bottom: 1px solid rgba(229,235,227,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--rock); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--rock); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--rock); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--rock); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(15,44,39,.82); border-left: 2px solid var(--rock); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 7.5 &middot; Mahā Kaccāyana</span></nav>
+<header>
+  <h1>The Slow Ascent</h1>
+  <div class="epigraph">And let the figure be composite&mdash;a pair of winged horses and a charioteer.<br>&mdash; Plato, <em>Phaedrus</em></div>
+</header>
+<p class="heard"><span class="heard-lead">&Eacute;tsi to &aacute;kousa,</span> on the sponge docks.</p>
+<section>
+  <h2>I. The Third Pew</h2>
+  <p class="dateline">Tarpon Springs, Florida · January 1936</p>
+  <p>Every year from Christmas until the Epiphany the sponge boats stayed in. They lay along the river two and three deep with their masts bare, painted fresh white and blue for the holy day, and the divers who had been out since spring sat in the coffeehouses on the docks with their worry beads and their backgammon boards and told one another the same stories about the bottom.</p>
+  <p>Every year in those twelve days, at some hour nobody saw, Barba Nikitas came back.</p>
+  <p>He had dived for forty-three years, from the islands to Benghazi to the Gulf of Mexico, and he had never once had the bends. People on the docks said it the way they said a man had never once been drunk: as a fact, and a little uneasily. He had been born on Kalymnos in 1872 and gone down in the suit for the first time at sixteen, off the coast of Africa, in water so deep the light at the bottom was the color of a bruise, and in his first season four men on his boat came up paralyzed and two of them died. In Florida the beds were shallower and the bends came less often, but they came. Men came up too fast with their bags full and lay on the deck with their legs gone dead under them, and some walked again and some never did. Barba Nikitas had come up slow every time. A fathom, and stop, and breathe. A fathom, and stop. However many sponges he left lying on the bottom, however the captain swore at him down the line. He said the sponges would be there tomorrow and the captain might find another diver if he liked. The captains swore at him for forty-three years and never found a better one.</p>
+  <p>When his wife died in 1931 he quit diving and went to live with his daughter in Jacksonville, where her husband had a restaurant. That was two hundred miles away. He came back every January on the train. He stayed at the Kalymnian boardinghouse by the river, and he sat on the Epiphany at the end of the third pew on the men&rsquo;s side in St. Nicholas, by the window, and on the day after he was gone again.</p>
+  <p>Nobody ever sat in that place on the Epiphany. Nobody had decided it. Nobody would have known who to ask.</p>
+  <p>Kyr Lefteris Mavrikos had been a schoolmaster on Kalymnos before the war, before the Italians, before his own three sons came across one after another to dive and he came after them to see that they did not die of it. He was nearly seventy. He clipped sponges at the Exchange, standing all day at a plank table in a canvas apron with a pair of long shears, cutting off the dead black roots and trimming each sponge round, and in the afternoons when the American school let out he taught the children their letters at the same table, with the shears put away and the sponges pushed to one end. He spoke very little. He made the children say every word back to him until they had it, and then he made them take it apart.</p>
+  <p>That week he was teaching them <em>ἡνίοχος.</em> The one who drives the chariot.</p>
+  <p><em>Ἡνία,</em> he said. The reins. <em>Ἔχω.</em> I hold.</p>
+  <p><em>The one who holds the reins,</em> said the children.</p>
+  <p><em>Good. Again.</em></p>
+  <p>On the second of January a letter came to the boardinghouse from Jacksonville in Barba Nikitas&rsquo;s square careful hand. His daughter was near her time with her fourth, and the doctor did not like the look of it, and he would not leave her. He would light a candle at home. He sent his respects to the priests and to the bishop who would be coming, and five dollars for the boys who dived.</p>
+  <p>The landlady read it out in the kitchen. By evening everybody on the docks knew. The divers said it was a pity. Kyr Lefteris said nothing at all and went on clipping.</p>
+</section>
+
+<section>
+  <h2>II. The Basil</h2>
+  <p class="dateline">January 6, 1936</p>
+  <p>The bishop came down on the train from the north the evening before, with two deacons and a protopsaltis and a young man who carried his bags and his staff, and the whole town met the train. There had been a band. There were policemen to hold the crowd back and the mayor in a gray overcoat and two men from the Florida newspapers. In the morning the church was so full that people stood in the street outside the open doors and listened to the Liturgy through them, and the smoke of the censers drifted out over their heads into the sun.</p>
+  <p>After the Liturgy the bishop blessed the water in the churchyard. He stood over the great basin in his gold vestments with the deacons on either side of him and dipped the cross three times, and then he took up a thick bunch of basil from the tray they held for him and began to sprinkle the people. <em>Vasilikós,</em> the women called it, the royal herb. The smell of it went up green and sharp in the cold sunshine. The people pressed forward with their bottles and jars to carry the water home.</p>
+  <p>He came back into the church to sprinkle the pews. He went down the aisle on the men&rsquo;s side, scattering water right and left, and at the third pew he stopped.</p>
+  <p>Afterward people argued about exactly what he said. Some said he only asked, <em>Where is the old diver who comes from Jacksonville?</em> The protopsaltis, who was standing nearest, said the bishop had heard about Barba Nikitas on the train the night before, from the president of the community, and that what he said was, <em>I would have liked to see that man.</em></p>
+  <p>Then he looked down at the end of the pew by the window, and Barba Nikitas was sitting there.</p>
+  <p>He was in his black suit and his white shirt buttoned to the throat without a tie, the way he always came. His hands were folded on his knees, big and spotted and quiet. Forty people saw him. The men on either side of him moved apart as if they had been pushed, and one of them crossed himself three times. Nobody had seen him come in. The church had been full since six, with the doors jammed and people standing in the street.</p>
+  <p>The bishop did not seem surprised. He dipped the basil and sprinkled the old man&rsquo;s head and his folded hands, and then he did a thing the community talked about for forty years. He gave him the whole bunch of basil, wet, into his hands. And then he bowed to him, from the waist, the way you bow to an icon.</p>
+  <p>Barba Nikitas stood up and bowed back. He did not say anything. He sat down again with the basil in his lap.</p>
+  <p>At noon he walked in the procession to Spring Bayou with the other old divers, behind the children of the Greek school in their island costumes. He stood at the rail while the bishop went out on the barge to the middle of the bayou and the dove went up, white, with its blue ribbon, out of a girl&rsquo;s hands, and the cross went into the water and thirty boys went in after it. He was seen at the blessing of the boats in the afternoon. After that nobody saw him. The landlady at the boardinghouse said he had not slept there. The conductor on the Jacksonville train, who was a Methodist and had no reason to lie, said that no old Greek gentleman in a black suit had ridden with him either way that week.</p>
+  <p>The letter from his daughter came on the fourteenth. It was a girl, and they were both well. Her father sent his love to everybody. He had not been out of the house since Christmas. He had spent the Epiphany morning in a chair by the kitchen window with his eyes shut, she wrote, and when she asked him if he was sleeping, he said no, he was at church.</p>
+</section>
+
+<section>
+  <h2>III. The Clipping Table</h2>
+  <p class="dateline">The Sponge Exchange · that week</p>
+  <p>The grumbling started at the glendi and went on through the week at the coffeehouses, and by Thursday it had reached the Exchange.</p>
+  <p><em>He bowed to him,</em> said Captain Fotis Kambouris, who owned four boats. He was standing at Kyr Lefteris&rsquo;s table with the president of the community and old Papa Dimitris&rsquo;s son-in-law, who sat on the parish council. <em>A bishop. To a diver who has not brought up a sponge since Hoover.</em></p>
+  <p><em>He did not bow to Papa Dimitris,</em> said the son-in-law, <em>who has served this parish twenty years.</em></p>
+  <p><em>He did not bow to the president,</em> said the captain. <em>Who met him at the train. Who paid for the band.</em></p>
+  <p>The president said nothing, but he did not say they were wrong.</p>
+  <p>Kyr Lefteris finished the sponge he was trimming and set it with the others and laid the shears down. The children were coming along the dock with their slates for the afternoon lesson, and he waited for them to come up and stand around the end of the table before he spoke.</p>
+  <p><em>Captain,</em> he said, <em>how many men have you seen come up with the bends?</em></p>
+  <p>The captain told him. It was a long number. He knew all their names.</p>
+  <p><em>And how many times did Nikitas come up too fast?</em></p>
+  <p><em>Never.</em> The captain shrugged. <em>Everybody knows that. He came up like a man climbing stairs in church. It cost me a thousand dollars a season.</em></p>
+  <p><em>Did he ever take a drink at the glendi?</em></p>
+  <p><em>No.</em></p>
+  <p><em>Did he ever play cards for money on the boat? Did he ever pick a fight? Did he ever tell you how good a diver he was?</em></p>
+  <p>The captain did not answer, because the answer was no and everybody at the table knew it. Barba Nikitas had never said one word about himself in forty-three years that anybody could remember. He went down and he came up, slow, and he ate what the cook gave him, and he slept.</p>
+  <p><em>Forty-three years he was on the bottom,</em> said Kyr Lefteris, <em>where a man sees more sponges than he can carry and the whole sea is pulling him up toward the light, and every time he stopped at the fathom. Every time.</em> He touched the shears on the table without picking them up. <em>You want to know why the bishop bowed. Bishops are men. They have wanted things all their lives and gone up too fast. When they see a man who holds his own reins they cannot help themselves.</em></p>
+  <p>He turned to the children.</p>
+  <p><em>What did we learn this week?</em></p>
+  <p><em>Ἡνίοχος,</em> they said. <em>The one who holds the reins.</em></p>
+  <p><em>Good.</em> He took a little book out of the pocket of his apron, worn soft, a Plato in Greek that he had carried from the island, and opened it to a place he did not need to look for, and read it to them slowly in the old language, which the captain, who had left school at nine to dive, followed the way a man follows a boat in fog.</p>
+  <div class="verse">
+    <p>The right-hand horse is upright and cleanly made; he has a lofty neck and an aquiline nose; his colour is white, and his eyes dark; he is a lover of honour and modesty and temperance, and the follower of true glory; he needs no touch of the whip, but is guided by word and admonition only.</p>
+    <p>&mdash; Plato, <em>Phaedrus</em> 253d, tr. Benjamin Jowett</p>
+  </div>
+  <p><em>Guided by word,</em> Kyr Lefteris said again in plain Greek, for the captain, and shut the book. <em>Not the whip. Only the word. That is a horse the gods would want to drive.</em></p>
+  <p>The captain stood a while longer. Then he went off down the dock toward his boats, and the president went with him, and the son-in-law, and the children sat down on the planks with their slates.</p>
+</section>
+
+<section>
+  <h2>IV. The Fathom</h2>
+  <p class="dateline">The Gulf · spring 1936</p>
+  <p>The boats sailed on the eleventh of January. Captain Fotis&rsquo;s best boat had a new diver that season, a boy from Pothia nineteen years old, the same one who had come up out of Spring Bayou with the cross in his teeth on the Epiphany and been carried through the streets on the other boys&rsquo; shoulders.</p>
+  <p>On his first day on the bottom, forty miles out, the boy filled his bag in an hour and felt the tug on the line, the signal to come up. He started up hand over hand, fast, the way they all did, the way the light pulled you. Then at the first fathom he stopped, without knowing why, and hung there in the green water and breathed. He thought of an old man in a black suit with a wet bunch of basil in his lap.</p>
+  <p>He came up the rest of the way a fathom at a time. On the deck the captain was standing over the air hose with his face dark, ready to swear at him, and did not.</p>
+  <p>Back in town the landlady had found the basil on the windowsill of the room where Barba Nikitas had not slept, dried and tied with a bit of white thread. She hung it on a nail over the third pew on the men&rsquo;s side, and it stayed there, gray and sweet, until the parish moved into the new church with the dome in 1943 and the old pews were carried out.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The gods even envy him whose senses, like horses well broken in by the driver, have been subdued, who is free from pride, and free from appetites.<cite>Dhammapada 94, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the elder <a href="https://en.wikipedia.org/wiki/K%C4%81ty%C4%81yana_(Buddhist)">Mahā Kaccāyana</a> lives far off in Avanti but travels often to hear the Buddha, and at the great Invitation ceremony at the end of the rains the other elders always leave his seat empty for him. Sakka, king of the gods, comes with his retinue bearing perfumes and garlands, notices the empty seat and wishes the elder were there, and at once Kaccāyana is sitting in it. Sakka greets him warmly, honors him with perfumes and flowers and bows to him. Some of the monks complain that Sakka has favored one elder over the others, and the Buddha answers that those who guard the doors of their senses as Kaccāyana does are dear to gods and men alike. Kaccāyana is remembered as the disciple best at drawing out the full meaning of a short saying, and Pali tradition credits him with its first grammar. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-05.htm">the full commentary story</a>.</p>
+    <h3>Tarpon Springs, 1936</h3>
+    <p>Sponges had been hooked from small boats off <a href="https://en.wikipedia.org/wiki/Tarpon_Springs,_Florida">Tarpon Springs</a> since the 1880s. In 1905 John Cocoris brought over divers and crews from Greece who worked the beds in the heavy diving suit, and before long most of them came from the Dodecanese islands of Kalymnos, Symi and Halki, which <a href="https://en.wikipedia.org/wiki/Italian_Islands_of_the_Aegean">Italy ruled</a> from 1912 until after the Second World War. In the Mediterranean the suit had killed and paralyzed divers by the thousands; the man who helped design it advised coming up at about three feet a minute, and divers trained in breath-hold diving rarely did. The Gulf beds were shallower and kinder, but <a href="https://en.wikipedia.org/wiki/Decompression_sickness">the bends</a> still came, and in one <a href="https://dan.org/alert-diver/article/the-story-of-sponge-divers/">history of the sponge divers</a> an old diver says that the careful ones, who resist greed, can dive happily all their lives.</p>
+    <p>The town's Greeks have kept the Epiphany, or <a href="https://en.wikipedia.org/wiki/Theophany">Theophany</a>, since 1903. The sponge boats stayed in port from Christmas until that day. After the Liturgy at <a href="https://en.wikipedia.org/wiki/St._Nicholas_Greek_Orthodox_Cathedral_(Tarpon_Springs,_Florida)">St. Nicholas</a> the presiding bishop blessed the water, and people carried it home with sprigs of basil; at noon a procession went down to Spring Bayou, a white dove was released, the bishop threw a cross into the water from a barge, and young men dove for it. The boats were blessed in the afternoon and the day ended in a glendi. The congregation moved into its present domed church in 1943. The teacher's lesson is the image from Plato's <a href="https://en.wikipedia.org/wiki/Phaedrus_(dialogue)"><em>Phaedrus</em></a> of the soul as a <a href="https://en.wikipedia.org/wiki/Chariot_Allegory">charioteer</a> with two horses, one wild and one that needs no whip; the Greek word for the driver, <em>hēníochos</em>, means the one who holds the reins.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Mahā Kaccāyana from the Dhammapada commentary (verse 94). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-05.htm">The original</a>. Text from Plato&rsquo;s <em>Phaedrus</em>, translated by Benjamin Jowett. Written by Claude Opus 5.5.
+  <div class="pager"><a href="three-hems.html">&larr; Three Hems</a><a href="index.html">All stories</a><a href="the-doorsill.html">The Doorsill &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, X, top, bot, N = 10, step;
+  var CLIMB = 3200, REST = 5200, cycle = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    X = W - Math.max(28, Math.min(90, W * 0.07));
+    top = -10; bot = H * 0.94; step = (bot - H * 0.08) / N;
+  }
+  function helmetY(t) {
+    var per = CLIMB + REST, total = per * N + 6000;
+    var u = t % total, k = Math.floor(u / per), r = u - k * per;
+    if (k >= N) return { y: bot - N * step, fade: 1 - Math.min(1, (u - per * N) / 3000) };
+    var y = bot - k * step;
+    if (r > REST) { var f = (r - REST) / CLIMB; f = f * f * (3 - 2 * f); y -= f * step; }
+    var fade = Math.min(1, u / 2500);
+    return { y: y, fade: fade };
+  }
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    // light from above
+    var lg = ctx.createLinearGradient(0, 0, 0, H * 0.5);
+    lg.addColorStop(0, 'rgba(160,210,190,0.07)'); lg.addColorStop(1, 'rgba(160,210,190,0)');
+    ctx.fillStyle = lg; ctx.fillRect(0, 0, W, H * 0.5);
+    // the line
+    ctx.strokeStyle = 'rgba(214,200,160,0.16)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(X, top); ctx.lineTo(X, bot + 20); ctx.stroke();
+    for (var i = 0; i <= N; i++) {
+      var ky = bot - i * step;
+      ctx.fillStyle = 'rgba(214,200,160,0.20)';
+      ctx.beginPath(); ctx.ellipse(X, ky, 3, 2, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    var h = reduce ? { y: bot - 3 * step, fade: 1 } : helmetY(now || 0);
+    var y = h.y, a = 0.32 * h.fade, r = 11;
+    if (a > 0.005) {
+      var g = ctx.createRadialGradient(X - 3, y - 4, 1, X, y, r * 1.2);
+      g.addColorStop(0, 'rgba(236,200,130,' + a + ')');
+      g.addColorStop(1, 'rgba(150,110,50,' + (a * 0.7) + ')');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(X, y, r, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(10,30,28,' + (a * 1.4) + ')';
+      ctx.beginPath(); ctx.arc(X, y + 1, r * 0.42, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(150,110,50,' + (a * 0.9) + ')';
+      ctx.fillRect(X - r * 0.9, y + r * 0.75, r * 1.8, 4);
+      // a few bubbles while resting
+      if (!reduce) {
+        var t = (now || 0) / 1000;
+        for (var b = 0; b < 4; b++) {
+          var ph = (t * 0.5 + b * 0.25) % 1;
+          var by = y - r - ph * step * 0.9;
+          ctx.strokeStyle = 'rgba(200,230,220,' + (0.18 * (1 - ph) * h.fade) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(X + Math.sin(t * 2 + b) * 4, by, 1.5 + b * 0.6, 0, Math.PI * 2); ctx.stroke();
+        }
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(0);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+
+</script>
+</body>
+</html>
