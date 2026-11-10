@@ -8,7 +8,7 @@ Images, places and worlds the editor wants in the series. Before you choose a se
 - The Minnesota Twins (the 1987 or 1991 Series, the Metrodome, a radio in a barn) [22.3]
 - Salt Spring Island, British Columbia (back-to-the-landers, draft dodgers, the Black settlers of the 1850s, Hawaiian Kanaka families) [25.9]
 - A windmill (a Plains water pump, a Dutch mill in Michigan, a wind farm in Texas or Iowa) [12.9]
-- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5]
+- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5] [19.5]
 
 ## Twenty random Dewey numbers (drawn Nov 10, 2026)
 Use one as a story's hidden subject: a job, an object, a book someone is reading, a shelf in the library where something happens.
@@ -43,10 +43,11 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - Buddhists. Six stories so far (Vietnamese, Kalmyk, Cambodian, Lao, Japanese Pure Land, Cantonese Chan). Still missing: Hawaii plantation Hongwanji temples, Soka Gakkai (Black and Latino members), Beat and San Francisco Zen (1950s–60s), insight meditation (Barre 1975), Shambhala in Boulder, Tibetan exiles, Thai, Burmese, Sri Lankan and Korean temples, a prison Buddhist chaplain, Dharmapala at the 1893 Parliament of Religions [25.7 Thai]
 - Buddhist and contemplative America, specific (the editor's picks; each one-use; real founders appear only at a distance, with no invented dialogue):
   - Chögyam Trungpa's world: Naropa and Boulder in 1974, the Vajradhatu seminaries, Shambhala households. Honest about the drinking and the controversies, without sneering.
-  - IMS: the Insight Meditation Society in Barre, Massachusetts, from 1976; a three-month retreat, the noting practice, a yogi job in the kitchen.
-  - An MBSR trial: a participant in an early mindfulness-based stress reduction clinic or research trial (the UMass stress clinic from 1979, or a 2000s randomized study), with a body scan, a raisin and a wait-list control group.
-  - A psychedelic trip: the 1962 Good Friday Experiment at Marsh Chapel, Harvard and Millbrook in the '60s, a 1970s commune, or a 2000s Johns Hopkins psilocybin session. Plain, and without endorsement or warning labels.
+  - IMS: the Insight Meditation Society in Barre, Massachusetts, from 1976; a three-month retreat, the noting practice, a yogi job in the kitchen. [3.6]
+  - An MBSR trial: a participant in an early mindfulness-based stress reduction clinic or research trial (the UMass stress clinic from 1979, or a 2000s randomized study), with a body scan, a raisin and a wait-list control group. [20.3]
+  - A psychedelic trip: the 1962 Good Friday Experiment at Marsh Chapel, Harvard and Millbrook in the '60s, a 1970s commune, or a 2000s Johns Hopkins psilocybin session. Plain, and without endorsement or warning labels. [20.4]
 - Government employees as the heart of a story: a census enumerator, a post office clerk, a WPA writer interviewing ex-slaves, an IRS auditor, a county extension agent, a park ranger, a Social Security claims clerk, a TSA screener, a lighthouse inspector, a customs officer
 - Spies: the Culper Ring, a Civil War spy (Elizabeth Van Lew's Richmond), Los Alamos and the Rosenbergs era, a Soviet "illegal" in the suburbs, a CIA analyst, an FBI informant inside a church or a movement, a suspected neighbor who wasn't
 - An astronaut (the Mercury Seven's wives, a Gemini capsule, Skylab, a shuttle mission specialist, the ISS, a NASA computer at Langley, a Houston flight controller)
 - A submarine (the Hunley in 1864, a WWII fleet boat, a Cold War missile boat on deterrent patrol, the Thresher, the boomer wives of Groton or Kings Bay)
+- Pirates (Blackbeard at Ocracoke, Anne Bonny and Mary Read, the Lafitte brothers at Barataria, Gasparilla legend, a privateer out of Salem or Baltimore, Caribbean buccaneers, a modern Somali-piracy hostage)

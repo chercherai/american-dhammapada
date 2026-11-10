@@ -45,7 +45,7 @@ Mahayana echoes are welcome too. The bodhisattvas are innumerable: a figure who 
 
 ## Decades
 
-The series is badly skewed toward the present: the 2010s and 2020s already have more than forty stories, and 1492–1680, 1700–1730 and 1800–1810 have almost none. **Until further notice, don't set a new story after 2000.** Prefer the empty decades: the 1490s through the 1670s (Columbus, Spanish Florida and New Mexico, Jamestown, Plymouth, New Netherland, the Pueblo Revolt), the 1700s–1720s, and the 1800s. Run `python3 /home/claude/series/claim.py --list` and count before choosing.
+Roughly follow where Americans have actually lived: more stories in recent, more populous decades is fine. Still, don't leave whole eras empty. The 1490s–1670s, 1700s–1720s and 1800s are nearly bare, so prefer them when a source fits. Run `python3 /home/claude/series/claim.py --list` to see the spread.
 
 ## Borders
 

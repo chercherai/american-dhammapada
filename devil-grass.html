@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Devil Grass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on drafting vellum under fluorescent light, light theme; along the foot of the page lies a strip of small round dichondra leaves, and now and then a pale runner of devil grass creeps through it, then lifts out whole, root and all, and is gone; datelined sections. */
+  --vellum: #f2f0e7;
+  --vellum-2: #e6e4d9;
+  --graphite: #34373a;
+  --graphite-dim: #6d7073;
+  --dichondra: #557f45;
+  --check: #b8382b;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f8f7f1 0%, var(--vellum) 40%, var(--vellum-2) 100%) fixed, var(--vellum);
+  color: var(--graphite);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 9rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--graphite-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--graphite-dim); text-decoration: none; border-bottom: 1px solid rgba(52,55,58,.2); }
+.series a:hover { color: var(--check); }
+a:focus-visible { outline: 2px solid var(--check); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--dichondra); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(184,56,43,.45); padding-left: 1rem; font-style: italic; color: var(--graphite-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--dichondra); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--check); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(252,251,247,.8); border: 1px solid rgba(52,55,58,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--dichondra); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(52,55,58,.15); color: var(--graphite-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--check); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--graphite-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--dichondra); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(52,55,58,.15); border-bottom: 1px solid rgba(52,55,58,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--check); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--check); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--dichondra); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--check); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(252,251,247,.8); border-left: 2px solid var(--check); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--graphite-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 19.5 &middot; Sambahulabhikkhu</span></nav>
+<header>
+  <h1>Devil Grass</h1>
+  <div class="epigraph">Not many of you should become teachers, my brothers, for you know that we who teach will be judged with greater strictness.<br>&mdash; James 3:1 (Goodspeed)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Now the way I heard it,</span> at Douglas Long Beach.</p>
+
+<section>
+  <h2>I. The Board Cover</h2>
+  <p class="dateline">Engineering, the Long Beach plant &middot; October 1959</p>
+  <p>The drafting room was on the second floor and ran the length of a city block, two hundred boards in rows under the fluorescent tubes, every board with a drafting machine clamped to the top edge and a man on a stool in front of it, and here and there a woman. It was quiet the way a library is quiet, which is to say there was a sound under everything, two hundred pencils going and the tick of the machines' protractor heads locking and unlocking, and the hiss of the air conditioning that had been put in for the vellum and not for the people. The airplane they had drawn had gone into service with United and Delta in September. Now the changes were coming back, the way they always did, in stacks.</p>
+  <p>Lloyd Ambrose had the second board from the window in the wing group. He had come out from Wichita in 1941 when Douglas was hiring anybody who could hold a pencil, and he had been a layout man since the war, and his lettering was the best in the building. People said that, and he had heard them say it. Single-stroke Gothic, upper case, an eighth of an inch high, every letter leaning exactly nowhere, every O a true O, every R with its leg kicked out at the same angle as every other R. He did it freehand. He had a Leroy set in his drawer and never used it. When the new men came up from the training school, somebody always walked them past Lloyd's board to look at his title blocks, the way you'd take a visitor to see the ocean.</p>
+  <p>Russ Hiatt had the board behind him. Russ had silver hair at fifty and the kind of face they put in shirt advertisements, and he talked beautifully, and so did Lloyd. They were the two best talkers in Engineering. At the coffee cart, at the Christmas party, at the retirement lunches at the coffee shop on Lakewood Boulevard, when somebody needed to say a few words, it was Russ or Lloyd who said them. Lloyd had won the area contest at Toastmasters two years running. The section chief, Mr. Voss, almost never said anything to anybody, so it fell to them.</p>
+  <p>On the Friday before Halloween, Lloyd came back early from lunch and found four of the young detailers at Irene Kostka's board.</p>
+  <p>Irene was the senior checker in the wing group. She had come in during the war, one of the women they hired off the street when the men went, and when the men came back she had not gone home. She was past fifty now, a heavy woman in cardigans who ate her lunch at her board out of waxed paper and did not talk at the coffee cart. Her lettering was a disgrace. It was fast and crabbed and leaned every which way, like a doctor's, and Lloyd had once heard Russ say that if Irene's initials were not in the check box of a drawing you could not be sure the drawing was finished, and if they were, you could not be sure they were initials.</p>
+  <p>The detailers had her drawings rolled and rubber-banded on the next stool and had stripped the old cover off her board, a sheet of pale green vinyl worn grey and scored through in a hundred places where her knife had cut tape. They were laying down a new one. Ray Delgado held one end and the Lund boy the other, and Judy Pratt ran a steel scale along it to push the bubbles out, and the Okamoto kid stood by with the tape. They did it carefully, the way you'd make a bed for somebody who was sick. When it was down they put her drawings back and set her pencils in a row, sharpened, the leads pointed on the sandpaper pad, and her coffee from the cart, black, with a saucer over it to keep it warm.</p>
+  <p>Lloyd went to his own board. His cover was eleven years old. He had never once thought about it until now.</p>
+</section>
+
+<section>
+  <h2>II. Lunch in the Buick</h2>
+  <p class="dateline">The parking lot &middot; the following week</p>
+  <p>Nobody ate in the cafeteria who could help it. Most of Engineering ate in their cars with the windows down and the radio on, in the big lot by the airport fence, and watched the airplanes. Lloyd and Russ ate in Russ's Buick, which had the better radio.</p>
+  <p><em>It's not that I want my pencils sharpened,</em> Lloyd said.</p>
+  <p><em>Lord, no.</em></p>
+  <p><em>It's the standard. You look at what's coming out of that training school. Half of them can't letter. They can't make a numeral eight. They come up here and they attach themselves to whoever's nice to them, and they learn whatever that person happens to do. Irene's a good checker. Nobody says she isn't. But her hand is a mess, and every one of those kids is going to letter like her in five years.</em></p>
+  <p>Russ unwrapped a sandwich. <em>What we ought to have,</em> he said, <em>is a rule. Nobody puts a line on a released drawing until he's done six weeks of lettering with one of the senior layout men. No matter where he trained.</em></p>
+  <p><em>The way they used to do it at Santa Monica before the war.</em></p>
+  <p><em>The way they used to do it everywhere. It'd be good for the airplane.</em></p>
+  <p><em>It would,</em> Lloyd said. He was already seeing it. He saw the memo, with his name on it and Russ's. He saw a Group Leader rating, which neither of them had ever been given, and the money that went with one. He saw young men coming up to his board in the morning with a question and a cup of coffee, and the walk past his title blocks becoming a thing they had to do and not just a thing they were shown.</p>
+  <p>An airliner went over low, coming in, all four engines at once, and they waited until they could hear each other.</p>
+  <p><em>You'd better do the talking,</em> Russ said. <em>You're better with Voss.</em></p>
+  <p>Nobody was better with Voss. But Lloyd said he would.</p>
+</section>
+
+<section>
+  <h2>III. The Chief's Desk</h2>
+  <p class="dateline">Mr. Voss's desk &middot; Friday afternoon</p>
+  <p>Harlan Voss had a grey steel desk at the end of the room, out in the open with everybody else, where he could see the whole wing group without seeming to look. He was from Red Oak, Iowa. He had been a structures man before he was a section chief and he still did the stress checks on the hard ones himself, at home, at night. He was an elder at a Presbyterian church in Long Beach and he had never been heard to raise his voice or tell a joke. When you talked to him he looked at you the whole time with his hands folded on the blotter, and it was hard to keep talking.</p>
+  <p>Lloyd talked well. He had written it out at home and practiced it in the bathroom mirror and he did not need the paper. He talked about the standard. He talked about the training school. He said that a drawing was a public document and might be in a file somewhere for forty years and that somebody they would never meet would have to read it. He did not mention Irene Kostka. He did not mention a Group Leader rating. Russ stood behind him and nodded at the right places. It took about four minutes, and when he was done he knew it had been good.</p>
+  <p>Voss sat a while.</p>
+  <p><em>That's a sound idea,</em> he said. <em>It's the way I was taught. A man ought to learn to letter from somebody who can letter.</em></p>
+  <p>Lloyd felt Russ shift behind him.</p>
+  <p><em>But that's not why you're asking,</em> Voss said.</p>
+  <p>He reached into the stack on the corner of his desk without looking and slid out a released drawing, a wing rib, and turned it around so they could read it. Lloyd knew the drawing. He had done the layout. In the check box, in a scrawl, were Irene's initials. Down the margin, in the same scrawl, in red pencil long since erased but still showing in the tooth of the vellum, were nine corrections. Lloyd remembered every one. Two of them would have put a rib in the wrong place on an airplane that was now carrying people to Chicago.</p>
+  <p><em>I don't count a man a draftsman because of his lettering, Lloyd,</em> Voss said. <em>Or because he can talk. You both letter better than anybody in this building. You talk better than anybody in it. I've known that for fifteen years.</em></p>
+  <p>He opened the shallow drawer of his desk, where other men kept their slide rules, and took out a small blue book with a soft cover, worn white along the spine, and opened it to a place he did not have to look for. He read it the way he read everything, flat, like specifications.</p>
+  <div class="verse">
+    <p>What wise, intelligent man is there among you? Let him show by his good life that what he does is done in the humility of wisdom. But if you cherish bitter feelings of jealousy and rivalry in your hearts, do not pride yourselves on it and thus belie the truth. Such wisdom does not come from above. It is earthly, animal, demon-like. For wherever jealousy and rivalry exist, there will be confusion and every low action.</p>
+    <p>&mdash; James 3:13&ndash;16 (Goodspeed)</p>
+  </div>
+  <p>He closed the book and put it back in the drawer.</p>
+  <p><em>The kids go to Irene because Irene doesn't care whether they go to her or not,</em> he said. <em>When you don't care either, I'll send you all of them.</em></p>
+  <p>That was all. He picked up his pencil, and they understood that they had been let go.</p>
+</section>
+
+<section>
+  <h2>IV. The Runner</h2>
+  <p class="dateline">Lakewood &middot; Saturday</p>
+  <p>Lloyd lived on Hayter Avenue in Lakewood, in a two-bedroom stucco house that had cost him nine thousand dollars in 1951 with nothing down, on a street of eighty houses that had all been built in about a week. He had put in dichondra in front, like everybody, because it stayed green and flat and you hardly had to mow it, and it looked from the street like a green felt tabletop. He was proud of it. The only trouble with it was the devil grass.</p>
+  <p>Devil grass was what everybody in Lakewood called Bermuda grass. It came over from the vacant lots and the neighbors and the strip by the curb, and it threw out runners under the dichondra, flat, like wire, and sent up blades every few inches along them, coarse and grey-green and ugly. Lloyd had been pulling it for eight years. He pulled it every Saturday morning, along with the rest of the street. You took hold of the blades and pulled, and they broke off at the runner, and the lawn looked clean, and in a week it was back. Everybody knew that. Nobody on Hayter Avenue had ever done anything else.</p>
+  <p>He was on his knees on a folded bath mat at seven in the morning, with the coffee going cold on the step. He had not slept well. He kept hearing it, the flat voice. When you don't care either. He had gone over the four minutes in his head all night the way you go over a drawing that came back from check, and every time he went over it he found that he had believed every word he said, and that none of it was why he had said it.</p>
+  <p>He took hold of a tuft of devil grass to pull it and stopped.</p>
+  <p>He went into the garage and got the narrow trowel Marjorie used for her bulbs. He came back and worked the point in beside the tuft, gently, and lifted, and found the runner, white where it had been out of the light, and followed it. It went under the dichondra toward the walk. He lifted the dichondra over it with his fingers and laid it back down. It went a foot and branched, and he followed both branches. One of them went under the edge of the concrete. He lay down flat on the walk on his stomach in his Saturday clothes and worked the trowel in under the slab, a quarter inch at a time, and drew it out. The other went clear across to the Hendersons' side. He followed it there too, on his knees on their lawn, and Ed Henderson came out in his robe for the paper and looked at him and went back inside.</p>
+  <p>It took him most of the morning. When it came up at last it came up all at once, the way a thread comes out of a hem, and he sat back on his heels holding it. It was longer than he was tall. There were joints all along it every few inches, and a fine beard of white root at every joint, and at the far end a knot of roots the size of his fist that had been sitting under his lawn since Eisenhower's first term, sending the stuff up, while he pulled at the tops every Saturday and called it weeding.</p>
+  <p>He laid it out on the sidewalk in the sun, the whole length of it.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On Monday he took his new layout, the trailing-edge change, not to the checker who usually had his work but down the row to Irene Kostka's board, and stood there with it until she looked up.</p>
+  <p><em>Would you look at this for me, Irene?</em></p>
+  <p>She looked at him a moment longer than she needed to. Then she cleared a space on the new green cover and unrolled it and weighted the corners and went over it with her red pencil, not saying anything, all the way down, the way she went over everybody's. She found two. She put a crabbed little red mark beside each of them that could have been a check or a letter or nothing at all, and rolled it back up and handed it to him.</p>
+  <p><em>Thank you,</em> Lloyd said.</p>
+  <p>The runner was still on the sidewalk when he came home that evening, dried out and gone the color of straw, with the beard of roots curled up at every joint. He left it there all week, where he had to step over it going to the car.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">An envious greedy, dishonest man does not become respectable by means of much talking only, or by the beauty of his complexion.<cite>Dhammapada 262, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He in whom all this is destroyed, and taken out with the very root, he, when freed from hatred and wise, is called respectable.<cite>Dhammapada 263, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, some senior monks at Jetavana notice the young monks and novices dyeing robes and doing other services for their own preceptors. The elders, who are skilled with words and expert in the letter of the teaching, get no such attention, and they ask the Buddha to rule that young monks, wherever they have learned the Dhamma, must not rehearse it until they have trained under them, so that their own gain and honor will grow. The Buddha sees that the rule would be proper in itself but that they want it for their own gain, and tells them he does not count them accomplished for their talk: only one in whom envy and the rest have been cut out at the root is truly accomplished. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-05.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Bhikkhu">bhikkhus</a>, the Buddhist monks, and their ordination and training.</p>
+    <h3>Long Beach and Lakewood, 1959</h3>
+    <p>Douglas Aircraft built its <a href="https://en.wikipedia.org/wiki/Douglas_DC-8">DC-8</a>, its first jet airliner, at a new factory at Long Beach Airport. The first one rolled out on April 9, 1958, first flew on May 30, 1958, and entered service with Delta and United on September 18, 1959. Before computers, every part of an airplane was drawn by hand, in pencil on vellum, in drafting rooms that held hundreds of boards; the work went from layout to detail to checker, whose initials on the drawing meant it could be released. Lettering in a standard single-stroke Gothic hand was a point of pride, and the trade itself all but disappeared once computer-aided drafting arrived.</p>
+    <p>Next door, the tract city of <a href="https://en.wikipedia.org/wiki/Lakewood,_California">Lakewood</a> went up between 1950 and 1953, 17,500 houses in under three years, sold to veterans with no money down on thirty-year loans. Lakewood incorporated in 1954. Dichondra, a low creeping plant with small round leaves, was a fashionable lawn in Southern California through the 1950s, and Bermuda grass, which the locals called devil grass, invaded it by underground runners that had to be dug out entire or would come back.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a company of bhikkhus from the Dhammapada commentary (verses 262&ndash;263). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-05.htm">The original</a>. Scripture from Edgar J. Goodspeed, <i>The New Testament: An American Translation</i> (1923). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-votum.html">&larr; The Votum</a><a href="index.html">All stories</a><a href="seven-oclock.html">Seven O&#x27;Clock &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, leaves = [], run = null, t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function band() { return Math.min(90, H * 0.12); }
+  function make() {
+    leaves = [];
+    var n = Math.round(W / 9), b = band();
+    for (var i = 0; i < n; i++) leaves.push({ x: Math.random() * W, y: H - Math.random() * b, r: 3 + Math.random() * 3.2, a: 0.10 + Math.random() * 0.12 });
+  }
+  function newRun() {
+    // A runner of devil grass creeps across the strip, jointed every few steps, then lifts out whole.
+    var b = band(), y0 = H - b * (0.25 + Math.random() * 0.5), left = Math.random() < 0.5;
+    run = { x: left ? -10 : W + 10, y: y0, dir: left ? 1 : -1, pts: [], phase: 'grow', lift: 0, len: W * (0.35 + Math.random() * 0.35), seed: Math.random() * 10 };
+  }
+  function drawLeaves() {
+    for (var i = 0; i < leaves.length; i++) {
+      var l = leaves[i];
+      ctx.fillStyle = 'rgba(85,127,69,' + l.a + ')';
+      ctx.beginPath(); ctx.ellipse(l.x, l.y, l.r * 1.15, l.r, 0, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  function drawRun() {
+    if (!run || run.pts.length < 2) return;
+    var up = run.lift, alpha = run.phase === 'lift' ? Math.max(0, 1 - up / 140) : 1;
+    ctx.strokeStyle = 'rgba(150,140,110,' + (0.42 * alpha) + ')';
+    ctx.lineWidth = 1.4; ctx.lineCap = 'round';
+    ctx.beginPath();
+    for (var i = 0; i < run.pts.length; i++) {
+      var p = run.pts[i], y = p.y - up * (0.6 + 0.4 * Math.sin(i * 0.05));
+      if (i === 0) ctx.moveTo(p.x, y); else ctx.lineTo(p.x, y);
+    }
+    ctx.stroke();
+    for (var j = 0; j < run.pts.length; j += 12) {
+      var q = run.pts[j], yy = q.y - up * (0.6 + 0.4 * Math.sin(j * 0.05));
+      ctx.strokeStyle = 'rgba(110,128,90,' + (0.4 * alpha) + ')';
+      ctx.beginPath(); ctx.moveTo(q.x, yy); ctx.lineTo(q.x + 3, yy - 7); ctx.stroke();
+      if (run.phase === 'lift') {
+        ctx.strokeStyle = 'rgba(200,192,170,' + (0.5 * alpha) + ')';
+        ctx.beginPath(); ctx.moveTo(q.x, yy); ctx.lineTo(q.x - 2, yy + 5); ctx.moveTo(q.x, yy); ctx.lineTo(q.x + 2, yy + 6); ctx.stroke();
+      }
+    }
+  }
+  function step() {
+    t++;
+    if (!run) { if (t % 400 === 0) newRun(); return; }
+    if (run.phase === 'grow') {
+      run.x += run.dir * 0.45;
+      run.y += Math.sin(t * 0.03 + run.seed) * 0.18;
+      run.pts.push({ x: run.x, y: run.y });
+      if (run.pts.length * 0.45 > run.len) { run.phase = 'rest'; run.rest = 0; }
+    } else if (run.phase === 'rest') {
+      if (++run.rest > 320) run.phase = 'lift';
+    } else {
+      run.lift += 0.35;
+      if (run.lift > 140) { run = null; t = 0; }
+    }
+  }
+  function frame() { ctx.clearRect(0, 0, W, H); drawLeaves(); drawRun(); }
+  function loop() { step(); frame(); requestAnimationFrame(loop); }
+  function still() {
+    newRun(); run.phase = 'rest';
+    for (var i = 0; i < run.len / 0.45; i++) { run.x += run.dir * 0.45; run.y += Math.sin(i * 0.03 + run.seed) * 0.18; run.pts.push({ x: run.x, y: run.y }); }
+    frame();
+  }
+  size(); make();
+  if (reduce) still(); else { newRun(); loop(); }
+  window.addEventListener('resize', function () { size(); make(); if (reduce) still(); });
+})();
+</script>
+</body>
+</html>
