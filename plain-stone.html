@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plain Stone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on dark slate; a single slack wire sways across the top and slowly comes to rest. */
+  --ground: #181b1f;
+  --ground-2: #22262b;
+  --paper: #e6e4df;
+  --paper-dim: #9fa3a7;
+  --accent: #a9bccb;
+  --glow: #c8b27e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #262b31 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,228,223,.14); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 26px rgba(169,188,203,.18); }
+.epigraph { border-left: 1px solid rgba(169,188,203,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(34,38,43,.8); border: 1px solid rgba(230,228,223,.09); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,228,223,.09); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(230,228,223,.14); border-bottom: 1px solid rgba(230,228,223,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(34,38,43,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.36 &middot; Naṭapubbakatthera</span></nav>
+<header>
+  <h1>Plain Stone</h1>
+  <div class="epigraph">Be still and cool in thy own mind and spirit from thy own thoughts&hellip;<br>&mdash; George Fox, letter to Lady Claypole (1658)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As it was told me,</span> in Washington Square.</p>
+
+<section>
+  <h2>I. The Last Garnier</h2>
+  <p class="dateline">The road, and Newport &middot; 1966&ndash;2011</p>
+  <p>Jo Garnier was born in a trailer behind the grandstand of the Ionia Free Fair in Michigan in July of 1966, between the two shows her father did each night on the sway pole. Her people had been on the rope in this country since before the Revolution, and her father liked to say so to the fair boards, and to add that one of them, back at the start, had danced on a ship's mast at Newport in Rhode Island and then run off and married a Quaker, and that the family had never got over it. He said it as a joke. It was the only story about the family that everyone in it knew.</p>
+  <p>She was on the wire at six and on the pole at sixteen, when her father's back went. She worked the fairs with the family until there were no more fairs that hired a free act, and then she went to New York and flew for the one-ring circus in the tent at Lincoln Center, and then for the big Canadian shows, in Las Vegas and on tour, for fifteen years. She was a flyer and then a catcher and then, when her knees began to go, she went back to what she had started on and did a slack-wire act thirty feet up, alone, in a white leotard, that the papers in Montreal called the stillest thing in the show. In Phoenix in 2005 a rigging plate failed and she fell twenty-six feet onto the edge of the net and broke her pelvis in two places. She was back up on the wire in nine months. Three years after that she came down for good, and nobody, including her, could have said exactly why.</p>
+  <p>She came to Newport because of the joke. She was forty-two and had no other place in particular, and she wanted to see the town where the girl on the mast had come down. She stood a long time on Washington Square in front of the old Colony House, in the traffic, trying to work out where a mast would have stood. Then she went looking for the Quakers, and found that the great meetinghouse on Farewell Street was a museum now and the meeting that was left met on First Days in a borrowed parish room on the Point, nine or ten people in a circle of folding chairs. She sat with them that Sunday, an hour without a word, and came back the next week, and the next.</p>
+  <p>She needed work, and a man at the meeting knew a stone shop on Spring Street that had been cutting gravestones in Newport for four generations of the same family and had never had enough people with steady hands. She swept the shop for a year. Then they gave her a mallet and a chisel and a slab of slate to practice on, and found out that she could stand at a stone for six hours and not move anything but one wrist. She was taken into membership in 2011. By 2024 she was fifty-eight and lettered half the stones that went out of that shop, and in meeting she almost never spoke.</p>
+  <p>The one she sat nearest to on First Days was Walt Pearce. He was eighty-eight, a retired engineer who had spent thirty-five years at the sonar plant in Portsmouth listening to tapes of the sea, and he spoke in meeting perhaps twice a year, and when he did, the others said, it was worth the wait. The first year she came she had asked him, after meeting, what you were supposed to do for the hour. He thought about it. <em>Same as up there, I'd guess,</em> he said. <em>Only don't do anything.</em> It was the only instruction she ever had.</p>
+</section>
+
+<section>
+  <h2>II. Washington Square</h2>
+  <p class="dateline">Newport &middot; a First Day in August 2024</p>
+  <p>Once a year, in August, the historical society let the meeting hold worship in the old house on Farewell Street, the great meetinghouse of 1699 where the Friends of all New England had gathered every summer for two hundred years. The meeting walked there together from the Point, the eleven of them who were left and a few summer attenders, the long way, through town, because Walt liked to go by the water. He went in front with his cane. Jo walked at the back with Abby Sherman, who was twenty-four and home from graduate school, and Abby's friend Dana, a counselor from Providence who had been attending since the spring.</p>
+  <p>Washington Square was full of the Sunday crowd off the cruise ship, and in the middle of it, in front of the Colony House, a troupe of street acrobats from Montreal had strung a slack wire between two steel tripods and set up a speaker. A boy was walking the wire in sneakers, and then a girl went up after him in a white leotard and stood on it with no hands, and lay down on it on her back, and stood up again, and rocked it, side to side, slowly, in the long swings that make the crowd under a wire draw in its breath. The tourists had their phones up. A man in a captain's hat said <em>Holy cow</em> out loud.</p>
+  <p>The meeting slowed. Walt kept going. Abby looked at the wire and then at Jo.</p>
+  <p><em>Jo. That's what you did. Isn't it? That exact thing.</em></p>
+  <p><em>That's it,</em> said Jo.</p>
+  <p><em>Don't you miss it? Even a little? Standing there watching?</em></p>
+  <p>Jo looked up at the girl on the wire. She looked a long time, the way she looked at a piece of slate before she drew on it, to see where the grain ran. Then she said, <em>No, I don't,</em> and went on after Walt, and Abby and Dana came behind.</p>
+  <p>They talked about it on Spring Street in low voices. Abby thought it could not be true. Thirty-six years, she said, she'd done that since she was six, she had been the stillest thing in the show, nobody walks away from that and doesn't miss it. She's being polite. She doesn't want to make a thing of it in front of us.</p>
+  <p>Dana thought it was the other way. <em>She fell,</em> Dana said. <em>She told me about it once. Twenty-six feet. I'd bet you anything she can't stand to look at it. When people say no that fast, it usually means it hurts.</em></p>
+  <p>Either way, they agreed, it was not quite the truth, and among Friends that is not a small matter. Before they reached Farewell Street they had caught up with Walt and told him.</p>
+</section>
+
+<section>
+  <h2>III. The Old House</h2>
+  <p class="dateline">The Great Friends Meeting House &middot; the same forenoon</p>
+  <p>Walt did not say anything to them on the street. He went up the steps and in, and sat down on the front of the old benches facing the room, where the ministers had sat in the old days, because his knees would not take the gallery stairs, and the others sat down where they liked in the wide plain room under the beams, and the door was shut, and it was quiet.</p>
+  <p>It was quiet a long time. The traffic went by outside on Farewell Street. The benches were the same benches. Jo sat by a window with her hands open on her knees, and if anything was going on in her it did not show. Abby looked at her and then at the floor. Dana looked at the clock.</p>
+  <p>Toward the end of the hour Walt stood up. He stood with both hands on the head of his cane, and the old benches creaked all through the house as people leaned to listen, the way they say those benches always creaked when somebody rose who did not rise often.</p>
+  <p><em>Friends,</em> he said. <em>I was told this morning that one of us said what isn't so. I was told she must want a thing she gave up. Or she must hate it, and won't say. I don't believe it's either. I've sat next to her thirteen years. She's put down the wanting, and she's put down the not wanting, both, and what's left isn't anything you'd notice in a crowd. It's cool, is what it is. Like the water out past Brenton Reef, down on the bottom, where nothing moves it. I used to listen to that water for a living.</em> He stopped. Then he said a little of George Fox, from memory, the way the old ones used to.</p>
+  <div class="verse">
+    <p>Be still and cool in thy own mind and spirit from thy own thoughts, and then thou wilt feel the principle of God to turn thy mind to the Lord, from whom cometh life; whereby thou mayest receive his strength and power to allay all storms, and tempests.</p>
+    <p>&mdash; George Fox, letter to Lady Claypole (1658)</p>
+  </div>
+  <p>He sat down. After a while he said, still sitting, as if it had just come back to him, <em>The same letter says when we go wrong, the mind flies up in the air.</em> And he folded his hands on the cane, and the quiet came back over the room, and at the end of the hour he turned and shook hands with the person beside him, who was Jo, and that was the end of meeting.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Jo walked back to the Point that afternoon by herself, by way of Washington Square. The troupe was packing up. The boy was folding the speaker stand, and the girl, with a sweatshirt over the white leotard now, was trying to let the wire down off its tripod, and the ratchet had jammed, the way they do when the sun has been on them all day. Jo stopped and watched her fight it. Then she set her bag down on the bricks and showed the girl where to put her thumb, and the ratchet let go.</p>
+  <p>The girl looked at Jo's hands. <em>You used to rig?</em></p>
+  <p><em>A long time ago.</em></p>
+  <p>She helped her coil the wire, over and under so that it would lie flat, the way her father had shown her behind the grandstand at Ionia, and handed it back, and picked up her bag and went on down Thames Street toward the Point. Halfway there she remembered she had not asked the girl's name, and was sorry, and then she began to think about supper.</p>
+</section>
+
+<section>
+  <h2>IV. Plain Stone</h2>
+  <p class="dateline">The stone shop on Spring Street &middot; October 2024</p>
+  <p>In September the meeting took up a question that had been before it, off and on, for nine years. In the old Friends' burying ground across town, where the early Friends had been put in the ground with no stones over them at all, the book kept by the recorder showed two who had lain side by side since 1819 with nothing to mark them: Edmund Lisle, who had been a public Friend and traveled in the ministry as far as Georgia, and Ann his wife. A descendant in Ohio had written offering to pay for a stone. Friends do not hurry. But in the fall they united on it, a small plain stone, no taller than the grass would let it be, with the two names and the years and nothing else, and they asked Jo to cut it.</p>
+  <p>She did it in the back of the shop on a Tuesday, from a piece of Pennsylvania slate as dark as a mussel shell. She laid out the letters in pencil on the polished face, plain Roman capitals an inch high, and then she stood at the stone with the mallet and the chisel and cut them, all day, one stroke and then the next, the chips coming off in little gray flakes, and the light from the alley window going slowly across the floor. The other carvers went home at five. She finished at a quarter to seven.</p>
+  <p class="verse" style="font-style: normal; text-align: center; letter-spacing: .12em; line-height: 2;">EDMUND LISLE<br>1732 &ndash; 1808<br>ANN GARNIER LISLE<br>1736 &ndash; 1819</p>
+  <p>Ann had been Nan to everybody, the recorder's book said, even in the minutes. Jo had cut the name the way it was in the book.</p>
+  <p>When she was done she took the brush and swept the dust out of the letters, and blew into each of them once to get the last of it, the way she had been taught. Then she laid the flat of her hand on the face of the stone, over the names, and kept it there a while. It was cool, the way slate is always cool, even at the end of a warm day in a shop where someone has been working on it since morning. She took her hand away and it left no mark, and she switched off the light over the bench and went home.</p>
+</section>
+
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who has left what gives pleasure and what gives pain, who is cold, and free from all germs (of renewed life), the hero who has conquered all the worlds.<cite>Dhammapada 418, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary says only that "the story is the same as the foregoing." An acrobat who performed from place to place heard the Buddha teach, went forth and became an arahat. One day, walking into the village for alms with the whole community behind the Buddha, the monks saw an acrobat going through the same act he used to do, and asked him whether he had no longing for that life. He said no. The monks told the Buddha that he had said what was not true, and the Buddha answered that his son had abandoned both delight and discontent, and spoke the verse. The same story stands behind verse 417, told in <a href="the-sway-pole.html">The Sway Pole</a>, and the acrobat Uggasena of <a href="cloud-of-witnesses.html">Cloud of Witnesses</a> began the line of rope-dancers that ends here. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-36.htm">the full commentary story</a>.</p>
+    <h3>Newport, 2024</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Great_Friends_Meeting_House">Great Friends Meeting House</a> on Farewell Street, built in 1699, is the oldest surviving house of worship in Rhode Island. The New England Yearly Meeting worshipped there until 1905, and since 1971 it has belonged to the Newport Historical Society, which keeps it as a museum. Early Friends were often buried <a href="https://ripnewport.com/friends.html">without any stone</a>, or under very plain ones. The small meeting in this story, its yearly hour in the old house, the stone shop and the Garniers are invented. Jo's career follows the shape of many circus lives of her generation: the fair "free acts" that kept family high acts on the road dwindled, and performers went to the one-ring <a href="https://en.wikipedia.org/wiki/Big_Apple_Circus">Big Apple Circus</a>, which played its tent in Lincoln Center's Damrosch Park from 1981, and to the large Canadian touring shows.</p>
+    <p>George Fox, the first leader of the Quakers, wrote to <a href="https://en.wikipedia.org/wiki/Elizabeth_Claypole">Elizabeth Claypole</a>, Oliver Cromwell's daughter, when she lay ill and "much troubled in mind" in 1658, the year of her death. The letter is printed in <a href="https://www.gutenberg.org/ebooks/75559">his Journal</a>, and Friends still quote its opening; later in the letter Fox writes that when a person goes astray "the mind flies up in the air." In the Pāli of verse 418 the word Müller renders "cold" means cooled, as a fire is cooled, or a fever.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder who had been an acrobat, from the Dhammapada commentary (verse 418). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-36.htm">The original</a>. Scripture from George Fox&rsquo;s letter to Lady Claypole, in <em>The Journal of George Fox</em> (1901 edition). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-sway-pole.html">&larr; The Sway Pole</a><a href="index.html">All stories</a><a href="thirteen-pleats.html">Thirteen Pleats &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // One slack wire across the dark, swaying in long slow arcs that die away until it hangs still.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = null;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function wire(phase, amp, alpha, y0, sag) {
+    ctx.beginPath();
+    var n = 60;
+    for (var i = 0; i <= n; i++) {
+      var u = i / n, x = -20 + u * (W + 40);
+      var s = Math.sin(Math.PI * u);
+      var y = y0 + sag * s + Math.sin(phase) * amp * s;
+      var dx = Math.cos(phase) * amp * 0.25 * s;
+      if (i === 0) ctx.moveTo(x + dx, y); else ctx.lineTo(x + dx, y);
+    }
+    ctx.strokeStyle = 'rgba(214,222,228,' + alpha + ')';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  function draw(ts) {
+    if (t0 === null) t0 = ts || 0;
+    var t = ((ts || 0) - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var amp = reduce ? 0 : H * 0.05 * Math.exp(-t / 40);
+    var y0 = H * 0.2, sag = H * 0.06;
+    wire(t * 0.55, amp, 0.16, y0, sag);
+    wire(t * 0.55 - 0.35, amp, 0.05, y0 + 2, sag);
+    if (!reduce && amp > 0.15) requestAnimationFrame(draw);
+  }
+  size(); draw(0);
+  if (!reduce) requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); else { t0 = null; requestAnimationFrame(draw); } });
+})();
+
+</script>
+</body>
+</html>

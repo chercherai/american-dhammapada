@@ -8,7 +8,7 @@ Images, places and worlds the editor wants in the series. Before you choose a se
 - The Minnesota Twins (the 1987 or 1991 Series, the Metrodome, a radio in a barn) [22.3]
 - Salt Spring Island, British Columbia (back-to-the-landers, draft dodgers, the Black settlers of the 1850s, Hawaiian Kanaka families) [25.9]
 - A windmill (a Plains water pump, a Dutch mill in Michigan, a wind farm in Texas or Iowa) [12.9]
-- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5] [19.5]
+- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5] [19.5] [9.10] [26.36]
 
 ## Twenty random Dewey numbers (drawn Nov 10, 2026)
 Use one as a story's hidden subject: a job, an object, a book someone is reading, a shelf in the library where something happens.
@@ -26,7 +26,7 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - **579, Microorganisms, fungi, algae:** sourdough, a mushroom forager, a lab tech, a red tide, penicillin.
 - **660, Chemical engineering:** a refinery town, DuPont, Love Canal, a plastics plant. [4.10]
 - **677, Textiles:** a mill girl, a quilting bee, a denim factory, a Lowell loom. [18.3]
-- **735, Sculpture since 1400:** a monument carver, a Mount Rushmore driller, a cemetery angel, a Confederate statue coming down. [6.6]
+- **735, Sculpture since 1400:** a monument carver, a Mount Rushmore driller, a cemetery angel, a Confederate statue coming down. [6.6] [26.36 gravestone letter-cutter]
 - **741, Drawing (including comics):** a cartoonist, a comic-book kid, a courtroom sketch artist, a tattoo flash sheet. [25.4]
 - **744, an unassigned number** (once mechanical drawing): a draftsman's lost trade, blueprints, a T-square in a garage. [2.6] [18.2]
 - **825, English speeches:** a eulogy, a valedictory, a stump speech, a toast, a sermon nobody heard. [13.10] [11.7] [18.9]
@@ -40,7 +40,7 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - Hunters: a muskrat trapper, a duck-blind guide, a buffalo hunter, a subsistence hunter, a bowhunter [13.8]
 - Teenagers as the protagonist, not the side character [26.26]
 - Fires: Peshtigo 1871, Chicago 1871, the Triangle factory, Hinckley 1894, Paradise 2018, Lahaina 2023
-- Buddhists. Six stories so far (Vietnamese, Kalmyk, Cambodian, Lao, Japanese Pure Land, Cantonese Chan). Still missing: Hawaii plantation Hongwanji temples, Soka Gakkai (Black and Latino members), Beat and San Francisco Zen (1950s–60s), insight meditation (Barre 1975), Shambhala in Boulder, Tibetan exiles, Thai, Burmese, Sri Lankan and Korean temples, a prison Buddhist chaplain, Dharmapala at the 1893 Parliament of Religions [25.7 Thai]
+- Buddhists. Six stories so far (Vietnamese, Kalmyk, Cambodian, Lao, Japanese Pure Land, Cantonese Chan). Still missing: Hawaii plantation Hongwanji temples, Soka Gakkai (Black and Latino members), Beat and San Francisco Zen (1950s–60s), insight meditation (Barre 1975), Shambhala in Boulder, Tibetan exiles, Thai, Burmese, Sri Lankan and Korean temples, a prison Buddhist chaplain, Dharmapala at the 1893 Parliament of Religions [25.7 Thai] [19.8 Beat and San Francisco Zen] [22.9 Soka Gakkai] [26.2 Tibetan exiles]
 - Buddhist and contemplative America, specific (the editor's picks; each one-use; real founders appear only at a distance, with no invented dialogue):
   - Chögyam Trungpa's world: Naropa and Boulder in 1974, the Vajradhatu seminaries, Shambhala households. Honest about the drinking and the controversies, without sneering.
   - IMS: the Insight Meditation Society in Barre, Massachusetts, from 1976; a three-month retreat, the noting practice, a yogi job in the kitchen. [3.6]
