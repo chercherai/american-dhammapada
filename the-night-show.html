@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Night Show</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on a high-plains July night, dark theme; far off along the foot of the page a black horizon, and on it the small ring of a midway Ferris wheel turning slowly in colored lights, with the glow of a town behind; datelined sections. */
+  --ground: #0e1117;
+  --ground-2: #161b24;
+  --paper: #e7e2d6;
+  --paper-dim: #9d9a92;
+  --accent: #d8c58f;
+  --glow: #e6a55c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, var(--ground) 0%, var(--ground-2) 78%, #241f1c 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(231,226,214,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(216,197,143,.22); }
+.epigraph { border-left: 1px solid rgba(216,197,143,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(22,27,36,.82); border: 1px solid rgba(231,226,214,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(231,226,214,.14); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(231,226,214,.14); border-bottom: 1px solid rgba(231,226,214,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(22,27,36,.82); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 21.6 &middot; Vajjiputtaka Bhikkhu</span></nav>
+<header>
+  <h1>The Night Show</h1>
+  <div class="epigraph">How dreary to be somebody!<br>How public, like a frog<br>&mdash; Emily Dickinson, <i>Poems, Second Series</i> (1891)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it,</span> out north of town.</p>
+
+<section>
+  <h2>I. Forty Acres</h2>
+  <p class="dateline">North of Cheyenne, Wyoming · 2012–2018</p>
+  <p>When Dale Lerwick died in the spring of 2012 the ranch was supposed to go to Cass. Everybody in Laramie County knew it. Her brother Wade had been gone to the Bakken since the boom started and said he was never coming back to look at the back end of a cow, and her cousin Travis had his own place on Horse Creek and his own note at the bank. Cass had grown up in the calving shed. She had shown a steer at the county fair every August from nine to eighteen and had cried in the sale barn every time and sold him anyway, the way you were supposed to. She could rope. Her father had left the brand to her in his will by name, a bar over an L, which in that country was as close as a man came to crowning somebody.</p>
+  <p>She had also quit eating meat at nineteen, her second year at the university in Laramie, and quit milk and eggs two years after that. Nobody in the family had taken it seriously. Her father said it was a thing girls did in college, and when it lasted he said it was a thing she did, and he never once said anything about it at the table. When he was dying he asked her what she would do with the place, and she told him, and he looked at the ceiling of the hospital room for a long time and said, <em>Well, they're yours.</em></p>
+  <p>She sold the herd that fall to Travis at a fair price, and leased him the grass, and deeded him the home place and the shed and the corrals for a dollar, because he had three kids and she had none. She kept forty acres at the bottom end where the creek came in under a stand of cottonwoods, and she kept the oldest of her father's cows, eleven of them, who were past calving and would have gone to the sale barn in the fall anyway. That was the beginning. Within three years she had nineteen cattle, most of them steers from 4-H kids who could not stand to put theirs through the sale ring and whose parents had driven them out to her at night with the trailer lights off, as if it were something to be ashamed of. She had goats, and two pigs from a family that had moved to Fort Collins, and a white turkey, and a gray gelding named Smoke who had bucked in the bareback string for eleven years and then stopped. She lived in a single-wide with a woodstove. She ate lentils and rice and whatever was in the garden. On the internet, where she posted pictures of the steers, eleven thousand strangers loved her. In Cheyenne a great many people who had known her since she was born had found it was easier not to stop when they saw her at the Albertsons.</p>
+  <p>She was not sorry. She had never once been sorry. It was only that for six years she had gone to bed every night at nine with the steers breathing at the fence, and there was nobody on earth who would have called that a life but her.</p>
+</section>
+
+<section>
+  <h2>II. The Last Saturday</h2>
+  <p class="dateline">The forty acres · July 28, 2018, after midnight</p>
+  <p>Frontier Days ran ten days at the end of July, and on the last Saturday night the whole town was out. Cheyenne had been hung with flags since the cattle drive two Sundays back. There had been four parades and three free pancake breakfasts, where the Kiwanis fed forty thousand people off griddles the size of a pickup bed. There had been rodeo every afternoon, and every afternoon the north wind had brought her the announcer's voice from Frontier Park in pieces, the names of cowboys and the names of their hometowns, so that she could hear a man from Texas and a man from Alberta go by on the air without hearing what had happened to them. Travis was on the rodeo committee and had been in a white straw hat and a pressed shirt for nine days. Her sister-in-law had a new one for every night.</p>
+  <p>The Saturday night show let out a little after eleven. She could hear the end of it from her step, the bass more than the song, and then the crowd, and then the whole grandstand walking to its trucks. The midway ran until midnight, and above the lights of the town she could see the top of the Ferris wheel turning, and then it stopped. After that there were the bars downtown and the campers out at the park, and the music came and went on the wind until nearly four. Every person she had gone to school with was in it somewhere. She knew how it smelled in there, funnel cake and diesel and beer on plywood. She had danced in that beer tent at seventeen in a new hat and had her boots stepped on by a boy from Chugwater.</p>
+  <p>She had done the water at ten and gone to bed and not slept, and at one she got up and pulled on the coveralls and went back out.</p>
+  <p>She walked the fence the way she walked it every night, down the lane from the trailer to the creek and back, the whole length of the forty, about a hundred steps. The moon was a night past full. It had come up over the plains enormous and orange and had climbed since then as high as it would go, small and white over the south, so that the posts threw short black shadows. The steers were lying down. One or two of them lifted their heads as she passed and put them down again. At the bottom of the lane she stopped by the cottonwoods where she had scattered her mother's ashes in 2009, and looked at herself in the moonlight. Canvas coveralls with the knees gone through, rubber boots, a ball cap with a feed-store name on it, her father's old work jacket. Hair that smelled of goat. She thought she looked like a post somebody had pulled out of a fence and thrown in the creek, the kind you find in the willows in the spring and leave.</p>
+  <p>Out loud, to nobody, to the cottonwoods, she said, <em>Who's worse off than me tonight? Name one.</em></p>
+  <p>Something answered her out of the trees.</p>
+  <p>It was her mother's voice. Ellen Lerwick had taught English at Central High School for thirty-one years, and she had a voice for reading aloud that made fifteen-year-old boys from the base sit still, and Cass had not heard it since 2009 and knew it in the first word. It did not come from any one place in the cottonwoods. It said the poem her mother had put on the board on the first day of every school year, the one she said was for the ones who sat in the back:</p>
+  <div class="verse">
+    <p>I'm nobody! Who are you?</p>
+    <p>Are you nobody, too?</p>
+    <p>Then there's a pair of us — don't tell!</p>
+    <p>They'd banish us, you know.</p>
+    <p>How dreary to be somebody!</p>
+    <p>How public, like a frog</p>
+    <p>To tell your name the livelong day</p>
+    <p>To an admiring bog!</p>
+    <p>&mdash; Emily Dickinson, Poems, Second Series (1891)</p>
+  </div>
+  <p>Then it said, in the voice her mother used at home, <em>Honey, half that crowd would trade you tonight. They'd give the truck. They'd give the hat. Go to bed.</em></p>
+  <p>The steers had all lifted their heads and were looking at the cottonwoods. Smoke had come down to the fence with his ears up. Then the wind brought another piece of somebody's music from town, and the cottonwoods were just cottonwoods, and the steers put their heads down one at a time and Smoke went off. Cass stood there a long time. She did not go to bed.</p>
+</section>
+
+<section>
+  <h2>III. Dr. Kopp</h2>
+  <p class="dateline">Chugwater road · Sunday</p>
+  <p>Ardith Kopp had been a large-animal vet in southeast Wyoming since 1966, when she was the only woman in her class at Colorado State and men in three counties would not let her touch a cow. She was seventy-six now and still went out, though she had given up pregnancy-checking in the winter of 2015 and said her shoulder was glad of it. She had married a rancher on the Chugwater who died young and left her eight hundred head and a note at the bank, and she had run the place for nine years and then sold it and lived alone since, in a stone house on the Chugwater road with a heeler and a shelf of journals. She had floated the teeth of every horse Cass ever owned. She had put down Cass's father's old cows one at a time as they went, out on the forty acres, and never once asked Cass what she thought she was doing.</p>
+  <p>Cass drove up on Sunday afternoon, the last day, when the whole county was at the final round of the rodeo. Dr. Kopp was on her porch with iced tea. Cass told her the whole thing, the music and the post in the creek and what she had said out loud. She told her about the voice too. She had thought on the drive up that she would leave that part out, and then she did not.</p>
+  <p>Dr. Kopp listened to the end. She looked out at the road for a while, where there was nobody.</p>
+  <p><em>Well, it's hard to quit,</em> she said. <em>You know that. Quitting the place, quitting all of it. That's hard, and it doesn't stop being hard, and then on top of that you're supposed to like it, and some nights you don't. That's the first two.</em></p>
+  <p><em>But don't you think for one minute that Travis is sitting in that grandstand having a good time. That man has eight hundred cows and the price of hay and a note at the bank, and three kids, and a wife who wants a new hat every night. I had that. I had it nine years. Staying is hard too.</em></p>
+  <p><em>And living with people who don't see it your way. Your brother at Thanksgiving. Me with my husband's mother in the house for six years. You with half of Cheyenne. That's hard whichever side of the fence you're on.</em></p>
+  <p>She drank some of the tea.</p>
+  <p><em>And the worst one is going round and round. Quit, go back, quit again. Lie there at night and go round on it. I've watched people do that with a ranch for forty years and I've watched them do it with a bottle and with a husband. It's the going round that wears you out. Not the place.</em></p>
+  <p><em>So don't go round,</em> she said. <em>That's all I know.</em></p>
+  <p>Cass sat on the porch step with her tea and looked at the empty road. Something went out of her shoulders that had been in them since about 2012, maybe longer, maybe since the sale barn when she was nine. It was not that she had decided anything. There was nothing to decide. The post she had seen the night before in the moonlight was only a post. The music in town was only music, and the people in it were having the night they were having, and she was having hers, and none of them was worse off than any other, and every one of them was. She could not have said it any better than that, and she never tried to.</p>
+  <p><em>Who was it you heard,</em> said Dr. Kopp after a while, <em>your mother?</em></p>
+  <p><em>Yes ma'am.</em></p>
+  <p><em>Ellen was a good teacher,</em> said Dr. Kopp. <em>I took a night class from her at the college in 1981. She made us learn that one.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Float</h2>
+  <p class="dateline">The forty acres · Monday morning</p>
+  <p>On Monday the carnival trucks went north up the interstate past the forty acres from six in the morning on, flatbeds with the Ferris wheel folded down on them in sections and the cars of the Zipper chained on in a row. Cass was out at the stock tank in the coveralls with the hose. She looked up at them once.</p>
+  <p>The steers came down to drink while the tank filled. There was a float valve that clipped on the rim, a brass arm and a copper ball, that her father had bought when she was a child, and in six years she had never once let it do its job; she always stood at the tank with the hose and shut the hydrant off by hand when the water was high enough. That morning she clipped the float on and walked away to feed the goats.</p>
+  <p>When she came back the tank was full to the brim and still. The ball had come up with the water and shut it off by itself, and the steers were drinking it down, and as they drank the ball sank a little and the water came in again under it, just as much as they had taken, and no more.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">It is hard to leave the world (to become a friar), it is hard to enjoy the world; hard is the monastery, painful are the houses; painful it is to dwell with equals (to share everything in common) and the itinerant mendicant is beset with pain. Therefore let no man be an itinerant mendicant and he will not be beset with pain.<cite>Dhammapada 302, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a Vajjian prince gives up his turn to rule and becomes a monk in a forest grove near Vesālī. On the full-moon night of Kattika the whole city is hung with banners and keeps festival until morning, and the monk, walking his cloister under the moon in his plain robe, hears the drums and lutes and thinks he looks like a log thrown away in the forest. Who, he asks, is worse off than we are? The spirit who lives in the grove answers him in verse: many envy you, as those in hell envy those bound for heaven. The next day he goes to the Buddha, who names the five kinds of suffering in this verse: the going forth is hard, delight in it is hard, the household life is hard, living with the uncongenial is hard, and the traveler through the round of births is beset by suffering; so do not be a traveler. Hearing it, the monk is freed. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-06.htm">the full commentary story</a>. The same exchange with the forest spirit is told in the Saṁyutta Nikāya (SN 9.9). The mother&rsquo;s poem is Emily Dickinson&rsquo;s <a href="https://en.wikipedia.org/wiki/I%27m_Nobody!_Who_are_you%3F">&ldquo;I&rsquo;m Nobody! Who are you?&rdquo;</a>, quoted as it was printed in <a href="https://www.gutenberg.org/ebooks/2679"><i>Poems, Second Series</i></a> in 1891.</p>
+    <h3>Cheyenne, 2018</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Cheyenne_Frontier_Days">Cheyenne Frontier Days</a> began in 1897 as a one-day cowboy roundup and calls itself &ldquo;the Daddy of &rsquo;em All.&rdquo; It runs ten days around the last full week of July, with rodeo every afternoon, a concert in the arena every night, a carnival midway, parades, and three free pancake breakfasts put on by the Kiwanis that feed some 40,000 people a year. It is run by committees of more than 2,500 volunteers from the town. In 2018 it ran from July 20 to 29; the last night show was on Saturday, July 28, and the midway stayed open until midnight. The moon had been full the night before, during a total lunar eclipse that could not be seen from North America.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Farm_Sanctuary">Farm Sanctuary</a>, founded in 1986 and calling itself America&rsquo;s first shelter for farmed animals, rescues cattle, pigs, goats and poultry and keeps them for the rest of their lives, and it promotes veganism, which refuses meat, milk and eggs alike; smaller farm-animal sanctuaries on the same pattern, some of them run by one or two people, have since been started across the country. In ranching country the ordinary way is otherwise. A 4-H member raises a market steer for most of a year and sells it at auction at the county fair, and the sale is meant to teach where meat comes from.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Vajjian monk from the Dhammapada commentary (verse 302). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-06.htm">The original</a>. Poem by Emily Dickinson, from <i>Poems, Second Series</i> (1891). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-brass-tray.html">&larr; The Brass Tray</a><a href="index.html">All stories</a><a href="the-bread-truck.html">The Bread Truck &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, N = 16, cols = ['230,165,92', '216,197,143', '210,110,90', '150,190,200'];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    var hy = H - Math.max(28, H * 0.05);
+    var r = Math.max(22, Math.min(46, W * 0.035));
+    var cx = W * 0.78, cy = hy - r - 6;
+    var town = ctx.createRadialGradient(cx - r * 2, hy, 0, cx - r * 2, hy, r * 9);
+    town.addColorStop(0, 'rgba(230,165,92,.10)'); town.addColorStop(1, 'rgba(230,165,92,0)');
+    ctx.fillStyle = town; ctx.fillRect(0, hy - r * 9, W, r * 9);
+    ctx.fillStyle = 'rgba(5,6,9,.85)'; ctx.fillRect(0, hy, W, H - hy);
+    var ang = reduce ? 0.3 : now / 1000 * (Math.PI * 2 / 90);
+    ctx.strokeStyle = 'rgba(216,197,143,.10)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx - r * 0.7, hy); ctx.lineTo(cx, cy); ctx.lineTo(cx + r * 0.7, hy); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+    for (var i = 0; i < N; i++) {
+      var a = ang + i * Math.PI * 2 / N;
+      var x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
+      var tw = reduce ? 0.8 : 0.6 + 0.4 * Math.sin(now / 700 + i * 1.7);
+      var col = cols[i % cols.length];
+      var g = ctx.createRadialGradient(x, y, 0, x, y, 6);
+      g.addColorStop(0, 'rgba(' + col + ',' + (0.55 * tw) + ')'); g.addColorStop(1, 'rgba(' + col + ',0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 6, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>

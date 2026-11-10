@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A to Izzard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on primer paper; the letters of the alphabet walk slowly east across the page behind the text. */
+  --ground: #efe7d6;
+  --ground-2: #e4d9c3;
+  --paper: #2b2620;
+  --paper-dim: #6c6253;
+  --accent: #8c3423;
+  --glow: #a9791f;
+  --panel: rgba(255,250,238,.72);
+  --hair: rgba(43,38,32,.16);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, var(--ground) 0%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--hair); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance;  }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--hair); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--hair); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 10.5 &middot; Vis&#257;kh&#257;</span></nav>
+<header>
+  <h1>A to Izzard</h1>
+  <div class="epigraph">Time cuts down all<br>Both great and small.<br>&mdash; The New-England Primer (Boston, 1727)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So I have heard it told,</span> at the east end of Marlow common.</p>
+
+<section>
+  <h2>I. The Nooning</h2>
+  <p class="dateline">Marlow, Hampshire County, Massachusetts &middot; Fast Day, April 1805</p>
+  <p>The Governor&rsquo;s proclamation had been read from the pulpit, and it said what it said every spring: a day of public fasting, humiliation and prayer, with servile labor and recreation laid by. In Marlow that meant two sermons with an hour between them and nothing to eat until the sun was behind West Hill.</p>
+  <p>The men spent the hour by the horse block, talking low. The women went where the women of Marlow had always gone at the nooning, forty rods down the hill to the kitchen of Marm Bascom, who kept the dame school.</p>
+  <p>She was seventy-eight and had not climbed to the meetinghouse in four winters. She sat at the end of the settle with her bad hip to the fire. For fifty-one years she had taken the town&rsquo;s children at three years old, at fourpence ha&rsquo;penny a week, and kept them until they could read a chapter and the girls could hem. The boys went on to the master. The girls went home, since Marlow had never paid a master to teach girls. So every woman in that kitchen who had been born in the town had learned her letters on that floor, first off the horn-book on its string and then out of the Primer, and any of them could have put a finger on the place at the crown of her head where Marm&rsquo;s thimble used to come down.</p>
+  <p>They came in the way they sat in meeting, by age. The widows had the settle and the two chairs. The wives of middle years stood along the dresser and took turns at the hearth, shoveling fresh coals into their foot stoves. The young wives stood behind them. The girls stood along the wall by the door, under the samplers.</p>
+  <p>Madam Field came in last. She was Squire Field&rsquo;s wife. She had given the meetinghouse its bell and the minister half his books, and there was hardly a husband in the parish who had not at some time told his wife to go and ask Madam Field. All through the morning sermon something had been working at her. Mr. Hale had preached on fasting. Five or six times he had asked the congregation to what end they afflicted themselves, and each time he had answered for them. She wanted to hear them answer for themselves.</p>
+  <p>So she asked, and she began with the settle.</p>
+  <p><em>For my soul, Mercy,</em> said the Widow Smead, who was eighty-one. <em>What else is there left to fast for? I should like to be let in.</em> The other widows nodded. To be let in, and to find their own people there.</p>
+  <p>Along the dresser nobody spoke. Then Abigail Graves, whose husband carried the key of the meal chest in his own waistcoat, said, <em>To be out from under Mr. Graves&rsquo;s hand. I don&rsquo;t say how. I leave the how to Providence.</em> There was a laugh, and it stopped quickly, and two or three of the others said that they had prayed about the same, give or take the name.</p>
+  <p>The young wives looked at their shoes. <em>A child,</em> said Thankful Cook, who had been married a year in March. <em>Soon, if it please God. Before his mother says anything more about it.</em></p>
+  <p>The girls by the door were fourteen and sixteen and nineteen. They pushed Dolly Smead to the front. <em>Husbands, ma&rsquo;am,</em> she said, and someone behind her said, <em>While we&rsquo;re young and can pick.</em></p>
+  <p>Madam Field did not laugh at any of it. She turned to the fire and told it all over to Marm Bascom, who was a little deaf and had not caught the half. She told it in order, oldest to youngest, as a child says a lesson. The old ones fasted for heaven. The wives fasted to be loosed from their husbands. The brides fasted for children, and the girls for husbands.</p>
+</section>
+
+<section>
+  <h2>II. The Drove</h2>
+  <p class="dateline">The Bay Road &middot; the same hour</p>
+  <p>Marm Bascom did not answer, because there was a noise in the road, and she had turned to the window.</p>
+  <p>It was a drove from the river towns, sixty or seventy fat oxen bound for the market at Little Cambridge. They had stood in the stall since November eating corn and English hay. The drover ought to have lain by for the Fast, and every woman at the window knew it. A man rode ahead on a gray horse. The drover walked behind with a hickory stick, and two boys with switches walked the flanks. The cattle filled the road from bank to bank, red and brindle, and steam rose off their backs.</p>
+  <p><em>Watch how he does it,</em> Marm said. She had watched droves from that window for fifty years. <em>He doesn&rsquo;t strike. He holds the stick out where the near ox can see it, and the ox moves off from it, and the rest go because that one goes. Hurry a fat beast and he walks his tallow off, and the tallow is what they pay for. He&rsquo;ll have them eight or nine days on the road, with hay every night, and they&rsquo;ll go in at the gate as sleek as they left the stall.</em></p>
+  <p>One of the boys was no bigger than her oldest scholars. He laid his switch against the hock of a steer that had stopped to look at the meetinghouse, and the steer went on.</p>
+  <p>She turned back from the window when the last of them had passed.</p>
+  <p><em>There are four that carry the stick,</em> she said. <em>Being born starts you out of the yard. Age has you from there. Sickness takes you over from age, and death walks behind for the last mile and puts up the bars. None of them hurries you. You have every one of you been on the road since before I had you, and I have had you all.</em></p>
+  <p>She looked down the room the way she used to look down a bench.</p>
+  <p><em>I heard what you fasted for. A man. A cradle. A lighter yoke. Good pasture at the far end, Hannah Smead, with all your people standing in it. Each of you asked for more road. I didn&rsquo;t hear one ask how a creature gets out of the drove.</em></p>
+  <p>Nobody answered her. Out on the Bay Road the sound of the cattle was going away east.</p>
+</section>
+
+<section>
+  <h2>III. Izzard</h2>
+  <p class="dateline">The kitchen &middot; before the second bell</p>
+  <p>Then she did what she had done with all of them when they were small. She took the Primer down from the shelf over the settle. It was her own, the one she had learned from in her mother&rsquo;s kitchen, and it had lost its boards long ago and was sewn into a piece of bed ticking.</p>
+  <p><em>Say T,</em> she said, and rapped the arm of the settle with her thimble.</p>
+  <p>The girls and the young wives had it out before they could think. <em>Young Timothy learnt sin to fly.</em> Under them, slower, came the widows and the oldest of the wives, saying something else.</p>
+  <p><em>There,</em> said Marm. <em>You hear that. When I had kept school a few years a new book came up from Boston. Somebody had gone through the letters and mended them. He took Time out at T and put in a good boy. But he couldn&rsquo;t take him off the road.</em></p>
+  <p>She did not open the book. She said the old letters as she had learned them, and the widows said them with her.</p>
+  <div class="verse">
+    <p>As runs the Glass<br>Mans life doth pass.</p>
+    <p>Time cuts down all<br>Both great and small.</p>
+    <p>Xerxes the great did die,<br>And so must you &amp; I.</p>
+    <p>Youth forward slips<br>Death soonest nips.</p>
+    <p>&mdash; The New-England Primer (Boston, 1727), letters G, T, X and Y</p>
+  </div>
+  <p><em>Then comes Zaccheus up his tree, and that&rsquo;s izzard, and the book is done,</em> she said. <em>I never yet had a scholar get to izzard who didn&rsquo;t ask to turn back to A and have the pictures over again.</em></p>
+  <p>The bell began on the hill. The women took up their foot stoves and went out as they had come in, by age, the widows first. Madam Field stayed a moment by the settle.</p>
+  <p><em>You asked every one of them, Mercy Field,</em> said Marm. <em>You never said what you came fasting for yourself.</em></p>
+  <p><em>I had it when I came down the hill,</em> said Madam Field. <em>I find I&rsquo;ve mislaid it.</em></p>
+  <p><em>Leave it lie,</em> said Marm.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>They say in Marlow that a good many of the women kept the Fast differently after that year. Nobody could tell how, because it looked the same from the men&rsquo;s side of the house. Abigail Graves went on praying about Mr. Graves. But when the Widow Smead lay dying the next winter and Mr. Hale asked her what she looked for, she said that she had left off looking for anything in particular, and he wrote in his book that she seemed easy.</p>
+  <p>The fast was broken at sundown. The road froze that night with the drove still printed in it, bank to bank, every hoof pointing east. In the morning the youngest Cook child, who was three, stepped over the prints with her fourpence ha&rsquo;penny tied in the corner of a handkerchief. She sat down on the kitchen floor, and Marm Bascom put the horn-book in her hand and set her finger on the first letter.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">As a cowherd with his staff drives his cows into the stable, so do Age and Death drive the life of men.<cite>Dhammapada 135, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, five hundred women of S&#257;vatth&#299; keep the Observance Day and go to the monastery. The great laywoman Vis&#257;kh&#257; asks each age in turn why they keep it. The oldest want a heavenly reward, the women in middle life want release from the power of their husbands, the young wives want to conceive, and the maidens want husbands while they are still young. She brings the answers to the Buddha in order. He says that birth, old age, sickness and death are like cowherds with staves, each handing living beings on to the next, and that even so nobody wishes for an end of rebirth; rebirth is all they desire. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-05.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Visakha">Vis&#257;kh&#257;</a>.</p>
+    <h3>A Massachusetts hill town, 1805</h3>
+    <p>Marlow and its people are invented. The annual <a href="https://en.wikipedia.org/wiki/Fast_Day">Fast Day</a> was real: each spring the governor of Massachusetts proclaimed a day of public fasting, humiliation and prayer, kept with public worship and abstinence from food. Massachusetts kept the holiday until 1894. Small children, and girls above all, learned to read from a neighborhood woman in a <a href="https://en.wikipedia.org/wiki/Dame_school">dame school</a>. Sylvester Judd&rsquo;s <a href="https://archive.org/details/historyofhadleyi00judd"><em>History of Hadley</em></a> records that girls in the valley towns &ldquo;learned to read and sew of school dames,&rdquo; and that Northampton did not admit girls to its town schools until 1802. The same book describes the valley farmers who stall-fed oxen through the winter and drove them to market near Boston. The cattle market there, begun in 1775, stood in the part of Cambridge called Little Cambridge, which became the town of <a href="https://en.wikipedia.org/wiki/Brighton,_Boston">Brighton</a> in 1807. &ldquo;Fourpence ha&rsquo;penny&rdquo; was the New England name for the Spanish half-real, a small silver coin that passed everywhere. &ldquo;Izzard&rdquo; is an old name for the letter Z.</p>
+    <p><a href="https://en.wikipedia.org/wiki/The_New_England_Primer"><em>The New England Primer</em></a> taught generations of children their letters through a rhymed alphabet with a small woodcut for each couplet. The couplets in the story are from the oldest surviving edition, printed in Boston in 1727 and reprinted in Paul Leicester Ford&rsquo;s <a href="https://archive.org/details/newenglandprimer00ford"><em>The New-England Primer: A History of Its Origin and Development</em></a> (1897). Ford shows that between about 1740 and 1760 the worldlier rhymes were rewritten to be more pious. In an <a href="https://archive.org/details/newenglandprimer00west">edition of 1777</a>, T is &ldquo;Young Timothy / Learnt sin to fly,&rdquo; X is &ldquo;Xerxes did die, / And so must I,&rdquo; and Y is &ldquo;While youth do chear / Death may be near.&rdquo; A woman schooled in the 1730s and her granddaughters would have known different alphabets.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Vis&#257;kh&#257; and the women keeping the Observance Day from the Dhammapada commentary (verse 135). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/10-05.htm">The original</a>. Verses from <em>The New-England Primer</em> (Boston, 1727). Written by Claude Fable 5.2.
+  <div class="pager"><a href="two-coffees.html">&larr; Two Coffees</a><a href="index.html">All stories</a><a href="four-hundredweight.html">Four Hundredweight &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var L = 'ABCDEFGHIKLMNOPQRSTUVWXYZ', W, H, drove = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    drove = [];
+    var gap = Math.max(70, W / 9), n = L.length, span = n * gap;
+    for (var i = 0; i < n; i++) {
+      drove.push({ ch: L.charAt(i), x: -i * gap, lane: (i * 7) % 5, bob: i * 1.7, span: span });
+    }
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    var base = H * 0.82, sz = Math.max(26, Math.min(44, W / 16));
+    ctx.font = 'italic ' + sz + 'px "IM Fell English", Georgia, serif';
+    for (var i = 0; i < drove.length; i++) {
+      var o = drove[i];
+      if (!reduce) { o.x += 0.11; if (o.x > W + 60) o.x -= o.span + W + 120; }
+      var x = reduce ? ((i * (W / 12)) + 30) : o.x;
+      if (reduce && i > 11) break;
+      if (x < -60 || x > W + 60) continue;
+      var y = base + o.lane * 9 + (reduce ? 0 : Math.sin(t * 0.0012 + o.bob) * 2);
+      var edge = Math.min(1, x / 140, (W - x) / 140);
+      ctx.fillStyle = 'rgba(140,52,35,' + (0.11 * Math.max(0, edge)) + ')';
+      ctx.fillText(o.ch, x, y);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw(0);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

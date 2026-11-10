@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Flea-Glass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on pale glass-green paper in an instrument shop, light theme; low in one corner a faint round field of a single-lens microscope, where a few tiny creatures dart like pike, spin like tops, and swarm like gnats in a drop of water; datelined sections. */
+  --ground: #eef0e6;
+  --ground-2: #e2e6d8;
+  --ink: #2a2a24;
+  --ink-dim: #6b6b5c;
+  --accent: #8a6a2c;
+  --glass: #5f8a7a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 85% 105%, #dfe6d6 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(42,42,36,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(138,106,44,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--glass); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(226,230,216,.85); border: 1px solid rgba(42,42,36,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glass); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,42,36,.12); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,42,36,.14); border-bottom: 1px solid rgba(42,42,36,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(226,230,216,.85); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 22.8 &middot; Niga&#7751;&#7789;h&#257;</span></nav>
+<header>
+  <h1>The Flea-Glass</h1>
+  <div class="epigraph">The number of these Animals in the scurf of a mans Teeth, are so many that I believe they exceed the number of Men in a kingdom.<br>&mdash; Leeuwenhoek, <i>Philosophical Transactions</i> 14 (1684)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As I have heard it reported,</span> in the North End of Boston.</p>
+
+<section>
+  <h2>I. The Sign of the Quadrant</h2>
+  <p class="dateline">Ann Street, Boston &middot; summer 1721</p>
+  <p>Silas Crane had made quadrants and compasses and spectacles at the sign of the gilt quadrant in Ann Street for twenty-six years, and when he died of a quinsy in the winter of 1719 his widow took down nothing but his hat from its peg. She kept the shop. She kept his two apprentices, whose indentures had four years and six years to run, and she kept the trade, because she had been grinding his lenses for him since the year they married, and anybody on the Long Wharf who had bought a pair of Crane spectacles since 1700 had been looking through her work.</p>
+  <p>Mistress Crane was fifty-eight, tall, with large red hands from the tripoli and the water. She said very little. When a ship&rsquo;s master came in with a compass whose card stuck, she took it from him, and opened it, and fixed it, and told him the price, and that was the conversation. The apprentices, Josiah Pratt and Eben Mayhew, who were sixteen and fourteen, had decided she did not like them, and then decided she did not like anybody, and then, after a year, had stopped deciding anything about her and simply watched her hands.</p>
+  <p>On the shelf behind the counter, in a case lined with green baize, she kept her husband&rsquo;s flea-glass. It was a brass plate the size of a playing card with a bead of glass no bigger than a mustard seed set in a hole in the middle, and a pin on a screw to hold the thing you looked at. Mr. Crane had made it himself, after the description of the Dutchman at Delft, and he had kept two books beside it, Mr. Hooke&rsquo;s great folio with the plates and an odd volume of the Royal Society&rsquo;s Transactions. On a slow afternoon Mistress Crane would sometimes take it down and set a drop of rainwater on the pin and hold it up to the window and look for a long time, and then put it away again without a word.</p>
+  <p>The boys of the street knew about the glass. Every boy in the North End had been in the shop at one time or another to have a flea or a hair or a bit of cheese mite put on the pin, and had looked, and yelled. It cost a penny. Mistress Crane took the penny.</p>
+  <p>The smallpox came off the <i>Seahorse</i> from Barbados in April, and by June it was in the town, and by the end of June Dr. Boylston had done the thing that made half of Boston want to hang him: he had taken matter from a pox sore and put it into a cut in his own little boy&rsquo;s arm, and into the arms of two of the Africans of his household, on purpose, so they would take the pox lightly and be done with it. All three lived. Mr. Mather, the minister of the North meeting, had put him up to it, people said, and Mr. Mather had got it from an African too.</p>
+  <p>Next door to the Crane shop, in a yard full of staves and hoops, worked a free cooper called Peter Coffee, who had been born on the Gold Coast and brought to Boston as a boy. In July, in front of Josiah and Eben, a carter asked him whether it was true, what they said about the Africans and the pox. Peter Coffee pushed up his sleeve and showed them a small pale scar on the outside of his arm.</p>
+  <p><em>My mother did that,</em> he said. <em>With a thorn. I was smaller than him.</em> He nodded at Eben.</p>
+  <p>The boys laughed. Afterward Josiah could not have said why. The carter laughed first.</p>
+</section>
+
+<section>
+  <h2>II. The French Ladies</h2>
+  <p class="dateline">Middle Street &middot; September</p>
+  <p>By September the town was emptying of anybody who had somewhere to go,. The General Court had gone to Cambridge. In the evenings men stood about at the head of the Long Wharf and argued about Boylston, and once a crowd went to a house in Middle Street where a man was lying sick of the inoculation and stood outside throwing stones and calling him a murderer until the constable came, and Josiah and Eben were in the crowd, at the back, and threw two stones each. They told nobody at the shop. Mistress Crane did not ask where they had been.</p>
+  <p>It was on Middle Street, a week after, that they met the Pelletreau sisters.</p>
+  <p>Everybody knew the three Mesdemoiselles Pelletreau, who had come from La Rochelle by way of London as girls, after the King of France took away the Protestants&rsquo; churches, and who kept a school for young ladies in two rooms over a chandler&rsquo;s, French and needlework and the use of the globes. They went to the French church. They were small, upright, and old. And now, in the middle of the pox, they went about the town with fine linen tied over their mouths and noses, like the ladies in pictures of Turkey, and the eldest carried a little covered cup when she went to buy milk, with a saucer on the top of it.</p>
+  <p><em>There,</em> Eben said, when they had passed. <em>There&rsquo;s decent women. Not like the fishwives on the wharf, bawling with their mouths open and spitting in the street.</em></p>
+  <p><em>It&rsquo;s fear,</em> said Josiah. <em>They&rsquo;re afraid of the pox. They think it comes in at the mouth.</em></p>
+  <p><em>Well, it&rsquo;s modest, anyhow. They&rsquo;re ashamed to be seen, at their age, and they cover up. Good for them.</em></p>
+  <p>The eldest Mademoiselle Pelletreau stopped in the street and turned round. She had very good ears.</p>
+  <p><em>It is not for shame,</em> she said, through the linen. <em>And it is not for fear. We are too old for the pox to want us, and we have seen it before, in London. It is for the little animals.</em></p>
+  <p>The boys looked at each other.</p>
+  <p>She explained. Two years ago, she said, they had come to Mistress Crane&rsquo;s shop and paid a penny each to look through the glass, as everybody did, at a drop of water from their own rain barrel, and they had seen it. The water was alive. It was full of creatures, swimming and turning, more than you could count, too small to see, every one of them made by God the same as a horse is made, and since that day they could not drink a cup of water without thinking of what they drank, or breathe the air without thinking of what might be in it. So they covered their cups, and they covered their mouths, so as not to swallow the little animals and kill them for nothing.</p>
+  <p><em>For nothing?</em> said Josiah.</p>
+  <p><em>Everything God made has its life,</em> said the second sister. <em>Even what you cannot see. Why should we take it?</em></p>
+  <p>Then it went on for a long time, there in Middle Street, in the smell of smoke and vinegar from the doorways where people burned things to clean the air. Josiah said she would have to stop drinking altogether, then, and stop breathing, and the eldest said they boiled their water and strained it through a cloth, and Eben said then she was killing them by boiling instead of by drinking, and the youngest sister said that was a different thing, and Josiah said how, and nobody could say how. A carter stopped to listen. A girl with a basket of eggs stopped. The argument went round and round and arrived nowhere, and at last the eldest Mademoiselle Pelletreau said that the young men should ask Mistress Crane, who had the glass, and the boys said they would, and everybody went away certain he had won.</p>
+</section>
+
+<section>
+  <h2>III. The Glass</h2>
+  <p class="dateline">Ann Street &middot; the same evening</p>
+  <p>Mistress Crane was at the wheel, grinding, when they told her. She did not stop until they had finished. Then she wiped her hands, and took the flea-glass down from the shelf, and took a clean goose quill from the jar.</p>
+  <p><em>Open your mouth,</em> she said to Josiah.</p>
+  <p>She scraped between two of his back teeth with the point of the quill and took off a little white stuff, like wetted flour. She mixed it on a slip of glass with a drop from the rain jar and touched the pin to it and gave him the brass plate and turned him to the window.</p>
+  <p>He looked for a long time. Then he gave it to Eben, and Eben looked, and put the glass down on the counter very carefully, as if it might go off.</p>
+  <p>It was alive. The little white stuff from between his teeth was a whole town. There were long ones that shot through the water like pickerel. There were round ones that spun like tops. There were small ones beyond counting that swarmed and turned among each other like gnats over a pond in the evening. Mistress Crane took down the odd volume of the Transactions and opened it to a page she had marked with a strip of leather, and put her red finger on a line, and Josiah read it out.</p>
+  <div class="verse">
+    <p>The number of these Animals in the scurf of a mans Teeth, are so many that I believe they exceed the number of Men in a kingdom.</p>
+    <p>&mdash; Leeuwenhoek, <i>Philosophical Transactions</i> 14 (1684)</p>
+  </div>
+  <p>Then she took the vinegar cruet from the shelf where they kept their dinner things and let one drop fall into the water on the glass, and gave it back to Josiah, and he looked, and they were all lying still.</p>
+  <p><em>You had vinegar on your fish at noon,</em> she said. <em>And you breathed all day. And you walked to Middle Street on a few thousand of them.</em></p>
+  <p>That was all she said about the Pelletreau sisters. She did not say they were fools. She put a fresh drop of rainwater on the pin and looked into it herself a while, the way she did on slow afternoons.</p>
+  <p>Then she said, without looking up, <em>Eben, come here,</em> and when he came she put her big hand on his head and went through his hair with her fingers as quick as a mother, and found what she was looking for, and put it on the pin, and handed him the glass.</p>
+  <p>He looked, and made a sound, and Josiah took it from him.</p>
+  <p>It filled the whole glass. It was gray and clear as horn and you could see the blood inside it, Eben&rsquo;s blood, moving. It had six legs with hooks on the ends of them, and a head like a cone, and two black eyes that looked backward.</p>
+  <p>Mistress Crane had Mr. Hooke&rsquo;s folio open on the counter by then, at the great folding plate of the louse, and she read it to them herself. It was the longest speech either of them ever heard her make.</p>
+  <div class="verse">
+    <p>This is a Creature so officious, that &rsquo;twill be known to every one at one time or other, so busie, and so impudent, that it will be intruding it self in every ones company, and so proud and aspiring withall, that it fears not to trample on the best, and affects nothing so much as a Crown; feeds and lives very high, and that makes it so saucy, as to pull any one by the ears that comes in its way, and will never be quiet till it has drawn blood: it is troubled at nothing so much as at a man that scratches his head.</p>
+    <p>&mdash; Robert Hooke, <i>Micrographia</i> (1665), Observation 54</p>
+  </div>
+  <p>She closed the book.</p>
+  <p><em>Not ashamed of anything it ought to be,</em> she said. <em>Afraid of the one thing that can&rsquo;t hurt it. It&rsquo;s a good likeness.</em></p>
+  <p>Eben scratched his head, and then stopped, and went red.</p>
+  <p><em>The ladies are ashamed of nothing, if you want to know,</em> she said. <em>They don&rsquo;t cover their mouths for shame. They&rsquo;re afraid of killing what they kill anyway with every breath, and that&rsquo;s their business, and it&rsquo;s a kind fault. But the two of you.</em> She looked at them, one and then the other, and the boys found that she knew about Middle Street, and the stones, and had always known. <em>You&rsquo;re afraid of a scratch on a child&rsquo;s arm. You&rsquo;re not afraid of the pox, that&rsquo;s in every third house. You&rsquo;re not afraid to stand in a crowd of two hundred breathing on each other to throw stones at a sick man. You&rsquo;re ashamed to be seen talking to Peter Coffee. You&rsquo;re not ashamed of what you did in Middle Street.</em></p>
+  <p>She put the louse into the fire.</p>
+  <p><em>That&rsquo;s backward,</em> she said. <em>It&rsquo;s a bad road, backward. It ends somewhere you won&rsquo;t like.</em></p>
+  <p>Then she went back to the wheel, and they heard the tripoli whispering on the brass, and the water dripping into the trough, the way it did every evening.</p>
+</section>
+
+<section>
+  <h2>IV. Going Forth</h2>
+  <p class="dateline">Ann Street and Middle Street &middot; October and after</p>
+  <p>In October more than four hundred people died in Boston, the worst month, and on the twenty-sixth, the day of Thanksgiving, every meeting in the town held one sermon only, at eleven in the morning, so as not to crowd the people twice. Mistress Crane went. The boys went with her and sat by the door.</p>
+  <p>Josiah went to the cooper&rsquo;s yard the next day, and stood about among the staves until Peter Coffee looked up, and asked him how his mother had done it, with the thorn. Peter Coffee told him, while he drove a hoop. Then he showed Josiah how you set the hoop driver so it doesn&rsquo;t slip, which Josiah had not asked.</p>
+  <p>In November, in the middle of the night, somebody threw a lighted grenado through the window of Mr. Mather&rsquo;s house, where his nephew was lying sick of the inoculation, with a note tied to it, and it did not go off. All the town talked about the note. Eben, who would have laughed in the summer, did not laugh. He said only that whoever had done it was not afraid of the right thing, and Josiah knew where he had got it.</p>
+  <p>The Pelletreau sisters came to the shop the week after the grenado. They had heard, as everybody heard everything, about the quill and the vinegar. The eldest asked whether it was true, what was between the young men&rsquo;s teeth, and Mistress Crane said she could see for herself for a penny, and the eldest put down three pennies, and the three of them looked at the inside of their own mouths, one after another, by the window, a long time.</p>
+  <p>When they came out of the shop the linen was folded in the eldest sister&rsquo;s reticule. They came back the next week, and the week after, not to look but to learn the wheel, because the second sister had said that if the world was going to be full of things too small to see, somebody ought to be able to make the glass to see them, and it might as well be a woman, since Mistress Crane was. The town found that very French. All that winter, until the pox was gone out of Boston, the Mesdemoiselles Pelletreau went with their school girls from house to house of the sick with broth, bare-faced, and nobody could say afterward that any of them had taken it.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Josiah Pratt finished his time and kept the shop at the sign of the quadrant after her, and made spectacles for half the captains in Boston, and when boys came in with a penny he still put a flea on the pin for them, and let them yell. But if one of them was old enough, and wanted to see something more, he would take a clean quill out of the jar.</p>
+  <p><em>Open your mouth,</em> he would say.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">They who are ashamed of what they ought not to be ashamed of, and are not ashamed of what they ought to be ashamed of, such men, embracing false doctrines enter the evil path.<cite>Dhammapada 316, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">They who fear when they ought not to fear, and fear not when they ought to fear, such men, embracing false doctrines, enter the evil path.<cite>Dhammapada 317, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, some monks see a group of Nigaṇṭhas, the Jain ascetics, who wear a small covering in front, and decide they must be more modest than the ascetics who go entirely naked. The Nigaṇṭhas overhear and correct them: the covering is not for modesty at all. Even dust is alive, they say, and the cloth keeps living things from falling into their alms bowls. A long argument follows. When the monks report it, the Buddha says that those who feel shame where there is nothing shameful, and none where there is, and who fear what is not to be feared and do not fear what is, are on a bad road; and many of the Nigaṇṭhas go forth after hearing him. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Jainism">Jainism</a> and its care for the smallest forms of life.</p>
+    <p>The widow&rsquo;s books are Robert Hooke&rsquo;s <a href="https://en.wikipedia.org/wiki/Micrographia"><i>Micrographia</i></a> (1665), whose great plate of the louse astonished its readers, and the Royal Society&rsquo;s <i>Philosophical Transactions</i>, which in 1684 printed in English an abstract of <a href="https://en.wikipedia.org/wiki/Antonie_van_Leeuwenhoek">Antonie van Leeuwenhoek</a>&rsquo;s letter describing the &ldquo;Animals in the scurf of the Teeth.&rdquo; Leeuwenhoek&rsquo;s microscopes were single beads of glass mounted in small brass plates; in English, simple magnifiers of this kind were often called flea-glasses.</p>
+    <h3>Boston, 1721</h3>
+    <p>Smallpox reached Boston on the <i>Seahorse</i> from Barbados on April 22, 1721. Before the epidemic ended the next February, about 5,800 of the town&rsquo;s roughly 10,600 people had caught it and 844 had died, with October the worst month. Cotton Mather had learned of inoculation years earlier from Onesimus, an enslaved West African man in his household, and from reports from Constantinople; on June 26 Dr. Zabdiel Boylston inoculated his own six-year-old son and two enslaved members of his household, all of whom survived. Most of the town&rsquo;s physicians, led by William Douglass, and James Franklin&rsquo;s new <i>New-England Courant</i> attacked the practice. Crowds forced inoculated people out to the quarantine house on Spectacle Island, and in November someone threw a homemade bomb into the room in Mather&rsquo;s house where his inoculated nephew was recovering; it failed to explode. About two percent of the inoculated died, against roughly fifteen percent of those who caught the disease naturally. See the <a href="https://en.wikipedia.org/wiki/1721_Boston_smallpox_outbreak">1721 Boston smallpox outbreak</a> and <a href="https://en.wikipedia.org/wiki/Onesimus_(Bostonian)">Onesimus</a>.</p>
+    <p>Boston&rsquo;s French Protestant church had been gathered by Huguenot refugees in the 1680s, after Louis XIV revoked the Edict of Nantes in 1685 and outlawed Protestant worship in France. Many of the refugees came, like the Pelletreau sisters, by way of London. See the <a href="https://en.wikipedia.org/wiki/Huguenots">Huguenots</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Nigaṇṭhas from the Dhammapada commentary (verses 316&ndash;317). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-08.htm">The original</a>. Quotations from Robert Hooke, <i>Micrographia</i> (1665), and from Antonie van Leeuwenhoek&rsquo;s letter of September 17, 1683, as abstracted in the <i>Philosophical Transactions</i> of the Royal Society, vol. 14 (1684). Written by Claude Opus 5.5.
+  <div class="pager"><a href="pipe-ash.html">&larr; Pipe Ash</a><a href="index.html">All stories</a><a href="jelly-glasses.html">Jelly Glasses &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, R, cx, cy, bugs = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    R = Math.max(70, Math.min(140, Math.min(W, H) * 0.16));
+    cx = W - R - Math.max(16, W * 0.03); cy = H - R - Math.max(16, H * 0.03);
+  }
+  function make() {
+    bugs = [];
+    var i;
+    for (i = 0; i < 3; i++) bugs.push({ kind: 'pike', x: (Math.random() - .5) * R, y: (Math.random() - .5) * R, a: Math.random() * 6.28, v: 0, rest: Math.random() * 200 });
+    for (i = 0; i < 5; i++) bugs.push({ kind: 'top', x: (Math.random() - .5) * R, y: (Math.random() - .5) * R, a: Math.random() * 6.28, spin: Math.random() * 6.28 });
+    for (i = 0; i < 26; i++) bugs.push({ kind: 'gnat', x: (Math.random() - .5) * R * .5 + R * .2, y: (Math.random() - .5) * R * .5 + R * .15, a: Math.random() * 6.28 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    var g = ctx.createRadialGradient(cx - R * .2, cy - R * .2, R * .1, cx, cy, R);
+    g.addColorStop(0, 'rgba(255,255,248,0.35)');
+    g.addColorStop(0.85, 'rgba(210,222,205,0.25)');
+    g.addColorStop(1, 'rgba(95,138,122,0.18)');
+    ctx.fillStyle = g; ctx.fill();
+    ctx.strokeStyle = 'rgba(138,106,44,0.22)'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.clip();
+    for (var i = 0; i < bugs.length; i++) {
+      var b = bugs[i];
+      if (!reduce) {
+        if (b.kind === 'pike') {
+          if (b.rest > 0) { b.rest--; b.v *= 0.94; }
+          else { b.v = 2.2; b.a += (Math.random() - .5) * .9; b.rest = 60 + Math.random() * 220; }
+          b.x += Math.cos(b.a) * b.v; b.y += Math.sin(b.a) * b.v;
+        } else if (b.kind === 'top') {
+          b.spin += 0.18; b.a += (Math.random() - .5) * .05;
+          b.x += Math.cos(b.a) * .25; b.y += Math.sin(b.a) * .25;
+        } else {
+          b.a += (Math.random() - .5) * 1.4;
+          b.x += Math.cos(b.a) * .7; b.y += Math.sin(b.a) * .7;
+        }
+        var dd = Math.sqrt(b.x * b.x + b.y * b.y);
+        if (dd > R * .9) { b.a = Math.atan2(-b.y, -b.x) + (Math.random() - .5); b.x *= .98; b.y *= .98; }
+      }
+      var X = cx + b.x, Y = cy + b.y;
+      ctx.fillStyle = 'rgba(70,90,80,0.32)';
+      if (b.kind === 'pike') {
+        ctx.save(); ctx.translate(X, Y); ctx.rotate(b.a);
+        ctx.beginPath(); ctx.ellipse(0, 0, 7, 1.8, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+      } else if (b.kind === 'top') {
+        ctx.save(); ctx.translate(X, Y); ctx.rotate(b.spin);
+        ctx.beginPath(); ctx.ellipse(0, 0, 3.2, 2.2, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+      } else {
+        ctx.beginPath(); ctx.arc(X, Y, 0.9, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    ctx.restore();
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
