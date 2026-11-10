@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cedar Bark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  /* Layout: one narrow column of prose on sun-faded adobe plaster; the soft shadows of fig leaves move slowly across the page as if on a porch at midafternoon; datelined sections. */
+  --ground: #efe3cf;
+  --ground-2: #e5d2b6;
+  --ink: #2f241b;
+  --ink-dim: #77614d;
+  --rock: #a3402a;
+  --cedar: #6d5b3e;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f7eedf 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(47,36,27,.2); }
+.series a:hover { color: var(--rock); }
+a:focus-visible { outline: 2px solid var(--rock); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--rock); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(163,64,42,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--rock); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--rock); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(250,244,233,.82); border: 1px solid rgba(47,36,27,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--rock); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(47,36,27,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--rock); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--rock); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(47,36,27,.15); border-bottom: 1px solid rgba(47,36,27,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--rock); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--rock); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--rock); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--rock); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(250,244,233,.82); border-left: 2px solid var(--rock); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 7.1 &middot; Jīvaka</span></nav>
+<header>
+  <h1>Cedar Bark</h1>
+  <div class="epigraph">Why should we mourn, or think our lot is hard?<br>&rsquo;Tis not so; all is right!<br>&mdash; William Clayton, &ldquo;Come, Come, Ye Saints&rdquo;</div>
+</header>
+<p class="heard"><span class="heard-lead">As it was told,</span> under the Red Hill in St. George.</p>
+<section>
+  <h2>I. The Ledge</h2>
+  <p class="dateline">St. George, Utah · May 1953</p>
+  <p>Orson Hale had been patriarch of the stake for fourteen years, and before that he had run cattle on the Arizona Strip for fifty, and he still walked like a man who expected to be on a horse by noon. He was eighty-two. He gave blessings three afternoons a week in an adobe house in Dr. Merrill Jarvis&rsquo;s orchard on the Santa Clara bench, under fig trees and pomegranates, with his grandnephew Del at a card table in the corner taking down every word on a portable Royal. His wife had kept the record for him until she died, and Del, home from his mission in Argentina, had taken it over the week of the funeral.</p>
+  <p>The house had been the doctor&rsquo;s grandmother&rsquo;s. The doctor had come home from the Pacific in 1945 with a Bronze Star and no use for church, and his wife had died the next spring of a cancer he had found too late, and in the summer after that Brother Hale had come out to the orchard without being asked and sat on the porch with him every evening for a month and said almost nothing. In the fall the doctor gave him a key. <em>The house is better used,</em> he said. <em>Come out when you want.</em> People drove out from town and up from Hurricane and over from Mesquite, young men going on missions and women with sick husbands and boys about to be married, and sat on the bench under the figs until Del came out and called their names.</p>
+  <p>Brother Hale&rsquo;s cousin Lyman had expected the calling himself. He had expected it in 1939 and he expected it still. He was seventy-six and had been a bishop once and was not anymore, and over the winter he had begun to say in priesthood meeting and at the post office that Orson was too old, that a man who got his words wrong could not be trusted with the Lord&rsquo;s, that somebody ought to write to Salt Lake. Lately he had been seen in the store on Main Street with Darrell Pace, who had had his own father sent up to the state hospital at Provo in March and taken over the store and the sheep permits both, and who was said to have offered to drive Lyman to Salt Lake himself.</p>
+  <p>Brother Hale knew all of it. When Del told him, he said, <em>Lyman has always been a worker,</em> and went back to his supper.</p>
+  <p>On the evening of Monday the eighteenth of May he walked out from his house on the north side of town as he did every evening, up the wash under the Red Hill where the white letters of DIXIE stood on the Sugarloaf. The sun was down behind the Pine Valley Mountains and the red rock above him had gone the color of a stove lid. Del was a hundred yards behind with a flashlight, because the family had begun insisting.</p>
+  <p>Del heard the rock before he saw it. It came off the ledge above the wash, a block of sandstone the size of a washtub, and struck the slope and burst. Most of it went past. One splinter as long as a table knife skipped off a boulder and went through the side of the old man&rsquo;s shoe.</p>
+  <p>Up on the ledge, against the last light, somebody stood for a moment and then was not there.</p>
+  <p>Brother Hale sat down on the boulder. When Del got to him he was unlacing the shoe.</p>
+  <p><em>Was that Lyman?</em> Del said. <em>Uncle Orson, was that Lyman up there?</em></p>
+  <p><em>Help me with this,</em> said Brother Hale. <em>Then go get your car.</em></p>
+</section>
+
+<section>
+  <h2>II. Burow&rsquo;s Solution</h2>
+  <p class="dateline">The Jarvis orchard · the same evening</p>
+  <p>The doctor had been eating supper standing at his counter. He put down the plate and turned on every light in the adobe house.</p>
+  <p>The splinter had gone in at the outside of the left foot below the ankle bone and come out an inch farther along. The shoe had held most of it. The doctor cut the sock off with surgical scissors and cleaned the wound with soap and boiled water and then with Zephiran, and the old man watched him do it as if the foot belonged to somebody else and he had been asked to keep an eye on it.</p>
+  <p><em>I can give you something,</em> the doctor said. He had a Syrette of morphine in his bag he had carried since Okinawa and never used on anybody at home.</p>
+  <p><em>Keep it for somebody who wants it.</em></p>
+  <p>The doctor packed the wound and laid over it a pad of gauze soaked in Burow&rsquo;s solution, which drew the swelling and closed the small vessels, and bound the whole foot in an elastic bandage to the middle of the shin. He had done it a hundred times. A wet pack like that did its work for a few hours, and then it had to come off before it dried and set and began to pull. He told Del so. He told Brother Hale so.</p>
+  <p>At nine the telephone rang. It was a farmer in Toquerville, twenty-five miles up the highway, whose wife had been in labor since noon and was not getting anywhere.</p>
+  <p><em>Go on,</em> Brother Hale said.</p>
+  <p><em>I&rsquo;ll be back by midnight,</em> said the doctor. <em>One o&rsquo;clock at the latest. Don&rsquo;t anybody touch that bandage. I&rsquo;ll take it off myself.</em></p>
+  <p>He drove out with his bag on the seat beside him, past the white temple standing up in the dark, and out through Washington and up the highway toward Leeds.</p>
+</section>
+
+<section>
+  <h2>III. Toquerville</h2>
+  <p class="dateline">Before dawn · Tuesday, May 19</p>
+  <p>The baby was turned the wrong way. The doctor worked until two, and then until three, with the farmer&rsquo;s mother at the foot of the bed, and at a quarter to five he delivered a boy, blue and furious and alive. He went out to the pump in the yard to wash.</p>
+  <p>The sky over the Hurricane Cliffs was beginning to go gray. He had his sleeves rolled up and his hands under the water when the whole valley went white.</p>
+  <p>It was not lightning. It had no direction. Every fence post, every leaf on the cottonwoods along the ditch, every pebble in the yard stood up sharp and shadowless for a long second, and then the light went pink and drained away to the west behind the Pine Valley Mountains, and it was dark again, and a rooster that had been asleep began to crow. The farmer came out on the porch in his stocking feet and stood beside him.</p>
+  <p><em>That&rsquo;s another one,</em> he said. <em>That&rsquo;s the ninth this spring. You can set your clock by them.</em></p>
+  <p>The doctor looked at his watch. It was five minutes after five. The bandage had been on the old man&rsquo;s foot for eight hours.</p>
+  <p>Then the farmer&rsquo;s mother called him from the door, and he went in, because the young woman had begun to bleed. He was with her until the bleeding stopped and for an hour after, until he was sure, and the sun was well up when he got back into the car. The mother lived. He drove south with the sun on his left hand. Past Leeds, past Harrisburg, past the black lava above Washington, he did the arithmetic again and again, the way he had once counted hours on a hospital ship: how long a wet pack took to dry in a closed room in May, how tight the elastic would draw as the foot swelled under it, what an old man&rsquo;s skin did when it was pinched for half a night. He told himself Del would have had the sense to loosen it. He remembered telling Del not to touch it.</p>
+  <p>At the east edge of St. George a station wagon was parked across half the highway and two young men in coveralls were stopping cars. One of them walked around the doctor&rsquo;s Chevrolet holding a meter on a cord close to the tires and the fenders, and the meter clicked and then chattered, and the young man straightened up and looked at the sky, which was clear and pale and empty, as if he could see something in it.</p>
+  <p><em>Your car needs to be washed, sir,</em> he said. <em>There&rsquo;s a station in town that&rsquo;s doing it. Then you&rsquo;ll want to go inside somewhere.</em></p>
+  <p><em>I&rsquo;m a doctor. I have a patient on the Santa Clara road.</em></p>
+  <p><em>Yes, sir. Everybody&rsquo;s supposed to go inside. It&rsquo;s only for a little while. There&rsquo;s no danger.</em></p>
+  <p>The radio in the service station said the same thing. A boy with a hose washed the Chevrolet down to the hubcaps while the doctor stood under the overhang with the station owner, and the water ran off the car and down the gutter of Main Street in the sun. Then a highway patrolman whose four children the doctor had delivered came and stood by him and said, <em>Doc, I&rsquo;m sorry, they want everybody in,</em> and took him by the elbow across to the café, where twelve people sat at the counter with the blinds drawn, and a waitress poured coffee, and nobody said very much. Children&rsquo;s faces went by the window now and then on their way somewhere, running. Somebody said the schools had let recess out at the regular time.</p>
+  <p>He sat there until noon. He thought about the foot. He found that he could not think about anything else, about the meter or the empty sky or the children, about what <em>no danger</em> meant in the mouth of a young man who had been told to say it. He could think about the foot because he had tied the bandage himself.</p>
+</section>
+
+<section>
+  <h2>IV. Cedar Bark</h2>
+  <p class="dateline">The orchard · Tuesday afternoon</p>
+  <p>Brother Hale was sitting on the porch of the adobe house in a kitchen chair with his left foot bare on a cushion, in the shade of the big fig. Del was at the card table inside the open door, typing. The bandage lay rolled on the porch boards beside the chair, dry and stiff as a stick.</p>
+  <p>The doctor knelt on the boards and took the foot in his hands.</p>
+  <p>Where the splinter had gone in and come out there were two thin lines, pale and closed, like the marks a hatband leaves. There was no swelling. The skin moved over the ankle bone the way it should. On the porch rail lay what had come off the wound in the night, a dark curled strip the length of his finger, and it looked like nothing so much as the bark that peels off a cedar fence post in long shreds when the post is old and the bark has finished with it.</p>
+  <p><em>What time did you take it off?</em></p>
+  <p>Del came to the door. <em>Midnight. He woke me up. He said, Brother Jarvis would have had that off by now. He said, Brother Jarvis is sitting up somewhere worrying about it, so take it off. I said you told us not to. He said, You take it off.</em> Del looked at his shoes. <em>So I did. And that was already on it.</em> He nodded at the rail. <em>It came away this morning when he put his foot down. All in one piece.</em></p>
+  <p>The doctor stayed on his knees. He held the foot a while longer, because he did not trust himself yet to let go of it.</p>
+  <p><em>Did you have pain in the night?</em> he said. <em>Tell me the truth.</em></p>
+  <p>Brother Hale looked at him with great kindness, the way he had looked at him across this porch in the summer of 1946.</p>
+  <p><em>Merrill,</em> he said, <em>I haven&rsquo;t had any pain since the winter of ninety-seven.</em></p>
+  <p>The doctor waited.</p>
+  <p><em>I was twenty-six. I was out past Mount Trumbull with two hundred head and the snow came, and I lay under a cedar three nights with my horse, and I thought that was the end of the road. I thought about everything I had. I thought about everybody that had ever done anything to me. Then I didn&rsquo;t.</em> He moved his bare toes on the cushion. <em>That was the end of the road, as it turned out. I just didn&rsquo;t die on it. Everything since then has been the trip home.</em></p>
+  <p><em>And Lyman?</em></p>
+  <p><em>Lyman is worried about who will do this when I&rsquo;m gone. Somebody ought to be.</em> He smiled. <em>You know the verse. You sang it in Primary. Your mother used to sing it in that kitchen.</em></p>
+  <p>He did not sing it. He said it, the fourth verse, in his ordinary voice, the voice he used for blessings, while Del&rsquo;s hands rested on the keys of the Royal and did not type.</p>
+  <div class="verse">
+    <p>And should we die before our journeys thro&rsquo;,<br>Happy day! all is well!<br>We then are free from toil and sorrow, too;<br>With the just we shall dwell.</p>
+    <p>&mdash; William Clayton, &ldquo;Come, Come, Ye Saints&rdquo; (1846), verse 4</p>
+  </div>
+  <p>The doctor sat back on his heels on the porch boards. Out past the orchard the highway ran east toward Washington, and the fields lay green under the same clear sky as any day in May, with nothing in it to see, and down on Main Street the boy with the hose would still be washing cars. Nobody on that porch could do one thing about any of it. He had known that since five minutes after five.</p>
+  <p>He had been sitting up all night, in Toquerville and in the café, with a bandage, because a bandage was a thing he could take off.</p>
+  <p><em>Your hands are shaking,</em> said Brother Hale.</p>
+  <p><em>I&rsquo;ve been up since yesterday.</em></p>
+  <p><em>Then sit,</em> the old man said. <em>Del, get Brother Jarvis a chair.</em></p>
+  <p>Del brought the other kitchen chair out and set it beside his uncle&rsquo;s in the shade of the fig. The doctor sat. After a while he leaned down, untied his own shoes and took them off, and set his feet on the cool boards. Inside, Del typed what had been said, all of it, because he typed everything. The strip of bark lay on the rail until the wind took it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">There is no suffering for him who has finished his journey, and abandoned grief, who has freed himself on all sides, and thrown off all fetters.<cite>Dhammapada 90, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha's jealous cousin <a href="https://en.wikipedia.org/wiki/Devadatta">Devadatta</a>, with the backing of Prince Ajātasattu, rolls a rock down from Vulture's Peak; a splinter wounds the Buddha's foot. He is carried to the mango grove of the physician <a href="https://en.wikipedia.org/wiki/J%C4%ABvaka">Jīvaka</a>, who dresses the wound with an astringent and binds it, then goes into the city to a patient, meaning to come back and take the bandage off. He returns too late; the city gate has shut, and he spends the night afraid that the bandage, left on, is causing the Buddha great pain. Knowing his thought, the Buddha has Ānanda remove it, and the wound vanishes like bark peeling from a tree. At dawn Jīvaka asks whether he suffered, and the Buddha answers that for one who has finished the journey all suffering is gone, as it was from the night of his awakening. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-01.htm">the full commentary story</a>.</p>
+    <h3>St. George, Utah, 1953</h3>
+    <p>In the spring of 1953 the Atomic Energy Commission set off eleven atmospheric tests at the Nevada Test Site in the series called <a href="https://en.wikipedia.org/wiki/Operation_Upshot%E2%80%93Knothole">Upshot-Knothole</a>. The ninth, <a href="https://en.wikipedia.org/wiki/Upshot-Knothole_Harry">Harry</a>, a 32-kiloton device on a tower, was fired before dawn on May 19, and the wind carried its fallout northeast over St. George, a town of about forty-five hundred in the cotton-and-fruit country Latter-day Saint settlers called Dixie since the cotton mission of 1861. An AEC monitor in town saw his instrument go off its scale around nine in the morning. Residents were asked by radio to stay indoors for a time and were told there was no danger; cars coming from the St. George area were checked with counters and washed at St. George, Cedar City, Mesquite and other points. Children at some schools were outside at recess while the fallout settled. The shot was later called "Dirty Harry." Earlier that spring thousands of sheep driven from Nevada winter range to lambing grounds near Cedar City sickened and died, and their owners' lawsuits against the government failed.</p>
+    <p>Rates of leukemia and other cancers among the <a href="https://en.wikipedia.org/wiki/Downwinders">downwinders</a> of southern Utah, Nevada and Arizona became a long public fight. In 1990 Congress passed the <a href="https://en.wikipedia.org/wiki/Radiation_Exposure_Compensation_Act">Radiation Exposure Compensation Act</a>, which offered payments to people with certain illnesses and apologized on behalf of the nation. The patriarch in this story holds a real office: in each stake of the Church of Jesus Christ of Latter-day Saints a <a href="https://en.wikipedia.org/wiki/Patriarchal_blessing">patriarch</a> lays his hands on members' heads and gives each one a blessing, usually once in a lifetime, which is written down as he speaks and kept. The verse he says is the fourth of William Clayton's "All Is Well," written on the trail across Iowa in April 1846 and sung ever after as <a href="https://en.wikipedia.org/wiki/Come,_Come,_Ye_Saints">"Come, Come, Ye Saints."</a></p>
+  </div>
+</details>
+
+<footer>
+  After the story of Jīvaka&rsquo;s question from the Dhammapada commentary (verse 90). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-01.htm">The original</a>. Hymn text from <em>Latter-Day Saints Congregational Hymns</em> (1919), no. 67. Written by Claude Opus 5.5.
+  <div class="pager"><a href="kaneezs-mother.html">&larr; Kaneez’s Mother</a><a href="index.html">All stories</a><a href="sukhari.html">Sukhari &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, leaves = [], t0 = Math.random() * 1000;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    leaves = [];
+    var n = Math.round(Math.max(5, Math.min(11, W / 140)));
+    for (var i = 0; i < n; i++) {
+      leaves.push({
+        x: Math.random() * W, y: Math.random() * H,
+        s: 70 + Math.random() * 90,
+        rot: Math.random() * Math.PI * 2,
+        ph: Math.random() * 10, sp: 0.15 + Math.random() * 0.2,
+        lobes: Math.random() < 0.5 ? 3 : 5
+      });
+    }
+  }
+  function leaf(l, t) {
+    var sway = Math.sin(t * l.sp + l.ph);
+    var x = l.x + sway * 14, y = l.y + Math.cos(t * l.sp * 0.7 + l.ph) * 6;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(l.rot + sway * 0.06);
+    ctx.beginPath();
+    for (var k = 0; k <= 120; k++) {
+      var a = -Math.PI / 2 + (k / 120) * Math.PI * 2;
+      var u = (k / 120) * Math.PI * l.lobes;
+      var r = l.s * (0.5 + 0.5 * Math.pow(Math.abs(Math.sin(u)), 0.6));
+      r *= (0.75 + 0.25 * Math.cos(a + Math.PI / 2));
+      var px = Math.cos(a) * r, py = Math.sin(a) * r;
+      if (k === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(70,60,36,0.06)';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(0, l.s * 0.2); ctx.lineTo(0, l.s * 0.75);
+    ctx.strokeStyle = 'rgba(70,60,36,0.05)'; ctx.lineWidth = 3; ctx.stroke();
+    ctx.restore();
+  }
+  function draw(ts) {
+    var t = reduce ? 0 : (ts || 0) / 1000 + t0;
+    ctx.clearRect(0, 0, W, H);
+    if ('filter' in ctx) ctx.filter = 'blur(4px)';
+    for (var i = 0; i < leaves.length; i++) leaf(leaves[i], t);
+    if ('filter' in ctx) ctx.filter = 'none';
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw(0);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+
+</script>
+</body>
+</html>

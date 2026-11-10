@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field Tickets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale banded clay of the Badlands in August, light theme; faint level bands of buff, rose and grey lie across the page, and now and then a small white bone weathers out of a band, holds a while, and is dusted over again; datelined sections. */
+  --ground: #efe6d6;
+  --ground-2: #e6dac5;
+  --paper: #2f2721;
+  --paper-dim: #74665a;
+  --clay: #a3533a;
+  --sage: #7b8c6c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f6efe2 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(47,39,33,.2); }
+.series a:hover { color: var(--clay); }
+a:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--clay); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(163,83,58,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--sage); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--clay); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(230,218,197,.85); border: 1px solid rgba(47,39,33,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--clay); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(47,39,33,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--clay); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--clay); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(47,39,33,.15); border-bottom: 1px solid rgba(47,39,33,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--clay); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--clay); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--clay); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(230,218,197,.85); border-left: 2px solid var(--clay); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.28 &middot; Mahā Moggallāna</span></nav>
+<header>
+  <h1>Field Tickets</h1>
+  <div class="epigraph">Of this volume, only here and there a short chapter has been preserved; and of each page, only here and there a few lines.<br>&mdash; Charles Darwin, <em>On the Origin of Species</em> (1859)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how it was told me,</span> in the bone room at Wakeman College.</p>
+
+<section>
+  <h2>I. Sage Creek</h2>
+  <p class="dateline">The White River Badlands, South Dakota &middot; June and July 1902</p>
+  <p>Wakeman College sent a party into the Badlands in any summer the trustees could be talked into it, and in 1902 there were five students, a cook, a wagon and team hired from a livery in Rapid City, and Joel Kolb. Kolb was sixty-one. He had driven a wagon for the Yale parties in the seventies, when the Sioux still held the country and the soldiers rode along, and he had collected since for whoever would pay him, and for eleven years now that had been Wakeman, which paid him little and on time. He was big and slow and the color of the clay, and he talked less than the mules.</p>
+  <p>What he could do was find. In the mornings he walked out alone into the breaks with a canvas bag and a pick and a canteen, and at noon he came back and said there was a turtle on the second bench below the knob with the cap rock on it, and there was a turtle. The boys tried following him and lost him in a quarter of an hour. Ernie Hoag, who was sixteen and from the college's preparatory department and had come along to wash the pans, said he had watched Kolb walk round behind one butte at noon and come out on the far side of the next before Ernie had counted twenty, and that was a quarter mile of ground. Will Dunning, who was a senior and kept notes on everything, said Ernie could not count. But none of them ever saw Kolb hunting. He walked, and stopped, and there it was, as if he had seen down into the ground.</p>
+  <p>They camped on Sage Creek under the Wall, where the water was alkali and they hauled their drinking water from a spring two miles up in a barrel. It went to a hundred and ten in the afternoons. When it rained the clay turned to a gumbo that balled on the wagon wheels until they would not turn and on a man's boots until he could not lift them. The beds lay in bands, buff and rose and grey, one above another like the leaves of a book left out in the weather, and every band had its dead in it. There were so many Oreodon skulls in the lower beds that after the first week they stopped taking them unless they were perfect.</p>
+  <p>Kolb gave each of the boys his own ground and a book of field tickets. Every bone that came out was ticketed where it lay, with a number, the bed, and the name of the one who found it, in the finder's own hand. Kolb would not put his name on a ticket unless he had found the thing and dug it himself, start to finish. <em>The museum puts on the card what's on the ticket,</em> he said. It was the longest thing he said that June.</p>
+  <p>In July, the Bastians' little girl went into the breaks.</p>
+  <p>The Bastians ran cattle three miles up the creek, out of a sod house and a log barn, Orrin and Hattie and eight children, the youngest a girl of four called Daisy. She went off after a jackrabbit in the middle of the afternoon, and at dusk Mrs. Bastian came down to the camp on a mule without a saddle. The boys and the cook went out with lanterns, calling. Kolb went the other way without one. He came back before moonrise with the child asleep against his shoulder and her fist shut tight on a handful of little white teeth, the teeth of some beast that had been dead longer than anybody at Wakeman would say out loud.</p>
+  <p>Mrs. Bastian took her and held her and did not say anything for a while. Then she looked at the crates the boys had begun to stack by the wagon, and asked how they meant to get all that to Rapid City. The college had paid for one wagon. The boys' boxes would have to wait on a second.</p>
+  <p><em>Orrin will haul them,</em> she said. <em>After haying. In the big wagon. Every box, no charge.</em></p>
+  <p>Kolb told her there was no call for it. She said there was, and that it was decided, and she said it in front of her husband so that it was said.</p>
+  <p>Kolb took off his hat. The boys had not seen him take it off since Rapid City.</p>
+</section>
+
+<section>
+  <h2>II. The Skull</h2>
+  <p class="dateline">Sage Creek &middot; August</p>
+  <p>In August Kolb found the titanothere. It lay in the lowest beds below a slump, a skull longer than a man's arm with the two blunt horns on the nose, and it took him and Otto Brase nine days to get it out. They trenched round it, hardened the bone with shellac, and wrapped it in strips of gunny sack dipped in plaster of Paris, and when they had turned it over and jacketed the underside it weighed something over eight hundred pounds. It went into the college's wagon with Kolb's own boxes, and filled it.</p>
+  <p>The boys' crates went up the creek to the Bastians' barn to wait for haying. There were forty-one. Ernie had three, and one of them held a whole turtle, shell and all, that he had found by himself on his own ground and ticketed in his own hand, E. Hoag, No. 112, the first thing he had ever found in his life that nobody had found before him.</p>
+  <p>A letter came out from the store at the White River crossing with the Bastians' mail. It was from Professor Dalgleish. The trustees met the second week in September, and he wanted the skull in the building before they did, and he wanted Kolb. The boys would finish out the month under Dunning and come home by the railroad.</p>
+  <p>On the morning he left, Kolb walked the boys up to the Bastians' barn. The crates stood in two rows along the wall with the tickets tacked to their ends. He went along them reading the names.</p>
+  <p><em>When Mr. Bastian takes these in,</em> he said to Dunning, <em>see they go on to the college, every one shipped in the name that's on it. And if he doesn't take them in, write and tell me.</em></p>
+  <p>Then he shook hands with each of them, Ernie last, and climbed up beside the teamster, and the wagon went down the creek with the skull riding in it like a sleeping man under a sheet.</p>
+</section>
+
+<section>
+  <h2>III. The Bone Room</h2>
+  <p class="dateline">Wakeman, Nebraska &middot; September</p>
+  <p>The boys came home on the twenty-ninth. The skull was already in the basement under the main hall, which everybody called the bone room, on a bench by the north windows, and Kolb was taking the jacket off it a little at a time with a chisel and a dental pick. The forty-one crates had not come.</p>
+  <p>Every afternoon at four Kolb put down the pick and walked to the depot and asked the agent whether there was anything from Rapid City. He had written twice to Sage Creek. The boys saw him go and saw him come back, and on the first Saturday in October, with Kolb gone down the hill again, they talked about it over the sorting trays.</p>
+  <p><em>Every day,</em> said Dunning. <em>Every day at four. He wrote Bastian twice. He's afraid they'll come in when he isn't there.</em></p>
+  <p><em>So would I be,</em> said Frank Ostrom.</p>
+  <p><em>That's not it. You heard about Cope and Marsh. Thirty years in this business, a man learns what a bone is worth. I'll bet you he wants to be the one who unpacks them. You know who writes the cards.</em></p>
+  <p><em>We wrote the tickets,</em> said Otto.</p>
+  <p><em>In the field. Wait till they're in the cases. A man doesn't change at the end of his life. Even a good one. There's always something he still wants.</em></p>
+  <p>Ernie Hoag said nothing. He was washing a tray.</p>
+  <p>The door at the end of the room opened, and Professor Dalgleish came out of his office with his spectacles pushed up on his forehead. He was seventy-six. He had come out from Edinburgh before the war, and as a student he had been rowed to the rocks at Siccar Point, where Hutton once came by boat and saw what time was, and he had been the college's geologist for thirty-one years, and its whole museum for most of them. He did not often come out of the office. The boys stood up.</p>
+  <p><em>What are you talking about, gentlemen?</em></p>
+  <p>Dunning told him. He was honest, and he told it all, and by the end he was looking at the floor.</p>
+  <p><em>No,</em> said the professor. <em>Mr. Kolb wants nothing. He was thinking of two things. Mrs. Bastian said her husband would haul your boxes. That is hers to give. If nobody minds it, and nobody tells her it is still wanted, she loses the giving of it. And the boxes are yours. Your names are on them. He would not have you lose what is yours. That is all he was thinking.</em></p>
+  <p>He stood a moment longer. Then he went back into the office and came out with a book, an old one, in brown boards, that had come with him from Edinburgh, and he opened it near the end and read them a little of it in his flat dry voice, the way he read the roll.</p>
+  <div class="verse">
+    <p>We have now got to the end of our reasoning; we have no data further to conclude immediately from that which actually is: But we have got enough; we have the satisfaction to find, that in nature there is wisdom, system, and consistency. &hellip;</p>
+    <p>The result, therefore, of this physical inquiry is, that we find no vestige of a beginning,&mdash;no prospect of an end.</p>
+    <p>&mdash; James Hutton, <em>Theory of the Earth</em> (1795)</p>
+  </div>
+  <p><em>He knows where things are,</em> the professor said. <em>He has never once doubted it, in the eleven years I have known him. He goes to the depot because the agent forgets.</em></p>
+  <p>He closed the book and went back into his office and shut the door.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The crates came on the fourteenth of October. Orrin Bastian had hauled them in to Rapid City in the big wagon behind the last of his steers, and shipped the steers to Omaha and the crates to Wakeman on the same train, and paid the freight on the crates himself, which nobody had asked him to do. In the lid of the first one there was a note in Mrs. Bastian's hand. Daisy wanted the man who knew where things were to have the teeth back, and they were in a twist of paper underneath.</p>
+  <p>Kolb unpacked all forty-one himself, that week, every evening after supper, alone. He did not hurry. As each piece came out he copied its field ticket onto a museum card in his slow upright hand, the genus if anyone knew it, the bed, Sage Creek, S.D., 1902, and then the name that was on the ticket.</p>
+  <p>Ernie's turtle went into the long case by the stairs, on a shelf at the height of a boy's eyes. The card leaning against the shell said <em>Stylemys. Lower Oreodon beds, Sage Creek. Coll. E. Hoag.</em></p>
+  <p>Of all the cards Kolb wrote that October, there was not one with his own name on it. The teeth he kept in his vest pocket, in the twist of paper, until the paper wore through.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who has no interests, and when he has understood (the truth), does not say How, how? and who has reached the depth of the Immortal.<cite>Dhammapada 411, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>This commentary story is told twice, word for word, first of S&#257;riputta and then of his friend the Elder Mah&#257; Moggall&#257;na. After a rains retreat with five hundred monks, Moggall&#257;na leaves before the promised requisites have all arrived, and asks that whatever comes for the young monks and novices be sent on, or that he be told. The monks take it as a sign of craving. The Buddha says Moggall&#257;na has none: he was only thinking that the donors should not lose their merit and the young monks should not lose their rightful gain. Moggall&#257;na was the disciple foremost in psychic power, remembered for seeing what others could not and going where they could not follow. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-28.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Maudgalyayana">Mah&#257; Moggall&#257;na</a>. Its twin in this series is <a href="the-comforters.html">The Comforters</a>.</p>
+    <h3>The White River Badlands, 1902</h3>
+    <p>The first scientific description of a Badlands fossil, a jaw from a rhinoceros-like beast brought out by a fur trader, was published in 1846. After that came a long line of collectors: Joseph Leidy described the finds, F. V. Hayden and Yale's O. C. Marsh worked the beds with army escorts, and from the 1870s the Geological Survey, Yale, Princeton, the American Museum, the Carnegie Museum, the University of Nebraska and the South Dakota School of Mines all sent parties, many of them made up of students (<a href="https://npshistory.com/publications/badl/history/sec1.htm">National Park Service history</a>). Princeton's summer expeditions, from 1877, chose their students by examination, and in 1890 brought <a href="https://paw.princeton.edu/article/old-west">a Menodus skull</a>, one of the titanotheres, out of the Badlands. The land between the White and Cheyenne rivers was opened to settlers in 1890, and ranchers ran cattle along Sage Creek under the long escarpment called the Wall, now in <a href="https://en.wikipedia.org/wiki/Badlands_National_Park">Badlands National Park</a>. Parties outfitted in Rapid City, the nearest railroad town.</p>
+    <p>The rocks hold the mammals of a lost world: <a href="https://en.wikipedia.org/wiki/Brontotheriidae">titanotheres</a> with forked horns on the nose, three-toed horses, land tortoises, and so many sheep-sized <a href="https://en.wikipedia.org/wiki/Merycoidodon">oreodonts</a>, then called Oreodon, that geologists named the layers in order the Titanotherium beds, the <a href="https://www.dmr.nd.gov/ndfossil/Research/Short%20Papers/white_river.asp">Oreodon beds</a> and the Protoceras beds. The quarrel between Marsh and E. D. Cope over credit for discoveries, the <a href="https://en.wikipedia.org/wiki/Bone_Wars">Bone Wars</a>, ended only with their deaths in 1897 and 1899. <a href="https://en.wikipedia.org/wiki/James_Hutton">James Hutton</a>, whose <em>Theory of the Earth</em> argued for the immense age of the earth, found what he took for conclusive proof in the tilted rocks he saw from a boat at <a href="https://en.wikipedia.org/wiki/Siccar_Point">Siccar Point</a> in 1788.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Mah&#257; Moggall&#257;na from the Dhammapada commentary (verse 411). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-28.htm">The original</a>. Words from James Hutton, <em>Theory of the Earth</em> (1795), and Charles Darwin, <em>On the Origin of Species</em> (1859). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-comforters.html">&larr; The Comforters</a><a href="index.html">All stories</a><a href="the-cedar-moon.html">The Cedar Moon &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, bands = [], bones = [], t = 0;
+  var cols = ['214,190,160', '205,160,140', '190,184,172', '220,200,168', '198,170,150'];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    bands = []; var y = H * 0.18, i = 0;
+    while (y < H) { var h = 14 + ((i * 37) % 40); bands.push({ y: y, h: h, col: cols[i % cols.length], a: 0.10 + ((i * 13) % 7) / 100 }); y += h + 10 + ((i * 23) % 30); i++; }
+    bones = []; for (var k = 0; k < 4; k++) bones.push(spawn({}, true));
+  }
+  function spawn(b, early) {
+    var band = bands[Math.floor(Math.random() * bands.length)] || { y: H / 2, h: 20 };
+    var side = Math.random() < 0.5 ? Math.random() * W * 0.18 : W - Math.random() * W * 0.18;
+    b.x = side; b.y = band.y + band.h * (0.3 + Math.random() * 0.4);
+    b.len = 10 + Math.random() * 18; b.rot = (Math.random() - 0.5) * 0.6;
+    b.life = early ? Math.random() * 900 : 0; b.max = 900 + Math.random() * 900;
+    return b;
+  }
+  function bone(b, a) {
+    ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.rot);
+    ctx.fillStyle = 'rgba(250,246,236,' + a + ')';
+    ctx.strokeStyle = 'rgba(160,140,120,' + (a * 0.5) + ')'; ctx.lineWidth = 0.8;
+    var L = b.len;
+    ctx.beginPath(); ctx.rect(-L / 2, -1.6, L, 3.2); ctx.fill(); ctx.stroke();
+    [-1, 1].forEach(function (s) {
+      ctx.beginPath(); ctx.arc(s * L / 2, -2, 2.6, 0, Math.PI * 2); ctx.arc(s * L / 2, 2, 2.6, 0, Math.PI * 2); ctx.fill();
+    });
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < bands.length; i++) {
+      var b = bands[i];
+      ctx.fillStyle = 'rgba(' + b.col + ',' + b.a + ')';
+      ctx.fillRect(0, b.y, W, b.h);
+    }
+    for (var j = 0; j < bones.length; j++) {
+      var o = bones[j];
+      if (!reduce) { o.life++; if (o.life > o.max) spawn(o, false); }
+      var p = o.life / o.max;
+      var a = reduce ? 0.6 : Math.min(1, p * 5) * Math.min(1, (1 - p) * 4) * 0.7;
+      if (a > 0.01) bone(o, a);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

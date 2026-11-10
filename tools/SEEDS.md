@@ -21,7 +21,7 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - **382, International commerce:** a longshoreman, a container port, a customs broker, NAFTA trucks at Laredo.
 - **482, Classical Greek etymology:** a spelling-bee kid, a seminary Greek class, a Greek diner owner's sayings. [7.5 Tarpon Springs Greek school] [24.8]
 - **544, an unassigned number:** an empty shelf in the library. Absence, a gap, something missing from the record. [19.1]
-- **558, Earth sciences of South America:** a geologist back from the Andes, guano, nitrate, a Chilean miner in Butte.
+- **558, Earth sciences of South America:** a geologist back from the Andes, guano, nitrate, a Chilean miner in Butte. [9.11 Chilean forty-niners, San Francisco 1850]
 - **573, Animal physiology:** a veterinarian, a 4-H steer, a slaughterhouse inspector, a heart in a jar. [13.10]
 - **579, Microorganisms, fungi, algae:** sourdough, a mushroom forager, a lab tech, a red tide, penicillin. [22.8 Leeuwenhoek animalcules, Boston 1721]
 - **660, Chemical engineering:** a refinery town, DuPont, Love Canal, a plastics plant. [4.10]
@@ -48,7 +48,7 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
   - A psychedelic trip: the 1962 Good Friday Experiment at Marsh Chapel, Harvard and Millbrook in the '60s, a 1970s commune, or a 2000s Johns Hopkins psilocybin session. Plain, and without endorsement or warning labels. [20.4]
 - Government employees as the heart of a story: a census enumerator, a post office clerk, a WPA writer interviewing ex-slaves, an IRS auditor, a county extension agent, a park ranger, a Social Security claims clerk, a TSA screener, a lighthouse inspector, a customs officer [17.4 1870 census assistant marshal] [2.8 Yellowstone seasonal ranger-naturalists] [20.6 lighthouse keepers]
 - Spies: the Culper Ring, a Civil War spy (Elizabeth Van Lew's Richmond), Los Alamos and the Rosenbergs era, a Soviet "illegal" in the suburbs, a CIA analyst, an FBI informant inside a church or a movement, a suspected neighbor who wasn't [15.2 Los Alamos 1950] [7.7 Culper-style line, Long Island 1779]
-- An astronaut (the Mercury Seven's wives, a Gemini capsule, Skylab, a shuttle mission specialist, the ISS, a NASA computer at Langley, a Houston flight controller)
+- An astronaut (the Mercury Seven's wives, a Gemini capsule, Skylab, a shuttle mission specialist, the ISS, a NASA computer at Langley, a Houston flight controller) [11.8 ISS spacewalker]
 - A submarine (the Hunley in 1864, a WWII fleet boat, a Cold War missile boat on deterrent patrol, the Thresher, the boomer wives of Groton or Kings Bay) [18.4 WWII fleet boat]
 - Pirates (Blackbeard at Ocracoke, Anne Bonny and Mary Read, the Lafitte brothers at Barataria, Gasparilla legend, a privateer out of Salem or Baltimore, Caribbean buccaneers, a modern Somali-piracy hostage) [18.5 Nassau 1719] [1.8]
 - Jazz (a Kansas City jam session in the '30s, a Harlem after-hours club, a bebop sideman, a New Orleans brass funeral, a high-school jazz band) [3.5 Harlem after-hours pianist, Peace Mission]
@@ -57,7 +57,7 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
 - A cartoonist (a newspaper strip artist, a Disney inker, a 1950s comic-book artist before the Comics Code, an underground comix artist, a webcomic) [22.2 editorial cartoonist]
 - A ceramicist (Pueblo potters at San Ildefonso, a Black Mountain College potter, a production potter in North Carolina's Seagrove, a community studio) [21.4 wood-fire potter, Zen]
 - A vegan (a 1840s Grahamite boardinghouse, a Seventh-day Adventist kitchen, a 1970s co-op, a 2010s Instagram vegan, an animal sanctuary) [21.6 animal sanctuary]
-- Unused wisdom sources (see HOUSE_STYLE "Broaden the sources"): spirituals, Poor Richard, Douglass, Sojourner Truth, Lincoln, Rumi/Hafiz, Talmud, Hasidic tales, Muir, Darwin, Dickinson, Melville, Joe Hill, McGuffey, the New England Primer [2.8 Muir] [24.9 Rumi]
+- Unused wisdom sources (see HOUSE_STYLE "Broaden the sources"): spirituals, Poor Richard, Douglass, Sojourner Truth, Lincoln, Rumi/Hafiz, Talmud, Hasidic tales, Muir, Darwin, Dickinson, Melville, Joe Hill, McGuffey, the New England Primer [2.8 Muir] [24.9 Rumi] [10.5 New England Primer] [11.1 Douglass]
 - Christian mystics, as text and as people: Julian of Norwich, The Cloud of Unknowing, Meister Eckhart, Jakob Böhme, Teresa of Ávila, John of the Cross, Brother Lawrence, Madame Guyon, Thomas Merton's Gethsemani (Merton at a distance) — all in pre-1929 translations if quoted [15.4 John of the Cross, Port Tobacco 1791] [16.1 Theologia Germanica among the Maryland Labadists] [10.6 Teresa of Ávila]
 - Orthodox Christians, beyond those already written (Russian Kodiak, Greek railroad and diner, Syrian, Coptic, Palestinian): Carpatho-Rusyn steel towns, Serbian Jackson, California, Romanian Ohio, Ukrainian Prairie churches, Alaska Native Orthodox, Ethiopian Orthodox in D.C. [26.29 Carpatho-Rusyn, Lackawanna and a Mohawk-hills monastery 1949]
 - Freemasons (a Prince Hall lodge, a Scottish Rite cathedral, the Morgan affair of 1826, a Shriners' hospital, the Order of the Eastern Star) [15.3 Anti-Masonic Genesee County 1829]
