@@ -46,15 +46,20 @@ Use one as a story's hidden subject: a job, an object, a book someone is reading
   - IMS: the Insight Meditation Society in Barre, Massachusetts, from 1976; a three-month retreat, the noting practice, a yogi job in the kitchen. [3.6]
   - An MBSR trial: a participant in an early mindfulness-based stress reduction clinic or research trial (the UMass stress clinic from 1979, or a 2000s randomized study), with a body scan, a raisin and a wait-list control group. [20.3]
   - A psychedelic trip: the 1962 Good Friday Experiment at Marsh Chapel, Harvard and Millbrook in the '60s, a 1970s commune, or a 2000s Johns Hopkins psilocybin session. Plain, and without endorsement or warning labels. [20.4]
-- Government employees as the heart of a story: a census enumerator, a post office clerk, a WPA writer interviewing ex-slaves, an IRS auditor, a county extension agent, a park ranger, a Social Security claims clerk, a TSA screener, a lighthouse inspector, a customs officer
-- Spies: the Culper Ring, a Civil War spy (Elizabeth Van Lew's Richmond), Los Alamos and the Rosenbergs era, a Soviet "illegal" in the suburbs, a CIA analyst, an FBI informant inside a church or a movement, a suspected neighbor who wasn't
+- Government employees as the heart of a story: a census enumerator, a post office clerk, a WPA writer interviewing ex-slaves, an IRS auditor, a county extension agent, a park ranger, a Social Security claims clerk, a TSA screener, a lighthouse inspector, a customs officer [17.4 1870 census assistant marshal]
+- Spies: the Culper Ring, a Civil War spy (Elizabeth Van Lew's Richmond), Los Alamos and the Rosenbergs era, a Soviet "illegal" in the suburbs, a CIA analyst, an FBI informant inside a church or a movement, a suspected neighbor who wasn't [15.2 Los Alamos 1950]
 - An astronaut (the Mercury Seven's wives, a Gemini capsule, Skylab, a shuttle mission specialist, the ISS, a NASA computer at Langley, a Houston flight controller)
-- A submarine (the Hunley in 1864, a WWII fleet boat, a Cold War missile boat on deterrent patrol, the Thresher, the boomer wives of Groton or Kings Bay)
-- Pirates (Blackbeard at Ocracoke, Anne Bonny and Mary Read, the Lafitte brothers at Barataria, Gasparilla legend, a privateer out of Salem or Baltimore, Caribbean buccaneers, a modern Somali-piracy hostage)
-- Jazz (a Kansas City jam session in the '30s, a Harlem after-hours club, a bebop sideman, a New Orleans brass funeral, a high-school jazz band)
-- Rap (the Bronx in the late '70s, a Southern trap studio, a Bay Area mixtape hustler, a battle-rap league, a church kid who raps)
-- EDM (a Detroit techno basement in the '80s, a Chicago house party, a desert festival, a warehouse rave, a DJ who plays sunrise sets)
+- A submarine (the Hunley in 1864, a WWII fleet boat, a Cold War missile boat on deterrent patrol, the Thresher, the boomer wives of Groton or Kings Bay) [18.4 WWII fleet boat]
+- Pirates (Blackbeard at Ocracoke, Anne Bonny and Mary Read, the Lafitte brothers at Barataria, Gasparilla legend, a privateer out of Salem or Baltimore, Caribbean buccaneers, a modern Somali-piracy hostage) [18.5 Nassau 1719]
+- Jazz (a Kansas City jam session in the '30s, a Harlem after-hours club, a bebop sideman, a New Orleans brass funeral, a high-school jazz band) [3.5 Harlem after-hours pianist, Peace Mission]
+- Rap (the Bronx in the late '70s, a Southern trap studio, a Bay Area mixtape hustler, a battle-rap league, a church kid who raps) [19.2 Bronx 1979]
+- EDM (a Detroit techno basement in the '80s, a Chicago house party, a desert festival, a warehouse rave, a DJ who plays sunrise sets) [19.4 Detroit techno]
 - A cartoonist (a newspaper strip artist, a Disney inker, a 1950s comic-book artist before the Comics Code, an underground comix artist, a webcomic)
 - A ceramicist (Pueblo potters at San Ildefonso, a Black Mountain College potter, a production potter in North Carolina's Seagrove, a community studio)
 - A vegan (a 1840s Grahamite boardinghouse, a Seventh-day Adventist kitchen, a 1970s co-op, a 2010s Instagram vegan, an animal sanctuary)
 - Unused wisdom sources (see HOUSE_STYLE "Broaden the sources"): spirituals, Poor Richard, Douglass, Sojourner Truth, Lincoln, Rumi/Hafiz, Talmud, Hasidic tales, Muir, Darwin, Dickinson, Melville, Joe Hill, McGuffey, the New England Primer
+- Christian mystics, as text and as people: Julian of Norwich, The Cloud of Unknowing, Meister Eckhart, Jakob Böhme, Teresa of Ávila, John of the Cross, Brother Lawrence, Madame Guyon, Thomas Merton's Gethsemani (Merton at a distance) — all in pre-1929 translations if quoted
+- Orthodox Christians, beyond those already written (Russian Kodiak, Greek railroad and diner, Syrian, Coptic, Palestinian): Carpatho-Rusyn steel towns, Serbian Jackson, California, Romanian Ohio, Ukrainian Prairie churches, Alaska Native Orthodox, Ethiopian Orthodox in D.C.
+- Freemasons (a Prince Hall lodge, a Scottish Rite cathedral, the Morgan affair of 1826, a Shriners' hospital, the Order of the Eastern Star)
+- The railroad (Chinese crews on the Central Pacific, Pullman porters, a section foreman, a station agent's telegraph, hoboes, a roundhouse, Amtrak's Empire Builder)
+- Science (a Harvard computer counting stars, a lighthouse-keeper naturalist, a Bell Labs engineer, the Manhattan Project's wives, a fossil hunter in the Badlands, a county agent with soil tests, a field biologist)

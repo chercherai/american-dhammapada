@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Water Pot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in an old chapel before a winter dawn, dark theme; from a point low on the page a faint fan of light in six colors, blue, yellow, red, white, pink and their mingling, opens very slowly, stands a while, and folds away; datelined sections. */
+  --ground: #11141b;
+  --ground-2: #1a1e28;
+  --paper: #e3e2dc;
+  --paper-dim: #9a9a96;
+  --clay: #c58a5c;
+  --saffron: #e7b45a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1f2433 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(227,226,220,.2); }
+.series a:hover { color: var(--clay); }
+a:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--clay); text-wrap: balance; text-shadow: 0 0 28px rgba(197,138,92,.2); }
+.epigraph { border-left: 1px solid rgba(197,138,92,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--clay); opacity: .88; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--clay); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(26,30,40,.8); border: 1px solid rgba(227,226,220,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--saffron); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(227,226,220,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--clay); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--clay); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--clay); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--clay); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--clay); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(26,30,40,.8); border-left: 2px solid var(--clay); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 3.6 &middot; Pañcasatavipassaka</span></nav>
+<header>
+  <h1>The Water Pot</h1>
+  <div class="epigraph">Either seen or which are not seen, and which live far (or) near, either born or seeking birth, may all creatures be happy-minded.<br>&mdash; Sutta Nip&#257;ta 146, tr. V. Fausb&ouml;ll (1881)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Hearing, hearing, it was heard like this,</span> on the hill in Barre.</p>
+
+<section>
+  <h2>I. The Living Room</h2>
+  <p class="dateline">Washington, D.C. &middot; summer 1976</p>
+  <p>Daw Tin Hla taught on Saturday mornings in her son's apartment off Connecticut Avenue, with the sofa pushed against the wall and the air conditioner going in the window like an outboard motor. She was sixty-eight, a widow from Rangoon, and she had sat long retreats at the meditation center there in the fifties, before her husband's posting brought them to Washington and then his heart gave out and left her in it. Her son was an economist at the World Bank and was gone by seven. On the bookshelf were a small brass Buddha, a little paper flag in stripes of blue, yellow, red, white and pink, and a row of her husband's English books from the university, gone soft in the heat of two countries.</p>
+  <p>Out on the balcony, eleven floors up, she kept a round clay water pot on an iron stand with a lid and a tin dipper, the way people did along the roads at home, so that anyone passing could drink. Nobody passed eleven floors up. She filled it every morning anyway.</p>
+  <p>Her students that summer were four young Americans who had found her through a notice on the board at a health food store in Takoma Park. Nora Kessel catalogued books at the Library of Congress and had not been able to sleep through a night since college. Bev Tuttle threw pots in a co-op studio on Carroll Avenue and had come, at first, mostly to look at the water pot on the balcony. Ellis Washington was in his second year of law school at Georgetown and was the only one of them who could sit still for an hour on the first try, which annoyed the others. Dewey Oakes had come home from Quang Tri in 1969 and hung drywall, and sat in the back by the door.</p>
+  <p>She taught them to note. Rising, falling, at the belly. Hearing, hearing, when the air conditioner kicked on. Wanting, wanting, at the smell of the mohinga she had going in the kitchen for afterward, fish broth and lemongrass and noodles. She said very little else. When Ellis asked her a long question about the self, she said, <em>Note it,</em> and went to stir the soup.</p>
+  <p>In August she told them that some young Americans, who had sat in Burma and India, had bought an old Catholic house in Massachusetts for meditation, and were holding a three-month course there in the fall, the way it was done at home in the rains. <em>Go and sit the three months,</em> she said. <em>All of you. Here you are only playing.</em></p>
+</section>
+
+<section>
+  <h2>II. The Fathers' House</h2>
+  <p class="dateline">Barre, Massachusetts &middot; September</p>
+  <p>They went up in Dewey's Volkswagen bus with their cushions and their sleeping bags and a cooler of Bev's granola, nine hours with the engine whining up every hill, and came into Barre in the late afternoon, a town of white houses around a long green common, with dairy farms going off on every side into the hills. They stopped at a luncheonette on the common because Ellis was hungry, and the woman behind the counter, a Mrs. Lacasse, gave them coffee and pie and looked at their cushions.</p>
+  <p><em>Where are you kids headed?</em></p>
+  <p><em>Somewhere quiet,</em> Nora said, which was what Daw Tin Hla had told them to say.</p>
+  <p><em>Well, you found it.</em> When she understood they were going up the hill to the old novitiate for three months, she put down the coffee pot. <em>The whole three months? Without talking?</em> She thought about that. <em>My aunt cleaned for the Fathers up there twenty years. That was a lot of house for a few priests. You stay the three months, and I'll tell you what. I'll keep my Roland out of those woods this deer season. He'll hate it.</em> She did not charge them for the pie.</p>
+  <p>The house stood at the top of a long drive in eighty acres of oak and pine and old pasture, a great old house that the Blessed Sacrament novitiate had kept since just after the war, with beds for a hundred and only eighteen men and one novice left in it at the end. The young teachers who had bought it the year before had made the chapel into the meditation hall and the long room beside it into a walking room, where two stained-glass windows of Christ still looked down on people pacing very slowly back and forth beneath them. There was a bowling alley in the basement that nobody had the heart to take out. There were about thirty yogis for the three months. Each was given a narrow room in what had been a novice's cell, and a yogi job. Nora's was the kitchen, a great tiled novitiate kitchen with steel sinks big enough to bathe in and pots you could stand a child in, where she chopped carrots and onions every morning for thirty people and washed the oatmeal pot after breakfast, noting, lifting, scrubbing, rinsing.</p>
+  <p>The teachers gave talks in the evening from a low platform where the altar had been, and interviews in the afternoon. The four from Washington sat and walked and noted, and for two weeks it was hard in the ordinary ways: the knees, the boredom, the radiators that clanged like hammers when the oil burner came on, which the teachers said to take for a bell.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>What had lived in the trees on that hill had lived there a long time, longer than the Fathers or the farmers before them, and it had got along with the Fathers well enough. The Fathers had been few and had kept mostly to the house, praying in the chapel day and night in turns, and the woods had been left to the ones who lived in them, with their families, in the high branches of the oaks.</p>
+  <p>Now thirty people came out of the house every hour of the day and walked slowly in the woods, under the oaks, lifting one foot and placing it, looking at nothing, and sat on the ground among the roots for hours, and did not leave. It did not seem right to the ones in the trees to live over the heads of such people. So they came down out of the branches, with their families, and sat on the ground in the dark under the pines, and said to one another, <em>They'll be gone in the morning.</em> In the morning the thirty went into the house for breakfast, and came out again. <em>Someone has fed them,</em> the ones on the ground said. <em>Tomorrow they'll go.</em> They sat on the ground in the cold like that for two weeks.</p>
+  <p>Then they saw that these people meant to stay the whole three months, and that they themselves would be sitting on the frozen ground with their children until Christmas, and they put their heads together to see how the people might be got rid of.</p>
+</section>
+
+<section>
+  <h2>III. Seeing, Seeing</h2>
+  <p class="dateline">Barre &middot; late September and October</p>
+  <p>Dewey saw it first, at four in the morning, at the far end of the third-floor corridor where the night light was: a man in a long black cassock standing by the radiator with his hands folded, and above the white collar nothing at all. Dewey had seen a good many things in Quang Tri Province and did not scream. He noted it. <em>Seeing, seeing.</em> It did not go away when he noted it. He went back into his cell and sat on the bed until the wake-up bell with his back against the wall.</p>
+  <p>Ellis saw a head. It was in the walking room in the afternoon, a young man's head, pale, with its hair combed wet, hanging in the air at the far end of the room under one of the windows of Christ, and looking at him with great patience, and nothing under it. He turned at the end of his lane as he had been taught, <em>turning, turning,</em> and when he came back it was still there, and when he came back the next time it was nearer.</p>
+  <p>Bev heard the voices. In the night, under the floor, men's voices murmuring together in a language she did not know, and then the long rumble of a ball down the lane in the bowling alley and the crash of pins, over and over, when everyone in the house was asleep and the basement door was locked. <em>Hearing, hearing.</em></p>
+  <p>Nora saw nothing. But she woke every night at three with the certainty that someone was standing just inside her door looking at her, and lay rigid until dawn noting <em>afraid, afraid,</em> and in the kitchen in the mornings her hands shook so that she cut herself twice on the onion knife.</p>
+  <p>And everyone got sick. All through the house that October people sneezed and coughed, so that the evening talks went on over a steady sound like rain on a roof, and boxes of tissues stood at the ends of the rows of cushions, and the teachers blamed the old oil burners and the dust in the radiators and the change of season. The four from Washington were the worst. Bev lost her voice entirely, which on a silent retreat should not have mattered, and somehow did.</p>
+  <p>They met behind the barn, which was against the rules, on a cold bright afternoon with the maples gone red down the hill, and whispered.</p>
+  <p><em>I've been coughing for nine days.</em></p>
+  <p><em>There's a man with no head on the third floor.</em></p>
+  <p><em>There's a head with no man in the walking room.</em></p>
+  <p>Bev wrote on the back of her hand with a ballpoint: <em>bowling.</em></p>
+  <p><em>This place is no good for us,</em> said Dewey, and the others were relieved that somebody had said it. <em>Let's go home to Daw Tin Hla.</em></p>
+  <p>They left a note for the teachers on the kitchen table, under the salt, and drove south through the night with the heater on and the windows fogging and all four of them coughing, and did not talk about the man or the head or the bowling, and were in Washington by morning.</p>
+</section>
+
+<section>
+  <h2>IV. The Weapon</h2>
+  <p class="dateline">Washington &middot; October</p>
+  <p>Daw Tin Hla opened the door in her housecoat and looked at the four of them on the mat, with their sleeping bags and their red noses, and stood aside to let them in. She did not seem surprised. She made tea. She let them tell it, all of it, the cassock and the head and the pins and the three o'clock door, and she listened with her hands in her lap the way she listened to the rain.</p>
+  <p><em>You could not stay there?</em></p>
+  <p><em>No,</em> Nora said. <em>We couldn't.</em></p>
+  <p><em>Of course there are beings there,</em> said Daw Tin Hla. <em>Tree spirits. Nats. Thirty years they had that hill with only a few quiet priests. Now you come and walk under their houses all day long and sit on their doorsteps. They don't like it. Would you?</em> She drank her tea. <em>You must go back.</em></p>
+  <p><em>We can't,</em> said Dewey.</p>
+  <p><em>The first time you went with nothing in your hands. This time you will take a weapon.</em></p>
+  <p>Dewey, who had carried an M16 for thirteen months and had not touched a gun since, looked at her for a long moment. <em>What kind of weapon?</em></p>
+  <p>She went to the bookshelf and took down one of her husband's soft old books, a thick one in dark blue cloth, and found the page without looking for it. She said that this had happened before, a long time ago, to some monks who went to sit the rains in a forest, and the Buddha had sent them back with this. She said it to them first in Pāli, the way it was chanted at home, so that the sound would be in them, and then she read it out of the old book in English, slowly, all of it, while the air conditioner rattled in the window and the traffic went by on Connecticut Avenue eleven floors down.</p>
+  <div class="verse">
+    <p>Whatever living beings there are, either feeble or strong, all either long or great, middle-sized, short, small or large,</p>
+    <p>Either seen or which are not seen, and which live far (or) near, either born or seeking birth, may all creatures be happy-minded.</p>
+    <p>&mdash; Sutta Nip&#257;ta 145&ndash;146 (Mettasutta), tr. V. Fausb&ouml;ll (1881)</p>
+  </div>
+  <p><em>Seen or not seen,</em> she said. <em>That is them too. Learn it. When you get there, stop at the bottom of the drive and say it all the way through, the four of you, before you go up to the house. Then go in.</em></p>
+  <p>They stayed three days. They learned it, the Pāli by sound and the English by heart, sitting on her son's carpet with their tea, and Bev, whose voice had come back, practiced the hard words on the balcony beside the water pot. On the third morning Daw Tin Hla gave them a bag of rice and a jar of fish paste for the kitchen, which Nora was fairly sure the teachers in Barre would not allow, and sent them north.</p>
+</section>
+
+<section>
+  <h2>V. The Driveway</h2>
+  <p class="dateline">Barre &middot; the end of October to December</p>
+  <p>Dewey stopped the bus at the bottom of the long drive at dusk and turned off the engine. The four of them got out and stood in the gravel in the cold, facing up the hill toward the dark woods and the lit windows of the house, and said it, the Pāli and then the English, all the way through, not very loudly. Ellis knew it best and kept the time. Their breath went up white. A car went by on the road behind them and slowed down to look and went on. When they finished, nothing happened that any of them could point to. They got back in the bus and drove up.</p>
+  <p>Their sleeping bags were on their beds when they came in. None of them had carried them up. Nobody in the office knew anything about it.</p>
+  <p>Then it was quiet. It is the thing everyone who sat that course remembers about the second half of it: how quiet that house became. The radiators still clanged when the burner came on, but not in the night. The bowling alley was silent. Nobody saw a head anywhere. The coughing in the hall thinned out over a week and stopped. In the kitchen at five in the morning Nora found the oatmeal pot from the night before already scoured and turned upside down on the drainboard, though she had left it to soak, and the woodbox by the old range was full, and the onions for the soup were peeled and lying in a row like eggs. She asked the cook. The cook said she had thought it was Nora.</p>
+  <p>Dewey, who sat the night watch in the hall from two to four because he was awake anyway, said that some nights there were figures standing at every door of the old chapel, tall and still, facing outward, the way ushers stand at the back of a church during the prayers. He said it plainly, months afterward, over coffee at the luncheonette, and nobody laughed at him. Nora woke one night at three, as she always had, and found her feet warm, warm right through, as if somebody had been holding them in both hands, and went back to sleep.</p>
+  <p>Down the hill Roland Lacasse kept out of the woods for the whole shotgun season and complained about it at the luncheonette every morning.</p>
+  <p>So they sat. They sat in the old chapel and walked under the stained-glass Christ and noted, and in the kitchen Nora washed the great pots, and in the long hours the body became what she was sitting with. Daw Tin Hla had told them, at the end, what the monks in the forest had looked at. Nora looked at it in the kitchen with her hands in the dishwater: a pot. A clay pot, like the one on the balcony eleven floors up, cool on the outside and sweating a little, good for carrying water, and fired thin, and cracking. Every pot she lifted out of the suds she felt it in her own arms, the weight and the thinness. Bev, who had pulled a thousand pots out of a kiln and seen a third of them come out split, said later that she had thought the same thing at the same hour, sitting in the hall. Bev said it was the plainest thing she had ever understood. It did not frighten her.</p>
+  <p>On a Saturday morning in December, at the first sitting, before light, the four of them were sitting together near the back of the hall when Daw Tin Hla came and sat down on the floor in front of them.</p>
+  <p>She was in the white blouse and the dark longyi she wore to teach, with her hands folded in her lap. She sat facing them, close enough to touch, and there was light coming off her in stripes of color, blue and yellow and red and white and pink and all of them run together at the edge, the colors of the little paper flag on her bookshelf, so that the floorboards around her were lit with them and the frost on the dark window behind her showed every color. The people sitting near them saw it. Some of them wrote it down afterward and some of them told it at dinner tables for forty years, and they told it the same way.</p>
+  <p><em>It is so,</em> she said, looking at the four of them. <em>This body is a clay pot. Make the mind a fort. Fight with what you have seen, and when you have won, guard it. Don't move in anywhere.</em></p>
+  <p>Then she was not there, and the floor was dark again, and the radiators clanged. The four of them sat on in the hall until the bell for breakfast and some time after it. The people who were there say that those four came out of the old chapel that morning finished with something, and walked down the hall to the dining room the way people walk out of a hospital after a long time, carefully, looking at everything, and that was all anyone could say about it. Nora went into the kitchen and put on her apron. The oatmeal pot was soaking. She washed it.</p>
+  <p>Daw Tin Hla's son said, when they asked him at Christmas, that his mother had been at home that Saturday morning with the door of her room shut, as she was every Saturday morning, and had come out at eight and made mohinga.</p>
+</section>
+
+<section>
+  <h2>VI. The Pot</h2>
+  <p class="dateline">Barre &middot; spring 1977</p>
+  <p>In April Bev drove up from Washington alone, with a round clay pot in a box of straw on the seat beside her. She had thrown it on the wheel on Carroll Avenue and fired it thin, the way Daw Tin Hla had told her the potters did at home. She set it on a flat stone at the bottom of the long drive, where the four of them had stood in the gravel and said the words, and filled it from the hose at the house, and put a lid on it and hung a tin dipper on its rim. She did not ask anyone's permission.</p>
+  <p>People drank from it. The mailman, the oil truck driver, yogis going down to the road to stretch their legs, a boy on a bicycle, Mrs. Lacasse once, on a Sunday, out for a drive with Roland. Somebody at the house filled it every morning. Nobody could ever say who.</p>
+  <p>It lasted until the first hard freeze the next November. In the morning it stood on the stone split down one side, with a fan of ice standing in the crack and the dipper still hanging from the rim, and it was cool to the touch, and it held nothing, and it was a good pot.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Knowing that this body is (fragile) like a jar, and making this thought firm like a fortress, one should attack Mara (the tempter) with the weapon of knowledge, one should watch him when conquered, and should never rest.<cite>Dhammapada 40, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, five hundred monks take a meditation subject from the Buddha and travel a hundred leagues to a village, whose people feed them and ask them to spend the three months of the rains in a nearby forest grove. The tree spirits there, unwilling to live above the monks' heads, come down with their families and sit on the ground waiting for them to leave; when the monks stay, the spirits show them headless bodies and bodiless heads, make them hear voices, and afflict them with sneezing and coughing until the monks flee back to the Buddha. He sends them back with a "weapon," the Discourse on Loving-Kindness, to be recited outside the grove before they enter. The spirits welcome them, carry their bowls, rub their hands and feet, and stand guard. Contemplating the body as fragile as a potter's jar, the monks develop insight, and the Buddha, though a hundred leagues away, appears before them sending out six-colored rays and speaks the verse; all of them reach awakening. This is the traditional origin story of the <a href="https://en.wikipedia.org/wiki/Mett%C4%81">Karaniya Metta Sutta</a>. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-06.htm">the full commentary story</a>.</p>
+    <h3>Barre, 1976</h3>
+    <p>In 1975 the young teachers Joseph Goldstein, Sharon Salzberg, Jack Kornfield and Jacqueline Schwartz, who had trained in Burma, Thailand and India, bought a former Catholic novitiate in Barre, Massachusetts, for $150,000. The <a href="https://en.wikipedia.org/wiki/Insight_Meditation_Society">Insight Meditation Society</a> opened there on February 14, 1976. The house had been the Blessed Sacrament novitiate since 1946. The old chapel became the meditation hall, stained glass of Christ stayed in the walking room, and a bowling alley stayed in the basement; early yogis remember the clanging radiators of the old oil-fired heat as the house's first mindfulness bells (<a href="https://www.dharma.org/ims-at-50-reflections/">IMS at 50</a>; <a href="https://www.aol.com/dharma-next-door-insight-meditation-090025229.html">a profile of the founding</a>). Its three-month retreat, modeled on the monastic rains retreat, was first held in Barre that year, with about thirty people. The practice was largely the noting method of the Burmese teacher <a href="https://en.wikipedia.org/wiki/Mahasi_Sayadaw">Mahasi Sayadaw</a>, in which the meditator silently labels each experience as it arises: rising, falling, hearing, seeing.</p>
+    <p>In Burma, belief in <a href="https://en.wikipedia.org/wiki/Nat_(spirit)">nats</a>, spirits of trees, places and households, sits alongside Theravada practice, and the Metta Sutta is among the protective discourses chanted to keep peace with them. The six colors that the Buddha's body is said to have emitted are the colors of the <a href="https://en.wikipedia.org/wiki/Buddhist_flag">Buddhist flag</a>, designed in Colombo in 1885; in Burma its orange stripe is read as pink. Daw Tin Hla, her students, the Lacasses and all the events at Barre in this story are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the five hundred monks with insight from the Dhammapada commentary (verse 40). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/03-06.htm">The original</a>. Scripture from the Mettasutta of the Sutta Nip&#257;ta, tr. V. Fausb&ouml;ll, in <i>The Dhammapada and Sutta-Nip&#257;ta</i> (Sacred Books of the East, vol. 10, 1881). Written by Claude Opus 5.5.
+  <div class="pager"><a href="three-shirts.html">&larr; Three Shirts</a><a href="index.html">All stories</a><a href="hot-water.html">Hot Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now();
+  // blue, yellow, red, white, pink, and the sixth, all of them mingled
+  var cols = [[70,110,200],[235,190,70],[200,70,60],[235,235,230],[225,140,170],[205,170,150]];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw(now) {
+    var t = reduce ? 18 : (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    // a seventy-second cycle: open slowly, stand, fold away, rest in the dark
+    var p = (t % 70) / 70, k;
+    if (p < 0.3) k = p / 0.3; else if (p < 0.55) k = 1; else if (p < 0.85) k = 1 - (p - 0.55) / 0.3; else k = 0;
+    k = k * k * (3 - 2 * k);
+    if (k > 0.002) {
+      var ox = W / 2, oy = H * 1.02, R = Math.max(W, H) * 1.05;
+      var spread = 0.9 * k, n = 18;
+      for (var i = 0; i < n; i++) {
+        var col = cols[i % 6];
+        var a0 = -Math.PI / 2 + (i / (n - 1) - 0.5) * spread * 2.1;
+        var wdt = 0.035 + 0.01 * Math.sin(i * 2.1);
+        var g = ctx.createRadialGradient(ox, oy, 0, ox, oy, R * (0.5 + 0.5 * k));
+        var al = 0.045 * k;
+        g.addColorStop(0, 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + al + ')');
+        g.addColorStop(0.6, 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + (al * 0.35) + ')');
+        g.addColorStop(1, 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.arc(ox, oy, R, a0 - wdt, a0 + wdt);
+        ctx.closePath(); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>
