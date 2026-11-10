@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thornapple Hill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale gold of an old hill pasture in late summer, light theme; dark hawthorn branches with long pale thorns reach in from the side margins, and small haws on them ripen one at a time from green to deep red, darken, and drop; datelined sections. */
+  --ground: #f1ebdf;
+  --ground-2: #e7dfcf;
+  --paper: #2b2620;
+  --paper-dim: #73695c;
+  --haw: #9b2f29;
+  --dome: #4d6c8c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f8f3ea 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,38,32,.2); }
+.series a:hover { color: var(--haw); }
+a:focus-visible { outline: 2px solid var(--haw); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--haw); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(155,47,41,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--dome); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--haw); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(231,223,207,.85); border: 1px solid rgba(43,38,32,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--haw); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,38,32,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--haw); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--haw); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,38,32,.15); border-bottom: 1px solid rgba(43,38,32,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--haw); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--haw); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--haw); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--haw); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(231,223,207,.85); border-left: 2px solid var(--haw); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.29 &middot; Revata</span></nav>
+<header>
+  <h1>Thornapple Hill</h1>
+  <div class="epigraph">And truly it was possible, as it were, to behold a land set by itself, filled with piety and justice.<br>&mdash; Athanasius, <em>Life of Antony</em> 44</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Tak ja &#269;ul,</span> on the North Side of Endicott.</p>
+
+<section>
+  <h2>I. The Capping</h2>
+  <p class="dateline">Endicott, New York &middot; June 1949</p>
+  <p>Anna Hrinko had given six children to the Endicott Johnson Corporation's town, and five of them had gone to God. That was how she said it at the counter of her grocery on the North Side, slicing kolbasa for the wives of cutters and lasters: <em>Five to God.</em> She did not say it gladly. Her husband had died in the tannery in 1941 and left her the store, the house behind it, a share in the Rusyn burial society, and money in the First National Bank that she did not speak of. Petro, the oldest, had gone first, in 1938, to the Russian monastery in the hills above the Mohawk, and now he was Father Sergius and wrote her twice a year in a hand she did not recognize. The three girls had followed him into the convents one after another, Mary and Olga and Justina, and then John, and then Steve. Every one of them had stood in her kitchen with a cardboard suitcase and said the same thing in the same quiet voice, as if Petro had taught it to them.</p>
+  <p>Michael was the last. He was seventeen and worked summers at E-J sorting heels, and he was the only one of her children who still came to the store after Mass and ate pirohy standing up at the counter and laughed with the customers. Anna looked at him and saw the store, and the house, and the money in the First National, and the Hrinko name on the burial-society roll, all of it walking away up the hill with a cardboard suitcase, and she made up her mind. She went to see Mrs. Dzurko, whose husband was a cutter at E-J and whose daughter Helen was seventeen too, and had a face like a plate of cream, and sang in the choir. By Easter it was settled. Nobody asked Michael very much, and Michael, who loved his mother and liked Helen and had never in his life been asked very much, did not object.</p>
+  <p>They were married on the second Sunday in June at the Russian church, under the crowns, with the priest leading them three times round the table and the choir singing Many Years until the windows rang. Afterward there was the hall on the North Side, three hundred people, a polka band from Binghamton, holubki and pirohy and kolbasa from Anna's own store, and a wedding bread the size of a wagon wheel braided round with dough birds.</p>
+  <p>Before the bride's dance came the capping. The married women led Helen to a chair in the middle of the floor and lifted off her veil and her wreath, and the oldest woman in the hall came forward on a cane to tie the married woman's kerchief over her hair. That was Helen's grandmother, Baba Varvara Dzurko, who had come from a village in the Lemko hills in 1903 and was ninety-six years old. She had three teeth. Her hands shook so that the knot took her a long time, and her back was bent so far over that she had to look at the bride from under her own brows, and her face was creased like a paper bag that has been folded and folded and opened again. When the kerchief was tied she patted Helen's cheek with a hand like a bundle of twigs, and the women laughed and clapped, and a cousin called out, <em>Now she looks like Baba!</em> and old Mr. Dzurko raised his glass and gave the toast that everybody gave:</p>
+  <p><em>Look at your grandmother, Helen. God give you to live as long as she has lived.</em></p>
+  <p>Michael was standing by the band. He asked the man next to him, a laster from E-J, which one was the grandmother.</p>
+  <p><em>Which one? That one. The baba. Tying the kerchief.</em></p>
+  <p>He looked at the old woman, and at Helen beside her in the kerchief, and back.</p>
+  <p><em>Will she look like that?</em></p>
+  <p>The laster laughed. <em>If God gives her the years, she will. Why not? We all will.</em></p>
+  <p>Michael Hrinko did not dance the bride's dance. He stood by the band with a shot glass he did not drink, and he thought: <em>So this is what Petro saw.</em></p>
+  <p>At ten o'clock they put the couple in the back of a borrowed Buick to drive them to the house Anna had bought for them on the North Side, with a line of cars behind them blowing their horns, under the arch where the company had put up its Square Deal. On the dark stretch by the river Michael leaned up and asked the driver to stop: he had to go. He went off into the willows and came back. A little way on he asked again, and went, and came back. The third time the cousin who was driving said something rude, and Helen's brother laughed, and they all decided that it was the beer. The fourth time he got out, he leaned in at the window and said, <em>Go on ahead, it's only up the hill, I'll walk,</em> and they went on ahead, honking.</p>
+  <p>He walked out to the highway in his wedding suit with a carnation in the lapel and his mother's gold cross under his shirt, and a milk truck took him as far as Oneonta, and a man going to the Utica market took him the rest.</p>
+</section>
+
+<section>
+  <h2>II. Father Sergius's Brother</h2>
+  <p class="dateline">The monastery above the Stony Kill, Herkimer County &middot; June 1949</p>
+  <p>There were thirty monks then at the Monastery of the Dormition. Half of them had come over in the last two years under the Displaced Persons Act, old men who had walked out of the Carpathians ahead of the Red Army and lived four years in camps in Bavaria, and they sat on the bench by the bakery in the sun with their hands on their knees and did not say much in any language. The rest were Americans, sons of miners and shoemakers and steelworkers, who had come up the hill one at a time with cardboard suitcases.</p>
+  <p>Michael came up the hill at seven in the morning in his wedding suit, which was grey with road dust to the knees, with the carnation brown and the knot of his tie pulled down. Brother Nikolai, who kept the gate, looked at the suit and at the carnation and asked him whether he was lost.</p>
+  <p><em>I want to be a monk.</em></p>
+  <p><em>In that suit, you don't look like anybody we would know what to do with. Who sent you?</em></p>
+  <p><em>I'm Petro Hrinko's brother. The youngest.</em></p>
+  <p>Nikolai went and asked. He came back with two of the old monks, and none of them knew any Petro Hrinko.</p>
+  <p><em>There's no Hrinko here,</em> said Father Pimen.</p>
+  <p><em>He's here. Tall. He has a scar on his chin from a sled. You call him Father Sergius.</em></p>
+  <p>The monks looked at one another.</p>
+  <p><em>You are Father Sergius's brother?</em></p>
+  <p><em>The youngest.</em></p>
+  <p><em>Then come in, quickly,</em> said Nikolai. <em>He told us. Ten years ago he told us. If my brother Michael ever comes, he said, take him the same hour, and don't send to ask our mother; I am his father now.</em></p>
+  <p>They took the carnation out of his lapel and the gold cross from his neck, and he gave them his wedding ring and his wristwatch and the eleven dollars in his wallet, and they put a black cassock on him that was too short in the arms, and by noon he was sweeping the bakery floor. They wrote to Father Sergius, who was in Pennsylvania that month with the old Archbishop, Vladyka Anatoly, the abbot, visiting the coal-town parishes. Father Sergius went to Vladyka with the letter in his hand and asked leave to go and see his brother. Vladyka read it and gave it back.</p>
+  <p><em>Not yet,</em> he said. <em>Stay with me. We'll go together. Later.</em></p>
+  <p>A week afterward Father Sergius asked again, and was told the same thing.</p>
+  <p>On the monastery hill, Michael was thinking. His mother knew where Petro was. Sooner or later she would come up that hill in somebody's Hudson with Helen's father and the priest from Endicott, and he did not know what he would do when she cried. So he went to the old monks on the bench and asked them to teach him how to pray all the way to the end, and they did, an old one and then another, in Rusyn and in Russian and in English that was not very good. Then he asked for an obedience as far from the road as they had.</p>
+  <p>They had one. A Rusyn bachelor who had come up out of the mines and bought land, dying, had left the monastery his hill farm over in Delaware County, ninety miles south, which nobody had worked since the Depression. The barn had fallen in. The pastures had gone to goldenrod and then to thornapple, which is what the hill people call the hawthorn, a low thick tree with thorns two and three inches long, white and hard as nails, that comes into an old pasture when the cows go out of it and takes the whole hill if it is let. The monks called the place Thornapple Hill. They had meant to sell it.</p>
+  <p>Brother Michael took a blanket, a prayer rope, a bucksaw, a sack of flour and the Psalter, and walked there.</p>
+  <p>His mother came up the monastery hill in a Hudson on the twenty-ninth of June, the feast of Peter and Paul, with Mr. Dzurko and the priest. Brother Nikolai met her at the gate and told her the truth, that her son was not there, and that he did not know exactly where in Delaware County the hill was, which was nearly the truth. She cried at the gate for a long time. Nikolai cried too. Then he brought her bread from the bakery, still warm, and she took it.</p>
+</section>
+
+<section>
+  <h2>III. Thornapple Hill</h2>
+  <p class="dateline">Delaware County &middot; summer and autumn 1949</p>
+  <p>He lived that summer in the milk house, which still had its roof, and cut his way into the thornapple a few yards a day with the bucksaw, and stacked the cut wood for winter, and prayed. A farmer down the hill named Rhinehart brought him milk in exchange for help at haying and decided after a month that the boy was harmless. The thorns went through his shoes and his cassock and the backs of his hands, and the cuts healed and he got new ones, and by August he had stopped noticing them.</p>
+  <p>What else happened to him on that hill nobody could tell. The old monks who heard about it afterward said that before the Dormition fast was out he had come to the end of what they had taught him, and gone on past it, which they said happened sometimes to the young ones, very seldom, and could not be explained, and should not be talked about too much. Rhinehart said only that the boy had got very quiet, and that his own dog, who bit everybody, would lie down across the boy's feet.</p>
+  <p>He stayed through the winter. Nobody came up the hill but Rhinehart.</p>
+</section>
+
+<section>
+  <h2>IV. The Hill Road</h2>
+  <p class="dateline">August 1950</p>
+  <p>In the summer of 1950 Father Sergius asked again to go to his brother, and this time Vladyka Anatoly said, <em>Yes. We'll all go.</em></p>
+  <p>All was a great many. The Archbishop was eighty, and wherever he went the monks went with him, and wherever the monks went that summer the pilgrims went too, out of every Russian and Rusyn parish from Endicott to Utica: the old women in black who came on foot as far as they could, the shoemakers' families in borrowed cars, a bus from Binghamton and a bus from Johnson City. By the time they gathered at the monastery gate there were five hundred of them, counting the children, and two trucks of camp beds and kettles borrowed from parish halls.</p>
+  <p>At the bottom of the monastery hill, where the road split, Father Sergius stopped the Archbishop's car and asked which way.</p>
+  <p><em>Vladyka, there are two roads. One goes round by the valley, through Cooperstown and Oneonta and every town on the river. It's long, nearly twice as far, but there are people all along it. The other goes straight over the hills by the old turnpike, ninety miles. There's nothing on it. No gas, no towns. The farmers say it's a bad road, and the old women from the Lemko villages say worse than that. They say things walk on it.</em></p>
+  <p>The Archbishop looked out of the car window at the column of cars and buses and trucks and walkers behind him.</p>
+  <p><em>Is Brother Simeon with us?</em></p>
+  <p><em>He's with us.</em></p>
+  <p><em>Then the hill road.</em></p>
+  <p>Brother Simeon was the cellarer, a big soft man of forty from the North Side of Endicott with a voice like a cello and a face like a loaf, and things came to him. Nobody had ever been able to say why. He did not ask for them. When he went down to Herkimer for flour the miller added a sack. When he took the truck to the Utica market the farmers filled the back of it before he could say what he had come for. The old monks said that if Simeon were left alone in the desert of Egypt, a camel would come over the dunes with bread on it, asking for him by name.</p>
+  <p>So they went over the hills by the old turnpike, ninety miles of gravel and washboard and grades that boiled the bus radiators, through country where the farms had gone back to woods. Nobody walked on the road who should not have. And every few miles, at a crossroads where nobody lived, they found a farm wife standing beside a table under a tree, with milk cans and crocks of butter and bread wrapped in dish towels, or a man with a wagon of sweet corn, or two girls with a washtub of cold spring water and a dipper, and every one of them asked the same thing:</p>
+  <p><em>Which one of you is the big monk? Brother Simeon? This is for him.</em></p>
+  <p>And Simeon, who had never seen any of them before, thanked them in his cello voice and gave it all to the Archbishop's table, and the Archbishop gave it to everyone, and there was always some left over to put in the trucks. In that way five hundred people crossed ninety miles of empty hills in two days and never once went hungry, on what was given to one fat monk.</p>
+</section>
+
+<section>
+  <h2>V. The Thorns</h2>
+  <p class="dateline">Thornapple Hill &middot; August and September 1950</p>
+  <p>They came up the last mile in the evening, in a line of headlights, expecting a milk house in a thicket and planning to sleep in the buses.</p>
+  <p>What the pilgrims found, they told for the rest of their lives on the North Side, and some of them are telling it still. There was a church at the top of the hill, a little one, of new logs, with a blue dome over it and a cross on the dome that caught the last of the light. There were cells down both sides of the pasture, enough for every monk, with a bench outside every door, and long walks mown green between the thornapples, which stood along them like an orchard, and there was a guest house and a kitchen and a well with a roof over it, and room in the barn, which no longer seemed to have fallen in, for every pilgrim and every child. There was a cell at the top of the hill under an old pear tree with a carpet on its floor and an icon corner already lit, and Brother Michael was standing at the door of it in a cassock that fit him now, waiting for the Archbishop.</p>
+  <p>Father Sergius got down from the car and stood looking at his brother, and then went and put his arms around him, and neither of them said anything that anyone could hear.</p>
+  <p>How it had been done, the pilgrims did not ask. The farmers down the hill said afterward that there had been no lumber trucks up that road all year, and that Rhinehart had not been near the place since spring. The pilgrims went home after the feast of the Dormition, singing on the buses. The Archbishop and the monks stayed a month.</p>
+  <p>There were two monks who did not like any of it. Father Pimen and Father Iov were the oldest of the old men from the bench, Carpathian men, who had kept the hours in a monastery in Slovakia for fifty years and in a displaced persons' camp for four, and they sat outside their new cells the first evening and looked at the blue dome and shook their heads.</p>
+  <p><em>When does the boy pray?</em> said Father Pimen. <em>He has been building all year. Look at it. Domes, walks, benches. A carpenter, not a monk.</em></p>
+  <p><em>And Vladyka comes ninety miles over a bad road and stays a month,</em> said Father Iov, <em>with a carpenter. Because he is Sergius's little brother. That's all. Favorites, here too, the same as everywhere.</em></p>
+  <p>The Archbishop, who got up at three every morning to read the office and was the first one out of his cell, saw them sitting there before dawn the next day, still with their faces set, and did not say anything to them. He said almost nothing to anybody that whole month.</p>
+  <p>On the morning they left, in the middle of September, with the haws on the thornapples going red, the Archbishop walked down the hill ahead of the cars, and stopped a little beyond the gate, and stood in the road with his eyes closed, as though he were listening to something far off.</p>
+  <p>At the top of the hill Father Pimen stopped with one foot on the bus step. <em>My oil,</em> he said. <em>The lamp oil. I left the bottle in the cell.</em> And Father Iov said, <em>My kettle. And my galoshes, my good ones, under the bench,</em> and the two old men went back up through the pasture together, complaining.</p>
+  <p>They could not find the cells. They could not find the mown walks, or the benches, or the blue dome. There was a milk house, and a fallen barn, and thornapple from one end of the hill to the other, thick and grey and high over their heads, and they went round and round in it with their cassocks catching and the long white thorns going through the sleeves into their arms and through the soles of their shoes into their feet, calling to each other, for most of an hour. The bus driver leaned on his horn. At last, at the edge of the thicket, they came on a thornapple standing by itself, and on its branches, hung neatly by their handles and straps as though somebody had meant them to be seen, were a bottle of lamp oil, a tin kettle and a pair of galoshes.</p>
+  <p>They took them down without a word and came out bleeding, and got on the bus, and nobody on the bus asked them anything.</p>
+</section>
+
+<section>
+  <h2>VI. Pani Vasko's Table</h2>
+  <p class="dateline">Endicott &middot; October 1950</p>
+  <p>Paraska Vasko kept a boardinghouse for Endicott Johnson men on the North Side, three doors from the house Anna Hrinko had bought for a bride and groom who never lived in it, and for thirty years every monk and priest and pilgrim who came through the Southern Tier had eaten at her table. She could not read Russian or English very well, and she had buried a husband and two sons, and she was the cleverest woman on the North Side, which everyone knew and nobody said in front of her.</p>
+  <p>In October Father Pimen and Father Iov came down to Endicott to collect for the monastery roof, and on their first morning they washed their faces and said, <em>Let's go to Pani Vasko's and have some soup,</em> and they went. She sat them down with borshch and bread and asked them, as she asked everybody that fall, whether they had been with Vladyka to Thornapple Hill.</p>
+  <p><em>We were.</em></p>
+  <p><em>They say it's beautiful there.</em></p>
+  <p><em>Beautiful?</em> said Father Iov, and showed her the scabs on his wrists. <em>A pasture full of thorns. An old milk house. A place for crazy people. For hermits.</em></p>
+  <p>That afternoon two of the young monks, Brother Nikolai and Brother Vasyl, came to the door on the same business, and she sat them down at the same table and asked them the same thing.</p>
+  <p><em>Pani Vasko,</em> said Nikolai, <em>I can't tell you. There aren't words in English. It was like the Lavra. It was like Tabor. Like a city.</em></p>
+  <p>Pani Vasko poured their tea and thought about it. The old ones had gone back, she said to herself. Something was forgotten and they went back for it, after Vladyka had gone out of the gate, and they saw one thing. And the young ones saw the place while it was the way it was meant to be seen. She was nearly sure of it. But she said nothing to anyone, and waited.</p>
+  <p>The Archbishop came down to Endicott himself at the end of the month, for the anniversary of the parish, and on the Sunday afternoon he and Father Sergius and a dozen monks ate at her table, and so did Anna Hrinko, who had not been asked and came anyway and sat at the end without taking off her coat. When they had eaten, Pani Vasko kissed the old man's hand and asked him.</p>
+  <p><em>Vladyka, some of your monks say Thornapple Hill is a field of thorns, and some say it's like heaven. Which is it?</em></p>
+  <p>The Archbishop looked at her a while, as if he were pleased with her. Then he asked Father Sergius for the book he carried for him, an old English Athanasius with a broken spine that he read to improve his English, and found the page, and had Brother Nikolai read it aloud, because Nikolai had been to high school in Johnson City.</p>
+  <div class="verse">
+    <p>So that any one beholding the cells again, and seeing such good order among the monks, would lift up his voice and say, &lsquo;How goodly are thy dwellings, O Jacob, and thy tents, O Israel; as shady glens and as a garden by a river; as tents which the Lord hath pitched, and like cedars near waters.&rsquo;</p>
+    <p>&mdash; Athanasius, <em>Life of Antony</em> 44</p>
+  </div>
+  <p><em>Wherever they live,</em> the Archbishop said in Rusyn, to her and to Anna Hrinko at the end of the table, <em>in a town or out on a hill, among people or among thorns, that place is good. The place is good because of who lives in it.</em></p>
+  <p>Anna Hrinko took off her coat.</p>
+</section>
+
+<section>
+  <h2>VII. The Honey</h2>
+  <p class="dateline">The same table</p>
+  <p>Brother Simeon's mother was there too, Mrs. Barna from Squires Avenue, and over the tea somebody asked her, because everyone in the parish had heard about the farm wives on the turnpike, whether Simeon had always been like that.</p>
+  <p><em>Always,</em> said Mrs. Barna. <em>From before he was born. I carried him ten months, and three days he lay crossways, and the midwife went home and said I would die. Then he came, and since then he never once wanted for anything. Why should that be?</em></p>
+  <p>The monks looked at the Archbishop, and the old man put down his glass and told them a story from the Lemko hills, the way the old people told it.</p>
+  <p>In a village there was a poor man who went one morning to pay his rent to the steward, and on the way, in a lime tree by the road, he found a wild comb of honey. He cut it down, bees and all, and carried it on its branch, meaning to give it to the steward instead of the rent. In the town a servant from the castle stopped him. The count was giving a feast for the bishop the next day, and there was every kind of food, and honey cooked in everything, but no fresh comb, and the count had sent his men out of every gate of the town with money to find some. <em>What do you want for it?</em> the servant said. The poor man saw his coat and asked a crown. The servant said yes. So the poor man asked two, and then ten, and then a hundred, until the servant had his whole purse out. Then the poor man said, <em>Wait. What do you want it for, that you'll pay a hundred crowns for a honeycomb not worth a kreuzer?</em> And when he heard it was for the bishop's table, he would not take a coin. <em>Take it,</em> he said. <em>Only let them know it is from me too.</em> They strained the comb into a silver bowl at the castle and he brought a crock of sour cream and stirred it in, and the bishop and his priests and the count and all the poor at the gate ate from that one bowl, and there was enough for all of them, and some over.</p>
+  <p><em>And that,</em> said the Archbishop, <em>is why everything comes to such a man, wherever he goes.</em></p>
+  <p>But the same man, he said, much later, came to be a great lord, and laid siege to a town that would not give him its keys. Seven years he sat outside its walls, and the people went in and out at night by the little gates to fetch wood and water, and held out. Then his mother sent to him: <em>You are a fool. Shut the little gates.</em> He shut them. In seven days the town opened, starving, and gave him everything. For the little gates he paid a long time, and he came into the world with difficulty, and late, and crossways.</p>
+  <p><em>And which one was Simeon?</em> said Brother Vasyl.</p>
+  <p><em>The old women would say both,</em> said the Archbishop. <em>The same one as always.</em> He picked up his glass again. <em>I say, have some more of Pani Vasko's honey cake. It came to Simeon.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Another day that winter, at the monastery, in the warm room by the bakery, the monks were talking about Thornapple Hill again, as they did all that year.</p>
+  <p><em>One novice,</em> said Brother Nikolai. <em>One boy, a year in the habit, and he built a church and cells for thirty monks and room for five hundred. Think of the merit of it. Think what that will count for him.</em></p>
+  <p>The Archbishop had come in behind them with his stick, as he did, so that they only noticed him afterward.</p>
+  <p><em>He doesn't count it,</em> he said. <em>Not the good he did, not the harm. The thorns he cut and the thorns he didn't, his mother's tears and the girl's, all of it. He put it down. He keeps no account.</em> And he quoted from memory, in his careful English, the place in Athanasius that he had read so often the book fell open there:</p>
+  <div class="verse">
+    <p>He at least gave no thought to the past, but day by day, as if he were at the beginning of his discipline, applied greater pains for advancement, often repeating to himself the saying of Paul: &lsquo;Forgetting the things which are behind and stretching forward to the things which are before.&rsquo;</p>
+    <p>&mdash; Athanasius, <em>Life of Antony</em> 7</p>
+  </div>
+  <p>Helen Dzurko married a cutter from E-J in 1952, after the bishop's court had done what bishops' courts can do, and named her second son Michael, and when she was very old she said that she had never held it against him, that he had looked at her grandmother at the capping as if he were seeing a saint.</p>
+  <p>On Thornapple Hill, the next May, the hawthorn came into bloom over the whole hill at once, white from the milk house to the woods, and so thick with bees that Rhinehart could hear them from the road. From the road, looking up, nobody could have told whether anyone lived there.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">In a hamlet or in a forest, in the deep water or on the dry land, wherever venerable persons (Arhanta) dwell, that place is delightful.<cite>Dhammapada 98, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Him I call indeed a Brahmana who in this world is above good and evil, above the bondage of both, free from grief from sin, and from impurity.<cite>Dhammapada 412, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>Revata was the youngest brother of S&#257;riputta. With all their siblings gone into the order, their mother married him off at seven to keep him at home. At the wedding, hearing the bride blessed with the long life of her 120-year-old grandmother, he saw what age would do and slipped away from the wedding carriage on the pretext of relieving himself, three times and then a fourth. Thirty forest monks ordained him once they understood that his brother was S&#257;riputta, whom they knew by his monk's name rather than his birth name Upatissa. Revata became an arahat in an acacia forest. When the Buddha came to see him by the short and haunted road, with five hundred monks fed along the way by the merit of the Elder S&#299;vali, Revata made lodgings for them all by psychic power. Two old monks who grumbled were made to forget their oil, water pot and sandals, went back, and found only thorns, with their things hanging in an acacia. The laywoman Vis&#257;kh&#257; heard both reports and asked the Buddha, who spoke verse 98; he then told S&#299;vali's past lives (the honeycomb given for nothing, the siege in which he shut the lesser gates), and spoke verse 412. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-29.htm">the full commentary story</a>, or about <a href="https://ancient-buddhist-texts.net/English-Texts/Great-Chronicles/43-14.htm">Khadiravaniya Revata</a>, <a href="https://en.wikipedia.org/wiki/Revata_Khadiravaniya">Revata Khadiravaniya</a>, &ldquo;Revata of the acacia forest.&rdquo;ldquo;Revata of the acacia forest.<a href="https://en.wikipedia.org/wiki/Revata_Khadiravaniya">Revata Khadiravaniya</a>, &ldquo;Revata of the acacia forest.&rdquo;rdquo; The same story is told in this series as <a href="una-de-gato.html">U&ntilde;a de Gato</a>.</p>
+    <h3>The Southern Tier and the hills, 1949&ndash;1950</h3>
+    <p>Carpatho-Rusyns, from the northern slopes of the Carpathians in what are now Slovakia, Poland and Ukraine, came to America in great numbers before the First World War; by 1920 about 13 percent of all <a href="https://en.wikipedia.org/wiki/Rusyn_Americans">Rusyn Americans</a> lived in New York State, and many worked in mills, mines and factories. In Endicott and Johnson City the <a href="https://visitbinghamton.org/articles/shoes-were-a-good-fit-for-binghamton/">Endicott Johnson shoe company</a> employed about 20,000 people under George F. Johnson's &ldquo;Square Deal,&rdquo; commemorated on arches over the road, and gave land for churches, including the lots for Endicott's <a href="https://www.oca.org/parishes/oca-ny-endspp">Russian Orthodox parish of Sts. Peter and Paul</a>, organized in 1914. Rusyn weddings kept the old <a href="https://carpathorusynsociety.wildapricot.org/Genealogy-Discussion-Forum/13190941">capping of the bride</a>: before the bride's dance her veil was taken off and replaced with the married woman's kerchief or cap.</p>
+    <p>After the Second World War the <a href="https://en.wikipedia.org/wiki/Displaced_Persons_Act">Displaced Persons Act of 1948</a> admitted nearly 400,000 refugees from the camps of Europe by 1952, among them Orthodox clergy and monks who had fled west ahead of the Soviet armies. The hawthorn, also called <a href="https://en.wikipedia.org/wiki/Crataegus">thornapple and whitethorn</a>, is quick to take over abandoned pasture. The Monastery of the Dormition, Thornapple Hill and the people of the story are invented. Athanasius's <em>Life of Antony</em>, the founding book of Christian monasticism, is quoted from <a href="https://ccel.org/ccel/schaff/npnf204/npnf204.xvi.ii.xii.html">H. Ellershaw's translation</a> in the Nicene and Post-Nicene Fathers (1892).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Revata from the Dhammapada commentary (verses 98 and 412). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-29.htm">The original</a>. Words from Athanasius, <em>Life of Antony</em>, tr. H. Ellershaw (1892). Written by Claude Opus 5.5.
+  <div class="pager"><a href="field-tickets.html">&larr; Field Tickets</a><a href="index.html">All stories</a><a href="the-cedar-moon.html">The Cedar Moon &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, branches = [], haws = [];
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    build();
+  }
+  function build() {
+    branches = []; haws = [];
+    var reach = Math.min(W * 0.16, 170);
+    for (var i = 0; i < 6; i++) {
+      var left = i % 2 === 0;
+      var y = H * (0.12 + 0.15 * i) + rnd(-20, 20);
+      var x0 = left ? -10 : W + 10, dir = left ? 1 : -1;
+      var pts = [[x0, y]], x = x0, yy = y;
+      for (var k = 0; k < 5; k++) { x += dir * reach / 5; yy += rnd(-14, 14); pts.push([x, yy]); }
+      var thorns = [];
+      for (var k2 = 1; k2 < pts.length; k2++) thorns.push({ p: pts[k2], up: Math.random() < 0.5 });
+      branches.push({ pts: pts, dir: dir, thorns: thorns });
+      for (var h = 1; h < pts.length; h += 2) {
+        haws.push({ x: pts[h][0] + rnd(-4, 4), y: pts[h][1] + 6, t: Math.random() * 1600, max: 1400 + Math.random() * 1200, fall: 0 });
+      }
+    }
+  }
+  function drawBranches() {
+    ctx.lineCap = 'round';
+    for (var i = 0; i < branches.length; i++) {
+      var b = branches[i];
+      ctx.strokeStyle = 'rgba(70,58,48,.28)'; ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.moveTo(b.pts[0][0], b.pts[0][1]);
+      for (var k = 1; k < b.pts.length; k++) ctx.lineTo(b.pts[k][0], b.pts[k][1]);
+      ctx.stroke();
+      ctx.strokeStyle = 'rgba(225,215,198,.9)'; ctx.lineWidth = 1;
+      for (var j = 0; j < b.thorns.length; j++) {
+        var p = b.thorns[j].p, s = b.thorns[j].up ? -1 : 1;
+        ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(p[0] + b.dir * 6, p[1] + s * 13); ctx.stroke();
+      }
+    }
+  }
+  function hawColor(q) {
+    var g = [128, 150, 96], r = [160, 44, 38], d = [92, 28, 26];
+    var a, bb, f;
+    if (q < 0.5) { a = g; bb = r; f = q / 0.5; } else { a = r; bb = d; f = (q - 0.5) / 0.5; }
+    return [0, 1, 2].map(function (i) { return Math.round(a[i] + (bb[i] - a[i]) * f); }).join(',');
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    drawBranches();
+    for (var i = 0; i < haws.length; i++) {
+      var h = haws[i];
+      var q = reduce ? 0.45 : Math.min(1, h.t / h.max);
+      var y = h.y;
+      if (!reduce) {
+        h.t++;
+        if (h.t > h.max) { h.fall += 1.2; y = h.y + h.fall; if (y > H + 10) { h.t = 0; h.fall = 0; h.max = 1400 + Math.random() * 1200; } }
+      }
+      var alpha = (h.t > h.max && !reduce) ? Math.max(0, 0.8 - h.fall / 300) : 0.8;
+      ctx.fillStyle = 'rgba(' + hawColor(q) + ',' + alpha + ')';
+      ctx.beginPath(); ctx.arc(h.x, y, 3.6, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

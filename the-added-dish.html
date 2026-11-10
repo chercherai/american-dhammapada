@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Added Dish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on fog-pale paper, light theme; along the foot of the page a line of bare hills stands across grey water, brown most of the time, gold for a short while, and then a bank of fog comes through and takes them; datelined sections. */
+  --ground: #e9e7e0;
+  --ground-2: #dedbd2;
+  --paper: #2a2622;
+  --paper-dim: #6a645a;
+  --mustard: #8c6414;
+  --flame: #c4962a;
+  --rule: rgba(42,38,34,.16);
+  --panel: rgba(255,255,255,.5);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(#eeece6 0%, #e4e2da 70%, #d9d9d2 100%) fixed, #e9e7e0;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--mustard); }
+a:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--mustard); text-wrap: balance; text-shadow: none; }
+.epigraph { border-left: 1px solid var(--mustard); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mustard); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--mustard); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--flame); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--mustard); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mustard); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--mustard); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--mustard); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mustard); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--mustard); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--mustard); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 23.8 &middot; M&#257;ra</span></nav>
+<header>
+  <h1>The Added Dish</h1>
+  <div class="epigraph">The superior man has three things in which he delights, and to be ruler over the empire is not one of them.<br>&mdash; Mencius, Book VII, Part I, 20</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Ngoi hiang ngin gam gong,</span> in the wooden house on the island.</p>
+
+<section>
+  <h2>I. The Wooden House</h2>
+  <p class="dateline">Angel Island, San Francisco Bay &middot; June 1925</p>
+  <p>The men called the place the wooden house. It stood on the north side of the island above a cove, a long barracks of fir boards with bars on the windows and a fence around the yard, and that summer about two hundred of them slept in one room of it on iron bunks hung three high. The country they had come to lay across the water. They had called it Gold Mountain since before they could walk. From the windows on the water side a piece of it could be seen, a long line of bare hills that were brown all day, and for a quarter of an hour before the evening fog came through they were the color the name said.</p>
+  <p>Moy Sin-saang had the bottom bunk by the second post. He was forty-four years old, a schoolmaster from a village of the Moy name below Toisan city, and he had come in the middle of March on a teacher&rsquo;s paper to take the evening classes at a school on Stockton Street. For forty years and more a teacher had been one of the few kinds of Chinese the law let in. The new law of the summer before used the word differently, and nobody at the station could tell him whether a man who taught children their first thousand characters over a dry-goods store still counted. His file had gone to Washington. He had been in the wooden house fifteen weeks, longer than anyone but old Lew.</p>
+  <p>He was one of the few men in the room whose paper name was his own. Most of the others were somebody&rsquo;s son on paper, and had spent the crossing learning a village they had never slept in, how many steps went up to the door, which wall the rice bin stood against. The Sin-saang thought no worse of them. The law had been made so that hardly anyone could come in by the front, and they had families who had sold fields to send them. In the mornings he taught the boys, of whom there were always twenty or so between ten and sixteen. He sat them on the floor between the bunks with one brush and a board and a cup of water, since water dries off a board and the board can be written on again. In the afternoons he wrote letters for the men who could not. His own letters went to his father and mother, who were both living, in the house where he was born.</p>
+  <p>The room kept itself, after a fashion. Some years back the men had made an association, the Gee Gee Wui, which means that they would rule themselves, and which in English had given itself the name of the Liberty Association. It took a dollar or two from each new man and bought brushes with it, and a barber&rsquo;s kit, and the newspapers from the city. It told the new ones what to say and what never to say aloud where a watchman could hear. It spoke for the room when the rice was sour. It had officers, and the officers sat at the table nearest the kitchen door. When a cook&rsquo;s helper set down in front of them a dish nobody had asked for, and said <em>ga choi</em>, an added dish, there would be a folded paper somewhere in it for a man whose answers before the Board had not matched his father&rsquo;s.</p>
+  <p>And it had the dark room. This was a linen closet with a chair in it. A boy who stole, or fought, or left the tap running, was shut in there by the officers for half an hour to think. One who had taken fifty cents from under a pillow had sat there most of a week.</p>
+  <p>In the last week of June the papers from the city were full of Canton. On the twenty-third the foreign soldiers on Shameen had fired across the canal into a parade of students and workmen, and the dead were counted past fifty. Every man in the room had a cousin in Canton, or thought he might. On the thirtieth there was trouble in the dining hall. Nobody agreed afterward what began it, only that it was not the food. Bowls went over. The watchmen in their green coats backed out through the doors, and then soldiers from the fort on the other side of the island came and stood along the wall with bayonets on their rifles while two hundred men were counted back up the stair, one, two, three, in bad Chinese.</p>
+  <p>That night old Lew, who had been chairman since the winter, put two boys of fourteen in the dark room for throwing the first bowls. Then he said he was tired, and that the room should choose somebody else in the morning. A good many men looked toward the bunk by the second post.</p>
+  <p>The Sin-saang lay awake. He had the bayonets in his mind, and the canal at Canton, and the two boys in the closet, to whom he had that morning taught the character for a person, two strokes leaning on each other. For twenty years he had set boys to copy what Mencius told the king of Liang.</p>
+  <div class="verse">
+    <p>Now among the shepherds of men throughout the empire, there is not one who does not find pleasure in killing men. If there were one who did not find pleasure in killing men, all the people in the empire would look towards him with outstretched necks.</p>
+    <p>&mdash; Mencius, Book I, Part I, 6</p>
+  </div>
+  <p>Tonight he put it to himself as a question. Could it be done at all? Could a room be kept, or a district, or a country, with no bayonet standing behind it and no closet, with nobody struck down and nobody set to strike, nobody made to grieve, and only by what was right? He went over it the way he went over a boy&rsquo;s composition, slowly, with the brush held back.</p>
+</section>
+
+<section>
+  <h2>II. The Visitor</h2>
+  <p class="dateline">The same night</p>
+  <p>Now there is one who listens for a thought of that kind. The men of the wooden house told it this way afterward. He heard the schoolmaster asking whether a man might govern, and took it that the schoolmaster wished to. And he reckoned that a chairman has a great deal to see to, and that a man with a great deal to see to can be caught looking the other way.</p>
+  <p>The door was locked from outside, as it was every night, and the watchman had his chair in the hall. Nobody heard the bolt. A man was sitting on the edge of the Sin-saang&rsquo;s bunk. He wore a gray suit of American cut and a straw hat, like the interpreters who came over on the morning boat, and he had a gold chain across his vest and a good deal of gold in his mouth. He spoke low. Chin, in the bunk above, said afterward that he spoke pure Hoiping, the speech of Chin&rsquo;s own market town. Wong, across the aisle, said no, Toisan city, anybody could hear it. Every man who was awake heard the talk of the next lane over from his own mother&rsquo;s door.</p>
+  <p><em>Sin-saang,</em> he said, <em>take the chair tomorrow. They will give it to you if you only look up when they look at you. Be the one the old book asks for. Keep this room with nobody in the closet and nobody&rsquo;s bowl empty and nobody sorry, by what is right and nothing else.</em></p>
+  <p>The Sin-saang sat up. <em>What do you see in me, that you say this to me?</em></p>
+  <p><em>What the room sees. In April you wrote six answers for the Lee boy on the paper off a cigarette, and the Board asked him those six, in that order, and no others. You wrote to the consul about the rice and the rice was changed. They say that what you set down comes out so. If you looked at those hills tonight and wrote that they were gold, they would be gold to the top by morning.</em> He smiled, and the gold showed. <em>You need not trouble to. The added dish goes to the chairman&rsquo;s table. Every paper that comes onto this island would come through your hand, and every man&rsquo;s landing with it, and there are families in four counties who would sell the roof to buy one. Leave that part to me. I will do with it everything that money does. Lawyers in Washington. The watchmen. The inspector&rsquo;s clerk. A school on Stockton Street with your name cut over the door. So you will govern justly, and want for nothing while you do.</em></p>
+  <p>The Sin-saang looked toward the water side, where at that hour there was nothing to see but the lamp at the end of the wharf.</p>
+  <p><em>They named that whole country Gold Mountain before any of us had seen it,</em> he said. <em>If it were gold, every hill, and a second country of gold were set down on top of it, that would still not be enough for one man. Ask the men who own it whether they have enough. They built this house.</em></p>
+  <p><em>And a man who has once seen where his trouble comes from, and what it is tied to, how is he to lean that way again? When he knows the rope for a rope he works at the knot.</em></p>
+  <p>The men who told it said the visitor took his hand off the bunk rail then, as a man takes it off a stove.</p>
+  <p><em>I will say it to you once more, since you came so far,</em> said the Sin-saang. <em>You and I have nothing to do with each other. These things are pleasant. A friend at the door when a man comes back up from the Board. This rice, on the days it is the rice there is. Something done rightly, to have by you on the morning they put you on the boat. And to have set all of it down, that most.</em> Then he said the rest as he had said it to boys for twenty years, not loudly, like a man hearing a lesson.</p>
+  <div class="verse">
+    <p>The superior man has three things in which he delights, and to be ruler over the empire is not one of them.</p>
+    <p>That his father and mother are both alive, and that the condition of his brothers affords no cause for anxiety;&mdash;this is one delight.</p>
+    <p>That, when looking up, he has no occasion for shame before Heaven, and, below, he has no occasion to blush before men;&mdash;this is a second delight.</p>
+    <p>That he can get from the whole empire the most talented individuals, and teach and nourish them;&mdash;this is the third delight.</p>
+    <p>The superior man has three things in which he delights, and to be ruler over the empire is not one of them.</p>
+    <p>&mdash; Mencius, Book VII, Part I, 20</p>
+  </div>
+  <p>He did not say that his father and mother were both living, or that in fifteen weeks he had told the Board nothing that was not so, or what he did with the boys in the mornings. The room knew those three things about him already.</p>
+  <p>The visitor stood up. He had the look of a man who comes to collect and is shown the receipt. He went down the aisle between the bunks, and he was at the door, and then he was not in the room, and still nobody had heard the bolt. In three tiers of bunks not one man had been asleep. It is said they were not the only ones who listened. The walls of that house are cut all over with the verses of men who waited there before, and the ones who lay nearest them said the boards were quieter that night than wood is.</p>
+</section>
+
+<section>
+  <h2>III. The Added Dish</h2>
+  <p class="dateline">July to December</p>
+  <p>In the morning the room chose a Hoiping man named Fong, who had been a shipping clerk in Hong Kong and had some English, and he did well enough. The two boys came out of the closet in time for breakfast. Old Lew was landed in August, after seventeen months, and wept on the stair, and left the Sin-saang his blanket.</p>
+  <p>The Sin-saang kept his board and his cup of water. He taught the character for a person to every new boy who came up from the boat. He wrote the letters. When the room looked at him, on the days when there was something to decide, he looked up and said what he thought and went back to what he was doing. Each evening he watched the hills go gold for their quarter hour, with the interest of a man looking into the window of a shop where he needs nothing, and then the fog took them.</p>
+  <p>In December the judges in the city ruled on another schoolmaster&rsquo;s paper, the same kind as his. Under the new law, they said, a teacher meant a professor of a college or an academy, a seminary or a university, and a certificate that said teacher and no more would not do. His own order came the week after. He would go back on the next boat.</p>
+  <p>On his last evening the cook&rsquo;s helper came out of the kitchen with a dish, walked past the officers&rsquo; table, and set it down in front of the Sin-saang where he sat among the boys. <em>Ga choi,</em> he said. Fong and the others watched it go by. It was a fish steamed whole with ginger, which that kitchen could do well, having been built with steam kettles and not one wok. The Sin-saang turned it over with his chopsticks from head to tail, as every man in the hall had seen an added dish turned over. There was nothing in it but the fish.</p>
+  <p>He served the boys first, and gave the cheek to the smallest.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">If an occasion arises, friends are pleasant; enjoyment is pleasant, whatever be the cause; a good work is pleasant in the hour of death; the giving up of all grief is pleasant.<cite>Dhammapada 331, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Pleasant in the world is the state of a mother, pleasant the state of a father, pleasant the state of a Samana, pleasant the state of a Brahmana.<cite>Dhammapada 332, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Pleasant is virtue lasting to old age, pleasant is a faith firmly rooted; pleasant is attainment of intelligence, pleasant is avoiding of sins.<cite>Dhammapada 333, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary the Buddha is living in a forest hut in the Himalaya country at a time when kings oppress the people they rule, and he asks himself whether sovereignty could be exercised without killing or conquest or sorrow, with justice. M&#257;ra, the tempter, overhears the thought and takes it for ambition. He urges the Buddha to rule: a man of his powers could turn the Himalaya to gold, and M&#257;ra will see to everything wealth can do. The Buddha answers that a mountain of gold twice over would not be enough for one person, tells M&#257;ra the two of them have nothing in common, and speaks these verses on what is truly pleasant. Many gods who were listening, the story adds, understood. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mara_(demon)">M&#257;ra</a>.</p>
+    <h3>Angel Island, 1925</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Angel_Island_Immigration_Station">Angel Island Immigration Station</a> opened in 1910 to enforce the <a href="https://en.wikipedia.org/wiki/Chinese_Exclusion_Act">Chinese Exclusion Act</a> of 1882, which barred Chinese laborers and let in only a few exempt classes, among them merchants, students and teachers. Most others who came claimed to be the children of citizens, many of them as <a href="https://en.wikipedia.org/wiki/Paper_sons">&ldquo;paper sons,&rdquo;</a> and were questioned before a Board of Special Inquiry on the smallest details of a village and a family. By the mid-1920s the wait for a hearing ran two or three weeks, but a man on appeal could be held as long as two years. The <a href="https://en.wikipedia.org/wiki/Immigration_Act_of_1924">Immigration Act of 1924</a> narrowed the exempt classes further. On December 7, 1925, in <em>Jeu Jo Wan v. Nagle</em>, the federal appeals court in San Francisco upheld the exclusion of a Chinese teacher who held the old certificate, ruling that the new act limited teachers to &ldquo;professors of colleges, academies, seminaries, or universities.&rdquo; Moy Sin-saang is invented; the ruling is not. California had been <a href="https://en.wikipedia.org/wiki/Gold_Mountain_(toponym)">Gold Mountain</a> in Cantonese since 1849.</p>
+    <p>The detained men&rsquo;s own society, the Zizhihui or Self-governing Association (in the Toisan speech of most detainees, <a href="https://www.aiisf.org/vault/room105">Gee Gee Wui</a>), called itself in English the Angel Island Liberty Association. The historian Him Mark Lai dated it to 1922; the Angel Island foundation gives 1918. Lai&rsquo;s essays describe <a href="https://foundsf.org/Self-Organized_Detainees">its officers</a>, chosen from the men held longest and &ldquo;at times respected intellectuals,&rdquo; its dues, books and classes for the children, and <a href="https://foundsf.org/Beating_the_INS">the coaching notes</a> that Chinese kitchen workers smuggled to the officers&rsquo; table under the words <em>ga choi</em>. Former detainees also remembered the &ldquo;dark room,&rdquo; a linen closet where the association shut up boys who stole or fought. Lai records <a href="https://foundsf.org/Detained_on_Angel_Island">two dining-hall disturbances in 1925</a>, one on June 30 that brought soldiers with fixed bayonets from Fort McDowell, and notes that the food was apparently not the cause. A week earlier, on June 23, British and French troops had fired on a demonstration in Canton, the <a href="https://en.wikipedia.org/wiki/Shameen_Incident">Shameen Incident</a>. The poems the detainees cut into the barracks walls can still be read there. The schoolmaster&rsquo;s two passages are from <a href="https://en.wikipedia.org/wiki/James_Legge">James Legge&rsquo;s</a> translation of <a href="https://en.wikipedia.org/wiki/Mencius">Mencius</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of M&#257;ra from the Dhammapada commentary (verses 331&ndash;333). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-08.htm">The original</a>. Scripture from the Works of Mencius, translated by James Legge (1861). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-firefinder.html">&larr; The Firefinder</a><a href="index.html">All stories</a><a href="the-yellow-cod.html">The Yellow Cod &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = null, PERIOD = 90;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function ridge(x) {
+    return H * 0.875 - (Math.sin(x * 0.0067 + 1.3) * 12 + Math.sin(x * 0.0183 + 0.4) * 5 + Math.sin(x * 0.0031 + 2.2) * 13);
+  }
+  function ease(v) { v = Math.max(0, Math.min(1, v)); return v * v * (3 - 2 * v); }
+  function mix(a, b, k) { return Math.round(a + (b - a) * k); }
+  function draw(now) {
+    if (t0 === null) t0 = now;
+    var T = reduce ? 0.46 : (((now - t0) / 1000) % PERIOD) / PERIOD;
+    /* brown most of the day; gold for a short while; then the fog comes through and goes */
+    var gold = ease(1 - Math.abs(T - 0.46) / 0.10);
+    var fog = T < 0.52 ? 0 : T < 0.64 ? ease((T - 0.52) / 0.12) : T < 0.84 ? 1 : ease(1 - (T - 0.84) / 0.14);
+    ctx.clearRect(0, 0, W, H);
+    var base = H * 0.905;
+    /* water */
+    var wg = ctx.createLinearGradient(0, base, 0, H);
+    wg.addColorStop(0, 'rgba(95,122,124,0.20)');
+    wg.addColorStop(1, 'rgba(95,122,124,0.05)');
+    ctx.fillStyle = wg; ctx.fillRect(0, base, W, H - base);
+    /* hills across the water */
+    var r = mix(128, 201, gold), g = mix(104, 154, gold), b = mix(78, 44, gold);
+    ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (0.34 + 0.22 * gold) + ')';
+    ctx.beginPath(); ctx.moveTo(0, base);
+    for (var x = 0; x <= W; x += 6) ctx.lineTo(x, ridge(x));
+    ctx.lineTo(W, base); ctx.closePath(); ctx.fill();
+    /* a little of the gold lies on the water under them */
+    if (gold > 0.02) {
+      var sg = ctx.createLinearGradient(0, base, 0, base + 26);
+      sg.addColorStop(0, 'rgba(201,154,44,' + (0.16 * gold) + ')');
+      sg.addColorStop(1, 'rgba(201,154,44,0)');
+      ctx.fillStyle = sg; ctx.fillRect(0, base, W, 26);
+    }
+    /* fog, coming in from the left: soft banks that cover the hills one after another */
+    if (fog > 0.01) {
+      var n = 7, R = Math.max(170, W * 0.24);
+      for (var i = 0; i < n; i++) {
+        var fx = (i / (n - 1)) * W + Math.sin(i * 2.1) * 30;
+        var a = ease(fog * 1.7 - (i / (n - 1)) * 0.7) * 0.95;
+        if (a < 0.01) continue;
+        var fy = H * 0.872 + Math.sin(i * 1.7 + 0.5) * 8;
+        var fg = ctx.createRadialGradient(fx, fy, 0, fx, fy, R);
+        fg.addColorStop(0, 'rgba(232,230,223,' + a + ')');
+        fg.addColorStop(0.45, 'rgba(232,230,223,' + (a * 0.8) + ')');
+        fg.addColorStop(1, 'rgba(232,230,223,0)');
+        ctx.fillStyle = fg;
+        ctx.save(); ctx.translate(fx, fy); ctx.scale(1, 0.34); ctx.translate(-fx, -fy);
+        ctx.beginPath(); ctx.arc(fx, fy, R, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>
