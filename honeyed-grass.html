@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Honeyed Grass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column in midnight dark; faint music staves cross the page and small diamond notes come up on them one at a time, as in a candlelit singing school. */
+  --ground: #13120e;
+  --ground-2: #1d1b15;
+  --paper: #e9e3d3;
+  --paper-dim: #a59c86;
+  --honey: #d6a23e;
+  --candle: #f1dca6;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #2a2416 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,227,211,.2); }
+.series a:hover { color: var(--honey); }
+a:focus-visible { outline: 2px solid var(--honey); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--honey); text-wrap: balance; text-shadow: 0 0 28px rgba(214,162,62,.22); }
+.epigraph { border-left: 1px solid rgba(214,162,62,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--honey); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--honey); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(29,27,21,.78); border: 1px solid rgba(233,227,211,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--candle); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,227,211,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--honey); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--honey); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(233,227,211,.1); border-bottom: 1px solid rgba(233,227,211,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--honey); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--honey); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--honey); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--honey); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(29,27,21,.78); border-left: 2px solid var(--honey); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.32 &middot; Sundarasamudda</span></nav>
+<header>
+  <h1>Honeyed Grass</h1>
+  <div class="epigraph">&hellip;as strangers and pilgrims, abstain from fleshly lusts, which war against the soul.<br>&mdash; 1 Peter 2:11</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Also ist mir&rsquo;s gesagt worden,</span> on the Cocalico.</p>
+<section>
+  <h2>I. The Outer Ring</h2>
+  <p class="dateline">Germantown and the Ridge, Pennsylvania &middot; summer 1744</p>
+  <p>Heinrich Sch&ouml;nsee tanned leather on the Wingohocking and owned shares in three ships, and it was said in Germantown that he could have bought the Main Street from the market square to Chestnut Hill and had money over. He had one child, a son, Matthias, who was nineteen and could sing. The tanyard and the ships were to be his.</p>
+  <p>One First-day after dinner Matthias saw people going out along the road toward the Ridge, a good many of them, with loaves under their arms and candles in their hands. He asked where they were going.</p>
+  <p><em>To hear the old man,</em> they said.</p>
+  <p><em>I will go too.</em></p>
+  <p>The old man was called Vater Lorenz. He had come over fifty years before with the forty brethren who built their cabins in the woods above the Wissahickon to wait for the Lord, who was to come that same year. The Lord had not come that year. The master of the forty had died young, and the rest had married or wandered off, and the cabins had fallen in. Lorenz had stayed. He had a hut and a spring and a patch of beans. On First-days he sat on a stump before the door and talked a little, and whoever had walked out sat on the ground. A boy named Christel, from the paper mill down the creek, carried his water.</p>
+  <p>Matthias sat at the back, in the outer ring. The old man looked at him once. Then he spoke as he always did, of plain things in their order: of giving, of keeping one&rsquo;s word, of what the body is, of how one wanting hauls the next one in behind it like a barge horse. Matthias listened and thought, <em>I cannot do this in my father&rsquo;s house. Nine dishes on the table and a clerk at my elbow. A life scoured as clean as a shell is not lived between a tanyard and a counting room.</em></p>
+  <p>When the people got up to go, he stayed, and asked to be taken in.</p>
+  <p><em>Have your father and mother said yes?</em></p>
+  <p><em>No.</em></p>
+  <p><em>Then go home. I take no man&rsquo;s son from him.</em></p>
+  <p>They said no all summer. In August he stopped eating. He lay on the floor of his room, and on the seventh day his mother came up with broth and he turned his face from it, and she went down and told her husband that a son in the woods was better than a son under the churchyard. So they gave him leave. He went up the Ridge with nothing in his hands. The old man cut his hair and gave him a gray coat.</p>
+  <p>He stayed a year. Every week his mother sent a girl out the road with a covered basket, and every week he sent it back as it came. At the end of the year he thought, <em>What is the use of my living here, two miles from her kitchen?</em> He had heard of the Camp of the Solitary on the Cocalico, sixty miles west, where the brethren slept on boards and ate once a day and sang. He asked leave. The old man said, <em>Go,</em> and he walked there.</p>
+</section>
+
+<section>
+  <h2>II. The Fair</h2>
+  <p class="dateline">Germantown &middot; November 1746</p>
+  <p>The November fair came on in Philadelphia, and the young men of Germantown rode down to it past the Sch&ouml;nsee house. The mother stood at the window. There went the Kepler boy, who had learned his letters on the same bench as Matthias, in a blue coat with silver buttons. There went young Dietz in a chaise with a wife beside him and a drummer walking ahead. She sat down on the window seat and wept, and her husband came and stood by her and wept as well.</p>
+  <p><em>That is past our son&rsquo;s getting now,</em> she said.</p>
+  <p>A woman came to the house that same hour with lace to sell. She was Anna Barbara Kuntz, called B&auml;rbel, twenty-four years old. She had come over from the Palatinate at fourteen and been sold off the ship for her passage, seven years to a tavern on Water Street. When the seven years were out she had nothing but what she had learned there, and she had taken rooms in the part of the city they called Helltown, where a clever woman who was good company could keep herself. She saw the mother&rsquo;s face.</p>
+  <p><em>Mother, why do you weep?</em></p>
+  <p><em>I keep thinking of my son.</em></p>
+  <p><em>Where is he?</em></p>
+  <p><em>Gone among the brethren.</em></p>
+  <p><em>Would it not be right to bring him home?</em></p>
+  <p><em>It would. He does not wish it. He has left the Ridge now and gone out to the Cocalico.</em></p>
+  <p>B&auml;rbel set down her lace.</p>
+  <p><em>Suppose I brought him home. What would you do for me?</em></p>
+  <p>The mother looked at her a long while, and knew what she was, and said it anyway.</p>
+  <p><em>You would be the wife of this house and carry its keys. All of it would be yours after us.</em></p>
+  <p><em>Then give me my expenses.</em></p>
+  <p>She took the money and hired a wagon, a maid and a boy to walk ahead of her, and went west on the Lancaster road like a merchant&rsquo;s widow.</p>
+</section>
+
+<section>
+  <h2>III. The Tenor</h2>
+  <p class="dateline">Ephrata &middot; winter 1747</p>
+  <p>On the Cocalico they had named him Brother Simeon. He wore the white habit with the hood and went barefoot until the ground froze. He slept on a bench the width of his shoulders with a block of wood under his head, and rose at midnight, and ate one meal a day. None of it was hard for him. The hard thing, and the thing he loved, was the singing school.</p>
+  <p>The Superintendent had made a music of his own for them, in four parts and five and six, the women above and the brothers below, and he kept the school himself, four hours at a stretch, ending at midnight. They sang with the mouth hardly open and the breath held back, so that the sound came from nowhere a visitor could point to. People of quality drove out from Lancaster to hear it and went home quiet. Matthias had the high part among the brothers. It was the one true note he owned, and it sat at the very top of what he could reach. The Brethren wrote the rule of that school down afterward in their chronicle.</p>
+  <div class="verse">
+    <p>&hellip;he declared all fruit, milk, meat, to be viands injurious to the voice.</p>
+    <p>&hellip;godly virtue must be at the source of our whole walk, because by it you obtain favor with the spirit of singing, which is the Holy Spirit.</p>
+    <p>&mdash; Chronicon Ephratense, ch. XXIV</p>
+  </div>
+  <p>The love of women stood in that list too. The Superintendent had struck it out, thinking some would take offence, and the Brethren had made him put it back.</p>
+  <p>Every Sixth-day they sent Brother Simeon the thirteen miles to Lancaster for rags. The paper mill ate rags, and the press ate paper, and that year the press was printing the book of their hymns. He went up one side of each street and down the other with a sack, and knocked at every door and passed none by, the brick houses and the log ones alike. And he had bound himself by a rule of his own, harder than the house asked. At a door he would take rags and a cup of cold water and nothing else. He would eat nothing on the road but the bread in his sleeve.</p>
+</section>
+
+<section>
+  <h2>IV. Queen Street</h2>
+  <p class="dateline">Lancaster &middot; April to July 1747</p>
+  <p>B&auml;rbel took note of the street he came in by. She hired the tallest house on it, two floors of brick and two garrets one above the other under a steep German roof with a knob at the peak. She baked on Fifth-day night so that the house smelled of it on Sixth-day morning.</p>
+  <p>The first weeks she gave him rags, good ones, a torn linen sheet, and cold water in a cup, and stood back from the door with her eyes down. He blessed the house and went on.</p>
+  <p>Then there was a small loaf in the sack among the rags, still warm. He found it on the road home. Bread was what he ate; it would have been waste to throw it in the ditch. It was white bread, and there was butter worked into it. The next week there was another.</p>
+  <p>In May she said, <em>Brother, sit down right here on the bench and eat it while it is hot.</em> She put out her hands for his sack, and he gave it to her. She brought milk in a cup. <em>There is no better door on your whole road than this one,</em> she said, and it was so. He sat on her bench in the sun every Sixth-day of that month.</p>
+  <p>There were boys on Queen Street. She gave them honey cakes and told them, <em>When the brother comes, you come too, and run up and down before the bench and kick up the dust. If I tell you to stop, pay me no mind.</em> They came and kicked up the dust. She called to them to stop. They paid her no mind. The next week she said, <em>Brother, these boys. I cannot do anything with them. Sit inside.</em></p>
+  <p>Inside there was a table with a cloth, and soup with meat in it, and pears stewed in honey. He ate what was set before him.</p>
+  <p>She gave the boys more cakes, and two kettle lids, and a toy drum. <em>When he is at the table, make a noise under the window. If I tell you to stop, pay me no mind.</em> They did it gladly. The next week she said, <em>Brother, there is no bearing it down here. Sit upstairs.</em></p>
+  <p>All this time the note was leaving him. First it came late. Then it came thick, like a thing sung through a blanket. Twice in June the midnight school was stopped on his account, and forty faces in white hoods turned and waited while he looked for it and could not find it. He knew why. And on the next Sixth-day morning he had his hand up to knock on her door before he had so much as thought about it.</p>
+  <p>He went up the stairs ahead of her. She shut each door behind them as they climbed, the door at the stair foot and the door to the first garret and the door to the second, and at the top of the house, under the peak, there was a chair, and he sat down in it.</p>
+</section>
+
+<section>
+  <h2>V. The Top of the House</h2>
+  <p class="dateline">Lancaster and the Ridge &middot; a Sixth-day in July</p>
+  <p>They say there are forty ways, and that she knew them. She yawned and stretched. She bent to the floor for something that had not fallen. She looked ashamed and rubbed one bare foot upon the other. She scratched on the boards with a stick. She spoke loud, as though the street could hear, and then low, as though no one must. She ate a pear and held it out to him. She sang a little, and wept a little, and laughed at herself for weeping. She took off her cap and put it on again. She loosened what was laced and laced it. Then she stood in front of him with her hair down and said it to him as a rhyme, the way a girl says a counting game.</p>
+  <p><em>My feet are washed, my shoes are red. You are young, and you are mine. I am young, and I am yours. We will both turn holy when we are old and go to God on two sticks.</em></p>
+  <p>Brother Simeon sat with his hands on his knees. <em>What have I done,</em> he thought. <em>I never looked where I was walking.</em> He was shaken through. And he did not get up.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>At that same hour, sixty miles east, Vater Lorenz was sitting on his stump on the Ridge with his dinner of bread on his knee, and he smiled. Christel had never seen him do it over nothing.</p>
+  <p><em>Father, what are you smiling at?</em></p>
+  <p><em>In Lancaster town, at the top of a house on Queen Street, there is a battle on between Matthias Sch&ouml;nsee and a woman from Philadelphia.</em></p>
+  <p><em>Who is going to win, and who is going to lose?</em></p>
+  <p><em>Matthias is going to win. The woman is going to lose.</em></p>
+  <p>He went on sitting where he was, with the bread on his knee. And in the top garret on Queen Street he was standing between the chair and the woman, in his gray coat with the bean dirt on it, and there was more light in that garret than the one small window gave. B&auml;rbel did not see him. She saw the brother look past her shoulder, and she felt the hair rise on her arms, and she stepped back.</p>
+  <p><em>Matthias,</em> the old man said. <em>Both. The thing wanted, and the wanting. Let them both go and look for nothing.</em> And he said the verse to him in Luther&rsquo;s words, as it stood in the new Bible Christoph Saur had printed in Germantown: <em>als die Fremdlinge und Pilgrime, enthaltet euch von fleischlichen L&uuml;sten, welche wider die Seele streiten.</em></p>
+  <div class="verse">
+    <p>Dearly beloved, I beseech you as strangers and pilgrims, abstain from fleshly lusts, which war against the soul.</p>
+    <p>&mdash; 1 Peter 2:11</p>
+  </div>
+  <p>Brother Simeon heard it to the end. When it ended, there was nothing left in him that leaned toward her or toward her table, or toward anything else.</p>
+  <p>Then he rose out of the chair, and kept on rising. He went up through the peak of the roof beside the knob, and not one shingle was started. The three boys were under the window with their kettle lids. They saw something white go up off the top of the tall house the way a goose goes up off a pond, and turn east. They told it all their lives.</p>
+  <p>B&auml;rbel sat down on the top stair. After a while she put up her hair and went down and opened the three doors, and paid the boys what she owed them.</p>
+</section>
+
+<section>
+  <h2>VI. Honey</h2>
+  <p class="dateline">The Ridge &middot; that evening, and the First-day after</p>
+  <p>Before the old man had finished his bread, Matthias was kneeling in the bean patch in front of him in the white habit, with his hood back. He looked at the old man from his cap to his cracked shoes, the whole body of him, the way a man looks at the house he was born in. Then he put his forehead to the ground. Christel dropped the water bucket and had to go back down for more.</p>
+  <p>On First-day the people who walked out had the story already, from a carter. They sat on the ground and talked it over among themselves. <em>For the sake of his tongue,</em> they said. <em>Bread with butter in it. He was that near lost, and the old man held him up.</em></p>
+  <p>Vater Lorenz heard them.</p>
+  <p><em>It is not the first time I have seen that one caught by the tongue,</em> he said. <em>Nor the first time I spoke for him.</em> And he told them a thing from before he crossed the water, when he was a page of fourteen at the court of a small count on the Lahn.</p>
+  <p>The count had a pleasure garden and a gardener named Sander. A roe deer began coming into the garden, a wild one out of the hill forest, the kind that is gone at the sight of a man. Sander let it go and did not frighten it. One day the count asked him, <em>Have you seen anything strange in the garden?</em> <em>Only a roe that comes, sir.</em> <em>Could you catch it?</em> <em>With a little honey I could bring it right into your hall.</em></p>
+  <p>So he was given honey. He smeared it on the grass where the roe fed, and hid. The roe tasted the honeyed grass and after that would feed nowhere else. Then Sander let himself be seen, a little, at a distance. The first days it ran. Then it stood. Before long it was eating grass out of his hand.</p>
+  <p>Then he strewed the path from the garden to the house with cut boughs, thick as a carpet, so that it looked like more forest. He hung a crock of honey from his shoulder and stuck a bunch of grass in his belt, and he walked ahead dropping honeyed wisps, one and then one, and the roe came after him with its head down, over the sill and into the hall. They shut the doors.</p>
+  <p>When it saw the people, it ran from wall to wall and shook. The count came down from his chamber and looked at it. <em>This creature,</em> he said, <em>will not go back for a week to a place where it has so much as seen a man. Where it has once been frightened it will not go again in all its life. And look where its tongue has brought it.</em></p>
+  <p><em>I was standing by the door with the candle,</em> the old man said. <em>I said, My lord, there is nothing worse than taste. Not at home, and not among friends. It gave this one to Sander. He laughed, since I was fourteen. Then he had them open the doors.</em></p>
+  <p><em>And the roe?</em> said Christel.</p>
+  <p><em>It went out between the boughs. There was honeyed grass lying the whole length of that path. It did not put its head down once.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Brother Simeon walked back to the Cocalico that week on his feet, like anybody, and it took him three days. He carried the rag sack to Lancaster every Sixth-day as before and passed no door, and at the tall house on Queen Street, for as long as she had the lease of it, B&auml;rbel gave him rags and he blessed the house. She stayed on in Lancaster afterward and baked for the town.</p>
+  <p>At the midnight school he stood in his place among the brothers with his mouth hardly open, as he had been taught, and the note was there.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who in this world, leaving all desires, travels about without a home, and in whom all concupiscence is extinct.<cite>Dhammapada 415, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Sundarasamudda (&ldquo;Ocean of Beauty&rdquo;) is the son of a very rich house in S&#257;vatth&#299; who wins his parents&rsquo; leave to become a monk and goes off to R&#257;jagaha. His mother, weeping on a festival day, promises a courtesan the whole household if she can bring him back. The woman takes a house on his alms street and feeds him, first at the door, then on the veranda, then (with the help of some bribed boys) indoors, then on the top floor of a seven-storied mansion, where she tries every art on him. The Buddha, far away, smiles, tells &#256;nanda who will win, and sends a radiant image of himself with the verse; the monk becomes an arahant and leaves through the roof peak. The Buddha then tells how the same monk was once a wind-deer lured into a palace by honeyed grass. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-32.htm">the full commentary story</a>.</p>
+    <h3>Ephrata and the Wissahickon, 1747</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Ephrata_Cloister">Ephrata Cloister</a> was founded in 1732 on Cocalico Creek in Lancaster County by <a href="https://en.wikipedia.org/wiki/Conrad_Beissel">Conrad Beissel</a>, who appears here only as &ldquo;the Superintendent.&rdquo; Its celibate brothers and sisters wore white habits, slept on narrow benches with wooden blocks for pillows, kept a midnight watch, ate one sparing meal a day, ran a paper mill and a press, and sang hymns in four and more parts to Beissel&rsquo;s own system of harmony. The community&rsquo;s chronicle, the <em>Chronicon Ephratense</em> (1786; quoted from J. Max Hark&rsquo;s 1889 translation), records that before opening the singing school Beissel judged fruit, milk and meat injurious to the voice, and that the Brethren insisted he keep a sentence saying the same of the love of women. The hymnal that carried that preface was printed at Ephrata in 1747. Brother Simeon, his rag round and his private rule are invented.</p>
+    <p>Vater Lorenz is invented too, but hermits like him were real. In 1694 about forty German Pietists under <a href="https://en.wikipedia.org/wiki/Johannes_Kelpius">Johannes Kelpius</a> settled on the ridge above <a href="https://en.wikipedia.org/wiki/Wissahickon_Creek">Wissahickon Creek</a> near Germantown to await the millennium; after Kelpius died, a few stayed on as solitaries into the 1740s and were visited for counsel. <a href="https://en.wikipedia.org/wiki/Christopher_Sauer">Christoph Saur</a> printed Luther&rsquo;s Bible at Germantown in 1743, the first Bible in a European language printed in America. Many German immigrants of those years came as <a href="https://en.wikipedia.org/wiki/Redemptioner">redemptioners</a>, sold into terms of service to pay their passage.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Sundarasamudda from the Dhammapada commentary (verse 415). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-32.htm">The original</a>. Scripture from Luther&rsquo;s German Bible and the King James Version; the rule of the singing school from the <em>Chronicon Ephratense</em>, tr. J. Max Hark (1889). Written by Claude Fable 5.2.
+  <div class="pager"><a href="seven-winters.html">&larr; Seven Winters</a><a href="index.html">All stories</a><a href="the-dogs-book.html">The Dog&#x27;s Book &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, staves = [], notes = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(n) {
+    var s = staves[Math.floor(Math.random() * staves.length)];
+    n.x = Math.random() * W; n.y = s + Math.floor(Math.random() * 9) * 4.5 - 4.5;
+    n.life = 0; n.max = 500 + Math.random() * 900;
+    return n;
+  }
+  function make() {
+    staves = []; notes = [];
+    var k = Math.max(3, Math.min(6, Math.round(H / 190)));
+    for (var i = 0; i < k; i++) staves.push((i + 0.5) * H / k);
+    var m = Math.max(5, Math.min(12, Math.round(W / 120)));
+    for (var j = 0; j < m; j++) { var n = spawn({}); n.life = Math.random() * n.max; notes.push(n); }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(233,227,211,0.035)'; ctx.lineWidth = 1;
+    for (var i = 0; i < staves.length; i++) {
+      for (var l = 0; l < 5; l++) {
+        var y = Math.round(staves[i] + l * 9) + 0.5;
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+    }
+    for (var j = 0; j < notes.length; j++) {
+      var n = notes[j];
+      if (!reduce) { n.life++; if (n.life > n.max) spawn(n); }
+      var p = n.life / n.max, a = Math.min(1, p * 5) * Math.min(1, (1 - p) * 5) * 0.22;
+      if (a < 0.01) continue;
+      var g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 16);
+      g.addColorStop(0, 'rgba(241,220,166,' + (a * 0.5) + ')'); g.addColorStop(1, 'rgba(241,220,166,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(n.x, n.y, 16, 0, 6.28); ctx.fill();
+      ctx.fillStyle = 'rgba(214,162,62,' + a + ')';
+      ctx.beginPath(); ctx.moveTo(n.x, n.y - 4.5); ctx.lineTo(n.x + 4, n.y); ctx.lineTo(n.x, n.y + 4.5); ctx.lineTo(n.x - 4, n.y); ctx.closePath(); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

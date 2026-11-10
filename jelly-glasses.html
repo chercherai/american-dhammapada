@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jelly Glasses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the white of scrubbed marble in July, light theme; three rowhouse steps stand at the foot of the page, and thin lines of heat waver up off the street and thin out. */
+  --ground: #f2ede5;
+  --ground-2: #e6dfd3;
+  --paper: #25211e;
+  --paper-dim: #6b635a;
+  --accent: #9a3a22;
+  --glow: #cf7f45;
+  color-scheme: light;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f6f2ea 0%, var(--ground) 60%, #eadfd0 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,224,208,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(209,163,49,.22); }
+.epigraph { border-left: 1px solid rgba(209,163,49,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(32,25,18,.75); border: 1px solid rgba(233,224,208,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,224,208,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(32,25,18,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+.series a { border-bottom-color: rgba(37,33,30,.25); }
+h1 { text-shadow: none; }
+.epigraph { border-left-color: rgba(154,58,34,.5); }
+.verse { background: rgba(230,223,211,.72); border-color: rgba(37,33,30,.14); }
+footer { border-top-color: rgba(37,33,30,.18); }
+details.bg { border-top-color: rgba(37,33,30,.18); border-bottom-color: rgba(37,33,30,.18); }
+.pd { background: rgba(230,223,211,.72); }
+.verse .cite { display: block; margin-top: .6rem; font-style: normal; font-size: .85rem; color: var(--paper-dim); }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 22.9 &middot; Titthiyas&#257;vaka</span></nav>
+<header>
+  <h1>Jelly Glasses</h1>
+  <div class="epigraph">Woe unto them that call evil good, and good evil.<br>&mdash; Isaiah 5:20</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it told,</span> on Lorman Street.</p>
+
+<section>
+  <h2>I. The Bible on the Table</h2>
+  <p class="dateline">Lorman Street, West Baltimore &middot; June 1974</p>
+  <p>Raymond Purnell had been baptized at Mount Hebron Baptist at the age of nine, in the same pool and on the same Sunday as Earl Pettiford, and for that reason the Pettifords took it harder than anybody when he came home from the Army with a new religion. He was thirty now. He drove a city bus on the split shift and lived alone at 1614 in the house his mother had left him. Twice a day, at six in the morning and again when he got in at night, the block could hear him through the front window. He said the same six syllables over and over, fast, in a strong flat voice, and then a long rattle of something that was not English, and every so often he struck a bell.</p>
+  <p>He had got it at Fort Meade in 1968, after Vietnam. His first sergeant's wife was a Japanese lady from Yokohama, and she asked every soldier who came to the house whether he was happy, and waited for a true answer, and then drove him to a meeting. Raymond had gone to be polite. On Tuesday nights now there were fifteen or twenty people in his front room, and they called him the district chief.</p>
+  <p>The Pettifords had no quarrel with his manners. He scrubbed his marble steps on Saturday like everyone else and spoke to every person he passed. But Dorothy Pettiford had seen the young people from that religion downtown on Howard Street, stopping strangers with a smile and steering them by the elbow toward a parked car, and she had heard that the thing they bowed to was a piece of paper in a box. That spring her Tyrone, who was eleven, and her Sheila, who was eight, had been playing every afternoon with Kevin Tubbs, whose mother went to the Tuesday meetings. So had the Boone twins from 1609, and the three Goins children from the corner.</p>
+  <p>The week school let out, Earl Pettiford set the family Bible on the kitchen table and had Tyrone and Sheila put their hands on it. They could say good afternoon to Mr. Purnell, because they had been raised right. They were not to say anything more to him than that. They were not to set one foot inside 1614, not the vestibule, not for any reason. <em>Say it,</em> he told them, and they said it. Mrs. Boone heard what the Pettifords had done and did the same with the twins that night, and the Goins children were sworn by their grandmother on Sunday, in their church clothes.</p>
+</section>
+
+<section>
+  <h2>II. Water</h2>
+  <p class="dateline">July 1974</p>
+  <p>The first of July the men who picked up the city's trash went out on strike, and inside of a week the alleys of West Baltimore were head high in it. People set the piles on fire at night. Children who had always played out back were told to stay on the front street, where there was no shade.</p>
+  <p>The second Tuesday of the strike it was past ninety by noon. Eight children were playing stepball against the Boones' front steps, and by two o'clock nobody was running for the ball. The corner store was shut. The city had capped the hydrant. The Pettifords and the Boones were at work and their doors were locked until five, and the Goins children's grandmother was asleep in front of her fan and had told them what would happen to the one who woke her.</p>
+  <p>Mr. Purnell's front door stood open behind its screen. He was home between shifts.</p>
+  <p><em>Kevin,</em> Tyrone said. <em>You can go in there. Go ask him for some water and bring it out to us.</em></p>
+  <p>Kevin went up the steps and in. He was gone a few minutes. He came back out with his chin wet and nothing in his hands.</p>
+  <p><em>He said drink mine first, and I did. He said tell the rest of you come get your own. He said he's not sending his good glasses down those marble steps with a nine-year-old.</em></p>
+  <p>Nobody moved. Tyrone looked at his own front door across the street. Then Sheila got up off the curb and climbed the steps of 1614, and Tyrone went after her, as he would tell his father, to bring her back. The twins went after Tyrone, and the Goins children came last.</p>
+  <p>The front room was dim and cooler than the street. A fan turned in the corner. Mr. Purnell had seven jelly glasses lined up on the mantel shelf, the kind with the Flintstones on them, worn half away, and a pitcher that had been in the icebox. He filled each glass and handed it to a child by name. He knew all their names. He filled them a second time without being asked.</p>
+  <p>Against the far wall stood a black cabinet with its doors open. Inside it hung a scroll of white paper covered with dark writing, large in the middle and small at the edges. There were two candles and some green leaves in a vase. A brass bowl the size of a mixing bowl sat on a cushion, and a small cup of water stood in front of everything.</p>
+  <p><em>You give it water too?</em> Sheila asked.</p>
+  <p><em>Every morning. First glass of the day goes there.</em></p>
+  <p><em>What's it say?</em> said Tyrone. He had not meant to speak.</p>
+  <p>Mr. Purnell sat down on the floor so that he was no taller than they were.</p>
+  <p><em>It says you,</em> he said. <em>Top to bottom. Everything a person has got in him is written on there. The part that fights is on it, and the part that's scared, and the part that would give away his last dollar. Right down the middle, in the biggest letters, is the best you could be. It's a mirror for what the bathroom mirror can't get. I sit in front of it and say what's written down the middle until I can see it.</em></p>
+  <p>He told them there were three rules in that room, and they were for him as much as for company. Nobody gets hurt in here. Nobody takes what isn't his. Nobody says what isn't so. He asked whether they could keep those for as long as it took to drink a glass of water, and they said they could.</p>
+  <p>Then, because Sheila asked, he let each of them strike the bowl once with the padded stick. The sound stood in the room a long time after each one. He said the six syllables slowly, three times, with his hands together, and seven of the eight children said them with him. Tyrone said them the third time.</p>
+  <p>Whatever went into those children with the water did not come out again. A good many people tried to get it out.</p>
+</section>
+
+<section>
+  <h2>III. Church Clothes</h2>
+  <p class="dateline">July 1974</p>
+  <p>Sheila told it at supper. She told all of it, the glasses and the cup of water for the scroll and the bell and the three rules, and then she put her hands together over her plate and said the six syllables to show how it went.</p>
+  <p>Dorothy Pettiford set down the serving spoon and wept. She wept as she had not done since her own mother's funeral. Earl went out and stood on his front steps with his arms folded and looked at 1614 until it was dark. Down the block Mrs. Boone could be heard through two walls. <em>My babies. In front of an idol. With their hands on the Book not three weeks ago.</em></p>
+  <p>Mother Lucille Hazzard came across the street at eight o'clock with Mr. Deems the barber behind her. She was eighty-one, a deaconess of Mount Hebron, and she had taught the nine-year-olds' Sunday school class for forty years, Earl and Dorothy and Raymond Purnell among them. She took the kitchen chair that was offered and waited for Dorothy to finish.</p>
+  <p><em>I went in that house in 1970 to pray the devil out of it,</em> she said. <em>I stayed for coffee. I have been watching that boy four years since, looking for the wrong in it, and I am a patient woman. Who drove Mr. Tubbs to the kidney machine three days a week till he died? Whose Buick has been hauling this block's garbage to the dump since the first of the month, with the windows down? He doesn't drink. He doesn't run women through his mother's house. He told your children not to hit, not to steal and not to lie, Dorothy, and gave them ice water. You cry over that if you want to. I am too old.</em></p>
+  <p>Mr. Deems said that Raymond had sat in his chair every other Friday for six years and had never once tried to sell him anything. He said he had been waiting for it.</p>
+  <p>They talked until past eleven. At the end of it Earl Pettiford said that if his children were going to be in that house, they were not going to sneak. He would put them there himself, in the daylight, and see what it was.</p>
+  <p>So on Sunday afternoon, after church and still in their church clothes, the Pettifords crossed Lorman Street with Tyrone and Sheila between them. The Boones came with the twins and Mrs. Boone's sister from Edmondson Avenue. The Goins children's grandmother came in her hat, and two uncles, and Mother Hazzard on Mr. Deems's arm. There were nineteen of them in Raymond Purnell's front room, and not enough chairs. He brought the ones from the kitchen. He did not look surprised.</p>
+  <p><em>Mother Hazzard gave me a verse in the basement of Mount Hebron when I was nine,</em> he said, <em>and I never gave it back.</em></p>
+  <div class="verse">
+    <p>Woe unto them that call evil good, and good evil; that put darkness for light, and light for darkness; that put bitter for sweet, and sweet for bitter!</p>
+    <span class="cite">&mdash; Isaiah 5:20</span>
+  </div>
+  <p><em>I have been on both ends of that. I called a bad thing good for thirteen months in a place I won't describe in front of children, and when I got home I called every good thing on this street by a bad name. That is where a person ends up who names a thing before he looks at it. I don't ask you to call this good. I ask you to look first. She gave me another one the year after.</em></p>
+  <div class="verse">
+    <p>But strong meat belongeth to them that are of full age, even those who by reason of use have their senses exercised to discern both good and evil.</p>
+    <span class="cite">&mdash; Hebrews 5:14</span>
+  </div>
+  <p><em>By reason of use. That's all I do in here. Twice a day I use it, so I can tell the one from the other when I go out that door. It's near time for the evening one. You are welcome to sit and watch me, and then call it what it is.</em></p>
+  <p>He turned around and knelt and struck the bell, and nineteen people in church clothes watched him do it for twenty-five minutes.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The Pettifords kept their pew at Mount Hebron for the rest of their lives. They also let it be known that their children could go up the steps of 1614 whenever the screen door was open, and stay to listen on Tuesdays if their homework was done. Tyrone and Sheila went every week. Mrs. Boone began sitting in the back of the room in August, to keep an eye on the twins she said, and by Thanksgiving there was a black cabinet in her own front room. The Goins children's grandmother got hers at Easter. Dorothy Pettiford never said the six syllables once, and every Tuesday she sent Sheila across with something under a dish towel.</p>
+  <p>The men went back to the trucks in the middle of July and the alleys were cleared by August. Mr. Purnell never did put the jelly glasses back in the kitchen cabinet. They stood upside down on a folded towel at the end of the mantel shelf, seven and then an eighth he found to match, where a child could reach one without asking.</p>
+</section>
+
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">They who forbid when there is nothing to be forbidden, and forbid not when there is something to be forbidden, such men, embracing false doctrines, enter the evil path.<cite>Dhammapada 318, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">They who know what is forbidden as forbidden, and what is not forbidden as not forbidden, such men, embracing the true doctrine, enter the good path.<cite>Dhammapada 319, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, parents who follow other teachers see their children playing with the children of the Buddha&rsquo;s lay followers. They forbid them to greet the monks or enter the monastery and make them swear to it. One hot day the children are playing outside the monastery gate and grow thirsty, and they send in the one boy who is allowed to go, to bring water out. The Buddha has him drink and then call the others in for theirs, and when they have all drunk he teaches them something suited to their age. The children tell their parents everything, and the parents weep that their sons have gone over to a false faith. Sensible neighbors talk them round, and the parents bring the children to the monastery themselves, with all their relations. The Buddha speaks the two verses about seeing fault where there is none. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-09.htm">the full commentary story</a>.</p>
+    <h3>West Baltimore, 1974</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Soka_Gakkai">Soka Gakkai</a>, a Japanese lay movement in the tradition of the thirteenth-century priest <a href="https://en.wikipedia.org/wiki/Nichiren">Nichiren</a>, reached the United States largely through Japanese women who had married American servicemen. Under the name Nichiren Shoshu of America it grew quickly in the 1960s and 1970s, and a large share of its American members were Black or Latino. Its practice is the chanting of <a href="https://en.wikipedia.org/wiki/Namu_My%C5%8Dh%C5%8D_Renge_Ky%C5%8D">Nam-myoho-renge-kyo</a>, the title of the Lotus Sutra, morning and evening before a scroll called the <a href="https://en.wikipedia.org/wiki/Gohonzon">Gohonzon</a>, together with neighborhood meetings in members&rsquo; homes. In those years it also recruited hard, on street corners and among strangers, which is the thing Dorothy Pettiford saw on Howard Street. Raymond Purnell, Mount Hebron Baptist and the families of the block are invented.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/1974_Baltimore_municipal_strike">Baltimore municipal strike of 1974</a> began with the city&rsquo;s trash collectors at the start of July and lasted two weeks. Garbage piled up in the alleys in the July heat, piles were set alight at night, and for several days much of the police force walked out as well. The white marble steps of the city&rsquo;s rowhouses, scrubbed by hand every week, were a point of pride in <a href="https://en.wikipedia.org/wiki/Sandtown-Winchester,_Baltimore">Sandtown</a> as everywhere else in Baltimore.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the sectarian disciples from the Dhammapada commentary (verses 318&ndash;319). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/22-09.htm">The original</a>. Scripture from the King James Version. Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-ear-mark.html">&larr; The Ear-Mark</a><a href="index.html">All stories</a><a href="green-broke.html">Green Broke &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw(ts) {
+    var t = reduce ? 0 : (ts || 0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    // three white marble steps at the foot of the page, lower right
+    var sw = Math.max(150, Math.min(260, W * 0.24)), sh = 20;
+    var x0 = W - sw - 18, y0 = H - 3 * sh - 4;
+    for (var i = 0; i < 3; i++) {
+      var x = x0 - i * 16, y = y0 + i * sh, w = sw + i * 16 + 18;
+      ctx.fillStyle = 'rgba(255,255,255,0.75)'; ctx.fillRect(x, y, w, sh);
+      ctx.fillStyle = 'rgba(120,108,96,0.16)'; ctx.fillRect(x, y + sh - 3, w, 3);
+      ctx.strokeStyle = 'rgba(120,108,96,0.22)'; ctx.lineWidth = 1; ctx.strokeRect(x + .5, y + .5, w, sh);
+    }
+    // heat coming up off the street: thin wavering lines that rise and thin out
+    ctx.lineWidth = 1;
+    for (var k = 0; k < 9; k++) {
+      var rise = reduce ? k / 9 : ((t * 0.035 + k / 9) % 1);
+      var y = H - 8 - rise * H * 0.34;
+      var a = 0.2 * (1 - rise) * Math.min(1, rise * 6);
+      ctx.strokeStyle = 'rgba(190,110,60,' + a + ')';
+      ctx.beginPath();
+      for (var xx = 0; xx <= W; xx += 14) {
+        var yy = y + Math.sin(xx * 0.018 + t * 0.9 + k * 1.7) * (2.5 + rise * 5) + Math.sin(xx * 0.05 - t * 0.6 + k) * 1.5;
+        if (xx === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+      }
+      ctx.stroke();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); if (reduce) draw(0); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

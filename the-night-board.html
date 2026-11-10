@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Night Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a telephone exchange over a drugstore on a November night, dark theme; low in the side margins small switchboard lamps light one at a time, hold, and go out when answered; datelined sections. */
+  --ground: #12141a;
+  --ground-2: #1c1f27;
+  --paper: #e6e1d6;
+  --paper-dim: #9c978b;
+  --accent: #d9a35a;
+  --glow: #ffd696;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #2a2419 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,225,214,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(217,163,90,.22); }
+.epigraph { border-left: 1px solid rgba(217,163,90,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(28,31,39,.75); border: 1px solid rgba(230,225,214,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,225,214,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(28,31,39,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 11.4 &middot; Sambahula-Adhimānikabhikkhū</span></nav>
+<header>
+  <h1>The Night Board</h1>
+  <div class="epigraph">So Jonah was exceeding glad of the gourd.<br>&mdash; Jonah 4:6</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Slik har jeg hørt det,</span> above Hegge’s Drug in Sundal.</p>
+
+<section>
+  <h2>I. The Board</h2>
+  <p class="dateline">Sundal, Sheridan County, Montana &middot; 1950</p>
+  <p>The telephone exchange was two rooms over Hegge's Drug, up a stair so steep the lineman said it was built for goats. The front room held the board. It was oak, older than most of the town, with a hundred and twenty jacks in brass rows and a little lamp over each one, and the cords came up out of the shelf on lead weights and went back down when you let them go. The back room held a cot, a hot plate, a coffee pot and a window that looked north across the flats toward Canada, nineteen miles off, where there was nothing to see but more of the same.</p>
+  <p>Thea Solum worked the board from seven at night until seven in the morning, six nights a week, and had since the fall of 1929. Her husband had gone through the ice on Medicine Lake the winter before, after a coyote, and the company needed a night girl, and she was forty-three. She was sixty-four now. The town still called her the night girl.</p>
+  <p>She knew who was sick before the doctor did. When the lamp came up for the Fjeld place at two in the morning, she knew it was the baby with the croup again, and had the doctor's line ringing before Mrs. Fjeld finished saying his name. She knew when the cows were calving and when a man had come home drunk and when a woman was calling her sister in Williston because she could not stand it one more night. She knew all of it and never repeated a word. People said that if you told her your sins she would only say, <em>Number, please.</em></p>
+  <p>Sundays she taught the young people's class at the Full Gospel Tabernacle, which met in the old Danish hall on the Antelope road. She had taught most of the young men in the county to sit still for an hour, which was more than their fathers had managed. Five of them had stayed in her class past high school and past the war: Orrin Bakke, Leland Fjeld, Duane Sorby and the two Moen brothers, Gilbert and Vern. They farmed with their fathers, wheat and flax, and they were all between twenty and twenty-five, and none of them was married.</p>
+  <p>In the summer of 1949 word came down from Saskatchewan about the revival at North Battleford: that the rain had fallen at the Sharon school, that young people there had fasted forty days, that the gifts were being given now by the laying on of hands. Men drove up from all over the plains to see it. The Assemblies of God put out a resolution against it that fall, and the Tabernacle in Sundal split over the resolution the way churches split, at a potluck, over the coffee.</p>
+  <p>The five went north in the summer of 1950. They came back in August with their faces scrubbed and light, and said that hands had been laid on them, and that a prophet had told each of them in turn that he was called to be one of the overcomers. The sons of God were going to be made manifest before the end. Some of the men up north were teaching that the overcomers would not see death.</p>
+  <p>Before they went, Thea had given each of them the same verse on a three-by-five card in her square hand. She told them to pray it every day and not to skip it because they liked another one better.</p>
+  <div class="verse">
+    <p>Search me, O God, and know my heart: try me, and know my thoughts: And see if there be any wicked way in me, and lead me in the way everlasting.</p>
+    <p>&mdash; Psalm 139:23&ndash;24</p>
+  </div>
+  <p>They carried the cards to Saskatchewan and back.</p>
+</section>
+
+<section>
+  <h2>II. The Wagon</h2>
+  <p class="dateline">The Big Muddy breaks &middot; September and October 1950</p>
+  <p>After harvest they went into the breaks south of the Big Muddy, where Gilbert's uncle kept a sheep wagon on a bench above the creek, and they fasted there twenty-one days. They took water and nothing else. They read aloud by a coal-oil lantern, Romans eight mostly, over and over. <em>For the earnest expectation of the creature waiteth for the manifestation of the sons of God.</em></p>
+  <p>The first week was hunger and quarreling, and Duane walked out twice and came back. The second week was cold, with frost on the wagon sheet in the morning and the sheep dog sleeping across the door to keep them in. In the third week something gave way.</p>
+  <p>It came to each of them a little differently and they told it to each other in the dark. Leland said it was like the wagon had been lifted off the ground and set down somewhere quieter. Vern said his body had gone, he could not feel the bunk under him, only a light that came up from inside and stayed. Orrin wept for two days without being sad. They stopped being hungry. They stopped being cold. They stopped, they all agreed, wanting anything at all. Not food, not land, not girls, not the new Ford tractor in the window at Plentywood. The flesh had died in them, they said. They had come through.</p>
+  <p>On the twenty-second day they walked out of the breaks to the road and Gilbert's father picked them up in the grain truck and did not say a word the whole way, because he had never seen faces like that on anybody and did not like it.</p>
+  <p>They decided to tell Thea first. It was right to. She had given them the cards.</p>
+</section>
+
+<section>
+  <h2>III. The Stair</h2>
+  <p class="dateline">Sundal &middot; the first week of November 1950</p>
+  <p>They went up Main Street a little after nine, in a dry snow that blew across the street without settling, and stood at the foot of the exchange stair. Old Elmer Haaland was sitting at the bottom of it in his sheepskin, where he sat most nights with a thermos, because he was the town's night marshal and there was nothing in Sundal to marshal. He ran messages up the stair for her when the board was too busy for her to leave it, which it never was.</p>
+  <p>Elmer went up. They could hear the cords drop on their weights and the little ring of the night bell, and her voice saying, <em>Number, please,</em> and then a long time nothing.</p>
+  <p>He came back down.</p>
+  <p><em>She says not to come up yet,</em> he said. <em>She says first go sit with old Torger Lund. They've got him laid out in the front room at the farm and the boy's not in from Seattle till Thursday. She says go sit up with him and come back after.</em></p>
+  <p>None of them asked why. Orrin said to the others in the truck, <em>She's got a reason.</em> She always had a reason. And they drove out to the Lund place, eleven miles west on the section line, in the snow.</p>
+</section>
+
+<section>
+  <h2>IV. Two Houses</h2>
+  <p class="dateline">The Lund farm and the Haugen farm &middot; November</p>
+  <p>Torger Lund had died on Saturday at eighty-one, in his chair, and the undertaker from Plentywood had come out and done what he did, and then they had laid him on a board across two sawhorses in the cold front room, with the stove door shut and the storm windows on, to keep until his son came. It was Monday. The neighbors were taking the nights.</p>
+  <p>The five sat up with him on kitchen chairs. They sang a little, low, so as not to bother Mrs. Lund upstairs. The lamp was turned down. Torger's face had gone the color of a candle and fallen in around the teeth, and his hands on his chest were yellow at the nails. The room smelled of cold and of the undertaker's fluid, and under that of something else, faint and sweet, that the cold could not quite keep down. By the second hour Duane had gone out on the step twice for air.</p>
+  <p>But they were steady. They looked at the old man and felt nothing but a mild distaste, the way you feel about a dead calf in a slough, and they were glad of the nothing. In the truck at dawn Leland said it for all of them. <em>You see? Not one thing in us that wants what that is. It's dead.</em> And they drove back to town light as boys, to tell her.</p>
+  <p>Elmer was at the foot of the stair again. He did not go up this time. He already had the message.</p>
+  <p><em>She says the Haugen girl. She says go on out there and sit up tonight.</em></p>
+  <p>They had not heard. Marit Haugen was nineteen. She had gone off the grade east of Antelope that afternoon in her father's Hudson, in the first real snow, on her way home from her job at the creamery, and the car had turned over once in the ditch and set itself back on its wheels, and she was dead when Elmer got there. Thea had put the call through to him herself, at a quarter past four.</p>
+  <p>They had known Marit all their lives. She had been in the young people's class at the Tabernacle until her people went back to the Lutherans, and every one of them had looked at her across the hall at one potluck or another. She had raised gourds for 4-H, the little striped ones and the white ones shaped like pears, and won with them at the fair in Plentywood, and every fall she set the white ones on the sills of the front room to dry.</p>
+  <p>They were on the sills that night. The undertaker had come and gone. Marit lay in the front room on the board her father had made from a door, under a quilt to her shoulders, in the blue dress she had worn to the fair. Her mother had washed her hair and combed it out across the pillow. There was no mark on her face. The cold of the room had not yet done anything to her. She looked as if she had come in from the snow and lain down.</p>
+  <p>They sat on the kitchen chairs and began to sing, low, and one by one they stopped singing.</p>
+  <p>Vern was the first to know. He was looking at her mouth. He had sat behind her in a Ford coupe once on the way to a box social, the summer he was sixteen, and had thought about her hair for a year. He thought about it now, with her mother in the kitchen and her father in the barn because he could not stand the house, and the thought did not stop where he told it to. It went on into the rest of her, under the quilt, as easily as it had ever gone anywhere. He sat with his hands on his knees in the presence of the dead and wanted her.</p>
+  <p>He did not look at the others, and they did not look at him. Every one of them, they admitted long afterward, believed he was the only one. Leland put his face in his hands. Gilbert went out on the step and stood in the snow without his coat until his brother came out and stood with him, and neither one said why.</p>
+  <p>At the Lund place it had been a dead old man and they had felt nothing, and they had called the nothing victory. It had only been distaste. Here was a dead girl as fresh as bread, and everything they had sworn was dead in them was sitting up on a kitchen chair in a farmhouse east of Antelope with its eyes open. It had never died. It had been asleep in the breaks, in the cold, with nothing to eat.</p>
+</section>
+
+<section>
+  <h2>V. Three O'Clock</h2>
+  <p class="dateline">The Haugen farm &middot; that night</p>
+  <p>The clock on the shelf said three. Marit's mother had gone up. The lamp was low and the stove had burned down and the five of them sat in a row along the wall where they could not see one another's faces.</p>
+  <p>Then they could see them. There was light in the room, not much, as much as comes off snow under a moon, though there was no moon that night. It came from the kitchen doorway. Thea Solum was standing there in her brown cardigan, with her reading glasses on the cord around her neck and her headset pushed down around her collar the way she wore it when she went for coffee, and the light was coming off her.</p>
+  <p>She did not come into the room. She looked at the girl on the door, and the white gourds on the sills, and the five of them along the wall.</p>
+  <p><em>Is this what you were coming up my stairs to tell me?</em> she said. <em>You sit here with a board of bones like this, and you're glad?</em></p>
+  <p>Nobody answered her. Then she said two verses, the way she had said them in class for fifteen years, plain, as if she were giving a number.</p>
+  <div class="verse">
+    <p>Son of man, can these bones live? And I answered, O Lord GOD, thou knowest.</p>
+    <p>&mdash; Ezekiel 37:3</p>
+    <p>Thou hast had pity on the gourd, for the which thou hast not laboured, neither madest it grow; which came up in a night, and perished in a night.</p>
+    <p>&mdash; Jonah 4:10</p>
+  </div>
+  <p>Then the doorway was dark, and the room was dark, and the stove ticked.</p>
+  <p>What happened to them in the next hour none of the five ever told well, though they were asked a good deal. Orrin said once that it was like the time the wagon was lifted, except that this time it was set down exactly where it had been, in the Haugens' front room, in the cold, with a dead girl on a door, and he was in it, and there was nothing wrong with any of it. They sat until the window went grey. Leland got up first and put coal in the stove, quietly, so as not to wake her mother. When Mrs. Haugen came down at six the five of them were sitting where she had left them, and she said afterward that she had never seen boys sit so still or look so ordinary.</p>
+</section>
+
+<section>
+  <h2>VI. The Ticket</h2>
+  <p class="dateline">Sundal &middot; the next morning</p>
+  <p>Elmer Haaland told it the rest of his life, in the drugstore and at the elevator, to anyone who would stand for it. He had sat at the foot of that stair from nine at night until seven in the morning, he said, with his thermos, the way he always did, and no one had come down it but him, and no one had gone up but him, and she had not left the board. He had heard her the whole night through the door. <em>Number, please.</em> And at five past three, he said, which was the exact time, she had put through the vet for the Sorby heifer that was calving backward, and at half past, a long-distance call to the hospital in Williston. It was on her tickets. Anybody could see the tickets. The company kept them in a drawer.</p>
+  <p>The five came up Main Street at a quarter to seven, as she was going off. Elmer stood aside. They went up the goat stair one at a time, which nobody but the lineman and the night girl ever did, and into the front room, and they knelt down on the oiled floor beside the board, all five, and put their foreheads on their hands, and stayed there.</p>
+  <p>The day girl came up behind them with her lunch pail and stopped in the door.</p>
+  <p><em>Get up,</em> Thea said. <em>You'll scare Doris.</em></p>
+  <p>She took off her headset and hung it on its hook and plugged the day girl in, and put on her coat. On the shelf over the board, where she kept her coffee cup, there was a white gourd shaped like a pear, which Mrs. Haugen had brought in to her that morning on the milk truck because Marit had always meant her to have one, and it was not yet dry. When you shook it you could not hear the seeds. By spring you could, and she kept it there for years, until it went grey as a stone, and the night girls after her kept it, and nobody threw it out.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Those white bones, like gourds thrown away in the autumn, what pleasure is there in looking at them?<cite>Dhammapada 149, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>Five hundred monks take a meditation subject from the Buddha into the forest, work hard, and reach deep absorption. Sure they are finished, they come back to report it. At the gate the Buddha sends word through <a href="https://en.wikipedia.org/wiki/Ananda">Ānanda</a> that they should first go to the charnel ground, and they go without asking why. Bodies a day or two dead disgust them, but the freshly dead stir their lust, and they see that their defilements are still in them. The Buddha, without leaving his chamber, sends a radiant image of himself to speak to them face to face: is it fitting, seeing such a heap of bones, to take delight? They reach awakening where they stand, and go to pay him homage. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/11-04.htm">the full commentary story</a>.</p>
+    <h3>Sheridan County, Montana, 1950</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Latter_Rain_(post%E2%80%93World_War_II_movement)">Latter Rain revival</a> began in February 1948 among students who had been fasting and praying at the Sharon Orphanage and Schools in <a href="https://en.wikipedia.org/wiki/North_Battleford">North Battleford, Saskatchewan</a>. Its first camp meeting that July drew thousands, and the movement spread fast through Pentecostal churches in Canada and the United States. Its leaders laid hands on believers with personal prophecy and taught that spiritual gifts could be passed on that way. Some taught that before the end a company of overcomers, the &ldquo;manifest sons of God,&rdquo; would come into the full stature of Christ, and the boldest said they would step into immortality. The Assemblies of God&rsquo;s General Council condemned the &ldquo;New Order of the Latter Rain&rdquo; in 1949, and a good many congregations split over it.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Sheridan_County,_Montana">Sheridan County</a> lies in the far northeast corner of Montana against the Saskatchewan line, dry-land wheat country with Plentywood as its county seat and 6,674 people in 1950. Most of its farm families were Norwegian, Danish and German, and in the 1920s and 1930s it had been a center of radical farm organizing. Small towns on the plains still put calls through on manual <a href="https://en.wikipedia.org/wiki/Telephone_switchboard">switchboards</a>, often in the operator&rsquo;s own rooms so someone could answer day and night, and customers knew their operator by name. The town of Sundal and everyone in the story are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the many vain bhikkhus from the Dhammapada commentary (verse 149). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/11-04.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-hem.html">&larr; The Hem</a><a href="index.html">All stories</a><a href="outward-adorning.html">Outward Adorning &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A night switchboard: rows of small lamps low in the side margins; now and then one lights, holds, and goes out when answered.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, lamps = [], t0 = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    lamps = [];
+    var gap = 26, cols = Math.max(2, Math.min(5, Math.floor((W - 620) / 2 / gap)));
+    if (W < 700) cols = 2;
+    var rows = 6, top = H * 0.58;
+    for (var side = 0; side < 2; side++) {
+      for (var r = 0; r < rows; r++) {
+        for (var k = 0; k < cols; k++) {
+          var x = side === 0 ? 18 + k * gap : W - 18 - k * gap;
+          lamps.push({ x: x, y: top + r * gap * 1.35, on: 0, life: 0, max: 0 });
+        }
+      }
+    }
+    if (reduce) { for (var i = 0; i < 3; i++) lamps[(i * 17 + 5) % lamps.length].on = 1; }
+  }
+  function light() {
+    var l = lamps[Math.floor(Math.random() * lamps.length)];
+    if (l.max) return;
+    l.life = 0; l.max = 260 + Math.random() * 420;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce && Math.random() < 0.012) light();
+    for (var i = 0; i < lamps.length; i++) {
+      var l = lamps[i], a = 0;
+      if (reduce) a = l.on;
+      else if (l.max) {
+        l.life++;
+        var p = l.life / l.max;
+        a = Math.min(1, p * 12) * (p > 0.92 ? Math.max(0, (1 - p) / 0.08) : 1);
+        if (l.life >= l.max) { l.max = 0; a = 0; }
+      }
+      ctx.fillStyle = 'rgba(120,96,64,0.16)';
+      ctx.beginPath(); ctx.arc(l.x, l.y, 3.2, 0, Math.PI * 2); ctx.fill();
+      if (a > 0.01) {
+        var g = ctx.createRadialGradient(l.x, l.y, 0, l.x, l.y, 16);
+        g.addColorStop(0, 'rgba(255,214,150,' + (0.55 * a) + ')');
+        g.addColorStop(0.25, 'rgba(232,168,82,' + (0.25 * a) + ')');
+        g.addColorStop(1, 'rgba(232,168,82,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(l.x, l.y, 16, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

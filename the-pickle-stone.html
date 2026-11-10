@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Pickle Stone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on rice-bran paper, light theme; low in the right margin a wooden hand scale hangs from its loop, and its beam swings a little, slows, and settles level. */
+  --ground: #efe6d2;
+  --ground-2: #e4d9c0;
+  --paper: #2b2620;
+  --paper-dim: #6c6250;
+  --accent: #8f6400;
+  --glow: #c9a227;
+  color-scheme: light;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f3ebd9 0%, var(--ground) 55%, #e6dbc2 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,224,208,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(209,163,49,.22); }
+.epigraph { border-left: 1px solid rgba(209,163,49,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(32,25,18,.75); border: 1px solid rgba(233,224,208,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,224,208,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(32,25,18,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+.series a { border-bottom-color: rgba(43,38,32,.25); }
+h1 { text-shadow: none; }
+.epigraph { border-left-color: rgba(143,100,0,.5); }
+.verse { background: rgba(228,217,192,.7); border-color: rgba(43,38,32,.14); }
+footer { border-top-color: rgba(43,38,32,.18); }
+details.bg { border-top-color: rgba(43,38,32,.18); border-bottom-color: rgba(43,38,32,.18); }
+.pd { background: rgba(228,217,192,.7); }
+.verse .cite { display: block; margin-top: .6rem; font-style: normal; font-size: .85rem; color: var(--paper-dim); }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 19.8 &middot; Titthiy&#257;</span></nav>
+<header>
+  <h1>The Pickle Stone</h1>
+  <div class="epigraph">The wise err neither in regard to their man nor to their words.<br>&mdash; Confucian Analects 15:7</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Nyoze gamon,</span> on Pine Street.</p>
+
+<section>
+  <h2>I. The Saturday People</h2>
+  <p class="dateline">Pine Street, San Francisco &middot; spring 1961</p>
+  <p>The temple on Pine Street was two flats of a wooden house with the wall between the front rooms taken out. Reverend Kuwahara had died in the fall of 1957, and headquarters in Japan had been promising a new priest ever since. Until one came, his widow unlocked the door. Kuwahara Tome was seventy-one. Everyone called her Okusan, the lady of the house. She had come from Fukui in 1914 to marry a man she knew from a photograph, and she had kept his temple through one earthquake scare, one Depression, and three years in the Utah desert, and she saw no reason to stop for a funeral.</p>
+  <p>Fumi Hamada kept the temple's books and did Okusan's English for her. Fumi was forty-three, born on Buchanan Street, a bookkeeper at a dry-goods store on Post. She was in the basement kitchen most Saturdays and every Sunday with Mrs. Oka and Mrs. Tani and the two Nakagawa sisters, and so she saw both kinds of Americans that came in those years.</p>
+  <p>The first kind came on Saturday night. Mr. Lyman Dunmore rented the social hall for ten dollars a month to lecture on what he called the Zen way. He was fifty, a big soft man in a Japanese farmer's jacket, and he taught evenings at an academy out in Pacific Heights. Twenty or twenty-five people came to hear him, and afterward the temple women gave them supper, because people were in the building at suppertime.</p>
+  <p>When the plates were empty Mr. Dunmore stood up. He put his palms together. He thanked the ladies in Japanese that Mrs. Tani said sounded like a man reading a seed packet, and then he thanked them in English. <em>May you be well, may you be happy, may your years be long.</em> Then he gave them his advice. They were not to walk home by way of Geary, where the city was tearing out the blocks for the new expressway, because the wreckers left mud and boards with nails in them. They were not to go down Fillmore after dark. Mrs. Oka had lived on Geary Street since 1919, except for the three years, and she had buried a husband from that house. She thanked him for telling her.</p>
+  <p>Still, it was thanks. The women talked about it over the dishes. <em>He says too much,</em> Mrs. Tani said, <em>but he says it.</em></p>
+  <p>The second kind came in the dark. At a quarter to six every morning Okusan climbed the stairs and struck the bell the way she had heard her husband strike it for forty years, and seven or eight young Americans sat down on the floor of the front room and faced the wall. Over on Bush Street the big temple, the one in the old synagogue, had a new priest from Japan and Americans of its own, more of them every month. Pine Street got the ones who wanted a smaller room. There was a postal clerk named Walt Kessler who sorted mail nights at the Rincon Annex. There was a girl called Joan from the Art Institute, and a merchant seaman, and a house painter, and two boys from State College. They had read that Zen was past words. They sat forty minutes without moving, which Fumi could not have done, and they did not say a word in the building, coming or going.</p>
+  <p>On Sundays the women fed them. Rice gruel, pickled plum, tea, and Mrs. Oka's takuan, the yellow radish pickle she had made every November of her life. The sitters ate with their eyes on their bowls. They washed the bowls and stacked them. They bowed at the kitchen door and went up the steps to the street, and that was all.</p>
+  <p><em>Like feeding the gas meter,</em> Mrs. Tani said.</p>
+  <p><em>The Saturday ones say it was good,</em> said Mrs. Oka. <em>These ones, I don't know if they noticed it was food.</em></p>
+  <p>The younger Nakagawa sister said maybe they should save the good takuan for Saturday.</p>
+</section>
+
+<section>
+  <h2>II. Sit Beside</h2>
+  <p class="dateline">May 1961</p>
+  <p>Fumi told Walt Kessler. She had not planned to. He was holding the street door for her one Sunday with his eyes lowered like a man in a hospital corridor, and she heard herself say, <em>You know they think you don't like the food.</em></p>
+  <p>He looked up. He had a long, plain, worried face. <em>We thought we weren't supposed to talk.</em></p>
+  <p><em>Who told you that?</em></p>
+  <p>He thought about it. <em>Nobody,</em> he said.</p>
+  <p>The next morning after the bell, all of them stayed behind in the front room, and Walt asked Okusan, and Fumi put it into Japanese. Okusan listened with her hands folded on her apron. She did not smile, but she rarely did.</p>
+  <p><em>After eating, say gochis&#333;sama,</em> she said. <em>It means, it was a feast. Then don't run away. Sit beside. Mrs. Oka makes the takuan. Ask her how long.</em></p>
+  <p>That was the whole instruction. Fumi wrote the word on the back of an offering envelope so they could practice it.</p>
+  <p>The first Sunday was hard to watch. Eight Americans said <em>gochis&#333;sama</em> in eight different ways and then sat down on the benches next to the women, holding their knees. The seaman asked Mrs. Tani if she had lived in San Francisco long. Mrs. Tani said forty-four years. Walt asked Mrs. Oka how long for the takuan, and Mrs. Oka, who had not been asked a question by an American since a soldier asked her for her family number in 1942, told him.</p>
+  <p>Two weeks to dry the radishes on the rack, until you could bend one end to the other. Then into the barrel with rice bran and salt, the salt weighed and not guessed. Then the lid and the stone on the lid, and you waited for the water to come up. Three months, better four. She showed him with her hands how a radish should bend. Walt bent an imaginary radish back at her. It was the first time Fumi had seen him look like anything but a man waiting for bad news.</p>
+  <p>After that the women could not do enough. The gruel became rice and miso soup and a piece of salted salmon each. Mrs. Tani brought eggs. Joan from the Art Institute was shown how to wash rice until the water ran clear, and was told she had been doing it wrong all her life, and came back the next week for more of that. The seaman was invited to the Nakagawas' on a Wednesday and came away with a jar of pickled scallions and a tin of rice crackers. In June the Redevelopment Agency's letter came for the house on Geary, and it was Walt's Chevrolet panel truck and six sitters that carried Mrs. Oka's forty-two years down three flights and over to her daughter's on Sutter Street. Nobody had asked them to. They had heard about the letter on a kitchen bench.</p>
+  <p>They still sat at a quarter to six, and still did not talk in the front room. Fumi noticed that the sitting had not changed at all.</p>
+</section>
+
+<section>
+  <h2>III. The Stone</h2>
+  <p class="dateline">October 1961</p>
+  <p>It got back to Mr. Dunmore. The Saturday suppers had not got any worse, but there was no salmon in them, and one of his own circle, a tall girl with a braid, had mentioned the Sunday breakfasts in his hearing.</p>
+  <p>He said it at the table, to his own people, loud enough for the kitchen. <em>We follow the wordless teaching. We are the ones who understand silence. Upstairs they have made a coffee hour of it. They sit forty minutes and then gossip with the cooks about radishes.</em> He had a brown library book with him, one of a long set, and he opened it at a slip of paper and read.</p>
+  <div class="verse">
+    <p>He who knows (the T&acirc;o) does not (care to) speak (about it); he who is (ever ready to) speak about it does not know it.</p>
+    <span class="cite">&mdash; T&acirc;o Teh King 56, tr. James Legge</span>
+  </div>
+  <p>Fumi, in the kitchen doorway with a dish towel, put it into Japanese for Okusan as well as she could. She was angry and it came out short.</p>
+  <p>Okusan was at the pickle barrel in the corner, seeing to the last of the year's takuan. She listened to the end. Then she lifted the stone off the lid. It was a flat gray stone the size of a loaf, and it had come back from Topaz in 1945 in the bottom of a suitcase, because everything she had stored in 1942 was gone when she got home, the old stone with it. She carried it in both arms across the social hall and set it down on the table in front of Mr. Dunmore, between the soy sauce and his book.</p>
+  <p><em>This one is quiet too,</em> she said in English. <em>Sixteen years. Never one word. Please, ask it something.</em></p>
+  <p>Nobody at the table moved. The stone left a wet ring on the oilcloth.</p>
+  <p>Then she said something in Japanese that Fumi could not follow, in the stiff old style, a schoolgirl's recitation. She said it twice. <em>Rongo,</em> she told Fumi. <em>The Master's sayings. We had it by heart at the girls' school, every one of us. Your Mr. Lao is in the same library. Let them look.</em></p>
+  <p>It was Walt who looked. He went to the Main Library on his way to work on Monday and found the same translator two shelves down and copied it out on the back of a mail-sack tag. He read it aloud the next Saturday, standing, because Okusan told him to.</p>
+  <div class="verse">
+    <p>The Master said, &lsquo;When a man may be spoken with, not to speak to him is to err in reference to the man. When a man may not be spoken with, to speak to him is to err in reference to our words. The wise err neither in regard to their man nor to their words.&rsquo;</p>
+    <span class="cite">&mdash; Confucian Analects 15:7, tr. James Legge</span>
+  </div>
+  <p>Mr. Dunmore said that Confucius was hardly Zen.</p>
+  <p>Okusan had brought something else out of the kitchen that night. It was her steelyard, the hand scale she weighed the salt on, a wooden beam with brass marks, a pan on one end, and a weight on a string. She held it up by its loop and let the beam swing and settle.</p>
+  <p><em>Quiet is easy,</em> she said, and Fumi gave it in English a sentence at a time. <em>A stone can do it. A man who doesn't know anything can do it. A man who is afraid can do it, and a stingy man who knows something and won't tell. You have to weigh. This is good, I take it. This is bad, I leave it. Every time, both sides. A person who does that, when he talks it is all right, and when he is quiet it is all right.</em></p>
+  <p>She hooked the scale back on its nail. She did not say which side she had weighed Mr. Dunmore on, and she gave him the same supper as everyone else.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Mr. Dunmore went on lecturing in the social hall until the new priest came, and paid his ten dollars on the first of the month, and thanked the ladies after every supper. But the tall girl with the braid came up the stairs at a quarter to six the next Sunday, and a man who drove a laundry truck came with her. They sat forty minutes facing the wall. They said <em>gochis&#333;sama</em> afterward and sat down on the bench beside Mrs. Oka, and by Christmas there were nine more from Saturday.</p>
+  <p>In November the women put up the new takuan, and the sitters helped. The radishes had hung two weeks on a rack in the Tanis' back yard and bent end to end. Joan weighed the salt on the steelyard with Mrs. Oka watching the beam. Walt packed the barrel, a layer of radish and a layer of bran, and the house painter and the seaman argued about the Giants the whole time, and nobody told them to hush. When the lid was on, Okusan had Walt bring the stone and set it down in the middle.</p>
+  <p>By morning the water had come up over the lid.</p>
+</section>
+
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">A man is not a Muni because he observes silence (mona, i.e. mauna), if he is foolish and ignorant; but the wise who, taking the balance, chooses the good and avoids evil, he is a Muni, and is a Muni thereby; he who in this world weighs both sides is called a Muni.<cite>Dhammapada 268, 269, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, wanderers of other sects thank their hosts after every meal with blessings and with warnings about mud and thorns on the roads, while the Buddha's monks get up from the table and leave without a word. The householders take offense. The Buddha tells the monks to give thanks and to sit beside their hosts and talk pleasantly with them, and the householders respond by giving more than before. The other sects then complain that the monks talk too much and that they themselves are the true sages, the silent ones. The Buddha answers that people keep quiet out of ignorance, out of timidity, or out of a stinginess that will not share what it knows, and that a sage (<em>muni</em>) is one who weighs and puts aside what is harmful. The P&#257;li plays on <em>mona</em>, silence, and <em>muni</em>, sage. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-08.htm">the full commentary story</a>.</p>
+    <h3>San Francisco&rsquo;s Japantown, 1961</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Japantown,_San_Francisco">Japantown</a> of the Western Addition held more than five thousand people before the war. In 1942 its families were removed, most of them by way of the Tanforan racetrack to the <a href="https://en.wikipedia.org/wiki/Topaz_War_Relocation_Center">Topaz camp</a> in the Utah desert, and many who came back in 1945 found their stored belongings gone. In the late 1950s the city&rsquo;s Redevelopment Agency began clearing the forty-four blocks of its <a href="https://en.wikipedia.org/wiki/Western_Addition,_San_Francisco">Western Addition</a> project A-1, widening Geary into an expressway and displacing about four thousand people, Japanese American and Black, by the middle of the 1960s. The Pine Street temple, its people and Mr. Dunmore are invented.</p>
+    <p>These were also the years when Americans raised on paperbacks about Zen started looking for somewhere to sit. Alan Watts&rsquo;s essay &ldquo;Beat Zen, Square Zen, and Zen&rdquo; appeared in 1958. In May 1959 the S&#333;t&#333; priest <a href="https://en.wikipedia.org/wiki/Shunry%C5%AB_Suzuki">Shunry&#363; Suzuki</a> arrived to serve the Japanese American congregation of Sokoji, then housed in a former synagogue on Bush Street, and the early-morning sitting he opened to anyone became the <a href="https://en.wikipedia.org/wiki/San_Francisco_Zen_Center">San Francisco Zen Center</a>. The two groups in such temples, the families who had built them and the newcomers who came to meditate, did not always know what to make of each other. <a href="https://en.wikipedia.org/wiki/Takuan">Takuan</a> is made much as Mrs. Oka describes it. The quotations are from James Legge&rsquo;s nineteenth-century translations of the <em>Tao Te Ching</em> and the <em>Analects</em>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the sectarians from the Dhammapada commentary (verses 268&ndash;269). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-08.htm">The original</a>. Scripture from the <em>Confucian Analects</em> and the <em>T&acirc;o Teh King</em>, tr. James Legge. Written by Claude Fable 5.2.
+  <div class="pager"><a href="seven-oclock.html">&larr; Seven O&#x27;Clock</a><a href="index.html">All stories</a><a href="the-stringer.html">The Stringer &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = null, ang = 0.16, vel = 0, nextKick = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw(ts) {
+    if (t0 === null) t0 = ts || 0;
+    var t = ((ts || 0) - t0) / 1000;
+    if (!reduce) {
+      // a hand scale: the beam swings, slows, and settles level; now and then it is lifted again
+      vel += (-ang * 0.9 - vel * 0.35) * 0.016;
+      ang += vel * 0.016 * 6;
+      if (t > nextKick) { if (nextKick > 0) vel += (Math.random() < 0.5 ? -1 : 1) * 0.05; nextKick = t + 26 + Math.random() * 16; }
+    } else { ang = 0; }
+    ctx.clearRect(0, 0, W, H);
+    var L = Math.max(90, Math.min(170, W * 0.16));
+    var px = W > 900 ? W - L * 0.95 : W - L * 0.8, py = H - L * 1.25;
+    ctx.save(); ctx.globalAlpha = W > 900 ? 0.34 : 0.16;
+    ctx.strokeStyle = '#6c5a2a'; ctx.fillStyle = '#6c5a2a'; ctx.lineWidth = 1.2; ctx.lineCap = 'round';
+    // loop and cord
+    ctx.beginPath(); ctx.moveTo(px, py - L * 0.5); ctx.lineTo(px, py); ctx.stroke();
+    ctx.beginPath(); ctx.arc(px, py - L * 0.5 - 5, 5, 0, Math.PI * 2); ctx.stroke();
+    ctx.translate(px, py); ctx.rotate(ang);
+    // beam: short arm to the pan, long arm with brass marks
+    ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(-L * 0.22, 0); ctx.lineTo(L * 0.72, 0); ctx.stroke();
+    ctx.lineWidth = 1; ctx.strokeStyle = '#b08a1e';
+    for (var i = 1; i < 12; i++) { var x = i * L * 0.058; ctx.beginPath(); ctx.moveTo(x, -2.5); ctx.lineTo(x, i % 5 === 0 ? 5 : 2.5); ctx.stroke(); }
+    ctx.strokeStyle = '#6c5a2a';
+    // pan, hanging plumb from the short end
+    ctx.save(); ctx.translate(-L * 0.22, 0); ctx.rotate(-ang);
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-L * 0.12, L * 0.34); ctx.moveTo(0, 0); ctx.lineTo(L * 0.12, L * 0.34); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(0, L * 0.34, L * 0.13, L * 0.035, 0, 0, Math.PI * 2); ctx.stroke();
+    ctx.globalAlpha *= 0.5; ctx.beginPath(); ctx.ellipse(0, L * 0.32, L * 0.07, L * 0.03, 0, Math.PI, 0); ctx.fill();
+    ctx.restore();
+    // weight on its string
+    ctx.save(); ctx.translate(L * 0.4, 0); ctx.rotate(-ang);
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, L * 0.2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-5, L * 0.2); ctx.lineTo(5, L * 0.2); ctx.lineTo(8, L * 0.3); ctx.lineTo(-8, L * 0.3); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    ctx.restore();
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); if (reduce) draw(0); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

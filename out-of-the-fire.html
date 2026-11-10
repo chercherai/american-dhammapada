@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Out of the Fire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in the woods of a camp meeting at night, dark theme; tree trunks stand along the margins, lit faintly and unsteadily from below by fires off the page, and now and then a white handkerchief is let go high up and drifts down, turning, into the dark; datelined sections. */
+  --ground: #100d0b;
+  --paper: #e6ddcf;
+  --paper-dim: #a39684;
+  --accent: #d98a4a;
+  --accent-2: #c9b48a;
+  --panel: rgba(28,22,18,.84);
+  --rule: rgba(230,221,207,.12);
+  --accent-soft: rgba(217,138,74,.45);
+  --glow-soft: rgba(217,138,74,.22);
+  color-scheme: dark;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 130%, #34200f 0%, #17110d 50%, var(--ground) 80%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px var(--glow-soft); }
+.epigraph { border-left: 1px solid var(--accent-soft); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--accent-2); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 23.5 &middot; S&#257;&#7751;u</span></nav>
+<header>
+  <h1>Out of the Fire</h1>
+  <div class="epigraph">The LORD rebuke thee, O Satan; even the LORD that hath chosen Jerusalem rebuke thee: is not this a brand plucked out of the fire?<br>&mdash; Zechariah 3:2</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So I&rsquo;ve heard it told,</span> on Stoner Creek.</p>
+
+<section>
+  <h2>I. The Log</h2>
+  <p class="dateline">Cane Ridge, Bourbon County, Kentucky &middot; August 1801</p>
+  <p>Sandy Combs fell on the Saturday afternoon, in the woods below the meetinghouse.</p>
+  <p>He was twelve. He had come over from Stoner Creek with his father and his stepmother in the wagon on Friday, with a sack of meal and a side of bacon and two quilts, and by Saturday noon there were more people in the woods at Cane Ridge than he had known there were in Kentucky. Wagons stood in the trees in every direction as far as you could see, and horses tied to every sapling, and fires smoking at every camp. There was preaching at the meetinghouse and preaching at the tent and preaching from wagon beds and stumps. A little way off the colored people had their own preaching. Under all of it was a noise like a river in flood, singing and praying and shouting and crying all at once, and the noise never stopped, not even in the night.</p>
+  <p>He had been watching people fall since Friday. A man would be standing and singing and then go down in the leaves as if he had been shot, and lie there, and the people around him would kneel and pray over him, and after an hour or two, or sometimes a day, he would get up shouting. Sandy had not been afraid of it. He had been curious about it, the way he was curious about a snake. On Saturday afternoon he was standing at the edge of a crowd around a Presbyterian on a stump, with his hands in his pockets, when it happened to him. His knees went. He lay in the leaves and could not move his arms, and he heard everything, the preacher and the singing and a dog barking somewhere in the camps, and he could not move at all.</p>
+  <p>He lay there about an hour. When he got up, he was talking.</p>
+  <p>Two men he did not know lifted him onto a big walnut log that had been felled for benches, and held him there, one on each side, by the arms, because his legs would not hold him yet, and he exhorted the crowd for most of an hour. Nobody afterward could remember all of what he said. They remembered the voice. It was a boy’s voice, high and clear, before it broke, and it went out over that whole roaring woods somehow and was heard on the far side of it. People came from the meetinghouse to hear it. He told them that Christ was willing. He told them not to wait. He took a handkerchief out of his pocket and held it up over his head and let it drop, and told them that was how short the time was. And every little while he would stop and put out both his hands to the crowd and say, <em>Come on, sinners. Come on in.</em></p>
+  <p>Then the men let go of his arms, and he sat down on the log in the dusk and cried.</p>
+  <p>His stepmother, Rachel, had him by then. She wrapped him in a quilt in the back of the wagon, and he lay against her with his teeth chattering, and the last thing he said before he went to sleep was a thing he would say after every meeting for the next six years.</p>
+  <p><em>Whatever good there was in that,</em> he said, <em>let it go to my mother and my pa.</em></p>
+  <p>Rachel thought he meant her, and she was glad of it, and she said so to nobody.</p>
+</section>
+
+<section>
+  <h2>II. The Two Mothers</h2>
+  <p class="dateline">Stoner Creek &middot; 1791&ndash;1806</p>
+  <p>His own mother was named Hannah, and she had burned to death when he was two.</p>
+  <p>It was in the winter of 1791, in the first cabin his father put up on the creek, the year they came over the mountains. His father was off at the salt lick. The chimney was sticks and clay, the way they all were then, and it caught in the night, and the roof went in before anybody knew. Rachel Ferrell was sixteen and lived on the next place down. She saw the light and ran up the creek in her shift, and she went into that cabin through the fire and came out with the baby, and went back in for his mother and could not find her, and came out the second time with her hair burning. She put her hair out in the creek. Then she sat on the bank holding the boy against her until his father came home.</p>
+  <p>Jesse Combs married her the next year. She raised the boy as her own, and they never had any of their own after, and Sandy called her Mama all his life. His mother Hannah was buried under a big sycamore by the creek with a fieldstone at her head. He did not remember her. He used to go and sit on the stone.</p>
+  <p>After Cane Ridge, Brother Amos Tull took him up.</p>
+  <p>Brother Tull was a Methodist local preacher, an old man with a farm on Hinkston Creek and a red bull that was known in three counties for its temper. He had been converted in Virginia under Asbury’s preachers before the war with England, and he had been preaching ever since, on Sundays, in barns and cabins and under trees, without pay, and farming the rest of the week. He was not a loud preacher. He said a thing once, in few words, and then sat down, and it was usually the thing you were still thinking about at supper. He asked Jesse and Rachel whether the boy could come with him to the meetings. The quarterly meeting gave Sandy a paper that let him exhort. He was the youngest on the circuit, and for five years he went everywhere Brother Tull went.</p>
+  <p>There was a great deal of meeting in Kentucky in those years. The fire that had started at Cane Ridge ran down the country like fire in a cane brake, and there were camp meetings every summer in every county. On a meeting day Sandy would be up before light. He swept the ground in front of the preaching stand with a cedar bush. He carried the split logs for the benches and set them in their rows. At dusk he built up the fires on the stands at the corners of the ground so there would be light for the night preaching. Then, when everything was ready, he stood up on the end of a bench and called the people in, and that voice, which was still a boy’s voice for a long time, went out over the creek bottoms and the camps and the horse lines, and people came.</p>
+  <p><em>Come on in, sinners. Come and hear. Come on in.</em></p>
+  <p>The preachers liked to have him exhort after the sermon, and they asked him often, and he never once said he was tired or that his throat hurt, though sometimes it did. He would get up on the end of the bench and the people would go still. Some said it was like water coming down out of the sky. And every time, when he got down, he said the same thing, to Brother Tull or to the bench or to nobody. <em>Whatever good there was in that, let it go to my mother and my pa.</em></p>
+  <p>What Rachel never knew, and Jesse never knew, was who else was listening.</p>
+  <p>The old women of Stoner Creek knew it, or said they did. At the meetings, they said, the dead came too. You did not see them unless you were looking at the edge of the light, past the last fire, where the trees started, and then you might see them standing there in rows among the trunks, quiet, listening to the preaching the way the living did. And when Sandy Combs got up to exhort, there was always one of them who came up nearer than the rest, a young woman in a grey dress with her hair cut off short as if it had been burned. The old women knew who she was. They said the others made room for her. They said that among the dead she was given the front of the bench, and the first of the light, and that even the old dead, the ones who had been preachers themselves and had been dead since before the Revolution, would step back out of the path when Hannah Combs came by, because of her boy. And after he said what he always said, about letting it go to his mother, the old women said they heard her answer him. <em>Thank you, son. I have it.</em></p>
+  <p>This was told on Stoner Creek for many years, by people who had not been at the meetings and by people who had.</p>
+</section>
+
+<section>
+  <h2>III. The Chair</h2>
+  <p class="dateline">The Combs place on Stoner Creek &middot; March 1807</p>
+  <p>By the spring of 1807 Sandy Combs was eighteen years old and as tall as his father, and his voice had broken long ago, and something in him had broken with it.</p>
+  <p>The meetings were not what they had been. Barton Stone and some of the other revival preachers had left the Presbyterians and called themselves only Christians, and a few had gone up into Ohio to the Shakers, who danced and did not marry. Nobody held up children on logs to exhort anymore. People said it had been a disorder. Sandy was too big to stand on the end of a bench and too young to be a preacher, and he went around with Brother Tull carrying logs and building fires and calling people in, and he found that he did not want to do it. He wanted other things. He did not always know what they were. A piece of land in the Green River country. A horse that could run at the Lexington races. A girl in Paris named Polly Ritchie, whose father kept a still. His own house, with a door that shut, and nobody standing on the end of a bench in it. The thoughts went every way at once, like cattle out of a broken lot, and he could not get them back in, and he quit trying.</p>
+  <p>He did not tell Brother Tull. One morning in March, with his hair grown down over his collar and his nails long and black and his one shirt filthy, he took his saddlebags and walked the eleven miles home alone.</p>
+  <p>Rachel saw him coming up the creek road. She came out and stood in the yard with her hands in her apron.</p>
+  <p><em>You always come with Brother Tull,</em> she said. <em>Or with one of the young men. What are you doing coming home by yourself?</em></p>
+  <p>He told her. He said he was done with it. He said he meant to stay home and work and get some land of his own and marry, and that was all he wanted, and he didn’t want to talk about it.</p>
+  <p>She talked about it anyway. She stood in the yard in the cold and told him what the world was. She told him about men she had known who had wanted land and got it and the land had eaten them alive, and men who had wanted whiskey, and men who had gone to the races and come back without their horses and their farms, and his own grandfather, who had died in a debtor’s prison in Virginia. She talked for a long time, and he stood there with the saddlebags on his shoulder and listened to all of it and looked at the ground, and she saw that it was not going in.</p>
+  <p>So she stopped. <em>Maybe he’ll come to it by himself,</em> she thought, <em>if I let him alone.</em></p>
+  <p><em>Come in the house,</em> she said. <em>You’re hungry. I’ll get you some buttermilk and cornbread, and when you’ve eaten I’ll get down your pa’s good shirt and you can put it on and I’ll wash that one.</em></p>
+  <p>She set the chair for him by the hearth, the good chair, the one with the hide seat, and he sat down in it. She brought him the buttermilk and the cornbread and he ate. Then she took a pan of dried beans out to the doorstep, where the light was better, and sat down there to pick them over for supper, a few feet from him, with her back half to him, so that he would not feel watched.</p>
+  <p>What happened next she told many times afterward, always the same way.</p>
+  <p>She heard the chair go over. She turned around and he was on the floor of the cabin on his back. His head was jerking back and forth, hard, the way she had seen people jerk at the meetings, so hard you could hear his hair whip on the boards. His eyes had rolled up white. There was froth on his mouth. His heels drummed on the floor and his hands were clawed up at his chest.</p>
+  <p>She threw the beans down and went to him. She got him up off the floor somehow, half into her lap, and held his head against her breast so it would stop hitting the boards, and she screamed for Jesse, who was in the far field. Jesse came running, and the Gaithers from the next place, white and colored, from their field, and a man who had been passing on the road with a mule, and in a little while there were a dozen people in the yard and in the door.</p>
+  <p>Rachel sat on the floor holding him and rocking, and said it out loud, to all of them and to nobody.</p>
+  <p><em>They told us at the meetings that the devil can’t lay a hand on them that keep the Sabbath,</em> she said. <em>Them that pray in secret and keep themselves clean. I heard the preachers say it. I heard it a hundred times. And look at him. Look what’s got hold of him.</em></p>
+  <p>Then Sandy spoke. His eyes were still rolled up and his body was still pulling in her arms, but his mouth was moving, and the voice that came out of it was not his. It was a woman’s voice, low and even and tired, a young woman’s. Rachel did not know it. Old Mrs. Gaither, who was standing in the door, put her hand over her own mouth, because she did. She had sat up with that voice through a lying-in in 1789.</p>
+  <p><em>It’s so,</em> the voice said. <em>What they told you is so. They heard it right.</em></p>
+  <p>The voice spoke to the boy then, as if he were across the room.</p>
+  <p><em>Sandy. Don’t turn your back on him. Don’t do wrong, son, in the open or in the dark either one. If you do it, now or after, you’ll not get shut of it. You can take the wings of the morning and you’ll not get shut of it. Be sure your sin will find you out.</em></p>
+  <p>Then the boy went limp in Rachel’s arms, as if somebody had set him down.</p>
+  <p>He opened his eyes after a little while. He looked up at her, and at her hair, which had come down, and at her face, which was wet, and at all the people in the yard and the door, and at the chair lying on its side.</p>
+  <p><em>Mama,</em> he said, <em>I was sitting in the chair. You were on the step with the beans. How’d I get down here?</em></p>
+  <p>Nobody answered him.</p>
+  <p>He sat up. He looked at her a long time.</p>
+  <p><em>Mama, what are you crying for? People cry for the dead. Or somebody gone off where they won’t see him again. I’m not dead. I’m right here.</em></p>
+  <p>Rachel wiped her face with the heel of her hand.</p>
+  <p><em>They cry for the dead,</em> she said. <em>They cry for the ones that go off and don’t come back. And they cry for the one that was dead and come alive again, and then goes back and dies a second time. That one they cry for the most. That’s who I’m crying for.</em></p>
+  <p>He did not say anything.</p>
+  <p><em>I’ll tell you something you never heard the whole of,</em> she said. <em>When you were two years old your mother’s house burned down with her in it, and I went in after you. I went in through the fire and got you out of the bed and carried you out of there. I didn’t have time to get anything else. There wasn’t anything else. I carried you out like you’d carry the one thing out of a burning house that you could save. And now you’re grown, and you want to walk back in.</em></p>
+  <p>She took his face in both her hands.</p>
+  <p><em>There’s fire on both sides of you,</em> she said. <em>Do you want to go back in it? Is that what you want? Lord, help us. Who else have I got to tell it to? Here’s a brand plucked out of the fire, and he wants to go back in the fire.</em></p>
+  <p>The people in the yard were quiet. Jesse had his hat in his hands. The man with the mule had taken off his.</p>
+  <p>Sandy looked at her for a long time. Then he looked at the hearth.</p>
+  <p><em>No, ma’am,</em> he said. <em>I don’t want it.</em></p>
+  <p>She let go of his face. <em>Good,</em> she said. <em>Good.</em></p>
+  <p>She set the chair back up on its legs and set him in it. She took the beans back out to the step and picked them up off the ground, every one, and she cooked them for supper with the last of the side meat and set the whole pot in front of him, and he ate it. When he had eaten, she asked him how old he was. She knew. She asked anyway.</p>
+  <p><em>Eighteen,</em> he said. <em>This month.</em></p>
+  <p><em>That’s old enough,</em> she said.</p>
+  <p>That night she took down the bolt of black wool she had been keeping for her own burying and cut him out a coat. It took her a week, sitting up by the fire. Jesse traded a heifer for a horse, a short-legged bay that would go all day. Old Mrs. Gaither gave him a pair of saddlebags that had been her husband’s. That fall Brother Tull took him to the Western Conference, and the conference admitted him on trial as a traveling preacher and sent him out on a circuit across the Green River, where he had once meant to buy land, with a Bible and a hymnbook and the black coat, and eighty dollars a year if anybody ever paid it.</p>
+</section>
+
+<section>
+  <h2>IV. The Ring</h2>
+  <p class="dateline">Brother Tull’s place on Hinkston Creek &middot; August 1807</p>
+  <p>Before he left for the conference, he went to see Brother Tull.</p>
+  <p>The old man was in the lot behind his barn with the red bull. It was August and the bull was in a temper because of the Gaither cows in the next field. He was bellowing and throwing his head and pawing up the ground, and the lather stood on his neck. Brother Tull had a hickory staff in his hand, about six feet long, with an iron hook at the end of it, and the hook was through the brass ring in the bull’s nose. He was walking the bull around the lot, slowly, at the end of the staff, and every time the bull flung his head toward the fence the old man gave the staff a little turn, not much, and the bull’s head came back around.</p>
+  <p>Sandy stood at the fence and watched. The bull was a ton of meat and Brother Tull was seventy-one years old and weighed about as much as a sack of meal.</p>
+  <p>After a while Brother Tull walked the bull into his stall and shut it in and hung the staff on two pegs on the wall of the barn, and came over and leaned on the fence beside him.</p>
+  <p><em>I heard about what happened at your mama’s,</em> he said.</p>
+  <p>Sandy said he expected the whole county had.</p>
+  <p>Brother Tull looked out over the lot.</p>
+  <p><em>You’ve had a mind that went wherever it pleased for a long time,</em> he said. <em>Since you were a boy. It went to the meetings because it pleased it to go. It went to the Ritchie girl and the races because that pleased it better. It’s a strong mind. It’s like that one.</em> He nodded at the barn, where the bull was still blowing. <em>You can’t reason with him, this time of year. You can’t hope he’ll behave. You don’t let go of the ring, that’s all. Not for a step. You’ll get tired of holding it. Hold it anyhow. It gets to where you don’t notice you’re holding it, after about thirty years.</em></p>
+  <p>That was all he said about it. Then he went into the house and came out with his Bible and opened it on the top rail of the fence and turned it around so Sandy could read, and put his finger on the verse, and Sandy read it out loud.</p>
+  <div class="verse">
+    <p>Casting down imaginations, and every high thing that exalteth itself against the knowledge of God, and bringing into captivity every thought to the obedience of Christ.</p>
+    <p>&mdash; 2 Corinthians 10:5</p>
+  </div>
+  <p><em>Every thought,</em> Brother Tull said. <em>Not just the bad ones. All of them.</em></p>
+  <p>He took the staff down off the pegs and gave it to him to take along.</p>
+  <p>The old women of Stoner Creek said that the young woman in the grey dress came to one more meeting after that. It was the camp meeting on Hinkston Creek that September, the last before Sandy went to the conference, and Brother Tull preached, and Sandy did not exhort, but only built the fires and called the people in. They said she stood at the edge of the light among the others all through the preaching, and that when it was over and the last hymn was sung, she turned and looked at the others with her, all of the dead along the edge of the trees, as if something had come clear to her that she had wanted to know for a long time, and they looked back at her the same way. Then they went off into the dark together. Nobody on Stoner Creek ever saw her again.</p>
+</section>
+
+<section>
+  <h2>V. The Staff</h2>
+  <p class="dateline">Missouri &middot; 1882</p>
+  <p>He rode circuits for fifty-four years: across the Green River country, through Tennessee and southern Indiana and Illinois, and at the last in Missouri, where he settled in Boone County and preached until he could not get up on a horse. He was ordained deacon and then elder, and he read everything that came over the mountains, so that the young preachers called him the Library. He married once, late, and buried her. He held something like four thousand meetings in his life, by his own count, and at every one of them, as long as he could stand, he was the one who stood up at the beginning and called the people in. He never could make himself say it any other way.</p>
+  <p><em>Come on in, sinners. Come on in.</em></p>
+  <p>He died in 1882, at ninety-three, in a chair by a hearth in Columbia, Missouri. Rachel had been dead forty years by then. On the wall over the chair, on two pegs, hung a hickory staff about six feet long with an iron hook at the end of it, worn black and smooth at the place where his hand had been.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">This mind of mine went formerly wandering about as it liked, as it listed, as it pleased; but I shall now hold it in thoroughly, as the rider who holds the hook holds in the furious elephant.<cite>Dhammapada 326, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the novice S&#257;&#7751;u has a voice so fine that the monks keep asking him to chant, and he never once pleads a sore heart or a tired body; every time, he gives the merit of it to his mother and father. His parents in this life do not know it, but his mother from his previous life, now a <em>yakkhin&#299;</em>, a spirit, comes with the gods to listen and receives it, and the spirits honor her with the first seat for his sake. Grown to manhood, S&#257;&#7751;u turns discontented and goes home alone, unkempt, meaning to give up the robe. His mother argues with him and fails, then sits him down and goes to wash rice for him. The yakkhin&#299; seizes him; he falls foaming and twisting, the village gathers, and his mother laments that spirits are said not to touch those who keep the holy days. Through him the spirit answers: do no evil, openly or in secret, for there is no flying away from it. He wakes and asks why she weeps for a living man. She answers that people weep for one who, though living, has died again, and that she snatched him like goods out of a burning house and he wants to burn again. He gives up the plan, and she provides his robes for full ordination. The Buddha tells him to master his wandering mind as an elephant driver masters a rutting elephant with the hook. S&#257;&#7751;u becomes a great teacher and lives to a hundred and twenty. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-05.htm">the full commentary story</a>.</p>
+    <h3>Kentucky, 1801&ndash;1807</h3>
+    <p>The <a href="https://christianhistoryinstitute.org/magazine/article/revival-at-cane-ridge">Cane Ridge revival</a> in Bourbon County, in August 1801, drew between ten and twenty-five thousand people to a Presbyterian sacramental meeting hosted by <a href="https://en.wikipedia.org/wiki/Barton_W._Stone">Barton Stone</a>. Presbyterian and Methodist preachers spoke from the meetinghouse, a tent and stumps and logs at once; Black worshippers held their own preaching; and thousands fell in the &ldquo;falling exercise,&rdquo; some lying motionless for hours, while others were seized by &ldquo;the jerks.&rdquo; Children who had fallen and risen were allowed to exhort, sometimes held up by grown men: one boy of about twelve, at Indian Creek that June, exhorted from a log for an hour with a man at each arm and lifted a handkerchief and let it fall as a warning to sinners. By 1810 <a href="https://practicalmattersjournal.org/2009/10/01/out-of-the-mouths-of-babes/">child exhortation</a> had all but disappeared. In 1803 Stone and four other ministers left the Kentucky Synod, and in 1804 they agreed to take no name but Christians; in 1805 the revival preacher Richard McNemar joined the Shakers.</p>
+    <p>The Methodists turned the revival into a system. A promising convert could receive a permit to exhort from the quarterly meeting; if the meeting recommended him, the annual Western Conference could admit him &ldquo;on trial&rdquo; as a traveling preacher and send him to a <a href="https://en.wikipedia.org/wiki/Circuit_rider_(religious)">circuit</a>, on an allowance of eighty dollars a year for a single man, rarely paid in full, as <a href="https://en.wikipedia.org/wiki/Peter_Cartwright">Peter Cartwright</a> remembered of his own start in 1802&ndash;1804. The <a href="https://en.wikipedia.org/wiki/Camp_meeting">camp meeting</a> born at Cane Ridge spread across the country with them. The Combs family, Brother Tull and the Gaithers are invented; the boy&rsquo;s descendants turn up two centuries later in <a href="sinners-welcome.html">Sinners Welcome</a>.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the novice S&#257;&#7751;u from the Dhammapada commentary (verse 326). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-05.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-cane.html">&larr; The Cane</a><a href="index.html">All stories</a><a href="the-old-bull.html">The Old Bull &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, trunks = [], kerch = null, nextDrop = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    trunks = [];
+    var col = Math.min(W * 0.5, 300), n = Math.max(2, Math.round((W / 2 - col) / 70));
+    for (var s = 0; s < 2; s++) for (var i = 0; i < n; i++) {
+      var edge = (W / 2 - col) * (i + 0.5) / n + (Math.random() - 0.5) * 30;
+      trunks.push({ x: s ? W - edge : edge, w: 10 + Math.random() * 22, ph: Math.random() * 6, f: 0.6 + Math.random() * 0.4 });
+    }
+  }
+  function drawKerchief(k, t) {
+    var sway = Math.sin(t / 900 + k.ph) * 30, tilt = Math.sin(t / 700 + k.ph) * 0.7;
+    var x = k.x + sway, y = k.y, s = 13;
+    ctx.save(); ctx.translate(x, y); ctx.rotate(tilt);
+    var fold = 0.4 + 0.6 * Math.abs(Math.cos(t / 520 + k.ph));
+    ctx.fillStyle = 'rgba(235,228,214,' + (0.22 * k.a) + ')';
+    ctx.beginPath();
+    ctx.moveTo(-s, -s * fold); ctx.quadraticCurveTo(0, -s * fold * 0.6, s, -s * fold);
+    ctx.lineTo(s * 0.9, s * fold); ctx.quadraticCurveTo(0, s * fold * 1.3, -s * 0.9, s * fold);
+    ctx.closePath(); ctx.fill(); ctx.restore();
+  }
+  function draw(t) {
+    t = t || 0;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < trunks.length; i++) {
+      var tr = trunks[i];
+      var fl = reduce ? 0.8 : 0.7 + 0.18 * Math.sin(t / 170 + tr.ph) + 0.12 * Math.sin(t / 61 + tr.ph * 3);
+      var g = ctx.createLinearGradient(0, H, 0, H * 0.25);
+      g.addColorStop(0, 'rgba(210,120,60,' + (0.16 * fl * tr.f) + ')');
+      g.addColorStop(0.5, 'rgba(120,70,40,' + (0.06 * fl * tr.f) + ')');
+      g.addColorStop(1, 'rgba(60,40,30,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(tr.x - tr.w / 2, 0, tr.w, H);
+    }
+    var glow = ctx.createRadialGradient(W / 2, H + 60, 0, W / 2, H + 60, H * 0.7);
+    var gf = reduce ? 1 : 0.85 + 0.15 * Math.sin(t / 230);
+    glow.addColorStop(0, 'rgba(200,110,50,' + (0.09 * gf) + ')'); glow.addColorStop(1, 'rgba(200,110,50,0)');
+    ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
+    if (!reduce) {
+      if (!kerch && t > nextDrop) kerch = { x: W * (0.15 + Math.random() * 0.7), y: -20, v: 0.35 + Math.random() * 0.2, ph: Math.random() * 6, a: 1 };
+      if (kerch) {
+        kerch.y += kerch.v;
+        if (kerch.y > H * 0.7) kerch.a -= 0.006;
+        drawKerchief(kerch, t);
+        if (kerch.a <= 0 || kerch.y > H + 20) { kerch = null; nextDrop = t + 9000 + Math.random() * 12000; }
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+  size(); nextDrop = 2500; requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>

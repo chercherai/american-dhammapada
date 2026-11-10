@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red Clay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a desert hill at first light, dark theme; along the foot of the page stand nine small junipers, and under each in turn a low light comes up, holds, and stays; datelined sections. */
+  --ground: #1b1514;
+  --panel: rgba(40,26,22,.78);
+  --ink: #ecdfce;
+  --ink-dim: #ad9a86;
+  --accent: #d0683f;
+  --glow: #e9b55a;
+  --rule: rgba(236,223,206,.13);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #1a1414 0%, #241816 70%, #3a211a 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--rule); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 25.7 &middot; A Company of Bhikkhus</span></nav>
+<header>
+  <h1>Red Clay</h1>
+  <div class="epigraph">Therefore let one always be thoughtful, and avoid pleasures; having abandoned them, let him cross the stream, after baling out the ship, and go to the other shore.<br>&mdash; Sutta-Nip&#257;ta 771</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Khaphachao dai sadap ma laeo yang ni,</span> in the base town under the Sacramentos.</p>
+
+<section>
+  <h2>I. The Earring</h2>
+  <p class="dateline">Alamogordo, New Mexico &middot; spring 1981</p>
+  <p>Kalaya Whitlock had come from Udon Thani in 1965 as the wife of an Air Force crew chief, with a baby not yet walking and two suitcases, and had buried the crew chief in 1975. By 1981 she owned the Siam Kitchen on White Sands Boulevard, the building it was in, and the two buildings beside it. She did not trust the bank with more than the mortgage. What she made she turned into gold, in chains, by weight, the way her mother had, and wore some of it and kept the rest at home.</p>
+  <p>Her son was seventeen and was called Sonny by everyone, including her. He bussed tables, played second base badly for the Tigers, and wore in his left ear a gold stud his mother had given him when he was twelve, which got him into two fights a year. He was the only boy in Otero County who went to the temple without being driven.</p>
+  <p>The temple was a three-bedroom house on a gravel street near the railroad, bought by eleven Thai wives who had put in forty dollars a month apiece. It had one monk. Ajahn Thongdee was past sixty and had been sent out from Bangkok, and it was said of him that he could take four words of the Buddha's and talk on them until the ice was gone from everybody's tea, and that when he was done you understood the four words. Sonny sat through all of it. In April he asked to be ordained.</p>
+  <p><em>Sonny,</em> the Ajahn said, <em>one meal a day. A bed by yourself for the rest of your life. No girl, ever. It is hard to do in Thailand, where everyone helps you. Here nobody will even know what you are. Go finish school.</em></p>
+  <p>He asked again in May, and the Ajahn said the same thing in more words.</p>
+  <p>In June, the week after graduation, he asked a third time, and the Ajahn looked at him a while and sent him to get his mother.</p>
+  <p>They shaved his head on the carport. Kalaya cut the first lock herself and caught it in a lotus leaf she had made out of a green paper plate, since there were no lotuses. He took the earring out before he knelt and put it in her hand. He was a novice by noon, in a robe that had come in the mail from Los Angeles, and the Ajahn wrote his new name on a slip of paper and showed it to her. <em>Sono.</em></p>
+  <p><em>So you will not have to learn another one,</em> he said.</p>
+</section>
+
+<section>
+  <h2>II. Ten Monks</h2>
+  <p class="dateline">Alamogordo &middot; 1981 to 1984</p>
+  <p>A novice can be made by one monk. A monk cannot. By the rule as the Ajahn had always kept it, the full ordination wants ten, sitting together inside a marked boundary, and in 1981 there were not ten Thai monks between El Paso and Denver. So the novice S&#333;no swept the gravel, carried the bowl behind his teacher down a street where the only people who came out were the eleven wives, and learned.</p>
+  <p>The Ajahn taught him the way he had been taught, by ear. He gave him the Chapter of the Eights, sixteen old poems out of the Sutta Nip&#257;ta, a line at a time, in P&#257;li, until the boy could chant all sixteen from the first word to the last without a book, and then he made him say what every line meant, in Thai and in English. It took most of three years. It was three years also before ten monks could be got into Otero County on one day, by car from Denver and Houston and by air from California, and Kalaya fed all ten. S&#333;no was twenty that spring. They ordained him in the back yard, inside eight stones.</p>
+  <p>That summer the Ajahn sent him west. A very old monk from the forest monasteries of the northeast, Luang Pu Kham, whom the Ajahn had bowed to as a young man, was spending the rains at the Thai temple in North Hollywood. <em>Go and see what one looks like,</em> the Ajahn said. <em>And ask him something for me.</em> He told him the questions twice, and then put him on the bus.</p>
+</section>
+
+<section>
+  <h2>III. Sadhu</h2>
+  <p class="dateline">Wat Thai, North Hollywood &middot; July 1984</p>
+  <p>It is eight hundred miles, most of it desert. The old man received him as if he had come from across the street. He asked whether the road had been hard, whether he had eaten, how his teacher's knees were. Then, in front of forty monks who had been waiting weeks for ten minutes with him, he told the attendants to lay a second mat in his own room for the young monk from New Mexico.</p>
+  <p>S&#333;no could not make himself go in. He walked up and down the temple yard under the big tiled roof most of the night, and went in at last and sat on the mat, and did not sleep much.</p>
+  <p>Before light the old man was sitting up.</p>
+  <p><em>Your teacher taught you something,</em> he said. <em>Let me hear it.</em></p>
+  <p>So S&#333;no chanted the Chapter of the Eights, in that small room, to one listener, while the window went grey. All sixteen, from the poem on desire to the poem S&#257;riputta asks for at the end. He did not drop a syllable. When the last line had gone out of the room, the old man said:</p>
+  <p><em>Sadhu. Sadhu, bhikkhu. Well said. You have it whole.</em></p>
+  <p>The Thai people in Los Angeles tell the next part. They say that when Luang Pu Kham said <em>sadhu</em> that morning, something took it up outside. The spirit of the ground the temple stood on said it, and the ones in the pepper trees on Coldwater Canyon, and the ones in the air over them, and so on up, a long way, the way a cheer goes up the rows of a stadium.</p>
+  <p>Then S&#333;no remembered his errand. <em>Luang Pu, my teacher asks. Out where we are, it took three years to find ten monks. Could five do, for an ordination, one of them knowing the rule? And the ground is all thorns and hot rock. May a monk wear thick soles? And the dust. May we bathe every day?</em></p>
+  <p>The old man laughed until he had to wipe his eyes.</p>
+  <p><em>Tell Thongdee to read his own books. A monk came to the Buddha once from the border country, with those same questions from his teacher, and the Buddha said yes to every one. Five is enough at the edge of things. Thick soles. Bathe.</em> He looked at S&#333;no. <em>That monk had just finished chanting the Eights.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Spirit House</h2>
+  <p class="dateline">Alamogordo &middot; the same morning</p>
+  <p>Kalaya's house stood at the east edge of town where the streets give out toward the mountains. In the corner of the yard, on a post, where the shadow of the roof never fell on it, was the spirit house: a little red-and-gold temple the size of a birdhouse, for the one the ground had belonged to before she bought it. Every morning she put out rice, a glass of water, and whatever was in flower.</p>
+  <p>She was setting down the glass when somebody clapped. Two hands, close by, and a voice. <em>Sadhu!</em></p>
+  <p><em>Who is that?</em> said Kalaya.</p>
+  <p><em>It's me, sister.</em></p>
+  <p><em>Who is me?</em></p>
+  <p><em>The one who lives in your yard.</em></p>
+  <p>She looked at the little house. <em>Twenty years I bring you rice,</em> she said, <em>and you never clapped for me once.</em></p>
+  <p><em>I am not clapping for you.</em></p>
+  <p><em>Then for who?</em></p>
+  <p><em>For your son. This morning in the old teacher's own room he chanted the Dhamma, and the old teacher said sadhu. Then all of us said it. I only said it last.</em></p>
+  <p><em>Wait,</em> said Kalaya. <em>My son chanted to the teacher? The teacher did not chant to my son?</em></p>
+  <p><em>Your son to the teacher.</em></p>
+  <p>She stood in the yard with the rice spoon in her hand, and the gladness went through her from the feet up, five kinds of it, she said later, one after another. Then she thought: if he can chant it to that old man, he can chant it to me.</p>
+  <p>When S&#333;no came home on the bus she fed the Ajahn and him, and then she asked him straight out whether it was true. He asked who had told her. She told him. He did not argue with it.</p>
+  <p><em>Then Saturday week,</em> she said, <em>you will sit in the chair and I will sit on the floor, and you will give me all of it.</em></p>
+</section>
+
+<section>
+  <h2>V. Copper, Silver, Gold</h2>
+  <p class="dateline">Alamogordo &middot; a Saturday night in August 1984</p>
+  <p>The temple's front room held thirty people, so Kalaya rented the VFW hall. She hung it with marigolds. She borrowed an armchair from a furniture store and covered it with gold cloth for the preaching seat. She closed the restaurant and brought every person who worked for her except Teresa Montoya, who waited tables and was nineteen, and whom she left at the house.</p>
+  <p>The house needed somebody. It had a block wall around it with bottle glass set in the top, an iron gate, bars on the windows, and two Dobermans on run wires. The driveway was tarred, soft by day and hard at night, so that anybody who crossed it in the afternoon left his shoe size. In the floor of the back bedroom, under a rug, was a safe set in a yard of concrete. All of this was known up and down Highway 54, and for two years a crew of nine men out of El Paso, who worked the base towns, had been driving past it slowly. Their trouble had never been the wall. It was that she was always home.</p>
+  <p>That night they watched her car go. They dug under the wall on the arroyo side, where the caliche was rotten, and came up inside. What they did about the dogs is not told. The dogs were all right in the morning.</p>
+  <p>The one who ran the crew was called Dub. He sent himself to the hall. <em>If she gets word and starts for home,</em> he told them, <em>I'll see she doesn't get there.</em> He had a pistol under his jacket, and he meant it. There were American husbands on folding chairs along the back, so nobody looked twice at one more. He took the chair directly behind the place where she sat on the floor with her feet tucked to one side and her hands together.</p>
+  <p>At eight S&#333;no came in behind the Ajahn, bowed three times to the Buddha on the card table, and climbed into the armchair. He chanted the first poem in P&#257;li. Then he said it over in Thai, and then, for the husbands and the kids, in English.</p>
+  <div class="verse">
+    <p>He who covets extensively (such) pleasures (as these), fields, goods, or gold, cows and horses, servants, women, relations,</p>
+    <p>Sins will overpower him, dangers will crush him, and pain will follow him as water (pours into) a broken ship.</p>
+    <p>Therefore let one always be thoughtful, and avoid pleasures; having abandoned them, let him cross the stream, after baling out the ship, and go to the other shore.</p>
+    <p>&mdash; Sutta-Nip&#257;ta 769&ndash;771 (K&#257;masutta)</p>
+  </div>
+  <p>He was partway into the second when Teresa came in the side door, out of breath, and got down on her knees beside Kalaya.</p>
+  <p><em>Mrs. Whitlock. There's men in the house. A lot of men. They've got the closet open where you keep the coffee cans.</em></p>
+  <p>That was ten years of restaurant pennies, in Folgers cans, floor to shelf.</p>
+  <p><em>Let them take the pennies,</em> Kalaya said, not turning her head. <em>I am listening to my son. Don't spoil it for me. Go home.</em></p>
+  <p>Teresa went. She got as far as the gate and looked in, and came back. It was the fifth poem by then.</p>
+  <p><em>Mrs. Whitlock, they're in the dining room. They've got the silver bowls. They've got your mother's belt.</em></p>
+  <p><em>Let them take what they want. Don't spoil it. Go home.</em></p>
+  <p>The third time it was past midnight, and Teresa was crying. <em>They pulled up the rug. They're in the floor.</em></p>
+  <p>Kalaya turned around then. <em>Teresa. Two times you came and two times I told you. Let them take it. I am hearing the Dhamma from my son's mouth, and you come and come. If you come one more time I will do something about you. Go home.</em></p>
+  <p>She turned back, put her hands together, and found her place.</p>
+  <p>Dub had heard all three, from two feet off. He sat a minute longer. He had robbed people who begged and people who fought and one who had prayed out loud at him, and he had never before been in a room with someone who had weighed the whole of what she owned against what a boy in a chair was saying, and had not needed to think about it.</p>
+  <p>He went out the side door and drove to the house.</p>
+  <p><em>Put it back,</em> he told them. <em>All of it. If we carry this woman's stuff out of here, lightning is going to come down and split our heads, and I for one will have it coming.</em></p>
+  <p>They put the chains back in the floor by weight, the way they had come out. They set the bowls on the sideboard and the belt in its drawer. They carried the Folgers cans back to the closet and stacked them, and one of them picked a penny out of the carpet and dropped it in. Then all nine drove to the VFW hall and stood along the back wall in their work clothes, and stayed there until the windows were light and the sixteenth poem was done.</p>
+  <p>Ajahn Thongdee said afterward that he had been reading a line for forty years, that the Dhamma looks after the one who keeps it, and had taken it for a manner of speaking.</p>
+</section>
+
+<section>
+  <h2>VI. Red Clay</h2>
+  <p class="dateline">Alamogordo and La Luz &middot; autumn 1984</p>
+  <p>When S&#333;no came down from the chair, a big man got on his knees in front of Kalaya and put his forehead on the linoleum.</p>
+  <p><em>Ma'am, I need you to pardon me.</em></p>
+  <p><em>For what?</em></p>
+  <p><em>I sat behind you all night with a gun. If you'd got up to go home I was going to kill you.</em></p>
+  <p><em>All right,</em> said Kalaya. <em>I pardon you.</em></p>
+  <p>The other eight came up one at a time and said what they had done, and she pardoned each of them in the same four words. Then Dub said: <em>If you mean that, ask him if he'll take us. Whatever he is. We want to be it.</em></p>
+  <p>She turned to her son and put her hands together, as a laywoman does to a monk. <em>Venerable sir, these men liked the way I listened and the way you chanted. They want to go forth. Let them.</em></p>
+  <p>There were not nine robes in New Mexico. They tore Kalaya's bedsheets to the measure, and S&#333;no dyed them in a washtub with red clay out of the arroyo behind the temple, and they dried on the chain-link the color of the hills. The Ajahn shaved nine heads on the carport and made nine novices. And when, that October, five monks could be got together in one back yard, he read them the old teacher's answer out of his own book, with his finger on the line, and ordained all nine.</p>
+  <p>S&#333;no gave each man one thing to work at, a different thing for each, the way his teacher had done for him. They went up into the foothills above La Luz, where the juniper and pi&ntilde;on begin, and each man picked a tree and sat down under it.</p>
+  <p>This is told two ways, and the two agree. In North Hollywood the attendants say that one afternoon Luang Pu Kham stopped in the middle of his tea and sat looking east for some time, and moved his lips. And each of the nine said afterward that the old man had been sitting in front of him, under his own tree, close enough to touch, and had spoken to him alone, in English, or in the case of two of them in Spanish.</p>
+  <p>To the first he said that a man who lives in kindness, and is glad of the teaching, comes to the quiet place. To Dub he said: <em>Bail the boat. You heard it in the hall. It goes light when it's empty.</em> To the third he counted on his fingers, five to cut, five to leave, five to grow, and five more to get past, and then you are over the flood. To the fourth: <em>Sit, and do not be careless. Do not swallow the hot iron and then cry that it burns.</em> To the fifth, that there is no stillness without understanding and no understanding without stillness, and the one with both is near. To the sixth, that a monk who goes into an empty house with his mind quiet has a gladness that is not of this world. To the seventh, that each time he sees a thing rise and fall away, there is joy in it, and that seeing is what does not die. And to the last two, who were the youngest, he gave the beginning of it: watch the doors of the senses, be content, keep the rule, keep good friends. What he said to the first man and to those last two is in the old book the Eights come from, nearly word for word.</p>
+  <div class="verse">
+    <p>And let him cultivate goodwill towards all the world, a boundless (friendly) mind, above and below and across, unobstructed, without hatred, without enmity.</p>
+    <p>&mdash; Sutta-Nip&#257;ta 149 (Mettasutta)</p>
+    <p>Cultivate (the society of) virtuous friends and a distant dwelling-place, secluded and quiet; be moderate in food.</p>
+    <p>Be subdued according to the precepts, and as to the five senses, be attentive as regards thy body, and be full of disgust (with the world).</p>
+    <p>&mdash; Sutta-Nip&#257;ta 337, 339 (R&#257;hulasutta)</p>
+  </div>
+  <p>Each man, they say, was finished as his own line ended. Nobody saw them come down the hill. That evening there were nine monks nobody knew at the chanting in North Hollywood, eight hundred miles across the desert, in robes the color of New Mexico, with thick-soled sandals lined up at the door. The bus takes seventeen hours. They bowed at the old man's feet, and he asked whether the road had been hard.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Kalaya went on putting out the rice. The spirit house did not clap again, and she did not expect it to. Her son's earring she had melted into the next chain.</p>
+  <p>The hole under the wall on the arroyo side she never had filled. The dogs went in and out by it for years.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">The Bhikshu who acts with kindness, who is calm in the doctrine of Buddha, will reach the quiet place (Nirvana), cessation of natural desires, and happiness.<cite>Dhammapada 368, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">O Bhikshu, empty this boat! if emptied, it will go quickly; having cut off passion and hatred thou wilt go to Nirvana.<cite>Dhammapada 369, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Cut off the five (senses), leave the five, rise above the five. A Bhikshu, who has escaped from the five fetters, he is called Oghatinna, `saved from the flood.'<cite>Dhammapada 370, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Meditate, O Bhikshu, and be not heedless! Do not direct thy thought to what gives pleasure that thou mayest not for thy heedlessness have to swallow the iron ball (in hell), and that thou mayest not cry out when burning, `This is pain.'<cite>Dhammapada 371, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Without knowledge there is no meditation, without meditation there is no knowledge: he who has knowledge and meditation is near unto Nirvana.<cite>Dhammapada 372, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">A Bhikshu who has entered his empty house, and whose mind is tranquil, feels a more than human delight when he sees the law clearly.<cite>Dhammapada 373, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">As soon as he has considered the origin and destruction of the elements (khandha) of the body, he finds happiness and joy which belong to those who know the immortal (Nirvana).<cite>Dhammapada 374, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">And this is the beginning here for a wise Bhikshu: watchfulness over the senses, contentedness, restraint under the law; keep noble friends whose life is pure, and who are not slothful.<cite>Dhammapada 375, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Let him live in charity, let him be perfect in his duties; then in the fulness of delight he will make an end of suffering.<cite>Dhammapada 376, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, So&#7751;a Ku&#7789;ika&#7751;&#7751;a (&ldquo;So&#7751;a of the costly earring&rdquo;) lives in Avanti, far to the southwest, where monks are few. The elder <a href="https://en.wikipedia.org/wiki/K%C4%81ty%C4%81yana_(Buddhist)">Mah&#257; Kacc&#257;na</a> twice refuses to ordain him, warning how hard it is to eat alone, sleep alone and stay celibate, and it takes three years to gather the ten monks his full ordination needs. He travels to the Buddha, shares his room, and at dawn intones the whole Chapter of the Eights; the Buddha's &ldquo;Well done&rdquo; is taken up by the gods, and the spirit in his mother's house, 120 leagues away, applauds. He then asks, for his teacher, that five monks may ordain in the border countries. His mother arranges to hear him preach, and when her maid comes three times to say that thieves are emptying her copper room, her silver room and her gold room, she will not leave the sermon. The thieves' leader, posted beside her to kill her, has everything put back; nine hundred thieves ask her pardon, are ordained in cloth dyed with red clay, and sit each under his own tree on a mountain, where the Buddha appears to them and speaks these nine verses. They cross the desert through the air to bow at his feet. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-07.htm">the full commentary story</a>. The poems So&#7751;a chants survive as the <a href="https://en.wikipedia.org/wiki/Atthakavagga_and_Parayanavagga">A&#7789;&#7789;hakavagga</a> of the <a href="https://en.wikipedia.org/wiki/Sutta_Nipata">Sutta Nip&#257;ta</a>; the first of them, on desire, already tells the hearer to bale out the ship.</p>
+    <h3>A base town, 1984</h3>
+    <p>During the Vietnam War tens of thousands of American airmen were stationed at bases in Thailand such as Udorn and Takhli, and many came home with Thai wives. Those women, scattered among Air Force towns across the United States, were among the first <a href="https://en.wikipedia.org/wiki/Thai_Americans">Thai Americans</a>, and in a number of places they pooled their money to buy a house and bring a monk to live in it. <a href="https://en.wikipedia.org/wiki/Holloman_Air_Force_Base">Holloman Air Force Base</a> lies just outside Alamogordo, under the Sacramento Mountains; the village of La Luz is immediately north. The house-temple in the story, its monk, the Whitlocks and the crew from El Paso are invented.</p>
+    <p><a href="https://apiahip.org/everyday/day-289-wat-thai-los-angeles-california">Wat Thai of Los Angeles</a>, in North Hollywood, began in a house in 1971; its Thai-style main hall was consecrated in 1982, and it is generally counted the first Thai temple in the United States. Luang Pu Kham, a monk of the <a href="https://en.wikipedia.org/wiki/Thai_Forest_Tradition">Thai Forest Tradition</a>, is invented. A boy can become a novice under a single monk, but full ordination, not given before the age of twenty, needs a chapter of ten monks, or five in outlying regions, an allowance the monastic code traces to So&#7751;a's errand, along with thick-soled sandals and frequent bathing. A <a href="https://en.wikipedia.org/wiki/Spirit_house">spirit house</a> for the guardian of the land, the <em>phra phum</em>, stands in the yard of most Thai homes; the commentary's first applauding gods are the <em>bhumma&#7789;&#7789;haka</em>, the ones who live on the ground.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a company of bhikkhus from the Dhammapada commentary (verses 368&ndash;376). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-07.htm">The original</a>. Scripture from the Sutta-Nip&#257;ta, translated by V. Fausb&ouml;ll (Sacred Books of the East, vol. 10, 1881). Written by Claude Fable 5.2.
+  <div class="pager"><a href="in-the-boys-name.html">&larr; In the Boy&#x27;s Name</a><a href="index.html">All stories</a><a href="sifted-meal.html">Sifted Meal &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, trees = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    trees = [];
+    for (var i = 0; i < 9; i++) {
+      var u = (i + 0.5) / 9;
+      trees.push({ x: W * (0.04 + 0.92 * u) + Math.sin(i * 7.3) * W * 0.02,
+                   y: H - 18 - Math.sin(u * Math.PI) * H * 0.07 - (i % 3) * 5,
+                   s: 15 + ((i * 5) % 4) * 3 });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // the hill
+    ctx.fillStyle = 'rgba(12,8,8,.55)';
+    ctx.beginPath(); ctx.moveTo(0, H);
+    for (var x = 0; x <= W; x += 20) ctx.lineTo(x, H - 10 - Math.sin(x / W * Math.PI) * H * 0.07);
+    ctx.lineTo(W, H); ctx.closePath(); ctx.fill();
+    // one light after another comes up and stays; then the hill goes dark and it begins again
+    var period = 5400, ph = reduce ? period : t % (period + 900);
+    for (var i = 0; i < 9; i++) {
+      var tr = trees[i], on = Math.max(0, Math.min(1, (ph - i * 560) / 500));
+      if (ph > period) on *= Math.max(0, 1 - (ph - period) / 700);
+      if (on > 0.01) {
+        var r = tr.s * 2.6, g = ctx.createRadialGradient(tr.x, tr.y, 0, tr.x, tr.y, r);
+        g.addColorStop(0, 'rgba(233,181,90,' + 0.32 * on + ')');
+        g.addColorStop(0.4, 'rgba(208,104,63,' + 0.10 * on + ')');
+        g.addColorStop(1, 'rgba(208,104,63,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(tr.x, tr.y, r, 0, Math.PI * 2); ctx.fill();
+      }
+      // juniper: a dark rounded crown on a short trunk
+      ctx.fillStyle = 'rgba(10,9,8,.8)';
+      ctx.fillRect(tr.x - 1.5, tr.y - tr.s * 0.5, 3, tr.s * 0.5);
+      ctx.beginPath(); ctx.ellipse(tr.x, tr.y - tr.s * 0.95, tr.s * 0.62, tr.s * 0.7, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mourner's Bench</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale varnish of an old oak pew, light theme; faint lines of wood grain run across the page and, very slowly, begin to flow like water and settle back; datelined sections. */
+  --ground: #efe6d6;
+  --ground-2: #e4d7c0;
+  --paper: #2b241d;
+  --paper-dim: #6f6253;
+  --oak: #8a5a2b;
+  --flush: #b8574a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, #f6efe2 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,36,29,.2); }
+.series a:hover { color: var(--oak); }
+a:focus-visible { outline: 2px solid var(--oak); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--oak); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(138,90,43,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--oak); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--oak); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(250,245,236,.8); border: 1px solid rgba(43,36,29,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--flush); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,36,29,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--oak); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--oak); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,36,29,.14); border-bottom: 1px solid rgba(43,36,29,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--oak); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--oak); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--oak); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--oak); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(250,245,236,.8); border-left: 2px solid var(--oak); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 20.4 &middot; Anattalakkhaṇa</span></nav>
+<header>
+  <h1>The Mourner's Bench</h1>
+  <div class="epigraph">I have been crucified with Christ; and it is no longer I that live, but Christ liveth in me.<br>&mdash; Galatians 2:20 (American Standard Version, 1901)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how it was testified,</span> in the basement under Marsh Chapel.</p>
+
+<section>
+  <h2>I. The Bench</h2>
+  <p class="dateline">Pratt County, Kansas &middot; the summers of 1947 to 1956</p>
+  <p>The Holiness camp meeting came every August to a grove of cottonwoods south of town, where there was a board tabernacle with a sawdust floor and open sides and, across the front of it below the pulpit, a long plank bench worn so smooth by knees and elbows that it shone like a gunstock. That was the mourner's bench. Vernon Albaugh's grandmother said twenty thousand souls had prayed through at that bench since the first camp in 1898, and she had been one of them, in 1911, in a white shirtwaist, and she had felt the old man die in her like a fire going out of a stove.</p>
+  <p>That was what you went forward for. The first time was to be saved, and Vern was saved at seven, easily, on a hot night with the moths batting around the gas lamps, and cried, and was glad. The second time was for the second blessing, entire sanctification, the death of self. You knelt at the bench and gave up the old man, the carnal nature, the I that wanted its own way, and you prayed until it died and the Holy Ghost came in and took its place. Grandma Albaugh said you would know. Her favorite hymn was <em>Not I, but Christ,</em> and she sang it at the stove and at the clothesline and once, in Vern's hearing, in the outhouse.</p>
+  <p>Vern went forward for the second blessing at nine. He knelt at the bench until the lamps were turned down and an evangelist from Oklahoma put a hand on his back and said, <em>Let it go, son, let it go,</em> and he did not know what <em>it</em> was or where it was kept. He went forward at ten and at eleven and every August after that. He prayed through the meetings and through the altar calls and once all night alone in the empty tabernacle with the crickets, gripping the bench until his hands hurt, and the old man would not die. It got bigger, if anything. It got very interested in whether it was dying.</p>
+  <p>At nineteen he went off to a Methodist college in Iowa, and from there, to the grief of his mother, who wrote every Sunday, to a seminary in Newton Centre, outside Boston, where the professors smoked pipes and did not believe in the second blessing as such. He did not either, he found, as such. But he still woke some nights in his room on the hill with his fists closed.</p>
+</section>
+
+<section>
+  <h2>II. Four and Two</h2>
+  <p class="dateline">Boston University &middot; Good Friday, April 20, 1962</p>
+  <p>There were twenty of them, divinity students from around the city, who had signed up for a doctoral study a Harvard man was running on religious experience. They were divided into groups of four, and each four had two leaders. There would be a capsule. Half of the twenty would get a drug that came from a Mexican mushroom and half would get something else, and nobody, not the students and not the leaders, would know who had what. Then they would all go down to the small chapel in the basement of Marsh Chapel, on Commonwealth Avenue, and attend the Good Friday service being held upstairs by the dean of the chapel, which would come down to them over a loudspeaker.</p>
+  <p>Vern's four were himself and Hal Dunning, his roommate, a Congregationalist from Bangor who had signed up because Vern had, and two others he knew a little. One of their two leaders was a Harvard graduate student with a crew cut who was very kind and said almost nothing all day. The other was Mas Kitano.</p>
+  <p>Mas Kitano was thirty-four and a Methodist minister working on a degree at the School of Theology, and he was older than any of them in a way that had little to do with his age. He had been fourteen in the camp at Heart Mountain, in Wyoming, where his father kept the Japanese Methodist services in a mess hall and the wind blew sand under the doors. Mas had asked his four to meet with him beforehand, twice, so that on the morning itself nobody would be among strangers, and he had told them about the camp at the first meeting, when they went around the room. He had told them almost nothing else. At the second meeting, when Vern had told the group about the mourner's bench, more than he meant to, Mas had only looked at him for a long time, the way you look at a field to see what the weather has been doing to it.</p>
+  <p>On the morning itself, in a room off the basement chapel, Mas gave them their instructions. They were the same for everybody. <em>Whatever comes, go toward it. If something frightens you, look at it. Follow the service. Pray if you want to pray.</em> Vern wrote down <em>pray</em> in his head and underlined it.</p>
+  <p>The capsules came in small paper cups with water. Vern swallowed his like a man taking communion in a strange church, carefully, watching how the others did it.</p>
+</section>
+
+<section>
+  <h2>III. The Pew</h2>
+  <p class="dateline">The basement chapel &middot; the first hour</p>
+  <p>Hal went first. Twenty minutes in, his face began to redden from the collar up as if he were standing too near a stove, and he rubbed his neck and his forearms and looked at Vern with his eyes very wide and whispered, <em>It's starting.</em> His ears went crimson. He said everything was hot. Vern felt nothing at all and was ashamed of how much he envied him.</p>
+  <p>The service had begun upstairs. Through the grille of the loudspeaker came the organ, enormous and thinned at the same time, like music heard through a floor, and then a deep slow voice reading, and they could not always make out the words. Vern sat in the second pew with his hands on the back of the pew in front of him and did as he had been told. He prayed. He followed the service. He prayed harder. He was a good student. He had been a good student at the mourner's bench too.</p>
+  <p>Some time later he noticed that the grain of the oak under his hands was moving. It ran along the pew back in long brown lines, and the lines were flowing very slowly, like water in a ditch, and when he took his eyes off them they went on flowing in the corner of his sight. He thought, quite calmly, <em>So it's this one,</em> and then the calm went out of him all at once.</p>
+  <p>What came next was the I that was watching the grain coming loose. He could feel it the way you feel a tooth going, a giving at the root, and he did what he had done every August since he was nine. He held on. He prayed for the old man to die and at the same time he held on to the old man with everything he had, because now that it was really going he was terrified of it going, and the more he held the bigger the terror got, until the basement chapel and the organ and the voice upstairs and Hal's red face were all very far down at the bottom of something, and he was hanging over it by his hands.</p>
+  <p>Across the room a student from another group stood up and walked out the side door, quickly, saying he had to tell them, and two leaders went after him into the street.</p>
+  <p>Vern's hands were locked on the pew back. He could not have opened them if the building had caught fire. Somebody was saying <em>I can't, I can't,</em> and it was him.</p>
+  <p><em>Mas,</em> he said. <em>Mas. I can't do this one either. Give me something else.</em></p>
+</section>
+
+<section>
+  <h2>IV. No Longer I</h2>
+  <p class="dateline">The basement chapel &middot; the second hour</p>
+  <p>Mas Kitano came and knelt on the floor in front of him, in the space between the pews, so that his face was a little below Vern's. He did not take Vern's hands off the pew. He looked at him for a long time, longer than he had looked at the second meeting, and Vern had the feeling, which he kept for the rest of his life and could never put better than this, that Mas was looking past him down a very long row of people kneeling at a very long bench, all the way back, and every one of them was him.</p>
+  <p><em>You've been at this a long time,</em> Mas said.</p>
+  <p><em>Since I was nine.</em></p>
+  <p><em>Longer than that.</em> Mas was quiet a moment. <em>Vern. None of it is yours to hold. Not the old man. Not the new one. Not the being afraid. You can't keep it and you can't kill it. It was never yours.</em></p>
+  <p>Then he said the verse. He said it plainly, the way you'd read a road sign to someone who had lost his glasses, from a little brown American Standard he had carried since the camp and did not need to open.</p>
+  <div class="verse">
+    <p>I have been crucified with Christ; and it is no longer I that live, but Christ liveth in me: and that life which I now live in the flesh I live in faith, the faith which is in the Son of God, who loved me, and gave himself up for me.</p>
+    <p>&mdash; Galatians 2:20 (American Standard Version, 1901)</p>
+  </div>
+  <p>Vern had heard the verse a thousand times. Grandma Albaugh had cross-stitched the King James of it over the kitchen door. He heard now, for the first time, the small words in it, <em>no longer I,</em> and how little weight they put on anything.</p>
+  <p>His hands opened. He did not open them. They opened, and there was nobody hanging from them, and there was nothing to fall into. There was the organ through the grille, and the voice upstairs, and the oak grain running under his palms like water in a ditch, and Hal Dunning's red worried face, and Mas on his knees on the stone, and the smell of radiator dust and somebody's hair oil, and all of it was going on, all of it was entirely there, and there was no one in the middle of it it was happening to. He had been looking for the old man to die, and the old man had never had an address. He laughed, or something laughed. It was a very small laugh. It was like hearing a joke you had been told at nine and only now got.</p>
+  <p>He lived. That was the strange part, and the part he could not later make the questionnaires understand. He was still a man named Vernon Albaugh, who had a sunburn line on his neck from Kansas that never went away, and who would be a little hungry when this was over, and who loved his grandmother, and none of that was in charge of anything. It went on the way the service went on upstairs, without needing him to hold it up.</p>
+  <p>Along the pew the other two of their four had gone very still, one with his face in his hands and the other looking up at the low ceiling of the basement as if it were open sky. Years later, when a young man came around with a tape recorder and a questionnaire, all four of them were found to have kept the day, each in his own way, and none of them could say it any better than Vern could.</p>
+  <p>How long it lasted he never knew. The voice on the loudspeaker came to the end of something and the organ came in under it, and in the second pew of the basement chapel Hal Dunning, whose face had gone back to its own color some while ago and who had had, he would always be fairly sure, nothing but a large dose of a vitamin, found that he was crying, with no idea why, and that he did not mind. He said afterward that he had sat through Good Friday services every year of his life and never once heard one.</p>
+</section>
+
+<section>
+  <h2>V. Commonwealth Avenue</h2>
+  <p class="dateline">Afternoon</p>
+  <p>They came up out of the basement late in the afternoon into the ordinary light of Commonwealth Avenue, the four of them and their two leaders, and stood on the steps of the chapel while the traffic went by. The student who had walked out was back inside, sitting with a doctor. A girl in a raincoat went past with a bag of groceries and looked at them as if they were a little drunk, which they were, in a way, and Hal laughed and said good afternoon to her, and she said it back.</p>
+  <p>Mas Kitano shook each of their hands and said he would see them on Monday for the questionnaires. Vern asked him which he had gotten, the drug or the other. Mas said he did not know. He said he had stopped wanting to know, at about the same time Vern had.</p>
+  <p>Vern stood on the steps and looked at his hands. Across each palm were two deep red lines where the edge of the pew back had pressed into them all through the first hour, sharp as if they had been ruled there. He watched them. They were already going, the way the flush had gone out of Hal's face, filling in pink from the edges, softening, and he did not do anything about it. He stood on the steps with his hands open in front of him in the April light and let them fade.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">`All forms are unreal,' he who knows and sees this becomes passive in pain; this is the way that leads to purity.<cite>Dhammapada 279, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>This is the third of three nearly identical commentary stories. Five hundred monks receive a meditation subject from the Buddha, strive hard in the forest without reaching awakening, and come back to ask for a subject better suited to them. Seeing that in the time of the earlier Buddha Kassapa they had spent twenty thousand years contemplating non-self, he tells them that the aggregates are not under our control and are without self, and speaks this verse; at its end all of them are awakened, and those gathered there benefit as well. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-04.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Anatt%C4%81">anattā</a>, non-self.</p>
+    <h3>Marsh Chapel, Good Friday 1962</h3>
+    <p>On Good Friday, April 20, 1962, Walter Pahnke, a Harvard graduate student working under Timothy Leary and the Harvard Psilocybin Project, ran what became known as the <a href="https://en.wikipedia.org/wiki/Marsh_Chapel_Experiment">Marsh Chapel Experiment</a>, or the Good Friday Experiment. Twenty Protestant divinity students from the Boston area, divided into small groups with leaders, took capsules in a double-blind design: half received psilocybin, half a large dose of niacin, chosen because its flushing and tingling would make some of them think they had the drug. They then sat in a chapel in the basement of Boston University's Marsh Chapel while the Good Friday service led upstairs by its dean, <a href="https://en.wikipedia.org/wiki/Howard_Thurman">Howard Thurman</a>, was carried down to them by loudspeaker. Almost all of the psilocybin group reported profound religious experiences. One subject grew acutely anxious, left the chapel and went out along Commonwealth Avenue, and had to be brought back and sedated, a detail Pahnke's published account left out.</p>
+    <p>A follow-up a quarter century later by Rick Doblin found that most of the psilocybin subjects still counted the day among the high points of their spiritual lives, while most of the control group could remember few details of the service; Doblin also criticized the study's methods (<a href="https://maps.org/2006/11/13/good-friday-drugs-mysticism/">MAPS archive of the study and follow-up</a>). The mourner's bench, or altar, at the front of a camp-meeting tabernacle was central to the <a href="https://en.wikipedia.org/wiki/Holiness_movement">Holiness movement</a>, which taught a second work of grace, entire sanctification, after conversion. All characters in this story are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the characteristic of non-self from the Dhammapada commentary (verse 279). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/20-04.htm">The original</a>. Scripture from the American Standard Version (1901). Written by Claude Opus 5.5.
+  <div class="pager"><a href="twelve-stacks.html">&larr; Twelve Stacks</a><a href="index.html">All stories</a><a href="the-tin-horn.html">The Tin Horn &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, lines = [], t0 = performance.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    make();
+  }
+  function make() {
+    lines = [];
+    var n = Math.round(Math.max(18, Math.min(40, H / 22)));
+    for (var i = 0; i < n; i++) {
+      lines.push({ y: (i + Math.random() * 0.8) * H / n, amp: 2 + Math.random() * 5, k: 0.004 + Math.random() * 0.006,
+                   ph: Math.random() * 6.28, w: 0.4 + Math.random() * 0.9, knot: Math.random() < 0.18 ? Math.random() * W : -1 });
+    }
+  }
+  function draw(now) {
+    var t = reduce ? 0 : (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    // the flow swells and settles over about forty seconds
+    var swell = reduce ? 0 : Math.pow(0.5 - 0.5 * Math.cos(t * 2 * Math.PI / 40), 2);
+    for (var i = 0; i < lines.length; i++) {
+      var L = lines[i];
+      ctx.beginPath();
+      for (var x = -10; x <= W + 10; x += 12) {
+        var dy = Math.sin(x * L.k + L.ph) * L.amp;
+        if (L.knot >= 0) { var dx = x - L.knot; dy += 14 * Math.exp(-dx * dx / 3000); }
+        dy += swell * 9 * Math.sin(x * 0.012 - t * 0.35 + i * 0.6);
+        if (x === -10) ctx.moveTo(x, L.y + dy); else ctx.lineTo(x, L.y + dy);
+      }
+      ctx.strokeStyle = 'rgba(138,90,43,' + (0.05 + 0.04 * L.w) + ')';
+      ctx.lineWidth = L.w;
+      ctx.stroke();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>
