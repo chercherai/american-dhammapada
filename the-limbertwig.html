@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Limbertwig</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a cubicle room on the evening shift, dark theme; low in the right margin the face of a panel meter, whose needle hunts a little off its mark and is brought back and stands, while now and then a blue light comes on somewhere else in the room and goes out; datelined sections. */
+  --panel: #0f1518;
+  --panel-2: #182227;
+  --chart: #e6e3d6;
+  --chart-dim: #9ba6a2;
+  --needle: #e3ad52;
+  --arc: #86bfe8;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 85% 110%, #1d2a2f 0%, var(--panel) 62%) fixed, var(--panel);
+  color: var(--chart);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--chart-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--chart-dim); text-decoration: none; border-bottom: 1px solid rgba(230,227,214,.2); }
+.series a:hover { color: var(--needle); }
+a:focus-visible { outline: 2px solid var(--needle); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--needle); text-wrap: balance; text-shadow: 0 0 28px rgba(227,173,82,.2); }
+.epigraph { border-left: 1px solid rgba(227,173,82,.4); padding-left: 1rem; font-style: italic; color: var(--chart-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--needle); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--needle); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,34,39,.8); border: 1px solid rgba(230,227,214,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--arc); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,227,214,.1); color: var(--chart-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--needle); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--chart-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--needle); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--needle); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--needle); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--needle); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--needle); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,34,39,.8); border-left: 2px solid var(--needle); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--chart-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.6 &middot; Pāṭhika the Ājīvaka</span></nav>
+<header>
+  <h1>The Limbertwig</h1>
+  <div class="epigraph">Tain&rsquo;t my mother or my father, but it&rsquo;s me, O Lord,<br>Standin&rsquo; in the need of prayer.<br>&mdash; &ldquo;It&rsquo;s Me, O, Lord,&rdquo; as printed in 1925</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it come down to me,</span> in the trailer camp below the Turnpike.</p>
+
+<section>
+  <h2>I. The Boy from Home</h2>
+  <p class="dateline">Middletown trailer camp, Oak Ridge, Tennessee &middot; October 1944</p>
+  <p>Ina Ledford had a trailer in Row F of the Middletown camp, a husband on the pipe gangs at K-25, a boy of eleven, and a stool in front of a board at Y-12. Besides these she had Arvil Tallent.</p>
+  <p>Arvil was twenty-three and came from Englewood, the same as the Ledfords. He had been called to preach at fifteen, in a brush arbor behind the hosiery mill, and no church had called him since. The Army would not have him on account of an eardrum. He drove nails on the hutment crews and slept in a hutment with four other men, and he ate at Ina&rsquo;s table. She washed his shirts in the bathhouse tubs along with Carl&rsquo;s and turned his collars when they frayed. She saved him the top of the milk and what sugar the stamps allowed. When people in the row asked was he her boy, she said he was the same as.</p>
+  <p>In return he told her things. He knew who in the camp drank, and who danced on the tennis courts by the recreation hall, and which trailer had a woman in it who was nobody&rsquo;s wife. He knew what the foremen let slide. He knew, he said, what they were making over the ridge, and he would lean across the oilcloth and all but say it, with a billboard up on the Turnpike telling every soul who passed to leave what they saw here where they saw it. Ina took it in with her supper. She had been raised to think that a man who could name what was wrong with everybody stood closer to God than the rest of them.</p>
+  <p>On Thursday nights, when the last wash was wrung out, there was a meeting in Bathhouse Seven. Mrs. Sisk went, from the trailer on the left, and Mrs. Hembree from the trailer on the right, and they came back along the plank walk at ten o&rsquo;clock both talking at once. The woman who held it was the woman who kept the bathhouse. Her name was Docia Brakebill, and the camp called her Aunt Docia. All day she mopped the concrete and fed the water heater. On Thursdays she turned a washtub over to sit on and talked a while, and then they sang.</p>
+  <p><em>I never heard it laid out so plain,</em> Mrs. Sisk said. <em>Not at home. Not anywhere.</em></p>
+  <p>Ina wanted to go. She put it to Arvil the way she would have asked leave of a pastor.</p>
+  <p><em>Don&rsquo;t go,</em> he said.</p>
+  <p>She asked the next week, and the week after.</p>
+  <p><em>She mops a bathhouse. She belongs to no church I ever heard of, and a woman has no call to hold a meeting. Don&rsquo;t go.</em></p>
+  <p>Ina thought it over at her board, between readings. If she was not to go to the old woman, nobody had said the old woman could not come to her.</p>
+</section>
+
+<section>
+  <h2>II. The Errand</h2>
+  <p class="dateline">Saturday evening</p>
+  <p>She was on the three-to-eleven that week. Before she left for the bus she gave Doyle his orders. <em>Go tell Miss Docia I&rsquo;d be proud to have her to dinner tomorrow. Tell her Row F, the fourteenth one down, with the lard can of marigolds on the step.</em></p>
+  <p>Doyle went by the hutments first. He generally did. Arvil was on his cot with his shoes off.</p>
+  <p><em>Where are you headed?</em></p>
+  <p><em>Mama sent me to ask Miss Docia to dinner.</em></p>
+  <p><em>Don&rsquo;t go.</em></p>
+  <p><em>I&rsquo;ve got to. She&rsquo;ll skin me.</em></p>
+  <p><em>There&rsquo;s a stack cake, isn&rsquo;t there. And a chicken.</em> Arvil sat up. <em>You and me could eat all that ourselves. Don&rsquo;t go.</em></p>
+  <p><em>She&rsquo;ll whip me, Arvil.</em></p>
+  <p>Arvil studied about it. <em>Go on, then. But don&rsquo;t tell her the row, and don&rsquo;t tell her how many down, and don&rsquo;t say marigolds. Let on like you live right there by the bathhouse. And when you leave, cut out toward the Turnpike like you were going someplace else, and then come back here.</em></p>
+  <p>Doyle did it just that way. The old woman was wringing a mop into the floor drain. She heard him out and said she would be glad to come, and she did not ask him one thing. He ran off toward the Turnpike and came back around the coal pile to the hutments.</p>
+  <p><em>What did you do?</em></p>
+  <p><em>Everything you said.</em></p>
+  <p><em>You did fine. Now it&rsquo;s you and me that eats it.</em></p>
+</section>
+
+<section>
+  <h2>III. The Fourteenth One Down</h2>
+  <p class="dateline">Sunday</p>
+  <p>Arvil came before daylight, while Carl was on his shift and Ina was down at the bathhouse filling the water can, and he took the boy in behind the curtain where the bed was.</p>
+  <p>The women of the row had been at it since Friday. Mrs. Sisk had scrubbed the linoleum with lye soap. Mrs. Hembree carried over the only stuffed chair in Row F, with a doily pinned to the back of it. There were five kinds of flowers in fruit jars: marigolds and zinnias, goldenrod, ironweed, and the small late asters that people there call farewell-summer. Three households had gone in together on the sugar.</p>
+  <p>There were close to four thousand trailers in Oak Ridge that fall. The ones at Middletown stood in rows on scraped red clay, every one like the next, with a plank walk down the middle and the numbers mostly gone from the doors. Men who had lived in the camp a year walked into the wrong kitchen after dark. In October the fog came up off the creek bottom and stood in the rows until nine.</p>
+  <p>Aunt Docia got down off the work bus from Oliver Springs at seven, with her badge pinned to her coat. She did not stop at the bathhouse to ask anybody. Mrs. Sisk was out on her step ready to wave, and she said afterward that she never got her hand up. The old woman came along the plank walk through the fog, past thirteen trailers, and did not turn her head to one of them. At the fourteenth she stepped off the planks, looked down a minute at the marigolds in the lard can, and knocked.</p>
+  <p>Ina poured water over her hands from the dipper, since there was no tap, and held the towel for her, and put her in the stuffed chair. At noon she set down fried chicken and soup beans and cornbread, and leather britches cooked with a piece of side meat, and then the stack cake, six layers, with dried apples between. Aunt Docia ate like a woman who had worked every day since she was six. When she was done she looked out the little window over the table.</p>
+  <p><em>There was a Limbertwig stood right about where your step is,</em> she said. <em>My daddy set it out the year I was born. This was his upper corn ground, all through here. That bathhouse is sitting in the orchard.</em></p>
+  <p><em>They told us it was all cleared off,</em> Ina said.</p>
+  <p><em>They hung a paper on our door in November, and we were gone by Christmas. They pulled the house down, and they scraped the ground and graveled it and stood these things on it in rows. And it is every bit of it right where it was. I couldn&rsquo;t get lost in here if I tried.</em></p>
+  <p>Then she returned thanks. She had a sweet voice, old as she was, and she did not hurry it. She gave thanks for the chicken and for the hands that fried it, and went on from there to what a person is given and what a person does with it, and Ina, listening, said <em>That&rsquo;s so,</em> and then <em>That&rsquo;s so</em> again, right out loud, as she never had in any church.</p>
+  <p>The curtain came down off its nails.</p>
+  <p><em>She is none of mine anymore,</em> Arvil said. He was white around the mouth. <em>You&rsquo;re lost, Ina. You old fool, sitting there saying amen to a mop woman.</em> He had more than that, and it was for both of them. He spoke of women who set up to teach, and of people who could not so much as hold on to the place they were born, and of what he was owed for two years of telling the truth at that table. Then he went out the door and up the plank walk with one arm in his coat.</p>
+  <p>Doyle stood where the curtain had been.</p>
+  <p>Aunt Docia took up where she had left off. But Ina&rsquo;s face was red to the hair and her hands were working in her lap, and none of it reached her.</p>
+  <p><em>Can&rsquo;t you keep your mind on what I&rsquo;m saying, honey?</em></p>
+  <p><em>No, ma&rsquo;am. What he said has got me all to pieces.</em></p>
+  <p><em>Don&rsquo;t study a man like that. He has eaten off the leavings of other people&rsquo;s plates all his life, and other people&rsquo;s doings are all he has to chew on. Don&rsquo;t study what anybody else has done, nor what they&rsquo;ve let go undone. You look to what you&rsquo;ve done your own self, and what you&rsquo;ve let go.</em></p>
+  <p>And she sang it, low, there at the table, with her hand keeping the time on the oilcloth.</p>
+  <div class="verse">
+    <p>It&rsquo;s me, it&rsquo;s me, it&rsquo;s me, O Lord,<br>Standin&rsquo; in the need of prayer.</p>
+    <p>Tain&rsquo;t my mother or my father, but it&rsquo;s me, O Lord,<br>Standin&rsquo; in the need of prayer.</p>
+    <p>Tain&rsquo;t the deacon or my leader, but it&rsquo;s me, O Lord,<br>Standin&rsquo; in the need of prayer.</p>
+    <p>&mdash; &ldquo;It&rsquo;s Me, O, Lord,&rdquo; The Book of American Negro Spirituals (1925)</p>
+  </div>
+  <p>Ina said afterward that it was like the needle on her board, when it quits hunting and stands.</p>
+</section>
+
+<section>
+  <h2>IV. The Board</h2>
+  <p class="dateline">Y-12 &middot; that night, and the next August</p>
+  <p>They had trained her for three weeks in a room the girls called the Bullpen. Nobody there said what the machine was for. A man told them he could teach them what to do and could not tell them what they were doing, and after that it was all knobs and gauges. Her knobs had letters on them. When M was right and G was right, the needle stood up where it belonged. When she let it get away, the unit let go with a pop, and a blue light came on, and the floor men ran. <em>Keep yours where it goes,</em> the supervisor said. <em>Don&rsquo;t study on it, and don&rsquo;t study the next girl&rsquo;s.</em></p>
+  <p>Ina had always studied the next girl&rsquo;s. The one on her right was from Lenoir City and popped twice a shift. Ina could have told you each time, and how long the floor men took, and what the supervisor&rsquo;s face did. She kept a kind of account of that whole row.</p>
+  <p>That night a blue light came on two boards down, and then one on her right, and feet went by behind her stool. Her hand stayed on the knob. Her needle stood. She did not know until the shift changed at eleven whose it had been.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On the sixth of August the Knoxville paper said in tall letters what had been made at Oak Ridge and where it had been put down. Horns blew on the Turnpike until dark. In Row F everybody was out on the plank walk telling what the scientists had done, and the Army, and the Japanese, and what Arvil Tallent would say he had known all along, now that he was preaching in McMinn County.</p>
+  <p>Ina sat on her step by the lard can. She had her right hand open in her lap, the thumb and two fingers a little apart, the width of a knob, and she was looking at it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Not the perversities of others, not their sins of commission or omission, but his own misdeeds and negligences should a sage take notice of.<cite>Dhammapada 50, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a housewife of Sāvatthī keeps a naked ascetic named Pāṭhika, of the fatalist <a href="https://en.wikipedia.org/wiki/%C4%80j%C4%ABvika">Ājīvika</a> order, and looks after him like a son. When her neighbors praise the Buddha she asks leave to go and hear him, and Pāṭhika forbids it, so she sends her boy to invite the Buddha to her house instead. The ascetic coaches the boy to hide where the house is, meaning to eat the meal himself, but a Buddha needs no directions and comes straight to the door. Hearing her applaud the teaching, Pāṭhika bursts out of the back room, abuses them both and runs off. She is too shaken to listen, and the Buddha tells her to leave other people&rsquo;s doings alone and look to her own. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-06.htm">the full commentary story</a>.</p>
+    <h3>Oak Ridge, 1944</h3>
+    <p>In the autumn of 1942 the Army took some 59,000 acres of Anderson and Roane counties for the <a href="https://en.wikipedia.org/wiki/Clinton_Engineer_Works">Clinton Engineer Works</a>. More than a thousand families were living there, on farms and in hamlets such as Elza, Robertsville and Scarboro. Some came home to find the notice nailed to the door or to a tree; most were given six weeks to leave and some only two. Many of the <a href="https://ahf.nuclearmuseum.org/ahf/history/civilian-displacement-oak-ridge-tn/">people put off the land</a> later took jobs inside the fence. The town built over their fields held 75,000 people by 1945. Workers who earned the least were assigned to hutments and to nearly four thousand trailers, which had no bathrooms; families used shared bathhouses and carried their water. One of the camps, <a href="https://home.nps.gov/places/oak-ridge-wayside-middletown-trailer-park.htm">Middletown</a>, stood along the Oak Ridge Turnpike. Bathhouse Seven, its Thursday meeting, Aunt Docia and the Ledfords are invented.</p>
+    <p>At the Y-12 plant, Tennessee Eastman hired about ten thousand women, most of them just out of East Tennessee high schools, to run the calutrons that separated uranium-235. These <a href="https://en.wikipedia.org/wiki/Calutron_Girls">cubicle operators</a> were trained for three weeks and told nothing of the purpose. A manager is remembered as saying, &ldquo;We can train you how to do what is needed, but cannot tell you what you are doing.&rdquo; They sat on stools before tall boards and kept needles in place with lettered knobs. In a week-long production race against physicists from Berkeley, the women won; the physicists could not stop investigating every flicker of a dial. Most operators learned what they had made on August 6, 1945. The song Aunt Docia sings is an African American spiritual of unknown origin. It was recorded by the Elkins-Payne Jubilee Singers in 1923 and by a white West Virginia string band in 1927 (see the <a href="https://folklorist.org/song/Standing_in_the_Need_of_Prayer">Traditional Ballad Index</a>), and its words are given here as James Weldon Johnson and J. Rosamond Johnson printed them in <a href="https://archive.org/details/31761097696793"><em>The Book of American Negro Spirituals</em></a> in 1925.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Ājīvaka Pāṭhika from the Dhammapada commentary (verse 50). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-06.htm">The original</a>. Song text from The Book of American Negro Spirituals (1925). Written by Claude Fable 5.2.
+  <div class="pager"><a href="seven-doors.html">&larr; Seven Doors</a><a href="index.html">All stories</a><a href="besobila.html">Besobila &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0;
+  var hunt = 0, huntAt = 500, huntPhase = 0;
+  var pops = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function meter(ang) {
+    var R = Math.max(54, Math.min(96, W * 0.11));
+    var cx = W - R - 22, cy = H - 18;
+    var a0 = -Math.PI * 0.82, a1 = -Math.PI * 0.18;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = 'rgba(230,227,214,0.16)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, cy, R, a0, a1); ctx.stroke();
+    for (var i = 0; i <= 20; i++) {
+      var a = a0 + (a1 - a0) * i / 20, long = i % 5 === 0;
+      var r0 = R - (long ? 9 : 5);
+      ctx.strokeStyle = 'rgba(230,227,214,' + (long ? 0.22 : 0.12) + ')';
+      ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0);
+      ctx.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); ctx.stroke();
+    }
+    var mark = a0 + (a1 - a0) * 0.66;
+    ctx.strokeStyle = 'rgba(227,173,82,0.5)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(cx + Math.cos(mark) * (R + 3), cy + Math.sin(mark) * (R + 3));
+    ctx.lineTo(cx + Math.cos(mark) * (R + 10), cy + Math.sin(mark) * (R + 10)); ctx.stroke();
+    var na = mark + ang;
+    ctx.strokeStyle = 'rgba(227,173,82,0.42)'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(na) * (R - 4), cy + Math.sin(na) * (R - 4)); ctx.stroke();
+    ctx.fillStyle = 'rgba(227,173,82,0.3)';
+    ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI * 2); ctx.fill();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var ang = 0;
+    if (!reduce) {
+      t++;
+      if (hunt === 0 && t > huntAt) { hunt = 1; huntPhase = 0; }
+      if (hunt === 1) {
+        huntPhase++;
+        var p = huntPhase / 520;
+        var env = Math.sin(Math.min(1, p) * Math.PI);
+        ang = env * (0.16 * Math.sin(huntPhase * 0.035) + 0.07 * Math.sin(huntPhase * 0.11));
+        if (p >= 1) { hunt = 0; huntAt = t + 900 + Math.random() * 1500; }
+      } else {
+        ang = 0.006 * Math.sin(t * 0.05);
+      }
+      if (Math.random() < 0.0012 && pops.length < 2) {
+        pops.push({ x: W * (0.04 + Math.random() * 0.2), y: H * (0.2 + Math.random() * 0.55), life: 0, max: 220 });
+      }
+      for (var i = pops.length - 1; i >= 0; i--) {
+        var o = pops[i]; o.life++;
+        var q = o.life / o.max, a = Math.min(1, q * 10) * (1 - q) * 0.16;
+        var g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, 90);
+        g.addColorStop(0, 'rgba(134,191,232,' + a + ')');
+        g.addColorStop(1, 'rgba(134,191,232,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(o.x, o.y, 90, 0, Math.PI * 2); ctx.fill();
+        if (o.life >= o.max) pops.splice(i, 1);
+      }
+    }
+    meter(ang);
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

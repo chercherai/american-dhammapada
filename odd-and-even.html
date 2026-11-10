@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Odd and Even</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on sun-bleached paper; heat rises off the asphalt at the foot of the page in slow bands. */
+  --ground: #f2ece0;
+  --ground-2: #e6dccb;
+  --paper: #2b2621;
+  --paper-dim: #6a6056;
+  --accent: #6a2f5c;
+  --glow: #b8741e;
+  --asphalt: #5e5852;
+  --grape: #6a2f5c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(to bottom, #f5f0e6 0%, #ece3d2 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,38,33,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(106,47,92,.22); }
+.epigraph { border-left: 1px solid rgba(106,47,92,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(230,219,201,.75); border: 1px solid rgba(43,38,33,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,38,33,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,38,33,.1); border-bottom: 1px solid rgba(43,38,33,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(230,219,201,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 18.7 &middot; Pañcasata-Upāsaka</span></nav>
+<header>
+  <h1>Odd and Even</h1>
+  <div class="epigraph">In my judgment, such of us as have never fallen victims, have been spared more from the absence of appetite, than from any mental or moral superiority over those who have.<br>&mdash; Abraham Lincoln, Address to the Springfield Washingtonian Temperance Society, 1842</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Way I heard it,</span> in the back of the Columbia van.</p>
+
+<section>
+  <h2>I. The Back Rows</h2>
+  <p class="dateline">Columbia, Maryland · June 1979</p>
+  <p>The van left the lot behind the Oakland Mills village center at ten minutes to seven, and it did not wait. Everybody knew that. Bernie Ostrowski had driven it since the winter of the first gas lines, in 1974, a fifteen-passenger Dodge the color of a Concord grape, and in five and a half years he had left behind two of his own supervisors at the General Accounting Office, a woman in a wedding dress on her way to the courthouse, and once, by about forty seconds, his wife. The riders paid him by the month. He kept the van in his driveway on Sohap Lane, washed it on Saturdays, and drove it down Route 29 and Colesville Road and Sixteenth Street every working day, and he almost never said anything, because he was driving.</p>
+  <p>There were eleven riders that June. Most of them slept or read the <em>Post</em>. The five in the back two rows talked, all the way down and all the way back, and over the years each of the five had come to know one thing about the other four, which was the thing each of them did not do.</p>
+  <p>Walt Haney did not kill anything. He was thirty-three and worked for the Fish and Wildlife Service in the Interior building, where he spent half the year adding up ducks. Every winter he flew low over the Chesapeake in a small plane with a clipboard and counted canvasbacks on the water. He had been a Marine at Hue in 1968 and had come home and put his father’s shotgun in the attic, and since then he had not killed so much as a fish. When a wasp came in the van window he trapped it in a paper cup against the glass and held it there until the next light, and let it out.</p>
+  <p>Carol Lindgren did not lie. She was an economist at the Bureau of Labor Statistics and worked on the Consumer Price Index, which that year was rising so fast that people asked her about it at parties as though she were doing it to them. She said the number exactly. She did not tell her mother that the pot roast was good when it was not, and her husband no longer asked her about his haircuts. A man at a party in Ellicott City had once asked her whether she was enjoying herself, and she had told him, and he had not spoken to her since.</p>
+  <p>Ray Coffman did not steal. He was fifty, a contracting officer at the General Services Administration, in the branch that let out repair work on federal buildings. A grand jury in Washington had spent the past year looking into bribes on exactly those contracts, and men two doors down from Ray had been called to testify. Ray had nothing to tell them. When a contractor left a bottle of Canadian whisky on his desk at Christmas he sent it back by registered mail with a letter, and paid for the registered mail. He did not take pencils home. He kept a list of the personal telephone calls he made from his office and paid the cost of them into an envelope.</p>
+  <p>Gail Fennell did not go with another man. She was thirty-eight and worked at Housing and Urban Development. Her husband Tom had been told he had multiple sclerosis in 1975. He had stopped driving the next year and stopped working the year after, and he was home in Columbia all day in a chair by the window, doing the crossword in ink. There was a man in Gail’s office who would have given up a good deal for her, and both of them knew it, and every evening at five-fifteen she got into the van.</p>
+  <p>Leon Matthews did not drink. He was forty-five and worked in the Wage and Hour Division at the Department of Labor, and on Sundays he was a deacon in the Black Baptist congregation that shared the Wilde Lake interfaith center with the Catholics and the Methodists and the Lutherans, all of them taking turns in the same plain rooms. In the spring of 1971 he had come to in a ditch beside Route 40 with his car on its roof and the radio still playing, and he had not had a drink since. At the office Christmas party he held a ginger ale in a plastic cup all evening, so that no one would bring him anything.</p>
+  <p>Each of them had made a promise about one thing. Each of them kept it. And each of them believed, though none of them had ever said so out loud, that the thing he kept was the hardest of the five.</p>
+</section>
+<section>
+  <h2>II. Odd and Even</h2>
+  <p class="dateline">July</p>
+  <p>By the middle of June there were lines at every station in Maryland, and the governor had put the state on odd and even. If your license plate ended in an odd number you bought gas on odd days, and if it ended in an even number, on even days. Carol had brought the executive order to the van in her purse to read them a line from it, because the state had thought it necessary to put in writing that zero is an even number.</p>
+  <p>The lines ran out of the stations and down the shoulders of the roads. Up in Levittown, Pennsylvania, people had thrown bottles at the police and set two cars on fire, chanting for gas. The van’s plate was even, and Bernie bought his gas before daylight on even days and came home with the tank full, and on odd days the van went by the lines with its riders looking out at them.</p>
+  <p>On a Sunday night in the middle of July the President went on television and told the country it was having a crisis of confidence. On Monday morning the radio in the van played pieces of the speech over again, until Bernie turned it off.</p>
+  <p>One afternoon that week, going home, the van came to a stop on Colesville Road behind a line for a Sunoco station that had backed out of the lot and into the right-hand lane and up over the hill. It was in the nineties. The van had no air conditioning that worked. They sat with the windows open and the engine off and the smell of everyone else’s exhaust coming in.</p>
+  <p><em>Crisis of confidence,</em> said Ray. <em>I’ll tell you a crisis. Another man on my floor got a subpoena last week.</em></p>
+  <p><em>At least you know what you’re not supposed to do,</em> said Walt. <em>Try not killing anything in Maryland in July.</em> He slapped his neck, looked at his palm, and showed it to them. A mosquito. <em>There. Every day I break it. Every day before lunch.</em></p>
+  <p><em>Everybody lies forty times a day,</em> Carol said. <em>How are you. Fine, thanks. I can’t say fine, thanks. Do you know what that’s like? You can’t get through a grocery line.</em></p>
+  <p><em>Nobody sees stealing,</em> Ray said. <em>That’s what makes it hard. You could take a box of envelopes home every night for thirty years and nobody would ever know but you. You have to be your own auditor.</em></p>
+  <p><em>Every retirement lunch in my building,</em> said Leon. <em>Every Friday at five. Somebody’s always holding a door open on Fourteenth Street, and it’s always cool in there, and somebody always says one won’t hurt you, Leon.</em></p>
+  <p>Gail had been looking out the window. <em>You all go home,</em> she said, <em>and nobody’s waiting for you to make a mistake. That’s all I’m going to say.</em></p>
+  <p>Nobody answered her for a while. Then they all started again, louder, the way people do when someone has said the true thing and they would rather not have heard it. The man in the seat in front of them, who rode in from Long Reach and worked at the Smithsonian, put his newspaper over his face.</p>
+  <p><em>Bernie,</em> said Ray finally. <em>Settle it. You’ve heard all of us for five years. Which one.</em></p>
+</section>
+<section>
+  <h2>III. The Driver</h2>
+  <p class="dateline">The same afternoon</p>
+  <p>Bernie did not turn around. He was watching the car in front, a Pinto with a dog in the back window, which had moved up about a length.</p>
+  <p><em>They’re all hard,</em> he said.</p>
+  <p><em>That’s no answer,</em> said Carol. <em>That’s what you say to children.</em></p>
+  <p>He started the engine and moved the van up a length behind the Pinto and turned it off again. There was a book on the dashboard, a library copy of Lincoln’s speeches with a GAO routing slip in it for a marker. He read at red lights. Everyone in the van knew that, and nobody had ever asked him what. He reached the book back over the seat without looking and Leon took it.</p>
+  <p><em>Where the slip is,</em> said Bernie. <em>Read them that.</em></p>
+  <p>Leon looked at the page a while first, the way he would look over a Scripture before he read it out on a Sunday. It was a speech Lincoln had made in Springfield in 1842, to a society of reformed drunkards.</p>
+  <div class="verse">
+    <p>In my judgment, such of us as have never fallen victims, have been spared more from the absence of appetite, than from any mental or moral superiority over those who have.</p>
+    <p>&mdash; Abraham Lincoln, Address to the Springfield Washingtonian Temperance Society, 1842</p>
+  </div>
+  <p><em>I never took a drink,</em> said Bernie. <em>Never wanted one. My father drank enough for the both of us at Sparrows Point for thirty years. So that one’s easy for me, and it’s no credit to me. I never had the appetite.</em> He watched the Pinto. <em>Walt, I’d have swatted your wasp and not thought twice. Carol, I tell my wife her coffee is fine every morning of my life. Whichever one you don’t want, that one’s easy. Whichever one you want, that’s the hard one. It’s the same for all five.</em></p>
+  <p><em>So which is worst?</em> said Ray, but quieter.</p>
+  <p><em>Any of them. You let any one of them go and you’ve dug yourself up by the roots. Doesn’t matter which one. It’s the same tree.</em></p>
+  <p>The line moved. The Pinto went up over the hill and the van went after it, and the attendant at the Sunoco was out in the road with a cardboard sign that said NO GAS, waving everyone on, and the whole line pulled out around him and went on north.</p>
+  <p>Nobody in the back said anything after that. Leon kept the book on his knee with his thumb in the page. Somewhere past the Beltway Gail fell asleep against the window, which she had never done before, and Carol took off her own cardigan and folded it and put it between Gail’s head and the glass.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The next morning, an odd day, a yellowjacket was in the van when Bernie unlocked it in the lot behind the village center. It had come in the night through the vent and was walking up and down the inside of the back window.</p>
+  <p>Walt went down the aisle with his paper cup. The yellowjacket would not go into it. It went up the glass and down, and along the rubber seal, and up again.</p>
+  <p>It was eleven minutes to seven, then ten to, then nine. Nobody said anything about the time. The man from Long Reach lowered his newspaper and watched. Carol held the back door open. Ray held a folded <em>Post</em> flat against the glass to make a wall, and Leon stood beside him and told Walt, <em>Easy, easy, you got him, no, there he goes.</em> Gail said nothing and kept her hand flat on the seat back, waiting.</p>
+  <p>Bernie sat behind the wheel with the engine running. He did not look at his watch. He watched the whole thing in the rearview mirror, until Walt came down the step with the cup closed under his palm and walked out across the parking lot to the strip of grass and the young trees at the edge of it, and opened his hand.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">He who destroys life, who speaks untruth, who in this world takes what is not given him, who goes to another man's wife;<cite>Dhammapada 246, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">And the man who gives himself to drinking intoxicating liquors, he, even in this world, digs up his own root.<cite>Dhammapada 247, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">O man, know this, that the unrestrained are in a bad state; take care that greediness and vice do not bring thee to grief for a long time!<cite>Dhammapada 248, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a group of lay followers at Jetavana each keep one of the <a href="https://en.wikipedia.org/wiki/Five_precepts">five precepts</a>: one abstains from killing, another from lying, and so on. They fall into a dispute, each insisting that his own precept is the hard one, and take the question to the Buddha. He does not rank them, and says that every precept is hard to keep. The verses follow, naming all five wrongs together. Some texts number the disciples at five hundred; the translator notes that the story itself calls for five. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-07.htm">the full commentary story</a>.</p>
+    <h3>Columbia, Maryland, 1979</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Columbia,_Maryland">Columbia</a> was founded in 1967 by the developer <a href="https://en.wikipedia.org/wiki/James_Rouse">James Rouse</a> as a planned town between Baltimore and Washington, meant to be free of racial, religious and class segregation. It was built as a set of villages, and its streets were named from <a href="https://columbiaassociation.org/blog/parents/the-literature-lesson-behind-columbias-streets/">poems and novels</a>. Sohap Lane in Oakland Mills, for example, comes from a Carl Sandburg poem. Congregations shared buildings instead of building their own. The <a href="https://baltimorepostexaminer.com/columbia-50-part-8-religion-interfaith-centers-sought-bring-congregations-together/2017/02/14">Wilde Lake Interfaith Center</a> opened in 1971 for a Catholic parish, a Black Baptist church, a Methodist&ndash;Presbyterian church and a Lutheran congregation, and the Catholics took down their crucifix and Stations of the Cross whenever the room was needed for Rosh Hashanah.</p>
+    <p>The Iranian Revolution set off the <a href="https://en.wikipedia.org/wiki/1979_oil_crisis">1979 oil crisis</a>, with gas lines, panic buying, and riots in Levittown, Pennsylvania. Maryland put drivers on odd-even days. Its <a href="https://msa.maryland.gov/megafile/msa/speccol/sc2900/sc2908/000001/000739/html/am739--3468.html">executive order</a>, effective June 21, 1979, explained that "Zero is an even number." On July 15 President Carter gave his televised "<a href="https://en.wikipedia.org/wiki/Crisis_of_Confidence">crisis of confidence</a>" address. The year before, federal grand juries had begun investigating <a href="https://www.thecrimson.com/article/1978/9/19/grand-juries-investigate-gsa-scandal-pwashington-grand/">fraud and bribery at the General Services Administration</a>, including bribes on repair contracts for federal buildings in Washington. Bernie's bookmark is in Lincoln's <a href="https://papersofabrahamlincoln.org/documents/D200294">address of February 22, 1842</a> to the Springfield branch of the <a href="https://en.wikipedia.org/wiki/Washingtonian_movement">Washingtonians</a>, a temperance movement begun by reformed drinkers.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the five lay disciples from the Dhammapada commentary (verses 246&ndash;248). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-07.htm">The original</a>. Scripture from Abraham Lincoln&rsquo;s address to the Springfield Washingtonian Temperance Society (1842). Written by Claude Opus 5.5.
+  <div class="pager"><a href="pond-mullet.html">&larr; Pond Mullet</a><a href="index.html">All stories</a><a href="fire-year.html">Fire Year &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Heat off the asphalt: faint wavering bands rise slowly from the foot of the page and thin out.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, bands = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(b, fresh) {
+    b.y = H * (0.96 + Math.random() * 0.06);
+    b.top = H * (0.55 + Math.random() * 0.2);
+    b.v = 0.12 + Math.random() * 0.12;
+    b.amp = 2 + Math.random() * 3;
+    b.len = 120 + Math.random() * 160;
+    b.ph = Math.random() * 10;
+    b.w = 0.8 + Math.random() * 1.2;
+    if (fresh) b.y = b.top + Math.random() * (H - b.top);
+    return b;
+  }
+  function make() {
+    bands = [];
+    var n = Math.round(Math.max(8, Math.min(16, W / 80)));
+    for (var i = 0; i < n; i++) bands.push(spawn({}, true));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var g = ctx.createLinearGradient(0, H * 0.7, 0, H);
+    g.addColorStop(0, 'rgba(94,88,82,0)');
+    g.addColorStop(1, 'rgba(94,88,82,0.06)');
+    ctx.fillStyle = g; ctx.fillRect(0, H * 0.7, W, H * 0.3);
+    for (var i = 0; i < bands.length; i++) {
+      var b = bands[i];
+      if (!reduce) { b.y -= b.v; if (b.y < b.top) spawn(b, false); }
+      var span = H - b.top;
+      var p = Math.min(1, Math.max(0, (H - b.y) / span));
+      var a = Math.sin(p * Math.PI) * 0.11;
+      if (a < 0.005) continue;
+      ctx.strokeStyle = 'rgba(184,116,30,' + a + ')';
+      ctx.lineWidth = b.w;
+      ctx.beginPath();
+      for (var x = -20; x <= W + 20; x += 8) {
+        var y = b.y + Math.sin(x / b.len + b.ph + t * 0.02) * b.amp * (0.6 + p);
+        if (x === -20) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

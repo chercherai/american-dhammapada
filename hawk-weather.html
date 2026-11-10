@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hawk Weather</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose under a pale September sky, with faint lines of moving air
+     and, now and then, a hawk that crosses on them and leaves nothing behind. */
+  --ground: #e7eae4;
+  --ground-2: #dde2da;
+  --paper: #263035;
+  --paper-dim: #5c676b;
+  --rust: #9a4724;
+  --ridge: #4c6273;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #d9e0e1 0%, var(--ground) 45%, #e9e6dc 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(38,48,53,.2); }
+.series a:hover { color: var(--rust); }
+a:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--rust); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(154,71,36,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; color: var(--ridge); }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--rust); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--rust); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(246,247,243,.82); border: 1px solid rgba(38,48,53,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--ridge); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(38,48,53,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--rust); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--rust); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(38,48,53,.15); border-bottom: 1px solid rgba(38,48,53,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--rust); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--rust); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--rust); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(246,247,243,.82); border-left: 2px solid var(--rust); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 18.12 &middot; Subhadda</span></nav>
+<header>
+  <h1>Hawk Weather</h1>
+  <div class="epigraph">If you are looking for perfect safety, you will do well to sit on a fence and watch the birds.<br>&mdash; Wilbur Wright, <i>Some Aeronautical Experiments</i> (1901)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So hab ich&rsquo;s gheert,</span> under the Blue Mountain.</p>
+
+<section>
+  <h2>I. The Cabinet</h2>
+  <p class="dateline">Northern Berks County, Pennsylvania &middot; 1905</p>
+  <p>Elias Dreibelbis kept school at the Eck for forty-three years, and in all that time no scholar of his told him anything he did not already know. He taught three generations of the township to cipher, to read the English reader and the German Testament, and to stand up when the director came in. He caned the fathers, and later he caned their sons. When he gave up the school in 1894 the directors presented him with a clock, and he went home to his stone house under the mountain and to his birds.</p>
+  <p>There were four hundred and twelve of them, in glass-fronted cases along three walls of the front room. He had shot and skinned and mounted every one himself, with arsenic soap and tow and glass eyes that came from Philadelphia by the gross. The hawks were the pride of it. He had sixty-one, from the little sharp-shins no bigger than a pigeon up to a golden eagle with its wings half open over the parlor door, and nearly all of them had come off the rock the township called the Pulpit, on the crest of the Blue Mountain, where every fall the hawks came down the ridge out of the northeast. On a good day they came one behind the other from breakfast to supper, so low along the face of the mountain that a boy could hit one with a stone. Every farm boy in the township had gone up there with a shotgun at one time or another. Elias had gone up for fifty Septembers. He weighed what he brought down on the scale at the post office, measured the wings with a carpenter&rsquo;s rule, and wrote it in a ledger, and people said he knew more about the hawks of the Blue Mountain than the Lord did, who had only made them.</p>
+  <p>There were three things he did not know. In the winter of 1891 he wrote them out in his best copybook hand and sent them to three authorities. The first was whether there was a fixed road in the air which the birds of prey kept to in their passage, since they came by the same rock every year. The second was whether a man could learn the flight of birds from the study of them in the hand. The third was whether there was anywhere, high up, a constant and steady wind.</p>
+  <p>The professor of natural history at Franklin and Marshall wrote back two pages on the wisdom of the Creator&rsquo;s design. <i>Der Readinger Adler</i> printed them the next spring among the farm notes, under the heading <i>Curious Inquiries</i>, with no answers. The Smithsonian Institution in Washington took two years and then sent a grey paper-covered memoir by the Secretary himself, Professor Langley, called <i>The Internal Work of the Wind</i>, with a printed slip. Elias read as far as the eighth page, decided that Professor Langley had not understood the question, marked his place with the slip, and put the memoir in the drawer under the eagle.</p>
+  <p>He did not ask Irvin Moyer. Irvin Moyer had sat in the third row at the Eck from 1878 to 1885 and been kept in at recess for drawing hawks in the margins of his arithmetic. He was a carpenter now, thirty-three years old and unmarried, who kept house with his sister Sallie on the Moyer place at the foot of the mountain. For three summers he had been jumping off the mountain on wings.</p>
+</section>
+
+<section>
+  <h2>II. The First of Everything</h2>
+  <p class="dateline">The Moyer place &middot; 1904&ndash;1905</p>
+  <p>He had built the first pair from a drawing in a Chicago engineering journal: two wings of bleached muslin, one above the other, on frames of spruce from the lumberyard at Hamburg, braced with piano wire and varnished till they rang when you flicked them. He hung between them by his armpits, ran down the high pasture into the wind, and was lifted. The first summer he went forty feet and broke two ribs, his own and the machine&rsquo;s. The second summer he went across the whole pasture and over the rail fence at the bottom, and the Reformed pastor preached on the tower of Babel, and the Lutheran pastor, who had a son, did not. Men drove out from Kempton on Sunday afternoons to sit on the fence and watch him, the way they would have watched a man try to ride a bull.</p>
+  <p>Then there was the day in October of 1904 that Jonas Dreibelbis told about for the rest of his life. The wind had come around northwest in the night, cold, the kind of wind the old men called hawk weather, and Jonas was up in the high pasture with the Moyers&rsquo; hired boy when Irvin ran off the top of it. He did not come down. He went out over the chestnuts along the face of the mountain, the way the hawks went, and the wind coming up the mountain held him there. Jonas said a broad-wing passed under him and two red-tails passed over, and none of the three paid him any more mind than they paid the trees. The boy ran down to the house for Sallie, and she came up the lane with flour to her elbows, and he was still up. He stayed up long enough for Jonas to say the Lord&rsquo;s Prayer three times through, slowly, in German. Then he came down in the same pasture he had started from, on his feet, and folded the wings, and went in to his supper.</p>
+  <p>Nobody outside the township believed it. Inside the township, people believed it the way they believed in the hex doctor at Lenhartsville, which is to say they did not discuss it in front of the pastors.</p>
+  <p>Jonas was Elias&rsquo;s younger brother by six years. He had stopped at the Fourth Reader and farmed the home place and given things away all his life, and in the summer of 1905 he took it into his head to carry the first of everything up to the Moyers&rsquo; barn floor, where Irvin built his wings. He brought the first asparagus in April, and the first rhubarb, and the first strawberries in a split basket. He brought peas, and cherries off the big tree by the springhouse, and new potatoes, and the first ears of sweet corn, and the first peaches, and a peck of Early Harvest apples in August. That was nine times. Each time he stopped at the stone house on the way and said, <em>Come along up, Elias. He&rsquo;ll show you.</em></p>
+  <p>Each time Elias said, <em>I don&rsquo;t go to school to my own scholars.</em></p>
+  <p>At the end of August Irvin took the typhoid. Two others had it on that road already, and people blamed the Moyer well. The doctor drove out from Kempton every second day and ordered milk, and broth, and the patient sponged with cold water whenever the fever climbed. Cold water in August meant ice, and the Moyers had no icehouse. Elias had one, because a man who mounts birds needs ice the way a miller needs water. Jonas came to him for it with his hat in his hand.</p>
+  <p>Elias said nothing at all. But that night his hired man drove down to the Moyer place with a block of ice packed in sawdust in the back of the spring wagon, and every morning after that there was another. It was the only thing Elias gave. Jonas said afterward that it was the reason he got there at all, even at the last.</p>
+</section>
+
+<section>
+  <h2>III. The Curtain</h2>
+  <p class="dateline">The Moyer place &middot; September 1905</p>
+  <p>In the third week the doctor found blood. He told Sallie at the kitchen table that it would be days, and he told the postmaster at Kempton the same thing in fewer words, and by evening it was all through the township.</p>
+  <p>Elias heard it at the post office and walked home and sat down in the front room among the cases. The glass eyes looked at him. He thought: I asked a professor, and a newspaper, and the Government of the United States. I never asked him because I had kept him in at recess. If he dies before I ask him I will be sorry for the rest of my life, which is not going to be long either. He took a clean sheet of paper and wrote the three questions out again, in the same words he had used in 1891, and folded it in his breast pocket, and put on his coat.</p>
+  <p>The wind had come around in the night. It was cold for September, the sky scrubbed blue, and as he crossed the stubble toward the Moyer place he saw them going over the ridge already, broad-wings, high up and many, turning in great slow kettles over the gap and then sliding off southwest one after the other as if somebody were pouring them.</p>
+  <p>Sallie Moyer met him at the kitchen door. She was a big plain woman a little older than her brother, and she had not slept in a bed for nine nights.</p>
+  <p><em>He&rsquo;s tired, Schoolmaster. He can&rsquo;t have company.</em></p>
+  <p><em>I won&rsquo;t keep him. I have three questions.</em></p>
+  <p><em>Not today.</em></p>
+  <p><em>I won&rsquo;t keep him long.</em></p>
+  <p><em>Elias,</em> she said, and it was the first time in her life she had called him by his given name, <em>you had three summers. Go home.</em></p>
+  <p>Then Irvin&rsquo;s voice came out of the downstairs bedroom, not loud. <em>Sallie. Let the schoolmaster in. He&rsquo;s come a long way.</em> It was half a mile.</p>
+  <p>The door of the bedroom had been taken off its hinges for the air and a curtain hung there instead, against the flies. When Elias lifted it he felt that it was stiff, and saw that it was wing muslin with the varnish still on it, patched in one corner where something had torn. He went in under it and sat down on the chair at the foot of the bed.</p>
+</section>
+
+<section>
+  <h2>IV. Three Questions</h2>
+  <p class="dateline">The same morning</p>
+  <p>Irvin lay with his hands outside the quilt. The fever had taken the flesh off him, and his hair was cut short for it, so that he looked about fifteen, about the age he had been when he left the Eck. The window was open on the mountain. He did not seem to be in any pain, or if he was it was somewhere a long way off, and his face was quiet the way a pond is quiet in the morning before anything has landed on it.</p>
+  <p><em>You have a paper,</em> he said.</p>
+  <p>Elias unfolded it and read the first question as he had written it fourteen years before, in the voice he had used for dictation. <em>Whether there is a fixed road or path in the air, which the birds of prey keep to in their passage.</em> He looked up. <em>They come by the Pulpit every year. The same rock. There must be a road.</em></p>
+  <p>Irvin turned his head on the pillow toward the window. A broad-wing was coming along the face of the mountain, low, below the crest, its wings held flat and still.</p>
+  <p><em>There goes one. Watch where he goes.</em></p>
+  <p>They watched it slide past the window frame and out of sight down the ridge.</p>
+  <p><em>Now show me where he went.</em></p>
+  <p>Elias looked at the air over the chestnuts. It was blue and empty and exactly like the rest of the sky.</p>
+  <p><em>There&rsquo;s no track,</em> Irvin said. <em>There&rsquo;s the mountain, and the wind going up it like water going up the face of a dam. They come where the wind comes up. Next year it comes up a little someplace else, and so do they. Nobody made a road up there, Schoolmaster. You can&rsquo;t follow anybody.</em></p>
+  <p>Elias read the second question. <em>Whether a man may learn the flight of birds from the study of them in the hand.</em> He did not wait. <em>I have sixty-one hawks. I have weighed every one and measured every one. I have it all in the ledger, to the quarter inch.</em></p>
+  <p><em>Sallie,</em> said Irvin, <em>get the grey book off the clock shelf.</em></p>
+  <p>She brought it in without a word: a thin pamphlet from the Smithsonian, a reprint of an address some bicycle maker from Ohio had given to the engineers in Chicago, with one corner turned down. Irvin nodded at Elias to read, and Elias read it aloud, because he had never in his life been handed a book and not read it aloud.</p>
+  <div class="verse">
+    <p>Now, there are two ways of learning to ride a fractious horse: One is to get on him and learn by actual practice how each motion and trick may be best met; the other is to sit on a fence and watch the beast a while, and then retire to the house and at leisure figure out the best way of overcoming his jumps and kicks. The latter system is the safest, but the former, on the whole, turns out the larger proportion of good riders. It is very much the same in learning to ride a flying machine; if you are looking for perfect safety, you will do well to sit on a fence and watch the birds; but if you really wish to learn, you must mount a machine and become acquainted with its tricks by actual trial.</p>
+    <p>&mdash; Wilbur Wright, <i>Some Aeronautical Experiments</i> (1901)</p>
+  </div>
+  <p><em>I didn&rsquo;t sit on any fence,</em> said Elias. <em>I had them in my hands.</em></p>
+  <p><em>You had them after they quit,</em> Irvin said, gently enough. <em>Every one of them. All you know about how they fly, you found out when they were done flying.</em></p>
+  <p>Elias sat with that. Behind the curtain Sallie was pumping water at the sink, and the pump handle squealed, and stopped.</p>
+  <p>He had written more on the back of the paper. Over fourteen years the three questions had grown footnotes: objections, references to Audubon and to Wilson, the weights of particular birds, a page of argument against a correspondent of the <i>Adler</i> who held that hawks soared by some lightness in their bones. He turned the paper over and looked at all of it and turned it back.</p>
+  <p><em>The third,</em> he said. <em>Whether there is anywhere, high up, a constant and steady wind. If a man could get up into it&mdash;</em></p>
+  <p>Irvin smiled for the first time.</p>
+  <p><em>You have that one in your own house. In the drawer under the eagle.</em></p>
+  <p>Elias stared at him.</p>
+  <p><em>Jonas brought it up in May with the rhubarb. He put it back after. Your slip was in at page eight.</em> He lifted one hand a little off the quilt, toward the doorway. <em>Turn around.</em></p>
+  <p>Elias turned on the chair. On the inside of the curtain he had come in under, on the muslin of what had been the lower wing, someone had copied out a passage in carpenter&rsquo;s pencil, in the round slanted copybook hand that Elias himself had taught at the Eck for forty-three years, so that the man flying would have it over his head.</p>
+  <div class="verse">
+    <p>If, on the one hand, owing to the weight and inertia of the anemometer, this is far from doing justice to the actual irregularities of the wind; on the other, it equally shows that the wind was far from being a body of even approximate uniformity of motion, and that, even when considered in quite small sections, the motion was found to be irregular almost beyond conception, &mdash; certainly beyond anticipation; for this record is not selected to represent an extraordinary breeze, but the normal movement of an ordinary one.</p>
+    <p>&mdash; S. P. Langley, <i>The Internal Work of the Wind</i> (Smithsonian Institution, 1893), page 8</p>
+  </div>
+  <p><em>Page eight,</em> said Irvin. <em>Nothing up there holds still. Not for one second. That&rsquo;s what holds you up.</em></p>
+  <p>Out past the window the broad-wings kept coming down the ridge, one and then another, and none of them was where the last one had been.</p>
+  <p>Sallie came in with a basin and stood with it. Her face was working. Irvin looked at her and then at the old man on the chair, and he did not look like somebody who was going to die by the end of the week, or like somebody who was not. He looked like somebody watching weather.</p>
+  <p><em>Sallie, the schoolmaster&rsquo;s cold. Give him some coffee before he goes.</em></p>
+  <p>Elias folded the paper with all its footnotes and put it away. At the curtain he stopped with the stiff muslin in his hand, and asked the thing he had not written down.</p>
+  <p><em>Irvin. Would you teach me?</em></p>
+  <p><em>Go up on the Pulpit,</em> Irvin said, <em>next time it blows northwest. Leave the gun home.</em></p>
+</section>
+
+<section>
+  <h2>V. The Pulpit</h2>
+  <p class="dateline">The Blue Mountain &middot; October 1905</p>
+  <p>Irvin Moyer died two nights later, toward morning, with Sallie asleep in the chair, so that nobody heard him go. They buried him from the union church on the Saturday, and the Reformed pastor and the Lutheran pastor both spoke, which had not happened since the Civil War. Jonas carried. Elias stood at the back with his hat in his hands and did not sing. The wind that day was out of the south and soft, and nothing came down the ridge at all.</p>
+  <p>It came around northwest again on the third of October.</p>
+  <p>Elias was seventy-six years old. It took him the whole of the morning to climb the mountain by the old charcoal road, resting on stumps, and he went up for the first time in fifty-one autumns with nothing in his hands. When he came out onto the Pulpit at noon the wind was pouring up the north face so hard that it lifted the skirts of his coat and held them out behind him, and the hawks were coming.</p>
+  <p>They came down the ridge out of the northeast, red-tails mostly by then, one, and then nothing, and then three. He stood on the rock where he had stood with a gun for half a century and watched them come. One came along the face below the crest at the height of his own head, so close that he could see the wind ruffle the small feathers at its shoulders, and see it shift, hardly at all, a finger&rsquo;s width, to each breath of air it met. It turned its head and looked at him going by, the way a scholar looks at the master from the third row, and slid on down the mountain, and was gone.</p>
+  <p>He looked at the place where it had been. It was the same as all the rest of the air.</p>
+  <p>After a while he lifted his right hand into the wind, flat, the palm turned down, and felt it pushed up from underneath, irregularly, a little and then more and then less, never once the same. He kept it there. Jonas, who came up at four o&rsquo;clock to look for him, found him standing on the rock in that way with the hawks going past him, his arm up, like a scholar who knows the answer and is waiting to be called on.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">There is no path through the air, a man is not a Samana by outward acts. The world delights in vanity, the Tathagatas (the Buddhas) are free from vanity.<cite>Dhammapada 254, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">There is no path through the air, a man is not a Samana by outward acts. No creatures are eternal; but the awakened (Buddha) are never shaken.<cite>Dhammapada 255, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary sets this story at the Buddha&rsquo;s deathbed in the sal grove at Kusinārā, drawing on the account of his last days in the <a href="https://en.wikipedia.org/wiki/Mahaparinibbana_Sutta">Mahāparinibbāna Sutta</a>. Long ago, it says, the wanderer Subhadda&rsquo;s younger brother gave alms of the first fruits of a crop nine times while Subhadda refused, giving only at the very end; so Subhadda came to the Buddha only at the very end too. He had put three doubts to the old teachers but never to the Buddha, whom he thought of as a youngster. Hearing that the Buddha was dying, he came to ask them. Ānanda tried to turn him away, but the Buddha told Ānanda to let him in, and Subhadda sat at the foot of the bed and asked: is there a path through the air, is there a true ascetic outside the teaching, are conditioned things constant? The Buddha answered with these two verses. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-12.htm">the full commentary story</a>.</p>
+    <h3>The Blue Mountain, 1905</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Blue_Mountain_(Pennsylvania)">Blue Mountain</a> runs about 150 miles across eastern Pennsylvania from the Delaware Water Gap, continuing in New Jersey as Kittatinny Mountain, and the Schuylkill River cuts through it just north of Hamburg. Each fall thousands of hawks, eagles and falcons migrate along it, broad-winged hawks peaking in September and red-tails later, and the stretch now protected as <a href="https://en.wikipedia.org/wiki/Hawk_Mountain_Sanctuary">Hawk Mountain Sanctuary</a> was for generations a popular place to shoot them, for sport or to protect poultry, until Rosalie Edge leased the land in 1934 and hired wardens to keep the gunners away. The <a href="https://en.wikipedia.org/wiki/Broad-winged_hawk">broad-winged hawks</a> travel in great soaring flocks called kettles. The farm families below the ridge were <a href="https://en.wikipedia.org/wiki/Pennsylvania_Dutch">Pennsylvania Dutch</a>, most of them Lutheran or Reformed &ldquo;church people,&rdquo; who often shared one union church between the two congregations.</p>
+    <p>By 1905 gliding was a small international hobby. <a href="https://en.wikipedia.org/wiki/Otto_Lilienthal">Otto Lilienthal</a> made over 2,000 glides in Germany before a crash killed him in August 1896, and that summer <a href="https://en.wikipedia.org/wiki/Octave_Chanute">Octave Chanute</a> and his helpers tested gliders in the dunes of Lake Michigan, among them the strut-and-wire biplane the Wright brothers later called the &ldquo;double-decker.&rdquo; Wilbur Wright described their own glider trials to the Western Society of Engineers in Chicago in September 1901, and the Smithsonian reprinted the address in its annual report for 1902. Its Secretary, <a href="https://en.wikipedia.org/wiki/Samuel_Pierpont_Langley">Samuel Pierpont Langley</a>, had argued in <i>The Internal Work of the Wind</i> (1893) that the wind is never uniform, and that a soaring bird might be sustained by its constant pulsations; his own engine-driven <a href="https://en.wikipedia.org/wiki/Langley_Aerodrome">Aerodrome</a> fell into the Potomac twice in the autumn of 1903. Irvin Moyer, Elias and the Pulpit&rsquo;s township are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the wanderer Subhadda from the Dhammapada commentary (verses 254&ndash;255). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/18-12.htm">The original</a>. Scripture from Wilbur Wright, <i>Some Aeronautical Experiments</i> (1901), and S. P. Langley, <i>The Internal Work of the Wind</i> (1893). Written by Claude Opus 5.5.
+  <div class="pager"><a href="best-construction.html">&larr; Best Construction</a><a href="index.html">All stories</a><a href="not-of-record.html">Not of Record &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Hawk weather: faint lines of air move across the page, never twice the same,
+  // and now and then a hawk crosses on them and leaves nothing behind.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, lines = [], t = 0, hawk = null, nextHawk = 600;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.max(7, Math.min(16, H / 60)));
+    lines = [];
+    for (var i = 0; i < n; i++) {
+      lines.push({
+        y: H * (0.08 + 0.86 * (i + Math.random() * 0.6) / n),
+        a1: 6 + Math.random() * 10, k1: 0.004 + Math.random() * 0.004, p1: Math.random() * 6.28,
+        a2: 2 + Math.random() * 5, k2: 0.012 + Math.random() * 0.01, p2: Math.random() * 6.28,
+        s1: 0.004 + Math.random() * 0.006, s2: 0.011 + Math.random() * 0.01,
+        alpha: 0.05 + Math.random() * 0.06
+      });
+    }
+  }
+  function yAt(L, x, tt) {
+    var gust = 1 + 0.5 * Math.sin(tt * 0.013 + L.p2) * Math.sin(tt * 0.031 + L.p1);
+    return L.y + gust * (L.a1 * Math.sin(x * L.k1 + L.p1 + tt * L.s1) + L.a2 * Math.sin(x * L.k2 - L.p2 + tt * L.s2));
+  }
+  function drawLines(tt) {
+    for (var i = 0; i < lines.length; i++) {
+      var L = lines[i];
+      ctx.strokeStyle = 'rgba(76,98,115,' + L.alpha + ')';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (var x = -10; x <= W + 10; x += 12) {
+        var y = yAt(L, x, tt);
+        if (x === -10) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+  }
+  function drawHawk(h, tt) {
+    var L = lines[h.line];
+    var y = yAt(L, h.x, tt) - 10;
+    var y2 = yAt(L, h.x + 6, tt) - 10;
+    var tilt = Math.atan2(y2 - y, 6) * 0.6;
+    var env = Math.min(1, h.x / 120, (W - h.x) / 120);
+    if (env <= 0) return;
+    var s = h.s;
+    ctx.save();
+    ctx.translate(h.x, y);
+    ctx.rotate(tilt);
+    ctx.fillStyle = 'rgba(52,44,38,' + (0.42 * env) + ')';
+    ctx.beginPath();
+    ctx.moveTo(-s * 1.1, -s * 0.18);
+    ctx.quadraticCurveTo(-s * 0.4, -s * 0.32, 0, -s * 0.05);
+    ctx.quadraticCurveTo(s * 0.4, -s * 0.32, s * 1.1, -s * 0.18);
+    ctx.quadraticCurveTo(s * 0.45, s * 0.02, s * 0.1, s * 0.12);
+    ctx.quadraticCurveTo(0, s * 0.2, -s * 0.1, s * 0.12);
+    ctx.quadraticCurveTo(-s * 0.45, s * 0.02, -s * 1.1, -s * 0.18);
+    ctx.fill();
+    ctx.restore();
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    drawLines(t);
+    if (!reduce) {
+      t += 1;
+      if (!hawk && --nextHawk <= 0) {
+        hawk = { x: -20, line: Math.floor(Math.random() * lines.length), s: 9 + Math.random() * 5, v: 0.9 + Math.random() * 0.6 };
+      }
+      if (hawk) {
+        drawHawk(hawk, t);
+        hawk.x += hawk.v;
+        if (hawk.x > W + 30) { hawk = null; nextHawk = 1400 + Math.random() * 1600; }
+      }
+      requestAnimationFrame(frame);
+    }
+  }
+  size(); make(); frame();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) frame(); });
+})();
+</script>
+</body>
+</html>

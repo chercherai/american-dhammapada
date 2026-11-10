@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Struck Measure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column over a dark lodgepole forest floor; along the foot of the page the duff lifts here and there in small pale domes, cracks, and settles. */
+  --ground: #12110d;
+  --ground-2: #1d1a13;
+  --paper: #e6dfd0;
+  --paper-dim: #a59c88;
+  --accent: #cfae78;
+  --glow: #b4623a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 118%, #2b2417 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,223,208,.13); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(207,174,120,.2); }
+.epigraph { border-left: 1px solid rgba(207,174,120,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(29,26,19,.78); border: 1px solid rgba(230,223,208,.13); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,223,208,.13); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(230,223,208,.13); border-bottom: 1px solid rgba(230,223,208,.13); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(29,26,19,.78); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 6.8 &middot; Pa&ntilde;casatabhikkh&#363;</span></nav>
+<header>
+  <h1>Struck Measure</h1>
+  <div class="epigraph">A man that Fortune&rsquo;s buffets and rewards<br>Hast ta&rsquo;en with equal thanks.<br>&mdash; <em>Hamlet</em>, III.ii</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how it&rsquo;s told,</span> at the scales along the Crescent Cutoff.</p>
+
+<section>
+  <h2>I. The Padlock</h2>
+  <p class="dateline">Crescent Lake Junction, Oregon &middot; September 1993</p>
+  <p>The man who invited them was named Vern, and he bought mushrooms. The November before, down in the tanoak country near the California line, he had weighed old Mrs. Saelee&rsquo;s baskets five nights running and had not found a mushroom in them with a torn veil or a knife mark. On the fifth night he came around the scale and spoke to her grandson, because the old woman had no English.</p>
+  <p><em>Tell her next fall I&rsquo;ll be up in the pine. Crescent Lake Junction, on the Cutoff road, a plywood shed with my name on it. Tell her to bring her people and camp behind me. There&rsquo;s a water tank. I&rsquo;ll have propane, and rice on my account at the store. I pay cash at the scale every night. Tell her it&rsquo;s her crew I want.</em></p>
+  <p>Kao told her. She looked at the man for a while, and said they would come.</p>
+  <p>Fahm Koy Saelee was seventy that year. She had been born in the hills above Muang Sing, in the north of Laos, and had walked out of that country in 1975 with a grandchild tied on her back. She buried her husband in a refugee camp in the north of Thailand and came at last to Redding, California, where the summers ran to a hundred and ten degrees and there was nothing anyone could think of for her to do. In the woods it was different. She carried a white bucket and a peeled stick and she never hurried, and where she stopped and touched the stick to the ground there was a mushroom under it.</p>
+  <p>Twelve of them picked. There was her daughter Meuy and Meuy&rsquo;s husband, and Kao, who was nineteen and did the talking. There was her nephew San, who had been a soldier at fifteen and could bring two full buckets up out of a canyon at a trot. There were two widows from her street in Redding, and Uncle Lu with his bad hip, and the rest were cousins.</p>
+  <p>Then there were the boys. Five of them, cousins&rsquo; sons, nineteen and twenty years old, had heard there was money lying on the ground in Oregon and had come up behind the trucks in a Honda with a sleeping bag apiece. They had no eye for it. They could walk straight across a patch and never know. Nobody had asked them along and nobody sent them home. They ate what was left in the pot after the pickers had eaten. That was the arrangement, and no one had ever needed to say it.</p>
+  <p>They drove up the week after Labor Day, four hours from Redding, and found the shed where he had said it would be. VERN, it said in red paint, MATSUTAKE, CASH. There was a padlock on the door. The water tank was dry. The man at the store had never heard of any account.</p>
+  <p>Vern was in British Columbia. It had rained in August in the country north of Terrace, and the pine mushrooms had come up there by the ton, and every buyer who could get himself across the line was standing in that rain with a roll of bills, bidding against every other. He bought until two in the morning and was on the road again at five. He hadn&rsquo;t decided anything about the people he had asked to the junction. They weren&rsquo;t in his head. From Labor Day until the snow he did not think of them one time.</p>
+  <p>At the junction it did not rain. The ground there is pumice, three and four feet of it, blown out of the mountain that left Crater Lake, and lodgepole pine stands on it as close as fence pickets. In a right year the duff under those trees holds the wet, and the mushrooms push it up from below in little cracked domes that a picker learns to see from ten yards off. That September the duff was dry down to the pumice, and a boot went into it like flour. The buyers along the Cutoff sat in lawn chairs beside their scales. In two weeks the twelve of them brought in nine pounds, and the money went for permits and gasoline. After that there was nothing. Meuy went from shed to shed asking for rice against the season, and the buyers, who were Lao and Mien and white and were eating out of cans themselves, turned up their hands. Other crews folded their tarps and left. The rice sack went slack, and then it lay flat.</p>
+</section>
+
+<section>
+  <h2>II. A Struck Measure</h2>
+  <p class="dateline">October</p>
+  <p>Across the Cutoff from the shed stood a pole corral, and in the first week of October a man named Hank Teal backed a stock truck up to it and let down nine horses and two mules. He packed elk hunters into the Diamond Peak country every fall, and he came early to shoe and to let the string get its wind at that height. He was past sixty and he minded his own business. He minded it for four days. He watched the smoke behind the padlocked shed and he watched what came out of the woods in the white buckets at evening, and on the fifth morning he walked across the road with a fifty-pound sack on his shoulder and an aluminum feed scoop in his hand.</p>
+  <p><em>It&rsquo;s barley. Steam-rolled. It&rsquo;s clean, it&rsquo;s what they get.</em> He tipped his head back toward the corral. <em>I can&rsquo;t do a lot. I&rsquo;ve got eleven head to carry through November and I bought close. I can do a scoop apiece, every day.</em></p>
+  <p>He showed Kao what he meant by it. He drove the scoop into the sack and brought it up heaped, and drew the flat of his hand across the top so that what stood above the rim fell back. <em>Struck measure, my granddad called that. Not heaped and not scant.</em> He did it seventeen times into the rice pot, once for each person in the camp, the boys included, and went back over the road to his horses.</p>
+  <p>So that fall they ate horse feed. Rolled barley is the whole kernel, steamed until it is soft and run between rollers until it is flat as a thumbnail, so that a horse gets the good of it. The women pounded it in a bucket with the butt of a peeled pole and boiled it a long time with salt. It made a gray porridge that tasted the way a feed store smells. The old woman ate hers first, where all of them could watch her do it. Then the pickers ate. Then the boys ate what was left and scraped the pot, and in those weeks the boys were as quiet as anyone had ever known them. They sat on the tailgate of the Honda with their hands between their knees. They were in their sleeping bags by dark.</p>
+  <p>Every morning Hank Teal came over with the sack. After the first week she met him at the edge of the road with the pot, and he gave her the scoop, and she struck the seventeen measures herself with the side of her hand. He noticed she was harder on a heap than he was.</p>
+  <p>It was San who couldn&rsquo;t bear it. He came to her at the fire one night with a potato rake he had found behind the store.</p>
+  <p><em>There&rsquo;s a flat beyond the cinder pit, a mile of it. They&rsquo;re in there. They&rsquo;re six inches down where the damp is, buttons, hundreds, and they can&rsquo;t lift the duff. Give me two nights and a headlamp. I&rsquo;ll turn that whole flat over. Nobody will see.</em></p>
+  <p><em>No.</em></p>
+  <p><em>Grandmother. There is money under the ground and your people are eating what horses eat.</em></p>
+  <p><em>It&rsquo;s alive under there,</em> she said. <em>All one body, the length of that flat. Turn it over and nothing comes up in that place again while Kao is living.</em></p>
+  <p>He put the rake down. A week later he tried the other way. Kao had been on the pay phone at the store, and the word was all Canada. <em>Then let me take the truck north. It&rsquo;s raining there and they&rsquo;re paying what nobody ever paid. I&rsquo;ll take everyone who can pick.</em></p>
+  <p>She looked across the fire at the two widows, and at Uncle Lu with his leg laid out straight on a feed sack.</p>
+  <p><em>And those?</em></p>
+  <p><em>The truck holds six.</em></p>
+  <p><em>No,</em> she said, and he did not ask again.</p>
+  <p>What the people who stayed at the junction that fall remembered afterward was that nobody in the camp behind Vern&rsquo;s shed complained. They were up at five. They walked the flats in a line with their sticks, and came back with the buckets light, and ate their measure of barley, and slept. At night nobody talked about pork, or about what the money would buy when it came. Hank Teal said he had fed that barley to horses that made more remarks about it.</p>
+</section>
+
+<section>
+  <h2>III. The Jackets</h2>
+  <p class="dateline">The last week of October</p>
+  <p>Rain came on the twenty-third. Snow came down to the road four days behind it, and that was the season in the pine. They had picked forty pounds between the one and the other.</p>
+  <p>Vern came back with the snow. He had made more in eight weeks than in the six years before, and he drove in at dusk in a different truck to fetch his scale. He saw the tarps behind the shed. Then he saw the feed sacks, nine of them, folded square and weighted with a rock, and he stood and read the printing on the top one.</p>
+  <p>She came out to him herself, with Kao beside her. She hadn&rsquo;t come about the water tank or the account at the store. She came because a person does not leave a man&rsquo;s place without telling him.</p>
+  <p><em>She says we go tomorrow. She says thank you for the ground to camp on.</em></p>
+  <p>Vern had been an actor once and had a voice that could reach the back of a house, and for a while he couldn&rsquo;t find any of it. <em>I never thought about you,</em> he said finally. <em>Tell her that. It isn&rsquo;t that I thought of it and stayed away. I never once thought of it.</em></p>
+  <p>Kao told her. She nodded, the way she nodded when he told her the price.</p>
+  <p>He was gone three hours. He came back from La Pine with a hundred pounds of rice and two cases of chickens, and from a logging supply on the highway he brought seventeen rain jackets, the heavy rubber kind, dark green, in whatever sizes they&rsquo;d had. He cooked the chickens himself over their fire and did not sit down while they ate. Afterward he went around the circle with the jackets, and when he got to the old woman he held hers open behind her, and she put her arms into it.</p>
+  <p><em>Ask her how she stood it. Eight weeks. I&rsquo;d have burned the shed.</em></p>
+  <p>Kao asked. <em>She says there wasn&rsquo;t anything to stand. It was a dry year.</em></p>
+  <p><em>I&rsquo;m in Cave Junction through December. The old Texaco on the Redwood Highway. Tell her I&rsquo;ll have the lights on.</em></p>
+  <p><em>She says we go there anyway.</em></p>
+  <p>In the morning she carried the scoop across the road, washed. Hank Teal was graining his string. He looked at it and at her and went on down the line of feed pans. <em>I&rsquo;ve got another one,</em> he said.</p>
+</section>
+
+<section>
+  <h2>IV. The Forks</h2>
+  <p class="dateline">Cave Junction, Oregon &middot; November</p>
+  <p>In the Illinois Valley it had been raining for three weeks. The mushrooms there come up under tanoak and madrone, on slopes a goat would think about, and they were lifting the wet leaves everywhere a person looked. A bucket was full by ten in the morning. That was also the fall the price went where it had never been. The junction had failed, and people said the crop in Japan had failed, and there were not enough matsutake in the world. It was told for years afterward that on one night that season number-one buttons went for six hundred dollars a pound, for about two hours, at a scale in the woods. Nothing like that came to the Illinois Valley. But Vern at the old Texaco paid more each night than he had the night before, and the crew was making in a day what a good week had made them other years. On the second Saturday the relatives drove up from Redding with a pig in the bed of a pickup, and killed it by the river, and there was food for sixty people.</p>
+  <p>The boys had money too. They had learned at last to see a hump under madrone leaves, or else they walked behind the pickers and took what had been missed, and at those prices what had been missed was wages. They still ate at the old woman&rsquo;s pot, after the others, and what was left in the pot now was pork. They slept until ten. When they got up they went down to the gravel bar where the two forks of the Illinois come together, and after that anybody in Cave Junction could have told you where they were. They hollered. They jumped off the rock into the green hole in November. They wrestled on the gravel for twenty-dollar bills, and drove the Honda in circles with the doors open and the stereo turned up, and bought a second car and drove that in circles. In town they were put out of the laundromat and the pizza place, and a deputy came out to the camp twice to talk to Kao about them.</p>
+  <p>The pickers talked about it at the fire. <em>Look at those five. At the junction they sat on that tailgate like boys at a funeral. Eight weeks on horse feed and not a sound out of them, and now look.</em> Then somebody said the other thing, which was that the old woman&rsquo;s camp was the same camp it had been. They were up at five. They were in the woods when it got light. Each night she measured the rice into the pot with Hank Teal&rsquo;s scoop, one for each of them, and struck it level with the side of her hand, and she was asleep by eight.</p>
+  <p>She came to the fire and asked what the talk was, and they told her. Vern was there. He had taken to walking down from the Texaco once he&rsquo;d closed his ticket book, and he stood at the edge of the light, and Kao put things into English for him when he remembered to.</p>
+  <p>She said:</p>
+  <p><em>When I was a girl the Haw came through our village in the dry season, Chinese from Yunnan with forty mules, carrying salt and iron pots. One year the headman opened a jar of the good liquor for the caravan master, the first of the run. The caravan master wanted us to see what kind of man he was. He poured a bowl of it down every mule he had. Forty mules drank the best liquor in that district and stood in the pen all night with their eyes half shut. You wouldn&rsquo;t have known a mule was there.</em></p>
+  <p><em>My father had two ponies. They had never carried anything farther than our field. The boys of the village took the mash from the bottom of the jar and poured water over it and wrung it through a cloth, and gave the ponies that. It was dishwater. There wasn&rsquo;t liquor enough in it to burn.</em></p>
+  <p><em>Those ponies screamed until morning. They kicked the pen flat. When it got light one of them was standing on the roof of the pig house.</em></p>
+  <p>The pickers laughed. Down on the bar the stereo was going.</p>
+  <p><em>Same ponies as always,</em> she said. <em>A year is dry or it&rsquo;s wet. It&rsquo;s the same ground under it. You get up and look at the ground.</em></p>
+  <p>Kao gave that to Vern as well as he could. Vern didn&rsquo;t say anything for some time. Then he spoke, toward the fire, in the voice he had not been able to find at the junction, and all of them looked up at the sound of it though only Kao had any of the words.</p>
+  <div class="verse">
+    <p>For thou hast been<br>As one, in suffering all, that suffers nothing,<br>A man that Fortune&rsquo;s buffets and rewards<br>Hast ta&rsquo;en with equal thanks. And blessed are those<br>Whose blood and judgement are so well co-mingled<br>That they are not a pipe for Fortune&rsquo;s finger<br>To sound what stop she please.</p>
+    <p>&mdash; <em>Hamlet</em>, III.ii</p>
+  </div>
+  <p><em>What does he say?</em></p>
+  <p>Kao thought about it. <em>He says it&rsquo;s from an old play. There&rsquo;s a man in it who gets hit and gets paid, and says thank you the same for both. He says that&rsquo;s you.</em></p>
+  <p>She looked at Vern for a while, as she had the first time.</p>
+  <p><em>Tell him to sit down,</em> she said.</p>
+  <p>He sat, and Meuy filled a bowl and handed it across to him.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The scoop went back to Redding in the rice sack. It is aluminum and holds a quart, and it has a dent in one side where a mule stood on it before any of this happened. It has measured rice in that family in falls when number ones brought sixty dollars and in falls when they brought six. Whoever has it in her hand draws the side of the hand across the top.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Good people walk on whatever befall, the good do not prattle, longing for pleasure; whether touched by happiness or sorrow wise people never appear elated or depressed.<cite>Dhammapada 83, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha and five hundred monks spend a rainy season at Vera&ntilde;j&#257; as guests of a brahmin who, &ldquo;under the spell of M&#257;ra,&rdquo; does not think of them for a single day. There is a famine, and the monks live on measures of steamed grain given them by horse-dealers. Mah&#257; Moggall&#257;na offers to turn the earth over so they can eat what lies beneath it, or to take them north to Uttarakuru, and is refused both times (in the Vinaya&rsquo;s telling the Buddha asks what would become of the creatures that live in the ground). Nobody complains. At the end of the season the Buddha takes formal leave of the brahmin, who honors him at last. Back at Jetavana, where food is plentiful, five hundred hangers-on who live on the monks&rsquo; leftovers and were quiet all through the famine go shouting and wrestling on the riverbank. The Buddha tells of the donkeys who got drunk on the strained washings of the wine that war-horses had drunk and stood quiet on. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Maudgalyayana">Mah&#257; Moggall&#257;na</a>.</p>
+    <h3>The Oregon Cascades, 1993</h3>
+    <p><a href="https://www.oregonencyclopedia.org/articles/matsutake-mushrooms/">Matsutake</a>, the pine mushroom, cannot be farmed. When Japan&rsquo;s own woods stopped producing enough of it, exporters turned to the Pacific Northwest, and from the late 1980s a circuit of commercial pickers followed the fruiting from British Columbia down to northern California. Many were Cambodian, Lao, Hmong and <a href="https://en.wikipedia.org/wiki/Iu_Mien_people">Iu Mien</a> refugees. The country around Crescent Lake and Chemult, where lodgepole pine grows on deep pumice from the eruption of <a href="https://en.wikipedia.org/wiki/Mount_Mazama">Mount Mazama</a>, became the center of the trade, with independent buyers weighing mushrooms for cash at roadside sheds every evening. The price could move by many dollars in a night, and by the mid-1990s it had been as high as six hundred dollars a pound. Raking the forest floor to get at buried buttons was the practice everyone argued about. A study begun near Diamond Lake in 1994 found that removing the litter layer and not replacing it was &ldquo;strongly detrimental&rdquo; to later fruiting, while careful picking did no harm. The anthropologist Anna Tsing&rsquo;s <a href="https://en.wikipedia.org/wiki/The_Mushroom_at_the_End_of_the_World"><em>The Mushroom at the End of the World</em></a> describes these camps closely.</p>
+    <p>The Iu Mien are a highland people of southern China and northern Laos. Many Mien men fought on the American side in the <a href="https://en.wikipedia.org/wiki/Laotian_Civil_War">war in Laos</a>, and after 1975 whole villages crossed into refugee camps in Thailand and were resettled, a few years later, in California and Oregon. Tsing writes that the Mien encampments in the matsutake woods were the nearest thing their elders had found in America to a village in upland Laos. Steam-rolled barley is ordinary horse feed. The dry fall, the buyer, the packer and the Saelee crew are invented.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the five hundred bhikkhus from the Dhammapada commentary (verse 83). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-08.htm">The original</a>. Verse from Shakespeare&rsquo;s <em>Hamlet</em>. Written by Claude Fable 5.2.
+  <div class="pager"><a href="kaneezs-mother.html">&larr; Kaneez’s Mother</a><a href="index.html">All stories</a><a href="decay-heat.html">Decay Heat &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, mounds = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(m) {
+    m.x = Math.random() * W;
+    m.y = H * (0.80 + Math.random() * 0.19);
+    m.w = 26 + Math.random() * 44;
+    m.life = 0; m.max = 1500 + Math.random() * 2200;
+    return m;
+  }
+  function make() {
+    var n = Math.round(Math.max(5, Math.min(11, W / 130)));
+    mounds = [];
+    for (var i = 0; i < n; i++) { var m = spawn({}); m.life = reduce ? m.max * 0.5 : Math.random() * m.max; mounds.push(m); }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < mounds.length; i++) {
+      var m = mounds[i];
+      if (!reduce) { m.life++; if (m.life > m.max) spawn(m); }
+      var p = m.life / m.max;
+      var rise = Math.min(1, p * 1.6);               /* the duff lifts slowly */
+      var fade = Math.min(1, (1 - p) * 5);           /* and settles quickly */
+      var h = m.w * 0.42 * rise;
+      var a = 0.13 * rise * fade;
+      if (a < 0.005) continue;
+      var g = ctx.createRadialGradient(m.x, m.y - h * 0.6, 0, m.x, m.y, m.w);
+      g.addColorStop(0, 'rgba(226,208,170,' + a + ')');
+      g.addColorStop(0.5, 'rgba(180,130,80,' + (a * 0.45) + ')');
+      g.addColorStop(1, 'rgba(180,130,80,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.ellipse(m.x, m.y, m.w, Math.max(1, h), 0, Math.PI, 0);
+      ctx.fill();
+      if (rise > 0.75) {                              /* the crack a picker looks for */
+        ctx.strokeStyle = 'rgba(240,228,200,' + (a * 1.4 * (rise - 0.75) * 4) + ')';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(m.x - m.w * 0.18, m.y - h * 0.92);
+        ctx.lineTo(m.x + m.w * 0.04, m.y - h * 0.99);
+        ctx.lineTo(m.x + m.w * 0.2, m.y - h * 0.9);
+        ctx.stroke();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

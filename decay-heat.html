@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decay Heat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column over deep still water; a blue glow low on the page falls off quickly, then slowly, and never quite goes out, while a few motes rise through it. */
+  --ground: #07111b;
+  --ground-2: #0e1c2a;
+  --paper: #dfe7ea;
+  --paper-dim: #90a4ae;
+  --accent: #74c6e2;
+  --glow: #e0a05a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #050c14 0%, var(--ground) 55%, #0a1826 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(223,231,234,.13); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(116,198,226,.25); }
+.epigraph { border-left: 1px solid rgba(224,160,90,.5); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(10,22,34,.8); border: 1px solid rgba(223,231,234,.13); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(223,231,234,.13); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(223,231,234,.13); border-bottom: 1px solid rgba(223,231,234,.13); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(10,22,34,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 6.9 &middot; Dhammika</span></nav>
+<header>
+  <h1>Decay Heat</h1>
+  <div class="epigraph">What should I do with that by which I do not become immortal?<br>&mdash; B<em>ri</em>had&acirc;ra<em>n</em>yaka Upanishad II.4.3</div>
+</header>
+
+<p class="heard"><span class="heard-lead">What I was told,</span> on the back shift at Palisades.</p>
+
+<section>
+  <h2>I. The Advisor</h2>
+  <p class="dateline">Covert Township, Michigan &middot; 1981</p>
+  <p>The job had not existed before the accident. After Three Mile Island the government decided that every nuclear control room in the country ought to have one person on shift with an engineering degree and nothing to do with his hands, somebody who would stand back from the boards when the alarms came in and think. They called him the shift technical advisor. At Palisades, on the Lake Michigan dunes below South Haven, one of the first was S. Ramanathan, thirty-three years old, late of Kumbakonam, Ann Arbor and the Bechtel Corporation, whom the operators called Ram.</p>
+  <p>He was good at it. The operators were Navy men and had expected to resent him, and found they didn&rsquo;t. He sat at a steel desk behind the horseshoe of panels and watched. He read the logs back three shifts before he took the watch. He never touched a switch. That was the rule of the job, and Marv Dykstra, the shift supervisor, said he had the look of a man who would have kept the rule if nobody had written it down. When he was on days he stopped on the way home at the state park beside the plant and walked down to the water, because the lake was to the west and the sun went into it. There he did what his father and his father&rsquo;s father had done at that hour on the steps of the great tank at Kumbakonam, with a little water in the hollow of his hand. Then he went home to his wife. They had a brick ranch house on a street of maples in South Haven, a Buick, a savings account, and a company pension that grew every month whether he looked at it or not.</p>
+  <p>One evening in the fall of 1981 they were sitting over their coffee after supper, talking pleasantly about nothing much, and he told her.</p>
+  <p><em>Lalitha. I want to go. I want to take sannyasa.</em></p>
+  <p>She did not ask what he meant. She had grown up in Mylapore and she knew what the word asked of a man. He performs his own funeral. He breaks the thread he has worn since he was seven. After that he belongs to no house.</p>
+  <p><em>I am going to have a child,</em> she said. <em>In February. Wait until the child is born.</em></p>
+  <p>He had not known. He looked at her, and then he laughed out loud and got up and came around the table.</p>
+  <p>He waited.</p>
+</section>
+
+<section>
+  <h2>II. The Second Asking</h2>
+  <p class="dateline">South Haven &middot; 1983</p>
+  <p>The boy was born in a snowstorm off the lake, and they named him Shankar. By the next spring he was walking. He went from the couch to the coffee table and from the coffee table to his father&rsquo;s knee, and one evening in May, when he had got as far as the screen door on his own and stood slapping it with both hands, Ramanathan asked again.</p>
+  <p><em>He is walking.</em></p>
+  <p><em>He is one year old. Wait until he is a man. Let him finish school and find work. Then go, and I will pack the bag for you myself.</em></p>
+  <p>She meant it, and he saw that she did. He saw too that after the work there would be a wedding to wait for, and after the wedding a grandchild, and that she would mean it every time. He thought, It makes no difference whether she says yes. Nobody can let another person out.</p>
+  <p>That summer the company offered to put him in the license class, which was the road to shift supervisor and from there to running the place. He thanked them and said no. He paid off the house. He put the savings and the car in her name, and drove to the benefits office in Jackson and signed what there was to sign. On a Tuesday in September he stood his last back shift, read the logs over to his relief, and walked out through the gate with his lunch pail. He was on a plane out of Chicago that night. He had told her the date a month before, and she had not spoken to him since.</p>
+  <p>Marv Dykstra came to the house on the Thursday. He had spent eleven years on submarines and did not know what a person says in a kitchen. He stood in hers with his cap in his hand and told her what he did know.</p>
+  <p><em>He tripped the plant on you. That&rsquo;s what this is. The rods are in. That part takes about two seconds, and everybody thinks it&rsquo;s the end.</em> The boy had hold of his trouser leg. <em>It isn&rsquo;t. You&rsquo;ve still got six, seven percent of full power coming off that core with nothing splitting. That&rsquo;s your decay heat. An hour later it&rsquo;s a percent and a half. Next day, under half a percent. It comes down fast and then it comes down slow, and you and I won&rsquo;t live to see it get to nothing. At Three Mile Island the rods went in eight seconds after the trouble started. They lost the core two hours later, off the heat that was left. Nobody can fight it. All you do is keep water on it.</em></p>
+  <p>She looked at him.</p>
+  <p><em>They&rsquo;re hiring a chemistry technician,</em> he said. <em>You&rsquo;ve got the degree. I&rsquo;d put my name on it.</em></p>
+</section>
+
+<section>
+  <h2>III. Water</h2>
+  <p class="dateline">1983 to 2005</p>
+  <p>She took the job. She had a bachelor of science from Queen Mary&rsquo;s College in Madras that she had never expected to use, and for twenty-three years she drew samples of the water that ran through the reactor and told the control room what was in it. She was exact. People on the back shift said you could set the boron by her.</p>
+  <p>She kept the house. She kept it for the boy, who came off the school bus at ten to four. She kept it also for the man, though she would not have said that to anyone living. His steel coffee tumbler stayed on the shelf where it had always stood, and she washed it when she washed the shelf.</p>
+  <p>When Shankar was four he asked where his father was, and she told him as much of the truth as a boy of four could carry, that Appa had gone to live beside the Ganges. Fifteen miles north of South Haven the Blue Star Highway runs through a crossroads with a store and a township hall, and the sign there says GANGES. Somebody liked the name a long time ago. There is a retreat among the orchards that the Vedanta swamis from Chicago have kept since 1971, and she drove up some Sundays for the talk and for the Upanishad class that old Visalam Mami gave afterward. The boy saw the sign from his car seat and sat up straight. Every time, until he was six or seven, he looked over the people on the lawn for a man who would know him.</p>
+  <p>Ramanathan was eight thousand miles east of that sign, at Uttarkashi, where the river is still called the Bhagirathi and comes down gray with rock flour between the hills. An old swami had a few rooms and a few students above the bathing steps. He asked the newcomer one thing, whether his wife had let him go, and when Ramanathan said she had not, the old man said, <em>Then you have brought her,</em> and gave him the room by the door. He studied grammar for three years before they let him near the texts. He ate once a day at the charity kitchen with the other sadhus. For a long time what he found when he sat down was a kitchen in Michigan and a small boy at a screen door. He sat with that the way he had been taught to sit with the panels, and kept his hands off it. In his seventh year he was given the ochre cloth and a name. Some time after that, the people who knew him there said, he was finished with it. He never said so himself. They said it of him because he had stopped being in any hurry, and because of how easily he had started to laugh.</p>
+  <p>Shankar grew up on the lake. He was a quiet boy and good with machinery, and at twenty he hired on at Palisades as an auxiliary operator. By the summer of 2005 he was in the license class his father had turned down. His mother had not asked it of him. She had not needed to.</p>
+</section>
+
+<section>
+  <h2>IV. Ganges</h2>
+  <p class="dateline">Ganges, Michigan &middot; August 2005</p>
+  <p>A letter came in June, the first in twenty-two years, in a hand she knew. The swamis in Chicago had invited a teacher from Uttarkashi to give the August classes at the retreat. He would be at Ganges three weeks. The letter asked for nothing.</p>
+  <p>She did not go. She told Shankar, and left the letter on the kitchen table, and on a Saturday he drove up the Blue Star Highway and turned in past the sign.</p>
+  <p>His father was sitting in a lawn chair under an apple tree with his head shaved, in an orange cloth, a smaller man than the one in the photograph. He looked up at Shankar the way the boy had once looked over the people on that lawn. Neither of them moved to touch the other. Shankar had driven up with one sentence ready, and he said it.</p>
+  <p><em>I couldn&rsquo;t talk yet. You left before I could say one thing to you.</em></p>
+  <p><em>Yes,</em> his father said.</p>
+  <p>He said nothing after it. He waited for the rest, and there was a great deal of the rest, and it took most of an hour, and he did not put up a word against any of it.</p>
+  <p>Afterward they sat. His father asked what he did at the plant, and Shankar told him about the rounds and the readings and the license class, and the simulator in the training building where they ran the bad nights over and over.</p>
+  <p><em>And when nothing is wrong?</em></p>
+  <p><em>Then you watch. That&rsquo;s most of it. Forty numbers. If you&rsquo;re doing it right, nothing happens.</em></p>
+  <p><em>I was paid to do that for three years,</em> his father said. <em>To sit behind the boards and watch, and keep my hands off. I was good at it. Nobody there could have told me the chair turns around.</em></p>
+  <p><em>Turns around to what?</em></p>
+  <p><em>To whoever is doing the watching. Look for him the way you look at the forty numbers. Don&rsquo;t touch anything. See whether you find anybody.</em></p>
+  <p>Shankar looked at the grass. The August classes ran three weeks, and he drove up eleven times.</p>
+</section>
+
+<section>
+  <h2>V. Background</h2>
+  <p class="dateline">South Haven &middot; 2006 and 2007</p>
+  <p>In the spring he passed the license examination. In June he gave the company his notice and gave his mother the keys to his truck. She did not ask him to wait. She had asked that of somebody once. He went the way his father had gone.</p>
+  <p>She stayed one more winter. The house was paid for and the pension had vested long ago. In April the company sold the plant to a firm from Louisiana, and there was a new badge to be issued and a new benefits book to read, three hundred pages of it. She sat down with it at the kitchen table, with the steel tumbler on its shelf and the door of the boy&rsquo;s room shut, and got as far as the table of contents.</p>
+  <p><em>Both the ones I kept it for are gone,</em> she said to Visalam Mami on the telephone that night. <em>What am I keeping?</em></p>
+  <p>When a person leaves a nuclear plant for good, she goes into the whole-body counter before she turns in her badge. It is a shielded booth with a detector in it, and it looks through the body for anything the work has left there. She stood in it for two minutes on her last afternoon. The technician was a young woman she had trained.</p>
+  <p><em>You&rsquo;re clean, Mrs. Ramanathan. Twenty-three years. There&rsquo;s nothing in you but potassium.</em></p>
+  <p><em>Potassium?</em></p>
+  <p><em>Everybody&rsquo;s got that. If you&rsquo;re clean it&rsquo;s all this thing ever finds. It&rsquo;s background.</em></p>
+  <p>She signed the form and went out through the gate.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On the second Sunday of that September, when she had been six weeks in a house of women in ochre at Haridwar, the families stood on the lawn at Ganges after the class, holding their paper plates, and talked about the Ramanathans, as they had been talking about them on and off for twenty-four years.</p>
+  <p><em>Think of it. The whole house. First he went, then the boy, and now she.</em></p>
+  <p><em>He was a great soul. He showed his son the road.</em></p>
+  <p><em>He was a selfish man who was lucky in his family.</em></p>
+  <p><em>Whatever he was, he got all three of them across. Which of us will manage that?</em></p>
+  <p>Visalam Mami was eighty-one. She had lectured in Sanskrit at Queen Mary&rsquo;s before most of them were born, and she still had her finger in the book. She said it first in Sanskrit. Then she said it in the English of the old Oxford volumes she had taught from in Madras.</p>
+  <div class="verse">
+    <p>Wishing for that world (for Brahman) only, mendicants leave their homes.</p>
+    <p>Knowing this, the people of old did not wish for offspring. What shall we do with offspring, they said, we who have this Self and this world (of Brahman)? And they, having risen above the desire for sons, wealth, and new worlds, wander about as mendicants. For desire for sons is desire for wealth, and desire for wealth is desire for worlds. Both these are indeed desires only.</p>
+    <p>&mdash; B<em>ri</em>had&acirc;ra<em>n</em>yaka Upanishad IV.4.22</p>
+  </div>
+  <p><em>So you needn&rsquo;t count it up as something he got,</em> she said. <em>He didn&rsquo;t go for the boy&rsquo;s sake. If he had, it would have been one more thing wanted. And he didn&rsquo;t go for his own. That is the part nobody believes.</em></p>
+  <p>She shut the book on her finger and looked round for somewhere to put her plate.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The fuel that was in the core on the night Ramanathan stood his last watch came out at a later refueling and went under forty feet of water. It stayed there for years. In the nineties it was moved into a concrete cask on a pad in the dunes, with vents at the foot and vents at the top. Nobody keeps water on it now. Air goes in below and comes out above a little warmer than it went in, and that is enough.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If, whether for his own sake, or for the sake of others, a man wishes neither for a son, nor for wealth, nor for lordship, and if he does not wish for his own success by unfair means, then he is good, wise, and virtuous.<cite>Dhammapada 84, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a householder of S&#257;vatth&#299; who lives rightly tells his wife, in the middle of a pleasant conversation, that he wants to go forth. She asks him to wait until their child is born. When the child can walk he asks again, and she asks him to wait until the child is grown. He decides that her permission makes no difference, goes forth, and reaches the goal. Later he returns and teaches his son, who goes forth and reaches it too. His wife thinks, &ldquo;Both of those for whom I desired to live the household life have gone forth,&rdquo; and follows them. When the monks praise him for the example he set his son, the Buddha answers that a wise person seeks success neither for his own sake nor for another&rsquo;s. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-09.htm">the full commentary story</a>. The triad of the verse (son, wealth, realm) is older than Buddhism. The <a href="https://en.wikipedia.org/wiki/Brihadaranyaka_Upanishad">B<em>ri</em>had&#257;ra<em>n</em>yaka Upanishad</a>, quoted here in Max M&uuml;ller&rsquo;s translation (Sacred Books of the East, vol. 15, 1884), names the same three desires. It also tells of the sage Y&#257;j&ntilde;avalkya leaving home and of his wife <a href="https://en.wikipedia.org/wiki/Maitreyi">Maitrey&#299;</a>, who refuses her share of his property with the question that stands at the head of this story.</p>
+    <h3>Palisades and Ganges, 1981&ndash;2007</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Palisades_Nuclear_Generating_Station">Palisades</a> plant stands in the dunes of Covert Township, Michigan, beside Van Buren State Park, and first ran at the end of 1971. On March 28, 1979, at <a href="https://en.wikipedia.org/wiki/Three_Mile_Island_accident">Three Mile Island</a> in Pennsylvania, the reactor shut itself down eight seconds into the trouble, and the core was half melted some hours later because the heat still coming off it was not carried away. One of the changes ordered afterward was the <a href="https://www.nrc.gov/sr0933/section-1-tmi-action-plan-items/task-ia-operating-personnel-operating-personnel-and-staffing-shift-technical-advisor">shift technical advisor</a>, an engineer on every shift whose work was to assess, not to operate. <a href="https://en.wikipedia.org/wiki/Decay_heat">Decay heat</a> behaves as the shift supervisor says: about six or seven percent of full power at shutdown, about one and a half percent an hour later, under half a percent after a day. Spent fuel is kept under water for years before it can be stored in air-cooled casks. Workers leaving a plant are checked in a <a href="https://en.wikipedia.org/wiki/Whole-body_counting">whole-body counter</a>, which always finds the natural radioactive potassium present in every human body. Palisades was sold to Entergy, of New Orleans, in April 2007.</p>
+    <p>Ganges is a crossroads on the Blue Star Highway in <a href="https://en.wikipedia.org/wiki/Ganges_Township,_Michigan">Ganges Township</a>, Allegan County. The Vivekananda Vedanta Society of Chicago, a branch of the Ramakrishna Order, <a href="https://www.chicagovedanta.org/vedanta-ashrama">established its retreat there in 1971</a>. Indian engineers and their families, many of them South Indian Brahmins, came to the American Midwest in numbers after the immigration law changed in 1965. <a href="https://en.wikipedia.org/wiki/Sannyasa">Sannyasa</a>, the formal renunciation of household life, is by tradition the last of the four stages of a life, and whether a husband may take it without his wife&rsquo;s consent has been argued over for a very long time. The Ramanathans, the shift supervisor, the old swami at Uttarkashi and Visalam Mami are invented.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Dhammika from the Dhammapada commentary (verse 84). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-09.htm">The original</a>. Scripture from the B<em>ri</em>had&acirc;ra<em>n</em>yaka Upanishad in F. Max M&uuml;ller&rsquo;s translation (1884). Written by Claude Fable 5.2.
+  <div class="pager"><a href="struck-measure.html">&larr; Struck Measure</a><a href="index.html">All stories</a><a href="hands-full.html">Hands Full &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now(), motes = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    motes = [];
+    var n = Math.round(Math.max(8, Math.min(22, W / 60)));
+    for (var i = 0; i < n; i++) motes.push({ x: Math.random() * W, y: H * (0.55 + Math.random() * 0.45), s: 0.08 + Math.random() * 0.16, r: 0.6 + Math.random() * 1.1, ph: Math.random() * 6.28 });
+  }
+  /* The glow under the water falls off fast, then slowly, and never reaches nothing. */
+  function level(sec) {
+    return 0.16 + 0.50 * Math.exp(-sec / 25) + 0.34 * Math.exp(-sec / 240);
+  }
+  function draw(now) {
+    var sec = reduce ? 120 : (now - t0) / 1000;
+    var L = level(sec);
+    ctx.clearRect(0, 0, W, H);
+    var cx = W * 0.5, cy = H * 1.06, R = Math.max(W, H) * 0.75;
+    var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+    g.addColorStop(0, 'rgba(96,200,235,' + (0.30 * L) + ')');
+    g.addColorStop(0.35, 'rgba(60,150,210,' + (0.13 * L) + ')');
+    g.addColorStop(1, 'rgba(40,110,180,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    for (var i = 0; i < motes.length; i++) {
+      var m = motes[i];
+      if (!reduce) { m.y -= m.s * (0.35 + L); if (m.y < H * 0.45) { m.y = H + 4; m.x = Math.random() * W; } }
+      var a = 0.22 * L * Math.min(1, (m.y - H * 0.45) / (H * 0.2));
+      if (a <= 0) continue;
+      var x = m.x + (reduce ? 0 : Math.sin(sec * 0.4 + m.ph) * 5);
+      ctx.fillStyle = 'rgba(170,225,245,' + a + ')';
+      ctx.beginPath(); ctx.arc(x, m.y, m.r, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>

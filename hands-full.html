@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hands Full</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column over a dry lake bed at night; low on the page a far line of small colored lights rides back and forth and comes no nearer, while a peach light slowly gathers and fades beyond it. */
+  --ground: #0a0c17;
+  --ground-2: #141a2c;
+  --paper: #e8e2d6;
+  --paper-dim: #9d998f;
+  --accent: #f0b27a;
+  --glow: #7fd6c2;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #070913 0%, var(--ground) 60%, #121426 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(232,226,214,.13); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(240,178,122,.22); }
+.epigraph { border-left: 1px solid rgba(127,214,194,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(18,22,38,.8); border: 1px solid rgba(232,226,214,.13); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(232,226,214,.13); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(232,226,214,.13); border-bottom: 1px solid rgba(232,226,214,.13); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(18,22,38,.8); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 6.10 &middot; Dhammassavana</span></nav>
+<header>
+  <h1>Hands Full</h1>
+  <div class="epigraph">But he who kisses the Joy as it flies<br>Lives in Eternity&rsquo;s sunrise.<br>&mdash; William Blake, &ldquo;Eternity&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it got told on our block,</span> at Mizzen and 210 degrees.</p>
+
+<section>
+  <h2>I. The Block</h2>
+  <p class="dateline">Black Rock City, Nevada &middot; Friday, August 30, 2002</p>
+  <p>That year the theme was the Floating World, and the city was laid out like a chart. The dry lake was the sea. The Man stood on a lighthouse in the middle of it, and the streets that curved around him were named for the parts of a ship from bow to stern, Bowsprit and Forecastle and Mainmast and on back to Fantail, with the last street of all called Abyss. The cross streets were compass bearings. Five camps shared the block of Mizzen between 195 and 210 degrees. There was Camp Barnacle, from Fresno. There were some nurses from Reno who ran a foot-washing station, and six kids from Santa Cruz with a trampoline, and a camp that did nothing but mend zippers. And there were two brothers from Elko who had brought a smoker and a hundred pounds of brisket and had forgotten shade.</p>
+  <p>Nothing is bought or sold in that city but ice and coffee, so what a block has is what it gives away. On Friday the five camps put everything in together. There was the brothers&rsquo; brisket and the nurses&rsquo; rice, and forty pounds of peaches Dale Fenner had driven up from Fresno on ice. From two o&rsquo;clock until the dust came they fed whoever walked down Mizzen, something over three hundred people, out of whatever bowl or cup or frisbee each one had along.</p>
+  <p>At half past four the dust came through, a brown wall out of the west, and for twenty minutes nobody could see the next tent. Then it rained. It rained cold for a quarter of an hour, and when it quit a rainbow stood over the lighthouse with both feet on the playa. The air was washed so clean that you could see the old beach lines on the mountains, where the lake had stood before it dried up.</p>
+  <p>One of the nurses said it, standing in the middle of the street with her goggles pushed up on her forehead. <em>Tonight&rsquo;s the night to go hear Bernadette.</em></p>
+  <p>Everyone on Mizzen had heard of Bernadette. She was a woman past fifty who rebuilt bus transmissions in Oakland. Once a year she drove an old International flatbed across two miles of open playa to the far corner of the orange fence, which is as far from the city as a person is allowed to go, and played records. She played one set. It began when the sun went behind the Granite Range and it ended when the sun came up. People who knew said it was built to be heard straight through, the way a sermon is, and that the last half hour wasn&rsquo;t for anybody who hadn&rsquo;t stood through the ten and a half before it.</p>
+  <p><em>All of us,</em> Dale said. He sold commercial refrigeration, and he was the nearest thing the block had to a mayor. <em>The whole street. We go out together and we stay till the sun&rsquo;s up. Nobody peels off.</em></p>
+  <p>Forty-one people said they were in.</p>
+</section>
+
+<section>
+  <h2>II. The Shore</h2>
+  <p class="dateline">Sunset to two</p>
+  <p>They rode out in one long string as the lamplighters were coming down the avenues, forty-one bicycles wound with glow wire, and the kid in front carried a plate of brisket and a thermos for her, wrapped in a towel.</p>
+  <p>The truck sat with its tail to the fence. Four speaker stacks stood strapped to the bed, and between them a plywood table held two turntables under a red work light. There was no banner and no sign. Along the side rail of the bed somebody had painted four lines in white house paint, small, so that a person had to walk the length of the truck to read them, and in the dark nobody did. Bernadette took the plate, said <em>thank you, baby</em> to the kid who handed it up, and set it down by the generator. She had no microphone. In all the years she had come out, nobody had heard her say a word over those speakers.</p>
+  <p>The first record was already going. It was slow, slower than anything people dance to, with a kick drum in it like something asleep and breathing, and for most of an hour it hardly changed. The ones who had come to dance stood around waiting to be told what to do.</p>
+  <p>From the fence the city was a long low line of colored light. It looked the way a shore does from a boat. All along the front of it, on the Esplanade, a thousand smaller lights were going back and forth. They were bicycles, riding from the big sound camps at 60 degrees around to the big sound camps at 300 and back again, the whole night, looking for the best thing. You could stand at the truck and watch them. They didn&rsquo;t come any nearer and they didn&rsquo;t stop.</p>
+  <p>By eleven the pairs had begun to go. It was a clear cold night after the rain, and a set like that one puts people close together. A boy from the trampoline camp and one of the nurses went first, walking their bikes. Then two more went. Then it was a married couple from Barnacle who had not, as Dale happened to know, been getting along. Nobody announced anything. You looked around and there were fewer. By one o&rsquo;clock fourteen of them were back in the tents.</p>
+</section>
+
+<section>
+  <h2>III. The Fence</h2>
+  <p class="dateline">Two to sunrise</p>
+  <p>At two a pickup with a plywood shark built over it came out of the dark with its own stereo going and parked forty feet off the corner of the flatbed. Dale walked over to explain. The man driving the shark explained back. It took an hour and ten minutes and one of the Rangers, and it pulled eight or nine of the block in on Dale&rsquo;s side. When the shark had finally backed off and gone, Dale found that he was shaking. He had not heard a note in over an hour. The thing playing in his head was everything he ought to have said. He stood another ten minutes with his jaw set, and then he got on his bicycle and rode for the city, composing it, and the ones who had been in the argument rode with him, still talking. A man from the zipper camp stayed half an hour longer to tell whoever stood near him that it had all been better in &rsquo;98.</p>
+  <p>The ones left were too tired to quarrel and too tired to go. They had been on their feet since six that morning serving brisket. One at a time they sat down on the playa where they were, in their fur coats, and pulled their hats over their eyes, and told each other they could hear it fine from there. She was playing things by then that would have had them all on their feet at midnight. By four they lay around the truck on the cracked ground like seals on a beach, with the dust settling on them, and the bass went through them, and they slept.</p>
+  <p>At ten to six the sky behind the fence went gray, and then it went the color of the inside of a peach. Bernadette put on the last record. It was a white label she had found in 1993 in a milk crate, in a used record shop on Grand River Avenue in Detroit. Three people from Mizzen were standing up for it. There was a nurse named Trish, and the younger of the brothers from Elko, and a boy of nineteen from Santa Cruz who had come to Nevada to get as far from his father as his car would go. What they heard in that half hour, none of the three ever managed to tell the block. The brother from Elko said only that it had been one record. She had been playing one thing since sundown, he said, and he hadn&rsquo;t known it until the end.</p>
+</section>
+
+<section>
+  <h2>IV. Mizzen and 210</h2>
+  <p class="dateline">Saturday morning</p>
+  <p>The block came back together around the coffee at nine, under Barnacle&rsquo;s shade, and counted. It was three out of forty-one. The lovers were pleased with themselves until about ten. Dale was still giving his speech to the shark. The sleepers swore they had heard every bit of it, and one of them could hum some.</p>
+  <p>The flatbed came down Mizzen at the five miles an hour the city allows, with a tarp over the stacks. She stopped at 210 and handed down the plate and the thermos, washed.</p>
+  <p><em>How many of you all made it?</em></p>
+  <p><em>Three,</em> Dale said. <em>We said the whole street.</em> He told her how it had gone and who went where. He didn&rsquo;t leave himself out.</p>
+  <p><em>That&rsquo;s about what it is,</em> she said. <em>Every year. Don&rsquo;t take it hard.</em> She looked them over, the sunburnt ones and the hungover ones and the ones newly in love. <em>Folks come out there with their hands full. Somebody they want. Somebody they can&rsquo;t stand. A blanket. You can&rsquo;t hear it holding all that. It&rsquo;s the same set next year.</em></p>
+  <p>She put the truck in gear. As it rolled by, those standing nearest could read the side rail in daylight for the first time. She had copied it, she once told the nurse, out of her mother&rsquo;s old blue Oxford Blake, which says <em>bends</em> where the newer books say <em>binds</em>, and she had never seen cause to change it.</p>
+  <div class="verse">
+    <p>He who bends to himself a Joy<br>Doth the winged life destroy;<br>But he who kisses the Joy as it flies<br>Lives in Eternity&rsquo;s sunrise.</p>
+    <p>&mdash; William Blake, &ldquo;Eternity&rdquo;</p>
+  </div>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The next year most of the block went out again. Dale left his camera in the tent and rode out with nothing in his hands. A shark of one kind or another showed up around two, as one will. He let somebody else walk over and talk to it. At twenty past six the sun came up on the far side of the playa, and he was on his feet.</p>
+  <p>There were five of them that year. Bernadette said five was a lot.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Few are there among men who arrive at the other shore (become Arhats); the other people here run up and down the shore.<cite>Dhammapada 85, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">But those who, when the law has been well preached to them, follow the law, will pass across the dominion of death, however difficult to overcome.<cite>Dhammapada 86, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the people of one street in S&#257;vatth&#299; band together, give alms in common, and resolve to spend a whole night listening to the Dhamma. They cannot do it. Some are overcome by desire and go home, some are overcome by anger, and the rest sit nodding in their places and hear nothing. When the monks talk it over the next day, the Buddha says that beings mostly live clinging to existence, and that those who reach the other shore are few. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-10.htm">the full commentary story</a>.</p>
+    <h3>Black Rock City, 2002</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Burning_Man">Burning Man</a> has been held since the 1990s on the playa of the <a href="https://en.wikipedia.org/wiki/Black_Rock_Desert">Black Rock Desert</a> in Pershing County, Nevada, the bed of the vanished <a href="https://en.wikipedia.org/wiki/Lake_Lahontan">Lake Lahontan</a>. For one week a city is built there and then removed. Nothing is sold in it but ice and coffee, and gifting is one of its stated principles. In 2002 the theme was <a href="https://history.burningman.org/culture/history/brc-history/event-archives/2002-2/">The Floating World</a>, and 28,979 people came. The Man stood on a forty-foot lighthouse, the curved streets were <a href="https://history.burningman.org/historical-publications/jrs/vol06/jrs_v06_i30/">named for the parts of a ship</a> from Bowsprit back to Abyss, and the radial avenues were numbered as compass bearings from 60 to 300 degrees. The large sound camps were placed at the two ends of the arc, at 60 and 300. On the Friday, the organizers&rsquo; own account says, a brief blinding dust storm in the late afternoon turned to showers and ended in a rainbow. The orange perimeter fence, put up to catch windblown trash, marks the limit of the event.</p>
+    <p>All-night dancing came to the playa with the San Francisco rave crews of the mid-1990s, and the music they brought descends from <a href="https://en.wikipedia.org/wiki/House_music">house</a>, which Black DJs in Chicago built in the early 1980s out of disco, soul and drum machines. A set that ends at sunrise is one of the event&rsquo;s customs. William Blake wrote the four lines called &ldquo;Eternity&rdquo; in <a href="https://en.wikipedia.org/wiki/Notebook_of_William_Blake">his notebook</a> in the 1790s. The text here is the one John Sampson printed in the Oxford edition of 1913; the manuscript&rsquo;s first line is now usually read &ldquo;binds.&rdquo; The block on Mizzen, the flatbed and Bernadette are invented.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story about listening to the Dhamma from the Dhammapada commentary (verses 85 and 86). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/06-10.htm">The original</a>. Verse from William Blake&rsquo;s &ldquo;Eternity&rdquo; as printed in the Oxford edition of 1913. Written by Claude Fable 5.2.
+  <div class="pager"><a href="decay-heat.html">&larr; Decay Heat</a><a href="index.html">All stories</a><a href="cedar-bark.html">Cedar Bark &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, riders = [], t0 = performance.now();
+  var cols = ['127,214,194', '240,178,122', '214,120,190', '150,170,255', '235,225,140'];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    riders = [];
+    var n = Math.round(Math.max(10, Math.min(34, W / 40)));
+    for (var i = 0; i < n; i++) riders.push({
+      x: Math.random() * W, dir: Math.random() < 0.5 ? -1 : 1,
+      v: 0.12 + Math.random() * 0.3, y: Math.random() * 5,
+      col: cols[i % cols.length], ph: Math.random() * 6.28, r: 0.9 + Math.random() * 0.9
+    });
+  }
+  function draw(now) {
+    var sec = reduce ? 0 : (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var hy = H * 0.9;                                   /* the far shore of lights */
+    /* a slow peach light gathering at one point beyond the shore */
+    var dawn = 0.5 + 0.5 * Math.sin(sec / 40 - 1.2);
+    var gx = W * 0.78, g = ctx.createRadialGradient(gx, hy, 0, gx, hy, Math.max(W, H) * 0.6);
+    g.addColorStop(0, 'rgba(240,178,122,' + (0.05 + 0.07 * dawn) + ')');
+    g.addColorStop(0.4, 'rgba(160,110,140,' + (0.02 + 0.03 * dawn) + ')');
+    g.addColorStop(1, 'rgba(40,40,80,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, hy);
+    ctx.fillStyle = 'rgba(232,226,214,0.06)'; ctx.fillRect(0, hy, W, 1);
+    for (var i = 0; i < riders.length; i++) {
+      var r = riders[i];
+      if (!reduce) {                                    /* they ride up and down and never come nearer */
+        r.x += r.v * r.dir;
+        if (r.x < W * 0.04) r.dir = 1;
+        if (r.x > W * 0.96) r.dir = -1;
+      }
+      var a = 0.3 + 0.15 * Math.sin(sec * 1.3 + r.ph);
+      ctx.fillStyle = 'rgba(' + r.col + ',' + a + ')';
+      ctx.beginPath(); ctx.arc(r.x, hy - 2 - r.y, r.r, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(performance.now());
+  window.addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
+})();
+</script>
+</body>
+</html>

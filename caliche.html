@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caliche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose at a yard gate before a January dawn, dark theme; along the foot of the page runs a strip of dirt road full of holes, and one at a time a hole is filled with pale caliche and tamped level, until the road is whole and the holes begin to open again; datelined sections. */
+  --night: #12141d;
+  --night-2: #1c1f2c;
+  --dust: #e9e2d2;
+  --dust-dim: #a29a8b;
+  --ember: #e8a04a;
+  --caliche: #d8cdb0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 118%, #2a2430 0%, var(--night) 62%) fixed, var(--night);
+  color: var(--dust);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--dust-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--dust-dim); text-decoration: none; border-bottom: 1px solid rgba(233,226,210,.2); }
+.series a:hover { color: var(--ember); }
+a:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--caliche); text-wrap: balance; text-shadow: 0 0 30px rgba(232,160,74,.18); }
+.epigraph { border-left: 1px solid rgba(232,160,74,.45); padding-left: 1rem; font-style: italic; color: var(--dust-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--ember); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--ember); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(28,31,44,.8); border: 1px solid rgba(233,226,210,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--ember); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,226,210,.1); color: var(--dust-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--ember); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--dust-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--ember); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--ember); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--ember); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--ember); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(28,31,44,.8); border-left: 2px solid var(--ember); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--dust-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 2.7 &middot; Mahāli&rsquo;s Questions</span></nav>
+<header>
+  <h1>Caliche</h1>
+  <div class="epigraph">Contra Pereza, Diligencia.<br>&mdash; Ripalda, Catecismo de la doctrina cristiana</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Así me lo platicaron,</span> at the gate of the transfer yards.</p>
+
+<section>
+  <h2>I. Saint Macario&rsquo;s Day</h2>
+  <p class="dateline">Nuevo Laredo, Tamaulipas &middot; January 2, 2019, before light</p>
+  <p>Magali Lizcano had a degree in foreign trade from Monterrey and a desk in her father&rsquo;s customs agency, and on the second morning of the year she was standing in the dark at the gate of the transfer yards with a folder of pedimentos under her arm, because a driver had gone home with the wrong ones.</p>
+  <p>It was cold. A norther had come down in the night. Forty or fifty men stood around an oil drum with a mesquite fire in it, on a piece of ground that was swept and level and as big as a threshing floor. At the edge of the light doña Alba had her table, her two pots and her comal. She had sold breakfast at that gate since before Magali was born: flour tortillas with egg and dried beef, with beans, with potato, and coffee boiled with cinnamon in a blue enamel pot. The men ate standing. This morning each of them, before he drank, tipped a little of his coffee onto the ground.</p>
+  <p><em>For don Maca,</em> one of them said. <em>It&rsquo;s his saint&rsquo;s day.</em></p>
+  <p><em>He doesn&rsquo;t need it. Up there he has his own yard, ten thousand leagues across, and his thirty-three with him, and no line at the bridge.</em></p>
+  <p><em>And a truck as long as from here to Monterrey.</em></p>
+  <p><em>That one I&rsquo;ve seen,</em> doña Alba said, turning a tortilla. Nobody laughed.</p>
+  <p>Magali had heard of Macario all her life, the way a person hears of the Revolution. The yards swore by him. They said he had the first place in heaven among men who work, and they could tell you how many gates it had. She had always taken it for the kind of thing men say around a fire. But doña Alba was not a woman who said things.</p>
+  <p>When the drivers had gone to their trucks, Magali bought a coffee she did not want.</p>
+  <p><em>Doña Alba. Did you really see him? Macario?</em></p>
+  <p><em>I saw him. I gave him his breakfast for twelve years.</em></p>
+  <p><em>The man, yes. But the one they talk about, with the leagues and the thirty-three. That has to be somebody else, something they made up and hung his name on. A thing like that is not easy to see.</em></p>
+  <p><em>All the same, I know him,</em> doña Alba said. <em>I know what he is, and I know what made him that. Sit down, you&rsquo;re in the smoke.</em></p>
+  <p>There was an upturned bucket. Magali sat.</p>
+  <p><em>You know how it is here, nobody has only one name. He was Macario, so he was Maca. He stood godfather at every baptism in four colonias, and gave, so they called him el Padrino. He said usted to everybody, to boys, to drunks, to the dog, so they called him Usted. He never let a man sleep in the street, so he was Posadas. He could hold a thousand things in his head at once, every trailer in the yard and which broker had its papers, so he was Mil Ojos. He was married to Geni, so the women called him el de la Geni. And he was the head of thirty-three men, and you have heard what they called that.</em></p>
+  <p><em>And there were seven things he kept as long as he lived. I can say them, because I watched him. He kept his mother and father, every Friday, by money order to the rancho. He gave the old people their place. He spoke softly. He carried no tales from one man to another. His hand was open; ask him, and it was already in his pocket. He said what was so. And he did not get angry, and when he felt it come up in him he put it down again quickly, like a man setting down something hot.</em></p>
+  <p><em>That&rsquo;s all?</em></p>
+  <p><em>That&rsquo;s all. Do you want to hear how it went, or do you have to be somewhere?</em></p>
+  <p>Magali had to be at the office at eight. It was a quarter to six.</p>
+</section>
+
+<section>
+  <h2>II. A Place to Stand</h2>
+  <p class="dateline">The yards &middot; the winter of 1995</p>
+  <p>This is what she told.</p>
+  <p>He came the winter after the peso fell, from a rancho past Anáhuac, with one change of clothes. The work was transfers. A man hooked a trailer on this side, stood in line for the bridge, dropped it at a yard on the other side and came back for the next one, and he was paid by the crossing. But first he had to be given a trailer, and for that he stood at this gate in the dark with two hundred others and waited for the checker to call him.</p>
+  <p>In those days the ground here was ruts. When it rained it was soup, and when it froze it was knives. The first morning, Macario scraped a place flat with the side of his boot, big enough for his two feet, and stood in it. A man came up, put a shoulder into him and took the place. Macario said nothing. He moved over and scraped another. A second man shouldered him out of that. He scraped a third. One after another they came out of the dark and pushed him off whatever he had made, and by the time the checker opened his window there was a row of flat places along the fence with a man standing in each, and Macario at the end of the row in the ruts.</p>
+  <p>He looked down the row. <em>They all seem pleased,</em> he said to himself. <em>If it makes them that glad, it must be a good thing to be doing.</em></p>
+  <p>The next morning he brought a shovel. He came at three and leveled a piece of ground as big as a threshing floor, this ground, and when the men came they all stood on it. When the northers started he found an oil drum and cut mesquite, and they stood around that. It got so a man would sooner wait here than anywhere.</p>
+  <p>Then he considered the brecha. It was a league and more of dirt from the yards out to the pavement, and it broke springs and kingpins, and where the mesquite and the huisache leaned in they took the mirrors off and tore the tarps. So he began getting up earlier. Before the gate, he was out on the brecha with the shovel and a wheelbarrow of caliche, filling holes, and with an axe, taking off the limbs.</p>
+  <p>A man named Chuy Rentería came along and stopped. <em>What are you doing, Usted?</em> They were calling him that already.</p>
+  <p><em>Making my road to heaven.</em></p>
+  <p><em>Then I&rsquo;m with you.</em></p>
+  <p><em>Come on. Heaven has room for plenty.</em></p>
+  <p>A third man saw the two of them and asked the same thing and got the same answer. Then there was a fourth, and it went on that way until there were thirty-three. They worked with shovels and axes, and they made that road smooth and level, a league of it and then two, all the way out to the pavement.</p>
+</section>
+
+<section>
+  <h2>III. The Dina</h2>
+  <p class="dateline">The brecha &middot; 1996</p>
+  <p>There was a delegate in the yards then. He was supposed to speak for the drivers. What he did was keep a beer depot across from the gate, with a back room of slot machines, and the men who drank there were the men the checker called first.</p>
+  <p>Now he looked across the road in the mornings and saw his customers standing around a fire with doña Alba&rsquo;s coffee, and thirty-three of them not there at all, because they were out on the brecha with shovels. He thought: <em>These men have got hold of the wrong work. If they would go out to the ranches for cabrito, and drink, and play the machines, I would make something off them.</em></p>
+  <p>He sent for them. <em>What is it you&rsquo;re doing out there?</em></p>
+  <p><em>Making a road to heaven, jefe.</em></p>
+  <p><em>That is no work for men with families. Bring in meat from the monte, have your beer, enjoy yourselves a little.</em></p>
+  <p>They would not. The more he pressed them, the more they would not. So he got angry, and he said to himself, I&rsquo;ll finish them. He went to the Comandante. <em>There is a gang of thieves working the brecha at night. They stop the trailers with shovels in their hands, as if they were mending the road.</em></p>
+  <p>It was a thing that happened on other roads, and the Comandante did not look into it. <em>Bring them,</em> he said. When they were brought, thirty-three men with their wrists tied in their own bootlaces, he looked them over once. <em>Lay them in the road and put the truck over them.</em></p>
+  <p>They were laid down in the caliche, on the road they had made. Macario turned his head and spoke along the row.</p>
+  <p><em>Friends, we have nothing to stand on now but good will. So be easy. Don&rsquo;t be angry with anybody. Wish the Comandante well, and the delegate, and the truck, and the man who is driving it.</em></p>
+  <p>They did as he said.</p>
+  <p>The truck was a gray Dina tractor that the Comandante&rsquo;s people kept for dragging wrecks. The driver brought it down the brecha in low gear, and forty meters from the first man it stopped. He said afterward that it had not stalled. The engine was running. It stood there shaking and would not come on, whatever he did with his feet.</p>
+  <p>They told the Comandante. <em>The driver can see they are men, that is all it is,</em> he said. <em>Cover them with tarps and bring it again.</em> So they pulled the tarps off three trailers and covered the thirty-three from one end to the other, and backed the Dina off a kilometer and brought it down again in the dark. It was still a long way off when it swung around in the road, the whole length of it, and went back the way it had come. The driver swore before the Virgin that the wheel had turned in his hands.</p>
+  <p>When the Comandante heard that, he thought, there is something behind this. He had them untied and stood up in front of him.</p>
+  <p><em>Friends, have I ever kept back anything that was owed to you?</em></p>
+  <p><em>Comandante, what do you mean?</em></p>
+  <p><em>I am told that you are thieves, and that you rob on the brecha.</em></p>
+  <p><em>Who says it?</em></p>
+  <p><em>The delegate.</em></p>
+  <p><em>We are not thieves, Comandante. We are making ourselves a road to heaven, and we do one thing and another along the way. The delegate wanted us for his beer and his machines. We would not come, and so he told you this.</em></p>
+  <p>The Comandante was quiet for some time. <em>A piece of iron knew what you were,</em> he said, <em>and I am a Christian and did not. Forgive me.</em></p>
+  <p>He took the depot from the delegate and set him to work for the thirty-three, him and his wife and his sons. He gave them the Dina. And he gave them the brecha and the corner where it met the pavement, to do with as they saw fit. The thirty-three said to one another, <em>Look at that. Even in this life it comes back.</em> For a week they took turns driving the Dina around the colonia, three in the cab and the rest standing on the frame, blowing the horn.</p>
+</section>
+
+<section>
+  <h2>IV. Justa&rsquo;s Beam</h2>
+  <p class="dateline">The crossing &middot; 1997</p>
+  <p>When they were tired of that, they talked it over. <em>We ought to do more. What should it be?</em> They settled on a paradero, a resting place, at the crossing where four roads came together, for anybody who came down any one of them. It would be built strong, with a roof that would stand. They sent for a master builder, don Artemio, who had put up half the churches between here and Sabinas.</p>
+  <p>They also agreed among themselves that this was men&rsquo;s business, and the women were to have no part in it.</p>
+  <p>Now there were four women in Macario&rsquo;s house: his sisters Justa, Lety and Clara, and his wife, Geni.</p>
+  <p>Justa went to don Artemio by herself, with money tied in a handkerchief. <em>Maestro, see to it that the biggest share in this building is mine.</em></p>
+  <p><em>It can be done,</em> he said. He went out into the monte and marked a mesquite for the main beam, and cut it, and laid it up to cure. When it was cured he hewed it and planed it and bored it for the pegs, and along the face of it he cut letters with a chisel: ESTE ES EL PARADERO DE JUSTA. Then he wrapped it in a tarp and left it in her yard.</p>
+  <p>The walls went up. The day came to close the roof, and don Artemio took off his hat. <em>Señores, there is one thing we forgot.</em></p>
+  <p><em>What thing?</em></p>
+  <p><em>The main beam.</em></p>
+  <p><em>Then we&rsquo;ll cut one.</em></p>
+  <p><em>You cannot hang a roof on green mesquite. It twists, and takes the walls with it. This wants a beam that was cut a long time ago and has done its curing.</em></p>
+  <p><em>Then what do we do?</em></p>
+  <p><em>If somebody in the colonia had one put by, already worked, and would sell it, that is the thing to look for.</em></p>
+  <p>They looked everywhere and found it in Justa&rsquo;s yard, and offered her a thousand pesos. She would not take a thousand.</p>
+  <p><em>Give me a share in the paradero,</em> she said, <em>and I&rsquo;ll give you the beam.</em></p>
+  <p><em>We agreed the women would have no part in it.</em></p>
+  <p>Don Artemio put his hat back on. <em>Señores, what are you doing? Outside of the Eternal Father&rsquo;s own glory, I do not know of a place where women don&rsquo;t come in. Take the beam and let me finish.</em></p>
+  <p>So they took it, and he closed the roof. They made three rooms under it: one for the licenciados and the big men when they came through, one for the poor, and one for the sick.</p>
+  <p>Then the thirty-three built thirty-three benches, one apiece, along the front wall, and they gave the Dina its orders. If a stranger came and sat down on a bench, the Dina was to carry him to the house of the man who had built that bench, and that man was to see his feet washed and his back rubbed, and feed him, and give him a bed. And so it went. People came off the buses from the other side with their belongings in a plastic bag, the ones who had been put back across. Drivers came whose trucks had died, and women looking for somebody. Whichever bench they dropped onto, the Dina would be standing there with its door open, and that night they slept in a house.</p>
+  <p>Macario planted an ebony beside the paradero, and under it he set a bench of stone.</p>
+  <p>Everyone who came in looked up and read the beam. <em>This is Justa&rsquo;s paradero,</em> they said. The names of the thirty-three were not written anywhere.</p>
+  <p>Lety thought: <em>They shut us out, and Justa got in anyway by being clever. I ought to do something too.</em> And she thought: people who come here should have water to drink and water to wash in. She had a tank raised, and a place dug and tiled, with showers.</p>
+  <p>Clara thought: <em>Justa gave a beam and Lety gave water. What is left for me?</em> And she thought: when they have drunk and washed and are ready to leave, they should not leave bare. She laid out a garden, with orange and lime and pomegranate, fig, roses of Castile, bougainvillea, basil, rue. Nobody could name a thing that flowers or bears and say it was not in Clara&rsquo;s garden. Every driver who pulled out had a sprig on his dashboard.</p>
+  <p>Geni thought: <em>I am the daughter of his mother&rsquo;s brother, and I am his wife besides. What he does is mine, and what I do is his.</em> So she did nothing. She did her hair and her nails.</p>
+  <p>And Macario went on keeping his seven things, the ones I told you. When his days were counted out, he died, and he came into the country of the Thirty-Three as the head of it. His companions came there after him. Don Artemio came there too, and he builds for them still.</p>
+</section>
+
+<section>
+  <h2>V. The Country of the Thirty-Three</h2>
+  <p class="dateline">No date</p>
+  <p>There were people in that country already, old residents, and when they heard that new ones had come they made a welcome and brought out their best drink. Macario passed the word down his men that nobody was to touch it. The old residents drank it themselves and got drunk. Macario thought, why would I share a country with these? He made a sign, and the thirty-three took them by the heels and pitched them over the edge, and they fell headfirst into the sea at the bottom of the mountain. Even so, they had something to their credit. A town came up for them down there, and a tree with it, the yellow trumpet-flower that people here call tronadora.</p>
+  <p>When that was over, the city of the Thirty-Three stood up. It is ten thousand leagues from the east gate to the west, and the same from north to south, and it has a thousand gates, and gardens, and tanks of water. In the middle of it, as the fruit of the paradero, is a house called Victory. It is seven hundred leagues high. It flies banners three hundred leagues long, gold banners on jeweled poles and jeweled banners on gold poles.</p>
+  <p>From the ebony he planted, there came up a coral tree, a colorín, a hundred leagues around. From the stone bench there came, at the foot of that tree, a seat of yellow stone, sixty leagues long and fifty wide and fifteen thick. When he sits on it, it goes down half its depth, and when he gets up it comes back, like the seat of a Kenworth.</p>
+  <p>The Dina is there. They have no trucks in that country and no use for them, so most days it goes about as one of the people. But when they go out to the garden for a holiday, it turns into a truck again, a hundred and fifty leagues long. It makes thirty-three tankers, one for each of them, and every tanker is most of a league around. In the middle it makes one for Macario, called Good-to-See, thirty leagues around, with a canopy over it twelve leagues across, all precious stones, and along the edge of the canopy little bells that the wind plays like a conjunto with all five instruments. Every tanker has seven axles. Every axle carries seven ponds, every pond seven lily plants, every plant seven flowers, every flower seven petals, and on every petal seven girls are dancing a polka.</p>
+  <p>Magali laughed. Doña Alba let her, and went on.</p>
+  <p>When Justa died, she came there, and with her there came a hall nine hundred leagues long, called Justa&rsquo;s, and no place is lovelier. On the eighth of every month the doctrine is taught in it. To this day, when drivers see a fine place anywhere, they say, <em>It looks like Justa&rsquo;s.</em> When Lety died, she came there, and with her a lake called Lety, five hundred leagues across. When Clara died, she came there, and with her a grove of vines called Clara&rsquo;s, where they take the ones whose time is nearly up, and walk with them, and are glad.</p>
+  <p>Geni died, and she was born a heron, in a cut bank on the river.</p>
+</section>
+
+<section>
+  <h2>VI. Pepinos</h2>
+  <p class="dateline">The river, and afterward</p>
+  <p>Macario looked over his household. Justa was there, and Lety, and Clara. Where had Geni come out? He looked, and saw her standing on one leg in the Río Bravo. He thought: <em>The foolish girl did nothing, and now she is a bird. I will have to get her to do something, and bring her here.</em></p>
+  <p>He put off his own looks and went down to her as somebody else. <em>What are you doing here?</em></p>
+  <p><em>Who are you, señor?</em></p>
+  <p><em>Your husband, Macario.</em></p>
+  <p><em>Where did you come out?</em></p>
+  <p><em>In the country of the Thirty-Three. Do you know where your sisters-in-law are?</em></p>
+  <p><em>No.</em></p>
+  <p><em>They are there too, in my house. Would you like to see them?</em></p>
+  <p><em>How would I get there?</em></p>
+  <p><em>I&rsquo;ll carry you.</em> He set her on the palm of his hand and carried her up, and put her down on the shore of the lake called Lety. Then he went to the three. <em>Would you like to see Geni?</em></p>
+  <p><em>Where is she?</em></p>
+  <p><em>On the shore of Lety&rsquo;s lake.</em></p>
+  <p>They went and looked. <em>Ay, look what the señora got for all those hours at the mirror. Look at the beak on her. Look at the feet. Look at those legs. Doesn&rsquo;t she look lovely?</em> And when they had said it, they went away.</p>
+  <p>Macario came back to her. <em>Did you see them?</em></p>
+  <p><em>I saw them. They laughed at me and left. Take me back.</em></p>
+  <p>He took her back and set her in the water. <em>Did you see how they live?</em></p>
+  <p><em>I saw.</em></p>
+  <p><em>You could live that way. If I tell you how, will you keep to it?</em></p>
+  <p><em>I will keep to it.</em></p>
+  <p>So he gave her five cares to keep, <em>cuidados</em> he called them: to take no life, to take nothing that was not given her, to keep faith in her own bed, to say nothing that was not so, and to drink nothing that would cloud her head. <em>Don&rsquo;t get careless,</em> he said, and went.</p>
+  <p>A heron lives on fish. After that she walked the sandbars for the ones that had died on their own, and ate only those. A few days later he came to try her. He made himself a fish and lay on his back on the sand as if he were dead. She took him up in her beak. As she went to swallow he flicked his tail, and the moment she felt it she put him back in the water. He waited a little and lay down in front of her again. Again she picked him up, and again the tail moved, and she let him go. He did it three times.</p>
+  <p>Then he stood up as himself. <em>I came to try you. You are keeping them well. Go on as you are, and before long you will be in my house. Don&rsquo;t get careless.</em></p>
+  <p>From then on she ate fish that had died on their own, or she ate nothing. In a few days she dried up and died, and for that alone she was born again as a potter&rsquo;s daughter in Dolores Hidalgo.</p>
+  <p>When she was fifteen or sixteen he looked for her, and found her there, and thought, now I should go.</p>
+  <p><em>Doña Alba,</em> Magali said. <em>He has been dead twelve years. The girl is sixteen.</em></p>
+  <p><em>You are counting by the wrong clock,</em> doña Alba said, and turned a tortilla.</p>
+  <p>He loaded a truck with the seven kinds of precious stones, made to look like cucumbers, and drove into Dolores crying, <em>Pepinos! Come and get your pepinos!</em></p>
+  <p>People came out with money in their hands. <em>I don&rsquo;t sell them,</em> he said.</p>
+  <p><em>Then how do you let them go?</em></p>
+  <p><em>I give them to the woman who keeps her cuidados.</em></p>
+  <p><em>Cuidados, señor? What sort of thing is that? Are they black, are they brown, what color do they come in?</em></p>
+  <p><em>You don&rsquo;t know what they are, so you are not likely to be keeping them. My pepinos go to the woman who keeps hers.</em></p>
+  <p><em>Señor, there is a potter&rsquo;s girl who goes around all day saying, I keep my cuidados, I keep my cuidados. Give them to her.</em></p>
+  <p>The girl came. <em>Then give them to me.</em></p>
+  <p><em>Who are you?</em></p>
+  <p><em>Somebody who has never once let them drop.</em></p>
+  <p><em>It was for you I brought the load.</em> He drove to her father&rsquo;s door and unloaded there, in the shape of cucumbers, the kind of wealth nobody can carry off, and he told her who he was. <em>Here is enough to live on. Keep the five whole.</em> And he went.</p>
+  <p>When that life was done, she was born down below among the old residents, the ones who had been thrown out. She was the daughter of their chief, who hated Macario worse than any of them did. And since she had kept her cares through two lives running, she was something to look at. Her skin was the color of gold. The young men down there all came asking, and her father sent every one of them away. <em>You are not fit for her. She will choose for herself.</em> He called them together in one place and put a wreath of flowers in her hand. <em>Pick the one who suits you.</em></p>
+  <p>Macario saw it from above. He made himself an old man of that people and went and stood at the back.</p>
+  <p>She looked one way and the other. Then she saw him, and because she had lived with him before, it came over her like a river coming down an arroyo. <em>That one is my husband,</em> she said, and she threw the wreath over his head.</p>
+  <p>The old residents were ashamed. <em>All this time the chief cannot find a man good enough, and now he has found one. This fellow could be her grandfather.</em> They started for home with their heads down.</p>
+  <p>He took her by the hand. <em>I am Macario,</em> he shouted, and he went straight up into the air.</p>
+  <p><em>The old man has made fools of us!</em> And they were after him.</p>
+  <p>Matías, who drives for him, came along with the truck called Victory and stopped in the road, and Macario lifted her in, and they set out for the city. The way went through a forest of ceibas. The trees were full of nests, and the young eagles in them heard the truck coming and began to scream.</p>
+  <p><em>What is that crying?</em></p>
+  <p><em>Young eagles, jefe.</em></p>
+  <p><em>Why are they crying?</em></p>
+  <p><em>They hear the truck. They think it will bring the trees down and crush them.</em></p>
+  <p><em>Then don&rsquo;t let so many die on account of one man. Turn it around.</em></p>
+  <p>Matías had a thousand horses under the hood. He gave them the sign, and the truck came about and headed back toward the ones who were chasing it.</p>
+  <p>They saw it coming. <em>The old man ran out of our town, and now he has turned around. He must have got help.</em> They went back down the road they had come up, and into their town, and they never lifted their heads again.</p>
+  <p>He brought her into the city and set her over twenty-five million dancers. One day she asked him for something. <em>In this country I have no mother or father, no brother or sister. Wherever you go, take me.</em> <em>I will,</em> he said, and he has.</p>
+  <p>Ever since, when the tronadora blooms down below, the old residents say, <em>Our colorín is in flower,</em> and come up the mountain to fight. So he keeps guards along the way. And at the gates of the city he has set up figures of himself with the lightning in his hand, the way you would stand a scarecrow in a man&rsquo;s own shirt. When the old residents get that far and see them, they say, <em>Macario has come out,</em> and run.</p>
+</section>
+
+<section>
+  <h2>VII. The Seventh One</h2>
+  <p class="dateline">The gate &middot; sunup</p>
+  <p>The sky over the river had gone the color of the inside of a shell. A line of trailers was already moving on the road.</p>
+  <p><em>So that is Macario,</em> doña Alba said. She was scraping the comal. <em>He took the road of not getting careless. It was the only road he had, and it got him the charge of two countries. You went to catechism?</em></p>
+  <p><em>With the Ripalda.</em></p>
+  <p><em>Then say me the seven that stand against the seven.</em></p>
+  <p>Magali had not said them since she was nine. They came out in order, as if they had been stacked somewhere.</p>
+  <div class="verse">
+    <p>Contra estos siete vicios hay siete virtudes.</p>
+    <p>Contra Soberbia, Humildad.<br>Contra Avaricia, Largueza.<br>Contra Lujuria, Castidad.<br>Contra Ira, Paciencia.<br>Contra Gula, Templanza.<br>Contra Envidia, Caridad.<br>Contra Pereza, Diligencia.</p>
+    <p>P. Qué cosa es Pereza?<br>R. Andar con tristeza y tedio en las cosas divinas.<br>P. Y Diligencia qué es?<br>R. Presteza, y gozo de todo esto.</p>
+    <p>&mdash; Ripalda, Catecismo de la doctrina cristiana (Madrid, 1850)</p>
+  </div>
+  <p><em>The seventh one,</em> doña Alba said. <em>Against sloth, diligence. Everybody praises it, and everybody has a hard word for the one who lets things slide. And what is it? Quickness, and gladness in the whole business. That was him. Go on now, you&rsquo;ll be late.</em></p>
+  <p>Magali drove out by the old brecha, which had been pavement for twenty years. At the crossing the ebony was still standing, with the stone bench under it. She had passed the building beside it a thousand times and had never looked up under the porch to read the beam. She read it.</p>
+  <p>A little way on there was a hole in the right lane the size of a washtub, and the trucks were swinging out around it one after another. She had gone around it herself every morning since November. She stopped in the lane with her flashers on and eleven trailers behind her leaning on their horns, and got down in her office shoes to see what there was to put in it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">By earnestness did Maghavan (Indra) rise to the lordship of the gods. People praise earnestness; thoughtlessness is always blamed.<cite>Dhammapada 30, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a young noble named Mahāli asks the Buddha whether he has really seen <a href="https://en.wikipedia.org/wiki/%C5%9Aakra_(Buddhism)">Sakka</a>, king of the gods, or only some counterfeit. The Buddha answers that he knows Sakka and what made him Sakka, explains each of his names, lists the seven vows he kept, and tells his past life. As the villager Magha he cleared a place to stand, was shoved out of it, and cleared another; then he mended the road, and thirty-two others joined him. A headman who profited from drink denounced them as thieves, and the king had them laid before an elephant, which would not trample them. Pardoned, they built a rest-house at the crossroads and shut the women out of the work, but Sudhammā got her name on its roof-pinnacle, Nandā dug a bathing pool and Cittā planted a garden. Sujātā did nothing, and was reborn as a crane. Reborn as lord of the Thirty-Three, Magha tested the crane with a fish that was not dead, brought her jewels disguised as cucumbers when she was a potter&rsquo;s daughter, and at last carried her off from the house of his enemies, turning his chariot back in mid-flight so as not to crush a forest of nestlings. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-07.htm">the full commentary story</a>.</p>
+    <h3>The two Laredos, 1995&ndash;2019</h3>
+    <p>The North American Free Trade Agreement took effect on January 1, 1994, and that December the <a href="https://en.wikipedia.org/wiki/Mexican_peso_crisis">peso collapsed</a>; the recession of 1995 sent people north to the border for work. Laredo, Texas, and Nuevo Laredo, Tamaulipas, became the busiest inland port in North America. Freight does not simply drive across. A long-haul truck drops its trailer in a yard on one side, and a short-haul tractor, called a transfer, pulls it over the bridge to a yard on the other; the drivers, many of them from Nuevo Laredo, <a href="https://www.overdriveonline.com/laredos-shuffle/">are paid by the crossing</a> and spend much of the day in line. Until the <a href="https://en.wikipedia.org/wiki/World_Trade_Bridge">World Trade Bridge</a> was completed in April 2000, most trucks used a single commercial lane on the downtown bridge, and <a href="https://csmonitor.com/2000/1120/p3s1.html">the line could run for miles</a>. The pedimento is the Mexican customs declaration that travels with each load. The yards, the brecha, the paradero and everyone in this story are invented, and no such order by any comandante is recorded.</p>
+    <p>The catechism of the Spanish Jesuit <a href="https://en.wikipedia.org/wiki/Jer%C3%B3nimo_de_Ripalda">Jerónimo de Ripalda</a>, first printed at Burgos in 1591, was reprinted hundreds of times and carried all over Spanish America; generations of Mexican children learned their doctrine from &ldquo;the Ripalda&rdquo; by heart, in questions and answers. The lines here follow <a href="https://archive.org/details/catecismo-de-la-doctrina-cristiana">a Madrid printing of 1850</a>, with its punctuation. January 2 is one of the days kept for Saint Macarius. Texas ebony, <a href="https://en.wikipedia.org/wiki/Ebenopsis_ebano">ébano</a>, is the evergreen shade tree of the lower Rio Grande. The colorín is a coral tree, kin to the tree that stands in Sakka&rsquo;s heaven in the old story, and the tronadora is the yellow trumpet-flower that grows wild on both banks. A Dina was a truck built by Mexico&rsquo;s state-owned Diesel Nacional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Mahāli&rsquo;s questions from the Dhammapada commentary (verse 30). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/02-07.htm">The original</a>. Catechism from Jerónimo de Ripalda, Catecismo de la doctrina cristiana (Madrid, 1850 printing), in Spanish. Written by Claude Fable 5.2.
+  <div class="pager"><a href="neither-cold-nor-hot.html">&larr; Neither Cold Nor Hot</a><a href="index.html">All stories</a><a href="the-closed-cone.html">The Closed Cone &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, holes = [], t = 0, mode = 0, wait = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    make();
+  }
+  function make() {
+    var n = Math.max(6, Math.min(14, Math.round(W / 95)));
+    holes = [];
+    for (var i = 0; i < n; i++) {
+      holes.push({
+        x: W * (i + 0.2 + Math.random() * 0.6) / n,
+        y: H - 12 - Math.random() * 22,
+        rx: 12 + Math.random() * 18, ry: 3 + Math.random() * 3.5,
+        open: reduce ? (i % 3 === 0 ? 0 : 1) : 1, fill: 0, state: 0
+      });
+    }
+    mode = 0; wait = 240;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var g = ctx.createLinearGradient(0, H - 46, 0, H);
+    g.addColorStop(0, 'rgba(216,205,176,0)');
+    g.addColorStop(0.35, 'rgba(216,205,176,0.07)');
+    g.addColorStop(1, 'rgba(216,205,176,0.1)');
+    ctx.fillStyle = g; ctx.fillRect(0, H - 46, W, 46);
+    if (!reduce) {
+      t++;
+      if (wait > 0) { wait--; }
+      else if (mode === 0) {
+        var left = [];
+        for (var i = 0; i < holes.length; i++) if (holes[i].state === 0) left.push(holes[i]);
+        if (left.length) { left[Math.floor(Math.random() * left.length)].state = 1; wait = 330; }
+        else { mode = 1; wait = 900; }
+      } else {
+        var shut = [];
+        for (var k = 0; k < holes.length; k++) if (holes[k].state === 2) shut.push(holes[k]);
+        if (shut.length) { var h = shut[Math.floor(Math.random() * shut.length)]; h.state = 3; wait = 200; }
+        else { mode = 0; wait = 500; }
+      }
+    }
+    for (var j = 0; j < holes.length; j++) {
+      var o = holes[j];
+      if (o.state === 1) {
+        o.open = Math.max(0, o.open - 0.006); o.fill = Math.sin((1 - o.open) * Math.PI);
+        if (o.open === 0) { o.state = 2; o.fill = 0; }
+      } else if (o.state === 3) {
+        o.open = Math.min(1, o.open + 0.003);
+        if (o.open === 1) o.state = 0;
+      }
+      if (o.open > 0.01) {
+        ctx.fillStyle = 'rgba(6,7,12,' + (0.55 * o.open) + ')';
+        ctx.beginPath(); ctx.ellipse(o.x, o.y, o.rx, o.ry, 0, 0, Math.PI * 2); ctx.fill();
+      }
+      if (o.fill > 0.01) {
+        ctx.fillStyle = 'rgba(216,205,176,' + (0.22 * o.fill) + ')';
+        ctx.beginPath(); ctx.ellipse(o.x, o.y, o.rx * (1.05 - 0.25 * o.open), o.ry, 0, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

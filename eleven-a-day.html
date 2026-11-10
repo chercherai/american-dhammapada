@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eleven a Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column over green engineering paper; small lights arrive at random on the grid and go out. */
+  --ground: #eef0e3;
+  --ground-2: #e1e5d2;
+  --paper: #262b28;
+  --paper-dim: #626a60;
+  --peacock: #1c6566;
+  --lamp: #c4862c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f6f7ee 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(38,43,40,.2); }
+.series a:hover { color: var(--peacock); }
+a:focus-visible { outline: 2px solid var(--peacock); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--peacock); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(28,101,102,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--peacock); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--peacock); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(250,251,244,.82); border: 1px solid rgba(38,43,40,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--lamp); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(38,43,40,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--peacock); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--peacock); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(38,43,40,.14); border-bottom: 1px solid rgba(38,43,40,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--peacock); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--peacock); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--peacock); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--peacock); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(250,251,244,.82); border-left: 2px solid var(--peacock); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 16.3 &middot; Visākhā</span></nav>
+<header>
+  <h1>Eleven a Day</h1>
+  <div class="epigraph">For no one is solicitous or anxious about anything, unless he loves it.<br>&mdash; Spinoza, Ethics V, Prop. 20, note</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it was told to me,</span> on Winesap Court.</p>
+
+<section>
+  <h2>I. The Prophet&rsquo;s Chamber</h2>
+  <p class="dateline">Holmdel, New Jersey &middot; 1959&ndash;1966</p>
+  <p>Ray Conover&rsquo;s people had grown apples on the rise above Holmdel Road for a hundred and forty years, and in 1959, the year the telephone company began building on the potato fields across Crawfords Corner Road, Ray sold the orchard to a builder from Matawan and kept the house. The builder took out the Winesaps and the Staymans and put in nine split-levels around a circle of new asphalt, and named the circle after what he had cut down. The Conover house stood at the head of it, white clapboard, a century older than anything else on the street, with a horse chestnut in the yard and a back bedroom over the kitchen that Edith Conover called the prophet&rsquo;s chamber.</p>
+  <p>She had the name from Second Kings, from the woman of Shunem who told her husband to build a little room on the wall for the man of God, with a bed in it and a table and a stool and a candlestick, so that he would have a place to turn in when he passed. Edith had a spool bed, a maple dresser, a cane-bottomed chair and a reading lamp, and a guest book on the dresser with eighty-one names in it by 1966: missionaries home on furlough from the Congo and Assam and the Philippines, a Telugu pastor, two Karen schoolteachers, a deaf evangelist from Ohio who preached with his hands at the Baptist church on Holmdel Road while his wife said it out loud beside him. On the dresser stood a round lacquer box from Pagan, red and black, with a peacock on the lid in gold leaf, which Mrs. Mabry of the Kachin Hills had given her in 1951, the first year the Mabrys slept in that room. Ray used to say she ran a hotel that never sent a bill. Ray died in 1962, and she went on running it.</p>
+  <p>The street was full of telephone people. The men drove out every morning to the new Bell Laboratories, a building a fifth of a mile long set down in the old potato fields, black glass that was turning, panel by panel, into mirror, so that on clear days it was mostly sky. There was a long pond in front of it, and a water tower on three white legs that the children said looked like a transistor. Whatever the men did in there, they did not talk about it at supper. The men who did not work for the telephone company drove to the station in Middletown and took the Long Branch train to Newark.</p>
+  <p>The only woman on Winesap Court who drove to the Laboratories herself was Mrs. Lotte Seligman, in the split-level across the circle from Edith&rsquo;s front door. She had come from G&ouml;ttingen in 1936 with a doctorate in mathematics and one suitcase, and had added up death rates for an insurance company on Madison Avenue until the war, when the telephone company found her. She worked on what she called traffic, which had nothing to do with cars. She could tell you how many people in Monmouth County would pick up a telephone between ten and eleven on a Monday morning, and how many lines the exchange needed so that nine hundred and ninety-nine of them would hear a dial tone. A Dane named Erlang had worked it out for the city of Copenhagen in 1909, she said, and it was the same arithmetic as rain on a roof or burials in a parish. Nobody arranges them. They come anyway, at a rate.</p>
+  <p>Edith took her supper on Tuesdays and Fridays, because Mr. Seligman had died in 1958 and Lotte, left to herself, ate sardines on crackers standing at the sink. In return Lotte did Edith&rsquo;s taxes, and told her what the bank was doing with her money, and was the one Edith asked about anything that had a number in it. She was also the one Edith asked about the rest. Lotte said very little, and what she said, Edith found, kept. On the bookshelf in Lotte&rsquo;s living room there was a photograph of a man in a wing collar and two girls in white dresses on a park bench, and the letters from Kassel had stopped in 1942. Edith had never asked, and Lotte had never said.</p>
+  <p>Edith&rsquo;s granddaughter Dorothy, her son Glenn&rsquo;s girl, had been coming up the hill to help with the prophet&rsquo;s chamber since she was eleven. She turned the mattress for every new guest and ironed the pillowcases with a sprinkle bottle. She learned to make tea the way the Assam people liked it, boiled in the milk with the sugar already in, and at fourteen she could set a table for a Telugu pastor and a deaf evangelist and know without being told which of them wanted the salt. Everybody called her Dorrie. She worked Saturdays at the notions counter in the Bamberger&rsquo;s at the Monmouth Shopping Center and was saving for Douglass College.</p>
+  <p>In February of 1966 Edith&rsquo;s sister in St. Petersburg broke her hip, and Edith went down on the train for six weeks, and that was the winter the government of Burma sent the missionaries home. The Mabrys had been thirty-one years in the Kachin Hills. They came to Winesap Court in the first week of March with two suitcases and a typewriter, and they found the prophet&rsquo;s chamber made up, the bed turned down, and Dorrie, sixteen years old, keeping the house.</p>
+  <p>She drove them in her father&rsquo;s Rambler to every church that wanted to hear them, as far as Trenton. She typed Mr. Mabry&rsquo;s letters to the Board at Valley Forge with two fingers. She made the tea boiled in milk. One morning Mrs. Mabry began to cry at the breakfast table because she would never see Myitkyina again, and Dorrie did not say anything at all; she reached across and held the old woman&rsquo;s hand and let her own eggs go cold. When Edith came home in April she found a new line in the guest book under the Mabrys&rsquo; names, in Mrs. Mabry&rsquo;s small slanted hand. <em>Kept by Dorothy. Faithful and true.</em></p>
+</section>
+
+<section>
+  <h2>II. Route 35</h2>
+  <p class="dateline">October 1966</p>
+  <p>On the twenty-second of October, a Saturday, it rained from morning on. Dorrie closed out her register at half past nine and drove north on Route 35 in the Rambler, and a southbound car crossed the center line. She died in the hospital in Red Bank a little after midnight, with Glenn and her mother beside the bed and Edith in the corridor on a plastic chair, holding her pocketbook on her knees with both hands.</p>
+  <p>Edith did everything. That was what she was for. She called the pastor and the funeral director and the florist. She chose the casket, and the blue dress from Easter, and the hymns. She sat on the edge of the bed with Glenn&rsquo;s wife, who could not hold a pencil, and made the list of who had to be called and called them. She set the women to work in the fellowship hall, and saw that the big urn was filled and the egg salad made and the folding chairs put out in rows. The Mabrys came up on the train from Philadelphia. Lotte Seligman came in a black hat and sat in the last pew, and stood when the others stood, and did not sing.</p>
+  <p>Then it was done. The chairs were stacked against the wall, the urn was rinsed and turned upside down on the drainboard, and Edith went home to the house at the head of the circle and found that she could not stop.</p>
+  <p>She cried in the A&amp;P in front of the canned peaches. She cried in the car in the church lot on Thursday night and drove home without going in to choir. She stripped the bed in the prophet&rsquo;s chamber and made it up again and stripped it again. She did not sleep in her own bed; she slept in her clothes on the davenport with the radio on low. One night in the second week of November, a little before eleven, she looked out and saw that the kitchen light was on across the circle, and she put her coat on over her nightgown and went across the wet asphalt in her slippers.</p>
+</section>
+
+<section>
+  <h2>III. Eleven</h2>
+  <p class="dateline">Winesap Court &middot; November 1966</p>
+  <p>Lotte was at the kitchen table with a pad of green engineering paper and a slide rule and a cup of coffee gone cold, working. She did not seem surprised. She moved the pad over to make room, and Edith sat down, not across from her but a little to one side, the way you sit in a doctor&rsquo;s office, and put her face in her hands.</p>
+  <p>Lotte let her cry for some time. Then she said, <em>Edith. Why are you sitting in my kitchen in your nightgown, crying like this?</em></p>
+  <p>So Edith told her. She said what she had not said to anybody, not to Glenn, not to the pastor: that the girl had been dearer to her than her own son. That she was faithful and true. That every missionary on every boat in the world could come through the prophet&rsquo;s chamber, and she would never see the like of her again.</p>
+  <p>Lotte listened to all of it. Then she turned the green pad around and picked up her pencil.</p>
+  <p><em>How many people live in Monmouth County?</em></p>
+  <p><em>I&rsquo;ve heard you say. Four hundred thousand.</em></p>
+  <p><em>Four hundred and twenty, now.</em> Lotte wrote it at the top of the page. <em>Suppose every one of them was as dear to you as Dorrie. Every one. Would you like that?</em></p>
+  <p>Edith thought of the Mabrys, and the Telugu pastor, and the deaf man preaching with his hands. It was what she had wanted her whole life. It was what the room was for.</p>
+  <p><em>Yes,</em> she said.</p>
+  <p><em>And how many die in Monmouth County every day?</em></p>
+  <p><em>I don&rsquo;t know. A great many.</em></p>
+  <p>Lotte worked it on the pad, saying it as she went, the way she must have said things for thirty years to young men who did not want to hear them. <em>Nine and a half in a thousand. That is the rate this year, for the whole country. Four hundred twenty thousand. Three thousand nine hundred ninety in a year.</em> She slid the rule, though Edith could see she did not need it. <em>Divide by three hundred sixty-five. Eleven.</em> She drew a line under it. <em>Eleven a day. Not eleven every day. It comes the way calls come. Some days six. Some days eighteen. But eleven.</em></p>
+  <p>She set the pencil down beside the pad, square to it.</p>
+  <p><em>So. If every one of them were Dorrie, Edith, you would have no time. You would go up and down Route 35 day and night and do nothing but this.</em></p>
+  <p>Edith looked at the number for a long while. It was written very neatly, the way Lotte wrote everything, the sevens crossed.</p>
+  <p><em>Yes,</em> she said. <em>I see that.</em></p>
+  <p><em>Then don&rsquo;t grieve like this.</em> Lotte said it gently, the way she gave the answer to a sum. <em>Grief or fear, Edith. Both of them come out of one place. They come out of holding a thing dear.</em></p>
+  <p>She got up and took a brown book off the shelf by the photograph, an English Spinoza with a cracked spine that she had bought on Fourth Avenue in 1937 to learn the language from, and found the place without looking for it, and read it out in her accent, which came back stronger when she read.</p>
+  <div class="verse">
+    <p>Again, it must be observed, that spiritual unhealthiness and misfortunes can generally be traced to excessive love for something which is subject to many variations, and which we can never become masters of. For no one is solicitous or anxious about anything, unless he loves it; neither do wrongs, suspicions, enmities, &amp;c. arise, except in regard to things whereof no one can be really master.</p>
+    <p>&mdash; Spinoza, Ethics, Part V, Prop. 20, note (tr. R. H. M. Elwes)</p>
+  </div>
+  <p><em>That isn&rsquo;t the Bible,</em> Edith said.</p>
+  <p><em>No.</em></p>
+  <p><em>Then what is my room for? If I&rsquo;m not to hold anybody dear?</em></p>
+  <p>Lotte closed the book on her finger and thought about it, as if it were a real question, which Edith understood later was the kindest thing anyone did for her that year.</p>
+  <p><em>Eighty-one people have slept in your room,</em> she said. <em>You made the bed for every one of them. You fed them. And then they went on, to Trenton, to Rangoon. Did you ever once ask one of them to stay?</em></p>
+  <p>Edith opened her mouth, and shut it.</p>
+  <p><em>Dear,</em> Lotte said, <em>is not the same as kept.</em></p>
+  <p>They sat a while. Over the roofs, toward Crawford Hill, there was nothing to see but the dark and the red light on the water tower. Lotte said the young men up on the hill had a great horn they listened to the sky with, and had found a noise in it they could not get out. They had chased out the pigeons that nested in it and scrubbed out what the pigeons left, and the noise was still there, the same day and night, from every direction they turned it. It had been there before anybody, they said. It was the beginning of everything, still coming in.</p>
+  <p>Edith went home across the circle at half past twelve and slept in her own bed.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>In March the Board at Valley Forge telephoned to ask if the room was free for two weeks: a Karen pastor from Chiang Mai, coming through. Edith said it was. She turned the mattress herself, which had been Dorrie&rsquo;s job, and ironed the pillowcases with the sprinkle bottle, and opened the guest book on the dresser beside the peacock box to a clean line under <em>Faithful and true</em>, and left the pen in the crease.</p>
+  <p>After supper, on most nights from then on, she took the <em>Red Bank Register</em> to the kitchen table and read the death notices through, out loud, every name and every age, to nobody. Some nights there were six. Some nights there were seventeen. Lotte had been right about that too. When she came to the end she folded the paper in half and in half again, and put it out on the back step for the boy who took them for the scout drive, and went up and turned down the bed for whoever was coming.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">From affection comes grief, from affection comes fear; he who is free from affection knows neither grief nor fear.<cite>Dhammapada 213, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the great laywoman Visākhā, chief patron of the Buddha&rsquo;s order at Sāvatthī, lets her son&rsquo;s daughter Dattā serve the monks in her house whenever she is away. Dattā dies. Visākhā sees to the body, then comes to the Buddha weeping: the girl was faithful and true, and she will never see her like again. The Buddha asks how many people live in Sāvatthī (she has heard him say seventy million), whether she would wish all of them as dear to her as Dattā (yes), and how many die there each day (a great many). Then, he says, she would have no time to do anything but weep, by night and by day. Grief and fear both spring from affection, and he speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/16-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Visakha">Visākhā</a>.</p>
+    <h3>Holmdel, 1966</h3>
+    <p>Bell Telephone Laboratories built its Holmdel research center on former farmland in Monmouth County between 1959 and 1962, to a design by Eero Saarinen: a single block about a thousand feet long, its glass walls refitted with mirror glass in the later 1960s, with a reflecting pool in front and a water tower that locals likened to a transistor (<a href="https://en.wikipedia.org/wiki/Bell_Labs_Holmdel_Complex">Bell Labs Holmdel Complex</a>). Its second phase opened in December 1966. Up the road on Crawford Hill, Arno Penzias and Robert Wilson, working with the lab&rsquo;s <a href="https://en.wikipedia.org/wiki/Holmdel_Horn_Antenna">horn antenna</a>, removed nesting pigeons and their droppings while hunting a persistent microwave noise that came from every direction; in 1965 they published it, and it was understood as the <a href="https://en.wikipedia.org/wiki/Discovery_of_cosmic_microwave_background_radiation">cosmic microwave background</a>, left over from the beginning of the universe. Telephone traffic engineering rested on the work of the Danish mathematician <a href="https://en.wikipedia.org/wiki/Agner_Krarup_Erlang">A. K. Erlang</a>, whose 1909 paper showed that calls arrive at random at a steady average rate. Monmouth County grew from about 334,000 people in 1960 to about 462,000 in 1970; the U.S. crude death rate in 1966 was about 9.5 per thousand. The open-air <a href="https://en.wikipedia.org/wiki/Monmouth_Mall">Monmouth Shopping Center</a> in Eatontown, anchored by Bamberger&rsquo;s, opened in 1960.</p>
+    <p>American Baptists had worked in Burma since Adoniram Judson arrived in 1813, especially among the Karen and Kachin peoples. In 1966, under General Ne Win&rsquo;s military government, the remaining foreign missionaries were made to leave the country (<a href="https://baptiststandard.com/news/baptists/in-burma-missions-comes-full-circle-for-american-baptists">Baptist Standard</a>). The American Baptist mission boards had moved in 1962 to a new round headquarters at Valley Forge, Pennsylvania, nicknamed the &ldquo;Holy Doughnut&rdquo; (<a href="https://visitkop.com/when-baptists-brought-modern-architecture-to-king-of-prussia/">Visit KOP</a>). Edith&rsquo;s name for her guest room comes from the <a href="https://en.wikipedia.org/wiki/Shunammite_woman">Shunammite woman</a> of 2 Kings 4, who built a room for the prophet Elisha. Lotte reads from the note to Proposition 20 in Part V of Spinoza&rsquo;s <a href="https://en.wikipedia.org/wiki/Ethics_(Spinoza_book)">Ethics</a> (1677).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Visākhā and her granddaughter Dattā from the Dhammapada commentary (verse 213). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/16-03.htm">The original</a>. Scripture from Spinoza&rsquo;s Ethics in R. H. M. Elwes&rsquo;s translation (1883&ndash;84). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-potato-ground.html">&larr; The Potato Ground</a><a href="index.html">All stories</a><a href="new-clothes.html">New Clothes &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* Green engineering paper; small lamp-colored lights arrive at random grid points (a Poisson process) and fade. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, cell = 24, lights = [], last = 0, nextAt = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function wait() { return -Math.log(1 - Math.random()) * 1900; } /* exponential gaps, mean ~1.9 s */
+  function arrive(age) {
+    var gx = Math.floor(Math.random() * (W / cell)), gy = Math.floor(Math.random() * (H / cell));
+    lights.push({ x: gx * cell, y: gy * cell, age: age || 0, life: 5200 + Math.random() * 2600 });
+  }
+  function grid() {
+    ctx.lineWidth = 1;
+    for (var x = 0; x <= W; x += cell) {
+      ctx.strokeStyle = (Math.round(x / cell) % 5 === 0) ? 'rgba(60,120,90,0.10)' : 'rgba(60,120,90,0.05)';
+      ctx.beginPath(); ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, H); ctx.stroke();
+    }
+    for (var y = 0; y <= H; y += cell) {
+      ctx.strokeStyle = (Math.round(y / cell) % 5 === 0) ? 'rgba(60,120,90,0.10)' : 'rgba(60,120,90,0.05)';
+      ctx.beginPath(); ctx.moveTo(0, y + 0.5); ctx.lineTo(W, y + 0.5); ctx.stroke();
+    }
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    grid();
+    var dt = last ? Math.min(t - last, 100) : 16; last = t;
+    if (!reduce) {
+      nextAt -= dt;
+      while (nextAt <= 0) { arrive(); nextAt += wait(); }
+    }
+    for (var i = lights.length - 1; i >= 0; i--) {
+      var L = lights[i];
+      if (!reduce) L.age += dt;
+      var p = L.age / L.life;
+      if (p >= 1) { lights.splice(i, 1); continue; }
+      var a = Math.min(1, p * 10) * Math.pow(1 - p, 1.6) * 0.42;
+      var g = ctx.createRadialGradient(L.x, L.y, 0, L.x, L.y, 26);
+      g.addColorStop(0, 'rgba(214,150,52,' + a + ')');
+      g.addColorStop(0.25, 'rgba(196,134,44,' + (a * 0.45) + ')');
+      g.addColorStop(1, 'rgba(196,134,44,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(L.x, L.y, 26, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  function seed() {
+    lights = [];
+    var n = reduce ? 11 : 3;
+    for (var i = 0; i < n; i++) arrive(reduce ? 900 + Math.random() * 1500 : Math.random() * 3000);
+    nextAt = wait();
+  }
+  size(); seed();
+  if (reduce) draw(0); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); seed(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

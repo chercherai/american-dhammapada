@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Besobila</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the white of a cotton shawl, light theme; along the foot of the page a flight of outside steps goes down to a basement door, and pairs of shoes are left on it one at a time, a long umbrella leaning at the bottom; datelined sections. */
+  --shawl: #f3efe4;
+  --shawl-2: #e8e1d0;
+  --ink: #2a2520;
+  --ink-dim: #746a5c;
+  --tibeb: #8c3a1e;
+  --basil: #5d6f55;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, var(--shawl) 0%, var(--shawl) 70%, var(--shawl-2) 100%) fixed, var(--shawl);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(42,37,32,.25); }
+.series a:hover { color: var(--tibeb); }
+a:focus-visible { outline: 2px solid var(--tibeb); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--tibeb); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(140,58,30,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--basil); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--tibeb); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(232,225,208,.7); border: 1px solid rgba(42,37,32,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--basil); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,37,32,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--tibeb); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--tibeb); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,37,32,.18); border-bottom: 1px solid rgba(42,37,32,.18); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--tibeb); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--tibeb); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--tibeb); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--tibeb); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(232,225,208,.7); border-left: 2px solid var(--tibeb); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.7 &middot; Chattapāṇi</span></nav>
+<header>
+  <h1>Besobila</h1>
+  <div class="epigraph">Very different is the word of practice from words of beauty.<br>&mdash; Isaac of Nineveh, tr. A. J. Wensinck (1923)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Endih semichalehu,</span> on Kennedy Street.</p>
+
+<section>
+  <h2>I. The Floor</h2>
+  <p class="dateline">Kennedy Street NW, Washington, D.C. &middot; June 1991, the Fast of the Apostles</p>
+  <p>The Emahoy Wolete-Tsion lived in the basement of a brick rowhouse on Kennedy Street, in one room with a radiator and a window at the level of the grass. She had been a nun for fifty years, in a convent in Gojjam and afterward wherever the times put her. A deacon named Desta, who drove a cab at night, carried what she needed down the outside steps. On the mornings of fast days people left their shoes on those steps and sat on her floor, and she had the deacon read from the books of the monks, and then she told them in plain Amharic what had been read.</p>
+  <p>The one who sat nearest was Ato Tilahun. At home he had gone through the four houses of the books under a master at Gondar, the Old Testament and the New, the Fathers and the Monks, and had come out the far end without taking so much as a deacon&rsquo;s orders. He had been a clerk of a court. In Washington he sat from eleven at night until seven in the morning in the cashier&rsquo;s booth of a hotel garage on K Street. He carried a long black umbrella with a crook handle in every weather, as a church scholar at home carries one against the sun, and Washington rained often enough to make an honest man of him. He kept the fasts, though it was hard to say that he kept them, since he had eaten once a day, after three in the afternoon, for so many years that a fast day and a feast day looked the same on him. People said of Tilahun that he had finished with most things.</p>
+  <p>On a Friday three weeks after the Derg fell, he was in his place with his legs folded and the umbrella laid along the wall. The deacon was reading. The room was full.</p>
+  <p>Dejazmach Workneh came down the steps.</p>
+  <p>He had governed a district in the south for the Emperor, and had got out in 1974 with his life and two suitcases. Now he had eleven parking lots between Dupont Circle and Foggy Bottom, and the men who worked them stood up when his car came down the ramp, as men had stood in the south. Since the end of May his telephone had not stopped. In every restaurant on Eighteenth Street the old families were handing one another back their lands. He took off his shoes like anyone and stooped under the lintel, and the room got to its feet, the women pulling their shawls straight, the young men flattening against the wall to make him a road.</p>
+  <p>Tilahun saw him come. He asked himself whether to rise, and he answered himself. The deacon was reading of the King of Kings. The country had once lent that name to a man, and the man was sixteen years dead, and nobody could say where the soldiers had put him. To stand up now, in the middle of the reading, for someone who had kept one of that man&rsquo;s districts would be to honor the district. He stayed as he was.</p>
+  <p>The Dejazmach saw it. The blood came up in his face. But he bowed low to the Emahoy and sat down against the side wall, where a place was made for him.</p>
+  <p>The Emahoy had seen both things. When the reading was finished she spoke across the room.</p>
+  <p><em>Dejazmach, this Tilahun is a man of sense. He knows the books, all four houses of them. I have known him in a good year and in a bad one, and I could not have told you from his face which was which.</em></p>
+  <p>She went on a little in that way, and as she went on, the Dejazmach&rsquo;s face eased.</p>
+</section>
+
+<section>
+  <h2>II. The Lot</h2>
+  <p class="dateline">L Street &middot; a wet morning, the week after</p>
+  <p>His office was a room up one flight at the back of his largest lot, with a window over the cars. He was standing at it after his coffee when he saw a black umbrella coming across the asphalt between the rows, and under it a small man in a raincoat, walking as if the lot were a churchyard.</p>
+  <p><em>Bring me that one,</em> he told the attendant.</p>
+  <p>Tilahun came up the stairs. On the landing he closed the umbrella and stood it in the corner. He took off his shoes and set them beside it, and went in in his socks, and bowed, and stood to one side.</p>
+  <p><em>Why have you left your umbrella and your shoes outside my door?</em></p>
+  <p><em>They said to me, the Dejazmach is calling you. I put them down before I came in.</em></p>
+  <p><em>Then it seems that today you have found out who I am.</em></p>
+  <p><em>I have always known who the Dejazmach is.</em></p>
+  <p><em>If that is so, then on Friday, when you were on the Emahoy&rsquo;s floor and saw me come in, why did you not get up?</em></p>
+  <p><em>Dejazmach, I was sitting where the King of Kings was being read. If I had got up for the governor of one of His districts, it is the governor I would have honored, and not Him. So I did not get up.</em></p>
+  <p>The Dejazmach looked out at his cars for a time.</p>
+  <p><em>Let it go,</em> he said. <em>They tell me you know this world and the other one, and all the books. My wife and my brother&rsquo;s widow want to learn. Come to my house and read to them.</em></p>
+  <p><em>I cannot, Dejazmach.</em></p>
+  <p><em>Why can you not?</em></p>
+  <p><em>A great man&rsquo;s house is watched. What is fitting there and what is not fitting both weigh double.</em></p>
+  <p><em>Don&rsquo;t tell me that. You saw fit to keep your seat in front of me. Don&rsquo;t put this on top of it.</em></p>
+  <p><em>Dejazmach, it is a fault in a layman to go about doing the work of those who are under orders. Send for one of them, and ask him.</em></p>
+  <p><em>Very well. You may go.</em></p>
+  <p>Tilahun bowed and went out and put on his shoes on the landing. The Dejazmach watched the umbrella open at the foot of the stairs and go off toward the bus.</p>
+</section>
+
+<section>
+  <h2>III. Tuesdays and Thursdays</h2>
+  <p class="dateline">A house off Sixteenth Street &middot; that summer</p>
+  <p>He sent to Kennedy Street. <em>My wife, Woizero Abebech, and my brother&rsquo;s widow, Woizero Aster, say they wish to learn the books. Come to my house each week, Emahoy, and bring as many of your people as you like.</em></p>
+  <p>The answer came back by the deacon. <em>It is not possible for me to go regularly to any one house.</em></p>
+  <p><em>Then send someone.</em></p>
+  <p>She gave it to Desta. He was twenty-six, and had the Psalter by heart and a good deal of Mar Yishaq. On Tuesdays and Thursdays he parked his cab under the Dejazmach&rsquo;s oak and read to the two women in the front room and told them what it meant.</p>
+  <p>Woizero Aster came of an old house, the same house as the Emahoy, and had married into another. She kept a green ledger for the lessons and wrote in it with a fountain pen, in a hand like print. When there were guests she could give back any passage, with the deacon&rsquo;s explanation after it, and the guests said they had not heard it better in Addis Ababa. She kept the front room in flowers from the supermarket, roses on long stems and carnations dyed blue, and changed them every week. A person could put his whole face in them and smell the refrigerator.</p>
+  <p>Woizero Abebech was a gardener&rsquo;s daughter from the Entoto road, twenty years younger than the Dejazmach, and he had married her in a rented hall in 1980. She wrote nothing down. She said each lesson over to herself at the griddle until she had it, and then she seemed to carry it about the house looking for somewhere to put it. After the reading on mercy she began sending a covered pot down to L Street on fast days at three o&rsquo;clock, for the men in the booths. After the reading on anger she telephoned a cousin of her husband&rsquo;s to whom she had not spoken in six years. Nobody asked her to recite. On the back step, in olive-oil tins, she grew besobila from seed that someone had carried through customs in a sock. It was a weed to look at, gray-green, with dusty flowers. A person smelled it from the alley.</p>
+  <p>By the end of August nobody on Eighteenth Street was handing out provinces. The new men in Addis Ababa had set up their government, and the old families had not been sent for. Some Thursdays the Dejazmach sat in on the lesson, on a chair by the door, and said nothing.</p>
+</section>
+
+<section>
+  <h2>IV. The Calendar</h2>
+  <p class="dateline">Kennedy Street &middot; September, before the New Year</p>
+  <p><em>Desta,</em> the Emahoy said, <em>are your two ladies learning?</em></p>
+  <p><em>They are, Emahoy.</em></p>
+  <p><em>Which of them learns it well?</em></p>
+  <p><em>Woizero Abebech learns it well, and says it over, and it gets into what she does. But your own kinswoman does not learn it that way. She writes it. She does not say it over. I cannot find where any of it has gone.</em></p>
+  <p>Woizero Aster had sent two dozen roses down with him that morning, in paper. They stood in the mop bucket by the door. On the wall over the radiator hung a calendar from an Ethiopian grocery, with a color picture of the falls of the Abay, the river coming over brown and white. It had hung there three years and had not wet the plaster.</p>
+  <p>The Emahoy looked from the bucket to the wall. Then she began the place in Mar Yishaq, and he knew it, and said it with her.</p>
+  <div class="verse">
+    <p>Very different is the word of practice from words of beauty. Even without experience wisdom knows how to adorn its words and to speak the truth even without having any acquaintance with it, and to express itself concerning excellence without any experience of [practical] performance. A word proceeding from practice, is a treasure to confide in. But idle wisdom is a pawn causing shame; it is as when an artist paints water on walls, without being able to quench his thirst by it; or as a man who dreams beautiful dreams.</p>
+    <p>&mdash; Isaac of Nineveh, Mystic Treatises I, tr. A. J. Wensinck (1923)</p>
+  </div>
+  <p><em>Take her that,</em> the Emahoy said. <em>Take it to both of them.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>On the morning of the New Year the room was full to the steps. Tilahun was in his place, with the umbrella along the wall. The Dejazmach came down in his socks with the two women behind him, and the room stood, and Tilahun stood with it, there being nothing read just then. Woizero Aster had brought yellow chrysanthemums, since the Meskel daisy does not grow in Washington, and they were set in the bucket where everyone could see them. Woizero Abebech had a twist of newspaper. She put it in the Emahoy&rsquo;s lap, and the Emahoy opened it.</p>
+  <p>People were still coming down from the street. They lifted their heads on the third step, before they could see the door.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Like a beautiful flower, full of colour, but without scent, are the fine but fruitless words of him who does not act accordingly.<cite>Dhammapada 51, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">But, like a beautiful flower, full of colour and full of scent, are the fine and fruitful words of him who acts accordingly.<cite>Dhammapada 52, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Chattapāṇi (&ldquo;Umbrella-in-Hand&rdquo;) is a learned layman of Sāvatthī, far advanced on the path, who eats one meal a day. Seated before the Buddha, he does not rise when <a href="https://en.wikipedia.org/wiki/Pasenadi">King Pasenadi</a> comes in, reasoning that to stand for a provincial king in the presence of the king of kings would honor the wrong one. The Buddha praises him and the king&rsquo;s anger cools. Later the king sees him crossing the palace court with umbrella and sandals, has him called up, and asks him to teach the women of the palace; Chattapāṇi declines, saying that is work for a monk. The Buddha, who cannot go regularly to any one house, sends Ānanda. Queen Mallikā, a garland-maker&rsquo;s daughter, learns and practices; Queen Vāsabhakhattiyā, the Buddha&rsquo;s own kinswoman, does not; and the Buddha speaks the two verses of the flower. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-07.htm">the full commentary story</a>.</p>
+    <h3>Washington, 1991</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Ethiopians_in_Washington,_D.C.">Ethiopian community of Washington</a>, the largest outside Africa, began with those who left after the military council called the <a href="https://en.wikipedia.org/wiki/Derg">Derg</a> deposed Emperor <a href="https://en.wikipedia.org/wiki/Haile_Selassie">Haile Selassie</a> in September 1974. The Emperor, whose title was <em>Neguse Negest</em>, King of Kings, was killed in August 1975, and his remains were not found until 1992. In the 1980s the exiles gathered around Eighteenth Street in Adams Morgan, and many who had been officials, officers and landholders at home drove cabs or worked in parking garages. The city&rsquo;s oldest Orthodox congregations date from those years; <a href="https://en.wikipedia.org/wiki/DSK_Mariam_Church">Debre Selam Kidist Mariam</a> was founded in 1987. In May 1991 the Derg&rsquo;s ruler fled and rebel armies entered Addis Ababa, and for a season some exiles thought they might go home to what they had lost. Dejazmach was a title of the old nobility, often borne by provincial governors. Emahoy is how a nun is addressed. Everyone in this story is invented.</p>
+    <p>The Ethiopian Orthodox Tewahedo Church <a href="https://en.wikipedia.org/wiki/Fasting_and_abstinence_in_the_Ethiopian_Orthodox_Tewahedo_Church">fasts</a> on Wednesdays and Fridays and through long seasons, among them the Fast of the Apostles after Pentecost; on a fast day nothing is eaten before three in the afternoon. Its traditional schools teach commentary on four bodies of books: the Old Testament, the New, the Fathers, and the Books of the Monks. First among the last is Mar Yishaq, the seventh-century Syriac hermit <a href="https://en.wikipedia.org/wiki/Isaac_of_Nineveh">Isaac of Nineveh</a>, whose treatises reached Ethiopia by way of Arabic. The passage here is from the opening treatise as A. J. Wensinck <a href="https://archive.org/details/IsaacOfNinevehMysticTreatises">translated it from the Syriac</a> in 1923; the Ethiopic wording differs. Besobila is Ethiopian sacred basil, a plain plant with a strong sweet smell, dried into the spice blends of every kitchen.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the lay disciple Chattapāṇi from the Dhammapada commentary (verses 51 and 52). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-07.htm">The original</a>. Scripture from Isaac of Nineveh, Mystic Treatises, translated by A. J. Wensinck (1923). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-limbertwig.html">&larr; The Limbertwig</a><a href="index.html">All stories</a><a href="yesterdays-bread.html">Yesterday’s Bread &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, steps = [], t = 0, shown = 2, phase = 0, fade = 1;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    build();
+  }
+  function build() {
+    var n = Math.max(5, Math.min(9, Math.round(W / 150)));
+    var run = Math.min(W * 0.9, 900) / n, rise = Math.min(13, H * 0.018);
+    var x0 = (W - run * n) / 2, yTop = H - 16 - rise * n;
+    steps = [];
+    for (var i = 0; i < n; i++) {
+      steps.push({ x: x0 + run * i, y: yTop + rise * i, w: run, rise: rise, a: 0,
+                   off: 0.2 + Math.random() * 0.5, tilt: (Math.random() - 0.5) * 0.3 });
+    }
+    if (reduce) { for (var j = 0; j < steps.length; j++) steps[j].a = (j % 3 === 2) ? 0 : 1; }
+  }
+  function shoe(x, y, ang, a) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(ang);
+    ctx.fillStyle = 'rgba(42,37,32,' + (0.2 * a) + ')';
+    ctx.beginPath(); ctx.ellipse(0, 0, 8, 3.1, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(243,239,228,' + (0.6 * a) + ')';
+    ctx.beginPath(); ctx.ellipse(-2.2, 0, 3.4, 1.7, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(42,37,32,0.16)'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (var i = 0; i < steps.length; i++) {
+      var s = steps[i];
+      if (i === 0) ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x + s.w, s.y); ctx.lineTo(s.x + s.w, s.y + s.rise);
+    }
+    ctx.stroke();
+    var last = steps[steps.length - 1];
+    ctx.strokeStyle = 'rgba(42,37,32,0.3)'; ctx.lineWidth = 1.4; ctx.lineCap = 'round';
+    var ux = last.x + last.w + 14, uy = last.y + last.rise;
+    ctx.beginPath(); ctx.moveTo(ux, uy); ctx.lineTo(ux + 12, uy - 46); ctx.stroke();
+    ctx.beginPath(); ctx.arc(ux + 15.5, uy - 46, 3.5, Math.PI, Math.PI * 2); ctx.stroke();
+    if (!reduce) {
+      t++;
+      if (phase === 0) {
+        if (t % 260 === 0 && shown < steps.length) { shown++; }
+        if (shown >= steps.length && t % 260 === 259) { phase = 1; }
+      } else {
+        fade -= 0.004;
+        if (fade <= 0) { fade = 1; phase = 0; shown = 0; t = 0;
+          for (var k = 0; k < steps.length; k++) { steps[k].a = 0; steps[k].off = 0.2 + Math.random() * 0.5; steps[k].tilt = (Math.random() - 0.5) * 0.3; } }
+      }
+      for (var m = 0; m < steps.length; m++) {
+        if (m < shown && steps[m].a < 1) steps[m].a = Math.min(1, steps[m].a + 0.012);
+      }
+    }
+    for (var j = 0; j < steps.length; j++) {
+      var p = steps[j]; if (p.a <= 0) continue;
+      var a = p.a * (phase === 1 ? fade : 1);
+      var px = p.x + p.w * p.off, py = p.y - 4;
+      shoe(px, py, p.tilt, a); shoe(px + 19, py + 0.5, p.tilt + 0.12, a);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
