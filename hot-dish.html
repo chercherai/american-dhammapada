@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hot Dish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the cream of a church-basement tablecloth, light theme; in the margins short strips of masking tape with a family name in ballpoint settle onto the page, hold a while, and lift away; datelined sections. */
+  --ground: #f3ecdc;
+  --ground-2: #e9dfc9;
+  --ink: #2f261c;
+  --ink-dim: #75685a;
+  --copper: #93441d;
+  --tape: #dccb98;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #fbf6ea 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(47,38,28,.2); }
+.series a:hover { color: var(--copper); }
+a:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--copper); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(147,68,29,.4); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--copper); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--copper); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(233,223,201,.8); border: 1px solid rgba(47,38,28,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--copper); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(47,38,28,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--copper); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--copper); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(47,38,28,.15); border-bottom: 1px solid rgba(47,38,28,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--copper); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--copper); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--copper); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(233,223,201,.8); border-left: 2px solid var(--copper); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 17.5 &middot; The Brahmin from S&#257;keta</span></nav>
+<header>
+  <h1>Hot Dish</h1>
+  <div class="epigraph">And our spirits shall sorrow no more&mdash;<br>not a sigh for the blessing of rest.<br>&mdash; S. Fillmore Bennett, &ldquo;In the Sweet By and By&rdquo; (1868)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it,</span> at the Bluebird in Ostrander.</p>
+
+<section>
+  <h2>I. The Shoulder</h2>
+  <p class="dateline">Ostrander, Spink County, South Dakota &middot; September 2002</p>
+  <p>Merle Fossum was eighty-four the year of the drought, and he still drove himself to town every morning for the mail and the markets and coffee at the Bluebird, in a white Ford pickup with the Pioneer sign half worn off the door. That September the pastures along the highway had gone the color of a paper sack. Hay was a hundred dollars a ton when you could find it, and the state agriculture secretary had said in public that the men asking it were greedy, and the men at the Bluebird talked about that and about nothing else. Gary Fossum, who farmed the home place on Turtle Creek now, had sold half the cows in August.</p>
+  <p>The exchange student had been in town three weeks. The Rotary brought one most years. This one was from Thailand, from a city called Phitsanulok, sixteen years old and slight, with a navy blazer he wore to school on Fridays with pins all down both lapels: the Thai flag, the Rotary wheel, a Twins cap, and a little enamel pheasant somebody had given him the first day. His name was Siriwat. He told people to call him Ton. Ron Hagen, who sold insurance and was Rotary president that year and the boy's first host father, called him Tom, and went on calling him Tom until June.</p>
+  <p>Exchange students were not allowed to drive, so he walked home from school along the shoulder, past the elevator and the Cenex to the Hagens' ranch house at the edge of town. On the third Thursday of September Merle was pulling out of the Cenex with a tank of gas when he saw him. He stopped the pickup on the shoulder at an angle, with the door hanging open, and got down the way old men get down, one leg and then the other, and knelt in the gravel in front of the boy and took hold of his ankles with both hands.</p>
+  <p><em>Son,</em> he said. <em>Where have you been all this time?</em></p>
+  <p>A grain truck went by and the wind of it pulled at their clothes. Cheryl Hagen's sister, going the other way, slowed down nearly to a stop.</p>
+  <p>Ton had seen people kneel like that. He had seen his grandmother kneel on the tiles of the big temple at home with her forehead nearly to the floor, and he had been a novice there himself one summer when he was twelve, with his head shaved and a robe the color of a squash blossom, and old women had knelt to him in the mornings to put rice in his bowl. He did not step back. He put his hand on the old man's seed cap and left it there.</p>
+  <p><em>A boy is supposed to look after his folks when they get old,</em> Merle said. <em>Isn't he? This is the first I ever laid eyes on you. Get in the pickup. Come and see your mother.</em></p>
+  <p>Dorothy Fossum was at the sink with the Aberdeen station on, doing the noon dishes at four in the afternoon because she had been at the church all day with the books. She was eighty-one. She dried her hands on a towel and looked at the boy in the door of her kitchen for a long time, and then she went down on her knees on the linoleum, slowly, holding the counter, and put her arms around his legs.</p>
+  <p><em>Where have you been? Don't children look after their mother and dad?</em></p>
+  <p>She made him sit. She gave him coffee cake and a glass of milk. Then she went to the phone on the wall and called her children one after the other, Gary on Turtle Creek and Janice in Aberdeen and Rick in Sioux Falls, and told each of them the same thing. <em>Come Sunday after church. Come and say hello to your brother.</em></p>
+  <p>They came. Gary drove over in his chore coat. Janice, who was a nurse at St. Luke's, came down from Aberdeen and watched her parents all afternoon the way she watched patients, and could not find one thing wrong with either of them except this. Rick, who ran a floor of four hundred people at Citibank, got his brother out by the machine shed and asked him straight out if it was Alzheimer's. Gary said Dad had done his own taxes in April, same as every year, and Mom did the church books to the penny. They stood looking at the dry yard.</p>
+  <p>Then they went in, because their mother was waiting, and shook hands with their brother. The boy put his palms together under his chin and bowed his head to each one of them, and Rick, without thinking, put his own hands together and bowed back.</p>
+</section>
+
+<section>
+  <h2>II. Hot Dish</h2>
+  <p class="dateline">October to December</p>
+  <p>Dorothy wanted him at her table every night. <em>You eat here,</em> she said. <em>Your dad can pick you up after school.</em></p>
+  <p>He explained it to her as well as he could. A Rotary student lived with three families in the year, a few months each, and ate where he was asked: with the members, with the churches, with the football coach, with anybody who wanted to know about Thailand. That was what he was there for. <em>I can't eat always in one house,</em> he said. <em>In Rotary, I go around.</em></p>
+  <p>Dorothy thought about that with her hand flat on the oilcloth.</p>
+  <p><em>Then whoever asks you, you tell them to call me.</em></p>
+  <p>So it went all fall. When Cheryl Hagen had the Lutheran pastor and his wife over to meet the boy, the phone rang at three and it was Dorothy, and at a quarter to six Merle's pickup was in the drive with a roaster on the seat wrapped in a bath towel. When the Kjellsens had him out to the farm, Dorothy brought the supper. When the coach had the team over after the Faulkton game, Dorothy sent two nine-by-thirteens of tater tot hot dish and a pan of scotcheroos. Chicken and noodles over mashed potatoes. Scalloped corn. Glorified rice. Meat loaf with the ketchup baked on top. Every pan had a strip of masking tape across the lid with FOSSUM on it in ballpoint, the way every pan in the county did, so that it would find its way home after the funerals and the church suppers. On the nights nobody asked him, Merle picked him up at the Hagens' and he ate on Turtle Creek.</p>
+  <p>People talked, of course. The Bluebird had it before the week was out. Some said the Fossums had gone soft in the head together, the way couples did who had been married that long, and some said they had always been a little different, and Hazel Kjellsen said that a woman who brought a roaster of chicken and noodles to your house every time you had company could call the boy anything she wanted.</p>
+  <p>Pheasant season opened the nineteenth of October. Ron Hagen's brothers-in-law came out from Minneapolis in a Suburban with three Labs and blaze-orange vests for everybody, and Ton walked the CRP grass west of town with them as a blocker, without a gun, because he did not kill anything. Merle drove out and sat in his pickup at the end of the strip with the window down. A rooster came up out of the grass almost under the boy's feet, copper and green and gold, with that sound like a rusty gate, and three guns went off, and the bird came down at Ton's feet and lay there kicking. He picked it up. He held it in both hands and did not know what to do with it, and it died in his hands, warm, the long tail feathers hanging down over his wrist.</p>
+  <p>Merle got out of the pickup and walked over and took the bird from him and smoothed its feathers down with his thumb, the way you would smooth a child's hair, and handed it to Ron.</p>
+  <p>On the way home Merle told him that he had not fired a gun since 1945. He had come home from Germany in the fall of that year and sold his shotgun to his brother-in-law for twelve dollars and never said why, and nobody had ever asked him. Dorothy said, from the stove, that in fifty-six years she had never once seen him raise his hand to a child or an animal, and she had never seen him raise his voice either, not even at the cattle.</p>
+  <p>That was the fall the Fossums began to sit.</p>
+  <p>After supper on Turtle Creek, while the coffee was still going, the boy would turn his kitchen chair a little away from the table and sit on it with his back straight and his hands in his lap and his eyes closed, the way he had sat in the temple at twelve. The first time, Merle asked him what he was doing.</p>
+  <p><em>Sitting,</em> Ton said.</p>
+  <p>Merle tried it the next night, in his own chair, with his seed cap on his knee. Dorothy laughed at the both of them, and within a week she had taken her apron off and was sitting too, at the end of the table, with her hands folded the way she held them in church. The three of them sat in the kitchen with the clock over the stove and the furnace coming on and going off and the wind working at the storm windows. The boy did not tell them anything to do. Afterward Dorothy would get up and cut pie.</p>
+  <p>Their children noticed it by Thanksgiving. Their mother had given the church books to Arlene Bauer. Their dad had quit turning the radio on for the markets at noon. They were quieter. Janice, who knew what to look for, still could not find it.</p>
+</section>
+
+<section>
+  <h2>III. The Four-Way Test</h2>
+  <p class="dateline">The Legion hall &middot; January 2003</p>
+  <p>Rotary met Tuesdays at noon at the Legion hall, twenty-two members, hot beef sandwiches and mashed potatoes and a slice of bar. They said the Pledge, and then they said the Four-Way Test together off the banner on the wall, the way they had every Tuesday since most of them could remember. <em>Is it the truth? Is it fair to all concerned? Will it build goodwill and better friendships? Will it be beneficial to all concerned?</em> Then happy dollars, and then the program.</p>
+  <p>The program that day was the exchange student. He had a borrowed laptop and the school's projector and forty pictures. His mother and father in front of their house in Phitsanulok, his father an engineer for the provincial electric company, his mother a high-school teacher of English. His little sister in her school uniform. A rice field. A market on the river. The big temple with its gold Buddha, and himself at twelve in front of it, shaved and robed, squinting in the sun.</p>
+  <p>When he was done Ron Hagen asked if there were questions, and Duane Bauer from the elevator, who was a plain man and had been the boy's second host father since December, asked the one the whole town had.</p>
+  <p><em>Ton, we all know those are your folks up there on the screen. Merle and Dorothy have seen those same pictures, I'd bet. So why do they call you son, and why do you let them?</em></p>
+  <p>The boy did not take very long to answer.</p>
+  <p><em>They are calling their own son.</em></p>
+  <p>The room waited. Somebody's fork touched a plate.</p>
+  <p><em>Before,</em> Ton said, <em>many times, they were my father and mother. Five hundred times. And five hundred times uncle and aunt. And five hundred times grandfather and grandmother. Fifteen hundred.</em> He said it the way he had said the population of Bangkok a few minutes before. <em>So when they see me they know me. Love comes like that. It comes from living together before, or it comes from helping now. It comes up like a lotus on the water.</em></p>
+  <p>Nobody laughed, though Ron said afterward that he had been about to. Duane nodded slowly, as if he were being told the moisture in a load of corn. Then Ron thanked the boy, and they gave him a Rotary coffee mug, and everybody went back to work.</p>
+</section>
+
+<section>
+  <h2>IV. Seed Corn</h2>
+  <p class="dateline">April and May</p>
+  <p>In March the boy moved to his third family, the parsonage behind the Methodist church, where the pastor was a woman named Karen Lindahl with two little boys and a husband who taught science at the school. The rule held. Whoever had him to supper, Dorothy brought the supper. Pastor Karen said that between Advent and Easter she had eaten more of Dorothy Fossum's cooking than she had of her own.</p>
+  <p>In April Merle told Gary which quarter to put the beans on and which to leave for corn, and then he gave Gary his tools, all of them, the good socket set and the welder and the anvil that had been his father's. He gave his chore coat to the Bauer boy, who had been wanting one. Dorothy gave her Haviland dishes to the granddaughters, eight place settings each, and the quilts to Janice. She went to the parsonage one afternoon and sat with Pastor Karen at the kitchen table and told her which hymn she wanted, and which scripture, and that it was all written down on a card in the drawer under the phone.</p>
+  <p><em>It's like they're packing for a trip,</em> Janice said to her brothers on the phone. She said it as a nurse. She meant it was a sign. But nothing showed. They were well. Their color was good. They sat in the kitchen in the evenings with the boy, when he came, and when he did not come they sat by themselves.</p>
+  <p>The peonies were starting along the south side of the house the last week of May. The boy's plane was in two weeks. On the Thursday, Dorothy brought supper to the parsonage, a roaster of Swiss steak, and stayed to eat it, and Merle had two helpings and talked to Pastor Karen's little boys about the Twins. When they left, Dorothy held the boy's face in her hands at the door and looked at him a while, and said only, <em>Well,</em> and Merle shook his hand.</p>
+  <p>Gary came in at seven the next morning for coffee, the way he did, and found them in the front room in their two recliners, side by side, with the television dark and the afghan over Dorothy's knees. The kitchen was clean. The dish rack was empty. The doctor from Redfield said it was Dorothy's heart and Merle's, and he could not say which had gone first, and he did not think it had been very long between.</p>
+  <p>The funeral home in Redfield would have sent two hearses. Gary said no. He hitched the hayrack behind his dad's John Deere 4020 and swept it out and laid a tarp on it and then a quilt, and on the day of the funeral the two caskets rode on the one hayrack, side by side, from the church to the cemetery on the hill west of town, with Gary driving the tractor in his good suit and the whole funeral walking behind.</p>
+</section>
+
+<section>
+  <h2>V. The Basement</h2>
+  <p class="dateline">The Methodist church &middot; the last week of May</p>
+  <p>The church was full and so was the basement, where they had set up speakers, and people stood along the walls of both. Gary put the boy in the front pew between Janice and Rick, and nobody said anything about it. Pastor Karen read the scripture from the card in the drawer, and then they sang the hymn Dorothy had written down, which was an old one, older than the church, and which most of the people there had sung at a funeral before and knew without the book.</p>
+  <div class="verse">
+    <p>We shall sing on that beautiful shore<br>the melodious songs of the blest;<br>and our spirits shall sorrow no more&mdash;<br>not a sigh for the blessing of rest.</p>
+    <p>&mdash; S. Fillmore Bennett, &ldquo;In the Sweet By and By&rdquo; (1868)</p>
+  </div>
+  <p>Afterward, when they had come back down from the hill, there was lunch in the basement. The long tables were covered with white paper and there were egg-salad buns and turkey buns and a dozen kinds of bars and a whole table of salads, and every pan had its strip of masking tape on the lid: HAGEN, KJELLSEN, BAUER, LINDAHL, OLSON, OLSON, LARSEN, the names of everybody who had ever eaten Dorothy's cooking.</p>
+  <p>People came by the boy where he sat. Grain-truck drivers and Rotary men and women from the circle and a man who had been in the war with Merle's brother. They took his hand and said the thing you say. <em>I'm sorry about your folks.</em> <em>Your mother was a fine woman.</em> <em>Your dad was the best neighbor I ever had.</em> He thanked each of them. He did not tell any of them that he had other folks, and when Ron Hagen started to say to somebody, <em>Well, now, they weren't really his,</em> he heard himself, and stopped, and went to get more coffee.</p>
+  <p>When the line had gone by, the boy asked Janice for a glass of water and an empty coffee cup. He set the cup on the paper tablecloth in front of him and poured the water into it slowly from the glass, in a thin stream, as his grandmother had done for his grandfather, and while it poured he said some words in Pali, low, that nobody at the table understood. People at the other tables put their forks down. When the cup was full he set the glass beside it.</p>
+  <p>Rick asked him what it said. The boy thought, and said it in English as best he could, and it went about like this.</p>
+  <div class="verse">
+    <p>How transient are all component things!<br>Growth is their nature and decay:<br>They are produced, they are dissolved again:<br>And then is best,&mdash;when they have sunk to rest!</p>
+    <p>&mdash; Mah&#257;-Sudassana Sutta, tr. T. W. Rhys Davids (1881)</p>
+  </div>
+  <p>Rick looked at the full cup for a while. He was a man who managed four hundred people and he did not cry in front of them. He asked the boy then what nobody had asked the pastor.</p>
+  <p><em>Where do you think they are?</em></p>
+  <p><em>They don't come back,</em> the boy said.</p>
+  <p>Rick's face moved, and the boy saw it, and put his hand on Rick's arm.</p>
+  <p><em>No. It's good. They went where there is no crying. Like your mother's song.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The women of the circle washed the dishes after, at the long steel sinks, and dried them, and sorted them out along the counter by the names on the tape, the way they always did, so that each pan would go home to its own kitchen. Dorothy's roaster went back to Gary. So did her blue Pyrex nine-by-thirteen, and Gary carried it across the basement and gave it to the boy, still warm from the dishwater, with the tape on the lid.</p>
+  <p>It went to Phitsanulok in his suitcase between the blazer and his Rotary mug. His mother bakes custard in it now, in the rainy season, and has never taken the tape off. The ballpoint has gone brown and the edges have curled, but it can still be read. When his little sister asks what it says, he tells her, and it is the one word of English she always says right.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The sages who injure nobody, and who always control their body, they will go to the unchangeable place (Nirvana), where, if they have gone, they will suffer no more.<cite>Dhammapada 225, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, an old Brahmin of S&#257;keta meets the Buddha at the city gate, falls at his feet, takes hold of his ankles, and calls him &ldquo;dear son,&rdquo; scolding him for staying away so long; the Brahmin's wife does the same and tells their children to greet their brother. The Buddha says he never takes all his meals in one house, so the couple ask him to send them everyone who invites him, and they carry the food to every invitation. When the monks wonder why the Buddha lets them call him son, he says the two had been his parents, uncle and aunt, and grandparents for fifteen hundred lives each, and speaks of love that arises from living together in the past or from kindness in the present, &ldquo;like a water-lily on the water.&rdquo; At the end of the rains the couple die together and are carried out on one bier. Mourners console the Buddha for his parents; he does not correct them, and teaches on the shortness of life. Asked where the couple have gone, he says they have gone where there is no grief. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-05.htm">the full commentary story</a>; the same tale is told in the J&#257;taka as the S&#257;keta birth story (J&#257;taka 68).</p>
+    <h3>Spink County, 2002</h3>
+    <p>Pheasants are not native to the Dakotas. The first successful release in South Dakota was made in 1908, when three sportsmen let three pairs go north of Redfield, and the first official season, on <a href="https://www.sdpb.org/rural-life-and-history/2023-10-30/first-official-pheasant-season-held-south-dakota-history">October 30, 1919</a>, was a single day in Spink County. <a href="https://en.wikipedia.org/wiki/Redfield,_South_Dakota">Redfield</a>, the county seat, calls itself the Pheasant Capital of the World. The 2002 season opened on October 19 with a bag limit of three roosters; 145,696 people hunted, slightly more than half of them from out of state (<a href="https://gfp.sd.gov/userdocs/docs/past-pheasant-stats.pdf">state figures</a>). That summer was a drought summer across the state, and the price of hay became a political fight (<a href="https://minneapolisfed.org/article/2002/long-hot-summer">Federal Reserve Bank of Minneapolis</a>).</p>
+    <p>The year-long <a href="https://en.wikipedia.org/wiki/Rotary_Youth_Exchange">Rotary Youth Exchange</a> began in 1958. Students usually stay about ten months, live with several host families in turn, may not drink, drive, date or use drugs, and wear a blazer covered in traded pins. Rotary clubs recite <a href="https://en.wikipedia.org/wiki/The_Four-Way_Test">the Four-Way Test</a>, written by Herbert J. Taylor in the 1930s. At Thai Buddhist funerals, mourners perform <a href="https://thailex.info/THAILEX/THAILEXENG/LEXICON/kruad%20nahm%20(%E0%B8%81%E0%B8%A3%E0%B8%A7%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3).htm">kruat nam</a>, pouring water slowly from one vessel into another so the dead may share in the merit; the verse on impermanence the boy says is the stanza traditionally chanted at Buddhist funerals, here in Rhys Davids's version from <a href="https://archive.org/details/buddhistsuttas00daviuoft"><i>Buddhist Suttas</i></a> (1881). &ldquo;<a href="https://en.wikipedia.org/wiki/In_the_Sweet_By-and-By">In the Sweet By and By</a>&rdquo; was written by S. Fillmore Bennett and Joseph P. Webster and published in Chicago in 1868.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Brahmin from S&#257;keta from the Dhammapada commentary (verse 225). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/17-05.htm">The original</a>. Scripture from S. Fillmore Bennett's hymn &ldquo;In the Sweet By and By&rdquo; (1868) and T. W. Rhys Davids's translation of the Mah&#257;-Sudassana Sutta (1881). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-red-umbrella.html">&larr; The Red Umbrella</a><a href="index.html">All stories</a><a href="rice-water.html">Rice Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NAMES = ['FOSSUM', 'HAGEN', 'BAUER', 'KJELLSEN', 'LINDAHL', 'OLSON', 'LARSEN', 'FOSSUM'];
+  var W, H, strips = [], t0 = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function margin() {
+    var col = Math.min(W, 640), side = (W - col) / 2;
+    if (side < 70) return { x: Math.random() < 0.5 ? 6 : W - 96, w: 90, narrow: true };
+    var left = Math.random() < 0.5;
+    var w = Math.min(150, side - 24);
+    return { x: left ? 12 + Math.random() * (side - w - 24) : W - side + 12 + Math.random() * (side - w - 24), w: w, narrow: false };
+  }
+  function spawn(s, i) {
+    var m = margin();
+    s.x = m.x; s.w = m.w; s.narrow = m.narrow;
+    s.y = 60 + Math.random() * (H - 120);
+    s.rot = (Math.random() - 0.5) * 0.12;
+    s.name = NAMES[(i + Math.floor(Math.random() * NAMES.length)) % NAMES.length];
+    s.life = 0; s.max = 900 + Math.random() * 900;
+    return s;
+  }
+  function make() {
+    strips = [];
+    var n = W < 700 ? 2 : 5;
+    for (var i = 0; i < n; i++) { var s = spawn({}, i); s.life = Math.random() * s.max; strips.push(s); }
+  }
+  function drawStrip(s, a) {
+    var h = s.narrow ? 16 : 20;
+    ctx.save();
+    ctx.translate(s.x + s.w / 2, s.y);
+    ctx.rotate(s.rot);
+    ctx.globalAlpha = a * (s.narrow ? 0.45 : 0.75);
+    ctx.fillStyle = '#dccb98';
+    ctx.beginPath();
+    var x0 = -s.w / 2, x1 = s.w / 2, y0 = -h / 2, y1 = h / 2;
+    ctx.moveTo(x0, y0);
+    for (var k = 0; k <= 6; k++) { ctx.lineTo(x0 + (x1 - x0) * k / 6, y0 + (k % 2 ? 1.2 : -0.6)); }
+    ctx.lineTo(x1 + 1.5, y0 + h * 0.3); ctx.lineTo(x1 - 1, y0 + h * 0.6); ctx.lineTo(x1 + 1, y1);
+    for (var j = 6; j >= 0; j--) { ctx.lineTo(x0 + (x1 - x0) * j / 6, y1 + (j % 2 ? -1 : 0.7)); }
+    ctx.lineTo(x0 - 1.5, y1 - h * 0.3); ctx.lineTo(x0 + 1, y1 - h * 0.6);
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle = 'rgba(40,52,110,0.55)';
+    ctx.font = 'italic ' + (s.narrow ? 10 : 13) + 'px "IM Fell English", Georgia, serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(s.name, 0, 1);
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < strips.length; i++) {
+      var s = strips[i];
+      if (!reduce) { s.life++; if (s.life > s.max) spawn(s, i); }
+      var p = s.life / s.max;
+      var a = reduce ? 0.8 : Math.min(1, p * 6) * Math.min(1, (1 - p) * 6);
+      if (a > 0.01) drawStrip(s, a);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
