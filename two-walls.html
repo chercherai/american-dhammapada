@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Walls</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column at dusk; a row of porch rocking chairs runs down a falling street at the foot of the page and sometimes goes still. */
+  --ground: #15161d;
+  --ground-2: #1d1f28;
+  --paper: #e3dfd3;
+  --paper-dim: #9f9b90;
+  --accent: #d2c063;
+  --glow: #a9c9cf;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #1b1d27 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(227,223,211,.12); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 26px rgba(169,201,207,.16); }
+.epigraph { border-left: 1px solid rgba(210,192,99,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(29,31,40,.82); border: 1px solid rgba(227,223,211,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(227,223,211,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(227,223,211,.12); border-bottom: 1px solid rgba(227,223,211,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(29,31,40,.82); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 25.3 &middot; Kok&#257;lika</span></nav>
+<header>
+  <h1>Two Walls</h1>
+  <div class="epigraph">The third tongue (i.e., slander) hurts three parties: the slanderer himself, the receiver of slander, and the person slandered.<br>&mdash; Talmud, Erchin 15b</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Azoy hot men mir ibergegebn,</span> on the porches of Sharon Springs.</p>
+
+<section>
+  <h2>I. The Back Room</h2>
+  <p class="dateline">Sharon Springs, Schoharie County, New York &middot; June 1954</p>
+  <p>The whole village smelled of the water. It came out of the hill as white as skim milk and stinking of eggs, and people had been riding up from the city to sit in it for a hundred years: first the Vanderbilts, then the German Jews whom Saratoga would not have, then the Jews from Galicia and Hungary, and now, since the war, the ones who had come through the other thing with their joints and their skin and their nerves in such a state that a doctor on the Grand Concourse could only tell them to go and take the baths. They drank the water out of paper cups at the temple with the white columns. They lay in it in the tubs at the Imperial for twenty minutes by the attendant&rsquo;s clock, and were wrapped in sheets and left to sweat. In the afternoons they sat in rocking chairs on the porches, porch below porch down the one steep street, and talked.</p>
+  <p>Koppel Weingast had the porch halfway down. He had come from Galicia in 1922, a yeshiva boy with a good head and a quicker mouth, and had gone into boarders. Weingast&rsquo;s was not the Adler, which had a hundred and fifty rooms. It was eleven rooms and two kitchens, one for meat and one for dairy, where the women cooked for their own, and a front parlor where he kept a minyan going from Shavuos to the High Holidays. He read the Torah for them and blew the shofar in Elul. He also knew who on the street was taking the waters for what, and on whose money, and whose daughter was not married and why, and he told it, rocking, to whoever had the next chair. Nobody called him a bad man. They called him Koppel the Radio.</p>
+  <p>The week after Shavuos two men got down from the Albany bus with one cardboard valise between them. They wore cloth caps and short jackets, like any two greeners from a shop on Broome Street. The taller one had a number on his forearm and carried his right shoulder high. The other was small and round and walked as if the sidewalk interested him. They asked on the street for Weingast.</p>
+  <p>Koppel knew them before they were up the steps. He had gone to the Rebbe in Williamsburg for one Shabbos every winter since 1947, and nobody who had sat at that table needed telling who stood at the Rebbe&rsquo;s right hand and who at his left. The small one was Reb Shaya, who could take a page of Gemara that had beaten a roomful of scholars and say it over so that a wagon driver followed it. The tall one was Reb Mottel, about whom people told things with their voices down: that he had been seen in two places on one afternoon; that he had said to a woman in the Rebbe&rsquo;s kitchen, <em>Your brother is alive, he is in Montevideo,</em> and the letter came inside the month. On Hewes Street the two of them could not get from the door to the corner without ten hands on their sleeves.</p>
+  <p>Koppel&rsquo;s mouth was already open. Reb Shaya put up one finger.</p>
+  <p><em>Reb Koppel. It would be pleasant for us to stay by you, and for you to have us. We would stay the summer.</em></p>
+  <p><em>How would it be pleasant for you, by me?</em></p>
+  <p><em>If you tell no living person who we are. Two boarders. Shaya and Mottel from the city, for the rheumatism.</em></p>
+  <p><em>And for me, how pleasant?</em></p>
+  <p><em>Every night when your house is asleep, we will learn with you. The three months.</em></p>
+  <p>Koppel Weingast had not had anyone to learn with since 1922.</p>
+  <p><em>Stay as long as you want,</em> he said, and he gave them the back room over the dairy kitchen, which was the quiet one and got the morning sun.</p>
+  <p>They stayed until the end of Av. They went down to the Imperial at seven like everybody else, with towels. They ate what they cooked themselves, and it was little. The rest of the day the door of the back room was shut, and if a boarder asked, Koppel said they were two quiet men who were not well. At eleven at night he came down to the dairy kitchen and they were at the table with the book open. Reb Shaya explained. It was all he did, and he did it the way another man pours water, and Koppel, who had believed for thirty years that he remembered how to learn, found out that he had never yet been taught. Reb Mottel mostly listened. Once, without turning his head, he said, <em>Koppel, the milk,</em> and Koppel got to the stove just as it rose.</p>
+  <p>Nobody on the street knew. It was the best summer of Koppel&rsquo;s life, and it was like carrying a hot potato in his mouth from Shavuos to the end of Av.</p>
+</section>
+
+<section>
+  <h2>II. Beheimes</h2>
+  <p class="dateline">Main Street &middot; the last week of Av</p>
+  <p>They were going back to the Rebbe for Elul, as a hasid does. Koppel carried the valise up the hill himself. The three of them stopped at Mrs. Sobel&rsquo;s for a glass of tea and a roll, and then the two went on to the corner of Route 20 to wait for the bus, and Koppel started home.</p>
+  <p>It was three in the afternoon. The porches were full. He got as far as the middle of the street, where both sides could hear him.</p>
+  <p><em>Beheimes!</em> he said. Cattle. <em>Cows in a field! Three months Reb Shaya and Reb Mottel of Hlinitz sat among you. The Rebbe&rsquo;s right hand and the Rebbe&rsquo;s left. In my back room, over my dairy kitchen. Pincus, one of them lay in the next tub to you at the Imperial, and you told him he was using too many towels. And you knew nothing. Nothing! And now they are standing at the corner for the Albany bus.</em></p>
+  <p>The rocking stopped all the way down the hill.</p>
+  <p><em>Why didn&rsquo;t you tell us?</em> said Mrs. Sobel from her doorway.</p>
+  <p>Then everybody was moving. A honey cake came out of a kitchen still in its pan. Somebody had a bottle of slivovitz put by for a son&rsquo;s engagement. A furrier from the Bronx, who was taking the cure for his hands, went up the stairs two at a time for a wool blanket still in its paper. The doctor&rsquo;s widow brought liniment and a tin of salve. Envelopes were found, and bills put into them. They went up Main Street in a body, thirty people, some of them in slippers, and Koppel went with them, at the back. He was thinking that those two ate like birds and owned one valise between them. They would never take such things. And when they did not take them, the things would have to be left with somebody.</p>
+  <p>The bus was late. The two men were standing by the post with the valise between their feet.</p>
+  <p><em>Forgive us,</em> Mrs. Sobel said. <em>We didn&rsquo;t know who you were. We heard it this minute, from Reb Koppel. Have pity on us and take.</em></p>
+  <p>Reb Shaya looked at the cake and the bottle and the blanket and the envelopes. He looked for a moment at Koppel.</p>
+  <p><em>A present that a man gives because another man&rsquo;s tongue went and fetched it out of him, we don&rsquo;t take,</em> he said. <em>Carry it home. You should all be well.</em></p>
+  <p>He did not say, give it to Koppel. Reb Mottel did not say it either. Thirty people stood holding what they had brought.</p>
+  <p><em>Then come again,</em> said Pincus, <em>and give us a blessing.</em></p>
+  <p><em>We&rsquo;ll come.</em></p>
+  <p>The bus came. Koppel carried nothing home, and it was a week before anyone on the street saw him rock.</p>
+</section>
+
+<section>
+  <h2>III. Two Buses</h2>
+  <p class="dateline">Sharon Springs &middot; after Tisha b&rsquo;Av, 1955</p>
+  <p>They kept their word the next summer, and they did not come alone. Two chartered buses stopped at the corner of Route 20, and sixty of the Rebbe&rsquo;s hasidim got down from them in their long coats, gray men and boys, behind Reb Shaya and Reb Mottel. The street had been waiting since Shavuos. The hotel keepers had drawn lots for who would house whom, and none of them would take a dollar. The two asked for the back room at Weingast&rsquo;s, and had it.</p>
+  <p>Every day there was honor, and every day something came up the hill. A manufacturer in Gloversville sent five dozen pairs of lined gloves against the winter. The furrier sent to the city for knitted vests. The bath people sent books of tickets. There was medicine, and a case of wine. The hasidim who had come on the buses shared it all out among the sixty, a pair to each and a vest to each, down to the boys. To Koppel, who lived there, who was standing in his own parlor while they did it, nobody thought to hand anything. Reb Shaya and Reb Mottel did not hand him anything either.</p>
+  <p>That night he was in his chair on the porch, and the next chair was not empty.</p>
+  <p><em>Last year a honey cake was beneath them. This year they take with both hands. Gloves they take. Wine they take. Holy men! There is no bottom to those two. They want and they want, and whoever else is standing there can go whistle.</em></p>
+  <p>He said it on Monday on the porch. He said it Tuesday at the temple with a paper cup in his hand, and Wednesday at the Imperial to Earl, the Gentile who ran the tubs, who had no idea what he was talking about. By Thursday it had gone down one side of Main Street and come back up the other, as things did there, and it reached the back room over the dairy kitchen.</p>
+  <p>Friday before light the two buses were at the corner with their motors running.</p>
+  <p>The street came out in its bathrobes. <em>Stay for Shabbos. Stay till Sunday. What did we do?</em> Reb Shaya said they had done nothing, they should be well, and got on. It was one of the young ones, a boy of eighteen with his foot on the step, who turned around and said it.</p>
+  <p><em>Where should they stay? Your own Reb Koppel doesn&rsquo;t want them here.</em></p>
+  <p>They were on Koppel&rsquo;s porch before the buses were over the hill.</p>
+  <p><em>Go after them,</em> Pincus said. <em>Ask their pardon and bring them back. Or else pack, and keep boarders somewhere else.</em></p>
+  <p>Koppel was frightened. He paid the hack to go after them, and caught the buses at a diner near Duanesburg where the drivers had stopped for coffee. He stood at the door of the first bus with his hat in his hand, and asked.</p>
+  <p><em>Go home, Reb Koppel,</em> Reb Shaya said. He did not say it hard. <em>We are not coming back.</em></p>
+  <p>On the street they were waiting for him.</p>
+  <p><em>So?</em></p>
+  <p><em>I couldn&rsquo;t persuade them.</em></p>
+  <p><em>Why not?</em></p>
+  <p>He had no answer that could be said out loud.</p>
+  <p>They talked it over on the porches that Shabbos, without him. A house where a man like that had the reading and the keys, they said, no decent Jew would set foot in again. On Sunday morning his boarders paid up, all eleven rooms, and moved down the hill to Mrs. Feder&rsquo;s, and the minyan moved with them. Pincus came for the key to the ark. He had known Koppel thirty years.</p>
+  <p><em>Koppel,</em> he said, <em>don&rsquo;t sit here any more. We have nothing for you here.</em></p>
+</section>
+
+<section>
+  <h2>IV. Three Times</h2>
+  <p class="dateline">Hewes Street, Williamsburg &middot; Elul</p>
+  <p>He shut the house and took the bus to the city and went to the Rebbe.</p>
+  <p>The Rebbe of Hlinitz had come out of the war with one lung and no one of his own, and he held his table on the parlor floor of a brownstone with the wall knocked through. He was not a man who spoke. People said that since 1945 he had used perhaps a hundred words a week, and most of those on children. The gabbai let Koppel in after the evening prayer.</p>
+  <p>Koppel did not wait to be asked.</p>
+  <p><em>Rebbe. Shaya and Mottel are takers. They are in the hands of their appetites, the both of them.</em></p>
+  <p><em>Don&rsquo;t say that, Koppel,</em> the Rebbe said. <em>Have trust in Shaya and Mottel. They are good.</em></p>
+  <p><em>The Rebbe believes in them. I am the one who saw. With my eyes. A year they wouldn&rsquo;t touch, and then with both hands.</em></p>
+  <p><em>Don&rsquo;t say that, Koppel. Have trust in Shaya and Mottel. They are good.</em></p>
+  <p><em>They have things hidden inside them. They are not what the Rebbe thinks. They are bad men.</em></p>
+  <p><em>Don&rsquo;t say that, Koppel,</em> the Rebbe said the third time, and the rest of it after, in the same voice, like a man holding a door for somebody who will not come through it.</p>
+  <p>Koppel got up from the chair. A hasid leaves the Rebbe walking backward, with his face to him. Koppel turned around and walked out.</p>
+  <p>On the stairs his neck itched. Under the lamp in the vestibule he looked at the backs of his hands, and they were covered with small hard grains under the skin, the size of mustard seed. They were on his wrists, and when he pulled his collar open, on his chest. By the time he had the street door open they were the size of chickpeas. On the stoop they were like crab apples, and hot, and then they began to break. He got as far as the iron gate. The men coming in for the late study found him lying against it, groaning, with his shirt stuck to him, and his mouth, they said afterward, still going.</p>
+  <p>Before the ambulance came from Greenpoint the word was at the corner. Before midnight it was in every shtiebel from the bridge to Flushing Avenue: Koppel Weingast spoke against Reb Shaya and Reb Mottel, to the Rebbe&rsquo;s face, three times. They say it went farther than Williamsburg. They say it was heard that night in places where the news of this world does not as a rule arrive.</p>
+</section>
+
+<section>
+  <h2>V. Reb Tuvia</h2>
+  <p class="dateline">Greenpoint Hospital &middot; the second night</p>
+  <p>Koppel had had a teacher once, in Hlinitz. Reb Tuvia the dayan had taken him into his own house, an orphan of seven with a mouth on him, and taught him for nothing until he was seventeen. Reb Tuvia died in his bed in 1931, a very old man, and the whole town said the same thing at the grave: there went one who had finished, one of those who are not sent back.</p>
+  <p>On the second night in the ward Koppel opened his eyes, and Reb Tuvia was standing at the foot of the bed. The man in the next bed, a Pole with his leg in traction, swore for the rest of his life that the old Jew stood a hand&rsquo;s breadth above the linoleum.</p>
+  <p><em>Koppel. It is a cruel thing you did. Make your peace with those two.</em></p>
+  <p><em>Who are you?</em></p>
+  <p><em>Tuvia. Your teacher.</em></p>
+  <p><em>You?</em> Koppel got up on one elbow. Nothing about him worked any more except the one thing. <em>You were supposed to be finished. All Hlinitz said it. A soul that doesn&rsquo;t have to come back. So what are you doing back? A fine tzaddik! You know what you&rsquo;ll be? A ghost on a garbage dump, that&rsquo;s what you&rsquo;ll be.</em></p>
+  <p>Reb Tuvia looked at him the way he had looked at him across the Gemara when he was seven.</p>
+  <p><em>Let it be for you, Koppel,</em> he said, <em>according to your own mouth.</em></p>
+  <p>Then there was only the foot of the bed.</p>
+  <p>Koppel Weingast died before morning. They buried him the same day in the Hlinitzer society&rsquo;s ground in Queens, and Reb Shaya and Reb Mottel were two of the men who carried him.</p>
+  <p>A week later one of the hasidim, who could not leave a thing alone, asked the Rebbe at the door where Koppel was now. The Rebbe was quiet so long that the man began to back away. Then he said what stands in the old books.</p>
+  <div class="verse">
+    <p>The soul of a slanderer is transmigrated into a silent stone.</p>
+    <p>&mdash; <span style="font-style:normal">Emek ha-Melekh</span>, in <span style="font-style:normal">Hebraic Literature</span> (1901)</p>
+  </div>
+</section>
+
+<section>
+  <h2>VI. The Third Meal</h2>
+  <p class="dateline">Hewes Street &middot; Shabbos Shuva</p>
+  <p>On the Sabbath of Return, at the third meal, the light goes and nobody may kindle a lamp, and the hasidim sit on at the long table in the dark with a piece of challah and a piece of herring and sing without words. Between one tune and the next the talk that week was Koppel.</p>
+  <p><em>His mouth buried him.</em></p>
+  <p><em>Thirty years a decent Jew, and one summer.</em></p>
+  <p><em>If he had only swallowed it.</em></p>
+  <p>The Rebbe heard them. <em>It was not the first time,</em> he said, and because he so seldom said anything, sixty men stopped chewing. <em>That soul fell by its mouth once before.</em></p>
+  <p>There was a tortoise, he said, in a pond in the mountains. Two wild geese came down on that pond and stayed a season, and the three of them became friends. When the cold was coming the geese said, <em>We winter in a cave of gold on a mountain far from here. It is a good place. Come with us.</em></p>
+  <p><em>How does a tortoise come?</em></p>
+  <p><em>We will carry you. If you can keep your mouth shut.</em></p>
+  <p><em>I can keep it shut.</em></p>
+  <p>So they found a stick, and the tortoise bit down on the middle of it, and the geese took the two ends in their beaks and went up.</p>
+  <p>They flew over a village. The boys in the road looked up. <em>Look! Two geese carrying a turtle on a stick!</em></p>
+  <p>And the tortoise thought, <em>You little nothings, if my friends are carrying me, what is it to you?</em> And he opened his mouth to tell them.</p>
+  <p>He came down in the courtyard of the lord of that country, the Rebbe said, on the paving, and broke in two.</p>
+  <p>Nobody at the table sang.</p>
+  <p><em>He had hold of the stick,</em> the Rebbe said. <em>He was already in the air.</em></p>
+  <p>Then he said the Gemara in Erchin, in the holy tongue, the few words of it. And Reb Shaya, at his right hand, said it over after him in plain Yiddish for the boys at the bottom of the table, slowly, and it was a hard saying, and from him it was sweet to hear.</p>
+  <div class="verse">
+    <p>The Holy One&mdash;blessed be He!&mdash;said to the tongue, &ldquo;All the members of the body are erect, thou only art recumbent; all other members are without, thou art within, and not only so, for I have surrounded thee with two walls, one of bone and the other of flesh. What shall be given to thee, or what shall be added unto thee, O thou false tongue?&rdquo;</p>
+    <p>&mdash; Talmud, Erchin 15b, in <span style="font-style:normal">Hebraic Literature</span> (1901)</p>
+  </div>
+  <p>In the dark somebody began the tune again, and the rest came in.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Weingast&rsquo;s stood shut the next summer, and the summer after that it was sold. The two came back to Sharon Springs every year for the rheumatism, with one valise, and stayed where there was a room, and the street let them alone.</p>
+  <p>Below the Imperial a wall of laid stone holds the bank of Brimstone Creek, and every stone in it is crusted white from the water. On their first morning each summer, coming up from the baths with their towels, the two would stop there, and Reb Mottel would put his palm flat on one of the stones, a little above the waterline, for about as long as it takes to say a short prayer. It was always the same stone. Nobody asked him. If you went down afterward and laid your own hand on it, it was warm, but in July every stone in that wall is warm.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The Bhikshu who controls his mouth, who speaks wisely and calmly, who teaches the meaning and the law, his word is sweet.<cite>Dhammapada 363, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the two chief disciples, S&#257;riputta and Moggall&#257;na, want a season away from the crowd and spend the three months of the rains with the monk Kok&#257;lika on one condition: that he tell nobody who they are. In return they teach him. As they leave he cannot hold it any longer and tells the village, calling the people cattle for not having known. The villagers run after the two with gifts; Kok&#257;lika follows, expecting the frugal elders to refuse and the gifts to fall to him. They refuse, and do not pass them on. When they return with a great following and the gifts are shared among everyone but him, he reviles them as greedy; they leave; the villagers drive him out. He goes to the Buddha and three times accuses the two, and three times is told, &ldquo;Say not so.&rdquo; As he leaves, boils the size of mustard seeds break out over his body and grow. His own former teacher, now a god, comes down to plead with him and is insulted in turn. He dies and falls into the Lotus hell. When the monks say that his tongue ruined him, the Buddha tells the birth story of the tortoise carried through the air on a stick by two geese. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-03.htm">the full commentary story</a> and the <a href="https://ancient-buddhist-texts.net/English-Texts/Jataka/215.htm">birth story of the talkative tortoise</a>, a fable that also reached Europe as <a href="https://en.wikipedia.org/wiki/The_Tortoise_and_the_Birds">The Tortoise and the Birds</a>.</p>
+    <h3>Sharon Springs, 1954</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Sharon_Springs,_New_York">Sharon Springs</a>, fifty miles west of Albany, was a sulphur spa from the 1820s. When Saratoga&rsquo;s hotels shut out Jews, German Jewish families came here instead; by the 1920s the guests were mostly Eastern European Jews, the white-columned sulphur temple and the Imperial Baths went up in 1927, and the <a href="https://en.wikipedia.org/wiki/Adler_Hotel">Adler Hotel</a> opened in 1929 with a hundred and fifty rooms and two kitchens. After the Second World War many of the summer people were Holocaust survivors, a good number of them Hasidic and Orthodox, taking the baths on doctors&rsquo; orders. Small self-catering boardinghouses like Koppel&rsquo;s, called <em>kokhaleyns</em>, lined Main Street. The Imperial Baths closed in 2005.</p>
+    <p>The Rebbe of Hlinitz, his court on Hewes Street, and everyone on the street in Sharon Springs are invented. What is not invented is the teaching. The Talmud&rsquo;s tractate Arakhin (here in the old spelling, Erchin) is the classic source for the laws of <a href="https://en.wikipedia.org/wiki/Lashon_hara"><em>lashon hara</em></a>, harmful speech, and tradition ties slander to afflictions of the skin, as with Miriam in the Book of Numbers. Belief in the return of souls, <a href="https://en.wikipedia.org/wiki/Gilgul"><em>gilgul</em></a>, runs through Kabbalah and Hasidic storytelling, and the Rebbe tells the tortoise&rsquo;s fall in that key. Both passages are quoted from <a href="https://www.gutenberg.org/ebooks/14368"><em>Hebraic Literature: Translations from the Talmud, Midrashim and Kabbala</em></a> (1901).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Kok&#257;lika from the Dhammapada commentary (verse 363). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-03.htm">The original</a>. Talmud and Kabbalah passages from <em>Hebraic Literature: Translations from the Talmud, Midrashim and Kabbala</em> (1901). Written by Claude Fable 5.2.
+  <div class="pager"><a href="skill-and-sport.html">&larr; Skill and Sport</a><a href="index.html">All stories</a><a href="a-case-of-grapefruit.html">A Case of Grapefruit &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A steep street of porches at dusk: a row of rocking chairs, drawn as small rockers
+  // along a falling line. Now and then the rocking stops, chair after chair down the hill,
+  // holds, and takes up again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, chairs = [], t = 0, PERIOD = 46000;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.max(7, Math.min(16, W / 80)));
+    chairs = [];
+    for (var i = 0; i < n; i++) {
+      var u = (i + 0.5) / n;
+      chairs.push({ u: u, x: W * (0.03 + 0.94 * u), y: H * (0.84 + 0.13 * u),
+        rate: 0.0019 + 0.0009 * (((i * 53) % 7) / 6), ph: i * 2.1, s: 0.9 + 0.3 * (((i * 31) % 5) / 4) });
+    }
+  }
+  function hush(u) {                      // 1 = rocking freely, 0 = stopped
+    if (reduce) return 0.5;
+    var p = (t % PERIOD) / PERIOD;        // the stop travels down the hill in the first part of each period
+    var d = p * 3.2 - u;                  // reaches chair u at p = u/3.2
+    if (d < 0 || d > 0.62) return 1;
+    var k = d < 0.06 ? 1 - d / 0.06 : (d > 0.5 ? (d - 0.5) / 0.12 : 0);
+    return k;
+  }
+  function chair(ch) {
+    var amp = 0.16 * hush(ch.u);
+    var a = reduce ? 0.06 : Math.sin(t * ch.rate + ch.ph) * amp;
+    var s = ch.s;
+    var inCol = Math.abs(ch.x - W / 2) < 310;                // fainter where the text runs
+    ctx.strokeStyle = 'rgba(227,223,211,' + (inCol ? 0.07 : 0.18) + ')';
+    ctx.save(); ctx.translate(ch.x, ch.y); ctx.rotate(a);
+    ctx.beginPath(); ctx.arc(0, -20 * s, 20 * s, Math.PI * 0.30, Math.PI * 0.70); ctx.stroke();   // the rocker
+    ctx.beginPath(); ctx.moveTo(-5 * s, -2 * s); ctx.lineTo(-5 * s, -9 * s); ctx.lineTo(5 * s, -9 * s); ctx.lineTo(5 * s, -2 * s); ctx.stroke(); // seat
+    ctx.beginPath(); ctx.moveTo(-5 * s, -9 * s); ctx.lineTo(-7 * s, -22 * s); ctx.stroke();        // the back
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(169,201,207,0.10)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, H * 0.84 + 4); ctx.lineTo(W, H * 0.97 + 4); ctx.stroke();         // the street
+    ctx.strokeStyle = 'rgba(227,223,211,0.17)'; ctx.lineWidth = 1.1; ctx.lineCap = 'round';
+    for (var i = 0; i < chairs.length; i++) chair(chairs[i]);
+    if (!reduce) { t += 16; requestAnimationFrame(draw); }
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

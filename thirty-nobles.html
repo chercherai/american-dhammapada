@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thirty Nobles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the tan of elastic garment cloth, light theme; in the margins a small pattern piece (a child's glove, a sleeve, a vest) is outlined one stitch at a time in brown thread behind a red point, holds, and is taken up again; datelined sections. */
+  --ground: #eadfc8;
+  --ground-2: #e0d2b6;
+  --paper: #2a2018;
+  --paper-dim: #6d5b47;
+  --accent: #9c1f2a;
+  --glow: #b47a1e;
+  --line: rgba(42,32,24,.16);
+  --panel: rgba(255,250,238,.55);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f3ead6 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance;  }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 8.9 &middot; Sa&#7749;kicca</span></nav>
+<header>
+  <h1>Thirty Nobles</h1>
+  <div class="epigraph">In small proportions we just beauties see;<br>And in short measures life may perfect be.<br>&mdash; Ben Jonson, &ldquo;The Noble Nature&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">I'll give it to you the way I got it,</span> in Egypt.</p>
+
+<section>
+  <h2>I. The Garment Room</h2>
+  <p class="dateline">Cincinnati, Ohio &middot; May 1984</p>
+  <p>There were thirty of them, and they had all come to it late. There was a circuit judge off the bench, a druggist, the man who had the Chevrolet agency in Harrisburg, an undertaker, two superintendents from the fluorspar mines at Rosiclare, a barber, and the rest farmers. Not one had been under sixty-five when he took his fez. They were the Egypt Shrine Club, out of the river counties at the bottom of Illinois, the country people have called Egypt for a hundred and fifty years, and for five years they had driven the hospital run. It was three hundred miles to the Burns Institute in Cincinnati, by the Shawneetown bridge and Louisville, with somebody's burned child asleep on the back seat of a white Ford van, and three hundred miles home.</p>
+  <p>That spring a man from the temple at East St. Louis came down to their ladies' night and told them there were two kinds of work in the Shrine. There was the work of the ritual, the degree teams and the ceremonials, where a man got a long part by heart and gave it without the book. And there was the work of the hospitals.</p>
+  <p>Judge Harlan Oxford was eighty-four and the oldest of them. <em>We came to this old,</em> he said in the car going home. <em>There's not one of us will get a part by heart now. I can't keep hold of my own telephone number. But I believe we could do the other.</em> Estel Belt, the undertaker, had forty acres and a dammed hollow back of Cave-in-Rock that he had never known what to do with. By the time the car reached Elizabethtown they meant to build a camp on it, six cabins and a dock, where the children from the hospital could come in summer and not be looked at.</p>
+  <p>On the next run they asked who in that building would know how to go about such a thing, and three different people sent them to the basement.</p>
+  <p>Mrs. Hauck had the garment room. She was seventy. She had cut corsets downtown for thirty years, and in 1968, when the Institute opened, somebody had the sense to hire her. A burned child, once the grafts have taken, has to wear an elastic suit that presses on the scars, twenty-three hours of the day for a year or better, or the scars rise up in ropes. Every suit is cut to the one child. Mrs. Hauck measured every child that came through the building, every inch and a half from the wrist up, and whatever the factory in Toledo sent back that did not fit she took apart and sewed over. She measured them again as they grew. There was nothing about any of them she had not had her tape around.</p>
+  <p>She heard the Judge out with her shears open in her hand.</p>
+  <p><em>Here is all I know,</em> she said. <em>Look at the child and not at the burn. That's the whole of it. You'll be the rest of your lives at it.</em></p>
+  <p>They thanked her. She asked whereabouts this lake was, and they told her, and she stood a while with the shears still open.</p>
+  <p><em>Go up to Three and see Mrs. Lashley before you start home,</em> she said.</p>
+</section>
+
+<section>
+  <h2>II. Pike</h2>
+  <p class="dateline">Three West &middot; the same afternoon</p>
+  <p>Mrs. Lashley was the charge nurse on the acute floor, a tall Black woman from Walnut Hills who had come with the building too. She looked at thirty old men in red fezzes filling up her corridor and asked what they wanted. They said they didn't rightly know. They had been to Mrs. Hauck about a camp, and Mrs. Hauck had sent them up.</p>
+  <p>Mrs. Lashley thought about that.</p>
+  <p><em>Is the boy going with you?</em></p>
+  <p><em>What boy?</em></p>
+  <p><em>Then you'd better take Pike.</em></p>
+  <p>They all knew Pike. Half of them had been on the run that first brought him.</p>
+  <p>In January of 1977 a house on Peters Creek had burned to the stones in the night with a girl of nineteen in it, who was eight months gone. In the morning the volunteers from Elizabethtown went through the ashes with pike poles, hunting what was left of her, and one of the poles went into something that cried. He was sitting up in the bedsprings as if he had been set on a shelf. Nobody has ever said how. The hook had laid open his right eye, and the pupil of it healed with a notch at the bottom, like a keyhole. The nurses in Cincinnati called him Pike, for the pole, before anybody thought to name him, and his grandmother let it stand.</p>
+  <p>Old women in Hardin County said that a child the fire had handed back would keep his people out of want for seven generations if he stayed among them, and that if he went off he would never go anywhere without a crowd behind him.</p>
+  <p>He went up to Cincinnati every year for the surgeons to let out what had tightened, and came home, and started school. When he was seven some boys at the bus stop told him the rest of it, that his mother had burned up and he had been inside her at the time. He walked home and found his grandmother at the clothesline.</p>
+  <p><em>Is it so?</em></p>
+  <p><em>It's so.</em></p>
+  <p><em>Then I don't see what I want with the second grade,</em> he said. <em>Take me back up there and leave me.</em></p>
+  <p>She took him. It was time for his scalp in any case. The top of a child's head grows the best skin he has, and they meant to shave him and take a sheet of it for his neck. Mrs. Lashley sat on his bed the night before and gave him something to say over.</p>
+  <p><em>Five things, Pike. Hair of the head, hair of the body, nails, teeth, skin. That's every bit of you anybody is ever going to see. Say them down and say them back up, and each time ask yourself is any of it you.</em></p>
+  <p>He was still saying them in the morning when the orderly came with the razor. They tell it on Three West that at the first stroke, when the hair came away, the boy set something down and never afterward picked it up. He did not cry in the tub room after that. He was not afraid of the dark, or of the doctors, or of the mirror in the hall. The nurses got so they would put a new child's bed next to his.</p>
+  <p><em>Mrs. Lashley,</em> the Judge said, <em>we'll be up on ladders. We can't be minding a seven-year-old with a fresh graft. He'd be in our way.</em></p>
+  <p><em>He won't be in yours,</em> said Mrs. Lashley. <em>You'll be some in his. She sent you up here so he would go along. Take him.</em></p>
+  <p>So they were thirty-one going home.</p>
+</section>
+
+<section>
+  <h2>III. The Lake</h2>
+  <p class="dateline">Hardin County, Illinois &middot; June and July</p>
+  <p>Rosiclare was glad of them. The mines had been letting men go for ten years, and here were thirty checkbooks come to spend a summer. The lumberyard opened an hour early. The women of the four churches drew up a calendar, so that each congregation carried dinner out to the lake on its own day and none was put upon twice in a week, and for one summer the Methodists and the Church of Christ were in agreement about something.</p>
+  <p>The Judge knew old men. Thirty of them set to build six cabins will build one and talk five. On the first evening he gave the rule.</p>
+  <p><em>Every man takes his own job on his own piece of ground and stays on it. We're together at breakfast and we're together at supper. The hours between, a man keeps to himself and thinks on what Mrs. Hauck told us.</em></p>
+  <p>Eleven of them carried nitroglycerin tablets in their shirt pockets. So Bus Hobbs took the brass locomotive bell off the club's parade float and set it on a post by the dock. It was to be struck for one cause only, a man down, and at the sound of it every one of them would come.</p>
+  <p>Pike had no job. He went from one old man to the next with water in a Mason jar. He wore his tan suit under his overalls through the heat of the day, and when Estel Belt asked him didn't it itch he said yes sir, and went on to the next man.</p>
+  <p>In the second week a stranger came out of the woods at noon, when they were all sitting along the dock with their plates. He stood off at the distance where a man can still be told to leave. He was fifty or so. He had been living on a daughter in Paducah until she could not feed him, and he was walking to another daughter in Harrisburg, and he looked to have missed several meals getting that far.</p>
+  <p><em>Go get you a plate,</em> the Judge said.</p>
+  <p>He came back with a paper plate and went down the length of the dock, and every man forked over a share of what was on his own, catfish and white beans and slaw, the same as he was eating himself, no better and no worse.</p>
+  <p>When he had cleaned the plate the stranger asked, <em>Has somebody had you fellows to dinner? Or is it like this every day?</em></p>
+  <p><em>About like this.</em></p>
+  <p>He looked at the plate. <em>I couldn't eat like that working double shifts. I don't know what I'd go to Harrisburg for. Let me stay and do for you.</em></p>
+  <p>His name was Dewey Stallings, and he stayed two months. He burned the scrap and carried shingles and washed up after thirty-one, and nobody had a word to say against him. He learned where each man worked. He learned that they never came together between breakfast and supper, and what the bell was for.</p>
+  <p>In August he got to wanting to see the daughter. He thought that if he asked, they might talk him out of going, so he did not ask. He went up the fire road one morning before breakfast and said nothing to anyone. In two months it was the only wrong he had done them.</p>
+</section>
+
+<section>
+  <h2>IV. The White Oak</h2>
+  <p class="dateline">Shawnee National Forest &middot; August</p>
+  <p>The Flatheads had the woods north of the lake that week, six miles off. They were a motorcycle club out of Evansville and Paducah and East St. Louis, and when every chapter rode there were five hundred of them. On the Fourth of July somebody in a pickup truck had shot Dale Sisk off his machine on Route 1, and had never been found. Dale's brother Wade was their president. On the first night of the wake Wade Sisk stood up on a picnic table, with Dale's colors nailed to a white oak behind him, and swore on them that the first man to walk in on the Flatheads in that woods, whoever he was, they would kill for Dale and burn what was left.</p>
+  <p>For six days nobody came. On the seventh a prospect up in a deer stand saw a man coming along the fire road with a paper sack, and waved his arm. They let him get well in. Then they closed around him and tied his hands with a bootlace.</p>
+  <p>Somebody was building up the fire. Two more were digging.</p>
+  <p><em>Mister,</em> said Dewey Stallings, <em>I don't see a hog anywhere. What's the pit for?</em></p>
+  <p><em>You.</em></p>
+  <p>He did not think about two months of dinners. He thought about his neck.</p>
+  <p><em>Lord God, don't waste it on me. I'm nobody. I eat what other men leave on the plate and I always have. You could put me in that hole and not a soul would read about it. If you want it to count for your brother, there's thirty-one of them six miles south on Belt's lake. Nobles. That's what they are. It's printed on their cards. There's a judge. There's the man that owns the Chevrolet place in Harrisburg. They've got rings on them like doorknobs. Kill one of those and it'll be on the television in St. Louis.</em></p>
+  <p>Wade Sisk thought it over.</p>
+  <p><em>He's right. What does Dale want with a bum? Show us.</em></p>
+  <p>They left the machines at the blacktop and went in on foot behind him in the dark. The cabins stood in a row with nobody in them.</p>
+  <p><em>Where are they?</em></p>
+  <p><em>Scattered out. Every one sleeps by his own work. Ring that bell and they'll all come.</em></p>
+  <p>Wade Sisk rang it.</p>
+</section>
+
+<section>
+  <h2>V. In Order</h2>
+  <p class="dateline">The lake &middot; that night</p>
+  <p>They came down the paths in undershirts and suspenders, a flashlight here and there, some with the little brown bottle already in their fist, each one thinking, <em>Who's down?</em> They sat on the plank benches of the dining hall, which had a floor and no roof yet. Then they saw the men standing all around it in the trees.</p>
+  <p><em>Who rang that bell?</em> the Judge said.</p>
+  <p><em>I did.</em></p>
+  <p><em>What for?</em></p>
+  <p><em>We swore to kill a man for my brother. One will do. You can pick him.</em></p>
+  <p>The Judge turned to the benches. <em>Boys, when brothers take a thing on, the oldest has the say. I'm eighty-four. I'll go with these men. The rest of you finish the roofs, and think on what you were told.</em></p>
+  <p><em>Sit down, Harlan,</em> said Estel Belt. <em>What the old man owes, the next one ought to carry for him. I'm eighty-one and I've buried everybody I ever cared to. It's mine.</em></p>
+  <p>It went down the benches that way by age, the way they sat in lodge, every one of the thirty standing up in his turn to say it should be him. They were not kin. They were not saints either. Two of them had not spoken in nine years over a line fence. And not a man of them said, <em>You go.</em></p>
+  <p>Then Pike got down off the end of the bench.</p>
+  <p><em>Y'all sit down. It's me.</em></p>
+  <p><em>Son,</em> said the Judge, <em>if they shoot every one of us right here on these planks, you are not going. I would have to walk onto Three West and tell Mrs. Lashley that we carried her boy down to Egypt and handed him to a pack of thieves.</em></p>
+  <p><em>Mrs. Hauck sent you to Mrs. Lashley, and Mrs. Lashley sent me with you. It was for this. Y'all stay.</em></p>
+  <p>He went along the benches and shook hands with each of them, and to each one he said, <em>If I did anything, I'm sorry for it.</em> Then he walked over to Wade Sisk.</p>
+  <p>Not one of those old men could see for crying. The Judge got hold of his voice.</p>
+  <p><em>Mister, he's seven. Whatever you have to make ready up there, the fire and the hole, don't let him watch you do it. Stand him off somewhere till you're through.</em></p>
+</section>
+
+<section>
+  <h2>VI. The Ochre Bank</h2>
+  <p class="dateline">The forest &middot; before daylight</p>
+  <p>They did that much. They put him by a stump at the edge of the firelight with his back to it, and he sat down on the stump. He sat the way he sat in the tub room while the dressings came off, looking at nothing in front of him, and whatever they were going to hurt was not where he was.</p>
+  <p>When all was ready Wade Sisk came across with the Army Colt he had carried for eleven years and set it behind the boy's ear and pulled. The hammer fell and nothing answered. <em>I never seated it,</em> he thought. He worked the slide and set it there again and pulled, and the barrel let go. It opened from the muzzle back in four strips that curled over like the petals of a lily, and the charge went nowhere, and neither the man nor the boy had a mark on him.</p>
+  <p>Wade Sisk looked at the thing in his hand.</p>
+  <p><em>I've put this through an engine block,</em> he said. <em>It's iron. It hasn't got a brain in it, and it knew what he was. I've got eyes, and I stood right here and didn't.</em></p>
+  <p>He threw it in the leaves and got down after it on his face.</p>
+  <p><em>Boy. Grown men see us a mile up the road and go to shaking. Two or three of them together can't get a word out. You never so much as jumped, and your face is as bright as a new penny. Why is that? How come you're not crying?</em></p>
+  <p>Pike turned around on the stump.</p>
+  <p><em>It's like something heavy you've had on your head a long way,</em> he said. <em>When somebody goes to lift it off, you aren't scared. You're glad.</em></p>
+  <p>Wade Sisk got up on his knees and looked around at the five hundred.</p>
+  <p><em>What are you all going to do?</em></p>
+  <p><em>What are you?</em></p>
+  <p><em>I'm through with it. I saw what I saw. Where he goes, I'm going.</em></p>
+  <p><em>Then so are we.</em></p>
+  <p>The boy had them do it right there. They took the knives off their own belts and cut one another's hair, and cut the patch off the back of every jacket. At first light he walked them down to the creek, to the place where the clay comes out of the hill as yellow as a school bus, and had them wash, and what they wore dried the color of the suit under his overalls. Then he gave them the rules. They were the rules on the wall by the scrub sink on Three West, which were all the rules he knew. Wash to the elbow. Nobody eats before the little ones. You don't take what's on another bed. You don't say <em>poor thing.</em> Look at the child and not the burn.</p>
+  <p>He could have gone straight up the blacktop from there. He thought of the benches.</p>
+  <p><em>They'll be sitting down there yet,</em> he said, <em>and nobody on a ladder. They think I'm in that hole. They won't drive a nail till they see me.</em></p>
+  <p>So he took the five hundred back down to the lake.</p>
+  <p><em>Pike,</em> said the Judge. <em>They turned you loose.</em></p>
+  <p><em>They tried it and it wouldn't work, sir. Then they listened and came along. I only stopped so you'd know. Y'all go on with the roofs, and think on what you were told. I've got to take these up to Mrs. Hauck.</em></p>
+</section>
+
+<section>
+  <h2>VII. Five Hundred</h2>
+  <p class="dateline">Cincinnati &middot; the next evening</p>
+  <p>Bus Hobbs drove the van, being the youngest at sixty-six, with the boy up beside him on two cushions. Behind them the machines came two abreast for three miles. They crossed the Shawneetown bridge that way and went through Louisville, and people got out of their cars on the overpasses of Interstate 71 to watch them go under.</p>
+  <p>Mrs. Lashley was on the ambulance dock in her sweater when they came up the hill. She looked down the line as far as it went.</p>
+  <p><em>Pike. You brought company.</em></p>
+  <p><em>Yes, ma'am.</em> He told her how it had been.</p>
+  <p><em>Take them around to Mrs. Hauck.</em></p>
+  <p>Mrs. Hauck came up from the basement to the front steps with the tape around her neck. She looked at five hundred men standing in the street in yellow denim with their hair cut ragged.</p>
+  <p><em>Pike, you have people now?</em></p>
+  <p>He told it again.</p>
+  <p><em>Is that the way it was?</em> she asked them.</p>
+  <p><em>Yes, ma'am,</em> they said.</p>
+  <p><em>Then hear me. One day, the way you are standing there this evening, is worth more than a hundred years of what you were at.</em> She folded her hands on her stomach, as she must have stood to say it in the sixth grade, and gave them a thing she had had by heart ever since.</p>
+  <div class="verse">
+    <p>It is not growing like a tree<br>
+    In bulk, doth make Man better be;<br>
+    Or standing long an oak, three hundred year,<br>
+    To fall a log at last, dry, bald, and sere:<br>
+    A lily of a day<br>
+    Is fairer far in May,<br>
+    Although it fall and die that night&mdash;<br>
+    It was the plant and flower of Light.<br>
+    In small proportions we just beauties see;<br>
+    And in short measures life may perfect be.</p>
+    <p>&mdash; Ben Jonson, &ldquo;The Noble Nature&rdquo;</p>
+  </div>
+  <p>Then she took the tape from around her neck, because the boy had grown in the shoulders since May.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>They kept it. They roofed the cabins alongside the old men that fall, and the camp on Belt's lake opened the next June. On the first Sunday of October, every year since, they have come up Interstate 71 two abreast behind a white Shrine van, five hundred when all of them can come, with a stuffed bear tied on behind every saddle, and the nurses bring the children who can be moved out onto the dock to watch them pull in. The bell is still on its post at the lake. In forty years it has been struck four times, each time for a heart.</p>
+  <p>Pike quit growing at sixteen and they let him go. At twenty-two he came back with a nursing license and took the tub room. When he had had it ten years, his cousin's boy Tim came up from Hardin County to work under him as an aide, and when the time came for Tim to go for a license of his own, Pike sent him home to the courthouse at Elizabethtown for his birth certificate, so they would have his age exact.</p>
+  <p>On a forest road back of Karbers Ridge, walking in to his folks' place, Tim came up on some men at work in a house trailer, at the kind of work that gets a stranger killed. They had him on his knees in the gravel. He talked to them the way he had heard Pike talk to frightened fathers, and in the end they let him up, on his word that he would tell no one on earth they were there. Half a mile on he met his own mother and father coming up that same road to look for him, walking straight toward the trailer. He had given his word. He let them pass.</p>
+  <p>They came home that night knocked about and robbed. <em>You knew,</em> his mother said. <em>You stood in the road and you knew. You're in with them.</em> The men from the trailer had followed to see what he would do, and they heard her through the screen door. They understood then that his word had held against his own mother. They came up onto the porch with their caps in their hands, and in the morning they drove to Cincinnati behind his car.</p>
+  <p>Mrs. Hauck was ninety-five that year, in the Lutheran home on the hill. Pike took them in to her. She asked them was that the way it was, and they said yes, ma'am, and she gave them the ten lines again from her chair without a stumble. When she had finished she held out her hand to Pike for the tape he carried in his pocket, and had him turn around, and measured him across the shoulders.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+<h3>The verse</h3>
+    <blockquote class="pd">But he who lives a hundred years, vicious and unrestrained, a life of one day is better if a man is virtuous and reflecting.<cite>Dhammapada 110, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, thirty men who became monks late in life decide they are too old for the duty of study and ask the Buddha for a subject of meditation and leave to go to a forest. He sends them first to the elder <a href="https://en.wikipedia.org/wiki/Sariputta">S&#257;riputta</a>, who makes them take along his seven-year-old novice, Sa&#7749;kicca. The boy had been found alive on his mother's funeral pyre, his eye marked by one of the stakes used to turn the fire, and had reached the goal of the path when the razor first touched his hair. "He will not be a hindrance to you," the elder says. "You will be a hindrance to him." The monks settle near a village, keep apart from one another, and agree on a bell to be struck only for sickness. A hungry traveler whom each of them feeds from his own bowl serves them two months and leaves without asking. Five hundred robbers who have vowed a human sacrifice seize him in the forest, and to save himself he leads them to the monks and tells them to ring the bell. Each monk in order of seniority offers to die; the novice insists it is why he was sent, asks their pardon, and goes. The robber chief's sword bends on the boy's shoulder and at the second blow splits like a palm leaf. The five hundred take the robe under the novice, who goes back to comfort the old men before he leads his following to S&#257;riputta and the Buddha. A second episode tells of his nephew Atimuttaka, who kept his word to a band of thieves even when his parents walked into them. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-09.htm">the full commentary story</a>.</p>
+    <h3>Egypt and the Shrine, 1984</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/Shriners">Shriners</a>, founded in New York in 1872, are Freemasons in red fezzes whose members are styled Nobles and whose local chief is an Illustrious Potentate. They opened their first children's hospital at Shreveport in 1922. In 1962 they voted to take on burns, and the <a href="https://www.shrinersinternational.org/en/news-and-events/news/2022/05/burn-care-history">three burn hospitals</a> opened at Galveston in 1966 and at Cincinnati and Boston in 1968. Until 2012 no family was ever billed. Children were, and are, driven to the hospitals by Shriners in their own time. A burned child of the 1980s wore custom elastic pressure garments most of the day for a year or more, went back each year to have tightened scars released, and often gave skin from the scalp, which heals quickly. The lines Mrs. Hauck recites are from Ben Jonson's ode on Sir Lucius Cary and Sir Henry Morison, printed in 1640, as generations of schoolchildren met them in <a href="https://www.gutenberg.org/ebooks/19221">Palgrave's <em>Golden Treasury</em></a> under the title "The Noble Nature."</p>
+    <p><a href="https://en.wikipedia.org/wiki/Southern_Illinois">Southern Illinois</a> has been called Egypt since the 1830s. <a href="https://en.wikipedia.org/wiki/Hardin_County,_Illinois">Hardin County</a>, on the Ohio, is the least populous county in the state; it had 5,383 people in 1980, fluorspar mines at Rosiclare that were worked until the early 1990s, a piece of the Shawnee National Forest, and at Cave-in-Rock a river cave that outlaws and river pirates used in the 1790s. The Shrine temple for the region was at East St. Louis. The Egypt Shrine Club, Belt's lake, the Flatheads and every person in the story are invented, and no hospital staff are drawn from life. Bikers' toy runs to children's hospitals, which became a fixture of American autumns around 1980, are real, and the story borrows them for its ending.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the novice Sa&#7749;kicca from the Dhammapada commentary (verse 110). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-09.htm">The original</a>. Verse from Ben Jonson (1640), as printed in Palgrave's Golden Treasury. Written by Claude Fable 5.2.
+  <div class="pager"><a href="from-its-stem.html">&larr; From Its Stem</a><a href="index.html">All stories</a><a href="the-window-dummy.html">The Window Dummy &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // In the margins a pattern piece (a child's glove, a sleeve, a small vest) is outlined
+  // one stitch at a time in thread, holds, and is taken up again.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, slots = [], last = 0;
+  var SH = [
+    [[.30,1],[.28,.62],[.10,.46],[.08,.36],[.18,.32],[.30,.43],[.30,.13],[.38,.11],[.40,.31],[.42,.06],[.50,.04],[.52,.30],[.54,.08],[.62,.07],[.64,.33],[.66,.16],[.73,.16],[.74,.46],[.72,.72],[.70,1],[.30,1]],
+    [[.22,0],[.78,0],[.68,1],[.32,1],[.22,0]],
+    [[.30,0],[.42,.09],[.58,.09],[.70,0],[.90,.12],[.82,.38],[.80,1],[.20,1],[.18,.38],[.10,.12],[.30,0]]
+  ];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function place(s, i) {
+    var col = 36 * 16, margin = Math.max(0, (W - col) / 2);
+    var wide = margin > 150;
+    var sz = wide ? Math.min(150, margin * 0.55) : 84;
+    s.sz = sz; s.shape = SH[(s.k = ((s.k === undefined ? i : s.k + 1) % SH.length))];
+    if (wide) {
+      s.x = (i % 2 === 0) ? margin * 0.5 - sz / 2 + (Math.random() - .5) * margin * 0.2 : W - margin * 0.5 - sz / 2 + (Math.random() - .5) * margin * 0.2;
+      s.y = H * (i % 2 === 0 ? 0.55 : 0.2) + Math.random() * H * 0.15;
+    } else {
+      s.x = (i % 2 === 0) ? 10 : W - sz - 10; s.y = H - sz - 14;
+    }
+    s.rot = (Math.random() - .5) * 0.5;
+    var L = 0, p = s.shape; s.seg = [];
+    for (var j = 1; j < p.length; j++) { var dx = (p[j][0] - p[j-1][0]) * sz, dy = (p[j][1] - p[j-1][1]) * sz * 1.25; var l = Math.sqrt(dx*dx + dy*dy); s.seg.push(l); L += l; }
+    s.len = L; s.t = 0;
+  }
+  function make() { slots = [{}, {}]; for (var i = 0; i < slots.length; i++) { place(slots[i], i); slots[i].t = i * 7; } }
+  function path(s, upto) {
+    var p = s.shape, sz = s.sz, acc = 0;
+    ctx.beginPath(); ctx.moveTo(p[0][0] * sz, p[0][1] * sz * 1.25);
+    for (var j = 1; j < p.length; j++) {
+      var l = s.seg[j-1];
+      if (acc + l <= upto) { ctx.lineTo(p[j][0] * sz, p[j][1] * sz * 1.25); acc += l; }
+      else { var f = (upto - acc) / l; ctx.lineTo((p[j-1][0] + (p[j][0] - p[j-1][0]) * f) * sz, (p[j-1][1] + (p[j][1] - p[j-1][1]) * f) * sz * 1.25); return [(p[j-1][0] + (p[j][0] - p[j-1][0]) * f) * sz, (p[j-1][1] + (p[j][1] - p[j-1][1]) * f) * sz * 1.25]; }
+    }
+    return null;
+  }
+  function draw(ts) {
+    var dt = Math.min(0.05, ((ts || 0) - last) / 1000); last = ts || 0;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < slots.length; i++) {
+      var s = slots[i], SEW = 16, HOLD = 7, FADE = 4;
+      if (!reduce) { s.t += dt; if (s.t > SEW + HOLD + FADE) place(s, i); }
+      var tt = reduce ? SEW + 1 : s.t;
+      var prog = Math.min(1, tt / SEW);
+      var a = tt > SEW + HOLD ? Math.max(0, 1 - (tt - SEW - HOLD) / FADE) : 1;
+      ctx.save(); ctx.translate(s.x + s.sz / 2, s.y + s.sz * 0.62); ctx.rotate(s.rot); ctx.translate(-s.sz / 2, -s.sz * 0.62);
+      ctx.lineWidth = 1.4; ctx.lineCap = 'round'; ctx.setLineDash([5, 4]);
+      ctx.strokeStyle = 'rgba(122,78,34,' + (0.34 * a) + ')';
+      var tip = path(s, s.len * prog); ctx.stroke();
+      if (tip && !reduce) { ctx.setLineDash([]); ctx.fillStyle = 'rgba(156,31,42,' + (0.55 * a) + ')'; ctx.beginPath(); ctx.arc(tip[0], tip[1], 1.8, 0, Math.PI * 2); ctx.fill(); }
+      ctx.restore();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw(0);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

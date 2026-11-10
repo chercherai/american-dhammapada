@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Singly None</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column in pit dark; five small lamp flames lean when the air moves and a safety lamp in the corner shows a blue cap when it stops. */
+  --ground: #0c0d0f;
+  --ground-2: #15171a;
+  --paper: #dedbd2;
+  --paper-dim: #9a968c;
+  --accent: #e0a640;
+  --glow: #7fb2dc;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #121417 0%, var(--ground) 45%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(222,219,210,.12); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 26px rgba(127,178,220,.18); }
+.epigraph { border-left: 1px solid rgba(224,166,64,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(21,23,26,.82); border: 1px solid rgba(222,219,210,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(222,219,210,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(222,219,210,.12); border-bottom: 1px solid rgba(222,219,210,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(21,23,26,.82); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 25.1 &middot; Pa&ntilde;cabhikkhu</span></nav>
+<header>
+  <h1>Singly None</h1>
+  <div class="epigraph">Drops of water turn a mill,<br>Singly none, singly none.<br>&mdash; Constitution and Laws of the American Miners&rsquo; Association (1864)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how I had it underground,</span> at the Bluff shaft above La Salle.</p>
+
+<section>
+  <h2>I. Five Doors</h2>
+  <p class="dateline">La Salle County, Illinois &middot; February 1865</p>
+  <p>The Bluff shaft went down better than three hundred feet to a vein of coal three and a half feet thick, and there were five doors in it.</p>
+  <p>A door in a coal pit keeps nobody out. It turns the air. A furnace burned day and night at the foot of the upcast and drew the foul air up that side of the shaft, and the good air fell down the other side to take its place. Left to itself the good air would have gone the forty yards across the pit bottom from the one to the other and never troubled the men at the coal half a mile in. So the short ways were shut with doors. The air came to a door, found it shut, and went the long way round, past every man lying on his side under the coal with his pick. It took his powder smoke with it, and the black damp that leaked out of the old workings, and carried them up and out. But the mules had to come through with the cars. So every door had a boy to pull it open for the trip and shut it after, and the company paid him fifty cents a day and called him a trapper.</p>
+  <p>Tommy Bate, whose father was a Staffordshire man, had the first door, forty yards in from the pit eye. Dai Rees had the second, far down the main road, where nobody passed for an hour at a time. Jamie Laird had the door on the return, near the furnace and the mule stable. Con Doolan had the door by the turnout, where the men left their dinner tins on a ledge out of the wet. Sam Ogden had the last one, at the bottom of the dip, in water.</p>
+  <p>None of them was over twelve. They went down on the first cage and came up on the last, and in between they sat. A trapper&rsquo;s work is to sit on a plank in the dark with a cord in his hand and do nothing until he hears wheels, then do one thing, then sit again. Each boy had a tin lamp on his cap and blew it out between trips, because he bought his own oil.</p>
+  <p>On a Saturday in February the five of them were waiting for the cage at the end of the shift, in a row on a stack of props, and Tommy Bate said that his was the worst door in the pit.</p>
+  <p><em>There&rsquo;s that much to look at. The cage comes down, and I look. The stableman goes by with the grey mare, and I look. A driver has a new lamp. I&rsquo;m not looking at anything, I&rsquo;m only looking, and then the trip is on top of me and Shaughnessy is swearing and the door not open. You try sitting where you can see.</em></p>
+  <p><em>I&rsquo;d give a week&rsquo;s pay to see anything,</em> said Dai Rees. <em>There&rsquo;s nothing down my road but the dark, and you can&rsquo;t shut your ears the way you shut your eyes. The roof works. Water drips. Something walks that is too heavy for a rat. Wednesday I heard my mam call me to my tea, plain as that, and I was twenty yards up the road after her before I knew where I was. And the door standing, and a trip coming.</em></p>
+  <p><em>You&rsquo;ve only the one mam,</em> Jamie Laird said. <em>Everything this pit has got comes by my door last. Powder reek. The mules. Forty men that have had onions. And Thursdays one of the furnacemen fries bacon on a shovel, and I tell you I would follow it to Peru.</em></p>
+  <p>Peru was the next town down the river, a mile off, but he said it as if it were the other one.</p>
+  <p>Con Doolan said they could keep their bacon. He had his bread eaten by nine o&rsquo;clock every morning of his life, and from nine until noon there were eleven dinner tins on the ledge an arm&rsquo;s length from where he sat, and he knew what was in every one. The drivers gave him a pull at their cold tea going through, to be friendly, or a twist of tobacco. <em>And once there&rsquo;s a taste in your mouth there is nothing else in the pit. I&rsquo;ve had a trip stand at my door and the mule looking at me.</em></p>
+  <p>Sam Ogden waited until they were done. He was the smallest.</p>
+  <p><em>Mine&rsquo;s wet,</em> he said. <em>I&rsquo;m in it to the ankles. The door weighs more than I do and the wind comes under it fit to skin you. And twenty yards off there&rsquo;s a cut-through where the warm comes off the furnace drift, with dry slack on the floor.</em> He looked at his boots. <em>I&rsquo;ve a bit of sacking there. I&rsquo;m not saying I lie on it.</em></p>
+  <p>Each of them held that the other four had no notion. They were still at it when the cage came. Then Tommy Bate said there was one man who had walked through all five doors every morning for nine years and would know, and they would ask Evan Lamp.</p>
+</section>
+
+<section>
+  <h2>II. Evan Lamp</h2>
+  <p class="dateline">The pit eye &middot; Monday, before the shift</p>
+  <p>Evan Pugh was the fireman. They called him Evan Lamp because there were three Evans at the Bluff and he was the one who carried the Davy. He came from Monmouthshire. He was near sixty, which is old for underground, and he had a blue line across the bridge of his nose where a cut had healed with the coal still in it.</p>
+  <p>He went down alone at four every morning, two hours before the men. He carried the safety lamp with the wick pricked low, and he walked every road in the pit and went into every place where a man would work that day. He watched the flame. He laid his left hand flat to the roof and rapped beside it with a stick and listened. He smelled the air at the mouths of the old workings, and drew it in over his tongue, as the old firemen at home did, who said a man could taste black damp, sour, before it dimmed his light. He wet his cheek and turned it to feel which way the air was going. Where a place was fit he chalked the day of the month on the coal and E.P. under it, and no man at the Bluff put a pick to a face that did not show that morning&rsquo;s chalk. Illinois had no law yet for the safety of coal pits. It was the custom, brought over with the men, and the lodge held to it.</p>
+  <p>The five were standing at the pit eye when he came out of the main road with the lamp. They had begged down on the first cage on purpose. Tommy Bate put the question, and each of the others put in what Tommy left out.</p>
+  <p>Evan Lamp heard them through. He looked along the row, and he did not look at any one of them longer than at the next.</p>
+  <p><em>They are all hard doors,</em> he said. <em>I never found the easy one.</em></p>
+  <p>Then he said, <em>I know you five. I have known you a long while.</em></p>
+  <p><em>Since the summer,</em> said Sam Ogden, who had come in July.</p>
+  <p><em>Since the Gelli pit. Forty-three years. There are always five, and it is always you.</em> He hung the lamp on a nail in a prop, out of the draught. <em>You have a quarter of an hour before the first trip. Sit down.</em></p>
+</section>
+
+<section>
+  <h2>III. The Gelli</h2>
+  <p class="dateline">Monmouthshire &middot; 1822</p>
+  <p>He had been fourteen, he said, and carried the fireman&rsquo;s tools. The fireman was Lewis Probert, who had the first Davy lamp in that valley. The Gelli was a fiery pit and made gas at every fall. There were five doors between the Deep and the pit eye, and five boys on them, and every one of those boys Lewis Probert had told the same thing in the same three words. <em>Keep your door.</em></p>
+  <p>One morning Probert took him into the Deep and held up the lamp, and the flame put on a cap. It was a blue cap as long as a thumb, sitting on the yellow. <em>She is in,</em> Probert said. He stayed behind to hang sheets across the road and turn what air there was, and he gave the boy the lamp to carry out to the overman, so that the overman should see the cap with his own eyes and keep the men on top. He told him three things. Hold it level. Walk, because a Davy will pass its flame through the gauze if you run with it. And do not stop to look at her. <em>She is very pretty,</em> he said, <em>and that is all she is.</em></p>
+  <p>So the boy walked. The cap should have shrunk as he came out toward good air. It grew.</p>
+  <p>He came to the fifth door and it was standing open with a sprag under it. The trapper had found a warm place off the road and was asleep in it; his feet stuck out. <em>That was you, Sam.</em> The fourth door was open, and the boy who kept it was down the turnout with his arm in another man&rsquo;s dinner. The third had gone toward the stable after a smell of something. The second had heard singing in the old workings and gone to find it, and Evan Lamp said that in forty-three years he had never learned who was singing. The first was at the pit eye with his back to his door, watching them lower a white pony down the shaft in a sling.</p>
+  <p>Five doors open. The air had no call to go round by the Deep. It went straight across from shaft to shaft, and the gas had the roads to herself. She came along behind him the whole way, door after door, as near as his heels, and he could see her in the lamp. By the second door the gauze was full of blue to the top. He said it was the prettiest color he had seen above ground or below it, like the inside of a mussel shell, and it was warm on his hand. He did not run and he did not stop. He looked at the road.</p>
+  <p>The overman had a cabin at the pit eye. The boy held the lamp up to him and said what Lewis Probert had said. The overman had been thirty years in that pit. He said there had never been gas in the main road and the lamp was foul, and anything found in his pit was his to judge. He took it into the cabin to have a proper look at her. He sent the boy up in the cage with a word for the agent.</p>
+  <p><em>I had one foot on the bank,</em> Evan Lamp said, <em>when she fired.</em></p>
+  <p>He took the lamp down off the nail.</p>
+  <p>Fifty-two men and boys. The five trappers were not found, to speak of. Lewis Probert they found behind his sheets with no mark on him, where the afterdamp had come to him. When the pit was opened again and the boy had his growth, they gave him Probert&rsquo;s place, because he was the one who had seen her and kept walking. He had had a lamp in his hand ever since.</p>
+</section>
+
+<section>
+  <h2>IV. Chalk</h2>
+  <p class="dateline">The Bluff shaft</p>
+  <p>Nobody said anything. The cage was coming down again. They could hear the rope.</p>
+  <p><em>I do not ask which of you has the worst door,</em> Evan Lamp said. <em>The air does not ask. It tries all five and goes by whichever one is open, and then it is no matter how well the other four were kept. A door is no use by itself. And every one of you has all five to mind, at whatever door you&rsquo;re sat. Your eyes, your ears, your nose, your mouth, and the whole skin of you. When you have minded those, there is your tongue to keep still, and your wits to keep by you, and that last is the hardest, and it keeps the rest.</em></p>
+  <p>He asked Tommy Bate whether his father had the Association&rsquo;s book of laws in the house. Tommy said he had. It was on the shelf with the clock.</p>
+  <p><em>Then you have seen what is printed on the front of it. Say it.</em></p>
+  <p>Tommy knew it. He said it standing up, the way he had heard the men say it, and by the fifth line the other four were saying it with him.</p>
+  <div class="verse">
+    <p>Step by step, the longest march<br>Can be won, can be won;<br>Single stones will form an arch,<br>One by one, one by one.<br>And, by union, what we will<br>Can be all accomplished still.<br>Drops of water turn a mill,<br>Singly none, singly none.</p>
+    <p>&mdash; Constitution and Laws of the American Miners&rsquo; Association (1864), title page</p>
+  </div>
+  <p><em>Your fathers mean wages by that,</em> Evan Lamp said. <em>It is true of wages. It is true of doors.</em></p>
+  <p>Then the first trip was calling from the turnout, and they went to their planks.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>He never told it again that anybody heard. That spring the men at the far end of the Deep, who had worked all winter with their lamps burning straight up and a pain behind the eyes by noon, noticed that the flames on their caps leaned toward the return and stayed leaning, shift after shift, and that the smoke of a shot was gone before they had walked back to look at the coal. Sam Ogden&rsquo;s sacking lay in the cut-through until the rats had it. Con Doolan sat with his back to the ledge. Dai Rees took to counting his own breaths in the quiet, out loud, up to a hundred and over again, and anything that called him had to call over the top of that.</p>
+  <p>And in the mornings, when the five came to their doors, the day of the month was there in chalk on each one, at the height of a boy&rsquo;s eyes, with E.P. under it, the same as on the coal.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Restraint in the eye is good, good is restraint in the ear, in the nose restraint is good, good is restraint in the tongue.<cite>Dhammapada 360, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">In the body restraint is good, good is restraint in speech, in thought restraint is good, good is restraint in all things. A Bhikshu, restrained in all things, is freed from all pain.<cite>Dhammapada 361, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, five monks have each taken one of the five sense doors to guard, and they fall to arguing over whose door is the hardest. They ask the Buddha. He will not set one above another: all the doors are hard, he says, and this is not the first time the five of them have failed at it. He then tells the birth story of the road to Takkasil&#257;, in which five guards walking with a prince through a haunted forest are drawn off one at a time by a sight, a sound, a scent, a taste and a soft couch, and are eaten by the ogresses who laid them out; the prince walks on with an ogress at his heels, does not look at her, and is made king after the king who took her in is devoured with his household. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-01.htm">the full commentary story</a>, the <a href="https://ancient-buddhist-texts.net/English-Texts/Jataka/096.htm">birth story of the bowl of oil</a> it summarizes, or about the <a href="https://en.wikipedia.org/wiki/Ayatana">sense bases</a>.</p>
+    <h3>La Salle, Illinois, 1865</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/American_Miners%27_Association">American Miners&rsquo; Association</a>, the first national miners&rsquo; union in the United States, was founded in January 1861 at West Belleville, Illinois, by British-born miners, some of them old Chartists. By 1863 it had lodges in the deep shafts around <a href="https://en.wikipedia.org/wiki/LaSalle,_Illinois">La Salle</a>, opened in 1856 where the Illinois and Michigan Canal met the river, and it held its convention there that March, a month after the legislature passed the anti-strike statute the miners called the La Salle Black Laws. The union was gone by 1869. The verse stands on the title page of its 1864 constitution, reproduced in Edward Wieck&rsquo;s <a href="https://www.russellsage.org/sites/default/files/American-Miners-Association.pdf"><em>The American Miners&rsquo; Association</em></a> (1940); in the twentieth century it was set to music as &ldquo;Step by Step.&rdquo; Illinois passed no mine-safety law until the 1870s, and what protection the men had was the custom they carried from British pits.</p>
+    <p>Mines of the period were ventilated by a furnace that drew air through the workings, and the current was steered by wooden doors kept by boys called trappers, a job described in the article on <a href="https://en.wikipedia.org/wiki/Hurrying">child labor in British pits</a>. The <a href="https://en.wikipedia.org/wiki/Davy_lamp">Davy lamp</a> of 1815 enclosed its flame in wire gauze; in <a href="https://en.wikipedia.org/wiki/Firedamp">firedamp</a> the flame lengthened and took a blue cap, and in <a href="https://en.wikipedia.org/wiki/Blackdamp">black damp</a> it sank and went out. The man who carried one through the pit before each shift was the fireman, later the <a href="https://en.wikipedia.org/wiki/Fire_boss">fire boss</a>. The Bluff shaft, the Gelli pit and everyone in them are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the five bhikkhus from the Dhammapada commentary (verses 360&ndash;361). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/25-01.htm">The original</a>. Verse from the title page of the Constitution and Laws of the American Miners&rsquo; Association (1864). Written by Claude Fable 5.2.
+  <div class="pager"><a href="thirteen-kettles.html">&larr; Thirteen Kettles</a><a href="index.html">All stories</a><a href="skill-and-sport.html">Skill and Sport &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Five small cap-lamp flames in the dark, and one safety lamp low in the corner.
+  // When the air is moving the five flames lean toward the return and the blue cap
+  // on the safety lamp shrinks; when the air stops they stand straight and the cap grows.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, flames = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var xs = [0.07, 0.16, 0.5, 0.86, 0.94], ys = [0.58, 0.9, 0.96, 0.62, 0.3];
+    flames = [];
+    for (var i = 0; i < 5; i++) flames.push({ x: W * xs[i], y: H * ys[i], s: 0.8 + 0.25 * ((i * 37) % 5) / 4, ph: i * 1.7 });
+  }
+  function air() {                       // 0 = still, 1 = moving
+    if (reduce) return 0.8;
+    var v = 0.5 + 0.5 * Math.sin(t * 0.00003 * 6.2832);     // one full cycle in about half a minute
+    return v * v * (3 - 2 * v);
+  }
+  function flame(f, a) {
+    var lean = a * 9 * f.s, h = 9 * f.s, fl = reduce ? 0 : Math.sin(t * 0.008 + f.ph) * 0.6;
+    var g = ctx.createRadialGradient(f.x, f.y - h * 0.4, 0, f.x, f.y - h * 0.4, 46 * f.s);
+    g.addColorStop(0, 'rgba(224,166,64,0.10)'); g.addColorStop(1, 'rgba(224,166,64,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(f.x, f.y - h * 0.4, 46 * f.s, 0, 6.2832); ctx.fill();
+    ctx.fillStyle = 'rgba(236,190,104,0.34)';
+    ctx.beginPath(); ctx.moveTo(f.x - 1.8 * f.s, f.y);
+    ctx.quadraticCurveTo(f.x - 2.4 * f.s + lean * 0.3, f.y - h * 0.55, f.x + lean + fl, f.y - h);
+    ctx.quadraticCurveTo(f.x + 2.4 * f.s + lean * 0.5, f.y - h * 0.5, f.x + 1.8 * f.s, f.y);
+    ctx.closePath(); ctx.fill();
+  }
+  function davy(a) {
+    var x = W * 0.8, y = H * 0.8, cap = 8 + 30 * (1 - a);
+    var g = ctx.createRadialGradient(x, y, 0, x, y, 80);
+    g.addColorStop(0, 'rgba(224,166,64,0.16)'); g.addColorStop(1, 'rgba(224,166,64,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 80, 0, 6.2832); ctx.fill();
+    var b = ctx.createRadialGradient(x, y - cap * 0.6, 0, x, y - cap * 0.6, cap * 1.4);
+    b.addColorStop(0, 'rgba(127,178,220,' + (0.10 + 0.20 * (1 - a)) + ')'); b.addColorStop(1, 'rgba(127,178,220,0)');
+    ctx.fillStyle = b; ctx.beginPath(); ctx.ellipse(x, y - cap * 0.6, cap * 0.55, cap * 1.4, 0, 0, 6.2832); ctx.fill();
+    ctx.fillStyle = 'rgba(236,196,120,0.40)';
+    ctx.beginPath(); ctx.ellipse(x, y, 2, 4.5, 0, 0, 6.2832); ctx.fill();
+    ctx.strokeStyle = 'rgba(222,219,210,0.07)'; ctx.lineWidth = 1;       // the gauze
+    ctx.strokeRect(x - 9, y - 46, 18, 54);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var a = air();
+    for (var i = 0; i < flames.length; i++) flame(flames[i], a);
+    davy(a);
+    if (!reduce) { t += 16; requestAnimationFrame(draw); }
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
