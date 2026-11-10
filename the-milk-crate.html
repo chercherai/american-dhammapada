@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Milk Crate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a riverfront warehouse loft before dawn, dark theme; the tall factory windows lay their grids of light across the floor and walls, and over a few minutes the light in them climbs from river-blue toward the gold of sunrise and settles; datelined sections. */
+  --dark: #0f1216;
+  --dark-2: #191e24;
+  --paper: #e6e3dc;
+  --paper-dim: #9aa0a6;
+  --dawn: #e2b25a;
+  --river: #5f86a6;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1d2630 0%, var(--dark) 60%) fixed, var(--dark);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,227,220,.2); }
+.series a:hover { color: var(--dawn); }
+a:focus-visible { outline: 2px solid var(--dawn); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--dawn); text-wrap: balance; text-shadow: 0 0 28px rgba(226,178,90,.2); }
+.epigraph { border-left: 1px solid rgba(226,178,90,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--river); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--dawn); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(25,30,36,.85); border: 1px solid rgba(230,227,220,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--dawn); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,227,220,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--dawn); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--dawn); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--dawn); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--dawn); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--dawn); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--dawn); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(25,30,36,.85); border-left: 2px solid var(--dawn); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 19.4 &middot; Lakuṇḍaka Bhaddiya</span></nav>
+<header>
+  <h1>The Milk Crate</h1>
+  <div class="epigraph">Thy young beard has attained to maturity, whereas thou hast remained immature, as thou wast.<br>&mdash; Eflākī, <em>Acts of the Adepts</em>, tr. James W. Redhouse (1881)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how it got told,</span> on Grand River Avenue.</p>
+
+<section>
+  <h2>I. The Door</h2>
+  <p class="dateline">Grand River Avenue, Detroit &middot; March 1993</p>
+  <p>The bus from Metro Airport let them off in front of a storefront with a hand-painted sign, FULLER&rsquo;S RECORDS &amp; BOOKS, and a steel grate rolled halfway up. There were thirty of them. Most were from Berlin, a few from Frankfurt and Rotterdam, two from Osaka who had met the others at the airport by accident and been adopted. They worked in record shops and clubs. They had saved since the summer. For two years they had been playing records made in this city in cellars under a city that had been cut in half, and they had come to see where the records came from, the way people go to see a river&rsquo;s source.</p>
+  <p>What most of them wanted to see was one man. His records had no names on them. They came in plain white sleeves with a stamped label, and in the smooth ring of the run-out groove, where the needle goes when the music is done, someone had scratched by hand a small circle with a dot in it. That was all. In Berlin they called him the Old Man. Nobody could remember who had started it. It was what the records sounded like: patient, unhurried, as if whoever made them had already heard everything and was not in any hurry to tell you about it. Somebody had heard he was one of the first, from back before anyone in Europe had a word for it. Somebody had heard he was nearly sixty and had worked at a plant. A Fuller&rsquo;s phone number was written on the back of one of the sleeves in ballpoint, and that was why they had come here.</p>
+  <p>As they came up to the door it opened from inside, and a boy came out backward, pushing it with his shoulder, with two long cardboard boxes of records in his arms.</p>
+  <p>He was small, five feet or a little under, in a hooded sweatshirt and a knit cap, with a round smooth face. He looked about fifteen. He held the door with his heel for the first of them, and then the next, and the next, and they went in past him one after another, thirty people, saying thank you in three languages and not looking at him. When the last one was in he let the door close and went off down Grand River in the slush with his boxes, toward a car with one gray fender.</p>
+  <p>Inside it smelled of old paper and radiator heat. There were bins of used records down the middle of the room and shelves of used books along both walls to the ceiling, paperbacks and old hardcovers with the cloth gone soft, and at the back, behind the counter, a man of sixty-some in a knit kufi and cardigan was writing in a ledger. His beard was white. He had big hands and wore half-glasses on a cord.</p>
+  <p>They knew him at once. They had decided in the bus. This was the Old Man, or if not, then the man who would take them to him. Jens, who had organized the trip and had the most English, went to the counter and put out his hand.</p>
+  <p>The man shook it. He looked past Jens at the thirty of them standing among the bins with their bags, and he took his time about it.</p>
+  <p><em>As-salaam alaikum,</em> he said. <em>Idris Fuller. You&rsquo;re the people from Germany.</em></p>
+  <p>They said they were.</p>
+  <p><em>Then you just missed him,</em> Mr. Fuller said. <em>Did you see the elder go out?</em></p>
+  <p>They looked at each other.</p>
+  <p><em>No,</em> Jens said. <em>No one went out. Only a boy.</em></p>
+  <p><em>A boy.</em></p>
+  <p><em>A boy carrying boxes. He held the door.</em></p>
+  <p><em>That was no boy,</em> Mr. Fuller said. <em>That was him.</em></p>
+  <p>Somebody laughed and stopped. One of the women from Osaka said something to the other in Japanese, softly. Jens held up a hand, about chest high, flat, as if he were measuring a child against a doorframe.</p>
+  <p><em>But he was very small.</em></p>
+  <p><em>He&rsquo;s small,</em> Mr. Fuller agreed. <em>He was small at seventeen when he came in here the first time to buy a drum machine off a man who owed me money, and he&rsquo;s small now. He&rsquo;s thirty years old. He&rsquo;s been making those records since before your wall came down. He sweeps this store for me on Saturdays.</em></p>
+</section>
+
+<section>
+  <h2>II. The Beard</h2>
+  <p class="dateline">The back of the store &middot; the same afternoon</p>
+  <p>He came out from behind the counter and went to the shelves on the left wall, and ran a finger along them without looking, and took down a fat old book with a cracked spine and the gilt gone off its lettering. He did not open it right away. He stood with it in his hands, looking at the thirty of them, and at their good boots and their careful clothes and the bags they had carried four thousand miles to put records in.</p>
+  <p><em>Rumi,</em> he said. <em>The poet. You know him?</em></p>
+  <p>Some of them did.</p>
+  <p><em>This is an Englishman&rsquo;s book from a hundred years ago. In the back are stories about Rumi that his people told after he was dead. One day he met a Christian monk in the road. A monk with a big beard. And Rumi asked him which one was older, him or his beard.</em></p>
+  <p>He found the page with his thumb, the way you find a place you have found many times, and read it to them through the half-glasses, slowly, in the voice of a man reading a lease aloud to somebody who cannot.</p>
+  <div class="verse">
+    <p>The monk replied: &ldquo;I am twenty years older than my beard. It came forth that number of years later.&rdquo; Jelāl answered him: &ldquo;Then I pity thee. Thy young beard has attained to maturity, whereas thou hast remained immature, as thou wast. &hellip;&rdquo;</p>
+    <p>&mdash; Eflākī, <em>Acts of the Adepts</em>, in <em>The Mesnevi</em>, tr. James W. Redhouse (1881)</p>
+  </div>
+  <p>He closed the book on his finger.</p>
+  <p><em>I&rsquo;m sixty-three,</em> he said. <em>I put twenty-nine years in at Dodge Main till they shut it. This beard came in white all at once the year my wife passed, and people started calling me Elder at the masjid that same week, like the beard did it. Men been calling me wise ever since on account of the color of my face hair.</em></p>
+  <p>He tapped the book against the counter.</p>
+  <p><em>That boy you walked past. Thirty years old. I never once heard him tell a lie, not even the easy kind, not even about whose drums he used. He doesn&rsquo;t drink. He never hit anybody. I saw a man swing on him once in a club downtown, in &rsquo;89, a man twice his size, and he just stepped in under the arm and held on to him till the man got tired and started crying. He doesn&rsquo;t put his name on anything. He gives his money away faster than I can pay him. He plays all night and takes what they give him and sweeps up after. You came a long way to find an old man. That&rsquo;s the oldest man I know.</em></p>
+  <p>He put the book back on the shelf in its place, and went behind the counter, and picked up his pen.</p>
+  <p><em>He&rsquo;s playing tonight,</em> he said, writing. <em>Down by the river. I&rsquo;ll give you the address. Don&rsquo;t take the bus. Walk the last part.</em></p>
+</section>
+
+<section>
+  <h2>III. The Windows</h2>
+  <p class="dateline">A warehouse loft near the Detroit River &middot; that night until morning</p>
+  <p>It was the fourth floor of a building that had made something once, stoves or cigar boxes, nobody there knew, with a freight elevator that did not work and a stairway that smelled of rain. The east wall was all windows, tall factory windows with a hundred small panes, some of them broken and taped. Below them, beyond the railroad tracks, was the river, black, and across the river the lights of Windsor, which was another country.</p>
+  <p>There were maybe two hundred people. The thirty came in together, and stood together for the first hour, and then did not.</p>
+  <p>He was at the far end on a plywood platform behind two turntables and a mixer on a door laid across sawhorses. The table was made for a taller man. Under his feet, so that he could reach, was a plastic milk crate turned upside down, with a dairy&rsquo;s name stenciled on the side, and he stood on it all night and did not once look down to find it.</p>
+  <p>He did not talk on a microphone. He did not raise his hands. He stood with his cap off now, and his round face lit from below by the little lamp on the mixer, and he looked like a boy at a science fair. When he took a record out of its white sleeve he held it by the edges and looked at the grooves before he put it down, every time, the same way, as if he had all the time in the world and so did the record.</p>
+  <p>What came out was what they had heard in Berlin and had not been able to explain. It did not hurry. It went on and on and kept arriving. It took them by the back of the neck and set them down somewhere and left them there to find their own feet. Around three in the morning Jens noticed he had not thought about anything for an hour, and that the woman from Osaka beside him was crying without any change in her face, and that he did not need to know why.</p>
+  <p>Toward six the windows began to go gray. Then blue. The river came up out of the dark under them, wide and slow and the color of a knife, with ice along the near edge, and the light came in through the hundred small panes and lay across the floor in long squares, over the people dancing and the people sitting against the walls and the people asleep, and climbed the far wall a pane at a time.</p>
+  <p>He had been bringing the music down for an hour so gradually that nobody felt it go. When the sun came over Windsor it was a single held chord and a heartbeat under it, and then only the heartbeat, and then he lifted the needle and let the record run out into the groove, and in the quiet you could hear it going round, a soft tick, a soft tick, and the gulls outside over the water.</p>
+  <p>He stepped down off the crate. He was small again. He was the size he had been in the doorway on Grand River with his arms full of boxes. Nobody laughed. Nobody in that room was looking at the size of him.</p>
+  <p>The thirty of them were sitting on the floor in the long squares of light, close together, the way people sit after a funeral or a wedding, and none of them said anything. None of them needed to. Later, on the plane, they would try and fail. Jens would say only that he had gone to Detroit to meet an old man and had met one.</p>
+  <p>The man who had organized the party came and gave him an envelope. He folded it once without opening it and put it in the pocket of his sweatshirt. Then he took a broom from against the wall by the stairs and began to sweep, starting at the platform, working down the long floor toward them through the light, a little at a time, the way he did everything, and when he came to the thirty of them sitting there he swept carefully around them.</p>
+  <p>The milk crate stayed where he had left it, upside down on the plywood, with the sun on it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">A man is not an elder because his head is grey; his age may be ripe, but he is called `Old-in-vain.'<cite>Dhammapada 260, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">He in whom there is truth, virtue, love, restraint, moderation, he who is free from impurity and is wise, he is called an elder.<cite>Dhammapada 261, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>Lakuṇṭaka Bhaddiya (&ldquo;Bhaddiya the Dwarf&rdquo;) was a monk so small and young-looking that people took him for a novice, though he was an elder and fully awakened. In this commentary story he leaves after attending on the Buddha just as thirty monks from the forest arrive. The Buddha asks whether they saw an elder go out; they say they saw only a novice, and a very small one. The Buddha tells them he does not call a man an elder because he is old and sits in an elder&rsquo;s seat, only one who understands the truths and harms no one, and the thirty monks are awakened as they listen. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-04.htm">the full commentary story</a>, or about <a href="https://www.wisdomlib.org/definition/lakuntaka-bhaddiya">Lakuṇṭaka Bhaddiya</a>.</p>
+    <h3>Detroit, 1993</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Detroit_techno">Detroit techno</a> was made in the mid-1980s by young Black musicians, most famously three high-school friends from suburban Belleville, who recorded in their basements on drum machines and synthesizers and released records on small local labels. By the late 1980s the music had found a larger audience in Britain and Europe than at home, and a second wave of Detroit artists followed in the early 1990s, many of them pressing their records in small runs with plain labels and little or no information about who made them. After the Berlin Wall fell, techno became the sound of the city&rsquo;s new clubs in empty buildings; <a href="https://en.wikipedia.org/wiki/Tresor_(club)">Tresor</a>, opened in March 1991 in the vaults of a former department store on Leipziger Strasse, released records by Detroit artists on its own label.</p>
+    <p>Mr. Fuller&rsquo;s plant, the <a href="https://en.wikipedia.org/wiki/Dodge_Main">Dodge Main</a> assembly plant in Hamtramck, closed in 1980. His book is Sir James Redhouse&rsquo;s 1881 translation of the first book of Rumi&rsquo;s <a href="https://www.gutenberg.org/ebooks/61724"><em>Mesnevi</em></a>, which includes a selection of anecdotes about Rumi from Shams al-Dīn Aflākī&rsquo;s fourteenth-century <em>Manāqib al-ʿĀrifīn</em>, the &ldquo;Acts of the Adepts.&rdquo;</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Lakuṇṭaka Bhaddiya from the Dhammapada commentary (verses 260 and 261). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-04.htm">The original</a>. Anecdote of Rumi from Eflākī&rsquo;s <em>Acts of the Adepts</em>, in <em>The Mesnevi</em>, tr. James W. Redhouse (1881). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-votum.html">&larr; The Votum</a><a href="index.html">All stories</a><a href="devil-grass.html">Devil Grass &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = performance.now(), DUR = 240000;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function mix(a, b, k) { return [0, 1, 2].map(function (i) { return Math.round(a[i] + (b[i] - a[i]) * k); }); }
+  var BLUE = [95, 134, 166], GOLD = [226, 178, 90];
+  function windowAt(x, y, w, h, col, a) {
+    var cols = 4, rows = 6, gw = w / cols, gh = h / rows;
+    for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
+      ctx.fillStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + (a * (0.75 + 0.25 * ((i * 7 + j * 3) % 5) / 4)) + ')';
+      ctx.fillRect(x + i * gw + 2, y + j * gh + 2, gw - 4, gh - 4);
+    }
+  }
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    var k = reduce ? 0.35 : Math.min(1, (now - t0) / DUR);
+    var e = k * k * (3 - 2 * k);
+    var col = mix(BLUE, GOLD, e);
+    var a = 0.025 + 0.05 * e;
+    var shift = (1 - e) * 0.25;
+    ctx.save();
+    ctx.transform(1, 0, -0.55, 1, 0, 0);
+    var ww = Math.max(110, W * 0.14), wh = H * 0.62;
+    var y = H * (0.30 + shift);
+    for (var n = 0; n < 3; n++) {
+      var x = W * (0.18 + n * 0.32) + H * 0.55 * 0.5;
+      windowAt(x, y, ww, wh, col, a);
+    }
+    ctx.restore();
+    if (!reduce && k < 1) requestAnimationFrame(draw);
+  }
+  var done = false;
+  var _d = draw; draw = function (now) { _d(now); if (reduce || (now - t0) >= DUR) done = true; };
+  size();
+  requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (done) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Oakum Loft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on tar-dark ground; pale moons rise slowly toward the upper right, where the tower would stand. */
+  --ground: #13100d;
+  --ground-2: #1e1913;
+  --paper: #e8dfcf;
+  --paper-dim: #a79b87;
+  --accent: #cf8f36;
+  --glow: #a9c0dc;
+  --panel: rgba(30,25,19,.78);
+  --hair: rgba(232,223,207,.12);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 85% -10%, #26303c 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--hair); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(207,143,54,.2); }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--hair); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--hair); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 11.1 &middot; Vis&#257;kh&#257;&rsquo;s Companions</span></nav>
+<header>
+  <h1>The Oakum Loft</h1>
+  <div class="epigraph">The light broke in upon me by degrees.<br>&mdash; Frederick Douglass, <em>Narrative</em> (1845), chapter VII</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how the old people told it,</span> on Fells Point.</p>
+
+<section>
+  <h2>I. The Bounce</h2>
+  <p class="dateline">Happy Alley, Fells Point, Baltimore &middot; Christmas 1845</p>
+  <p>When a young caulker on the Point married, he took his wife to Mother Sewell. A good many of the girls were just up from the Eastern Shore. Some were free and some were hired out by a master in Talbot or Dorchester who had never seen Baltimore, and none of them knew the town. Keziah Sewell did. She owned two houses in Happy Alley, and she washed for the captains&rsquo; wives on Thames Street and employed six women to help her do it. The husbands went off to the yards at sunup, where a good caulker made a dollar and a half a day, and they knew that whatever their wives did, they did it under her eye. By that Christmas she had some thirty of them. She took them to market and to the meeting on Strawberry Alley, and two nights a week she took them up the outside stair of a chandler&rsquo;s storehouse on Wolfe Street to learn their letters.</p>
+  <p>In July she also taught them to make cherry bounce. They stoned the sour cherries in her yard and put them down in stone crocks with sugar and spirits, and the crocks stood in her cellar until Christmas. That was for the men. From Christmas Eve to New Year&rsquo;s the yards were shut, and the caulkers of Fells Point kept the holiday the way it was kept from there to Georgia. They drank for a week. The women dipped the bounce and beat the eggs for the nog and carried the cups, and they did not drink in front of their husbands, because that was not allowed them.</p>
+  <p>On the second of January the mallets started up again along the waterfront. A caulking mallet is live oak, and on a cold morning you could hear forty of them across the Basin. The men went back to work.</p>
+  <p>There were two crocks left.</p>
+  <p><em>We stoned every cherry in there,</em> said Prissy Bordley. So they went to Mother Sewell and asked whether she would walk them out along Harris Creek to the Canton shore, as it was a soft day for January.</p>
+  <p><em>Get your work done first,</em> she said.</p>
+  <p>They got their work done. Then they came with a wash basket between two of them and sheets folded on top of it. Out among the cedars, with Mother Sewell sitting on a stump and looking at the water, they emptied both crocks. They came home down Thames Street in broad day, arm in arm and singing.</p>
+  <p>She did not raise her voice to them. <em>Do you know what they say on this Point about colored women who can read? You have just said it for them, the length of Thames Street. That is Tilghman&rsquo;s class, they&rsquo;ll say. You&rsquo;ve shamed yourselves and you&rsquo;ve shamed me, and your husbands will be home at dark. What do you mean to do?</em></p>
+  <p><em>We&rsquo;ll say we&rsquo;re sick.</em></p>
+  <p><em>Then you&rsquo;ll be known by your own doing,</em> she said, and she went into her house.</p>
+  <p>The men came up from the yards with pitch on their hands. <em>Where is she?</em> <em>Sick.</em> There was not a man of them who did not know what was left in that cellar and how much of it. Some of those husbands were gentle men and some were not. There was crying that night in Happy Alley and on Strawberry Alley and Wolfe Street, and Mother Sewell sat in her kitchen and listened to it.</p>
+</section>
+
+<section>
+  <h2>II. One Lamp</h2>
+  <p class="dateline">A storehouse loft on Wolfe Street &middot; Tuesday of Christmas week, 1846</p>
+  <p>Mr. Nace Tilghman had driven oakum into the seams of ships for forty years. He had bought himself out of it a Sunday at a time, and that took eleven years. When his hands grew too knotted to hold an iron he did not leave the trade. He rented the loft over the chandler&rsquo;s. There he picked old rope apart and rolled the tarred hemp on his knee into the long soft strands the caulkers used, and the yards bought all he could spin. The loft was heaped with it to the rafters. It smelled of Stockholm tar. He kept one whale-oil lamp on a chain from the ridge beam, well clear of everything, and a bucket of sand under it, and he had one rule, which was that nobody moved the lamp.</p>
+  <p>Twice a week after dark he chalked letters on the wall. He started every scholar on the same four, S and L and F and A, because those were the ones the ship carpenters cut into a timber to say where it went. Starboard, larboard, forward and aft. A woman who had carried her husband&rsquo;s dinner into a yard had seen them all her life. He said there had been a boy on Philpot Street who got his first four letters that way, off the timbers in a yard, with nobody to teach him. That boy had gone North eight years back, and he had lately put his life in a book. The book had come down the Bay in the bottom of a seaman&rsquo;s chest. Mr. Tilghman kept it under the sand in the bucket and read a page from it at the end of each lesson. For a free colored man in Maryland, having that book meant ten to twenty years in the penitentiary. A roomful of colored people at night with no white person among them was something the watch could break up without any book at all.</p>
+  <p>The next Christmas came. On the Monday of the holiday week the wives went to Mother Sewell and asked to walk out to the shore.</p>
+  <p><em>I took you once,</em> she said. <em>Walk out by yourselves.</em></p>
+  <p>They talked it over among themselves and came back to her. <em>Then take us up to Mr. Tilghman&rsquo;s tomorrow night, Mother. We want to carry him something for Christmas.</em></p>
+  <p><em>Now that is fitting,</em> she said. <em>Get your things ready.</em></p>
+  <p>They came on Tuesday night in their big cloaks with a pound of candles and a paper of sugar and a new slate tied up in a handkerchief. Under the cloaks they had brown jugs. They let her go up ahead of them. On the outside stair in the dark they drank the jugs dry and dropped them one after another into the dock, and then they went in and sat down on the benches in front of him.</p>
+  <p><em>Mr. Tilghman,</em> said Mother Sewell, <em>give these women their lesson.</em></p>
+  <p>He chalked an S on the wall. The front bench was swaying. Somebody laughed and somebody else clapped her hands. Prissy Bordley stood up and began to dance. Then they were all up. They sang a frolic song at the top of their voices and beat the time on the floor with their heels, with the watch house two squares off and the chandler&rsquo;s whole stock underneath them.</p>
+  <p>The old people always said that it was not only the bounce. They said something had come up the stair behind those women that night and got in amongst them. It wanted that room, and it had been waiting on that stair a long time for somebody to leave the door open.</p>
+  <p>Prissy&rsquo;s cloak swung out and passed a hand&rsquo;s width under the lamp.</p>
+  <p>Mr. Tilghman stood at the wall with the chalk in his fingers. He thought that he had not given eleven years of Sundays for himself, and every year since to that loft, to have the thing on the stair walk in and take it.</p>
+  <p>He looked at the lamp. The flame drew down blue and went out.</p>
+  <p>There is no dark in a town like the dark in a loft full of oakum. It was the dark of a ship&rsquo;s hold with the hatches on. The singing stopped, and in the quiet every woman there heard what she had been making too much noise to hear. A rattle was going somewhere up Wolfe Street. A man in boots had stopped at the foot of the outside stair. They smelled the tar all around them and remembered what tar does when fire touches it. They thought of the watch house and the penitentiary and the pens on Pratt Street where the Georgia traders bought, and each of them thought of her children. They were so afraid that the liquor dried up inside them. In the space of a few breaths they were cold sober, and no one moved or spoke.</p>
+  <p>Then there was light at the window. It came from outside and from the west.</p>
+  <p>The Shot Tower stood across the Falls, most of a mile off. It was two hundred and thirty-four feet of brick, and when it was built nothing in the country stood taller. A man was standing on the rim of it with a lamp in his hand. That is how they told it ever after, the ones who were in the room. They said the light off that one lamp was as if a thousand moons had come up over Baltimore together. It lay on the Basin and on every mast and yard in it, and on Federal Hill and the roofs of Old Town, and it showed white on the faces at the loft window. Down on Wolfe Street the watchman never lifted his head. They heard his boots go on toward the market.</p>
+  <p>They heard Mr. Tilghman also. He spoke no louder than he did in class, and they heard him as if he stood at the end of the bench.</p>
+  <p><em>What is there to laugh at? Everything in this room will burn, and you dance in it. You&rsquo;re shut up in the dark, every one of you. And you had a lamp here and never looked for it.</em></p>
+  <p>Then he read to them. It was the page he had meant to read that night, and he read it from up there.</p>
+  <div class="verse">
+    <p>Thus, when the slave asks for virtuous freedom, the cunning slaveholder, knowing his ignorance, cheats him with a dose of vicious dissipation, artfully labelled with the name of liberty.</p>
+    <p>So, when the holidays ended, we staggered up from the filth of our wallowing, took a long breath, and marched to the field,&mdash;feeling, upon the whole, rather glad to go, from what our master had deceived us into a belief was freedom, back to the arms of slavery.</p>
+    <p>&mdash; Frederick Douglass, <em>Narrative of the Life of Frederick Douglass, an American Slave</em> (1845), chapter X</p>
+  </div>
+  <p>When they turned from the window the loft lamp was burning on its chain as it had been. He was sitting in his chair under it with the book shut on his knee.</p>
+</section>
+
+<section>
+  <h2>III. The Crock</h2>
+  <p class="dateline">The same night, and after</p>
+  <p>Mother Sewell spoke first. <em>That drink is a wicked thing, Mr. Tilghman. These are decent women. They sat down in front of you and couldn&rsquo;t keep their own feet under them. Where did such a thing ever start?</em></p>
+  <p><em>The way I had it, it started with a hunter,</em> he said. <em>He found a tree with a hollow in the fork. The rain stood in it, and fruit had dropped in and wild grain, and the sun had worked on that all summer. He watched the birds come and drink there. They fell off the limb and lay on the ground a while, and then they got up and flew. So he drank, and he carried some to a holy man who lived by himself in those woods, and the two of them took it to a town in gourds. That town drank until it forgot to plant. It&rsquo;s gone now. They went on to the next town and that one is gone too. At last they brought it to a king. He had the cup at his mouth when a stranger came to the gate with a jar on his hip, crying it like a huckster. Buy my jar! Drink this and you&rsquo;ll fall down your own stair. You&rsquo;ll sleep in the road and tell what you ought to hide, and you&rsquo;ll strike your mother. The king put the cup down and had every pot in the place broken. He&rsquo;s the only king I ever heard of with sense. It is the same pot every time, Keziah. I don&rsquo;t care whose cellar it sits in.</em></p>
+  <p>She went home and carried her crocks up from the cellar one at a time. She did not break them, because a stone crock costs money. She poured what was in them down the gutter of Happy Alley and scalded them with lye. The next July she bought no cherries.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>By spring there was not one of those thirty women who could not read the marks on a timber, and by the next Christmas each of them could read that page for herself. Prissy Bordley read it out to the others on the Tuesday of the holiday week, with her finger under the line, while her husband stood on the outside stair in the cold to keep the door. People said afterward that you could not have got a cup into the hand of one of them.</p>
+  <p>The biggest crock went up to the loft. It stood by the door for as long as Mr. Tilghman kept school there, filled to the brim with water, with a gourd dipper hung on the rim, under the lamp.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">How is there laughter, how is there joy, as this world is always burning? Why do you not seek a light, ye who are surrounded by darkness?<cite>Dhammapada 146, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, five hundred young men of S&#257;vatth&#299; put their wives in the care of the laywoman Vis&#257;kh&#257;. After a seven-day drinking festival the women secretly finish the leftover liquor on an outing to a pleasure garden. Vis&#257;kh&#257; rebukes them, they pretend to be sick, and their husbands beat them. At the next festival she refuses to take them out, so they ask to visit the monastery and carry jugs under their cloaks. Drunk in the hall before the Buddha, and possessed by a spirit of M&#257;ra&rsquo;s host, they clap, laugh and dance. He sends out a dark ray that leaves them in blackness and so frightened that the liquor dries up in them. Then he stands on the summit of Mount Sineru and sends out a light like a thousand moons, and speaks the verse. Asked how drink began, he tells the birth story of the pot: a forester finds liquor in the fork of a tree, it ruins city after city, and a king is stopped at the last moment and has the jars broken. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/11-01.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Visakha">Vis&#257;kh&#257;</a>.</p>
+    <h3>Fells Point, 1846</h3>
+    <p>The people in this story are invented. <a href="https://en.wikipedia.org/wiki/Fells_Point,_Baltimore">Fells Point</a> was Baltimore&rsquo;s shipbuilding district, and the caulking trade there was largely in the hands of Black workers, free and enslaved. Black caulkers named Richard Jones, Henry Scott and John Whittington lived in the 1840s in two small wooden houses on South Wolfe Street that <a href="https://explore.baltimoreheritage.org/items/show/139">still stand</a>. <a href="https://en.wikipedia.org/wiki/Frederick_Douglass">Frederick Douglass</a>, then Frederick Bailey, grew up partly on Philpot Street and worked as a caulker in the Point&rsquo;s yards until he escaped in September 1838. He wrote that he earned a dollar and a half a day, and that he learned his first letters from the marks ship carpenters cut into timbers: L, S, L. F., S. A. His <a href="https://www.gutenberg.org/ebooks/23"><em>Narrative</em></a>, published in Boston in 1845, describes the week between Christmas and New Year&rsquo;s as a holiday on which slaveholders encouraged drunkenness, and calls it a fraud.</p>
+    <p>Maryland did not forbid teaching Black people to read, and Black Baltimoreans supported their own schools. But laws passed after 1831 put heavy limits on free Black people, including on meeting for worship without a white person present, and an 1841 law made a free Black person found with abolitionist writing liable to ten to twenty years in prison (see the <a href="https://pathways.thinkport.org/library/events.cfm">Pathways to Freedom timeline</a>). The <a href="https://en.wikipedia.org/wiki/Phoenix_Shot_Tower">Phoenix Shot Tower</a>, finished in 1828 and a little over 234 feet high, was the tallest structure in the United States when it was built. <a href="https://en.wikipedia.org/wiki/Oakum">Oakum</a> is tarred hemp fiber, often picked from old rope, which caulkers drove into a ship&rsquo;s seams with an iron and a mallet. <a href="https://en.wikipedia.org/wiki/Cherry_bounce">Cherry bounce</a> is an old cordial of sour cherries, sugar and spirits.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Vis&#257;kh&#257;&rsquo;s companions from the Dhammapada commentary (verse 146). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/11-01.htm">The original</a>. Text from Frederick Douglass, <em>Narrative of the Life of Frederick Douglass, an American Slave</em> (1845). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-long-day.html">&larr; The Long Day</a><a href="index.html">All stories</a><a href="what-shall-i-cry.html">What Shall I Cry &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, moons = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.max(18, Math.min(46, W / 28)));
+    moons = [];
+    for (var i = 0; i < n; i++) {
+      var u = Math.random();
+      moons.push({ x: W * (1 - u * u * 0.95), y: Math.random() * H, r: 1.5 + Math.random() * 4.5, v: 0.03 + Math.random() * 0.07, ph: Math.random() * 6.28 });
+    }
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < moons.length; i++) {
+      var m = moons[i];
+      if (!reduce) { m.y -= m.v; if (m.y < -20) { m.y = H + 20; } }
+      var top = 1 - m.y / H;
+      var a = (0.05 + 0.16 * top) * (reduce ? 1 : 0.85 + 0.15 * Math.sin(t * 0.0006 + m.ph));
+      var g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 5);
+      g.addColorStop(0, 'rgba(214,226,240,' + a + ')');
+      g.addColorStop(0.2, 'rgba(169,192,220,' + (a * 0.5) + ')');
+      g.addColorStop(1, 'rgba(169,192,220,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(m.x, m.y, m.r * 5, 0, 6.2832); ctx.fill();
+      ctx.fillStyle = 'rgba(232,236,240,' + (a * 1.3) + ')';
+      ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, 6.2832); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw(0);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

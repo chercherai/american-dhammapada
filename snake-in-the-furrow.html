@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snake in the Furrow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale dust of a summer-fallow field at sunup, light theme; faint furrows run across the page, and the round field of a hermit's long glass drifts slowly over them, now and then catching a glint of gold. */
+  --ground: #ebe0c8;
+  --ground-2: #e0d2b4;
+  --ink: #2c2218;
+  --ink-dim: #6f5f4a;
+  --tanbark: #8b3d1f;
+  --pistole: #b2862b;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f5ecd8 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(44,34,24,.25); }
+.series a:hover { color: var(--tanbark); }
+a:focus-visible { outline: 2px solid var(--tanbark); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--tanbark); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(139,61,31,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--tanbark); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--tanbark); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(245,236,216,.8); border: 1px solid rgba(44,34,24,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--pistole); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(44,34,24,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--tanbark); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--tanbark); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(44,34,24,.15); border-bottom: 1px solid rgba(44,34,24,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--tanbark); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--tanbark); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--tanbark); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--tanbark); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(245,236,216,.8); border-left: 2px solid var(--tanbark); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 5.8 &middot; Kassaka</span></nav>
+<header>
+  <h1>Snake in the Furrow</h1>
+  <div class="epigraph">If thou injurest Conscience, it will have its Revenge on thee.<br>&mdash; Poor Richard, 1739</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Sin mar a chuala m&eacute; &eacute;,</span> on the Ridge above the Wissahickon.</p>
+
+<section>
+  <h2>I. The Long Glass</h2>
+  <p class="dateline">Roxborough Township, Philadelphia County &middot; August 1739</p>
+  <p>Owen Phelan had been four years a servant and two years a free man, and he did not yet own anything that would not go in a handcart. He had come from the county of Waterford in the spring of 1733, bound for four years to pay his passage, and a Welsh farmer on the Ridge named Hugh Jones had bought the four years off the ship at the Philadelphia wharf. When they were served, Owen got what the law of the province said a servant should have at the end: two complete suits of apparel, one of them new, a new axe, a grubbing hoe and a weeding hoe. Hugh Jones died the same winter. His widow could not work the place and would not sell it, so she let Owen have the fourteen acres along the brow of the hill on the halves, and the yoke of red oxen with them, Buck and Bright, because nobody else could drive them.</p>
+  <p>In August he was breaking the stubble ground for wheat. The Welsh on the Ridge plowed a fallow three times in a summer, and this was the third. He was in the field before the sun, because by ten o'clock the heat came up out of the ground and the oxen hung their heads and would not be talked to.</p>
+  <p>From the bottom of the field he could see over the treetops into the gorge where the creek ran, and on the far shoulder of it, among the hemlocks, a roof. Every child on the Ridge knew about the Germans who had come there in the year 'ninety-four to wait in the woods for the end of the world. They had kept a school, and doctored people, and watched the sky for a sign, and the world had not ended. Most of them were dead now or married. A few old men lived on in huts along the creek, and one of them, whom the Germans called Bruder Elias, still kept the long glass the brothers had brought from Europe. People said he climbed onto the roof every morning before sunrise and looked through it at the whole valley, every field and lane from the Schuylkill to the Germantown road, and that nothing in it was hidden from him. Farmers went down to him about strayed cattle and fevers and the right day to cut timber. Some went about thieves. He would talk to them about the cattle and the fevers and the timber, and about the thieves he would say nothing at all.</p>
+  <p>That morning, with the sun not yet over the trees, the old man came along the headland of Owen's field with the boy who lived with him, a Swiss orphan called Jost who carried his stick and his basket. Owen stopped the oxen and took off his hat. The old man nodded to him and said nothing, and Owen, who had nothing to say either, spoke to Buck and Bright and went on down the furrow.</p>
+  <p>At the corner of the field, by the stump of a chestnut where the plow had to swing wide, the old man stopped and looked at the ground.</p>
+  <p><em>Siehst du, Jost? Eine Schlange.</em></p>
+  <p>The boy came and looked. <em>Ich seh sie, Bruder. Eine giftige Schlange.</em></p>
+  <p>Then they went on down the path into the trees toward the creek, and the old man did not look back.</p>
+  <p>Owen did not have German, but he had worked four years beside Germans, and he had the word <em>Schlange</em>, as every child on the Ridge had it. The rocks along the Wissahickon were full of rattlesnakes. He thought: I have gone up and down that corner fifty times since March and seen nothing. Then he thought of Bright, who was nervous on his near side, putting a foot down in the wrong place. He left the plow standing, took the long ox-goad with the iron prick in the end of it, and went over to kill the thing.</p>
+  <p>There was no snake. The grass by the stump was trampled flat, as if men had stood about there in the night, and in the loose earth at the end of the last furrow lay a purse of soft brown leather with its strings pulled open. He turned it over with the goad. It was heavy. Gold showed in the mouth of it, Spanish pistoles and the broad Portugal pieces, more money than Owen had seen together in his life.</p>
+  <p>He squatted on his heels and looked at it for a long time. The old man had meant this. That much was plain. What the old man meant him to do with it was not plain at all. He thought of carrying it to Justice Pugh on the Ridge road, and of the Justice's face when an Irishman two years out of his indenture came into his kitchen with a purse of gold and a story about a hermit. He thought of the widow Jones, who would want to know where it came from. He thought of Father Greaton's little chapel in Walnut Street, where he walked once a month to hear Mass, and of what the priest would say. He did not know what to do with it, and so he did what a man will do with a thing he does not know what to do with. He put it down. He laid it back in the furrow and pushed loose earth over it with the side of his shoe, and went back to his oxen. In the evening, he thought, he would go down to the creek and ask the old man.</p>
+</section>
+
+<section>
+  <h2>II. Tanbark</h2>
+  <p class="dateline">The same morning</p>
+  <p>In the night someone had robbed Lorenz Kunkel, the tanner at the foot of the township. The run that fed his vats went under his bark house in a stone culvert, and the thieves had come up through it on their hands and knees, knocked the stones out of his cellar wall, and carried off his strongbox with everything in it. Kunkel came down at first light to see to the fire and found his cellar open to the creek.</p>
+  <p>His sons Hannes and Peter went after them with Velten Hoffmann the constable. It was not hard. A man who has walked through a tanyard carries ground oak bark in the welts of his shoes for a mile, and the thieves had walked out through Kunkel's yard in the dark. The bark lay in crumbs up the lane, and the dew showed where they had crossed the meadow. It led them up the Ridge to the stump at the corner of the widow Jones's fallow, where the strongbox lay on its back with the lid broken off and the grass trampled flat around it.</p>
+  <p>There the thieves' tracks went off every which way into the woods. But there was another track, fresh, that came from the plowing to the stump and back: a man in heavy shoes, one of them mended at the heel with a piece of leather that did not match. It went to a patch of earth at the end of the last furrow that had been pushed over by somebody's foot. Hannes Kunkel knelt and dug in it with his hands, and stood up with his father's purse.</p>
+  <p>Owen was at the other end of the field. He saw them standing at the stump, four men, and one of them holding up something brown, and he knew before they started toward him what they were going to say.</p>
+  <p><em>So,</em> Hannes said. <em>You rob the house, and here you are plowing.</em></p>
+  <p>They beat him in the furrow with their fists and the stock of a cart whip, while Buck and Bright stood in the yoke and swung their heads. Owen said once that he was no thief, and after that he did not say anything, because his mouth was full of blood. Velten Hoffmann let it go on a while and then pulled them off. They tied Owen's hands behind him with his own plow line and walked him down to the Ridge road to the house of Justice Pugh.</p>
+  <p>Evan Pugh was a Welshman of sixty, a justice of the peace for the county, with a stone house and a mill seat and a son at the college in New Haven. He was in his shirtsleeves with his wig off, and he did not like being taken from his breakfast. There had been three burglaries in Germantown since May. He heard Kunkel's sons and the constable, and he looked at the purse, and at the shoe with the mended heel, and at the Irishman with blood drying on his chin, and he did not want to hear anything else.</p>
+  <p><em>I am no thief, your worship.</em></p>
+  <p><em>Nor was the last one.</em></p>
+  <p>He wrote out the commitment himself. Owen Phelan, laborer, to be held in the common gaol at Third and High Streets until the next Court of Oyer and Terminer, for burglary. Burglary had been death in Pennsylvania since the year eighteen, and the Justice said so, as though the man in front of him might not know it. <em>You will hang before the leaves are down,</em> he said, <em>and I shall be sorry for your mother.</em> Then he gave him into Velten Hoffmann's charge and told the Kunkels they might carry him to the city in their bark cart, since they were going that way.</p>
+</section>
+
+<section>
+  <h2>III. The Germantown Road</h2>
+  <p class="dateline">Afternoon</p>
+  <p>They did not put him in the cart. They tied him by the wrists to the tail of it and he walked behind in the dust. Peter Kunkel drove, and Hannes walked alongside with the whip, and whenever the cart slowed on a hill, or Owen stumbled, or whenever it occurred to him, Hannes laid the whip across Owen's back. Velten Hoffmann walked on the other side and did not stop him. It was the hottest part of the day. The road went down through the Germantown fields to the long street of stone houses with their half-doors, and people came out onto their stoops to see the Irishman who had robbed Kunkel.</p>
+  <p>Owen walked behind the cart and said the old man's words. He did not have the German for them. He said them the way he had heard them, in the old man's deep voice and then in the boy's high one, as near as he could make it, like a man saying a prayer in a language he was never taught.</p>
+  <p><em>Siehst du, Jost? Eine Schlange.</em></p>
+  <p><em>Ich seh sie, Bruder. Eine giftige Schlange.</em></p>
+  <p>When the whip came down he said them. When it did not he said them. He said them past the Mennonite meetinghouse and past the market square, where the women stopped their bargaining and turned. He did not say another word.</p>
+  <p>At the market square Velten Hoffmann took hold of the bridle and stopped the cart.</p>
+  <p><em>Those are the Bruder's words,</em> he said. <em>The old man on the Ridge. You say them over like a parrot. What is it?</em></p>
+  <p><em>I'll tell it,</em> Owen said, <em>if you take me back to the Justice.</em></p>
+  <p>The Kunkels cursed and said it was a trick, and it was an hour back up the hill in the heat. But the constable was a Germantown man and had been down to the creek himself, about a sick child, the winter before. He turned the cart around.</p>
+  <p>Justice Pugh had his wig on now. He sat in the window of his front room with the commitment still on the table and let Owen tell it, from the time he went out to the oxen in the dark to the time the four men stood up at the stump. When it was done he did not say anything for a while. He turned his hat around in his hands.</p>
+  <p><em>He names Brother Elias for his witness,</em> he said at last, not to Owen but to the room.</p>
+  <p>He had known the old man thirty years. In the year 'nine the old man had told his wife the week their first child would come, and been right. In the year 'twenty-nine he had told the Justice a thing about his own brother that the Justice had not wanted to hear, and been right about that too. Evan Pugh did not hold with nativities and figures, and conjuration was a hanging matter in the province, the same as burglary. But he had never known the old man to say a thing that was not so.</p>
+  <p><em>I cannot hang a man on Kunkel's word when he names that one,</em> he said. <em>Nor can I let him walk off on his own. There will be a way through this. Untie his hands, Velten. We'll go down this evening.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Sixth Month</h2>
+  <p class="dateline">The Wissahickon &middot; evening</p>
+  <p>They went down the hill path at sunset, the Justice in front with his stick, Owen after him, and Velten Hoffmann behind with a lantern he did not need yet. The creek was low and loud over the rocks. The old man's hut stood above it in the hemlocks, a room of logs with a stone chimney and a ladder up to a platform on the roof, where the long glass was lashed under a piece of oilcloth. The old man was sitting on a bench by the spring. The boy was carrying water.</p>
+  <p>The Justice took off his hat. He asked his questions one at a time, the way he did at the quarter sessions, and the old man answered them the same way.</p>
+  <p><em>Brother Elias. Did you and the boy go this morning to a place where a man was plowing?</em></p>
+  <p><em>Yes, your worship.</em></p>
+  <p><em>What did you see there?</em></p>
+  <p><em>A purse with gold in it, by the stump of a chestnut.</em></p>
+  <p><em>When you saw it, what did you say?</em></p>
+  <p>The old man said it, word for word, and the boy put down his bucket and said his part, and they were the same words Owen had said behind the cart all the way to Germantown, in the same order, and Velten Hoffmann laughed out loud and then was ashamed of it.</p>
+  <p><em>If this man had not named you,</em> the Justice said, <em>he would have hanged. He saved his neck with your words. He said them over four miles under the whip and never said anything else.</em></p>
+  <p><em>Ja,</em> the old man said. <em>I said so this morning, when I went there. A man should not do the thing he must weep for afterward.</em></p>
+  <p>Inside the door of the hut, on a nail where the light from the chimney corner fell on it, hung an almanac, the thin stitched kind the printer in Market Street sold, with the moon's changes and the courts and the fairs. The brothers had always kept every almanac in the province, the old man said, to see whose sums were right about the sky. This printer's sums were not the best. But he put good things at the bottom of the months. He took it down and opened it to the sixth month, which in the province's reckoning was August, and held it out to the Justice with his thumb under a line. The boy brought a candle.</p>
+  <p>Evan Pugh read it aloud, slowly, the way he read a commitment.</p>
+  <div class="verse">
+    <p>If thou injurest Conscience, it will have its Revenge on thee.</p>
+    <p>&mdash; Poor Richard, 1739 (August)</p>
+  </div>
+  <p>He stood with the almanac in his hands for a time after that. Then he gave it back, and the old man hung it on its nail.</p>
+  <p>Owen sat on the end of the bench. His back had stiffened in the cool, and he could feel every place the whip had been. He looked down the gorge to where the Ridge farms showed through a gap in the trees, a lamp lit here and there, the fields going grey. It came to him that the old man looked at all this every morning before the sun was up, every field and lane and roof, the tanner's yard and the Justice's mill seat and the widow's fallow and the stump, and that he could see it now the way the old man must see it, all of it at once, with nothing hidden in it. His own field lay down there among the others, a small dark square, half plowed. The gold had not been his. The field was not his. The beaten back he was sitting in, which had walked four miles behind a cart saying words in a language it did not know, did not seem to him at that moment to be particularly his either. He was not frightened by this. He felt light, as if somebody had lifted a yoke off him that he had not known he was wearing.</p>
+  <p>The Justice put his hat back on. <em>Velten will see you home,</em> he said, and then, after a moment, <em>I'll speak to Kunkel,</em> which was as near as a Welsh justice of the peace came, in those days, to begging an Irishman's pardon.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The thieves were never found. Lorenz Kunkel got his gold back and rebuilt his cellar wall with an iron grate across the mouth of the culvert, and the next spring, without saying why, he sent the widow Jones a side of harness leather.</p>
+  <p>Owen finished the fallow in the second week of September and sowed it. He farmed the brow of the hill on the halves for nine more years, and then bought it. In August of the following year, breaking the stubble again, he came round to the corner by the stump in the first light and there was a rattlesnake lying in the open furrow, a big one, yellow and black, warming itself on the turned earth. He stopped the oxen. He stood with the goad in his hand and did not lift it, and the snake lay there, and after a while it moved, without any hurry, off into the chestnut sprouts. Then Owen spoke to Buck and Bright, and they leaned into the yoke, and he drew the furrow straight through the place where it had been.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">That deed is not well done of which a man must repent, and the reward of which he receives crying and with a tearful face.<cite>Dhammapada 67, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, thieves who have robbed a rich man of Sāvatthī divide their loot in a farmer's field, and one of them drops a purse of a thousand coins. At dawn the Buddha passes the field with Ānanda and says, "See, Ānanda, a poisonous snake," and Ānanda answers, "I see it, a deadly poisonous snake." The farmer goes with his goad to kill it, finds the purse, covers it with earth and goes on plowing. The owners track the thieves to the field, find the purse, beat the farmer and bring him before the king, who orders him put to death. Led away under the whip, he repeats the two sentences and nothing else, and when he is allowed to explain, the king takes him to the Buddha that evening to confirm the story. The Buddha says a wise man should not do a deed he must afterward repent, and speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Ananda">Ānanda</a>, the attendant who answers.</p>
+    <h3>The Ridge and the almanac, 1739</h3>
+    <p>In 1694 the German mystic <a href="https://en.wikipedia.org/wiki/Johannes_Kelpius">Johannes Kelpius</a> and some forty followers settled along <a href="https://en.wikipedia.org/wiki/Wissahickon_Creek">Wissahickon Creek</a> northwest of Philadelphia, believing the end of the world would come that year. When it did not, they kept a school, shared their medical knowledge and went on searching the stars. Kelpius died in 1708 and the community dwindled, though some who had joined it, among them Conrad Matthai and Christopher Witt, stayed on in the neighborhood. Bruder Elias is invented. Philadelphia County was full of Irish and German servants who had sold years of labor for their passage; Pennsylvania's 1700 law gave a servant at the end of his term two suits of clothes, one new, an axe, a grubbing hoe and a weeding hoe. The Jesuit Joseph Greaton opened <a href="https://en.wikipedia.org/wiki/Old_St._Joseph%27s_Church">St. Joseph's</a> in Philadelphia in 1733, the one place in the English-speaking world where Mass could then be said openly. Under the province's criminal act of 1718, burglary, like conjuration and witchcraft, was punishable by death, and men awaiting the Court of Oyer and Terminer were held in the <a href="https://philadelphiaencyclopedia.org/essays/prisons-and-jails/">stone prison at Third and High Streets</a>.</p>
+    <p>Benjamin Franklin began printing <a href="https://en.wikipedia.org/wiki/Poor_Richard%27s_Almanack">Poor Richard's Almanack</a> for the year 1733 under the name of Richard Saunders, a poor stargazer, and by 1739 was printing and selling it on Market Street. Besides the calendar, the weather and the stars, each month carried proverbs and squibs, most of them borrowed from books like Thomas Fuller's <em>Gnomologia</em> and sharpened in the rewording; the almanac for 1739 began its year in March, as the province's calendar still did, so its sixth month was August, and that is where "If thou injurest Conscience" stands. Almanac makers were often pestered to find thieves and stray horses by the stars; Poor Richard complained of it in his preface for 1742.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of a farmer from the Dhammapada commentary (verse 67). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-08.htm">The original</a>. The verse from Benjamin Franklin's <em>Poor Richard</em> for 1739. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-blue-cup.html">&larr; The Blue Cup</a><a href="index.html">All stories</a><a href="honey-on-the-knife.html">Honey on the Knife &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, glint = { on: 0, x: 0, y: 0 };
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function furrowY(i, x) { return H * 0.18 + i * 26 + Math.sin(x * 0.004 + i * 0.7) * 6; }
+  function furrows(alpha, clipX, clipY, R) {
+    var n = Math.ceil(H / 26);
+    for (var i = 0; i < n; i++) {
+      ctx.beginPath();
+      for (var x = -10; x <= W + 10; x += 16) {
+        var y = furrowY(i, x);
+        if (x === -10) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = 'rgba(110,80,50,' + alpha + ')';
+      ctx.lineWidth = R ? 1.6 : 1;
+      ctx.stroke();
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    furrows(0.05);
+    var R = Math.max(70, Math.min(W, H) * 0.16);
+    var lx = W * (0.5 + 0.38 * Math.sin(t * 0.00023)), ly = H * (0.55 + 0.3 * Math.sin(t * 0.00031 + 1.1));
+    ctx.save();
+    ctx.beginPath(); ctx.arc(lx, ly, R, 0, Math.PI * 2); ctx.clip();
+    var g = ctx.createRadialGradient(lx, ly, 0, lx, ly, R);
+    g.addColorStop(0, 'rgba(255,248,230,0.35)'); g.addColorStop(1, 'rgba(255,248,230,0.05)');
+    ctx.fillStyle = g; ctx.fillRect(lx - R, ly - R, R * 2, R * 2);
+    furrows(0.14, lx, ly, R);
+    if (glint.on > 0) {
+      var a = Math.sin(glint.on * Math.PI) * 0.7;
+      var gg = ctx.createRadialGradient(glint.x, glint.y, 0, glint.x, glint.y, 9);
+      gg.addColorStop(0, 'rgba(240,200,90,' + a + ')'); gg.addColorStop(1, 'rgba(240,200,90,0)');
+      ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(glint.x, glint.y, 9, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.restore();
+    ctx.beginPath(); ctx.arc(lx, ly, R, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(80,55,30,0.12)'; ctx.lineWidth = 3; ctx.stroke();
+    if (!reduce) {
+      t += 16;
+      if (glint.on > 0) { glint.on += 0.01; if (glint.on >= 1) glint.on = 0; }
+      else if (Math.random() < 0.003) {
+        var i = Math.floor((ly - H * 0.18) / 26), gx = lx + (Math.random() - 0.5) * R;
+        glint = { on: 0.01, x: gx, y: furrowY(i, gx) };
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
