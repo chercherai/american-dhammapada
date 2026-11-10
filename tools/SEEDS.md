@@ -8,14 +8,14 @@ Images, places and worlds the editor wants in the series. Before you choose a se
 - The Minnesota Twins (the 1987 or 1991 Series, the Metrodome, a radio in a barn) [22.3]
 - Salt Spring Island, British Columbia (back-to-the-landers, draft dodgers, the Black settlers of the 1850s, Hawaiian Kanaka families) [25.9]
 - A windmill (a Plains water pump, a Dutch mill in Michigan, a wind farm in Texas or Iowa) [12.9]
-- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5] [19.5] [9.10] [26.36] [17.5] [10.2] [12.10, 23.7]
+- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5] [19.5] [9.10] [26.36] [17.5] [10.2] [12.10, 23.7] [16.8, 11.4]
 
 ## Twenty random Dewey numbers (drawn Nov 10, 2026)
 Use one as a story's hidden subject: a job, an object, a book someone is reading, a shelf in the library where something happens.
 - **178, Ethics of consumption:** temperance, the WCTU, Prohibition, a man who quits drinking or buying. [9.2]
 - **184, Platonic philosophy:** a cave, shadows on a wall, a night-school Plato class, a drive-in screen. [19.1] [15.7] [14.6]
 - **234, Salvation and grace:** an altar call, a revival tent, a 12-step "higher power," a deathbed. [24.2] [26.30] [12.10]
-- **306, Culture and institutions:** a sociologist doing fieldwork, a Middletown study, a Rotary club. [17.5]
+- **306, Culture and institutions:** a sociologist doing fieldwork, a Middletown study, a Rotary club. [17.5] [16.8: Middletown fieldwork; 17.5 took the Rotary club]
 - **326, Slavery and emancipation:** Juneteenth, a manumission paper, an abolitionist parlor. [13.8]
 - **335, Socialism:** a utopian colony (Oneida, New Harmony, Llano del Rio), Milwaukee's sewer socialists, a Debs rally. [6.6]
 - **382, International commerce:** a longshoreman, a container port, a customs broker, NAFTA trucks at Laredo.
