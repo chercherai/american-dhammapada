@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Six Bottles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a night mountain; six small lights climb a
+     switchback trail and come down again to a fire that never moves. */
+  --ground: #0e131a;
+  --ground-2: #19202a;
+  --paper: #e4e6e8;
+  --paper-dim: #98a1ab;
+  --fire: #e08a3c;
+  --granite: #6f7b88;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 0%, #1b2431 0%, var(--ground) 65%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,230,232,.2); }
+.series a:hover { color: var(--fire); }
+a:focus-visible { outline: 2px solid var(--fire); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--fire); text-wrap: balance; text-shadow: 0 0 26px rgba(224,138,60,.2); }
+.epigraph { border-left: 1px solid rgba(224,138,60,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--fire); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--fire); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(25,32,42,.82); border: 1px solid rgba(228,230,232,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--granite); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,230,232,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--fire); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--fire); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--fire); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--fire); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--fire); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--fire); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(25,32,42,.82); border-left: 2px solid var(--fire); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 19.10 &middot; The Virtuous Bhikkhus</span></nav>
+<header>
+  <h1>Six Bottles</h1>
+  <div class="epigraph">Do nothing in haste, look well to each step, and from the beginning think what may be the end.<br>&mdash; Edward Whymper, <i>Scrambles Amongst the Alps</i> (1871)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So hab ich es erz&auml;hlen h&ouml;ren,</span> at the Turnhalle in Denver.</p>
+
+<section>
+  <h2>I. The Pledge</h2>
+  <p class="dateline">The Turnhalle, Denver &middot; spring 1887</p>
+  <p>There were six of them that year in the mountain section of the Denver Turnverein, and by the first of July there was nothing left that they had not done to get ready.</p>
+  <p>They had taken the pledge in May, standing in a row under the gaslights of the Turnhalle with their hands up: six weeks before the mountain, no lager and no tobacco. For a Turner this was not a small thing. Gustav Brenner&rsquo;s father made beer for a living, and Gustav went home every evening through the smell of the malt house and drank water at supper while his brothers watched him. They had walked to Golden and back on Sundays with forty pounds of sand in their packs. They had climbed the rope to the rafters hand over hand until their palms split, and done it again the next night on the splits. Dr. Fritz Haller had bought an aneroid barometer in a leather case from an instrument maker on Larimer Street and read everything there was to read about the peak: the Hayden survey, the English lady&rsquo;s letters, every paragraph the <i>Rocky Mountain News</i> had printed since the first party went up in 1868. Karl Ostertag had spent the whole of the past winter alone as watchman at a shut-down mine above timberline on the Divide, five months without speaking to anyone but a cat, and said the cold no longer meant anything to him. Gustav could stand on his hands on the parallel bars for two minutes by the Turnhalle clock and not a muscle in him trembled, so that the younger boys came to watch him the way people watch a candle flame in a room with no draft. And the Lenz brothers, Theo and Willi, who made cigars on Fifteenth Street, had already been to the top of Longs Peak once, in the summer of 1885, and knew the way.</p>
+  <p>The Turnlehrer watched all this from his chair by the vaulting horse and said very little.</p>
+  <p>His name was Johann Baptist Ruf, and he had taught gymnastics in that hall since there had been a hall. He was fifty-seven. At nineteen he had carried a musket for the revolution in Baden and been inside the fortress at Rastatt when it surrendered, and he had come to America on the strength of that with nothing but a trade and a bad shoulder, and then fought again with the Western Turner Rifles of Missouri because, he said, he had already lost one republic and did not intend to lose two. He had never been up Longs Peak. He believed in nothing he could not lift, and he did not go to any church, and the Turners loved him the way boys love a man who has never once told them they were good when they were not.</p>
+  <p>In July he announced that he was going with them as far as timberline, to keep the camp. Nobody argued. Nobody argued with Ruf.</p>
+</section>
+
+<section>
+  <h2>II. Timberline</h2>
+  <p class="dateline">Below Longs Peak &middot; August 1887</p>
+  <p>They went up from Longmont by wagon and from the ranch at the foot of the trail on foot, with a mule to carry the blankets and the coffee and a wooden crate that Ruf had packed himself in Denver and would not let anybody else lift. They made camp in the last of the trees, where the spruce stood twisted and knee-high and flagged all on one side by the wind, and above them the mountain went up out of the dwarf willow into the Boulder Field and on up past it, a great square grey head with the snow lying in its seams, so close and so big in the evening light that Willi Lenz said it looked like it was leaning over to see what they had brought.</p>
+  <p>Ruf opened the crate by the fire. In the straw were six brown bottles of Denver lager, sweating from the walk. He carried them one at a time to a snowbank in the lee of a boulder fifty yards from camp, where a drift had lasted the summer in the shade, and pushed them into it neck-down in a row, and covered them over, and came back and sat down.</p>
+  <p>After supper the six of them came over to his side of the fire and sat down on the ground in front of him. Somebody had decided they should. They sat the way they sat on the floor of the Turnhalle when he talked to them before an exhibition, with their knees up and their arms around them, and Theo Lenz spoke for all of them because he was the oldest.</p>
+  <p><em>Herr Lehrer, we want to tell you something. We&rsquo;ve kept the pledge six weeks. Not a glass. We&rsquo;re as strong as we&rsquo;re going to be. The Doctor knows that mountain better than the men who measured it. Karl&rsquo;s not afraid of any cold there is. Gustav could stand on his hands on the top. Willi and I have been up already. The weather is fine. We could go up tomorrow, or the next day, or any day we like. It&rsquo;s as good as done.</em></p>
+  <p>Ruf looked at them over the fire a long time.</p>
+  <p><em>So,</em> he said. <em>You have finished it.</em></p>
+  <p><em>All but the walking.</em></p>
+  <p><em>Then give me something to drink to it. Gustav. Go get the bottles.</em></p>
+  <p>Gustav laughed and half got up, and saw the old man&rsquo;s face, and sat down again.</p>
+  <p><em>Three years ago,</em> Ruf said, <em>in September, a lady from Waterbury in Connecticut went up this mountain with a guide. She was very determined. They told her the weather was turning and it was late, and she went on, and she got to the top. I read it in the</em> News. <em>She got to the top in the afternoon. And then she came down as far as the notch in the ridge up there, and the storm came, and a little below the notch she could not go on, and the guide went for help, and when they came back for her in the morning she was dead.</em> He nodded up into the dark where the mountain was. <em>She had climbed it, you understand. She had been on the top. Ask her if it was as good as done.</em></p>
+  <p>Nobody said anything. The fire popped.</p>
+  <p>Ruf reached into the pocket of his coat and took out a book, a thick red Philadelphia edition with the corners gone soft, and opened it near the back where a strip of newspaper marked the place. He had bought it in 1873, the year it came to the bookstore on Larimer Street, and every boy in the mountain section had heard him read from it, though never this part. He read it in English, slowly, the way he read everything in English.</p>
+  <div class="verse">
+    <p>Climb if you will, but remember that courage and strength are naught without prudence, and that a momentary negligence may destroy the happiness of a lifetime. Do nothing in haste, look well to each step, and from the beginning think what may be the end.</p>
+    <p>&mdash; Edward Whymper, <i>Scrambles Amongst the Alps</i> (1871)</p>
+  </div>
+  <p><em>He wrote that,</em> Ruf said, <em>after the Matterhorn. They got to the top of the Matterhorn, seven of them, the first men ever. Coming down, one slipped, and four of them went off the mountain on the rope.</em> He closed the book. <em>Being good is not the top. Being strong is not the top. Knowing everything in the newspaper is not the top. You can stand on your hands on the top, Gustav, and still not be done. Nobody has climbed that mountain until he is sitting here by this fire again. Not one minute before. Then we will drink to it.</em></p>
+  <p>He put the book back in his coat and banked the fire, and they went to their blankets. Willi Lenz said afterward that he did not sleep at all, and that he heard the old man get up twice in the night and go out to look at the sky.</p>
+</section>
+
+<section>
+  <h2>III. The Notch</h2>
+  <p class="dateline">Longs Peak &middot; the next day</p>
+  <p>They went at three in the morning by lantern, up through the dwarf willow and the frost, and came into the Boulder Field as the sky went grey, a mile of broken granite heaped as if a city had fallen down there, every block of it rimed white. At sunrise they were at the notch, a hole in the ridge like a keyhole with the whole western world blowing through it, and on the other side the ledges went out across the face of the mountain with nothing under them for a thousand feet. Theo went first. Nobody talked. They went across the ledges and up the long gully of loose rock beyond them, where every stone they touched went clattering down and down and down and they listened to it go, and then out onto the steep slabs of the last pitch, on their hands and their feet together, and then there was no more up.</p>
+  <p>The top of Longs Peak is as flat as a parade ground and nearly as large, a field of granite blocks in the sky. It was nine o&rsquo;clock. They shouted. They shook hands. Willi built a little pile of stones and put his name on a card in a tobacco tin under it. Dr. Haller took the aneroid out of its case and read it three times and wrote the figures in his book and said that the Hayden survey had been out by some feet, and that he would write to the <i>News</i> about it. Gustav walked to the very edge of the east face, where the cliff dropped straight down into the dark lake at its foot, and stood there looking down, and the others watched him and knew that he was thinking about standing on his hands, and that he was thinking about Ruf, and that he was not going to.</p>
+  <p>By eleven the clouds were building over the Divide, white and then not white.</p>
+  <p>Theo said they would go down now, and Willi wanted another quarter of an hour for the view, and Theo said, <em>Now,</em> in the Turnlehrer&rsquo;s voice, and they went.</p>
+  <p>The storm caught them on the slabs. First it was hail, small and hard as birdshot, bouncing off the rock and filling every crack white, so that the slabs that had been rough going up were greased coming down. Then the light went strange and violet and Karl Ostertag&rsquo;s hair stood up from under his hat, all of it, straight up, and the iron shoes of their alpenstocks began to sing in their hands like bees in a wall. Theo shouted to lay the irons down. They laid them on the rock and lay down flat themselves among the blocks while the thunder came, not after the lightning but with it, the way a door slams, and the whole mountain shook under their bellies.</p>
+  <p>When it moved off a little they went on down without the alpenstocks, all but Gustav&rsquo;s, which had slid away down the slabs while they lay there and gone over into the gully, and they heard it a long time. They went down the slabs on the seats of their trousers. They went down the gully one at a time, the others waiting with their backs to the wall until each man had stopped and called up that he was stopped. On the ledges Gustav, who could have run across them in the Turnhalle on a beam six inches wide, put each boot down and looked at it there before he lifted the other one, the whole way, and Willi behind him said afterward that it was the longest he had ever seen anyone take to do anything.</p>
+  <p>Coming back through the notch the hail had turned to wet snow. Just below it on the Boulder Field side they passed a place among the rocks, a hollow out of the wind where a person might sit down to rest for a minute, and none of them sat down. Haller said later that every one of them had looked at it.</p>
+</section>
+
+<section>
+  <h2>IV. The Snowbank</h2>
+  <p class="dateline">Timberline &middot; that evening</p>
+  <p>Ruf had kept the fire going since noon. He had been watching the mountain since three in the morning with Haller&rsquo;s spare field glass, and when the storm covered it he had gone on watching the cloud.</p>
+  <p>They came down out of the Boulder Field in the last of the light, soaked to the skin, one behind the other, Theo first and Gustav last, and walked into the circle of the fire, and Ruf stood up and counted them with his finger the way he counted boys back in from a run along the Platte. Six. He did not say anything. One by one they sat down on the ground by the fire with their knees up, not because anyone told them to, and held their hands out to it, and none of them said the word top, or done, or any word at all.</p>
+  <p>When the last of them was sitting down Ruf picked up the lantern and walked out to the boulder in the dark. They heard him kicking at the drift. He came back with the bottles in the crook of his arm like kindling, six of them, frosted white from neck to heel, and stood them in a row on the flat rock by the fire, and the snow slid off them in the heat and ran down the brown glass, and the firelight came through.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Not only by discipline and vows, not only by much learning, not by entering into a trance, not by sleeping alone, do I earn the happiness of release which no worldling can know. Bhikshu, be not confident as long as thou hast not attained the extinction of desires.<cite>Dhammapada 271&ndash;272, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a company of monks at Jetavana tell themselves that because they keep the precepts and the ascetic practices, are deeply learned, live in remote places and have mastered the meditative absorptions, they could become arahants any day they wished; some who have already reached the stage of non-return think the same. They come and sit before the Buddha, who asks whether they have finished their work. When they tell him what they have attained, he warns that no monk should think there is little suffering left until the taints are actually destroyed, and speaks these verses; at the end of the teaching all of them become arahants. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-10.htm">the full commentary story</a>.</p>
+    <h3>Longs Peak and the Turners, 1887</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Longs_Peak">Longs Peak</a>, the highest summit in what is now Rocky Mountain National Park, was first climbed on August 23, 1868, by a party with John Wesley Powell and the Denver editor William Byers. Isabella Bird described her own ascent, in the autumn of 1873, in <i>A Lady&rsquo;s Life in the Rocky Mountains</i>. The usual way up passes through the Boulder Field and a gap in the ridge called the Keyhole, then crosses exposed ledges and climbs steep slabs to a broad, flat summit, and its afternoon thunderstorms are still the mountain&rsquo;s best-known danger. In September 1884 <a href="https://coloradoencyclopedia.org/article/carrie-welton">Carrie Welton</a> of Waterbury, Connecticut, reached the summit late in the day with her guide; a storm caught them on the descent, and she died of exposure a short distance below the Keyhole. Edward Whymper wrote the closing words of <i>Scrambles Amongst the Alps</i> with the <a href="https://en.wikipedia.org/wiki/First_ascent_of_the_Matterhorn">first ascent of the Matterhorn</a> in mind: in July 1865 his party of seven reached the top, and on the way down a slip pulled four of them to their deaths.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Turners">Turners</a> were German gymnastic societies, many founded in America by refugees of the failed revolutions of 1848&ndash;49, and the clubs served as gymnasiums and as social, political and cultural centers for German immigrants; many Turners fought for the Union, some of them in Turner regiments such as the <a href="https://en.wikipedia.org/wiki/17th_Missouri_Infantry_Regiment">17th Missouri</a>, the &ldquo;Western Turner Rifles.&rdquo; Denver&rsquo;s Turnverein was founded in 1865. The six climbers and their Turnlehrer are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the company of bhikkhus endowed with virtue from the Dhammapada commentary (verses 271&ndash;272). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/19-10.htm">The original</a>. Scripture from Edward Whymper, <i>Scrambles Amongst the Alps in the Years 1860&ndash;69</i> (1871). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-stringer.html">&larr; The Stringer</a><a href="index.html">All stories</a><a href="twenty-thousand-days.html">Twenty Thousand Days &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Six small lanterns climb a switchback trail up a dark mountain, pause on the top,
+  // and come back down to a fire at the foot that never moves.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, ridge = [], trail = [], seg = [], total = 0, t = 0;
+  var CYCLE = 5400; // frames: up, rest, down, rest
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function build() {
+    var base = H * 0.98, peakX = W * 0.72, peakY = H * 0.62, left = W * 0.38, right = W * 1.05;
+    ridge = [[left, base], [W * 0.5, H * 0.86], [W * 0.6, H * 0.74], [W * 0.66, H * 0.69],
+             [peakX - W * 0.02, peakY + 4], [peakX + W * 0.05, peakY + 2], [W * 0.82, H * 0.7],
+             [W * 0.93, H * 0.76], [right, H * 0.8], [right, base]];
+    var fx = W * 0.56, fy = H * 0.935;
+    trail = [[fx, fy], [W * 0.63, H * 0.905], [W * 0.585, H * 0.865], [W * 0.66, H * 0.83],
+             [W * 0.62, H * 0.79], [W * 0.69, H * 0.75], [W * 0.665, H * 0.71],
+             [peakX - W * 0.005, peakY + 6]];
+    seg = []; total = 0;
+    for (var i = 1; i < trail.length; i++) {
+      var dx = trail[i][0] - trail[i - 1][0], dy = trail[i][1] - trail[i - 1][1];
+      var L = Math.sqrt(dx * dx + dy * dy); seg.push(L); total += L;
+    }
+  }
+  function at(f) {
+    var d = Math.max(0, Math.min(1, f)) * total;
+    for (var i = 0; i < seg.length; i++) {
+      if (d <= seg[i] || i === seg.length - 1) {
+        var k = seg[i] ? Math.min(1, d / seg[i]) : 0;
+        return [trail[i][0] + (trail[i + 1][0] - trail[i][0]) * k, trail[i][1] + (trail[i + 1][1] - trail[i][1]) * k];
+      }
+      d -= seg[i];
+    }
+    return trail[trail.length - 1];
+  }
+  function progress(tt, i) {
+    var p = ((tt - i * 70) % CYCLE + CYCLE) % CYCLE / CYCLE;
+    if (p < 0.38) return p / 0.38;           // climbing
+    if (p < 0.48) return 1;                  // on top
+    if (p < 0.86) return 1 - (p - 0.48) / 0.38; // coming down
+    return 0;                                // at the fire
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(30,38,49,0.55)';
+    ctx.beginPath(); ctx.moveTo(ridge[0][0], ridge[0][1]);
+    for (var r = 1; r < ridge.length; r++) ctx.lineTo(ridge[r][0], ridge[r][1]);
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = 'rgba(160,172,186,0.08)'; ctx.lineWidth = 1; ctx.stroke();
+    var fx = trail[0][0], fy = trail[0][1];
+    var fl = reduce ? 1 : 0.82 + 0.12 * Math.sin(t * 0.11) + 0.06 * Math.sin(t * 0.29 + 1.7);
+    var g = ctx.createRadialGradient(fx, fy, 0, fx, fy, 46 * fl);
+    g.addColorStop(0, 'rgba(255,200,130,' + (0.5 * fl) + ')');
+    g.addColorStop(0.2, 'rgba(224,138,60,' + (0.25 * fl) + ')');
+    g.addColorStop(1, 'rgba(224,138,60,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(fx, fy, 46 * fl, 0, Math.PI * 2); ctx.fill();
+    if (!reduce) {
+      for (var i = 0; i < 6; i++) {
+        var pr = progress(t, i);
+        if (pr <= 0.004) continue;
+        var pt = at(pr);
+        var a = Math.min(1, pr * 12) * (0.55 + 0.1 * Math.sin(t * 0.07 + i));
+        var lg = ctx.createRadialGradient(pt[0], pt[1], 0, pt[0], pt[1], 7);
+        lg.addColorStop(0, 'rgba(255,214,150,' + a + ')');
+        lg.addColorStop(1, 'rgba(255,214,150,0)');
+        ctx.fillStyle = lg; ctx.beginPath(); ctx.arc(pt[0], pt[1], 7, 0, Math.PI * 2); ctx.fill();
+      }
+      t += 1;
+      requestAnimationFrame(frame);
+    }
+  }
+  size(); build(); frame();
+  window.addEventListener('resize', function () { size(); build(); if (reduce) frame(); });
+})();
+</script>
+</body>
+</html>

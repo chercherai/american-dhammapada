@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Demon Star</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column under a cold winter sky in which one star of Perseus slowly goes dim and comes back. */
+  --night: #0a0f1b;
+  --night-2: #121a2b;
+  --paper: #dfe4ec;
+  --paper-dim: #8e9ab0;
+  --star: #e8dcae;
+  --flannel: #c2574a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #17223a 0%, var(--night) 62%) fixed, var(--night);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(223,228,236,.2); }
+.series a:hover { color: var(--star); }
+a:focus-visible { outline: 2px solid var(--star); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--star); text-wrap: balance; text-shadow: 0 0 26px rgba(232,220,174,.2); }
+.epigraph { border-left: 1px solid rgba(232,220,174,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--star); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--star); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(18,26,43,.8); border: 1px solid rgba(223,228,236,.09); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--flannel); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(223,228,236,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--star); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--star); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--star); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--star); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--star); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--star); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(18,26,43,.8); border-left: 2px solid var(--star); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 7.8 &middot; S&#257;riputta</span></nav>
+<header>
+  <h1>The Demon Star</h1>
+  <div class="epigraph">We must at least question it; we cannot accept anything as granted, beyond the first mathematical formulae. Question everything else.<br>&mdash; Maria Mitchell, <span style="font-style:normal">Life, Letters, and Journals</span></div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way they tell it,</span> up to Harlow.</p>
+
+<section>
+  <h2>I. The Examination</h2>
+  <p class="dateline">Harlow Academy, Caledonia County, Vermont &middot; December 1899</p>
+  <p>Three weeks before the fall examination, on the word of the astronomers, the whole village of Harlow sat up to see the stars fall. The Boston papers had promised it since summer. The November meteors were due again, as in 'thirty-three and 'sixty-six, when they had come down like snow. Deacon Stiles kept his hired men up at his own expense. Mr. Peck had his text chosen. They watched three nights and counted a few dozen in the best hour, and the stars stayed where they were, and afterward the village held a low opinion of astronomy that it was at no trouble to keep from Miss Wing.</p>
+  <p>Miss Lois Wing taught natural science and the higher mathematics at Harlow Academy. She was forty-four. She had studied at Vassar College under Miss Maria Mitchell, and afterward she had worked six years at the Harvard observatory, measuring stars on glass plates at twenty-five cents an hour, in a room of women who were the best eyes in the country, until her mother's last illness called her home. She had brought back a three-inch glass on a tripod, a habit of saying less than she knew, and a contempt for the marking system, which the trustees had got round by having her assistant keep the mark book.</p>
+  <p>The assistant was Ruth Hadlock. She was nineteen, she worked for her board at Miss Wing's, and she heard the lower classes in algebra. She came from Victory, over in Essex County, at the far end of the logging road. Her father, Asa Hadlock, was the infidel of that town. He took Colonel Ingersoll's lectures in paper covers, and since July, when the Colonel died, he had worn a band of crape on his sleeve, the only mourning anyone had known him to put on. It was understood in Harlow that the girl had never got clear of him.</p>
+  <p>Thirty new scholars had entered that fall. Most were from the woods towns, from Victory and Granby and the camps up the Moose River: boys who would go back to the choppings after New Year's, girls who meant to keep school. They boarded themselves, four to a room, on what came down from home in a box. They were quick and biddable, and by December they could recite Professor Young's <span style="font-style:italic">Lessons in Astronomy</span> from the Great Bear to the nebular hypothesis without a fault.</p>
+  <p>The examination was held in the upper hall on the fifth of December, before the trustees and anyone else who cared to climb the stairs. The stove was red. Mr. Peck, the Congregational minister, sat in the middle, with Deacon Stiles on one side of him and Dr. Brock on the other. The thirty stood in a row. Miss Wing asked and they answered, and it went like a mill.</p>
+  <p><em>Algol,</em> said a boy from Granby. <em>Beta Persei. The name is Arabic and signifies the Demon. A variable star. Period, two days, twenty hours and forty-nine minutes. For the most of that time it is of the second magnitude. Then in some four hours and a half it loses the greater part of its light, and in as many more regains it.</em></p>
+  <p><em>Explained how?</em></p>
+  <p><em>By the passage of a dark companion before the bright star. First proposed by John Goodricke, of York, in 1783.</em></p>
+  <p><em>That is the book,</em> said Miss Wing, and the committee nodded, since it was.</p>
+  <p>She looked along the row a moment. Then she turned to the side table, where Ruth Hadlock sat with the mark book.</p>
+  <p><em>Miss Hadlock. These scholars have told the committee that the star Algol goes dim every two days, twenty hours and forty-nine minutes. They have it from Professor Young, and from me. Do you believe it?</em></p>
+  <p><em>No, ma'am,</em> said Ruth Hadlock.</p>
+  <p>The stove ticked.</p>
+  <p><em>Not on Professor Young's word, and not on yours. I have watched it go down and come back. Nineteen times off the belfry deck, and once off my father's woodshed. I don't believe it. I know it.</em> She looked at the thirty, not unkindly. <em>Those who have not sat up for it will have to take your word. I don't see what else they can do.</em></p>
+  <p><em>That will do,</em> said Miss Wing. <em>Thank you.</em></p>
+</section>
+
+<section>
+  <h2>II. The Committee</h2>
+  <p class="dateline">The upper hall &middot; the same afternoon</p>
+  <p>The scholars were sent down. The committee stayed.</p>
+  <p>Mr. Peck spoke first, and he was not an unkind man. He said the whole county had been made fools of in November by taking the word of astronomers, and he could have understood a little modesty from that quarter in December. Instead a girl of nineteen had been stood up before the entering class to say she did not believe her teacher. <em>It is the father,</em> he said. <em>She has not given up one of his notions. She would not believe Moses, and now she will not believe you.</em></p>
+  <p>Deacon Stiles set it out under five heads, the way he did at town meeting. The girl believed nothing she was told. She was ungrateful to the woman whose bread she ate. She was a housebreaker besides, for Dow the janitor had twice found the staple drawn on the belfry scuttle. She had thrown away her chances, since Granby wanted a teacher for the spring term and the men who would be asked about her were sitting in this room. And the worst of it, he said, was that she did not appear to want anything of anybody.</p>
+  <p>Miss Wing heard him through.</p>
+  <p><em>Gentlemen, why do you say so? I did not ask her whether she believed in her Maker. I did not ask whether she was thankful for her board. I asked whether she took a star on my say-so, and she does not, because she has gone up in the cold and looked. In October I asked her another thing, which you did not hear. I asked whether anybody could come to know that star without sitting up for it. She said nobody could. That is the whole creed I have examined her in.</em></p>
+  <p><em>You say it is the father. Asa Hadlock takes Colonel Ingersoll's word for a great many things. She does not take that either.</em></p>
+  <p><em>As to the rest, Deacon, you have every head right. She does not believe what she is told. She owes me nothing; she has earned her board twice over. She did draw the staple. I lent her the file. She has spoiled her chances with you, and she wants nothing from you, which I suppose is how she came to answer as she did. You have described the best observer I ever met with, and I worked six years in a room with the best in America.</em></p>
+  <p>There was a book on her desk. She did not open it to find the place.</p>
+  <p><em>Miss Mitchell wrote this of women. I do not find it truer of them than of deacons.</em></p>
+  <div class="verse">
+    <p>What the father, the brother, the doctor, and the minister have said has been received undoubtingly. Until women throw off this reverence for authority they will not develop. When they do this, when they come to truth through their investigations, when doubt leads them to discovery, the truth which they get will be theirs, and their minds will work on and on unfettered.</p>
+    <p>&mdash; Maria Mitchell, Life, Letters, and Journals</p>
+  </div>
+  <p>Dr. Brock laughed once and turned it into a cough. Mr. Peck looked at the stove.</p>
+</section>
+
+<section>
+  <h2>III. The Belfry Deck</h2>
+  <p class="dateline">The night of the sixth</p>
+  <p>By Miss Wing's reckoning the star would be at its least a little before midnight on the sixth. She wrote the hour on the board in the lower hall, and under it one more line of Miss Mitchell's, and nothing else.</p>
+  <div class="verse">
+    <p>We must at least question it; we cannot accept anything as granted, beyond the first mathematical formulae. Question everything else.</p>
+    <p>&mdash; Maria Mitchell, Life, Letters, and Journals</p>
+  </div>
+  <p>She did not go up herself. She had seen it.</p>
+  <p>It was eight above zero and dead clear, and the young moon was down early. They came up the belfry ladder one at a time through the scuttle, which nobody had mended, all thirty, in mufflers and their fathers' coats, and stood on the deck packed like sheep. Ruth Hadlock came last. She carried the lantern up the ladder in both hands, the way a full pail is carried, with a piece of red flannel tied over the glass.</p>
+  <p>She gave each of them a card with six stars pricked on it and no names. She showed them where Algol stood, at one corner of a three-cornered figure with Alpha of Perseus and Almach in Andromeda. She showed them Epsilon and Delta farther up in Perseus, and Rho, the little star close beside Algol. Then she told them the only thing she told them that night.</p>
+  <p><em>Don't ask me what it is doing. Don't ask each other. Every quarter hour, look, and put down which of these it is brighter than and which it is fainter than. I will call the quarters from Miss Wing's watch. If you see nothing, put that down.</em></p>
+  <p>At half past seven it was the equal of Almach, and a boy from Granby said so aloud and was told to write and not talk. At a quarter to eleven a girl from Victory said in a small voice, to nobody, that it had gone under Epsilon. A little before midnight it was no better than Rho, a common star among common stars, and the figure she had shown them had a hole in its corner.</p>
+  <p>Nobody spoke. There were thirty pencils going, and the cold came up through the boards. Down on the common Dr. Brock, driving home late from a confinement on the Kirby road, stopped his horse in the middle of the street and sat with his head back for the better part of an hour. There was a lamp in the parsonage study, and then there was not, and the front door opened and stayed open.</p>
+  <p>At one it had begun to mend. By two it stood over Epsilon again, and she sent them down the ladder, stiff as boards. They did not talk on the stairs.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Ruth Hadlock did not get the Granby school. That winter she sent her estimates to Cambridge over her own name, and in the spring a letter came back from the observatory asking for more.</p>
+  <p>The thirty cards stayed in Miss Wing's drawer. No two of them agreed to the quarter hour, and none was copied from another. She had read every one at the window the morning after, and she never marked them.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The man who is free from credulity, but knows the uncreated, who has cut all ties, removed all temptations, renounced all desires, he is the greatest of men.<cite>Dhammapada 97, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, thirty forest-dwelling monks come to the Buddha, and he sees that they are ready. For their sake he turns to his chief disciple and asks: Sāriputta, do you believe that faith, developed and made much of, ends in the deathless? Sāriputta answers that in this matter he does not go by faith in the Blessed One, because he has seen it for himself; those who have not seen it must go by the faith of others. The other monks mutter that he has never given up his old wrong views and will not believe even the Buddha. The Buddha defends him and speaks a verse made of five words that can each be heard as an insult, <em>faithless, ungrateful, a housebreaker, one who has ruined his chances, an eater of what is thrown up,</em> and each of which also means its opposite: beyond mere belief, knowing the unmade, having broken the chain, having ended the occasion for rebirth, having spat out desire. The thirty reach full awakening. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Sariputta">Sāriputta</a>.</p>
+    <h3>Vermont, 1899</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Maria_Mitchell">Maria Mitchell</a> (1818&ndash;1889), who found a comet from a Nantucket rooftop in 1847, was professor of astronomy at Vassar College from its opening in 1865. She put her students at the telescope, refused to grade them ("You cannot mark a human mind," her successor remembered her saying), and told the class of 1876, "We are women studying together." Her sister published <a href="https://www.gutenberg.org/ebooks/10202">Maria Mitchell: Life, Letters, and Journals</a> in 1896; both passages quoted here are from her notes of the 1870s in that book. At the Harvard College Observatory, from the 1880s, Edward Pickering hired women known as the <a href="https://en.wikipedia.org/wiki/Harvard_Computers">Harvard computers</a> to measure and classify stars on photographic plates, at wages commonly given as twenty-five to fifty cents an hour. Miss Wing, Ruth Hadlock, the committee and Harlow Academy are invented. Victory and Granby are real towns in Essex County, and <a href="https://en.wikipedia.org/wiki/Robert_G._Ingersoll">Robert Ingersoll</a>, "the Great Agnostic," died on July 21, 1899.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Algol">Algol</a>, Beta Persei, takes its name from the Arabic <em>ra's al-gh&#363;l</em>, the ogre's head. Every 2 days, 20 hours and 49 minutes it fades from about magnitude 2.1 to 3.4 and recovers, over some ten hours, and the whole of it can be followed without a telescope by comparing it with its neighbors. <a href="https://en.wikipedia.org/wiki/John_Goodricke">John Goodricke</a>, a deaf eighteen-year-old in York, worked out the period in 1782&ndash;83 and proposed that a dark body was passing in front of the star; the spectroscope confirmed it in 1889. In November 1899 the <a href="https://en.wikipedia.org/wiki/Leonids">Leonid meteors</a>, which had stormed in 1833 and 1866, were widely predicted to do so again. They did not, and the astronomer Charles Olivier later called the failure "the worst blow ever suffered by astronomy in the eyes of the public."</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the question put to the elder Sāriputta, from the Dhammapada commentary (verse 97). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/07-08.htm">The original</a>. Scripture from Maria Mitchell: Life, Letters, and Journals (1896). Written by Claude Fable 5.2.
+  <div class="pager"><a href="one-hand.html">&larr; One Hand</a><a href="index.html">All stories</a><a href="una-de-gato.html">Uña de Gato &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, field = [], t0 = 0;
+  // A fixed winter sky. One star in a small three-cornered figure goes slowly dim and comes back.
+  var fig = [ [0.00, 0.00, 1.9], [0.62, 0.10, 1.9], [0.14, 0.52, 0], [0.30, 0.30, 1.2], [0.42, 0.20, 1.2], [0.10, 0.66, 0.9] ];
+  var links = [ [0, 3], [3, 4], [4, 1], [3, 2], [2, 5] ];
+  function rnd(seed) { var x = Math.sin(seed * 127.1) * 43758.5453; return x - Math.floor(x); }
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    field = [];
+    var n = Math.round(Math.max(40, Math.min(110, W * H / 14000)));
+    for (var i = 0; i < n; i++) field.push({ x: rnd(i + 1) * W, y: rnd(i + 51) * H, r: 0.4 + rnd(i + 101) * 0.9, a: 0.10 + rnd(i + 151) * 0.28 });
+  }
+  function dot(x, y, r, a) {
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r * 5);
+    g.addColorStop(0, 'rgba(240,232,200,' + a + ')');
+    g.addColorStop(0.25, 'rgba(232,220,174,' + (a * 0.35) + ')');
+    g.addColorStop(1, 'rgba(232,220,174,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * 5, 0, Math.PI * 2); ctx.fill();
+  }
+  function draw(t) {
+    if (!t0) t0 = t || 0;
+    var s = ((t || 0) - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < field.length; i++) { var f = field[i]; dot(f.x, f.y, f.r, f.a); }
+    // the figure, upper right, kept clear of the text column on wide screens
+    var size = Math.min(220, W * 0.42), ox = W - size - Math.max(18, W * 0.05), oy = Math.max(70, H * 0.12);
+    // light curve: steady for most of a 48 s cycle, then a slow dip and return
+    var ph = reduce ? 0.5 : (s % 48) / 48, dip = 0;
+    if (ph > 0.62) { var u = (ph - 0.62) / 0.38; dip = Math.pow(Math.sin(Math.PI * u), 2); }
+    ctx.strokeStyle = 'rgba(142,154,176,0.10)'; ctx.lineWidth = 1;
+    for (var k = 0; k < links.length; k++) {
+      var a = fig[links[k][0]], b = fig[links[k][1]];
+      ctx.beginPath(); ctx.moveTo(ox + a[0] * size, oy + a[1] * size); ctx.lineTo(ox + b[0] * size, oy + b[1] * size); ctx.stroke();
+    }
+    for (var j = 0; j < fig.length; j++) {
+      var p = fig[j], x = ox + p[0] * size, y = oy + p[1] * size;
+      if (p[2] === 0) dot(x, y, 2.0 - 0.9 * dip, 0.62 - 0.40 * dip);
+      else dot(x, y, p[2], 0.25 + p[2] * 0.18);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(0);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>
