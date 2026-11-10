@@ -43,6 +43,10 @@ Mahayana echoes are welcome too. The bodhisattvas are innumerable: a figure who 
 
 **When a community has no book,** use what it actually holds sacred or wise, in public domain if quoted (Thoreau, Whitman, Emerson, Ingersoll, the Declaration, a pre-1929 hymn or folk song, a Mahayana sutra in an old translation), or let the teacher's own words carry the verse. Never invent text and pass it off as a real quotation.
 
+## Decades
+
+The series is badly skewed toward the present: the 2010s and 2020s already have more than forty stories, and 1492–1680, 1700–1730 and 1800–1810 have almost none. **Until further notice, don't set a new story after 2000.** Prefer the empty decades: the 1490s through the 1670s (Columbus, Spanish Florida and New Mexico, Jamestown, Plymouth, New Netherland, the Pueblo Revolt), the 1700s–1720s, and the 1800s. Run `python3 /home/claude/series/claim.py --list` and count before choosing.
+
 ## Borders
 
 The map draws no political borders. A story can cross them: people coming to or leaving the United States, through Canada, Mexico, the Caribbean, or across the Pacific and Atlantic. Put the main setting in lat/lon and any journey stops in the optional "route" list, and the map draws the journey as a dashed line.

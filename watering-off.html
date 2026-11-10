@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watering Off</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale mist of an April morning on a racetrack backstretch, light theme; low in the right margin a faint board of odds figures turns over now and then, one figure at a time, and sometimes the whole board goes blank and stays blank a while; datelined sections. */
+  --ground: #eee8db;
+  --ground-2: #e2d9c7;
+  --ink: #2a241d;
+  --ink-dim: #776c5e;
+  --bay: #7a3f22;
+  --straw: #b8984f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f7f3ea 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(42,36,29,.2); }
+.series a:hover { color: var(--bay); }
+a:focus-visible { outline: 2px solid var(--bay); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--bay); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(122,63,34,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--bay); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--bay); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(226,217,199,.75); border: 1px solid rgba(42,36,29,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--straw); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,36,29,.12); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--bay); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--bay); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,36,29,.14); border-bottom: 1px solid rgba(42,36,29,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--bay); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--bay); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--bay); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--bay); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(226,217,199,.75); border-left: 2px solid var(--bay); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 8.4 &middot; The Brahmin Who Asked about Loss</span></nav>
+<header>
+  <h1>Watering Off</h1>
+  <div class="epigraph">Fight manfully onward,<br>Dark passions subdue.<br>&mdash; H. R. Palmer, &ldquo;Yield Not to Temptation&rdquo; (1868)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Now this is the way I heard it,</span> on the backside at the Downs.</p>
+
+<section>
+  <h2>I. The Backside</h2>
+  <p class="dateline">Churchill Downs, Louisville &middot; April 1937</p>
+  <p>In January the Ohio had come up out of its banks and five miles across the city, and into February it stood six feet deep on the racetrack, brown and still, with the tops of the rails showing like a fence in a pond. When it went down it left the mud. The men spent March raking it off the strip and hauling it away in wagons and putting down new dirt, and by the middle of April there was fresh paint on everything, and the Derby horses were coming in on the train, and people uptown were saying the Downs looked better than before.</p>
+  <p>The backside smelled the way it always did, of liniment and wet straw and coffee from the track kitchen and the manure pile behind every barn. Before light the grooms came out of the tack rooms, where most of them slept on cots between the saddles, and the exercise boys came up from Smoketown in the dark, and the roosters some of the stables kept went off one after another down the line. By six the horses were going out to the track in the fog, and the clockers stood at the rail with their stopwatches, and the men who bet for a living stood near the clockers.</p>
+  <p>Isom Tandy walked hots for Mr. Dade Collier&rsquo;s stable in Barn 22. He was fifty-six years old and stood about five feet two, and he still weighed what he had weighed at nineteen. When a horse came back blowing from a work or a race, steaming, with its veins up under the skin, Isom took the shank and walked it around the shed row under the overhang, around and around, for most of an hour, until its breathing came down and its coat was dry and it was a horse again and not a fire. A bucket hung at the corner of the row. Each time around he let the horse put its nose in, and let it have three swallows, and then he lifted its head out of the water. A hot horse will drink a bucket dry and founder on it. He never let one.</p>
+  <p>The exercise boys called him Mister Isom. The white men called him Isom. He did not bet, and he did not give tips, though people were always asking him, because it was known on the backside that he could watch a horse cool out and tell you whether it had another race in it.</p>
+  <p>He had ridden once. He had been a jockey from the time he was twelve, at Latonia across the river and at the old Oakley track in Cincinnati and in the East, and he had won a great deal, in the years when most of the boys who rode in Kentucky were colored boys. Then, in the years after nineteen hundred, the colored boys stopped getting mounts. White riders put them into the rail and nobody fined them for it. Owners who had hired them stopped hiring them. A few went to Europe. Most went to the barns, if they stayed at all. Isom stayed. He rubbed horses for twenty years, and when his back got too bad for the stall work he walked them, and he had been walking them ever since.</p>
+  <p>He did not talk about any of that. The boys had it from their fathers.</p>
+</section>
+
+<section>
+  <h2>II. The Question</h2>
+  <p class="dateline">Barn 22 &middot; a morning in the last week of April</p>
+  <p>Mr. Carroll Ashby came down the shed row at about seven, with the fog still lying on the infield and the sun just coming red through it. He was a white man of forty or so in a camel-hair coat, with field glasses on a strap around his neck and the <em>Racing Form</em> folded lengthwise in his pocket. He lived at the Seelbach in the season and at Hialeah in the winter, and he was known on every backside from Saratoga to New Orleans as a man who made his living at the windows and had been making it for twenty years.</p>
+  <p>Isom had a gray two-year-old on the shank, just back from a bad work, blowing hard. Lafayette Moss, who was sixteen and galloped horses for Mr. Collier, sat on an upturned bucket by the tack room door with a bridle across his knees, mending a rein.</p>
+  <p>Mr. Ashby fell in beside Isom and walked with him.</p>
+  <p><em>Morning, Isom.</em></p>
+  <p><em>Morning, Mr. Ashby.</em></p>
+  <p><em>They tell me you know horses. They tell me you can look at one cooling out and say if he&rsquo;ll run back.</em></p>
+  <p>Isom walked. The gray put its nose down to the bucket at the corner and took three swallows, and Isom lifted its head and walked on.</p>
+  <p><em>Now I&rsquo;ve been wondering something,</em> Mr. Ashby said. <em>A man who knows winners. Does he know losers too? Or does he just know the one side?</em></p>
+  <p><em>I know both,</em> said Isom.</p>
+  <p><em>All right. Tell me about losing, then.</em></p>
+  <p>They went around the end of the row, past Lafayette on his bucket, and Isom said it walking, the way he said everything, without looking around.</p>
+  <p><em>Lying down when the sun&rsquo;s up. A horse still lying down in his stall at daylight is a sick horse, and a man is the same. That&rsquo;s one.</em></p>
+  <p><em>Lazy. That&rsquo;s two.</em></p>
+  <p><em>Mean. A mean horse runs his race in the stall, kicking the boards, and hasn&rsquo;t got anything left at the head of the stretch. That&rsquo;s three.</em></p>
+  <p><em>Drinking. Not a night of it. A long time of it. That&rsquo;s four.</em></p>
+  <p><em>Going down a long road by yourself. That&rsquo;s five.</em></p>
+  <p><em>Another man&rsquo;s wife. That&rsquo;s six.</em></p>
+  <p>The gray put its nose in the bucket. Three swallows. Isom lifted its head.</p>
+  <p><em>You go after any of those, Mr. Ashby,</em> he said, <em>you&rsquo;re going to lose. You don&rsquo;t need me for that.</em></p>
+  <p>Mr. Ashby laughed out loud, and a horse in a stall down the row put its head out to look at him.</p>
+  <p><em>Isom, that&rsquo;s a whole sermon. You ought to have a congregation. You&rsquo;re right, though. You know both sides of it.</em></p>
+  <p><em>There isn&rsquo;t anybody on this ground,</em> Isom said, <em>knows losing the way I know it.</em></p>
+  <p>He did not say it hard. He said it the way he would say what a horse weighed. Lafayette, on his bucket, stopped mending the rein. Mr. Ashby looked at the old man for a moment as if he were going to ask something, and then he did not ask it.</p>
+</section>
+
+<section>
+  <h2>III. Often Cast Down</h2>
+  <p class="dateline">Barn 22 &middot; the same morning</p>
+  <p>They went around again. The sun was clear of the fog now and the shed row was striped with it, light and shadow, light and shadow, and the gray walked through the stripes with its head lower than before.</p>
+  <p>Isom looked at the field glasses and the folded <em>Form,</em> and at the camel-hair coat, which was a good coat and had been mended once at the cuff, very well, by somebody who knew how.</p>
+  <p><em>How do you make your living, Mr. Ashby?</em></p>
+  <p><em>You know how I make it. I bet.</em></p>
+  <p><em>Who wins?</em></p>
+  <p><em>Some days me,</em> Mr. Ashby said. <em>Some days the windows.</em></p>
+  <p>Isom let the gray drink, and lifted its head, and walked on.</p>
+  <p><em>Beating the other man,</em> he said, <em>that&rsquo;s a little thing. There isn&rsquo;t anything in it. You beat the windows Tuesday and the windows beat you Saturday. I won a race at Latonia once by a nose, and the man I beat went out and beat me the next day by two lengths, and the next week neither one of us had a mount. That kind of winning comes back on you. It always comes back.</em></p>
+  <p><em>But a man who gets the better of what&rsquo;s in himself,</em> he said, <em>the mean, and the lazy, and the bottle, and all of it. A man who beats that, and keeps on beating it every morning, that one stays won. Nobody can take it back off him. Not the stewards up in the stand. Not the Jockey Club in New York. Not the riders that put you into the rail. Not the devil. The river came up six feet over this track this winter, and it couldn&rsquo;t take that back off a man.</em></p>
+  <p>He walked on a while. Then, because Mr. Ashby was still walking beside him and seemed to be waiting, he said the words of a song the children sang at his church on Walnut Street, flat, not singing it, in time with the gray&rsquo;s feet.</p>
+  <div class="verse">
+    <p>To him that o&rsquo;ercometh,<br>God giveth a crown,<br>Through faith we shall conquer,<br>Tho&rsquo; often cast down;<br>He who is our Saviour,<br>Our strength will renew.<br>Look ever to Jesus,<br>He&rsquo;ll carry you through.</p>
+    <p>&mdash; H. R. Palmer, &ldquo;Yield Not to Temptation,&rdquo; stanza 3</p>
+  </div>
+  <p>Mr. Ashby did not say anything to that. At the end of the row he stopped, and took the <em>Form</em> out of his pocket and looked at it, and put it back. He touched his hat brim to Isom, which he had never done before, and went back up toward the rail where the clockers were, with the sun on the back of his coat. Whether he bet that afternoon, nobody on the backside knew. Lafayette heard later that he had gone to Hialeah the next winter as usual. People do what they do.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>But Lafayette Moss had been carrying a two-dollar ticket in his shirt pocket for three days, on a horse that had run fifth, because he could not make himself throw it away. He took it out now and looked at it, and tore it in half, and in half again, and let the pieces go in the straw. Then he put the bridle down and got up off his bucket.</p>
+  <p><em>Let me have him a while, Mister Isom.</em></p>
+  <p>Isom gave him the shank. The gray was nearly cool. Its coat had dried in rough patches along the neck where the sweat had been, and its breath came slow. They went around once, the boy and the horse, through the stripes of sun, and Isom stood by the tack room door and watched them. At the corner the gray put its nose down into the bucket and drank, one swallow, two, three, and Lafayette took hold of the halter and lifted its head out of the water, and the gray let him, and the water ran off its chin in a string and fell back into the bucket, and they walked on.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">One&rsquo;s own self conquered is better than all other people; not even a god, a Gandharva, not Mara with Brahman could change into defeat the victory of a man who has vanquished himself, and always lives under restraint.<cite>Dhammapada 104&ndash;105, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a brahmin wonders whether the Buddha knows only what brings gain, or what brings loss as well, and goes to Jetavana to ask him. The Buddha says he knows both and names six roads to loss: sleeping after sunrise, idleness, ferocity, long drunkenness, going on a long journey alone, and other men&rsquo;s wives. The brahmin praises him as a teacher and leader of a following, and the Buddha answers that no one knows loss as well as he does. Then the Buddha asks the brahmin how he lives. By gambling, he says; sometimes he wins and sometimes the other man does. The Buddha tells him that victory over another is a small thing, and that the victory of one who conquers himself is one that no god or demon can turn into defeat. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-04.htm">the full commentary story</a>.</p>
+    <h3>The backside at Churchill Downs, 1937</h3>
+    <p>Black horsemen built American racing. Thirteen of the fifteen riders in the first <a href="https://en.wikipedia.org/wiki/Kentucky_Derby">Kentucky Derby</a>, in 1875, were Black, and Black jockeys won fifteen of the first twenty-eight Derbies, among them <a href="https://en.wikipedia.org/wiki/Isaac_Burns_Murphy">Isaac Murphy</a>, who won three. Around the turn of the century they were driven out of the saddle by racism, by violence from white riders that went unpunished, and by the shrinking of racing under anti-gambling laws. <a href="https://en.wikipedia.org/wiki/Jimmy_Winkfield">Jimmy Winkfield</a>, the last Black jockey to win the Derby, in 1902, left to ride in Russia and Europe. After Henry King rode in 1921, no Black jockey rode in the Derby again until 2000. Many Black horsemen stayed on as grooms, trainers and hot walkers; the <a href="https://www.smithsonianmag.com/history/the-kentucky-derbys-forgotten-jockeys-128781428/">Smithsonian</a> tells the story.</p>
+    <p>In January 1937 the <a href="https://en.wikipedia.org/wiki/Ohio_River_flood_of_1937">Ohio River flood</a> put about seventy percent of Louisville under water and drove some 175,000 people from their homes. By early February the track at Churchill Downs, more than five miles from the river, lay under about six feet of water; the crew rebuilt the strip, and the Derby was run on schedule on May 8 (the <a href="https://www.derbymuseum.org/hoofnotes/churchill-and-the-great-flood">Kentucky Derby Museum</a> has the story). After a race or a workout a hot walker leads a horse until it has cooled, and the old practice, still remembered on the backstretch, was to let a hot horse have only a few swallows of water at a time.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the brahmin who asked about loss, from the Dhammapada commentary (verses 104&ndash;105). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/08-04.htm">The original</a>. Hymn text by H. R. Palmer (1868), as printed in <em>Christ in Song</em> (1908). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-branch.html">&larr; The Branch</a><a href="index.html">All stories</a><a href="the-window-dummy.html">The Window Dummy &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, cells = [], blankUntil = 0, nextBlank = 0, nextFlip = 0, t0 = performance.now();
+  var odds = ['2','5/2','3','7/2','4','9/2','5','6','8','10','12','15','20','30','50','99'];
+  function pick() { return odds[Math.floor(Math.random() * odds.length)]; }
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    cells = [];
+    for (var i = 0; i < 8; i++) cells.push({ v: pick(), nv: null, k: 1 });
+  }
+  function layout() {
+    var cw = Math.max(34, Math.min(52, W * 0.045)), ch = cw * 0.9;
+    var cols = 2, rows = 4;
+    var x0 = W - cols * cw - Math.max(16, W * 0.03), y0 = H - rows * ch - Math.max(20, H * 0.05);
+    return { cw: cw, ch: ch, cols: cols, x0: x0, y0: y0 };
+  }
+  function draw(now) {
+    var t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      if (!nextBlank) nextBlank = t + 40 + Math.random() * 30;
+      if (t > nextBlank && blankUntil < t) { blankUntil = t + 12 + Math.random() * 10; nextBlank = blankUntil + 40 + Math.random() * 40; }
+      if (t > nextFlip) { var c0 = cells[Math.floor(Math.random() * cells.length)]; if (c0.k >= 1) { c0.nv = pick(); c0.k = 0; } nextFlip = t + 2.5 + Math.random() * 4; }
+    }
+    var dark = !reduce && t < blankUntil;
+    var fade = dark ? Math.max(0, 1 - (t - (blankUntil - 12)) * 1.2) : 1;
+    if (dark && fade <= 0) { requestAnimationFrame(draw); return; }
+    var L = layout();
+    ctx.font = Math.round(L.ch * 0.5) + 'px "IM Fell English", Georgia, serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (var i = 0; i < cells.length; i++) {
+      var col = i % L.cols, row = Math.floor(i / L.cols);
+      var x = L.x0 + col * L.cw, y = L.y0 + row * L.ch;
+      ctx.strokeStyle = 'rgba(42,36,29,' + (0.08 * fade) + ')';
+      ctx.strokeRect(x + 2, y + 2, L.cw - 4, L.ch - 4);
+      var cl = cells[i];
+      ctx.save(); ctx.beginPath(); ctx.rect(x + 2, y + 2, L.cw - 4, L.ch - 4); ctx.clip();
+      if (cl.k < 1 && !reduce) {
+        cl.k = Math.min(1, cl.k + 0.03);
+        var off = cl.k * L.ch;
+        ctx.fillStyle = 'rgba(42,36,29,' + (0.16 * fade) + ')';
+        ctx.fillText(cl.v, x + L.cw / 2, y + L.ch / 2 - off);
+        ctx.fillText(cl.nv, x + L.cw / 2, y + L.ch / 2 + L.ch - off);
+        if (cl.k >= 1) { cl.v = cl.nv; cl.nv = null; }
+      } else {
+        ctx.fillStyle = 'rgba(42,36,29,' + (0.16 * fade) + ')';
+        ctx.fillText(cl.v, x + L.cw / 2, y + L.ch / 2);
+      }
+      ctx.restore();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); if (reduce) requestAnimationFrame(draw); });
+})();
+</script>
+</body>
+</html>
