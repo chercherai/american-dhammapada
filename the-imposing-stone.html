@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Imposing Stone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in a printing office at night; a single hairline of light lies across the page with a glint walking along it. */
+  --lampblack: #131210;
+  --lampblack-2: #1d1a16;
+  --rag: #e7e0cf;
+  --rag-dim: #a59c88;
+  --rubric: #d27150;
+  --glint: #f6f1e4;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 78% -10%, #262019 0%, var(--lampblack) 62%) fixed, var(--lampblack);
+  color: var(--rag);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--rag-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--rag-dim); text-decoration: none; border-bottom: 1px solid rgba(231,224,207,.2); }
+.series a:hover { color: var(--rubric); }
+a:focus-visible { outline: 2px solid var(--rubric); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--rubric); text-wrap: balance; text-shadow: 0 0 28px rgba(210,113,80,.22); }
+.epigraph { border-left: 1px solid rgba(210,113,80,.4); padding-left: 1rem; font-style: italic; color: var(--rag-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--rubric); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--rubric); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(29,26,22,.8); border: 1px solid rgba(231,224,207,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glint); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(231,224,207,.1); color: var(--rag-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--rubric); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--rag-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--rubric); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--rubric); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--rubric); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--rubric); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--rubric); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(29,26,22,.8); border-left: 2px solid var(--rubric); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--rag-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 12.5 &middot; Mahā Kāla</span></nav>
+<header>
+  <h1>The Imposing Stone</h1>
+  <div class="epigraph">If destruction be our lot we must ourselves be its author and finisher.<br>&mdash; Abraham Lincoln, Address before the Young Men’s Lyceum of Springfield, 1838</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way it was handed to me,</span> in a printing office at Springfield.</p>
+
+<section>
+  <h2>I. Press Night</h2>
+  <p class="dateline">Springfield, Illinois &middot; Friday, February 2, 1838</p>
+  <p>The Journal came out on Saturdays, so Friday was press night, and on press night the office was the one lit window in that part of town. Lew Carmody was fifteen and in the second year of a five-year indenture. The other apprentice, Hod, was twelve and had been bound since October. Between them they carried the wood and the water, damped the paper, rolled the ink, washed the forms in lye and swept up after, and for this they were called devils, as boys in printing offices had been called for two hundred years.</p>
+  <p>The foreman was Mr. Abner Pell. He was a Vermonter of about forty, stooped from the case, who had set type in eleven towns between Brattleboro and the Sangamon. He could read a line of type upside down and backward faster than Lew could read it off the sheet. He seldom said anything in the shop that was not about the work.</p>
+  <p>There was a fourth person in the office that night, and he did not work there. Jesse Odom had come up from Mississippi a year and a half before with a wagon and two mules, and he cut and hauled stove wood for half the square. He was a big man past forty, slow to speak, who signed for his money with a mark. His first winter in town he had brought a load to the office on a press night and stood by the stove while a proof was read. A proof has to be read aloud against the copy, a boy calling out the words and the points while the foreman follows on the damp slip with a pen. Odom had stayed until it was done. After that he came every Friday. He sat on the wood box with his hat on his knee and heard the canal reports and the acts of the legislature and the notices of strayed horses, and when the press was working he fed the stove. Mr. Pell let him stay. Nobody had asked him why he wanted to.</p>
+  <p>The long piece that week was an address. A young lawyer in Mr. Stuart’s office, a long, dark man, had read it out to the Young Men’s Lyceum at the Baptist church the Saturday before, and it ran to better than three columns. Mr. Pell had set most of it himself. A little after nine Hod got up on a box under the lamp with the copy and began to read, and Mr. Pell followed him with the pen.</p>
+  <p>It was about the laws, and what becomes of a country where men leave off keeping them. Hod read it the way he read everything, at a trot. He came to a place about the State of Mississippi.</p>
+  <div class="verse">
+    <p>Thus went on this process of hanging, from gamblers to negroes, from negroes to white citizens, and from these to strangers, till dead men were seen literally dangling from the boughs of trees upon every roadside, and in numbers almost sufficient to rival the native Spanish moss of the country as a drapery of the forest.</p>
+    <p>&mdash; Abraham Lincoln, Address before the Young Men’s Lyceum of Springfield, January 27, 1838</p>
+  </div>
+  <p><em>Read that over,</em> Odom said.</p>
+  <p>He had never spoken during a proof. Hod looked at Mr. Pell, and Mr. Pell nodded, and Hod went back a few lines and read it over. Odom did not ask again. But Lew, turning paper at the bank, saw that he had put his hat down on the floor.</p>
+  <p>They locked up the form a little before eleven and began to work it off, Lew at the bar and Hod with the roller. A hand press is loud enough that two people at the far end of a room can talk and not be heard. Sometime after one Lew looked up between pulls and saw Odom standing with Mr. Pell at the imposing stone under the back window. The foreman’s head was down. The big man’s mouth was moving. It went on for the length of a candle.</p>
+  <p>Once Odom took something from inside his shirt and held it to the light, and it flashed like a drop of water. He turned and drew his hand down the windowpane. Lew heard that through the press, a squeal like a slate pencil. Then the hand moved toward the stone, and Mr. Pell laid his own palm flat on the marble and said something short. Odom put the thing back in his shirt.</p>
+  <p>The last sheet came off a while before first light. Odom took a bucket, as he did every week, and went out to the well in the lot behind the office to wash before he saw to his mules.</p>
+</section>
+
+<section>
+  <h2>II. The Well</h2>
+  <p class="dateline">The lot behind the office &middot; first light</p>
+  <p>What happened at the well Lew had afterward from four or five men who were in it, and they all told it alike.</p>
+  <p>Sometime past five, three men got into Ruggles’s store on the square by a back shutter. Mr. Ruggles slept over the store. He woke when a brass kettle came down off its hook, and he went down the stair in his shirt with a fowling piece that was not loaded, and the three went out the way they had come with a meal sack between them. He raised the street. By the corner there were ten or a dozen men behind the thieves: his two clerks, a smith, some teamsters who had been harnessing in the tavern yard. The thieves threw down a bolt of calico in the mud, and then a caddy of tea, and the men behind ran past both. At the next corner the three split. One of them came up the lot behind the printing office with the sack. He saw a big man bent over a bucket at the well with his face in his hands, and he slung the sack down at the man’s feet and went over the fence.</p>
+  <p>The others came into the lot with one lantern. What they saw was a man straightening up from a bucket with water running off his chin, and Ruggles’s sack at his boots with the kettle half out of it.</p>
+  <p>Some of them knew him. <em>It’s the wood hauler,</em> a clerk said. <em>The Mississippian.</em></p>
+  <p>Odom said he had been in the printing office since dark. He said he had been hearing a piece read.</p>
+  <p><em>Hearing a piece read,</em> Ruggles said. <em>I have your mark on my book, Odom. You can’t read your own name. You broke my shutter, and here you stand washing as if you’d been at meeting.</em></p>
+  <p>They went through his coat. Inside his shirt, pinned in a twist of rag, they found a breastpin, a diamond the size of a field pea in a gold claw. Ruggles held it up to the lantern. He did not deal in such goods and it was no part of what he had lost. But every man in the lot knew what to think of a wood hauler with a stone like that on him.</p>
+  <p><em>That’s mine,</em> Odom said. <em>I’ve had that nine years.</em></p>
+  <p>He said it twice more. It was the truth, and each time it sounded worse. Somebody had pulled a stick of stove wood off the pile by the office door. It was Odom’s own cutting, hickory, split in the fall. Then several of them had sticks. He was a strong man and it took some time. He never called out to the printers, though the window was thirty feet off and lit. One of the teamsters said that toward the end he let his arms come down from his head, and that he seemed to be studying them, one face and then the next, like a man who has been told to expect somebody.</p>
+  <p>When he had stopped moving they stood back. It was getting light enough to see each other by. They dragged him by the heels to the side of the lot, in under the fence where the hogs had rooted, and they took up the sack and went back to the square to look for the other two.</p>
+  <p>A quarter of an hour later Lew and Hod came out with the buckets for water to wash the form. Hod saw the boots.</p>
+</section>
+
+<section>
+  <h2>III. What He Told</h2>
+  <p class="dateline">The Journal office &middot; sunup</p>
+  <p>Mr. Pell went out and looked and came back in. He washed his hands at the bucket and dried them on his apron.</p>
+  <p><em>He was here, Mr. Pell,</em> Lew said. <em>He never went out but for wood. He was on that box from dark till the last sheet. He didn’t do a thing.</em></p>
+  <p><em>He did nothing last night. I will swear to that in front of anybody, and so will you. Sit down, both of you.</em></p>
+  <p>They sat down on the wood box. The whole edition was stacked on the bank with the lawyer’s address on the second page, dry enough to fold. Mr. Pell stood at the imposing stone with his back to the window.</p>
+  <p><em>I am going to tell you what he told me at this stone between one o’clock and two. Then you will know as much as I do.</em></p>
+</section>
+
+<section>
+  <h2>IV. The Big Black</h2>
+  <p class="dateline">Madison County, Mississippi &middot; July 1835</p>
+  <p>In the summer of 1835 Jesse Odom kept a ferry on the Big Black River in Madison County, on a road going north out of Livingston toward the Yazoo. He had a flat on a rope, a house with two rooms for travelers, and one man, named Harry, whom he owned, who worked the rope.</p>
+  <p>At the end of June a planter’s wife up at Beattie’s Bluff believed she had heard her house servants whispering about a rising set for the Fourth of July. Within a week every beat in the county had its committee. They put the black men of the Bluff plantations to the question with the whip and hanged five of them, an old preacher among the five who had said nothing under it. At Livingston the same week they hanged two white men, steam doctors, from the grating of the jail window. The talk was that a clan of land pirates stood behind the whole of it, and that their captains were riding the roads in the character of travelers. Every stranger bound north had to come down to Odom’s landing, so the committee made him captain of patrol for his beat. No one crossed without giving an account of himself. Beyond the river the road ran four miles through cane, and for a dollar Odom or one of his patrol would ride a traveler through to the far side.</p>
+  <p>Late one afternoon that week a gig came down to the landing. The man driving it was young, a Tennessean, a saddler by his hands, on his way to a brother who had entered land on the Yazoo. His wife sat beside him. She wore a green calash against the sun, and when the gig stopped she pushed it back.</p>
+  <p>Odom told Mr. Pell he had seen handsome women before that day and could not account for it. He wanted her. And he had seen in that same minute how it could be managed, because that week, in that county, it was the easiest thing in the world to manage.</p>
+  <p>The Tennessean asked to be put across and ridden through the cane.</p>
+  <p><em>It’s too late in the day,</em> Odom said. <em>I’ll take you through at sunup.</em></p>
+  <p><em>There’s two hours of light yet, sir. We would be obliged to go on.</em></p>
+  <p><em>You’ll turn back to the house. There’s supper there and a bed.</em></p>
+  <p>The young man said again that he would rather go on. Odom lifted one hand, and two of the patrol took the mare by the cheek strap and turned the gig around in the road.</p>
+  <p>He gave them the better room and had a hen killed. At the table Odom kept his eyes on his plate.</p>
+  <p>Odom owned a breastpin, a diamond in a gold claw, which a gambler at Natchez had put up against a debt in the year 1829 and never come back for. When the house was dark he gave it to Harry and told him to put it under the cushion of the gig seat. Harry put it there. That summer a black man in Madison County did what a captain of patrol told him, and did it quickly.</p>
+  <p>At first light one of the patrol fired a pistol behind the house and hollered thief. Then he came around to the gallery and said, good and loud, <em>Captain, your pin’s gone out of the press.</em> Odom gave out that no one was to cross, and that nothing on wheels was to come down to the landing without being gone through.</p>
+  <p>The Tennessean had his mare in the shafts by sunup. They stopped him at the top of the bank. Harry had been told he would be the one to find it, and he put his hand under the cushion and found it.</p>
+  <p><em>Here’s a man eats your chicken and sleeps in your bed,</em> one of the patrol said, <em>and drives off before breakfast with your diamond.</em></p>
+  <p>They pulled him down over the wheel and beat him in the road. Then they tied him behind a horse and took him a mile to the house of the planter who sat as the committee for that beat. The Squire heard it from his chair on the gallery.</p>
+  <p><em>After my friend Odom had lodged him, and fed him,</em> the Squire said. <em>We know what kind is on the roads this week. Take him off, gentlemen.</em></p>
+  <p>That was the whole trial. In that week nobody looked for more. They asked him under the whip to name his confederates in the clan. He had none to name, and he had been dead some little time before they took notice of it. They put him in the Big Black.</p>
+  <p>The woman had sat through all of it in the gig at the top of the bank, with the reins in her lap. Afterward Odom went up to her with his hat off and told her she was welcome to stay at the ferry house until her people could be written to.</p>
+  <p><em>Put my mare on your boat,</em> she said.</p>
+  <p>Harry took her over. She drove into the cane alone, and Odom never learned whether she came out at the other end of it. That evening the Squire’s son brought the pin down to the ferry with the Squire’s compliments.</p>
+  <p>He kept the ferry one year more. Before he left he sold Harry at Vicksburg, because he could not stand to have him by, and he told Mr. Pell that he had known what that was while he was doing it. He had not slept a night through since that July. It was why he sat up Fridays. A room with a lamp in it and somebody reading was the one place he had found where the dark went by. He had come north because he heard there was law in the free states, and in every town on the way he had looked at the men standing about the tavern doors and thought, it will be these. In Springfield he had about quit looking.</p>
+  <p><em>He asked me a thing,</em> Mr. Pell said. <em>When Hod read out the Mississippi part, he knew every tree in it. He asked me did the piece say what comes to the men who do such work. I told him it said something. I read it to him off the proof.</em></p>
+  <p>The slip was in his apron. He read it to the two boys as he had read it to Odom, flat, the way he read copy.</p>
+  <div class="verse">
+    <p>When men take it in their heads to-day to hang gamblers or burn murderers, they should recollect that in the confusion usually attending such transactions they will be as likely to hang or burn some one who is neither a gambler nor a murderer as one who is, and that, acting upon the example they set, the mob of to-morrow may, and probably will, hang or burn some of them by the very same mistake.</p>
+    <p>&mdash; Abraham Lincoln, Address before the Young Men’s Lyceum of Springfield, January 27, 1838</p>
+  </div>
+  <p><em>He had me read it twice. Then he took out the pin, to show me it was a true stone. He said it would write on anything in this shop, and he wrote on my window with it. He’d have tried the stone next.</em> Mr. Pell put his palm on the marble, as he had in the night. <em>Hod, go and fetch Mr. Francis. Lew, get your coat. You and I are going to the justice.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The paper went out that morning as it stood. There was no time to open a form for a death behind the office, and so the address against mobs was carried around Springfield by a boy who had found the body.</p>
+  <p>The coroner’s jury sat on Monday. Mr. Pell swore that Jesse Odom had been in the office from dark until first light, and both apprentices swore it after him. One of the three thieves was taken that week on the Jacksonville road with a kettle of Ruggles’s on his saddle. The jury found that Odom had come to his death by blows from persons unknown, and there was not a man on it who could not have named six of them. Ruggles gave the breastpin over to the coroner with his own hand. It was sold at vendue in April, with the wagon and the mules, to a drover who was going to Texas.</p>
+  <p>On Tuesday the boys washed the form, and Mr. Pell unlocked it on the stone, and they threw the address back into the cases a letter at a time. That is how it goes in a printing office. By the next Friday the same m and o and b had gone out again in a notice of bottom land for sale.</p>
+  <p>The scratch stayed in the window. It ran a hand’s length down the lower pane, a little out of true. On a clear morning, when the sun got over the roofs across the lot, it laid one bright hair across the imposing stone and across whatever was locked up on it. Lew Carmody worked at that stone four more years. He had apprentices of his own afterward, in Peoria and then in Iowa, and he told them he had never known a clear morning when the line did not come, and that Mr. Pell would not have the pane changed.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The evil done by oneself, self-begotten, self-bred, crushes the foolish, as a diamond breaks a precious stone.<cite>Dhammapada 161, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary the layman Mahā Kāla (&ldquo;Big Black&rdquo;) keeps the observance day and sits up the whole night at the monastery listening to the teaching. Toward dawn, thieves running from a house they have robbed throw their loot down in front of him as he washes his face at the monastery pool. The owners come up, tell him he has only been acting the part of a man who listens to the Dhamma, and beat him to death, and the young monks find his body when they go out with their water pots. The Buddha grants that in this life he did nothing to earn it. Then he tells of an earlier one, in which the same man was a king’s soldier posted at a forest road, wanted a traveler’s wife, had his own jewel hidden in the traveler’s carriage and found there, and saw the man beaten to death on the word of the village headman. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-05.htm">the full commentary story</a>. A later story in the same chapter begins the same way and ends differently; this series tells it as <a href="windmill-water.html">Windmill Water</a>.</p>
+    <h3>Springfield, 1838, and the Big Black, 1835</h3>
+    <p>On January 27, 1838, Abraham Lincoln, twenty-eight years old and the junior partner in John T. Stuart’s law office, read an address called &ldquo;The Perpetuation of Our Political Institutions&rdquo; to the Young Men’s Lyceum of Springfield, which met in the Baptist church. Its subject was mob law. The <a href="https://papersofabrahamlincoln.org/organizations/IL37850">Sangamo Journal</a>, the Whig weekly that Simeon Francis had edited since 1831, printed it on February 3. See <a href="https://en.wikipedia.org/wiki/Abraham_Lincoln%27s_Lyceum_address">Lincoln’s Lyceum address</a>; the passages quoted here follow the text in Arthur Brooks Lapsley’s edition of the <a href="https://www.gutenberg.org/ebooks/2653">Papers and Writings</a> (1905). A country paper of that day was set by hand and worked off on a hand press. Proofs were read aloud against the copy, the type was thrown back into the cases afterward to be used again, and the apprentices were called <a href="https://en.wikipedia.org/wiki/Printer%27s_devil">devils</a>. The imposing stone is the flat slab on which pages of type are locked into their iron frame. Mr. Pell, the two apprentices, Jesse Odom, Ruggles and his store, and the killing behind the office are invented. No such death is recorded at Springfield that morning.</p>
+    <p>The Mississippi that Lincoln described was two and a half years old. Late in June 1835 a rumor went through Madison County that the enslaved people of the plantations around Beattie’s Bluff, on the <a href="https://en.wikipedia.org/wiki/Big_Black_River_(Mississippi)">Big Black River</a>, meant to rise on the Fourth of July, led by white outlaws of the kind a new pamphlet had attached to the name of <a href="https://en.wikipedia.org/wiki/John_Murrell_(bandit)">John Murrell</a>. Self-appointed committees there and at Livingston questioned black men under the lash and hanged a number of them. They also hanged several white men, among them two &ldquo;steam doctors,&rdquo; itinerant botanic practitioners, from the grating of the Livingston jail window. In the same week a crowd at Vicksburg hanged five gamblers. Travelers and newcomers were the first white men suspected. The ferry, its captain of patrol, the Squire and the couple from Tennessee are invented.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the lay disciple Mahā Kāla from the Dhammapada commentary (verse 161). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-05.htm">The original</a>. Words from Abraham Lincoln’s address before the Young Men’s Lyceum of Springfield (1838). Written by Claude Fable 5.2.
+  <div class="pager"><a href="mataji.html">&larr; Mataji</a><a href="index.html">All stories</a><a href="strangler-fig.html">Strangler Fig &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // One hairline of light, a little out of true, lying across the page the way
+  // the scratch in the pane lay across the imposing stone; a glint walks along it.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, motes = [], t0 = null;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.max(8, Math.min(22, W / 70)));
+    motes = [];
+    for (var i = 0; i < n; i++) motes.push({ x: Math.random(), y: Math.random(), r: 0.5 + Math.random() * 0.9, s: 0.004 + Math.random() * 0.008, p: Math.random() * 6.283 });
+  }
+  function lineY(x) {
+    // two segments with a slight kink at 58% of the width
+    var k = W * 0.58, y0 = H * 0.36, yk = H * 0.418, y1 = H * 0.455;
+    return x < k ? y0 + (yk - y0) * ((x + W * 0.05) / (k + W * 0.05)) : yk + (y1 - yk) * ((x - k) / (W * 1.05 - k));
+  }
+  function draw(ts) {
+    if (t0 === null) t0 = ts || 0;
+    var t = reduce ? 0 : ((ts || 0) - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var k = reduce ? 0.44 : 0.5 + 0.42 * Math.sin(t * 0.045);
+    var x0 = -W * 0.05, x1 = W * 1.05;
+    var g = ctx.createLinearGradient(x0, 0, x1, 0);
+    var a = Math.max(0.01, k - 0.2), b = Math.min(0.99, k + 0.2);
+    g.addColorStop(0, 'rgba(246,241,228,0.035)');
+    g.addColorStop(a, 'rgba(246,241,228,0.06)');
+    g.addColorStop(k, 'rgba(246,241,228,0.5)');
+    g.addColorStop(b, 'rgba(246,241,228,0.06)');
+    g.addColorStop(1, 'rgba(246,241,228,0.035)');
+    ctx.strokeStyle = g; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x0, lineY(x0)); ctx.lineTo(W * 0.58, lineY(W * 0.58)); ctx.lineTo(x1, lineY(x1)); ctx.stroke();
+    var gx = x0 + (x1 - x0) * k, gy = lineY(gx);
+    var bloom = ctx.createRadialGradient(gx, gy, 0, gx, gy, 46);
+    bloom.addColorStop(0, 'rgba(246,241,228,0.16)');
+    bloom.addColorStop(1, 'rgba(246,241,228,0)');
+    ctx.fillStyle = bloom; ctx.beginPath(); ctx.arc(gx, gy, 46, 0, 6.283); ctx.fill();
+    // paper dust turning in the lamp light
+    for (var i = 0; i < motes.length; i++) {
+      var m = motes[i];
+      var mx = ((m.x + t * m.s * 0.35) % 1) * W, my = ((m.y + t * m.s) % 1) * H;
+      var al = 0.05 + 0.05 * Math.sin(t * 0.6 + m.p);
+      ctx.fillStyle = 'rgba(210,150,110,' + al.toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(mx, my, m.r, 0, 6.283); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw(0);
+  if (!reduce) requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+
+</script>
+</body>
+</html>
