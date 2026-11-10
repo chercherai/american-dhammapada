@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The White Disk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose in deep lake water seen from above, dark theme; in one margin a white disk on a marked line sinks slowly through the blue until it is lost, then is raised until it can just be seen again; datelined sections. */
+  --ground: #071c2e;
+  --ground-2: #0d2a43;
+  --paper: #e3edf1;
+  --paper-dim: #93adba;
+  --accent: #9fd3e8;
+  --glow: #f4f9fb;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #12436a 0%, #0b2c48 38%, var(--ground) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(227,237,241,.13); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 30px rgba(159,211,232,.2); }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(13,42,67,.82); border: 1px solid rgba(227,237,241,.13); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(227,237,241,.13); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(227,237,241,.13); border-bottom: 1px solid rgba(227,237,241,.13); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(13,42,67,.82); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.34 &middot; Jotika</span></nav>
+<header>
+  <h1>The White Disk</h1>
+  <div class="epigraph">&hellip; having no particular home, but equally at home everywhere.<br>&mdash; Henry David Thoreau, &ldquo;Walking&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Here is how I heard it,</span> on the Nevada side.</p>
+
+<section>
+  <h2>I. The Stone Light</h2>
+  <p class="dateline">East shore of Lake Tahoe, Nevada &middot; 1998</p>
+  <p>There was a house on the Nevada side with no lamp in it. It belonged to a man named Bright. The night he was born, in Carson City, every ring and watch and belt buckle in town gave off light, and the rifles in the sheriff&rsquo;s rack shone so that the deputy on duty read his paper by them. People said that was where the name came from, though it had been his father&rsquo;s name too.</p>
+  <p>When he was of an age to marry, a crew came to clear a lot for him above the public beach. A carpenter none of them knew walked onto the site and asked what they were doing. Then he told them to go home. <em>He won&rsquo;t live in anything you can build.</em> By morning the house stood there, seven stories of it, with seven walls around it and a gate in each wall. Nobody on the east shore has ever claimed the work.</p>
+  <p>The walls and floors were of stone so clear and so polished that they gave back the lake. There were stones in the ceilings that gave light, and the household ate and read by them. His wife came from the north. She never said how far, and it was understood to be past where there are roads or fences. She brought with her a quart pot of rice and three stones the size of goose eggs. A pan set on those stones got hot, and when the food was done they cooled. In all the years of that house nobody saw the bottom of the pot. Anybody who came to the first gate hungry was fed from it, and anybody who came short was sent off with what he needed. For some summers there were so many cars on the shoulder of the highway that the county put up signs.</p>
+  <p>In June of 1998 Bim Sayer came to breakfast. Bim owned the Regent at Stateline, eleven hundred rooms, and on that end of the lake he was as near to a king as Nevada allows. He brought his boy, A.J., who was seven and held on to one of his father&rsquo;s fingers.</p>
+  <p>A woman sweeping at the first gate put out her hand to help him over the sill. Bim took her for Mrs. Bright and would not touch her. Inside, the floor was so clear that he saw a hundred feet of drop under his shoes, and he stopped.</p>
+  <p><em>You&rsquo;ve dug me a pit, Bright.</em></p>
+  <p><em>There&rsquo;s no pit. Walk where I walk.</em></p>
+  <p>So the owner of the Regent crossed the hall in another man&rsquo;s steps, with his boy behind him.</p>
+  <p>They ate on the top floor. Bright sent word down to his wife that Mr. Sayer was at the table.</p>
+  <p><em>Who is Mr. Sayer?</em></p>
+  <p><em>He owns the south end. You could say he&rsquo;s over us.</em></p>
+  <p>She was a while answering. <em>I didn&rsquo;t know anybody was over us,</em> she said. <em>We must have done something by halves, somewhere back.</em> But she came up and stood by Bim&rsquo;s chair, and after a minute tears were running down her face.</p>
+  <p><em>She&rsquo;s afraid I&rsquo;ll take the place,</em> Bim said. <em>Tell her I don&rsquo;t want it.</em></p>
+  <p><em>She isn&rsquo;t crying,</em> said Bright. <em>It&rsquo;s the smoke in your coat. She has never sat by a lamp or a fire. You came here off your casino floor.</em> When they left he gave Bim one of the stones, to read by.</p>
+  <p>The boy had looked at the ceilings through the whole meal. <em>My father is a fool,</em> he thought. <em>He&rsquo;s the king and he lives in sheetrock. When it&rsquo;s mine, this man doesn&rsquo;t stay here one day.</em></p>
+</section>
+
+<section>
+  <h2>II. The First Gate</h2>
+  <p class="dateline">The same shore &middot; August 2025</p>
+  <p>In March of 2025 A.J. Sayer and a lawyer named Devlin had the old man found unfit to manage his affairs. They put him in a locked unit in Carson City, and A.J. signed for who went in to him and what went in with them. Bim Sayer died there in June. He weighed a hundred and nine pounds. One nurse said he had stopped eating. Another said, once, and afterward would not say it again, that the trays had stopped coming.</p>
+  <p>By August the Regent was A.J.&rsquo;s, and he remembered the breakfast.</p>
+  <p>He came up the shore road on a Tuesday morning with eleven black Suburbans. He had forty men. Some were lawyers and some were the kind the casino kept for other work, and those were armed. He had a locksmith. He had a paper Devlin had drawn up, which did not need to be good.</p>
+  <p>The outer wall of Bright&rsquo;s place ran along the highway for a quarter mile. A.J. came around the last curve and saw eleven black cars and forty men coming at him out of the stone. He put his foot on the brake.</p>
+  <p><em>He&rsquo;s got his own,</em> he said. <em>He knew. He&rsquo;s got as many as we have.</em></p>
+  <p>The column sat on the shoulder with the engines running, facing itself.</p>
+  <p>Then the woman at the first gate came out. Her name was Mrs. Coley. She had swept that gatehouse for thirty years, and she still had the broom in her hand.</p>
+  <p><em>Where are you going?</em> she said.</p>
+  <p>Nobody who was there has explained the next part well. She was one woman past seventy with a push broom. Forty men went up the highway and down the highway and into the manzanita, and two went into the lake in their shoes. The Suburbans stood on the shoulder with their doors open until dark.</p>
+  <p>A.J. ran downhill. He came out at the pier in Zephyr Cove, where the Regent kept a boat, and he took it straight out for the middle of the lake, as a man does who wants nothing near him on any side.</p>
+</section>
+
+<section>
+  <h2>III. Twenty Rings</h2>
+  <p class="dateline">Mid-lake &middot; the same morning</p>
+  <p>There was one thing out there, and it was the university&rsquo;s boat.</p>
+  <p>The university has kept a record of how clear the lake is since 1968. Every couple of weeks, the year round, the boat goes out to the same two stations. Somebody lowers a white disk the size of a dinner plate on a marked line and watches it down. The depth where you lose it gets written in the log. Then you bring it up until you have it again, and that gets written, and the number halfway between is the reading. In the first years it averaged ninety-seven feet. In 2024 it was sixty-two.</p>
+  <p>For thirty-six of those years the hand on the line had been Peg Ostrander&rsquo;s. She was a field technician, sixty-three years old. She had outlasted three directors, and she answered most questions with the number.</p>
+  <p>Bright had been riding along on reading days for eleven years. He had come the first time to ask whether the lake was getting brighter or darker, and she had handed him the logbook. After that he drove around to Tahoe City on those mornings, straight from breakfast, paid for the diesel and sat on the stern locker. While the disk was down Peg would say a sentence or two to whoever was aboard. It was mostly about not wanting the number to be anything. <em>You lose it where you lose it,</em> she said. He came to hear that as other people go to church.</p>
+  <p>They were on station with the engine off and the disk down when the Regent&rsquo;s boat came across the flat water. A.J. cut his engine and stood up in it.</p>
+  <p><em>Bright. You set your people on me, and here you sit like a man in a pew.</em></p>
+  <p>Bright got up off the locker. <em>What&rsquo;s happened to you, A.J.?</em> Then he looked at him a little longer. <em>Did you go up there to take the house?</em></p>
+  <p><em>That&rsquo;s what I went for.</em></p>
+  <p><em>A thousand of you couldn&rsquo;t take that house if I didn&rsquo;t want it taken.</em></p>
+  <p><em>What are you now? You figure to run this lake?</em></p>
+  <p><em>No. I don&rsquo;t want to run anything. But there isn&rsquo;t a man alive, you or a thief, who takes one thread off my cuff unless I&rsquo;ve let go of it.</em></p>
+  <p>A.J. thought about that. <em>Then let go of it. Give it to me.</em></p>
+  <p>Bright held up his hands. He wore two rings on every finger, and nobody on that boat had ever asked him why. <em>Here are twenty rings. I&rsquo;m not giving them to you. Come and get them.</em></p>
+  <p>A.J. stepped across the two rails. He was thirty-four and lifted weights every morning. He took hold of the outside ring on Bright&rsquo;s left little finger and pulled. He set his feet and hauled. He crouched and jumped with both hands on it and went up twenty-seven feet, higher than the antenna, and came down still holding on. He jumped again and went up a hundred and twenty. Tess, the graduate student keeping the log that day, wrote both figures in the margin, since she did not know what else to do with them. The ring had not gone over the knuckle.</p>
+  <p><em>Hold out your jacket,</em> said Bright.</p>
+  <p>A.J. held it out by the hem. Bright straightened his fingers, and twenty rings slid off and dropped into the cloth in a small heap.</p>
+  <p><em>You see how it is,</em> Bright said.</p>
+  <p>A.J. stood looking down into the jacket. Then he looked at Bright&rsquo;s bare hands to see what was left on them. Bright watched him do it. They say on the boat that this was what turned him, more than the cars at his wall, more even than the old man in Carson City. He had seen a grown man with his coat full look for more.</p>
+  <p><em>A.J., I want to go.</em></p>
+  <p><em>Go where?</em></p>
+  <p><em>Off it. Out from under all of it. You&rsquo;re what there is for a king on this end of the lake, so I&rsquo;m asking you. Give me leave.</em></p>
+  <p>A.J. worked it out where he stood. With Bright gone, the house was a job for a locksmith.</p>
+  <p><em>Go,</em> he said.</p>
+  <p>Peg had not looked up through any of this. <em>Fifty-nine and a half,</em> she said, and Tess wrote it down.</p>
+</section>
+
+<section>
+  <h2>IV. Sixty-One</h2>
+  <p class="dateline">Lake Tahoe &middot; September 2025</p>
+  <p>He did not go back up the shore road. He walked off the dock at Tahoe City that afternoon in what he had on. The lake has seventy-two miles of shore, and he slept on some part of it, a different part most nights, and ate what he was handed. On reading days he was at the dock before the crew.</p>
+  <p>On the second trip Peg gave him the line. <em>Don&rsquo;t help it,</em> she said. That was all the instruction there was. Everybody helps it at first. You know about where it went last time, and you see it a foot longer than it can be seen.</p>
+  <p>On the nineteenth of September he let the disk down over the shaded side. He watched it go from white to a greenish white, and then to something he was not sure of, and then he was sure it was gone, and he said so. He brought it up until it was there again.</p>
+  <p><em>Sixty-one,</em> he said. He had not wanted it to be anything.</p>
+  <p>When he raised his head the east shore had changed. Where the wall had been there was granite and manzanita and a stand of Jeffrey pine, with the highway in plain sight behind. A.J. had been up there twice that month with the locksmith and been turned back at the first gate. The third time there was no gate. They stood on bare rock with Devlin&rsquo;s paper. A.J. still has the twenty rings, and it is said that not one of them will go over his knuckle.</p>
+  <p>In the same hour a floatplane came in low out of the north and set down off the point. Mrs. Bright walked out on the rocks with the quart pot under her arm and the three stones tied in a dish towel. Somebody reached down a hand and she went aboard. No flight plan was filed in either state. Mrs. Coley went home to Gardnerville and took her blanket with her.</p>
+  <p>Peg looked at the shore, and then at the logbook.</p>
+  <p><em>Sixty-one,</em> she said. <em>Write it.</em></p>
+  <p>Tess waited until they were tied up.</p>
+  <p><em>Mr. Bright. Do you miss it? The house? Her?</em></p>
+  <p><em>No,</em> he said.</p>
+  <p>She took that to Peg in the wheelhouse. <em>That isn&rsquo;t true, Peg. He may think it is. Nobody has all that and loses it in one afternoon and says no like that.</em></p>
+  <p><em>I&rsquo;ve caught every one of you reading it long,</em> Peg said. <em>You twice. I&rsquo;ve done it myself. You want a good year, so you see a good year. I stood next to him today, and he read it where it was.</em></p>
+  <p>It was the most she had said at one time all season. Above the depth sounder two strips of paper were taped to the bulkhead. The technician before her had typed them in 1971, and the tape had gone the color of tea. She put her finger on them, and Tess read them out.</p>
+  <div class="verse">
+    <p>If you are ready to leave father and mother, and brother and sister, and wife and child and friends, and never see them again,&mdash;if you have paid your debts, and made your will, and settled all your affairs, and are a free man; then you are ready for a walk.</p>
+    <p>&hellip; having no particular home, but equally at home everywhere.</p>
+    <p>&mdash; Henry David Thoreau, &ldquo;Walking&rdquo;</p>
+  </div>
+  <p>Tess read it over again to herself.</p>
+  <p>Out on the dock Bright had the disk in the rinse bucket. He hung it on its nail by the wheelhouse door, where it dripped for a while, and went up the ramp toward the road.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who, leaving all longings, travels about without a home, and in whom all covetousness is extinct.<cite>Dhammapada 416, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The commentary hangs two stories on this one verse. The first is Ja&#7789;ila&rsquo;s, and this is the second. The rich man Jotika (&ldquo;the radiant one&rdquo;) lives in a jeweled palace that the god Sakka raised for him, with seven walls and a yakkha at each gate. His wife was brought to him from Uttarakuru, the northern continent where nothing is owned, with one pot of rice that never runs out and three crystals that cook it, and the household lives by the light of gems and has never seen a lamp. When King Bimbis&#257;ra comes to see the palace, the little prince Aj&#257;tasattu walks beside him holding his finger and decides that when he is king this householder will not keep it. Years later Aj&#257;tasattu, with Devadatta&rsquo;s help, has his father killed. He marches on the palace, takes his own reflection in the walls for a defending army, and is routed by the yakkha of the first gate. He flees to the monastery, where Jotika is spending the Observance Day listening to the Buddha. Jotika tells him that a thousand kings could not take a thread from him against his will, and offers the twenty rings on his ten fingers. The king leaps eighteen cubits and then eighty and cannot pull one off. Jotika straightens his fingers and they fall into the king&rsquo;s robe. Then, shaken by what he has seen, he asks the king&rsquo;s leave to go forth. He becomes an arahat, his wealth vanishes, and the gods take his wife back to Uttarakuru. When the monks doubt that he feels no longing, the Buddha answers with the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-34.htm">the full commentary story</a>. The palace and the king&rsquo;s first visit are told inside <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-33.htm">the story before it</a>. On the king, see <a href="https://en.wikipedia.org/wiki/Ajatashatru">Aj&#257;tasattu</a>, and on the wife&rsquo;s country, <a href="https://en.wikipedia.org/wiki/Uttarakuru">Uttarakuru</a>.</p>
+    <h3>Lake Tahoe and the white disk, 1968 to 2025</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Lake_Tahoe">Lake Tahoe</a> lies across the California and Nevada line at more than six thousand feet, with seventy-two miles of shoreline, about a third of it in Nevada. The hotel-casinos stand at the south end, in <a href="https://en.wikipedia.org/wiki/Stateline,_Nevada">Stateline</a>, and the east shore above them has long been a place of large private estates behind walls. The Sayers, the Regent, Mr. Bright and his house are invented.</p>
+    <p>The disk is real. A <a href="https://en.wikipedia.org/wiki/Secchi_disk">Secchi disk</a>, named for the Italian astronomer who devised it in 1865, is a plain white plate lowered on a line; the depth at which it can no longer be seen is the measure of the water&rsquo;s clarity. The University of California, Davis has <a href="https://tahoe.ucdavis.edu/secchi">taken that measurement at Lake Tahoe</a> since 1968, with a ten-inch disk, from a research boat, at a long-term station and a mid-lake station, some twenty to thirty times a year. The average for 1967 to 1971 was 97.4 feet, which is still the restoration target. The 2024 average was 62.3 feet. Peg Ostrander and her crew are invented, as are the strips over the depth sounder. The words on them are from Thoreau&rsquo;s essay <a href="https://en.wikipedia.org/wiki/Walking_(Thoreau)">&ldquo;Walking,&rdquo;</a> printed in the <em>Atlantic Monthly</em> in June 1862, a month after he died, in which he derives &ldquo;sauntering&rdquo; from <em>sans terre</em>, without land or a home.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder Jotika from the Dhammapada commentary (verse 416). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-34.htm">The original</a>. Words from Henry David Thoreau, &ldquo;Walking&rdquo; (1862). Written by Claude Fable 5.2.
+  <div class="pager"><a href="the-dogs-book.html">&larr; The Dog&#x27;s Book</a><a href="index.html">All stories</a><a href="the-sway-pole.html">The Sway Pole &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  // a white disk on a line goes down through blue water in one margin, is lost, and is raised until it is seen again
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var CY = 2400, p = reduce ? 0.22 : (t % CY) / CY;
+    // 0..0.55 lowering, 0.55..0.65 lost, 0.65..0.85 raising a little, 0.85..1 held then drawn up out of sight
+    var top = H * 0.08, deep = H * 0.86, depth;
+    if (p < 0.55) depth = p / 0.55;
+    else if (p < 0.65) depth = 1;
+    else if (p < 0.85) depth = 1 - (p - 0.65) / 0.2 * 0.22;
+    else depth = 0.78 * (1 - (p - 0.85) / 0.15);
+    var x = W > 760 ? W * 0.5 + Math.min(W * 0.36, 430) : W * 0.9;
+    var y = top + (deep - top) * depth;
+    var vis = Math.max(0, 1 - depth / 0.86);          // gone a little before the bottom of its travel
+    var a = 0.03 + 0.5 * vis * vis;
+    var r = (W > 760 ? 30 : 20) * (1 - depth * 0.35);
+    var sway = reduce ? 0 : Math.sin(t / 90) * 3 * depth;
+    // the line, with its marks
+    ctx.strokeStyle = 'rgba(214,232,240,' + (0.10 + 0.12 * vis) + ')';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + sway, y); ctx.stroke();
+    for (var m = 1; m < 12; m++) {
+      var my = top + (deep - top) * (m / 12) * 1.0;
+      if (my > y - r) break;
+      ctx.fillStyle = 'rgba(214,232,240,' + (0.22 * (1 - m / 13)) + ')';
+      ctx.fillRect(x - 3 + sway * (my / y), my, 6, 1);
+    }
+    // the disk, seen a little from above
+    ctx.fillStyle = 'rgba(244,249,251,' + a + ')';
+    ctx.beginPath(); ctx.ellipse(x + sway, y, r, r * 0.42, 0, 0, Math.PI * 2); ctx.fill();
+    if (!reduce) { t++; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

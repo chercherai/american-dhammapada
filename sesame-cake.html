@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesame Cake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on warm tahini-colored paper, light theme; behind the text a few sesame seeds drift down the page very slowly, turning, and are gone at the bottom edge. */
+  --ground: #f0e7d3;
+  --ground-2: #e6dabf;
+  --paper: #2b2318;
+  --paper-dim: #6f6350;
+  --accent: #8b4a1d;
+  --glow: #3d5f86;
+  --line: rgba(43,35,24,.16);
+  --panel: rgba(255,250,236,.66);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f8f1e0 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; }
+.epigraph { border-left: 1px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: var(--panel); border: 1px solid var(--line); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--panel); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 5.14 &middot; Sudhamma</span></nav>
+<header>
+  <h1>Sesame Cake</h1>
+  <div class="epigraph">The exclusionist in religion does not see that he shuts the door of heaven on himself, in striving to shut out others.<br>&mdash; Emerson, &ldquo;Compensation&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how it went around the store,</span> on the west side of Bloomington.</p>
+
+<section>
+  <h2>I. The Loft</h2>
+  <p class="dateline">Bloomington, Indiana &middot; 1978 to 1985</p>
+  <p>Lowell Sudduth came into the store in the spring of 1978 for a pound of lentils and stayed seven years. He had been a Methodist youth minister in Kokomo until the Sunday he found he could not get through the benediction, and after that he had painted houses. He was thirty-four, long in the leg, with a voice people liked to listen to. Hart Householder took him back to the office and played him the first tape, the woman with the cough and the kitchen clock. Lowell sat through both sides of it without shifting his feet and then asked if there was a second one.</p>
+  <p>By summer he was living in the loft over the old scale room, where Hart&rsquo;s father had kept the seed-corn records. Hart charged him nothing and fed him. Lowell ran the register on Saturdays, and the rest of the week he ran the sitting.</p>
+  <p>Before he came it had been six or eight people going down to the pawpaw patch behind the mill whenever they thought of it. Lowell gave it hours. Wednesday night and Sunday morning there was a half hour of tape, then the cassette was turned over and there was a half hour more. Afterward he read one page aloud from a small <em>Tao Teh King</em>, the old Legge translation, which he carried in his coat. He built the rain shed himself out of siding from the mill&rsquo;s own corn crib, and he was particular about who drove a nail in it.</p>
+  <p>He was good at the work. People came from Spencer and from Nashville on Wednesday nights, and it was Lowell they asked how long before your knees quit hurting. He had a place under the biggest tree at the head of the grove, facing the rest, with the tape machine by his knee. Nobody else touched the machine.</p>
+  <p>Hart never had people to his table in those years without Lowell at it. If a card went up on the bulletin board about a supper, the card said AND LOWELL. If Hart carried a sack of rice out to somebody&rsquo;s car he said, <em>Lowell and I thought you could use this.</em> It went on that way for seven years, and a man gets used to the sound of his own name.</p>
+</section>
+
+<section>
+  <h2>II. Last</h2>
+  <p class="dateline">The book room &middot; a Friday in late September 1985</p>
+  <p>The two who came through that fall were her old students, a nurse and a carpenter. They were on their way east and they had been driving since Kansas. Hart went out to the edge of town to meet their car, which he had never done for anybody.</p>
+  <p>Lowell set up the folding chairs in the book room. He put one at the front, turned sideways, for himself, since somebody would have to say a few words first. Nobody asked him to say them. Hart only said, <em>These are her people,</em> and sat down on the floor.</p>
+  <p>The nurse did most of the talking. She said they were worn out and would keep it short, and it was short. Lowell did not take in much of it. He was watching Hart. In seven years of Wednesday nights he had not seen Hart&rsquo;s face do what it did in that hour.</p>
+  <p>When it was over Hart got up off the floor.</p>
+  <em>You&rsquo;ll eat with us tomorrow before you go,</em> he said to the two of them. <em>Noon, here in the store. Everybody in this room. Bring whoever you came with.</em>
+  <p>The nurse nodded. Forty people stood up and started in talking. Hart shook hands all the way to the back of the room, where Lowell was folding chairs and stacking them against the cookbooks.</p>
+  <em>You come too, Lowell.</em>
+  <p>Lowell hung a chair on the stack. He had been asked after two strangers and after forty people, some of whom had not sat through one Wednesday.</p>
+  <em>I&rsquo;ve got things to see to tomorrow.</em>
+  <em>Come and eat.</em>
+  <em>You go ahead.</em>
+  <em>Lowell. Come eat with us.</em>
+  <em>I said I had things.</em>
+  <p>Hart looked at him a moment. <em>Well, I hope you&rsquo;ll be there,</em> he said, and went to find the visitors a bed.</p>
+</section>
+
+<section>
+  <h2>III. The Table</h2>
+  <p class="dateline">The store &middot; Saturday morning</p>
+  <p>Lowell did not sleep. A little after five he heard Hart moving below him, and the cooler door, and he thought he would just go and see what was being put on for them. He came down the loft stairs with his coat buttoned.</p>
+  <p>Hart had laid planks across the grain bins for the length of the store and covered them with bed sheets. There was a crock of pinto beans and a pan of cornbread the size of a door. There was brown rice with walnuts, and tabouli, and the last tomatoes sliced on a platter, and a whole wheel of cheese from the Amish in Daviess County. There were six round loaves, and apple butter, and honey in the comb, and a persimmon pudding. At the far end he had set a dishpan of pawpaws, picked up that morning out of the wet grass. Two women from the Tuesday quilters were slicing bread. A farmer from over by Stanford had come in with cider and stayed to watch.</p>
+  <em>Sit down, Lowell. There&rsquo;s coffee.</em>
+  <em>I won&rsquo;t sit. I&rsquo;m on my way out.</em>
+  <p>He walked down the planks and looked at all of it, taking his time, like a man going over a car he does not intend to buy.</p>
+  <em>It&rsquo;s a fine table, Hart. There&rsquo;s only the one thing you&rsquo;ve left off.</em>
+  <em>What&rsquo;s that?</em>
+  <em>Sesame cake.</em>
+  <p>Hart&rsquo;s father had sold cake in that building for forty years. That was the trade&rsquo;s word for it. Linseed cake, soybean cake and cottonseed cake were the hard slabs left over when the oil has been pressed out of the seed, and they were sold by the hundredweight to put weight on hogs. Sesame makes a cake like the rest. The farmer from Stanford knew what had been said, and so did the two women. Lowell had called the man a feed dealer at his own table.</p>
+  <p>Hart laid down the bread knife.</p>
+  <em>My dad had a customer once who went down to the fair at Louisville and brought home a prize bantam hen. She took up with a crow. He swore to this. She hatched one chick out of it, and when that chick tried to crow like a rooster it said caw, and when it tried to caw like a crow it said cock-a-doodle-doo.</em> He wiped his hands on his apron. <em>Two people drove in here last night with everything she ever gave them, and they laid it out for anybody to pick up. You had all night to turn it over. And what comes out of your mouth this morning is sesame cake.</em>
+  <em>You&rsquo;re making fun of me in front of people,</em> Lowell said. <em>It&rsquo;s your store, Hart. I&rsquo;ll get out of it.</em>
+  <em>I am not making fun of you. Stay where you are. It&rsquo;s a good patch down there, and the loft is yours, and your dinner, as long as this roof holds.</em>
+  <em>It&rsquo;s your store. I&rsquo;ll go.</em>
+  <em>Stay, Lowell.</em>
+  <em>It&rsquo;s your store.</em>
+  <em>Where will you go?</em>
+  <em>I&rsquo;m going out there. I&rsquo;m going to see her.</em>
+  <p>Nobody from the store had ever seen her. All any of them had was a box number and the name on the back of a cancelled check.</p>
+  <em>Then tell her all of it,</em> Hart said. <em>What you said and what I said, both. I won&rsquo;t be surprised to see you back here.</em>
+</section>
+
+<section>
+  <h2>IV. Thirty Days</h2>
+  <p class="dateline">Indianapolis to Weed, California, and back &middot; October</p>
+  <p>Greyhound sold a pass in those years called the Ameripass, good for all the riding a person could stand in seven days, or fifteen, or thirty. Lowell bought the thirty-day one at the depot in Indianapolis out of the house-painting money he kept in a coffee can. It was cheaper than two tickets, and he did not know how long he would be. He did not expect to use it up.</p>
+  <p>It was three nights sitting up. St. Louis, Kansas City, Denver, Salt Lake, Reno, Sacramento, and then north to a lumber town called Weed, where the bus let him down in sight of the mountain. He spent the three nights on his account of things. There were the seven years and the shed and the Wednesdays, and who had built what, and who had said what first. By Salt Lake he had it so that nobody could have found a hole in it.</p>
+  <p>He walked and thumbed the nine miles to Mount Shasta and stood in the post office until a young man with a key opened the right box.</p>
+  <em>I&rsquo;m from Householder&rsquo;s, in Indiana.</em>
+  <p>The young man looked at him, and at the grip. <em>You&rsquo;d better come on, then,</em> he said.</p>
+  <p>She had a small house on Alder Street. He knew the cough before he saw her, and then the clock. She was past seventy, in a housedress and a grey cardigan, and she did not get up. He told it standing. He told it the way it had gone, since Hart had said to, and it did not sound in her kitchen the way it had sounded on the bus.</p>
+  <em>That man has kept his word for fifty years and fed everybody that came up his road,</em> she said. <em>You sleep in his loft. And you stood at his table, in front of his company, and called him a feed man. You were the small one in that room, Mr. Sudduth, and you tried to make him small. Go back and ask his pardon.</em>
+  <p>That was the whole of it. The young man gave him a plate of beans on the back step and walked him out to the highway.</p>
+  <p>Three more nights. He came into the store with the grip still in his hand and Hart was at the register.</p>
+  <em>Hart, it was my fault. All of it. There, I&rsquo;ve said so. Now forgive me and let&rsquo;s be done with it.</em>
+  <p>Hart looked at him for some time.</p>
+  <em>No,</em> he said. <em>I don&rsquo;t believe I will.</em>
+  <p>Lowell had twenty-three days left on the pass and he spent three of them going straight back. He was hot the whole way. He had gone two thousand miles and said it, and the man would not have it, and what more was there? He said so in her kitchen. She heard him out. She knew that Hart would forgive him, and she knew what it would take, and she did not tell him.</p>
+  <em>Well,</em> she said, <em>you had better go on back, then,</em> and got up to see to something on the stove.
+  <p>So he went back. They say he got as far as the depot in Indianapolis and stood under the departures board for an hour, and could not find one thing to say to Hart that he had not said already. Then he got on the westbound.</p>
+  <p>By that time the drivers knew him. One out of Salt Lake said, <em>You again,</em> and held the door. Somewhere in Kansas, the third time through it, he had quit working on his account. He had gone over it so often there was nothing left on it. At night in Nevada there is nothing in a bus window but your own face. He slept against the glass with his mouth open like everybody else. A woman with two children used his shoulder from Cheyenne to Rock Springs, and he let her. He ate out of machines.</p>
+  <p>When he came up Alder Street that time he had crossed the country five times in seventeen days. He needed a shave, and he had no case to make.</p>
+</section>
+
+<section>
+  <h2>V. Remnants</h2>
+  <p class="dateline">Alder Street, Mount Shasta &middot; the middle of October</p>
+  <p>She looked at him in the door.</p>
+  <em>Come in and sit down, Mr. Sudduth.</em>
+  <p>It was the first time she had asked him to sit. The young man, whose name was Andy, put a cup in front of him.</p>
+  <em>Mr. Tibbets next door is going east to see his daughter in Dayton,</em> she said, <em>and he doesn&rsquo;t like to ride alone. You go along with him as far as Indiana.</em>
+  <p>He said he would.</p>
+  <em>Now listen. A man who has sat down to be quiet has no business holding a deed to it. My shed. My Wednesday night. My machine. My Hart. Once you say mine over a thing like that, everything you sat down to be rid of comes back and puts on weight.</em>
+  <p>She had a book by her on the table, an old one, the back of it mended with tape. She did not have to hunt for the place.
+<div class="verse">
+    <p>The exclusive in fashionable life does not see that he excludes himself from enjoyment, in the attempt to appropriate it. The exclusionist in religion does not see that he shuts the door of heaven on himself, in striving to shut out others.</p>
+    <p>&mdash; Emerson, &ldquo;Compensation&rdquo;</p>
+  </div></p>
+  <em>That one is mine,</em> she said. <em>Andy says you carry one of your own. Read me the place about the tiptoes.</em>
+  <p>He had read it aloud in the shed perhaps forty times. He took the little book out of his coat and read it to her.
+<div class="verse">
+    <p>He who stands on his tiptoes does not stand firm; he who stretches his legs does not walk (easily). (So), he who displays himself does not shine; he who asserts his own views is not distinguished; he who vaunts himself does not find his merit acknowledged; he who is self-conceited has no superiority allowed to him. Such conditions, viewed from the standpoint of the Tao, are like remnants of food, or a tumour on the body, which all dislike.</p>
+    <p>&mdash; <em>Tao Teh King</em> 24, tr. James Legge</p>
+  </div></p>
+  <p>He had stopped at the remnants of food, and she had waited, and he had gone on to the end.</p>
+  <em>You&rsquo;ve been reading that to other people for seven years,</em> she said.
+  <em>Yes, ma&rsquo;am.</em>
+  <em>It&rsquo;s a good book.</em>
+  <p>Mr. Tibbets was seventy-one and had been a brakeman on the McCloud River Railroad. He was hard of hearing. He had never sat still on purpose in his life and had never heard one of the tapes, though they were copied in the garage twenty feet from his bedroom window. He carried a cardboard suitcase and a sack of sandwiches, and from Weed to Reno he told Lowell about log trains. He offered him half of everything he had. In the depot at Salt Lake he came back from the newsstand with a sesame bar, broke it, and held out the bigger piece.</p>
+  <p>Lowell looked at it. Then he laughed, which he had not done in a month, and ate it.</p>
+</section>
+
+<section>
+  <h2>VI. The Chair by the Door</h2>
+  <p class="dateline">Bloomington &middot; the end of October, and after</p>
+  <p>They walked in from the highway, the two of them. Hart was on the loading dock with a sack of rice on his shoulder. Lowell stopped at the foot of the steps where Hart could see him and took off his cap. Mr. Tibbets stood beside him holding the suitcase and looked the mill over with interest.</p>
+  <em>Hart. You asked me last and I couldn&rsquo;t stand it. I came down that morning to spoil your table, and I said the meanest thing I could find, in your father&rsquo;s own building. I&rsquo;m sorry for it. I&rsquo;m asking you to forgive me.</em>
+  <p>Hart let the sack down.</p>
+  <em>That&rsquo;s forgiven, Lowell. That&rsquo;s gone. And I had no call to bring out that crow in front of people. If I did you wrong, you forgive me.</em>
+  <em>Yes.</em>
+  <em>Who&rsquo;s this?</em>
+  <em>Mr. Tibbets. He&rsquo;s going on to Dayton.</em>
+  <em>Not until he eats,</em> said Hart.
+  <p>Lowell kept to what she had told him. It did not take long. The ones who sat near him that month say only that some time before the first hard frost it was finished in him, and that you could tell by the fact that there was nothing left to step on. You could ask him first or last, or forget to ask him. He read the page from the little book if somebody handed it to him. Whoever sat nearest the machine turned the tape over.</p>
+  <p>Two summers later Hart signed the patch away to a board, and Lowell would not be on it. When the card went up about the bread truck he said he had been to Alder Street, and somebody ought to mind the store.</p>
+  <p>Hart put a tin of halvah by the register that winter, next to the shoebox of tapes, with a card on it in his own printing. SESAME CAKE. ASK LOWELL. It sold steadily. People who asked got the story of the crow, told against himself, with both noises.</p>
+  <p>His old place under the big tree stayed empty a while, and then somebody&rsquo;s child took it over. In the shed, in cold weather, there was a folding chair just inside the door, in the draft. It had always gone to whoever came last. Lowell was usually the first one down the hill, and he took that one.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Let the fool wish for a false reputation, for precedence among the Bhikshus, for lordship in the convents, for worship among other people!<cite>Dhammapada 73, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">&ldquo;May both the layman and he who has left the world think that this is done by me; may they be subject to me in everything which is to be done or is not to be done,&rdquo; thus is the mind of the fool, and his desire and pride increase.<cite>Dhammapada 74, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>The monk Sudhamma lived at Macchik&#257;sa&#7751;&#7693;a in the mango grove that the householder Citta had given, and Citta never invited anyone without naming him. When the two chief disciples came, Citta heard S&#257;riputta teach, invited the visitors for the next day&rsquo;s meal, and only then turned to invite Sudhamma, who was stung at being asked last and refused three times. Early next morning he went to look over the food all the same, would not sit down, and remarked that only one thing was missing: sesame cake. Citta answered with the tale of a chick hatched from a hen and a crow, which cawed when it meant to crow and crowed when it meant to caw. Sudhamma said, &ldquo;This is your residence; I will depart,&rdquo; refused three times to stay, and walked the thirty leagues to the Buddha, who put the blame wholly on him and sent him back to ask pardon. Citta refused it. The Buddha, knowing what was needed, let him make the long journey once more without advice, and when he came back with his pride worn down gave him a companion, warned him against thinking &ldquo;this dwelling is mine, this disciple is mine,&rdquo; and spoke the verses. Sudhamma asked pardon in Citta&rsquo;s sight, and Citta gave it and asked his in turn; within a few days Sudhamma was an arahat. Only then did Citta set out to see the Buddha himself, which is the journey told in <a href="the-bread-truck.html"><em>The Bread Truck</em></a>. Here is <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-14.htm">the full commentary story</a>; the sesame cake and the crow are given at length in the monastic code, <a href="https://www.wisdomlib.org/buddhism/book/vinaya-3-the-cullavagga/d/doc370161.html">Cullavagga I.18</a>. More about <a href="https://en.wikipedia.org/wiki/Citta_(disciple)">Citta</a>.</p>
+    <h3>Indiana to California by bus, 1985</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Greyhound_Lines">Greyhound</a> introduced the unlimited-mileage Ameripass in 1972, and for decades it was how people without money crossed the country; in the 1980s it was sold for seven, fifteen or thirty days. A rider going west from Indianapolis went by way of St. Louis, Kansas City, Denver, Salt Lake City and Reno to Sacramento, and changed there for the bus north to <a href="https://en.wikipedia.org/wiki/Weed,_California">Weed</a>, the old lumber town under Mount Shasta. The <a href="https://en.wikipedia.org/wiki/McCloud_Railway">McCloud River Railroad</a> hauled logs and lumber around the mountain&rsquo;s south side from 1897. Hart&rsquo;s remark at the table turns on a feed-trade word: <a href="https://en.wikipedia.org/wiki/Press_cake">press cake</a>, or oil cake, is the solid left when oil is pressed from linseed, soybeans, cottonseed or sesame, and it is sold as livestock feed. The sweet he later puts by the register is <a href="https://en.wikipedia.org/wiki/Halva">halvah</a>, made of ground sesame.</p>
+    <p>Mrs. Varnum reads from Emerson&rsquo;s essay <a href="https://en.wikipedia.org/wiki/Compensation_(essay)">&ldquo;Compensation&rdquo;</a> (1841), in the same volume as the &ldquo;Self-Reliance&rdquo; she reads from in <em>The Bread Truck</em>. Lowell&rsquo;s pocket book is the <em>Tao Teh King</em> in the 1891 translation of the Scottish missionary and Oxford professor <a href="https://en.wikipedia.org/wiki/James_Legge">James Legge</a>, long out of copyright and often reprinted. Lowell Sudduth, Mr. Tibbets, the store and Alder Street are invented, as they were in the earlier story.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder Sudhamma from the Dhammapada commentary (verses 73&ndash;74). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/05-14.htm">The original</a>. Quotations from Ralph Waldo Emerson, &ldquo;Compensation&rdquo; (<em>Essays: First Series</em>, 1841), and the <em>Tao Teh King</em>, tr. James Legge (1891). Written by Claude Fable 5.2.
+  <div class="pager"><a href="a-thousand-stamps.html">&larr; A Thousand Stamps</a><a href="index.html">All stories</a><a href="reading-glasses.html">Reading Glasses &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, seeds = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make(any) {
+    return { x: Math.random() * W, y: any ? Math.random() * H : -10,
+      v: 0.05 + Math.random() * 0.09, a: Math.random() * 6.28, w: (Math.random() - 0.5) * 0.004,
+      s: 3.2 + Math.random() * 1.8, ph: Math.random() * 6.28 };
+  }
+  function seed(p) {
+    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a);
+    ctx.beginPath();
+    ctx.moveTo(0, -p.s);
+    ctx.bezierCurveTo(p.s * 0.75, -p.s * 0.3, p.s * 0.6, p.s * 0.9, 0, p.s);
+    ctx.bezierCurveTo(-p.s * 0.6, p.s * 0.9, -p.s * 0.75, -p.s * 0.3, 0, -p.s);
+    ctx.fillStyle = 'rgba(139,74,29,0.13)'; ctx.fill();
+    ctx.strokeStyle = 'rgba(139,74,29,0.20)'; ctx.lineWidth = 0.6; ctx.stroke();
+    ctx.restore();
+  }
+  function init() { seeds = []; var n = Math.max(10, Math.min(26, Math.round(W * H / 52000))); for (var i = 0; i < n; i++) seeds.push(make(true)); }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < seeds.length; i++) {
+      var p = seeds[i];
+      if (!reduce) { p.y += p.v; p.a += p.w; p.ph += 0.004; p.x += Math.sin(p.ph) * 0.05; if (p.y > H + 10) seeds[i] = p = make(false); }
+      seed(p);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); init(); draw();
+  window.addEventListener('resize', function () { size(); init(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
