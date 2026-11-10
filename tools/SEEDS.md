@@ -2,10 +2,10 @@
 
 Images, places and worlds the editor wants in the series. Before you choose a setting, check this list. **Each seed is used once.** If an untagged seed fits your source story, use it and add your story number next to it in brackets; a tagged seed is closed. Small passing mentions of a closed seed are fine; building a story on it is not.
 
-- Video games (arcades, LAN parties, speedrunners, streamers, MMO guilds, a dad who plays at night) [17.2] [3.3] [21.3]
+- Video games (arcades, LAN parties, speedrunners, streamers, MMO guilds, a dad who plays at night) [17.2] [3.3]
 - Quakers (beyond 1750s Newport: Underground Railroad, conscientious objectors, a modern unprogrammed meeting)
 - Detainees (ICE detention, Japanese internment beyond Heart Mountain, Guantánamo, an Angel Island interrogation)
-- The Minnesota Twins (the 1987 or 1991 Series, the Metrodome, a radio in a barn) [22.3] [21.3]
+- The Minnesota Twins (the 1987 or 1991 Series, the Metrodome, a radio in a barn) [22.3]
 - Salt Spring Island, British Columbia (back-to-the-landers, draft dodgers, the Black settlers of the 1850s, Hawaiian Kanaka families) [25.9]
 - A windmill (a Plains water pump, a Dutch mill in Michigan, a wind farm in Texas or Iowa) [12.9]
 - Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11]
