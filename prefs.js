@@ -38,7 +38,7 @@
   function ui() {
     const css = document.createElement("style");
     css.textContent = `
-#awaw-prefs { position: fixed; left: .6rem; bottom: .6rem; z-index: 50; display: flex; gap: .3rem; font: 600 15px/1 system-ui, sans-serif; }
+#awaw-prefs { position: fixed; right: .6rem; bottom: .6rem; z-index: 50; display: flex; gap: .3rem; font: 600 15px/1 system-ui, sans-serif; }
 #awaw-prefs button { min-width: 2.4em; height: 2.4em; padding: 0 .55em; border-radius: 1.2em; border: 1px solid rgba(128,128,128,.45);
   background: rgba(20,20,22,.72); color: #eee; cursor: pointer; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 #awaw-prefs button:hover { border-color: rgba(220,220,220,.8); }
