@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Feather Trees</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Dusk over the Valley in 1944: blue-black ground, crimson last light, feather green. */
+  --ground: #15161f;
+  --ground-2: #1b1c28;
+  --paper: #ebe5da;
+  --paper-dim: #a7a196;
+  --accent: #dd9272;
+  --glow: #8fa86b;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #11121b 0%, var(--ground) 55%, #2a1c22 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,229,218,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(221,146,114,.22); }
+.epigraph { border-left: 1px solid rgba(221,146,114,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(27,28,40,.75); border: 1px solid rgba(235,229,218,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,229,218,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(27,28,40,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+.log { margin: 2rem 0; padding: 1.1rem 1.25rem 1.1rem 4.6rem; position: relative; background: #ece7d8; color: #222631; font-size: .98rem; line-height: 1.55; background-image: repeating-linear-gradient(180deg, transparent 0, transparent 1.5rem, rgba(60,90,140,.18) 1.5rem, rgba(60,90,140,.18) calc(1.5rem + 1px)); box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+.log::before { content: ""; position: absolute; left: 3.9rem; top: 0; bottom: 0; width: 1px; background: rgba(190,60,60,.45); }
+.log p { margin: 0 0 .5rem; }
+.log p:last-child { margin: 0; }
+.log .t { position: absolute; left: .7rem; width: 3rem; font-variant-numeric: tabular-nums; color: #5a5f6e; font-style: normal; }
+.log .who { color: #5a5f6e; font-style: italic; }
+.log .fl { letter-spacing: .03em; font-weight: 400; }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.20 &middot; Khemā</span></nav>
+<header>
+  <h1>The Feather Trees</h1>
+  <div class="epigraph">There is a Power whose care<br>Teaches thy way along that pathless coast,&mdash;<br>The desert and illimitable air,&mdash;<br>Lone wandering, but not lost.<br>&mdash; William Cullen Bryant, &ldquo;To a Waterfowl&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how I heard it,</span> in Magnolia Park.</p>
+
+<section>
+  <h2>I. The Book</h2>
+  <p class="dateline">Observation Post Item-41, Burbank, California &middot; May 1944</p>
+  <p>The post was a plywood shack on the roof of Inez Albright&rsquo;s two-car garage, with a telephone, a stool, a pair of Navy binoculars, a chart of silhouettes tacked to the wall and a ledger that the Army called the post log and everyone on the block called the Book. You went up by a ladder from the alley. The Army had put it there in the winter of 1942, when nobody knew yet whether the Japanese would come over the San Gabriels some night, and it had been manned every hour since, in four-hour watches, by forty-one volunteers from the streets around, most of them women, most of them over fifty, two of them Boy Scouts.</p>
+  <p>Mrs. Albright was chief observer because she had more hours than anybody and because she could tell a Vega from a Harvard by the sound before it cleared the roofs. She was sixty-four. In 1919 she had flown a Jenny upside down over the Pomona fair with her husband standing on the top wing, and later, after he was killed doing it at Bakersfield, she had taught flying for sixteen years at a dirt field out in the Valley until the war shut down private flying along the coast. Since then she had flown nothing. She wore her husband&rsquo;s leather coat on the night watches and kept her Fourth Reader from Kansas on the shelf under the telephone, with a poem in it she had made all her students learn.</p>
+  <p>Across the street and three blocks east, where the Lockheed plant had been, there was a suburb.</p>
+  <p>It was not there. It was a canopy of chicken wire and netting and painted canvas laid over the factory and the parking lots on poles, with streets painted on it, and burlap houses with burlap roofs, and trees made of feathers glued onto wire and sprayed green and brown. The airfield next door was painted to look like alfalfa. Men from the studios had designed it, painters and set builders who had been making Kansas and Paris and the moon out of lath for twenty years. The swing shift went to work underneath it through tunnels. On their breaks men went up through hatches and moved the canvas cars around, and took in laundry from the clotheslines at the burlap bungalows, so that from five thousand feet it would look as if someone lived there. Everybody on Mrs. Albright&rsquo;s street had feathers in their gutters. The kids played with them.</p>
+  <p>On the sixteenth of May the Secretary of War said in the papers that the Aircraft Warning Service would be inactivated. The order came down to the post a few days after: secure the telephone and turn in the Book on the twenty-ninth. Mrs. Albright read it out at the change of watch and then put it in the back of the Book with the rest, and went on.</p>
+  <div class="log">
+    <p><span class="t">1530</span>Mrs. Ochs on post. Clear, wind W light. Feathers on roof again, swept.</p>
+    <p><span class="t">1612</span><span class="fl">Army Flash. Item-41. Two, single-motor, low, seen, one mile east, heading north.</span> (Ours. Harvards.)</p>
+    <p><span class="t">1930</span>Mrs. Albright on post. Mr. Purcell asks is it true we&rsquo;re closing. It is true.</p>
+    <p><span class="t">2105</span>Visitor on post, by permission of chief obs. Mr. S. Stayed to 2350. No traffic.</p>
+  </div>
+</section>
+
+<section>
+  <h2>II. The Visitor</h2>
+  <p class="dateline">The garage roof &middot; nights</p>
+  <p>The visitor was Mr. Saxe. Everybody on the street knew the car, which was a Packard as long as a hearse with a driver who sat in it all night reading, and everybody knew who he was, because he ran a studio, one of the big ones over the hill. Mrs. Ochs said he had a thousand cameras. She meant it the way people meant it then, that he could see anything he wanted to see, anywhere in the world, and make you see it too.</p>
+  <p>He had first come up the ladder in March, in a white suit, asking whether it was true that Inez Albright of the old Albright Flying Circus was on this roof. His studio had hired her in 1927 to fly through a barn for a picture about the war in France, and she had flown through the barn, and he had never forgotten it. After that he came every week or two, after dark, and sat on an apple box with his back against the shack while she watched the sky, and she talked to him in the plain pleasant way she talked to everybody, about the Jenny and the fairs and the wind off the Tehachapis, and about nothing, and he listened like a man drinking water.</p>
+  <p>He told her one night that his own art department had designed half the canopy across the street.</p>
+  <p><em>It&rsquo;s good work,</em> she said. <em>Nobody can find it.</em></p>
+  <p><em>Nobody?</em></p>
+  <p><em>One girl could. One of mine. She said you look for the railroad. There&rsquo;s a spur that runs under the netting, and from up high it starts in the middle of a street and stops in the middle of a field. Everything else in that suburb goes somewhere. You look for the track that doesn&rsquo;t.</em></p>
+  <p>Mr. Saxe laughed and wrote it down in a little book, and then sat looking at what he had written for a long time.</p>
+  <div class="log">
+    <p><span class="t">2140</span>Mr. S. on post again. Asked could he take a watch. Told him not without the course. He said what course. Chief obs. explained.</p>
+    <p><span class="t">2215</span><span class="fl">Army Flash. Item-41. One, multi-motor, high, heard, distance unknown, heading west.</span></p>
+    <p><span class="t">2300</span>Mr. S. asked chief obs. what she does up here all night when nothing comes. Chief obs. says she looks. <span class="who">(D.K.)</span></p>
+  </div>
+</section>
+
+<section>
+  <h2>III. One, Bi-motor</h2>
+  <p class="dateline">The garage roof &middot; Thursday, May 25, 1944</p>
+  <p>Danny Kowalski, fifteen, of the Scout troop at St. Finbar&rsquo;s, had the early evening watch with Mrs. Albright that Thursday, because his mother worked swing at the plant and because he liked the binoculars. He was the one who wrote it in the Book. He kept the Book that summer, after it was over, in a drawer of his bureau, until the Army sent a man in a car to ask for it back, and he gave the man the Book but copied the page first, and kept the copy.</p>
+  <p>There had been a postcard at noon, from Long Beach. Mrs. Albright had read it on the porch and said nothing about it, which was usual, but she had gone up the ladder half an hour before her watch, which was not. At six-thirty the Packard came up the street and stopped at the curb, and Mr. Saxe came up the ladder in his white suit with a paper sack of cherries from the market on Magnolia, and sat on his box with his back to the shack and offered the cherries round. The sky over Glendale was going rose and then red. Swallows were working the air over the canopy, coming down very low over the painted streets and the feather trees and the burlap roofs, and Danny would always remember that, that the birds were not fooled, that they went for the bugs over the vacant lots and the wash and let the feather trees alone.</p>
+  <p>At 7:41 by the post clock he heard her before he saw her, the sound of two Allisons, which is a sound like no other, coming low out of the north. He had the glasses up and the receiver in his other hand before Mrs. Albright said a word.</p>
+  <p>She came in over the roofs at perhaps four hundred feet, a P-38 still in her factory skin, twin booms and the long middle nacelle like a pair of tongs carrying a cigar, so low that the feathers stood up off the canopy behind her and went whirling. Danny could see the dark of the helmet behind the glass, and the head turned toward them, looking down at the roof. Looking down at the street. At the Packard at the curb.</p>
+  <p>She did not come round again. She rocked her wings once, left and right, slowly, over the garage, the way a person bows from across a room, and banked off south toward Long Beach and the last of the light, and was a sound, and then was nothing.</p>
+  <div class="log">
+    <p><span class="t">1941</span><span class="fl">Army Flash. Item-41. One, bi-motor, very low, seen, overhead, heading S.</span> P-38. Ours. Rocked wings over post. Did not circle. <span class="who">(D.K.)</span></p>
+  </div>
+  <p>Mr. Saxe had stood up. He had a cherry in his fingers and had forgotten it.</p>
+  <p><em>Who was that?</em></p>
+  <p><em>That was my girl,</em> Mrs. Albright said. She was still looking south. <em>That was Kay. She was coming by. I expect she saw she&rsquo;d be interrupting.</em></p>
+  <p><em>Kay,</em> he said. Then he said a name, a different last name, the one that had been on the posters, and she nodded. He had had the girl under contract from 1936 to 1939. She had the most famous face on his lot, a face that men wrote letters to by the sackful, and she had loved it, and he had built three pictures on it, and in the spring of 1939 she had walked off the lot in the middle of the fourth and he had never known why. There had been talk. There had been a lawsuit, which he had won.</p>
+  <p><em>She came out to my field that summer,</em> Mrs. Albright said. <em>Wanted to learn. I told her people only want to learn to fly to be looked at, and she said that&rsquo;s exactly why she wanted to learn, to be somewhere nobody could. I never had a better one. She can find a field in the dark by the smell of it. She can find your factory.</em></p>
+  <p><em>The railroad.</em></p>
+  <p><em>She knows what&rsquo;s a street and what&rsquo;s chicken wire,</em> said Mrs. Albright. <em>That&rsquo;s all flying is. She&rsquo;s in the WASPs now, out of Long Beach. Ferrying. She takes them off the line over there and puts them down wherever the Army says, and comes back on the train, and does it again.</em> She sat down on the stool. <em>She&rsquo;s got where she was going, Mr. Saxe. There&rsquo;s nothing she wants. I don&rsquo;t think I ever met anybody else I could say that about.</em></p>
+  <p>Mr. Saxe did not say anything. Mrs. Albright reached under the telephone and took down the Fourth Reader, which fell open by itself, and handed it to Danny without a word, because it was the custom of the post that whoever logged a ship read the poem, and Danny read it out loud to the studio man in the last red light, embarrassed, all of it, the way they had learned it in the eighth grade.</p>
+  <div class="verse">
+    <p>Vainly the fowler&rsquo;s eye<br>Might mark thy distant flight to do thee wrong,<br>As, darkly painted on the crimson sky,<br>Thy figure floats along.</p>
+    <p>&hellip;</p>
+    <p>There is a Power whose care<br>Teaches thy way along that pathless coast,&mdash;<br>The desert and illimitable air,&mdash;<br>Lone wandering, but not lost.</p>
+    <p>&mdash; William Cullen Bryant, &ldquo;To a Waterfowl&rdquo;</p>
+  </div>
+  <p>The feathers she had stirred were still coming down, over the canopy and the street and the roof of the garage, green and brown, very slowly, because they were so light. One landed on the white sleeve of the studio man&rsquo;s suit. He looked at it a while. Then he set it on the shelf by the telephone, beside the Reader, and went down the ladder, and the Packard went away down the street with its lights hooded.</p>
+  <div class="log">
+    <p><span class="t">2010</span>Mr. S. off post. Left cherries.</p>
+  </div>
+</section>
+
+<section>
+  <h2>IV. Secure the Telephone</h2>
+  <p class="dateline">Monday, May 29, 1944</p>
+  <p>He did not come back. On the last night half the block climbed the ladder by turns to sit a while, and there were more people on the roof than the roof was built for, and nothing came over at all. At midnight Mrs. Albright made the last entry in her square hand and closed the Book and tied it with the string, and Danny copied the page into his school notebook before the man from the Army came for it in August.</p>
+  <div class="log">
+    <p><span class="t">2400</span>Post Item-41 secured per orders. Manned 20,352 hours since Feb. 1, 1942. No enemy aircraft observed. All ours. &mdash; I.A.</p>
+  </div>
+  <p>The canopy came down after the war, and the factory stood out in the sun again with its sawtooth roofs, and the men who took the netting off found swallows nesting in the feather trees. Mrs. Albright flew again in 1946, a rented Cub out of a field in Van Nuys, and in her eighties she was still telling people that you look for the track that doesn&rsquo;t go anywhere. She kept the feather on the shelf over her kitchen sink until it was gray. Kay never flew over again that anybody saw. She did not need to. The old woman said she knew where she was.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana whose knowledge is deep, who possesses wisdom, who knows the right way and the wrong, and has attained the highest end.<cite>Dhammapada 403, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, Sakka, lord of the gods, comes one night with his retinue to hear the Buddha speak. The nun Khem&#257; sets out through the air to visit the Teacher, sees Sakka there, pays her respects without coming down, turns around and goes. Sakka asks who she was, and the Buddha answers: <em>my daughter Khem&#257;, of great wisdom, who knows well what is the path and what is not the path,</em> and speaks the verse. Khem&#257; had been the queen of King Bimbis&#257;ra, so proud of her beauty that she avoided the Buddha, and became the foremost of his nuns in wisdom. Here Sakka is a studio head, the &ldquo;thousand eyes&rdquo; are cameras, and the path that is not a path is a painted street. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-20.htm">the full commentary story</a> and about <a href="https://en.wikipedia.org/wiki/Khema">Khem&#257;</a>.</p>
+    <h3>Burbank, 1944</h3>
+    <p>After Pearl Harbor the Army hid the <a href="https://www.lockheedmartin.com/en-us/news/features/history/camouflage.html">Lockheed plant in Burbank</a>, where the <a href="https://en.wikipedia.org/wiki/Lockheed_P-38_Lightning">P-38 Lightning</a> was built, under a canopy of chicken wire, netting and painted canvas meant to look from the air like an ordinary California suburb, with artists and set designers from Disney, Paramount and 20th Century Fox helping. Trees were made of chicken feathers glued to wire and sprayed green and brown, the airfield and lots were painted to pass for alfalfa, and workers took in laundry at the &ldquo;burlap bungalows&rdquo; on their breaks. A longtime Lockheed man recalled, as <a href="https://laist.com/news/la-history/burbank-lockheed-camouflage-world-war-ii">LAist reports</a>, that the only giveaway from the air was a railroad track that seemed to begin and end inside the canopy.</p>
+    <p>The <a href="https://en.wikipedia.org/wiki/Aircraft_Warning_Service">Aircraft Warning Service</a> put hundreds of thousands of civilian volunteers on observation posts who phoned &ldquo;flash&rdquo; reports of every plane they saw or heard to Army filter centers; in May 1944 the War Department announced its inactivation, effective May 29. Some 130 <a href="https://en.wikipedia.org/wiki/Women_Airforce_Service_Pilots">Women Airforce Service Pilots</a> flew pursuit planes for the Air Transport Command, among them pilots of the 6th Ferrying Group at Long Beach, ferrying aircraft from the factories, as the <a href="https://waspmuseum.org/avenger-news/p-is-for-pursuit-the-wasp-who-ferried-the-hottest-fighters-of-the-day-by-julia-lauria-blum/">WASP Museum</a> recounts.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the nun Khem&#257; from the Dhammapada commentary (verse 403). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-20.htm">The original</a>. Poetry from William Cullen Bryant, &ldquo;To a Waterfowl,&rdquo; as printed in his <i>Poems</i> (1854). Written by Claude Opus 5.5.
+  <div class="pager"><a href="these-presents.html">&larr; These Presents</a><a href="index.html">All stories</a><a href="the-hickory-stick.html">The Hickory Stick &rarr;</a></div>
+</footer>
+</main>
+<script>
+(function () {
+  /* Painted streets seen from altitude drift by under dusk; feathers come down; now and then a far twin-boom shape crosses and rocks its wings once. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, fe = [], plane = null, next = 1800;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    fe = [];
+    var n = Math.max(6, Math.min(16, Math.round(W / 90)));
+    for (var i = 0; i < n; i++) fe.push(newF(true));
+  }
+  function newF(any) { return { x: Math.random() * W, y: any ? Math.random() * H : -20, v: 0.12 + Math.random() * 0.18, p: Math.random() * 6, g: Math.random() < 0.6 }; }
+  function grid() {
+    var off = reduce ? 0 : (t * 0.05) % 140;
+    ctx.strokeStyle = 'rgba(143,168,107,0.05)'; ctx.lineWidth = 1; ctx.setLineDash([10, 9]);
+    ctx.beginPath();
+    for (var x = -140 + off; x < W + 140; x += 140) { ctx.moveTo(x, H * 0.55); ctx.lineTo(x + 60, H); }
+    for (var y = H * 0.6; y < H; y += 46) { ctx.moveTo(0, y); ctx.lineTo(W, y + 18); }
+    ctx.stroke(); ctx.setLineDash([]);
+    /* the track that begins and ends nowhere */
+    ctx.strokeStyle = 'rgba(221,146,114,0.07)'; ctx.beginPath();
+    ctx.moveTo(W * 0.62, H * 0.72); ctx.lineTo(W * 0.78, H * 0.8); ctx.stroke();
+  }
+  function drawPlane(p) {
+    var k = (t - p.t0) / p.dur; if (k > 1) return false;
+    var x = -60 + k * (W + 120), y = p.y - k * 30;
+    var roll = (k > 0.45 && k < 0.6) ? Math.sin((k - 0.45) / 0.15 * Math.PI * 2) * 0.35 : 0;
+    ctx.save(); ctx.translate(x, y); ctx.rotate(roll * 0.4);
+    ctx.fillStyle = 'rgba(20,18,28,0.55)';
+    ctx.fillRect(-16, -1, 32, 2);            /* wing */
+    ctx.fillRect(-6, -1.5 + roll * 2, 2, 12); ctx.fillRect(4, -1.5 - roll * 2, 2, 12); /* booms */
+    ctx.fillRect(-1, -4, 2, 6);              /* nacelle */
+    ctx.fillRect(-7, 10, 14, 1.5);           /* tail */
+    ctx.restore(); return true;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    grid();
+    for (var i = 0; i < fe.length; i++) {
+      var f = fe[i];
+      if (!reduce) { f.y += f.v; f.x += Math.sin(t * 0.002 + f.p) * 0.25; if (f.y > H + 20) fe[i] = newF(false); }
+      ctx.save(); ctx.translate(f.x, f.y); ctx.rotate(Math.sin(t * 0.003 + f.p) * 0.6);
+      ctx.fillStyle = f.g ? 'rgba(143,168,107,0.16)' : 'rgba(150,110,70,0.14)';
+      ctx.beginPath(); ctx.ellipse(0, 0, 2, 6, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    }
+    if (!reduce) {
+      if (!plane && t > next) plane = { t0: t, dur: 900, y: H * (0.12 + Math.random() * 0.15) };
+      if (plane && !drawPlane(plane)) { plane = null; next = t + 2600 + Math.random() * 2400; }
+      t += 1; requestAnimationFrame(draw);
+    }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -8,7 +8,7 @@ Images, places and worlds the editor wants in the series. Before you choose a se
 - The Minnesota Twins (the 1987 or 1991 Series, the Metrodome, a radio in a barn) [22.3]
 - Salt Spring Island, British Columbia (back-to-the-landers, draft dodgers, the Black settlers of the 1850s, Hawaiian Kanaka families) [25.9]
 - A windmill (a Plains water pump, a Dutch mill in Michigan, a wind farm in Texas or Iowa) [12.9]
-- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5] [19.5] [9.10] [26.36] [17.5] [10.2] [12.10, 23.7] [16.8, 11.4] [18.7 Columbia, Maryland vanpool 1979] [16.3 Holmdel cul-de-sac 1966] [20.1 Evanston streetcar suburb, wheel club 1895] [9.5 swim club, Johnson County, Kansas 1977] [10.1 Dormont streetcar suburb 1993]
+- Boring white people (suburbs, office parks, bowling leagues, mainline Protestants, middle managers, the ordinary Midwest) — *a standing direction, not a one-use seed* [19.3] [13.11] [26.25] [2.6] [19.1] [25.5] [18.2] [9.2] [11.9] [22.5] [18.11] [24.2, 13.5] [19.5] [9.10] [26.36] [17.5] [10.2] [12.10, 23.7] [16.8, 11.4] [18.7 Columbia, Maryland vanpool 1979] [16.3 Holmdel cul-de-sac 1966] [20.1 Evanston streetcar suburb, wheel club 1895] [26.15 Oakland County lake-association adult swim class 1986] [9.5 swim club, Johnson County, Kansas 1977] [10.1 Dormont streetcar suburb 1993]
 
 ## Twenty random Dewey numbers (drawn Nov 10, 2026)
 Use one as a story's hidden subject: a job, an object, a book someone is reading, a shelf in the library where something happens.
