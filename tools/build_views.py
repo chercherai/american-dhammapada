@@ -284,6 +284,22 @@ for f in sorted(glob.glob(os.path.join(HERE, "*.html")) + [os.path.join(HERE, x)
     dig.update(open(f, "rb").read())
 wr("sw.js", open(os.path.join(HERE, "sw.tpl.js")).read().replace("/*VERSION*/", dig.hexdigest()[:10]))
 
+# ---------- social cards: Open Graph / Twitter tags on story pages ----------
+SITEURL = "https://chercherai.github.io/american-dhammapada/"
+for m in metas:
+    fp = os.path.join(HERE, m["file"]); h = open(fp).read(); h0 = h
+    h = re.sub(r'<!--og-->.*?<!--/og-->\n?', '', h, flags=re.S)
+    slug = m["num"].replace(".", "-")
+    tags = ('<!--og--><meta property="og:type" content="article">'
+            f'<meta property="og:title" content="{e(m["title"])} · Walking the American Way">'
+            f'<meta property="og:description" content="{e(m.get("logline", ""))}">'
+            f'<meta property="og:url" content="{SITEURL}{m["file"]}">'
+            f'<meta property="og:image" content="{SITEURL}og/{slug}.png">'
+            '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+            '<meta name="twitter:card" content="summary_large_image"><!--/og-->\n')
+    h = h.replace("</head>", tags + "</head>", 1)
+    if h != h0: open(fp, "w").write(h)
+
 # ---------- reader preferences script on every page ----------
 import glob
 TAG = '<script src="prefs.js"></script>'
