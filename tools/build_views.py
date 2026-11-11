@@ -325,6 +325,16 @@ for m in metas:
     h = h.replace("</head>", tags + "</head>", 1)
     if h != h0: open(fp, "w").write(h)
 
+# ---------- GoatCounter pageviews (only on the GitHub Pages site) ----------
+GC = ('<!--gc--><script>if(location.hostname==="chercherai.github.io"){var g=document.createElement("script");g.async=true;'
+      'g.src="https://gc.zgo.at/count.js";g.setAttribute("data-goatcounter","https://american-dhammapada.goatcounter.com/count");'
+      'document.head.appendChild(g);}</script><!--/gc-->')
+for f in glob.glob(os.path.join(HERE, "*.html")):
+    h = open(f).read(); h0 = h
+    h = re.sub(r'<!--gc-->.*?<!--/gc-->\n?', '', h, flags=re.S)
+    h = h.replace("</body>", GC + "\n</body>", 1)
+    if h != h0: open(f, "w").write(h)
+
 # ---------- reader preferences script on every page ----------
 import glob
 TAG = '<script src="prefs.js"></script>'
