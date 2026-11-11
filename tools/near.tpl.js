@@ -1,6 +1,6 @@
 /* "Near you": open a story set somewhere near the reader.
-   Location comes from an approximate IP lookup (ipwho.is); if that fails,
-   from the browser's time zone; if that fails too, any story at all.
+   Location is guessed from the browser's time zone only (nothing is sent
+   anywhere); an unknown zone gets any story at all.
    Picks among the closest few, weighted toward the closest, so it isn't
    the same story every time. */
 (() => {
@@ -29,25 +29,16 @@
     for (let i = 0; i < near.length; i++) { r -= w[i]; if (r <= 0) return near[i][1]; }
     return near[0][1];
   }
-  async function where() {
-    try {
-      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 2500);
-      const r = await fetch("https://ipwho.is/?fields=success,latitude,longitude", {signal: ctl.signal});
-      clearTimeout(t);
-      const j = await r.json();
-      if (j.success && isFinite(j.latitude)) return [j.latitude, j.longitude];
-    } catch (e) {}
+  function where() {
     try { const z = Intl.DateTimeFormat().resolvedOptions().timeZone; if (TZ[z]) return TZ[z]; } catch (e) {}
     return null;
   }
   const a = document.getElementById("nearme");
   if (!a) return;
-  a.addEventListener("click", async ev => {
+  a.addEventListener("click", ev => {
     ev.preventDefault();
-    const old = a.textContent; a.textContent = "Finding…";
-    const here = await where();
+    const here = where();
     const f = here ? pick(here[0], here[1]) : PTS[Math.floor(Math.random() * PTS.length)][0];
-    a.textContent = old;
     location.href = f;
   });
 })();
