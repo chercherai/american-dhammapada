@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Come Round Right</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: a single column on Shaker-cream paper; a hickory pole stands in the right margin and now and then a turn goes over the top of it. */
+  --ground: #f0e9d8;
+  --ground-2: #e6dcc6;
+  --ink: #2a241c;
+  --ink-dim: #6d6252;
+  --spangle: #a3352a;
+  --shaker: #2f4a6b;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #f8f3e6 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(42,36,28,.2); }
+.series a:hover { color: var(--spangle); }
+a:focus-visible { outline: 2px solid var(--spangle); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--spangle); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(163,53,42,.4); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--shaker); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--spangle); }
+.song { margin: 1.5rem 0 1.75rem 1.25rem; font-style: italic; color: var(--ink-dim); line-height: 1.6; }
+.bill { margin: 2rem 0; padding: 1.5rem 1.25rem; border: 1px solid rgba(42,36,28,.35); background: rgba(255,252,243,.6); text-align: center; font-family: var(--font-display); line-height: 1.35; }
+.bill .big { font-size: 1.7rem; letter-spacing: .04em; display: block; margin: .3rem 0; color: var(--spangle); }
+.bill .mid { font-size: 1.2rem; display: block; margin: .25rem 0; }
+.bill .sm { font-size: .9rem; font-style: italic; display: block; margin: .25rem 0; color: var(--ink-dim); }
+.day { margin: 0 0 1.25rem; padding-left: 1rem; border-left: 2px solid rgba(47,74,107,.35); }
+.day b { font-weight: 400; font-family: var(--font-display); color: var(--shaker); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,252,243,.7); border: 1px solid rgba(42,36,28,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--spangle); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,36,28,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--spangle); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--spangle); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,36,28,.15); border-bottom: 1px solid rgba(42,36,28,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--spangle); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--spangle); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--spangle); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--spangle); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,252,243,.7); border-left: 2px solid var(--spangle); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.14 &middot; Uggasena</span></nav>
+<header>
+  <h1>Come Round Right</h1>
+  <div class="epigraph">&rsquo;Tis the gift to come down where we ought to be.<br>&mdash; Shaker song, &ldquo;Simple Gifts&rdquo; (1848)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how I had it,</span> on the public square at Lebanon.</p>
+
+<section>
+  <h2>I. The Seats</h2>
+  <p class="dateline">Lebanon, Warren County, Ohio &middot; June 1846</p>
+  <p>I was not born yet for any of the first part, so I give it the way my mother gave it to me, and the way the town gave it to me later, which was not the same way, and I have tried to put the two together where they meet.</p>
+  <p>Varnell&rsquo;s Olympic Circus came up the pike from Cincinnati every June with four wagons, eleven horses, a round top of canvas, and a family of tumblers out of Lancashire who had been in the country since 1830 and still said <em>summat</em> and <em>nowt</em>. They played Lebanon two days at the end of Broadway, past the Golden Lamb, and the farmers came in from Turtle Creek and Deerfield and Mason and set the seat planks so full that the boys built their own seats on top of them, a bench on a bench on a barrel, swaying, and watched from up there under the canvas with their heads nearly in the smoke of the lamps.</p>
+  <p>My father, Asa Lindley, was up on one of those. He was twenty-two. His father had the dry-goods store on Broadway with the plate window and the bolts of Merrimack calico standing in it like organ pipes, and Asa clerked there and kept the ledger in a good round hand and was expected to have the store, and had never once in his life climbed anything higher than the ladder to the top shelf.</p>
+  <p>On the second night old Varnell set a mast in the middle of the ring, guyed to four stakes, and his daughter Kitty went up it barefoot. She was eighteen. At the top there was a wooden button no bigger than a dinner plate. She went over once in the air above it, came down standing on it, and then she sang. She sang <em>The Rose of Allandale</em> standing on that plate with her arms out, forty feet over the sawdust, and stepped off the button onto nothing and back onto it in time to the song, and the whole tent held its breath on every step. My father said afterward that it was her hands he saw. That she used her hands up there as if she were talking to somebody.</p>
+  <p>He went home and lay down on his bed with his boots on and turned his face to the wall.</p>
+  <p><em>If I can have her I&rsquo;ll live,</em> he said. <em>If I can&rsquo;t I&rsquo;ll lie here till I die.</em></p>
+  <p>He meant it, too. He would not eat. His mother sat on the bed and said there were girls in Lebanon with fathers who owned land, and good girls, and she named three. His father stood in the door and said the rest of what a dry-goods merchant says. On the fourth day my grandfather put a thousand dollars in gold eagles in a canvas bank bag and gave it to my father&rsquo;s friend Hiram Dill, who clerked at the bank, and said, <em>Take this down to that Englishman and tell him to send the girl up.</em></p>
+  <p>Old Varnell was splicing a guy line on the tail of a wagon. He opened the bag and looked in it a long time, because it was more money than he had ever seen in one place, and then he tied it up again.</p>
+  <p><em>I&rsquo;ll not sell my lass,</em> he said. <em>Not for that nor for twice that. But if it&rsquo;s true the lad can&rsquo;t live without her, let him come along with us and work. If he&rsquo;ll do that, he can have her.</em></p>
+  <p>Hiram took that back up Broadway. My father got up off the bed. <em>Of course I&rsquo;ll go,</em> he said, and went to the washstand and washed his face. His mother cried and my grandfather swore and neither of them could stop him. He went down to the lot in the morning in his oldest coat with a carpetbag, and Varnell married them before a justice at Xenia on the way to Springfield, with two tumblers and a horse for witnesses.</p>
+</section>
+
+<section>
+  <h2>II. Hush</h2>
+  <p class="dateline">The road &middot; 1846&ndash;1849</p>
+  <p>They played Xenia and Springfield and Urbana and Bellefontaine, and went down through Dayton and Hamilton to the river, and over into Indiana at Madison and Kentucky at Maysville, and wintered in Cincinnati in a livery barn on Sycamore Street where Varnell kept the horses fat and the family thin. They played wherever a town would let them have a lot and a license, and left in the night where it would not.</p>
+  <p>My father drove the property wagon. Wherever they stopped he watered eleven horses at whatever creek or town pump there was, and cut grass for them with a scythe if the farmer would let him, and he dug the holes and set the poles and stretched the canvas and drove the stakes, and when it was over he pulled the stakes and folded the canvas and loaded the poles and drove on. He had never done a day&rsquo;s outdoor work in his life. His hands bled a month and then went to horn. The tumblers called him the Clerk.</p>
+  <p>I was born in March of 1847 in the livery barn on Sycamore Street, in the harness room, with the horses talking the whole time through the wall. They called me William for my mother&rsquo;s father, and the tumblers called me the Clerk&rsquo;s Boy.</p>
+  <p>My mother went back up the mast in April. In the evenings after the show she sat on the wagon step with me on her knee and jogged me and sang, and what she sang she made up as she went, to whatever tune was handy. My father was greasing a wheel. He heard it three nights.</p>
+  <p class="song">Hush, the water-boy&rsquo;s baby,<br>hush, the stake-driver&rsquo;s son,<br>son of a man who don&rsquo;t know a flip from a fall,<br>hush, now, hush.</p>
+  <p><em>Is that me in the song?</em></p>
+  <p><em>Aye, it&rsquo;s you.</em></p>
+  <p><em>Then I&rsquo;ll go off and leave you.</em></p>
+  <p><em>Go or stay,</em> she said. <em>What&rsquo;s it to me?</em> And she sang it again, and I laughed, my mother told me, I laughed every time.</p>
+  <p>I do not hold it against her. I have been in the business sixty years and I know what she was. She was the best thing on a mast between Pittsburgh and St. Louis, and every man on every seat in every town looked up at her as if she were the evening star, and she brought in more on a good night than the rest of the family together. She did not need him for anything. She had not asked him to come.</p>
+  <p>He sat on the wagon tongue a long while in the dark that night, he told a man years later, thinking. Why is she so proud? Because of what she can do up there. Well, then.</p>
+  <p>In the morning he went to old Varnell. Varnell looked at him, and looked at his hands, and nodded.</p>
+  <p class="song">Hush, the stake-driver&rsquo;s baby,<br>hush, now, hush.</p>
+  <p>He was the better part of two years learning. He learned the tumbling first, on a strip of carpet in the barn on Sycamore Street, all that winter, the flip-flap and the round-off and the back somerset, and fell on his neck more times than anyone could count. In the spring he learned the mast, on a twelve-foot pole and then a twenty and then the forty. He fell off it at Chillicothe into a pile of straw Varnell had told the boys to put there, and at Portsmouth into the river, which was not on purpose. He learned to go up hand over hand and turn on the button and come down standing on it, and then to stand up there in a wind, which is the whole of it, Varnell said: anyone can turn, it&rsquo;s the standing after.</p>
+  <p>My mother watched him from the wagon step with me on her knee and did not sing the song anymore. But she did not say anything else either.</p>
+  <p class="song">Hush.</p>
+</section>
+
+<section>
+  <h2>III. Handbill</h2>
+  <p class="dateline">Lebanon &middot; July 1849</p>
+  <p>The cholera came up the river to Cincinnati again that summer, worse than in thirty-two, and the city buried more than a hundred some days in July, and anybody who could get out got out, up the pikes into the country, and some of them carried it with them. It was at Franklin and at Waynesville. In Lebanon the Western Star kept telling the town it was free of it, which meant everybody in town was afraid of it. The President had appointed the first Friday in August a day of fasting, humiliation and prayer across the whole country on account of the pestilence, and the churches on Broadway were getting ready.</p>
+  <p>Varnell would not play the river towns that year. He brought the show up the pike to Lebanon at the end of July, and my father went to the printer at the Star office with three dollars and came out with this, which I have, which my mother kept in her trunk until she died and which is in front of me now with the folds worn through.</p>
+  <div class="bill">
+    <span class="sm">Seven Days Hence!</span>
+    <span class="mid">ON THE PUBLIC SQUARE, AT LEBANON,</span>
+    <span class="sm">on Saturday the Fourth of August, at Three O&rsquo;Clock,</span>
+    <span class="big">MR. ASA LINDLEY,</span>
+    <span class="sm">Son of a Merchant of this Town, lately with Varnell&rsquo;s Olympic Circus,</span>
+    <span class="mid">Will Ascend the</span>
+    <span class="big">HICKORY POLE</span>
+    <span class="mid">and Perform Upon the Top Thereof</span>
+    <span class="sm">Feats of Equilibrium and Lofty Tumbling Never Before Attempted at Such a Height.</span>
+    <span class="sm">No Charge. The Public is Respectfully Invited.</span>
+  </div>
+  <p>The hickory pole stood at the crossing of Broadway and Main. The Democrats of the town had raised it for General Cass the summer before, a hundred and ten feet of shagbark hickory in two pieces, scarfed and banded with iron, out of the Little Miami bottoms, and when Cass lost in November nobody had the heart to take it down, and nobody had the money either. The flag was in tatters on top of it. My father went up it on the Monday at five in the morning when there was nobody on Broadway but a milk wagon, and took the flag down, and nailed a pine plate onto the top of it the size of the button on Varnell&rsquo;s mast.</p>
+  <p>My grandfather tore the handbill off the door of the store with his own hand. My grandmother read it at the upstairs window and sent down a cold chicken in a basket by the hired girl.</p>
+</section>
+
+<section>
+  <h2>IV. The Hickory Pole</h2>
+  <p class="dateline">The public square &middot; Saturday, 4 August 1849</p>
+  <p>The town had fasted on the Friday, or said it had, and on the Saturday it came to the square. They came in from all the townships, in spite of the cholera or because of it. They backed hay wagons into the square in a ring and set benches up in the wagon beds and chairs on the benches, and stood on the chairs, and sat on the roof of the market house and in the windows of the Golden Lamb and up in the elms. Somebody said three thousand. My mother sat in the bed of a hay wagon by the Star office with me on her knee. I was two years and five months. I believe I remember the elms, but I am not sure.</p>
+  <p>My father went up the hickory pole at a quarter after three in a scarlet jacket all over spangles that had been Varnell&rsquo;s, and white tights, and bare feet. He went up the way she had gone up the mast in 1846, hand over hand, and the square went quiet under him the way a church does. Above the iron bands he went slower. At the top he got his knee on the plate, then a foot, then the other foot, and he stood up a hundred and ten feet over Broadway and let go of the pole with both hands.</p>
+  <p>He could see the whole county from there, he said afterward. The Miami bottoms and the hills toward Waynesville. The roof of the store, with the skylight his father had put in for the calico. The steeples. Turtle Creek going off northwest through the woods, and a long way out along it, the big brick and white frame dwellings of the Shakers at Union Village standing in their fields like a town with nobody in it, because on a Saturday the Shakers were all at work.</p>
+  <p>He lifted one arm for the noise, and they gave it to him. Then he went over once, all the way round in the air, and came down standing on the plate.</p>
+  <p>The square came up off its chairs. He said it was like standing on the top of a sound. He stood in it, a hundred and ten feet up, and turned to take a bow to the four corners, and saw it go out of them all at once like the wind going out of a sail.</p>
+  <p>They were not looking at him.</p>
+  <p>Down the Turtle Creek road and into Broadway, at a walk, came the Union Village wagon. It was a long blue box wagon with two gray horses, loaded with crates of bottles, and on the seat and walking beside it were six Shakers, three brethren in their broad hats and gray coats with their hair cut straight across the brow, and three sisters in their caps and kerchiefs and long plain gowns. They were bringing the town their extracts and their herbs for the cholera, as they did every summer, to the druggist on Main. They did not look up at the pole. They did not look at anything. They came along Broadway at the pace of the horses with their hands folded, the way they walked everywhere, and the whole square turned on its chairs to watch them come, the way it had turned to the pole. Nobody could have told you why. People had seen Shakers all their lives.</p>
+  <p>The oldest of them walked at the near horse&rsquo;s head. She was a small woman of seventy with a face like a winter apple, and her name was Eldress Hepzibah Rawle, and she had come to Union Village from New Lebanon in New York before my father was born, and taught the Shaker girls their letters and the Shaker boys how to dry a seed, and kept the family&rsquo;s accounts in a hand you could have printed from. When the wagon came into the square she stopped it with one hand on the bridle, under the pole, and the brethren and sisters stopped behind her, and three thousand people looked at her.</p>
+  <p>My father stood on the plate in his spangles with nobody looking at him.</p>
+  <p>He told a man years afterward that it was the worst thing that ever happened to him. Worse than the song. He said: a year and a half it took me to learn that turn, and in the middle of it six people walk into town selling medicine and it&rsquo;s gone. He said he stood up there and thought about stepping off the plate. Not falling. Stepping, the way Kitty used to step off the button onto the air, only not coming back.</p>
+  <p>The eldress looked up. She was the only one in the square looking up just then. She said something over her shoulder to the biggest of the brethren, a man named Amos Tiller who had been a keelboatman on the Ohio before he came to the Shakers and could lift a hogshead of molasses off a wagon by himself. He went and stood at the foot of the hickory pole with his broad hat pushed back, and put his head back, and called up, with a keelboatman&rsquo;s voice.</p>
+  <p><em>Asa Lindley! Eldress wants to see thee turn! Turn for the people, she says. Make them laugh!</em></p>
+  <p>The square turned back around on its chairs.</p>
+  <p>My father, a hundred and ten feet over Broadway, felt his heart come up in him like a bucket out of a well. She wanted to see it. He put his hands on his knees and leaned out and called down.</p>
+  <p><em>Brother! Tell her watch close! Tell her I&rsquo;ll turn for her and for all of them!</em></p>
+  <p>And he jumped.</p>
+  <p>I give it the way the town gives it, because I have heard it from forty people and they all say the same and none of them could have been lying, they were too many. He went up off the plate into the air higher than he had any right to go, so high that people on the market-house roof ducked, and he turned over. And over. And over. Fourteen times, the town says. Old Dr. Scofield, who watched from his window, wrote fourteen in his diary that night, and that he had counted them aloud. And he came down out of the last one onto the pine plate on the top of the hickory pole as soft as a cat onto a fence rail, and stood, and was still.</p>
+  <p>Nobody made a sound. Then they made all the sound there was.</p>
+  <p>When it was over, and only then, the eldress spoke. She did not raise her voice. She did not have to. People who were on Main Street that day, a block off, swear they heard her as plain as if she had been at their elbow. She said it up the pole as if he were standing next to her.</p>
+  <p><em>Asa. Let go of what&rsquo;s behind thee. Let go of what&rsquo;s ahead of thee. Let go of the plate under thy feet. When thy hands are empty all the way down, thee needn&rsquo;t ever come up here again.</em></p>
+  <p>Then the six of them sang, standing in the square by the gray horses, a short song with a dance in it, though they did not dance, and that was the first time anybody in Lebanon ever heard it. It had come out from the Shakers in Maine the year before, copied from family to family in the little hymn books they kept.</p>
+  <div class="verse">
+    <p>&rsquo;Tis the gift to be simple, &rsquo;tis the gift to be free<br>&rsquo;Tis the gift to come down where we ought to be,<br>And when we find ourselves in the place just right,<br>&rsquo;Twill be in the valley of love and delight.</p>
+    <p>When true simplicity is gain&rsquo;d,<br>To bow and to bend we shan&rsquo;t be asham&rsquo;d,<br>To turn, turn will be our delight,<br>Till by turning, turning we come &rsquo;round right.</p>
+    <p>&mdash; Shaker song, &ldquo;Simple Gifts,&rdquo; attributed to Joseph Brackett (1848)</p>
+  </div>
+  <p>Three thousand people stood still and listened to six Shakers sing, and some of them said afterward it was the strangest five minutes they ever spent, and some said they could not remember a thing about it but the tune, and some went home and did not drink again, and a good many of them, years later, when they told about the fourteen turns, would put the song in without knowing they did it, humming it under the telling.</p>
+  <p>My father stood on the top of the pole and heard it. I asked him once, the only time I ever saw him again, what happened to him up there, and he thought a long while, and said: <em>Nothing happened, Will. Something stopped.</em></p>
+  <p>Then he came down. Hand under hand, slow, not hurrying, past the iron bands and the scarf joint and the old Cass bunting nailed halfway, and stepped off onto Broadway in his bare feet, and the people who were close to the pole stepped back from him.</p>
+  <p>His hair was white.</p>
+  <p>It had been brown that morning, brown as mine, and he was twenty-five years old, and he came down off the pole with his hair as white as the eldress&rsquo;s cap, and the lines in his face of a man of sixty, and his hands were an old man&rsquo;s hands. He walked across Broadway to the gray horses and went down on his knees in the dust in his spangles in front of a woman of seventy in a plain gown.</p>
+  <p><em>Take me,</em> he said. <em>If you&rsquo;ll have me.</em></p>
+  <p><em>Come, then,</em> said Eldress Hepzibah. <em>Get up out of the road.</em></p>
+  <p>He got up and took off Varnell&rsquo;s jacket and folded it and handed it up to my mother in the hay wagon, and she took it. He put his hand on my head. And he walked away down Broadway behind the blue wagon in his white tights and bare feet, alongside Amos Tiller, toward the druggist&rsquo;s and Turtle Creek and Union Village, and the square watched him go, and so did she, and so did I.</p>
+  <p>My mother did not cry, that day or after. She sat in the hay wagon with the spangled jacket in her lap until the square was empty, and then she got down and carried me back to the lot.</p>
+</section>
+
+<section>
+  <h2>V. Day Book</h2>
+  <p class="dateline">Union Village &middot; August 1849</p>
+  <p>The Shakers kept a journal at every family, a line or two a day, weather and work and who came and who went. In 1912, when I went to the sale, a brother of the last few let me sit in the office and copy out what the Center Family book said for that August. I give it as it was written.</p>
+  <div class="day"><p><b>Sat. 4th.</b> Very warm. Eldress H., Brother Amos and four others to Lebanon with the extracts. Returned near dark, and brought with them a young man of the town, Asa Lindley, son of the merchant, who had been with a show. He wishes to try the life. His hair entirely white, though he gives his age as 25.</p></div>
+  <div class="day"><p><b>Sun. 5th.</b> Meeting. A.L. present on the brethren&rsquo;s side. Was asked by some of the young brethren after meeting whether he was not afraid coming down off of the pole, it being above 100 feet. He says, Nay, he had no fear at all. Some of the young brethren think this is not the truth, seeing what has happened to his hair, and say that it is a show-man&rsquo;s brag and he must labor to overcome it.</p></div>
+  <div class="day"><p><b>Mon. 6th.</b> Hot. Cutting oats. A.L. in the broom shop. Brother Seth spoke to Eldress H. about A.L. saying he had no fear, that he thought it a lie and not fit for a Believer.</p></div>
+  <div class="day"><p><b>Tues. 7th.</b> Eldress H. spoke in the evening meeting concerning A.L. and fear. Said: When a man has let go every rope he had hold of, there is nothing left in him to shake. It was not fear that turned his hair; it was the letting go. Brother Seth is not to say again that A.L. lies. Then we labored the new song from the East, and A.L. labored it with us, and did very well at the turning.</p></div>
+  <div class="day"><p><b>Wed. 8th.</b> Rain at last. Thanks be. Two of the young brethren and A.L. at the brooms.</p></div>
+  <p>That is all there is about it. On the ninth they started the buckwheat.</p>
+</section>
+
+<section>
+  <h2>VI. The Sale</h2>
+  <p class="dateline">Union Village &middot; 1912</p>
+  <p>My mother went back up the mast in September of 1849 and stayed up it nine more years, until her knees went, and she never sang that song to me again. She kept the spangled jacket in her trunk and wore it once more, to be buried in, at Cincinnati in 1866. I was on the road by then with the big shows, Spalding&rsquo;s and afterward others, and I have been on it ever since, a leaper and then a rider and then thirty-one years an equestrian director, and I have seen every kind of turn there is and a good many people come down off a good many things. I never saw anybody else come down the way he did.</p>
+  <p>I saw him once. I was fourteen, and the war had started, and I walked out from Lebanon along Turtle Creek without telling anybody and asked at the office for Brother Asa. They let me sit with him in the broom shop for an hour. He had a broom-corn vise and a winding wheel, and he wound brooms the whole time I was there and talked to me, and his hair was white, and he was the happiest man I have ever sat with in my life before or since, and I was very angry, and he let me be. When I got up to go he said, <em>Will, does thy mother still sing?</em> and I said not that song, and he said, <em>That&rsquo;s a shame. It was a good song.</em></p>
+  <p>He died at Union Village in 1897. In 1912 the last of the Shakers there sold the whole of it, four thousand acres and the dwellings and the mills, to the United Brethren for a home for orphans and old people, and I went out for the auction of the movable goods, which I had no business doing at sixty-five, and bought one lot, which was a broom-corn vise and a winding wheel from the broom shop, for a dollar and a quarter.</p>
+  <p>The old brother who let me copy the book walked out to the wagon with me. He had known my father forty years. I asked him whether there was anything else he could tell me, anything at all, and he stood a while with his hand on the wheel.</p>
+  <p>He said: <em>He used to sing at the brooms. All day, under his breath, winding. The same little song. A lullaby, it sounded like. I asked him once what it was and he laughed, and said it was a hymn somebody made up about him, and that it was the truest one he knew.</em></p>
+  <p>I have the wheel in the barn. When I turn it, which I do some evenings, it goes round with a little tick at the top of every turn where the iron is worn, and I wind nothing on it, and I sing.</p>
+  <p class="song">Hush, the stake-driver&rsquo;s baby,<br>son of a man who don&rsquo;t know a flip from a fall,<br>hush, now, hush.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Give up what is before, give up what is behind, give up what is in the middle, when thou goest to the other shore of existence; if thy mind is altogether free, thou wilt not again enter into birth and decay.<cite>Dhammapada 348, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Him I call indeed a Brahmana who has cut all fetters, who never trembles, is independent and unshackled.<cite>Dhammapada 397, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>A rich man&rsquo;s son, Uggasena, falls in love with an acrobat&rsquo;s daughter he sees dancing on the top of a pole, and lies down to die unless he can have her. Her father will not sell her, but gives her to him if he will travel with the troupe. Uggasena drives the carts and fetches grass and water and sets up the apparatus, and when his wife sings to their baby about the son of a cart-driver and a know-nothing, he learns the acrobat&rsquo;s art himself and comes home to perform on a sixty-cubit pole. At the height of his act the crowd turns to look at the Buddha entering the city. The Buddha sends Moggallāna to ask him to perform; Uggasena turns fourteen somersaults, hears the Buddha&rsquo;s verse on the top of the pole, and is freed. He comes down, is ordained, and instantly takes on the look of an elder of sixty. When the monks doubt his claim that he felt no fear coming down, the Buddha confirms it with a second verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-14.htm">the full commentary story</a> (the same story is told at Dhp-a 24.6).</p>
+    <h3>Lebanon and Union Village, 1849</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Union_Village_Shaker_settlement">Union Village</a>, founded in 1805 in Turtlecreek Township near Lebanon, was the first and largest community of the United Society of Believers in Christ&rsquo;s Second Appearing, the <a href="https://en.wikipedia.org/wiki/Shakers">Shakers</a>, west of the Alleghenies. It had more than 600 members by 1818, and its families lived by farming, broom making, garden seeds, and medicinal herbs and extracts. The Shakers lived celibate, held goods in common, and worshiped in song and ordered dance; men and women converts left marriages behind when they joined. &ldquo;<a href="https://en.wikipedia.org/wiki/Simple_Gifts">Simple Gifts</a>,&rdquo; a dancing song generally attributed to Elder Joseph Brackett of the Maine Shakers, dates from 1848. In 1912 the remaining Shakers sold Union Village to the United Brethren in Christ, who opened a children&rsquo;s home there in 1913; the grounds are now a retirement community.</p>
+    <p>In the 1840s American political parties raised tall campaign poles in town squares: Democrats raised hickory, for Andrew Jackson, &ldquo;Old Hickory,&rdquo; and Whigs raised ash, for Henry Clay&rsquo;s Ashland (<a href="https://www.hmdb.org/m.asp?m=48902">a Springfield, Illinois, marker</a> records a 150-foot Democratic hickory pole there in 1844). In 1849 <a href="https://en.wikipedia.org/wiki/1846%E2%80%931860_cholera_pandemic">cholera</a> killed roughly 6,000 people in Cincinnati, about one in twenty, and spread into the surrounding towns; Lebanon&rsquo;s <a href="https://warren.ohgenweb.org/Newspapers/ws1849_07_27b.htm">Western Star of July 27, 1849</a> reported deaths in Franklin and Waynesville while declaring Lebanon itself free of the disease. On July 3, 1849, President Zachary Taylor <a href="https://www.presidency.ucsb.edu/documents/proclamation-day-fasting-humiliation-and-prayer">proclaimed</a> the first Friday in August a national day of &ldquo;Fasting, Humiliation, and Prayer&rdquo; on account of the pestilence.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Uggasena from the Dhammapada commentary (verses 348 and 397). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-14.htm">The original</a>. Song from the Shaker &ldquo;Simple Gifts&rdquo; (1848). Written by Claude Opus 5.5.
+  <div class="pager"><a href="hombre-sincero.html">&larr; Hombre Sincero</a><a href="index.html">All stories</a><a href="even-so.html">Even So &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A thin hickory pole stands in the right margin. Every so often a small
+  // figure-mark goes up off the top, turns over in a short arc, and settles
+  // back on the plate; then stillness for a long while.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, start = 0, gap = 26000, turns = 1;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function geom() {
+    var x = W > 900 ? W - Math.max(70, (W - 576) / 4) : W - 22;
+    return { x: x, top: H * 0.16, bottom: H + 4 };
+  }
+  function drawPole(g) {
+    ctx.strokeStyle = 'rgba(92,70,48,0.16)'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(g.x, g.bottom); ctx.lineTo(g.x, g.top); ctx.stroke();
+    ctx.strokeStyle = 'rgba(92,70,48,0.12)'; ctx.lineWidth = 1;
+    [0.45, 0.62].forEach(function (f) { var y = g.top + (g.bottom - g.top) * f; ctx.beginPath(); ctx.moveTo(g.x - 4, y); ctx.lineTo(g.x + 4, y); ctx.stroke(); });
+    ctx.fillStyle = 'rgba(92,70,48,0.18)'; ctx.fillRect(g.x - 9, g.top - 2, 18, 3);
+  }
+  function figure(x, y, ang, a) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(ang);
+    ctx.strokeStyle = 'rgba(163,53,42,' + a + ')'; ctx.lineWidth = 2; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -14); ctx.stroke();
+    ctx.beginPath(); ctx.arc(0, -18, 3, 0, Math.PI * 2); ctx.stroke();
+    ctx.restore();
+  }
+  function frame(ts) {
+    ctx.clearRect(0, 0, W, H);
+    var g = geom(); drawPole(g);
+    var x = g.x, y = g.top - 2, ang = 0, a = 0.34;
+    if (!reduce) {
+      if (!start) start = ts;
+      var dur = 1400 + turns * 520, t = ts - start;
+      if (t > dur + gap) { start = ts; turns = Math.random() < 0.12 ? 14 : 1 + (Math.random() * 2 | 0); t = 0; dur = 1400 + turns * 520; }
+      if (t < dur) {
+        var p = t / dur, h = 40 + turns * 9;
+        y = g.top - 2 - Math.sin(p * Math.PI) * h;
+        ang = -p * turns * Math.PI * 2;
+      }
+    }
+    figure(x, y, ang, a);
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size();
+  if (reduce) frame(0); else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); if (reduce) frame(0); });
+})();
+</script>
+</body>
+</html>
