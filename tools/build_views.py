@@ -226,3 +226,11 @@ footer {"""
     s = s.replace('<p class="count">', NAV("num") + '\n  <p class="count">', 1)
     open(ip, "w").write(s)
 print("views:", len(ms), "timeline,", len(pts), "map points")
+
+# ---------- reader preferences script on every page ----------
+import glob
+TAG = '<script src="prefs.js"></script>'
+for f in glob.glob(os.path.join(HERE, "*.html")):
+    h = open(f).read()
+    if TAG not in h and "</body>" in h:
+        open(f, "w").write(h.replace("</body>", TAG + "\n</body>", 1))
