@@ -252,6 +252,38 @@ for f in ["index.html", "timeline.html", "map.html"]:
     if '.dl a' not in h: h = h.replace("</style>", "footer .dl { margin-top: .6rem; } footer .dl a { text-decoration: underline; text-underline-offset: .2em; }\n</style>", 1)
     if h != h0: open(fp, "w").write(h)
 
+# ---------- PWA: manifest, offline list, service worker, head tags ----------
+import hashlib
+STORY_FILES = [m["file"] for m in sorted(metas, key=lambda m: [int(x) for x in m["num"].split(".")])]
+def wr(name, text):
+    fp = os.path.join(HERE, name)
+    if not os.path.exists(fp) or open(fp).read() != text: open(fp, "w").write(text)
+wr("offline-list.json", json.dumps(STORY_FILES))
+wr("manifest.webmanifest", json.dumps({
+    "name": "Walking the American Way", "short_name": "American Way",
+    "description": "The stories behind the Dhammapada, set down again across five hundred years of American life.",
+    "start_url": "./index.html", "scope": "./", "display": "standalone",
+    "background_color": "#111214", "theme_color": "#111214",
+    "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+              {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+              {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}]}, indent=1))
+HEADTAGS = '<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#111214"><link rel="apple-touch-icon" href="icon-192.png">'
+for f in glob.glob(os.path.join(HERE, "*.html")):
+    h = open(f).read(); h0 = h
+    if 'rel="manifest"' not in h: h = h.replace("</head>", HEADTAGS + "\n</head>", 1)
+    if '<script src="pwa.js"></script>' not in h: h = h.replace("</body>", '<script src="pwa.js"></script>\n</body>', 1)
+    if h != h0: open(f, "w").write(h)
+SAVE = ('<p class="dl"><button id="save-offline" hidden>Save all stories for offline reading</button> '
+        '<span id="save-offline-msg">Install this site as an app from your browser menu to read it like a book.</span></p>')
+ip = os.path.join(HERE, "index.html"); h = open(ip).read(); h0 = h
+if 'id="save-offline"' not in h: h = h.replace("</footer>", SAVE + "</footer>", 1)
+if "#save-offline" not in h: h = h.replace("</style>", "#save-offline { font: inherit; font-size: .95em; padding: .35rem .8rem; margin-right: .6rem; background: transparent; color: inherit; border: 1px solid currentColor; border-radius: 2rem; cursor: pointer; } #save-offline:disabled { opacity: .5; }\n</style>", 1)
+if h != h0: open(ip, "w").write(h)
+dig = hashlib.sha1()
+for f in sorted(glob.glob(os.path.join(HERE, "*.html")) + [os.path.join(HERE, x) for x in ["prefs.js", "rail.js", "near.js", "pwa.js"]]):
+    dig.update(open(f, "rb").read())
+wr("sw.js", open(os.path.join(HERE, "sw.tpl.js")).read().replace("/*VERSION*/", dig.hexdigest()[:10]))
+
 # ---------- reader preferences script on every page ----------
 import glob
 TAG = '<script src="prefs.js"></script>'
