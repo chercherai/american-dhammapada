@@ -297,6 +297,18 @@ for m in metas:
     h = head + body
     if h != h0: open(fp, "w").write(h)
 
+# ---------- Background anchors: #background (verse and commentary), #history ----------
+for m in metas:
+    fp = os.path.join(HERE, m["file"]); h = open(fp).read(); h0 = h
+    h = re.sub(r'<details class="bg"(?: id="background")?>', '<details class="bg" id="background">', h, count=1)
+    i = h.find('<div class="bg-body">')
+    if i > 0:
+        j = [x.start() for x in re.finditer(r'<h3(?: id="history")?>', h[i:])]
+        if len(j) >= 2:
+            k = i + j[1]
+            h = h[:k] + re.sub(r'^<h3(?: id="history")?>', '<h3 id="history">', h[k:])
+    if h != h0: open(fp, "w").write(h)
+
 # ---------- social cards: Open Graph / Twitter tags on story pages ----------
 SITEURL = "https://chercherai.github.io/american-dhammapada/"
 for m in metas:

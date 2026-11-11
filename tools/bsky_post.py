@@ -29,27 +29,42 @@ def xrpc(method, body=None, token=None, raw=None, ctype="application/json"):
     data = raw if raw is not None else (json.dumps(body).encode() if body is not None else None)
     return json.loads(http(PDS + method, data, h, "POST" if data is not None else "GET"))
 
-LINK = "Read this part \u2192"
-def section_post(sec, url):
-    """One post per section: heading, dateline, as many whole sentences as fit, and a link to the section."""
-    import re
-    head = sec["heading"] + ("\n" + sec["dateline"] if sec.get("dateline") else "")
-    budget = 296 - len(head) - len("\n\n") - len("\n\n" + LINK)
-    sents = re.split(r'(?<=[.!?\u201d\u2019])\s+', sec["text"])
+import re
+
+def fit(text, budget):
+    """As many whole sentences as fit; if that's too little, fill and cut at a word."""
+    if len(text) <= budget: return text
     body = ""
-    for x in sents:
-        if len(body) + len(x) + 1 > budget: break
+    for x in re.split(r'(?<=[.!?\u201d\u2019])\s+', text):
+        if len(body) + len(x) + 1 > budget - 2: break
         body = (body + " " + x).strip()
-    if len(body) < budget * 0.6 and len(body) < len(sec["text"]):
-        # too little fits in whole sentences: fill to the budget and cut at a word
-        body = sec["text"][:budget - 1].rsplit(" ", 1)[0].rstrip(",;:") + "\u2026"
-    elif len(body) < len(sec["text"]):
+    if len(body) < budget * 0.6:
+        body = text[:budget - 1].rsplit(" ", 1)[0].rstrip(",;:") + "\u2026"
+    else:
         body += " \u2026"
-    text = f"{head}\n\n{body}\n\n{LINK}"
-    start = len(text.encode()) - len(LINK.encode())
-    facets = [{"index": {"byteStart": start, "byteEnd": len(text.encode())},
-               "features": [{"$type": "app.bsky.richtext.facet#link", "uri": url + sec["anchor"]}]}]
-    return text, facets
+    return body
+
+def compose(head, text, label, uri):
+    budget = 296 - len(head) - len("\n\n") - len("\n\n" + label)
+    t = f"{head}\n\n{fit(text, budget)}\n\n{label}"
+    start = len(t.encode()) - len(label.encode())
+    return t, [{"index": {"byteStart": start, "byteEnd": len(t.encode())},
+                "features": [{"$type": "app.bsky.richtext.facet#link", "uri": uri}]}]
+
+def section_post(sec, url):
+    head = sec["heading"] + ("\n" + sec["dateline"] if sec.get("dateline") else "")
+    return compose(head, sec["text"], "Read this part \u2192", url + sec["anchor"])
+
+def background_posts(bg, url):
+    """Two closing replies: the verse with the commentary story, then the history."""
+    out = []
+    if bg.get("verse"):
+        verse = "\u201c" + fit(bg["verse"], 170) + "\u201d"
+        head = f"The verse \u00b7 {bg.get('cite', 'Dhammapada')}\n{verse}"
+        out.append(compose(head, bg.get("commentary", ""), "The verse and the old story \u2192", url + "#background"))
+    if bg.get("history"):
+        out.append(compose(bg.get("hist_title", "Background"), bg["history"], "Historical background \u2192", url + "#history"))
+    return out
 
 def story_for(day, posts):
     n = (day - START).days
@@ -71,8 +86,8 @@ def main():
     print(f"{day}: cycle {cycle + 1}, #{i + 1} of {len(posts)} -> {p['num']} {p['title']}")
     if dry:
         print(text); print(p["url"])
-        for sec in p.get("sections", []):
-            t, f = section_post(sec, p["url"]); print("--- reply (%d chars)\n%s\n[%s]" % (len(t), t, f[0]["features"][0]["uri"]))
+        for t, f in [section_post(sec, p["url"]) for sec in p.get("sections", [])] + background_posts(p.get("bg", {}), p["url"]):
+            print("--- reply (%d chars)\n%s\n[%s]" % (len(t), t, f[0]["features"][0]["uri"]))
         return
 
     handle, pw = os.environ["BSKY_HANDLE"], os.environ["BSKY_APP_PASSWORD"]
@@ -112,9 +127,9 @@ def main():
             node = min(mine, key=lambda r: r["post"]["record"]["createdAt"]); done += 1
             parent = {"uri": node["post"]["uri"], "cid": node["post"]["cid"]}
 
-    secs = p.get("sections", [])
-    for sec in secs[done:]:
-        text, facets = section_post(sec, p["url"])
+    replies = [section_post(sec, p["url"]) for sec in p.get("sections", [])] + background_posts(p.get("bg", {}), p["url"])
+    secs = replies
+    for text, facets in replies[done:]:
         rec = {"$type": "app.bsky.feed.post", "text": text, "langs": ["en"],
                "createdAt": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
                "reply": {"root": root, "parent": parent}}
@@ -123,7 +138,7 @@ def main():
     rkey = root["uri"].rsplit("/", 1)[1]
     word = "Posted" if done == 0 else "Completed"
     if done == len(secs) and done: word = "Already posted"
-    print(f"{word}: https://bsky.app/profile/{handle}/post/{rkey} ({len(secs)} section replies)")
+    print(f"{word}: https://bsky.app/profile/{handle}/post/{rkey} ({len(secs)} replies)")
 
 if __name__ == "__main__":
     main()

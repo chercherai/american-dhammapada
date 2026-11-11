@@ -3,7 +3,7 @@
    - Stories are cached as you read them, or all at once from "Save for offline".
    - Pages: network first, so corrections arrive; the cached copy when offline.
    - Fonts and map libraries: cache first. */
-const VERSION = "b8b428f08e";
+const VERSION = "05cc289ee9";
 const CACHE = "awaw-" + VERSION;
 const SHELL = ["./", "index.html", "timeline.html", "map.html", "prefs.js", "rail.js", "near.js",
                "manifest.webmanifest", "icon-192.png", "icon-512.png", "offline-list.json"];

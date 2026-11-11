@@ -34,6 +34,15 @@
     if (btn) btn.setAttribute("aria-label", "Switch to " + ((want ? want === "dark" : native()) ? "light" : "dark") + " theme");
   }
   applySize();
+  function openBgForHash() {
+    if (!/^#(background|history)$/.test(location.hash)) return;
+    const d = document.getElementById("background"); if (!d) return;
+    d.open = true;
+    const t = document.getElementById(location.hash.slice(1));
+    if (t) setTimeout(() => t.scrollIntoView({block: "start"}), 30);
+  }
+  addEventListener("hashchange", openBgForHash);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", openBgForHash); else openBgForHash();
 
   function ui() {
     const css = document.createElement("style");

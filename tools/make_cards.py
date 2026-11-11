@@ -39,7 +39,24 @@ for m in metas:
         secs.append({"heading": html.unescape(re.sub(r'<[^>]+>', '', hm.group(1))).strip() if hm else "",
                      "dateline": html.unescape(re.sub(r'<[^>]+>', '', dm.group(1))).strip() if dm else "",
                      "text": " ".join(x for x in paras if x)[:1200], "anchor": f"#part-{i}"})
-    posts.append({"sections": secs, "num": m["num"], "title": m["title"], "place": m["place"], "year": str(m["year"]),
+    T = lambda x: html.unescape(re.sub(r'<[^>]+>', '', x or '')).strip()
+    bgm = re.search(r'<div class="bg-body">(.*?)</details>', page, re.S)
+    bg = {}
+    if bgm:
+        b = bgm.group(1)
+        q = re.search(r'<blockquote[^>]*>(.*?)</blockquote>', b, re.S)
+        if q:
+            cite = re.search(r'<cite>(.*?)</cite>', q.group(1), re.S)
+            bg["verse"] = T(re.sub(r'<cite>.*?</cite>', '', q.group(1), flags=re.S))
+            bg["cite"] = T(cite.group(1)).split(", tr.")[0] if cite else ""
+            after = b[q.end():]
+            pm = re.search(r'<p>(.*?)</p>', after.split('<figure')[0].split('<h3')[0], re.S)
+            bg["commentary"] = T(pm.group(1)) if pm else ""
+        hs = list(re.finditer(r'<h3[^>]*>(.*?)</h3>', b, re.S))
+        if len(hs) >= 2:
+            bg["hist_title"] = T(hs[1].group(1))
+            bg["history"] = " ".join(T(x) for x in re.findall(r'<p>(.*?)</p>', b[hs[1].end():], re.S))[:1500]
+    posts.append({"bg": bg, "sections": secs, "num": m["num"], "title": m["title"], "place": m["place"], "year": str(m["year"]),
                   "logline": m.get("logline", ""), "url": SITE + m["file"], "image": SITE + f"og/{slug}.png"})
     im = Image.new("RGB", (1200, 630), BG); d = ImageDraw.Draw(im)
     d.rectangle([24, 24, 1176, 606], outline="#3a3a36", width=2)
