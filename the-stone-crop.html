@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Stone Crop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one column on rag paper over slow strata; each section opens with an entry from the clerk's soil book. */
+  --ground: #ebe3d3;
+  --ground-2: #e0d5c0;
+  --paper: #2c241b;
+  --paper-dim: #6d5e4b;
+  --clay: #96452a;
+  --loam: #4e3c2b;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, var(--ground) 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(44,36,27,.2); }
+.series a:hover { color: var(--clay); }
+a:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--clay); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(150,69,42,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--clay); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--clay); }
+.entry { margin: 0 0 1.75rem; padding: .9rem 1.1rem; border: 1px dashed rgba(78,60,43,.35); font-family: var(--font-display); font-size: 1.02rem; line-height: 1.55; color: var(--loam); background: rgba(255,250,240,.45); }
+.entry p { margin: 0 0 .5rem; }
+.entry p:last-child { margin: 0; }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,250,240,.6); border: 1px solid rgba(44,36,27,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--clay); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(44,36,27,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--clay); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--clay); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(44,36,27,.15); border-bottom: 1px solid rgba(44,36,27,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--clay); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--clay); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--clay); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,250,240,.6); border-left: 2px solid var(--clay); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 4.1 &middot; Pa&#7789;havikath&#257;</span></nav>
+<header>
+  <h1>The Stone Crop</h1>
+  <div class="epigraph">The human mind is like soil which is such as it is made by cultivation.<br>&mdash; Swedenborg, Heaven and Hell 356</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is the way I had it,</span> on the Black River in the Reserve.</p>
+
+<section>
+  <h2>I. Stony Loam</h2>
+  <p class="dateline">Lyme Hollow, Windsor County, Vermont &middot; June 1816 to May 1817</p>
+  <div class="entry">
+    <p>No. 1. Our own. A brown loam on a hard pan, thin on the hills, better in the hollow. Full of stones of every size from a hen's egg to a cart. The stones come up anew every spring with the frost and must be picked, and are laid in walls. No man living has seen the bottom of them.</p>
+    <p>&mdash; A. Pettengill, clerk</p>
+  </div>
+  <p>It snowed on the seventh and eighth of June. Asa Pettengill was nineteen and kept the district school, and he walked out on the morning of the eighth to see the corn, and the corn was lying flat and black in rows, and the snow lay in the furrows between, and the birds that had come north for the summer were sitting on the stone walls with their feathers puffed out, and some of them were dead in the grass. Frost again in July. Frost on the twenty-first of August that took the beans. By September the town was eating its seed.</p>
+  <p>That winter the men met in the meetinghouse, which had no stove, and agreed to go. Thirty-one families. They would sell what they could and go together to a township in the Connecticut Reserve that a man from Bennington had for sale, all of it, and lay it out in lots by drawing, and build a meetinghouse first. They would take their minister if he would come. He would not. They took their deacon and their militia captain and the oldest person in the hollow, who was the Widow Submit Haskell, who had buried two husbands and seven of her eleven children and would not be left behind.</p>
+  <p>Because the deacon and the captain could not agree which of them should judge the land along the way, they gave the job to the schoolmaster, who had a good hand, and told him to set down every soil they passed over from Lyme Hollow to the Reserve, so that the company would know what was good and what was not. He bought a blank book in Windsor for that purpose for one and six. It is the book these entries are taken from.</p>
+  <p>The deacon was Ezra Wetherbee and the captain was Jonas Lamb, and their farms had shared a wall for twenty-two years, and for nineteen of them they had not agreed about it. Every spring the frost lifted stones out of the ground on both sides, and every spring each man threw his own stones on the wall, and each man said the other threw his over. In 1809 it went to the justice. In 1811 it went to the church, where the deacon could not sit in judgment on his own case and sat anyway. They sold both farms to the same man from Massachusetts in the same week and walked out of the hollow on the same morning, in May of 1817, one at the head of the wagons and one at the tail.</p>
+  <p>The Widow Haskell rode in Lamb's wagon on a feather bed with a box in her lap. In the box were her husband's spectacles, a paper of seeds, and a London book called <em>Heaven and Hell</em>, which her second husband, a tin peddler, had taken in trade at Boston for a coffee pot and a lantern and never read. She had read it eleven times. The deacon would not sit in the same room with it.</p>
+</section>
+
+<section>
+  <h2>II. Flats</h2>
+  <p class="dateline">The Mohawk below Little Falls, New York &middot; June 1817</p>
+  <div class="entry">
+    <p>No. 9. The German Flats. A black mould of the river, deep, without one stone in it that I could find, though Capt. Lamb walked into a field to look and was spoke to sharply in Dutch. Grass to a man's belt. Wheat very good. The Dutchmen here have been on it a hundred years and say the river gives it back every spring.</p>
+  </div>
+  <p>That was the first time the men talked soil at night. They had been talking about it all day walking, but that night at the fire they talked about nothing else, and after that it was every night. The flats were a wonder to them. Captain Lamb held up a fist of that black ground and let it go through his fingers, and nothing stayed in his palm, not a pebble, and some of the men laughed out loud.</p>
+  <p>The widow did not get down from the wagon. She sat on the tailboard with her feet hanging and her book shut on her knee, and she looked at the river.</p>
+</section>
+
+<section>
+  <h2>III. Openings</h2>
+  <p class="dateline">The Genesee Road, beyond Canandaigua &middot; June 1817</p>
+  <div class="entry">
+    <p>No. 14. Oak openings. A light sand or gravel, the trees standing apart like an orchard, and grass between. Easy to break, they say, and easy to lose. The Holland Company's men at Batavia say it will bear wheat. Deacon W. says sand is sand.</p>
+    <p>No. 15. The same, wetter. Even and uneven.</p>
+  </div>
+  <p>Every wagon on the Genesee Road was going the same way. They passed Vermonters and New Hampshire men and a whole congregation from Connecticut with its minister riding in front on a white mare, and every one of them was talking soil. At the taverns in the evening the men stood in the yard with their hats on the backs of their heads and argued gravel and sand and clay and muck. A man from Rutland said there was land in the Indiana country where you could push a ramrod in to the thimble. A man from Pittsfield said the Reserve was all clay and the clay held water like a pan and the water bred the fever. The deacon said there was no land on earth without a fault in it, and looked at the captain when he said it.</p>
+  <p>Asa wrote it all down. In the back of the book he began a list of the things people told him, which ran to four pages and contradicted itself on every one.</p>
+</section>
+
+<section>
+  <h2>IV. Mud</h2>
+  <p class="dateline">The lake road, Buffalo to the Pennsylvania line &middot; late June 1817</p>
+  <div class="entry">
+    <p>No. 22. Black ash swamp. Mud.</p>
+    <p>No. 23. Mud.</p>
+    <p>No. 24. A red clay like the inside of a brick, then mud. Lost the Wetherbees' near ox in it to the belly. Got him out. Six days from Buffalo, which the British burnt in the war.</p>
+  </div>
+  <p>The road along the lake was a cut through the woods with the stumps left in it, and where it was not stumps it was mud, and where it was not mud it was sand that the wheels went into to the felloes. When the deacon's ox went down in the red clay at a creek east of Erie, the men of the company hauled him out with chains, and the captain put his shoulder under the yoke with the rest, and nobody said anything about it afterward, and it seemed to Asa that the two men had been given something to talk about that was not the wall, and that neither of them would take it.</p>
+  <p>It rained eleven days of the fourteen. The widow was wet through, and her book was wrapped in an oilcloth inside her dress, and she did not complain once that anybody heard. The children walked beside her wagon because she would tell them things. She told them that every bird that sang had a reason, and that the angels in heaven wove crowns of flowers for children who had died small, and that her own four were wearing them, and that the crowns did not fade. One of the Lamb girls said there were no flowers in a swamp. The widow leaned down and picked one off the edge of the cut, a little white thing on a long stem with a drop of rain in it, and gave it to her, and said, <em>That was there all the time.</em></p>
+</section>
+
+<section>
+  <h2>V. Black Clay and Red</h2>
+  <p class="dateline">The township, on the east branch of the Black River &middot; July 1817</p>
+  <div class="entry">
+    <p>No. 31. Our own again. A stiff yellow clay under beech and maple, very heavy, with a black mould on top of it about four inches deep where the leaves have lain. In the swales a black clay that will stick a boot. On the ridge toward the river a red clay with gravel in it. Abounds in mud at present. NOT ONE STONE.</p>
+  </div>
+  <p>He wrote the last three words in capitals and underlined them twice, and that is how they are in the book.</p>
+  <p>The tract had been signed away at Fort Industry twelve years before by the Wyandot and the Ottawa and the others who had used it, and in the beech woods there were still the bark frames of hunting camps falling in, and along the river old cornhills under the grass that nobody in the company could account for. Asa wrote them down too, and did not know under what heading.</p>
+  <p>They drew lots on the second Sunday, out of the deacon's hat. The deacon drew the lot on the river and the captain drew the lot beside it, and the company stood in the clearing and heard it and was still. Somebody laughed. Then the captain walked to the line between the two lots, where the surveyor's blaze was on a beech, and stood there, and then he got down on his knees and began to dig at the clay with his hands, and the whole company watched him do it. He dug down a forearm's length. He sat back on his heels and held his hands up, yellow to the wrist, and there was nothing in them.</p>
+  <p><em>Well, Ezra,</em> he said. <em>There's nothing here to throw.</em></p>
+  <p>It was the first thing he had said to the deacon direct in six years. The deacon did not answer it.</p>
+</section>
+
+<section>
+  <h2>VI. The Inner Soil</h2>
+  <p class="dateline">Captain Lamb's cabin, the first Sabbath evening in August 1817</p>
+  <div class="entry">
+    <p>No. 32. This entry is not a soil. I set it down because I was asked to.</p>
+  </div>
+  <p>The first roof in the township was the captain's, so the company met under it. It had no floor yet. They sat on the sills and on blocks of beech and on the ground, the men on one side and the women on the other, and the children in the door, and they read the psalm and prayed, the deacon praying, since there was no minister. When the prayer was done nobody went home. It was hot and the mosquitoes were bad and outside it was raining again on the clay. The men began to talk.</p>
+  <p>They talked about the yellow clay and whether it would drain if you ditched it. They talked about the black clay in the swales and whether that was where the fever came from. They talked about the red clay on the ridge and the gravel in it. They talked about the flats on the Mohawk and the openings on the Genesee and the man from Rutland and his ramrod. They talked about even land and uneven, and land that abounded in mud, and land that abounded in gravel, and Asa, who had the book open on his knee because they kept asking him what number this was and what number that, saw that they were reading the whole road back to one another from the beginning, every mile of it, and that they would go on reading it all night.</p>
+  <p>The Widow Haskell had been sitting by the cold hearth with her hands on her box. She asked them, in her little high voice, what it was that they were all talking about.</p>
+  <p>Captain Lamb said, <em>The soils, Mother. What we saw on the road.</em></p>
+  <p>She was quiet a while. Then she said, <em>You came out of Lyme Hollow because the ground grew stones.</em></p>
+  <p>They said yes.</p>
+  <p><em>And you have looked in every field from there to here. And you have found the one without a stone in it.</em></p>
+  <p>They said yes, that was so, and somebody said, <em>Praise God,</em> and the deacon said, <em>Amen.</em></p>
+  <p><em>I have had a wall to the north of me for sixty years,</em> said the widow. <em>Ezra knows it, he helped my first husband lay it. You can stand on the wall in March and see the stones come up in the field like bread. Where do you suppose they come from? Nobody puts them in. They are in it. The frost goes into the ground and finds them and lifts them up one at a time, and the ground is no worse ground for it. It is only that they are let out.</em></p>
+  <p>She opened the box and took out the book in its oilcloth and did not open it. She knew the place.</p>
+  <div class="verse">
+    <p>The human mind is like soil which is such as it is made by cultivation.</p>
+    <p>&mdash; Swedenborg, Heaven and Hell 356</p>
+  </div>
+  <p><em>You have every one of you brought your stones,</em> she said. <em>I watched you load them. They are in the wagons under the feather beds. They will come up the first hard frost, every one, and you will have to pick them, and you had better not throw them on your neighbor.</em></p>
+  <p>Nobody said anything at all. The rain came through the roof in one place and fell on the ground between the deacon and the captain, a little stream of it, and made a hole in the clay.</p>
+  <p><em>This is the soil you have to know,</em> said the widow. <em>Not that one. You will learn that one with an ax in two years. This one you will be all your life at, and all the way to the other side, and past it. There is a garden there. I have read about it.</em> She put the book in the box. <em>Pick what is good out of it, the way you would pick the one flower. You can leave the rest by the road.</em></p>
+  <div class="verse">
+    <p>There the intelligent walk, and gather flowers and weave garlands with which they adorn little children.</p>
+    <p>&mdash; Swedenborg, Heaven and Hell 176</p>
+  </div>
+  <p>Then she asked the captain to carry her to bed, because she was tired, and he did.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>That is the end of the soil book. After entry thirty-two there are only Asa Pettengill's school accounts for the winter of 1817 and 1818, and on the last page, in a different ink, a note that the frost came on the eighteenth of November and went down deep, and that in March the clay heaved like a loaf, and that nothing came up out of it.</p>
+  <p>It was said in the township for a hundred years afterward, by people who could not have known, that every soul who sat under that roof went home that night and was changed, the whole company at once, and that not one of them in the rest of their lives went to law against another. The church records, which begin in 1819, do not contradict it.</p>
+  <p>The Widow Haskell died in April of 1818, the first death in the township, and was buried on the ridge in the red clay. The day of the burying the spring beauties were out under the beeches, white with a pink vein in them, more than anyone had ever seen, and the women picked them all morning and wove them into a crown, and it was laid on the coffin by Ezra Wetherbee's granddaughter, who was six, standing on a block, with Jonas Lamb's hand under her elbow so she would not fall.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Who shall overcome this earth, and the world of Yama (the lord of the departed), and the world of the gods? Who shall find out the plainly shown path of virtue, as a clever man finds out the (right) flower?<cite>Dhammapada 44, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The disciple will overcome the earth, and the world of Yama, and the world of the gods. The disciple will find out the plainly shown path of virtue, as a clever man finds out the (right) flower.<cite>Dhammapada 45, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>Five hundred monks come back to Jetavana from a journey through the countryside with the Buddha and sit in the hall talking about the ground they walked over: even and uneven, muddy, gravelly, black clay, red clay. The Buddha asks what they are discussing, tells them that this is the outer soil and that they must clear the soil within, and speaks the two verses, which turn on the double sense of "earth" and on the garland-maker who knows which flower to pick. All five hundred are said to have reached awakening as he finished. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-01.htm">the full commentary story</a>. The teacher's book is <a href="https://en.wikipedia.org/wiki/Heaven_and_Hell_(Swedenborg)"><em>Heaven and Hell</em></a> (1758) by <a href="https://en.wikipedia.org/wiki/Emanuel_Swedenborg">Emanuel Swedenborg</a>, a work "from things heard and seen" in which earth, heaven and hell answer one another by correspondence; it is quoted here in John C. Ager's translation.</p>
+    <h3>Vermont and the Reserve, 1816&ndash;1818</h3>
+    <p>The eruption of Tambora in April 1815 brought the <a href="https://en.wikipedia.org/wiki/Year_Without_a_Summer">Year Without a Summer</a> to New England. Frost killed crops on the high ground in May 1816; snow fell across the region on June 6 to 8; killing frosts came again in August. The historian L. D. Stillwell estimated that Vermont lost ten to fifteen thousand people to emigration in 1816 and 1817, many of them bound for western New York and Ohio. The New England hill farms they left were notorious for stones: <a href="https://en.wikipedia.org/wiki/Frost_heaving">frost heaving</a> lifts glacial cobbles to the surface every spring, and the miles of stone walls in Vermont were built largely from what farmers picked off their fields.</p>
+    <p>The northern route west ran up the Mohawk, out the Genesee Road through the lands of the <a href="https://en.wikipedia.org/wiki/Holland_Land_Company">Holland Land Company</a> at Batavia, through Buffalo (burned by the British in December 1813), and along the lake shore into the <a href="https://en.wikipedia.org/wiki/Connecticut_Western_Reserve">Connecticut Western Reserve</a>, sold by Connecticut to the Connecticut Land Company in 1796. Title west of the Cuyahoga, where this story's fictional township lies, was taken from the Wyandot, Ottawa and other nations at the Treaty of Fort Industry in 1805. Whole New England congregations often moved and settled together, laying out a new town by lot.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the five hundred monks who talked about soil, from the Dhammapada commentary (verses 44 and 45). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/04-01.htm">The original</a>. Scripture from Swedenborg's Heaven and Hell, tr. John C. Ager. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-midwifes-driver.html">&larr; The Midwife&#x27;s Driver</a><a href="index.html">All stories</a><a href="notional-water.html">Notional Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* Frost heave: faint strata, and small stones that rise through them very slowly and are let out at the top. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, stones = [], bands = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(s, anywhere) {
+    s.x = Math.random() * W;
+    s.y = anywhere ? H * (0.45 + Math.random() * 0.55) : H + 20;
+    s.r = 3 + Math.random() * 7;
+    s.rx = s.r * (1 + Math.random() * 0.6);
+    s.rot = Math.random() * Math.PI;
+    s.v = 0.025 + Math.random() * 0.05;
+    s.shade = Math.random();
+    return s;
+  }
+  function make() {
+    stones = []; bands = [];
+    var n = Math.round(Math.max(10, Math.min(26, W / 50)));
+    for (var i = 0; i < n; i++) stones.push(spawn({}, true));
+    for (var b = 0; b < 7; b++) bands.push({ y: 0.42 + b * 0.085, amp: 4 + Math.random() * 8, ph: Math.random() * 6, k: 0.004 + Math.random() * 0.004 });
+  }
+  var t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var b = 0; b < bands.length; b++) {
+      var B = bands[b];
+      ctx.beginPath();
+      for (var x = 0; x <= W; x += 16) {
+        var y = H * B.y + Math.sin(x * B.k + B.ph) * B.amp;
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = 'rgba(110,80,55,' + (0.05 + b * 0.008) + ')';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    for (var i = 0; i < stones.length; i++) {
+      var s = stones[i];
+      if (!reduce) { s.y -= s.v * (0.6 + 0.4 * Math.sin(t * 0.004 + i)); if (s.y < H * 0.38) spawn(s, false); }
+      var fade = Math.min(1, (s.y - H * 0.38) / (H * 0.12));
+      var a = Math.max(0, fade) * 0.16;
+      if (a < 0.005) continue;
+      ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(s.rot);
+      ctx.beginPath(); ctx.ellipse(0, 0, s.rx, s.r, 0, 0, Math.PI * 2);
+      var g = s.shade > 0.5 ? '120,105,90' : '150,69,42';
+      ctx.fillStyle = 'rgba(' + g + ',' + a + ')';
+      ctx.fill();
+      ctx.restore();
+    }
+    t++;
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Nooning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column over a dark school slate where pencil words are written and wiped; the slates in the story are framed panels. */
+  --ground: #1b2024;
+  --ground-2: #252c31;
+  --paper: #e4e1d8;
+  --paper-dim: #9ba19f;
+  --mullein: #d6b04a;
+  --tallow: #e39a4c;
+  --frame: #7b5b3c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #2c353b 0%, var(--ground) 65%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,225,216,.2); }
+.series a:hover { color: var(--mullein); }
+a:focus-visible { outline: 2px solid var(--mullein); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--mullein); text-wrap: balance; text-shadow: 0 0 28px rgba(214,176,74,.18); }
+.epigraph { border-left: 1px solid rgba(214,176,74,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mullein); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--mullein); }
+.slate { margin: 1.75rem auto; max-width: 26rem; padding: 1.1rem 1.4rem; background: #20272b; border: 7px solid var(--frame); border-radius: 3px; box-shadow: inset 0 0 18px rgba(0,0,0,.55), 0 2px 0 rgba(0,0,0,.4); font-family: var(--font-display); letter-spacing: .14em; color: #cfd2cc; line-height: 1.6; text-align: center; }
+.slate p { margin: 0; }
+.slate .gap { word-spacing: 2.2em; }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(37,44,49,.8); border: 1px solid rgba(228,225,216,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--tallow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,225,216,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--mullein); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mullein); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--mullein); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--mullein); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mullein); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--mullein); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(37,44,49,.8); border-left: 2px solid var(--mullein); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } .slate { padding: 1rem .9rem; letter-spacing: .08em; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 12.8 &middot; K&#257;la</span></nav>
+<header>
+  <h1>The Nooning</h1>
+  <div class="epigraph">&hellip;this language, as simple as nature, is capable of extending itself like her, and of attaining the furthest limits of human thought.<br>&mdash; Laurent Clerc, Address at the Connecticut Asylum, Hartford, 28 May 1818</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Thus it was signed to me,</span> on Meetinghouse Hill.</p>
+
+<section>
+  <h2>I. Cow</h2>
+  <p class="dateline">Meetinghouse Hill, Tolland County &middot; winter 1810</p>
+  <p>I am the Hale boy. Keep that in front of you while I tell this. I was not born yet when this first part happened, and when the rest of it happened I was nine years old and had no words, not one. I had pointing, and I had my mother&rsquo;s face. What I tell you I put together afterward, out of what I saw, and what was written down, and what Mrs. Kingsbury wrote out for me when we were both old. Watch my hands. I will go slowly.</p>
+  <p>Thankful Root. Her house stood at the south corner of the green, so near the meetinghouse that on a still Sabbath the minister came in at her kitchen window, and she was the one person in the kitchen who did not know it. A fever took her hearing in her second year. In 1810 she was forty-four. She kept the books of her husband&rsquo;s hat shop in figures she had worked out for herself, could cut a coat by eye and dress a hog, and on the Sabbath she sat on the short bench under the pulpit, where the town put the hard of hearing, between two old soldiers holding their tin trumpets up at the preacher, and watched his mouth for three hours and got nothing out of it.</p>
+  <p>She and Ezra had made a language between them, the way two people will who have to. A sign for flour. A sign for the red cow. One for the minister, the chin lifted. One for each of their boys, and later one for each of the boys&rsquo; graves. Their girl Huldah had all of it from the cradle. The rest of the town had pointing and nodding, and an opinion, which the minister shared, that Mrs. Root understood about what the red cow understood and was to be pitied for it on fast days.</p>
+  <p>That winter the district hired Asa Pember to keep the school, a young man out of Windham County with two years of Yale College in him and no money to finish. Schoolmasters boarded round then, a week at each house for each scholar sent, and when his weeks came to the Roots&rsquo; he was the first person in her life who thought of writing. He brought a slate home from the schoolhouse. He drew a cow on it and wrote under the cow.</p>
+  <div class="slate"><p>COW</p></div>
+  <p>She looked at it a long time. Then she took the pencil out of his hand and drew a line from the cow to the word, hard, so that the slate squealed, as if she were tying a rope.</p>
+  <p>He told people afterward he had never seen anybody so hungry. He meant it kindly. He meant most things kindly.</p>
+  <p>By spring she could read a hundred names of things. When his weeks were up he did not move on. He took the chamber over the hat shop and paid what he could, which was little. When Ezra died two winters later it was Asa Pember who wrote out on the slate what the doctor had said, and what the minister said at the grave, and who sat with her in the kitchen afterward while she made the sign for Ezra on the table with one finger, over and over. He did not know that sign. She did not teach it to him.</p>
+</section>
+
+<section>
+  <h2>II. Mullein</h2>
+  <p class="dateline">The widow&rsquo;s kitchen, at the nooning &middot; 1812&ndash;1818</p>
+  <p>Six years. She kept his shirts and knit his stockings and set his plate at her table where she had set her sons&rsquo;, and he was a son to her, near enough, and he knew it, and it was the best thing he had.</p>
+  <p>On the Sabbath he took notes of the morning sermon in a little book on his knee. At the nooning, while the farm families went down to the noon-houses on the lower side of the green to thaw out and fill their foot stoves, he crossed to her kitchen and ate her cold beans and brown bread and wrote the sermon out for her. The text, the doctrine, the heads. He chose the words she had.</p>
+  <div class="slate"><p>FIRSTLY. SIN.</p><p>SECONDLY. GOD SEES.</p><p>THIRDLY. OBEY. GIVE.</p></div>
+  <p>She read them and nodded. He wiped the slate with the side of his hand, and they went back up the hill for the afternoon. That was her whole religion for six years: three or four words a week and a hand wiped across them. She thought it was a short religion and a hard one, and that it was all there was of it for a woman like her. He thought so too. That is the thing to understand about him. He was not lying to her.</p>
+  <p>One October he taught her the weed by the pasture wall. He drew it two ways. The first year, the flat grey rosette lying on the ground, leaves soft as flannel. The second year, the tall stalk with the yellow flowers going up it like a candle. Through the second picture he drew a line.</p>
+  <div class="slate"><p>MULLEIN</p></div>
+  <p>She had known that all her life. Every farm woman knows the mullein blooms once and then stands dead all winter on its own stalk. What she had not known was that it could be written and kept. On dark evenings he cut the dry stalks along the wall and dipped them in her tallow pot and walked out to the schoolhouse with one burning in his hand, and she watched the little fire go along the road from her window and knew the word for it.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The Kingsburys had the farm two miles out on the Bolton road. In the cold year, when there was frost in June and half the hill sold up and went to Ohio, the Kingsburys stayed. Their third child, Lydia, was born deaf. In the fall of 1817 Eli Kingsbury sold his young oxen and borrowed on his woodlot and drove her twenty miles to Hartford, to the Asylum that had opened that spring in the old City Hotel, and paid a hundred dollars for six months. In April he found the second hundred; nobody knew how. In October of 1818 he could not find the third. He drove to Hartford and brought her home to wait.</p>
+  <p>She came home talking.</p>
+  <p>I saw it, the first Sabbath. My mother had heard something and took me down to the Kingsbury noon-house at the nooning: a low shed, a stone chimney at one end, the horses at the other, smoke and wet wool and horse. There was Lydia on the bench by the fire, fifteen years old. There was old Abner Fuller from the east parish, who was born deaf and drove oxen and had never in sixty-one years said a thing to anybody that he could not point at. And her hands were going. Fast as a fiddler&rsquo;s, her face going with them. She spelled on her fingers. She wrote whole lines on a slate. She made a shape in the air with both hands, and Abner Fuller wept, an old man with ice in his beard, in front of everybody, and my mother put her hand over her own mouth. I stood there with my nothing. I did not know yet I was looking at words. I only knew I was hungry. That is the right word. Pember was right about that word.</p>
+  <p>Mrs. Peck, who lived next door to the widow, was in the shed too. She went home and stood in the widow&rsquo;s kitchen and said it to Huldah, and Huldah turned it into the household signs. Huldah wrote it down for me afterward. Huldah kept everything.</p>
+  <p><em>She talks, Thankful. With her hands. About the Almighty, and the stars, and the soul, and old Fuller understood every bit of it. I never saw the like of it in my life. You ought to go and see.</em></p>
+</section>
+
+<section>
+  <h2>III. No</h2>
+  <p class="dateline">The same week &middot; October 1818</p>
+  <p>Monday at supper the widow made the sign for Lydia Kingsbury, a hand drawing down a braid, which she had used since the girl was in long clothes. Then two fingers out from her own eyes, toward the Bolton road. I want to see.</p>
+  <p>He took the slate off its nail.</p>
+  <div class="slate"><p>NO. THEY ARE FRENCH SIGNS.</p><p>YOU WOULD NOT FOLLOW.</p></div>
+  <p>Wednesday, at the woodpile, she asked again. He wrote with the slate against his knee.</p>
+  <div class="slate"><p>YOU ARE TOO OLD TO BEGIN.</p><p>IT WILL MUDDLE WHAT YOU HAVE.</p></div>
+  <p>Friday, at the well, the third time. He wrote, and did not look at her while she read it.</p>
+  <div class="slate"><p>THE TOWN WILL LAUGH AT YOU.</p></div>
+  <p>Why? He told himself it was for her. Here is what was under that, where a man keeps what he does not look at. If the Kingsbury girl could talk to her, the slate would go back to the schoolhouse. His plate would be a plate on the table, and he would be a boarder. For eight years he had been the only door into that house, and he could not think what he would be if there were another.</p>
+  <p>I know this because he wrote it, the next year, in a letter to Huldah from Ohio. I told you she kept everything.</p>
+  <p>The widow read each slate and nodded, and he wiped it, and he thought that was the end of it.</p>
+</section>
+
+<section>
+  <h2>IV. Tree, Green</h2>
+  <p class="dateline">The Kingsbury noon-house &middot; the first Sabbath in November 1818</p>
+  <p>Frost on everything. She ate her breakfast by candle and filled her foot stove from the hearth. Before they went out she put her hand on Huldah&rsquo;s cheek, and pointed at the bean pot, and the bread, and Pember&rsquo;s chair. Feed him. Huldah nodded.</p>
+  <p>That morning the minister preached on the new constitution, voted in by a hair in October, which ended the Standing Order and, by his account, very possibly the world. Pember wrote it in his book. At the blessing the widow went out the door with her foot stove and turned away from home, across the green and down the hill toward the noon-houses.</p>
+  <p>He went to the kitchen. Huldah set out the beans and the bread and a mug of cider. Huldah wrote down for me what was said. I have it here.</p>
+  <p><em>Where is your mother?</em></p>
+  <p><em>At the Kingsburys&rsquo; noon-house, sir. She has gone to see Lyddy.</em></p>
+  <p>He put the spoon down. Huldah said his face went the color of the coals in the stove. He said out loud, to no one, <em>So. She has done with me,</em> and went out across the green without his hat.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Now I was there. This part is mine.</p>
+  <p>She came in out of the cold and sat at the end of the bench with the foot stove under her skirts, and Lydia looked at her a long time. Lydia did not begin with Hartford. She began with the widow. She made a little asking face and opened her hands: show me yours. And the widow, slowly, the way you take things out of a chest that has been shut for years, showed her. Flour. The red cow. The minister. Ezra. Lydia gave each one back to her, and some of them Lydia&rsquo;s hands had already, because the signs at Hartford were made the same way, out of how a thing looks and how it moves. Mr. Clerc&rsquo;s rule, which he had from the Abbé Sicard, was that you go from the known to the unknown. Lydia had it from him, and I have it from her.</p>
+  <p>Then she took a burnt stick out of the fire and wrote on the hearthstone.</p>
+  <div class="slate"><p class="gap">TREE GREEN</p></div>
+  <p>She pointed out the door at the hemlock by the horse shed. Tree. Green. She drew a line between the two words, the way the widow had once drawn a line from a cow to its name. Then she rubbed the line out with her thumb and wrote in its place:</p>
+  <div class="slate"><p>IS</p></div>
+  <p>The widow looked at that a long time. I looked at it too, though I could not read, because everybody was looking at it.</p>
+  <p>Then Lydia lifted her own hand, slowly, and let it fall. Lifted it again. She pointed at the hand: this? And shook her head. She touched her arm: this? No. She touched her forehead, and then her breast, and then she made a sign none of us had ever seen, both hands opening out from the breast the way shutters open on a shop in the morning. And she pointed at the widow.</p>
+  <p>That is when the door let the cold in, and Asa Pember stood in it with no hat.</p>
+  <p>I did not hear what he said. Nobody in that shed heard it but the Kingsburys and Mrs. Peck and my mother. Mrs. Kingsbury wrote it out for me fifty years later in a good round hand. This is what his mouth said.</p>
+  <p><em>Mrs. Kingsbury, I beg you, let her be. She cannot follow this. I have taught her eight years and I know her measure. If the girl must teach her something, let it be the Commandments, and to put her penny in the box. That much she can hold.</em></p>
+  <p>And he made at the widow the household sign for <em>come home</em>, which was Ezra&rsquo;s.</p>
+  <p>Lydia watched his mouth. She could not read mouths well, but she read faces the way a pilot reads water. She wiped her slate on her skirt and wrote and held it up to him.</p>
+  <div class="slate"><p>YOU ARE AFRAID</p><p>SHE WILL NOT WANT YOU.</p></div>
+  <p>Then she took out of her apron a thin printed pamphlet. It was the address Mr. Clerc had written for the examination in May, which Mr. Gallaudet read aloud for him before the Governor and both houses, while the forty-two of them sat in rows and watched the words go over their heads into the hearing people. She had carried it home with her. She opened it and set her finger under a line and held it up, and he read it. He could not help it. He was a man who read whatever was put in front of him.</p>
+  <div class="verse">
+    <p>Every creature, every work of God, is admirably well made; but if any one appears imperfect in our eyes, it does not belong to us to criticise it. Perhaps, that which we do not find right in its kind, turns to our advantage, without our being able to perceive it.</p>
+    <p>&mdash; Laurent Clerc, Address at the Connecticut Asylum, Hartford, 28 May 1818</p>
+  </div>
+  <p>Then one more line on the slate, her own.</p>
+  <div class="slate"><p>IT IS YOURSELF YOU HURT.</p></div>
+  <p>Mrs. Peck said afterward he looked like a man who has walked into a post in the dark.</p>
+  <p>And the widow did not look at him. That is what I remember best. He had been the door of her house for eight years and she did not turn her head. She was looking at the hearthstone. She lifted her hand. She let it fall. She lifted it again and turned it over and looked at the back of it, and then at Lydia&rsquo;s hand, and at old Fuller&rsquo;s, big and broken on his knees, and at mine, and at Asa Pember&rsquo;s hanging at his side, and I saw it go into her. I have no better way to put it. Whatever lifted the hand was not in the hand. It was in hers, and in all of ours, and in his too, standing there in the door. It had been in her the whole of her life on the short bench under the pulpit, and nobody had come in to it, and it had not waited on anybody to come.</p>
+  <p>She made the sign Lydia had made. Both hands, opening from the breast.</p>
+  <p>Lydia&rsquo;s face did something I have no sign for.</p>
+  <p>Old Fuller made it. My mother made it, crying, badly, the way hearing people make signs. And I made it, and it was my first word, and I made it three times over because I could not believe I had one, and Lydia laughed and caught my hands and made me do it slower.</p>
+  <p>The bell went for afternoon meeting. Asa Pember went out first.</p>
+</section>
+
+<section>
+  <h2>V. The Wall</h2>
+  <p class="dateline">The Bolton road &middot; March 1819</p>
+  <p>In December the widow sold Ezra&rsquo;s hat blocks and his bow and the last of the felt to a hatter in Coventry, and walked out the Bolton road with the money tied in a stocking, and put it on Eli Kingsbury&rsquo;s table. Nobody had taught her the duty of almsgiving. In January Lydia went back to Hartford.</p>
+  <p>After that, at the nooning, the widow went down to the noon-house, and old Fuller and I and two more who had heard of it and walked over from the next town sat by the fire with her, and she gave us what she had. Flour. Cow. Tree. Green. Is. She was a slow teacher. She had a great deal of time for it.</p>
+  <p>Asa Pember kept the school to the end of the term. He still ate at her table; she still set his plate; there was nothing in her that wanted to punish him. But he did not take the slate off the nail again, and she did not hand it to him. In March he went west with the Pecks, who had the Ohio fever like half the hill.</p>
+  <p>I saw him go. It was very early. The wagon went out past the pasture wall, where last summer&rsquo;s mullein stood along the stones in a row, grey and dry, every stalk gone to seed and dead on its feet since September, and he did not look at them. He was looking back at the corner of the green, where she stood in her doorway with the slate in her two hands. She had wiped it clean. She held it up toward the wagon so he could see there was nothing on it, and she held it there until the wagon was over the hill.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The foolish man who scorns the rule of the venerable (Arahat), of the elect (Ariya), of the virtuous, and follows false doctrine, he bears fruit to his own destruction, like the fruits of the Katthaka reed.<cite>Dhammapada 164, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a laywoman of Sāvatthī looks after the Elder Kāla &ldquo;with the tenderness of a mother for a son.&rdquo; When her neighbors come home praising the Buddha&rsquo;s teaching, she asks to hear it too, and three days running Kāla talks her out of it, thinking that once she has heard the Teacher she will have no more use for him. On an Observance Day she goes anyway, telling her daughter to feed the elder. When he learns where she is, he hurries to the monastery in a jealous rage and tells the Buddha the woman is too stupid for subtle teaching and should be taught only giving and the precepts. The Buddha sees his motive, tells him he strives only to his own hurt, and speaks the verse of the reed that dies when it bears fruit. The woman attains stream-entry, and the others listening benefit too. There is no past-life story. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-08.htm">the full commentary story</a>.</p>
+    <h3>Hartford and the hill towns, 1817&ndash;1819</h3>
+    <p>The <a href="https://en.wikipedia.org/wiki/American_School_for_the_Deaf">Connecticut Asylum for the Education and Instruction of Deaf and Dumb Persons</a> opened in Hartford on April 15, 1817, in the old Bennet&rsquo;s City Hotel, with Thomas Hopkins Gallaudet and the French Deaf teacher <a href="https://en.wikipedia.org/wiki/Laurent_Clerc">Laurent Clerc</a>, a former pupil of the Abbé Sicard&rsquo;s school in Paris. The <a href="https://disabilitymuseum.org/dhm/lib/detail.html?id=1734">committee&rsquo;s first report</a> lists parents&rsquo; advances of a hundred dollars for six months and regrets that its means were &ldquo;altogether inadequate to the support and instruction of those pupils who are in indigent Circumstances.&rdquo; Two of the first pupils came from Hebron, in Tolland County. At a public examination on May 28, 1818, before the governor and both houses of the legislature, Gallaudet read aloud <a href="https://archive.org/details/gu_addresswritte00cler">an address Clerc had written</a>. It describes Sicard&rsquo;s method of following &ldquo;the uninterrupted line from the known to the unknown&rdquo; and counts forty-two deaf pupils in the room. In the winter of 1818&ndash;19 it became the first school of primary and secondary education to receive federal aid. Pupils brought home signs and village sign languages to Hartford, where they mixed with Clerc&rsquo;s French signs, and <a href="https://en.wikipedia.org/wiki/American_Sign_Language">American Sign Language</a> emerged at the school.</p>
+    <p>On October 5, 1818, Connecticut voters ratified the state&rsquo;s first written constitution by a narrow margin, 13,918 votes, just under 53 percent of those cast. It ended the established church, the &ldquo;Standing Order&rdquo; that the <a href="https://en.wikipedia.org/wiki/Toleration_Party">Toleration Party</a> had campaigned against (<a href="https://todayincthistory.com/2018/10/12/october-12-connecticuts-constitution-of-1818-goes-into-effect-but-not-without-grumbling/">more at Today in Connecticut History</a>). Meetinghouses were unheated, and between the morning and afternoon services many Connecticut congregations ate and refilled their foot stoves in &ldquo;noon-houses&rdquo; or &ldquo;Sabba-day houses,&rdquo; low sheds with a chimney at one end; many meetinghouses also kept a seat near the pulpit for the hard of hearing (Alice Morse Earle, <a href="https://www.gutenberg.org/ebooks/8659"><i>The Sabbath in Puritan New England</i></a>). Two years earlier, in <a href="https://connecticuthistory.org/?p=42477">the year without a summer</a>, frost in June and a ruined corn crop had sent many Connecticut families west in the &ldquo;Ohio fever.&rdquo;</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder K&#257;la from the Dhammapada commentary (verse 164). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/12-08.htm">The original</a>. Scripture, here, from Laurent Clerc&rsquo;s <i>Address</i> (Hartford: Hudson and Co., 1818). Written by Claude Opus 5.5.
+  <div class="pager"><a href="porch-lights.html">&larr; Porch Lights</a><a href="index.html">All stories</a><a href="windmill-water.html">Windmill Water &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var WORDS = ['COW', 'TREE', 'GREEN', 'IS', 'MULLEIN', 'FLOUR', 'GIVE', 'NO', 'SIN', 'OBEY'];
+  var W, H, marks = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(m) {
+    m.word = WORDS[Math.floor(Math.random() * WORDS.length)];
+    m.size = 22 + Math.random() * 30;
+    ctx.font = m.size + 'px "IM Fell English", Georgia, serif';
+    m.w = ctx.measureText(m.word).width;
+    m.x = Math.random() * Math.max(10, W - m.w - 20) + 10;
+    m.y = m.size + Math.random() * (H - m.size * 1.5);
+    m.rot = (Math.random() - 0.5) * 0.08;
+    m.t = 0; m.write = 260 + m.word.length * 50; m.hold = 500 + Math.random() * 700; m.wipe = 160;
+    m.line = Math.random() < 0.3;
+    return m;
+  }
+  function make() {
+    var n = Math.round(Math.max(3, Math.min(7, W / 220)));
+    marks = [];
+    for (var i = 0; i < n; i++) { var m = spawn({}); m.t = Math.random() * (m.write + m.hold); marks.push(m); }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < marks.length; i++) {
+      var m = marks[i];
+      if (!reduce) { m.t++; if (m.t > m.write + m.hold + m.wipe) spawn(m); }
+      var shown = reduce ? 1 : Math.min(1, m.t / m.write);
+      var wipeP = reduce ? 0 : Math.max(0, (m.t - m.write - m.hold) / m.wipe);
+      var a = 0.085 * (1 - wipeP);
+      if (a <= 0.002) continue;
+      ctx.save();
+      ctx.translate(m.x, m.y); ctx.rotate(m.rot);
+      ctx.beginPath(); ctx.rect(-4, -m.size, (m.w + 8) * shown, m.size * 1.6); ctx.clip();
+      ctx.font = m.size + 'px "IM Fell English", Georgia, serif';
+      ctx.fillStyle = 'rgba(214,218,210,' + a + ')';
+      ctx.fillText(m.word, 0, 0);
+      if (m.line) {
+        ctx.strokeStyle = 'rgba(214,218,210,' + a + ')'; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(-2, m.size * 0.25); ctx.lineTo(m.w + 2, m.size * 0.22); ctx.stroke();
+      }
+      ctx.restore();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

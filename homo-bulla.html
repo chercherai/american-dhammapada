@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homo Bulla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the pale wet concrete of a Florida driveway in an October shower, light theme; along the foot of the page lies a finger's depth of standing water, and where a drop strikes it a small glass dome stands up, sails a little way, and is gone. */
+  --ground: #e7ebe8;
+  --ground-2: #dbe2de;
+  --ink: #22302e;
+  --ink-dim: #5b6a67;
+  --grape: #2c6a5f;
+  --sky: #7fa9bd;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #eef1ee 0%, var(--ground) 60%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 9rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(34,48,46,.25); }
+.series a:hover { color: var(--grape); }
+a:focus-visible { outline: 2px solid var(--grape); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--grape); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(44,106,95,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--grape); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--grape); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(246,248,246,.85); border: 1px solid rgba(34,48,46,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.board { margin: 1.75rem 0; padding: 1rem 1.5rem; border-left: 2px solid var(--grape); font-style: italic; line-height: 1.6; }
+.board p { margin: 0 0 .4rem; }
+.board p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--sky); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .8; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(34,48,46,.15); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--grape); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--grape); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(34,48,46,.18); border-bottom: 1px solid rgba(34,48,46,.18); background: rgba(231,235,232,.8); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--grape); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--grape); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--grape); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--grape); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(246,248,246,.85); border-left: 2px solid var(--grape); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 13.3 &middot; Pañcasatavipassakabhikkhu</span></nav>
+<header>
+  <h1>Homo Bulla</h1>
+  <div class="epigraph">If, as the saying is, all life is but a bubble, the more fragile is that of an old man.<br>&mdash; Varro, On Farming I.1, tr. Fairfax Harrison</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Sic audivi,</span> in Miami Springs.</p>
+
+<section>
+  <h2>I. Thirteen Lines</h2>
+  <p class="dateline">Hialeah High School, Florida &middot; Tuesday, October 23, 1962</p>
+  <p>Miss Alma Rountree had taught Latin in Dade County for thirty-nine years, the last eight of them at the high school in Hialeah, where the children from Miami Springs also went, the Springs having no high school of its own yet. She was sixty-four. Her fourth-year class that fall was five. On the second Friday in October she slipped on the wet terrazzo of the breezeway and broke her hip, and by the time the President went on television she had been ten days gone, first in the hospital having a steel pin put in, then at home in the Springs, in bed, under orders not to stand before Thanksgiving.</p>
+  <p>She left two things behind her in Room 114. One was in the top corner of the blackboard, where every Monday she chalked a sentence for anyone who cared to take it home. That week’s was from Varro, who wrote his book on farming at eighty, and under the Latin she had put the English in her square hand, out of a translation she liked by a Virginia railroad man.</p>
+  <div class="board">
+    <p>Si est homo bulla, eo magis senex.</p>
+    <p>If, as the saying is, all life is but a bubble, the more fragile is that of an old man.</p>
+  </div>
+  <p>Nobody had erased it. The substitute, Mr. Purdy, taught driver education and did not like to touch the board.</p>
+  <p>The other thing was thirteen lines of Lucretius. Fourth year was Vergil, and they would get back to Vergil. But every October she took her seniors out of the <em>Aeneid</em> for two weeks and made them put into English the place in the third book where Lucretius says that death is nothing to us. Some years a parent telephoned about it. It began <em>Nil igitur mors est ad nos neque pertinet hilum,</em> and she had told them, the day before she fell, that <em>hilum</em> was the little dark mark on a bean where it had hung in the pod. Death did not concern us by the mark on a bean.</p>
+  <p>They had had ten days, and they could not do it.</p>
+  <p>They had the words. Sandra Lipscomb had every word on a card. Kenny Brandt, who built radios, said it was only atoms and he did not see the difficulty, and then could not write a sentence of it down. Dale Pruitt got as far as the Carthaginians. Midge Koenig said it was a terrible thing to hand to children. The fifth was María Elena Fuentes, who had come from Havana alone in March on the Pan American plane, sixteen years old, in the care of the Catholic Welfare Bureau, and who lived now with a family named Henderson on East Ninth Street. She read Latin better than any of them, from the nuns. Her English was eight months old. She had the thirteen lines by heart and said them under her breath between classes, and they would not come across.</p>
+  <p>That Tuesday was a hard day to work in. The President had been on at seven the night before. By the first bell the Food Fair on Palm Avenue was out of canned milk and bottled water, and Midge’s mother had filled the bathtub. Twice before lunch fighters went over low toward Homestead, in fours, and the windows of Room 114 buzzed in their frames. There was an air raid drill at ten. Dale’s father, who fueled airplanes for Eastern, had said at breakfast that an Air Force bomber was parked at the far end of the long runway. Mr. Henderson had said at his breakfast that the Havana flights were stopped. María Elena’s mother and father had had their papers since June and were waiting for seats.</p>
+  <p>At the last bell the five of them stood in the breezeway where she had fallen and agreed to go and ask her for something else. Caesar, Dale said. Caesar building his bridge. A person could just translate Caesar.</p>
+</section>
+
+<section>
+  <h2>II. Okeechobee Road</h2>
+  <p class="dateline">Hialeah &middot; the same afternoon</p>
+  <p>Dale had his mother’s Rambler. They went down Palm Avenue and out along the canal on Okeechobee Road, five in a station wagon with the windows down. It was eighty-four degrees, with the sun straight on the blacktop.</p>
+  <p>Ahead of them the road went under water. It lay bright and flat from the canal bank to the far curb, a quarter mile on, with the sky in it. A city bus coming toward them stood in it to the axles, and a second bus hung upside down beneath the first. Dale slowed, as he had on every hot afternoon since he got his license. The water drew back and kept its distance. The bus came up out of it dry and went by.</p>
+  <p><em>It’s the heat,</em> Kenny said. <em>The air right on the road is hotter than the air over it, and the light bends coming through. That’s sky. You’re looking at a piece of the sky laid down on the road.</em></p>
+  <p><em>So it is truly there,</em> María Elena said.</p>
+  <p><em>The sky is. The water isn’t.</em></p>
+  <p><em>On the road to Varadero it is the same.</em> She was looking out the side window, south, toward the airport. <em>My father also slows the car.</em></p>
+  <p><em>Then how do you tell which things are the water?</em> Midge said.</p>
+  <p>Nobody had anything for that. Sandra said you drove up to it. Dale drove up to it for another mile. It stayed the same quarter mile ahead of them, shining, with a palm tree standing on its head in it, and none of the five looked at anything else until the bridge. Then they crossed the canal into the Springs.</p>
+</section>
+
+<section>
+  <h2>III. The Swale</h2>
+  <p class="dateline">Oriole Avenue, Miami Springs &middot; twenty minutes to four</p>
+  <p>Miss Rountree lived with her sister Opal in a concrete-block house with a carport and a Florida room, on a lot with a sea grape by the front walk. A cloud had come up from the Glades side while they were on the bridge. The first drops struck the roof of the Rambler as Dale set the brake, big ones, far apart. By the time they were out of the car it was coming the way it comes in that country, all at once and straight down.</p>
+  <p>They ran, and they did not all run to the same place. Dale and Kenny got under the carport beside Miss Opal’s Studebaker. Sandra made the front step, under the eave. Midge was caught at the sea grape and stayed under it. María Elena stood at the corner of the carport by the jalousie door of the Florida room, with the rain going past a foot from her face.</p>
+  <p>The ground there is a hand’s depth of sand over rock, and water stands on it before it goes anywhere. Inside a minute the driveway was a finger deep. In the swale along the street, the low strip of grass the county leaves for the purpose, it stood deeper, and every drop that hit raised a bubble. They were perfect. Each was a dome of glass the size of a half-dollar, with the gray sky bent around it and the sea grape and, if you leaned, five small heads. It sailed a little way and was gone, and another stood in its place.</p>
+  <p><em>Bulla,</em> María Elena said.</p>
+  <p><em>Homo bulla,</em> said Kenny.</p>
+  <p>Midge, under the tree, said <em>eo magis senex,</em> and nobody laughed.</p>
+  <p>They have each told it since, and they tell it alike. Each of them, watching the swale, had the same thought about then and took it for a private one. A bubble was only the water, stood up for a second with a breath in it and the whole sky on its side. When it went, nothing had gone anywhere. Kenny Brandt. Sandra Lipscomb. A girl from the Vedado with a mother and father on the far side of ninety miles. Those stood up the same way, out of the same water. They kept looking.</p>
+  <p>Then Miss Rountree was on the carport.</p>
+  <p>She had on her gray school dress, with chalk on the right cuff. She stood without a cane, a little way from each of them, though they were in four different places, and the rain that blew in under the roof did not wet her. There was a light on her of the kind a slide projector throws, so that she was brighter than the afternoon. She looked into each face in turn, the way she did before she handed back a test. Then she looked down at the driveway and said what she could never pass a puddle without saying.</p>
+  <div class="verse">
+    <p>A pool of water of but a finger’s depth,<br>Which lies between the stones along the pave,<br>Offers a vision downward into earth<br>As far, as from the earth o’erspread on high<br>The gulfs of heaven; that thus thou seemest to view<br>Clouds down below and heavenly bodies plunged<br>Wondrously in heaven under earth.</p>
+    <p>&mdash; Lucretius, On the Nature of Things, Book IV, tr. William Ellery Leonard (1916)</p>
+  </div>
+  <p>After that she said the thirteen lines. She said them in Latin, at the pace she always took, and the five have never agreed how it was that they had them in English as she went. What Kenny wrote that night on the back of his chemistry notebook is not far from the English of Mr. Leonard of Wisconsin, which stood on her shelf in the Everyman edition and which none of them had ever opened. Leonard has the end of it this way.</p>
+  <div class="verse">
+    <p>thus when we are no more,<br>When comes that sundering of our body and soul<br>Through which we’re fashioned to a single state,<br>Verily naught to us, us then no more,<br>Can come to pass, naught move our senses then&mdash;<br>No, not if earth confounded were with sea,<br>And sea with heaven.</p>
+    <p>&mdash; Lucretius, On the Nature of Things, Book III, tr. William Ellery Leonard (1916)</p>
+  </div>
+  <p>The jalousie door cranked open beside María Elena. Miss Opal Rountree stood in it in an apron, wanting to know what five children were doing in her yard in a cloudburst. She said her sister was asleep. She had been asleep since two o’clock in the back bedroom with the fan on, and she could not have stood up if the house were afire. Miss Opal took them through to see, one at a time, on tiptoe. The room smelled of lavender water and wintergreen. She was asleep.</p>
+  <p>Nobody asked for Caesar. The rain quit eleven minutes after it started. They stood a while longer where they were, in five places on a wet lot in Miami Springs, and Dale Pruitt says it is the one time in his life he has known for certain that nothing was the matter.</p>
+</section>
+
+<section>
+  <h2>IV. The Count</h2>
+  <p class="dateline">Hialeah High School &middot; Wednesday, October 24</p>
+  <p>The Navy’s line around Cuba went into force at ten the next morning, and at ten the school had its drill. Fourth period filed out into the inside corridor and got down along the lockers with their heads on their knees and their hands laced behind their necks. Mr. Boggs, the assistant principal, came along with the clipboard, counting backs.</p>
+  <p>He counted Room 114 three times, and three times he came out five short. They were there. They were sitting against the lockers between the typing class and the Spanish class with their heads up, and María Elena was saying the thirteen lines over, in English now, to see whether they still held. She says she waved at him. Mr. Boggs marked the five absent and went on down the hall. The absences were never cleared. They are on five transcripts yet: fourth period, October 24, unexcused.</p>
+  <p>On Sunday it was over, or people said it was. The fighters stayed at Homestead a good while. The flights from Havana did not start again. María Elena’s mother and father came out on the airlift in March of 1966, three years and five months later, when she was a sophomore at Barry College, and she translated for them at the airport.</p>
+  <p>Miss Rountree came back after Christmas on two canes. The Varro was still in the corner of the board, since Mr. Purdy had never touched it, and under it, in five hands, were the thirteen lines in English. She read them through, standing. She took the chalk and changed one tense. Then she left all of it up until June, the old man’s bubble and what was written under it, and on the last day of school she wiped the board herself, top to bottom, and went home.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Look upon the world as a bubble, look upon it as a mirage: the king of death does not see him who thus looks down upon the world.<cite>Dhammapada 170, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, five hundred monks take a subject of meditation from the Buddha and go to the forest. They strive hard and get nowhere, and set out to ask him for a subject better suited to them. On the road they see a mirage and fix their minds on it. As they enter the monastery grounds it begins to rain, and standing here and there on the terraces they watch the bubbles rise and burst in the downpour and think, so does this self of ours. The Buddha, seated in his own room, sends out a radiant image of himself that seems to look into each face, and speaks the verse; they are freed where they stand. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-03.htm">the full commentary story</a>.</p>
+    <h3>Dade County, October 1962</h3>
+    <p>President Kennedy announced on the evening of Monday, October 22, 1962, that Soviet missiles were in Cuba, and the naval quarantine took effect at ten on Wednesday morning (the <a href="https://en.wikipedia.org/wiki/Cuban_Missile_Crisis">Cuban Missile Crisis</a>). South Florida, the nearest piece of the mainland, filled with fighters, troops and anti-aircraft missiles; stores were stripped of canned goods, and schools ran air raid drills. Commercial flights between Havana and Miami stopped that week. They had carried, since December 1960, more than 14,000 unaccompanied Cuban children sent ahead by their parents under the Catholic Welfare Bureau’s program later called <a href="https://en.wikipedia.org/wiki/Operation_Peter_Pan">Operation Pedro Pan</a>. Parents left behind waited until the <a href="https://en.wikipedia.org/wiki/Freedom_Flights">Freedom Flights</a> began in December 1965. <a href="https://en.wikipedia.org/wiki/Hialeah_Senior_High_School">Hialeah High School</a> opened in 1954 and took students from <a href="https://en.wikipedia.org/wiki/Miami_Springs,_Florida">Miami Springs</a>, an airline town beside the airport, until the Springs got its own school in 1964. The Weather Bureau’s gauge at Miami International, a mile south of the story’s driveway, recorded a high of 84 degrees and five hundredths of an inch of rain on October 23, the only rain of that week. Miss Rountree, her five students and their Room 114 are invented.</p>
+    <p>The Latin tag <em>homo bulla</em>, man is a bubble, was already an old saying when <a href="https://en.wikipedia.org/wiki/Marcus_Terentius_Varro">Varro</a> used it at eighty to open his book on farming; the English is from Fairfax Harrison’s <a href="https://www.gutenberg.org/ebooks/12140"><em>Roman Farm Management</em></a> (1913), which he signed “a Virginia Farmer” while president of the Southern Railway. <a href="https://en.wikipedia.org/wiki/De_rerum_natura">Lucretius</a> wrote his poem on atoms in the first century BC to free his readers from the fear of death. The pool in the street is in Book IV, among the tricks of sight, where he also explains how things send out thin images of themselves through the air; the lines on death are Book III, 838&ndash;842, and the passage opens at line 830 with the words the class could not get across. The English is <a href="https://en.wikipedia.org/wiki/William_Ellery_Leonard">William Ellery Leonard’s</a> <a href="https://www.gutenberg.org/ebooks/785">verse translation</a> of 1916, reprinted in Everyman’s Library. The same pair of images, the mirage and the bubble, stands under another story in this series, set in the Mojave in 2008.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the five hundred monks who gained insight, from the Dhammapada commentary (verse 170). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/13-03.htm">The original</a>. Lucretius from the translation of William Ellery Leonard (1916); Varro from Fairfax Harrison, <em>Roman Farm Management</em> (1913). Written by Claude Fable 5.2.
+  <div class="pager"><a href="better-than-sleep.html">&larr; Better Than Sleep</a><a href="index.html">All stories</a><a href="the-push-broom.html">The Push Broom &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, drops = [], bubbles = [], last = 0, acc = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function water() { return H - 26; }
+  function addBubble(x, age) {
+    bubbles.push({ x: x, r: 5 + Math.random() * 7, age: age || 0, life: 1.6 + Math.random() * 2.6, vx: (Math.random() - 0.5) * 7 });
+  }
+  function still() {
+    bubbles = [];
+    var n = Math.max(4, Math.round(W / 170));
+    for (var i = 0; i < n; i++) addBubble((i + 0.3 + Math.random() * 0.4) * W / n, 0.6);
+  }
+  function dome(b, a) {
+    var y = water();
+    ctx.beginPath(); ctx.arc(b.x, y, b.r, Math.PI, 0); ctx.closePath();
+    ctx.fillStyle = 'rgba(246,249,248,' + (0.45 * a) + ')'; ctx.fill();
+    ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(74,104,110,' + (0.55 * a) + ')'; ctx.stroke();
+    ctx.beginPath(); ctx.arc(b.x - b.r * 0.3, y - b.r * 0.5, b.r * 0.42, Math.PI * 1.05, Math.PI * 1.55);
+    ctx.strokeStyle = 'rgba(255,255,255,' + (0.9 * a) + ')'; ctx.stroke();
+  }
+  function draw(now) {
+    var t = (now || 0) / 1000, dt = last ? Math.min(0.1, t - last) : 0; last = t;
+    ctx.clearRect(0, 0, W, H);
+    var y = water();
+    var g = ctx.createLinearGradient(0, y, 0, H);
+    g.addColorStop(0, 'rgba(127,169,189,.26)'); g.addColorStop(1, 'rgba(127,169,189,.10)');
+    ctx.fillStyle = g; ctx.fillRect(0, y, W, H - y);
+    ctx.fillStyle = 'rgba(74,104,110,.28)'; ctx.fillRect(0, y, W, 1);
+    if (!reduce) {
+      acc += dt * Math.max(1.2, W / 420);
+      while (acc > 1) { acc -= 1; drops.push({ x: Math.random() * W, y: y - 60 - Math.random() * 90, v: 420 + Math.random() * 160 }); }
+      ctx.strokeStyle = 'rgba(74,104,110,.30)'; ctx.lineWidth = 1;
+      for (var i = drops.length - 1; i >= 0; i--) {
+        var d = drops[i]; d.y += d.v * dt;
+        if (d.y >= y) { addBubble(d.x, 0); drops.splice(i, 1); continue; }
+        ctx.beginPath(); ctx.moveTo(d.x, d.y - 9); ctx.lineTo(d.x, d.y); ctx.stroke();
+      }
+    }
+    for (var k = bubbles.length - 1; k >= 0; k--) {
+      var b = bubbles[k];
+      if (!reduce) { b.age += dt; b.x += b.vx * dt; }
+      if (b.age > b.life + 0.35) { bubbles.splice(k, 1); continue; }
+      if (b.age <= b.life) {
+        dome(b, Math.min(1, b.age / 0.15));
+      } else {
+        var p = (b.age - b.life) / 0.35;
+        ctx.beginPath(); ctx.ellipse(b.x, y, b.r * (1 + p * 1.4), 1.6, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(74,104,110,' + (0.5 * (1 - p)) + ')'; ctx.lineWidth = 1; ctx.stroke();
+      }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); if (reduce) still(); draw(0);
+  window.addEventListener('resize', function () { size(); if (reduce) { still(); draw(0); } });
+})();
+</script>
+</body>
+</html>

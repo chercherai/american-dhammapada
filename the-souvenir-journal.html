@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Souvenir Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose over a church parking lot at dusk, where an older set of painted lines shows under the newer one. */
+  --ground: #17181b;
+  --ground-2: #212327;
+  --paper: #e9e5db;
+  --paper-dim: #a5a197;
+  --stripe: #dcb44a;
+  --ruby: #c4506a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #2a2c31 0%, var(--ground) 65%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(233,229,219,.2); }
+.series a:hover { color: var(--stripe); }
+a:focus-visible { outline: 2px solid var(--stripe); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.6rem, 8.5vw, 4rem); line-height: 1; margin: 0 0 1.5rem; color: var(--stripe); text-wrap: balance; text-shadow: 0 0 28px rgba(220,180,74,.18); }
+.epigraph { border-left: 1px solid rgba(196,80,106,.6); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--stripe); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--ruby); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(33,35,39,.82); border: 1px solid rgba(233,229,219,.08); border-left: 2px solid rgba(196,80,106,.7); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--ruby); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(233,229,219,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--stripe); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--stripe); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--stripe); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--stripe); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--stripe); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--stripe); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(33,35,39,.82); border-left: 2px solid var(--ruby); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 14.4 &middot; Ānanda&rsquo;s Question on the Observance</span></nav>
+<header>
+  <h1>The Souvenir Journal</h1>
+  <div class="epigraph">First, By doing no harm, by avoiding evil of every kind, especially that which is most generally practised<br>&mdash; The General Rules, A.M.E. Discipline (1817)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I received it,</span> on Old Halls Ferry Road.</p>
+
+<section>
+  <h2>I. Our Shepherds</h2>
+  <p class="dateline">Coppin Chapel A.M.E. Church, Black Jack, Missouri &middot; September 2004</p>
+  <p>Sister Nanette Givens had been clerk of Coppin Chapel for nineteen years, and the church said of her that if the roll book ever burned she could write it out again from the front pew back, with the birthdays. She had retired from Southwestern Bell in 1996 after thirty-one years of other people&rsquo;s telephone numbers, and she still had most of them. Now the Fortieth Anniversary was five Sundays off, and the Souvenir Journal was hers.</p>
+  <p>On a Thursday afternoon she sat in the church office with the proofs. Out the window was the parking lot, where under the yellow lines the trustees had painted you could still make out the white ones the Lutherans had left, slanting the other way. The Lutherans had built the place in 1961, when the subdivisions were going in for the McDonnell men, and sold it in 1979, when Coppin Chapel came out to the County behind its own members. Across Old Halls Ferry Road was a strip of stores: a beauty supply, a Chinese carry-out, and a place that did taxes in the spring and sat dark the rest of the year.</p>
+  <p>The ads were in. There was the full page from the funeral home, as there was in every journal of every church north of the highway. There were half pages from the barber college and the State Farm man, and two pages of patrons at ten dollars a name. The history was in, beginning in a storefront on Easton Avenue in 1964, the Easton Avenue that is Dr. Martin Luther King Drive now. What she had in front of her was the center spread, which she had headed OUR SHEPHERDS. It ran to seven columns. Six of them had a black rule around the photograph. In the seventh was Pastor Meeks in her robe.</p>
+  <p>She had done it right. For every one of the seven she had set down who the mother and father were and what town they came from. She had the years at Coppin Chapel, and where each one got the call and under whose preaching. She had how many were on the roll in that pastor&rsquo;s time. She had the two who stood closest, the steward pro tem and the head of the trustees. And she had the one member who had stood behind the pastor with money when money was the question, which in Reverend Tate&rsquo;s column was Mother Ida Crump, who signed her own house over against the note on this building. All of it came out of the conference minutes and the old bulletins and her own head, and all of it was checked.</p>
+  <p>Reading down the columns, she saw what was not there.</p>
+  <p>The General Rules were printed in the front of the Discipline, as they had been since Richard Allen&rsquo;s people first printed one, and the oldest Discipline told the elder in charge to read them out to the people. In the organizing minutes for 1964 she had found a line in a hand like copperplate: <em>Rev. Broadnax read the General Rules entire.</em> After that there was nothing for seven years. She could remember hearing them herself at Watch Night under Reverend Pettis, with the lights down. She heard them now on the first Sunday of every quarter. But she could not have said how the six before had kept them, whether the same as now or some other way. It was not in the minutes, and a thing that was not written down sat badly with her.</p>
+  <p>She squared the proofs and went down the hall to the pastor&rsquo;s study.</p>
+</section>
+
+<section>
+  <h2>II. The Study</h2>
+  <p class="dateline">The same afternoon</p>
+  <p>Reverend Yolanda Meeks was fifty-one. She had dispatched buses for Bi-State for twenty-two years before she answered her call, and she still said a thing one time and expected it to get where it was going. The Bishop had read her name out to Coppin Chapel two conferences ago. On the shelf behind her desk, between the hymnal and the current Discipline, stood a thin brown book that had been Reverend Broadnax&rsquo;s, a reprint of the first Discipline of 1817. He had penciled dates in its margin.</p>
+  <p><em>Pastor,</em> Sister Nan said, <em>the six before you. Did they keep the Rules the way we keep them? Or did each one have a different way?</em></p>
+  <p>Pastor Meeks did not reach for the book.</p>
+  <p><em>The time was different with every one. Reverend Broadnax read the Rules to this church once in seven years. Three times in his whole pastorate. Mother Crump will tell you they lived on one reading until the next. Reverend Tate read them once in his six years, the Sunday we came into this building, and Dr. Lyles once in his six. Reverend Pettis and Reverend Coates read them every year, him at Watch Night and her on Founder&rsquo;s Day. Reverend Sample read them every six months.</em> She turned her pen end for end on the blotter. <em>I read them every quarter, the way that first book says to. And I could not swear to you that mine last out the month.</em></p>
+  <p><em>Then which of you had it right?</em></p>
+  <p><em>That is the time, Sister Nan. You asked me about the time. The words were never different. Any one of the seven of us stood up and opened to the same page.</em></p>
+  <p>She knew the page, and she said the three heads of it across the desk.</p>
+  <div class="verse">
+    <p>First, By doing no harm, by avoiding evil of every kind, especially that which is most generally practised:</p>
+    <p>Secondly, By doing good, by being in every kind, merciful according to their power;</p>
+    <p>Thirdly, By attending upon all the ordinances of God:</p>
+    <p>&mdash; The General Rules of the United Societies</p>
+  </div>
+  <p><em>If you want a line to go under every name, put that. It is the same under every name.</em></p>
+</section>
+
+<section>
+  <h2>III. Anniversary Sunday</h2>
+  <p class="dateline">The third Sunday in October</p>
+  <p>Pastor Meeks came down out of the pulpit to read them. She stood on the floor in front of the rail in her robe, with Reverend Broadnax&rsquo;s brown book open on her hand, and she read them entire, and slowly. In the choir stand the children had been told to sit still and were doing what they could.</p>
+  <p>Sister Nan had the clerk&rsquo;s seat, second pew on the aisle, and she turned in it far enough to watch the right side of the church. Eleven were left who had been on Easton Avenue. They sat together, as they always had. Mother Ida Crump was ninety-three and had not known her own granddaughter since Easter. She sat in her white with both hands on the bar of her walker, looking at the floor. When the pastor came to the list under the first head, Mother Crump&rsquo;s lips began to move, and by the third line she was half a beat in front.</p>
+  <div class="verse">
+    <p>Fighting, quarrelling, brawling, brother going to law with brother; returning evil for evil; or railing for railing;</p>
+    <p>Uncharitable or unprofitable conversation: particularly speaking evil of magistrates or of ministers.</p>
+    <p>Softness, and needless self-indulgence.</p>
+    <p>&mdash; The General Rules, under the first head</p>
+  </div>
+  <p>At <em>or of ministers</em> somebody in the back said <em>Well,</em> and the church laughed, and Pastor Meeks let them. Brother Teasdale had his eyes shut and was saying it too, and both the Hinton sisters, and the rest of the eleven. Not one of them had a book. It went on that way through the second head and the third, the one voice from the floor and the old ones under it, dry as leaves.</p>
+  <div class="verse">
+    <p>By running with patience the race which is set before them, denying themselves, and taking up their cross daily;</p>
+    <p>Family and private prayer: Searching the scriptures, and Fasting or abstinence.</p>
+    <p>&mdash; The General Rules, under the second and third heads</p>
+  </div>
+  <p>Sister Nan did the sum because she could not help doing sums. Reverend Broadnax had read these words to those eleven people three times, in 1964 and 1971 and 1978. The last of the three was twenty-six years gone.</p>
+  <p>There was dinner afterward in the fellowship hall, with the ruby tablecloths the anniversary committee had rented. Out on the lot a girl from the children&rsquo;s choir had a clapping game going with two others. <em>First, do no harm. Second, do good.</em> They could not get the third head to fit the claps, and kept starting over.</p>
+  <p>Sister Nan drove Mother Crump home, as she did every Sunday, down Old Halls Ferry and in among the courts. Mother Crump had a plate on her knees under foil. Twice she asked whose car this was, and twice Sister Nan told her. They passed a man washing a truck in his driveway, and a yard where somebody had the ball game on a radio. Mother Crump looked out at all of it and said, quite clearly, to nobody:</p>
+  <div class="verse">
+    <p>To their bodies of the ability which God giveth, by giving food to the hungry, by clothing the naked, by visiting or helping them that are sick, or in prison.</p>
+    <p>&mdash; The General Rules, under the second head</p>
+  </div>
+  <p><em>Mother, who is the plate for?</em></p>
+  <p>Mother Crump looked down at the foil as if somebody had set it on her while she slept. She had made up a plate for somebody sick after every church dinner for forty years. She had made up this one, and she did not know.</p>
+  <p>Sister Nan knew the sick list the way she knew the roll. She put on her signal and turned away from the daughter&rsquo;s court, toward the Florissant side, where Brother Hampton had been laid up since his stroke.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">Not to commit any sin, to do good, and to purify one's mind, that is the teaching of (all) the Awakened.<cite>Dhammapada 183, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">The Awakened call patience the highest penance, long-suffering the highest Nirvana; for he is not an anchorite (pravragita) who strikes others, he is not an ascetic (sramana) who insults others.<cite>Dhammapada 184, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">Not to blame, not to strike, to live restrained under the law, to be moderate in eating, to sleep and sit alone, and to dwell on the highest thoughts,--this is the teaching of the Awakened.<cite>Dhammapada 185, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary the elder Ānanda, sitting alone, reflects that the Buddha has described the six Buddhas before him in every particular (their parents, their length of life, the tree each awakened under, their following, their two chief disciples, their chief supporter) but has never said how they kept the Observance Day, the regular gathering at which the community&rsquo;s rule is recited. He asks whether it was the same as now. The Buddha answers that the interval differed, once in seven years for Vipassī, six for the next two, yearly for the two after, every six months for Kassapa, and that one day&rsquo;s admonition lasted the whole interval; but the words were the same for all of them, and he recites the three verses. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-04.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C4%80nanda">Ānanda</a>, the <a href="https://en.wikipedia.org/wiki/List_of_the_named_Buddhas">Buddhas before Gotama</a> and the <a href="https://en.wikipedia.org/wiki/Uposatha">Observance Day</a>.</p>
+    <h3>North St. Louis County, 2004</h3>
+    <p>The General Rules were written by John Wesley in 1743 for the first Methodist societies, under three heads: doing no harm, doing good, and attending upon the ordinances of God. American Methodists printed them at the front of their book of Discipline, and when Richard Allen and his colleagues organized the <a href="https://en.wikipedia.org/wiki/African_Methodist_Episcopal_Church">African Methodist Episcopal Church</a> in Philadelphia in 1816, their first <a href="https://docsouth.unc.edu/church/ame/ame.html"><em>Doctrines and Discipline</em></a> (1817) carried the Rules too, with a direction that the elder in charge read them &ldquo;once a year in every congregation, and once a quarter in every society.&rdquo; The wording quoted in the story is that of 1817. A.M.E. pastors are appointed by the bishop at each annual conference and moved from charge to charge, which is how a church of forty years comes to have had seven. The anniversary souvenir journal, with its history, its page of pastors and its paid advertisements, is a fixture of Black church life. Coppin Chapel and its people are invented.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Black_Jack,_Missouri">Black Jack</a> lies in the northern suburbs of St. Louis, among subdivisions built in the 1950s and 1960s, when the McDonnell aircraft plants nearby were hiring. Residents incorporated it as a city in 1970 and at once zoned out an interfaith group&rsquo;s apartment project meant for families from the city; a federal appeals court <a href="https://www.stlpr.org/government-politics-issues/2015-06-25/supreme-court-housing-discrimination-decision-had-its-roots-in-black-jack">struck the ordinance down in 1974</a>. Black families moved into North County through the 1970s and after, many congregations followed their members out from the city, and by the 2000 census Black Jack was about seventy-one percent African American. Easton Avenue in St. Louis was renamed for Dr. Martin Luther King in 1972.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Ānanda&rsquo;s question about the Observance Day from the Dhammapada commentary (verses 183&ndash;185). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-04.htm">The original</a>. Scripture from John Wesley&rsquo;s General Rules of the United Societies (1743), as printed in the Doctrines and Discipline of the African Methodist Episcopal Church (1817). Written by Claude Fable 5.2.
+  <div class="pager"><a href="three-ladders.html">&larr; Three Ladders</a><a href="index.html">All stories</a><a href="a-hundred-eggs.html">A Hundred Eggs &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Parking-lot lines: the newer yellow stalls and, slanting the other way under them, the older white ones.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t0 = Date.now();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function rows(angle, rgb, alpha, offset, wear) {
+    if (alpha < 0.004) return;
+    var L = Math.max(90, Math.min(150, H * 0.17)), gap = 62;
+    var dx = Math.cos(angle) * L, dy = -Math.sin(angle) * L;
+    var ys = [0.24, 0.57, 0.9];
+    ctx.lineCap = 'butt';
+    ctx.lineWidth = 3.5;
+    for (var r = 0; r < ys.length; r++) {
+      var y = H * ys[r] + offset;
+      for (var x = -L - gap; x < W + L + gap; x += gap) {
+        var k = Math.sin(x * 12.9898 + r * 78.233) * 43758.5453; k = k - Math.floor(k);
+        var a = alpha * (wear ? 0.35 + 0.65 * k : 0.8 + 0.2 * k);
+        ctx.strokeStyle = 'rgba(' + rgb + ',' + a + ')';
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + dx, y + dy); ctx.stroke();
+      }
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var t = reduce ? 0 : (Date.now() - t0) / 1000;
+    var s = reduce ? 0 : Math.sin(t / 9);
+    // the old white lines come up as the light goes flat, and sink again
+    rows(2.05, '233,229,219', 0.045 + 0.03 * s, 6, true);
+    rows(1.09, '220,180,74', 0.075 - 0.025 * s, 0, false);
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

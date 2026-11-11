@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brickbats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column of prose on the grey-white of a lake-fog October morning, light theme; every little while a train's worth of soft-coal smoke rolls in from the right across the top of the page, puff by puff, swells, thins and is gone; datelined sections, with clippings from the village weekly set off in a narrow newsprint block. */
+  --ground: #e6e5e0;
+  --ground-2: #d8d6cf;
+  --ink: #26282b;
+  --ink-dim: #686a6d;
+  --brick: #9a4a32;
+  --soot: #3c3f44;
+  --newsprint: #efe9da;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f1f0ec 0%, var(--ground) 40%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(38,40,43,.2); }
+.series a:hover { color: var(--brick); }
+a:focus-visible { outline: 2px solid var(--brick); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--brick); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(154,74,50,.45); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--brick); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--brick); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(246,245,241,.85); border: 1px solid rgba(60,63,68,.18); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.clip { margin: 2rem auto; max-width: 24rem; padding: 1rem 1.2rem; background: var(--newsprint); border-top: 3px double rgba(60,63,68,.5); border-bottom: 1px solid rgba(60,63,68,.3); font-family: Georgia, "Times New Roman", serif; font-size: .9rem; line-height: 1.5; color: #2e2c28; text-align: justify; hyphens: auto; }
+.clip .hd { display: block; text-align: center; font-variant: small-caps; letter-spacing: .08em; font-size: .85rem; margin-bottom: .5rem; }
+.brk { text-align: center; color: var(--soot); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(38,40,43,.12); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--brick); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--brick); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(38,40,43,.14); border-bottom: 1px solid rgba(38,40,43,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--brick); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--brick); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--brick); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--brick); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(246,245,241,.85); border-left: 2px solid var(--brick); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.7 &middot; Sāriputta</span></nav>
+<header>
+  <h1>Brickbats</h1>
+  <div class="epigraph">Smite not the smiter to save thine own cheek.<br>&mdash; Adin Ballou, <em>Christian Non-Resistance</em> (1846)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how we tell it,</span> in the smoking car of the 7:52.</p>
+
+<section>
+  <h2>I. The Wager</h2>
+  <p class="dateline">Glen Arden, Illinois &middot; October 1886</p>
+  <p>There were eleven of us that year who rode in to the city every morning in the smoking car of the 7:52, and if you had asked any of us what we thought about we would have said the price of coal, or the Board of Trade, or our wives, or the anarchists. That was the year of the anarchists. Since May every paper in Chicago had been full of the bomb in the Haymarket and the seven policemen, and in August the jury gave seven of the eight men the rope, and the whole North Shore said it was about time. Gates, who sold coal and feed by the depot, said he would pull the trap himself and not charge the county. We laughed at that. We were not cruel men. We were the kind of men who live eighteen miles out on the North Western so that our children will have elms.</p>
+  <p>We talked about Elias Dunning too, the way you talk about the weather in another town.</p>
+  <p>Dunning kept books for a wholesale grocer on Lake Street and rode the coach behind us, because he did not smoke, and in nine years not one of us had ever seen him put out. You could step on his foot in the aisle. You could spill your coffee down him at the Wells Street lunch counter. Young Hollis from the Board of Trade had once, for a joke, taken his umbrella off the rack every morning for a week and left it on the platform, and every evening Dunning came back from the city, found it leaning by the baggage room, said good evening to the agent, and carried it home. He went on Sunday afternoons to old Mr. Pryor&rsquo;s, the clock man on Spring Street, where five or six people sat in the parlor and read out of some books. People said the old man had grown up in a community down East where they shared everything and would not fight. We didn&rsquo;t know what to make of that. We liked Dunning, the way you like a well that never goes dry.</p>
+  <p>Royal Thayer came out from Peoria in the summer and bought the brick house on Ridge Avenue. He was a lawyer and a good one, a big pink easy man with a laugh you could hear through the partition into the coach, and before September he was the best company in the smoking car. He read the <em>Truth Seeker</em> on the train and had heard Colonel Ingersoll lecture eleven times, and he told us so, and he said the thing that made him angriest in the world was a Christian.</p>
+  <p><em>Not the religion,</em> he said. <em>I can stand the religion. It&rsquo;s the face. Every Christian in this county went to church in May and came home and said hang them. Love your enemies, and pass the rope. Every one of them has a fist in his pocket. You show me one that hasn&rsquo;t.</em></p>
+  <p>Somebody said Dunning.</p>
+  <p>We told him about the umbrella. We told him the coffee. Ober the insurance man said he would bet a box of Havanas that nothing on God&rsquo;s earth could make Elias Dunning raise his hand, and Thayer laughed his big laugh and took him, and we all forgot about it by Rogers Park.</p>
+</section>
+
+<section>
+  <h2>II. The Platform</h2>
+  <p class="dateline">Monday, the 18th</p>
+  <p>It was a fog morning off the lake, the kind where the engine comes up the track as a sound before it is a thing. We were standing in a bunch at the smoking-car end of the platform with our papers. Dunning was down by the coach steps with his umbrella and his dinner in a newspaper, reading the timetable on the board, which he must have known by heart.</p>
+  <p>Thayer walked down the platform past us. He was not laughing. He came up behind Dunning in the fog and hit him between the shoulders with his fist, as hard as a big man can hit, so that it sounded on the boards, so that Dunning&rsquo;s hat went off and his whole body went forward a step.</p>
+  <p>Some of us shouted. Most of us didn&rsquo;t do anything.</p>
+  <p>Dunning did not turn around. He stood a moment where the blow had put him. Then he bent and picked up his hat, and set it on, and when the train came in out of the fog he climbed into the coach with his umbrella and his dinner, and sat down by a window on the far side, and we could see his hat through the glass, and it did not move, and it did not look back.</p>
+  <p>Thayer stood on the platform with his hand still closed. The conductor called. He got on with us.</p>
+  <p>He did not say a word to Rogers Park. He did not light his cigar. He sat with the <em>Tribune</em> on his knee and did not open it, and his face went from pink to the color of the fog, and somewhere past Ravenswood he put his face in his hands. We had seen men drunk in that car and men who had lost a year&rsquo;s money on wheat. We had never seen a man look like that.</p>
+  <p>At Wells Street he was off before the train stopped. We went after him. Some of us thought he meant to finish it. He ran along the cinders through the steam and the crowd off the coaches with his hat in his hand, and he caught Dunning by the newsstand, and before the whole North Western platform, before a hundred people going to work, Royal Thayer of Peoria knelt down on the boards.</p>
+  <p><em>Mr. Dunning, I struck you on a wager. I have no excuse. I am more ashamed than I have been in my life. Will you pardon me?</em></p>
+  <p>Dunning looked down at him. He was a small man. He had a small brown mustache and his collar was a little frayed.</p>
+  <p><em>You have it,</em> he said. <em>Get up, Mr. Thayer. Your trousers.</em></p>
+  <p>Thayer got up. He held on to Dunning&rsquo;s hand. <em>Then come to dinner on Sunday. Will you? Come every Sunday. Mrs. Thayer will be glad. I want you at my table.</em></p>
+  <p><em>Thank you,</em> Dunning said. <em>I will.</em></p>
+  <p>He went out into Wells Street to his books. Thayer stood there by the newsstand. The rest of us stood behind him, and we did not look at each other, because every one of us was thinking the same thing, and what we were thinking was not about pardon.</p>
+</section>
+
+<section>
+  <h2>III. The Gate</h2>
+  <p class="dateline">Sunday, the 24th</p>
+  <p>Ober&rsquo;s wife was one of the people who sat in Mr. Pryor&rsquo;s parlor on Sundays, so we knew the hour. Dunning went in at Thayer&rsquo;s gate at a quarter to one. By two there were nine of us outside it.</p>
+  <p>Nobody had said, <em>Let&rsquo;s.</em> We would like that to be understood. Gates came by Ober&rsquo;s house after church and said he thought he would walk down Ridge Avenue, and Ober got his hat. The village had been laying the new brick walk on the east side of Ridge since August, and there was a pile of paving brick at the corner where the workmen had left off, and a heap of broken ones beside it, and when we came to the gate most of us had a brickbat in our coat pocket or our hand, and I could not tell you which of us picked up the first one. Gates had his buggy whip. Young Hollis had a piece of lath. We were church members, all but two. We stood in the street in our Sunday coats in the thin October sun, and the leaves came down off Thayer&rsquo;s elms, and we could smell the dinner through his windows, roast chicken and something with cloves, and we waited for the coward to come out of his door.</p>
+  <p>He came out at half past two. Dunning was ahead of him on the walk. Thayer was carrying Dunning&rsquo;s umbrella for him, the way a boy carries a man&rsquo;s satchel, both hands, and it came to me only afterward that Dunning must have handed it to him on the step.</p>
+  <p>They saw us at the gate. Thayer stopped. He looked at our hands and he understood, and he went white again, the way he had on the train, and he did not run back into his house. He stood on his own walk holding the other man&rsquo;s umbrella.</p>
+  <p><em>Elias,</em> Gates said. <em>You go on home now. Go along. This is between him and us.</em></p>
+  <p>Dunning came down the walk and opened the gate and stood in it.</p>
+  <p><em>Mr. Gates,</em> he said, <em>did Mr. Thayer strike you?</em></p>
+  <p>Gates said that wasn&rsquo;t the point.</p>
+  <p><em>Did he strike you, Mr. Ober? Did he strike you, Hollis?</em> He went along us one at a time. He asked every one of us by name, nine times, and nine times somebody had to say no. It took a long while. It was very quiet on Ridge Avenue. A leaf came down on Hollis&rsquo;s hat and stayed there.</p>
+  <p><em>He struck me,</em> Dunning said. <em>And he asked my pardon, and I gave it him. So there is nothing here belongs to you. Go home to your dinners.</em></p>
+  <p>Then he held out his hand behind him without looking, and Thayer put the umbrella in it, and Dunning walked out through the middle of us down Ridge Avenue toward Spring Street, and nobody stopped him. After a while we went home. I don&rsquo;t remember putting the brickbat down. I found it that night in my coat.</p>
+  <div class="clip"><span class="hd">Glen Arden Notes</span>A number of our citizens assembled Sunday afternoon before the residence of R. Thayer, Esq., on Ridge Avenue, upon some private business, and dispersed in good order. &mdash; The new brick walk on Ridge has been found short some fourteen or fifteen bricks, and Trustee Bolles asks that any person knowing of their whereabouts return them to the corner.</div>
+</section>
+
+<section>
+  <h2>IV. The Parlor</h2>
+  <p class="dateline">Spring Street &middot; the same afternoon</p>
+  <p>What happened next we have only from Mrs. Ober, and she says she has it right, and we have no reason to think she hasn&rsquo;t.</p>
+  <p>Mr. Pryor&rsquo;s people met at four. There were seven that day, in the front parlor full of clocks, the old man&rsquo;s own and other people&rsquo;s, ticking on every wall and shelf, none of them together. The old man was seventy-four and had made loom parts in Massachusetts before the war. He sat by the stove with a clock in pieces on a tray on his knees, the way he always did, and he hardly ever spoke. The others read and talked. He fixed the clock.</p>
+  <p>Everybody had heard about the gate by then. Miss Kittredge, who taught the fourth grade, said she had heard, too, that this was the second Sunday Mr. Dunning had eaten at that man&rsquo;s table, and that he meant to go every week, and she did not think it right.</p>
+  <p><em>It&rsquo;s one thing to forgive him,</em> she said. <em>We all forgive him. It&rsquo;s another thing to sit down to his chicken every Sunday as if nothing had happened. It tells him nothing happened. A man who will hit one person from behind will hit another. Next time it will be somebody who can&rsquo;t bear it. It will be a woman, or a child. And it will be because Mr. Dunning let him think it was all right.</em></p>
+  <p>Mr. Lund, the harness maker, said he thought so too. He said a little honest fear of consequences never hurt anybody&rsquo;s morals, and that those men at the gate, whatever else, had shown Thayer what the village thought. Two or three of the others nodded. Mrs. Ober says she nodded herself. Dunning was not there. He had gone home to lie down, his landlady said; his back was black and yellow from the shoulder blades to the belt.</p>
+  <p>The old man set a little brass wheel down on the tray.</p>
+  <p><em>What are you all talking about,</em> he said, <em>sitting here?</em></p>
+  <p>They told him. He listened to the whole of it with his head on one side, the way he listened to a clock that wouldn&rsquo;t keep time.</p>
+  <p><em>There were two men on that platform,</em> he said, <em>and only one of them had a fist. If there had been two fists, you would have had a fight, and the rest of it never. There would be nobody now to sit at that table. There is nobody else in this village that man would let sit there.</em></p>
+  <p>Miss Kittredge said, but if he strikes again.</p>
+  <p><em>He has been struck,</em> Mr. Pryor said. <em>Did nobody see it? He was struck harder than Elias was. He went down on his knees on the Wells Street boards.</em> He picked up the little wheel again. <em>Smite not the smiter to save thine own cheek. Mr. Ballou put that in his book, when I was a young man at Hopedale. He put a good deal in it. That was the part I could carry.</em></p>
+  <p>Then he said there was one more thing he had by heart, from the year he was twenty-six, when he walked to Boston for the peace meeting and sat in the gallery and heard it read out. He did not get up. He said it to the clock on his knee.</p>
+  <div class="verse">
+    <p>The history of mankind is crowded with evidences proving that physical coercion is not adapted to moral regeneration; that the sinful dispositions of men can be subdued only by love; that evil can be exterminated from the earth only by goodness; that it is not safe to rely upon an arm of flesh, upon man whose breath is in his nostrils, to preserve us from harm; that there is great security in being gentle, harmless, long-suffering, and abundant in mercy; that it is only the meek who shall inherit the earth, for the violent who resort to the sword are destined to perish with the sword.</p>
+    <p>&mdash; Declaration of Sentiments, Peace Convention, Boston, 1838</p>
+  </div>
+  <p><em>I am sorry for Mr. Thayer,</em> he said. <em>He has had a bad week. But I am sorrier for the nine at the gate. He struck once and was sorry. They had the bricks in their hands and they are not sorry yet. That is worse.</em></p>
+  <p>Mrs. Ober went home and told her husband that, word for word, at the supper table, in front of the children, and Ober got up and went out to the barn and stayed there till dark.</p>
+</section>
+
+<section>
+  <h2>V. The Doorstop</h2>
+  <p class="dateline">November 11, 1887</p>
+  <p>Royal Thayer gave up the smoking car. We missed him. He rode in the coach with Dunning every morning after that, for years, the two of them on the same seat, the big man and the small one, and on wet mornings it was always Thayer who carried the umbrella. He never told us what they talked about. He did not stop reading the <em>Truth Seeker</em>, and Dunning did not stop going to Mr. Pryor&rsquo;s, and Mrs. Thayer said they argued at her table every Sunday for nine years and never once raised their voices, and that the chicken got cold.</p>
+  <p>The morning they hanged the four men at the county jail, a year and a month after, the smoking car of the 7:52 was quiet. Somebody had the <em>Inter Ocean</em> and read out the times, and nobody said anything about pulling a trap. Gates looked out of the window the whole way to Wells Street. I don&rsquo;t know what he was thinking. I know what I was.</p>
+  <p>I have the brickbat still. It is half a paving brick, red, with a corner of the mortar left on, and it has held the parlor door open against the lake wind for thirty years. My wife likes it there. Every time I stoop to move it I feel in my hand exactly how heavy it is, which is about as heavy as a man&rsquo;s fist, and I set it down again where it belongs, against the door, and the door stays.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">No one should attack a Brahmana, but no Brahmana (if attacked) should let himself fly at his aggressor! Woe to him who strikes a Brahmana, more woe to him who flies at his aggressor!<cite>Dhammapada 389, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <blockquote class="pd">It advantages a Brahmana not a little if he holds his mind back from the pleasures of life; when all wish to injure has vanished, pain will cease.<cite>Dhammapada 390, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, people at Sāvatthī praised the elder Sāriputta, the Buddha&rsquo;s chief disciple, for a patience nothing could break. A brahmin of wrong views set out to provoke him and struck him hard on the back as he went for alms. Sāriputta did not even turn around. The brahmin, stricken with remorse, fell at his feet, begged pardon and invited him to take his meals at his house, and Sāriputta accepted and handed him his bowl. A crowd gathered at the door with sticks and stones to kill the brahmin, and Sāriputta asked them whether the man had struck them or him, and sent them away. The monks grumbled that he went on eating with a man who struck people. The Buddha said that one who has destroyed anger does not strike back, and spoke the verses. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-07.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C5%9A%C4%81riputra">Sāriputta</a>.</p>
+    <h3>Chicago&rsquo;s North Shore, 1886</h3>
+    <p>By the 1880s the <a href="https://en.wikipedia.org/wiki/Chicago_and_North_Western_Transportation_Company">Chicago and North Western</a> carried commuters from a string of villages along the lake into its <a href="https://en.wikipedia.org/wiki/Wells_Street_Station">Wells Street station</a>, rebuilt in 1881. On May 4, 1886, a bomb thrown at police breaking up a labor rally in the <a href="https://en.wikipedia.org/wiki/Haymarket_affair">Haymarket</a> killed seven officers and led to the trial of eight anarchists; seven were sentenced to death, and four were hanged on November 11, 1887. The same decade was the height of <a href="https://en.wikipedia.org/wiki/Robert_G._Ingersoll">Robert Ingersoll</a>&rsquo;s fame as &ldquo;the Great Agnostic,&rdquo; a lecturer who had practiced law in Peoria.</p>
+    <p>Mr. Pryor&rsquo;s nonresistance goes back to the <a href="https://en.wikipedia.org/wiki/New_England_Non-Resistance_Society">New England Non-Resistance Society</a>, formed at a peace convention in Boston in September 1838 that admitted women as equals; its Declaration of Sentiments was written by <a href="https://en.wikipedia.org/wiki/William_Lloyd_Garrison">William Lloyd Garrison</a>. <a href="https://en.wikipedia.org/wiki/Adin_Ballou">Adin Ballou</a>, a member, founded the <a href="https://en.wikipedia.org/wiki/Hopedale_Community">Hopedale Community</a> near Milford, Massachusetts, in 1842, a &ldquo;Practical Christian&rdquo; commune that failed after fourteen years and became the Draper brothers&rsquo; loom-parts town. Ballou&rsquo;s <em>Christian Non-Resistance</em> (1846) was later admired by Tolstoy. The Declaration is quoted here from the text printed in <em>William Lloyd Garrison: The Story of His Life Told by His Children</em>, volume 2 (1885).</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder Sāriputta from the Dhammapada commentary (verses 389&ndash;390). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-07.htm">The original</a>. Words from the Declaration of Sentiments of the Boston Peace Convention (1838) and Adin Ballou&rsquo;s <em>Christian Non-Resistance</em> (1846). Written by Claude Opus 5.5.
+  <div class="pager"><a href="hatched-at-home.html">&larr; Hatched at Home</a><a href="index.html">All stories</a><a href="cast-clouts.html">Cast Clouts &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, puffs = [], t0 = null;
+  var CYCLE = 38000;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    puffs = [];
+    var n = 26;
+    for (var i = 0; i < n; i++) {
+      puffs.push({ birth: 2000 + i * 420, y: H * (0.04 + 0.12 * Math.random()), r0: 18 + Math.random() * 14, drift: 0.035 + Math.random() * 0.02, rise: 0.004 + Math.random() * 0.004, seed: Math.random() * 6 });
+    }
+  }
+  function draw(now) {
+    if (t0 === null) t0 = now || 0;
+    var s = reduce ? 9000 : ((now || 0) - t0) % CYCLE;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < puffs.length; i++) {
+      var p = puffs[i];
+      var age = s - p.birth;
+      if (age < 0 || age > 22000) continue;
+      var u = age / 22000;
+      var x = W + 40 - age * p.drift * (W / 900);
+      var y = p.y - age * p.rise + Math.sin(age * 0.0006 + p.seed) * 6;
+      var r = p.r0 + age * 0.006;
+      var a = 0.16 * Math.min(1, u * 10) * (1 - u);
+      if (a < 0.005) continue;
+      var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, 'rgba(70,72,78,' + a + ')');
+      g.addColorStop(0.6, 'rgba(90,92,98,' + (a * 0.5) + ')');
+      g.addColorStop(1, 'rgba(110,112,118,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(0);
+  window.addEventListener('resize', function () { size(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>

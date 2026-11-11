@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toussaint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column over a night marsh; whitewash and lamp gold, a little hyacinth. */
+  --ground: #0e1315;
+  --ground-2: #172024;
+  --paper: #e7e2d6;
+  --paper-dim: #9fa39a;
+  --gold: #d9ad5b;
+  --hyacinth: #a58bd0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1f2b2c 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(231,226,214,.2); }
+.series a:hover { color: var(--gold); }
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: #f1ede3; text-wrap: balance; text-shadow: 0 0 26px rgba(217,173,91,.25); }
+.epigraph { border-left: 1px solid rgba(165,139,208,.5); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--hyacinth); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--gold); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(23,32,36,.8); border: 1px solid rgba(231,226,214,.08); border-left: 2px solid var(--hyacinth); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--gold); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(231,226,214,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--gold); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--gold); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--gold); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--gold); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--gold); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(23,32,36,.8); border-left: 2px solid var(--hyacinth); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 21.1 &middot; Ascending the Ganges</span></nav>
+<header>
+  <h1>Toussaint</h1>
+  <div class="epigraph">That which the fountain sends forth returns again to the fountain.<br>&mdash; Longfellow, <em>Evangeline</em> (1847)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">C&rsquo;est comme &ccedil;a que moi je l&rsquo;ai entendu,</span> on Bayou Lafourche.</p>
+
+<section>
+  <h2>I. Three Dangers</h2>
+  <p class="dateline">The Ch&ecirc;ni&egrave;re &middot; October 1893</p>
+  <p>Before the storm there were fifteen hundred people on the Ch&ecirc;ni&egrave;re and four hundred and fifty houses, and on a Sunday you could hear the church bell from Grand Isle across the pass. The men tonged oysters and dragged seines for shrimp and sailed the catch up through Barataria to the lugger landing across from New Orleans. The women kept gardens of okra and mirliton behind the houses, and there were orange trees and a little cane, and live oaks along the ridge so old that the ridge had its name from them. People came down from the bayou to marry there and stayed.</p>
+  <p>The storm came in the night of the first of October with no warning anyone had heard. The water rose six feet in a few minutes and then rose two more. All night the church bell rang by itself in the wind, and the people in the water turned toward the sound of it. In the morning four houses were standing.</p>
+  <p>Seven hundred and seventy-nine people were dead. That was the count they gave the newspapers later, and the people who were left said it was short. Sixty-two had lived through the night under what was left of a single roof. Others had held onto doors and pieces of gallery and drifted, and some of them came back. The dead were in the lagoons and in the marsh grass and in the branches of the oaks. The men who could still stand buried what they could find in long trenches on the ridge and in the ruin of the graveyard, and there were more than they could find.</p>
+  <p>Then the hunger came, because the gardens were salt and the boats were kindling and the flour in the barrels had turned to paste. The relief luggers from New Orleans came within the week with flour and coffee and men to help bury, and went back, and came again, and it was never enough. Then the sickness came, the bloody flux, out of the water they had to drink, and the old ones and the little ones who had lived through the storm began to die of that. And at night there were lights in the marsh. Everyone saw them. They were the feux follets, the little fires that walk over wet ground where the dead are, and they came up to the edge of the ridge and stood there, and the dogs would not stop crying, and a woman who went out to the trenches after dark to pray for her husband came back without her voice and did not get it back.</p>
+  <p>So there were three dangers on the Ch&ecirc;ni&egrave;re: hunger, and sickness, and the dead who would not lie down.</p>
+  <p>The men met in the Rigaud house, which was one of the four. Old Th&eacute;odule Rigaud kept the store, or had kept it, and had been something like the head man of the place for thirty years, and he stood up in front of them with his hat in his hand and said, <em>If this has come on us for something I did, say it. I&rsquo;ll go.</em> They went over his life, all of it, out loud, the way people can only do in a place that small, his dealings and his debts and his wife and the matter of the fence in 1871, and at the end they said they could not find it in him. It was not that.</p>
+  <p>They had already done everything they knew. They had said the rosary on the ridge every evening. They had carried a statue of the Virgin around the trenches in procession. They had made a novena. Some of them now wanted to send to New Orleans for the doctors of the Board of Health, and some for a famous healer over on the Teche, and some for a holy woman down in Plaquemines whom nobody had actually seen.</p>
+  <p>Then somebody said Tante Z&eacute;lie.</p>
+  <p>Everyone on Bayou Lafourche knew Az&eacute;lie Gautreaux. She was a traiteuse, and she had treated half of them or their mothers, for burns and for sunstroke and for the bleeding that will not stop and for the thing in the chest that the doctors could not name. She did not take money. You could not get her to say ten words together. She lived up the bayou below Thibodaux. And everybody also knew what the old people said about the treating, that it would not cross water: that a traiteuse could do nothing for you across a bayou or a bay. For the Ch&ecirc;ni&egrave;re, at the very bottom of everything, with fifty miles of bayou and marsh between, she would have to come herself.</p>
+  <p><em>She won&rsquo;t come,</em> someone said. <em>It&rsquo;s the grinding. She&rsquo;s at Judge Arceneaux&rsquo;s with his wife. She promised him the season.</em></p>
+  <p>They sent Ulysse Pitre anyway, who had married onto the Ch&ecirc;ni&egrave;re from Thibodaux and whose people the judge knew, and with him the sacristan&rsquo;s boy, Ovide, who could write. They put together what they had to send with them, which was one sack of dried shrimp that had been on the Rigauds&rsquo; high shelf, and a silver cup, and the church&rsquo;s altar cloth, which had been found in a tree.</p>
+</section>
+
+<section>
+  <h2>II. The Judge&rsquo;s Road</h2>
+  <p class="dateline">Below Thibodaux &middot; the middle of October</p>
+  <p>Judge Arceneaux had been judge of the district so long that nobody remembered he had been anything else. He was eighty. His wife was dying in the front bedroom of the house below Thibodaux, slowly, with the window open toward the bayou, and Tante Z&eacute;lie had been sitting with her since the cane began to turn color, because he had asked, and because she had promised.</p>
+  <p>He received the two men from the Ch&ecirc;ni&egrave;re on his gallery and heard them out. He took the shrimp and the cup and the altar cloth and laid them on the swing. Then he said, <em>You don&rsquo;t need me to ask her. You know how it&rsquo;s done. Ask her yourselves.</em></p>
+  <p>So Ulysse and Ovide went around the side of the house to the back gallery, where she was sitting on a cane-bottomed chair shelling field peas into her apron, and they took their hats off, and Ulysse asked. He told her the count. He told her about the lights.</p>
+  <p>She was a small woman, past seventy, in a black dress and a sunbonnet. She went on shelling for a while. Then she put the peas in the pan.</p>
+  <p><em>Bon,</em> she said.</p>
+  <p>That was the whole of it. Afterward people would ask Ulysse what else she had said, and he would say she had said <em>bon</em>, and they would not believe him.</p>
+  <p>The judge would not hear of her going down the bayou like a woman going to market. <em>Wait,</em> he said, <em>till I fix the road.</em> There was a road then along the upper bayou from Thibodaux down as far as Lockport, fifteen miles of it, dirt and shell and ruts. For three days the judge had men on it with shovels and drags, filling holes and pulling stumps, and his neighbors sent their men too, and shell came up from the landing by the wagonload and was spread white down the middle of it. Then the women came out. They brought flowers from every yard on the bayou, roses that had lived through the wind and four-o&rsquo;clocks and goldenrod and the purple asters off the levee, and lantana, and when the flowers ran out, armfuls of the white fluff of the sea myrtle off the ditch banks, and they put it all down along the road so deep that in places, the old people say, it came to a man&rsquo;s knees. They hung bedsheets and tablecloths from the galleries. Every man who owned a flag of any kind put it out.</p>
+  <p>The judge walked beside her buggy the whole way. A boy held a black umbrella over her, and another held a second one, higher, over the first, because the judge said one was not enough. At every house along the road somebody came out to the gate with coffee or with a child to be touched or with a burn, and she stopped for every one, so that it took five days to go fifteen miles. Every night she slept in a different house, and every house fed her as if it were Easter.</p>
+  <p>At Lockport the judge had two oyster luggers lashed side by side, with a deck of boards across them and an awning of sailcloth on poles, and the awning wound around with flowers, and a chair from his own parlor set under it. She sat in the chair. Her grandson Placide, who poled her pirogue at home and went everywhere with her, sat on the boards at her feet. Ulysse and Ovide and a crew from the lower bayou took the sweeps.</p>
+  <p>Then the old judge did a thing people still talked about. He walked down the bank into Bayou Lafourche in his black suit and his good boots, in front of half of Lockport, and kept on walking until the water was at his neck, and put his two hands on the stern of the lugger and pushed it off.</p>
+  <p><em>I&rsquo;ll be right here,</em> he said, with the water at his chin, <em>until you come back up.</em></p>
+</section>
+
+<section>
+  <h2>III. Down the Bayou</h2>
+  <p class="dateline">Lower Lafourche &middot; three days</p>
+  <p>Below Lockport there was no road at all, only the bayou, with the houses along both banks facing it like people along a street, and the word had gone down ahead of her faster than the luggers could row.</p>
+  <p>The people of the lower bayou had decided among themselves that they would do twice what the judge had done. The houses on both banks were hung with whatever cloth was left after the storm. Men stood in the shallows holding up four umbrellas over the place where she would pass, and when she passed they waded out and walked alongside in the water. Where the storm had filled the channel with drift, cypress logs and roof timbers and the carcasses of cattle, the men of Leeville and the men from the Ch&ecirc;ni&egrave;re who could still pull had gone out in the days before and dragged it all clear for three leagues, so that the bayou she came down was as clean as a swept floor. At every landing someone had a pot on, and they fed the crew twice what the judge had fed them, and they would not let Placide pay for so much as a cup of coffee.</p>
+  <p>Where the bayou opened into the marsh and the oaks of the Ch&ecirc;ni&egrave;re ridge stood up grey against the sky, broken off, half of them, like teeth, the men of the Ch&ecirc;ni&egrave;re came down into the water to meet her. They went in to their necks. They took hold of the lugger on both sides and walked it in through the shallows with their hands, and when it grounded they lifted her out of the parlor chair and carried her up the bank and set her down on the shell.</p>
+  <p>The moment her feet touched the ground, the sky over the Gulf turned the color of a slate and the rain came.</p>
+  <p>It was not a storm with wind in it. It was only rain, more rain than anyone had seen fall at one time, straight down, so heavy it hissed on the marsh. It filled every low place on the Ch&ecirc;ni&egrave;re knee-deep and then thigh-deep and then to a man&rsquo;s waist, and then it found its way off, through the cuts and the bayous and the passes, all of it going out toward the Gulf. It ran all afternoon. When it stopped, the stink that had lain on the ridge for weeks was gone, and the lagoons were clean, and the marsh grass stood up washed. The rain had carried out to the Gulf what the trenches had not held. Nobody said that part out loud. They said the air was sweet. They stood in the wet and breathed it.</p>
+</section>
+
+<section>
+  <h2>IV. Placide&rsquo;s Round</h2>
+  <p class="dateline">The Ch&ecirc;ni&egrave;re &middot; the first night, and seven days</p>
+  <p>That evening a relief steamer from New Orleans came into Caminada Bay with all her lamps lit. She carried flour and doctors and barrels of lime, and the light of her came across the water like a town arriving. Out in the marsh the little fires went out, most of them, one after another, the way lamps go out in a house when people go to bed.</p>
+  <p>Tante Z&eacute;lie stood at the head of the path that went up the ridge, where the gate of the graveyard had been, and called Placide to her.</p>
+  <p>A traiteuse gives her prayers across, a woman to a man and a man to a woman, and they are never written down. She had been going to give them to Placide someday. She gave them to him there, in the dark, in the smell of wet ground and lime, with her mouth close to his ear, and nobody else heard them, and they are not written here. Then she took the white enamel bowl she carried in her bag, the one she used for everything, and dipped it full from the rain barrel at the Rigaud house, and put it in his two hands.</p>
+  <p><em>Go around,</em> she said. <em>All the way. Three times.</em></p>
+  <p>Placide went around the Ch&ecirc;ni&egrave;re three times that night, in the three watches, from dark to the first grey, along the ridge and down through the ruin of the houses and along the edge of the marsh and back, saying what she had given him, under his breath, over and over. Th&eacute;odule Rigaud and some of the men went with him with lanterns. At the first word, they said, he dipped his hand in the bowl and threw the water up into the dark. It did not fall the way water falls. It hung for a moment in the lantern light, in drops like silver birdshot, and then came down on the people lying sick on pallets under the one roof and in the lee of the cisterns and in the boats pulled up on the shell, and wherever it touched them they got up.</p>
+  <p>They got up all over the Ch&ecirc;ni&egrave;re, the old ones and the children, and came out, and followed him. By the third round there were more people behind Placide than had been left alive on the ridge, though nobody could ever say who the extra ones were.</p>
+  <p>Out in the marsh, the last of the lights went off toward the passes, fast, low, the way a flock goes. In the morning the chimney of the Naquin house, which had stood through the storm when the house around it went, was lying in the grass in one long piece, as if something had gone out through it in a hurry, and nobody had heard it fall.</p>
+  <p>The women had scrubbed the floor of the Rigaud house with lye and strewn it with bay leaves, and stretched a lugger&rsquo;s sail under the ceiling, and cut stars out of a piece of tin roof and hung them from the sail on threads, so that when the door opened they turned and caught the light. They set the judge&rsquo;s parlor chair under the stars. Tante Z&eacute;lie sat in it, and the people came in and sat on the floor around her, and Placide came in with the ones who had followed him all night and sat down too.</p>
+  <p>She treated everyone who asked, for seven days, from that chair. She said very little. People who were there tried for the rest of their lives to tell what it had been like, those seven days in the room with the tin stars, and mostly they could not, and the ones who could not tell it were the ones you believed. At the end of the seven days there was no more flux on the Ch&ecirc;ni&egrave;re, and the flour from the steamer had come ashore, and nobody saw a light in the marsh again that year.</p>
+  <p>Then she said she would go back up, because she had promised the judge the season.</p>
+</section>
+
+<section>
+  <h2>V. The Manila Men</h2>
+  <p class="dateline">Barataria and the bayou &middot; the end of October</p>
+  <p>The people of the Ch&ecirc;ni&egrave;re took her back to the mouth of the bayou with twice the honor they had given her coming, which was everything they had, and more than they had.</p>
+  <p>But the Manila men were waiting.</p>
+  <p>They were the shrimp people of the bay, from the islands on the far side of the world, men who had come off Spanish ships two and three generations back and lived on platforms of cypress built out over the water, where they boiled and dried their shrimp in the sun and sent it to China. Some of them had Chinese partners and some had Cajun wives. Their platforms stood on pilings, and the storm had gone under the one in the bay where they lived and left most of it standing. They had heard about the parlor chair and the stars. They said to each other in their own language, and then in Spanish to the Cajuns, that the people of the land had honored her and they did not see why the people of the water should not.</p>
+  <p>So they came out from Barataria with every boat they had. They had painted the luggers. They had hung them with colored cloth and paper lanterns and the flags of three countries. They had brought, from somewhere up the freshwater bayous, so much water hyacinth in bloom that when they turned it loose ahead of her the brown bayou went purple for a mile, from bank to bank, and the boats pushed through flowers. And each crew asked her, in Spanish and in French and in their own tongue, to come into their boat.</p>
+  <p>It was the end of October, and the birds were coming down for the winter. That afternoon they came over in numbers that no one living had seen before or saw again: ducks and geese and white pelicans and long strings of ibis, flock over flock, one above another, so high that the top ones were only a shimmer, a roof of wings over the whole bayou all the way up into the sky, and under it the boats, and under the boats the flowers.</p>
+  <p>Tante Z&eacute;lie sat in the judge&rsquo;s chair on the lashed luggers. That is certain. But every crew of every Manila boat swore afterward that she had sat with them, in their boat, in the stern, with her hands in her lap and her bonnet on, the whole way. Ulysse Pitre, who was at the sweep of the judge&rsquo;s lugger, said she never left the chair. The men in the Manila boats said she was in theirs. The men on the bank said they had seen her go by in every one. Nobody ever settled it, and after a while nobody tried.</p>
+  <p>The Manila men took her across the bay to the platform and gave her their best place out of the wind. They cooked all night: rice, and shrimp in tomatoes, and fish they had smoked, and a kind of sweet rice cake that nobody on the bayou had ever eaten, and coffee. She talked more that night than anyone had ever heard her talk. She talked in French, and they listened in Spanish and in Tagalog, and they understood her. In the morning they fed her again and took her back across to the bayou with a hundred boats behind.</p>
+  <p>At Lockport the judge was waiting on the bank, in the same black suit. He had been told she was coming, and the road was white with fresh shell again, and the flowers were down twice as deep as before, and he walked into the bayou to his neck once more to take the lugger in. He walked her home in five days.</p>
+</section>
+
+<section>
+  <h2>VI. Toussaint</h2>
+  <p class="dateline">A sugarhouse below Thibodaux &middot; the night of November 1</p>
+  <p>The grinding went day and night that time of year. In the sugarhouse on the plantation next to the judge&rsquo;s the kettles boiled from dark to dark, and the men who skimmed them and fed the furnaces and the women who brought them supper stayed up talking in the heat, and the smell of the cane juice cooking lay on the whole bayou like a blanket. Tante Z&eacute;lie came over most nights to treat burns. On the night of the first of November, Toussaint, she came over late, from the graveyard, where the whole bayou had been all day whitewashing the tombs and setting out chrysanthemums, and sat down on a bench by the door to wait in case anyone burned himself.</p>
+  <p>They were talking about her. They had been talking about nothing else for a week. The road white with shell, fifteen miles. The judge to his neck in the bayou, twice, at eighty. The rain. The tin stars. The Manila boats, the hyacinths, the birds, a hundred boats and she in every one.</p>
+  <p><em>There was never anything like it on this bayou,</em> said one of the kettle men. <em>Not for a bishop. Not for the governor.</em></p>
+  <p><em>It&rsquo;s the gift she has,</em> said a woman. <em>The power.</em></p>
+  <p>Tante Z&eacute;lie said, <em>What are you all talking about?</em></p>
+  <p>They told her.</p>
+  <p><em>It wasn&rsquo;t any power of mine,</em> she said. <em>Nor the judge&rsquo;s, nor the Manila men&rsquo;s either. I&rsquo;ll tell you what it was.</em></p>
+  <p>They were so surprised to hear her say that many words in a row that the man at the last kettle let it boil over.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>She had a son, she said. Aur&eacute;lien. He was the one who could learn. When he was sixteen he told her and his father that he wanted to go to New Orleans and study, and his father had a friend among the Brothers who kept a school there, and they sent him to that friend. He learned faster than anybody the Brothers had ever had. Whatever went into him stayed, the way oil stays in a good jar. He learned English and Latin and his catechism and his figures, and in two years he knew everything the Brothers&rsquo; school had to teach. But he wrote to her that he understood the beginning of it and the middle, and not the end, and when he asked his teacher who knew the end, the old Brother said he did not know it either, but that the Brothers who nursed the sick might.</p>
+  <p>So he went to them, and they told him they could not teach the end of it to anyone who stayed outside, and he put on the habit. They taught him first how to put it on. They taught him the rest. He wrote her once that he understood now.</p>
+  <p>That was 1878, the year of the yellow fever, when five thousand people died in New Orleans. The Brothers went into the houses where the fever was, and Aur&eacute;lien went with them, and he was so good at it, so quiet and so quick, that people in the city began to ask for him by name, and the newspapers printed it when he came through a street, and they said he had the touch. Then he took the fever himself and died of it in October, three weeks before the first cold, and the Brothers put him in a tomb by the gate of a cemetery on Esplanade, and the people he had nursed paid to have his name cut on it.</p>
+  <p>She did not know any of this. The letters had stopped coming in the summer, and the boats were tied up for the quarantine. At the end of October, when the first cold came and the boats began to run, she went to the city. She got there on the day of Toussaint, and the cemeteries were full of people whitewashing their tombs, and she went up to the biggest crowd she could find and asked whether anyone knew a young man named Aur&eacute;lien Gautreaux, from Bayou Lafourche, who had come to the city to study with the Brothers.</p>
+  <p>Yes, they said. They knew him. He had studied with the Brothers, and become one of them, and gone into the fever houses, and died. That was his tomb, there by the gate.</p>
+  <p>She knelt down on the walk and hit the ground with her open hand until it hurt, and cried. Then she got up and went to the tomb. Nobody had tended it. The name on it was new, and the Brothers were still in the fever houses, and there had been no one to whitewash it. She pulled up the grass that had grown around its foot in the wet weeks, all of it, by the roots. She went to the walk and filled her apron with the white shell and brought it back and spread it around the tomb, two trips, three. She had a bottle of water from the bayou in her bag, from home, and she sprinkled it over the stone. She went out to the edge of the cemetery where there was a ditch and picked the wild asters and the goldenrod growing along it and laid them on the ledge. She hung her shawl from the little iron cross on the top, like a flag. And she opened her umbrella and wedged the handle down in the shell at the foot of the tomb so that it stood over his name. Then she walked to the boat in the rain without it.</p>
+  <p><em>I pulled the grass,</em> she said, <em>and so the judge&rsquo;s men pulled the stumps out of fifteen miles of road, and the men of Leeville cleared the bayou. I spread the shell, and so they spread shell. I picked those few flowers off the ditch, and so they put flowers down to your knees and the Manila men covered the bayou with them. I sprinkled one bottle of water, and so the rain came on the Ch&ecirc;ni&egrave;re. I put up my shawl and my umbrella, and so there were flags on every gallery and umbrellas over my head and boats with lanterns and birds all the way up to the top of the sky. That&rsquo;s all it was. One afternoon. A little grass and a little shell.</em></p>
+  <p>She was quiet a while. The kettles boiled.</p>
+  <p><em>He used to say a piece of an English poem to me, when he came home in the summer,</em> she said. <em>The Brothers taught it to him. About the Acadians, our people, and the girl who looked for her young man all her life and found him at the end in a fever hospital. I don&rsquo;t have English. But I have that piece, because he said it so many times.</em></p>
+  <p>And she said it, in his English, in the voice she used for the prayers:</p>
+  <div class="verse">
+    <p>Talk not of wasted affection, affection never was wasted;<br>If it enrich not the heart of another, its waters, returning<br>Back to their springs, like the rain, shall fill them full of refreshment;<br>That which the fountain sends forth returns again to the fountain.</p>
+    <p>&mdash; Longfellow, <em>Evangeline</em> II.i (1847)</p>
+  </div>
+  <p>The kettle men did not have English either, most of them. But several of them said afterward that they had understood every word.</p>
+  <p>Then a boy at the strike pan put his wrist on the edge of the kettle and yelled, and she got up and went to him.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If by leaving a small pleasure one sees a great pleasure, let a wise man leave the small pleasure, and look to the great.<cite>Dhammapada 290, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the city of <a href="https://en.wikipedia.org/wiki/Vaishali_(ancient_city)">Ves&#257;l&#299;</a> suffers three dangers at once: famine, the non-human beings drawn by the unburied dead, and disease. Its people find no fault in their ruler and send two envoys to King Bimbis&#257;ra, who tells them to ask the Buddha themselves. The Buddha agrees. Bimbis&#257;ra smooths five leagues of road, strews it knee-deep with flowers, holds two white parasols over the Buddha, and wades into the Ganges to his neck to launch his boat; the Licchavi princes on the far bank double every honor. When the Buddha sets foot in their country a great rain washes the corpses into the river. &#256;nanda walks the city walls through the three watches of the night reciting the <a href="https://en.wikipedia.org/wiki/Ratana_Sutta">Ratana Sutta</a> and flinging water from the Buddha&rsquo;s bowl; the drops fall like silver on the sick, who rise, and the spirits break through the walls to flee. On the way back the N&#257;gas of the river cover it with lotuses and offer jeweled boats, the gods raise parasols to the highest heaven, and the Buddha makes a Buddha appear in every boat. Afterward, when the monks marvel, he says the honors came from one small deed: long ago, as the Brahmin Sa&#7749;kha, he traveled to find his son, who had gone away to study, become a solitary Buddha and died, and he cleared the grass from the son&rsquo;s shrine, spread sand, sprinkled water, scattered wildflowers, and raised his robe as a banner and his parasol over the mound. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-01.htm">the full commentary story</a>.</p>
+    <h3>Bayou Lafourche and the Ch&ecirc;ni&egrave;re, 1878&ndash;1893</h3>
+    <p>On the night of October 1&ndash;2, 1893, a small, intense hurricane came ashore at <a href="https://en.wikipedia.org/wiki/Cheniere_Caminada,_Louisiana">Ch&ecirc;ni&egrave;re Caminada</a>, a French-speaking fishing village of about 1,500 people west of Grand Isle that sent oysters, shrimp and crabs to New Orleans. The Weather Bureau had not known the storm existed. The surge put the village under six feet of water within minutes; 779 people died there, and only four of its 450 houses were left standing. The <a href="https://en.wikipedia.org/wiki/1893_Cheniere_Caminada_hurricane">storm</a> killed about 2,000 people in all and remains the deadliest in Louisiana&rsquo;s history. Survivors moved up <a href="https://en.wikipedia.org/wiki/Bayou_Lafourche">Bayou Lafourche</a>, &ldquo;the longest Main Street in the world,&rdquo; to Golden Meadow, Leeville and C&ocirc;te Blanche (now Cut Off), and some to Westwego; below Golden Meadow the bayou was the only road (<a href="https://louisianafolklife.org/LT/Articles_Essays/lfmriverran.html">Louisiana Folklife</a>). Filipino sailors who had left Spanish ships had been settling the marshes since the eighteenth century and dried shrimp for export on platform villages like <a href="https://en.wikipedia.org/wiki/Manila_Village">Manila Village</a> in Barataria Bay. The sickness, the lights in the marsh and every person in this story are the story&rsquo;s own.</p>
+    <p>A <a href="https://en.wikipedia.org/wiki/Traiteur_(faith_healer)">traiteur or traiteuse</a> treats with Catholic prayer and the laying on of hands, takes no payment, must be asked, and passes the secret prayers on to someone of the opposite sex; many say the treatment cannot cross water. The <a href="https://en.wikipedia.org/wiki/1878_yellow_fever_epidemic">yellow fever epidemic of 1878</a> killed roughly 5,000 people in New Orleans; steamboats were tied up, and the fever lasted until the cold weather of late October. Longfellow&rsquo;s <a href="https://en.wikipedia.org/wiki/Evangeline"><em>Evangeline</em></a> (1847), the tale of an Acadian girl who searches all her life for her lost Gabriel and finds him dying in a fever hospital, did more than any other book to shape how Acadians and Cajuns were seen and saw themselves. On Toussaint, All Saints&rsquo; Day, Louisiana families still clean and whitewash their tombs and bring chrysanthemums.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of the Ascent of the Ganges from the Dhammapada commentary (verse 290). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/21-01.htm">The original</a>. Scripture from Henry Wadsworth Longfellow&rsquo;s <em>Evangeline: A Tale of Acadie</em> (1847). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-childrens-house.html">&larr; The Children&#x27;s House</a><a href="index.html">All stories</a><a href="the-egg-chamber.html">The Egg Chamber &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Water thrown up into the dark: a few drops rise, hang like silver shot, and come down slowly.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, drops = [], wait = 60;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function toss() {
+    var x0 = W * (0.1 + Math.random() * 0.8), y0 = H * (0.82 + Math.random() * 0.12);
+    var n = 10 + Math.floor(Math.random() * 10);
+    for (var i = 0; i < n; i++) {
+      drops.push({ x: x0, y: y0, vx: (Math.random() - 0.5) * 1.1, vy: -(2.2 + Math.random() * 1.6), r: 0.8 + Math.random() * 1.4, life: 0, max: 420 + Math.random() * 260 });
+    }
+  }
+  function still() {
+    drops = [];
+    for (var i = 0; i < 70; i++) drops.push({ x: Math.random() * W, y: H * (0.25 + Math.random() * 0.7), r: 0.6 + Math.random() * 1.2, life: 200, max: 400, vx: 0, vy: 0 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce && --wait <= 0) { toss(); wait = 240 + Math.random() * 360; }
+    for (var i = drops.length - 1; i >= 0; i--) {
+      var d = drops[i];
+      if (!reduce) {
+        d.life++;
+        var hang = Math.exp(-Math.pow((d.vy) / 0.35, 2));
+        d.x += d.vx * (1 - 0.8 * hang); d.y += d.vy * (1 - 0.85 * hang);
+        d.vy += 0.012; if (d.vy > 0.7) d.vy = 0.7; d.vx *= 0.995;
+        if (d.life > d.max || d.y > H + 10) { drops.splice(i, 1); continue; }
+      }
+      var p = d.life / d.max, a = Math.min(1, p * 6) * Math.min(1, (1 - p) * 3) * 0.55;
+      var g = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.r * 5);
+      g.addColorStop(0, 'rgba(236,236,228,' + a + ')');
+      g.addColorStop(0.35, 'rgba(200,205,210,' + (a * 0.35) + ')');
+      g.addColorStop(1, 'rgba(200,205,210,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(d.x, d.y, d.r * 5, 0, 6.2832); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); if (reduce) still(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) { still(); draw(); } });
+})();
+
+</script>
+</body>
+</html>

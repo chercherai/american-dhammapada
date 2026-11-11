@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cast Clouts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: a magistrate's papers read by a driftwood fire at the edge of a salt cove; the patched coat pieced in the dark below. */
+  --ground: #0f1214;
+  --ground-2: #1a1d1e;
+  --paper: #e5dfd2;
+  --paper-dim: #9d998d;
+  --fire: #c99350;
+  --salt: #b4c3c4;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 20% 115%, #2a2219 0%, var(--ground) 58%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(229,223,210,.2); }
+.series a:hover { color: var(--fire); }
+a:focus-visible { outline: 2px solid var(--fire); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--fire); text-wrap: balance; text-shadow: 0 0 28px rgba(201,147,80,.2); }
+.epigraph { border-left: 1px solid rgba(201,147,80,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--salt); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--fire); }
+.dep { padding-left: 1rem; border-left: 1px solid rgba(180,195,196,.18); }
+.sig { font-family: var(--font-display); font-style: italic; color: var(--paper-dim); text-align: right; }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(26,29,30,.8); border: 1px solid rgba(229,223,210,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--fire); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(229,223,210,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--fire); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--fire); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--fire); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--fire); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--fire); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--fire); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(26,29,30,.8); border-left: 2px solid var(--fire); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.12 &middot; Kisā Gotamī</span></nav>
+<header>
+  <h1>Cast Clouts</h1>
+  <div class="epigraph">The best clad English-man,<br>Not cloth&rsquo;d with Christ, more naked is<br>Than naked Indian.<br>&mdash; Roger Williams, <i>A Key into the Language of America</i> (1643), ch. XX</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Thus have I heard it,</span> on the Towne Street at Providence.</p>
+
+<section>
+  <h2>I. Informations</h2>
+  <p class="dateline">Pawtuxet, under the government of the Massachusetts &middot; 20 September 1647</p>
+  <p>Informations taken before me, Nathaniel Harrowe, a magistrate of the Bay, at a house at Pawtuxet, concerning a woman of the plantation of Providence, Thomasine Ashby, widow, called the Lath, who is reported to go through the air.</p>
+  <div class="dep">
+  <p><strong>Ephraim Tull,</strong> aged fourteen or thereabout, saith: That on a night in August last he was at the falls of the Moshassuck with a lantern to take eels, and saw a woman come down the river in the air, at the height of the tallest pine, not swimming nor walking, but going as a heron goes, with her arms at her sides. That she had on a coat of many pieces and a man&rsquo;s hat tied under her chin with a list of cloth. That she came down on the flat rock below the falls and sat. That he knew her for the Lath, who has a hut in the woods above the falls. That he was afraid and put out his lantern, and could not get home past her, and so sat in the dark until it was light, and she sat also, and did nothing in all that while, not so much as turn her head. That in the morning she said, Good morrow, Ephraim, the eels are under the bank, and went up into the woods on her feet. That the eels were under the bank.</p>
+  <p><strong>Joan Pratley,</strong> wife of Robert Pratley, aged about forty, saith: That she knew the said Thomasine at Boston, in the church there, when she was a goodwife in a good gown and a lawn band and had a husband. That the husband was one of those whose arms were taken from them in the year 1637 for setting their hands to the writing for Mr. Wheelwright, and they came away to Providence. That the husband was killed in the year 1640 felling an oak, and the child, a boy of two years, died of a flux the summer after. That the said Thomasine carried the child up and down the Towne Street two days asking physick at every door, and old Overy, who fishes the cove, told her to go to every lot and ask whether any had yet been laid in the ground there. That she went, and came back without the child, and said, Every one, and the town not five years old. That soon after she gave away her gown and her band and her shoes, and has gone ever since in what other folk put off. That she will take nothing given her new, only what is done with. That she eats so little you may see the veins in the backs of her hands and in the side of her neck, as in a leaf held up to the window. That this deponent&rsquo;s own girl had a fever in June and the Lath sat by her one night and said nothing at all and the girl mended, but this deponent will not say the Lath did it, and does not.</p>
+  <p><strong>Hugh Ganlett,</strong> fisherman, aged fifty or more, saith: That coming up the bay by night in his shallop in the month of July he saw a woman go over the water toward the Great Salt Cove, high, and took it for a bird until it was not a bird. That it was the Lath. That all Providence knows of it and no man there will say so before a magistrate of the Bay. That he says it only because he lives at Pawtuxet and is under this government, and was asked.</p>
+  </div>
+  <p class="sig">Taken before me. [not signed]</p>
+</section>
+
+<section>
+  <h2>II. To Hannah</h2>
+  <p class="dateline">Pawtuxet &middot; the night of 22 September 1647</p>
+  <p>My dear Hannah,</p>
+  <p>I am well and the Pawtuxet business is near done. Arnold and his neighbors have had their say about the meadows and the Providence men have had theirs, and I have written it all down for the Court, which is what I was sent to do and the least of what has happened to me here, and that is why I am writing to you tonight and not tomorrow.</p>
+  <p>On Monday the Pawtuxet men brought me three persons to swear to a woman of Providence who goes in the air. I enclose what they swore, in my own hand. You will see I did not sign it. You will have heard by now about the woman hanged at Hartford in May, and you know the Providence men put witchcraft among the felonies in their own new code at Portsmouth the same month, so there is no place left in this country for such a woman to go. The Pawtuxet men knew all that. They are no friends to Providence and they wanted me to carry her back to Boston on a horse, and I could have done it. A magistrate of the Bay is a great man at Pawtuxet, Hannah. I had not known how great until I saw how they looked at my cloak.</p>
+  <p>Last night I went up to Providence to see the old man the witnesses named. It is five miles by the path. I took Tull the boy&rsquo;s father to show the way and four of the trained band with lanterns, because a magistrate does not walk anywhere alone, and I told myself it was to examine the old man. You will remember the name Simon Overy. He lectured at a parish in Essex and came over in the year we did, and preached once at Roxbury, and would not take a church afterward because, he said, he could find none that Christ had sent. So he keeps none. There are some at Providence of that mind, and they call themselves Seekers, and they meet at his fire on a weeknight and wait, and that is the whole of their worship. He fishes the cove for his bread. His house is at the foot of his lot on the shore, with the fire built outside it on the stones when the weather is fair.</p>
+  <p>I meant to put questions to him and I put none. He made room for me on his bench as if I had been expected, and my men stood back in the dark with their lanterns, and he talked a little and then not at all. What he said I cannot rightly give you. That we are all waiting, the Bay too, only the Bay has built a house to wait in and is ashamed to say so. That waiting is not idleness, any more than a heron is idle. That I might wait with them if I liked, for it costs nothing. Then he was quiet, and the others were quiet, and the tide came in over the stones below us very softly, and Hannah, I sat on that bench without a word in my mouth until the first watch of the night was past, and I have not been so still since the winter we lost Mercy. I did not know there was anything left in me that could be still.</p>
+  <p>Then the woman came.</p>
+  <p>I will set it down as plainly as the boy did. She came out of the dark from the west side of the cove, over the salt water, at about the height of a ship&rsquo;s yard. She was not hurried. Her coat was all pieces, sacking and kersey and something that had been red, and the pieces moved in the air as she came. She came down onto the shingle at the very edge of the firelight, as light as you set down a cup, and stooped toward the old man the way a woman stoops coming into meeting late. And then she saw me. My men behind me with their lanterns. My band and my black broadcloth and the silver at my throat. She looked at me a moment, Hannah, the way you look at the window when it rains. Then she turned and went back up into the dark the way she had come, not hurried then either, and I heard the water under her and nothing else.</p>
+  <p>I asked him who that was, though I knew.</p>
+  <p><em>That is my daughter Thomasine,</em> he said. <em>Of all of us here who wait, she goes first, and she goes in what the rest of us put off.</em></p>
+  <p>He got up and went into the house and came back with a little book, not much bigger than my hand, and held it to the fire. It was Mr. Williams&rsquo;s book of the Indian tongue that was printed at London, and I had seen it at Boston and not read it, because of who wrote it. He turned to the place where Mr. Williams writes of the Indians&rsquo; garments, and how they will pull off an English coat in the rain and go wet rather than spoil it, and then he read me the verses at the end of the chapter. I copied them on the back of the Pawtuxet paper by his fire, and I copy them again here so you will have them.</p>
+  <div class="verse">
+    <p>Israell was naked, wearing clothes!<br>The best clad English-man,<br>Not cloth&rsquo;d with Christ, more naked is<br>Than naked Indian.</p>
+    <p>&mdash; Roger Williams, <i>A Key into the Language of America</i> (1643), ch. XX</p>
+  </div>
+  <p>And a line above it in the same chapter, of the Indians in their skins, that they creep into them contentedly, by day or night, in house or in the woods, and sleep soundly: <em>That every man be content with his skin.</em> He said, <em>She is content with hers. There is not much of it.</em></p>
+  <p>Then he told me about the child, the same as the Pratley woman had told it but slower, and about the lots. Every lot on the Towne Street has its dead at the back of it, under the apple slips, because Providence has no church and so no churchyard, and each house buries its own. She went to every one with the boy on her hip. Every one, and the town not five years old. She came back to him without the boy, and he said she gave the gown away the next week and has not been inside a house since but to sit with the sick.</p>
+  <p>Hannah, I thought of you all the while he talked. You carried ours up and down the chamber three days, and would not let the midwife near, and I stood in the door with my hat in my hands like a man come about a debt. You have not been out to meeting in two winters. Her little coat and her shoes are in the chest at the foot of our bed. I am not telling you to do anything with them. I would not dare. I only want you to know that I saw a woman tonight who had gone all the way to the bottom of it, and come out so light that the air would carry her, and that when she saw me in my good clothes she was sorry for me, and turned back so as not to make me ashamed.</p>
+  <p><em>You may write what you came to write,</em> he said, when I stood up. <em>She will not run. There is nowhere she would sooner be than on that rock by the falls.</em></p>
+  <p>I have written nothing. I am sending you the informations so that you may burn them at our own fire, where I have sat. Or keep them. You will know which.</p>
+  <p>I left my cloak on the shingle where she came down. I did not give it. Overy said she would not take it if I gave it. I took it off and set it on the stones above the tide mark, and walked off up the lot and left it lying, the way a man leaves a thing he is done with. Tull&rsquo;s father thought me mad, and the trained band said nothing at all, all five miles back in the dark with the lanterns, and I was cold, and I did not mind it.</p>
+  <p>I will be home on Friday. Your loving husband,</p>
+  <p class="sig">N. H.</p>
+</section>
+
+<section>
+  <h2>III. Endorsed</h2>
+  <p class="dateline">On the back of the informations, in another hand</p>
+  <p class="dep"><em>Rec&rsquo;d of my husband, the 27th of September. Not proceeded upon. Kept. H. H.</em></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The paper stayed in a Dorchester chest for a long time, folded in four, under a child&rsquo;s linen cap with the strings cut off. Hannah Harrowe went out to meeting on the first Sabbath in October, and the women made room on the bench, and nobody said anything about it, and that was right.</p>
+  <p>Of the four men of the trained band, one of them, a Watertown man named Tobias Kember, sold his lot within the year and went to Providence and was a Seeker there the rest of his life, and never would say why, except that he had stood in the dark one night holding a lantern and found he did not need it.</p>
+  <p>In April, when the alewives came up the Moshassuck so thick that a boy could take them in his hands, Ephraim Tull went to the falls in the gray of the morning and found the Lath sitting on the flat rock below them, in a black broadcloth cloak gone green along the shoulders, with the silver clasp cut off and a patch of sacking let into the back where she had given the good cloth away to somebody. The fish went up past her in the white water, all silver, all one way. She did not look at them, and she did not look at him, and the hem of the cloak lay in the river and was wet, and she let it.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The man who wears dirty raiments, who is emaciated and covered with veins, who lives alone in the forest, and meditates, him I call indeed a Brahmana.<cite>Dhammapada 395, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>One night Sakka, king of the gods, comes with his retinue to sit before the Buddha on Vulture&rsquo;s Peak and listen. The nun Kisā Gotamī, &ldquo;Gotamī the thin,&rdquo; the same woman who once carried her dead son from house to house in search of medicine, comes through the air to pay her respects, sees the king of the gods, and turns back. Sakka asks who she is. The Buddha answers that she is his daughter, foremost among the nuns who wear robes sewn from cast-off rags, and speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-12.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Kisa_Gotami">Kisā Gotamī</a>.</p>
+    <h3>Providence Plantations, 1647</h3>
+    <p>Providence was founded in 1636 by <a href="https://en.wikipedia.org/wiki/Roger_Williams">Roger Williams</a>, banished from Massachusetts Bay, and it filled up with other people the Bay had pushed out, among them supporters of the minister John Wheelwright in the <a href="https://en.wikipedia.org/wiki/Antinomian_Controversy">Antinomian Controversy</a>, whose petitioners were disarmed by order of the General Court in November 1637. Williams himself left the Baptist church he had helped to found and became a <a href="https://en.wikipedia.org/wiki/Seekers">Seeker</a>, one of those who held no church to be rightly gathered and met in silence to wait. Because the town kept no established church, it kept no churchyard either, and for its first sixty years families buried their dead in their own plots; the town did not vote to lay out the <a href="https://en.wikipedia.org/wiki/North_Burial_Ground">North Burial Ground</a> until 1700. Some of the settlers at Pawtuxet, a few miles south, quarreled with their Providence neighbors over land and in 1642 put themselves under the government of Massachusetts, which kept its claim there for sixteen years (<a href="https://en.wikipedia.org/wiki/William_Arnold_(settler)">William Arnold</a>).</p>
+    <p>Williams wrote <a href="https://en.wikipedia.org/wiki/A_Key_into_the_Language_of_America">A Key into the Language of America</a> on his first voyage to England, to secure a charter for the colony, and his friend Gregory Dexter printed it in London in 1643. It is a phrasebook of the Narragansett language, with Williams&rsquo;s observations of Narragansett life and a short poem at the end of each chapter that usually turns the comparison back against the English. In May 1647 the four towns met at Portsmouth under that charter and adopted a code of laws that listed witchcraft among its capital crimes; the same month, on May 26, <a href="https://en.wikipedia.org/wiki/Alse_Young">Alse Young</a> of Windsor was hanged at Hartford, the first recorded execution for witchcraft in the English colonies.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Kisā Gotamī from the Dhammapada commentary (verse 395). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-12.htm">The original</a>. Verses from Roger Williams, <i>A Key into the Language of America</i> (London, 1643). Written by Claude Opus 5.5.
+  <div class="pager"><a href="brickbats.html">&larr; Brickbats</a><a href="index.html">All stories</a><a href="hombre-sincero.html">Hombre Sincero &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // The coat of many pieces: faint patches are pieced together one at a time
+  // in the lower corner of the dark, each with a line of running stitches;
+  // now and then an old patch fades and another takes its place.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, cells = [], t0 = 0;
+  var tones = ['154,126,96', '120,112,98', '140,62,48', '98,104,100', '168,150,120', '110,92,70'];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    cells = [];
+    var s = Math.max(34, Math.min(58, W / 18));
+    var cols = Math.ceil(Math.min(W * 0.42, 420) / s), rows = Math.ceil(Math.min(H * 0.34, 300) / s);
+    for (var r = 0; r < rows; r++) for (var k = 0; k < cols; k++) {
+      // keep to a ragged corner, thinning toward the page
+      if (k + r * 1.3 > cols + 0.5 - Math.random() * 1.5) continue;
+      var jx = (Math.random() - 0.5) * s * 0.25, jy = (Math.random() - 0.5) * s * 0.25;
+      cells.push({ x: k * s + jx, y: H - (r + 1) * s + jy, w: s * (0.9 + Math.random() * 0.3), h: s * (0.85 + Math.random() * 0.3),
+        tone: tones[(Math.random() * tones.length) | 0], a: reduce ? 1 : 0, target: reduce ? 1 : (Math.random() < 0.6 ? 1 : 0),
+        next: Math.random() * 30000, rot: (Math.random() - 0.5) * 0.08 });
+    }
+  }
+  function drawCell(p) {
+    if (p.a < 0.01) return;
+    ctx.save();
+    ctx.translate(p.x + p.w / 2, p.y + p.h / 2); ctx.rotate(p.rot);
+    ctx.fillStyle = 'rgba(' + p.tone + ',' + (0.075 * p.a) + ')';
+    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    ctx.strokeStyle = 'rgba(214,190,150,' + (0.11 * p.a) + ')';
+    ctx.lineWidth = 1; ctx.setLineDash([3, 4]);
+    ctx.strokeRect(-p.w / 2 + 3, -p.h / 2 + 3, p.w - 6, p.h - 6);
+    ctx.restore();
+  }
+  function frame(ts) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < cells.length; i++) {
+      var p = cells[i];
+      if (!reduce) {
+        if (ts > p.next) { p.target = p.target ? 0 : 1; p.next = ts + 14000 + Math.random() * 40000; }
+        p.a += (p.target - p.a) * 0.004;
+      }
+      drawCell(p);
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size(); make();
+  if (reduce) frame(0); else requestAnimationFrame(frame);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) frame(0); });
+})();
+</script>
+</body>
+</html>

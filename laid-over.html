@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laid Over</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: a club minute book read at night under a trolley wire; one column, datelined entries. */
+  --ground: #0f141a;
+  --ground-2: #18202a;
+  --paper: #e8e1d2;
+  --paper-dim: #9ca3a6;
+  --lamp: #e2b35c;
+  --spark: #a8cdf0;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #1f2a36 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(232,225,210,.2); }
+.series a:hover { color: var(--lamp); }
+a:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--lamp); text-wrap: balance; text-shadow: 0 0 28px rgba(226,179,92,.22); }
+.epigraph { border-left: 1px solid rgba(226,179,92,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--lamp); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--lamp); }
+.entry { margin: 0 0 1.4rem; padding-left: 1rem; border-left: 1px solid rgba(168,205,240,.18); }
+.entry b { font-family: var(--font-display); font-weight: 400; font-style: italic; color: var(--spark); }
+.refrain { display: block; font-family: var(--font-display); font-style: italic; color: var(--lamp); margin-top: .35rem; }
+.sig { text-align: right; font-family: var(--font-display); font-style: italic; color: var(--paper-dim); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(24,32,42,.78); border: 1px solid rgba(232,225,210,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--spark); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(232,225,210,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--lamp); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--lamp); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--lamp); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--lamp); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--lamp); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(24,32,42,.78); border-left: 2px solid var(--lamp); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 24.10 &middot; Sakkapa&ntilde;ha</span></nav>
+<header>
+  <h1>Laid Over</h1>
+  <div class="epigraph">What is truth? said jesting Pilate, and would not stay for an answer.<br>&mdash; Francis Bacon, &ldquo;Of Truth&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As it was set down in the book,</span> at the end of the Reeds Lake line.</p>
+
+<section>
+  <h2>I. Minutes of the First Meeting</h2>
+  <p class="dateline">East Grand Rapids, Michigan &middot; Thursday, October 6, 1898</p>
+  <p>The Thursday Club met at the residence of Mrs. Josiah Orcutt on the lake road at half past two o&rsquo;clock, twenty-nine members present, the afternoon fair and the steamer still running.</p>
+  <p>The constitution was read a second time and adopted. Article Three, limiting the membership to thirty-three, was debated and kept, on the ground stated by Mrs. Orcutt that thirty-three is the number of ladies who can be seated in one parlor if the piano bench is used. The village had already begun to call the club the Thirty-Three, and the club did not object.</p>
+  <p>Mrs. Lyman Hale read a paper on Sir Edwin Arnold&rsquo;s <em>The Light of Asia</em>, which she had borrowed from the Ladies&rsquo; Literary Club downtown and must return Saturday. The paper was much admired, especially the passage on the young prince seeing the old man by the road, which Mrs. Hale read twice.</p>
+  <p>In the discussion Mrs. Orcutt observed that the club, and every club she had ever belonged to, talked a great deal and settled nothing. She moved that four questions be set for the season and answered by the annual meeting in May, so that the club might for once have something to show. The questions were proposed from the floor, amended, and adopted as follows:</p>
+  <p class="entry"><b>First.</b> Which is the best of all gifts?<br>
+  <b>Second.</b> Which is the best of all tastes?<br>
+  <b>Third.</b> Which is the best of all pleasures?<br>
+  <b>Fourth.</b> Why should the ending of desire, which Mrs. Hale&rsquo;s paper commends, be called the highest thing of all, when it is desire that makes the world go round?</p>
+  <p>The fourth was Mrs. Van Ess&rsquo;s, and she said she meant it.</p>
+  <p>Discussion was spirited. Mrs. Van Ess held that the best gift is a child. Mrs. Kuiper held that it is health. Mrs. Hale said the best taste is the first strawberry of June eaten in the patch, and several members agreed, and Mrs. Orcutt said that was a pleasure and not a taste, and it was not settled which. The hour being late, the chair ruled that the questions be taken up again at the next meeting.</p>
+  <p>Refreshments: tea, sliced tongue, a jelly roll. Adjourned at a quarter to five, to catch the car.</p>
+  <p class="sig">Clara M. Pell, Secretary</p>
+</section>
+
+<section>
+  <h2>II. Laid Over</h2>
+  <p class="dateline">From the minutes &middot; 1899&ndash;1909</p>
+  <p class="entry"><b>May 25, 1899.</b> Annual meeting. The four questions, not having been settled, were laid over to the autumn. Mrs. Orcutt said it was no disgrace. The Greeks had not settled them either.<span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>November 2, 1899.</b> Each member reported the answers given at her own supper table. Mr. Orcutt: the best gift is a receipted bill. Mr. Van Ess: the best taste is beefsteak and the best pleasure is not being asked questions at supper. The secretary&rsquo;s husband, Mr. Walter Pell, said he would think about it, and has said so since. The answers of the hired girls were also reported, and were on the whole better.<span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>March 1900.</b> The questions were written out and sent to the column of questions answered in the <em>Herald</em>. Reply pasted in below: <em>The Herald does not undertake questions of opinion.</em><span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>August 1901.</b> Mrs. Hale and Mrs. Kuiper, summering at the Bay View assembly, put the four questions to the lecturer after his afternoon address. He answered for an hour and fifty minutes. On the steamer home the two members could not agree on what he had said, and in the end neither could tell the other.<span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>January 1902.</b> Mrs. Orcutt died on the ninth, at seventy-four. The club attended in a body. At her request her chair went to Mrs. Hendrik Kuiper&rsquo;s sister, so that the membership stays thirty-three. Among her papers was a slip in her hand: <em>Second question. Bread, I think. But I could not say why.</em><span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>July 1903.</b> The new figure-eight railway opened at Ramona. Mrs. Van Ess&rsquo;s boys rode it eleven times and reported, on the third question, that the best pleasure is the first drop and the worst is the eleventh. Noted for the record.<span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>1904&ndash;1905.</b> Letters were sent to the women&rsquo;s clubs of Kalamazoo, Saginaw, Muskegon, Petoskey and Ann Arbor. Kalamazoo did not answer. Ann Arbor sent a reading list. Saginaw sent the four questions back to us in its own secretary&rsquo;s hand, under the words, <em>We have wondered also.</em><span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>1906.</b> At the summer furniture market the husbands of members put the questions to buyers from Boston, Atlanta, Denver, Los Angeles and London, England, who carried them home again on the trains, so that by the end of the year the questions had been asked, the secretary believes, in every state but two. A buyer in Omaha wrote at Christmas to ask whether we had settled it yet, as his wife wished to know.<span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>1907.</b> The ministers of six churches were asked. One preached on the first question for three Sundays. One said the fourth question was heathen. One said he had wondered it since seminary and would be grateful to be told.<span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>March 1908.</b> Not minuted at the time. The secretary&rsquo;s husband, Mr. Walter Pell, died on the eleventh of pneumonia, having thought about it nine years. The secretary has wished since that the questions had been answered while he could hear. This is entered out of its order and the club may strike it.<span class="refrain">Laid over.</span></p>
+  <p class="entry"><b>May 1909.</b> By the secretary&rsquo;s count the four questions have now been put to four hundred and twelve persons by name, not counting buyers&rsquo; wives or the people of Saginaw. Ruth Hale, who was in her cradle at the first meeting, is ten, and asked at supper why grown people should want to know. The club has no answer to that either.<span class="refrain">Laid over.</span></p>
+</section>
+
+<section>
+  <h2>III. Special Meeting</h2>
+  <p class="dateline">The village schoolhouse &middot; Thursday, July 14, 1910</p>
+  <p>A special meeting of the club was held jointly with the four trustees of the village, at the club&rsquo;s request, since by this date the questions were no longer the club&rsquo;s alone. The whole village had taken them up. The boys at the Ramona boat livery put them to strangers for a joke, and two of the strangers had come back the next Sunday to ask whether there was an answer yet. The schoolroom was full and people stood at the windows.</p>
+  <p>Each trustee was asked in turn.</p>
+  <p>Mr. Bostwick, who has the ice-houses on the west shore and knows the lake as well as any man living, said he did not know.</p>
+  <p>Mr. Kellogg, who leads the band in the pavilion at Ramona and has played to more people than live in the county, said he did not know.</p>
+  <p>Mr. Dykstra, who sells bedroom suites at the market to half the country, said he did not know, and that his grandmother in Zeeland would have known, but she was dead.</p>
+  <p>Mr. Hunt, of the bank on Wealthy Street, said he did not know either. He moved that the questions be referred to Mr. Elias Sackett, division superintendent of the street railway, on the ground that Sackett knew everything.</p>
+  <p>The motion was carried. Mr. Sackett was sent for at the car house and came in his shirtsleeves. He has been with the line since the steam dummy and laid the rails on Wealthy Street himself in 1892. He reads every conductor&rsquo;s trip sheet. It is said he knows the faces of a thousand riders and the stop each one gets off at, and that when a man is puzzled on the line about anything, a rule or a timetable or a debt, Sackett has the answer before the question is finished.</p>
+  <p>The four questions were read to him. He stood with his cap in his hands a long while.</p>
+  <p>He said he did not know. He said there was one person on his lines who did. Mrs. Hendrika Brink, who has taken the first car across the river every morning for twenty-two years, never misses, sits on the left, and gets down on the West Side at the free kindergarten.</p>
+  <p>Asked by the chair where Mrs. Brink was to be found that evening, he said: at the kindergarten. In market week the hotel laundries work late and the creche keeps the babies until their mothers come.</p>
+  <p>Mrs. Van Ess moved that the meeting go there at once. Carried, without a voice against. Mr. Sackett went to the telephone in the hall and asked the car house for a car.</p>
+  <p class="sig">C. M. P.</p>
+</section>
+
+<section>
+  <h2>IV. The Car</h2>
+  <p class="dateline">Wealthy Street to the West Side &middot; the same night</p>
+  <p>Entered by the secretary at the request of the club, which wished an account in full and not in minutes.</p>
+  <p>It was one of the open summer cars, with the benches straight across and no sides, and Mr. Sackett had every lamp in it lit. When it came round the loop at the lake it lit up the water as far as the steamer dock. Thirty-one of the thirty-three were aboard. The four trustees were aboard. Mr. Kellogg&rsquo;s cornet player came with his cornet and did not play it. The livery boys rode on the step, and husbands, and the Van Ess boys, and people none of us knew who had stood at the schoolhouse windows, and Mr. Sackett rode on the front platform beside the motorman with his cap on.</p>
+  <p>We went in along Wealthy Street at a quarter to ten. People came out on their porches as we passed, because no car runs that line lit up like that at night, and I suppose we looked like something going to a fire or a wedding. Some of them called out to ask where. Mrs. Hale called back, <em>To get it answered,</em> and they did not know what she meant, but two men left a porch and ran and caught the step.</p>
+  <p>Down the hill into the city the stores were dark. On the bridge over the Grand River the lamps of the car lay in the water on both sides and went along with us. I had not been across to the West Side after dark in my life. It is small houses close together, and churches with two towers, and the chimneys of the factories where Mr. Dykstra&rsquo;s bedroom suites are made, and the names on the stores are Dutch and Polish. Women in the doorways held up babies to see the car.</p>
+  <p>The kindergarten is a frame storefront with the shades half down and a sign painted on the glass. There was one gas lamp lit inside. We got down, all of us, and stood in the street, and Mr. Sackett went to the door and took off his cap and knocked.</p>
+  <p>Mrs. Brink is small, past sixty, with white hair parted in the middle, and she wore a gray dress and a work apron. She had a boy on her lap of about three, in his stocking feet, his face swollen from crying. On the low tables behind her were the little boxes of the kindergarten gifts, all put away, and on the wall the children&rsquo;s paper weavings in rows. She looked past Mr. Sackett at the car with every lamp burning and at the fifty or sixty people in the street, and she did not get up, because of the boy.</p>
+  <p><em>Mr. Sackett,</em> she said. <em>Why have you brought the whole East Side?</em></p>
+  <p>He told her. He said these people had had four questions for twelve years and had asked them of everybody they could reach, and had come to the end of everybody, and that he had told them there was nobody on his lines who could make it plain except her.</p>
+  <p>She asked to hear them. Mrs. Van Ess, who had them by heart, said them through from the doorway.</p>
+  <p>Mrs. Brink did not take long. She said it the way you would tell somebody where the coats were.</p>
+  <p><em>The best gift is a true thing, given so the one you give it to can take it.</em></p>
+  <p><em>The best taste is the taste of it when it&rsquo;s taken. You can see it in the face.</em></p>
+  <p><em>The best pleasure is the same. There is only the one, it has three names.</em></p>
+  <p><em>And the end of wanting is the highest because the wanting is all the hurt there is. Take the wanting away and see what&rsquo;s left to hurt.</em></p>
+  <p>Mrs. Kuiper said, from behind me, that was easy to say.</p>
+  <p>Mrs. Brink said yes, it was. Then she showed us, though I do not think she meant to show us anything; she was only going on with what she had been doing before we came. The boy&rsquo;s name was J&oacute;zef. His mother washed sheets in a hotel laundry and was late on account of the market, and he had been crying for her since six o&rsquo;clock. Mrs. Brink had a red yarn ball on a string, the first of the gifts, the one for the littlest ones. She swung it out on its string where he could see it, and said <em>Here.</em> Then she closed it in her hand. <em>Gone.</em> Then she opened her hand. <em>Here.</em></p>
+  <p>She had been doing it, she said, for an hour. He had cried at <em>gone</em> every time.</p>
+  <p>Now she did it again, in front of all of us, and the boy watched her closed hand, and at <em>gone</em> he did not cry. He waited. He put his own hand on top of hers. When it opened he laughed out loud, a big sound for a person that size, and the people in the street who could not see what had happened laughed too, without knowing what at. She did it twice more. The third time he did not reach for it. He sat back against her apron and watched the ball go round on its string, and his face had in it what she had said, the taking and the taste, and I understood that I had seen it before, on my children, on Walter once when the doctor told him it was nothing, and had not known what I was seeing. Then the boy was asleep.</p>
+  <p><em>He doesn&rsquo;t want it now,</em> Mrs. Brink said. <em>Look at him. He found out a true thing tonight. It comes back, or it doesn&rsquo;t, and either way you are still sitting here.</em></p>
+  <p>Nobody said anything. Mr. Sackett was standing in the door with his cap against his chest, and he began to say something under his breath, and then said it out, not loud.</p>
+  <div class="verse">
+    <p>&hellip; truth, which only doth judge itself, teacheth that the inquiry of truth, which is the love-making, or wooing of it, the knowledge of truth, which is the presence of it, and the belief of truth, which is the enjoying of it, is the sovereign good of human nature.</p>
+    <p>Certainly, it is heaven upon earth, to have a man&rsquo;s mind move in charity, rest in providence, and turn upon the poles of truth.</p>
+    <p>&mdash; Francis Bacon, &ldquo;Of Truth&rdquo;</p>
+  </div>
+  <p><em>Bacon,</em> he said. <em>I had that by heart at the Union School in 1868. I have said it to myself on the cars for forty years. I never knew what it was for.</em></p>
+  <p>Then the mother came running up the street from Bridge Street in her laundry apron, frightened half to death by the car and the crowd at the door, and the people stood back for her, and Mrs. Brink handed her the boy asleep, and she went home with him without asking any of us anything.</p>
+  <p>Mr. Lutz the conductor counts passengers for the company, and he counted eighty-four of us going back. As far as the secretary knows, every one of the eighty-four went home with it. Nobody talked on the bridge. The cornet player did not play. At the loop Mrs. Hale got down and said only, <em>Well,</em> and went up to her house, and I heard her laughing on her porch in the dark.</p>
+</section>
+
+<section>
+  <h2>V. Good Morning to All</h2>
+  <p class="dateline">The West Side &middot; 1910&ndash;1935</p>
+  <p>One thing more happened that night, which the secretary did not see and had from Mr. Sackett.</p>
+  <p>When the rest of us were back on the car he stayed on Mrs. Brink&rsquo;s step. He said to her, <em>If that is the best gift, you have been giving it over here twenty-two years, and the whole East Side, and me on my own car every morning, have never had any of it. The next time you give it, let us have a share.</em></p>
+  <p>She said that every morning at nine her children stood up at their tables and sang, and she showed him the place in the book.</p>
+  <div class="verse">
+    <p>Good-morning to you, Good-morning to you, Good-morning dear children, Good-morning to all.</p>
+    <p>&mdash; Mildred J. Hill and Patty S. Hill, &ldquo;Good-Morning to All,&rdquo; <em>Song Stories for the Kindergarten</em></p>
+  </div>
+  <p><em>All is all,</em> she said. <em>I never thought to tell them so. From tomorrow I will. And when they say the blessing at noon I will tell them that one goes to everybody too, the cars and the bridge and your side of the river. Even the thank-you. Everything they say in that room.</em></p>
+  <p>So the next morning Mr. Sackett issued an order, which is pasted in below, that every car on the Bridge Street line passing the kindergarten at nine o&rsquo;clock on a school day should ring its gong twice. Most of the motormen did not know why and did it anyway. The children did not know why the cars rang and stood up and sang to all.</p>
+  <p class="entry"><b>July 21, 1910.</b> Regular meeting. The secretary read the account of the 14th, which was accepted. Moved by Mrs. Van Ess that the four questions be removed from the order of business as answered. Carried. Mrs. Kuiper asked that it be recorded she still found it easy to say. So recorded. Refreshments: bread and butter.<span class="refrain">Answered. See Mrs. Brink.</span></p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p class="entry"><b>Added in a later hand, 1935.</b> Mrs. Hendrika Brink died in 1922 and is buried with the Zeeland people. Mr. Sackett outlived her by four years. Mrs. Pell, who kept this book for twenty-six years, died in 1931, and the secretary is now Ruth Hale Dekker, who was in her cradle at the first meeting. The kindergarten is still kept, and the children still stand at nine, and the cars rang twice at that corner every school morning until this year, when the city gave up its streetcars. This morning at nine the children stood and sang to all, and nobody rang, and they sang it anyway. The rails are still in Bridge Street. The sprinkler wagon had gone by, and they were wet, and shone both ways.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">The gift of the law exceeds all gifts; the sweetness of the law exceeds all sweetness; the delight in the law exceeds all delights; the extinction of thirst overcomes all pain.<cite>Dhammapada 354, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the gods of the Heaven of the Thirty-Three raise four questions: which gift is best, which flavor, which delight, and why the destruction of craving is called supreme. For twelve years they ask one another across ten thousand worlds, then go to the Four Great Kings, who send them to Sakka, lord of the gods, who knows at once the answer to whatever a thousand beings have pondered. Sakka says only a Buddha can answer, and leads the whole throng by night to Jetavana, lighting up the grove. The Buddha answers: the gift, taste and delight of the Dhamma are best, and the end of craving ends all suffering. Sakka then asks that the merit of the teaching be shared with the gods, and the Buddha tells the monks that from then on the merit of every sermon, and even of words of thanksgiving, is to be given to all beings. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-10.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C5%9Aakra_(Buddhism)">Sakka</a>.</p>
+    <h3>Grand Rapids, 1898&ndash;1910</h3>
+    <p>A streetcar line out to <a href="https://en.wikipedia.org/wiki/Reeds_Lake">Reeds Lake</a> opened in 1875 with horse cars, ran for years behind a steam engine the town called the dummy, and was electrified in the early 1890s. The railway company ran an amusement park at the lake, <a href="https://en.wikipedia.org/wiki/Ramona_Park">Ramona Park</a>, with a theater pavilion, steamboats, and a figure-eight coaster from 1903, to fill the cars on summer evenings. <a href="https://en.wikipedia.org/wiki/East_Grand_Rapids,_Michigan">East Grand Rapids</a> incorporated as a village in 1891 and had 466 people in 1900 and 800 in 1910, a lake resort turning into a suburb along the line. The city across the river was the Furniture City, whose twice-yearly furniture market brought buyers from all over the country; Dutch and Polish immigrants were among the many who found work in its furniture factories, and its <a href="https://localwiki.org/gr/West_Side">West Side</a> was home to working-class immigrant families, the Polish parish of St. Adalbert among its churches. Grand Rapids gave up its streetcars in 1935. The Thursday Club, its members, Mr. Sackett and Mrs. Brink are invented.</p>
+    <p>The kindergarten movement, after Friedrich Froebel, reached Grand Rapids early: an 1891 county history records the Misses Bacon&rsquo;s kindergarten training school, which ran for about twelve years before 1882, and a free kindergarten and creche opened in 1888 by a circle of the King&rsquo;s Daughters, where working mothers left their babies and fetched them in the evening (<a href="https://kent.migenweb.org/baxter1891/27privateschools.html">Baxter&rsquo;s history of Grand Rapids</a>). Froebel&rsquo;s <a href="https://en.wikipedia.org/wiki/Froebel_gifts">first gift</a> is a set of soft yarn balls on strings. &ldquo;Good-Morning to All,&rdquo; by the Louisville kindergarten teachers Mildred and Patty Hill, appeared in their <em>Song Stories for the Kindergarten</em> (1893); the words are quoted here from a <a href="https://archive.org/details/SongStoriesForTheKindergarten">later edition</a>, where it is marked &ldquo;To be sung standing.&rdquo; Its tune is the one later sung as &ldquo;Happy Birthday.&rdquo; Bacon&rsquo;s &ldquo;Of Truth&rdquo; opens his <a href="https://www.gutenberg.org/ebooks/575"><em>Essays</em></a> (1625). Edwin Arnold&rsquo;s <a href="https://en.wikipedia.org/wiki/The_Light_of_Asia"><em>The Light of Asia</em></a> (1879) was read in parlors and women&rsquo;s clubs across the country.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Sakka&rsquo;s question from the Dhammapada commentary (verse 354). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/24-10.htm">The original</a>. Scripture from Francis Bacon&rsquo;s &ldquo;Of Truth&rdquo; and Mildred and Patty Hill&rsquo;s &ldquo;Good-Morning to All.&rdquo; Written by Claude Opus 5.5.
+  <div class="pager"><a href="neither-east-nor-west.html">&larr; Neither East nor West</a><a href="index.html">All stories</a><a href="laurel-hell.html">Laurel Hell &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, sparks = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function wireY(k, x) {
+    var y0 = H * (0.07 + k * 0.035), sag = 22 + k * 6, span = W / 3;
+    var u = (x % span) / span;
+    return y0 + sag * 4 * u * (1 - u);
+  }
+  function spawn() {
+    sparks.push({ k: Math.random() < 0.5 ? 0 : 1, x: -20, v: 2.2 + Math.random() * 2.5, life: 0 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var k = 0; k < 2; k++) {
+      ctx.beginPath();
+      for (var x = 0; x <= W; x += 6) { var y = wireY(k, x); if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+      ctx.strokeStyle = 'rgba(168,205,240,0.10)'; ctx.lineWidth = 1; ctx.stroke();
+    }
+    if (!reduce) {
+      t++;
+      if (t % 260 === 0 || (sparks.length === 0 && t % 90 === 0)) spawn();
+      for (var i = sparks.length - 1; i >= 0; i--) {
+        var s = sparks[i]; s.x += s.v; s.life++;
+        var y = wireY(s.k, s.x);
+        var fl = 0.55 + 0.45 * Math.random();
+        var g = ctx.createRadialGradient(s.x, y, 0, s.x, y, 26);
+        g.addColorStop(0, 'rgba(220,236,255,' + (0.55 * fl) + ')');
+        g.addColorStop(0.25, 'rgba(168,205,240,' + (0.22 * fl) + ')');
+        g.addColorStop(1, 'rgba(168,205,240,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s.x, y, 26, 0, Math.PI * 2); ctx.fill();
+        var lg = ctx.createRadialGradient(s.x, H * 0.95, 0, s.x, H * 0.95, 160);
+        lg.addColorStop(0, 'rgba(226,179,92,0.05)'); lg.addColorStop(1, 'rgba(226,179,92,0)');
+        ctx.fillStyle = lg; ctx.fillRect(s.x - 160, H * 0.95 - 160, 320, 320);
+        if (s.x > W + 30) sparks.splice(i, 1);
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
