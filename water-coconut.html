@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Water Coconut</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column, part prose and part radio log, over dark harbor water where rings open in pairs like a microphone clicked twice. */
+  --ground: #0c1517;
+  --ground-2: #14211f;
+  --paper: #e4e8df;
+  --paper-dim: #9aa69d;
+  --mimosa: #e793ab;
+  --frond: #8fbf86;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #1a2e2b 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(228,232,223,.2); }
+.series a:hover { color: var(--mimosa); }
+a:focus-visible { outline: 2px solid var(--mimosa); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--frond); text-wrap: balance; text-shadow: 0 0 28px rgba(143,191,134,.2); }
+.epigraph { border-left: 1px solid rgba(231,147,171,.5); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--mimosa); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--frond); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(20,33,31,.8); border: 1px solid rgba(228,232,223,.08); border-left: 2px solid rgba(143,191,134,.6); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+/* the radio log: hour in the left column, as in the composition book */
+.log { margin: 0 0 .8rem; padding-left: 3.6rem; text-indent: -3.6rem; line-height: 1.6; }
+.log .t { display: inline-block; width: 3.6rem; text-indent: 0; font-family: var(--font-display); color: var(--mimosa); font-size: 1rem; }
+.log .b { font-family: var(--font-display); letter-spacing: .04em; color: var(--frond); font-size: .98rem; }
+.song { margin: .6rem 0 1.4rem 3.6rem; padding-left: 1rem; border-left: 1px solid rgba(231,147,171,.4); font-style: italic; line-height: 1.6; }
+.song.flush { margin-left: 0; }
+.brk { text-align: center; color: var(--mimosa); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(228,232,223,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--mimosa); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--mimosa); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--mimosa); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--mimosa); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--mimosa); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--mimosa); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(20,33,31,.8); border-left: 2px solid var(--frond); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } .log { padding-left: 3.1rem; text-indent: -3.1rem; } .log .t { width: 3.1rem; } .song { margin-left: 3.1rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 14.3 &middot; Erakapatta</span></nav>
+<header>
+  <h1>Water Coconut</h1>
+  <div class="epigraph">It is most difficult to meet with this superior law, even in myriads of kotis of Æons<br>&mdash; Saddharma-Pundarika II.135, tr. H. Kern</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Như vầy tôi nghe,</span> on channel sixty-eight.</p>
+
+<section>
+  <h2>I. Book Five</h2>
+  <p class="dateline">Oak Street, Biloxi, Mississippi &middot; Tuesday, May 12, 1987 &middot; the fifteenth of the fourth month</p>
+  <p>I keep the radio for the boats. It sits on the kitchen counter by the window, the VHF and next to it the sideband for the big water, and beside them a school composition book and a cup of pencils. When a boat calls I write the hour, the name of the boat, and what was said. I have done it every night since 1982, when one of ours did not come home and afterward nobody on the Point could agree what day she had last called. I said then that it would be written down. So it is written down, and this is the fifth book. Where I only heard a thing I write <em>heard</em>. Where I was looking at it I write <em>saw</em>. Most nights there is nothing to see.</p>
+  <p>They call me Cô Năm. We are Catholic, from Phước Tỉnh. We went out in &rsquo;78 with nineteen in the boat and landed seventeen. My husband has the <em>Thanh Tâm</em>, and tonight he is off Ship Shoal on the Louisiana side, because the Sound does not open until June and the note on the boat does not wait for June.</p>
+  <p>Tonight is the full moon of the fourth month, which the Buddhists keep for the birthday of their Buddha. I put that down so that anybody who reads this book will know I did not make the day fit.</p>
+  <p>Everybody on the Back Bay knows what happens at the fuel dock on the first and the fifteenth of the moon. Ông Bảy does not drag on those two days. He has not dragged on one of them in four years, shrimp or no shrimp, and he is the best captain we have. The old families call him Mr. Bay, and the King, and that is only half a joke, because the Shrimp King at their Blessing is always one of their own old men and he lands more than any of them. On those two evenings he brings his boat round and anchors her off the fuel dock, out where nobody can climb on her. Her name is <em>Lá Dừa Nước</em>, leaf of the water coconut, the palm that stands in the mud along every canal at home. It is painted on her bow without the marks, and the Americans say <em>La Dua</em> and think she is named for a woman. Why a man would name a boat for a leaf, he has never said.</p>
+  <p>Then the girl climbs up on the wheelhouse roof. Ngọc is nineteen. He carried her off the boat in &rsquo;79 and signed for her in the camp on Bidong, and nobody has ever heard her call him anything but father. She sings one verse in the old way, the way girls sang across the canals to the boys in the other boats, a question that wants its answer sung back. He made the verse. And he has let it be known from Port Arthur to Bayou La Batre that the man who answers it right gets the girl, and the boat with her.</p>
+  <p>They have come from everywhere. She told my daughter she will stand up there as long as he likes, because she has heard the answers and none of them is going to get her.</p>
+  <p>The other thing I must put down is the monk. He came in March on the Greyhound with one bag. He is thirty-three. There is no pagoda on this Coast. He rented the Fayard house next to mine, the little shotgun, and I think he rented it for the yard, since there is nothing to the house. Seven mimosa trees stand along my fence on his side. They are in flower now, and they drop pink threads on my wash. He hung the flag with the six colors on his porch post, and he sits under the trees. Everybody calls him thầy, teacher, which is what a monk is called, by ours and theirs both. People say he worked his uncle&rsquo;s deck at Port Arthur before he took the robe, and he does look at a boat the way a deckhand looks at one. I take him rice over the fence on Fridays, since I am cooking without meat anyway.</p>
+  <p>This morning at the fence he asked me which evenings they sing at the fuel dock. I told him. He said, <em>Today, then,</em> and went and sat down under the end tree.</p>
+</section>
+
+<section>
+  <h2>II. Seven Mimosas</h2>
+  <p class="dateline">Next door &middot; a little after four &middot; saw</p>
+  <p>I was taking in the wash when Út came up the street in a clean shirt. He decks on the <em>Sao Mai</em>. He is twenty-two and his mother&rsquo;s last, and he has been making up his answer since Tết. Half the Point has heard pieces of it.</p>
+  <p>The thầy did not get up. <em>Út.</em></p>
+  <p><em>Dạ, thầy.</em></p>
+  <p><em>Come here.</em></p>
+  <p>He came in at the gate and bowed and sat down on his heels on the pink.</p>
+  <p><em>Where are you going?</em></p>
+  <p><em>To the fuel dock, thầy. Where ông Bảy&rsquo;s daughter sings.</em></p>
+  <p><em>Do you have an answer for her?</em></p>
+  <p><em>I have one.</em></p>
+  <p><em>Say it.</em></p>
+  <p>Út sang it. He has a voice. It was all a captain with his six doors on the bottom and his nets full and no bank over him. I thought it as good as any I have written down.</p>
+  <p><em>That is no answer,</em> the thầy said. <em>You have the number right and the wrong doors. I will give you one. Will you carry it down there?</em></p>
+  <p><em>I will, thầy.</em></p>
+  <p><em>How many doors does ông Bảy put in the water?</em></p>
+  <p><em>Six. Two to a net, and the two little ones on the try net.</em></p>
+  <p><em>Those are his. Count your own.</em> And he touched his eye, and his ear, and the side of his nose. He put out the tip of his tongue like a boy. He laid one hand flat on the back of the other, and last he set a finger to his forehead. <em>Things come in at these all day and all night. The man who is master of all six is a king, and you have not met him. The man who hangs up on what comes in, the mud has him. Now say this after me.</em></p>
+  <div class="song flush">Six doors he has, and none of wood.<br>Who rules all six, that one is king.<br>The king who clings, the mud is his master.<br>Who does not cling comes up clear.<br>The one who clings they call the fool.</div>
+  <p><em>When you have sung that, she will sing you a second verse. Nobody has heard it yet. It asks what carries the fool away, and how the wise man holds against it, and how a man gets loose from the yoke. Then you sing this.</em></p>
+  <div class="song flush">The flood tide carries the fool away.<br>By his own work the wise man holds.<br>Unyoked from every yoke there is,<br>that man is called let go.</div>
+  <p>Út said them over. The thầy kept him at it until there was none of the boy&rsquo;s own tune left in them. I had the last sheet over my arm and I did not go in. Somewhere in the saying, something went out of that boy&rsquo;s face. He had come up Oak Street like one going to win a girl and a boat. He went back down it like a man carrying a full pot in both hands.</p>
+</section>
+
+<section>
+  <h2>III. Channel Sixty-Eight</h2>
+  <p class="dateline">The base radio &middot; a little before six to twenty past seven &middot; heard</p>
+  <p>The fuel dock is four blocks from this kitchen, and I have never once gone down to it on a singing night. I have no need. The <em>Sao Mai</em> ties up nearest, and her captain hangs his mike out the wheelhouse window, and somebody always puts it over on the sideband for the boats outside.</p>
+  <p class="log"><span class="t">5:55</span><span class="b">THANH TÂM</span>, sideband. Ship Shoal. Forty boxes. Weather fair. He asks is the old man standing his girl up tonight. I say it is the fifteenth, what does he think. He says leave the sideband on.</p>
+  <p class="log"><span class="t">6:20</span><span class="b">SAO MAI</span>. Ông Bảy is coming round. People on the bulkhead from the ice house to the net shop, sitting with their legs over. Cars from Louisiana.</p>
+  <p class="log"><span class="t">6:31</span><span class="b">STELLA MARIS</span>, old Captain Tony, in English. <em>Mr. Bay has got his hook down right in the channel again. Somebody tell him I draw six feet.</em></p>
+  <p class="log"><span class="t">6:33</span><span class="b">SAO MAI</span>. She is on the roof.</p>
+  <p class="log"><span class="t">6:35</span>The mike goes out the window. I hear water on the pilings, and then I hear her. <em>Hò ơ.</em></p>
+  <div class="song">Which captain is the one that is king?<br>Which king has got the mud for master?<br>How does he come clear of the mud?<br>And which one do they call the fool?</div>
+  <p class="log"><span class="t">6:38</span>A boy from Bayou La Batre, off the <span class="b">HẢI ÂU</span>. The captain with a steel hull is king, he sings, and the worms are master of the wooden one. <span class="b">SAO MAI</span>: <em>She says no.</em></p>
+  <p class="log"><span class="t">6:44</span>A boy from Versailles, in New Orleans East. The king is the man who owes no bank. Laughing all down the bulkhead. <em>She says no.</em></p>
+  <p class="log"><span class="t">6:51</span>Two brothers from Port Arthur, singing together. The king is the price the dealer chalks on the board, and every captain is ruled by it. That one gets a cheer. <em>She says no. The old man has not looked out of the wheelhouse.</em></p>
+  <p class="log"><span class="t">6:58</span><span class="b">STELLA MARIS</span>. <em>How long does this go on?</em></p>
+  <p class="log"><span class="t">6:59</span><span class="b">SAO MAI</span>, in English. <em>Four years, Captain.</em></p>
+  <p class="log"><span class="t">7:02</span><span class="b">SAO MAI</span>. Út is here. He is coming down the bulkhead through them. They are sitting so thick that he is knocking knees. He says, <em>Let me by. I have brought an answer.</em></p>
+  <p class="log"><span class="t">7:04</span>I hear him. He does not sing what he sang for himself in the yard at four o&rsquo;clock. He sings what he was given, all five lines, as I have them above. <em>Six doors he has, and none of wood.</em></p>
+  <p class="log"><span class="t">7:05</span>Nothing on the channel. Water on the pilings.</p>
+  <p class="log"><span class="t">7:06</span>She is singing again, and it is not the first verse. In four years I have never written down a second verse.</p>
+  <div class="song">What is it carries the fool away?<br>How does the wise man hold against it?<br>How does a man get loose from the yoke?<br>Tell me that, if you are able.</div>
+  <p class="log"><span class="t">7:07</span>Út. <em>The flood tide carries the fool away.</em> All four lines.</p>
+  <p class="log"><span class="t">7:08</span><span class="b">SAO MAI</span>. The old man is out of the wheelhouse. He is on the deck. He is saying something. He says, <em>A thầy has come. There is a thầy in this country.</em> He has gone back in.</p>
+  <p class="log"><span class="t">7:08</span>Horn. I hear it out of the radio and I hear it through my window.</p>
+  <p class="log"><span class="t">7:09</span><span class="b">STELLA MARIS</span>. <em>He has got her wide open. Bay! You are on your anchor!</em></p>
+  <p class="log"><span class="t">7:09</span><span class="b">SAO MAI</span>. He has put the wheel over. She is going round her anchor like a dog on a chain.</p>
+  <p class="log"><span class="t">7:10</span><span class="b">STELLA MARIS</span>. <em>There go the skiffs. He has put water over the bulkhead on both sides. It is up to the ice house door. There are men in the bay. I count fifteen. Twenty.</em></p>
+  <p class="log"><span class="t">7:10</span>Channel sixteen. Somebody calls men in the water at the Back Bay fuel dock. <span class="b">COAST GUARD GULFPORT</span> answers and asks how many persons.</p>
+  <p class="log"><span class="t">7:11</span><span class="b">SAO MAI</span>. He has stopped her. He is letting his booms down. Both nets are going in the water, doors and all.</p>
+  <p class="log"><span class="t">7:12</span><span class="b">STELLA MARIS</span>. <em>I am looking at it. They are climbing into his webbing. He is taking them up on the winch. He is landing those men on the dock like a tow of shrimp. I have fished here fifty-one years.</em></p>
+  <p class="log"><span class="t">7:13</span>Channel sixteen. <span class="b">STELLA MARIS</span> to the Coast Guard. <em>Disregard. All persons are on the dock. They are laughing.</em></p>
+  <p class="log"><span class="t">7:15</span><span class="b">LÁ DỪA NƯỚC</span>. In four years I have not written that name in the left column. He does not talk on the radio. <em>Út. Where is the thầy?</em></p>
+  <p class="log"><span class="t">7:15</span>Út, on the <span class="b">SAO MAI</span>&rsquo;s mike. <em>Under the mimosas, ông. Next to Cô Năm&rsquo;s.</em></p>
+  <p class="log"><span class="t">7:16</span><span class="b">LÁ DỪA NƯỚC</span>. <em>Come. We are going.</em></p>
+  <p class="log"><span class="t">7:20</span><span class="b">SAO MAI</span>. Everyone is going. The whole bulkhead is getting up.</p>
+  <p>I put the pencil down and turned off the stove.</p>
+</section>
+
+<section>
+  <h2>IV. One Leaf</h2>
+  <p class="dateline">Next door &middot; ten to eight &middot; saw, and heard twice</p>
+  <p>They came up Oak Street in the last of the light, with the moon rising behind them over the Point. I would say two hundred. Út was in front, and ông Bảy behind him in his white boots, and the girl. After them came the ones he had fished out, still dripping, and then the rest, ours and theirs, Buddhist and Catholic, and some of the old families&rsquo; men who had only followed the crowd. They filled the street as far as my gate.</p>
+  <p>A deckhand off the <em>Kim Hoa</em> had a hand radio on his belt. When the old man went in at the thầy&rsquo;s gate, that boy held the key down and kept it down. So everything that follows I heard two times, once through the window screen and once out of the radio on my counter. I wrote from whichever was clearer.</p>
+  <p>Ông Bảy went in under the flag and under the trees. The thầy was sitting where he had sat since morning. The old man got down on the pink threads in his boots and put his forehead to the ground three times. Then he stood off to one side with his hands hanging, and he cried. He is sixty-two. I have known him eight years and I had not known he could.</p>
+  <p><em>What is this, bác?</em> the thầy said.</p>
+  <p>He called himself <em>con</em>, child, as a person does before the robe, though this monk was young enough to be his son.</p>
+  <p><em>Thầy. Con was a monk. Con took the ten at twelve years old, in a temple on a canal below Sa Đéc, and the full precepts at twenty.</em></p>
+  <p><em>The spring after that, three of us went down the canal in the temple&rsquo;s boat to chant for a dead man. The tide was going out and the boat ran with it. The water coconut is thick there on both banks, and the fronds hang out over the water. Con put out a hand and took hold of a leaf. Why, con cannot tell you. A young man puts out his hand. The boat went on, and con did not open the hand, and the leaf tore away. One blade of it, as long as this arm.</em></p>
+  <p><em>A monk does not break a growing thing. It is a small rule. You say it to another monk before the recitation, on a day like this one, and it is finished. Con looked at it and thought, it is a leaf. Con dropped it in the canal and did not say it. Not that fortnight, and not the next. After a year, how do you say it? After ten? Con kept every other rule there is for thirty-two rains, and that leaf lay unsaid under all of them.</em></p>
+  <p><em>In &rsquo;78 the district took the temple for a rice store and told the monks to go home and produce. Con had no home. In &rsquo;79 con went out from Rạch Giá in a river boat with a hundred and ten people. The engine stopped on the second day. On the fifth day there was no water. On the sixth con lay in the bottom of the boat and felt a thing laid across here.</em></p>
+  <p>He put the edge of his hand against his throat.</p>
+  <p><em>Thin and cool, with an edge to it. Con knew what it was. Con looked down the boat for a monk to say it to. A hundred and ten people, and not one shaved head. Con said out loud, My precepts are broken. The ones lying nearest thought it was a man asking for water.</em></p>
+  <p><em>That is where the monk died, thầy. What went up the side of the tanker the next morning was some other kind of thing, with somebody&rsquo;s child holding on to its shirt. They sent it to Mississippi. They stood it at a table on the Back Bay at five in the morning and put an oyster knife in its hand. Thirty-two rains, and con comes up in a town where everything that breathes lives by killing what is small in the water. Then the shrimp. Con is good at it. They call con a king. Con kills more in one tow than there are people in this town.</em></p>
+  <p><em>Eight years. In eight years con has not had a man&rsquo;s life, or heard one line of the Dharma, or laid eyes on a monk. Con named the boat for it, so as to have to read it every time con came down the dock. Con gave the girl the song because con thought, if a true teacher ever comes to this country, some boy he has taught will carry the answer down to the water, and con will know.</em></p>
+  <p><em>All of it for a leaf, thầy. One leaf.</em></p>
+</section>
+
+<section>
+  <h2>V. The Door in the Net</h2>
+  <p class="dateline">The same yard &middot; heard twice</p>
+  <p>For a while there was only the key held down, and the street breathing.</p>
+  <p><em>Bác,</em> the thầy said. <em>You are saying it to a monk now. Do you see it?</em></p>
+  <p><em>Con sees it.</em></p>
+  <p><em>Then be careful after this.</em></p>
+  <p>That was all he did about the leaf. I am Catholic and I waited for more, and there was no more. Then he spoke to the old man, but loud enough for the street.</p>
+  <p><em>It is hard to come by a human life. You came to this one in a river boat, bác. You know how hard. It is hard to keep one. It is hard to hear the Dharma even once. And harder than all of these is for a Buddha to come into the world. That takes work and trouble past any counting.</em></p>
+  <p><em>They say the government is going to make every one of you cut a door in his nets this year, to let the turtle out. You know how big the Gulf is. You know how big that door will be. The sutra says it is like that. One turtle, one hole, and the whole sea. That is how often a person is born where the Dharma can be heard. And every one of you standing in this street has put his neck through.</em></p>
+  <p>Then he said it as it stands in their book, where two sons say it to their father and mother. He was a young man saying it to an old one, and he did not change the words.</p>
+  <div class="verse">
+    <p>It is most difficult to meet with this superior law, even in myriads of kotis of Æons; very rare are the beings who will adhere to the superior law which they have heard from me.</p>
+    <p>&mdash; Saddharma-Pundarika II.135</p>
+    <p>For, father and mother, the appearance of a Buddha is rare to be met with as the blossom of the glomerated fig-tree, as the entering of the tortoise's neck into the hole of the yoke formed by the great ocean. The appearance of Lords Buddhas, father and mother, is rare. Hence, father and mother, it is a happy lot we have been blessed with, to have been born at the time of such a prophet.</p>
+    <p>&mdash; Saddharma-Pundarika XXV</p>
+  </div>
+  <p>He stopped. The boy from the <em>Kim Hoa</em> let go of the key. The radio on my counter gave the small hiss it gives when a channel comes empty, and then nothing, the way it is at three in the morning.</p>
+  <p>Then somebody clicked his mike twice. That is how a captain says <em>I heard you</em> when he has nothing to add. Another did it. Then they came in one on top of another, loud ones from the harbor first, and after those the thin ones from outside, boats I could not have named. On the sideband it was the same from the Louisiana side, and my husband says from Texas. I made a mark in the book for each until I had eighty-four marks and the line was full. They did not stop when I did.</p>
+  <p>How many in the street understood him I cannot write, because that does not come over a radio. Some of them sat down in his yard that night, and some of those were ours.</p>
+</section>
+
+<section>
+  <h2>VI. After Dark</h2>
+  <p class="dateline">Oak Street &middot; saw</p>
+  <p>The girl had a jade bangle on her wrist. It was her dead mother&rsquo;s, and it came through two sets of pirates sewn in a hem. She worked it off over her hand and set it down in front of the thầy, and he took it up at once, in both hands. I do not know what that means with them. My daughter says Ngọc understood him before the old man had finished crying.</p>
+  <p>Út did not ask for the girl or the boat. He said he had only carried it. She said that was the first right thing any of them had said in four years. They were married in the eleventh month. That is not in this book, but I was there.</p>
+  <p>Ông Bảy would have asked for the robe again that same evening. But he is sixty-two, and three families eat off his nets, and a bank in Gulfport holds the paper on the <em>Lá Dừa</em>. The thầy did not tell him yes and did not tell him no. He said the trees would be there on the first and the fifteenth. The old man says now that there are five times when he can be nothing but a shrimper: the morning the season opens; when the nets come up; when he is asleep in the bunk behind the wheel; when he sits with the other captains at the fuel dock; and when he dies, which he expects to do with ice in his cuffs. The rest of the time he is in that yard.</p>
+  <p class="log"><span class="t">9:40</span><span class="b">THANH TÂM</span>, sideband. He asks did I write it. I say every word. He says, <em>Read it to me.</em> I read him what the thầy said, from the hard life to the turtle, and the part out of their book as near as I got it. When I finish there are clicks again, from boats I do not know.</p>
+  <p class="log"><span class="t">10:15</span>Nothing on sixty-eight.</p>
+  <p>When I went to shut the kitchen window the old man was still out there, standing under the end tree by himself. A branch hung down beside his shoulder. Those trees close their leaves at night, every small pair folding flat together with nobody touching them, and it was doing that. He had his hands behind his back.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Difficult (to obtain) is the conception of men, difficult is the life of mortals, difficult is the hearing of the True Law, difficult is the birth of the Awakened (the attainment of Buddhahood).<cite>Dhammapada 182, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, a young monk in the time of an earlier Buddha, riding in a boat down the Ganges, catches hold of a leaf of an eraka plant and does not let go, and it tears off. Damaging a plant is a small breach of the monks&rsquo; rule, cleared by admitting it to another monk. He thinks it a trifle and never does. After twenty thousand years of faultless practice he lies dying, feels the leaf at his throat, finds no monk to confess to, and is reborn as Erakapatta (&ldquo;Eraka-leaf&rdquo;), a serpent king the size of a dugout. To learn whether a Buddha has arisen, he sets his daughter in his raised hood on the river every fortnight to sing a riddle, with herself and his wealth as the prize. For a whole age no one answers. The Buddha, seated under seven trees, teaches a young man named Uttara the answer (the king is the one who rules the six doors of the senses). When the serpent hears it he lashes the river in joy, floods both banks, lifts the swamped men out in his hood, and goes weeping to the Buddha, who gives him the verse. Eighty-four thousand listeners understand; the serpent, being an animal, cannot. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-03.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/N%C4%81ga">nāgas</a>. The riddle and its answers in the story are rendered from the commentary&rsquo;s own verses. The sutra the monk recites is the <a href="https://en.wikipedia.org/wiki/Lotus_Sutra">Lotus Sutra</a>, in <a href="https://archive.org/details/saddharmapundar00cambuoft">Hendrik Kern&rsquo;s translation of 1884</a>; the same sutra tells of a serpent king&rsquo;s young daughter who hands the Buddha a jewel and is awakened on the spot.</p>
+    <h3>Biloxi, 1987</h3>
+    <p>Refugees from Vietnam began settling on the Mississippi coast in the late 1970s, many of them fishing families who had escaped by sea as <a href="https://en.wikipedia.org/wiki/Vietnamese_boat_people">boat people</a>. They started in Biloxi&rsquo;s oyster and shrimp houses, bought and built boats, and through the 1980s became a growing share of the fleet working out of the Back Bay and Point Cadet, alongside the older Croatian (&ldquo;Slavonian&rdquo;) and French fishing families whose <a href="https://msfolkdirectory.org/blessing-of-the-fleet-2/">Blessing of the Fleet</a>, with its Shrimp King and Queen, dates from 1929. Many of the newcomers were Catholic; the Buddhists among them had no temple until <a href="https://biloxihistoricalsociety.org/vietnamese-people-and-buddhists-pagodas">a pagoda opened in a house on East Howard Avenue in December 1988</a>. See <a href="https://www.mshistorynow.mdah.ms.gov/issue/vietnamese-in-mississippi">Vietnamese in Mississippi</a>. Cô Năm, her log, the monk and the boats are invented. The full moon of the fourth lunar month, kept as the Buddha&rsquo;s birthday, fell on May 12 in 1987.</p>
+    <p>A Gulf shrimp trawler of the time towed a net from each outrigger, each net held open by a pair of wooden <a href="https://en.wikipedia.org/wiki/Otter_board">doors</a>, and sampled the bottom with a small try net that had two doors of its own: six in the water. A &ldquo;hang&rdquo; is a snag that catches a net. In 1987 federal rules were on the way requiring a <a href="https://en.wikipedia.org/wiki/Turtle_excluder_device">turtle excluder device</a> in shrimp nets, an escape opening for sea turtles that Gulf shrimpers fought for years. The palm is the nipa, <a href="https://en.wikipedia.org/wiki/Nypa_fruticans"><em>Nypa fruticans</em></a>, in Vietnamese <em>dừa nước</em>, &ldquo;water coconut.&rdquo; The commentary&rsquo;s seven trees are <em>sirīsa</em>, an Albizia; the mimosa of Southern yards is its cousin <a href="https://en.wikipedia.org/wiki/Albizia_julibrissin"><em>Albizia julibrissin</em></a>, whose leaves fold shut at night.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the nāga king Erakapatta from the Dhammapada commentary (verse 182). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-03.htm">The original</a>. Scripture from the Saddharma-Pundarika, or Lotus of the True Law, translated by H. Kern (Sacred Books of the East, vol. 21, 1884). Written by Claude Fable 5.2.
+  <div class="pager"><a href="three-ladders.html">&larr; Three Ladders</a><a href="index.html">All stories</a><a href="the-souvenir-journal.html">The Souvenir Journal &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // Rings on dark water, always in pairs: a microphone keyed twice, "I heard you."
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, clicks = [], wait = 40;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(age) {
+    var far = Math.random();                       // far boats are higher on the water, and fainter
+    return {
+      x: Math.random() * W,
+      y: H * (0.3 + 0.66 * (1 - far * 0.85)),
+      r: 26 + (1 - far) * 70,
+      a: 0.1 + (1 - far) * 0.16,
+      pink: Math.random() < 0.3,
+      life: age || 0, max: 190 + Math.random() * 90
+    };
+  }
+  function ring(k, life) {
+    if (life <= 0) return;
+    var p = life / k.max; if (p >= 1) return;
+    var r = k.r * (0.12 + 0.88 * Math.sqrt(p));
+    var a = k.a * (1 - p) * (1 - p);
+    ctx.strokeStyle = (k.pink ? 'rgba(231,147,171,' : 'rgba(214,226,214,') + a + ')';
+    ctx.beginPath(); ctx.ellipse(k.x, k.y, r, r * 0.34, 0, 0, Math.PI * 2); ctx.stroke();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1.2;
+    if (!reduce) {
+      if (--wait <= 0) { clicks.push(spawn(0)); wait = 50 + Math.random() * 150; }
+    }
+    for (var i = clicks.length - 1; i >= 0; i--) {
+      var k = clicks[i];
+      ring(k, k.life);
+      ring(k, k.life - 22);                        // the second click
+      if (!reduce) { k.life++; if (k.life - 22 > k.max) clicks.splice(i, 1); }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  function still() {
+    clicks = [];
+    for (var i = 0; i < 7; i++) { var k = spawn(0); k.life = k.max * (0.25 + Math.random() * 0.4); clicks.push(k); }
+  }
+  size(); if (reduce) still(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) { still(); draw(); } });
+})();
+</script>
+</body>
+</html>

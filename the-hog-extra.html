@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hog Extra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one column on depot-office paper; message-blank yellow, railroad green, red pencil. */
+  --ground: #f1ead6;
+  --ground-2: #e7dcbf;
+  --paper: #29261f;
+  --paper-dim: #6b6455;
+  --ochre: #9f3128;
+  --blue: #2f5d46;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -20%, #f8f2e2 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,38,29,.2); }
+.series a:hover { color: var(--blue); }
+a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--ochre); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(47,93,70,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--blue); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--ochre); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(246,231,166,.75); border: 1px solid rgba(43,38,29,.1); border-left: 2px solid var(--blue); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--blue); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,38,29,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--blue); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--ochre); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,38,29,.15); border-bottom: 1px solid rgba(43,38,29,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--blue); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--ochre); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--blue); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(250,245,230,.8); border-left: 2px solid var(--ochre); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+.entry { font-family: var(--font-display); font-variant: small-caps; letter-spacing: .04em; color: var(--blue); margin-right: .3em; }
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 23.4 &middot; Pasenadi Kosala</span></nav>
+<header>
+  <h1>The Hog Extra</h1>
+  <div class="epigraph">Not to satiate one&rsquo;s self with food is the science of health.<br>&mdash; Louis Cornaro, <em>The Art of Living Long</em> (1903)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">The way I heard it,</span> at the Oakmere depot.</p>
+
+<section>
+  <h2>I. The Day Book</h2>
+  <p class="dateline">Agent&rsquo;s day book, Oakmere station, C.B.&amp;Q. &middot; January 1926</p>
+  <p><span class="entry">Jan. 11, Monday.</span> Cold. 4 above at 6:00. Lit the waiting-room stove 5:40. Hog extra east 7:38, forty-one cars, steaming like a laundry. No. 22 on time 7:52, took 63 commuters. Sold 9 monthly commutation books. Mr. H. Dunning, village president, came down at 7:30 and walked the platform the whole length three times and sat down on the bench by the baggage truck with his mouth open and missed the 7:52. Sent him in on the 8:20. He said, <em>I don&rsquo;t know what&rsquo;s the matter with me, Mrs. Sandquist.</em> I know what&rsquo;s the matter with him. Ham, eggs, fried potatoes, buckwheat cakes, sausage, a bowl of oats with the top of the milk on it. His cook told my niece.</p>
+  <p><span class="entry">Jan. 12.</span> Same. Caught the 7:52 this time but it took the brakeman to boost him.</p>
+  <p><span class="entry">Jan. 14.</span> Mr. Dunning came into the office after the 7:52 had gone without him and asked could he sit a minute. I said sit. He sat in my chair by the key and his eyes went shut and his head went down on his chest and the sounder went on clacking and he did not hear it. I let him. At 8:05 he woke up and looked around like a man coming up out of a well.</p>
+  <p><em>Did you come down before you were rested, Mr. Dunning?</em></p>
+  <p><em>No, I slept eight hours. It&rsquo;s after I eat. Every day of my life, after I eat, I feel like this.</em></p>
+  <p><em>Well,</em> I said, <em>that&rsquo;s what eating like that will do. It always does.</em></p>
+  <p>He looked at me. I am sixty-seven and have been agent here since 1894, when the job was Carl&rsquo;s and Carl died and the division superintendent let me keep the key because I could send faster than Carl and everyone knew it. Mr. Dunning was in short pants then. I have sold him every ticket he ever bought.</p>
+  <p>The hog extra was standing on the passing track waiting for No. 24 to clear, the way it does two mornings in five. I pointed at it with my pencil.</p>
+  <p><em>You see those,</em> I said. <em>Corn-fed. Eat and lie down and roll over and eat. That car goes in to the Yards this morning and tomorrow morning there&rsquo;s another one standing in the same place, and I declare it&rsquo;s the same hogs. Thirty-two years I&rsquo;ve watched it. It&rsquo;s always the same hogs, going around.</em></p>
+  <p>He did not like that. He went out and stood on the platform with his hands in his coat. But he did not go up the street either. He stood and watched the extra pull out, forty-one cars, every slat with a snout in it, all the way out of sight toward Chicago.</p>
+  <p><span class="entry">Jan. 15.</span> 2 below. Pipe in the ladies&rsquo; room froze. No. 22 eight minutes late, ice at Aurora.</p>
+</section>
+
+<section>
+  <h2>II. The Blanks</h2>
+  <p class="dateline">The same book &middot; January and February</p>
+  <p><span class="entry">Jan. 18.</span> The Dunning boy, Walter, 13, has been coming in after school since Thanksgiving to learn the key. I let him sit at the dead one and practice. He is slow on his numbers and fast on his letters, which is backwards. Today I took down the book that was in lost-and-found when I came here, which nobody ever claimed and which I have read through four times: <em>The Art of Living Long</em>, by Louis Cornaro, a Venetian gentleman who ate himself nearly to death by forty and then stopped, and lived to be past a hundred. Printed in Milwaukee, 1903. Somebody left it on the 5:14.</p>
+  <p>I copied a piece of it on a yellow message blank in my best hand, the way I would take down a telegram, and gave it to Walter.</p>
+  <p><em>Every time your father sits down to eat,</em> I said, <em>you read him this. After the blessing. Before he takes a bite. Breakfast and supper and Sunday dinner. Every time.</em></p>
+  <p><em>He won&rsquo;t like it.</em></p>
+  <p><em>He didn&rsquo;t like the hogs either.</em></p>
+  <div class="verse">
+    <p>In this manner, I accustomed myself to the habit of never fully satisfying my appetite, either with eating or drinking&mdash;always leaving the table well able to take more. In this I acted according to the proverb: &ldquo;Not to satiate one&rsquo;s self with food is the science of health.&rdquo;</p>
+    <p>&mdash; Louis Cornaro, <em>The Art of Living Long</em> (Milwaukee, 1903)</p>
+  </div>
+  <p><span class="entry">Jan. 19.</span> Walter says he read it. Says his mother laughed and his father put down his fork and asked who was Louis Cornaro, and Walter said a Venetian, and his father said that figures, and ate his supper anyhow. All of it.</p>
+  <p><span class="entry">Jan. 20.</span> Walter read it again at breakfast. Mr. D. came down for the 7:52 and did not look at the office window.</p>
+  <p><span class="entry">Jan. 23.</span> Read it again. And again. Walter says it is like saying grace twice. He has it by heart now and does not need the blank, but I told him to read it off the blank anyway. A message is a message.</p>
+  <p><span class="entry">Feb. 2.</span> Walter reports his father left two buckwheat cakes on the plate this morning. Did not say anything about it. Left them.</p>
+  <p><span class="entry">Feb. 9.</span> Gave Walter a second blank. The first one is worn through at the folds.</p>
+  <div class="verse">
+    <p>And I do not feel like sleeping; for the small amount of food I take cannot make me drowsy, as it is insufficient to send fumes from the stomach to the head.</p>
+    <p>&mdash; Louis Cornaro, <em>The Art of Living Long</em> (Milwaukee, 1903)</p>
+  </div>
+  <p><span class="entry">Feb. 16.</span> Mr. D. caught the 7:52 without the brakeman. Said good morning to me through the window, first time this year.</p>
+  <p><span class="entry">Feb. 24.</span> Snow, 9 inches. Section men out at 4:00 on the switches. Mr. D. came down at 7:15, early, and took a broom off the baggage room wall and swept the platform from one end to the other before anybody asked him. The village president. I wrote it down so somebody would believe it.</p>
+</section>
+
+<section>
+  <h2>III. Weights and Measures</h2>
+  <p class="dateline">The same book &middot; spring and summer</p>
+  <p><span class="entry">Apr. 6.</span> Mr. D. weighed himself on the baggage scale while the 7:52 was whistling for the crossing. 214. He was 241 at Christmas, he says. He wrote it on the wall by the scale in pencil, which I do not allow, and I let it stay.</p>
+  <p><span class="entry">Apr. 20.</span> Walter got his numbers. Sent 25 words a minute clean.</p>
+  <p><span class="entry">May 4.</span> The breakfast at the Dunnings&rsquo; is one bowl of oats, the boy says. One bowl and a cup of coffee, and the cook is put out and says she does not know what she is in that kitchen for.</p>
+  <p><span class="entry">June 22.</span> Hot. The Rebekahs&rsquo; picnic. Mr. D. stood on the platform an hour with me in the heat helping the old ladies off the 8:20 with their baskets, and laughed at something one of them said, a big laugh, and I could not remember ever hearing him laugh before.</p>
+  <p><span class="entry">Aug. 6.</span> Over the wire in the afternoon: the Ederle girl swam the English Channel, first woman ever, beat the men&rsquo;s time. Mr. D. came off the 5:14 and I read it to him off the blank and he took off his hat and threw it up in the air on the platform, at his age, and it came down on the track, and Walter went down and got it.</p>
+  <p><span class="entry">Aug. 27.</span> 192 on the baggage scale. Cornaro says when he left the table he had to sing. Mr. D. has gone back into the choir at the Methodist church. Second bass. His wife told my niece.</p>
+</section>
+
+<section>
+  <h2>IV. Fight Night</h2>
+  <p class="dateline">The same book &middot; September 23</p>
+  <p><span class="entry">Sept. 23.</span> Rain here and rain in Philadelphia. Dempsey and Tunney for the title. Half the men in the village have radios and the other half came down to the depot because the Western Union was carrying the rounds and I would read them out through the window. Forty-some men on the platform under umbrellas and in the waiting room. Somebody brought a washtub of sandwiches from the lodge hall, ham and cheese, and a dishpan of doughnuts.</p>
+  <p>Mr. D. stood at the window with the others. Every round I read out, the tub went around. He took one sandwich at the first round and ate it slow. The tub came around nine more times and he let it go by nine times, and said <em>no thank you</em> nine times, and I counted, because I count everything, it is my job.</p>
+  <p>Tunney took it on points, ten rounds. Dempsey&rsquo;s eye shut. The men went home in the rain arguing. Mr. D. stayed and helped Walter carry the empty tub back up to the lodge hall, the two of them under one umbrella, and I heard them singing going up Burlington Avenue, something from the hymnal, the boy flat.</p>
+</section>
+
+<section>
+  <h2>V. Christmas Week</h2>
+  <p class="dateline">The same book &middot; December 24&ndash;31</p>
+  <p><span class="entry">Dec. 24.</span> 6:10 a.m. Mr. D. came down in the dark with the Methodist church&rsquo;s big coffee urn on a coaster wagon, and Walter pulling, and three dozen doughnuts from Kuhn&rsquo;s bakery in two boxes, and set up on a sawhorse table under the depot light. Every man who came for the 7:52 got a cup, and every man for the 8:20. The section men. The brakemen off the hog extra, who stood there steaming in the cold with their cups. A man off the freight who had been riding the rods since Ottumwa, and Mr. D. gave him three doughnuts and his own gloves. 186 on the scale.</p>
+  <p><span class="entry">Dec. 25.</span> Christmas. No commuters. He came down anyway and the urn went to the section gang and the switch tender and me, and a family going to Galesburg on No. 9 with four children asleep on the bench.</p>
+  <p><span class="entry">Dec. 26, 27, 28.</span> Every morning. Six o&rsquo;clock. The urn, the wagon, the doughnuts.</p>
+  <p><span class="entry">Dec. 29.</span> Mrs. Dunning came down with him and poured. People are coming to the 7:52 who take the 8:20 as a rule, just to have the coffee and stand under the light with the village president in his old overcoat, which hangs on him now like a horse blanket.</p>
+  <p><span class="entry">Dec. 30.</span> 12 below. He brought a second urn.</p>
+  <p><span class="entry">Dec. 31.</span> Seventh day. At 8:25, when the 8:20 had gone, he came to the window and wanted to give me something for my trouble, an envelope. I told him the Q pays me. He said then what can I do for you. I told him he could put the urn away clean and the wagon back where he found it, and he did, and Walter swept up the sugar.</p>
+  <p>Then I gave Walter the third blank. I had been saving it.</p>
+  <div class="verse">
+    <p>They also see how I am ever cheerful, happy, and contented&mdash;free from all perturbations of the soul and from every vexatious thought; instead of these, joy and peace have fixed their abode in my heart, and never depart from it.</p>
+    <p>&mdash; Louis Cornaro, <em>The Art of Living Long</em> (Milwaukee, 1903)</p>
+  </div>
+  <p>Year&rsquo;s business, Oakmere: 11,904 tickets, 1,131 commutation books, 2,217 messages sent and received. Hog extras, 263.</p>
+</section>
+
+<section>
+  <h2>VI. A Man I Admire</h2>
+  <p class="dateline">Composition, Grade 8, Oakmere School &middot; January 1927</p>
+  <p>A Man I Admire. By Walter Dunning.</p>
+  <p>The man I admire is my father, Mr. Harold Dunning, who is the president of the village, but that is not why. Last year he was sick every day after breakfast and went to sleep on the bench and the brakeman had to boost him up on the train. That is true. You can ask the brakeman. His name is Mr. Riordan.</p>
+  <p>Mrs. Sandquist at the depot wrote down something from a book by a man from Venice for me to read to my father before every meal. I read it to him 900 times about. I counted the meals. At first he said every time, Thank you, Walter, in a voice. Then after a while he said it in his regular voice. Then in the summer he started saying it with me. He knows it by heart now and so does my mother and so does the cook, Hilda, though she says it does her no good, she is not the one.</p>
+  <p>My father lost 55 pounds. He sings bass. On fight night he only ate one sandwich. At Christmas he gave coffee to everybody at the depot for seven days including a tramp who got his gloves. Mother says he is a different man but he says no, he is the same man, only less of him.</p>
+  <p>The reason I admire him is it is hard to leave food on your plate when it is right there. I know because I tried it.</p>
+  <p>Mrs. Sandquist says when I am sixteen I can be her night operator. She says I am still slow on numbers.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p class="dateline">Agent&rsquo;s day book &middot; January 3, 1927</p>
+  <p><span class="entry">Jan. 3.</span> 10 above. Hog extra east 7:36, thirty-eight cars. Walter brought back the three blanks, folded soft as cloth, the first one in two pieces. He said his father does not need them read anymore. I put them in the book at the page where they came from and put the book back on the lost-and-found shelf over the stove, for the next one.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">If a man becomes fat and a great eater, if he is sleepy and rolls himself about, that fool, like a hog fed on wash, is born again and again.<cite>Dhammapada 325, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, King <a href="https://en.wikipedia.org/wiki/Pasenadi">Pasenadi</a> of Kosala goes through a period of eating rice by the bucketful, with sauce and curry to match. One morning after breakfast he comes to the Buddha so heavy with sleep that he paces wearily and then sits down to one side. The Buddha asks whether he has come before he was rested; the king says he always suffers after a meal, and the Buddha answers that overeating always brings suffering, and speaks the verse of the fat man rolling in his sleep like a great hog fed on fodder. Then he teaches a second verse, on knowing the measure in food so that one ages slowly and guards one&rsquo;s life, to a young Brahmin named Uttara, and tells him to recite it whenever the king sits down to eat. In time the king is content with a pint-pot of rice, grows lean and cheerful, and gives incomparable gifts for seven days. The commentary tells nearly the same episode under verse 204 (story 15.6). Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-04.htm">the full commentary story</a>.</p>
+    <h3>The Burlington suburbs, 1926</h3>
+    <p>The Chicago, Burlington and Quincy ran its commuter trains from the new <a href="https://en.wikipedia.org/wiki/Chicago_Union_Station">Union Station</a>, opened in 1925, west through a string of railroad suburbs toward Aurora, on the line that is now Metra&rsquo;s <a href="https://en.wikipedia.org/wiki/BNSF_Line">BNSF Line</a>. The same tracks carried livestock east from Iowa and Nebraska to the <a href="https://en.wikipedia.org/wiki/Union_Stock_Yards">Union Stock Yards</a>, where more meat was processed through the early 1920s than anywhere else on earth. Small stations were kept by an agent-operator who sold tickets, handled freight and express, and worked the telegraph; from the Civil War on, many American <a href="https://en.wikipedia.org/wiki/Telegraphist">telegraphers</a> were women. Oakmere, the Sandquists and the Dunnings are fictional. In 1926 the wire carried <a href="https://en.wikipedia.org/wiki/Gertrude_Ederle">Gertrude Ederle</a>&rsquo;s Channel swim on August 6 and, on September 23, <a href="https://en.wikipedia.org/wiki/Jack_Dempsey_vs._Gene_Tunney">Gene Tunney&rsquo;s ten-round decision over Jack Dempsey</a> in the rain at Philadelphia.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Luigi_Cornaro">Luigi (Alvise) Cornaro</a>, a Paduan who claimed Venetian nobility, wore himself out with eating and drinking by about forty and, on his doctors&rsquo; advice, cut himself to about twelve ounces of food a day. His <em>Discorsi della vita sobria</em>, written from his eighties on, was a great success and was translated into English again and again for four centuries; the edition Mrs. Sandquist finds, <em>The Art of Living Long</em>, was published in Milwaukee by William F. Butler in 1903. Prohibition had made liquor the vice good Methodists did without; the table was another matter.</p>
+
+  </div>
+</details>
+
+<footer>
+  After the story of King Pasenadi of Kosala from the Dhammapada commentary (verse 325). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/23-04.htm">The original</a>. Scripture from Louis Cornaro&rsquo;s <em>The Art of Living Long</em> (William F. Butler, Milwaukee, 1903). Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-cane.html">&larr; The Cane</a><a href="index.html">All stories</a><a href="out-of-the-fire.html">Out of the Fire &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  // A telegraph tape along the foot of the page: dots and dashes sliding by, spelling the proverb in Morse.
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var M = {A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..'};
+  var text = 'NOT TO SATIATE ONES SELF WITH FOOD IS THE SCIENCE OF HEALTH   ';
+  var U = 6, marks = [], total = 0, W, H, off = 0;
+  (function build() {
+    var x = 0;
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (ch === ' ') { x += U * 4; continue; }
+      var code = M[ch];
+      for (var k = 0; k < code.length; k++) {
+        var len = code[k] === '.' ? U : U * 3;
+        marks.push({ x: x, w: len });
+        x += len + U;
+      }
+      x += U * 2;
+    }
+    total = x;
+  })();
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var y = H - 22;
+    ctx.fillStyle = 'rgba(159,49,40,0.05)';
+    ctx.fillRect(0, y - 9, W, 18);
+    ctx.fillStyle = 'rgba(41,38,31,0.22)';
+    for (var rep = -1; rep <= Math.ceil(W / total) + 1; rep++) {
+      var base = rep * total - off;
+      for (var i = 0; i < marks.length; i++) {
+        var mx = base + marks[i].x;
+        if (mx > W || mx + marks[i].w < 0) continue;
+        ctx.fillRect(mx, y - 1.5, marks[i].w, 3);
+      }
+    }
+    if (!reduce) { off = (off + 0.35) % total; requestAnimationFrame(draw); }
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+
+</script>
+</body>
+</html>

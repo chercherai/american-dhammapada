@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Even So</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one column of testimonies over a limestone field; chalk dust lifts on the beat of a hammer. */
+  --ground: #e8e5dc;
+  --ground-2: #d9d4c7;
+  --paper: #24262a;
+  --paper-dim: #636259;
+  --rust: #8b3a26;
+  --chain: #4f5a63;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 110%, var(--ground-2) 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(36,38,42,.2); }
+.series a:hover { color: var(--rust); }
+a:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--rust); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(139,58,38,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--chain); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--rust); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(250,248,242,.7); border: 1px solid rgba(36,38,42,.12); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.ledger { margin: 2rem 0; padding: 1rem 1.25rem; border-top: 1px solid rgba(79,90,99,.35); border-bottom: 1px solid rgba(79,90,99,.35); font-family: var(--font-display); font-size: 1rem; line-height: 1.6; color: var(--chain); }
+.ledger p { margin: 0; }
+.brk { text-align: center; color: var(--rust); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(36,38,42,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--rust); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--rust); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(36,38,42,.15); border-bottom: 1px solid rgba(36,38,42,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--rust); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--rust); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--rust); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(250,248,242,.7); border-left: 2px solid var(--rust); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.16 &middot; Akkosa Bh&#257;radv&#257;ja</span></nav>
+<header>
+  <h1>Even So</h1>
+  <div class="epigraph">If they were pushed, struck, or thrown down, they rose again and went away; but no complaint was found in their mouth.<br>&mdash; John Wesley's Journal, as quoted in The Great Controversy</div>
+</header>
+
+<p class="heard"><span class="heard-lead">I heard it told this way,</span> in the Cove below Graysville.</p>
+
+<section>
+  <h2>I. Delphia</h2>
+  <p class="dateline">The Bratcher place, Rhea County, Tennessee &middot; June 1895</p>
+  <p>I will tell my part first because it is the smallest and it is where it started.</p>
+  <p>I sneeze in threes. I always have, from a girl. My mother said it was the pepper in our blood. And I am a stumbler. I catch my toe on nothing, on the edge of a rag rug, on the shadow of a door, and Absalom used to say I could fall down a well that was not there. And from the spring of 1893, when I first sat under Brother Swafford's reading in Ma Kelso's front room and came out of it knowing the seventh day, whenever I sneezed or tripped or coughed so it hurt, what came out of my mouth was <em>Even so, come, Lord Jesus.</em> I did not decide it. It came out of me the way the sneeze did.</p>
+  <p>Absalom was a Methodist local preacher, and his father was, and his grandfather rode a circuit out of Knoxville when it was Indian country. All four of the Bratcher boys could preach, and three of them did. It was a preaching family, and they were known for it from Washington to Smith's Crossroads. I married into it at seventeen.</p>
+  <p>Every quarter when the presiding elder came for quarterly meeting, the preachers ate at our house. It was the custom. I killed four hens and a rooster and made the dumplings and the stack cake the day before, and fourteen men sat down in their black coats with their hats on the bed, and the presiding elder asked the blessing, and I carried in the platter.</p>
+  <p>I caught my toe on the doorsill. I did not drop the platter. I want that known. But I said it, loud, the way you would say it if you saw Him in the yard. <em>Even so, come, Lord Jesus.</em></p>
+  <p>Nobody said anything. The presiding elder took a thigh. And Absalom sat at the head of his own table among his own kind with his face going red from the collar up, and I knew by the time the stack cake came that he would not keep it.</p>
+  <p>He kept it until they had gone. Then he said that he had married a woman who could not trip over a thread without hollering for the Adventist's Jesus, as if there were two, and that it was that old man Swafford had done it to her, and that old Swafford was at that hour breaking rock on the county road in chains for plowing on the Lord's day and that was where he belonged, and that he, Absalom, would go up there tomorrow and take him apart on the Scriptures in front of the guard and the whole gang, and then we would see.</p>
+  <p>I said, <em>Go on, then.</em> I said, <em>I have never yet seen the man that could best him. But you go and ask him something.</em></p>
+</section>
+
+<section>
+  <h2>II. Absalom</h2>
+  <p class="dateline">The rock pile at the bridge approach, near Spring City &middot; the next morning</p>
+  <p>I am the oldest. I will try to say it straight.</p>
+  <p>There had been Sabbath-keepers in the Cove for twenty years and nobody minded them much until they built their school at Graysville and got a store, and then somebody minded. A man swore out a warrant on Silas Swafford for plowing his bottom on a Sunday in April. There were others charged, for fodder pulling and for carrying boards and for helping dig a well. The judge fined them and said he did not much like the law himself but it was the law. Not one of them would pay a cent of it. Paying, they said, would be keeping Sunday. So they lay in the jail at Dayton. Then the court got the chain gang up again for them, that had not been used in years, and in July they hauled them up the valley in two wagons and set them to breaking rock for the approaches of a bridge.</p>
+  <p>I had preached against them. I had preached against them by name.</p>
+  <p>It was hot already at seven. There was a guard on a stump with a shotgun across his knees, a Tallent boy I had baptized. There were nine men in that line with hammers, and a pile of blue limestone higher than a barn, and a pile of broken rock beside it the size of a corncrib, and the sound of it. If you have not heard nine hammers on limestone you do not know what I mean. It is not a din. They were keeping time.</p>
+  <p>Swafford was at the end. He was seventy-one that year. He had been a sawyer and he had the arms still. He had a rag around his head for the sweat and the chain on his right ankle had rubbed through his sock. He looked up and saw me and set the hammer head down on the rock and leaned on the helve and waited.</p>
+  <p>I did not say good morning. I had a question ready. I had worked on it half the night. I thought I would catch him between the commandments: he would say a Christian must kill nothing, and I would ask him about the Amalekites, or he would name a thing, and I would ask him where the Book said so. I said, <em>Swafford, you are a Bible man. Tell me this. Is there one thing on God's earth you say a Christian is bound to kill? And what does a man have to cut off to sleep easy at night?</em></p>
+  <p>He thought about it. He looked at the rock.</p>
+  <p><em>The same thing both times,</em> he said. <em>Cut off your temper and you'll sleep. Cut it off and you won't grieve. That's the one thing I know of you're bound to kill.</em></p>
+  <p>I opened my mouth and he went on.</p>
+  <p><em>You know spotted cowbane, that grows in the wet places down along the creek? The children dig it sometimes. They say it's sweet. It is sweet. Tastes like a parsnip, they say, and then it kills them. That's what temper is. It's sweet in your mouth at the first. You were tasting it all the way up here, Brother Bratcher. I saw you coming up the road with your mouth working.</em></p>
+  <p>Then he picked up the hammer.</p>
+  <p>I stood there. The Tallent boy looked at me and looked off. I had not been able to sleep for a year, if I am honest, not since she started saying it, and I had thought it was her. I stood there until the sun was over the pile, and then I sat down on the broken rock and listened to them keep time, and I do not know how long. When I came home Delphia was in the garden. I sat down on the chopping block and said she had better tell me about the seventh day from the beginning, and she did, and she sneezed three times telling it.</p>
+  <p>I kept my first Sabbath on the third of August. They indicted me at the next term. I would not pay either.</p>
+</section>
+
+<section>
+  <h2>III. Wash</h2>
+  <p class="dateline">The same place &middot; August 1895</p>
+  <p>I was the lawyer of us. I had read law at Cleveland and I was acting for the state that term because the attorney general was down with his kidneys. It was my office indicted my own brother. I want that understood. I did it in the regular course.</p>
+  <p>When I heard Ab had gone over to them I went up to the rock pile on a Sunday afternoon, when they were not working because the law would not let them, which is a joke I did not see at the time. They were sitting in the shade of the log house where the gang slept. I said what I came to say. I said it to Swafford. I will not write it all down. I called him an old fool and a Jew and a disturber of the peace of a Christian county and a stealer of wives and of brothers, and some other things, and I am a lawyer and know how to say a thing so it goes in. I went on a good while. The others got up and went inside. He did not. He sat on the step with his hands between his knees and heard every word as if I were reading him a deed.</p>
+  <p>When I had run down he said, <em>Wash, when the quarterly meeting comes to your house, does Lou set the table?</em></p>
+  <p>I said what did that have to do with it.</p>
+  <p><em>She kills her hens and makes her stack cake and sets it all out for them?</em></p>
+  <p>I said she did.</p>
+  <p><em>And say they came in, and looked at it, and wouldn't eat. Got up from the table and went home and never touched it. Whose dinner is that?</em></p>
+  <p>I said, <em>Why, it's ours. We'd eat it.</em></p>
+  <p><em>That's right,</em> he said. <em>Well. You've set a big table here this afternoon. I thank you for it. I'm not going to eat any. You carry it on home.</em></p>
+  <p>That was all he said. I stood there in the yard of that log house with the whole of it in my arms, everything I had said, and it was heavy. And it was mine. He was right, it was mine. I had been cooking it a long time.</p>
+  <p>I did not prosecute the September term. I wrote to Nashville that I was unwell, which was true. I kept my first Sabbath in October.</p>
+</section>
+
+<section>
+  <h2>IV. Pretty and Clabber</h2>
+  <p class="dateline">The same place &middot; September 1895</p>
+  <p>Our names are Sunderland and Thomas, but nobody has called us that since we were in dresses. I am Pretty and I taught singing school, the round notes and the shape notes both, and I am vain, I know it. My brother is Clabber because he was a sour baby and has been a sour man, and he runs the sorghum mill. He cannot write, so I am writing for both of us, and he says to put down that he does not agree with how I tell it.</p>
+  <p>We went up together the second Sunday in September because there was nobody left to go. Our father was dead. Ab was keeping Saturday. Wash was keeping Saturday. Our mother had not left her bed in a week. Clabber said somebody had to whip that old man and he would hold my coat.</p>
+  <p>I am not going to tell what we said because it was worse than Wash, and Clabber says that is the only part I have right.</p>
+  <p>I will tell this. While I was saying it, Swafford was looking at me the way you look at a horse you are thinking of buying, all over, without any hurry. And when I was done he said, <em>You've got a good voice, Sunderland. Your mother always said so.</em> And he said to Clabber, <em>How's the cane this year, Tom?</em> And Clabber, who had come to whip him, told him how the cane was, for a quarter of an hour, the rust on the lower leaves and the price of a gallon at Dayton, and then sat down on the step beside him and told him the rest.</p>
+  <p>I cannot account for it better than that. We were the last two, and we had the least reason, and we came over the easiest. Clabber says that is because there was nobody left to be ashamed in front of.</p>
+</section>
+
+<section>
+  <h2>V. The Time Book</h2>
+  <p class="dateline">The log house below Graysville &middot; October 1895</p>
+  <p>This last part is mine again, Delphia's, because I was there and none of them can tell it.</p>
+  <p>By October there were four Bratchers on the county's books, Ab and Wash on the gang, Pretty and Clabber bound over, and the gang was moved down the valley to a log house a mile and a half from Graysville with bars on the windows and the front door left open at night, because where would they go. On the Sabbath we women carried dinner up. The Tallent boy ate with us. He had not been made to and he did it.</p>
+  <p>After dinner the men sat on the floor of the big room, and it came up, the way it does when men are full, how it had been. One of the Graysville men said it was a wonderful thing. Four brothers, he said, and every one of them came up that road to curse him, and every one of them went home ours. And not one hard word back. Not a word in his own defense. He just stood there like a post and let them hang their coats on him.</p>
+  <p>Brother Swafford was by the door with the light behind him. He said it was nothing to do with him. He said, <em>I can't take credit for a thing I didn't do. I didn't do anything.</em> Then he said if they wanted to hear about not answering back they ought to hear about it from Ab's side of the family, and he got out his <em>Great Controversy</em>, which he had read through in the Dayton jail and then started again, and found the place, and handed it to Absalom, and Absalom read it. It was out of Mr. Wesley's own journal, the founder of his own church, about the Germans on the ship coming over.</p>
+  <div class="verse">
+    <p>Of their humility they had given a continual proof, by performing those servile offices for the other passengers which none of the English would undertake; for which they desired and would receive no pay, saying it was good for their proud hearts, and their loving Saviour had done more for them. And every day had given them occasion of showing a meekness which no injury could move. If they were pushed, struck, or thrown down, they rose again and went away; but no complaint was found in their mouth.</p>
+    <p>&mdash; John Wesley's Journal, as quoted in Ellen G. White, The Great Controversy</p>
+  </div>
+  <p>Absalom stopped reading there, though there was more. He had read it before. He had read it from a pulpit, in Spring City, in a sermon against the Adventists. He held the book open on his knee and did not say anything, and nobody else did.</p>
+  <p>Brother Swafford said, <em>A man that won't fight has got more soldiers than he knows.</em> And he looked around that room, at the four of them and the Graysville men and the women and the guard with the shotgun on his knees, and smiled, and that was the most I ever heard him say about it.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Later that fall I saw the Tallent boy's time book, because he left it on the table. It was a ruled book from the store at Dayton with the men's names down the side and the days across the top, and a mark in each square for a day served. Under every Saturday, all the way across, for every name, the squares were empty. That was the bargain: they would not work on the Sabbath, and the Sabbath would not count as time served, so that every man of them stood one more day in the chain for every Sabbath he kept. I looked down the page for one of them that had complained of it. The boy said I would not find one, and I did not.</p>
+  <p>I still sneeze in threes. I still catch my toe. I am seventy now and have been to the camp meeting at Graysville forty-nine times, and last summer I went down in the aisle of the big tent over a tent rope, all the way down, in front of everybody, and I heard it come out of me, the way it always has, loud. And I heard four old men behind me, all at once, say it back.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who, though he has committed no offence, endures reproach, bonds, and stripes, who has endurance for his force, and strength for his army.<cite>Dhammapada 399, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>Dhana&ntilde;jan&#299;, a Brahmin's wife and a follower of the Buddha, cries out in praise of him whenever she sneezes or stumbles, and one day does it while serving a meal to Brahmins. Her furious husband goes to defeat the Buddha with a riddle (what must one kill to live at ease?) and is answered: anger, "a poisonous root, sweet at the beginning." He becomes a monk. His younger brother, the Insolent Bh&#257;radv&#257;ja, comes to abuse the Buddha and is asked whether, when guests refuse the food he sets out, it is not still his own; so too the abuse the Buddha refuses. Two more brothers come to revile him and are won the same way, and when the monks marvel that he became their refuge without a word in reply, he speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-16.htm">the full commentary story</a>; the exchanges are in the <a href="https://en.wikipedia.org/wiki/Samyutta_Nikaya">Sa&#7747;yutta Nik&#257;ya</a> (SN 7.1, 7.2 and 7.4). The teacher reads from <a href="https://en.wikipedia.org/wiki/The_Great_Controversy_(book)"><em>The Great Controversy</em></a> by <a href="https://en.wikipedia.org/wiki/Ellen_G._White">Ellen G. White</a>, which quotes <a href="https://en.wikipedia.org/wiki/John_Wesley">John Wesley</a>'s journal of his 1736 voyage to Georgia with a company of Moravians.</p>
+    <h3>Rhea County, Tennessee, 1895</h3>
+    <p>Tennessee law forbade ordinary work on Sunday, and in the late 1880s and 1890s it was turned against <a href="https://en.wikipedia.org/wiki/Seventh-day_Adventist_Church">Seventh-day Adventists</a>, who kept Saturday and worked on Sunday. Around the Adventist school at Graysville, in Rhea County, members were charged in 1894 and 1895 for such things as stripping fodder, carrying boards and helping dig a well. At Dayton in March 1895 Judge J. G. Parks said he doubted the justice of the law but enforced it; the defendants refused on conscience to pay even small fines and went to jail instead.</p>
+    <p>After a second round of convictions that summer, the county revived its chain gang, and in July 1895 Adventist prisoners were carried north in wagons to break rock for the approaches of a bridge near Spring City, later lodging in a barred log house near Graysville. Their guard agreed not to work them on Saturday, and not to count Saturdays against their sentences. Adventist papers such as the <em>American Sentinel</em> carried the story nationally, and many secular newspapers took the prisoners' side. Swafford, the Bratchers and the Tallent boy are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Insolent Bh&#257;radv&#257;ja and his brothers from the Dhammapada commentary (verse 399). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-16.htm">The original</a>. Scripture from John Wesley's Journal as quoted in Ellen G. White's The Great Controversy (1888; 1911 edition). Written by Claude Opus 5.5.
+  <div class="pager"><a href="hombre-sincero.html">&larr; Hombre Sincero</a><a href="index.html">All stories</a><a href="the-seed-on-the-needle.html">The Seed on the Needle &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* Chalk dust off broken limestone, lifted a little on the slow beat of nine hammers keeping time. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, motes = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(m, anywhere) {
+    m.x = Math.random() * W;
+    m.y = anywhere ? H * (0.5 + Math.random() * 0.5) : H * (0.85 + Math.random() * 0.15);
+    m.vx = (Math.random() - 0.5) * 0.08;
+    m.vy = 0;
+    m.r = 0.8 + Math.random() * 2.2;
+    m.life = 0; m.max = 900 + Math.random() * 1500;
+    return m;
+  }
+  function make() {
+    motes = [];
+    var n = Math.round(Math.max(40, Math.min(110, W / 12)));
+    for (var i = 0; i < n; i++) { var m = spawn({}, true); m.life = Math.random() * m.max; motes.push(m); }
+  }
+  var t = 0, beat = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var lift = 0;
+    if (!reduce) {
+      t++;
+      if (t % 95 === 0) beat = 1;
+      lift = beat * 0.05; beat *= 0.94;
+    }
+    for (var i = 0; i < motes.length; i++) {
+      var m = motes[i];
+      if (!reduce) {
+        m.life++;
+        m.vy = m.vy * 0.98 - lift + 0.004;
+        m.x += m.vx; m.y += m.vy;
+        if (m.life > m.max || m.y > H + 10 || m.y < H * 0.3) spawn(m, false);
+      }
+      var p = m.life / m.max;
+      var a = Math.min(1, p * 6) * Math.min(1, (1 - p) * 4) * 0.22;
+      if (a < 0.01) continue;
+      ctx.fillStyle = 'rgba(120,118,108,' + a + ')';
+      ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

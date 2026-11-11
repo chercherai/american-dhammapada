@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Compass Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column on starched linen; a faint brass compass card swings and settles behind the text. */
+  --ground: #f2ede2;
+  --ground-2: #e6dfcf;
+  --paper: #2a2f3a;
+  --paper-dim: #6b6658;
+  --brass: #8a6a24;
+  --flannel: #9a3a2c;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #fbf8f1 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(42,47,58,.2); }
+.series a:hover { color: var(--brass); }
+a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--brass); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(138,106,36,.45); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--flannel); opacity: .9; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--brass); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,253,247,.8); border: 1px solid rgba(42,47,58,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.doc { margin: 1.75rem 0; padding: 1rem 1.25rem; background: rgba(255,253,247,.85); border-left: 2px solid var(--brass); font-size: .95rem; line-height: 1.6; }
+.doc p { margin: 0 0 .6rem; }
+.doc p:last-child { margin: 0; }
+.ledger { font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+.ledger .head { font-family: var(--font-display); font-style: italic; color: var(--paper-dim); }
+.bearing { font-family: var(--font-display); font-style: italic; color: var(--flannel); }
+.chart p { font-variant-numeric: tabular-nums; }
+.chart b { font-weight: 400; color: var(--flannel); }
+.brk { text-align: center; color: var(--brass); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .55; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(42,47,58,.15); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--brass); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--brass); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(42,47,58,.15); border-bottom: 1px solid rgba(42,47,58,.15); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--brass); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--brass); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--brass); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,253,247,.85); border-left: 2px solid var(--brass); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.9 &middot; S&#257;riputta</span></nav>
+<header>
+  <h1>The Compass Card</h1>
+  <div class="epigraph">To reckon him who taught me this Art equally dear to me as my parents.<br>&mdash; Hippocrates, The Oath</div>
+</header>
+
+<p class="heard"><span class="heard-lead">As it was told at morning worship,</span> on the hill above Sligo Creek.</p>
+
+<section>
+  <h2>I. The Lane</h2>
+  <p class="dateline">Caroline County, Maryland &middot; August 1906</p>
+  <p>Sadie Upton was seventeen the summer the canvasser came up the lane, and she had been skinning tomatoes since the first of the month in the top room of the canning house at Hobbs Landing, where the steam from the cookers came up through the floorboards and the girls stood in rubber aprons to the ankle. You filled a bucket and the runner took it, and the bucket came back to you with a tin check stamped with the packer's initials. At night she stood the checks on the kitchen windowsill in rows of ten, and on Saturdays she turned them into money, and most of the money went to Denton for her mother's medicine.</p>
+  <p>Her mother took Peruna for catarrh and Lydia Pinkham's Compound for the rest, and since Sadie's father went over the side of a bugeye in the Choptank two winters back, she took a good deal of both. She slept afternoons on the lounge with her mouth open. She was yellow under the eyes and short with the little ones, and sweet as anything for an hour after supper, and then she slept again. The doctor from Denton came twice and left calomel and a bill.</p>
+  <p>The cannery ran out of tomatoes early one evening, and Sadie was sitting on the back step with her feet in a pan of water when a man in a black coat came up the lane from the county road. It was August and the coat was buttoned. He carried a satchel in one hand and nothing in the other. What she noticed first was the gate. He opened it, came through, and put the wire loop back over the post as carefully as if the gate were his own and the stock might get out. Then he came up the lane at the same pace the whole way. When the dog went for him he did not hurry and he did not stop. He looked at the ground a few yards ahead of his feet, the way a man walks who is carrying a full basin.</p>
+  <p>He took his hat off at the step and said he was selling a book, and that the proceeds went to the sanitariums, and that his name was Ashby.</p>
+  <p><em>What's in it?</em></p>
+  <p><em>I'm poor at the talking part,</em> he said. <em>I've only been at it two years. I couldn't give you the whole of it.</em></p>
+  <p><em>Then give me a piece of it.</em></p>
+  <p>He set the satchel on the step and took out a book in green cloth and opened it where a slip of paper was, and he read her four sentences in a flat Western Shore voice, without any preaching in it, the way you would read the directions on a tin.</p>
+  <div class="verse">
+    <p>Disease is an effort of nature to free the system from conditions that result from a violation of the laws of health. In case of sickness, the cause should be ascertained. Unhealthful conditions should be changed, wrong habits corrected. Then nature is to be assisted in her effort to expel impurities and to re-establish right conditions in the system.</p>
+    <p>&mdash; Ellen G. White, The Ministry of Healing (1905), p. 127</p>
+  </div>
+  <p>Sadie looked past him through the screen door at the windowsill. The rows of tin checks. The two brown bottles with the labels turned to the wall, as if the bottles were ashamed. Something in her turned over and came to rest, the way the card in her father's boat compass used to swing around and around when you set it down on the table and then stop and point. A thing that had a cause could be stopped. You found the cause, and you stopped it, and the thing stopped. It was so simple she was angry nobody had said it before.</p>
+  <p><em>Read it again,</em> she said, and he did, at the same speed.</p>
+  <p>She bought the book with everything in the baking-powder tin. That night she poured the Peruna out by the hog lot, both bottles, and then she sat up in the kitchen with the green book until the lamp ran dry. By Christmas her mother was awake in the afternoons. On the first warm Sunday in March Sadie walked four miles to her cousin Cora's at Preston and read her the same four sentences on the porch, and Cora said, <em>Read it again,</em> and then, <em>Well,</em> and then nothing for a long while. In the fall of 1907 the two of them took the train to Washington with one trunk between them, to train as nurses at the sanitarium on Sligo Creek.</p>
+  <p>Brother Ashby had gone back down the lane that evening at the same pace he came up it, and latched the gate behind him.</p>
+</section>
+
+<section>
+  <h2>II. The Reports</h2>
+  <p class="dateline">The nurses' home, Takoma Park &middot; autumn 1909</p>
+  <p>The <em>Columbia Union Visitor</em> came to the reading room of the new nurses' home on Thursdays, eight pages, and Sadie read it from the back. On page seven, under the conference reports and above the notices for the camp meetings, were the Canvassers' Reports, set in small type in columns: the name of the canvasser, the county, the book, the days and hours, the orders taken, the value. She ran her finger down Chesapeake.</p>
+  <div class="doc ledger">
+    <p class="head">Chesapeake, Week Ending October 1, 1909</p>
+    <p>J. W. Ashby, Talbot Co., Md. &nbsp; MH &nbsp; 5 &nbsp; 41 &nbsp; 9 &nbsp; $13 50</p>
+    <p class="bearing">East by south.</p>
+  </div>
+  <p>Her father's compass was a brass box the size of a biscuit with a card in it marked in thirty-two points, and the glass had a crack across Nor'west that she had stopped seeing. On the inside of her trunk lid she had pinned a railroad map of Maryland and Delaware, and with a thread and a pin stuck through Takoma Park she could lay off the line to any county in the Chesapeake Conference. She set the compass on the floorboards, let the card settle, turned herself until she faced the point, and knelt.</p>
+  <p>She did not pray to him. She was particular about that. She prayed for him, for his feet and his chest and the dogs at the gates, and then she gave thanks for the man, and then for the rest of it. Then she got into bed with her head toward the point, which in the nurses' home meant some weeks she slept with her feet against the wall and her face toward the door, and twice the preceptress, making rounds, turned her pillow back the right way while she slept.</p>
+  <div class="doc ledger">
+    <p class="head">Chesapeake, Week Ending October 22</p>
+    <p>J. W. Ashby, Queen Anne's Co., Md. &nbsp; MH &nbsp; 5 &nbsp; 38 &nbsp; 6 &nbsp; $9 00</p>
+    <p class="bearing">East.</p>
+  </div>
+  <p>She was the best in her class. Everyone said it, and Dr. Mortensen, who said very little, said it in her way, which was to send for Miss Upton when a fomentation had to reach a patient hot. Most girls lost half the heat between the steamer and the bed. Sadie wrung the flannel in the double towel and carried it down the hall folded close against her own body, and it went on the patient's chest hot enough that the patient said <em>Oh,</em> and then said nothing, and the color came. She had the anatomy by heart before Christmas of the first year. She could do a salt glow and a cold mitten friction and a hot foot bath in the time it took the others to fill the tub.</p>
+  <div class="doc ledger">
+    <p class="head">Chesapeake, Week Ending November 5</p>
+    <p>J. W. Ashby, Calvert Co., Md. &nbsp; MH &nbsp; 4 &nbsp; 30 &nbsp; 3 &nbsp; $4 50</p>
+    <p class="bearing">Southeast by south.</p>
+  </div>
+  <p>Student nurses were paid a few dollars a month. Once a month Sadie bought two dollars' worth of two-cent stamps at the Takoma post office and mailed them in a plain envelope, with no letter, care of the conference office in Baltimore, for Brother J. W. Ashby. A canvasser lived on postage and shoe leather. She could not do anything about the leather.</p>
+  <div class="doc ledger">
+    <p class="head">Chesapeake, Week Ending November 19</p>
+    <p>J. W. Ashby, St. Mary's Co., Md. &nbsp; MH &nbsp; 5 &nbsp; 44 &nbsp; 4 &nbsp; $6 00</p>
+    <p class="bearing">South-southeast.</p>
+  </div>
+  <div class="doc ledger">
+    <p class="head">Chesapeake, Week Ending December 3</p>
+    <p>J. W. Ashby, Baltimore Co., Md. &nbsp; MH &nbsp; 5 &nbsp; 39 &nbsp; 11 &nbsp; $16 50</p>
+    <p class="bearing">Northeast by north.</p>
+  </div>
+  <div class="doc ledger">
+    <p class="head">Chesapeake, Week Ending December 17</p>
+    <p>(The name did not appear.)</p>
+    <p class="bearing">&nbsp;</p>
+  </div>
+  <p>That week she did not know which way to kneel. She took the compass out and held it and the card swung and settled north, the way it always did, which was no help. In the end she knelt in the middle of the floor and turned slowly all the way around on her knees, a point at a time, thirty-two times, and her roommates sat up in their beds in the dark and watched her do it.</p>
+  <div class="doc ledger">
+    <p class="head">Chesapeake, Week Ending December 31</p>
+    <p>J. W. Ashby, Washington Co., Md. &nbsp; MH &nbsp; 3 &nbsp; 22 &nbsp; 2 &nbsp; $3 00</p>
+    <p class="bearing">Northwest, a little north of it.</p>
+  </div>
+</section>
+
+<section>
+  <h2>III. A Letter</h2>
+  <p class="dateline">Slipped under the office door &middot; January 1910</p>
+  <div class="doc">
+    <p>Dear Dr. Mortensen,</p>
+    <p>We write this with great reluctance and only after prayer. We do not wish to make trouble for a sister. But we believe it is our duty, as it is written that we are our brother's keeper, and we have read what Sister White has written about the deceptions of the last days and the working of spirits, and we are afraid.</p>
+    <p>Every Thursday Miss Upton consults a brass compass. She has a map in her trunk with a pin in it. She kneels to a different quarter of the heavens each week, sometimes east, sometimes south, once to the northeast. She turns her bed around to lie toward the same quarter. Before Christmas there was a week when she knelt to all the quarters one after another, turning on her knees in the dark, and did not speak when Miss Kinney asked her what she was doing.</p>
+    <p>Miss Dorsett, whose brother is at the Foreign Mission Seminary, says the Mohammedans in Egypt bow toward Mecca five times a day. But their Mecca does not move.</p>
+    <p>She is the best nurse among us and we love her. That is why we have written.</p>
+    <p>Respectfully,<br>Ethel Kinney<br>Mabel Dorsett<br>Lottie Snyder</p>
+  </div>
+</section>
+
+<section>
+  <h2>IV. The Oath</h2>
+  <p class="dateline">The superintendent's office &middot; the same week</p>
+  <p>Dr. Hanne Mortensen was sixty-one. She had been born on a farm near Aalborg and brought to Wisconsin at six, and had gone to Ann Arbor for medicine when there were few enough women in the lecture room that the men counted them, and from there to Battle Creek, and from Battle Creek to Calcutta for seven years, and from Calcutta to this office with a window over the creek. She had a way of looking at a girl that the girls said was like being auscultated.</p>
+  <p>She sent for all four of them after morning worship. The three who had signed stood by the bookcase. Sadie stood by the window with her hands folded on her apron bib.</p>
+  <p><em>Miss Upton. These young women tell me you kneel to the points of the compass.</em></p>
+  <p>Sadie looked at her a while.</p>
+  <p><em>Doctor,</em> she said, <em>you know what I kneel to.</em></p>
+  <p>Dr. Mortensen did not answer her. She held out her hand to Mabel Dorsett.</p>
+  <p><em>Thursday's</em> Visitor<em>, please. Page seven. Read me the Chesapeake.</em></p>
+  <p>Mabel read the names in the order they came. Bowen, Queen Anne's County. Lankford, Somerset. Then she stopped, and read the next one slower. <em>J. W. Ashby. Frederick County.</em></p>
+  <p><em>Which way is Frederick County, Miss Upton?</em></p>
+  <p><em>Northwest by north, Doctor.</em></p>
+  <p><em>I read the applications,</em> Dr. Mortensen said to the three by the bookcase. <em>Every one. There is a line on the form: by what means did you come to the message. Most of you wrote the name of a parent. Miss Upton wrote the name of a canvasser who stood on her mother's back step in Caroline County and read her four sentences, because he said he could not give her any more than that. She has been turning toward that man every week for three years, wherever the</em> Visitor <em>says he has walked to. She is not bowing to the northwest. She is bowing to J. W. Ashby.</em></p>
+  <p>Nobody said anything. The radiator knocked.</p>
+  <p>Dr. Mortensen got up and took a book down from the top of the case, a heavy brown volume with a broken spine, and turned to a place in it near the front.</p>
+  <p><em>This is the oath the old Greek physicians took. I took it, more or less, in Ann Arbor in 1879, because a professor of mine thought we ought to. I will not read you whom they swore it by. You would write me a letter.</em> Lottie Snyder laughed and put her hand over her mouth. <em>But listen to what they swore.</em></p>
+  <div class="verse">
+    <p>I will keep this Oath and this stipulation&mdash;to reckon him who taught me this Art equally dear to me as my parents, to share my substance with him, and relieve his necessities if required.</p>
+    <p>&mdash; Hippocrates, The Oath, tr. Francis Adams (1849)</p>
+  </div>
+  <p>She shut the book.</p>
+  <p><em>In Calcutta,</em> she said, <em>there was a Brahmin on our street who kept a fire in a clay pot in his courtyard that his grandfather had lit. Morning and evening he fed it. He would no more have let it go out than stopped breathing. I thought it was heathen foolishness when I came. I was there seven years. When I left I thought he was the most faithful man on the street.</em> She looked at the three of them. <em>A girl who keeps the man who first taught her the way that Brahmin kept his fire has not gone over to the spirits. Who first taught you? Do you know which way they are tonight?</em></p>
+  <p>Ethel Kinney began to cry, and could not have said why.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>The night nurse, coming up the stairs of the nurses' home at ten o'clock with her lamp, saw through four open doors on the second floor four girls kneeling in their nightgowns, each one facing a different way. Ethel Kinney toward Ohio and a Sabbath-school teacher in Mount Vernon who had given her a card with a lily on it in 1897. Lottie Snyder toward a grandmother in Lancaster County. Mabel Dorsett toward the wall, because her teacher had been her own mother, who was in Trenton, and she was not sure where Trenton was from Takoma Park and would not ask. Sadie Upton toward the northwest by north, with the brass box on the floor beside her and the card gone still.</p>
+  <p>The night nurse said afterward that it looked like a compass card itself, the whole floor, and that she stood on the landing and did not go up the last step until they had all got into bed.</p>
+</section>
+
+<section>
+  <h2>V. The Chart</h2>
+  <p class="dateline">Men's ward, Washington Sanitarium &middot; February 1910</p>
+  <p>He came in on the afternoon train from Frederick with a canvasser's cough that had gone down into his chest a week before and stayed there. Somebody at the Frederick church had put him on the car. He walked from the Takoma station up the hill with his satchel, at the same pace, and fainted on the sanitarium steps.</p>
+  <div class="doc chart">
+    <p><b>Ashby, J. W.</b> &nbsp; age 53 &nbsp; colporteur &nbsp; adm. 4:40 p.m.</p>
+    <p>Lobar pneumonia, right lower lobe. T. 104.2. P. 120. R. 36. Rusty sputum.</p>
+    <p>Orders: hot fomentations to chest q. 2 hrs, 3 changes each, followed by cold mitten friction. Water freely. Night special: Miss Upton.</p>
+  </div>
+  <p>He did not know her. She had been a girl on a step with her feet in a pan of water, and now she was a nurse in a cap with her sleeves rolled, and he was a man with a fever of a hundred and four who thought for an hour around midnight that he was back in Calvert County and the dog had his satchel. She did not tell him. She brought the fomentations down the hall folded against her own body, three changes, and laid them on his chest so hot that he said <em>Oh,</em> and then nothing, and she rubbed his arms with the cold mitten until the skin came up pink, and she counted his breaths with her watch.</p>
+  <div class="doc chart">
+    <p>11:00 &nbsp; Fom. to chest x 3. C.M.F. T. 104.4. Restless. Asks for his books.</p>
+    <p>1:00 &nbsp; Fom. x 3. T. 104.0. Delirious, mild. Talking of a gate.</p>
+    <p>3:00 &nbsp; Fom. x 3. T. 104.6. R. 40. Pulse weak. Dr. M. notified.</p>
+  </div>
+  <p>Dr. Mortensen came at a quarter past three in a wrapper with her hair down her back in a grey braid, and listened to his chest for a long time, and said, <em>Keep them hot,</em> and went and sat in the chair by the door and did not go back to bed.</p>
+  <p>At four he was quiet and his lips were blue at the edges. Sadie had the steamer going in the diet kitchen across the hall and she did not let it drop off the boil for a minute, and every time she came back through the door with the flannel against her she looked at Dr. Mortensen in the chair, and Dr. Mortensen looked back at her, and neither of them said anything.</p>
+  <p>Between changes she sat by the bed. His satchel was on the floor under it, where the orderly had put it. She took out the green book, which was the same edition, a little more worn, with the slip of paper still in it at the same page, and she read him the four sentences in a low voice at the same speed he had read them to her, without any preaching in it.</p>
+  <div class="doc chart">
+    <p>5:00 &nbsp; Fom. x 3. Profuse sweating. T. 101.2.</p>
+    <p>5:40 &nbsp; Crisis. T. 99.0. P. 88. Sleeping naturally.</p>
+  </div>
+  <p>He woke at seven with the light coming grey off the creek and looked at her a long time, the way a man does who is trying to put a face to a county.</p>
+  <p><em>Do I know you?</em></p>
+  <p><em>You sold my mother a book. In Caroline County.</em></p>
+  <p><em>Did it do her any good?</em></p>
+  <p><em>Yes, sir.</em></p>
+  <p>He thought about that, and then he closed his eyes. <em>I never could tell it right,</em> he said. <em>I only ever had the one piece of it.</em></p>
+  <p>Dr. Mortensen stood up out of the chair by the door and went out without a word, and Sadie heard her going down the hall in her slippers. The brass box was in Sadie's apron pocket. She took it out and set it on the night table by the water glass, and the card went round once and settled north, as it always did, and she let it, and went across the hall to warm the next flannel.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">After a man has once understood the law as taught by the Well-awakened (Buddha), let him worship it carefully, as the Brahmana worships the sacrificial fire.<cite>Dhammapada 392, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>S&#257;riputta, the wisest of the Buddha's disciples, first heard the Dhamma from the elder Assaji, a quiet monk whose bearing on his alms round caught his eye. Assaji said he was new and could give only a little, and spoke four lines about causes and their ending; S&#257;riputta understood at once. From then on, wherever Assaji was staying, S&#257;riputta bowed in that direction and even lay down to sleep with his head toward it. Other monks decided he had gone back to worshipping the directions and reported him. When the Buddha asked, S&#257;riputta left the answer to the Buddha's own knowledge, and the Buddha explained that he was honoring the teacher through whom he had learned, as a Brahmin honors the sacred fire. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-09.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/%C5%9A%C4%81riputra">S&#257;riputta</a> and <a href="https://en.wikipedia.org/wiki/Assaji">Assaji</a>.</p>
+    <h3>Takoma Park, 1909</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Takoma_Park,_Maryland">Takoma Park</a> was laid out in 1883 as a commuter suburb on the B&amp;O's Metropolitan Branch just outside Washington. In 1904 the <a href="https://en.wikipedia.org/wiki/Seventh-day_Adventist_Church">Seventh-day Adventist Church</a> bought land there along Carroll Avenue and moved its headquarters from Battle Creek, Michigan; the church's publishing house, college and the <a href="https://en.wikipedia.org/wiki/Adventist_HealthCare_White_Oak_Medical_Center">Washington Sanitarium</a> followed. The sanitarium opened on June 13, 1907, on the bank of Sligo Creek, treating patients with water, air, massage and plain food. It trained nurses from the start, and a <a href="https://asylumprojects.org/index.php/Washington_Sanitarium_and_Hospital">nurses' dormitory</a> went up in 1909. Hot fomentations, salt glows and cold mitten frictions were the ordinary tools of Adventist hydrotherapy.</p>
+    <p>Ellen G. White's <em>The Ministry of Healing</em> (1905) was a "relief book": she gave up her royalties, the publishers printed it at cost, and church members sold it door to door to help pay the debts of the denomination's sanitariums. Canvassers' weekly results, by name, county, book, hours and orders, were printed in union papers such as the <em>Columbia Union Visitor</em>. The book appeared the same year Samuel Hopkins Adams's series <a href="https://www.gutenberg.org/ebooks/44325">"The Great American Fraud"</a> in <em>Collier's</em> exposed patent medicines like <a href="https://en.wikipedia.org/wiki/Peruna_(patent_medicine)">Peruna</a>, which was largely alcohol; the Pure Food and Drug Act followed in 1906. On the Eastern Shore, girls and women of Sadie's age spent the summer peeling tomatoes at piece rates in the canning houses, paid in tokens for each bucket.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of S&#257;riputta and Assaji from the Dhammapada commentary (verse 392). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-09.htm">The original</a>. Quotations from Ellen G. White, <em>The Ministry of Healing</em> (1905), and Hippocrates, <em>The Oath</em>, tr. Francis Adams (1849). Written by Claude Opus 5.5.
+  <div class="pager"><a href="brickbats.html">&larr; Brickbats</a><a href="index.html">All stories</a><a href="cast-clouts.html">Cast Clouts &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, ang = 0, vel = 0, target = 0, t = 0, nextKick = 400;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var R = Math.min(W, H) * 0.42;
+    var cx = W * 0.82, cy = H * 0.78;
+    ctx.save(); ctx.translate(cx, cy);
+    ctx.globalAlpha = 0.11;
+    ctx.strokeStyle = '#8a6a24'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(0, 0, R, 0, Math.PI * 2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(0, 0, R * 0.86, 0, Math.PI * 2); ctx.stroke();
+    ctx.rotate(ang);
+    for (var i = 0; i < 32; i++) {
+      var a = i * Math.PI / 16, len = (i % 8 === 0) ? 0.86 : (i % 4 === 0) ? 0.62 : (i % 2 === 0) ? 0.45 : 0.3;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a - 0.05) * R * 0.08, Math.sin(a - 0.05) * R * 0.08);
+      ctx.lineTo(Math.cos(a) * R * len, Math.sin(a) * R * len);
+      ctx.lineTo(Math.cos(a + 0.05) * R * 0.08, Math.sin(a + 0.05) * R * 0.08);
+      ctx.closePath();
+      ctx.fillStyle = (i === 24) ? '#9a3a2c' : '#8a6a24';
+      ctx.globalAlpha = (i === 24) ? 0.16 : 0.07;
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+  function step() {
+    t++;
+    if (t > nextKick) { vel += (Math.random() - 0.5) * 0.08; nextKick = t + 700 + Math.random() * 900; }
+    var acc = -0.0009 * (ang - target) - 0.012 * vel;
+    vel += acc; ang += vel;
+    draw();
+    requestAnimationFrame(step);
+  }
+  size();
+  if (reduce) { ang = 0.05; draw(); } else { ang = 1.2; step(); }
+  window.addEventListener('resize', function () { size(); draw(); });
+})();
+</script>
+</body>
+</html>
