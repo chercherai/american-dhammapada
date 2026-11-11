@@ -242,8 +242,8 @@ for f in ["index.html", "timeline.html", "map.html"]:
         open(fp, "w").write(h.replace("</body>", '<script src="near.js"></script>\n</body>', 1))
 
 # ---------- offline downloads in the footer of the three views ----------
-DL = ('<p class="dl">Read offline: <a href="https://chercherai.github.io/american-dhammapada/Walking-the-American-Way.epub" download>EPUB</a> (6.7 MB, for Play Books, Kindle and other e-readers) '
-      '&middot; <a href="https://chercherai.github.io/american-dhammapada/Walking-the-American-Way.pdf" download>PDF</a> (13 MB, typeset at 6&times;9 in)</p>')
+DL = ('<p class="dl">Read offline: <a href="https://chercherai.github.io/american-dhammapada/Walking-the-American-Way.epub" target="_blank" rel="noopener">EPUB</a> (6.7 MB, for Play Books, Kindle and other e-readers) '
+      '&middot; <a href="https://chercherai.github.io/american-dhammapada/Walking-the-American-Way.pdf" target="_blank" rel="noopener">PDF</a> (13 MB, typeset at 6&times;9 in)</p>')
 for f in ["index.html", "timeline.html", "map.html"]:
     fp = os.path.join(HERE, f); h = open(fp).read(); h0 = h
     h = re.sub(r'<p class="dl">.*?</p>', '', h, flags=re.S)
