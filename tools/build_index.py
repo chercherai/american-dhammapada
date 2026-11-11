@@ -7,9 +7,17 @@ ml = json.load(open(os.path.join(HERE, "master_list.json")))
 metas = [m for m in metas if os.path.exists(os.path.join(HERE, m["file"])) and ml.get(m["num"], {}).get("status") == "done"]
 metas.sort(key=lambda m: [int(x) for x in m["num"].split(".")])
 e = html.escape
-items = []
+CH = ["The Twin-Verses", "On Earnestness", "Thought", "Flowers", "The Fool", "The Wise Man", "The Venerable", "The Thousands", "Evil", "Punishment", "Old Age", "Self", "The World", "The Buddha", "Happiness", "Pleasure", "Anger", "Impurity", "The Just", "The Way", "Miscellaneous", "The Downward Course", "The Elephant", "Thirst", "The Bhikshu", "The Brahmana"]
+from collections import Counter
+chn = Counter(m["num"].split(".")[0] for m in metas)
+items, seen = [], set()
 for m in metas:
-    items.append(f'''    <li><a href="{e(m['file'])}">
+    c = m["num"].split(".")[0]
+    ra = ""
+    if c not in seen:
+        seen.add(c)
+        ra = f' data-rail="{c}" data-rail-major data-rail-n="{chn[c]}" data-rail-tip="{c} &middot; {e(CH[int(c)-1])}" style="scroll-margin-top:1rem"'
+    items.append(f'''    <li{ra}><a href="{e(m['file'])}">
       <span class="num">{e(m['num'])}</span>
       <span class="title"><span class="dot" style="background:{e(m['accent'])};box-shadow:0 0 10px {e(m['glow'])}"></span>{e(m['title'])}</span>
       <span class="meta">{e(m['place'])} &middot; {e(str(m['year']))} &middot; after {e(m['source'])} &middot; {e(m.get('model','').replace('Claude ',''))}</span>
@@ -19,6 +27,8 @@ idx_path = os.path.join(HERE, "index.html")
 idx = open(idx_path).read()
 idx = re.sub(r"<ol>.*?</ol>", "<ol>\n" + "\n".join(items) + "\n  </ol>", idx, count=1, flags=re.S)
 idx = re.sub(r'<p class="count">.*?</p>', f'<p class="count">{'All ' + str(len(metas)) + ' stories' if len(metas)==305 else str(len(metas)) + ' stories so far'}</p>', idx)
+if '<script src="rail.js"></script>' not in idx:
+    idx = idx.replace("</body>", '<script src="rail.js"></script>\n</body>', 1)
 if idx != open(idx_path).read(): open(idx_path, "w").write(idx)
 for i, m in enumerate(metas):
     p = os.path.join(HERE, m["file"]); s = open(p).read()
