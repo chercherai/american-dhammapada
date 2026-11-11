@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Summer Fallow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column over a pale prairie sky; at the horizon the heat lifts faint shapes into the air, and they shimmer and settle. */
+  --ground: #f1ecdf;
+  --ground-2: #e4dcc6;
+  --paper: #2c2a26;
+  --paper-dim: #6f685b;
+  --gilt: #a97a1f;
+  --furrow: #5b4630;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f6f3ea 0%, var(--ground) 55%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(44,42,38,.2); }
+.series a:hover { color: var(--gilt); }
+a:focus-visible { outline: 2px solid var(--gilt); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--furrow); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(169,122,31,.5); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; color: var(--furrow); }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--gilt); opacity: .95; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--gilt); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(251,249,242,.85); border: 1px solid rgba(44,42,38,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--gilt); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .7; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(44,42,38,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--gilt); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--gilt); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(44,42,38,.14); border-bottom: 1px solid rgba(44,42,38,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--gilt); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--gilt); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--gilt); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--gilt); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(251,249,242,.85); border-left: 2px solid var(--gilt); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 14.9 &middot; Kassapadasabalassa Suvaṇṇacetiya</span></nav>
+<header>
+  <h1>Summer Fallow</h1>
+  <div class="epigraph">Surely, then, we must ascribe honour to the living temples of God, the living tabernacles of God.<br>&mdash; John of Damascus, Exposition of the Orthodox Faith IV.15</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Tak ia chuv,</span> on the Whitford road.</p>
+
+<section>
+  <h2>I. The Cross</h2>
+  <p class="dateline">North of Vegreville, Alberta &middot; June 1918</p>
+  <p>The company from Pruth district set out on the Wednesday before the Feast of the Holy Trinity to walk the twenty-two miles to Cheremosh, where a new church with three domes was to be blessed on the Sunday. There were forty-one of them. They carried birch and poplar branches for the green feast and a banner of the Mother of God on two poles, and the old women carried their icons from home wrapped in embroidered towels, the way they had carried them across the ocean in 1898. At the front walked the dyak, Fedir Ilashchuk, who was sixty-seven and had been the nearest thing to a priest that Pruth district had for twenty years: he sang the services when no priest came, which was most Sundays, and read the Epistle and the Psalms, and buried the dead, and taught the boys the responses. Once a month he also walked into Vegreville and signed the book at the Mounted Police barracks, because he had been born a subject of the Austrian emperor, and there was a war.</p>
+  <p>That June the colony was quarrelling. It had begun at the reading halls and gone on to the churches, and by summer half the families north of Vegreville did not greet the other half on the road. It was over priests and bishops and who owned the church buildings and which way to make the sign of the cross, and under that it was over older things nobody could name any longer. The dyak had his opinions and did not say them.</p>
+  <p>At noon on the first day they came to the corner of the Danylchuk place, where a tall cross of white-painted tamarack stood in a little square of fence at the edge of the field, with the slanting footboard near the bottom and a ribbon tied to it, faded to no color. The dyak stopped there. They all stopped. The old women took their icons out of the towels and stood them against the fence, and the company sang the Trisagion, and then they sat down in the grass along the road allowance to eat their bread and onions.</p>
+  <p>Out in the field, Yurko Danylchuk was plowing summer fallow behind four horses, a quarter-mile of black turned up behind him and the gulls following. The dyak sent his grandson Andrii, twelve, to ask whether the man would come and drink a little water with them.</p>
+  <p>Danylchuk came. He left the team standing and walked across the furrows, a big man with his shirt stuck to him, and when he came to the fence he took off his hat and crossed himself three times toward the cross and kissed the post and stood a moment with his head down. He did not take his hat off to the dyak, or to the old women, or to anybody in that company. He put it back on and stood there in front of them, waiting to see what they wanted. He was one of the other church. These days you did not greet across that line.</p>
+  <p>The dyak looked at him with great interest.</p>
+  <p><em>How do you regard this place, Pane Danylchuk?</em></p>
+  <p><em>My father found him here,</em> said Danylchuk. <em>Father Kassian. In the snow, in &rsquo;99, with the little box of the Holy Gifts inside his coat. My father put up the cross, and every man in my family has taken his hat off at this corner since. It came down to us. That&rsquo;s why.</em></p>
+  <p><em>You do well,</em> said the dyak. <em>You do well to honor it.</em></p>
+  <p>Danylchuk looked at him a moment longer, and nodded once, and went back across his furrows to his horses.</p>
+  <p>The company did not like it. Petro Hudyma, who carried one pole of the banner, said what several of them were thinking. <em>He walked past you, Pane Dyak. He walked past all of us as if we were fence posts. And you praised him.</em> And Marusia Sorochan, who had been a girl in the old country when Father Kassian was a young monk, said she did not see what a man of the other church was doing with their Father Kassian at all.</p>
+  <p>The dyak sat down again in the grass and broke his bread.</p>
+  <p><em>Andrii,</em> he said. <em>Bring me the water. I will tell you who is under that cross, and then you can say whether the man did well.</em></p>
+</section>
+
+<section>
+  <h2>II. The Potter</h2>
+  <p class="dateline">On the Cheremosh, in the old country &middot; 1871</p>
+  <p>When I was nineteen, the dyak said, I was the cleverest young man on the Cheremosh, and the most foolish. I had been to school in Vyzhnytsia for two winters. I read newspapers. I thought priests were for old women and monks were for nobody.</p>
+  <p>My friend was Hnat the potter, from across the river below Pistyn. Hnat made pots and jugs and bowls, green and yellow on white, the best on that river, and he made them in a strange way. He would not dig his clay with a spade. He said he did not want to cut through anything living to get it. He took only what the river had already torn out of the bank in the spring flood, or what the moles had thrown up in the meadow, and that was all the clay he ever had, and somehow it was always enough.</p>
+  <p>His father and mother were both blind, and he kept them. He did not take his pots to the fair at Kuty to sell. He set them out on a bench by the road in front of his house, and anybody who needed a pot took one, and left what they liked, a little flour, a few eggs, a coin, nothing. Every evening Hnat carried in whatever had been left and cooked it for the old people, and put out more pots.</p>
+  <p>Up the hill above Hnat&rsquo;s house there was a little wooden church and a monk who served it, Father Kassian, who was young then, younger than I am now by forty years. Hnat loved him. When Father Kassian came down the hill and Hnat was away, the blind parents would call out, <em>Father, there is soup in the pot, and bread under the cloth, take what you want,</em> and he would sit down at their table and eat, and when Hnat came home and saw the bowl he would laugh out loud and say, <em>He has been here. He trusted me enough to eat without asking.</em></p>
+  <p>That autumn the roof of the little church began to leak over the altar. There was no money for shingles. While Hnat was away at the Kuty fair, buying a horse for a neighbor, Father Kassian&rsquo;s people came down the hill and asked the blind parents, and the old woman said, <em>Take them, take them, the roof is his,</em> and they climbed up on Hnat&rsquo;s house and took off his shingles and carried them up the hill and put them on the church. When Hnat came home, his house had no roof. He stood in the road and laughed until he had to sit down.</p>
+  <p>It rained that whole autumn on the Cheremosh. Three months. It rained on every roof on that river and in through every bad shingle and down every chimney. In Hnat&rsquo;s house, with no roof on it, the floor stayed dry. The blind old people sat by the stove and felt the sky over them with their faces, and not a drop came in. People came from three villages to stand in his doorway and look up at the rain stopping in the air above his rafters.</p>
+  <p>I did not go to look. I said it was a story for old women.</p>
+  <p>Hnat asked me many times to come up the hill with him and hear Father Kassian. I always said, <em>What do I want with looking at a monk?</em> At last one day by the river he asked me again and I said it again, and Hnat, who was the gentlest man I ever knew, took hold of me by my hair. I wore it long then, like everybody. He took hold of it in his fist and walked me up the hill like a calf, the whole way, with me shouting, and the whole village came out to see, because nobody in that village had ever seen Hnat lay a hand on anything that was alive. He walked me in at the church door and let go.</p>
+  <p>Father Kassian was sitting on the step inside, mending a censer chain. He looked up at me with my hair every which way and said, <em>Sit down, Fedia. You must be tired.</em> That was all. I sat down.</p>
+  <p>The dyak drank his water.</p>
+  <p>I never went back to Vyzhnytsia. I learned the eight tones from him and the order of the services. When our families came to this country he came after us, though nobody had sent for him, because there was no priest here at all. He went from district to district on foot, in all weathers, with the Holy Gifts in a little box inside his coat. In the second winter they found him at this corner, sitting in the snow as if he had only stopped to rest. Hnat would not come to Canada; he said his parents were too old to cross the water. So I am the one who carries this.</p>
+  <p>He took a bundle out of his bag and unwrapped it on his knee, a worn embroidered towel, and inside it a priest&rsquo;s stole, old brocade gone brown, with the gold thread rubbed through to the linen at the neck.</p>
+  <p><em>There are three kinds of holy places,</em> he said. <em>The place where a holy man&rsquo;s bones are. The cross or the picture that stands for him. And a thing he used.</em> He laid one hand on the stole, and pointed with the other at the cross in its fence, and at the field. <em>Two of them are here. So when a man takes off his hat at that corner, I say he does well. I don&rsquo;t care what church he goes to.</em></p>
+</section>
+
+<section>
+  <h2>III. The Living Icons</h2>
+  <p class="dateline">The Danylchuk corner &middot; the same afternoon</p>
+  <p>What happened next was told for fifty years in Pruth district and Cheremosh and all the districts north of Vegreville, and the people who told it did not all go to the same church, and they told it the same way.</p>
+  <p>The dyak stood up and looked out over the summer fallow, and the company looked where he was looking, and Danylchuk out at the far end of his field stopped his team and looked too. Over the black field, in the white heat of the afternoon, there was a church standing in the air. It was the little wooden church on the hill above the Cheremosh, the same one, every board of it, with the potter&rsquo;s shingles on the roof; but it was gold, all of it, and it was as tall as a mountain, so that the poplar bluffs at the edge of the field came only to the bottom step of it. It stood on nothing. Its domes were in the clouds, and the light came off it so that the gulls behind Danylchuk&rsquo;s plow were gold too.</p>
+  <p>The old women went down on their knees in the road.</p>
+  <p>The dyak did not kneel. He turned his back on the gold church, and with his open hand he showed them the company itself: the old women on their knees with their icons, Marusia Sorochan who had buried four children in this ground, Petro Hudyma whose hands were split from building the church at Cheremosh log by log, the widow Paraska who had fed every new family off the train since 1899 and never been thanked, the boys who knew the responses, Andrii with the empty cup.</p>
+  <p><em>In church,</em> he said, <em>when the priest comes out with the censer, first he censes the icons. Then he turns around and censes you. Did you ever wonder why? Look at that,</em> he said, pointing over his shoulder without looking, <em>and then look at each other. It is a good thing to bow to a cross. It is a better thing to bow to people like these.</em></p>
+  <p>And then he said it the way he had learned it from Father Kassian, out of the old book of Saint John of Damascus, the same John who wrote the hymns they sang over their dead.</p>
+  <div class="verse">
+    <p>Surely, then, the worshippers and friends and sons of God are to be held in honour? For the honour shewn to the most thoughtful of fellow-servants is a proof of good feeling towards the common Master.</p>
+    <p>Surely, then, we must ascribe honour to the living temples of God, the living tabernacles of God.</p>
+    <p>Let us raise monuments to them and visible images, and let us ourselves become, through imitation of their virtues, living monuments and images of them.</p>
+    <p>&mdash; John of Damascus, Exposition of the Orthodox Faith IV.15 (tr. S. D. F. Salmond)</p>
+  </div>
+  <p><em>And who will count what that is worth,</em> said the dyak, <em>to honor even one of them? Nobody. Not the bishop. Not the government. Nobody can say, it is so much and no more.</em></p>
+  <p>Out in the field, Yurko Danylchuk took off his hat. He took it off, people said, not to the gold church in the air but to the old women in the road, and to the dyak, and he stood like that by his horses until the company picked up its banner and went on north.</p>
+</section>
+
+<section>
+  <h2>IV. Seven Days</h2>
+  <p class="dateline">North of Vegreville &middot; summer 1918</p>
+  <p>The gold church stood over the Danylchuk summer fallow for seven days.</p>
+  <p>People came from Andrew and Whitford and Hairy Hill and Mundare, and from as far as Smoky Lake with their wagons, Catholic and Orthodox and the ones who were not sure any longer which they were, and they stood along the road allowance and in the plowed ground, and the old women sang, and somebody always had bread. An English rancher came from beyond Vegreville and said it was a mirage, that the prairie did that in the heat, lifting some town from over the horizon up into the sky, and then he stood and looked at it all afternoon with his hat in his hand like everybody else. Two Mounted Policemen rode out to see what the crowd was about and did not write anything down.</p>
+  <p>That was the summer the men from all three provinces met in Saskatoon to start a church of their own, and after that the quarrel in the colony did not end for thirty years. But for those seven days it was said that nobody on the Whitford road refused anybody else a cup of water.</p>
+  <p>On the seventh evening the gold church went back the way it had come, east, and was not there. In the place where it had stood, at the corner of the field by the white cross, there was the heap of stones that the Danylchuks had been picking off that field for twenty years, every spring, rock by rock, gray and pink and black, and carrying to the corner on a stoneboat, until it was taller than a man. Everybody had driven past it a thousand times. That evening, people said, with the sun going down behind it, you could see it had the shape of a church.</p>
+  <p>The next spring Yurko Danylchuk and his sons built a little chapel at the corner out of those stones, with one small dome of tin on top, and the dyak of Pruth district came and sang at the blessing of it, and Danylchuk took off his hat to him at the door. The chapel is still there, though the field has been sold twice. People of both churches stop at it. The tamarack cross has been replaced with iron, and inside, on a shelf under the window, there is an old priest&rsquo;s stole wrapped in an embroidered towel, and a green-and-yellow jug from the old country with a chip out of the lip that nobody can remember bringing.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verses</h3>
+    <blockquote class="pd">He who pays homage to those who deserve homage, whether the awakened (Buddha) or their disciples, those who have overcome the host (of evils), and crossed the flood of sorrow, he who pays homage to such as have found deliverance and know no fear, his merit can never be measured by anybody.<cite>Dhammapada 195&ndash;196, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the Buddha, traveling toward Bārāṇasī with a great company of monks, sits down at an old shrine near the village of Todeyya and sends Ānanda to call a brahmin who is plowing nearby. The brahmin bows to the shrine and not to the Buddha, and explains that the shrine has come down to him through the generations. The Buddha praises him. When the monks are puzzled, he tells the story of the potter Ghaṭīkāra (Majjhima Nikāya 81): supporter of the earlier Buddha Kassapa, keeper of his blind parents, a man who dug no earth and let anyone take his pots, whose roof thatch was taken for the Buddha&rsquo;s hut while no rain fell into his house for three months, and who dragged his proud friend Jotipāla (the future Gotama) by the hair to meet Kassapa. Then the Buddha makes a golden double of Kassapa&rsquo;s shrine appear in the air, a league high, points to his monks and says it is still more fitting to honor such people, and speaks of the three kinds of shrines and the verses. The golden shrine hangs in the air for seven days; a schism arises at that time; when it returns, a great stone shrine stands in its place. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-09.htm">the full commentary story</a>, or about <a href="https://suttacentral.net/mn81">the Ghaṭīkāra Sutta</a>.</p>
+    <h3>East-central Alberta, 1918</h3>
+    <p>Ukrainian settlement in western Canada began in 1891 and 1892 at the Edna&ndash;Star colony east of Edmonton; by the First World War more than 100,000 Ukrainians and other eastern Europeans, most of the Ukrainians from Galicia and Bukovyna, had settled a band of parkland from Manitoba to Alberta, building whitewashed plastered houses and onion-domed churches, and marking graves with wooden crosses that were later replaced in iron and concrete (<a href="https://thecanadianencyclopedia.ca/en/article/ukrainians-homesteading-in-the-parkland-feature">Canadian Encyclopedia</a>; <a href="https://canadashistory.ca/explore/travel/prairie-icons">Canada&rsquo;s History</a>). Priests were scarce, and lay cantors led much of the singing and reading. Because most had been Austro-Hungarian subjects, during the war some 80,000 Ukrainians and others were registered as &ldquo;enemy aliens&rdquo; and made to report regularly to the police, and about 8,600 were interned in camps (<a href="https://en.wikipedia.org/wiki/Ukrainian_Canadian_internment">Ukrainian Canadian internment</a>).</p>
+    <p>Settlers from Galicia were mostly Greek Catholic, those from Bukovyna mostly Orthodox, and disputes over clergy, bishops and church property ran through the colonies. In July 1918 disaffected Greek Catholic laymen from the three prairie provinces met in Saskatoon and formed a brotherhood to organize a Ukrainian Greek Orthodox Church; its first sobor followed that December (<a href="https://en.wikipedia.org/wiki/Ukrainian_Orthodox_Church_of_Canada">Ukrainian Orthodox Church of Canada</a>; <a href="https://wdm.ca/2019/01/17/100th-anniversary-of-the-founding-of-the-ukrainian-orthodox-church-of-canada/">Western Development Museum</a>). The potter Hnat&rsquo;s green-and-yellow ware belongs to the Hutsul tradition of <a href="https://en.wikipedia.org/wiki/Kosiv_painted_ceramics">Kosiv and Pistyn</a> in the Carpathians. The dyak quotes the chapter &ldquo;Concerning the honour due to the Saints and their remains&rdquo; from John of Damascus&rsquo;s eighth-century <em>Exposition of the Orthodox Faith</em>. Pruth and Cheremosh districts and the Danylchuk chapel are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the golden shrine of the Buddha Kassapa from the Dhammapada commentary (verses 195&ndash;196). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/14-09.htm">The original</a>. Scripture from John of Damascus, <em>Exposition of the Orthodox Faith</em>, tr. S. D. F. Salmond, in the Nicene and Post-Nicene Fathers (1899). Written by Claude Opus 5.5.
+  <div class="pager"><a href="mic-check.html">&larr; Mic Check</a><a href="index.html">All stories</a><a href="bean-bread.html">Bean Bread &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* Prairie heat: low at the horizon band, faint warm shapes lift and shimmer like a mirage, then settle back. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, cols = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function make() {
+    var n = Math.round(Math.max(18, Math.min(60, W / 22)));
+    cols = [];
+    for (var i = 0; i < n; i++) {
+      cols.push({ x: (i + Math.random() * 0.8) * (W / n), w: 6 + Math.random() * 18, h: 20 + Math.random() * 70, ph: Math.random() * 6.28, f: 0.0004 + Math.random() * 0.0005 });
+    }
+  }
+  function draw(t) {
+    t = reduce ? 0 : (t || 0);
+    ctx.clearRect(0, 0, W, H);
+    var base = H * 0.86;
+    /* the long black furrow line of the horizon */
+    var g0 = ctx.createLinearGradient(0, base - 2, 0, H);
+    g0.addColorStop(0, 'rgba(91,70,48,0.10)');
+    g0.addColorStop(0.25, 'rgba(91,70,48,0.06)');
+    g0.addColorStop(1, 'rgba(91,70,48,0.02)');
+    ctx.fillStyle = g0; ctx.fillRect(0, base, W, H - base);
+    var lift = 0.5 + 0.5 * Math.sin(t * 0.00012);
+    for (var i = 0; i < cols.length; i++) {
+      var k = cols[i];
+      var s = Math.sin(t * k.f + k.ph);
+      var hh = k.h * (0.55 + 0.45 * lift) * (0.8 + 0.2 * s);
+      var y0 = base - hh - 18 * lift - 6 * s;
+      var x = k.x + 3 * Math.sin(t * k.f * 2.1 + k.ph);
+      var a = 0.05 + 0.05 * lift;
+      var g = ctx.createLinearGradient(0, y0, 0, y0 + hh);
+      g.addColorStop(0, 'rgba(201,152,52,0)');
+      g.addColorStop(0.35, 'rgba(201,152,52,' + a + ')');
+      g.addColorStop(1, 'rgba(201,152,52,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(x, y0, k.w, hh);
+    }
+    /* shimmer band */
+    for (var y = base - 70; y < base; y += 3) {
+      var off = reduce ? 0 : Math.sin(y * 0.4 + t * 0.003) * 2.5;
+      ctx.fillStyle = 'rgba(255,250,235,' + (0.05 * (1 - (base - y) / 70)) + ')';
+      ctx.fillRect(off, y, W, 1);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make();
+  if (reduce) draw(0); else requestAnimationFrame(draw);
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(0); });
+})();
+</script>
+</body>
+</html>
