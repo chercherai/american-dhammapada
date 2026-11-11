@@ -36,6 +36,16 @@ li a { display: grid; grid-template-columns: 3.2rem 1fr; gap: 0 1.4rem; padding:
 .t { font-family: var(--font-display); font-size: 1.45rem; line-height: 1.2; display: flex; align-items: center; gap: .6rem; }
 .m { grid-column: 2; font-size: .95rem; color: var(--page-dim); font-style: italic; }
 li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+li.dec { height: 0; scroll-margin-top: 1rem; }
+#rail { position: fixed; right: .35rem; top: 8vh; bottom: 8vh; width: 2.6rem; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; z-index: 5; touch-action: none; user-select: none; -webkit-user-select: none; cursor: ns-resize; padding: 0 .3rem; }
+#rail .tk { flex: 1; display: flex; align-items: center; justify-content: flex-end; width: 100%; position: relative; }
+#rail .tk::after { content: ""; height: 1px; width: .5rem; background: var(--page-dim); opacity: .45; }
+#rail .tk.c::after { width: .9rem; opacity: .9; }
+#rail .tk.cur::after { background: var(--page); opacity: 1; width: 1.2rem; height: 2px; }
+#rail .tk.c span { position: absolute; right: 1.2rem; font-family: var(--font-display); font-size: .78rem; color: var(--page-dim); font-variant-numeric: tabular-nums; }
+#bubble { position: fixed; right: 3.4rem; padding: .25rem .7rem; background: var(--ink-2); border: 1px solid var(--rule); font-family: var(--font-display); font-size: 1.4rem; color: var(--page); pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 6; transform: translateY(-50%); }
+#bubble.on { opacity: 1; }
+@media (max-width: 40rem) { main { padding-right: 3rem; } }
 
 </style>
 </head>
@@ -47,23 +57,27 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <p class="kicker">305 stories, 1492 to 2026</p>
   <ol>
 <li class="century"><span>1400s</span></li>
+<li class="dec" id="d1490" aria-hidden="true"></li>
 <li><a href="the-contrary-wind.html">
   <span class="yr">1492</span>
   <span class="t"><span class="dot" style="background:#9a4a22;box-shadow:0 0 8px #2f6f68"></span>The Contrary Wind</span>
   <span class="m">The Santa María, off Hispaniola &middot; commentary 4.9, after The Elder Ānanda&#x27;s Question &middot; Fable 5.2</span>
 </a></li>
 <li class="century"><span>1500s</span></li>
+<li class="dec" id="d1510" aria-hidden="true"></li>
 <li><a href="the-silk-cotton-trees.html">
   <span class="yr">1510</span>
   <span class="t"><span class="dot" style="background:#dcc893;box-shadow:0 0 8px #b5463a"></span>The Silk-Cotton Trees</span>
   <span class="m">Santo Domingo, Hispaniola &middot; commentary 5.6, after Thirty bhikkhus from Pāṭheyya &middot; Opus 5.5</span>
 </a></li>
 <li class="century"><span>1600s</span></li>
+<li class="dec" id="d1610" aria-hidden="true"></li>
 <li><a href="light-enough.html">
   <span class="yr">1610</span>
   <span class="t"><span class="dot" style="background:#e2b869;box-shadow:0 0 8px #c9624a"></span>Light Enough</span>
   <span class="m">Jamestown, Virginia &middot; commentary 26.5, after Ānanda &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1620" aria-hidden="true"></li>
 <li><a href="beat-in-the-reed.html">
   <span class="yr">1620</span>
   <span class="t"><span class="dot" style="background:#c9a55a;box-shadow:0 0 8px #9fb2bc"></span>Beat In the Reed</span>
@@ -74,11 +88,13 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#d9673a;box-shadow:0 0 8px #f2a65a"></span>Banked Fire</span>
   <span class="m">San Juan, Puerto Rico &middot; commentary 5.12, after Ahipeta (the snake peta) &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1630" aria-hidden="true"></li>
 <li><a href="hatched-at-home.html">
   <span class="yr">1638</span>
   <span class="t"><span class="dot" style="background:#5f6b45;box-shadow:0 0 8px #7c8189"></span>Hatched at Home</span>
   <span class="m">New Plymouth, Plymouth Colony &middot; commentary 26.6, after Aññatara Pabbajita (a certain one gone forth) &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1640" aria-hidden="true"></li>
 <li><a href="cast-clouts.html">
   <span class="yr">1647</span>
   <span class="t"><span class="dot" style="background:#c99350;box-shadow:0 0 8px #b4c3c4"></span>Cast Clouts</span>
@@ -89,6 +105,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#d59a3c;box-shadow:0 0 8px #8fae9c"></span>Fourth Day</span>
   <span class="m">Enderby (fictional), Merrimack River, Massachusetts Bay &middot; commentary 6.3, after Channa &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1650" aria-hidden="true"></li>
 <li><a href="ask-on-my-son.html">
   <span class="yr">1655</span>
   <span class="t"><span class="dot" style="background:#c48a4e;box-shadow:0 0 8px #e9b878"></span>Ask On, My Son</span>
@@ -99,27 +116,32 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#2c5f68;box-shadow:0 0 8px #b9792a"></span>The New Pane</span>
   <span class="m">Beverwijck (Albany), New York &middot; commentary 17.8, after Chabbaggiya (The Group of Six) &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1660" aria-hidden="true"></li>
 <li><a href="come-in-saints.html">
   <span class="yr">1667</span>
   <span class="t"><span class="dot" style="background:#d7b47a;box-shadow:0 0 8px #b9c7cf"></span>Come In, Saints</span>
   <span class="m">Newark, New Jersey &middot; commentary 26.1, after Pasādabahula &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1670" aria-hidden="true"></li>
 <li><a href="una-de-gato.html">
   <span class="yr">1672</span>
   <span class="t"><span class="dot" style="background:#8a4b22;box-shadow:0 0 8px #b88a2c"></span>Uña de Gato</span>
   <span class="m">Jornada del Muerto, New Mexico &middot; commentary 7.9, after Khadiravaniya Revata &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1680" aria-hidden="true"></li>
 <li><a href="the-yellow-cod.html">
   <span class="yr">1686</span>
   <span class="t"><span class="dot" style="background:#d0a640;box-shadow:0 0 8px #7fa3a0"></span>The Yellow Cod</span>
   <span class="m">Gull Cove, Massachusetts Bay &middot; commentary 24.1, after Kapilamaccha &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1690" aria-hidden="true"></li>
 <li><a href="neats-tongue.html">
   <span class="yr">1691</span>
   <span class="t"><span class="dot" style="background:#c9a24c;box-shadow:0 0 8px #d6e0e6"></span>Neat’s Tongue</span>
   <span class="m">Springfield and Boston, Massachusetts &middot; commentary 18.1, after A son of a cow-killer (Goghātakaputta) &middot; Opus 5.5</span>
 </a></li>
 <li class="century"><span>1700s</span></li>
+<li class="dec" id="d1700" aria-hidden="true"></li>
 <li><a href="a-peck-a-head.html">
   <span class="yr">1700</span>
   <span class="t"><span class="dot" style="background:#d39a4a;box-shadow:0 0 8px #e9c77e"></span>A Peck a Head</span>
@@ -140,6 +162,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#2f5270;box-shadow:0 0 8px #9a7b3c"></span>The Widow&#x27;s Priests</span>
   <span class="m">New York, New York &middot; commentary 26.4, after A Certain Brahmin &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1710" aria-hidden="true"></li>
 <li><a href="four-hundredweight.html">
   <span class="yr">1717</span>
   <span class="t"><span class="dot" style="background:#d0574a;box-shadow:0 0 8px #e8b56a"></span>Four Hundredweight</span>
@@ -160,6 +183,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#dd9248;box-shadow:0 0 8px #f0b266"></span>Neither Bank</span>
   <span class="m">Stono River, South Carolina &middot; commentary 26.3, after Māra &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1720" aria-hidden="true"></li>
 <li><a href="the-flea-glass.html">
   <span class="yr">1721</span>
   <span class="t"><span class="dot" style="background:#8a6a2c;box-shadow:0 0 8px #5f8a7a"></span>The Flea-Glass</span>
@@ -175,6 +199,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#d6a94e;box-shadow:0 0 8px #f0c35a"></span>The Watch Chain</span>
   <span class="m">Germantown and Philadelphia, Pennsylvania &middot; commentary 24.3, after The Runaway Bhikkhu &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1730" aria-hidden="true"></li>
 <li><a href="what-shall-i-cry.html">
   <span class="yr">1736</span>
   <span class="t"><span class="dot" style="background:#96462f;box-shadow:0 0 8px #c99696"></span>What Shall I Cry</span>
@@ -185,6 +210,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#8b3d1f;box-shadow:0 0 8px #b2862b"></span>Snake in the Furrow</span>
   <span class="m">Roxborough Township and the Wissahickon, Pennsylvania &middot; commentary 5.8, after A Farmer (Kassaka) &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1740" aria-hidden="true"></li>
 <li><a href="the-kings-bowl.html">
   <span class="yr">1745</span>
   <span class="t"><span class="dot" style="background:#9fd6bb;box-shadow:0 0 8px #6fc7a0"></span>The King’s Bowl</span>
@@ -195,16 +221,19 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#d6a23e;box-shadow:0 0 8px #f1dca6"></span>Honeyed Grass</span>
   <span class="m">Ephrata, Pennsylvania &middot; commentary 26.32, after Sundarasamudda &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1750" aria-hidden="true"></li>
 <li><a href="cloud-of-witnesses.html">
   <span class="yr">1756</span>
   <span class="t"><span class="dot" style="background:#9e2f28;box-shadow:0 0 8px #a9852b"></span>Cloud of Witnesses</span>
   <span class="m">Newport, Rhode Island &middot; commentary 24.6, after Uggasena &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1760" aria-hidden="true"></li>
 <li><a href="copper-teeth.html">
   <span class="yr">1766</span>
   <span class="t"><span class="dot" style="background:#c46a34;box-shadow:0 0 8px #f2c98a"></span>Copper Teeth</span>
   <span class="m">New Orleans, French Louisiana &middot; commentary 8.1, after Tambadāṭhika &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1770" aria-hidden="true"></li>
 <li><a href="paid-in-rice.html">
   <span class="yr">1772</span>
   <span class="t"><span class="dot" style="background:#d6ae5a;box-shadow:0 0 8px #f2d48a"></span>Paid in Rice</span>
@@ -220,6 +249,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#2f4f6f;box-shadow:0 0 8px #8a6a3a"></span>One Hand</span>
   <span class="m">Smithtown Branch, Long Island, New York &middot; commentary 7.7, after Kosambivāsī Tissa&#x27;s Novice &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1780" aria-hidden="true"></li>
 <li><a href="locust-year.html">
   <span class="yr">1783</span>
   <span class="t"><span class="dot" style="background:#983a25;box-shadow:0 0 8px #b5602e"></span>Locust Year</span>
@@ -230,6 +260,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#de97a0;box-shadow:0 0 8px #e8955c"></span>Castile Roses</span>
   <span class="m">Santa Cruz de la Cañada, New Mexico &middot; commentary 2.1, after Udena &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1790" aria-hidden="true"></li>
 <li><a href="strained-water.html">
   <span class="yr">1791</span>
   <span class="t"><span class="dot" style="background:#8a5a2b;box-shadow:0 0 8px #4f6f7a"></span>Strained Water</span>
@@ -241,6 +272,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="m">Kodiak Island, Russian America &middot; commentary 9.9, after Koka the hunter &middot; Opus 5.5</span>
 </a></li>
 <li class="century"><span>1800s</span></li>
+<li class="dec" id="d1800" aria-hidden="true"></li>
 <li><a href="out-of-the-fire.html">
   <span class="yr">1801</span>
   <span class="t"><span class="dot" style="background:#d98a4a;box-shadow:0 0 8px #c9b48a"></span>Out of the Fire</span>
@@ -271,6 +303,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#c4914a;box-shadow:0 0 8px #d9a35a"></span>These Presents</span>
   <span class="m">Deep Creek, Norfolk County, Virginia &middot; commentary 26.19, after Aññatarabrāhmaṇa (a certain Brahmin) &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1810" aria-hidden="true"></li>
 <li><a href="little-brother.html">
   <span class="yr">1816</span>
   <span class="t"><span class="dot" style="background:#96402f;box-shadow:0 0 8px #c8962e"></span>Little Brother</span>
@@ -291,6 +324,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#d6b04a;box-shadow:0 0 8px #e39a4c"></span>The Nooning</span>
   <span class="m">Meetinghouse Hill (fictional), Tolland County, Connecticut &middot; commentary 12.8, after Kāla &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1820" aria-hidden="true"></li>
 <li><a href="the-childrens-house.html">
   <span class="yr">1824</span>
   <span class="t"><span class="dot" style="background:#d9a66b;box-shadow:0 0 8px #8fb0cf"></span>The Children&#x27;s House</span>
@@ -306,6 +340,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#3f6b4a;box-shadow:0 0 8px #8a6a2c"></span>The Level</span>
   <span class="m">Genesee County, New York &middot; commentary 15.3, after Kosalarañño Parājaya (Pasenadi) &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1830" aria-hidden="true"></li>
 <li><a href="the-cooling-board.html">
   <span class="yr">1832</span>
   <span class="t"><span class="dot" style="background:#2f5770;box-shadow:0 0 8px #9a4a2c"></span>The Cooling Board</span>
@@ -331,6 +366,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#2c4f7a;box-shadow:0 0 8px #b3832a"></span>Another Man&#x27;s Hat</span>
   <span class="m">San Miguel del Vado, New Mexico &middot; commentary 8.7, after Sāriputta&#x27;s Friend &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1840" aria-hidden="true"></li>
 <li><a href="the-oakum-loft.html">
   <span class="yr">1846</span>
   <span class="t"><span class="dot" style="background:#cf8f36;box-shadow:0 0 8px #a9c0dc"></span>The Oakum Loft</span>
@@ -356,6 +392,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#c8553d;box-shadow:0 0 8px #c99a4a"></span>A Whole Hand</span>
   <span class="m">Philadelphia and the New Jersey Pine Barrens &middot; commentary 9.8, after Kukkuṭamitta &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1850" aria-hidden="true"></li>
 <li><a href="a-jar-of-sand.html">
   <span class="yr">1850</span>
   <span class="t"><span class="dot" style="background:#d6a53a;box-shadow:0 0 8px #9fb7b0"></span>A Jar of Sand</span>
@@ -386,6 +423,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#dd8f5e;box-shadow:0 0 8px #f0c890"></span>Seven Winters</span>
   <span class="m">San Juan Island, Washington &middot; commentary 26.31, after The Elder Sīvali &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1860" aria-hidden="true"></li>
 <li><a href="the-fanner.html">
   <span class="yr">1862</span>
   <span class="t"><span class="dot" style="background:#d8ab3c;box-shadow:0 0 8px #f0cf7a"></span>The Fanner</span>
@@ -411,6 +449,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#7a4a1e;box-shadow:0 0 8px #b0752f"></span>The Fiftieth Buggy</span>
   <span class="m">Harrisonville, Missouri &middot; commentary 26.39, after The Elder Aṅgulimāla &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1870" aria-hidden="true"></li>
 <li><a href="as-if-living.html">
   <span class="yr">1870</span>
   <span class="t"><span class="dot" style="background:#7a4a1e;box-shadow:0 0 8px #5f7a3c"></span>As If Living</span>
@@ -441,6 +480,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#d8bf6a;box-shadow:0 0 8px #f4efdc"></span>Pond Lilies</span>
   <span class="m">Mashpee, Massachusetts &middot; commentary 4.12, after Garahadinna &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1880" aria-hidden="true"></li>
 <li><a href="the-last-course.html">
   <span class="yr">1884</span>
   <span class="t"><span class="dot" style="background:#7d2230;box-shadow:0 0 8px #a5812f"></span>The Last Course</span>
@@ -476,6 +516,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#d9b77a;box-shadow:0 0 8px #9fb6d6"></span>The Blue Cup</span>
   <span class="m">Goodhue County, Minnesota &middot; commentary 5.7, after Suppabuddha &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1890" aria-hidden="true"></li>
 <li><a href="eight-handfuls.html">
   <span class="yr">1892</span>
   <span class="t"><span class="dot" style="background:#4b6283;box-shadow:0 0 8px #b8696a"></span>Eight Handfuls</span>
@@ -527,6 +568,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="m">Caledonia County, Vermont &middot; commentary 7.8, after Sāriputta &middot; Fable 5.2</span>
 </a></li>
 <li class="century"><span>1900s</span></li>
+<li class="dec" id="d1900" aria-hidden="true"></li>
 <li><a href="since-morning.html">
   <span class="yr">1901</span>
   <span class="t"><span class="dot" style="background:#e59aa6;box-shadow:0 0 8px #c4473a"></span>Since Morning</span>
@@ -582,6 +624,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#8a6a24;box-shadow:0 0 8px #9a3a2c"></span>The Compass Card</span>
   <span class="m">Takoma Park, Maryland &middot; commentary 26.9, after Sāriputta &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1910" aria-hidden="true"></li>
 <li><a href="strangler-fig.html">
   <span class="yr">1910</span>
   <span class="t"><span class="dot" style="background:#34452f;box-shadow:0 0 8px #a9523a"></span>Strangler Fig</span>
@@ -662,6 +705,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#cf8350;box-shadow:0 0 8px #e3ac6e"></span>The Seventh Floor</span>
   <span class="m">Butte, Montana &middot; commentary 9.12, after Suppabuddha &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1920" aria-hidden="true"></li>
 <li><a href="no-winters.html">
   <span class="yr">1923</span>
   <span class="t"><span class="dot" style="background:#d9a648;box-shadow:0 0 8px #f6cf7c"></span>No Winters</span>
@@ -712,6 +756,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#39586a;box-shadow:0 0 8px #6f93a6"></span>Spilt Water</span>
   <span class="m">Lake Okeechobee, Florida &middot; commentary 8.12, after Paṭācārā &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1930" aria-hidden="true"></li>
 <li><a href="the-long-day.html">
   <span class="yr">1930</span>
   <span class="t"><span class="dot" style="background:#e0a458;box-shadow:0 0 8px #8cbec8"></span>The Long Day</span>
@@ -772,6 +817,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#8a3d1e;box-shadow:0 0 8px #c27531"></span>The Firefinder</span>
   <span class="m">Lolo National Forest, Montana &middot; commentary 23.7, after A company of bhikkhus (Pārileyyaka) &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1940" aria-hidden="true"></li>
 <li><a href="dead-air.html">
   <span class="yr">1943</span>
   <span class="t"><span class="dot" style="background:#e0a23e;box-shadow:0 0 8px #c8553d"></span>Dead Air</span>
@@ -837,6 +883,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#9b2f29;box-shadow:0 0 8px #4d6c8c"></span>Thornapple Hill</span>
   <span class="m">Endicott, New York &middot; commentary 26.29, after Revata &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1950" aria-hidden="true"></li>
 <li><a href="the-night-board.html">
   <span class="yr">1950</span>
   <span class="t"><span class="dot" style="background:#d9a35a;box-shadow:0 0 8px #ffd696"></span>The Night Board</span>
@@ -902,6 +949,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#5d6f33;box-shadow:0 0 8px #a77b1e"></span>No Guile</span>
   <span class="m">Caddo Springs, Alabama &middot; commentary 26.24, after Mahā Panthaka &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1960" aria-hidden="true"></li>
 <li><a href="the-pickle-stone.html">
   <span class="yr">1961</span>
   <span class="t"><span class="dot" style="background:#8f6400;box-shadow:0 0 8px #c9a227"></span>The Pickle Stone</span>
@@ -982,6 +1030,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#d8c48c;box-shadow:0 0 8px #cfd6dc"></span>Three Shirts</span>
   <span class="m">Outagamie County, Wisconsin &middot; commentary 3.4, after Nephew Saṅgharakkhita &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1970" aria-hidden="true"></li>
 <li><a href="the-partition.html">
   <span class="yr">1971</span>
   <span class="t"><span class="dot" style="background:#d6aa6e;box-shadow:0 0 8px #6ec4be"></span>The Partition</span>
@@ -1062,6 +1111,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#74c2b8;box-shadow:0 0 8px #e0a94a"></span>Neither East nor West</span>
   <span class="m">Upper Kanawha Valley, West Virginia &middot; commentary 24.9, after The Ājīvaka Upaka &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d1980" aria-hidden="true"></li>
 <li><a href="hombre-sincero.html">
   <span class="yr">1980</span>
   <span class="t"><span class="dot" style="background:#d8b46e;box-shadow:0 0 8px #cf7f62"></span>Hombre Sincero</span>
@@ -1157,6 +1207,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#6fa8ad;box-shadow:0 0 8px #e0b25c"></span>Kaneez’s Mother</span>
   <span class="m">Corona, Queens, New York &middot; commentary 6.7, after Kāṇamātā &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d1990" aria-hidden="true"></li>
 <li><a href="better-than-sleep.html">
   <span class="yr">1990</span>
   <span class="t"><span class="dot" style="background:#d7a546;box-shadow:0 0 8px #f4cb78"></span>Better Than Sleep</span>
@@ -1243,6 +1294,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="m">Cumberland Gap, Virginia &middot; commentary 14.6, after The Brahmin Aggidatta &middot; Opus 5.5</span>
 </a></li>
 <li class="century"><span>2000s</span></li>
+<li class="dec" id="d2000" aria-hidden="true"></li>
 <li><a href="twenty-thousand-days.html">
   <span class="yr">2000</span>
   <span class="t"><span class="dot" style="background:#44606b;box-shadow:0 0 8px #8a3b2c"></span>Twenty Thousand Days</span>
@@ -1338,6 +1390,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#d39189;box-shadow:0 0 8px #9db0c8"></span>Two Ribbons</span>
   <span class="m">Lakewood and Fort Lewis, Washington &middot; commentary 22.4, after Khema &middot; Opus 5.5</span>
 </a></li>
+<li class="dec" id="d2010" aria-hidden="true"></li>
 <li><a href="mic-check.html">
   <span class="yr">2011</span>
   <span class="t"><span class="dot" style="background:#e2a95c;box-shadow:0 0 8px #6f93c2"></span>Mic Check</span>
@@ -1473,6 +1526,7 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
   <span class="t"><span class="dot" style="background:#6b3c80;box-shadow:0 0 8px #b97f14"></span>Seven Doors</span>
   <span class="m">Scott County, Mississippi &middot; commentary 4.5, after Macchariya Kosiya (the selfish Kosiya) &middot; Fable 5.2</span>
 </a></li>
+<li class="dec" id="d2020" aria-hidden="true"></li>
 <li><a href="four-saplings.html">
   <span class="yr">2020</span>
   <span class="t"><span class="dot" style="background:#a6c861;box-shadow:0 0 8px #e8c86a"></span>Four Saplings</span>
@@ -1580,5 +1634,30 @@ li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text
 </a></li>
   </ol>
 </main>
+<nav id="rail" aria-label="Jump to decade"><div class="tk c" data-d="1490" title="1490s, 1 story"><span>1400s</span></div><div class="tk c" data-d="1510" title="1510s, 1 story"><span>1500s</span></div><div class="tk c" data-d="1610" title="1610s, 1 story"><span>1600s</span></div><div class="tk" data-d="1620" title="1620s, 2 stories"></div><div class="tk" data-d="1630" title="1630s, 1 story"></div><div class="tk" data-d="1640" title="1640s, 2 stories"></div><div class="tk" data-d="1650" title="1650s, 2 stories"></div><div class="tk" data-d="1660" title="1660s, 1 story"></div><div class="tk" data-d="1670" title="1670s, 1 story"></div><div class="tk" data-d="1680" title="1680s, 1 story"></div><div class="tk" data-d="1690" title="1690s, 1 story"></div><div class="tk c" data-d="1700" title="1700s, 4 stories"><span>1700s</span></div><div class="tk" data-d="1710" title="1710s, 4 stories"></div><div class="tk" data-d="1720" title="1720s, 3 stories"></div><div class="tk" data-d="1730" title="1730s, 2 stories"></div><div class="tk" data-d="1740" title="1740s, 2 stories"></div><div class="tk" data-d="1750" title="1750s, 1 story"></div><div class="tk" data-d="1760" title="1760s, 1 story"></div><div class="tk" data-d="1770" title="1770s, 3 stories"></div><div class="tk" data-d="1780" title="1780s, 2 stories"></div><div class="tk" data-d="1790" title="1790s, 2 stories"></div><div class="tk c" data-d="1800" title="1800s, 6 stories"><span>1800s</span></div><div class="tk" data-d="1810" title="1810s, 4 stories"></div><div class="tk" data-d="1820" title="1820s, 3 stories"></div><div class="tk" data-d="1830" title="1830s, 5 stories"></div><div class="tk" data-d="1840" title="1840s, 5 stories"></div><div class="tk" data-d="1850" title="1850s, 6 stories"></div><div class="tk" data-d="1860" title="1860s, 5 stories"></div><div class="tk" data-d="1870" title="1870s, 6 stories"></div><div class="tk" data-d="1880" title="1880s, 7 stories"></div><div class="tk" data-d="1890" title="1890s, 10 stories"></div><div class="tk c" data-d="1900" title="1900s, 11 stories"><span>1900s</span></div><div class="tk" data-d="1910" title="1910s, 16 stories"></div><div class="tk" data-d="1920" title="1920s, 10 stories"></div><div class="tk" data-d="1930" title="1930s, 12 stories"></div><div class="tk" data-d="1940" title="1940s, 13 stories"></div><div class="tk" data-d="1950" title="1950s, 13 stories"></div><div class="tk" data-d="1960" title="1960s, 16 stories"></div><div class="tk" data-d="1970" title="1970s, 16 stories"></div><div class="tk" data-d="1980" title="1980s, 19 stories"></div><div class="tk" data-d="1990" title="1990s, 17 stories"></div><div class="tk c" data-d="2000" title="2000s, 19 stories"><span>2000s</span></div><div class="tk" data-d="2010" title="2010s, 27 stories"></div><div class="tk" data-d="2020" title="2020s, 21 stories"></div></nav><div id="bubble"></div>
+<script>
+(() => {
+  const rail = document.getElementById("rail"), bub = document.getElementById("bubble");
+  const tks = [...rail.querySelectorAll(".tk")];
+  let dragging = false;
+  function pick(y) {
+    const r = rail.getBoundingClientRect();
+    const i = Math.max(0, Math.min(tks.length - 1, Math.floor((y - r.top) / r.height * tks.length)));
+    const d = tks[i].dataset.d;
+    document.getElementById("d" + d).scrollIntoView({block: "start"});
+    bub.textContent = d + "s"; bub.style.top = y + "px"; bub.classList.add("on");
+  }
+  rail.addEventListener("pointerdown", e => { dragging = true; rail.setPointerCapture(e.pointerId); pick(e.clientY); });
+  rail.addEventListener("pointermove", e => { if (dragging) pick(e.clientY); });
+  const end = () => { dragging = false; bub.classList.remove("on"); };
+  rail.addEventListener("pointerup", end); rail.addEventListener("pointercancel", end);
+  const marks = tks.map(t => document.getElementById("d" + t.dataset.d));
+  function mark() {
+    let k = 0; marks.forEach((m, i) => { if (m.getBoundingClientRect().top < innerHeight * .3) k = i; });
+    tks.forEach((t, i) => t.classList.toggle("cur", i === k));
+  }
+  addEventListener("scroll", mark, {passive: true}); mark();
+})();
+</script>
 </body>
 </html>

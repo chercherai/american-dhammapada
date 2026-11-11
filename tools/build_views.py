@@ -59,11 +59,15 @@ a:focus-visible {{ outline: 2px solid var(--page); outline-offset: 3px; }}
 
 # ---------- timeline ----------
 ms = sorted(metas, key=lambda m: (year_of(m), m["num"]))
-rows, cur_c = [], None
+rows, cur_c, decs = [], None, []
 for m in ms:
     y = year_of(m); c = y // 100
     if c != cur_c:
         rows.append(f'<li class="century"><span>{c}00s</span></li>'); cur_c = c
+    d = y // 10 * 10
+    if not decs or decs[-1][0] != d:
+        decs.append([d, 0]); rows.append(f'<li class="dec" id="d{d}" aria-hidden="true"></li>')
+    decs[-1][1] += 1
     model = e(m.get("model", "").replace("Claude ", ""))
     rows.append(f'''<li><a href="{e(m['file'])}">
   <span class="yr">{y}</span>
@@ -79,9 +83,47 @@ li a { display: grid; grid-template-columns: 3.2rem 1fr; gap: 0 1.4rem; padding:
 .t { font-family: var(--font-display); font-size: 1.45rem; line-height: 1.2; display: flex; align-items: center; gap: .6rem; }
 .m { grid-column: 2; font-size: .95rem; color: var(--page-dim); font-style: italic; }
 li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+li.dec { height: 0; scroll-margin-top: 1rem; }
+#rail { position: fixed; right: .35rem; top: 8vh; bottom: 8vh; width: 2.6rem; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; z-index: 5; touch-action: none; user-select: none; -webkit-user-select: none; cursor: ns-resize; padding: 0 .3rem; }
+#rail .tk { flex: 1; display: flex; align-items: center; justify-content: flex-end; width: 100%; position: relative; }
+#rail .tk::after { content: ""; height: 1px; width: .5rem; background: var(--page-dim); opacity: .45; }
+#rail .tk.c::after { width: .9rem; opacity: .9; }
+#rail .tk.cur::after { background: var(--page); opacity: 1; width: 1.2rem; height: 2px; }
+#rail .tk.c span { position: absolute; right: 1.2rem; font-family: var(--font-display); font-size: .78rem; color: var(--page-dim); font-variant-numeric: tabular-nums; }
+#bubble { position: fixed; right: 3.4rem; padding: .25rem .7rem; background: var(--ink-2); border: 1px solid var(--rule); font-family: var(--font-display); font-size: 1.4rem; color: var(--page); pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 6; transform: translateY(-50%); }
+#bubble.on { opacity: 1; }
+@media (max-width: 40rem) { main { padding-right: 3rem; } }
 """
+newc = lambda i: i == 0 or decs[i][0] // 100 != decs[i-1][0] // 100
+ticks = "".join(f'<div class="tk{" c" if newc(i) else ""}" data-d="{d}" title="{d}s, {n} {"story" if n == 1 else "stories"}">' + (f'<span>{d // 100}00s</span>' if newc(i) else '') + '</div>' for i, (d, n) in enumerate(decs))
+RAIL = f'''<nav id="rail" aria-label="Jump to decade">{ticks}</nav><div id="bubble"></div>
+<script>
+(() => {{
+  const rail = document.getElementById("rail"), bub = document.getElementById("bubble");
+  const tks = [...rail.querySelectorAll(".tk")];
+  let dragging = false;
+  function pick(y) {{
+    const r = rail.getBoundingClientRect();
+    const i = Math.max(0, Math.min(tks.length - 1, Math.floor((y - r.top) / r.height * tks.length)));
+    const d = tks[i].dataset.d;
+    document.getElementById("d" + d).scrollIntoView({{block: "start"}});
+    bub.textContent = d + "s"; bub.style.top = y + "px"; bub.classList.add("on");
+  }}
+  rail.addEventListener("pointerdown", e => {{ dragging = true; rail.setPointerCapture(e.pointerId); pick(e.clientY); }});
+  rail.addEventListener("pointermove", e => {{ if (dragging) pick(e.clientY); }});
+  const end = () => {{ dragging = false; bub.classList.remove("on"); }};
+  rail.addEventListener("pointerup", end); rail.addEventListener("pointercancel", end);
+  const marks = tks.map(t => document.getElementById("d" + t.dataset.d));
+  function mark() {{
+    let k = 0; marks.forEach((m, i) => {{ if (m.getBoundingClientRect().top < innerHeight * .3) k = i; }});
+    tks.forEach((t, i) => t.classList.toggle("cur", i === k));
+  }}
+  addEventListener("scroll", mark, {{passive: true}}); mark();
+}})();
+</script>
+'''
 page = HEAD.format(title="Walking the American Way by Year", layout="one vertical timeline grouped by century", maxw="40rem", extra=extra, h1="By year", nav=NAV("year"))
-page += f'  <p class="kicker">{len(ms)} stories, {year_of(ms[0])} to {year_of(ms[-1])}</p>\n  <ol>\n' + "\n".join(rows) + "\n  </ol>\n</main>\n</body>\n</html>\n"
+page += f'  <p class="kicker">{len(ms)} stories, {year_of(ms[0])} to {year_of(ms[-1])}</p>\n  <ol>\n' + "\n".join(rows) + "\n  </ol>\n</main>\n" + RAIL + "</body>\n</html>\n"
 open(os.path.join(HERE, "timeline.html"), "w").write(page)
 
 # ---------- map ----------
@@ -95,7 +137,13 @@ svg { width: 100%; height: auto; display: block; }
 .sea { fill: #141619; }
 .grat { fill: none; stroke: rgba(230,225,214,.05); stroke-width: .5; }
 .route { fill: none; stroke-width: 1.2; stroke-dasharray: 3 4; opacity: .7; }
-.pin { cursor: pointer; stroke: #111214; stroke-width: 1.2; }
+.pin { cursor: pointer; stroke: #111214; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.land, .grat, .route { vector-effect: non-scaling-stroke; }
+#map { cursor: grab; touch-action: none; }
+#map:active { cursor: grabbing; }
+.zoomer { display: flex; gap: .4rem; margin-top: .6rem; }
+.zoomer button { font: inherit; font-family: var(--font-display); font-size: 1.1rem; min-width: 2.4rem; padding: .2rem .6rem; background: var(--ink-2); color: var(--page); border: 1px solid var(--rule); cursor: pointer; }
+.zoomer button:hover { border-color: var(--page-dim); }
 .pin:hover, .pin.on { stroke: #e6e1d6; stroke-width: 2; }
 #card { min-height: 6.5rem; margin-top: 1.25rem; padding: 1rem 1.25rem; border: 1px solid var(--rule); background: var(--ink-2); }
 #card .t { font-family: var(--font-display); font-size: 1.6rem; color: var(--page); text-decoration: none; display: flex; align-items: center; gap: .6rem; }
@@ -105,7 +153,8 @@ svg { width: 100%; height: auto; display: block; }
 """
 page = HEAD.format(title="Walking the American Way on the Map", layout="one full-width map of the continent, no borders drawn, a detail card below", maxw="62rem", extra=extra, h1="On the map", nav=NAV("map"))
 page += """  <svg id="map" viewBox="0 0 975 720" role="img" aria-label="Map of North America, without borders, with a point for each story"></svg>
-  <div id="card"><p class="hint">Tap or hover a point to see the story set there. Dashed lines follow journeys.</p></div>
+  <div class="zoomer"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">&minus;</button><button id="zreset">Reset</button></div>
+  <div id="card"><p class="hint">Tap or hover a point to see the story set there. Dashed lines follow journeys. Drag to pan; pinch, scroll or use the buttons to zoom.</p></div>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
@@ -118,20 +167,21 @@ const frame = {type: "MultiPoint", coordinates: [[-160, 18], [-62, 16], [-150, 6
 const proj = d3.geoConicConformal().parallels([20, 60]).rotate([105, 0]).fitExtent([[10, 10], [965, 710]], frame);
 const path = d3.geoPath(proj);
 svg.append("rect").attr("class", "sea").attr("width", 975).attr("height", 720);
-svg.append("path").attr("class", "grat").attr("d", path(d3.geoGraticule().step([10, 10])()));
-svg.append("path").attr("class", "land").attr("d", path(land));
+const world = svg.append("g");
+world.append("path").attr("class", "grat").attr("d", path(d3.geoGraticule().step([10, 10])()));
+world.append("path").attr("class", "land").attr("d", path(land));
 const card = document.getElementById("card");
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 function show(p, el) {
   d3.selectAll(".pin").classed("on", false); d3.select(el).classed("on", true);
   card.innerHTML = '<a class="t" href="' + p.f + '"><span class="dot" style="background:' + p.a + '"></span>' + esc(p.t) + '</a><p>' + esc(p.p) + ' &middot; ' + p.y + ' &middot; commentary ' + esc(p.n) + '</p>';
 }
-const routes = svg.append("g"), g = svg.append("g");
+const routes = world.append("g"), g = world.append("g");
 PTS.forEach(p => {
   if (p.r && p.r.length) {
     const line = {type: "LineString", coordinates: [[p.lon, p.lat]].concat(p.r.map(q => [q[1], q[0]]))};
     routes.append("path").attr("class", "route").attr("stroke", p.a).attr("d", path(line));
-    p.r.forEach(q => { const xy = proj([q[1], q[0]]); routes.append("circle").attr("cx", xy[0]).attr("cy", xy[1]).attr("r", 2.5).attr("fill", p.a).attr("opacity", .7); });
+    p.r.forEach(q => { const xy = proj([q[1], q[0]]); routes.append("circle").attr("cx", xy[0]).attr("cy", xy[1]).attr("class", "stop").attr("r", 2.5).attr("fill", p.a).attr("opacity", .7); });
   }
 });
 PTS.sort((a, b) => a.lat - b.lat).forEach(p => {
@@ -145,6 +195,18 @@ PTS.sort((a, b) => a.lat - b.lat).forEach(p => {
   el.addEventListener("click", () => { if (el.classList.contains("on") && matchMedia("(hover: hover)").matches) location.href = p.f; else show(p, el); });
   el.addEventListener("keydown", ev => { if (ev.key === "Enter") location.href = p.f; });
 });
+const zoom = d3.zoom().scaleExtent([1, 24]).translateExtent([[0, 0], [975, 720]])
+  .on("zoom", ev => {
+    const k = ev.transform.k;
+    world.attr("transform", ev.transform);
+    g.selectAll(".pin").attr("r", 6 / Math.pow(k, .8));
+    routes.selectAll(".stop").attr("r", 2.5 / Math.pow(k, .8));
+  });
+svg.call(zoom).on("dblclick.zoom", null);
+const ease = () => svg.transition().duration(350);
+document.getElementById("zin").onclick = () => ease().call(zoom.scaleBy, 2);
+document.getElementById("zout").onclick = () => ease().call(zoom.scaleBy, .5);
+document.getElementById("zreset").onclick = () => ease().call(zoom.transform, d3.zoomIdentity);
 </script>
 </body>
 </html>
