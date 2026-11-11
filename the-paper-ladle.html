@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Paper Ladle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one column in a dim parlor; incense smoke drifts up from a swinging censer below the text. */
+  --ground: #19130f;
+  --ground-2: #261c17;
+  --paper: #ebe0d1;
+  --paper-dim: #a8998a;
+  --apricot: #dba15e;
+  --pomegranate: #b2453f;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 115%, #33231a 0%, var(--ground) 62%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(235,224,209,.2); }
+.series a:hover { color: var(--apricot); }
+a:focus-visible { outline: 2px solid var(--apricot); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--apricot); text-wrap: balance; text-shadow: 0 0 26px rgba(219,161,94,.2); }
+.epigraph { border-left: 1px solid rgba(219,161,94,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--apricot); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--apricot); }
+.rite { font-family: var(--font-display); font-style: italic; color: var(--paper-dim); font-size: 1rem; padding-left: 1.25rem; border-left: 1px solid rgba(178,69,63,.45); }
+.qa p { margin: 0 0 .6rem; }
+.qa .q { font-family: var(--font-display); color: var(--apricot); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(38,28,23,.78); border: 1px solid rgba(235,224,209,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--pomegranate); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .6; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(235,224,209,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--apricot); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--apricot); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--apricot); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--apricot); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--apricot); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--apricot); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(38,28,23,.78); border-left: 2px solid var(--apricot); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.17 &middot; S&#257;riputta</span></nav>
+<header>
+  <h1>The Paper Ladle</h1>
+  <div class="epigraph">What Matter was to Fragrance sweet is turned&mdash;<br>The cleansing fire its purity restores.<br>&mdash; Zabel Yesayan, &ldquo;Incense&rdquo;</div>
+</header>
+
+<p class="heard"><span class="heard-lead">Aysbes lsetsi,</span> below Mount Auburn Street.</p>
+
+<section>
+  <h2>I. The Blessing</h2>
+  <p class="dateline">Dexter Avenue, East Watertown, Massachusetts &middot; the Tuesday after Easter, April 1934</p>
+  <p>The tray was on the dining table under the good cloth: a glass of water, a saucer of salt, a slice of the Easter choreg. Hripsime Garabedian had set it out at six in the morning and then sat in the parlor in her black dress with her hands in her lap for five hours, and when the bell rang she let it ring twice before she got up.</p>
+  <p>He was on the step in his black robe and his pointed hood, with the censer in his hand and the little case of wafers under his arm, and behind him on the walk were the four altar boys from the new church on Mount Auburn Street, and her grandson Arto was one of them, with his hair wet down. Her son kissed her hand. She let him.</p>
+  <p><em>Come in, Father,</em> she said. <em>Sit. You must be tired. How many houses is it today? Twenty? Thirty? Sit down.</em></p>
+  <p>He began the prayers standing. She did not sit down either.</p>
+  <p class="rite">He lit the charcoal from the box of matches she handed him, and put the grains on it, and the smoke went up.</p>
+  <p><em>Thirty houses. And in every one a cup of coffee and a piece of somebody's choreg and a spoon of somebody's harissa and a quarter in your hand at the door, and you say thank you, Digin, God bless your table, and you go next door and do it again. I have seen you. Mrs. Kasparian on Arlington Street saw you on Sunday scraping the bottom of her pot. Scraping it. She said the Vartabed is very humble, he would not let her open a new jar. I said yes, he is very humble.</em></p>
+  <p class="rite">He blessed the water. He made the cross over it three times.</p>
+  <p><em>Do you remember the harissa in Kharpert? Your father's mother made it in the copper pot with the lid that had a bird on the handle, and the whole street came, and you were so small you sat in the pot after, and licked the ladle, the back of the ladle, and your grandfather laughed until he had to hold the wall. I carried that ladle out. Did you know that? I carried it to Aleppo inside my dress. I carried it to Marseille. It is in that drawer. Everything else I left on the road and I carried a ladle, and you, and your sister. And now you go up and down Dexter Avenue licking the backs of other women's ladles.</em></p>
+  <p class="rite">He blessed the salt.</p>
+  <p><em>Your father had the shop on Boylston Street when he died. You know what we had. You know I bought these two houses with the rugs your father and I washed by hand in the cellar on Nichols Avenue. The shop was yours. Mr. Hovsepian would have taught you the books. You could have married any girl from here to Worcester. You had the shop and the houses and your father's name, and you went to Jerusalem and lay down on your face on a stone floor and gave them your name too, and came back with this one, which is not a name, which is a saint's name off a calendar. Arsen. Who is Arsen? My son is Krikor.</em></p>
+  <p class="rite">He blessed the bread, and set the wafer on it, stamped with a cross and grapes and wheat.</p>
+  <p><em>Khrimian Hayrik said that at Berlin there was a great pot of harissa on the table, and the Bulgarians and the Serbs came in with iron ladles and took their share, and the Armenians came with a ladle made of paper, and it went soft in the pot and they came home with nothing. Your father made us learn that. Everybody's father made them learn that. So here is my son. Fifteen hundred thousand dead, and they burned Kharpert, and I walked to Aleppo with my feet tied up in my own hair, and when we get to America and I make him an iron ladle with my two hands, he goes and makes himself one out of paper. You have ruined me. Do you know that? You have ruined me, Krikor. Sit down. Eat.</em></p>
+  <p>He sat down at her table. She brought the harissa in the blue bowl and he ate it, all of it, with the spoon she gave him, slowly, and did not say anything.</p>
+  <p>Then she turned to the boys standing against the wall with the candles.</p>
+  <p><em>And you. You are the ones who made my son your errand boy. You walk behind him and swing his smoke and eat on his account in every house in East Watertown. Sit. Eat. God made men and women; who made monks? Sit down, I said.</em></p>
+  <p>They sat. She fed them. She fed her grandson last, and gave him the biggest bowl, and pinched his ear so hard it was red the rest of the day.</p>
+  <p>When they had eaten, her son stood and finished the prayers, and blessed the house and every room of it, and her, and asked God to keep it from enemies seen and unseen, and gave her the wafer. He kissed her hand again at the door. She let him. Then he went down the steps to the Kasparians' and the boys went after him, and Hripsime stood at the window behind the lace and watched the smoke go away along Dexter Avenue, a little at every door, until she could not see it.</p>
+</section>
+
+<section>
+  <h2>II. Questions and Answers</h2>
+  <p class="dateline">The Sahag Mesrob school, the church hall on Mount Auburn Street &middot; Saturday</p>
+  <p>Arto brought Varjouhi a piece of his grandmother's choreg wrapped in wax paper, as he had been told to, and set it on her desk and asked her to eat.</p>
+  <p>Her name was Mrs. Takouhi Kalfayan, but nobody under fifty in the parish called her anything but Varjouhi, which only means teacher. She had come from Van. She had taught the alphabet in that city in the year the city was besieged, and in Erivan the year after, to orphans, in a tent, and now she taught it on Saturday mornings in the new hall on Mount Auburn Street to the children of rubber workers from Hood's, who would rather have been playing ball. She was very small. She had a way of asking you something as if the answer had been yours from the beginning and she only wanted to hear you say it. She broke off a piece of the choreg and ate it and asked him questions the way they did in the old catechism, and he answered the way the catechism answers.</p>
+  <div class="qa">
+    <p><span class="q">Where were you on Tuesday?</span></p>
+    <p>On the house blessings, Varjouhi. With Hayr Surp.</p>
+    <p><span class="q">To whose houses did you go?</span></p>
+    <p>To the houses on Dexter Avenue. To my grandmother's.</p>
+    <p><span class="q">And what did your grandmother say to Hayr Surp?</span></p>
+    <p>She said he was a beggar. She said he licks other women's ladles.</p>
+    <p><span class="q">What else?</span></p>
+    <p>She said things. This and that.</p>
+    <p><span class="q">And what did Hayr Surp answer her?</span></p>
+    <p>Nothing, Varjouhi.</p>
+    <p><span class="q">Nothing?</span></p>
+    <p>He ate the harissa. He said nothing.</p>
+  </div>
+  <p>She nodded, and finished her piece of choreg, and folded up the wax paper and put it in the drawer of her desk, and sent him back to his letters.</p>
+</section>
+
+<section>
+  <h2>III. Incense</h2>
+  <p class="dateline">The church hall &middot; the same afternoon</p>
+  <p>The story had gone through the parish by then. The hall had only opened that winter, and the heat had only just been put in, and the men who had carried the boxes of hymnals in from the truck were still sitting at the long tables in the afternoon with coffee, and the altar boys were stacking chairs, and the women were in the kitchen, and all of them were talking about it.</p>
+  <p>It was a wonderful thing, the men said. You know her, Hripsime Garabedian. You know her tongue. She said it all, in front of the boys, in front of God and the censer. And he did not raise his eyes. Not one word, not to his own mother. A man of thirty, and a priest. He sat and ate his harissa. What other man in this parish could do that? Mardiros said he himself would have thrown the bowl. Hagop said his own mother would have thrown it first.</p>
+  <p>Varjouhi was at the end of the table with her coat on, waiting for her ride. Somebody asked her what she thought.</p>
+  <p>She said that she did not think it was so wonderful. She said that a man has to have something lit in him to catch fire when it is thrown, and that a man who has let all of that burn up already has nothing left in him for it to catch on. She said it is not that he is holding his temper. It is that there is no more temper. It went up. And she said, in Armenian, four lines about the incense from a poem by a woman of Scutari that she had taught to older girls in Van before the war, and the women in the kitchen door stopped talking to hear it.</p>
+  <div class="verse">
+    <p>Consumed within the censer now, and burned,<br>The incense through the boundless ether soars.<br>What Matter was to Fragrance sweet is turned&mdash;<br>The cleansing fire its purity restores.</p>
+    <p>&mdash; Zabel Yesayan, &ldquo;Incense&rdquo;</p>
+  </div>
+  <p><em>He has finished,</em> she said. <em>He is not coming back again as anything. That is the last of him, and it is very sweet. His mother is not finished, God keep her. Somebody should go and sit with her.</em></p>
+  <p>Then her ride came, and she went out.</p>
+  <div class="brk" aria-hidden="true">&bull;&bull;&bull;</div>
+  <p>Hripsime Garabedian lived to be ninety-one and never once in her life said a kind word about the priesthood in anybody's hearing. But it is known in the family, because Arto's mother saw it, that on the night of the blessing she took the wafer her son had left on the tray and laid it in the flour jar, the way her own mother had done in Kharpert, and opened the drawer by the stove, and took out the old copper ladle with the bird on the handle, and pressed the flour smooth over it with the back of the ladle, and stood a long time in the kitchen with the ladle in her hand.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who is free from anger, dutiful, virtuous, without appetite, who is subdued, and has received his last body.<cite>Dhammapada 400, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>S&#257;riputta, the Buddha's chief disciple, comes on his alms round with five hundred monks to his mother's house in his home village. She, a Brahmin woman who never forgave him for leaving a great fortune, seats him and feeds him while abusing him as an "eater of leavings" who licks the backs of strangers' ladles, and abuses the monks for making her son their page-boy. He eats and goes back without a word. R&#257;hula, the young novice, reports it to the Buddha in a short exchange of questions and answers; when the monks marvel at S&#257;riputta's calm, the Buddha says that those whose taints are gone do not grow angry, and speaks the verse. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-17.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Sariputta">S&#257;riputta</a>. The teacher's poem is by <a href="https://en.wikipedia.org/wiki/Zabel_Yesayan">Zabel Yesayan</a> (Essayan), born in Scutari (&Uuml;sk&uuml;dar) in 1878, quoted in Zabelle C. Boyajian's translation from <em>Armenian Legends and Poems</em> (1916). The grandmother's proverb about monks is from the Armenian proverbs in the anthology <em>Armenian Literature</em> (1904).</p>
+    <h3>Watertown, 1934</h3>
+    <p>Survivors of the <a href="https://en.wikipedia.org/wiki/Armenian_genocide">Armenian genocide</a> of 1915&ndash;1923, many of them from Kharpert (Harput) and the provinces of the east, built one of the largest Armenian communities in America in <a href="https://en.wikipedia.org/wiki/Watertown,_Massachusetts">Watertown</a>, a trolley suburb on the Charles just west of Cambridge, where many found work at the Hood Rubber Company. Factory workers began raising money door to door in 1926 for an Armenian Apostolic church on Mount Auburn Street. Services were first held in the new building in June 1933; the heating and the church hall were finished in 1934, and the parish had already taken over the Sahag Mesrob Armenian school.</p>
+    <p>In the Armenian Church's home blessing (<em>Tnorhnek</em>), given in the seasons after Christmas and Easter, a priest visits each household, blesses bread, water and salt set out on a tray, burns incense, prays for the family and leaves a wafer stamped with a cross. Armenian celibate priests, who may become vardapets and bishops, take a new name at ordination. The ladle in the story comes from a sermon of <a href="https://en.wikipedia.org/wiki/Armenian_delegation_at_the_Berlin_Congress">Mkrtich Khrimian</a> ("Hayrik") after the Congress of Berlin in 1878: other nations took their share of the harissa pot with iron ladles, while the Armenian petition was a paper ladle that went soft in it. The Garabedians, Varjouhi and the priest are invented.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the Elder S&#257;riputta and his mother from the Dhammapada commentary (verse 400). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-17.htm">The original</a>. Scripture from Zabel Yesayan's &ldquo;Incense,&rdquo; tr. Zabelle C. Boyajian (1916). Written by Claude Opus 5.5.
+  <div class="pager"><a href="even-so.html">&larr; Even So</a><a href="index.html">All stories</a><a href="the-seed-on-the-needle.html">The Seed on the Needle &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  /* A censer swings slowly out of sight below the page; its smoke rises in thin ribbons and thins to nothing. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, puffs = [], t = 0;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function origin(tt) { return { x: W * 0.5 + Math.sin(tt * 0.012) * W * 0.22, y: H + 30 }; }
+  function emit(tt, age) {
+    var o = origin(tt);
+    return { x: o.x, y: o.y, vx: Math.cos(tt * 0.012) * 0.25, vy: -0.45 - Math.random() * 0.25,
+             r: 10 + Math.random() * 10, age: age || 0, max: 700 + Math.random() * 400, ph: Math.random() * 6 };
+  }
+  function seed() {
+    puffs = [];
+    for (var i = 0; i < 160; i++) {
+      var p = emit(-i * 5, 0);
+      for (var k = 0; k < i * 5; k++) step(p);
+      puffs.push(p);
+    }
+  }
+  function step(p) {
+    p.age++;
+    p.x += p.vx + Math.sin(p.age * 0.02 + p.ph) * 0.25;
+    p.vx *= 0.995;
+    p.y += p.vy;
+    p.r += 0.06;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      t++;
+      if (t % 5 === 0) puffs.push(emit(t, 0));
+      for (var i = puffs.length - 1; i >= 0; i--) { step(puffs[i]); if (puffs[i].age > puffs[i].max || puffs[i].y < -60) puffs.splice(i, 1); }
+    }
+    for (var j = 0; j < puffs.length; j++) {
+      var p = puffs[j], q = p.age / p.max;
+      var a = Math.min(1, q * 5) * (1 - q) * 0.07;
+      if (a < 0.003) continue;
+      var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      g.addColorStop(0, 'rgba(225,205,180,' + a + ')');
+      g.addColorStop(1, 'rgba(225,205,180,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); seed(); draw();
+  window.addEventListener('resize', function () { size(); seed(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shadow Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one column on sheer white muslin; a pattern stitched on the reverse shows through faintly as shadow, drifting with the sea light. */
+  --ground: #f6f4ee;
+  --ground-2: #ebe7dc;
+  --paper: #2b2a33;
+  --paper-dim: #706c66;
+  --indigo: #3b4a78;
+  --sand: #a8834a;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% 120%, #e9e4d6 0%, var(--ground) 60%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(43,42,51,.2); }
+.series a:hover { color: var(--indigo); }
+a:focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--indigo); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(59,74,120,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--sand); font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--indigo); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(255,255,252,.85); border: 1px solid rgba(43,42,51,.1); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.note { margin: 1.75rem 0; padding: 1rem 1.25rem 1rem 1.4rem; background: rgba(255,255,252,.7); border-left: 2px solid var(--sand); font-size: .97rem; line-height: 1.6; }
+.note p { margin: 0 0 .55rem; }
+.note p:last-child { margin: 0; }
+.note .no { font-family: var(--font-display); font-style: italic; color: var(--sand); }
+.list { font-variant-numeric: tabular-nums; }
+.brk { text-align: center; color: var(--indigo); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .45; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(43,42,51,.12); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--indigo); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--indigo); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(43,42,51,.12); border-bottom: 1px solid rgba(43,42,51,.12); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--indigo); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--indigo); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--indigo); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(255,255,252,.85); border-left: 2px solid var(--indigo); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.11 &middot; Kuhakabr&#257;hma&#7751;a</span></nav>
+<header>
+  <h1>Shadow Work</h1>
+  <div class="epigraph">Tell your beads, paint your forehead with the mark of your God, and wear matted locks long and showy: but a deadly weapon is in your heart.<br>&mdash; Kabir, tr. Rabindranath Tagore</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is as I set it down,</span> in the tents at Ocean Grove.</p>
+
+<section>
+  <h2>I. No. 41</h2>
+  <p class="dateline">Ocean Grove, New Jersey &middot; July 1896</p>
+  <p>Minnie Lathrop was thirteen that summer and a corresponding member of the St. Nicholas Agassiz Association, Chapter 512, Newark, and she kept a Record. The Association asked its members to observe closely, to describe exactly, to set down only what they had seen with their own eyes, and to mark plainly whatever they had only been told. She had a green cloth notebook from the stationer's on Broad Street, and a pencil on a string, and by the middle of July she had forty species of the Grove in it, from the fiddler crabs on the Wesley Lake mud to the black skimmers that came over the surf at dusk dragging their lower bills along the water as if they were ruling lines.</p>
+  <p>Her family had a tent on Pilgrim Pathway for the season, as they had every summer since she could remember, a striped canvas front with a wooden cottage built on behind it for the kitchen. Her father came down from his drugstore on Friday nights on the train. Her mother went to the Great Auditorium twice a day, and to the Young People's Meeting, and to the Holiness Meeting, and on Sundays the gates of the Grove were chained at both ends and no wheel turned on any street, and the only sound from morning service to supper was the surf and the hymns.</p>
+  <p>On the second Monday in July she made an entry she was not sure of.</p>
+  <div class="note">
+    <p class="no">No. 41. Fakir, Hindoo (so called).</p>
+    <p>Observed from the Grove side of the Wesley Lake footbridge, 7 a.m., hanging by the backs of his knees from the low limb of the big willow on the Asbury Park bank. Head down. Arms crossed on breast. Hair very long, black, matted into ropes, hanging nearly to the ground. Wears a goatskin with the hair on, tied at the waist, and nothing else that can be seen. Face painted white across the forehead in three lines. Eyes shut. Does not appear to sway. A tin cup on the grass below him. A card on the tree: YOGI RAM DASS OF BENARES. UNDER A VOW.</p>
+    <p>Length of time hanging: not known. Was there at seven. Was there at noon. Was there at six.</p>
+  </div>
+  <p>A man in a checked suit who called himself the Yogi's manager stood by the tree and explained the vow to anyone who stopped, and by Tuesday everybody had stopped. The Yogi had come from the banks of the Ganges, said the manager, by way of London, to hang between earth and heaven as the holy men of India did, and he would not come down until the vow was satisfied. And if he fell before it was satisfied, said the manager, lowering his voice, the gods of his country had promised him that the place where he fell would be taken by the sea.</p>
+  <p>Everybody in the Grove knew it was heathen nonsense. The Camp Meeting Association said so from the Auditorium platform on Wednesday. But Ocean Grove lies low, between a lake and the open Atlantic, and there was hardly a family on Pilgrim Pathway that did not remember a September when the surf came over the bulkhead and up the avenues, and Mrs. Tilton in the next tent said she did not believe a word of it but she did not see the harm in being on the safe side.</p>
+</section>
+
+<section>
+  <h2>II. The Subscription</h2>
+  <p class="dateline">Pinned to the willow &middot; the third week of July</p>
+  <p>The vow, it turned out, could be satisfied. The manager had it written out. One hundred dollars in silver. A suit of clothes. A railroad ticket to Philadelphia. And a girl to sit by the Yogi with a fan through the heat of the day and bring him his rice, because a holy man under a vow could not lift his own hand to his mouth.</p>
+  <p>Several of the Asbury Park hotel men, who did not want a dead Hindoo hanging in a tree across from their verandas in the height of the season, got up a paper. Minnie copied it into the Record, all of it, because the Association said to set down everything exactly.</p>
+  <div class="note list">
+    <p class="no">Copy of the subscription, as pinned.</p>
+    <p>For the Satisfaction of the Yogi's Vow, &amp; his Prompt Removal.</p>
+    <p>A Hotel Proprietor ......... $20.00<br>
+    The Boardwalk Merchants ......... 15.00<br>
+    A Friend of the Grove ......... 10.00<br>
+    Mrs. H. Tilton, Pilgrim Pathway ......... 2.00<br>
+    A Methodist Who Does Not Believe in It ......... 5.00<br>
+    Bathing pavilion, one suit of clothes, gentleman's, gray<br>
+    Two Ladies, To Be On the Safe Side ......... 1.00<br>
+    Sundry, in the cup ......... 48.65</p>
+  </div>
+  <p>The hotel on Ocean Avenue lent a chambermaid named Bridget for the fan, at the hotel's expense, for one week. She was seventeen, from County Mayo, and she sat on a camp stool under the willow in her uniform with a palmetto fan and a bowl of rice and said her beads under her breath all day long, and would not look up at the Yogi's face, which hung about a foot above her own.</p>
+  <p>On the first of August the manager announced that the vow was satisfied. That evening, with a crowd on both banks of the lake and on the footbridge, the Yogi untucked his knees from the limb and came down hand over hand by a rope the manager threw him, slowly, like a man very weak, and was helped into a hack and driven away toward the depot. The crowd clapped. Mrs. Tilton said she felt a good deal easier. Bridget went back to the hotel with the fan.</p>
+</section>
+
+<section>
+  <h2>III. Mr. Gani</h2>
+  <p class="dateline">The boardwalk, Asbury Park</p>
+  <p>Mr. Gani sold handkerchiefs.</p>
+  <p>He walked the Asbury Park boardwalk end to end all day with a bundle in a white cloth on his shoulder, and when a lady stopped him he set the bundle down on the rail and undid the knot, and there were handkerchiefs and table runners and children's collars and a few long scarves, all of white cotton so fine you could read through it, all worked in white thread. He wore a little white cap and a long coat and spoke English slowly and well. He was from a district called Hooghly, on a river in Bengal, he said, and there were other men from his villages who sold the same work in Atlantic City and New Orleans and Charleston. His name was Abdul Gani Mondal. The ladies of the Grove called him the Hindoo, and he did not correct them, though Minnie found out from him later that he was a Mussulman and had been to the mosque in Calcutta, and that the Yogi's card was spelled wrong.</p>
+  <p>Minnie had bought a handkerchief from him in June with her birthday quarter, and after that she stopped by him every afternoon she was let over the footbridge, because he knew the names of things. He knew the black skimmers. He had seen birds like them on the river at home. He knew what a horseshoe crab was and that it was not a crab. He had a nephew, Rafiq, fourteen, who carried the second bundle and could add up a sale in his head faster than her father.</p>
+  <p>In the second week the Yogi was in the tree, Minnie had asked him what he thought.</p>
+  <p>Mr. Gani had walked over to the willow with his bundle on his shoulder and stood a while among the people looking. Then he said something up to the Yogi in a language she did not know, quietly, the way you'd ask a man on a train if a seat was taken. The Yogi opened his eyes and looked at him upside down for a moment, and shut them again, and said in a deep voice, <em>Om. Om. Ram.</em></p>
+  <p>Mr. Gani nodded, as if he had been answered, and walked back to the boardwalk. He did not say anything to the crowd. He did not put anything in the cup.</p>
+  <p><em>What did you ask him?</em> said Minnie.</p>
+  <p><em>Which village he was from,</em> said Mr. Gani. <em>And whether his mother was well.</em></p>
+</section>
+
+<section>
+  <h2>IV. No. 42</h2>
+  <p class="dateline">Cookman Avenue &middot; the second week of August</p>
+  <div class="note">
+    <p class="no">No. 42. The same.</p>
+    <p>Observed through the front window of a chop house on Cookman Avenue, about half past one, while waiting for Rafiq, who had gone in the side door to sell a table runner to the proprietor's wife. Hair cut short. Gray suit. Derby hat on the chair beside him. Right way up. Eating fried clams, a beefsteak, and a dish of stewed tomatoes. Two bottles of sarsaparilla. Has gained flesh. Identified by the ears (pierced) and a white mark of paint not quite washed out of the left eyebrow. Rafiq agrees.</p>
+  </div>
+  <p>When Rafiq came out, the man in the gray suit came out behind him, picking his teeth, and saw Minnie on the curb with her notebook, and must have known her, because she had stood under the willow every day for three weeks. He looked at her a long moment. Then he winked, and tipped the derby, and said in a voice from somewhere around Paterson:</p>
+  <p><em>Got everything I came for, sis.</em></p>
+  <p>He walked off toward the depot swinging his arms. Minnie found that she was shaking, and could not have said if it was anger or something else. Rafiq spat in the gutter, very neatly, and then looked around to be sure his uncle had not seen.</p>
+</section>
+
+<section>
+  <h2>V. No. 43</h2>
+  <p class="dateline">The boardwalk rail &middot; that afternoon</p>
+  <p>They told Mr. Gani, both of them at once. He went on folding a table runner while they talked, in thirds and then in half, the way he always did, so the work was inside.</p>
+  <p><em>He was like this before, too,</em> he said when they were done. <em>That kind does not change his ways from one life to another. In my district there was a fakir just the same. Maybe this one. Who knows.</em> He set the runner on the pile. <em>You want the story? Write it down, then. Write that you did not see it.</em></p>
+  <p>Minnie opened the Record.</p>
+  <p>Near a village outside Chinsurah, Mr. Gani said, there lived a fakir in a little hut at the edge of the rice, with long matted hair and a goatskin, and a family in the village fed him every day because he was holy. Behind his hut was an old white-ant hill, taller than a man, and in the ant-hill lived a gosaap, which is a great lizard as long as Rafiq, brown and slow, with a forked tongue and a tail like a whip. It was very old. In the evenings it came out of its hole and sat in the dust near the fakir's door, the way the old men of the village sat near a holy man in the evenings, because it believed he was one.</p>
+  <p>Now some of the people of that district eat gosaap, said Mr. Gani, though his own people did not, and one day the family that fed the fakir caught one and cooked it with onions and chilis, and sent him a portion. He ate it and could think of nothing else. He sat in his hut and thought about the taste of it all that night and all the next day. In the evening, when the old gosaap came out of the ant-hill to sit by his door, the fakir lay down on his mat as if he were asleep, with a heavy stick hidden under his goatskin.</p>
+  <p>But the gosaap was old, and it had sat with many holy men. It came out of the hole and stopped, and looked at the fakir sleeping with one eye a little open, and smelled the smell of the cooking still on his hands, and it turned around and went back toward the hole. The fakir jumped up and threw the stick. It hit the ant-hill an inch above the gosaap's tail, and the gosaap went down into the dark.</p>
+  <p>Then the fakir called after it, sweetly. <em>Come out, brother. Come out, I was only playing. I have rice for you, and salt, and oil, and chili.</em></p>
+  <p>And the gosaap said, from deep in the ant-hill: <em>What is your long hair for, fool? What is your goatskin for? Outside you are washed and painted. Inside you there is a jungle full of teeth. Keep your rice and your salt and your oil. I have seen the stick.</em></p>
+  <p>Mr. Gani tied the white cloth over his bundle and knotted it.</p>
+  <p><em>We have a poet,</em> he said, <em>a weaver, Kabir. The singers who go up and down our river sing him.</em> He said something in his own language, four lines, singsong, the way the girls at school said the times tables, and then he gave it to them in English, slowly, a word at a time, as near as he could: that a man could tell his beads, and paint his forehead, and wear his hair long and matted for show, and still carry a killing weapon in his heart; and then how would he find God?</p>
+  <p><em>And the gosaap?</em> said Minnie, with her pencil up. <em>What became of the gosaap?</em></p>
+  <p>Mr. Gani lifted the bundle to his shoulder.</p>
+  <p><em>Some old fellow,</em> he said, <em>who stayed in his hole and did not come out for rice.</em></p>
+  <div class="note">
+    <p class="no">No. 43. Gosaap, or great lizard of Bengal.</p>
+    <p>NOT SEEN. Described by Mr. A. G. Mondal of Hooghly. Brown. As long as a boy of fourteen. Lives in the ant-hills. Slow, but not a fool.</p>
+  </div>
+  <p>That night on Pilgrim Pathway she lay on her cot under the canvas with the surf going and could not sleep. She kept seeing two things at once, the Yogi upside down with his eyes shut and the man in the gray suit picking his teeth, and she understood for the first time in her life that they were the same thing, and that a person could be both at once, and that she could be, and that it would show from the outside only if somebody very patient were watching from a hole. Rafiq, she found out the next day, had not slept either.</p>
+</section>
+
+<section>
+  <h2>VI. The New Books</h2>
+  <p class="dateline">The public library, Asbury Park &middot; November 1916</p>
+  <p>Twenty years later Miss Minnie Lathrop, assistant librarian, unpacked a shipment of new books from Macmillan at the back table and wrote the accession numbers inside the covers. One was a thin blue book, <em>Songs of Kabir</em>, translated by Rabindranath Tagore, who had won the Nobel Prize three years before and whose picture had been in all the papers. She had the pen in her hand to number it. Instead she sat down on the high stool and read it through, while the radiator ticked and the November light went off the windows, and under the numeral LXVII she found it.</p>
+  <div class="verse">
+    <p>I do not know what manner of God is mine.</p>
+    <p>The Mullah cries aloud to Him: and why? Is your Lord deaf? The subtle anklets that ring on the feet of an insect when it moves are heard of Him.</p>
+    <p>Tell your beads, paint your forehead with the mark of your God, and wear matted locks long and showy: but a deadly weapon is in your heart, and how shall you have God?</p>
+    <p>&mdash; Songs of Kabir LXVII, tr. Rabindranath Tagore (1915)</p>
+  </div>
+  <p>She did not know where Mr. Gani was. He had come back to the boardwalk two more summers and then not again. Rafiq had written her a postal card from New Orleans in 1903, in a good round hand, about a bird he had seen there. In the papers that month there was talk in Congress of a law to close the whole of Asia to immigrants, a line drawn across the map, and she had read it standing up at the newspaper rack and thought of the white bundle on the boardwalk rail and the knot.</p>
+  <p>She still had the handkerchief from her birthday quarter. It was in her desk, in the drawer with the stamp pads. She took it out and held it up between her face and the lamp, the way he had shown her to the first day, in June of 1896, when she had complained that she could not see the pattern. From the front the cotton was plain, so fine you could read through it. Then the light came through from behind, and the flowers and the vines came up in it, gray and soft, all over, from the other side. <em>The work is on the inside,</em> he had said. <em>You look through to it.</em></p>
+  <p>She wrote in the Kabir the accession number, and the date, and then, very small, under the number on the inside of the cover, in pencil, where the borrowers would never think to look: <em>No. 43. Seen.</em></p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">What is the use of platted hair, O fool! what of the raiment of goat-skins? Within thee there is ravening, but the outside thou makest clean.<cite>Dhammapada 394, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>A fraudulent Brahmin took a "bat vow" and hung upside down from a tree by the gate of Ves&#257;l&#299;, demanding a hundred coins, a servant girl and other gifts, and threatening that if he fell the city would be destroyed. Afraid for their city, the people gave him everything. When monks later saw him strolling about and he told them he had got what he wanted, the Buddha said he had been a fraud in an earlier life too: an ascetic with matted hair and a deerskin who, after tasting monitor-lizard meat, tried to club the old lizard that came each evening from an ant-hill to sit near him. The wise lizard saw through the pretended sleep, escaped into the ant-hill, refused his offers of rice, salt, oil and pepper, and rebuked him with the verse. The ascetic was the same man; the lizard was the Buddha. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-11.htm">the full commentary story</a>. The lizard (<em>godh&#257;</em>) is the <a href="https://en.wikipedia.org/wiki/Bengal_monitor">Bengal monitor</a>, which shelters in burrows and old termite mounds and is still eaten in parts of South Asia.</p>
+    <h3>Ocean Grove and Asbury Park, 1896</h3>
+    <p><a href="https://en.wikipedia.org/wiki/Ocean_Grove,_New_Jersey">Ocean Grove</a> was founded in 1869 by Methodist clergymen as a seaside camp-meeting ground. Families rented tents for the season, its Great Auditorium was finished in 1894, and until 1981 its laws barred horses, wagons and later cars from its streets on Sundays, with chains across the entrances. Its northern neighbor across Wesley Lake, <a href="https://en.wikipedia.org/wiki/Asbury_Park,_New_Jersey">Asbury Park</a>, was laid out in 1871 by the brush manufacturer James A. Bradley as a dry Methodist resort and grew a boardwalk, pavilions and hotels. The <a href="https://en.wikipedia.org/wiki/Agassiz_Association">Agassiz Association</a>, founded in 1875, enrolled thousands of young naturalists in local chapters and for years used <em>St. Nicholas</em> magazine as its organ.</p>
+    <p>From the 1880s on, Muslim peddlers from villages in the Hooghly district of Bengal sold embroidered cotton (<em>chikan</em>) and other "Oriental" goods on the boardwalks of Atlantic City and Asbury Park, and spread through a network reaching New Orleans, Charleston and Chattanooga, a history recovered in Vivek Bald's <a href="https://electricliterature.com/bengali-harlem-shows-how-much-south-asians-owe-to-the-black-community/"><em>Bengali Harlem</em></a>. The fine shadow work of <a href="https://en.wikipedia.org/wiki/Chikankari">chikankari</a> is stitched on the reverse of sheer cloth and seen through it from the front. Rabindranath Tagore's translation of <em>Songs of Kabir</em>, made with Evelyn Underhill, was published in New York by Macmillan in 1915; the <a href="https://en.wikipedia.org/wiki/Immigration_Act_of_1917">Immigration Act of 1917</a>, passed that February over President Wilson's veto, created the "Asiatic Barred Zone."</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the fraudulent Brahmin from the Dhammapada commentary (verse 394). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-11.htm">The original</a>. Verse from <em>Songs of Kabir</em>, tr. Rabindranath Tagore (1915). Written by Claude Opus 5.5.
+  <div class="pager"><a href="for-a-that.html">&larr; For A&#x27; That</a><a href="index.html">All stories</a><a href="cast-clouts.html">Cast Clouts &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, t = 0, motifs = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    motifs = [];
+    var step = 150;
+    for (var y = -step; y < H + step; y += step) {
+      for (var x = -step; x < W + step; x += step) {
+        motifs.push({ x: x + ((y / step) % 2 ? step / 2 : 0), y: y, r: 0.6 + Math.random() * 0.5, ph: Math.random() * 6.28 });
+      }
+    }
+  }
+  function flower(m, light) {
+    ctx.save(); ctx.translate(m.x, m.y); ctx.rotate(m.ph * 0.2);
+    var s = 26 * m.r;
+    ctx.strokeStyle = 'rgba(70,72,95,' + (0.05 + 0.05 * light) + ')';
+    ctx.fillStyle = 'rgba(70,72,95,' + (0.025 + 0.035 * light) + ')';
+    ctx.lineWidth = 1.2;
+    for (var k = 0; k < 6; k++) {
+      ctx.rotate(Math.PI / 3);
+      ctx.beginPath(); ctx.ellipse(0, -s * 0.55, s * 0.2, s * 0.45, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    }
+    ctx.beginPath(); ctx.arc(0, 0, s * 0.12, 0, Math.PI * 2); ctx.stroke();
+    // a vine tendril
+    ctx.beginPath(); ctx.moveTo(s * 0.9, 0);
+    ctx.bezierCurveTo(s * 1.6, -s * 0.6, s * 2.1, s * 0.5, s * 2.8, 0); ctx.stroke();
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // the light passes slowly across from behind, like sun moving behind muslin
+    var lx = reduce ? W * 0.5 : (Math.sin(t * 0.0011) * 0.5 + 0.5) * W;
+    var ly = reduce ? H * 0.4 : (Math.cos(t * 0.0007) * 0.3 + 0.45) * H;
+    for (var i = 0; i < motifs.length; i++) {
+      var m = motifs[i];
+      var dx = m.x - lx, dy = m.y - ly;
+      var light = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / (Math.max(W, H) * 0.55));
+      flower(m, light);
+    }
+    var g = ctx.createLinearGradient(0, 0, W, 0);
+    g.addColorStop(0, 'rgba(246,244,238,0)');
+    g.addColorStop(0.32, 'rgba(246,244,238,0.82)');
+    g.addColorStop(0.68, 'rgba(246,244,238,0.82)');
+    g.addColorStop(1, 'rgba(246,244,238,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+  function step() { t++; draw(); requestAnimationFrame(step); }
+  size();
+  if (reduce) draw(); else step();
+  window.addEventListener('resize', function () { size(); draw(); });
+})();
+</script>
+</body>
+</html>
