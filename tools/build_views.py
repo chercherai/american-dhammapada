@@ -241,6 +241,17 @@ for f in ["index.html", "timeline.html", "map.html"]:
     if '<script src="near.js"></script>' not in h:
         open(fp, "w").write(h.replace("</body>", '<script src="near.js"></script>\n</body>', 1))
 
+# ---------- offline downloads in the footer of the three views ----------
+DL = ('<p class="dl">Read offline: <a href="Walking-the-American-Way.epub" download>EPUB</a> (6.7 MB, for Play Books, Kindle and other e-readers) '
+      '&middot; <a href="Walking-the-American-Way.pdf" download>PDF</a> (13 MB, typeset at 6&times;9 in)</p>')
+for f in ["index.html", "timeline.html", "map.html"]:
+    fp = os.path.join(HERE, f); h = open(fp).read(); h0 = h
+    h = re.sub(r'<p class="dl">.*?</p>', '', h, flags=re.S)
+    if "<footer" in h: h = re.sub(r'</footer>', DL + '</footer>', h, count=1)
+    else: h = h.replace("</main>", '<footer style="margin-top:3rem;font-size:.9rem;color:var(--page-dim)">' + DL + '</footer>\n</main>', 1)
+    if '.dl a' not in h: h = h.replace("</style>", "footer .dl { margin-top: .6rem; } footer .dl a { text-decoration: underline; text-underline-offset: .2em; }\n</style>", 1)
+    if h != h0: open(fp, "w").write(h)
+
 # ---------- reader preferences script on every page ----------
 import glob
 TAG = '<script src="prefs.js"></script>'
