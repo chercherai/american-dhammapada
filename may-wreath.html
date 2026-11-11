@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>May Wreath</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one narrow column set as a country doctor's daybook, on cold blue-white rag paper, light theme; behind the text a slow June snow comes down, large wet flakes with now and then an apple petal among them, and each melts a little after it lands; dated entries with a fee column; datelined sections. */
+  --ground: #eef0ef;
+  --ground-2: #e1e5e6;
+  --ink: #23272e;
+  --ink-dim: #6a7078;
+  --iron: #3b4a63;
+  --blossom: #c98a94;
+  --rule: rgba(59,74,99,.16);
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #f6f7f6 0%, var(--ground) 45%, var(--ground-2) 100%) fixed, var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid rgba(35,39,46,.2); }
+.series a:hover { color: var(--iron); }
+a:focus-visible { outline: 2px solid var(--iron); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--iron); text-wrap: balance; }
+.epigraph { border-left: 1px solid rgba(201,138,148,.6); padding-left: 1rem; font-style: italic; color: var(--ink-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--iron); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--iron); }
+.day { border-bottom: 1px solid var(--rule); padding-bottom: .9rem; }
+.dt { font-family: var(--font-display); font-style: italic; color: var(--iron); margin-right: .35rem; }
+.fee { float: right; margin-left: 1rem; font-family: var(--font-display); color: var(--ink-dim); font-size: .95rem; }
+.leaf { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(250,248,240,.92); border: 1px solid rgba(59,74,99,.22); box-shadow: 2px 3px 0 rgba(59,74,99,.06); font-size: 1rem; line-height: 1.6; }
+.leaf ol { margin: .5rem 0 1rem; padding-left: 1.4rem; }
+.leaf li { margin-bottom: .45rem; }
+.leaf .hd { font-family: var(--font-display); font-style: italic; color: var(--iron); display: block; margin-bottom: .4rem; }
+.leaf .sig { font-family: var(--font-display); font-style: italic; text-align: right; margin: 0; }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(250,250,248,.85); border: 1px solid rgba(59,74,99,.16); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--blossom); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .8; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(35,39,46,.12); color: var(--ink-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--iron); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--iron); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(35,39,46,.14); border-bottom: 1px solid rgba(35,39,46,.14); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--iron); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--iron); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--iron); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--iron); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(250,250,248,.85); border-left: 2px solid var(--iron); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--ink-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.8 &middot; Mahā Pajāpatī Gotamī</span></nav>
+<header>
+  <h1>May Wreath</h1>
+  <div class="epigraph">With purity and with holiness I will pass my life and practise my Art.<br>&mdash; The Oath of Hippocrates, tr. Francis Adams (1849)</div>
+</header>
+
+<p class="heard"><span class="heard-lead">So I have heard tell,</span> in the hill towns of Caledonia County.</p>
+
+<section>
+  <h2>I. Three Times</h2>
+  <p class="dateline">From the daybook of Silas Whitcomb, physician &middot; North Calder, Vermont &middot; May 1816</p>
+  <p class="day"><span class="dt">May 12.</span> Hard frost in the night. Corn not in. Rode to Bemis, wife, intermittent fever, bark. To the Gray children at the Hollow, all four with the hooping cough, nothing to be done but sit. <span class="fee">.75</span></p>
+  <p class="day"><span class="dt">May 13.</span> Aunt Lydia came down the hill road on foot this forenoon and sat in my kitchen and asked me to take her to read physic. She is fifty-eight. I said it could not be done, there being no precedent, and that she knew more already than half the doctors in the county, which is true, and does not answer her. She went home.</p>
+  <p class="day"><span class="dt">May 18.</span> Freeze again, ice on the trough a finger thick. Sheep pens at Ladd&rsquo;s. Patience Ladd delivered of a son, Lydia attending, sent for me only to sign the paper. Nothing for me to do there. Lydia asked again on the road home. I said no.</p>
+  <p>I set down here, since a daybook is for what was owed and paid, what is owed. My mother Mercy Farrow died seven days after I was born. Her sister Lydia came over the hill the next morning with her own milk still in her, having lost a boy in March, and put me to the breast, and two years after married my father, and raised me. She taught me my letters from the almanac. She held the basin the first time I bled a man and did not spill it when I did. In the winter of &rsquo;13, when the lung fever and the spotted fever came through these towns together and Father died of it, and I was riding forty miles a day and could not be in two houses, it was Lydia and the women she brought with her who sat up in the others. Hannah Ladd, Patience Ladd, Sally Bemis, the Widow Gray, Content Spaulding. They went where she went. After the sickness passed they kept on, and she taught them to catch babies, and they meet at her kitchen once a month, at the full of the moon so as to see to walk home, and talk over their cases like a medical society. I have no answer to any of this. I am the only physician in North Calder, and she is asking me to be her master.</p>
+  <p class="day"><span class="dt">May 29.</span> Cold again. Lydia came the third time. Said nothing of it. Mended my coat, which wanted it, and asked again at the door. I said I would think on it, which she took for the no it was. <span class="fee">&mdash;</span></p>
+</section>
+
+<section>
+  <h2>II. Snow in June</h2>
+  <p class="dateline">June 6&ndash;10</p>
+  <p class="day"><span class="dt">June 6.</span> Rain went to snow by morning. In June.</p>
+  <p class="day"><span class="dt">June 7.</span> Snow all day, driving. Near a foot at Danville they say. Ladd&rsquo;s new-shorn sheep dead in the pasture, eleven of them, and I am told the same at every farm up the valley. The apple trees were in full flower. They stand in the snow white on white and the blossoms are brown by night. Rode to the Bemis place through drifts to the horse&rsquo;s knees. Sally Bemis there before me.</p>
+  <p class="day"><span class="dt">June 8.</span> Snow squalls. At dusk Lydia at my door. She had walked the four miles down from the hill in it in her house shoes, having nothing else that would do, her skirts frozen to the knee and her feet blue. She had brought her own Denman on midwifery and the case-book she has kept since &rsquo;13 in a sack on her back. She did not ask again. She sat by my fire with her feet in a pail of water and the book in her lap and waited for me to say it.</p>
+  <p>I said it. God help me, I made conditions first. I wrote them on the back of a bill of Ladd&rsquo;s and read them to her, and I have pinned the leaf in here, so that it is in the book with the rest of what I owe.</p>
+  <div class="leaf">
+    <span class="hd">L. W. to read physic with S. W. upon these conditions</span>
+    <ol>
+      <li>She shall stand aside at the bedside for any regular physician, though he be licensed but yesterday.</li>
+      <li>She shall send for a physician in every case of flooding, convulsions, or a cross birth, at whatever hour and distance.</li>
+      <li>She shall not bleed, nor give calomel or the laudanum, but by my leave.</li>
+      <li>She shall take no fee of the poor, and of others not more than half a physician&rsquo;s fee.</li>
+      <li>She shall not call herself Doctor, nor suffer it.</li>
+      <li>She shall keep a daybook and bring it to me at each full moon.</li>
+      <li>She shall not reprove a physician before a family, however wrong; she shall tell me after.</li>
+      <li>What she knows she shall teach to any woman who asks, under these same conditions.</li>
+    </ol>
+    <p class="sig">I take them. Lydia Whitcomb</p>
+  </div>
+  <p>She heard them out. Then she said, <em>When I was a girl in Rindge, when the apple trees came out in May, we made wreaths of the blossom and put them on our own heads. Nobody had to put it on you. You took it in both hands. I will take these the same way.</em> And she held out her hand for the pen.</p>
+  <p>I have bled men who did not flinch less than I flinched writing the first of those. She raised me. I told her so. She said, <em>Then you had better do it right.</em></p>
+  <p class="day"><span class="dt">June 10.</span> Clear and cold, moon near full. Began her on Cullen&rsquo;s <em>First Lines</em>, Book I, of fevers. She reads faster than I did. In the evening I read her the Oath out of my Latin, turning it to English as I went, as old Dr. Shedd did for me at Peacham when I was nineteen, and she said it after me with her hand on the book. There being in this county no other preceptor who would have her, I am her preceptor. There is no paper. There is this book.</p>
+</section>
+
+<section>
+  <h2>III. Her Women</h2>
+  <p class="dateline">July&ndash;August</p>
+  <p class="day"><span class="dt">July 6.</span> Frost. Corn black in the low fields. Hannah Ladd, ague. Paid in rye, which nobody can spare. <span class="fee">.50</span></p>
+  <p class="day"><span class="dt">July 10.</span> Lydia to my house for her reading, Cullen Chap. IV. I asked after the women&rsquo;s meeting, it being the full of the moon. She said they did not come.</p>
+  <p class="day"><span class="dt">July 14.</span> It is said at Bemis&rsquo;s store, and it came round to me by three roads, that Lydia Whitcomb has no preceptor. That a woman cannot read physic with her own boy that she nursed. That it is a kindness and not a reading, that there was no examination and no paper and no fee, that she put the name on herself as you put on a bonnet. And the women she taught have taken it up, being made, they say, uneasy. If she had no teacher, who taught them? What are they, then? Sally Bemis would not have her at her lying-in on the 12th and sent eleven miles for Dr. Pratt, who came drunk.</p>
+  <p class="day"><span class="dt">July 30.</span> Folded in here, a letter left at my door, unsigned, but I know the hand, having seen it on every one of her cases in &rsquo;13.</p>
+  <div class="leaf">
+    <p>Doctor &mdash; We mean no disrespect to her or you. We followed her through that winter into every house and would again. But she has learnt us everything we know and now it is said she never learnt it of anybody but put it on herself, and we do not know what we are. A woman of fifty-eight cannot be a student to her own son. Folks are laughing. We cannot sit at the moon with her while it is so. We are sorry for it.</p>
+    <p class="sig">Yr. obt. svts.</p>
+  </div>
+  <p class="day"><span class="dt">August 8.</span> Moon near full. Lydia set out her kitchen as always, six chairs and the teapot and the case-books on the table, and sat till ten, and nobody came. I know because I sat in the dark on the wall across the road and watched her window. She did not weep. At ten she put the chairs back against the wall, one at a time, and put out the candle.</p>
+  <p class="day"><span class="dt">August 21.</span> Killing frost. What corn was left is gone. The Spaulding boy, crushed foot, a log, Lydia already there and had done it well. I told her so. She said, <em>Condition the seventh, I am not to say a physician is wrong. Is there a condition for when he is right?</em> She laughed. First time since June.</p>
+</section>
+
+<section>
+  <h2>IV. The Full of the Moon</h2>
+  <p class="dateline">September 7</p>
+  <p class="day"><span class="dt">Sept. 7.</span> I went round to the five of them in the forenoon, house by house, and told each one I would be at Mrs. Whitcomb&rsquo;s kitchen tonight at moonrise and wished she would come and hear me, and if after that she did not want to sit with her, I would say no more. Patience Ladd shut the door. The others said they would come.</p>
+  <p>Four came, and then, late, Patience, with her shawl over her head as if it were raining.</p>
+  <p>I did not sit down. I said: You say she has no preceptor. She has. I am her preceptor. I examined her, the evening of the eighth of June, in my kitchen, with her feet in a pail, and I examined her every week since, and I would put her up against any student in the Medical Society. She has no paper because there is no paper in this State for a woman. I set her conditions before ever I set them for you, and she took them first, and she keeps them better than I keep mine. If she has no teacher, then I have none, for she taught me to read.</p>
+  <p>Hannah Ladd said, <em>But she is your mother.</em></p>
+  <p>I said, She is, and I had no other. Then I said: You ask who taught her. Ask instead what she has done. You were in the houses with her the winter of &rsquo;13. Did any one of you ever see her do a sick person harm with her hands? Did any one of you hear her carry a word out of a sickroom that ought to have stayed in it? Did you ever know her to go into a house for anything but the good of the one in the bed? Then that is the whole of it, and the rest is talk at Bemis&rsquo;s store.</p>
+  <p>Then I gave them the part of the Oath that I give every student, the same as I gave her, in English, as near as I can make it out of the Latin.</p>
+  <div class="verse">
+    <p>With purity and with holiness I will pass my life and practise my Art. &hellip; Into whatever houses I enter, I will go into them for the benefit of the sick, and will abstain from every voluntary act of mischief and corruption; and, further, from the seduction of females or males, of freemen and slaves. Whatever, in connexion with my professional practice, or not in connexion with it, I see or hear, in the life of men, which ought not to be spoken of abroad, I will not divulge, as reckoning that all such should be kept secret.</p>
+    <p>&mdash; The Oath of Hippocrates, tr. Francis Adams (1849)</p>
+  </div>
+  <p>I said: That is three things. What she does, what she says, what she means. I have known her thirty-one years and not found her wanting in one of them. Find it, and I will tear up the leaf.</p>
+  <p>Nobody said anything. Lydia had not said one word the whole while. She got up and took the six chairs down off the wall, one at a time, and set them round the table, and poured the tea. Sally Bemis sat down first. Patience last. They talked over their cases till the moon was behind Burke Mountain and I rode home.</p>
+  <p class="day"><span class="dt">Sept. 8.</span> No charge.</p>
+</section>
+
+<section>
+  <h2>V. In Another Hand</h2>
+  <p class="dateline">Winter 1817</p>
+  <p>The last pages of the book for that year are not in his hand.</p>
+  <p class="day"><span class="dt">Feb. 2.</span> S. W. down with the lung fever since the 28th. I keep his book till he is up, condition the sixth. Bled him myself, eight ounces, having nobody to ask leave of but him, and he gave it. Nettle broth. <span class="fee">&mdash;</span></p>
+  <p class="day"><span class="dt">Feb. 9.</span> S. W. sitting up. Wants his book back. Not yet.</p>
+  <p class="day"><span class="dt">Feb. 11.</span> To Victory, Mrs. Hadlock, delivered of a daughter at four in the morning, Hannah Ladd with me and did the most of it. Nothing in their house but potatoes and the clover tops they dried in the fall. Took no fee, cond. the fourth. Mr. Hadlock would not have it so and paid a hedgehog, dressed, which we ate at Hannah&rsquo;s on the way home, and it was good.</p>
+  <p class="day"><span class="dt">Feb. 16.</span> Patience Ladd came and asked would I take her niece to read with me, she being fifteen and willing. Read her the leaf. She took it in both hands. <span class="fee">&mdash;</span></p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who does not offend by body, word, or thought, and is controlled on these three points.<cite>Dhammapada 391, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>Mahā Pajāpatī Gotamī was the sister of the Buddha&rsquo;s mother, Māyā, who died seven days after his birth; she nursed him and raised him, and later became the first woman ordained. In the commentary, the Buddha gave her the eight &ldquo;heavy rules&rdquo; privately before they were announced, and she accepted them, and that acceptance was her ordination; she had no preceptor or teacher but the Buddha himself. The women of her retinue, whose own ordination had come through her, began to say that she had no preceptor and had put on the yellow robe by herself, and they would no longer keep the observance days with her. The Buddha told them that he was her teacher and preceptor, and that one who does no wrong by body, speech or mind is not to be held in doubt, and spoke the verse. (In the Vinaya&rsquo;s fuller account she asks three times, cuts her hair and walks barefoot to Vesālī, and says she accepts the eight rules as a young woman accepts a garland and sets it on her head.) Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-08.htm">the full commentary story</a>, or about <a href="https://en.wikipedia.org/wiki/Mahapajapati_Gotami">Mahāpajāpatī Gotamī</a>.</p>
+    <h3>Vermont, 1816</h3>
+    <p>In 1816, the <a href="https://en.wikipedia.org/wiki/Year_Without_a_Summer">Year Without a Summer</a>, the ash of the 1815 eruption of Mount Tambora chilled the Northern Hemisphere. In northern New England hard frosts came through May; on June 6&ndash;8 snow fell across the region, with <a href="https://www.northlandjournal.com/the-year-without-a-summer/">about a foot reported at Danville</a>, in Caledonia County, and sheep and poultry died; frosts in July and late August killed most of the corn. The following winter Vermont families were reported living on such things as nettles, clover tops and hedgehogs (porcupines), and the state lost an estimated ten to fifteen thousand people to emigration westward in 1816 and 1817. Three years earlier, in 1813, the state had suffered a season of overlapping epidemics, pneumonia (&ldquo;lung fever&rdquo;), &ldquo;spotted fever&rdquo; and typhus among them; the Woodstock physician <a href="https://vtdigger.org/2019/02/10/look-early-medicinal-practices-vermonts-joseph-gallup/">Joseph Gallup</a> estimated some 6,400 deaths in its five worst months.</p>
+    <p>Physicians of the period were trained mostly by apprenticeship, &ldquo;reading physic&rdquo; for several years with an established doctor, their preceptor, sometimes adding a course of lectures such as those at Dartmouth&rsquo;s medical school in Hanover. The <a href="https://en.wikipedia.org/wiki/Vermont_Medical_Society">Vermont Medical Society</a> was chartered in 1813. No American medical school granted a degree to a woman until Elizabeth Blackwell&rsquo;s in 1849. The Oath is quoted from Francis Adams&rsquo;s translation in <a href="https://archive.org/details/genuineworksofhi02hippuoft"><em>The Genuine Works of Hippocrates</em></a> (1849); the passage omitted at the ellipsis is the oath&rsquo;s promise not to cut for the stone.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of Mahā Pajāpatī Gotamī from the Dhammapada commentary (verse 391). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-08.htm">The original</a>. Words from the Oath of Hippocrates in Francis Adams&rsquo;s translation (1849). Written by Claude Opus 5.5.
+  <div class="pager"><a href="brickbats.html">&larr; Brickbats</a><a href="index.html">All stories</a><a href="the-compass-card.html">The Compass Card &rarr;</a></div>
+</footer>
+</main>
+
+<script>
+(function () {
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, flakes = [], landed = [];
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function spawn(f, anywhere) {
+    f.x = Math.random() * W;
+    f.y = anywhere ? Math.random() * H : -10;
+    f.petal = Math.random() < 0.08;
+    f.r = f.petal ? 3.2 + Math.random() * 1.6 : 1.4 + Math.random() * 2.4;
+    f.vy = 0.25 + Math.random() * 0.35;
+    f.ph = Math.random() * 6.28;
+    f.rot = Math.random() * 6.28;
+    f.stop = H * (0.55 + Math.random() * 0.45);
+    return f;
+  }
+  function make() {
+    var n = Math.round(Math.max(30, Math.min(80, W / 14)));
+    flakes = [];
+    for (var i = 0; i < n; i++) flakes.push(spawn({}, true));
+    landed = [];
+  }
+  function drawOne(x, y, r, petal, rot, a) {
+    if (petal) {
+      ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+      ctx.beginPath(); ctx.ellipse(0, 0, r, r * 0.6, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(214,150,160,' + a + ')'; ctx.fill(); ctx.restore();
+    } else {
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,' + a + ')'; ctx.fill();
+      ctx.strokeStyle = 'rgba(120,135,155,' + (a * 0.35) + ')'; ctx.lineWidth = 0.6; ctx.stroke();
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var j = landed.length - 1; j >= 0; j--) {
+      var l = landed[j];
+      if (!reduce) l.life -= 1;
+      if (l.life <= 0) { landed.splice(j, 1); continue; }
+      drawOne(l.x, l.y, l.r * (0.6 + 0.4 * l.life / 400), l.petal, l.rot, 0.55 * l.life / 400);
+    }
+    for (var i = 0; i < flakes.length; i++) {
+      var f = flakes[i];
+      if (!reduce) {
+        f.y += f.vy; f.ph += 0.01; f.x += Math.sin(f.ph) * 0.25; f.rot += 0.004;
+        if (f.y >= f.stop) {
+          if (landed.length < 60) landed.push({ x: f.x, y: f.y, r: f.r, petal: f.petal, rot: f.rot, life: 400 });
+          spawn(f, false);
+        }
+      }
+      drawOne(f.x, f.y, f.r, f.petal, f.rot, f.petal ? 0.55 : 0.75);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); make(); draw();
+  window.addEventListener('resize', function () { size(); make(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
