@@ -59,6 +59,29 @@
       set("theme", now ? "light" : "dark"); applyTheme();
     };
     applyTheme();
+    // Story pages: a discreet arrow at the top that takes you to the end (Background, pager).
+    if (document.querySelector(".pager")) {
+      const st = document.createElement("style");
+      st.textContent = `
+#awaw-down { position: absolute; top: .9rem; right: 1rem; z-index: 40; width: 2.2rem; height: 2.2rem; display: grid; place-items: center;
+  color: inherit; opacity: .45; text-decoration: none; border-radius: 50%; animation: awaw-bob 2.4s ease-in-out 1.2s 4; }
+#awaw-down:hover, #awaw-down:focus-visible { opacity: .9; }
+#awaw-down:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+@keyframes awaw-bob { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) { #awaw-down { animation: none; } }
+@media print { #awaw-down { display: none; } }`;
+      document.head.appendChild(st);
+      const d = document.createElement("a");
+      d.id = "awaw-down"; d.href = "#"; d.setAttribute("aria-label", "Skip to the end of the page");
+      d.style.color = getComputedStyle(document.body).color;
+      d.innerHTML = '<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2v13M3.5 9.5 9 15l5.5-5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      d.addEventListener("click", ev => {
+        ev.preventDefault();
+        const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+        scrollTo({top: document.documentElement.scrollHeight, behavior: smooth ? "smooth" : "auto"});
+      });
+      document.body.appendChild(d);
+    }
   }
   if (document.body) ui(); else document.addEventListener("DOMContentLoaded", ui);
 })();
