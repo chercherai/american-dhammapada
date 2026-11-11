@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build timeline.html and map.html from meta/*.json (finished stories only), and add view nav to index.html."""
-import re, glob, html, json, os, re
+import wc, re, glob, html, json, os, re
 HERE = os.path.dirname(os.path.abspath(__file__))
 ml = json.load(open(os.path.join(HERE, "master_list.json")))
 metas = [json.load(open(p)) for p in glob.glob(os.path.join(HERE, "meta", "*.json"))]
@@ -69,7 +69,7 @@ for m in ms:
     if not decs or decs[-1][0] != d:
         decs.append([d, 0]); rows.append(f'<li class="dec" id="d{d}" aria-hidden="true"></li>')
     decs[-1][1] += 1
-    model = e(m.get("model", "").replace("Claude ", ""))
+    model = e(m.get("model", "").replace("Claude ", "")) + " &middot; " + wc.label(wc.count(open(os.path.join(HERE, m["file"])).read()))
     rows.append(f'''<li><a href="{e(m['file'])}">
   <span class="yr">{y}</span>
   <span class="t"><span class="dot" style="background:{e(m['accent'])};box-shadow:0 0 8px {e(m['glow'])}"></span>{e(m['title'])}</span>

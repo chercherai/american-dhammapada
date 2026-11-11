@@ -10,6 +10,8 @@ e = html.escape
 CH = ["The Twin-Verses", "On Earnestness", "Thought", "Flowers", "The Fool", "The Wise Man", "The Venerable", "The Thousands", "Evil", "Punishment", "Old Age", "Self", "The World", "The Buddha", "Happiness", "Pleasure", "Anger", "Impurity", "The Just", "The Way", "Miscellaneous", "The Downward Course", "The Elephant", "Thirst", "The Bhikshu", "The Brahmana"]
 from collections import Counter
 chn = Counter(m["num"].split(".")[0] for m in metas)
+import wc
+WC = {m["file"]: wc.count(open(os.path.join(HERE, m["file"])).read()) for m in metas}
 items, seen = [], set()
 for m in metas:
     c = m["num"].split(".")[0]
@@ -19,13 +21,19 @@ for m in metas:
     items.append(f'''    <li><a href="{e(m['file'])}">
       <span class="num">{e(m['num'])}</span>
       <span class="title"><span class="dot" style="background:{e(m['accent'])};box-shadow:0 0 10px {e(m['glow'])}"></span>{e(m['title'])}</span>
-      <span class="meta">{e(m['place'])} &middot; {e(str(m['year']))} &middot; after {e(m['source'])} &middot; {e(m.get('model','').replace('Claude ',''))}</span>
+      <span class="meta">{e(m['place'])} &middot; {e(str(m['year']))} &middot; after {e(m['source'])} &middot; {e(m.get('model','').replace('Claude ',''))} &middot; {wc.label(WC[m['file']])}</span>
       <span class="line">{e(m['logline'])}</span>
     </a></li>''')
 idx_path = os.path.join(HERE, "index.html")
 idx = open(idx_path).read()
 idx = re.sub(r"<ol>.*?</ol>", "<ol>\n" + "\n".join(items) + "\n  </ol>", idx, count=1, flags=re.S)
 idx = re.sub(r'<p class="count">.*?</p>', f'<p class="count">{'All ' + str(len(metas)) + ' stories' if len(metas)==305 else str(len(metas)) + ' stories so far'}</p>', idx)
+tot = sum(WC.values())
+idx = re.sub(r'<p class="count">(.*?)</p>', lambda x: f'<p class="count">{re.sub(r" &middot; .*", "", x.group(1))} &middot; {tot:,} words &middot; about {round(tot / wc.WPM / 60)} hours of reading</p>', idx, count=1)
+for m in metas:
+    fp = os.path.join(HERE, m["file"]); h = open(fp).read()
+    h2 = re.sub(r'(<nav class="series"><a [^>]*>[^<]*</a><span>)(.*?)(</span>)', lambda x: x.group(1) + re.sub(r' &middot; [\d,]+ words.*', '', x.group(2)) + ' &middot; ' + wc.label(WC[m["file"]]) + x.group(3), h, count=1)
+    if h2 != h: open(fp, "w").write(h2)
 if "li.chapter" not in idx:
     idx = idx.replace("ol { list-style: none;", """li.chapter { border-bottom: none; scroll-margin-top: .5rem; }
 li.chapter h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 6vw, 2.8rem); line-height: 1.15; margin: 3.5rem 0 0; padding: 0 0 .9rem; border-bottom: 1px solid var(--rule); }
