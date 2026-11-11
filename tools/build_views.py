@@ -84,9 +84,10 @@ li a { display: grid; grid-template-columns: 3.2rem 1fr; gap: 0 1.4rem; padding:
 .m { grid-column: 2; font-size: .95rem; color: var(--page-dim); font-style: italic; }
 li a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
 li.dec { height: 0; scroll-margin-top: 1rem; }
-#rail { position: fixed; right: .35rem; top: 8vh; bottom: 8vh; width: 2.6rem; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; z-index: 5; touch-action: none; user-select: none; -webkit-user-select: none; cursor: ns-resize; padding: 0 .3rem; }
+#rail { position: fixed; right: .1rem; top: 8vh; bottom: 8vh; width: 2.6rem; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; z-index: 5; touch-action: none; user-select: none; -webkit-user-select: none; cursor: ns-resize; padding: 0 .3rem; }
 #rail .tk { flex: 1; display: flex; align-items: center; justify-content: flex-end; width: 100%; position: relative; }
 #rail .tk::after { content: ""; height: 1px; width: .5rem; background: var(--page-dim); opacity: .45; }
+#rail .tk::before { content: ""; position: absolute; right: 0; top: 15%; bottom: 15%; width: calc(.2rem + var(--n) * 2.2rem); background: var(--page-dim); opacity: .32; border-radius: 1px 0 0 1px; }
 #rail .tk.c::after { width: .9rem; opacity: .9; }
 #rail .tk.cur::after { background: var(--page); opacity: 1; width: 1.2rem; height: 2px; }
 #rail .tk.c span { position: absolute; right: 1.2rem; font-family: var(--font-display); font-size: .78rem; color: var(--page-dim); font-variant-numeric: tabular-nums; }
@@ -95,7 +96,8 @@ li.dec { height: 0; scroll-margin-top: 1rem; }
 @media (max-width: 40rem) { main { padding-right: 3rem; } }
 """
 newc = lambda i: i == 0 or decs[i][0] // 100 != decs[i-1][0] // 100
-ticks = "".join(f'<div class="tk{" c" if newc(i) else ""}" data-d="{d}" title="{d}s, {n} {"story" if n == 1 else "stories"}">' + (f'<span>{d // 100}00s</span>' if newc(i) else '') + '</div>' for i, (d, n) in enumerate(decs))
+mx = max(n for _, n in decs)
+ticks = "".join(f'<div class="tk{" c" if newc(i) else ""}" style="--n:{n / mx:.3f}" data-d="{d}" title="{d}s, {n} {"story" if n == 1 else "stories"}">' + (f'<span>{d // 100}00s</span>' if newc(i) else '') + '</div>' for i, (d, n) in enumerate(decs))
 RAIL = f'''<nav id="rail" aria-label="Jump to decade">{ticks}</nav><div id="bubble"></div>
 <script>
 (() => {{
@@ -144,7 +146,8 @@ svg { width: 100%; height: auto; display: block; }
 .zoomer { display: flex; gap: .4rem; margin-top: .6rem; }
 .zoomer button { font: inherit; font-family: var(--font-display); font-size: 1.1rem; min-width: 2.4rem; padding: .2rem .6rem; background: var(--ink-2); color: var(--page); border: 1px solid var(--rule); cursor: pointer; }
 .zoomer button:hover { border-color: var(--page-dim); }
-.pin:hover, .pin.on { stroke: #e6e1d6; stroke-width: 2; }
+.pin:hover { stroke: #e6e1d6; stroke-width: 1.5; }
+.pin.on { stroke: #e6e1d6; stroke-width: 1.2; }
 #card { min-height: 6.5rem; margin-top: 1.25rem; padding: 1rem 1.25rem; border: 1px solid var(--rule); background: var(--ink-2); }
 #card .t { font-family: var(--font-display); font-size: 1.6rem; color: var(--page); text-decoration: none; display: flex; align-items: center; gap: .6rem; }
 #card .t:hover { text-decoration: underline; }
@@ -154,7 +157,7 @@ svg { width: 100%; height: auto; display: block; }
 page = HEAD.format(title="Walking the American Way on the Map", layout="one full-width map of the continent, no borders drawn, a detail card below", maxw="62rem", extra=extra, h1="On the map", nav=NAV("map"))
 page += """  <svg id="map" viewBox="0 0 975 720" role="img" aria-label="Map of North America, without borders, with a point for each story"></svg>
   <div class="zoomer"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">&minus;</button><button id="zreset">Reset</button></div>
-  <div id="card"><p class="hint">Tap or hover a point to see the story set there. Dashed lines follow journeys. Drag to pan; pinch, scroll or use the buttons to zoom.</p></div>
+  <div id="card"><p class="hint">Tap or hover a point to see the story set there. Drag to pan; pinch, scroll or use the buttons to zoom.</p></div>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
@@ -172,18 +175,13 @@ world.append("path").attr("class", "grat").attr("d", path(d3.geoGraticule().step
 world.append("path").attr("class", "land").attr("d", path(land));
 const card = document.getElementById("card");
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+let K = 1;
+const R = () => 6 / Math.pow(K, .8);
 function show(p, el) {
-  d3.selectAll(".pin").classed("on", false); d3.select(el).classed("on", true);
+  d3.selectAll(".pin").classed("on", false).attr("r", R()); d3.select(el).classed("on", true).attr("r", R() * .6).raise();
   card.innerHTML = '<a class="t" href="' + p.f + '"><span class="dot" style="background:' + p.a + '"></span>' + esc(p.t) + '</a><p>' + esc(p.p) + ' &middot; ' + p.y + ' &middot; commentary ' + esc(p.n) + '</p>';
 }
-const routes = world.append("g"), g = world.append("g");
-PTS.forEach(p => {
-  if (p.r && p.r.length) {
-    const line = {type: "LineString", coordinates: [[p.lon, p.lat]].concat(p.r.map(q => [q[1], q[0]]))};
-    routes.append("path").attr("class", "route").attr("stroke", p.a).attr("d", path(line));
-    p.r.forEach(q => { const xy = proj([q[1], q[0]]); routes.append("circle").attr("cx", xy[0]).attr("cy", xy[1]).attr("class", "stop").attr("r", 2.5).attr("fill", p.a).attr("opacity", .7); });
-  }
-});
+const g = world.append("g");
 PTS.sort((a, b) => a.lat - b.lat).forEach(p => {
   const xy = proj([p.lon, p.lat]); if (!xy) return;
   const c = g.append("circle").attr("class", "pin").attr("cx", xy[0]).attr("cy", xy[1]).attr("r", 6).attr("fill", p.a)
@@ -197,11 +195,10 @@ PTS.sort((a, b) => a.lat - b.lat).forEach(p => {
 });
 const zoom = d3.zoom().scaleExtent([1, 24]).translateExtent([[0, 0], [975, 720]])
   .on("zoom", ev => {
-    const k = ev.transform.k;
+    const k = ev.transform.k; K = k;
     world.attr("transform", ev.transform);
-    g.selectAll(".pin").attr("r", 6 / Math.pow(k, .8));
-    routes.selectAll(".stop").attr("r", 2.5 / Math.pow(k, .8));
-  });
+    g.selectAll(".pin").attr("r", function () { return this.classList.contains("on") ? R() * .6 : R(); });
+      });
 svg.call(zoom).on("dblclick.zoom", null);
 const ease = () => svg.transition().duration(350);
 document.getElementById("zin").onclick = () => ease().call(zoom.scaleBy, 2);
