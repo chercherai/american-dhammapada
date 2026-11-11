@@ -76,7 +76,7 @@ world.append("path").attr("class", "land").attr("d", path(land));
 const card = document.getElementById("card");
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 let K = 1;
-const R = () => 6 / Math.pow(K, .8);
+const R = () => 6 / K;
 function show(p, el) {
   d3.selectAll(".pin").classed("on", false).attr("r", R()); d3.select(el).classed("on", true).attr("r", R() * .6).raise();
   card.innerHTML = '<a class="t" href="' + p.f + '"><span class="dot" style="background:' + p.a + '"></span>' + esc(p.t) + '</a><p>' + esc(p.p) + ' &middot; ' + p.y + ' &middot; commentary ' + esc(p.n) + '</p>';
@@ -93,7 +93,7 @@ PTS.sort((a, b) => a.lat - b.lat).forEach(p => {
   el.addEventListener("click", () => { if (el.classList.contains("on") && matchMedia("(hover: hover)").matches) location.href = p.f; else show(p, el); });
   el.addEventListener("keydown", ev => { if (ev.key === "Enter") location.href = p.f; });
 });
-const zoom = d3.zoom().scaleExtent([1, 24]).translateExtent([[0, 0], [975, 720]])
+const zoom = d3.zoom().scaleExtent([1, 48]).translateExtent([[0, 0], [975, 720]])
   .on("zoom", ev => {
     const k = ev.transform.k; K = k;
     world.attr("transform", ev.transform);
