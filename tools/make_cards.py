@@ -44,18 +44,21 @@ for m in metas:
     bg = {}
     if bgm:
         b = bgm.group(1)
-        q = re.search(r'<blockquote[^>]*>(.*?)</blockquote>', b, re.S)
-        if q:
-            cite = re.search(r'<cite>(.*?)</cite>', q.group(1), re.S)
-            bg["verse"] = T(re.sub(r'<cite>.*?</cite>', '', q.group(1), flags=re.S))
-            bg["cite"] = T(cite.group(1)).split(", tr.")[0] if cite else ""
-            after = b[q.end():]
-            pm = re.search(r'<p>(.*?)</p>', after.split('<figure')[0].split('<h3')[0], re.S)
-            bg["commentary"] = T(pm.group(1)) if pm else ""
         hs = list(re.finditer(r'<h3[^>]*>(.*?)</h3>', b, re.S))
+        first = b[:hs[1].start()] if len(hs) >= 2 else b
+        first = re.sub(r'<figure.*?</figure>', '', first, flags=re.S)
+        verses = []
+        for q in re.findall(r'<blockquote[^>]*>(.*?)</blockquote>', first, re.S):
+            cite = re.search(r'<cite>(.*?)</cite>', q, re.S)
+            verses.append({"text": T(re.sub(r'<cite>.*?</cite>', '', q, flags=re.S)),
+                           "cite": T(cite.group(1)).split(", tr.")[0] if cite else ""})
+        bg["verses"] = verses
+        com = " ".join(T(x) for x in re.findall(r'<p>(.*?)</p>', re.sub(r'<blockquote.*?</blockquote>', '', first, flags=re.S), re.S))
+        com = re.sub(r'\s*Read (?:the|about)\b[^.]*\.\s*$', '', com)          # drop the trailing "Read the full commentary..." link line
+        bg["commentary"] = com
         if len(hs) >= 2:
             bg["hist_title"] = T(hs[1].group(1))
-            bg["history"] = " ".join(T(x) for x in re.findall(r'<p>(.*?)</p>', b[hs[1].end():], re.S))[:1500]
+            bg["history"] = "\n\n".join(T(x) for x in re.findall(r'<p>(.*?)</p>', b[hs[1].end():], re.S))
     posts.append({"bg": bg, "sections": secs, "num": m["num"], "title": m["title"], "place": m["place"], "year": str(m["year"]),
                   "logline": m.get("logline", ""), "url": SITE + m["file"], "image": SITE + f"og/{slug}.png"})
     im = Image.new("RGB", (1200, 630), BG); d = ImageDraw.Draw(im)
