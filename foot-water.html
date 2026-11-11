@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foot Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Inside a limestone cave looking out: cave black, wet-stone grey, the pale of daylight on water. */
+  --ground: #0c0c0c;
+  --ground-2: #191a1b;
+  --paper: #e6e1d7;
+  --paper-dim: #9e9a92;
+  --accent: #a9bccb;
+  --glow: #d3dde4;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(ellipse at 50% -10%, #23262a 0%, var(--ground) 55%) fixed, var(--ground);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 36rem; margin: 0 auto; padding: 3rem 1.25rem 7rem; }
+.series { font-family: var(--font-display); font-style: italic; font-size: 1rem; margin: 0 0 3.5rem; color: var(--paper-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.series a { color: var(--paper-dim); text-decoration: none; border-bottom: 1px solid rgba(230,225,215,.2); }
+.series a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+header { margin-bottom: 4rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 9vw, 4.2rem); line-height: 1; margin: 0 0 1.5rem; color: var(--accent); text-wrap: balance; text-shadow: 0 0 28px rgba(169,188,203,.22); }
+.epigraph { border-left: 1px solid rgba(169,188,203,.4); padding-left: 1rem; font-style: italic; color: var(--paper-dim); font-size: 1rem; line-height: 1.6; }
+section { margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; margin: 0; text-wrap: balance; }
+.dateline { font-family: var(--font-display); font-style: italic; color: var(--accent); opacity: .85; font-size: .95rem; margin: .25rem 0 1.75rem; }
+p { margin: 0 0 1.25rem; }
+section > .dateline + p::first-letter { font-family: var(--font-display); float: left; font-size: 3.6rem; line-height: .85; padding: .35rem .5rem 0 0; color: var(--accent); }
+.verse { margin: 2rem 0; padding: 1.25rem 1.5rem; background: rgba(25,26,27,.75); border: 1px solid rgba(230,225,215,.08); font-style: italic; line-height: 1.7; }
+.verse p { margin: 0 0 .9rem; }
+.verse p:last-child { margin: 0; }
+.brk { text-align: center; color: var(--glow); letter-spacing: 1.2em; margin: 2.5rem 0; opacity: .5; font-size: .8rem; }
+footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid rgba(230,225,215,.1); color: var(--paper-dim); font-size: .9rem; font-style: italic; line-height: 1.6; }
+footer a { color: var(--accent); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; font-style: normal; font-family: var(--font-display); font-size: 1.05rem; }
+.heard { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--paper-dim); margin: 0 0 1rem; }
+.heard-lead { color: var(--accent); }
+details.bg { margin-top: 5rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+details.bg summary { cursor: pointer; list-style: none; padding: 1.1rem 0; font-family: var(--font-display); font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+details.bg summary::-webkit-details-marker { display: none; }
+details.bg summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; }
+details.bg[open] summary::after { content: "\2212"; }
+details.bg summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bg-body { padding: 0 0 1.75rem; font-size: 1rem; line-height: 1.7; }
+.bg-body h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .75rem; }
+.bg-body h3:first-child { margin-top: 0; }
+.bg-body p { margin: 0 0 1rem; }
+.bg-body a { color: var(--accent); }
+.pd { margin: 0 0 1rem; padding: 1rem 1.25rem; background: rgba(25,26,27,.75); border-left: 2px solid var(--accent); font-style: italic; }
+.pd cite { display: block; margin-top: .5rem; font-size: .85rem; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 420px) { body { font-size: 1.05rem; } }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+<nav class="series"><a href="index.html">Walking the American Way</a><span>Commentary 26.21 &middot; Pabbhāravāsī Tissa</span></nav>
+<header>
+  <h1>Foot Water</h1>
+  <div class="epigraph">(Of whom the world was not worthy:) they wandered in deserts, and in mountains, and in dens and caves of the earth.<br>&mdash; Hebrews 11:38</div>
+</header>
+
+<p class="heard"><span class="heard-lead">This is how I heard it,</span> on the Green River.</p>
+
+<section>
+  <h2>I. The Praying Man</h2>
+  <p class="dateline">The bluffs above the Green River, Hart County, Kentucky &middot; June 1884</p>
+  <p>I will tell it the way it happened to me, because nobody else saw my side of it, and I am the one who did the wrong.</p>
+  <p>I lived in the cave above Joppa with my three. You know the one if you are from there. It opens under a ledge in the bluff where the sinkhole woods come down to the river, low at the mouth so a grown person has to stoop, and then it stands up tall inside and goes back a long way, and there is water in it that you hear before you find. Cold all year. The same cold in August as in January, so that in summer the air comes out of the mouth like breath, and the boys from Joppa used to dare each other to stand in it. They did not come in. They said a woman lived in there. That was so.</p>
+  <p>I came in the winter of the big snow, before the war, with Phebe who was eight and Lewis who was five and the baby I had not named yet, because you wait. We had come up out of Barren County four nights walking, and they were behind us with the dogs, and the river was too high and too cold, and the cave was there. I meant to stay one night. I am not going to tell you more about that winter than that we did not come out. You can understand it or not. After a while the cold did not trouble us, and the dark was a house, and the four of us kept it. Thirty years. It is a long time, if you are counting, and I was not.</p>
+  <p>He came up the bluff path in the middle of June, in the morning. A man past forty, dark and spare, in a hickory shirt washed nearly white, barefooted, with his shoes tied together by the laces and hung round his neck and a blanket roll on his back and nothing else. He stooped under the ledge and stood up inside, out of the sun, and he did not look around the way people look in a cave, for snakes or for treasure. He sat down on the flat rock just inside the drip line, where the water comes off the ledge in a fringe when it has rained, and put his hands on his knees, and was still.</p>
+  <p>I have had people in my cave. Boys on a dare. A drunk white man in &rsquo;71 who slept a night and went out screaming. Two surveyors with a candle and a line. None of them were still. This one was still the way the river is still at the bottom of a deep hole, where it is moving all the time and you can&rsquo;t see it, and the stillness came off him into the cave like the cold comes out of it, and I could not abide it. I have no other way to say it. It was like being looked at with a light by somebody who is not looking at you at all. The children felt it. Lewis went back into the dark behind the water and would not come out.</p>
+  <p>I said to myself, he is a traveling preacher looking for a cool place to sleep. He will stay the night. I took the three by the hand and went out of my own house, up through the sinkhole woods, and sat under the beeches the whole night through like a woman put out in the road, and waited for him to leave.</p>
+</section>
+
+<section>
+  <h2>II. Looking Back Along Him</h2>
+  <p class="dateline">Joppa and the bluff &middot; June and July</p>
+  <p>In the morning he went down to Joppa. I followed him. Nobody sees me if I don&rsquo;t want them to.</p>
+  <p>Joppa was eleven houses then, and a church of hewed logs that doubled for the school, and a store that belonged to a white man in Munfordville. He walked through it the way a man walks through a place where he means to ask for something, slow, and he stopped at nobody&rsquo;s door, and at the last house before the woods Viney Hollins came out on her step with flour on her hands and looked at him and called him in.</p>
+  <p>She knew who he was. Everybody in that country knew Brother Isom Gaines, though most had never laid eyes on him. He was the one Mother Easter Tolliver had raised up out of her church at Little Zion, who preached when they asked him and did not ask, and had no house, and ate what was put in front of him. Viney sat him at her table and gave him cornbread and buttermilk and a plate of greens. Then she brought her washpan, the tin one with the dent, because his feet were cut from the bluff, and knelt and washed them, and dried them on her apron. She asked him where he was staying. He said in the cave above. She asked him how long. He said Mother Easter had given him a word to carry, and he meant to sit with it through laying-by, if the Lord was willing.</p>
+  <p><em>Then you come here every day for your dinner,</em> Viney said. <em>Every day. You hear me? Till the crop&rsquo;s laid by and after.</em></p>
+  <p>He said he would. And I knew then he wasn&rsquo;t going to leave.</p>
+  <p>I knew the word Mother Easter had given him, too, because he said it over walking. I heard it all the way up the bluff path that day and every day after. She had told him to go off by himself and count what he was made of. Every part. So he counted it, coming and going, the way you&rsquo;d say a lesson. <em>The hair of the head. The hair of the body. The nails. The teeth. The skin.</em> And on, inward: the flesh and the sinews and the bones and the marrow, the heart and the liver, the lights, the bowels, down to the spit and the sweat and the tears and the water. Over and over, all the way down to the river and all the way back up, as if he were taking an inventory of a house he had been lent.</p>
+  <p>Half a month went by, and I sat in the beech woods with my three. He did not go. He sat on the flat rock inside my door from before light until dinner and from dinner until dark and went in and lay down on his blanket by my water and slept like a child. I could not go in. I could not have gone in any more than you could lie down on a stove.</p>
+  <p>I thought: everybody has something. If I could find it, I could tell him. I could stand in my own door and say it to his face, and he would pick up his blanket and go.</p>
+  <p>The dead see the way water runs, all the way back to where it came from. I looked back along him. I looked along his whole life the way you look up a creek from the mouth, every turn of it, every snag. I saw him born on a place in Barren County not twelve miles from where I was born. I saw them sell his mother off it when he was six, and I saw him at sixteen knock down a white boy who struck him and take the whipping for it. I saw him freed at twenty-one, in the December the law came down, walking off that place with a hoe on his shoulder that he carried back the next morning because it wasn&rsquo;t his. I saw him go down in the Green River to be baptized in 1866 with Mother Easter on the bank, and come up.</p>
+  <p>And from the day he came up out of that water I looked for one thing, for a speck, for a flyspeck, the way you&rsquo;d look over a sheet you meant to sell. He married and buried his wife and gave her brother the land. He worked other men&rsquo;s tobacco for wages and took the wages and nothing over. He preached at forty brush arbors and would not let them take up a collection. When men cussed him he waited. When women looked at him he looked at the ground. He never took one thing that wasn&rsquo;t handed to him. I went over it twice. I went over it three times.</p>
+  <p>There was nothing. He was clean as a peeled stick. I sat under the beeches and hated him for it, and then I thought of something.</p>
+</section>
+
+<section>
+  <h2>III. The Boy</h2>
+  <p class="dateline">Viney Hollins&rsquo;s house &middot; a Tuesday in July</p>
+  <p>I am going to tell this part plainly and not make it any better than it was.</p>
+  <p>Viney had four. The least one was Sam, five years old, with a head like a little brown egg and a way of following the preacher down to the gate every day and walking along beside him a piece, saying the parts over with him to show he knew them. <em>The teeth. The skin.</em> On a Tuesday in July, in the morning, while his mother was at the churn, I went into that child.</p>
+  <p>I had been a mother. I want you to know I knew what I was doing. I took him by the throat from inside and closed it. He fell down on the floor of the kitchen and his heels went on the boards, and his eyes stood out of his head, and the froth came out of his mouth, and Viney left the churn and fell on her knees and took him up and screamed, <em>What is this, what is this, Jesus, what is this,</em> and I spoke to her out of the air of her own kitchen.</p>
+  <p><em>I have got your boy,</em> I said. <em>I don&rsquo;t want nothing for him. But that praying man that eats at your table carries a root. You go ask him for a piece of it, and boil it down in lard, and put it in the child&rsquo;s nose, and I will turn him loose.</em></p>
+  <p>That was the whole of my plan. If he gave it, he was a root doctor. Everybody on the river would know it by Sunday, and a preacher who gives out roots is no preacher, and he would have to go.</p>
+  <p>Viney held her boy against her with his heels drumming and his face going dark, and she looked up at nothing, at me, and her face was wet all over, and she said:</p>
+  <p><em>Then let him go to Jesus. I will not ask that man for any root. I will not make Brother Isom a root doctor in front of God and Joppa. Let him go.</em></p>
+  <p>I had not expected that. I tried again.</p>
+  <p><em>Then have him tie a bag of asafetida round the child&rsquo;s neck with his own hands.</em></p>
+  <p><em>No. I won&rsquo;t ask him that either.</em></p>
+  <p>I could feel the boy going. I could feel how little there was left in him, how soon. I had not wanted that. I don&rsquo;t know what I had wanted.</p>
+  <p><em>Then wash his feet when he comes,</em> I said, <em>the way you do. And take the water you washed them in and put it on this child&rsquo;s head.</em></p>
+  <p>Viney stopped crying. She sat on her heels on her kitchen floor and looked a long time at nothing.</p>
+  <p><em>That I can do,</em> she said.</p>
+  <p>And I let the throat open a little, so the child could breathe, and lie in his mother&rsquo;s lap, and wait.</p>
+</section>
+
+<section>
+  <h2>IV. Foot Water</h2>
+  <p class="dateline">The same day, at dinner</p>
+  <p>He came down the path at noon the way he always came, saying the parts, and Sam was not at the gate. Viney met him at the step with her face scrubbed and her eyes red and sat him down at the table and put the bread in front of him and the buttermilk, and while he ate she brought the dented washpan, and knelt, and washed his feet, the way she did every day, and dried them on her apron.</p>
+  <p>Then she stood up with the pan in her two hands.</p>
+  <p><em>Brother Isom,</em> she said. <em>Sam is sick. I want to put this water on my boy&rsquo;s head.</em></p>
+  <p>He looked at the pan. He looked at the child in the corner on the pallet with his throat working. If he had a thought about it, it did not get as far as his face.</p>
+  <p><em>Put it, then,</em> he said.</p>
+  <p>She poured it on the boy&rsquo;s head, all of it, and it ran down into his ears and his collar and the tick of the pallet, gray with the dust of my bluff, and I let him go. He sat up coughing and hollered for his mother, and she grabbed him to her wet and all and rocked him there on the floor, and the preacher finished his bread, and thanked her for it, and put his shoes back round his neck, and went out the gate.</p>
+  <p>I was at my door before him.</p>
+</section>
+
+<section>
+  <h2>V. Root Doctor</h2>
+  <p class="dateline">The mouth of the cave &middot; afternoon</p>
+  <p>It had rained in the night and the fringe was coming off the ledge, a line of drops all across the mouth, and the flat rock inside it was dark with wet. He came up the last of the path saying <em>the bones, the marrow, the kidneys,</em> and stooped under the ledge, and I stood up in my own door and said it with all I had.</p>
+  <p><em>Doctor! Root doctor! Don&rsquo;t you come in here!</em></p>
+  <p>He stopped where he was, on the flat rock, with the drops coming down all round him.</p>
+  <p><em>Who is that?</em></p>
+  <p><em>It&rsquo;s me that lives here.</em></p>
+  <p>And I watched him do what I had done. I watched him turn and look back along his own life, the whole length of it, from the river in 1866 to the rock he was standing on, looking for the day he doctored anybody. He took his time. He looked the way an honest man counts money that isn&rsquo;t his.</p>
+  <p><em>I never doctored nobody,</em> he said.</p>
+  <p><em>You never?</em></p>
+  <p><em>Never.</em></p>
+  <p><em>Then I will tell you.</em></p>
+  <p><em>Tell me.</em></p>
+  <p><em>Stand back from my door first. Now. Didn&rsquo;t Viney Hollins this very day take the water she washed your feet in and pour it on her boy&rsquo;s head, when he was took?</em></p>
+  <p><em>She did.</em></p>
+  <p><em>Well.</em></p>
+  <p><em>Is that what you mean?</em></p>
+  <p><em>That is what I mean.</em></p>
+  <p>Then something happened in him that I had never seen happen in anybody, living or dead.</p>
+  <p>I had gone over his life three times with all the sight the dead have, and so had he, just now, and the worst either of us could find in eighteen years was the dirty water off his feet. He understood that. I watched him understand it. And a gladness came up in him like the river comes up in March, all at once and from underneath, so strong that I stepped back from it into my own dark. I thought he would shout. A preacher would have shouted. He did not. He held it down the way you put your hand over a lamp chimney in a draft, not to put it out, to keep it steady, and he stood there on the wet rock and did not lift a foot, while the drops came off the ledge and ran down the back of his neck, and whatever he had come there to finish, he finished it, standing there. I saw it go through. I don&rsquo;t have a word for it any more than I had a word for the stillness. He was a man with nothing left on him to count.</p>
+  <p>Then he looked straight at me, and I knew he could see me, and I knew he had always been able to.</p>
+  <p><em>You told a lie on a clean man,</em> he said. <em>You can&rsquo;t stay here now. Go on.</em></p>
+  <p>Then he said, and it was not hard, it was the voice you&rsquo;d use to a mule that&rsquo;s stood too long in a stall, <em>And there&rsquo;s no call for you to stay here, Sister. Nobody&rsquo;s hunting you. They quit in &rsquo;65. Get your children and go on.</em></p>
+  <p>Nobody tells the dead anything. Nobody had told me. Thirty winters I had kept that cave against the dogs, and the dogs were dead, and the men were old or dead, and the place in Barren County had been sold twice, and nobody had come up the bluff to say it.</p>
+  <p>I went and got them out of the back. Phebe had the baby. Lewis would not let go of my skirt. We came up to the mouth, and he stepped off the rock to let us by, and we went out past him into the light, which did not hurt.</p>
+</section>
+
+<section>
+  <h2>VI. Little Zion</h2>
+  <p class="dateline">The district association, under the beeches &middot; August 1884</p>
+  <p>I have been other places since. But I went to the association first, in August, because I wanted to see what they would make of him.</p>
+  <p>It met that year at Little Zion, in the grove, with tables of dinner under the trees and the preachers of eleven churches on the benches and the people standing all round, and Brother Isom came walking in on the third day out of the woods with his shoes round his neck. They asked him had he finished what he went to do. He said he had. Then they made him tell it, the cave and Viney and the foot water and the woman at the door, and he told it the way he told everything, without any shine on it.</p>
+  <p><em>And she called you a root doctor,</em> said one of the preachers, <em>right to your face. And you were not angry.</em></p>
+  <p><em>No.</em></p>
+  <p><em>Not at all?</em></p>
+  <p><em>No.</em></p>
+  <p>The preachers looked at each other. They went to the front bench where Mother Easter Tolliver was sitting with her stick between her knees, ninety years old, so small her feet did not reach the ground, and the oldest of them bent down and said it to her low.</p>
+  <p><em>Mother, that boy is telling a story. Any man would have got mad.</em></p>
+  <p>Mother Easter did not look up at him. She was looking at Isom, across the grove, where he stood by himself at the edge of the trees.</p>
+  <p><em>That one don&rsquo;t get mad,</em> she said. <em>He don&rsquo;t run with the members and he don&rsquo;t run with the preachers. He hasn&rsquo;t got a house to keep. He don&rsquo;t want nothing.</em></p>
+  <p>Then she put her hand out, and somebody put a Bible in it, and she could not read, she had never read, but she opened it to the place she wanted by the feel of the pages, the way you find a step in the dark, and gave it to the preacher to read out, and he read it out.</p>
+  <div class="verse">
+    <p>They were stoned, they were sawn asunder, were tempted, were slain with the sword: they wandered about in sheepskins and goatskins; being destitute, afflicted, tormented; (Of whom the world was not worthy:) they wandered in deserts, and in mountains, and in dens and caves of the earth.</p>
+    <p>&mdash; Hebrews 11:37&ndash;38</p>
+  </div>
+  <p>I was standing at the back among the people, with my three. Nobody saw us. Destitute, afflicted, tormented. In a den and a cave of the earth. I had not known there was any word for us in that book. I had not known anybody had written it down.</p>
+  <p>I went back once more to the cave, at the end, to look. Nobody lives there now. The boys from Joppa go in all the way to the water and come out laughing. The flat rock is still inside the drip line, and when it has rained in the night the fringe comes off the ledge and wets the whole of it, all but two places the shape of a man&rsquo;s bare feet, side by side, where he stood that afternoon and did not move; and those stay dry.</p>
+</section>
+
+<details class="bg">
+  <summary>Background</summary>
+  <div class="bg-body">
+    <h3>The verse</h3>
+    <blockquote class="pd">Him I call indeed a Brahmana who keeps aloof both from laymen and from mendicants, who frequents no houses, and has but few desires.<cite>Dhammapada 404, tr. F. Max M&uuml;ller (1881)</cite></blockquote>
+    <p>In the commentary, the monk Tissa takes a meditation subject from the Buddha and settles for the rains in a rock cave, fed by a laywoman of the village. The deity who lives in the cave cannot bear to share it with so virtuous a man; she searches his whole life for a flaw and finds none, then seizes the laywoman&rsquo;s youngest son and demands, in turn, that the woman get licorice, then resin powder, from the monk as medicine. The woman refuses to make him a physician, but agrees to sprinkle the water she bathed his feet in on the boy&rsquo;s head. Then the deity stands at the cave mouth and calls Tissa <em>great physician</em>. He reviews his life, finds no speck on his conduct, feels great joy, restrains it, and becomes an arahant without lifting a foot; he tells the deity to leave. When the monks refuse to believe he was not angry, the Buddha speaks the verse. The thirty-two parts of the body he recites are the meditation subject. Read <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-21.htm">the full commentary story</a> and about the <a href="https://en.wikipedia.org/wiki/Patikulamanasikara">contemplation of the body&rsquo;s parts</a>.</p>
+    <h3>The Green River country, 1884</h3>
+    <p>Kentucky stayed in the Union and was exempt from the Emancipation Proclamation, so slavery there ended only when the <a href="https://en.wikipedia.org/wiki/Thirteenth_Amendment_to_the_United_States_Constitution">Thirteenth Amendment</a> took effect in December 1865. The limestone country along the Green River is riddled with caves and sinkholes; at nearby <a href="https://www.nps.gov/maca/learn/historyculture/african-american-history.htm">Mammoth Cave</a> enslaved men mined saltpeter and, from 1838, enslaved guides such as Stephen Bishop and Mat and Nick Bransford explored and led tours, and Bransford descendants went on guiding into the 1930s.</p>
+    <p>Freed Black Kentuckians built their own churches quickly after the war. In 1869 delegates met at the First Baptist Church of Lexington to organize the <a href="https://baptisthistoryhomepage.com/ky.colored.gen.assoc.html">Kentucky General Association of Colored Baptists</a>; its constitution provided for messengers from the district associations into which local churches gathered. Joppa, Little Zion and their people are fictional.</p>
+  </div>
+</details>
+
+<footer>
+  After the story of the elder Pabbh&#257;rav&#257;s&#299; Tissa from the Dhammapada commentary (verse 404). <a href="https://ancient-buddhist-texts.net/English-Texts/Dhamma-Verses-Comm/26-21.htm">The original</a>. Scripture from the King James Version. Written by Claude Opus 5.5.
+  <div class="pager"><a href="the-feather-trees.html">&larr; The Feather Trees</a><a href="index.html">All stories</a><a href="the-hickory-stick.html">The Hickory Stick &rarr;</a></div>
+</footer>
+</main>
+<script>
+(function () {
+  /* Wet bare footprints appear one by one on dark stone and slowly dry; now and then a pair stays. */
+  var c = document.getElementById('fx'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, prints = [], step = 0, tick = 0, path;
+  function size() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    newPath();
+    if (reduce) { prints = []; for (var i = 0; i < 6; i++) addPrint(0.5); }
+  }
+  function newPath() { path = { x: W * (0.15 + Math.random() * 0.7), y: H + 30, a: -Math.PI / 2 + (Math.random() - .5) * 0.5 }; step = 0; }
+  function addPrint(life) {
+    var side = step % 2 ? 1 : -1, nx = Math.cos(path.a + Math.PI / 2) * 9 * side;
+    var ny = Math.sin(path.a + Math.PI / 2) * 9 * side;
+    prints.push({ x: path.x + nx, y: path.y + ny, a: path.a, s: side, life: life || 1 });
+    path.x += Math.cos(path.a) * 38; path.y += Math.sin(path.a) * 38;
+    path.a += (Math.random() - .5) * 0.12; step++;
+    if (path.y < -30 || path.x < -30 || path.x > W + 30) newPath();
+  }
+  function foot(p) {
+    var al = 0.11 * p.life;
+    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a + Math.PI / 2);
+    ctx.fillStyle = 'rgba(169,188,203,' + al + ')';
+    ctx.beginPath(); ctx.ellipse(0, 4, 4.2, 7.5, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(0, -6, 4.8, 4.5, 0, 0, Math.PI * 2); ctx.fill();
+    for (var i = 0; i < 5; i++) {
+      ctx.beginPath(); ctx.arc(-4 + i * 2, -12 + Math.abs(i - 1) * 0.6, 1.2, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduce) {
+      tick++;
+      if (tick % 70 === 0) addPrint(1);
+      for (var i = prints.length - 1; i >= 0; i--) { prints[i].life -= 0.0016; if (prints[i].life <= 0) prints.splice(i, 1); }
+    }
+    for (var j = 0; j < prints.length; j++) foot(prints[j]);
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); if (reduce) draw(); });
+})();
+</script>
+</body>
+</html>
