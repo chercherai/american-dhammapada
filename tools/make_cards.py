@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Social cards (1200x630) for each story: title, place and year, logline, and the locator map.
 Writes og/<num>.png and a posts.json the Bluesky poster reads."""
-import glob, io, json, os, re, textwrap
+import glob, html, io, json, os, re, textwrap
 import cairosvg
 from PIL import Image, ImageDraw, ImageFont
 
@@ -30,7 +30,16 @@ metas = sorted((json.load(open(p)) for p in glob.glob(os.path.join(HERE, "meta",
 for m in metas:
     slug = m["num"].replace(".", "-")
     out = os.path.join(HERE, "og", f"{slug}.png")
-    posts.append({"num": m["num"], "title": m["title"], "place": m["place"], "year": str(m["year"]),
+    page = open(os.path.join(HERE, m["file"])).read()
+    secs = []
+    for i, sec in enumerate(re.findall(r'<section[^>]*>(.*?)</section>', page, re.S), 1):
+        hm = re.search(r'<h2>(.*?)</h2>', sec, re.S)
+        paras = [html.unescape(re.sub(r'<[^>]+>', '', x)).strip() for x in re.findall(r'<p(?: class="(?!dateline)[^"]*")?>(.*?)</p>', sec, re.S)]
+        dm = re.search(r'<p class="dateline">(.*?)</p>', sec, re.S)
+        secs.append({"heading": html.unescape(re.sub(r'<[^>]+>', '', hm.group(1))).strip() if hm else "",
+                     "dateline": html.unescape(re.sub(r'<[^>]+>', '', dm.group(1))).strip() if dm else "",
+                     "text": " ".join(x for x in paras if x)[:1200], "anchor": f"#part-{i}"})
+    posts.append({"sections": secs, "num": m["num"], "title": m["title"], "place": m["place"], "year": str(m["year"]),
                   "logline": m.get("logline", ""), "url": SITE + m["file"], "image": SITE + f"og/{slug}.png"})
     im = Image.new("RGB", (1200, 630), BG); d = ImageDraw.Draw(im)
     d.rectangle([24, 24, 1176, 606], outline="#3a3a36", width=2)

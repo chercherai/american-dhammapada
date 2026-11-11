@@ -284,6 +284,19 @@ for f in sorted(glob.glob(os.path.join(HERE, "*.html")) + [os.path.join(HERE, x)
     dig.update(open(f, "rb").read())
 wr("sw.js", open(os.path.join(HERE, "sw.tpl.js")).read().replace("/*VERSION*/", dig.hexdigest()[:10]))
 
+# ---------- section anchors (#part-1 ...) so posts can link to a section ----------
+for m in metas:
+    fp = os.path.join(HERE, m["file"]); h = open(fp).read(); h0 = h
+    main_start = h.find("<main")
+    n = [0]
+    def anchor(x):
+        n[0] += 1
+        return f'<section id="part-{n[0]}"' + x.group(1)
+    head, body = h[:main_start], h[main_start:]
+    body = re.sub(r'<section(?: id="part-\d+")?(\s|>)', lambda x: anchor(x), body)
+    h = head + body
+    if h != h0: open(fp, "w").write(h)
+
 # ---------- social cards: Open Graph / Twitter tags on story pages ----------
 SITEURL = "https://chercherai.github.io/american-dhammapada/"
 for m in metas:
