@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build timeline.html and map.html from meta/*.json (finished stories only), and add view nav to index.html."""
-import glob, html, json, os, re
+import re, glob, html, json, os, re
 HERE = os.path.dirname(os.path.abspath(__file__))
 ml = json.load(open(os.path.join(HERE, "master_list.json")))
 metas = [json.load(open(p)) for p in glob.glob(os.path.join(HERE, "meta", "*.json"))]
@@ -13,9 +13,10 @@ def year_of(m):
 
 def NAV(cur):
     out = []
-    for k, h, t in [("num", "index.html", "By number"), ("year", "timeline.html", "By year"), ("map", "map.html", "On the map")]:
+    for k, h, t in [("num", "index.html", "Verse"), ("year", "timeline.html", "Time"), ("map", "map.html", "Place")]:
         ac = ' aria-current="page"' if k == cur else ""
         out.append(f'<a href="{h}"{ac}>{t}</a>')
+    out.append('<a href="#" id="nearme" title="A story set somewhere near you">Near you</a>')
     return '<nav class="views">' + "".join(out) + "</nav>"
 
 HEAD = """<!DOCTYPE html>
@@ -124,7 +125,7 @@ RAIL = f'''<nav id="rail" aria-label="Jump to decade">{ticks}</nav><div id="bubb
 }})();
 </script>
 '''
-page = HEAD.format(title="Walking the American Way by Year", layout="one vertical timeline grouped by century", maxw="40rem", extra=extra, h1="By year", nav=NAV("year"))
+page = HEAD.format(title="Walking the American Way: Time", layout="one vertical timeline grouped by century", maxw="40rem", extra=extra, h1="Time", nav=NAV("year"))
 page += f'  <p class="kicker">{len(ms)} stories, {year_of(ms[0])} to {year_of(ms[-1])}</p>\n  <ol>\n' + "\n".join(rows) + "\n  </ol>\n</main>\n" + RAIL + "</body>\n</html>\n"
 open(os.path.join(HERE, "timeline.html"), "w").write(page)
 
@@ -154,7 +155,7 @@ svg { width: 100%; height: auto; display: block; }
 #card p { margin: .25rem 0 0; color: var(--page-dim); font-style: italic; font-size: .95rem; }
 .hint { color: var(--page-dim); font-style: italic; font-size: .95rem; }
 """
-page = HEAD.format(title="Walking the American Way on the Map", layout="one full-width map of the continent, no borders drawn, a detail card below", maxw="62rem", extra=extra, h1="On the map", nav=NAV("map"))
+page = HEAD.format(title="Walking the American Way: Place", layout="one full-width map of the continent, no borders drawn, a detail card below", maxw="62rem", extra=extra, h1="Place", nav=NAV("map"))
 page += """  <svg id="map" viewBox="0 0 975 720" role="img" aria-label="Map of North America, without borders, with a point for each story"></svg>
   <div class="zoomer"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">&minus;</button><button id="zreset">Reset</button></div>
   <div id="card"><p class="hint">Tap or hover a point to see the story set there. Drag to pan; pinch, scroll or use the buttons to zoom (the buttons zoom toward the chosen point).</p></div>
@@ -225,7 +226,20 @@ footer {"""
     s = s.replace("footer {", css, 1)
     s = s.replace('<p class="count">', NAV("num") + '\n  <p class="count">', 1)
     open(ip, "w").write(s)
+s = open(ip).read()
+s2 = re.sub(r'<nav class="views">.*?</nav>', NAV("num"), s, count=1, flags=re.S)
+if s2 != s: open(ip, "w").write(s2)
 print("views:", len(ms), "timeline,", len(pts), "map points")
+
+# ---------- "near you" picker ----------
+NEAR = [[m["file"], round(m["lat"], 3), round(m["lon"], 3)] for m in metas if "lat" in m]
+nj = open(os.path.join(HERE, "near.tpl.js")).read().replace("/*PTS*/[]", json.dumps(NEAR, separators=(",", ":")))
+np_ = os.path.join(HERE, "near.js")
+if not os.path.exists(np_) or open(np_).read() != nj: open(np_, "w").write(nj)
+for f in ["index.html", "timeline.html", "map.html"]:
+    fp = os.path.join(HERE, f); h = open(fp).read()
+    if '<script src="near.js"></script>' not in h:
+        open(fp, "w").write(h.replace("</body>", '<script src="near.js"></script>\n</body>', 1))
 
 # ---------- reader preferences script on every page ----------
 import glob
