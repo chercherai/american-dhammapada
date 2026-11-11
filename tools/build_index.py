@@ -18,7 +18,7 @@ for m in metas:
 idx_path = os.path.join(HERE, "index.html")
 idx = open(idx_path).read()
 idx = re.sub(r"<ol>.*?</ol>", "<ol>\n" + "\n".join(items) + "\n  </ol>", idx, count=1, flags=re.S)
-idx = re.sub(r'<p class="count">.*?</p>', f'<p class="count">{len(metas)} stories so far</p>', idx)
+idx = re.sub(r'<p class="count">.*?</p>', f'<p class="count">{'All ' + str(len(metas)) + ' stories' if len(metas)==305 else str(len(metas)) + ' stories so far'}</p>', idx)
 if idx != open(idx_path).read(): open(idx_path, "w").write(idx)
 for i, m in enumerate(metas):
     p = os.path.join(HERE, m["file"]); s = open(p).read()
