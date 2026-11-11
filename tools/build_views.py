@@ -139,7 +139,7 @@ svg { width: 100%; height: auto; display: block; }
 .sea { fill: #141619; }
 .grat { fill: none; stroke: rgba(230,225,214,.05); stroke-width: .5; }
 .route { fill: none; stroke-width: 1.2; stroke-dasharray: 3 4; opacity: .7; }
-.pin { cursor: pointer; stroke: #111214; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.pin { cursor: pointer; stroke: #111214; stroke-width: 1.2; vector-effect: non-scaling-stroke; outline: none; -webkit-tap-highlight-color: transparent; }
 .land, .grat, .route { vector-effect: non-scaling-stroke; }
 #map { cursor: grab; touch-action: none; }
 #map:active { cursor: grabbing; }
@@ -157,7 +157,7 @@ svg { width: 100%; height: auto; display: block; }
 page = HEAD.format(title="Walking the American Way on the Map", layout="one full-width map of the continent, no borders drawn, a detail card below", maxw="62rem", extra=extra, h1="On the map", nav=NAV("map"))
 page += """  <svg id="map" viewBox="0 0 975 720" role="img" aria-label="Map of North America, without borders, with a point for each story"></svg>
   <div class="zoomer"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">&minus;</button><button id="zreset">Reset</button></div>
-  <div id="card"><p class="hint">Tap or hover a point to see the story set there. Drag to pan; pinch, scroll or use the buttons to zoom.</p></div>
+  <div id="card"><p class="hint">Tap or hover a point to see the story set there. Drag to pan; pinch, scroll or use the buttons to zoom (the buttons zoom toward the chosen point).</p></div>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
@@ -175,34 +175,38 @@ world.append("path").attr("class", "grat").attr("d", path(d3.geoGraticule().step
 world.append("path").attr("class", "land").attr("d", path(land));
 const card = document.getElementById("card");
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
-let K = 1;
-const R = () => 6 / K;
+// Pins live outside the zoomed group and are repositioned on zoom, so their size never scales.
+const touch = matchMedia("(hover: none)").matches;
+const CSSR = touch ? 7 : 5.5;                       // pin radius in screen pixels
+const R = () => CSSR * 975 / (svg.node().clientWidth || 975);
+let T = d3.zoomIdentity;
+function size() { g.selectAll(".pin").attr("r", function () { return this.classList.contains("on") ? R() * .6 : R(); }); }
+function place() { g.selectAll(".pin").attr("cx", d => T.applyX(d.x)).attr("cy", d => T.applyY(d.y)); }
 function show(p, el) {
-  d3.selectAll(".pin").classed("on", false).attr("r", R()); d3.select(el).classed("on", true).attr("r", R() * .6).raise();
+  g.selectAll(".pin").classed("on", false); d3.select(el).classed("on", true).raise(); size();
   card.innerHTML = '<a class="t" href="' + p.f + '"><span class="dot" style="background:' + p.a + '"></span>' + esc(p.t) + '</a><p>' + esc(p.p) + ' &middot; ' + p.y + ' &middot; commentary ' + esc(p.n) + '</p>';
 }
-const g = world.append("g");
+const g = svg.append("g");
 PTS.sort((a, b) => a.lat - b.lat).forEach(p => {
   const xy = proj([p.lon, p.lat]); if (!xy) return;
-  const c = g.append("circle").attr("class", "pin").attr("cx", xy[0]).attr("cy", xy[1]).attr("r", 6).attr("fill", p.a)
+  const c = g.append("circle").datum({x: xy[0], y: xy[1]}).attr("class", "pin").attr("fill", p.a)
     .attr("tabindex", 0).attr("role", "link").attr("aria-label", p.t + ", " + p.p + ", " + p.y);
   c.append("title").text(p.t + " - " + p.p + ", " + p.y);
   const el = c.node();
   el.addEventListener("mouseenter", () => show(p, el));
   el.addEventListener("focus", () => show(p, el));
-  el.addEventListener("click", () => { if (el.classList.contains("on") && matchMedia("(hover: hover)").matches) location.href = p.f; else show(p, el); });
+  el.addEventListener("click", () => { if (el.classList.contains("on") && !touch) location.href = p.f; else show(p, el); });
   el.addEventListener("keydown", ev => { if (ev.key === "Enter") location.href = p.f; });
 });
+place(); size();
+addEventListener("resize", size);
 const zoom = d3.zoom().scaleExtent([1, 48]).translateExtent([[0, 0], [975, 720]])
-  .on("zoom", ev => {
-    const k = ev.transform.k; K = k;
-    world.attr("transform", ev.transform);
-    g.selectAll(".pin").attr("r", function () { return this.classList.contains("on") ? R() * .6 : R(); });
-      });
+  .on("zoom", ev => { T = ev.transform; world.attr("transform", T); place(); });
 svg.call(zoom).on("dblclick.zoom", null);
 const ease = () => svg.transition().duration(350);
-document.getElementById("zin").onclick = () => ease().call(zoom.scaleBy, 2);
-document.getElementById("zout").onclick = () => ease().call(zoom.scaleBy, .5);
+const focusPt = () => { const o = g.select(".pin.on"); return o.empty() ? null : [T.applyX(o.datum().x), T.applyY(o.datum().y)]; };
+document.getElementById("zin").onclick = () => { const f = focusPt(); f ? ease().call(zoom.scaleBy, 2, f) : ease().call(zoom.scaleBy, 2); };
+document.getElementById("zout").onclick = () => { const f = focusPt(); f ? ease().call(zoom.scaleBy, .5, f) : ease().call(zoom.scaleBy, .5); };
 document.getElementById("zreset").onclick = () => ease().call(zoom.transform, d3.zoomIdentity);
 </script>
 </body>
