@@ -67,9 +67,12 @@
   color: inherit; opacity: .45; text-decoration: none; border-radius: 50%; animation: awaw-bob 2.4s ease-in-out 1.2s 4; }
 #awaw-down:hover, #awaw-down:focus-visible { opacity: .9; }
 #awaw-down:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+#awaw-up { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; margin: 1.6rem 0 0 auto; color: inherit; opacity: .45; border-radius: 50%; text-decoration: none; }
+#awaw-up:hover, #awaw-up:focus-visible { opacity: .9; }
+#awaw-up:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
 @keyframes awaw-bob { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(6px); } }
 @media (prefers-reduced-motion: reduce) { #awaw-down { animation: none; } }
-@media print { #awaw-down { display: none; } }`;
+@media print { #awaw-down, #awaw-up { display: none; } }`;
       document.head.appendChild(st);
       const d = document.createElement("a");
       d.id = "awaw-down"; d.href = "#"; d.setAttribute("aria-label", "Skip to the end of the page");
@@ -81,6 +84,18 @@
         scrollTo({top: document.documentElement.scrollHeight, behavior: smooth ? "smooth" : "auto"});
       });
       document.body.appendChild(d);
+      // ...and at the end of the Background, an arrow back up to the top.
+      const bg = document.querySelector(".bg-body") || document.querySelector("details.bg");
+      if (bg) {
+        const u = document.createElement("a");
+        u.id = "awaw-up"; u.href = "#"; u.setAttribute("aria-label", "Back to the top of the story");
+        u.innerHTML = '<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 16V3M3.5 8.5 9 3l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        u.addEventListener("click", ev => {
+          ev.preventDefault();
+          scrollTo({top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+        });
+        bg.appendChild(u);
+      }
     }
   }
   if (document.body) ui(); else document.addEventListener("DOMContentLoaded", ui);
