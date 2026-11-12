@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Narration Bench</title>
+<style>
+:root {
+  --bg: #15110d; --panel: #1e1813; --panel-2: #271f18; --line: rgba(233,224,208,.12);
+  --text: #e9e0d0; --dim: #a99d8a; --accent: #d1a331; --accent-2: #f0b44c;
+  --good: #8fbf7a; --bad: #d9785f;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: -apple-system, "Inter", "Helvetica Neue", sans-serif;
+  --serif: "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--text); font: 14px/1.45 var(--sans); }
+button, select, input, textarea { font: inherit; color: inherit; }
+button { background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; padding: .35rem .7rem; cursor: pointer; }
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: .45; cursor: default; }
+button.primary { background: var(--accent); color: #1a140c; border-color: var(--accent); font-weight: 600; }
+button.small { padding: .15rem .45rem; font-size: 12px; }
+select, input[type=text], input[type=number], textarea { background: #120e0a; border: 1px solid var(--line); border-radius: 6px; padding: .35rem .5rem; width: 100%; }
+textarea { resize: vertical; min-height: 4.5rem; }
+label { display: block; font-size: 12px; color: var(--dim); margin: .7rem 0 .25rem; text-transform: uppercase; letter-spacing: .05em; }
+header { display: flex; align-items: center; gap: 1rem; padding: .6rem 1rem; border-bottom: 1px solid var(--line); background: var(--panel); flex-wrap: wrap; }
+header h1 { font: italic 400 1.25rem var(--serif); color: var(--accent); margin: 0; }
+header .sp { flex: 1; }
+#status { font-family: var(--mono); font-size: 12px; color: var(--dim); }
+#status.busy { color: var(--accent-2); }
+.layout { display: grid; grid-template-columns: 300px minmax(380px, 1fr) 360px; height: calc(100% - 52px); }
+.col { overflow: auto; border-right: 1px solid var(--line); }
+.col:last-child { border-right: 0; }
+.pad { padding: .8rem 1rem; }
+h2 { font: 600 12px var(--sans); text-transform: uppercase; letter-spacing: .08em; color: var(--dim); margin: 0 0 .5rem; }
+/* stories */
+#storyList { list-style: none; margin: .5rem 0 0; padding: 0; }
+#storyList li { padding: .35rem .5rem; border-radius: 5px; cursor: pointer; display: flex; gap: .5rem; }
+#storyList li:hover { background: var(--panel-2); }
+#storyList li.on { background: var(--panel-2); outline: 1px solid var(--accent); }
+#storyList .n { font-family: var(--mono); font-size: 12px; color: var(--dim); min-width: 3.2em; }
+#storyList .tc { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--accent); }
+/* blocks */
+.storyhead { position: sticky; top: 0; background: var(--bg); z-index: 2; padding: .8rem 1rem .6rem; border-bottom: 1px solid var(--line); }
+.storyhead h3 { font: 400 1.5rem var(--serif); margin: 0; color: var(--accent); }
+.storyhead .meta { color: var(--dim); font-size: 12px; }
+.toolbar { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .5rem; align-items: center; }
+.toolbar .grow { flex: 1; }
+.block { display: grid; grid-template-columns: 22px 1fr auto; gap: .5rem; padding: .45rem 1rem; border-bottom: 1px solid rgba(233,224,208,.05); cursor: pointer; }
+.block:hover { background: rgba(255,255,255,.025); }
+.block.focus { background: rgba(209,163,49,.08); box-shadow: inset 3px 0 var(--accent); }
+.block .txt { font-family: var(--serif); font-size: 15px; }
+.block.k-heading .txt, .block.k-title .txt { font-size: 18px; color: var(--accent); }
+.block.k-dateline .txt, .block.k-epigraph .txt, .block.k-heard .txt, .block.k-verse .txt { font-style: italic; color: var(--dim); }
+.block.k-break .txt { color: var(--dim); text-align: center; }
+.block .kind { font: 10px var(--mono); color: var(--dim); text-transform: uppercase; }
+.block .badges { display: flex; flex-direction: column; align-items: flex-end; gap: .2rem; font: 11px var(--mono); }
+.badge { color: var(--accent); }
+.badge.pick { color: var(--good); }
+.secthead { padding: .9rem 1rem .2rem; font: 600 11px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--accent-2); opacity: .8; }
+/* voice */
+.mode-only { display: none; }
+body[data-mode=custom] .m-custom, body[data-mode=design] .m-design, body[data-mode=clone] .m-clone,
+body[data-mode=kokoro] .m-kokoro, body[data-mode=chatterbox] .m-chatterbox, body[data-mode=turbo] .m-turbo,
+body[data-mode=vibevoice] .m-vibevoice { display: block; }
+body:is([data-mode=custom],[data-mode=design],[data-mode=clone]) .m-qwen,
+body:is([data-mode=chatterbox],[data-mode=turbo]) .m-cb { display: block; }
+.mode-only.row { display: none; }
+body:is([data-mode=custom],[data-mode=design],[data-mode=clone],[data-mode=chatterbox],[data-mode=turbo]) .row.m-sampling,
+body[data-mode=kokoro] .row.m-kokoro, body[data-mode=chatterbox] .row.m-chatterbox, body[data-mode=vibevoice] .row.m-vibevoice { display: grid; }
+optgroup { color: var(--dim); }
+.chips { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .35rem; }
+.chip { font-size: 12px; padding: .15rem .5rem; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); cursor: pointer; }
+.chip:hover { border-color: var(--accent); }
+.row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+.voices { list-style: none; padding: 0; margin: .4rem 0 0; }
+.voices li { display: flex; align-items: center; gap: .4rem; padding: .25rem 0; border-bottom: 1px solid rgba(233,224,208,.05); }
+.voices li .vn { flex: 1; cursor: pointer; }
+.voices li .vn:hover { color: var(--accent); }
+.voices small { color: var(--dim); }
+details.box { border: 1px solid var(--line); border-radius: 8px; padding: .5rem .7rem; margin-top: .8rem; background: var(--panel); }
+details.box summary { cursor: pointer; font-weight: 600; }
+/* takes */
+.take { border: 1px solid var(--line); border-radius: 8px; padding: .6rem; margin-bottom: .6rem; background: var(--panel); }
+.take.pick { border-color: var(--good); }
+.take .who { font-weight: 600; }
+.take .ins { color: var(--dim); font-size: 12px; font-style: italic; }
+.take audio { width: 100%; margin: .4rem 0 .2rem; height: 32px; }
+.take .stats { font: 11px var(--mono); color: var(--dim); }
+.take .ctl { display: flex; gap: .3rem; align-items: center; flex-wrap: wrap; margin-top: .35rem; }
+.stars span { cursor: pointer; font-size: 16px; color: #5a4e3e; }
+.stars span.on { color: var(--accent-2); }
+.take input.note { font-size: 12px; margin-top: .35rem; }
+.take .proc { font: 11px var(--mono); color: var(--accent-2); margin-top: .15rem; }
+.take .deepen { margin-top: .5rem; padding: .5rem; border: 1px dashed var(--line); border-radius: 6px; }
+.take .deepen .drow { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; margin: .4rem 0; }
+.take .deepen label { margin: 0; font-size: 10px; display: flex; flex-direction: column; justify-content: flex-end; white-space: nowrap; }
+.take .deepen input { padding: .2rem .3rem; font-size: 12px; margin-top: .15rem; }
+.take .diffs { font-size: 12px; margin-top: .3rem; display: flex; flex-wrap: wrap; gap: .3rem .7rem; }
+.take .diffs s { color: var(--dim); }
+.take .diffs b { color: var(--bad); font-weight: 500; }
+.take .t { font: 12px var(--serif); color: var(--dim); margin-top: .25rem; max-height: 3.2em; overflow: hidden; }
+table.sum { width: 100%; border-collapse: collapse; font-size: 12px; }
+table.sum th, table.sum td { text-align: left; padding: .25rem .3rem; border-bottom: 1px solid var(--line); }
+table.sum td.num { font-family: var(--mono); text-align: right; }
+.tabs { display: flex; gap: .3rem; margin-bottom: .6rem; }
+.tabs button.on { border-color: var(--accent); color: var(--accent); }
+#queue { font: 12px var(--mono); color: var(--dim); }
+.empty { color: var(--dim); font-style: italic; padding: 1rem 0; }
+@media (max-width: 1100px) { .layout { grid-template-columns: 1fr; height: auto; } .col { border-right: 0; border-bottom: 1px solid var(--line); max-height: none; } }
+</style>
+</head>
+<body data-mode="custom">
+<header>
+  <h1>Narration Bench</h1>
+  <span style="color:var(--dim)">Qwen3-TTS on <i>Walking the American Way</i></span>
+  <span class="sp"></span>
+  <select id="model" style="width:auto"></select>
+  <button id="loadBtn">Load model</button>
+  <span id="status">idle</span>
+</header>
+
+<div class="layout">
+  <!-- stories -->
+  <div class="col pad">
+    <h2>Stories</h2>
+    <input type="text" id="storyFilter" placeholder="Filter by title or commentary no.">
+    <ul id="storyList"></ul>
+  </div>
+
+  <!-- blocks -->
+  <div class="col" id="blocksCol">
+    <div class="storyhead">
+      <h3 id="storyTitle">Pick a story</h3>
+      <div class="meta" id="storyMeta"></div>
+      <div class="toolbar">
+        <button class="small" id="selAll">Select all</button>
+        <button class="small" id="selNone">None</button>
+        <button class="small" id="selSection">This section</button>
+        <label style="display:inline;margin:0 0 0 .4rem;text-transform:none;letter-spacing:0"><input type="checkbox" id="showBg"> Background</label>
+        <span class="grow"></span>
+        <span id="selCount" style="color:var(--dim);font-size:12px"></span>
+      </div>
+      <div class="toolbar">
+        <button class="primary" id="genSel">Render selected</button>
+        <button id="genAB" title="Render each selected block once per checked voice">A/B checked voices</button>
+        <button id="genMissing" title="Render only selected blocks that have no picked take">Fill gaps</button>
+        <span class="grow"></span>
+        <button id="stopQ" disabled>Stop</button>
+      </div>
+      <div id="queue"></div>
+    </div>
+    <div id="blocks"></div>
+  </div>
+
+  <!-- voice + takes -->
+  <div class="col pad">
+    <div class="tabs">
+      <button class="on" data-tab="voice">Voice</button>
+      <button data-tab="takes">Takes</button>
+      <button data-tab="compare">Compare</button>
+      <button data-tab="export">Export</button>
+    </div>
+
+    <section data-pane="voice">
+      <div class="mode-only m-custom m-kokoro m-vibevoice">
+        <label>Speaker</label>
+        <select id="speaker"></select>
+      </div>
+      <div class="mode-only m-kokoro" style="color:var(--dim);font-size:12px;margin-top:.3rem">Prefix: a = American, b = British; f = female, m = male.</div>
+      <div class="mode-only row m-kokoro">
+        <div><label>Speed</label><input type="number" id="speed" value="0.9" step="0.05" min="0.5" max="1.5"></div>
+      </div>
+      <div class="mode-only row m-chatterbox">
+        <div><label title="Expressiveness: 0.25 flat, 0.5 neutral, 0.7+ dramatic">Exaggeration</label><input type="number" id="exag" value="0.5" step="0.05" min="0" max="2"></div>
+        <div><label title="Lower = slower, more deliberate pacing">CFG weight</label><input type="number" id="cfgw" value="0.5" step="0.05" min="0" max="1"></div>
+      </div>
+      <div class="mode-only row m-vibevoice">
+        <div><label>CFG scale</label><input type="number" id="cfgs" value="1.5" step="0.1" min="1" max="3"></div>
+        <div><label>Diffusion steps</label><input type="text" id="steps" placeholder="default"></div>
+      </div>
+      <div class="mode-only m-custom">
+        <label>Style instruction (optional)</label>
+        <textarea id="instructCustom" placeholder="e.g. Calm, unhurried storyteller; warm and low."></textarea>
+        <div class="chips" data-target="instructCustom">
+          <span class="chip">Calm, unhurried storyteller, warm and low.</span>
+          <span class="chip">Reads like an old radio drama narrator, measured and grave.</span>
+          <span class="chip">Quiet and intimate, as if reading by a fire.</span>
+          <span class="chip">Plain, dry, matter-of-fact; no performance.</span>
+          <span class="chip">Slow and reverent, for scripture.</span>
+        </div>
+      </div>
+      <div class="mode-only m-design">
+        <label>Voice description</label>
+        <textarea id="instructDesign" placeholder="Describe the voice: age, accent, timbre, pace, manner."></textarea>
+        <div class="chips" data-target="instructDesign">
+          <span class="chip">An older American man with a low, slightly gravelly voice and a soft Southern accent, reading aloud slowly and warmly.</span>
+          <span class="chip">A middle-aged American woman, clear alto, Midwestern, unhurried and kind, like a librarian reading to adults.</span>
+          <span class="chip">An elderly Black woman from the Carolinas, rich and low, telling a family story on a porch.</span>
+          <span class="chip">A young American man, plain and quiet, with a New England reserve.</span>
+          <span class="chip">A seasoned audiobook narrator, neutral American accent, rich baritone, precise diction, gentle pacing.</span>
+        </div>
+      </div>
+      <div class="mode-only m-clone m-cb">
+        <label id="refLabel">Reference clip</label>
+        <select id="refSel"></select>
+        <details class="box">
+          <summary>Add a reference clip</summary>
+          <label>Audio (5–20 s, one speaker, no music)</label>
+          <input type="file" id="refFile" accept="audio/*">
+          <label>Exact transcript of the clip</label>
+          <textarea id="refText"></textarea>
+          <label>Name</label>
+          <input type="text" id="refName">
+          <div style="margin-top:.5rem"><button id="refUpload">Upload</button></div>
+        </details>
+        <p class="mode-only m-clone" style="color:var(--dim);font-size:12px">Tip: design a voice with VoiceDesign, then use “Make clone ref” on a take you like to lock that voice for every paragraph.</p>
+      </div>
+
+      <div class="mode-only row m-sampling">
+        <div><label>Temperature</label><input type="number" id="temp" value="0.9" step="0.05" min="0.1" max="1.5"></div>
+        <div><label>Top-p</label><input type="number" id="topp" value="1.0" step="0.05" min="0.1" max="1"></div>
+        <div><label>Rep. penalty</label><input type="number" id="rep" value="1.05" step="0.01" min="1" max="1.5"></div>
+      </div>
+      <div class="row">
+        <div><label>Seed</label><input type="text" id="seed" placeholder="random"></div>
+        <div><label>Language</label><select id="lang"><option>english</option><option>auto</option></select></div>
+        <div><label>&nbsp;</label><button id="saveVoice" style="width:100%">Save voice</button></div>
+      </div>
+
+      <label>Try any text</label>
+      <textarea id="freeText">All that we are is the result of what we have thought: it is founded on our thoughts, it is made up of our thoughts.</textarea>
+      <div style="margin-top:.4rem"><button id="genFree">Render text</button></div>
+
+      <h2 style="margin-top:1.2rem">Saved voices <small style="text-transform:none;letter-spacing:0;font-weight:400">(check to include in A/B)</small></h2>
+      <ul class="voices" id="voiceList"></ul>
+    </section>
+
+    <section data-pane="takes" hidden>
+      <div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.5rem">
+        <select id="takeScope" style="width:auto">
+          <option value="block">Focused block</option>
+          <option value="story">Whole story</option>
+          <option value="free">Free text</option>
+        </select>
+        <select id="takeSort" style="width:auto">
+          <option value="new">Newest</option><option value="rating">Rating</option>
+        </select>
+      </div>
+      <div id="takes"></div>
+    </section>
+
+    <section data-pane="compare" hidden>
+      <p style="color:var(--dim);font-size:12px;margin-top:0">Per-voice averages over this story's takes. RTF below 1 means faster than real time.</p>
+      <div id="summary"></div>
+    </section>
+
+    <section data-pane="export" hidden>
+      <p style="color:var(--dim);font-size:12px;margin-top:0">Stitches the <b>picked</b> take of every block (in reading order) into one file. Blocks without a pick are skipped, or use the highest-rated take if you tick below.</p>
+      <label><input type="checkbox" id="fallbackBest" checked> Fall back to best-rated / newest take</label>
+      <label><input type="checkbox" id="exportBg"> Include Background section</label>
+      <div class="row">
+        <div><label>Pause, paragraph (s)</label><input type="number" id="gapPara" value="0.6" step="0.1"></div>
+        <div><label>Pause, section (s)</label><input type="number" id="gapSec" value="1.6" step="0.1"></div>
+        <div><label>Format</label><select id="fmt"><option>mp3</option><option>wav</option></select></div>
+      </div>
+      <div style="margin-top:.6rem"><button class="primary" id="stitch">Stitch story</button></div>
+      <div id="stitchOut" style="margin-top:.8rem"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const api = async (path, opts = {}) => {
+  const r = await fetch(path, { headers: opts.body && !(opts.body instanceof FormData) ? { 'Content-Type': 'application/json' } : {}, ...opts });
+  if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || r.statusText);
+  return r.json();
+};
+const FALLBACK_SPEAKERS = ['ryan', 'aiden', 'vivian', 'serena', 'dylan', 'eric', 'uncle_fu', 'ono_anna', 'sohee'];
+const esc = s => (s ?? '').toString().replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const S = { models: {}, stories: [], story: null, takes: [], focus: null, sel: new Set(), voices: [], refs: {}, queue: [], running: false, stop: false };
+const store = { get(k, d) { try { return JSON.parse(localStorage.getItem('nb.' + k)) ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem('nb.' + k, JSON.stringify(v)); } catch {} } };
+
+function setStatus(t, busy) { const s = $('#status'); s.textContent = t; s.classList.toggle('busy', !!busy); }
+
+/* ---------------- models ---------------- */
+async function loadModels() {
+  S.models = await api('/api/models');
+  const cur = $('#model').value || store.get('model', 'custom-1.7b');
+  const opt = ([k, m]) => `<option value="${k}">${esc(m.label)}${m.loaded ? ' ●' : m.cached ? '' : ' (download)'}</option>`;
+  const all = Object.entries(S.models), isQ = ([, m]) => QWEN.includes(m.mode);
+  $('#model').innerHTML = `<optgroup label="Qwen3-TTS">${all.filter(isQ).map(opt).join('')}</optgroup>
+    <optgroup label="Other local models">${all.filter(e => !isQ(e)).map(opt).join('')}</optgroup>`;
+  $('#model').value = cur in S.models ? cur : 'custom-1.7b';
+  onModel();
+}
+const QWEN = ['custom', 'design', 'clone'];
+const DEFAULT_SPEAKER = { custom: 'ryan', kokoro: 'am_michael' };
+const modeOf = key => S.models[key]?.mode;
+function onModel() {
+  const m = S.models[$('#model').value];
+  document.body.dataset.mode = m.mode;
+  store.set('model', $('#model').value);
+  const sp = m.speakers?.length ? m.speakers : m.mode === 'custom' ? FALLBACK_SPEAKERS : [];
+  const cur = store.get('speaker.' + m.mode, DEFAULT_SPEAKER[m.mode]);
+  $('#speaker').innerHTML = sp.length ? sp.map(s => `<option>${s}</option>`).join('') : '<option value="">(load model to list voices)</option>';
+  $('#speaker').value = sp.includes(cur) ? cur : sp[0] || '';
+  const cb = ['chatterbox', 'turbo'].includes(m.mode);
+  $('#refLabel').textContent = cb ? 'Reference clip (optional)' : 'Reference clip';
+  renderRefOptions(cb);
+}
+$('#model').onchange = onModel;
+$('#speaker').onchange = () => store.set('speaker.' + document.body.dataset.mode, $('#speaker').value);
+$('#loadBtn').onclick = async () => {
+  const k = $('#model').value;
+  setStatus(`loading ${k}${S.models[k].cached ? '' : ' (downloading first)'}…`, true);
+  try { const r = await api(`/api/models/${k}/load`, { method: 'POST' }); setStatus(`${k} ready (${r.seconds}s)`); await loadModels(); }
+  catch (e) { setStatus('load failed: ' + e.message); }
+};
+
+/* ---------------- stories ---------------- */
+async function loadStories() {
+  S.stories = await api('/api/stories');
+  const allTakes = await api('/api/takes');
+  S.takeCounts = {}; allTakes.forEach(t => { if (t.slug) S.takeCounts[t.slug] = (S.takeCounts[t.slug] || 0) + 1; });
+  renderStoryList();
+  const last = store.get('story', 'the-mustard-seed');
+  if (S.stories.some(s => s.slug === last)) openStory(last);
+}
+function renderStoryList() {
+  const q = $('#storyFilter').value.toLowerCase();
+  $('#storyList').innerHTML = S.stories.filter(s => !q || s.title.toLowerCase().includes(q) || s.commentary.startsWith(q) || s.meta.toLowerCase().includes(q))
+    .map(s => `<li data-slug="${s.slug}" class="${S.story?.slug === s.slug ? 'on' : ''}" title="${esc(s.meta)}"><span class="n">${s.commentary}</span><span>${esc(s.title)}</span>${S.takeCounts?.[s.slug] ? `<span class="tc">${S.takeCounts[s.slug]}</span>` : ''}</li>`).join('');
+}
+$('#storyFilter').oninput = renderStoryList;
+$('#storyList').onclick = e => { const li = e.target.closest('li'); if (li) openStory(li.dataset.slug); };
+
+async function openStory(slug) {
+  S.story = await api('/api/story/' + slug);
+  store.set('story', slug);
+  S.sel = new Set(); S.focus = null;
+  $('#storyTitle').textContent = S.story.title;
+  $('#storyMeta').innerHTML = `${esc(S.story.meta)} · <a href="/story/${slug}.html" target="_blank" style="color:var(--accent)">page</a>`;
+  await refreshTakes();
+  renderStoryList();
+  const first = S.story.blocks.find(b => b.kind === 'para');
+  if (first) focusBlock(first.id, false);
+}
+function visibleBlocks() { return S.story ? S.story.blocks.filter(b => $('#showBg').checked || !b.background) : []; }
+function blockTakes(id) { return S.takes.filter(t => t.block_id === id); }
+function renderBlocks() {
+  let html = '', sect = null;
+  for (const b of visibleBlocks()) {
+    if (b.section !== sect && b.kind !== 'heading') { sect = b.section; if (sect !== 'Opening') html += `<div class="secthead">${esc(sect)}</div>`; }
+    if (b.kind === 'heading') sect = b.section;
+    const tk = blockTakes(b.id), pick = tk.find(t => t.pick);
+    html += `<div class="block k-${b.kind} ${S.focus === b.id ? 'focus' : ''}" data-id="${b.id}">
+      <input type="checkbox" ${S.sel.has(b.id) ? 'checked' : ''} ${b.kind === 'break' ? 'disabled' : ''}>
+      <div><div class="kind">${b.kind}</div><div class="txt">${b.kind === 'break' ? '· · ·' : esc(b.text)}</div></div>
+      <div class="badges">${tk.length ? `<span class="badge">${tk.length} take${tk.length > 1 ? 's' : ''}</span>` : ''}${pick ? `<span class="badge pick">✓ ${(pick.voice_name || pick.speaker || pick.model)}</span>` : ''}</div>
+    </div>`;
+  }
+  $('#blocks').innerHTML = html;
+  $('#selCount').textContent = S.sel.size ? `${S.sel.size} selected` : '';
+}
+$('#blocks').onclick = e => {
+  const el = e.target.closest('.block'); if (!el) return;
+  const id = +el.dataset.id;
+  if (e.target.type === 'checkbox') { e.target.checked ? S.sel.add(id) : S.sel.delete(id); $('#selCount').textContent = S.sel.size ? `${S.sel.size} selected` : ''; return; }
+  focusBlock(id, true);
+};
+function focusBlock(id, showTakes) {
+  S.focus = id; renderBlocks();
+  if (showTakes && blockTakes(id).length) { switchTab('takes'); $('#takeScope').value = 'block'; }
+  renderTakes();
+}
+$('#showBg').onchange = renderBlocks;
+$('#selAll').onclick = () => { visibleBlocks().forEach(b => b.kind !== 'break' && S.sel.add(b.id)); renderBlocks(); };
+$('#selNone').onclick = () => { S.sel.clear(); renderBlocks(); };
+$('#selSection').onclick = () => {
+  const f = S.story.blocks.find(b => b.id === S.focus); if (!f) return;
+  S.story.blocks.filter(b => b.section === f.section && b.kind !== 'break').forEach(b => S.sel.add(b.id)); renderBlocks();
+};
+
+/* ---------------- voices ---------------- */
+function currentVoice() {
+  const model = $('#model').value, mode = S.models[model].mode;
+  return {
+    model, speaker: ['custom', 'kokoro', 'vibevoice'].includes(mode) ? $('#speaker').value || null : null,
+    instruct: mode === 'custom' ? $('#instructCustom').value.trim() || null : mode === 'design' ? $('#instructDesign').value.trim() : null,
+    ref_id: ['clone', 'chatterbox', 'turbo'].includes(mode) ? $('#refSel').value || null : null,
+    temperature: +$('#temp').value, top_p: +$('#topp').value, repetition_penalty: +$('#rep').value,
+    seed: $('#seed').value.trim() === '' ? null : +$('#seed').value, language: $('#lang').value,
+    speed: +$('#speed').value, exaggeration: +$('#exag').value, cfg_weight: +$('#cfgw').value,
+    cfg_scale: +$('#cfgs').value, ddpm_steps: $('#steps').value.trim() === '' ? null : +$('#steps').value,
+  };
+}
+function voiceLabel(v) {
+  if (v.name || v.voice_name) return v.name || v.voice_name;
+  const mode = modeOf(v.model);
+  if (v.speaker) return v.speaker;
+  if (v.ref_id) return 'clone: ' + (S.refs[v.ref_id]?.name || v.ref_id);
+  if (mode === 'chatterbox' || mode === 'turbo') return 'built-in voice';
+  return (v.instruct || 'designed voice').slice(0, 28) + '…';
+}
+function applyVoice(v) {
+  $('#model').value = v.model; onModel();
+  const mode = modeOf(v.model);
+  if (v.speaker) $('#speaker').value = v.speaker;
+  if (mode === 'custom') $('#instructCustom').value = v.instruct || '';
+  if (mode === 'design') $('#instructDesign').value = v.instruct || '';
+  $('#refSel').value = v.ref_id || '';
+  if (v.temperature != null) $('#temp').value = v.temperature;
+  $('#topp').value = v.top_p ?? 1; $('#rep').value = v.repetition_penalty ?? 1.05;
+  $('#seed').value = v.seed ?? ''; $('#lang').value = v.language || 'english';
+  if (v.speed != null) $('#speed').value = v.speed;
+  if (v.exaggeration != null) $('#exag').value = v.exaggeration;
+  if (v.cfg_weight != null) $('#cfgw').value = v.cfg_weight;
+  if (v.cfg_scale != null) $('#cfgs').value = v.cfg_scale;
+  $('#steps').value = v.ddpm_steps ?? '';
+}
+async function loadVoices() { S.voices = await api('/api/voices'); renderVoices(); }
+function renderVoices() {
+  $('#voiceList').innerHTML = S.voices.length ? S.voices.map((v, i) => `<li>
+    <input type="checkbox" data-i="${i}" ${v.ab ? 'checked' : ''}>
+    <span class="vn" data-i="${i}">${esc(v.name)}<br><small>${v.model} · ${esc(voiceLabel({ ...v, name: null }))}${v.seed != null ? ' · seed ' + v.seed : ''}</small></span>
+    <button class="small" data-del="${i}">✕</button></li>`).join('') : '<li class="empty">No saved voices yet.</li>';
+}
+$('#voiceList').onclick = async e => {
+  const i = e.target.dataset.i ?? e.target.closest('.vn')?.dataset.i, d = e.target.dataset.del;
+  if (d != null) { S.voices.splice(+d, 1); await api('/api/voices', { method: 'PUT', body: JSON.stringify(S.voices) }); return renderVoices(); }
+  if (e.target.type === 'checkbox') { S.voices[+i].ab = e.target.checked; return api('/api/voices', { method: 'PUT', body: JSON.stringify(S.voices) }); }
+  if (i != null) { applyVoice(S.voices[+i]); setStatus('voice: ' + S.voices[+i].name); }
+};
+$('#saveVoice').onclick = async () => {
+  const v = currentVoice(), name = prompt('Name this voice', voiceLabel(v)); if (!name) return;
+  S.voices.push({ ...v, name, ab: true });
+  await api('/api/voices', { method: 'PUT', body: JSON.stringify(S.voices) }); renderVoices();
+};
+$$('.chips').forEach(c => c.onclick = e => { if (e.target.classList.contains('chip')) $('#' + c.dataset.target).value = e.target.textContent; });
+
+async function loadRefs() {
+  S.refs = await api('/api/refs');
+  renderRefOptions(['chatterbox', 'turbo'].includes(document.body.dataset.mode));
+}
+function renderRefOptions(allowBlank) {
+  const cur = $('#refSel').value, refs = Object.values(S.refs || {});
+  $('#refSel').innerHTML = (allowBlank ? '<option value="">Built-in voice</option>' : refs.length ? '' : '<option value="">— none yet —</option>')
+    + refs.map(r => `<option value="${r.id}">${esc(r.name)} (${r.duration}s)</option>`).join('');
+  if (cur in (S.refs || {}) || (allowBlank && cur === '')) $('#refSel').value = cur;
+}
+$('#refUpload').onclick = async () => {
+  const f = $('#refFile').files[0], text = $('#refText').value.trim();
+  if (!f || !text) return alert('Need an audio file and its transcript.');
+  const fd = new FormData(); fd.append('file', f);
+  const r = await api(`/api/refs?text=${encodeURIComponent(text)}&name=${encodeURIComponent($('#refName').value)}`, { method: 'POST', body: fd });
+  await loadRefs(); $('#refSel').value = r.id; setStatus('reference added');
+};
+
+/* ---------------- generation queue ---------------- */
+function enqueue(jobs) { S.queue.push(...jobs); runQueue(); }
+function selectedBlocks() { return visibleBlocks().filter(b => S.sel.has(b.id) && b.kind !== 'break'); }
+$('#genSel').onclick = () => {
+  const v = currentVoice(), bl = selectedBlocks().length ? selectedBlocks() : S.story.blocks.filter(b => b.id === S.focus);
+  enqueue(bl.map(b => ({ block: b, voice: v })));
+};
+$('#genAB').onclick = () => {
+  const vs = S.voices.filter(v => v.ab); if (!vs.length) return alert('Save and check at least one voice first.');
+  const bl = selectedBlocks().length ? selectedBlocks() : S.story.blocks.filter(b => b.id === S.focus);
+  // group by voice so the server reloads models as rarely as possible
+  enqueue(vs.flatMap(v => bl.map(b => ({ block: b, voice: v }))));
+};
+$('#genMissing').onclick = () => {
+  const v = currentVoice();
+  enqueue(selectedBlocks().filter(b => !blockTakes(b.id).some(t => t.pick)).map(b => ({ block: b, voice: v })));
+};
+$('#genFree').onclick = () => enqueue([{ block: { id: null, kind: 'para', text: $('#freeText').value }, voice: currentVoice(), free: true }]);
+$('#stopQ').onclick = () => { S.stop = true; S.queue = []; };
+
+async function runQueue() {
+  if (S.running) return renderQueue();
+  S.running = true; S.stop = false; $('#stopQ').disabled = false;
+  let done = 0, total = S.queue.length, t0 = performance.now();
+  while (S.queue.length && !S.stop) {
+    total = done + S.queue.length;
+    const job = S.queue.shift(), v = job.voice;
+    renderQueue(`${done + 1}/${total} · ${voiceLabel(v)} · ${job.block.text.slice(0, 50)}…`);
+    setStatus('generating…', true);
+    try {
+      const take = await api('/api/generate', { method: 'POST', body: JSON.stringify({
+        model: v.model, speaker: v.speaker, instruct: v.instruct, ref_id: v.ref_id, temperature: v.temperature,
+        top_p: v.top_p, repetition_penalty: v.repetition_penalty, seed: v.seed, language: v.language,
+        speed: v.speed ?? 1, exaggeration: v.exaggeration ?? 0.5, cfg_weight: v.cfg_weight ?? 0.5,
+        cfg_scale: v.cfg_scale ?? 1.5, ddpm_steps: v.ddpm_steps ?? null,
+        voice_name: v.name || null, text: job.block.text, kind: job.block.kind,
+        slug: job.free ? null : S.story.slug, block_id: job.free ? null : job.block.id }) });
+      S.takes.push(take); done++;
+      setStatus(`${take.duration}s audio in ${take.gen_seconds}s (RTF ${take.rtf})`);
+      if (job.free) { switchTab('takes'); $('#takeScope').value = 'free'; await refreshTakes(); playTake(take.id); }
+      else { renderBlocks(); renderTakes(); }
+    } catch (e) { setStatus('error: ' + e.message); S.stop = true; }
+  }
+  const secs = ((performance.now() - t0) / 1000).toFixed(0);
+  renderQueue(S.stop ? `stopped after ${done}` : `done: ${done} take(s) in ${secs}s`);
+  S.running = false; $('#stopQ').disabled = true; renderSummary();
+}
+function renderQueue(msg) { $('#queue').textContent = msg ?? (S.queue.length ? `${S.queue.length} queued` : ''); }
+
+/* ---------------- takes ---------------- */
+async function refreshTakes() {
+  const [story, all] = await Promise.all([api('/api/takes?slug=' + (S.story?.slug || '')), api('/api/takes')]);
+  S.takes = story; S.freeTakes = all.filter(t => !t.slug);
+  renderBlocks(); renderTakes(); renderSummary();
+}
+function renderTakes() {
+  const scope = $('#takeScope').value;
+  let list = scope === 'block' ? blockTakes(S.focus) : scope === 'story' ? S.takes : (S.freeTakes || []);
+  list = [...list].sort($('#takeSort').value === 'rating' ? (a, b) => b.rating - a.rating || b.created.localeCompare(a.created) : (a, b) => b.created.localeCompare(a.created));
+  $('#takes').innerHTML = list.length ? list.map(t => `<div class="take ${t.pick ? 'pick' : ''}" data-id="${t.id}">
+    <div class="who">${esc(voiceLabel(t))} <small style="color:var(--dim);font-weight:400">${t.model}</small></div>
+    ${t.instruct ? `<div class="ins">${esc(t.instruct)}</div>` : ''}
+    ${t.processed ? `<div class="proc">deepened ${fmtSt(t.processed.pitch_st)} st · formants ×${t.processed.formant} · range ×${t.processed.pitch_range}${t.processed.duration !== 1 ? ' · duration ×' + t.processed.duration : ''} · ${Math.round(t.processed.f0_before)} → ${Math.round(t.processed.f0_after)} Hz</div>` : ''}
+    ${scope !== 'block' ? `<div class="t">${esc(t.text)}</div>` : ''}
+    <audio controls preload="none" src="/audio/${t.file}"></audio>
+    <div class="stats">${t.duration}s · gen ${t.gen_seconds}s · RTF ${t.rtf} · ${t.wpm ?? '–'} wpm · seed ${t.seed}${t.temperature != null ? ' · T ' + t.temperature : ''}${t.speed != null ? ' · speed ' + t.speed : ''}${t.exaggeration != null ? ' · exag ' + t.exaggeration + ' · cfg ' + t.cfg_weight : ''}${t.cfg_scale != null ? ' · cfg ' + t.cfg_scale : ''}</div>
+    <div class="ctl"><span class="stars">${[1, 2, 3, 4, 5].map(n => `<span data-r="${n}" class="${n <= t.rating ? 'on' : ''}">★</span>`).join('')}</span>
+      ${t.slug ? `<button class="small" data-act="pick">${t.pick ? '✓ picked' : 'Pick'}</button>` : ''}
+      <button class="small" data-act="check" title="Transcribe with Parakeet and compare to the text">${t.wer == null ? 'Check' : t.wer === 0 ? '✓ exact' : `WER ${Math.round(t.wer * 100)}%`}</button>
+      <button class="small" data-act="deepen-toggle" title="Lower pitch and formants with Praat (saves a new take)">Deepen…</button>
+      <button class="small" data-act="reuse" title="Load these settings (incl. seed) into the voice panel">Reuse</button>
+      <button class="small" data-act="ref" title="Use this audio as a voice-clone reference">Make clone ref</button>
+      <button class="small" data-act="del">✕</button></div>
+    ${S.deepenOpen.has(t.id) ? deepenPanel() : ''}
+    ${t.asr_diffs?.length ? `<div class="diffs">${t.asr_diffs.map(d => `<span><s>${esc(d.said) || '∅'}</s> → <b>${esc(d.heard) || '∅'}</b></span>`).join(' ')}</div>` : ''}
+    <input type="text" class="note" placeholder="note (mispronunciation, pacing…)" value="${esc(t.note)}">
+  </div>`).join('') : `<div class="empty">${scope === 'block' ? 'No takes for this block yet. Select it and hit Render.' : 'No takes yet.'}</div>`;
+}
+$('#takeScope').onchange = renderTakes; $('#takeSort').onchange = renderTakes;
+
+/* ---------------- deepen (Praat Change Gender) ---------------- */
+S.deepenOpen = new Set();
+const DEEPEN_PRESETS = { subtle: { pitch_st: -2, formant: 0.96, pitch_range: 0.9 }, deeper: { pitch_st: -3, formant: 0.94, pitch_range: 0.85 }, heavy: { pitch_st: -5, formant: 0.9, pitch_range: 0.8 } };
+const deepenSettings = () => ({ duration: 1, ...DEEPEN_PRESETS.deeper, ...store.get('deepen', {}) });
+const fmtSt = v => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v);
+function deepenPanel() {
+  const d = deepenSettings();
+  return `<div class="deepen">
+    <div class="chips">${Object.keys(DEEPEN_PRESETS).map(k => `<span class="chip" data-preset="${k}">${k}</span>`).join('')}</div>
+    <div class="drow">
+      <label title="Shift of the median pitch">Pitch (st)<input type="number" data-k="pitch_st" value="${d.pitch_st}" step="0.5" min="-12" max="12"></label>
+      <label title="Below 1 = longer vocal tract, sounds bigger. Keep within about 0.88–1.">Formant ×<input type="number" data-k="formant" value="${d.formant}" step="0.01" min="0.7" max="1.3"></label>
+      <label title="Below 1 = flatter intonation">Range ×<input type="number" data-k="pitch_range" value="${d.pitch_range}" step="0.05" min="0" max="2"></label>
+      <label title="Above 1 = slower">Duration ×<input type="number" data-k="duration" value="${d.duration}" step="0.05" min="0.5" max="2"></label>
+    </div>
+    <button class="small primary" data-act="deepen">Apply → new take</button>
+  </div>`;
+}
+const findTake = id => S.takes.find(t => t.id === id) || S.freeTakes.find(t => t.id === id);
+async function patchTake(id, p) {
+  const t = await api('/api/takes/' + id, { method: 'PATCH', body: JSON.stringify(p) });
+  if (p.pick) S.takes.forEach(o => { if (o.block_id === t.block_id) o.pick = false; });
+  Object.assign(findTake(id), t); renderTakes(); renderBlocks(); renderSummary();
+}
+$('#takes').onclick = async e => {
+  const el = e.target.closest('.take'); if (!el) return; const id = el.dataset.id, t = findTake(id);
+  if (e.target.dataset.r) return patchTake(id, { rating: +e.target.dataset.r === t.rating ? 0 : +e.target.dataset.r });
+  if (e.target.dataset.preset) {
+    store.set('deepen', { ...deepenSettings(), ...DEEPEN_PRESETS[e.target.dataset.preset] }); return renderTakes();
+  }
+  if (e.target.dataset.act === 'deepen-toggle') { S.deepenOpen.has(id) ? S.deepenOpen.delete(id) : S.deepenOpen.add(id); return renderTakes(); }
+  if (e.target.dataset.act === 'deepen') {
+    const p = {}; el.querySelectorAll('.deepen input').forEach(i => p[i.dataset.k] = +i.value);
+    store.set('deepen', p);
+    e.target.disabled = true; setStatus('deepening…', true);
+    try {
+      const n = await api(`/api/takes/${id}/deepen`, { method: 'POST', body: JSON.stringify(p) });
+      (t.slug ? S.takes : S.freeTakes).push(n); S.deepenOpen.delete(id);
+      setStatus(`deepened: ${Math.round(n.processed.f0_before)} → ${Math.round(n.processed.f0_after)} Hz`);
+      renderTakes(); renderBlocks(); renderSummary();
+      document.querySelector(`.take[data-id="${n.id}"]`)?.scrollIntoView({ block: 'nearest' }); playTake(n.id);
+    } catch (err) { setStatus('deepen failed: ' + err.message); e.target.disabled = false; }
+    return;
+  }
+  const act = e.target.dataset.act;
+  if (act === 'pick') return patchTake(id, { pick: !t.pick });
+  if (act === 'check') {
+    e.target.disabled = true; e.target.textContent = 'checking…'; setStatus('transcribing take…', true);
+    try { Object.assign(t, await api(`/api/takes/${id}/check`, { method: 'POST' })); setStatus(t.wer ? `WER ${Math.round(t.wer * 100)}%: heard “${t.asr}”` : 'transcript matches the text'); }
+    catch (err) { setStatus('check failed: ' + err.message); }
+    renderTakes(); renderSummary(); return;
+  }
+  if (act === 'reuse') { applyVoice({ ...t, name: t.voice_name }); switchTab('voice'); setStatus('settings loaded from take'); }
+  if (act === 'ref') { const name = prompt('Name for this clone reference', t.voice_name || 'designed voice'); if (!name) return; await api(`/api/refs/from-take/${id}?name=${encodeURIComponent(name)}`, { method: 'POST' }); await loadRefs(); setStatus('clone reference saved: ' + name); }
+  if (act === 'del') { if (!confirm('Delete this take and its audio?')) return; await api('/api/takes/' + id, { method: 'DELETE' }); S.takes = S.takes.filter(x => x.id !== id); S.freeTakes = S.freeTakes.filter(x => x.id !== id); renderTakes(); renderBlocks(); }
+};
+$('#takes').addEventListener('change', e => { if (e.target.classList.contains('note')) patchTake(e.target.closest('.take').dataset.id, { note: e.target.value }); });
+function playTake(id) { const a = document.querySelector(`.take[data-id="${id}"] audio`); a?.play(); }
+
+/* ---------------- compare ---------------- */
+function renderSummary() {
+  const g = {};
+  for (const t of S.takes) {
+    const k = t.voice_name || [t.model, voiceLabel(t)].join(' · ');
+    (g[k] ||= []).push(t);
+  }
+  const rows = Object.entries(g).map(([k, ts]) => {
+    const rated = ts.filter(t => t.rating), avg = (f, a = ts) => a.reduce((s, t) => s + (f(t) || 0), 0) / (a.length || 1);
+    const checked = ts.filter(t => t.wer != null);
+    return { k, n: ts.length, rating: rated.length ? avg(t => t.rating, rated) : null, rtf: avg(t => t.rtf), wpm: avg(t => t.wpm), picks: ts.filter(t => t.pick).length,
+      wer: checked.length ? avg(t => t.wer, checked) : null, nChecked: checked.length };
+  }).sort((a, b) => (b.rating ?? -1) - (a.rating ?? -1));
+  $('#summary').innerHTML = rows.length ? `<table class="sum"><tr><th>Voice</th><th>Takes</th><th>★</th><th title="Word error rate over checked takes">WER</th><th>RTF</th><th>WPM</th><th>Picks</th></tr>${rows.map(r =>
+    `<tr><td>${esc(r.k)}</td><td class="num">${r.n}</td><td class="num">${r.rating ? r.rating.toFixed(1) : '–'}</td><td class="num" title="${r.nChecked} checked">${r.wer != null ? (r.wer * 100).toFixed(1) + '%' : '–'}</td><td class="num">${r.rtf.toFixed(2)}</td><td class="num">${r.wpm.toFixed(0)}</td><td class="num">${r.picks}</td></tr>`).join('')}</table>` : '<div class="empty">No takes for this story yet.</div>';
+}
+
+/* ---------------- export ---------------- */
+$('#stitch').onclick = async () => {
+  const ids = [];
+  for (const b of S.story.blocks) {
+    if (b.background && !$('#exportBg').checked) continue;
+    const tk = blockTakes(b.id); if (!tk.length) continue;
+    const pick = tk.find(t => t.pick) || ($('#fallbackBest').checked ? [...tk].sort((a, c) => c.rating - a.rating || c.created.localeCompare(a.created))[0] : null);
+    if (pick) ids.push(pick.id);
+  }
+  if (!ids.length) return alert('No takes to stitch yet.');
+  setStatus('stitching…', true);
+  const r = await api('/api/render', { method: 'POST', body: JSON.stringify({ slug: S.story.slug, take_ids: ids, gap_para: +$('#gapPara').value, gap_section: +$('#gapSec').value, fmt: $('#fmt').value }) });
+  setStatus(`stitched ${ids.length} blocks`);
+  $('#stitchOut').innerHTML = `<audio controls src="/audio/${r.file}" style="width:100%"></audio><div class="stats" style="font:12px var(--mono);color:var(--dim)">${r.duration}s · ${ids.length} blocks · <a href="/audio/${r.file}" download style="color:var(--accent)">download</a> · tts/out/${r.file}</div>`;
+};
+
+/* ---------------- tabs + boot ---------------- */
+function switchTab(name) { $$('.tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === name)); $$('[data-pane]').forEach(p => p.hidden = p.dataset.pane !== name); if (name === 'takes') renderTakes(); }
+$$('.tabs button').forEach(b => b.onclick = () => switchTab(b.dataset.tab));
+document.addEventListener('keydown', e => {
+  if (e.target.matches('input,textarea,select')) return;
+  const vb = visibleBlocks(), i = vb.findIndex(b => b.id === S.focus);
+  if (e.key === 'j' || e.key === 'ArrowDown') { e.preventDefault(); if (vb[i + 1]) focusBlock(vb[i + 1].id); document.querySelector('.block.focus')?.scrollIntoView({ block: 'nearest' }); }
+  if (e.key === 'k' || e.key === 'ArrowUp') { e.preventDefault(); if (vb[i - 1]) focusBlock(vb[i - 1].id); document.querySelector('.block.focus')?.scrollIntoView({ block: 'nearest' }); }
+  if (e.key === 'r') $('#genSel').click();
+  if (e.key === ' ') { e.preventDefault(); const a = document.querySelector('[data-pane="takes"]:not([hidden]) .take audio'); if (a) a.paused ? a.play() : a.pause(); }
+});
+(async () => { await loadModels(); await Promise.all([loadVoices(), loadRefs()]); await loadStories(); })();
+</script>
+</body>
+</html>
