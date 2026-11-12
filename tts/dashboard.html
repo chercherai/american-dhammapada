@@ -94,6 +94,11 @@ details.box summary { cursor: pointer; font-weight: 600; }
 .stars span { cursor: pointer; font-size: 16px; color: #5a4e3e; }
 .stars span.on { color: var(--accent-2); }
 .take input.note { font-size: 12px; margin-top: .35rem; }
+.take .proc { font: 11px var(--mono); color: var(--accent-2); margin-top: .15rem; }
+.take .deepen { margin-top: .5rem; padding: .5rem; border: 1px dashed var(--line); border-radius: 6px; }
+.take .deepen .drow { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; margin: .4rem 0; }
+.take .deepen label { margin: 0; font-size: 10px; display: flex; flex-direction: column; justify-content: flex-end; white-space: nowrap; }
+.take .deepen input { padding: .2rem .3rem; font-size: 12px; margin-top: .15rem; }
 .take .diffs { font-size: 12px; margin-top: .3rem; display: flex; flex-wrap: wrap; gap: .3rem .7rem; }
 .take .diffs s { color: var(--dim); }
 .take .diffs b { color: var(--bad); font-weight: 500; }
@@ -518,20 +523,42 @@ function renderTakes() {
   $('#takes').innerHTML = list.length ? list.map(t => `<div class="take ${t.pick ? 'pick' : ''}" data-id="${t.id}">
     <div class="who">${esc(voiceLabel(t))} <small style="color:var(--dim);font-weight:400">${t.model}</small></div>
     ${t.instruct ? `<div class="ins">${esc(t.instruct)}</div>` : ''}
+    ${t.processed ? `<div class="proc">deepened ${fmtSt(t.processed.pitch_st)} st · formants ×${t.processed.formant} · range ×${t.processed.pitch_range}${t.processed.duration !== 1 ? ' · duration ×' + t.processed.duration : ''} · ${Math.round(t.processed.f0_before)} → ${Math.round(t.processed.f0_after)} Hz</div>` : ''}
     ${scope !== 'block' ? `<div class="t">${esc(t.text)}</div>` : ''}
     <audio controls preload="none" src="/audio/${t.file}"></audio>
     <div class="stats">${t.duration}s · gen ${t.gen_seconds}s · RTF ${t.rtf} · ${t.wpm ?? '–'} wpm · seed ${t.seed}${t.temperature != null ? ' · T ' + t.temperature : ''}${t.speed != null ? ' · speed ' + t.speed : ''}${t.exaggeration != null ? ' · exag ' + t.exaggeration + ' · cfg ' + t.cfg_weight : ''}${t.cfg_scale != null ? ' · cfg ' + t.cfg_scale : ''}</div>
     <div class="ctl"><span class="stars">${[1, 2, 3, 4, 5].map(n => `<span data-r="${n}" class="${n <= t.rating ? 'on' : ''}">★</span>`).join('')}</span>
       ${t.slug ? `<button class="small" data-act="pick">${t.pick ? '✓ picked' : 'Pick'}</button>` : ''}
       <button class="small" data-act="check" title="Transcribe with Parakeet and compare to the text">${t.wer == null ? 'Check' : t.wer === 0 ? '✓ exact' : `WER ${Math.round(t.wer * 100)}%`}</button>
+      <button class="small" data-act="deepen-toggle" title="Lower pitch and formants with Praat (saves a new take)">Deepen…</button>
       <button class="small" data-act="reuse" title="Load these settings (incl. seed) into the voice panel">Reuse</button>
       <button class="small" data-act="ref" title="Use this audio as a voice-clone reference">Make clone ref</button>
       <button class="small" data-act="del">✕</button></div>
+    ${S.deepenOpen.has(t.id) ? deepenPanel() : ''}
     ${t.asr_diffs?.length ? `<div class="diffs">${t.asr_diffs.map(d => `<span><s>${esc(d.said) || '∅'}</s> → <b>${esc(d.heard) || '∅'}</b></span>`).join(' ')}</div>` : ''}
     <input type="text" class="note" placeholder="note (mispronunciation, pacing…)" value="${esc(t.note)}">
   </div>`).join('') : `<div class="empty">${scope === 'block' ? 'No takes for this block yet. Select it and hit Render.' : 'No takes yet.'}</div>`;
 }
 $('#takeScope').onchange = renderTakes; $('#takeSort').onchange = renderTakes;
+
+/* ---------------- deepen (Praat Change Gender) ---------------- */
+S.deepenOpen = new Set();
+const DEEPEN_PRESETS = { subtle: { pitch_st: -2, formant: 0.96, pitch_range: 0.9 }, deeper: { pitch_st: -3, formant: 0.94, pitch_range: 0.85 }, heavy: { pitch_st: -5, formant: 0.9, pitch_range: 0.8 } };
+const deepenSettings = () => ({ duration: 1, ...DEEPEN_PRESETS.deeper, ...store.get('deepen', {}) });
+const fmtSt = v => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v);
+function deepenPanel() {
+  const d = deepenSettings();
+  return `<div class="deepen">
+    <div class="chips">${Object.keys(DEEPEN_PRESETS).map(k => `<span class="chip" data-preset="${k}">${k}</span>`).join('')}</div>
+    <div class="drow">
+      <label title="Shift of the median pitch">Pitch (st)<input type="number" data-k="pitch_st" value="${d.pitch_st}" step="0.5" min="-12" max="12"></label>
+      <label title="Below 1 = longer vocal tract, sounds bigger. Keep within about 0.88–1.">Formant ×<input type="number" data-k="formant" value="${d.formant}" step="0.01" min="0.7" max="1.3"></label>
+      <label title="Below 1 = flatter intonation">Range ×<input type="number" data-k="pitch_range" value="${d.pitch_range}" step="0.05" min="0" max="2"></label>
+      <label title="Above 1 = slower">Duration ×<input type="number" data-k="duration" value="${d.duration}" step="0.05" min="0.5" max="2"></label>
+    </div>
+    <button class="small primary" data-act="deepen">Apply → new take</button>
+  </div>`;
+}
 const findTake = id => S.takes.find(t => t.id === id) || S.freeTakes.find(t => t.id === id);
 async function patchTake(id, p) {
   const t = await api('/api/takes/' + id, { method: 'PATCH', body: JSON.stringify(p) });
@@ -541,6 +568,23 @@ async function patchTake(id, p) {
 $('#takes').onclick = async e => {
   const el = e.target.closest('.take'); if (!el) return; const id = el.dataset.id, t = findTake(id);
   if (e.target.dataset.r) return patchTake(id, { rating: +e.target.dataset.r === t.rating ? 0 : +e.target.dataset.r });
+  if (e.target.dataset.preset) {
+    store.set('deepen', { ...deepenSettings(), ...DEEPEN_PRESETS[e.target.dataset.preset] }); return renderTakes();
+  }
+  if (e.target.dataset.act === 'deepen-toggle') { S.deepenOpen.has(id) ? S.deepenOpen.delete(id) : S.deepenOpen.add(id); return renderTakes(); }
+  if (e.target.dataset.act === 'deepen') {
+    const p = {}; el.querySelectorAll('.deepen input').forEach(i => p[i.dataset.k] = +i.value);
+    store.set('deepen', p);
+    e.target.disabled = true; setStatus('deepening…', true);
+    try {
+      const n = await api(`/api/takes/${id}/deepen`, { method: 'POST', body: JSON.stringify(p) });
+      (t.slug ? S.takes : S.freeTakes).push(n); S.deepenOpen.delete(id);
+      setStatus(`deepened: ${Math.round(n.processed.f0_before)} → ${Math.round(n.processed.f0_after)} Hz`);
+      renderTakes(); renderBlocks(); renderSummary();
+      document.querySelector(`.take[data-id="${n.id}"]`)?.scrollIntoView({ block: 'nearest' }); playTake(n.id);
+    } catch (err) { setStatus('deepen failed: ' + err.message); e.target.disabled = false; }
+    return;
+  }
   const act = e.target.dataset.act;
   if (act === 'pick') return patchTake(id, { pick: !t.pick });
   if (act === 'check') {

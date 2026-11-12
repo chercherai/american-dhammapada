@@ -513,6 +513,64 @@ def api_check_take(tid: str):
     return t
 
 
+class DeepenReq(BaseModel):
+    pitch_st: float = -3.0      # shift of the median pitch, in semitones
+    formant: float = 0.94       # formant shift ratio (<1 = larger vocal tract, "bigger" voice)
+    pitch_range: float = 0.85   # scale of pitch excursions around the median (<1 = flatter)
+    duration: float = 1.0       # >1 = slower
+
+
+def _median_f0(snd) -> float:
+    f = snd.to_pitch_ac(time_step=0.01, pitch_floor=60, pitch_ceiling=500).selected_array["frequency"]
+    v = f[f > 0]
+    return float(np.median(v)) if len(v) else 0.0
+
+
+@app.post("/api/takes/{tid}/deepen")
+def api_deepen_take(tid: str, p: DeepenReq):
+    """Praat "Change Gender" (PSOLA): lower pitch and formants, save the result as a new take."""
+    import parselmouth
+    from parselmouth.praat import call
+    db = read_json(TAKES_DB, [])
+    t = next((x for x in db if x["id"] == tid), None)
+    if not t:
+        raise HTTPException(404)
+    if not (0.7 <= p.formant <= 1.3 and -12 <= p.pitch_st <= 12 and 0 <= p.pitch_range <= 2
+            and 0.5 <= p.duration <= 2):
+        raise HTTPException(400, "settings out of range")
+    snd = parselmouth.Sound(str(OUT / t["file"]))
+    f0_before = _median_f0(snd)
+    if not f0_before:
+        raise HTTPException(400, "no voiced speech found")
+    out = call(snd, "Change gender", 60, 500, p.formant, f0_before * 2 ** (p.pitch_st / 12),
+               p.pitch_range, p.duration)
+    audio = out.values[0].astype(np.float32)
+    peak = float(np.max(np.abs(audio))) or 1.0
+    if peak > 0.99:
+        audio *= 0.99 / peak
+    sr = int(out.sampling_frequency)
+    nid = time.strftime("%Y%m%d-%H%M%S-") + uuid.uuid4().hex[:6]
+    sf.write(TAKES_DIR / f"{nid}.wav", audio, sr)
+    dur = len(audio) / sr
+    f0_after = _median_f0(out)
+    label = f"{p.pitch_st:+g} st, formants ×{p.formant:g}, range ×{p.pitch_range:g}" + \
+            (f", duration ×{p.duration:g}" if p.duration != 1 else "")
+    new = dict(t, id=nid, file=f"takes/{nid}.wav", created=time.strftime("%Y-%m-%d %H:%M:%S"),
+               duration=round(dur, 2), sample_rate=sr, rating=0, note="", pick=False,
+               wpm=round(len(t["text"].split()) / (dur / 60)) if dur > 0.5 else None,
+               parent=tid, processed={"method": "praat-change-gender", **p.model_dump(),
+                                      "f0_before": round(f0_before, 1), "f0_after": round(f0_after, 1)},
+               voice_name=(t.get("voice_name") or None), gen_seconds=0.0, rtf=0.0)
+    for k in ("asr", "wer", "asr_diffs"):
+        new.pop(k, None)
+    with _db_lock:
+        db = read_json(TAKES_DB, [])
+        db.append(new)
+        write_json(TAKES_DB, db)
+    new["label"] = label
+    return new
+
+
 @app.get("/api/refs")
 def api_refs():
     return read_json(REFS_DIR / "refs.json", {})

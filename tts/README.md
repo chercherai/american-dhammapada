@@ -60,6 +60,13 @@ open http://localhost:8765
 - **Check**: transcribes a take with Parakeet ASR and compares it to the source text, giving a
   word error rate and the words that differ (`gold → bowl`). Catches skipped or misread
   words without listening to everything; an occasional hit is the transcriber's mistake.
+- **Deepen…**: lowers a take's pitch and formants with Praat's *Change Gender* (PSOLA) and saves
+  the result as a new take beside the original. Presets: subtle (−2 st, formants ×0.96),
+  deeper (−3 st, ×0.94), heavy (−5 st, ×0.90); *range* below 1 flattens intonation. Lowering
+  formants with the pitch is what makes it sound like a bigger voice rather than a slowed one.
+  For a whole story, deepen one good take, **Make clone ref** from it, and render with the Base
+  model: clones of a −3 st reference came out about 2 st lower than clones of the original,
+  as fresh renders rather than processed audio.
 - **Compare**: per-voice averages of rating, WER, speed and pace for the current story.
 - **Export**: stitch the picked takes (or best-rated as fallback) into one mp3/wav with
   pauses between paragraphs and sections.
