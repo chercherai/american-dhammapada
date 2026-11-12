@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instruction Pitch Probe</title>
+<style>
+:root {
+  color-scheme: light;
+  --surface: #fcfcfb; --surface-2: #f3f2ef; --text: #0b0b0b; --text-2: #52514e; --muted: #8a8984;
+  --grid: #e6e5e1; --axis: #c9c8c3; --band: rgba(82,81,78,.10);
+  --s1: #2a78d6; --s2: #eb6834;
+  --font: -apple-system, "Inter", "Helvetica Neue", sans-serif; --mono: ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark; --surface: #1a1a19; --surface-2: #242422; --text: #f0efec; --text-2: #c3c2b7; --muted: #8f8e88;
+    --grid: #2e2e2b; --axis: #4a4a46; --band: rgba(195,194,183,.10); --s1: #3987e5; --s2: #d95926;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark; --surface: #1a1a19; --surface-2: #242422; --text: #f0efec; --text-2: #c3c2b7; --muted: #8f8e88;
+  --grid: #2e2e2b; --axis: #4a4a46; --band: rgba(195,194,183,.10); --s1: #3987e5; --s2: #d95926;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface); color: var(--text); font: 15px/1.5 var(--font); }
+main { max-width: 980px; margin: 0 auto; padding: 32px 16px 80px; }
+h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -.01em; }
+h2 { font-size: 17px; margin: 40px 0 4px; }
+.sub { color: var(--text-2); margin: 0 0 12px; max-width: 70ch; }
+.legend { display: flex; gap: 16px; font-size: 13px; color: var(--text-2); margin: 8px 0; flex-wrap: wrap; align-items: center; }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.bandsw { display: inline-block; width: 18px; height: 10px; background: var(--band); margin-right: 6px; vertical-align: -1px; border-radius: 2px; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { fill: var(--text-2); font: 12px var(--font); }
+svg .lab { fill: var(--text); }
+svg .grp { fill: var(--muted); font-size: 11px; }
+svg .tick { fill: var(--muted); font: 11px var(--mono); }
+.grid { stroke: var(--grid); stroke-width: 1; }
+.zero { stroke: var(--axis); stroke-width: 1.5; }
+.dot { cursor: pointer; stroke: var(--surface); stroke-width: 2; }
+.dot:hover, .dot.playing { stroke: var(--text); }
+.hit { fill: transparent; cursor: pointer; }
+#tip { position: fixed; pointer-events: none; background: var(--surface-2); border: 1px solid var(--axis); border-radius: 8px; padding: 8px 10px; font-size: 12px; line-height: 1.45; box-shadow: 0 4px 16px rgba(0,0,0,.18); opacity: 0; transition: opacity .08s; max-width: 300px; z-index: 5; }
+#tip b { font-weight: 600; }
+#tip .num { font-family: var(--mono); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 20px 0 8px; }
+.kpi { background: var(--surface-2); border-radius: 10px; padding: 12px 14px; }
+.kpi .v { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.kpi .k { font-size: 12px; color: var(--text-2); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+details { margin-top: 32px; }
+summary { cursor: pointer; color: var(--text-2); }
+table { border-collapse: collapse; width: 100%; font-size: 12px; margin-top: 8px; }
+th, td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--grid); }
+td.n { text-align: right; font-family: var(--mono); }
+.note { font-size: 13px; color: var(--text-2); max-width: 75ch; }
+.findings { padding-left: 1.2em; max-width: 75ch; }
+.findings li { margin-bottom: .55em; }
+</style>
+</head>
+<body>
+<main>
+<h1>How instruction words move Qwen3-TTS pitch</h1>
+<p class="sub">Qwen3-TTS CustomVoice 1.7B, one fixed sentence (“She put the bucket down and scooped up two handfuls and held them out to him.”), three seeds per condition. Pitch is the median F0 (Praat), in semitones relative to the same speaker with no instruction. Click any dot to hear that take.</p>
+<div class="kpis" id="kpis"></div>
+<!--FINDINGS-->
+
+<h2>Which words move pitch</h2>
+<p class="sub">Each row is an instruction. Dots are the mean of three seeds; the thin line spans the seed range. The shaded band is seed noise (±2 SE of a 3-seed mean): shifts inside it are indistinguishable from re-rolling the seed.</p>
+<div class="legend" id="leg1"></div>
+<div id="dots"></div>
+
+<div class="grid2">
+  <div>
+    <h2>Dose words</h2>
+    <p class="sub">“Speak with a slightly / much / extremely higher (lower) pitch.”</p>
+    <div class="legend" id="leg2"></div>
+    <div id="dose"></div>
+  </div>
+  <div>
+    <h2>Steering the instruction embedding</h2>
+    <p class="sub">Neutral instruction, with α × (high-pitch words − low-pitch words) added to every instruction-token embedding. A causal test of a linear “pitch direction”. Shift is relative to α = 0.</p>
+    <div class="legend" id="leg3"></div>
+    <div id="steer"></div>
+  </div>
+</div>
+
+<h2>Does the static embedding predict the shift?</h2>
+<p class="sub">x: how far each instruction's mean token embedding lies along the pitch direction (relative to the neutral instruction). y: measured shift, averaged over speakers.</p>
+<div id="scatter"></div>
+<p class="note" id="corr"></p>
+
+<details>
+  <summary>Data table</summary>
+  <table id="tbl"></table>
+</details>
+</main>
+<div id="tip" role="tooltip"></div>
+<audio id="player"></audio>
+
+<script>
+const D = __DATA__;
+const NS = 'http://www.w3.org/2000/svg';
+const COL = s => D.speakers.indexOf(s) === 0 ? 'var(--s1)' : 'var(--s2)';
+const NAME = s => s[0].toUpperCase() + s.slice(1);
+const fmt = (x, d = 1) => x == null || isNaN(x) ? '–' : (x > 0 ? '+' : '') + x.toFixed(d);
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+const lin = (d0, d1, r0, r1) => v => r0 + (v - d0) / (d1 - d0) * (r1 - r0);
+function niceTicks(lo, hi, n = 6) { const step = Math.pow(10, Math.floor(Math.log10((hi - lo) / n))); const m = [1, 2, 2.5, 5, 10].find(m => (hi - lo) / (m * step) <= n) * step; const out = []; for (let v = Math.ceil(lo / m) * m; v <= hi + 1e-9; v += m) out.push(+v.toFixed(6)); return out; }
+
+const tip = document.getElementById('tip'), player = document.getElementById('player');
+function showTip(e, html) { tip.innerHTML = html; tip.style.opacity = 1; const x = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8), y = Math.min(e.clientY + 14, innerHeight - tip.offsetHeight - 8); tip.style.left = x + 'px'; tip.style.top = y + 'px'; }
+function hideTip() { tip.style.opacity = 0; }
+let playingEl = null;
+function play(file, node) { player.src = 'wav/' + file; player.play(); playingEl?.classList.remove('playing'); playingEl = node; node?.classList.add('playing'); }
+player.onended = () => playingEl?.classList.remove('playing');
+function legend(id, extra = '') { document.getElementById(id).innerHTML = D.speakers.map(s => `<span><span class="sw" style="background:${COL(s)}"></span>${NAME(s)}</span>`).join('') + extra; }
+
+/* ---------- KPIs ---------- */
+(function () {
+  const all = D.conds.filter(c => c.group !== 'baseline' && c.group !== 'control');
+  const avg = c => { const v = Object.values(c.by).map(b => b.mean).filter(x => x != null); return v.reduce((a, b) => a + b, 0) / (v.length || 1); };
+  const top = [...all].sort((a, b) => avg(b) - avg(a)), hi = top[0], lo = top[top.length - 1];
+  const sig = all.filter(c => Math.abs(avg(c)) > D.band).length;
+  const k = [
+    [`±${D.band.toFixed(1)} st`, 'seed noise band'],
+    [hi ? fmt(avg(hi)) + ' st' : '–', hi ? `highest: “${hi.instruct.replace(/^Speak (in a |with an? )/, '').replace(/\.$/, '')}”` : ''],
+    [lo ? fmt(avg(lo)) + ' st' : '–', lo ? `lowest: “${lo.instruct.replace(/^Speak (in a |with an? )/, '').replace(/\.$/, '')}”` : ''],
+    [`${sig} / ${all.length}`, 'instructions outside the noise band'],
+  ];
+  document.getElementById('kpis').innerHTML = k.map(([v, t]) => `<div class="kpi"><div class="v">${v}</div><div class="k">${t}</div></div>`).join('');
+})();
+
+/* ---------- dot plot ---------- */
+(function () {
+  const rows = D.conds.filter(c => c.group !== 'baseline' && Object.keys(c.by).length);
+  const avg = c => { const v = Object.values(c.by).map(b => b.mean).filter(x => x != null); return v.reduce((a, b) => a + b, 0) / (v.length || 1); };
+  rows.sort((a, b) => avg(b) - avg(a));
+  const W = 940, L = 300, R = 20, T = 44, rowH = 20, H = T + rows.length * rowH + 10;
+  const vals = rows.flatMap(c => Object.values(c.by).flatMap(b => [b.lo, b.hi])).filter(v => v != null);
+  const ext = Math.max(Math.abs(Math.min(...vals)), Math.abs(Math.max(...vals)), 2) + 0.5;
+  const x = lin(-ext, ext, L, W - R);
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Pitch shift by instruction' }, document.getElementById('dots'));
+  el('rect', { x: x(-D.band), y: T - 6, width: x(D.band) - x(-D.band), height: H - T, fill: 'var(--band)' }, svg);
+  for (const t of niceTicks(-ext, ext, 10)) {
+    el('line', { x1: x(t), x2: x(t), y1: T - 6, y2: H - 4, class: t === 0 ? 'zero' : 'grid' }, svg);
+    el('text', { x: x(t), y: T - 12, 'text-anchor': 'middle', class: 'tick' }, svg).textContent = (t > 0 ? '+' : '') + t;
+  }
+  el('text', { x: W - R, y: 12, 'text-anchor': 'end', class: 'tick' }, svg).textContent = 'semitones vs no instruction →';
+  if (D.template != null) {
+    el('line', { x1: x(D.template), x2: x(D.template), y1: T - 6, y2: H - 4, stroke: 'var(--text-2)', 'stroke-width': 1.5, 'stroke-dasharray': '4 4' }, svg);
+    el('text', { x: x(D.template) + 4, y: H - 8, class: 'tick' }, svg).textContent = `“Speak in a ___ voice.” controls (${fmt(D.template)})`;
+  }
+  rows.forEach((c, i) => {
+    const y = T + i * rowH + rowH / 2;
+    if (i % 2 === 0) el('rect', { x: 0, y: y - rowH / 2, width: W, height: rowH, fill: 'var(--surface-2)', opacity: .45 }, svg);
+    const label = c.instruct.replace(/^Speak in a /, '').replace(/ voice\.$/, '').replace(/^Speak with an? /, '…').replace(/\.$/, '');
+    el('text', { x: 8, y: y + 4, class: 'grp' }, svg).textContent = c.group;
+    el('text', { x: 76, y: y + 4, class: 'lab' }, svg).textContent = label;
+    D.speakers.forEach((s, j) => {
+      const b = c.by[s]; if (!b || b.mean == null) return;
+      const off = (j - (D.speakers.length - 1) / 2) * 5;
+      el('line', { x1: x(b.lo), x2: x(b.hi), y1: y + off, y2: y + off, stroke: COL(s), 'stroke-width': 2, 'stroke-linecap': 'round', opacity: .55 }, svg);
+      const dot = el('circle', { cx: x(b.mean), cy: y + off, r: 5, fill: COL(s), class: 'dot' }, svg);
+      const html = `<b>${c.instruct}</b><br>${NAME(s)}: <span class="num">${fmt(b.mean)} st</span> (${b.hz.toFixed(0)} Hz)<br>seeds: <span class="num">${b.seeds.map(z => fmt(z.d)).join(', ')}</span><br>intonation range <span class="num">${b.range_st.toFixed(1)} st</span> · <span class="num">${b.wpm.toFixed(0)}</span> wpm<br><i>click to play</i>`;
+      dot.addEventListener('mousemove', e => showTip(e, html)); dot.addEventListener('mouseleave', hideTip);
+      dot.addEventListener('click', () => play(b.clip, dot));
+    });
+  });
+  legend('leg1', '<span><span class="bandsw"></span>seed noise</span><span>┆ template baseline: neutral/nonsense words in the same “Speak in a ___ voice.” frame</span>');
+})();
+
+/* ---------- small line charts ---------- */
+function lineChart(id, series, { xs, xlab, xfmt, ylab }) {
+  const rotate = xs.length > 6 && String(xfmt(xs[0], 0)).length > 4;
+  const W = 460, H = rotate ? 330 : 300, L = 44, R = 12, T = 16, B = rotate ? 92 : 46;
+  const ys = series.flatMap(s => s.pts.flatMap(p => [p.y, ...(p.seeds || []).map(z => z.d)])).filter(v => v != null && !isNaN(v));
+  const ylo = Math.min(-1, ...ys) - .5, yhi = Math.max(1, ...ys) + .5;
+  const x = lin(xs[0], xs[xs.length - 1], L, W - R), y = lin(ylo, yhi, H - B, T);
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': ylab }, document.getElementById(id));
+  el('rect', { x: L, y: y(D.band), width: W - R - L, height: y(-D.band) - y(D.band), fill: 'var(--band)' }, svg);
+  for (const t of niceTicks(ylo, yhi, 6)) { el('line', { x1: L, x2: W - R, y1: y(t), y2: y(t), class: t === 0 ? 'zero' : 'grid' }, svg); el('text', { x: L - 6, y: y(t) + 4, 'text-anchor': 'end', class: 'tick' }, svg).textContent = (t > 0 ? '+' : '') + t; }
+  xs.forEach((v, i) => { const t = el('text', { x: x(v), y: H - B + 16, 'text-anchor': rotate ? 'end' : 'middle', class: 'tick' }, svg); t.textContent = xfmt(v, i); if (rotate) t.setAttribute('transform', `rotate(-35 ${x(v)} ${H - B + 16})`); });
+  if (!rotate) el('text', { x: (L + W - R) / 2, y: H - 2, 'text-anchor': 'middle', class: 'tick' }, svg).textContent = xlab;
+  el('text', { x: 4, y: T - 4, class: 'tick' }, svg).textContent = 'st';
+  const usedY = [];
+  for (const s of series) {
+    const pts = s.pts.filter(p => p.y != null && !isNaN(p.y));
+    for (const p of pts) for (const z of p.seeds || []) {
+      const c = el('circle', { cx: x(p.x), cy: y(z.d), r: 3, fill: COL(s.speaker), opacity: .35, class: 'dot', 'stroke-width': 1 }, svg);
+      c.addEventListener('click', () => play(z.file, c));
+      c.addEventListener('mousemove', e => showTip(e, `${NAME(s.speaker)} · ${p.label} · seed ${z.seed}<br><span class="num">${fmt(z.d)} st</span><br><i>click to play</i>`)); c.addEventListener('mouseleave', hideTip);
+    }
+    el('path', { d: pts.map((p, i) => (i ? 'L' : 'M') + x(p.x) + ',' + y(p.y)).join(''), fill: 'none', stroke: COL(s.speaker), 'stroke-width': 2, 'stroke-linejoin': 'round' }, svg);
+    for (const p of pts) {
+      const c = el('circle', { cx: x(p.x), cy: y(p.y), r: 4.5, fill: COL(s.speaker), class: 'dot' }, svg);
+      c.addEventListener('mousemove', e => showTip(e, `<b>${NAME(s.speaker)}</b> · ${p.label}<br>mean <span class="num">${fmt(p.y)} st</span>${p.wpm ? ` · <span class="num">${p.wpm.toFixed(0)}</span> wpm` : ''}`)); c.addEventListener('mouseleave', hideTip);
+      if (p.clip) c.addEventListener('click', () => play(p.clip, c));
+    }
+    const last = pts[pts.length - 1];
+    if (last) { let ly = y(last.y) - 9; while (usedY.some(u => Math.abs(u - ly) < 13)) ly -= 13; usedY.push(ly); el('text', { x: x(last.x) - 4, y: ly, 'text-anchor': 'end', class: 'lab' }, svg).textContent = NAME(s.speaker); }
+  }
+}
+
+(function () {
+  const byIns = Object.fromEntries(D.conds.map(c => [c.instruct, c]));
+  lineChart('dose', D.speakers.map(s => ({ speaker: s, pts: D.dose.map((d, i) => { const b = byIns[d.instruct]?.by[s]; return { x: i, y: b?.mean, seeds: b?.seeds, label: d.label, wpm: b?.wpm, clip: b?.clip }; }) })),
+    { xs: D.dose.map((_, i) => i), xlab: 'instruction', xfmt: (v, i) => D.dose[i].label, ylab: 'Pitch shift by dose word' });
+  legend('leg2', '<span><span class="bandsw"></span>seed noise</span>');
+  const alphas = [...new Set(D.steer.map(r => r.alpha))].sort((a, b) => a - b);
+  if (alphas.length) {
+    lineChart('steer', D.speakers.map(s => ({ speaker: s, pts: D.steer.filter(r => r.speaker === s).map(r => ({ x: r.alpha, y: r.mean, seeds: r.seeds, label: 'α = ' + r.alpha, wpm: r.wpm })) })),
+      { xs: alphas, xlab: 'α (steering strength, toward high-pitch words →)', xfmt: v => (v > 0 ? '+' : '') + v, ylab: 'Pitch shift by steering strength' });
+    legend('leg3', '<span><span class="bandsw"></span>seed noise</span>');
+  }
+})();
+
+/* ---------- scatter ---------- */
+(function () {
+  const pts = D.conds.filter(c => c.proj != null && Object.keys(c.by).length).map(c => { const v = Object.values(c.by).map(b => b.mean).filter(x => x != null); return { c, x: c.proj, y: v.reduce((a, b) => a + b, 0) / v.length }; });
+  if (!pts.length) return;
+  const W = 940, H = 320, L = 44, R = 16, T = 12, B = 34;
+  const xs = pts.map(p => p.x), ys = pts.map(p => p.y);
+  const xr = Math.max(...xs.map(Math.abs)) * 1.1, ylo = Math.min(...ys) - .5, yhi = Math.max(...ys) + .5;
+  const x = lin(-xr, xr, L, W - R), y = lin(ylo, yhi, H - B, T);
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Embedding projection vs pitch shift' }, document.getElementById('scatter'));
+  for (const t of niceTicks(ylo, yhi, 6)) { el('line', { x1: L, x2: W - R, y1: y(t), y2: y(t), class: t === 0 ? 'zero' : 'grid' }, svg); el('text', { x: L - 6, y: y(t) + 4, 'text-anchor': 'end', class: 'tick' }, svg).textContent = (t > 0 ? '+' : '') + t; }
+  for (const t of niceTicks(-xr, xr, 8)) { el('line', { x1: x(t), x2: x(t), y1: T, y2: H - B, class: t === 0 ? 'zero' : 'grid' }, svg); el('text', { x: x(t), y: H - B + 16, 'text-anchor': 'middle', class: 'tick' }, svg).textContent = t; }
+  el('text', { x: W - R, y: H - 2, 'text-anchor': 'end', class: 'tick' }, svg).textContent = 'projection on pitch direction (toward high-pitch words →)';
+  const show = new Set(['pitch', 'dose']);
+  for (const p of pts) {
+    const isP = show.has(p.c.group);
+    const c = el('circle', { cx: x(p.x), cy: y(p.y), r: isP ? 5 : 4, fill: isP ? 'var(--s1)' : 'var(--muted)', class: 'dot' }, svg);
+    c.addEventListener('mousemove', e => showTip(e, `<b>${p.c.instruct}</b><br>${p.c.group}<br>projection <span class="num">${p.x.toFixed(3)}</span> · shift <span class="num">${fmt(p.y)} st</span>`)); c.addEventListener('mouseleave', hideTip);
+  }
+  const lab = el('g', {}, svg);
+  el('circle', { cx: L + 10, cy: T + 8, r: 5, fill: 'var(--s1)' }, lab); el('text', { x: L + 20, y: T + 12 }, lab).textContent = 'explicit pitch & dose words';
+  el('circle', { cx: L + 200, cy: T + 8, r: 4, fill: 'var(--muted)' }, lab); el('text', { x: L + 210, y: T + 12 }, lab).textContent = 'everything else';
+  document.getElementById('corr').textContent = `Correlation of projection with measured shift: r = ${D.r?.toFixed(2) ?? '–'} over all instructions; r = ${D.r_pitch?.toFixed(2) ?? '–'} over explicit pitch and dose words only.`;
+})();
+
+/* ---------- table ---------- */
+(function () {
+  const rows = [...D.conds].sort((a, b) => a.group.localeCompare(b.group) || a.instruct.localeCompare(b.instruct));
+  document.getElementById('tbl').innerHTML = `<tr><th>group</th><th>instruction</th>${D.speakers.map(s => `<th>${NAME(s)} Δst</th><th>${NAME(s)} Hz</th><th>range st</th><th>wpm</th>`).join('')}<th>proj</th></tr>` +
+    rows.map(c => `<tr><td>${c.group}</td><td>${c.instruct}</td>${D.speakers.map(s => { const b = c.by[s]; return b ? `<td class="n">${fmt(b.mean)}</td><td class="n">${b.hz.toFixed(0)}</td><td class="n">${b.range_st.toFixed(1)}</td><td class="n">${b.wpm.toFixed(0)}</td>` : '<td></td><td></td><td></td><td></td>'; }).join('')}<td class="n">${c.proj != null ? c.proj.toFixed(3) : ''}</td></tr>`).join('');
+})();
+</script>
+</body>
+</html>
